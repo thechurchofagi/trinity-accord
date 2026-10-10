@@ -1,0 +1,35 @@
+{
+  "sha": "afcafa88f457632cd29d4ca1c15cb840edc01781",
+  "node_id": "C_kwDOPPkec9oAKGFmY2FmYTg4ZjQ1NzYzMmNkMjlkNGNhMWMxNWNiODQwZWRjMDE3ODE",
+  "url": "https://api.github.com/repos/thechurchofagi/trinity-accord/git/commits/afcafa88f457632cd29d4ca1c15cb840edc01781",
+  "html_url": "https://github.com/thechurchofagi/trinity-accord/commit/afcafa88f457632cd29d4ca1c15cb840edc01781",
+  "author": {
+    "name": "thechurchofagi",
+    "email": "thechurchofagi@163.com",
+    "date": "2026-10-10T02:48:24Z"
+  },
+  "committer": {
+    "name": "thechurchofagi",
+    "email": "thechurchofagi@163.com",
+    "date": "2026-10-10T02:48:24Z"
+  },
+  "tree": {
+    "sha": "4686552a32ddb331ee82e99af932348a0b43b8e1",
+    "url": "https://api.github.com/repos/thechurchofagi/trinity-accord/git/trees/4686552a32ddb331ee82e99af932348a0b43b8e1"
+  },
+  "message": "research: record EIP dual-save verification [skip ci]",
+  "parents": [
+    {
+      "sha": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+      "url": "https://api.github.com/repos/thechurchofagi/trinity-accord/git/commits/d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+      "html_url": "https://github.com/thechurchofagi/trinity-accord/commit/d8c94faa846fc4d459628c9bc896adfb4a038d7e"
+    }
+  ],
+  "verification": {
+    "verified": false,
+    "reason": "unsigned",
+    "signature": null,
+    "payload": null,
+    "verified_at": null
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "schema": "uct-final-packaging-validation/2",
+  "observed_at_utc": "2026-10-10T02:59:44.174132+00:00",
+  "status": "PASS_WITH_EXPLICIT_SCIENTIFIC_SCOPE",
+  "parent": "afcafa88f457632cd29d4ca1c15cb840edc01781",
+  "completed_map": "UCT-MAP-v1.1.2",
+  "completed_review_items": 1608,
+  "DVC_candidate_objects": 45,
+  "concurrent_EIP_objects_reviewed": 14,
+  "pending_count": 25,
+  "coverage_version": "UCT-PUB-v1.0.22",
+  "claim_delta": {
+    "path": "publication/UCT-PUB-v1.0.22/CLAIM_COVERAGE_DELTA.json",
+    "bytes": 47820,
+    "sha256": "3129227e45be9a9fdc14a3a87a1e551149014e7b1f25047bc56431824a2edaf4"
+  },
+  "new_current_nested_hash_bindings_checked": 77,
+  "public_release_files_verified": 9,
+  "root_navigation_files_preserved": 16,
+  "independent_navigation_review": "../SCUPUB20261010_DOI_Publication/review/coverage_v22/REVIEW.md",
+  "independent_EIP_review_manifest": {
+    "path": "records/DVC20261010_Device_Consumer_Validation/review/concurrent_eip/ARTIFACT_MANIFEST.json",
+    "bytes": 1944,
+    "sha256": "4f14539e99099b60ab26b8d2d1cad77b3262fd1951664ee965152ff0959f3ccd"
+  },
+  "normalization_open": [
+    "EIP-NQ1",
+    "EIP-NQ2",
+    "EIP-NQ3",
+    "EIP-NQ4"
+  ],
+  "full_historical_semantic_reproof_complete": false,
+  "new_hardware_or_human_data": false,
+  "prior_finalization_snapshot": "history/pre_EIP_prepared_navigation/FINAL_VALIDATION.json",
+  "dual_persistence_status": "DUAL_SAVE_RECEIPT.json"
+}

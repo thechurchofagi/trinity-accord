@@ -1,0 +1,151 @@
+{
+  "schema": "uct-navigation-update/1",
+  "parent_commit": "79ec03184ce66ac2c1e44d0dc6ba88c3f774d33a",
+  "files": [
+    {
+      "file": "CURRENT_STATE.json",
+      "mode": "old_exact_json_bytes_preserved_in_history",
+      "current": {
+        "path": "CURRENT_STATE.json",
+        "bytes": 8482,
+        "sha256": "44c7dbffd15cc97ae7b0bac6de52b23efcaa6c691c5685b2f3b05acc882bdc9b"
+      }
+    },
+    {
+      "file": "PUBLICATION_COVERAGE.json",
+      "mode": "old_exact_json_bytes_preserved_in_history",
+      "current": {
+        "path": "PUBLICATION_COVERAGE.json",
+        "bytes": 5275,
+        "sha256": "0fba3af73f05befdea139e4c86e5789f2135539f664eef9f22808ef532da9660"
+      }
+    },
+    {
+      "file": "RESEARCH_REGISTRY.json",
+      "mode": "old_exact_json_bytes_preserved_in_history",
+      "current": {
+        "path": "RESEARCH_REGISTRY.json",
+        "bytes": 26203,
+        "sha256": "babe85f61d28514314c2ae901b92095854ff018b88a943ac379be7caf99e1fb0"
+      }
+    },
+    {
+      "file": "RESEARCH_SESSION_LOG_INDEX.json",
+      "mode": "old_exact_json_bytes_preserved_in_history",
+      "current": {
+        "path": "RESEARCH_SESSION_LOG_INDEX.json",
+        "bytes": 2719,
+        "sha256": "c245c6ec45accc99a567b658f9781edd2541399a638de835acb32adc381e88b3"
+      }
+    },
+    {
+      "file": "FORMAL_MAP_EXTENSION_INDEX.json",
+      "mode": "old_exact_json_bytes_preserved_in_history",
+      "current": {
+        "path": "FORMAL_MAP_EXTENSION_INDEX.json",
+        "bytes": 1860,
+        "sha256": "ba27eac2ec140f81aac16de9ced6662e0d1132017a653d85142703da89f59795"
+      }
+    },
+    {
+      "file": "RESEARCH_MASTER_GUIDE.md",
+      "mode": "only_current_navigation_line_replaced_policy_unchanged",
+      "current": {
+        "path": "RESEARCH_MASTER_GUIDE.md",
+        "bytes": 29861,
+        "sha256": "2d15d2e5cd7ce7864b63323a01af43fd212808e77a8ea652fea59173f9b11ada"
+      }
+    },
+    {
+      "file": "AGENTS.md",
+      "mode": "exact_old_bytes_preserved_as_suffix",
+      "current": {
+        "path": "AGENTS.md",
+        "bytes": 100700,
+        "sha256": "9624f50db14f59e743d2e486064a235539ba5b3f21e3c94d5cbf10f7f1e4b003"
+      }
+    },
+    {
+      "file": "MEMORY.md",
+      "mode": "exact_old_bytes_preserved_as_suffix",
+      "current": {
+        "path": "MEMORY.md",
+        "bytes": 16492,
+        "sha256": "dfb14d975968921ab6e0b4c65efe7cd0e687fc86c1eb6cdfcfd78010cc46c5ce"
+      }
+    },
+    {
+      "file": "HANDOFF.md",
+      "mode": "exact_old_bytes_preserved_as_suffix",
+      "current": {
+        "path": "HANDOFF.md",
+        "bytes": 35412,
+        "sha256": "8b8e356380d134b5c255c4fb7cb3eae3052c9c4d43cee92c4a004eb210d92f3b"
+      }
+    },
+    {
+      "file": "MASTER_INDEX.md",
+      "mode": "exact_old_bytes_preserved_as_suffix",
+      "current": {
+        "path": "MASTER_INDEX.md",
+        "bytes": 26671,
+        "sha256": "0f2178c0dc869b30bdb11c83503a57bbdf46c7451d29037706a4e0311445d78f"
+      }
+    },
+    {
+      "file": "REVIEW_SUPERVISION.md",
+      "mode": "exact_old_bytes_preserved_as_prefix",
+      "current": {
+        "path": "REVIEW_SUPERVISION.md",
+        "bytes": 98858,
+        "sha256": "e0509c506e64b49388e118bec4b9d885ea07e447a9ddbee3200c12c204a8a07f"
+      }
+    },
+    {
+      "file": "UCT_FORMAL_MAP.md",
+      "mode": "exact_old_bytes_preserved_as_suffix",
+      "current": {
+        "path": "UCT_FORMAL_MAP.md",
+        "bytes": 14338,
+        "sha256": "2d29438b86c0e3e8d51e790122bd0a3132a3e1cbc9fa45215b6c6d4049cf80cd"
+      }
+    },
+    {
+      "file": "UCT_FORMAL_AUDIT.md",
+      "mode": "exact_old_bytes_preserved_as_suffix",
+      "current": {
+        "path": "UCT_FORMAL_AUDIT.md",
+        "bytes": 15257,
+        "sha256": "b66847c649ee2e571f64db1dfb9a5f3e42d5426fc1ac5e6edab032b697fd0405"
+      }
+    },
+    {
+      "file": "CHANGELOG.md",
+      "mode": "exact_old_bytes_preserved_as_suffix",
+      "current": {
+        "path": "CHANGELOG.md",
+        "bytes": 12388,
+        "sha256": "3bb661100a5d46e7e04aa9c573555a3c2eafd4324721704826fd8a2fdfb2e2ff"
+      }
+    },
+    {
+      "file": "START_HERE.md",
+      "mode": "exact_old_bytes_preserved_as_suffix",
+      "current": {
+        "path": "START_HERE.md",
+        "bytes": 2068,
+        "sha256": "5f6b360be240d6f480b6a0fe44337b9d2d457d6f5a35d31295fc895dbfdd088e"
+      }
+    },
+    {
+      "file": "README.md",
+      "mode": "exact_old_bytes_preserved_as_suffix",
+      "current": {
+        "path": "README.md",
+        "bytes": 11376,
+        "sha256": "15d3631c608e5ed40b84f595e864e49a67acdfb66a3bac5d20305d2aa5f2efa9"
+      }
+    }
+  ],
+  "graph_release_unchanged": true
+}

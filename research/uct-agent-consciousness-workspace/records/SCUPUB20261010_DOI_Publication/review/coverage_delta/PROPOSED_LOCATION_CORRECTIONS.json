@@ -1,0 +1,19 @@
+[
+  {
+    "claim_id": "R204-C1",
+    "body_or_attachment_location": "Section 3.1, finite success/alignment/use separation and the successful-output matched quartet; reproduction/baseline_R204 code/results.",
+    "severity": "TRACEABILITY_CLARIFICATION"
+  },
+  {
+    "claim_id": "R204-C2",
+    "body_or_attachment_location": "Section 3.2, natural/null update ambiguity and forced mismatch inference under joint intervention-port, writer, exclusivity and carrier-readout premises; reproduction/baseline_R204/check_alignment_and_use.py and EXACT_RESULTS.json.",
+    "severity": "REQUIRED_STABLE_ID_CORRECTION"
+  },
+  {
+    "claim_id": "R204-C3",
+    "coverage_status": "PARTIAL_BODY_PLUS_EXECUTABLE_WITNESS_NOT_FULL_NARRATIVE_PROOF",
+    "body_or_attachment_location": "Section 7.4 gives general transport background and Section 8 reports inherited check counts; reproducibility-v1.0.1.zip: reproduction/baseline_R204/check_alignment_and_use.py and EXACT_RESULTS.json disclose finite alignment/mismatch relabeling and rational-mixture witnesses.",
+    "scope_rule": "Only n=2,3,4 permutation input/output maps and all action/output permutation recodings for mismatch/alignment invariance; for mixtures, uniform action support and lambda in {0,1/10,...,1}. The code performs 333088 relabel checks and 6776 mixture checks. This coverage row does not claim that the full historical C3 controller-success covariance, arbitrary nonuniform weights, or all-real-lambda narrative proof is published in the SCU body. General transport discussion is background, not a substitute for that exact proof.",
+    "severity": "REQUIRED_STABLE_ID_AND_SCOPE_CORRECTION"
+  }
+]

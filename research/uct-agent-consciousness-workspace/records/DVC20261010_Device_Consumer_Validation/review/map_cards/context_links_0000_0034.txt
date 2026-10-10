@@ -1,0 +1,35 @@
+"BASE:CTX:001" | relation="same row-sum closure idea, no selection assumed in N128" | from="C:P6" | to="N128:JOINT_CRITERION" | deductive=false
+"BASE:CTX:002" | relation="joint-dependence motivation, not proof premise" | from="R127:JOINT_INFORMATION" | to="N128:MARKOV_JOIN" | deductive=false
+"BASE:CTX:003" | relation="same quotient criterion with explicit operations/outputs" | from="A:COARSE_CLOSURE" | to="R126:P2" | deductive=false
+"BASE:CTX:004" | relation="Original D allowed edge, retained as context; not by itself a deductive rule" | from="D:D0" | to="D:D1" | deductive=false
+"BASE:CTX:005" | relation="Original D allowed edge, retained as context; not by itself a deductive rule" | from="D:D1" | to="D:F1" | deductive=false
+"BASE:CTX:006" | relation="Original D allowed edge, retained as context; not by itself a deductive rule" | from="D:D3" | to="D:F1" | deductive=false
+"BASE:CTX:007" | relation="Original D allowed edge, retained as context; not by itself a deductive rule" | from="D:F1" | to="D:F2" | deductive=false
+"BASE:CTX:008" | relation="Original D allowed edge, retained as context; not by itself a deductive rule" | from="D:D4" | to="D:F3" | deductive=false
+"BASE:CTX:009" | relation="Original D allowed edge, retained as context; not by itself a deductive rule" | from="D:D1" | to="D:E1" | deductive=false
+"BASE:CTX:010" | relation="Original D allowed edge, retained as context; not by itself a deductive rule" | from="D:F2" | to="D:E2" | deductive=false
+"BASE:CTX:011" | relation="Original D allowed edge, retained as context; not by itself a deductive rule" | from="D:E2" | to="D:E3" | deductive=false
+"BASE:CTX:012" | relation="Original D allowed edge, retained as context; not by itself a deductive rule" | from="D:D5" | to="D:E4" | deductive=false
+"BASE:CTX:013" | relation="Original D allowed edge, retained as context; not by itself a deductive rule" | from="D:D6" | to="D:E4" | deductive=false
+"BASE:CTX:014" | relation="Original D allowed edge, retained as context; not by itself a deductive rule" | from="D:A1" | to="D:S1" | deductive=false
+"BASE:CTX:015" | relation="Original D allowed edge, retained as context; not by itself a deductive rule" | from="D:F1" | to="D:S1" | deductive=false
+"BASE:CTX:016" | relation="Original D allowed edge, retained as context; not by itself a deductive rule" | from="D:F2" | to="D:S1" | deductive=false
+"BASE:CTX:017" | relation="Original D allowed edge, retained as context; not by itself a deductive rule" | from="D:F3" | to="D:S1" | deductive=false
+"BASE:CTX:018" | relation="Original D allowed edge, retained as context; not by itself a deductive rule" | from="D:E1" | to="D:S1" | deductive=false
+"BASE:CTX:019" | relation="Original D allowed edge, retained as context; not by itself a deductive rule" | from="D:E2" | to="D:S1" | deductive=false
+"BASE:CTX:020" | relation="Original D allowed edge, retained as context; not by itself a deductive rule" | from="D:E3" | to="D:S1" | deductive=false
+"BASE:CTX:021" | relation="Original D allowed edge, retained as context; not by itself a deductive rule" | from="D:E4" | to="D:S1" | deductive=false
+"BASE:CTX:022" | relation="Token/type/lineage discipline informs bearer mapping; does not empirically identify it" | from="A:P6" | to="D:D0" | deductive=false
+"BASE:CTX:023" | relation="A typed consequence interface needs a supplied bridge; expressibility does not establish empirical fidelity" | from="B:REP" | to="D:D4" | deductive=false
+"BASE:CTX:024" | relation="Bundled coefficient recovery is a nonconstant-fiber identification problem" | from="C:P2_COORD" | to="D:F1" | deductive=false
+"BASE:CTX:025" | relation="A full-rank observation map supplies singleton parameter fibers within its model" | from="C:P2_COORD" | to="D:F2" | deductive=false
+"BASE:CTX:026" | relation="Earlier decision-level dependence result versus later dynamical-closure counterexample; neither implies the other" | from="D:F3" | to="N128:MARKOV_JOIN" | deductive=false
+"BASE:CTX:027" | relation="Exact regularity lemma supplies a conditional part of the recorded bounded audit, not a rerun of its numerical evidence" | from="D:GRID_BOUND" | to="D:E4" | deductive=false
+"BASE:CTX:028" | relation="Architecture-level cancellation separated from numerical performance" | from="D:SEPARABLE" | to="D:E4" | deductive=false
+"BASE:CTX:029" | relation="L8/L9 require independent valence evidence; neither the standard nor control establishes it" | from="D:D7" | to="D:S1" | deductive=false
+"BASE:CTX:030" | relation="Published binary special case and motivation; not an additional deductive premise" | from="D:PAYOFF" | to="R131:TARGET_SPAN" | deductive=false
+"BASE:CTX:031" | relation="A translated finite view still needs a grounded operation family and closure; not proof of actual support" | from="B:REP" | to="R131:CLOSURE" | deductive=false
+"BASE:CTX:032" | relation="Finite closure does not discharge the independent actual complete-organization premise" | from="R131:CLOSURE" | to="D:UCT_INTERPRETATION" | deductive=false
+"BASE:CTX:033" | relation="Time/resource/port grounding discipline; not a proof of actual schedule adequacy" | from="B:VIEW" | to="R132:SLOT_MODEL" | deductive=false
+"BASE:CTX:034" | relation="Completes the earlier partial-operation caveat in a finite stochastic joint-output setting" | from="R126:P2" | to="R132:PARTIAL_CLOSURE" | deductive=false
+"BASE:CTX:035" | relation="Existing deterministic refinement generalized within this project; classical probabilistic refinement is prior art" | from="R126:P4" | to="R132:REFINEMENT" | deductive=false

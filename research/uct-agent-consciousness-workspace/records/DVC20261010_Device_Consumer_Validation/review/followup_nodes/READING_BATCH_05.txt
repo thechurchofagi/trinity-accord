@@ -1,0 +1,239 @@
+FIELDS
+F1=/scope
+F3=LEDGER/semantic_review/assessment/targeted_item_assessment
+F5=/domain
+F43=/quantifiers
+F44=/limits
+F45=/actuality
+F47=/premises
+F48=/excluded_inferences
+F49=/boundary
+NEW EXACT VALUES (old V references retain already-read meanings)
+V503="Finite mathematical identity is stipulated; its actual experiential grounding and restriction to C1 remain OPEN."
+V504="In CHAIN_DOMAIN freeze iota(x_i)=e_i without target-order information, and define H as betweenness preservation/reflection by this fixed iota. Background D permits all endpoint-preserving E-orders; H is a hypothesis, not background evidence."
+V505="Real failure case for the joint selected bridge; neither C1 falsification nor empirical phenomenal evidence."
+V506="For every n>=4 in FROZEN_IDENTITY_DOMAIN, exactly one endpoint-preserving total order satisfies H. For n=4, D permits opposite e1/e2 orders, D+H entails e1<e2, and the swapped middle order violates H on B(e0,e1,e2)."
+V507="Deterministic logical evidence accounting. Noise/measurement and actual targets need separate validation."
+V508="Fix background D, candidate H and outcome q in one admitted model class with unchanged target identities. Logical consequence includes indirect relations, rank naming and background-derived constraints, not only a held-out literal cell."
+V509="Prospective information separation criterion, not a statistical significance theorem or universal empirical testing prescription."
+V510="A nontrivial deterministic contrast has D compatible with q and not q, satisfiable D+H entailing q, and D+not q incompatible with H. If D already entails q, withholding its literal record does not create incremental evidence for H."
+V511="Declared trace transmission, not arbitrary causal ancestry or identical stored values. Abstract finite model."
+V512="Fix a finite DAG (V,L) of executed trace events, distinct independently grounded source-port events S_B/S_C, and selected use events U. A(u) is the subset of those sources with an L-path to u. id(u) is defined only for singleton A(u). Legal timestamp assignments strictly increase on every L edge; retiming preserves roles and L."
+V513="Does not identify externally named phenomenal content, solve B_order/B_fam or add a basal gate."
+V514="Abstract construction; actual interpretation is an explicit additional premise."
+V515="All old trace roles and paths fixed; new cross-source routes can invalidate unique identity. Classical reachability; relay precedent TE20261008 §7.1."
+V516="Every legal retiming of TRACE_DOMAIN preserves A(u), including singleton identity and multi-source ambiguity. Role-preserving graph isomorphisms transport these sets covariantly; faithful relay subdivision preserves sets on old endpoints. Incomparable use times may reverse without changing source identity."
+V517="Application premise OPEN. Retiming comparisons use separately grounded instances and a justified role-preserving map; no screened-history claim."
+V518="Fix one actual P/I/K containing the selected finite source-to-use histories, complete D_K/Phi_K and C1 instance h_P. Independently interpret every source-port/trace/use predicate, domain bound and parameter; finite reachability uses only that interpreted domain. No external archive or test outcome is substituted for an actual trace."
+V519="Same bound/domain and all parameters transported. No subjective event-name measurement, familiar-mineness bridge, total-richness or subject-count conclusion."
+V520="Given TRACE_IDENTITY_INVARIANT, ACTUAL_TRACE_INSTANCE and A:C1, the finite source-set and singleton association formulas hold in D_K exactly when their fully transported counterparts hold in Phi_K. This supplies source-associated experiential structural roles, without identifying a named feeling or choosing H_prod/H_use."
+V521="Stateless finite interpreted transducers on declared source/use roles; source paths, values, operations and time-independent decoding fixed per instance.; Only the explicit finite-domain/all-admitted-input and legal-retiming quantifiers in the statement; no universal psychophysical claim.; No biological instance, empirical quality correspondence, full K-isomorphism, basal gate, unique owner or assistant-consciousness verdict."
+V522="Stateless finite interpreted transducers on declared source/use roles; source paths, values, operations and time-independent decoding fixed per instance."
+V523="Only the explicit finite-domain/all-admitted-input and legal-retiming quantifiers in the statement; no universal psychophysical claim."
+V524="No biological instance, empirical quality correspondence, full K-isomorphism, basal gate, unique owner or assistant-consciousness verdict."
+V525=["Finite typed carriers", "Universal left-inverse condition on admitted C", "Bijective g", "Actual dprime execution stipulated in model, not analyst relabeling"]
+V526="Exactly EXECUTED_FEATURE_DOMAIN; binary omitted-premise counterexample and noninjective alternative are separate models.; Only the explicit finite-domain/all-admitted-input and legal-retiming quantifiers in the statement; no universal psychophysical claim.; No biological instance, empirical quality correspondence, full K-isomorphism, basal gate, unique owner or assistant-consciousness verdict."
+V527="Exactly EXECUTED_FEATURE_DOMAIN; binary omitted-premise counterexample and noninjective alternative are separate models."
+V528=["R177:EXECUTED_FEATURE_DOMAIN"]
+V529="Declared abstract trace/transducer comparisons. Multiple-source use or repeated descendants require refined binding; no phenomenal identity supplied.; Only the explicit finite-domain/all-admitted-input and legal-retiming quantifiers in the statement; no universal psychophysical claim.; No biological instance, empirical quality correspondence, full K-isomorphism, basal gate, unique owner or assistant-consciousness verdict."
+V530="Declared abstract trace/transducer comparisons. Multiple-source use or repeated descendants require refined binding; no phenomenal identity supplied."
+V531=["IA trace domain interpreted on the same source/use binding", "Singleton source for each nominated use", "One nominated use per source", "Executed time-independent feature operations", "Fixed source-state and role correspondence"]
+V532="All legal retimings satisfying the fixed stateless contract; recoding clause under P1; counterexamples in explicit four-case binary domain, not universal biological independence.; Only the explicit finite-domain/all-admitted-input and legal-retiming quantifiers in the statement; no universal psychophysical claim.; No biological instance, empirical quality correspondence, full K-isomorphism, basal gate, unique owner or assistant-consciousness verdict."
+V533="All legal retimings satisfying the fixed stateless contract; recoding clause under P1; counterexamples in explicit four-case binary domain, not universal biological independence."
+V534=["R177:JOINT_SOURCE_FEATURE_DOMAIN", "IA20261008:TRACE_IDENTITY_INVARIANT", "R177:COMPENSATED_FEATURE_PRESERVATION"]
+V535="Exactly the stated contract, model or conditional proposition. No automatic biological or phenomenal instantiation."
+V536="Joint realizability and complete primitive coverage are preconditions to coherent gluing. Merely matching each pair of source values or each local context response does not build a common actual encoder. This is overlap in the compatibility principle, not a derivation of the feedback value formula."
+V537="The same evaluative quantities apply in each compared instance."
+V538=["general intelligence from one task", "unchanged task when external cues are added"]
+V539="32 equal-probability tasks; value clamp before selection, no later cue source access."
+V540=["H is a feeling", "clamp deletes basal experience"]
+V541="Specific physically matched intervention and fixed mechanisms."
+V542=["all biological systems use shared route", "all silicon systems bypass experience"]
+V543="Fixed future mechanism; no further context-bearing input; whole-profile correctness distinct from single-query accuracy."
+V544=["ignoring surviving environmental or compiled context"]
+V545="CUT_CONTRACT; ordinary finite coding/decoding principle."
+V546=["novel general mathematics", "universal phenomenal amount bound"]
+V547="Uniform 32 tasks, same mechanism/input contract, any x,y-only decoder."
+V548=["claiming the whole-profile 1/2 bound for each query"]
+V549="Zero-clamp, no-adaptation regime and arithmetic target only."
+V550=["unique universal consciousness core", "monotone effects of arbitrary brain lesions"]
+V551="Actual bearer, interval, signature, boundary and realization are jointly required."
+V552=["abstract simulation implies complete actual realization"]
+V553="No independent experience-off switch at fixed complete organization; no particular familiar feeling inferred."
+V554=["named feeling", "scalar richness", "single exclusive owner"]
+V555="A report or a task function cannot define and validate the target circularly."
+V556=["promoting an unresolved interpretation to theorem"]
+V557="Same declared P/I/K/M/pi/T; no class may silently replace another."
+V558="Only independently realizable pi(S); absent/undefined actual comparisons are not invented as successes or failures."
+V559="Finite nonempty SUPPORT_CONTRACT; no monotonicity needed."
+V560="Requires upward closure; false as an unrestricted inference."
+V561="Target/protocol relative; it does not assert that any one member is universally necessary."
+V562="Joint same-instance premise; abstract circuits and labels do not discharge it."
+V563="No extra experiential cause, named feeling, scalar richness, basal gate or exclusive owner."
+V564="Pure finite family class; all members contain full support, no actual realization inferred."
+V565="Finite selected supports; no actual-instance claim."
+V566="Conditional toy witness; actual complete-token realization and selected relation membership remain open."
+V567="Requires the changed relation to be constitutive of the declared complete token; does not infer reportless absence of experience."
+V568="Reports cannot define and validate the target circularly."
+V569="Declared finite classical source/encoder/consumer models. Not an independently established complete brain or AI process."
+V570="All inputs and independent queries of the stated finite contract. Uniform priors and fixed task weights only where explicitly assumed."
+V571="Model-level. C1 application needs a separately admitted actual same-P/Q/K/time comparison, installed decoder and true fixed J."
+V572="No experiential, report or IQ variable is defined."
+V573="The encoder is linear; arbitrary nonlinear encoders are outside this setup."
+V574="Uniform full-support source and no additional information are essential."
+V575="Equal aggregate performance does not identify equal full profiles; no named feeling established."
+V576="Not a universal ordering of intelligence or experience."
+V577="Classical quadratic coding, not a model of phenomenal content."
+V578="No source-dependent side information or post-query source access."
+V579="Only the four-variable uniform parity battery. Not a comparison to unrestricted two-bit optimum."
+NODES
+IA20261008:FROZEN_IDENTITY_DOMAIN | DEFINITION_AND_APPLICATION_PREMISE | In CHAIN_DOMAIN freeze iota(x_i)=e_i without target-order information, and define H as betweenness preservation/reflection by this fixed iota. Background D permits all endpoint-preserving E-orders; H is a hypothesis, not background evidence.
+F1=V503 F5=V503 F43=V504 F44=V499 F45=V500
+IA20261008:FIXED_TARGET_CONSTRAINT | CONDITIONAL_THEOREM | For every n>=4 in FROZEN_IDENTITY_DOMAIN, exactly one endpoint-preserving total order satisfies H. For n=4, D permits opposite e1/e2 orders, D+H entails e1<e2, and the swapped middle order violates H on B(e0,e1,e2).
+F1=V505 F5=V505 F43=V506 F44=V499 F45=V500
+IA20261008:EVIDENCE_CLOSURE_DOMAIN | DEFINITION | Fix background D, candidate H and outcome q in one admitted model class with unchanged target identities. Logical consequence includes indirect relations, rank naming and background-derived constraints, not only a held-out literal cell.
+F1=V507 F5=V507 F43=V508 F44=V499 F45=V500
+IA20261008:GENUINE_HOLDOUT_CRITERION | CONDITIONAL_EVIDENCE_CRITERION | A nontrivial deterministic contrast has D compatible with q and not q, satisfiable D+H entailing q, and D+not q incompatible with H. If D already entails q, withholding its literal record does not create incremental evidence for H.
+F1=V509 F5=V509 F43=V510 F44=V499 F45=V500
+IA20261008:TRACE_DOMAIN | MODEL_AND_DEFINITION | Fix a finite DAG (V,L) of executed trace events, distinct independently grounded source-port events S_B/S_C, and selected use events U. A(u) is the subset of those sources with an L-path to u. id(u) is defined only for singleton A(u). Legal timestamp assignments strictly increase on every L edge; retiming preserves roles and L.
+F1=V511 F5=V511 F43=V512 F44=V513 F45=V514
+IA20261008:TRACE_IDENTITY_INVARIANT | CONDITIONAL_THEOREM | Every legal retiming of TRACE_DOMAIN preserves A(u), including singleton identity and multi-source ambiguity. Role-preserving graph isomorphisms transport these sets covariantly; faithful relay subdivision preserves sets on old endpoints. Incomparable use times may reverse without changing source identity.
+F1=V515 F5=V515 F43=V516 F44=V513 F45=V514
+IA20261008:ACTUAL_TRACE_INSTANCE | ACTUAL_GROUNDING_PREMISE | Fix one actual P/I/K containing the selected finite source-to-use histories, complete D_K/Phi_K and C1 instance h_P. Independently interpret every source-port/trace/use predicate, domain bound and parameter; finite reachability uses only that interpreted domain. No external archive or test outcome is substituted for an actual trace.
+F1=V517 F5=V517 F43=V518 F44=V513 F45=V514
+IA20261008:TRACE_COUNTERPART | CONDITIONAL_UCT_INTERPRETATION | Given TRACE_IDENTITY_INVARIANT, ACTUAL_TRACE_INSTANCE and A:C1, the finite source-set and singleton association formulas hold in D_K exactly when their fully transported counterparts hold in Phi_K. This supplies source-associated experiential structural roles, without identifying a named feeling or choosing H_prod/H_use.
+F1=V519 F5=V519 F43=V520 F44=V513 F45=V514
+R177:EXECUTED_FEATURE_DOMAIN | FINITE_MODEL_CONTRACT | Fix finite C,Z,Zprime, encoder e:C->Z, executed decoder d:Z->C with d(e(c))=c for every admitted c, bijection g:Z->Zprime and installed dprime=d composed with inverse(g). Source and selected-use occurrences are independently bound; feature output is a physical task variable, not an experiential label.
+F1=V521 F5=V522 F43=V523 F44=V524 F47=V525
+R177:COMPENSATED_FEATURE_PRESERVATION | CONDITIONAL_ELEMENTARY_THEOREM | For every admitted c, dprime(g(e(c)))=c. Without installed compensation, bit inversion with the fixed identity decoder changes c; noninjective transmission need not admit any decoder recovering all c.
+F1=V526 F5=V527 F43=V523 F44=V524 F47=V528
+R177:JOINT_SOURCE_FEATURE_DOMAIN | APPLICATION_AND_COMPARISON_CONTRACT | In the IA singleton-source trace convention, bind one selected use per nominated source per episode and J(u)=(s(u),c(u)). Freeze source values and stateless encoder/transmission/decoder operations under legal retiming. For recoding comparisons admit the finite feature contract and the same source/use role mapping.
+F1=V529 F5=V530 F43=V523 F44=V524 F47=V531
+R177:SOURCE_FEATURE_SEPARATION | CONDITIONAL_CONSTRUCTION_AND_BOUNDARY | On JOINT_SOURCE_FEATURE_DOMAIN legal retiming preserves J while incomparable use order may reverse; compensated recoding preserves J; uncorrected bit inversion preserves s but changes c and J. Distinct sources may have equal c. This fixes only a selected functional identity and entails no named-quality or felt-mineness identity.
+F1=V532 F5=V533 F43=V523 F44=V524 F47=V534
+CORE20261008:TARGET_LEVELS | DEFINITION | Separate basal nonempty experience, independently named selected phenomenal target, complete experiential structural type and particular-process continuation. Loss at one level does not entail loss at every level.
+F1=V535
+CORE20261008:CONTRACT | DEFINITION | Fix finite physically grounded slots V, reference P0, K, interval I, histories H, external support B, transformation pi(S), independent target T and acceptance set. F(S)=1 iff every h in H yields an admitted successful target comparison. Undefined targets fail this test only.
+F1=V535
+CORE20261008:FAMILY | ASSUMPTION | One fixed CONTRACT gives a nonempty success family F on finite V. Declare whether the domain is a toy or an actual application; this premise does not identify a human phenomenal target.
+F1=V535
+CORE20261008:MINIMA | DEFINITION | M={S in F:no successful proper subset of S}; K_required=intersection(F). Inclusion-minimality is not minimum cardinality, leastness or single-deletion local minimality.
+F1=V535
+CORE20261008:MINIMUM_EXISTENCE | THEOREM | Each S in a nonempty finite success family contains a minimal successful member. Finite descent may use multi-component set reductions and does not establish a physically safe one-at-a-time deletion path.
+F1=V535
+CORE20261008:REQUIRED_INTERSECTION | THEOREM | For the same nonempty finite family, intersection(F)=intersection(M). The common required set need not itself be sufficient.
+F1=V535
+CORE20261008:UNIQUE_LEAST | THEOREM | A least successful set exists iff intersection(F) belongs to F iff M has exactly one member, in the same finite nonempty contract.
+F1=V535
+CORE20261008:TARGET_NESTING | ASSUMPTION | Two contracts share V, transformation policy, H and B. Their nonempty success families satisfy F2 subset F1 because preservation of T2 entails preservation of T1.
+F1=V535
+CORE20261008:TARGET_REFINEMENT | THEOREM | Under TARGET_NESTING each F2-successful set contains an F1-minimal support, and K_required(T1) subset K_required(T2). The two minimal families need not be nested collections.
+F1=V535
+CORE20261008:MONOTONE | ASSUMPTION | On this fixed contract success is upward closed: if S succeeds and S subset T subset V then T succeeds. Additional retained mechanisms are not presumed harmless without this premise.
+F1=V535
+CORE20261008:CUT_DUALITY | THEOREM | Under MONOTONE a retained S succeeds iff it contains a member of M. A removed D destroys success iff D intersects every M. Minimal destructive cuts are minimal hitting sets.
+F1=V535
+CORE20261008:RELAY_SETUP | FINITE_MODEL | C holds q and the return receiver/input combiner. Present R1/R2 copy q and absent relays supply 0. q_next=(R1*q OR R2*q) XOR V*u XOR A*w. REP is read-only; absent C makes the chosen q target undefined. Power and clock are fixed external support.
+F1=V535
+CORE20261008:ALTERNATIVE_SUPPORTS | CONSTRUCTION_RESULT | In RELAY_SETUP the initial-q distinction persists under every common input sequence iff C and (R1 or R2). Minimal supports are {C,R1},{C,R2}, common {C} fails, and minimal destructive cuts are {C},{R1,R2}.
+F1=V535
+CORE20261008:INPUT_VS_RETENTION | CONSTRUCTION_RESULT | Removing V or REP preserves initial-q distinction when C and a relay remain; removing V removes sensitivity to u. Retention plus u-sensitivity has minimal supports {C,R1,V},{C,R2,V}. No variable measures a feeling.
+F1=V535
+CORE20261008:GATE_SETUP | FINITE_MODEL | C contains q and an agreement gate. Installed A/B give gate values 1; excised inputs give 0. With C present q_next=q when A=B and q_next=0 otherwise. Absent C fails the selected q target.
+F1=V535
+CORE20261008:ONE_CUT_NOT_MINIMAL | COUNTEREXAMPLE | Under GATE_SETUP only {C} and {C,A,B} preserve the initial-bit distinction. Every single cut from the full set fails although {C} succeeds. Single-deletion irreducibility is not inclusion-minimality without further conditions.
+F1=V535
+CORE20261008:PROTOCOL_ORDER | COUNTEREXAMPLE | Starting at q=1,A=B=1, simultaneous A/B removal preserves q=1; removing A, permitting an update, then removing B leaves q=0. The final support/law matches but pointed states differ. No ghost-history claim is made.
+F1=V535
+CORE20261008:ACTUAL_BRIDGE | OPEN_PREMISE | Independently establish actual bearer/reference and continuation, relevant complete physical realization, common K/I/B/pi and noncircular selected phenomenal interpretation for one comparison. The toy does not supply this human instance.
+F1=V535
+CORE20261008:EXPERIENTIAL_APPLICATION | CONDITIONAL_INTERPRETATION | With ACTUAL_BRIDGE and C1, a justified target-preserving or target-changing organizational relation receives its corresponding experiential interpretation. A failed toy target alone entails neither absent basal experience nor loss of a person nor any named feeling.
+F1=V535
+CORE20261008:PERSISTING_INSTANCE | OPEN_INSTANCE_PREMISE | Independently establish that local P remains an actual process with constitutive dynamics and lineage through I while embedded in actual Q. Mere inclusion is not evidence of persistence after real cessation.
+F1=V535
+CORE20261008:LOCAL_COPRESENCE | INHERITED_CONDITIONAL_RESULT | With PERSISTING_INSTANCE, A:P3 and A:U1 the continuing local process retains nonempty experience. An independently admitted actual whole also falls under U1. Neither implies unchanged local content or preservation of the former human target.
+F1=V535
+CORE20261008:HUMAN_CORE | OPEN_QUESTION | No universal anatomical human core, uniquely minimal subject, cell quale label or complete human-target preservation is identified. Defining a target-relative support family does not prove a human realizes it.
+F1=V535
+CORE20261008:PRIOR_CG_C | IMPORTED_CONDITIONAL_PROOF_CARD | Grounded shared physical identity and sort-preserving local isomorphisms induce coherent overlap maps and a quotient preserving local injections; no subjective-event or subject identity follows.
+F1=V535
+CORE20261008:PRIOR_CG_R | IMPORTED_CONDITIONAL_PROOF_CARD | If every allowed primitive tuple is covered or supplied and all facts are jointly realizable, local/interface data determine the full labeled structure within the declared class. Carrier coverage alone is insufficient.
+F1=V535 F3=V536
+CORE20261008:PRIOR_CG_UCT | IMPORTED_CONDITIONAL_PROOF_CARD | Given an actual whole, complete physically grounded open composition, strong C1, valid local actual instances where invoked and intended comparison compatibility, whole experiential type is the transported assembly.
+F1=V535
+CORE20261008:PRIOR_CG_SUB | IMPORTED_CONDITIONAL_PROOF_CARD | Local constitutive isomorphisms preserving states, ports, interventions, overlap identities, joint mechanisms, wiring, timing and well-posedness induce whole structural equivalence; actual C1 interpretation is additional.
+F1=V535
+CORE20261008:PRIOR_CG_ANF | IMPORTED_CONDITIONAL_PROOF_CARD | For unrestricted n-input Boolean laws with fixed zero-anchor scopes and cover downset D, compatible local records leave 2^(2^n-|D|) update laws. This is not full physical-implementation reconstruction.
+F1=V535
+CORE20261008:PRIOR_CG_W | IMPORTED_CONDITIONAL_PROOF_CARD | Parity versus parity XOR joint product agree on all proper zero-anchor faces, but their reversible memory embeddings have different fixed-point counts at the same one-step clock.
+F1=V535
+CORE20261008:PRIOR_CD_LIFT | IMPORTED_CONDITIONAL_PROOF_CARD | For finite abelian G with q elements,n>=2,c(x)=sum x_i,m=q^(n-1), L_Q(x,xprime)=Q(c(x),c(xprime))/m lifts arbitrary stochastic Q with uniform proper next-coordinate marginals for every previous x.
+F1=V535
+CORE20261008:PRIOR_CD_PROTOCOL | IMPORTED_CONDITIONAL_PROOF_CARD | Fresh masks, one proper post-refresh read per step, no pooled full-state/mask information, fixed refresh law and common accessible initial information imply identical finite adaptive transcript laws across Q.
+F1=V535
+CORE20261008:PRIOR_CD_INVARIANTS | IMPORTED_CONDITIONAL_PROOF_CARD | For BR=I,L=RQB, L^k=RQ^kB and trace(L^k)=trace(Q^k). Fix the same sampled clock. Macro return is not complete microstate return.
+F1=V535
+CORE20261008:PRIOR_CD_FACTOR | IMPORTED_CONDITIONAL_PROOF_CARD | Independently addressable parity layers can implement collective memory. A deterministic four-cycle cannot be a product of two deterministic binary systems at the same step. Neither decomposition count establishes subjects.
+F1=V535
+CORE20261008:PRIOR_CD_CAPABILITY | IMPORTED_CONDITIONAL_PROOF_CARD | For Qrho=rho I+(1-rho)J/q, uniform initial target and no writes, an installed joint decoder at lag k attains [1+(q-1)rho^k]/q while the restricted proper-readout protocol attains 1/q. This is specified recall, not experiential intensity.
+F1=V535
+EI20261008:CONTRACT | definition | Fix task distribution, boundary, time, installed mechanism and transported intervention family; define intact and post-intervention J.
+F1=V537 F48=V538
+EI20261008:ARITHMETIC | construction | H=Q=c; select H, Q, or H OR Q; answer sum or product on x,y in {0,1,2,3}, uniform c; context report R=H.
+F1=V539 F48=V540
+EI20261008:NONTRANSPORT | counterexample | All intact task answers match, but H-clamping produces accuracy 9/16, 1, 1 in shared, bypass, redundant systems.
+F1=V541 F48=V542
+EI20261008:CUT_CONTRACT | definition | N distinct complete task-response profiles must be produced after only M distinguishable context-dependent code states remain.
+F1=V543 F48=V544
+EI20261008:DISTINCTION_BOUND | conditional_theorem | Exact profile correctness requires M>=N; uniform complete-profile identification succeeds at most min(1,M/N).
+F1=V545 F48=V546
+EI20261008:SINGLE_QUERY_BOUND | conditional_theorem | After both context carriers are erased, no decoder of x,y alone beats 9/16 expected arithmetic accuracy.
+F1=V547 F48=V548
+EI20261008:CORE_FAMILY | model_consequence | Minimal sufficient context-route sets are {H}, {Q}, or either singleton, according to architecture.
+F1=V549 F48=V550
+EI20261008:ACTUAL_BRIDGE | unresolved_premise | Selected model relations are constitutive relations of one independently admitted actual complete token under a common P/I/K.
+F1=V551 F48=V552
+EI20261008:STRUCTURAL_INTERPRETATION | conditional_application | C1 and the actual-instance premise give experiential structural counterparts of actual task-executing organizational relations.
+F1=V553 F48=V554
+EI20261008:NAMED_BRIDGE | open_problem | Independently determine the named experiential counterpart of a task distinction or route in an admitted bearer.
+F1=V555 F48=V556
+R183:COUNTERFACTUAL_CLASSES | definition | Distinguish fixed-organization experience-off (UCT-inadmissible), constitutive-relation intervention, evidence-channel intervention and boundary/resource change.
+F1=V557
+R183:SUPPORT_CONTRACT | definition | F_T^pi is the nonempty finite family of admitted retained relation sets that succeed on target T under one frozen actual-process and evaluation contract.
+F1=V558
+R183:INDIVIDUAL_RELEVANCE | conditional_theorem | A relation r is individually unavoidable iff it belongs to the intersection of the inclusion-minimal successful supports, equivalently iff every successful support contains r.
+F1=V559
+R183:FULL_DELETION_CRITERION | conditional_theorem | For a nonempty upward-closed success family, r is individually unavoidable iff deleting r from full support fails.
+F1=V560
+R183:DISJUNCTIVE_RELEVANCE | definition | A relation family R is disjunctively unavoidable iff it intersects every minimal successful support; minimal such R are minimal hitting sets.
+F1=V561
+R183:ACTUAL_BRIDGE | unresolved_premise | The bearer/lineage, interval, complete signature, relation membership, transformations, boundary and capability target are actual and independently grounded for one application.
+F1=V562
+R183:TRER | conditional_application | Under C1, ACTUAL_BRIDGE, SUPPORT_CONTRACT and INDIVIDUAL_RELEVANCE, the experiential counterpart of r is target-relative constitutively relevant to T because it is the intrinsic presentation of the same unavoidable relation.
+F1=V563
+R183:FOUR_RELATION_CLASS | model_specification | Consider the complete class of nonempty upward-closed success families on one fixed four-relation universe.
+F1=V564
+R183:INTACT_UNDERIDENTIFICATION | counterexample_family | All 167 nonempty upward-closed families on four relations have intact full-support success while their individual unavoidable cores differ.
+F1=V565
+R183:TARGET_PRESERVING_WITNESS | model_specification | Two declared toy complete signatures differ by a report or bypassed relation while both satisfy the same fixed selected capability target.
+F1=V566
+R183:EXPERIENCE_CHANGE_NO_TARGET_CHANGE | counterexample | Changing a declared report or bypassed relation can change complete organization while the selected capability target remains successful.
+F1=V567
+R183:NAMED_BRIDGE | open_problem | Independently identify a human-scale experiential target and show whether the selected actual relation or disjunctive family realizes it.
+F1=V568
+OO20261008:CONTRACT | DEFINITION | X is uniform in F2^n; nonzero task a is independent of X; target is a dot X. A pre-query e(X) feeds an installed post-query decoder d(a,e(X)); no other source access. Fix deadline, task weights, policies and process boundary.
+F1=V569 F43=V570 F45=V571 F49=V572
+OO20261008:LINEAR_SETUP | ASSUMPTION | Within CONTRACT, e(X)=HX for fixed binary k-by-n H, U=row(H), r=rank(H). Downstream decoding need not be linear.
+F1=V569 F43=V570 F45=V571 F49=V573
+OO20261008:LINEAR_ACCESS | CONDITIONAL_THEOREM | Under CONTRACT and LINEAR_SETUP, p*(a)=1 for a in U and 1/2 otherwise; weighted accuracy is 1/2+weight_w(U minus {0})/2; uniform accuracy is 1/2+(2^r-1)/(2(2^n-1)).
+F1=V569 F43=V570 F45=V571 F49=V574
+OO20261008:DIRECTIONAL_WITNESS | COUNTEREXAMPLE | Under GUARD_R_DIRECTION, both rank-two messages have uniform-parity score 3/5, but item accuracies 3/4 versus 1/2 and cross-pair accuracies 1/2 versus 1.
+F1=V569 F43=V570 F45=V571 F49=V575
+OO20261008:LINEAR_DOMINANCE | CONDITIONAL_THEOREM | Within the linear contract, U weakly dominates V for every weighting of nonzero-parity queries iff V is a subset of U.
+F1=V569 F43=V570 F45=V571 F49=V576
+OO20261008:NONLINEAR_SETUP | ASSUMPTION | Within CONTRACT, n=2m and tasks are uniform nonzero parities. The one-bit encoder is f_m(X)=XOR_j x_(2j-1)*x_(2j), and the installed decoder is d(a,b)=b XOR f_m(a).
+F1=V569 F43=V570 F45=V571 F49=V577
+OO20261008:WALSH_SCORE | CONDITIONAL_THEOREM | Under CONTRACT and BOOLEAN_ENCODER, for nonzero a, p_f*(a)=1/2+|W_f(a)|/(2*2^n), where W_f(a)=sum_x (-1)^(f(x) XOR a dot x).
+F1=V569 F43=V570 F45=V571 F49=V578
+OO20261008:FOUR_BIT_OPTIMUM | CONDITIONAL_THEOREM | Under GUARD_R_FOUR, any one-bit synopsis encoder/decoder has uniform mean accuracy at most 5/8. Quadratic f_2 attains 5/8 on each nonzero parity, with none answered perfectly.
+F1=V569 F43=V570 F45=V571 F49=V579

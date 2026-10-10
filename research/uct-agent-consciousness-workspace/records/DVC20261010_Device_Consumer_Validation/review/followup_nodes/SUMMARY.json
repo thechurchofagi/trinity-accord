@@ -1,0 +1,42 @@
+{
+  "schema": "uct-dvc-node-followup-scoped-review/1",
+  "recorded_finish_utc": "2026-10-10T02:07:23.805633+00:00",
+  "map_version": "UCT-MAP-v1.1.2",
+  "source_graph_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
+  "source_ledger_sha256": "0513cb55cef94d82adcaea46af1974438a424aeba152f4c9d5655340f9271687",
+  "prior_scoped_review_sha256": "e44b1c1ef334d0f463f14f44e2423012fee6ecd7050f1eebff6fdb58a964deee",
+  "prior_unread_list_sha256": "56e3de200c5bb400808167459c3df4cee36d7c886903ed7f021e901c49cb52ef",
+  "counts": {
+    "new_nodes_read": 599,
+    "prior_nodes_with_scoped_reading": 314,
+    "combined_nodes": 913,
+    "new_nodes_without_scoped_reading": 0,
+    "forced_node_revisions": 0,
+    "new_graph_leaf_fields_read": 4089,
+    "new_graph_leaf_fields_not_read": 11804,
+    "new_ledger_leaf_fields_read": 1874,
+    "new_ledger_leaf_fields_not_read": 26092,
+    "new_nodes_with_graph_omissions": 599,
+    "nodes_with_unresolved_external_quantifier_locator": 11,
+    "manual_family_assessments": 54,
+    "manual_targeted_assessments": 34
+  },
+  "all_913_nodes_scoped_across_two_review_records": true,
+  "all_913_freshly_reread_by_this_worker": false,
+  "whole_map_deep_semantic_completion": false,
+  "independent_historical_proof_completion": false,
+  "program_is_semantic_review": false,
+  "actual_premises_discharged": false,
+  "historical_depth_gaps_kept_open": {
+    "ids_with_deeper_fields": 1034,
+    "deeper_fields": 1828,
+    "historical_proof_ids": 1347,
+    "review_items": [
+      "QC10",
+      "IA-QC11",
+      "QC12",
+      "QC13"
+    ]
+  },
+  "concurrent_CBI_read_scope": "Not read in this node follow-up; parent manages concurrent CBI integration separately. Completed-map version unchanged."
+}

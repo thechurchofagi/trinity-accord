@@ -1,0 +1,146 @@
+{
+  "schema": "uct-eip-independent-reconciliation-check/1",
+  "source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+  "original_sha256": {
+    "model.py": "43ea2686f3db61653b472265dd2da33765906b52ef6370166668b4cd642e0f82",
+    "EXACT_RESULTS.json": "6a14ebf52d93bcd8e426c962351b8b75e808d0a5e639f525886728f3cf92460f"
+  },
+  "original_run_exit_code": 0,
+  "original_run_stdout": "{\"rows\": 8, \"ordinary_gate_ambiguous_groups\": 3, \"exclusive_probe_gate_ambiguities\": 0}",
+  "replay_exact_results_byte_identical": true,
+  "source_files_unchanged": true,
+  "ordinary_observation_fibers": [
+    {
+      "observation": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rows_S_G_X": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ]
+      ],
+      "possible_G": [
+        0,
+        1
+      ],
+      "possible_I_if_I_is_defined_as_S_times_G": [
+        0
+      ]
+    },
+    {
+      "observation": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "rows_S_G_X": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          1
+        ]
+      ],
+      "possible_G": [
+        0,
+        1
+      ],
+      "possible_I_if_I_is_defined_as_S_times_G": [
+        0
+      ]
+    },
+    {
+      "observation": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "rows_S_G_X": [
+        [
+          1,
+          0,
+          0
+        ]
+      ],
+      "possible_G": [
+        0
+      ],
+      "possible_I_if_I_is_defined_as_S_times_G": [
+        0
+      ]
+    },
+    {
+      "observation": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "rows_S_G_X": [
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "possible_G": [
+        0,
+        1
+      ],
+      "possible_I_if_I_is_defined_as_S_times_G": [
+        0,
+        1
+      ]
+    }
+  ],
+  "globally_G_identifying": false,
+  "not_all_fibers_G_ambiguous": true,
+  "gate_configuration_ambiguous_fibers": 3,
+  "intake_indicator_ambiguous_fibers_under_conditional_I_equals_SG_model": 1,
+  "delivered_exclusive_probe_rows": [
+    {
+      "S": 1,
+      "G": 0,
+      "X": 0,
+      "U": 0
+    },
+    {
+      "S": 1,
+      "G": 1,
+      "X": 0,
+      "U": 1
+    }
+  ],
+  "interpretation": "I=S*G is a proposed semantic qualification if G means gate configuration. It is not an observed read event, a hardware result, or an adopted change to EIP.",
+  "limits": [
+    "No source-to-consumer hardware binding was measured.",
+    "The aggregate U variable is never treated as an observed specified consumer read.",
+    "No historical proofs were reconstructed or map objects activated."
+  ]
+}

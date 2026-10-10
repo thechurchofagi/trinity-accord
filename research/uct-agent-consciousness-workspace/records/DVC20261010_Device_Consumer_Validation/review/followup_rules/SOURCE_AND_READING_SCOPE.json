@@ -1,0 +1,134 @@
+{
+  "schema": "uct-dvc-core-followup-reading-provenance/1",
+  "baseline": {
+    "path": "/workspace/scratch/465328c0080c/workbench/audit/baseline/UCT_EFFECTIVE_GRAPH.json",
+    "sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
+    "version": "UCT-MAP-v1.1.2"
+  },
+  "read_displays": [
+    {
+      "file": "COMPACT_CONTRACT_CATALOG.txt",
+      "sha256": "d7dd8317999c3251c2678d119773baaa21e446f2775ee7f9d735fed026a41cba",
+      "read_scope": "ENTIRE_CONTENT"
+    },
+    {
+      "file": "STATUS_FIELD_SUPPLEMENT.txt",
+      "sha256": "8b8e4454d16a3e5bff4f87e78fee1b5f1b421467f33e1232c622ddf60d00a53b",
+      "read_scope": "ENTIRE_CONTENT"
+    },
+    {
+      "file": "CONCLUSION_TEXT_SUPPLEMENT.json",
+      "sha256": "e7f9e63bd9f9811a1f3f320ff268d90214963db5dc613c238822a85fecb793a3",
+      "read_scope": "ENTIRE_CONTENT"
+    },
+    {
+      "file": "PRIOR137_NEW_VALUE_CATALOG.txt",
+      "sha256": "83b6b06cb4830138103e23fb4d04fc08d3a70b0da2eda5e85cf468d6c78773d9",
+      "read_scope": "ENTIRE_CONTENT"
+    },
+    {
+      "file": "PRIOR137_REFERENCE_CATALOG.txt",
+      "sha256": "1833ed38048853b9fb5bc8675fe2abd0c0c2ceb3ac0ad0c1bd44b85042cdb149",
+      "read_scope": "ENTIRE_CONTENT"
+    },
+    {
+      "file": "PRIOR137_CORE_TEMPLATE_CATALOG.txt",
+      "sha256": "3c0b88d8d47eb627efead1bf54c5fa9c24c61ed72fa74b65de68f01e3097851b",
+      "read_scope": "ENTIRE_CONTENT"
+    },
+    {
+      "file": "PRIOR137_CORE_COMPACT.txt",
+      "sha256": "1c7847aec39abb03c383695bee43feea5905c9dff5c1fc81d28138f74fb9ceab",
+      "read_scope": "ENTIRE_CONTENT"
+    },
+    {
+      "file": "compact_cards/RULES_000_024.txt",
+      "sha256": "b166fdce9ca74b1015a8b63539af2678f358b80aff97401009da60cb67de7fd6",
+      "read_scope": "ALL_RULE_LINES; final large batches were read in bounded contiguous chunks"
+    },
+    {
+      "file": "compact_cards/RULES_025_049.txt",
+      "sha256": "83807d26bab30b8b97210e97d1e9e0c1f6f5b151832ef2324b9e7d6fcbeca752",
+      "read_scope": "ALL_RULE_LINES; final large batches were read in bounded contiguous chunks"
+    },
+    {
+      "file": "compact_cards/RULES_050_074.txt",
+      "sha256": "430a40b6816955b24a65e97baf0dafec3397812e02efbac5dceaec829f871863",
+      "read_scope": "ALL_RULE_LINES; final large batches were read in bounded contiguous chunks"
+    },
+    {
+      "file": "compact_cards/RULES_075_099.txt",
+      "sha256": "6db7fb6f54ab74e72ff2645e7d08d011c0440657f887c4393d9b529d8cb8ec54",
+      "read_scope": "ALL_RULE_LINES; final large batches were read in bounded contiguous chunks"
+    },
+    {
+      "file": "compact_cards/RULES_100_124.txt",
+      "sha256": "172e286cf25fc40964177282c1da935b578988bbdb5bd2ca760c055cea57b537",
+      "read_scope": "ALL_RULE_LINES; final large batches were read in bounded contiguous chunks"
+    },
+    {
+      "file": "compact_cards/RULES_125_149.txt",
+      "sha256": "8963506a12bff963a2eb6a637897d209e6cd4a10c2bc1b24ca42e16835b89b14",
+      "read_scope": "ALL_RULE_LINES; final large batches were read in bounded contiguous chunks"
+    },
+    {
+      "file": "compact_cards/RULES_150_174.txt",
+      "sha256": "0d2ba0efe34aece8b73391c6f5558715cbf559064dd90b7b3887e82fba150e9c",
+      "read_scope": "ALL_RULE_LINES; final large batches were read in bounded contiguous chunks"
+    },
+    {
+      "file": "compact_cards/RULES_175_199.txt",
+      "sha256": "23f5c4043b72d47ac1c7d13583b9fd731e7418e54eae02a00795e7ab66153042",
+      "read_scope": "ALL_RULE_LINES; final large batches were read in bounded contiguous chunks"
+    },
+    {
+      "file": "compact_cards/RULES_200_224.txt",
+      "sha256": "ce8b6de7cc8d9c67b186953095ae915ad589828609f834e479c6dbc98c9557a6",
+      "read_scope": "ALL_RULE_LINES; final large batches were read in bounded contiguous chunks"
+    },
+    {
+      "file": "compact_cards/RULES_225_249.txt",
+      "sha256": "25bc6c903970286d54b7bc342a0fe4f844da09255f3ab5ffbdc39913d87e77db",
+      "read_scope": "ALL_RULE_LINES; final large batches were read in bounded contiguous chunks"
+    },
+    {
+      "file": "compact_cards/RULES_250_274.txt",
+      "sha256": "d3bcfd53d992042cfa54d019871abca64d44cbba83bb035eebbd792d559aff4f",
+      "read_scope": "ALL_RULE_LINES; final large batches were read in bounded contiguous chunks"
+    },
+    {
+      "file": "compact_cards/RULES_275_286.txt",
+      "sha256": "e8465bb354d3dd5dfa287fe242a8049e647bedc5ebb36d5dd281aec582782d8d",
+      "read_scope": "ALL_RULE_LINES; final large batches were read in bounded contiguous chunks"
+    }
+  ],
+  "external_record_reads": [
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/DVC20261010_Device_Consumer_Validation/EVIDENCE_CANDIDATE_ADDITION.json",
+      "sha256": "c2dc72bd756de37262016a429c596c722b68776858ffe0f8e50ad396125b0c8b",
+      "scope": "Entire JSON"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/CBI20261010_Consumer_Branch_Isolation/RESEARCH_NOTE.md",
+      "sha256": "183e2ae49a3c8f2cb3bfb520675ecf73a05d31d9bda876ce08c27c37e31a3746",
+      "scope": "Entire note; no underlying source rereview"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/DVC20261010_Device_Consumer_Validation/MAP_EXTENSION.json",
+      "sha256": "c35c38d5046dcf3aa30646e2fd27237f53a75505922be9ae1854c15e90e8db29",
+      "scope": "Full machine comparison of original 39 IDs plus manual reading of every changed proof-location field and all six new records; no new full-map semantic proof"
+    }
+  ],
+  "non_read_materializations": [
+    "cards/*.txt",
+    "prior137_core_cards/*.txt",
+    "PRIOR137_GROUPED_FIELDS.txt"
+  ],
+  "non_read_materialization_note": "These intermediate verbose displays were generated for the compact workflow but are not claimed as separately read. Equivalent selected values were actually read through the listed compact displays and exact-value catalogues.",
+  "prior_frozen_review_unchanged": {
+    "manifest_sha256": "65bbbb6f90e4fd9a96f1263b0d0f481e0db241d3f1ce6c28a7aa0df1a36eda1b",
+    "main_report_sha256": "952bfabcbf3c17bb64db8bf9a34f40d6095a0c3fd9bf60f7357a68bdd56a669d"
+  },
+  "new_numerical_execution": false,
+  "parent_final_model_execution": "Parent reports a final exact-byte model reproduction in canonical DVC/FINAL_MODEL_REPRODUCTION.json. This subagent did not rerun it in this bounded follow-up and does not claim that receipt as its own execution."
+}

@@ -1,0 +1,25 @@
+Interpretation: instantiate the template, then replace each named whole field by the card override; replacement is not conjunction. Values refer to the already-read exact-value reference catalogue or NEW_VALUE catalogue.
+
+S1={"/formal_contract_R153/alternative_routes": "P4", "/formal_contract_R153/bindings_required": "P6", "/formal_contract_R153/premise_connective": "P3", "/formal_contract_R153/quantification": "P5", "/formal_contract_R153/relation_type": "P1", "/formal_contract_R153/root_premise_routes": "NEW_VALUE_60", "/formal_contract_R154/alternative_routes": "P4", "/formal_contract_R154/bindings_required": "P6", "/formal_contract_R154/premise_connective": "P3", "/formal_contract_R154/quantification": "P5", "/formal_contract_R154/relation_type": "P1", "/formal_contract_R154/root_premise_routes": "NEW_VALUE_60", "/instance_obligations": "P2", "/kind": "P1"}
+
+S2={"/formal_contract_R169/bindings_required": "NEW_VALUE_102", "/formal_contract_R169/premise_connective": "P3", "/formal_contract_R169/quantification": "NEW_VALUE_101", "/instance_obligations": "P2", "/kind": "P1"}
+
+S3={"/formal_contract_R171/bindings_required": "NEW_VALUE_114", "/formal_contract_R171/premise_connective": "P3", "/formal_contract_R171/quantification": "P12", "/instance_obligations": "P2", "/kind": "P1"}
+
+S4={"/formal_contract_R172/bindings_required": "NEW_VALUE_126", "/formal_contract_R172/premise_connective": "P3", "/formal_contract_R172/quantification": "NEW_VALUE_125", "/instance_obligations": "P2", "/kind": "P1"}
+
+S5={"/formal_contract_R173/bindings_required": "NEW_VALUE_129", "/formal_contract_R173/premise_connective": "P3", "/formal_contract_R173/quantification": "NEW_VALUE_128", "/instance_obligations": "P2", "/kind": "P1"}
+
+S6={"/formal_contract_R174/bindings_required": "NEW_VALUE_131", "/formal_contract_R174/premise_connective": "P3", "/formal_contract_R174/quantification": "NEW_VALUE_130", "/instance_obligations": "P2", "/kind": "P1"}
+
+S7={"/instance_obligations": "P2", "/kind": "P1"}
+
+S8={"/formal_contract_R176/connective": "P3", "/formal_contract_R176/same_binding": "P15", "/instance_obligations": "P2", "/kind": "P1"}
+
+S9={"/actual_application_status": "P16", "/instance_obligations": "P2", "/may_infer": "NEW_VALUE_143", "/premise_mode": "NEW_VALUE_142"}
+
+S10={"/enabled_as_established_premise": "P18", "/guard": "NEW_VALUE_149", "/instance_obligations": "P2", "/kind": "P1", "/no_assumption_promotion": "P19"}
+
+S11={"/enabled_as_established_premise": "P18", "/kind": "P1"}
+
+S12={"/enabled_as_established_premise": "P18", "/instance_obligations": "P2", "/kind": "P1"}

@@ -1,3 +1,17 @@
+# 最新接续 DVC20261010；SCU v1.0.1 已公开
+
+**正式论文：** [Matched Behavior and Source Use，SCU-PAPER v1.0.1](https://doi.org/10.5281/zenodo.23272690)，15页英文预印本；[公开核验收据](records/SCUPUB20261010_DOI_Publication/FINAL_PUBLICATION_RECEIPT.json)。DOI解析与公开文件已核验，非期刊同行评审。
+
+**后续研究：** [DVC中文交接](records/DVC20261010_Device_Consumer_Validation/HANDOFF_ZH.md) · [英文研究稿](records/DVC20261010_Device_Consumer_Validation/RESEARCH_NOTE.md) · [装置协议](records/DVC20261010_Device_Consumer_Validation/PROBE_PROTOCOL.md) · [结果](records/DVC20261010_Device_Consumer_Validation/EXACT_RESULTS.json) · [全图范围审计](records/DVC20261010_Device_Consumer_Validation/MAP_AUDIT.md) · [工作日志](records/DVC20261010_Device_Consumer_Validation/WORK_LOG.md) · [保存收据](records/DVC20261010_Device_Consumer_Validation/DUAL_SAVE_RECEIPT.json)。已完成18人公开数据重算、装置接口合同审查及有限时序模型；未新增人体数据或部署硬件。DVC净余保留为后续技术补充，暂不单独成稿，也不改已冻结SCU。
+
+完成图仍为 **UCT-MAP-v1.1.2：913节点、424活跃条件规则、261非演绎上下文、10暂停规则、1,608审查项**。DVC 24/6/15候选停用。全图每ID核心层及45条新候选均已按保存范围审读；历史深层合同/证明债务与QC10、IA-QC11、QC12、QC13等仍开放，核心层复核不是全图语义重证。发表覆盖 **UCT-PUB-v1.0.22** 是冻结已核文献基线加本次SCU的逐主张增量；公开不等于前提成立。
+
+下一步接入一个可访问的实际装置，核验M_D/P_E的物理来源、写入器/缓存、issue/arrival/capture/commit/read、时钟误差、同回合绑定、运动/触觉实测与预先选择的PSE/响应编码；shadow没有人体端点因果路径时只解释数字消费者。强度、精度、能动感、所有感、H、RetBind、概念我和报告分开。C1/U1不增加基础体验门槛。并发MPC/CBI和以下历史全文保留；OTS/Arweave未执行。
+
+并发 [EIP研究](records/EIP20261010_Exoskeleton_Instrumentation/HANDOFF_ZH.md) 与其6/3/5停用候选已完整保留。EIP的到达/聚合状态与指定消费者读取界限已扣除；对人体结论还需一个命名消费者的可行选择性差异探针，不能用外部shadow代替。
+
+---
+
 # 最新接续 EIP20261010 / EIP-RESULT-v0.1.0
 
 [本轮交接](records/EIP20261010_Exoskeleton_Instrumentation/HANDOFF_ZH.md) · [仪器合同](records/EIP20261010_Exoskeleton_Instrumentation/INSTRUMENT_CONTRACT.md) · [研究稿](records/EIP20261010_Exoskeleton_Instrumentation/RESEARCH_NOTE.md) · [精确结果](records/EIP20261010_Exoskeleton_Instrumentation/EXACT_RESULTS.json) · [审计](records/EIP20261010_Exoskeleton_Instrumentation/MAP_AUDIT.md)。本轮证明外周传入、中央到达、聚合状态和匹配输出仍不能在冗余写入存在时识别指定消费者的实际读取；专属探针只在 `S=1` 及选择性/唯一写入等前提下条件识别。完成图不变，EIP 6/3/5候选停用；覆盖v1.0.21，单篇HOLD并并入SCU/MPC方法段。下一步只评估一个命名消费者的物理/伦理可行差异探针。QC10/IA-QC11/QC12/QC13等仍开放。以下旧标题均为历史。

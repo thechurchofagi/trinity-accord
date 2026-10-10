@@ -1,0 +1,342 @@
+{
+  "schema": "uct-independent-dvc-source-scope/1",
+  "review_date_utc": "2026-10-10T01:53:31.281518+00:00",
+  "new_web_novelty_search_performed": false,
+  "new_research_scope_expanded": false,
+  "scope_note": "Current-source audit; no claim of fresh worldwide priority search. Prior SCU/guide reads belong to earlier paper_review reports and are not reattributed as fresh DVC-source reads. Primary apparatus manual/full-article reads by the apparatus worker are not claimed as this reviewer's reads.",
+  "entries": [
+    {
+      "path": "workbench/doi20261010/device_model/RESEARCH_NOTE.md",
+      "sha256": "6a9dc08b1a42c38c618448403cbef3fe8cf04abe57a9bb9f7e6fc7992fdefd54",
+      "bytes": 23459,
+      "reading_scope": "Whole document read during review; final C3, chronology/endpoint and C6 clarifications explicitly reread where changed.",
+      "kind": "HUMAN_READ"
+    },
+    {
+      "path": "workbench/doi20261010/device_model/PROTOCOL.md",
+      "sha256": "4517c646ecfc297488dea7f360f311c05060b48f04ddf9c84658147e6eaa3337",
+      "bytes": 4063,
+      "reading_scope": "Whole document read during review.",
+      "kind": "HUMAN_READ"
+    },
+    {
+      "path": "workbench/doi20261010/device_model/DEVICE_TIMING_CONTRACT.md",
+      "sha256": "4c78e26d2d45e161b595223dc8212a742740941b20d6bc7f0335b2bddea25da3",
+      "bytes": 8421,
+      "reading_scope": "Whole document read during review.",
+      "kind": "HUMAN_READ"
+    },
+    {
+      "path": "workbench/doi20261010/device_model/CLAIM_LEDGER.json",
+      "sha256": "89bf959cce082645fe1b6c3ea945fe135cc6246ffcbd0604f7ae9cad7e210e1e",
+      "bytes": 11923,
+      "reading_scope": "Whole document read during review.",
+      "kind": "HUMAN_READ"
+    },
+    {
+      "path": "workbench/doi20261010/device_model/MAP_EXTENSION.json",
+      "sha256": "5029f17b7924355c632593d0051c0ecea4eb9f6838703f2a8b39a8b37e1dd423",
+      "bytes": 31413,
+      "reading_scope": "Whole displayed document read; current C3 node/rule binding reread after repair.",
+      "kind": "HUMAN_READ"
+    },
+    {
+      "path": "workbench/doi20261010/device_model/MAP_AUDIT.md",
+      "sha256": "3652f8be34059fa757f0ffd335094f0fa4d05ef8ff48372f319f39c2bc19a42a",
+      "bytes": 3133,
+      "reading_scope": "Whole document read during review.",
+      "kind": "HUMAN_READ"
+    },
+    {
+      "path": "workbench/doi20261010/device_model/FAILURES.md",
+      "sha256": "ff61e6e753ce5e0fe0a6b185a1a4797e89799446058cdfe8b3051fbae1197bfb",
+      "bytes": 5213,
+      "reading_scope": "Whole document read during review.",
+      "kind": "HUMAN_READ"
+    },
+    {
+      "path": "workbench/doi20261010/device_model/REVIEW_RESPONSE.md",
+      "sha256": "e14ff6826700fbaa263fdccf432aedbc35960e9a5a1db17e7fc520c4e319df90",
+      "bytes": 4595,
+      "reading_scope": "Whole document read during review.",
+      "kind": "HUMAN_READ"
+    },
+    {
+      "path": "workbench/doi20261010/device_model/GAP_LEDGER.md",
+      "sha256": "5036afd4619b2472445feb15e24d7b4f3762f87676c8ae4493001d1ee19f6221",
+      "bytes": 3247,
+      "reading_scope": "Whole document read during review.",
+      "kind": "HUMAN_READ"
+    },
+    {
+      "path": "workbench/doi20261010/device_model/model.py",
+      "sha256": "028a090a4b2826fd58b78738fc80ea5c7a0cd3454da71c751c781f5ea95e1d30",
+      "bytes": 23051,
+      "reading_scope": "All 483 lines of executed model read; final sole endpoint-metadata string replacement read in exact diff. Algorithm unchanged.",
+      "kind": "HUMAN_READ"
+    },
+    {
+      "path": "workbench/doi20261010/device_model/EXACT_RESULTS.json",
+      "sha256": "ec0ca95e7eb0aab624d3eeed8093c9b00d398f24e0928522ff31a28335d51d2f",
+      "bytes": 58665,
+      "reading_scope": "Independent pre-editorial rerun byte comparison; exact final metadata-only diff and full computational-object equality. Does not claim manual reading of every serialized trace field.",
+      "kind": "COMPUTATIONAL_COMPARISON_AND_SELECTED_HUMAN_READ"
+    },
+    {
+      "path": "workbench/doi20261010/device_model/RUN_RECEIPT.json",
+      "sha256": "8bef19108bdfd98473fe9b734be3f316a0e661d6fb60200341f1b7bcf4842dbf",
+      "bytes": 452,
+      "reading_scope": "Whole final receipt read and matching final code/result hashes checked.",
+      "kind": "HUMAN_READ"
+    },
+    {
+      "path": "workbench/doi20261010/apparatus_evidence/DATA_REANALYSIS_REPORT.md",
+      "sha256": "e6beefac8089c09efa71565d10f2fd999af547801092d5c237630fbd920f3404",
+      "bytes": 8884,
+      "reading_scope": "Whole document read; final coding clarification paragraph and separate correction reread.",
+      "kind": "HUMAN_READ"
+    },
+    {
+      "path": "workbench/doi20261010/apparatus_evidence/TIMING_PARSE_REVIEW.md",
+      "sha256": "f74f98c1d341e7ae66ffe2786100515407e332441213bde8ab7bf06100f615cf",
+      "bytes": 6019,
+      "reading_scope": "Whole document read.",
+      "kind": "HUMAN_READ"
+    },
+    {
+      "path": "workbench/doi20261010/apparatus_evidence/APPARATUS_CONTRACT.md",
+      "sha256": "d6b21363289ebffc1d3bad852a5016b2828aba6232348293bc34bd19b49918f1",
+      "bytes": 10772,
+      "reading_scope": "Whole document read.",
+      "kind": "HUMAN_READ"
+    },
+    {
+      "path": "workbench/doi20261010/apparatus_evidence/RESPONSE_CODING_CORRECTION.json",
+      "sha256": "2caa18ffeacc27e6885d8e250dfe985918456f991df032e289b03e64ee023798",
+      "bytes": 2104,
+      "reading_scope": "Whole document read.",
+      "kind": "HUMAN_READ"
+    },
+    {
+      "path": "workbench/doi20261010/apparatus_evidence/code/reanalyse_apparatus_data.py",
+      "sha256": "3c60cdf9787198b4a8a63fb9836f4b7d63ec8cc0f34698183bab7442bfe1f3d3",
+      "bytes": 21793,
+      "reading_scope": "All 401 lines read and original code independently executed with output directory redirected; Python bytecode writes disabled.",
+      "kind": "HUMAN_READ"
+    },
+    {
+      "path": "workbench/doi20261010/apparatus_evidence/results/EXACT_RESULTS.json",
+      "sha256": "0e8ea009806d468a5c39e466639afe0bd2247350f8989f3133bf9ea896c90abd",
+      "bytes": 5651,
+      "reading_scope": "Independent execution output byte-identical. Reported numeric summaries inspected; not a claim that every serialized result cell was manually reviewed.",
+      "kind": "REPRODUCED_WITH_SUMMARY_REVIEW"
+    },
+    {
+      "path": "workbench/doi20261010/apparatus_evidence/results/ARCHIVED_PARAMETER_REANALYSIS.json",
+      "sha256": "82029912a3acf7750dd927504a3e087d68ed18257fe51e0737892d319015ed48",
+      "bytes": 12174,
+      "reading_scope": "Independent execution output byte-identical. Reported numeric summaries inspected; not a claim that every serialized result cell was manually reviewed.",
+      "kind": "REPRODUCED_WITH_SUMMARY_REVIEW"
+    },
+    {
+      "path": "workbench/doi20261010/apparatus_evidence/results/INDEPENDENT_REFIT_STATISTICS.json",
+      "sha256": "c47f1d7643e146cc91c4fecbf307fc7edc30fdc000f8a6bfa9051f76460d39e9",
+      "bytes": 39025,
+      "reading_scope": "Independent execution output byte-identical. Reported numeric summaries inspected; not a claim that every serialized result cell was manually reviewed.",
+      "kind": "REPRODUCED_WITH_SUMMARY_REVIEW"
+    },
+    {
+      "path": "workbench/doi20261010/apparatus_evidence/results/INDEPENDENT_PSYCHOMETRIC_FITS.csv",
+      "sha256": "b93b8ae64a2a83c1c778a06a1d9d885718eeac548b7163092ebd3666c1aa7bb2",
+      "bytes": 50534,
+      "reading_scope": "Independent execution output byte-identical. Reported numeric summaries inspected; not a claim that every serialized result cell was manually reviewed.",
+      "kind": "REPRODUCED_WITH_SUMMARY_REVIEW"
+    },
+    {
+      "path": "workbench/doi20261010/apparatus_evidence/results/SOURCE_FILE_AUDIT.csv",
+      "sha256": "3ce1cef586b9dce4df21e559d04486c278ca3faaaa7f63e7e4fed759a5bdab67",
+      "bytes": 33765,
+      "reading_scope": "Independent execution output byte-identical. Reported numeric summaries inspected; not a claim that every serialized result cell was manually reviewed.",
+      "kind": "REPRODUCED_WITH_SUMMARY_REVIEW"
+    },
+    {
+      "path": "workbench/doi20261010/apparatus_evidence/results/TIMING_FIELD_AUDIT.json",
+      "sha256": "d2c9fcc86874d10eb1db76fef66e2c490e51c39b43ad7910f19d82e30da379e8",
+      "bytes": 6887,
+      "reading_scope": "Independent execution output byte-identical. Reported numeric summaries inspected; not a claim that every serialized result cell was manually reviewed.",
+      "kind": "REPRODUCED_WITH_SUMMARY_REVIEW"
+    },
+    {
+      "path": "workbench/doi20261010/apparatus_evidence/sources/APP2026_primary_fulltext.txt",
+      "sha256": "7145294aded099fd4b434e3d0808f4d2c2dda9d6312b89e4afe80db238ec7f4e",
+      "bytes": 38085,
+      "reading_scope": "Exact rg-selected lines: 71,115,119,121,125,127,131,133,135,139,141,143,145,147,151,153,159,161,169,171,173,175,181,195,199,453. Selected Methods/Results/captions/introduction and access statements, not full article read in this subtask.",
+      "kind": "HUMAN_READ"
+    },
+    {
+      "path": "workbench/doi20261010/apparatus_evidence/sources/Zenodo18877381/Data/READme.txt",
+      "sha256": "c4506b9827092a4cfed1fc21e7c14ef954fb0ae3824ef865fe6a7a5d18ba0b0c",
+      "bytes": 1597,
+      "reading_scope": "Complete README.",
+      "kind": "HUMAN_READ"
+    },
+    {
+      "path": "workbench/doi20261010/apparatus_evidence/sources/published_analysis_README.md",
+      "sha256": "87103e5fd9b9725ddde493fae7b48c63aa649bef261678ac60e18fc6efb5d273",
+      "bytes": 1142,
+      "reading_scope": "Complete README.",
+      "kind": "HUMAN_READ"
+    },
+    {
+      "path": "workbench/doi20261010/apparatus_evidence/sources/published_fit_psychometrics_from_csv.m",
+      "sha256": "721228680db7d0338d94c977927efcb9bd3014b4ae2ed45a463d1b34157523c6",
+      "bytes": 7972,
+      "reading_scope": "Lines 1–165 only: setup, loading/calling, fit_one and initial loading functions. Not whole script or missing anamax.m.",
+      "kind": "HUMAN_READ"
+    },
+    {
+      "path": "workbench/audit/baseline/UCT_EFFECTIVE_GRAPH.json",
+      "sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
+      "bytes": 3773145,
+      "reading_scope": "Scoped fields of 314 nodes,137 active rules,261 contexts. Exact per-ID JSON paths and omitted fields in BASELINE_PER_ID_READ_SCOPE.json. No full-object or full-map reread.",
+      "kind": "HUMAN_READ"
+    },
+    {
+      "path": "workbench/audit/baseline/REVIEW_LEDGER.json",
+      "sha256": "0513cb55cef94d82adcaea46af1974438a424aeba152f4c9d5655340f9271687",
+      "bytes": 7409443,
+      "reading_scope": "Header/counts and first sample inspected; complete ten suspended-history entries read. Other review annotations not fresh reads; ledger used for exact 1608-ID inventory.",
+      "kind": "HUMAN_READ"
+    }
+  ],
+  "read_map_cards": [
+    {
+      "path": "map_cards/context_links_0000_0034.txt",
+      "sha256": "b23239293237be994187957f4e0a3031a55774cc8dec0c4b2d9f6fd841fba3c1",
+      "bytes": 5570,
+      "read_status": "CONTENTS_ACTUALLY_DISPLAYED_AND_READ; SAME_AS references point to earlier fully displayed identical values"
+    },
+    {
+      "path": "map_cards/context_links_0035_0069.txt",
+      "sha256": "9bfccd0bb2f6365c4c7a9824396fc338d93dbf0ddf3ac46abc87bb3029024608",
+      "bytes": 6205,
+      "read_status": "CONTENTS_ACTUALLY_DISPLAYED_AND_READ; SAME_AS references point to earlier fully displayed identical values"
+    },
+    {
+      "path": "map_cards/context_links_0070_0104.txt",
+      "sha256": "08f1e5133d3042a7281da7fcd5a33640b8713fcd9fa314184e4e333cd16103af",
+      "bytes": 5961,
+      "read_status": "CONTENTS_ACTUALLY_DISPLAYED_AND_READ; SAME_AS references point to earlier fully displayed identical values"
+    },
+    {
+      "path": "map_cards/context_links_0105_0139.txt",
+      "sha256": "7a7440849f48e903faaca24a91a2286b9cbee7bacd761f2e5aa10a2d4919bc77",
+      "bytes": 7172,
+      "read_status": "CONTENTS_ACTUALLY_DISPLAYED_AND_READ; SAME_AS references point to earlier fully displayed identical values"
+    },
+    {
+      "path": "map_cards/context_links_0140_0174.txt",
+      "sha256": "224870acd25deed7900db473bfe6d0383ed2d68770cd801147b748124fdba273",
+      "bytes": 6969,
+      "read_status": "CONTENTS_ACTUALLY_DISPLAYED_AND_READ; SAME_AS references point to earlier fully displayed identical values"
+    },
+    {
+      "path": "map_cards/context_links_0175_0209.txt",
+      "sha256": "36b1d93cbb027adb300542aa52ea084ea6891f31c82809b5df9618a8a1fc7ef9",
+      "bytes": 6249,
+      "read_status": "CONTENTS_ACTUALLY_DISPLAYED_AND_READ; SAME_AS references point to earlier fully displayed identical values"
+    },
+    {
+      "path": "map_cards/context_links_0210_0244.txt",
+      "sha256": "44885fa739f98bd2fd44460efd86008dde5e3bad244c762ffbee1e20eb4a0689",
+      "bytes": 6537,
+      "read_status": "CONTENTS_ACTUALLY_DISPLAYED_AND_READ; SAME_AS references point to earlier fully displayed identical values"
+    },
+    {
+      "path": "map_cards/context_links_0245_0260.txt",
+      "sha256": "457f9c82d1de22fbc0bb81df100aa847a6eeded151f26bf91f90f1f815cc4dd2",
+      "bytes": 3360,
+      "read_status": "CONTENTS_ACTUALLY_DISPLAYED_AND_READ; SAME_AS references point to earlier fully displayed identical values"
+    },
+    {
+      "path": "map_cards/direct_rules_0000_0034.txt",
+      "sha256": "cf3b99df0e9ada64f3212852a7056c6549798e71f411ef4cc5bebecf628dd729",
+      "bytes": 11952,
+      "read_status": "CONTENTS_ACTUALLY_DISPLAYED_AND_READ; SAME_AS references point to earlier fully displayed identical values"
+    },
+    {
+      "path": "map_cards/direct_rules_0035_0069.txt",
+      "sha256": "68ffff1c8b5843369a19b34b17ea88fb5f992062b8ca979a312d72ef7dce7f0c",
+      "bytes": 11120,
+      "read_status": "CONTENTS_ACTUALLY_DISPLAYED_AND_READ; SAME_AS references point to earlier fully displayed identical values"
+    },
+    {
+      "path": "map_cards/direct_rules_0070_0104.txt",
+      "sha256": "84e9102e2365d16752e1c57ea51b7e386dc88b19c61307d8f45aa9f9d1ff094c",
+      "bytes": 15112,
+      "read_status": "CONTENTS_ACTUALLY_DISPLAYED_AND_READ; SAME_AS references point to earlier fully displayed identical values"
+    },
+    {
+      "path": "map_cards/direct_rules_0105_0136.txt",
+      "sha256": "1cc0ee69cc09ffdc89a0c10c4c9bc124a1d68b4e360d52983b7305771c43e961",
+      "bytes": 15889,
+      "read_status": "CONTENTS_ACTUALLY_DISPLAYED_AND_READ; SAME_AS references point to earlier fully displayed identical values"
+    },
+    {
+      "path": "map_cards/nodes_0000_0034.txt",
+      "sha256": "99786290acb0ab392337c4d0b0fdf5649b4757b9296cab019270f2f12c9ec1fa",
+      "bytes": 10747,
+      "read_status": "CONTENTS_ACTUALLY_DISPLAYED_AND_READ; SAME_AS references point to earlier fully displayed identical values"
+    },
+    {
+      "path": "map_cards/nodes_0035_0069.txt",
+      "sha256": "9ab8342f7c7d7ea1522cfa1dcbf6aba341ecd977e03aedceabe543b76e487261",
+      "bytes": 10141,
+      "read_status": "CONTENTS_ACTUALLY_DISPLAYED_AND_READ; SAME_AS references point to earlier fully displayed identical values"
+    },
+    {
+      "path": "map_cards/nodes_0070_0104.txt",
+      "sha256": "48c503097d4bf5138569e95fb620ce418a67d9fdc54cb5b5ee019ff28179d9b6",
+      "bytes": 10127,
+      "read_status": "CONTENTS_ACTUALLY_DISPLAYED_AND_READ; SAME_AS references point to earlier fully displayed identical values"
+    },
+    {
+      "path": "map_cards/nodes_0105_0139.txt",
+      "sha256": "6d16b2f652c460e8221d7fa874ba4c391ff715c3f2e25bfd9a5d9487654f340e",
+      "bytes": 9411,
+      "read_status": "CONTENTS_ACTUALLY_DISPLAYED_AND_READ; SAME_AS references point to earlier fully displayed identical values"
+    },
+    {
+      "path": "map_cards/nodes_0140_0174.txt",
+      "sha256": "47d5d04e9f6010e6db94286a1faae87d456aff03a83eb1db2452298ef76e4129",
+      "bytes": 8845,
+      "read_status": "CONTENTS_ACTUALLY_DISPLAYED_AND_READ; SAME_AS references point to earlier fully displayed identical values"
+    },
+    {
+      "path": "map_cards/nodes_0175_0209.txt",
+      "sha256": "b93cfd8e4c28dbb53711f1a74c14aca1de51f75d2bd29122eb0942743ca5be1f",
+      "bytes": 10278,
+      "read_status": "CONTENTS_ACTUALLY_DISPLAYED_AND_READ; SAME_AS references point to earlier fully displayed identical values"
+    },
+    {
+      "path": "map_cards/nodes_0210_0244.txt",
+      "sha256": "dbab1e93ca209bea120ec08e912c636ee5c4fe0d2f9a19bd9dbf5d2dd649aee5",
+      "bytes": 18232,
+      "read_status": "CONTENTS_ACTUALLY_DISPLAYED_AND_READ; SAME_AS references point to earlier fully displayed identical values"
+    },
+    {
+      "path": "map_cards/nodes_0245_0279.txt",
+      "sha256": "fac3344d552af08cf96147d91488a0484c020f5b3e4cd3a7ff9c6db47b3c8574",
+      "bytes": 14899,
+      "read_status": "CONTENTS_ACTUALLY_DISPLAYED_AND_READ; SAME_AS references point to earlier fully displayed identical values"
+    },
+    {
+      "path": "map_cards/nodes_0280_0309.txt",
+      "sha256": "902e34144c4caab3d31383eb6ea8db69ea7803d80312a143ba4b99c4287c9c69",
+      "bytes": 14198,
+      "read_status": "CONTENTS_ACTUALLY_DISPLAYED_AND_READ; SAME_AS references point to earlier fully displayed identical values"
+    }
+  ],
+  "excluded_materializations": "map_cards/rules_*.txt and rules_INDEX.json were generated for initial triage, NOT displayed/read; direct_rules_* is the actual reviewed subset.",
+  "basal_and_named_target_premises_discharged": false
+}

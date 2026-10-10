@@ -1,0 +1,200 @@
+{
+  "schema": "uct-scu-root-source-reading/1",
+  "generated_utc": "2026-10-10T00:05:01.802503+00:00",
+  "original_research_head": "90a542d697d923aa484f2bd5a4484a438125325a",
+  "concurrent_reconciled_head": "7dd9564c50f08a9f78dd8e35a5b960f4f0d30edc",
+  "main_checked": "6cfb89f0b88605da9a44da9c97203729a6742894",
+  "root_required_files": [
+    {
+      "path": "RESEARCH_MASTER_GUIDE.md",
+      "revision": "90a542d697d923aa484f2bd5a4484a438125325a",
+      "bytes": 29165,
+      "sha256": "17790bd935323f0e2d168d55d2c766a11fdc555e23f005361295405cfb18c2a7",
+      "lines": 218,
+      "actual_read_scope": "Complete file read by root, in successive tool-output chunks; this is a reading claim, not full source-proof reconstruction."
+    },
+    {
+      "path": "AGENTS.md",
+      "revision": "90a542d697d923aa484f2bd5a4484a438125325a",
+      "bytes": 96146,
+      "sha256": "6a03d15463176d9296e0d164d2a829ba36f9fa6876be76befc8c670a8be520c4",
+      "lines": 549,
+      "actual_read_scope": "Complete file read by root, in successive tool-output chunks; this is a reading claim, not full source-proof reconstruction."
+    },
+    {
+      "path": "CURRENT_STATE.json",
+      "revision": "90a542d697d923aa484f2bd5a4484a438125325a",
+      "bytes": 4623,
+      "sha256": "2701c0f34e5ffc278949d5b741d5296cbd02d725ce1c08d0365133d314525f8c",
+      "lines": 103,
+      "actual_read_scope": "Complete file read by root, in successive tool-output chunks; this is a reading claim, not full source-proof reconstruction."
+    },
+    {
+      "path": "PUBLICATION_COVERAGE.json",
+      "revision": "90a542d697d923aa484f2bd5a4484a438125325a",
+      "bytes": 2838,
+      "sha256": "0f67bbbbe8f116cd4b6fee95b8f6f6e2ce77559f058c5d49de4c9772a6124128",
+      "lines": 44,
+      "actual_read_scope": "Complete file read by root, in successive tool-output chunks; this is a reading claim, not full source-proof reconstruction."
+    },
+    {
+      "path": "MEMORY.md",
+      "revision": "90a542d697d923aa484f2bd5a4484a438125325a",
+      "bytes": 9493,
+      "sha256": "c7eb6bd6a8bdb96ac6a80d909b0d609633e8750e5bbe7b11a84ab81f9ffe124a",
+      "lines": 88,
+      "actual_read_scope": "Complete file read by root, in successive tool-output chunks; this is a reading claim, not full source-proof reconstruction."
+    },
+    {
+      "path": "HANDOFF.md",
+      "revision": "90a542d697d923aa484f2bd5a4484a438125325a",
+      "bytes": 28175,
+      "sha256": "185dd28c0202538d3cfe038adf6a6be000cbfe5587ba2828d5c477368bfb8857",
+      "lines": 212,
+      "actual_read_scope": "Complete file read by root, in successive tool-output chunks; this is a reading claim, not full source-proof reconstruction."
+    },
+    {
+      "path": "MASTER_INDEX.md",
+      "revision": "90a542d697d923aa484f2bd5a4484a438125325a",
+      "bytes": 19628,
+      "sha256": "fb4e44eab3af15edb84ab10654edb1a40641584671b8aa206f6a103f1316392d",
+      "lines": 168,
+      "actual_read_scope": "Complete file read by root, in successive tool-output chunks; this is a reading claim, not full source-proof reconstruction."
+    },
+    {
+      "path": "REVIEW_SUPERVISION.md",
+      "revision": "90a542d697d923aa484f2bd5a4484a438125325a",
+      "bytes": 89701,
+      "sha256": "db723b64174b982543ec072e337ddbf11cc95c4641294cde0b62fbb4761636d7",
+      "lines": 738,
+      "actual_read_scope": "Complete file read by root, in successive tool-output chunks; this is a reading claim, not full source-proof reconstruction."
+    },
+    {
+      "path": "FORMAL_MAP_REVIEW_POLICY.json",
+      "revision": "90a542d697d923aa484f2bd5a4484a438125325a",
+      "bytes": 7340,
+      "sha256": "5e743007e31f1ee37241e932f8358d3cdc72b0ee88bfb51d5156b5c782e939c2",
+      "lines": 172,
+      "actual_read_scope": "Complete file read by root, in successive tool-output chunks; this is a reading claim, not full source-proof reconstruction."
+    }
+  ],
+  "current_foundations": [
+    {
+      "work": "UCT I",
+      "version": "1.2",
+      "doi": "10.5281/zenodo.23131575",
+      "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md",
+      "bytes": 142624,
+      "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+      "total_lines": 2418,
+      "root_read_line_intervals": [
+        [
+          1,
+          690
+        ]
+      ],
+      "actual_read_scope": "Front matter and §§1–5 in full; beginning of §6. Includes actual processes, complete signatures, pointed ports, C1, U1–U3, no gate, probe/type/lineage distinctions. Remainder not claimed fully read."
+    },
+    {
+      "work": "UCT II",
+      "version": "1.1",
+      "doi": "10.5281/zenodo.23030320",
+      "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/B_UCT_II_v1_1.md",
+      "bytes": 59958,
+      "sha256": "d8f3329f08cd7272b77945b780e94e87a2f43773aeb86ca41b907b558d59504b",
+      "total_lines": 1276,
+      "root_read_line_intervals": [
+        [
+          81,
+          369
+        ],
+        [
+          502,
+          529
+        ]
+      ],
+      "actual_read_scope": "§§2–5 and §10 on predictive processing/active inference. Bridge constraints and formal/evidential levels; other sections not claimed fully read."
+    },
+    {
+      "work": "UCT III",
+      "version": "1.0",
+      "doi": "10.5281/zenodo.23137088",
+      "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/C_UCT_III_v1_0.md",
+      "bytes": 94626,
+      "sha256": "2721672485b055c26ec83a64d36fd5713e349cabe0494edd52b626aa7b9903e2",
+      "total_lines": 819,
+      "root_read_line_intervals": [
+        [
+          1,
+          265
+        ]
+      ],
+      "actual_read_scope": "Front matter and §§1–5, including capability/experience distinctions, local/whole examples and non-scalar organization; remainder not claimed fully read."
+    },
+    {
+      "work": "TA25",
+      "version": "1.0",
+      "doi": "10.5281/zenodo.23206492",
+      "path": "records/R153_Complete_Formal_Map_20261007/sources/experience-intelligence-self-v1.0.md",
+      "bytes": 42068,
+      "sha256": "694856862f75834024cd3e71ffdba95a6be4601c2832285902f7905907e3039c",
+      "total_lines": 345,
+      "root_read_line_intervals": [
+        [
+          1,
+          345
+        ]
+      ],
+      "actual_read_scope": "Entire current 345-line manuscript read by root."
+    }
+  ],
+  "version_interface_note": "RESEARCH_MASTER_GUIDE v2.3 selects UCT I v1.2, UCT II v1.1, UCT III v1.0 and TA25 v1.0. Older AGENTS A/B/C/D pins are historical; C1/current I v1.2 is used without silently changing II source wording.",
+  "main_handoffs": [
+    {
+      "version": 69,
+      "bytes": 663821,
+      "sha256": "869c13d8de2a7df51f21a9d19ff434268d17e6d038c8b2ca277c23d21bbfdb61",
+      "read_scope": "Current top handoff section and identity metadata; all prior bytes materialized and preserved, not all historical prose newly reread."
+    },
+    {
+      "version": 70,
+      "bytes": 667336,
+      "sha256": "15eb057893a80b70ff06c523bd61ffb1ed475bbbed5596979aa4dc703f760dc2",
+      "read_scope": "Current top handoff section and identity metadata; all prior bytes materialized and preserved, not all historical prose newly reread."
+    }
+  ],
+  "r204_scope": "All user-named R204 files read completely, including exact result, map extension and 77-line checker. Root rerun produces byte-identical EXACT_RESULTS.",
+  "r205_scope": "Concurrent note, code, protocol, claim ledger, map audit, failures and review response read in full; root independently reran checker and compared exact result bytes. Root instruction additions and current state were separately read.",
+  "parallel_reading_receipts": [
+    "review/SOURCE_AND_COVERAGE_INVENTORY.json",
+    "review/WHOLE_MAP_READ_SCOPE.json"
+  ],
+  "claims_about_reading": "Reading, retrieval, program traversal, source-proof reuse, fresh rederivation and actual-premise discharge remain distinct. No claim that all four foundation papers were freshly reread in full.",
+  "external_sources_root": [
+    {
+      "url": "https://people.maths.ox.ac.uk/scott/Papers/separating.pdf",
+      "scope": "All six pages of author manuscript; classical separating bound and provenance."
+    },
+    {
+      "url": "https://arxiv.org/abs/1511.00041",
+      "scope": "Author/title/abstract verified by root; full theorem and Appendix 6.3 read by coverage worker."
+    },
+    {
+      "url": "https://arxiv.org/pdf/1401.7485",
+      "scope": "Pages 1–3 through §2 Definition 1 / Proposition 1 and surrounding scope."
+    },
+    {
+      "url": "https://academic.oup.com/nc/article/2019/1/niz006/5488527",
+      "scope": "Primary indexed text on matching/equality insufficiency read by root; direct open failures retained. Coverage worker inspected larger stated sections."
+    },
+    {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/29750195/",
+      "scope": "Complete indexed primary abstract and full eight-author metadata; no methods/raw-data reanalysis."
+    },
+    {
+      "url": "https://digitalcommons.memphis.edu/facpubs/5309/",
+      "scope": "Official institutional bibliographic record confirming 2007, 28(4),1068–1071 and DOI."
+    }
+  ],
+  "concurrent_receipt_scope": "R205 final DUAL_SAVE_RECEIPT at 7dd9564c read; current remote 7dd9564c and master v70 rechecked before integration."
+}

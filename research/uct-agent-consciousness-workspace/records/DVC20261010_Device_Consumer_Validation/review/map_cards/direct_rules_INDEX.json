@@ -1,0 +1,1664 @@
+[
+  {
+    "id": "a01",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a02",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a03",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a04",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a05",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a06",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a07",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a08",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a09",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a10",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a11",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a12",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a13",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a14",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a15",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a16",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a17",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a18",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a19",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a20",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a21",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a22",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a23a",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a23b",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a24",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a25",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a26",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a27",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a28",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a29",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a30",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a31",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a32",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a33",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a34",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "b01",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "b02",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "b03",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "b_IIT",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "b_RPT",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "b_GNWT",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "b_HOT",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "b_AST",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "b_PP_AI",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "b_DIT",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "b_MTOC",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "b_TTC",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "b04",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "b05",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "b06",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "b07",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a35",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a36",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a37",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "c01",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "c02",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "c03",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "c04",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "c05",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "c06",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "c07",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "c08",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "c09",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "c10",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "c11",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "c12",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "c13",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "c14",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "c15",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "c16",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "c17",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "c18",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "c19",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "c20",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "c21",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "c22",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "c23",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "c24",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "a38",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "d129_bundled",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "d129_direct",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "d129_payoff",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "d129_marginal_counter",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "d129_value_gap",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "d129_frechet",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "d129_grid",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "d129_separable",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "d129_uct",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "r147_routing",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "r147_memory",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "r147_type",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "r149_ta18_germ_nonfactor",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "r149_ta18_phen_nonfactor",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "r149_ta18_idle",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "r149_ta18_factor",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "r149_ta18_underdetermination",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "r169_compositional_effect_bound",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "r169_direct_route_envelope",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "r169_partial_view_direct_radius",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "r169_route_calibration_triage",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "r169_route_application_boundary",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "r171_direct_range_closure",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "r171_inductive_range_closure",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "r171_fitted_cover_nonentailment",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "r171_four_domain_application",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "r171_range_certificate_triage",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "r172_interface_composition",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "r173_retentive_coordinate_transport",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "r174_mediator_clamp_separation",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "r174_finite_route_nonidentification",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "r174_experiential_coordinate_transport",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "r174_order_bridge_boundary",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "r175_r173_target_boundary_effective",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "r176_present_slice_effective",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "r171_range_application_boundary_direct_effective",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "r171_range_application_boundary_reachable_effective",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "r172_witnessed_online_action_use_effective",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "r172_experience_internal_action_coordinate_effective",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "r172_bio_ai_application_boundary_effective",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "R187:r_allpolicy",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/binding",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "R187:r_diagonal",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/binding",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "R187:r_duration",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/binding",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "R187:r_selective",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/binding",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "R187:r_noise",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/binding",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "R187:r_tv",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/binding",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "R187:r_coupling",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/binding",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "R188:r_word",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/binding",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "R188:r_score",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/binding",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "R188:r_coins",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/binding",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "R188:r_zero",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/binding",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "R188:r_profile",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/binding",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "R188:r_gap",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/binding",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "R188:r_repair",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/binding",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "R188:r_late",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/binding",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "R188:r_nonsuff",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/binding",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "R188:r_complete",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/binding",
+      "/alternative_route_semantics"
+    ]
+  },
+  {
+    "id": "R188:r_uct",
+    "kind": "rules",
+    "fields_materialized": [
+      "/id",
+      "/statement",
+      "/all_of",
+      "/conclusion",
+      "/same_instance_required",
+      "/binding",
+      "/alternative_route_semantics"
+    ]
+  }
+]

@@ -403,11 +403,15 @@
       "status": "PENDING_CHECKPOINT_DISABLED",
       "enabled_as_established_premises": false,
       "actual_application": "OPEN",
-      "publication_coverage_version": "UCT-PUB-v1.0.18",
+      "publication_coverage_version": "UCT-PUB-v1.0.22",
       "compatibility_audit": "records/SCU20261010_Source_Consumer_Protocols/MAP_AUDIT.md",
       "handoff": "records/SCU20261010_Source_Consumer_Protocols/HANDOFF_ZH.md",
-      "manuscript": "records/SCU20261010_Source_Consumer_Protocols/Matched_Behavior_and_Source_Use_v1.0.0.md",
-      "manuscript_status": "COMPLETE_SCOPED_WORKING_MANUSCRIPT_NOT_FORMALLY_PUBLISHED"
+      "manuscript": "records/SCUPUB20261010_DOI_Publication/release/matched-behavior-and-source-use-v1.0.1.md",
+      "manuscript_status": "PUBLISHED_PREPRINT_PUBLIC_READBACK_AND_DOI_RESOLUTION_VERIFIED",
+      "historical_working_manuscript": "records/SCU20261010_Source_Consumer_Protocols/Matched_Behavior_and_Source_Use_v1.0.0.md",
+      "publication_doi": "10.5281/zenodo.23272690",
+      "publication_receipt": "records/SCUPUB20261010_DOI_Publication/FINAL_PUBLICATION_RECEIPT.json",
+      "publication_does_not_admit_scientific_premises": true
     },
     {
       "research_id": "MPC20261010",
@@ -447,16 +451,35 @@
       "compatibility_audit": "records/EIP20261010_Exoskeleton_Instrumentation/MAP_COMPATIBILITY_AUDIT.json",
       "handoff": "records/EIP20261010_Exoskeleton_Instrumentation/HANDOFF_ZH.md",
       "manuscript_status": "HOLD_STANDALONE_INTEGRATE_AS_SCU_MPC_METHODS_SECTION"
+    },
+    {
+      "research_id": "DVC20261010",
+      "result_version": "DVC-RESULT-v0.1.0",
+      "title": "Device consumer validation",
+      "source": "records/DVC20261010_Device_Consumer_Validation/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "actual_application": "OPEN",
+      "publication_coverage_version": "UCT-PUB-v1.0.22",
+      "compatibility_audit": "records/DVC20261010_Device_Consumer_Validation/MAP_AUDIT.md",
+      "handoff": "records/DVC20261010_Device_Consumer_Validation/HANDOFF_ZH.md",
+      "manuscript_status": "HOLD_STANDALONE_POST_PUBLICATION_TECHNICAL_SUPPLEMENT",
+      "candidate_counts": {
+        "nodes": 24,
+        "rules": 6,
+        "contexts": 15
+      }
     }
   ],
   "preservation": "Exact previous registry remains preserved. The full research manuscript/module and saved per-item review decisions are in the version capsule; expanded artifacts are also in the offline downloadable archive.",
   "publication_coverage": {
     "entry": "PUBLICATION_COVERAGE.json",
-    "version": "UCT-PUB-v1.0.21",
+    "version": "UCT-PUB-v1.0.22",
     "base_census_version": "UCT-PUB-v1.0.0",
-    "update": "records/EIP20261010_Exoskeleton_Instrumentation/PUBLICATION_COVERAGE_UPDATE.json",
-    "report": "records/PUB20261009_Publication_Coverage/PUBLICATION_COVERAGE_REPORT_ZH.md",
-    "nondeductive": true
+    "update": "records/DVC20261010_Device_Consumer_Validation/PUBLICATION_COVERAGE_UPDATE.json",
+    "report": "publication/UCT-PUB-v1.0.22/COVERAGE_REPORT_ZH.md",
+    "nondeductive": true,
+    "counting_scope": "Frozen verified corpus plus one independently verified SCU DOI; not a new worldwide census."
   },
   "registry_scope": "Recent navigation register; complete fixed-source inventories are in the current publication coverage ledger.",
   "effective_pending_corrections": {

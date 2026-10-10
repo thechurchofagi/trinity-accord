@@ -1,0 +1,16 @@
+"R187:ctx_r186" | relation="CONTEXT_NOT_DEDUCTION" | from="R186-HOM-20261009" | to="R187:DURATION_LIMIT" | source="R186-HOM-20261009" | target="R187:DURATION_LIMIT" | deductive=false | reason="Finite-depth hidden effects differ from interface-structural nonidentifiability"
+"R187:ctx_cm" | relation="CONTEXT_NOT_DEDUCTION" | from="CM20261009:CAUSAL_MASK" | to="R187:SYNC_ERASURE" | source="CM20261009:CAUSAL_MASK" | target="R187:SYNC_ERASURE" | deductive=false | reason="Corrective/synchronizer masking; CM is separately pending"
+"R187:ctx_ol" | relation="CONTEXT_NOT_DEDUCTION" | from="OL20261009" | to="R187:NOISE_SEPARATION" | source="OL20261009" | target="R187:NOISE_SEPARATION" | deductive=false | reason="Classical finite-observation projection used at physical port boundary"
+"R187:ctx_c1" | relation="CONTEXT_NOT_DEDUCTION" | from="A:C1_OI" | to="R187:UCT_APPLICATION" | source="A:C1_OI" | target="R187:UCT_APPLICATION" | deductive=false | reason="Only conditional same-complete-signature type inference"
+"R187:ctx_u1" | relation="CONTEXT_NOT_DEDUCTION" | from="A:U1" | to="R187:SUBJECT_COUNT_LIMIT" | source="A:U1" | target="R187:SUBJECT_COUNT_LIMIT" | deductive=false | reason="No experience gate or subject-number identity"
+"R187:ctx_p3" | relation="CONTEXT_NOT_DEDUCTION" | from="A:P3" | to="R187:LINEAGE_GUARD" | source="A:P3" | target="R187:LINEAGE_GUARD" | deductive=false | reason="Local persistence must be grounded"
+"R187:ctx_ta25" | relation="CONTEXT_NOT_DEDUCTION" | from="C:P2_COORD" | to="R187:RANK_LIMIT" | source="C:P2_COORD" | target="R187:RANK_LIMIT" | deductive=false | reason="Prior target-conditional factorization; coordinate views do not count events"
+"R188:ctx_1" | relation="General common-action/message-cover antecedent; not a newly discovered factorization principle." | from="R133:MESSAGE_COVER" | to="R188:IDEAL_NOT_INSTALLED" | deductive=false
+"R188:ctx_2" | relation="Related late-query access restriction; pair-context law and exact finite-error surface are separate specializations." | from="IE:QUERY_SPEC" | to="R188:PROTOCOL" | deductive=false
+"R188:ctx_3" | relation="The encoder access variable changes; unrestricted-helper upper bound remains valid." | from="RB20261009:HELPER" | to="R188:PROTOCOL" | deductive=false
+"R188:ctx_4" | relation="Preserve basal experience for every continuing admitted actual process; this is a constraint, not a feedback-to-experience deduction." | from="A:U1" | to="R188:UCT_TYPE" | deductive=false
+"R188:ctx_5" | relation="Embedding or compensation alone does not erase a persisting actual local process." | from="A:P3" | to="R188:UCT_TYPE" | deductive=false
+"R188:ctx_6" | relation="Finite evidence corroborates constructions; not a general proof edge." | from="R188:EXECUTED_CHECKS" | to="R188:EXACT_SCORE" | deductive=false
+"R188:ctx_7" | relation="Interface reference implementation does not discharge actual full-organization premises." | from="R188:PROCESS_REFERENCE" | to="R188:GROUNDING" | deductive=false
+"R188:ctx_8" | relation="Blocks/longer protocols are out-of-scope controls, not a contradiction." | from="R188:ONE_SHOT" | to="R188:EXACT_SCORE" | deductive=false
+"R188:ctx_9" | relation="Synthesis with prior compensation and shared-occurrence audits; non-deductive method relation." | from="R188:IDEAL_NOT_INSTALLED" | to="R188:INFERENCE_CONTRACT" | deductive=false

@@ -1,0 +1,27 @@
+{
+  "endpoint": "https://api.github.com/repos/thechurchofagi/trinity-accord/releases?per_page=30",
+  "returned_count": 30,
+  "scope": "First 30 returned records only, including visible drafts; not the full historical release corpus or Zenodo account.",
+  "title_matches": [],
+  "search_fields": [
+    "name",
+    "tag_name",
+    "body",
+    "asset names"
+  ],
+  "queries": [
+    "Matched Behavior and Source Use",
+    "SCU-PAPER",
+    "SCU20261010"
+  ],
+  "main": {
+    "endpoint": "https://api.github.com/repos/thechurchofagi/trinity-accord/branches/main",
+    "sha": "6cfb89f0b88605da9a44da9c97203729a6742894"
+  },
+  "research": {
+    "endpoint": "https://api.github.com/repos/thechurchofagi/trinity-accord/branches/uct-agent-consciousness-workspace",
+    "sha": "8bac31cc0b9fb4c70d87f688dabbadeb6166addb"
+  },
+  "zenodo_account_deposits": "NOT_READ_BY_THIS_REVIEWER",
+  "scope_caution": "No positive duplicate found in checked sources; absence of all possible deposits is not established."
+}

@@ -1,0 +1,392 @@
+{
+  "PSE": {
+    "cells": [
+      {
+        "condition": "Control",
+        "attention": "Start",
+        "n": 18,
+        "mean": 4.487111111111112,
+        "sd": 0.6372227322196818
+      },
+      {
+        "condition": "Control",
+        "attention": "End",
+        "n": 18,
+        "mean": 4.334666666666667,
+        "sd": 0.5236199789474625
+      },
+      {
+        "condition": "Active",
+        "attention": "Start",
+        "n": 18,
+        "mean": 3.926222222222222,
+        "sd": 0.8267415525853541
+      },
+      {
+        "condition": "Active",
+        "attention": "End",
+        "n": 18,
+        "mean": 4.083111111111112,
+        "sd": 0.8198760945761966
+      },
+      {
+        "condition": "Passive",
+        "attention": "Start",
+        "n": 18,
+        "mean": 3.530666666666667,
+        "sd": 0.6718319117510413
+      },
+      {
+        "condition": "Passive",
+        "attention": "End",
+        "n": 18,
+        "mean": 3.7693333333333334,
+        "sd": 0.767912985266675
+      }
+    ],
+    "within_movement": [
+      {
+        "contrast": "Control: Start - End",
+        "n": 18,
+        "mean_difference": 0.1524444444444446,
+        "sd_difference": 0.6147273161350603,
+        "ci95_lower": -0.1532522579982128,
+        "ci95_upper": 0.458141146887102,
+        "t": 1.0521201605155228,
+        "df": 17,
+        "p_two_sided": 0.307470574860221,
+        "effect_dz": 0.2479871000412017,
+        "p_Holm_family_3_within_movement": 0.6598740536555621
+      },
+      {
+        "contrast": "Active: Start - End",
+        "n": 18,
+        "mean_difference": -0.1568888888888888,
+        "sd_difference": 0.5226476587179921,
+        "ci95_lower": -0.4167954549643787,
+        "ci95_upper": 0.1030176771866011,
+        "t": -1.2735600595430778,
+        "df": 17,
+        "p_two_sided": 0.21995801788518735,
+        "effect_dz": -0.3001809847837512,
+        "p_Holm_family_3_within_movement": 0.6598740536555621
+      },
+      {
+        "contrast": "Passive: Start - End",
+        "n": 18,
+        "mean_difference": -0.23866666666666664,
+        "sd_difference": 0.8793505624975206,
+        "ci95_lower": -0.6759574136220652,
+        "ci95_upper": 0.19862408028873196,
+        "t": -1.1515053880027408,
+        "df": 17,
+        "p_two_sided": 0.2654625974644674,
+        "effect_dz": -0.27141242280986155,
+        "p_Holm_family_3_within_movement": 0.6598740536555621
+      }
+    ],
+    "interaction_pairs": [
+      {
+        "contrast": "(Passive Start - End) - (Active Start - End)",
+        "n": 18,
+        "mean_difference": -0.08177777777777775,
+        "sd_difference": 1.0881818379380814,
+        "ci95_lower": -0.622917874832738,
+        "ci95_upper": 0.4593623192771825,
+        "t": -0.3188380059343916,
+        "df": 17,
+        "p_two_sided": 0.7537334451007719,
+        "effect_dz": -0.07515083869873501,
+        "p_Holm_family_3_interaction_pairs": 0.7537334451007719
+      },
+      {
+        "contrast": "(Passive Start - End) - (Control Start - End)",
+        "n": 18,
+        "mean_difference": -0.3911111111111112,
+        "sd_difference": 1.0366276141689053,
+        "ci95_lower": -0.9066138958333209,
+        "ci95_upper": 0.12439167361109849,
+        "t": -1.6007135932943253,
+        "df": 17,
+        "p_two_sided": 0.12785828614501948,
+        "effect_dz": -0.37729181218530095,
+        "p_Holm_family_3_interaction_pairs": 0.34509494997074425
+      },
+      {
+        "contrast": "(Active Start - End) - (Control Start - End)",
+        "n": 18,
+        "mean_difference": -0.3093333333333335,
+        "sd_difference": 0.7900939631387112,
+        "ci95_lower": -0.7022378176661701,
+        "ci95_upper": 0.08357115099950313,
+        "t": -1.6610558327374865,
+        "df": 17,
+        "p_two_sided": 0.11503164999024808,
+        "effect_dz": -0.3915146144193815,
+        "p_Holm_family_3_interaction_pairs": 0.34509494997074425
+      }
+    ],
+    "marginal_contrasts": [
+      {
+        "contrast": "Active - Control averaged over attention",
+        "n": 18,
+        "mean_difference": -0.40622222222222226,
+        "sd_difference": 0.6057982148572106,
+        "ci95_lower": -0.7074785870635236,
+        "ci95_upper": -0.10496585738092085,
+        "t": -2.8449323318297295,
+        "df": 17,
+        "p_two_sided": 0.01119339010558806,
+        "effect_dz": -0.6705569812845531,
+        "p_Holm_family_3_marginal": 0.02238678021117612
+      },
+      {
+        "contrast": "Passive - Control averaged over attention",
+        "n": 18,
+        "mean_difference": -0.7608888888888887,
+        "sd_difference": 0.42731348031336003,
+        "ci95_lower": -0.9733868833856707,
+        "ci95_upper": -0.5483908943921068,
+        "t": -7.554590030742015,
+        "df": 17,
+        "p_two_sided": 7.890908377594802e-07,
+        "effect_dz": -1.7806339466073227,
+        "p_Holm_family_3_marginal": 2.367272513278441e-06
+      },
+      {
+        "contrast": "Active - Passive averaged over attention",
+        "n": 18,
+        "mean_difference": 0.35466666666666646,
+        "sd_difference": 0.5530510028602298,
+        "ci95_lower": 0.07964087324669117,
+        "ci95_upper": 0.6296924600866418,
+        "t": 2.720767564985782,
+        "df": 17,
+        "p_two_sided": 0.01453067221387202,
+        "effect_dz": 0.6412910650779524,
+        "p_Holm_family_3_marginal": 0.02238678021117612
+      }
+    ],
+    "ANOVA": {
+      "movement": {
+        "F": 18.30095903854588,
+        "df_numerator": 2,
+        "df_denominator": 34,
+        "p_uncorrected": 4.0295921457300316e-06,
+        "GG_epsilon": 0.8736181728939593,
+        "p_GG": 1.3570858139347514e-05
+      },
+      "attention": {
+        "F": 0.7653968970036118,
+        "df_numerator": 1,
+        "df_denominator": 17,
+        "p_uncorrected": 0.39383754195163917,
+        "GG_epsilon": 1.0,
+        "p_GG": 0.39383754195163917
+      },
+      "movement_by_attention": {
+        "F": 1.5942389993465023,
+        "df_numerator": 2,
+        "df_denominator": 34,
+        "p_uncorrected": 0.21787064214690613,
+        "GG_epsilon": 0.887215836752362,
+        "p_GG": 0.22076646378111708
+      }
+    }
+  },
+  "JND": {
+    "cells": [
+      {
+        "condition": "Control",
+        "attention": "Start",
+        "n": 18,
+        "mean": 1.3359027777777777,
+        "sd": 0.36943399562996926
+      },
+      {
+        "condition": "Control",
+        "attention": "End",
+        "n": 18,
+        "mean": 1.169225,
+        "sd": 0.3371156926434463
+      },
+      {
+        "condition": "Active",
+        "attention": "Start",
+        "n": 18,
+        "mean": 1.3314911111111112,
+        "sd": 0.4791425690063313
+      },
+      {
+        "condition": "Active",
+        "attention": "End",
+        "n": 18,
+        "mean": 1.3834061111111113,
+        "sd": 0.3843682307239626
+      },
+      {
+        "condition": "Passive",
+        "attention": "Start",
+        "n": 18,
+        "mean": 1.6688983333333334,
+        "sd": 0.7145343271237816
+      },
+      {
+        "condition": "Passive",
+        "attention": "End",
+        "n": 18,
+        "mean": 1.1706994444444443,
+        "sd": 0.4374279120370406
+      }
+    ],
+    "within_movement": [
+      {
+        "contrast": "Control: Start - End",
+        "n": 18,
+        "mean_difference": 0.16667777777777776,
+        "sd_difference": 0.35536059213400417,
+        "ci95_lower": -0.010038887224900955,
+        "ci95_upper": 0.3433944427804565,
+        "t": 1.9899615694358233,
+        "df": 17,
+        "p_two_sided": 0.0629271848390744,
+        "effect_dz": 0.4690384400162319,
+        "p_Holm_family_3_within_movement": 0.1258543696781488
+      },
+      {
+        "contrast": "Active: Start - End",
+        "n": 18,
+        "mean_difference": -0.05191499999999998,
+        "sd_difference": 0.3139828785000489,
+        "ci95_lower": -0.2080550121022606,
+        "ci95_upper": 0.10422501210226062,
+        "t": -0.7014926811423677,
+        "df": 17,
+        "p_two_sided": 0.4924879138878635,
+        "effect_dz": -0.16534341059616695,
+        "p_Holm_family_3_within_movement": 0.4924879138878635
+      },
+      {
+        "contrast": "Passive: Start - End",
+        "n": 18,
+        "mean_difference": 0.4981988888888888,
+        "sd_difference": 0.5516484002129584,
+        "ci95_lower": 0.22387059335595066,
+        "ci95_upper": 0.7725271844218269,
+        "t": 3.8315689404005426,
+        "df": 17,
+        "p_two_sided": 0.0013360735844510589,
+        "effect_dz": 0.9031094601136596,
+        "p_Holm_family_3_within_movement": 0.0040082207533531766
+      }
+    ],
+    "interaction_pairs": [
+      {
+        "contrast": "(Passive Start - End) - (Active Start - End)",
+        "n": 18,
+        "mean_difference": 0.5501138888888888,
+        "sd_difference": 0.6876778188276224,
+        "ci95_lower": 0.20813975492608927,
+        "ci95_upper": 0.8920880228516883,
+        "t": 3.39393754407899,
+        "df": 17,
+        "p_two_sided": 0.0034527823667517402,
+        "effect_dz": 0.7999587507806236,
+        "p_Holm_family_3_interaction_pairs": 0.010358347100255221
+      },
+      {
+        "contrast": "(Passive Start - End) - (Control Start - End)",
+        "n": 18,
+        "mean_difference": 0.33152111111111116,
+        "sd_difference": 0.7484483167105982,
+        "ci95_lower": -0.04067348047739544,
+        "ci95_upper": 0.7037157026996177,
+        "t": 1.8792546168326185,
+        "df": 17,
+        "p_two_sided": 0.07746451743100895,
+        "effect_dz": 0.4429445610461572,
+        "p_Holm_family_3_interaction_pairs": 0.12163522481383147
+      },
+      {
+        "contrast": "(Active Start - End) - (Control Start - End)",
+        "n": 18,
+        "mean_difference": -0.21859277777777775,
+        "sd_difference": 0.46188110471400545,
+        "ci95_lower": -0.4482808474724413,
+        "ci95_upper": 0.011095291916885797,
+        "t": -2.0078990100378156,
+        "df": 17,
+        "p_two_sided": 0.06081761240691574,
+        "effect_dz": -0.4732663353118317,
+        "p_Holm_family_3_interaction_pairs": 0.12163522481383147
+      }
+    ],
+    "marginal_contrasts": [
+      {
+        "contrast": "Active - Control averaged over attention",
+        "n": 18,
+        "mean_difference": 0.10488472222222217,
+        "sd_difference": 0.42642038041899794,
+        "ci95_lower": -0.10716914414572548,
+        "ci95_upper": 0.3169385885901698,
+        "t": 1.0435434383318205,
+        "df": 17,
+        "p_two_sided": 0.311309893767249,
+        "effect_dz": 0.2459655472357187,
+        "p_Holm_family_3_marginal": 0.622619787534498
+      },
+      {
+        "contrast": "Passive - Control averaged over attention",
+        "n": 18,
+        "mean_difference": 0.167235,
+        "sd_difference": 0.3880143434431865,
+        "ci95_lower": -0.02571999350312637,
+        "ci95_upper": 0.36018999350312636,
+        "t": 1.8285870800914914,
+        "df": 17,
+        "p_two_sided": 0.08506192120292674,
+        "effect_dz": 0.4310021081076007,
+        "p_Holm_family_3_marginal": 0.2551857636087802
+      },
+      {
+        "contrast": "Active - Passive averaged over attention",
+        "n": 18,
+        "mean_difference": -0.062350277777777796,
+        "sd_difference": 0.46146331508159427,
+        "ci95_lower": -0.2918305855760841,
+        "ci95_upper": 0.1671300300205285,
+        "t": -0.5732412885440661,
+        "df": 17,
+        "p_two_sided": 0.5739867349737332,
+        "effect_dz": -0.1351142674618745,
+        "p_Holm_family_3_marginal": 0.622619787534498
+      }
+    ],
+    "ANOVA": {
+      "movement": {
+        "F": 1.4145475392165285,
+        "df_numerator": 2,
+        "df_denominator": 34,
+        "p_uncorrected": 0.2569767152699103,
+        "GG_epsilon": 0.962213407382429,
+        "p_GG": 0.2572619990194032
+      },
+      "attention": {
+        "F": 19.824853885946716,
+        "df_numerator": 1,
+        "df_denominator": 17,
+        "p_uncorrected": 0.00034953220180822156,
+        "GG_epsilon": 1.0,
+        "p_GG": 0.00034953220180822156
+      },
+      "movement_by_attention": {
+        "F": 6.64761942038859,
+        "df_numerator": 2,
+        "df_denominator": 34,
+        "p_uncorrected": 0.0036580142992541555,
+        "GG_epsilon": 0.7990964223307079,
+        "p_GG": 0.007140442753694992
+      }
+    }
+  }
+}

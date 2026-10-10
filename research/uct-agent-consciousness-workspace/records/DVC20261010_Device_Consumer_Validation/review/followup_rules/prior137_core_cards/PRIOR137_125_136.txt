@@ -1,0 +1,12 @@
+125 R187:r_coupling | /kind=PREVIOUS287:OO20261008:r_linear/kind | /instance_obligations=NEW_VALUE_160 | /enabled_as_established_premise=PREVIOUS287:r185_shared_membership/enabled_as_established_premise | /guard=NEW_VALUE_161 | /no_assumption_promotion=PREVIOUS287:r126_1/same_instance_required
+126 R188:r_word | /kind=PREVIOUS287:OO20261008:r_linear/kind | /enabled_as_established_premise=PREVIOUS287:r185_shared_membership/enabled_as_established_premise
+127 R188:r_score | /kind=PREVIOUS287:OO20261008:r_linear/kind | /enabled_as_established_premise=PREVIOUS287:r185_shared_membership/enabled_as_established_premise
+128 R188:r_coins | /kind=PREVIOUS287:OO20261008:r_linear/kind | /enabled_as_established_premise=PREVIOUS287:r185_shared_membership/enabled_as_established_premise
+129 R188:r_zero | /kind=PREVIOUS287:OO20261008:r_linear/kind | /enabled_as_established_premise=PREVIOUS287:r185_shared_membership/enabled_as_established_premise
+130 R188:r_profile | /kind=PREVIOUS287:OO20261008:r_linear/kind | /enabled_as_established_premise=PREVIOUS287:r185_shared_membership/enabled_as_established_premise
+131 R188:r_gap | /kind=PREVIOUS287:OO20261008:r_linear/kind | /instance_obligations=NEW_VALUE_162 | /enabled_as_established_premise=PREVIOUS287:r185_shared_membership/enabled_as_established_premise
+132 R188:r_repair | /kind=PREVIOUS287:OO20261008:r_linear/kind | /instance_obligations=NEW_VALUE_163 | /enabled_as_established_premise=PREVIOUS287:r185_shared_membership/enabled_as_established_premise
+133 R188:r_late | /kind=PREVIOUS287:OO20261008:r_linear/kind | /enabled_as_established_premise=PREVIOUS287:r185_shared_membership/enabled_as_established_premise
+134 R188:r_nonsuff | /kind=PREVIOUS287:OO20261008:r_linear/kind | /enabled_as_established_premise=PREVIOUS287:r185_shared_membership/enabled_as_established_premise
+135 R188:r_complete | /kind=PREVIOUS287:OO20261008:r_linear/kind | /instance_obligations=NEW_VALUE_164 | /enabled_as_established_premise=PREVIOUS287:r185_shared_membership/enabled_as_established_premise
+136 R188:r_uct | /kind=PREVIOUS287:OO20261008:r_linear/kind | /enabled_as_established_premise=PREVIOUS287:r185_shared_membership/enabled_as_established_premise

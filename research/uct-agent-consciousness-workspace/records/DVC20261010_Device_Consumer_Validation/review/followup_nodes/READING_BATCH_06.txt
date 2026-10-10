@@ -1,0 +1,248 @@
+FIELDS
+F1=/scope
+F3=LEDGER/semantic_review/assessment/targeted_item_assessment
+F43=/quantifiers
+F45=/actuality
+F49=/boundary
+F50=/caveats
+NEW EXACT VALUES (old V references retain already-read meanings)
+V580="Unrestricted m-bit encoders can emulate the one-bit code. Global nonlinear optimum is not asserted for m>2."
+V581="Physical error law and basis are fixed; they are transported, not reset, under passive recoding."
+V582="Dependent H rows require separate treatment; the unique-lambda claim uses full row rank."
+V583="Fresh independent errors after two different encoders define distinct physical channels. Pure coordinate transport restores equivalence."
+V584="This is not the isolated synopsis contract. Individual-coordinate address needs ceil(log2 n) reverse bits."
+V585="One-bit answer is not one-bit total memory. Architecture/time assumptions changed and cannot be passed silently into fixed-contract C:P1."
+V586="No finite program, successful enumeration or map entry establishes this real-instance premise."
+V587="No named quale, suffering, subjective magnitude, unique subject or absence of local experience follows."
+V588="Countermodels constrain inference; they do not compute real phenomenal coordinates."
+V589="Persistence is a physical premise. Continuing experience is not necessarily unchanged complete local type."
+V590="Required explicit witness domain; not every pair of rank-two matrices has these item scores."
+V591="No general nonlinear optimality extension beyond this case."
+V592="Not merely two descriptions of one transported physical noise process."
+V593="The mathematical model alone does not discharge this actual comparison."
+V594="No unconditional survival or unchanged-content assumption."
+V595="The single-bit Walsh identity is not automatically a vector-message identity."
+V596="One declared instance of the finite CONTRACT; actual claims require the explicit actual-instance bridge."
+V597="Universal only on the stated finite domain; witnesses have their exact construction; open bridges are not asserted true."
+V598="MODEL_ONLY unless explicit actual-process assumptions hold"
+V599="No source-dependent side information; models are not complete actual brains."
+V600="Source storage may persist outside the isolated downstream comparison."
+V601="The posterior is not defined as felt confidence."
+V602="No normalized human metacognitive-efficiency claim."
+V603="No variable-size message or post-query source query."
+V604="Four-source-bit uniform parity contract only; bent functions are prior mathematics."
+V605="Coverage is an accepted fraction,not an experience threshold."
+V606="External selection using correctness is outside the contract."
+V607="Changed scoring contracts are not silently one fixed J."
+V608="No extra measurements,retries or source access."
+V609="Not a universal evolutionary/intelligence ranking."
+V610="Routing,target and gate fixed before scoring; not post-hoc role labels."
+V611="Only model intervention established; no actual neural or deployed AI instance."
+V612="Constant marginal calibration need not discriminate reliable trials."
+V613="Execution does not discharge physical or phenomenal admission."
+V614="Explicit premise,not true merely because it is in the graph."
+V615="Actual and selected-feeling bridges remain open."
+V616="Physical persistence is not implied by an output label."
+V617="Continuing experience need not have unchanged local type."
+V618="Fixed P/I/K/TBI, obstruction, release, target, boundary and scoring contract."
+V619="Route membership, policy use and evidence of use remain distinct; biological material, report and reflection are not clauses."
+V620="Toy route type; actual bearer membership remains open."
+V621="Cue and path lie within the frozen boundary/resource contract."
+V622="Retained route content remains target-correct; content-conflict interventions are separate."
+V623="Same declared deletion family and R183 support contract."
+V624="Architecture/protocol relative; no unique carrier or subject follows."
+V625="Finite declared equations; actual intervention fidelity remains open."
+V626="Blocks phenomenal identification only; does not establish complete-type or experience equality."
+V627="Same-instance all_of premise; model success and test access do not discharge it."
+V628="No extra causal force, named feeling, basal gate, richness order or exclusive owner."
+V629="Membership/gluing problem, not an exclusive subject selector."
+V630="The explicitly bound finite contract and same episode; n=4 only where FOUR_SETUP is required."
+V631="Source-message size is not total working memory."
+V632="Not a criterion for rationality, phenomenal unity or basal experience."
+V633="Standard linear-function characterization; a represented z is not necessarily the real X."
+V634="Context-dependent commitments, nonuniform inputs or additional source information require new analysis."
+V635="This decoder is not assumed point-coherent."
+V636="Classical bent-function result previously used in OO; no new claim of originality."
+V637="Additional point-coherence constraint, not a universal theorem that less memory is better. The arbitrary-encoder class is covered."
+V638="Selected triple tests differ from full-table consistency and from probability coherence."
+V639="A mathematical posterior is not by itself a physically installed human/LLM representation."
+V640="Violating jointly committed hard answers does not imply incoherent posterior probabilities."
+V641="Physical installed route is a model assumption; equal variable values do not establish shared physical identity."
+V642="Equal single-query law is not equality of full sequential conditional laws. Correlated distributed implementations can substitute for a shared register."
+V643="Not in POINT_COHERENCE domain; do not apply the full-table message bound to it."
+V644="No code pass or graph node supplies this physical/phenomenal application premise."
+V645="No inference from answer consistency to basal experience, pain, subject number or present-assistant consciousness."
+V646="Persistence does not imply unchanged experiential structure/content."
+V647="A genuinely terminated local process is not covered by a false persistence premise."
+V648="Original UCT ontology; same actual token/time/signature."
+V649="See explicit general or finite statement in RESEARCH_NOTE.md section 2"
+V650=["No new basal gate", "No deletion of persisting local experience", "No named-phenomenal variable or subject count computed", "Full-map semantic audit unfinished"]
+V651="Internal UCT model-class observation, not an independently verified law or empirical intervention."
+V652="Finite Boolean encoder/consumers; eight equally weighted task rows per architecture. No phenomenal variable."
+V653="See explicit general or finite statement in RESEARCH_NOTE.md section 3.1"
+V654="Under IE:ROLE_SPEC with only the specified channels."
+V655="See explicit general or finite statement in RESEARCH_NOTE.md section 3.2"
+V656="Same inputs, task, readout and time; selected functional representation only, not complete physical realization."
+V657="See explicit general or finite statement in RESEARCH_NOTE.md section 3.4"
+V658="Classical deterministic finite zero-error problem; numerical 3/4 case uses uniform independent two bits and query."
+V659="See explicit general or finite statement in RESEARCH_NOTE.md section 4.1"
+V660="The old query is independently chosen after encoding and has the full admitted task set. It must not be silently replaced by side information correlated with T; the support restriction is a substantive protocol change."
+V661="Under IE:QUERY_SPEC; unconstrained decoder table. Does not guarantee actual installation."
+V662="See explicit general or finite statement in RESEARCH_NOTE.md section 4.2"
+V663="Early/late timings are different contracts; only one-bit versus two-bit comparison within late timing is a fixed-M capacity comparison."
+V664="Same actual physical comparison, constitutive signature, resources and boundary. Abstract program execution does not discharge this."
+V665="See explicit general or finite statement in RESEARCH_NOTE.md section 4.3"
+V666="Requires IE:ACTUAL_COMPARISON; C1 remains interpretive assumption."
+V667="Candidate explanation of the apparent contrast; not a proof of substrate irrelevance or equal human/machine experience."
+V668="See explicit general or finite statement in RESEARCH_NOTE.md section 5"
+NODES
+OO20261008:EVEN_FAMILY | CONDITIONAL_THEOREM | For n=2m, quadratic one-bit f_m scores 1/2+1/(2*2^m), exceeding every rank-m linear code's 1/2+1/[2*(2^m+1)] by 1/[2*2^m*(2^m+1)].
+F1=V569 F43=V570 F45=V571 F49=V580
+OO20261008:NOISE_SETUP | ASSUMPTION | Within LINEAR_SETUP, H has full row rank and transmitted Y=HX XOR E with independent Bernoulli(epsilon) errors, 0<=epsilon<=1/2, applied after the specified physical encoder.
+F1=V569 F43=V570 F45=V571 F49=V581
+OO20261008:NOISE_LAW | CONDITIONAL_THEOREM | Under CONTRACT and NOISE_SETUP, p*(a)=[1+(1-2epsilon)^weight(lambda)]/2 when a=H^T lambda, and 1/2 otherwise.
+F1=V569 F43=V570 F45=V571 F49=V582
+OO20261008:RECODING_LIMIT | COUNTEREXAMPLE | Under GUARD_R_NOISE_EXAMPLE, optimal x1 accuracies are 9/10 and 41/50 despite identical noiseless rowspace and equal total mutual information.
+F1=V569 F43=V570 F45=V571 F49=V583
+OO20261008:PERSISTENT_SOURCE | ASSUMPTION | All n source bits persist after query arrival. An installed reverse route delivers a to a source-side parity circuit within deadline; n backward bits, retained memory and source computation are counted.
+F1=V569 F43=V570 F45=V571 F49=V584
+OO20261008:QUERY_RETURN | CONSTRUCTION | Given PERSISTENT_SOURCE, a source-side executing parity circuit returns a dot X exactly using one forward answer bit for every query.
+F1=V569 F43=V570 F45=V571 F49=V585
+OO20261008:REALIZATION | OPEN_BRIDGE | Independently justify actual P/Q, same constitutive K/time and allowed comparison, complete relevant implementation/ports/noise, installed consumer and equality of modeled score laws to the true fixed actual J.
+F1=V569 F43=V570 F45=V571 F49=V586
+OO20261008:TYPE_CONSEQUENCE | CONDITIONAL_UCT_APPLICATION | For a comparison satisfying REALIZATION, C:FIXED_J and GUARD_R_TYPE, inherited C:P1 and C1 imply distinct complete experiential structural types.
+F1=V569 F43=V570 F45=V571 F49=V587
+OO20261008:NO_SCALAR_INFERENCE | INFERENCE_GUARD | The displayed functional countermodels and inherited C:P3 block unconditional identification of more task accuracy with more exact distinctions or a universal experiential-richness ranking.
+F1=V569 F43=V570 F45=V571 F49=V588
+OO20261008:LOCAL_PERSISTENCE | INFERENCE_GUARD | Under GUARD_R_PERSISTENCE, U1 applies to the local actual process after a reader route changes; downstream inaccessibility is not local experiential nonexistence.
+F1=V569 F43=V570 F45=V571 F49=V589
+OO20261008:GUARD_R_DIRECTION | ASSUMPTION | Instantiate n=4, H_item rows (1,2), H_relation rows (5,10), item tasks (1,2,4,8) and cross-pair tasks (5,10), each selected battery uniform.
+F1=V569 F43=V570 F45=V571 F49=V590
+OO20261008:GUARD_R_FOUR | ASSUMPTION | n=4 (m=2), uniform fifteen nonzero tasks; one-bit synopsis chosen before the query; no side source. Use finite Walsh Parseval and even-integer coefficients.
+F1=V569 F43=V570 F45=V571 F49=V591
+OO20261008:GUARD_R_NOISE_EXAMPLE | ASSUMPTION | Use the two full-rank source encodings (x1,x2) and (x1 XOR x2,x2); target x1; epsilon=1/10; fresh independent errors after each encoder.
+F1=V569 F43=V570 F45=V571 F49=V592
+OO20261008:GUARD_R_TYPE | ASSUMPTION | A genuine inequality of the same actual capability profile J has been established for this same P/Q comparison, not just a sample-score or changed-protocol comparison.
+F1=V569 F43=V570 F45=V571 F49=V593
+OO20261008:GUARD_R_PERSISTENCE | ASSUMPTION | The same local process physically persists over the declared interval under the original UCT I P3 criteria; route modification has not terminated it.
+F1=V569 F43=V570 F45=V571 F49=V594
+OO20261008:BOOLEAN_ENCODER | ASSUMPTION | The message under CONTRACT is the single bit f(X) for any deterministic Boolean f; independent/shared random strategies are convex mixtures of deterministic pairs.
+F1=V569 F43=V570 F45=V571 F49=V595
+RU20261008:CONTRACT | ASSUMPTION | X is uniform on F2^4, A independently uniform on its15 nonzero masks. One source-dependent bit is sent before A is known; decoder and selector see only(A,B), public model and independent randomness. No later source access. Fix clock,boundaries and scoring contract.
+F1=V596 F43=V597 F45=V598 F49=V599
+RU20261008:WITNESS | CONSTRUCTION | L transmits x1 and returns B on A=1,otherwise0. Q transmits f(X)=x1*x2 XOR x3*x4 and returns B XOR f(A). Both transmit exactly one source-dependent bit.
+F1=V596 F43=V597 F45=V598 F49=V600
+RU20261008:ANSWER_POSTERIOR | DEFINITION | For the actual proposed answer Y=d(A,B),q(A,B,Y)=Pr[A dot X=Y|A,B]. Separate this law,an installed estimate,its target binding,its operative use and its report.
+F1=V596 F43=V597 F45=V598 F49=V601
+RU20261008:POSTERIOR_LAWS | CONDITIONAL_THEOREM | Under CONTRACT and WITNESS,L has q1 with mass1/15 and q1/2 with mass14/15;Q has q3/5 with mass5/8 and q2/3 with mass3/8. Forced means are8/15 and5/8.
+F1=V596 F43=V597 F45=V598 F49=V602
+RU20261008:ALL_CODES | ASSUMPTION | Range over all deterministic one-bit Boolean encoders and decoders in CONTRACT. Random strategies have seeds independent of X,A and are mixtures of deterministic protocols.
+F1=V596 F43=V597 F45=V598 F49=V603
+RU20261008:EQUALITY_CLASS | CONDITIONAL_THEOREM | Forced mean optimum is5/8. Every achieving Boolean encoder has all16 Walsh absolute values4,fiber sizes6 and10 and the same posterior reliability law as Q.
+F1=V596 F43=V597 F45=V598 F49=V604
+RU20261008:SELECTION | ASSUMPTION | Fix positive coverage c in(0,1]. Acceptance is measurable from the same(A,B) and independent randomness; no truth label or extra evidence. Tie randomization is allowed.
+F1=V596 F43=V597 F45=V598 F49=V605
+RU20261008:CEILING | CONDITIONAL_THEOREM | Every forced-mean-optimal one-bit protocol,including randomized optimal protocols,has accepted accuracy at most2/3 at every positive coverage under SELECTION.
+F1=V596 F43=V597 F45=V598 F49=V606
+RU20261008:FRONTIERS | CONDITIONAL_THEOREM | A_L(c)=1 for c<=1/15 else1/2+1/(30c);A_Q(c)=2/3 for c<=3/8 else3/5+1/(40c). Cross at1/5;at c1/10 values5/6 and2/3.
+F1=V596 F43=V597 F45=V598 F49=V607
+RU20261008:LOSS | ASSUMPTION | Reward1 for correctness,-ell for error,0 for abstention;ell>=0. Same evidence and answer/reject actions for both encoders.
+F1=V596 F43=V597 F45=V598 F49=V608
+RU20261008:VALUE_REVERSAL | CONDITIONAL_THEOREM | V_L=1/15+(14/15)max(0,(1-ell)/2);V_Q=(5/8)max(0,(3-2ell)/5)+(3/8)max(0,(2-ell)/3). Cross atell67/45;atell2 values1/15 and0.
+F1=V596 F43=V597 F45=V598 F49=V609
+RU20261008:WIRING | CONSTRUCTION | Fix L raw answers,error loss ell=2 and gate q>2/3. Compare true-q gate,a physical swap attaching q1 to A2 instead of A1,correct q with always-answer bypass,and correct gate with constant displayed8/15. A separate test complements actual answerY.
+F1=V596 F43=V597 F45=V598 F49=V610
+RU20261008:WIRING_RESULTS | CONDITIONAL_THEOREM | Atell2 the four utilities are1/15,-1/30,-2/5,1/15. Swap preserves raw answers/confidence histogram but changes conditional accuracy. ComplementingY gives stale-reference utility-2/15 versus0 with correct rebinding.
+F1=V596 F43=V597 F45=V598 F49=V611
+RU20261008:CALIBRATION | CONDITIONAL_OBSERVATION | Both L and Q permit perfectly calibrated Bayes-posterior reports. Their reliability distributions differ; neither proves dishonesty,loss of subjective experience or lower normalized metacognitive efficiency.
+F1=V596 F43=V597 F45=V598 F49=V612
+RU20261008:REALIZATION | OPEN_BRIDGE | Independently admit actual P,Q with common constitutive signature,time,ports,noise,actual encoder/consumer paths and faithful model-to-actual correspondence.
+F1=V596 F43=V597 F45=V598 F49=V613
+RU20261008:ACTUAL_J_DIFFERENCE | OPEN_BRIDGE | Establish genuine inequality of the same actual isomorphism-invariant J on this P,Q comparison,not a sample score or changed scoring protocol.
+F1=V596 F43=V597 F45=V598 F49=V614
+RU20261008:TYPE_APPLICATION | CONDITIONAL_UCT_APPLICATION | REALIZATION,ACTUAL_J_DIFFERENCE,C1 and inherited fixed-J refinement imply distinct complete experiential structural types.No magnitude or named feeling is assigned.
+F1=V596 F43=V597 F45=V598 F49=V615
+RU20261008:PERSISTENCE | OPEN_BRIDGE | An admitted local process continues under UCTI P3 over the interval after reader/monitor/report-path change;its constitutive dynamics have not terminated.
+F1=V596 F43=V597 F45=V598 F49=V616
+RU20261008:LOCAL_EXPERIENCE | INHERITED_APPLICATION | A local process satisfying PERSISTENCE remains under U1;downstream inaccessibility,abstention or missing report does not by itself extinguish basal experience.
+F1=V596 F43=V597 F45=V598 F49=V617
+R184:RESUMPTION_CONTRACT | definition | T_resume(tau) is target-correct post-release action resumption for both target values without a release-time directive.
+F1=V618
+R184:RTR | definition | RTR_r(tau) requires an actually target-discriminating route spanning obstruction that is actually consumed by the same installed policy after release, with no reissue and a predeclared route-isolation consequence.
+F1=V619
+R184:M_ROUTE | model_specification | M is an internal continuing target carrier consumed after release.
+F1=V620
+R184:Q_ROUTE | model_specification | Q is a continuing external target cue plus admitted sensor-consumer path, not a newly issued release-time directive.
+F1=V621
+R184:SUPPORT_FAMILIES | model_result | The M-only, Q-only and two redundant policies have deletion-only minimal supports {M}, {Q}, and {M}/{Q}, respectively.
+F1=V622
+R184:INDIVIDUAL_APPLICATION | conditional_application | M or Q is individually unavoidable only in the corresponding single-route architecture.
+F1=V623
+R184:DISJUNCTIVE_APPLICATION | conditional_application | In either redundant architecture neither route is individually unavoidable, while {M,Q} intersects every minimal success.
+F1=V624
+R184:INTACT_UNDERIDENTIFICATION | counterexample | Equal intact resumption with M=Q=tau does not identify redundant priority; conflict input separates the policies.
+F1=V625
+R184:REFLEX_TWIN | counterexample | Deliberate-labelled and reflex-labelled controllers can share the selected TBI/ART/EAC/RTR and resumption profile.
+F1=V626
+R184:ACTUAL_BRIDGE | unresolved_premise | One actual token jointly satisfies bearer, interval, complete signature, target binding, route membership, policy consumption, boundary, release and intervention-fidelity premises.
+F1=V627
+R184:EXPERIENTIAL_RELEVANCE | conditional_application | Under C1, ACTUAL_BRIDGE and the matching R183 relevance package, an RTR relation or disjunctive route family has an experience-internal target-relative counterpart.
+F1=V628
+R184:OVERLAP_NEXT | open_problem | Determine how local target-retention, effector-loop and whole-organism actual tokens overlap and whether one relation is shared across tokens or copied into distinct occurrences.
+F1=V629
+RC20261008:CONTRACT | DEFINITION | X is uniform on F2^n, N=2^n, n>=1; nonzero parity queries are uniform and independent of X. A pre-query source message has at most M>=1 symbols. No source revisits, extra source information or source-correlated independent seeds. Fix episode identity, timing, resource ceiling and output commitment semantics.
+F1=V630 F49=V631
+RC20261008:POINT_COHERENCE | DEFINITION | For each message and episode seed, the hard response r(a) is independent of query context/order, r(0)=0, and r(a XOR c)=r(a) XOR r(c) for every a,c. Probabilistic beliefs and alternative speculative hypotheses are different targets.
+F1=V630 F49=V632
+RC20261008:CHARACTERIZATION | CONDITIONAL_THEOREM | Under POINT_COHERENCE, there is a unique z in F2^n with r(a)=a dot z; conversely each such z gives a coherent response table.
+F1=V630 F49=V633
+RC20261008:COHERENT_BOUND | CONDITIONAL_THEOREM | Under CONTRACT and POINT_COHERENCE, the optimum mean parity accuracy over arbitrary possibly randomized encoders/decoders is [N+min(M,N)-2]/[2(N-1)]. For a fixed deterministic encoder with k nonempty cells, selecting a representative in each cell attains the same formula with k.
+F1=V630 F49=V634
+RC20261008:QUADRATIC_SETUP | ASSUMPTION | In CONTRACT take n=2m, m>=1, f_m(X)=XOR_j x_(2j-1)*x_(2j), message b=f_m(X), and fixed decoder r_b(a)=b XOR f_m(a) for nonzero a.
+F1=V630 F49=V635
+RC20261008:QUADRATIC_SCORE | CONDITIONAL_THEOREM | Under QUADRATIC_SETUP the decoder has accuracy 1/2+1/(2*2^m) for every nonzero parity. The tensor two-bit Walsh identity proves the score independently of the pending OO graph status.
+F1=V630 F49=V636
+RC20261008:MESSAGE_THRESHOLD | CONDITIONAL_THEOREM | To match or exceed QUADRATIC_SCORE while imposing POINT_COHERENCE under the same source/query contract, at least 2^m+1 source-message symbols are necessary and sufficient; fixed-length binary messages need at least m+1 bits.
+F1=V630 F49=V637
+RC20261008:FOUR_SETUP | ASSUMPTION | Specialize QUADRATIC_SETUP to m=2, n=4; evaluate the 35 unordered distinct triples {a,c,a XOR c} uniformly in the same fixed evidence epoch. Source-message cells have sizes ten and six.
+F1=V630 F49=V638
+RC20261008:POSTERIOR | CONDITIONAL_THEOREM | Under FOUR_SETUP, P(X=x|b)=1[f(x)=b]/|C_b| is normalized and supported entirely on possible worlds. Unique per-query modal confidence is 3/5 for b=0 and 2/3 for b=1.
+F1=V630 F49=V639
+RC20261008:MAP_CONFLICT | COUNTEREXAMPLE | Under FOUR_SETUP, hard modal answers violate 20/35 triples for b=0 and 15/35 for b=1, giving weighted violation 29/56, while per-query accuracy is 5/8. For b=0, queries (1,2,3) yield (0,0,1), each with confidence 3/5.
+F1=V630 F49=V640
+RC20261008:SAMPLER_SETUP | ASSUMPTION | Under FOUR_SETUP and POSTERIOR, compare one retained sample Z reused by all parity consumers with independently refreshed samples per question. Sampling is from the same P(X|b), independent of the actual X conditional on b; specify registers, selector, route switch and clock as in manuscript section 5.
+F1=V630 F49=V641
+RC20261008:JOINT_GAP | COUNTEREXAMPLE | Under SAMPLER_SETUP, single-query conditional output distributions agree exactly and mean accuracy is 8/15 for both. Shared samples violate no triple; fresh sampling violates 1573/3150 on average. Complete-triple accuracies are 3/10 and 949/6300 respectively.
+F1=V630 F49=V642
+RC20261008:CONTEXT_LIMIT | COUNTEREXAMPLE | Under FOUR_SETUP but allowing the full triple to determine the commitment, a joint-mode rule attains 3/8 whole-triple accuracy and 7/12 individual accuracy, with zero within-triple violations; its answer to a fixed query can vary with context.
+F1=V630 F49=V643
+RC20261008:ACTUAL_COMPARISON | OPEN_BRIDGE | Independently establish actual P,Q, common full constitutive signature and time/boundaries, installed source/sampler/consumer/noise mechanisms, a common fixed J including the joint outcome, and equality of the demonstrated model difference with a genuine actual J difference.
+F1=V630 F49=V644
+RC20261008:TYPE_CONSEQUENCE | CONDITIONAL_UCT_APPLICATION | For ACTUAL_COMPARISON, original C:P1 under A:C1 and C:FIXED_J implies different complete experiential structural types; the model alone does not identify a named human feeling or scalar quantity.
+F1=V630 F49=V645
+RC20261008:LOCAL_PERSISTENCE | ASSUMPTION | An independently admitted local process remains physically actual through the route/decoder change according to original UCT I P3: its support and constitutive dynamics do not terminate merely through embedding.
+F1=V630 F49=V646
+RC20261008:NON_ERASURE | CONDITIONAL_UCT_APPLICATION | For LOCAL_PERSISTENCE, A:U1 continues to give nonempty local experience regardless of the downstream coherence score. Whole/local organization can overlap without suppressing persisting local experience.
+F1=V630 F49=V647
+IE:BASELINE | INHERITED_ALIAS | C1/U1 apply to admitted actual processes across substrates; persistence under embedding does not imply unchanged type.
+F1=V648 F43=V649 F50=V650
+IE:NO_EMPTY_SWITCH | LOGICAL_APPLICATION | Holding an admitted actual complete organization fixed while setting all its experience empty violates C1/U1.
+F1=V651 F43=V649 F50=V650
+IE:ROLE_SPEC | MODEL_DEFINITION | Uniform context z, nonzero second operand, exact F, s=e(z), k=d(s), r=h(s); scores for core, contextual task and context report are distinct.
+F1=V652 F43=V653 F50=V650
+IE:ROLE_WITNESS | FINITE_COUNTERMODEL | All core accuracies equal one; contextual accuracies range over 0,1/2,1; report accuracy need not equal task accuracy.
+F1=V654 F43=V655 F50=V650
+IE:COMPENSATION | CLASSICAL_APPLICATION | Invertible recoding with inverse-compensated consumers preserves behavior; uncompensated recoding need not.
+F1=V656 F43=V657 F50=V650
+IE:QUERY_SPEC | MODEL_DEFINITION | Encode finite world Omega before independent query g; no later world access, side channel, query leak, or extra memory; decoder uses e(omega),g.
+F1=V658 F43=V659 F50=V650 F3=V660
+IE:QUERY_SUFFICIENCY | CLASSICAL_APPLICATION | Perfect decoder exists iff each e-fiber has a constant joint answer vector T; minimum encoder alphabet is |im T|.
+F1=V661 F43=V662 F50=V650
+IE:LATE_QUERY | CLASSICAL_COUNTERMODEL | Uniform two-bit late-query one-bit average optimum is 3/4; late-query perfect requires four messages; early-query one-bit can be perfect.
+F1=V663 F43=V659 F50=V650
+IE:ACTUAL_COMPARISON | UNDISCHARGED_PREMISE | Two actual complete organizational types realize the specified models and different genuine J profiles under one common evaluation M.
+F1=V664 F43=V665 F50=V650
+IE:UCT_INTERPRETATION | INHERITED_THEOREM_APPLICATION | The admitted genuine fixed-M capability difference entails a complete experiential-type difference under C:P1, not a named feeling or richness increase.
+F1=V666 F43=V665 F50=V650
+IE:BIO_SILICON_COMPARISON | INTERPRETIVE_SYNTHESIS | The biological/calculator contrast can be analyzed through tasks, access timing, retained distinctions and actual consumers without adding two basal-experience rules.
+F1=V667 F43=V668 F50=V650

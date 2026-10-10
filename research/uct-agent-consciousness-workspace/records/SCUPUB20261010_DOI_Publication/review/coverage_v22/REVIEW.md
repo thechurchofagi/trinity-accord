@@ -1,0 +1,9 @@
+# Bounded internal review of the v22 concurrency reconciliation
+
+**PASS WITH SCOPE**, reported by the read-only source_consumer_model reviewer on 2026-10-10. This root-authored receipt records its final report; it does not claim external peer review.
+
+The 42 claims in the old prepared v21 and current v22 delta are exactly equal, including scientific statement, scope, locations, statuses and limitations. The old delta SHA remains e3c76a81c2a5779014038e0806f78b416f25ac45d11d8441dabf55a08a7903c8 in the unpublished pre-save history. Current v22 delta SHA is 3129227e45be9a9fdc14a3a87a1e551149014e7b1f25047bc56431824a2edaf4. Only outer version/parent/path and final-publication-receipt metadata were updated. All 42 index locations point to v22.
+
+The reviewer checked 45 nested path/SHA bindings in 12 new root/coverage/publication JSON files, including bytes when present, and 160 current relative navigation targets. It confirmed identical 25-item pending sets in state, registry, session and formal-index; all 33 EIP concurrent files plus six root Markdown exact-suffix preservations, totaling 39 byte comparisons; separate inherited EIP four-claim coverage; unchanged SCU Markdown/ZIP and DOI; unchanged map, disabled candidates and historical audit-depth scope. PUBLICATION_DECISION's remaining old-version label was corrected and read back as v22 with EIP v21 parent. Publication counts remain frozen base plus one SCU publication.
+
+The current branch subsequently received only EIP's persistence receipt (afcafa88f457632cd29d4ca1c15cb840edc01781), and master handoff v74 was read with its exact v73 suffix verified. Pending final manifests and actual dual save are outside this review; an initial phase-0 receipt is not accepted as completed persistence. EIP-NQ qualifications are separately reviewed scientific annotations and do not alter any of the 42 delta claims.

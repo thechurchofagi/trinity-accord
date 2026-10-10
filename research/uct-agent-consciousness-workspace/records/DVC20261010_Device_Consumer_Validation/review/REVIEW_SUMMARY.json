@@ -1,0 +1,50 @@
+{
+  "decision": "RETAIN_DISABLED_DVC_CHECKPOINT_AND_EXPLORATORY_PUBLIC_DATA_REANALYSIS",
+  "scientific_blockers_for_that_disposition": [],
+  "map_promotion_authorized_by_review": false,
+  "human_consumer_or_hardware_application_established": false,
+  "corrections": [
+    {
+      "id": "DVC-REVIEW-C3-BINDING",
+      "status": "CLOSED_VERIFIED",
+      "fix": "Each rival instance separately fixes all premises; compared implementations may differ."
+    },
+    {
+      "id": "DVC-REVIEW-RESPONSE-CODING",
+      "status": "CLOSED_VERIFIED_SCOPE_CORRECTION",
+      "fix": "Key1/2 to stored0/1 mapping unverified; curve-direction interpretation explicit; numerical bytes unchanged."
+    }
+  ],
+  "baseline_read_counts": {
+    "total": 1608,
+    "scoped_read": 722,
+    "unread": 886,
+    "nodes": 314,
+    "rules": 137,
+    "contexts": 261,
+    "suspended": 10
+  },
+  "candidate_counts": {
+    "nodes": 21,
+    "rules": 6,
+    "contexts": 12,
+    "all_items_read": 39
+  },
+  "historical_depth_open": {
+    "ids": 1034,
+    "fields": 1828,
+    "proof_ids": 1347
+  },
+  "review_items_open": [
+    "QC10",
+    "IA-QC11",
+    "QC12",
+    "QC13"
+  ],
+  "independent_reproduction": "DVC finite model plus six public-data outputs, all byte-identical before explicitly reviewed endpoint metadata change",
+  "final_code_sha256": "028a090a4b2826fd58b78738fc80ea5c7a0cd3454da71c751c781f5ea95e1d30",
+  "final_result_sha256": "ec0ca95e7eb0aab624d3eeed8093c9b00d398f24e0928522ff31a28335d51d2f",
+  "final_candidate_sha256": "5029f17b7924355c632593d0051c0ecea4eb9f6838703f2a8b39a8b37e1dd423",
+  "canonical_or_remote_writes_by_reviewer": false,
+  "publication_action_by_reviewer": false
+}

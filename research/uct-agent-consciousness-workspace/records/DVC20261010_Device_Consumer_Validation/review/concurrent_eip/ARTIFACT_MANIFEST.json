@@ -1,0 +1,59 @@
+{
+  "schema": "uct-scoped-review-artifact-manifest/1",
+  "frozen_at_utc": "2026-10-10T02:56:35.791225+00:00",
+  "research_context": "Concurrent EIP reconciliation with frozen DVC; review only",
+  "eip_source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+  "candidate_maps_modified": false,
+  "candidate_promoted": false,
+  "new_established_premises": false,
+  "status": "FROZEN_WITH_FOUR_OPEN_NONDEDUCTIVE_NORMALIZATION_QUALIFICATIONS",
+  "entry_count": 9,
+  "total_bytes_excluding_manifest": 56980,
+  "files": [
+    {
+      "path": "EIP_NORMALIZATION_QUALIFICATIONS.json",
+      "bytes": 10025,
+      "sha256": "04e7936ca25af2c643fcb4a782b85d25592da1cb2e9da01aaa8ea4c824b08bd3"
+    },
+    {
+      "path": "HANDOFF_ZH.md",
+      "bytes": 1572,
+      "sha256": "432e1f9357f95df99496f856df1b9b4673056f70ec804e3ea595ad019dfc2ee1"
+    },
+    {
+      "path": "INDEPENDENT_CHECK.json",
+      "bytes": 2822,
+      "sha256": "fdbfbcb980a3c15cdbcc40ab6f90a0a7aadf04179a5fa8620f8bc25fc0653eb9"
+    },
+    {
+      "path": "PER_OBJECT_REVIEW.json",
+      "bytes": 14691,
+      "sha256": "3164f17a12695f11bcceb2c5479628ccbddf83a1a3fa1a1447e4a621c2c9a104"
+    },
+    {
+      "path": "READING_RECEIPT.json",
+      "bytes": 8997,
+      "sha256": "e9c9d9e8cb8d291b98c9f198362ceb9b4a41c4e250ca2ca58d93543a3fa94c43"
+    },
+    {
+      "path": "REVIEW.md",
+      "bytes": 10274,
+      "sha256": "df7c735093a9af2279a18741d72033bc5acc3c4c12456b70dc3aa1752c40b555"
+    },
+    {
+      "path": "check_eip_independently.py",
+      "bytes": 3795,
+      "sha256": "594e74ec25591eb68336663eb94a69fff7587c8fc18c8b236aa61a34ff6a977c"
+    },
+    {
+      "path": "reproduction/EXACT_RESULTS.json",
+      "bytes": 1941,
+      "sha256": "6a14ebf52d93bcd8e426c962351b8b75e808d0a5e639f525886728f3cf92460f"
+    },
+    {
+      "path": "reproduction/model.py",
+      "bytes": 2863,
+      "sha256": "43ea2686f3db61653b472265dd2da33765906b52ef6370166668b4cd642e0f82"
+    }
+  ]
+}

@@ -1,0 +1,378 @@
+FIELDS
+F1=/scope
+F3=LEDGER/semantic_review/assessment/targeted_item_assessment
+F5=/domain
+F6=/counterexamples_and_limits
+F29=/formal_contract_R166/quantifiers
+F30=/formal_contract_R166/bearer_time_signature
+F31=/formal_contract_R167/quantifiers
+F32=/formal_contract_R167/bearer_time_signature
+F33=/formal_contract_R168/quantifiers
+F34=/formal_contract_R168/bearer_time_signature
+F35=/formal_contract_R170/quantifiers
+F36=/formal_contract_R170/bearer_time_signature
+F37=/formal_contract_TE20261008/quantifiers
+F38=/formal_contract_TE20261008/bearer_time_signature
+F39=/formal_contract_TO20261008/quantifiers
+F40=/formal_contract_TO20261008/object_time_signature
+F41=/formal_contract_BR20261008/quantifiers
+F42=/formal_contract_BR20261008/object_time_signature
+F43=/quantifiers
+F44=/limits
+F45=/actuality
+F46=/all_premises
+NEW EXACT VALUES (old V references retain already-read meanings)
+V300="One predeclared candidate Anchor-Bind-Use relation in one actual process token and nonzero interval; no actual apparatus or token was tested in R166."
+V301="Not necessary, not executed, not complete-mechanism identification, and vulnerable to invalid realization, locality or intervention assumptions. Missing clauses yield unresolved, not no experience."
+V302="There exists one declared actual token/interval and candidate tuple; every W1-W6 clause and every member of nonempty U must satisfy the same binding package where applicable."
+V303="P,I,K,D,r,k,U and instrument-to-occurrence map are fixed; population/session evidence, abstract equations, external anatomy and reports cannot replace them."
+V304="Exactly one common actual instance satisfying all three premise packages simultaneously; empirical truth of the clauses is not supplied by R166."
+V305="Any false or unsupported witness premise blocks the conclusion. Alternative mechanisms outside the declared model and unmeasured redundancy remain open."
+V306="For every application instance satisfying all premises on one common P,I,K,D and candidate tuple; no universal realization claim."
+V307="All premises bind the identical actual bearer, interval, complete signature and sorted occurrences; no cross-trial h or population average is substituted."
+V308="One common actual C1 instance and selected installed relation; the conclusion does not range over tokens, populations or every experience."
+V309="Does not derive C1, validate B_min, identify familiar ownership/agency, require body-frame organization for experience, or assert a unique owner."
+V310="For every common instance satisfying witnessed installation and R159 transport; every familiar-label claim additionally requires independent B_min."
+V311="The D/Phi structures and h belong to the same P/I/K instance; external vocabulary, anatomy, measurement and report remain separately typed."
+V312="One uninterrupted participant-device episode and its predeclared reversible intervention subintervals."
+V313="Process lineage can persist while complete microstate and local organization change; cross-subject or reset comparisons do not satisfy the contract."
+V314="every admitted intervention subinterval must satisfy all lineage and indexing clauses"
+V315="P, I, Sigma, K, D, rho and each intervention provenance are explicit"
+V316="One instrumented participant-device episode with calibrated safe perturbations; no apparatus or participant was tested in R167."
+V317="Sensory or motor perturbation alone is not do(k); hidden routes, off-target effects, invalid fidelity or safety failure block the application."
+V318="there exists one declared candidate architecture; every named state and route must be physically realized and audited"
+V319="controller state and participant-device process are distinct but nested actual occurrences within P/I"
+V320="All deterministic Boolean functions with one candidate input k and finitely many declared binary backup inputs; executable enumeration covers zero through three backups."
+V321="The theorem is relative to declared variables, deterministic Boolean outputs and intervention semantics; it does not establish closure of the real organization."
+V322="for every f and every declared context; relevance is existential and indispensability universal over z"
+V323="one pre-compensation time slice; abstract f requires separate realization in an actual token"
+V324="The declared deterministic binary OR consumer under controlled interventions on k and z."
+V325="A validated contextual matrix can resolve this declared model; omitted backups remain possible."
+V326="there exists a masking context z=1 and a revealing context z=0"
+V327="same modeled consumer and pre-compensation time slice"
+V328="The declared two-step deterministic binary compensation model."
+V329="The model is not asserted as universal physiology; it refutes only the late-null-to-no-prior-use inference."
+V330="there exists the stated initial state and cut sequence"
+V331="same bearer lineage but distinct pre-adaptation and post-compensation subintervals"
+V332="One predeclared operational mediator candidate, declared finite backup closure and predeclared null/sensitivity bounds."
+V333="Any omitted route can defeat closure; null without closure/sensitivity is unresolved and never no experience."
+V334="all validity premises precede any support/refutation; refutation universally covers declared contexts only"
+V335="same token lineage with pre-compensation contrasts separated from adapted endpoints"
+V336="One common actual P/I/K/D/rho episode and one declared operational relation satisfying all premises simultaneously."
+V337="Failure of any all-of premise blocks the conclusion; C1 transport remains R166/R159 conditional and familiar mineness still requires independent B_min."
+V338="every all-of premise holds simultaneously on the one application; no universal neural or experiential necessity claim"
+V339="same P/I lineage, explicit subintervals, fixed K/D/rho except named interventions; C1 applies tokenwise only where admitted"
+V340="One pre-compensation subinterval of one R167 episode, one declared consumer, one declared intervention set and one fixed integral-probability metric."
+V341="A weak F can miss distributional changes; changing F after results changes the claim; abstract laws require separate physical realization."
+V342="supremum over declared k,k'; existential over z for contribution and universal only for indispensability"
+V343="same actual lineage and pre-compensation interval; random laws remain distinct from samples and fitted latents"
+V344="Any declared metric context space with nonempty tested set and finite nonnegative M,L,U_i; executable checks cover finite line metrics."
+V345="The physical metric, L and tested upper bounds are premises, not consequences; without them the numerical envelope has no physical authority."
+V346="for every compatible e and every z; sharpness is pointwise over all compatible e"
+V347="mathematical context geometry must be linked separately to actual episode contexts"
+V348="A two-point hidden context space, one coarse observed label, one tested representative and effect range [0,M]."
+V349="A physically certified within-fiber regularity/lift premise can add a bound; the counterexample denies inference without it."
+V350="there exist two compatible models with maximal hidden-effect separation"
+V351="same observed label is not identity of actual physical context"
+V352="One declared partial observation map and one actual context space with a chosen physical metric."
+V353="No section, delta or C is supplied by interface labels alone; a poor section can make the bound vacuous."
+V354="every admissible z satisfies the fiber bound and every x,x' satisfy section regularity"
+V355="r(x) denotes an actual tested-context representative, not an abstract label only"
+V356="One common actual/observed metric application satisfying the section, fiber, coverage, effect-regularity and tested-bound premises simultaneously."
+V357="Invalid if the section is not physically realized, the fiber bound fails, or effect regularity does not hold; can be vacuous at M."
+V358="for every admissible hidden context z under all simultaneous premises"
+V359="same actual context geometry, section representatives and pre-compensation effect function"
+V360="Independent context draws, fixed affected set, fixed positive sensitivity lower bound and no adaptive post-result target changes."
+V361="Bounds mu-mass only, not maximum amplitude or existence; invalid for dependent/adaptive draws, unknown mu, or unsupported sensitivity."
+V362="n independent draws; every affected draw has detection probability at least s_min"
+V363="sampling distribution across contexts is not the complete organization of any one context"
+V364="Declared bounded effects and context measures; includes discrete and continuous examples."
+V365="Metric regularity plus coverage can connect neighboring contexts, but only as an additional premise."
+V366="there exist counterexample families in both directions"
+V367="population over contexts remains distinct from an actual effect at a named context"
+V368="One named operational mediator candidate, one fixed effect geometry, actual/partial context coverage and predeclared threshold tau."
+V369="No status is a basal-experience status; null without valid regularity/coverage remains unresolved."
+V370="all validity premises precede status; local support is existential, envelope refutation universal over declared Z, mass bound relative to mu"
+V371="same episode lineage and pre-compensation interval; samples, laws, contexts and experience remain distinct"
+V372="One common actual P/I/K/D/rho episode and one fixed stochastic effect/coverage certificate satisfying all premises simultaneously."
+V373="Any unsupported metric, L, lift, sensitivity, route, identity or upper/lower bound blocks the refinement; abstract kernels do not install themselves."
+V374="every all-of premise holds on the same application; no universal necessity or familiar-mineness conclusion"
+V375="same P/I lineage and indexed subinterval; actual routes, laws, samples, partial views, Phi/h and reports remain typed separately"
+V376="One named R168-R169 effect application and its intended physical context population."
+V377="A convenience sample or laboratory distribution can omit a physically admissible safety-critical state; no canonical measure follows from T alone."
+V378="every context quantified by the target claim; mu only where explicitly fixed"
+V379="same bearer lineage, consumer, timing, sort and realization identity as R169"
+V380="A finite family of physical cells inside one R170 target domain and one frozen R169 consumer geometry."
+V381="Endpoint checks do not bound an interior gate; proving a cell range is a universal structural obligation but need not reconstruct the full mechanism."
+V382="every context admitted by every used cell under one universal radius event"
+V383="same actual bearer lineage, consumer, pre-compensation interval and discriminator class"
+V384="One common target-domain contract and cell family."
+V385="Relabeling failed challenges outside T after observation invalidates the target contract; U is not assumed empty or harmless."
+V386="every z in predeclared T belongs to exactly one of C or U"
+V387="same target identity and cell provenance"
+V388="One frozen bounded R168 effect, R169/cell envelope on C and explicit R170 remainder U."
+V389="Information-class sharpness is not a proof that every extremal function is realized by one consumer-law kernel family."
+V390="every z in T and every effect compatible with the declared pointwise premises"
+V391="same effect, target and simultaneous envelope-validity event"
+V392="Any R170 target with a nonempty unresolved remainder and inherited effect cap M."
+V393="Almost-everywhere control is not pointwise control; excluding a null context requires a domain, continuity or amplitude premise."
+V394="every nonempty U without an added pointwise bound"
+V395="same target T; measure-independent pointwise statement"
+V396="One R170 target with fixed mu, valid covered envelope and explicit remainder."
+V397="A convenience measure, dependent confidence event or sample frequency without a sampling-frame proof cannot discharge mu(U)<=epsilon."
+V398="mu-almost every z under one fixed target measure and simultaneous bound event"
+V399="same T, mu, effect and envelope validity event"
+V400="One fixed R170 target measure, threshold and valid pointwise covered envelope."
+V401="An epsilon-mass unresolved state may still have effect M; threshold and measure must be frozen."
+V402="every frozen tau<M and every compatible effect"
+V403="same T, mu, effect, threshold and validity event"
+V404="One frozen target/cell/remainder plan and independently generated actual boundary challenges."
+V405="Passing finitely many challenges does not prove an unbounded target complete; shared bias and post-hoc challenges invalidate the inference."
+V406="one valid violation refutes its certificate; no converse completeness inference"
+V407="same target, admission, consumer, timing and challenge frame"
+V408="One named target-domain, cell and optional measure certificate."
+V409="OPEN_WORLD_MASS_CERTIFIED is not weaker wording for amplitude closure; it deliberately retains sup_U e<=M only."
+V410="validity first, then refutation, then closed or measure-weighted certification, else unresolved"
+V411="same T, cells, mu, effect and challenge plan"
+V412="One common actual P/I/K/D/rho episode, target domain and R166-R170 certificate package."
+V413="A small remainder mass can coexist with a maximal rare effect; neither map/code success nor coverage statistics identify experience or familiar mineness."
+V414="every all-of premise on one application; no necessity, global mechanism or semantic conclusion"
+V415="same P/I/K/D/rho lineage, target, consumer, interval and signature across R166-R170"
+V416="Actual-pair scope with independently established or explicitly conditional realization; full versus selected types and support/reference/lineage targets remain separate."
+V417="See manuscript §§3–7 and GAP_LEDGER.json. No empirical C1 proof, exclusive owner or assistant-consciousness verdict."
+V418="For every instance satisfying all displayed premises on the stated domain; actuality is conditional where not evidenced."
+V419="P_i,I_i,K,Sigma and physical parameters are fixed per actual application; mathematical models have their explicit domains."
+V420="All bindings and parameter transports simultaneous; only declared Sigma, complete case recovers existing A:C1_OI."
+V421="Declared classical time model only; fixed-unit time structure and rescaled/order comparison are different."
+V422="Every supplied solution and alpha>0 on the corresponding rescaled intervals/histories; no new global existence claim."
+V423="Finite selected repertoire, not all histories simultaneously actual; physical implementation remains additional."
+V424="No total phenomenal amount, intelligence order or universal physical minimum. Retained old channel and reachable joint support are required."
+V425="Grounded actual episodes only; repertoire growth is separate and cannot instantiate unexecuted histories."
+V426="Exact edge subdivision, not arbitrary replacement, current/full history conflation or unique continuation."
+V427="Finite trace-event graph and fixed old endpoints; optional actual applications independently grounded."
+V428="A fixed finite actual/idealized event interval containing the claimed past and present endpoints; common value types and declared relay timing."
+V429="Real time-valued delta,beta,d,epsilon_R; dimensionless a,b,eta,epsilon_U; positive time scale s; finite adaptation history and one probe; not a complete neural signature."
+V430="See manuscript §§5–8 and GAP_LEDGER.json; model checks are not physical realization, phenomenal evidence or global consistency proof."
+V431="Every instance satisfying the exact scoped premise package; semantic candidate remains unproved."
+V432="All constants and finite trials satisfying ROUTED_REFERENCE_SETUP plus the stated crossing or retiming conditions; positive physical arrival delta is an additional condition when claimed."
+V433="All real probe inputs/reference values and common conditional report noise laws in the fixed model; no claim that all evidence in a human experiment is report-only."
+V434="Specified S/C architectures and independently fixed consumers; structural/command discrimination only, not identification of every rival mechanism or phenomenology."
+V435="Finite graph with an orientation for notation and both oriented edge values; all local comparisons belong to the declared interval. No global clock or experiential unity is presumed."
+V436="Every finite connected graph in PAIRWISE_CLOCK_SETUP; exact additive representation distinguished from mere ordinal consistency."
+V437="One common actual bearer/time/K/parameter binding. Current complete organization and history-containing organization remain distinct."
+V438="One grounded actual complete token and K-definable predicate; conditional on C1, not an empirical derivation of C1."
+V439="Selected temporal-order content on a future justified actual domain. Not an existence threshold, universal consciousness measure, or new C1 axiom."
+V440="Finite selected vocabulary/carrier, fixed sorts and any pointing; not a complete physical or phenomenal description by default."
+V441="Uniformly directed cycle, arbitrarily small weighted asymmetry, incompatible anchors, incomplete selected signature and ungrounded phenomenal graph; see §§3–6 and GAP_LEDGER.json."
+V442="For each instance satisfying the stated package; physical/phenomenal application is conditional and not inferred from a schema."
+V443="Every ROLE_EXPANSION_SETUP instance; finite role distinction, not an experience count."
+V444="Finite idealized dissipative signal network. Real hardware grounding, experiential geometry and full K-completeness are not assumed."
+V445="One selected structural model and finite actual-update placeholder interval; no full physical/phenomenal richness or subject count."
+V446="One common X,Y,Sigma and target; no switching token/time/relation meaning between correspondences."
+V447="Selected structural matching only; multiple selected maps need not extend to distinct complete C1 realizations."
+V448="One common actual bearer/time/K/parameter binding; no history beyond the token imported from an external archive."
+V449="Grounded actual selected roles within one complete C1 token, not a new experience-existence condition."
+V450="Same-token selected correspondence; unresolved empirical/semantic package, not an unconditional C1 consequence."
+V451="Only the fixed independently admitted selected target. No automatic common h across distinct actual tokens, nor measured human qualia supplied by this theorem."
+V452="One declared actual bearer/token/episode unless explicitly a finite alternative-model class.; Only the quantifiers displayed in the R175 note; no universal biological or phenomenal generalization.; Other availability conventions require separate disclosure."
+V453="One declared actual bearer/token/episode unless explicitly a finite alternative-model class."
+V454="Only the quantifiers displayed in the R175 note; no universal biological or phenomenal generalization."
+V455="Other availability conventions require separate disclosure."
+V456="Actuality requires independent grounding; abstract models and evidence records do not install the relation."
+V457="One declared actual bearer/token/episode unless explicitly a finite alternative-model class.; Only the quantifiers displayed in the R175 note; no universal biological or phenomenal generalization.; Not empirical prevalence or eight-way independence."
+V458="Not empirical prevalence or eight-way independence."
+V459="Retain at-most-six valuations under G=>A. Filtering two rows from a Boolean table is not construction of all six semantic event models; the explicit UPPER_BOUND_ONLY_SEMANTIC_REALIZATION_OPEN status is essential."
+V460="One declared actual bearer/token/episode unless explicitly a finite alternative-model class.; Only the quantifiers displayed in the R175 note; no universal biological or phenomenal generalization.; Not entailed by predicate definitions or one positive instance."
+V461="Not entailed by predicate definitions or one positive instance."
+V462="One declared actual bearer/token/episode unless explicitly a finite alternative-model class.; Only the quantifiers displayed in the R175 note; no universal biological or phenomenal generalization.; No phenomenal difference assigned."
+V463="No phenomenal difference assigned."
+V464="One declared actual bearer/token/episode unless explicitly a finite alternative-model class.; Only the quantifiers displayed in the R175 note; no universal biological or phenomenal generalization.; Targets may overlap or be undefined."
+V465="Targets may overlap or be undefined."
+V466="One declared actual bearer/token/episode unless explicitly a finite alternative-model class.; Only the quantifiers displayed in the R175 note; no universal biological or phenomenal generalization.; Does not close the empirical bridge."
+V467="Does not close the empirical bridge."
+V468="One declared actual bearer/token/episode unless explicitly a finite alternative-model class.; Only the quantifiers displayed in the R175 note; no universal biological or phenomenal generalization.; A model chain or report is insufficient."
+V469="A model chain or report is insufficient."
+V470="One declared actual bearer/token/episode unless explicitly a finite alternative-model class.; Only the quantifiers displayed in the R175 note; no universal biological or phenomenal generalization.; Report may be fallible evidence but not target definition."
+V471="Report may be fallible evidence but not target definition."
+V472="One declared actual bearer/token/episode unless explicitly a finite alternative-model class.; Only the quantifiers displayed in the R175 note; no universal biological or phenomenal generalization.; Assumes one common map and independently fixed relation meanings."
+V473="Assumes one common map and independently fixed relation meanings."
+V474="One declared actual bearer/token/episode unless explicitly a finite alternative-model class.; Only the quantifiers displayed in the R175 note; no universal biological or phenomenal generalization.; Separate per-anchor maps, switched tokens or fitted anchors do not qualify."
+V475="Separate per-anchor maps, switched tokens or fitted anchors do not qualify."
+V476="One declared actual bearer/token/episode unless explicitly a finite alternative-model class.; Only the quantifiers displayed in the R175 note; no universal biological or phenomenal generalization.; Conditional on all physical, experiential, common-map and anchor premises."
+V477="Conditional on all physical, experiential, common-map and anchor premises."
+V478="Use only the R176 effective reading: oriented anchors select the increasing correspondence between full supplied chains. This is not a new named-content prediction, and IA fixed-target/holdout obligations remain open."
+V479="One declared actual bearer/token/episode unless explicitly a finite alternative-model class.; Only the quantifiers displayed in the R175 note; no universal biological or phenomenal generalization.; No basal gate, unique owner or cross-trial identity follows."
+V480="No basal gate, unique owner or cross-trial identity follows."
+V481="Four-element finite logical completions, not actual worlds of identical complete organization.; Full E or a fixed common q-preservation bridge is extra information."
+V482="Four-element finite logical completions, not actual worlds of identical complete organization."
+V483="Full E or a fixed common q-preservation bridge is extra information."
+V484=["Neutral fixed identities", "Strict total order", "Endpoint/interior facts", "No middle relation or rank-based identity in data"]
+V485="Every completion in the declared four-label domain.; Does not refute R175 correspondence completion or show any actual C1 counterexample."
+V486="Every completion in the declared four-label domain."
+V487="Does not refute R175 correspondence completion or show any actual C1 counterexample."
+V488=["R176:PARTIAL_NAMED_ORDER_DOMAIN"]
+V489="Real-valued finite times in one stipulated model episode; no physical or phenomenal instantiation asserted.; Actual application requires grounding; multiple consumers and reconstructed order need separate target specification."
+V490="Real-valued finite times in one stipulated model episode; no physical or phenomenal instantiation asserted."
+V491="Actual application requires grounding; multiple consumers and reconstructed order need separate target specification."
+V492=["Same marker/source/use bindings", "Nonnegative delays", "One consumer", "Actual execution stipulated in model"]
+V493="All real parameters satisfying CAUSAL_DELAY_SETUP; named bridge predictions only if the respective separately stipulated bridge holds.; Not an observed experiential reversal; equal case gives no strict order; not agency/familiarity conclusion."
+V494="All real parameters satisfying CAUSAL_DELAY_SETUP; named bridge predictions only if the respective separately stipulated bridge holds."
+V495="Not an observed experiential reversal; equal case gives no strict order; not agency/familiarity conclusion."
+V496=["R176:CAUSAL_DELAY_SETUP"]
+V497="Fixed finite abstract chain class; actual same-token realization is not supplied."
+V498="Fix n>=4, X ordered x0<...<x(n-1), labeled E, and the class of all (n-2)! strict total E-orders with fixed extreme identities x0->e0 and x(n-1)->e(n-1). Interior identity matches may be outcome-dependent only in the adaptive comparison."
+V499="No empirical B_order/B_fam closure, complete organization claim, unique owner or assistant-consciousness verdict."
+V500="Abstract model only; actual P/I/K, experiential admission, identity grounding, measurement and C1 restriction remain independently required."
+V501="Existential fitting after each possible outcome, not one fixed physical/experiential correspondence."
+V502="For every E-order in CHAIN_DOMAIN, the post-outcome rank map is an increasing isomorphism respecting both endpoints. Thus all (n-2)! orders fit while the independently named e1<e2 query varies."
+NODES
+R166:TOKEN_INSTALLATION_WITNESS_CONTRACT | SUFFICIENT_EMPIRICAL_APPLICATION_CONTRACT | For one actual P,I,K,D and internally sorted r,k,U, require jointly: W1 same-token actuality/typing and a fixed realization map; W2 report-independent physical Anchor grounding; W3 endogenous Bind and actually occurring Use; W4 fidelity-checked local perturbation propagation; W5 mediator or localized-cut discrimination from a live bypass under declared causal assumptions; and W6 bounded four-status discipline. The package is sufficient relative to its premises, not necessary and not a basal-experience criterion.
+F1=V300 F5=V300 F6=V301 F29=V302 F30=V303
+R166:WITNESSED_FRAME_INSTALLATION | CONDITIONAL_ACTUAL_APPLICATION_RESULT | If the same actual P,I,K,D satisfies the R157 physically grounded selector, the R159 sorted Anchor-Bind-Use schema and every R166 witness clause, then the selected theta_frame(r,k,U) is supported as actually installed during I. The conclusion is relative to the declared realization and causal assumptions and is not a complete-mechanism or necessity theorem.
+F1=V304 F5=V304 F6=V305 F29=V306 F30=V307
+R166:EXPERIENTIAL_COUNTERPART_BOUNDARY | CONDITIONAL_C1_APPLICATION_WITH_SEMANTIC_RESIDUAL | On the identical admitted P,I,K,D,Phi,h, a witnessed installed theta_frame is transported by the existing R159 C1 result to theta_frame(h(r),h(k),h(U)) in Phi. R157's semantic residual still blocks naming that counterpart familiar felt bodily mineness without independently fixed B_min and target evidence.
+F1=V308 F5=V308 F6=V309 F29=V310 F30=V311
+R167:TOKEN_LINEAGE_INTERVAL_CONTRACT | SAME_BEARER_INTERVENTION_CONTRACT | A token-preserving intervention series requires one continuous actual bearer lineage and clock, fixed participant/device identity, signature, code, wiring and realization map except for the named intervention, no reset/retraining/copied-run substitution, and explicitly indexed subintervals. Same token means same bearer lineage under controlled local change, not identity of the complete organization across interventions.
+F1=V312 F5=V312 F6=V313 F31=V314 F32=V315
+R167:OPERATIONAL_MEDIATOR_ARCHITECTURE | PROSPECTIVE_PHYSICAL_ARCHITECTURE | A prospective non-invasive participant-device loop realizes a report-independent physical anchor r, a logged live controller mediator k, declared backup routes z, and actual consumers u, with independent reversible interventions on r, k and route gates. The operational k is not asserted to be a hidden neural or complete body representation.
+F1=V316 F5=V316 F6=V317 F31=V318 F32=V319
+R167:CONTEXTUAL_USE_CRITERION | EXACT_FINITE_BOOLEAN_THEOREM | For a declared finite deterministic Boolean consumer u=f(k,z), k contributes relative to the declared intervention closure iff there exists a backup context z with f(1,z) unequal to f(0,z); k is contextually indispensable iff the inequality holds in every declared context. Contribution and indispensability are distinct.
+F1=V320 F5=V320 F6=V321 F31=V322 F32=V323
+R167:SINGLE_CUT_REDUNDANCY_OBSTRUCTION | EXACT_CAUSAL_FALSE_NEGATIVE_COUNTEREXAMPLE | In u=k OR z, changing k while z=1 leaves u unchanged, although changing k while z=0 changes u. Therefore one null mediator cut in an uncontrolled redundant context does not refute installed use of k.
+F1=V324 F5=V324 F6=V325 F31=V326 F32=V327
+R167:COMPENSATION_TIMING_OBSTRUCTION | EXACT_DYNAMIC_FALSE_NEGATIVE_COUNTEREXAMPLE | For u_t=k_t OR z_t with z_(t+1)=z_t OR cut_t, cutting an initially active k makes the immediate pre-adaptation output differ from baseline but the later compensated output equal baseline. A late endpoint alone therefore does not refute prior installed use.
+F1=V328 F5=V328 F6=V329 F31=V330 F32=V331
+R167:CLOSURE_RELATIVE_TRIAGE | BOUNDED_INTERVENTION_DECISION_CONTRACT | For one named candidate: identity, admissibility or fidelity failure yields INVALID_PROTOCOL; a valid pre-compensation contextual contrast yields PRIMARY_USE_SUPPORTED_RELATIVE_TO_CLOSURE; all valid null contrasts yield CANDIDATE_REFUTED_RELATIVE_TO_CLOSURE only with declared route closure and adequate sensitivity; every other case is UNRESOLVED. Compensation is recorded as an additional temporal flag.
+F1=V332 F5=V332 F6=V333 F31=V334 F32=V335
+R167:R166_WITNESS_APPLICATION_BOUNDARY | CONDITIONAL_OPERATIONAL_DISCHARGE_AND_BOUNDARY | If one common actual episode satisfies the grounded selector, typed Anchor–Bind–Use schema, every R166 W1-W6 clause, the R167 token-lineage and operational architecture contracts, and closure-relative support, then W2-W5 are operationally discharged for the declared participant-device relation. This does not identify a hidden neural or complete body representation, prove route completeness, derive C1, validate B_min, or make the relation a basal-experience gate.
+F1=V336 F5=V336 F6=V337 F31=V338 F32=V339
+R168:STOCHASTIC_CONTEXTUAL_EFFECT | TYPED_DISTRIBUTIONAL_CAUSAL_DEFINITION | For declared safe mediator interventions K0, actual backup context z and interventional consumer laws Q_{k,z}, define e(z)=sup_{k,k' in K0} d_F(Q_{k,z},Q_{k',z}), where the discriminator class F is fixed before results. Contextual use is existence of z with e(z)>0 relative to K0, Z and F; indispensability is a distinct universal condition.
+F1=V340 F5=V340 F6=V341 F33=V342 F34=V343
+R168:SHARP_METRIC_ENVELOPE | EXACT_LIPSCHITZ_EXTENSION_THEOREM | For 0<=e<=M, L-Lipschitz e on declared (Z,d), tested actual contexts s_i and valid upper bounds e(s_i)<=U_i, every compatible e satisfies e(z)<=E(z)=min{M,inf_i[U_i+L d(z,s_i)]}; E itself is compatible, so no uniformly smaller pointwise upper bound follows from those premises alone.
+F1=V344 F5=V344 F6=V345 F33=V346 F34=V347
+R168:PARTIAL_VIEW_NONENTAILMENT | EXACT_HIDDEN_FIBER_COUNTEREXAMPLE | If q(a)=q(b) and only actual context a is tested with e(a)=0, the compatible models e0(a)=e0(b)=0 and e1(a)=0,e1(b)=M agree on the observed label and tested law but differ maximally at b. Partial observation alone therefore yields no nontrivial hidden-fiber amplitude bound.
+F1=V348 F5=V348 F6=V349 F33=V350 F34=V351
+R168:PARTIAL_VIEW_LIFT_CONTRACT | SUFFICIENT_HIDDEN_CONTEXT_COVERAGE_CONTRACT | For q:Z->X, require a declared section r, a within-fiber deviation d_Z(z,r(q(z)))<=delta, section regularity d_Z(r(x),r(x'))<=C d_X(x,x'), and tested observed fill distance h_X. These are independent physical/measurement premises, not consequences of sharing an observed label. In the delta + C h_X claim the actually tested representatives are s_i=r(x_i); arbitrary within-fiber samples only warrant 2 delta + C h_X by this argument.
+F1=V352 F5=V352 F6=V353 F33=V354 F34=V355
+R168:LIFTED_HIDDEN_CONTEXT_BOUND | CONDITIONAL_METRIC_COVERAGE_RESULT | Under the R168 partial-view lift contract, actual-context fill radius is at most delta+C h_X; combined with common tested effect upper eta and L-Lipschitz effect, sup_z e(z)<=min{M,eta+L(delta+C h_X)}.
+F1=V356 F5=V356 F6=V357 F33=V358 F34=V359
+R168:RANDOM_CONTEXT_MASS_BOUND | EXACT_BINOMIAL_NO_HIT_BOUND | If n contexts are sampled independently from declared mu and every sampled context with e(z)>tau is detected with probability at least s_min, no-detection probability is at most (1-s_min p)^n for p=mu{e>tau}; a no-hit 1-alpha upper bound is p<=min{1,(1-alpha^(1/n))/s_min}. The detection trials, not just the context draws, must satisfy the source independence condition (or a valid history-conditional detection lower bound sufficient for the no-hit product).
+F1=V360 F5=V360 F6=V361 F33=V362 F34=V363
+R168:AMPLITUDE_MASS_SEPARATION | TYPED_NONENTAILMENT_RESULT | A no-hit mass bound does not bound sup_z e(z): arbitrarily large allowed effect can occupy an arbitrarily small or mu-null context. Conversely, large affected mass can have effect only infinitesimally above tau. Amplitude and prevalence are distinct evidence objects.
+F1=V364 F5=V364 F6=V365 F33=V366 F34=V367
+R168:ENVELOPE_RELATIVE_TRIAGE | BOUNDED_CONTINUOUS_STOCHASTIC_DECISION_CONTRACT | After all R167 validity gates: a tested lower bound above tau supports contextual use; a valid sharp envelope maximum at most tau refutes effects above tau relative to the declared envelope; a valid random-context no-hit result without amplitude closure bounds affected mass only; every remaining case is unresolved.
+F1=V368 F5=V368 F6=V369 F33=V370 F34=V371
+R168:R167_WITNESS_STOCHASTIC_BOUNDARY | CONDITIONAL_WITNESS_REFINEMENT_AND_BOUNDARY | If the complete R166 witness, R167 token-lineage/operational architecture, and every R168 effect, coverage, regularity and triage premise hold on one common actual episode, the stochastic/continuous evidence refines W4-W5 for that declared relation. It does not replace physical realization, identify neural completeness, derive C1, validate B_min, or create a basal-experience gate.
+F1=V372 F5=V372 F6=V373 F33=V374 F34=V375
+R170:TARGET_DOMAIN_ADMISSION_CONTRACT | PHYSICAL_TARGET_DOMAIN_AND_MEASURE_CONTRACT | A target claim fixes before outcomes the physically admissible context domain T, an admission rule with bearer/time/sort/realization provenance, and—only for mean or mass claims—an independently justified probability measure mu; observed samples, task labels and post-hoc exclusions do not define T or mu.
+F1=V376 F5=V376 F6=V377 F35=V378 F36=V379
+R170:CELL_ROUTE_COVER_CERTIFICATE | FINITE_STRUCTURAL_CELL_TO_ANCHOR_CERTIFICATE | Each certified cell has an independently bounded physical admission range, an actual R169 anchor, and a universal same-lineage route or structural channel budget R_j(z)<=r_j for every admitted context; sampled clouds, fitted interpolation and success-selected cells do not qualify.
+F1=V380 F5=V380 F6=V381 F35=V382 F36=V383
+R170:OPEN_WORLD_REMAINDER_PARTITION | EXPLICIT_COVERED_UNKNOWN_DOMAIN_DECOMPOSITION | For the frozen target T and certified cells C_j, define C as their union and U=T\C; U remains part of the target and receives no route or cell conclusion unless a separate certificate applies.
+F1=V384 F5=V384 F6=V385 F35=V386 F36=V387
+R170:SHARP_POINTWISE_REMAINDER_ENVELOPE | EXACT_INFORMATION_CLASS_ENVELOPE_THEOREM | If e<=E_C on C and only 0<=e<=M is known on U, then the sharp pointwise envelope over exactly that information class equals E_C on C and M on U; no smaller pointwise upper follows without an added premise.
+F1=V388 F5=V388 F6=V389 F35=V390 F36=V391
+R170:GLOBAL_SUPREMUM_OBSTRUCTION | EXACT_OPEN_WORLD_AMPLITUDE_NONENTAILMENT | If U is nonempty and has no separate amplitude bridge, the sharp general global bound is sup_T e<=M even when mu(U) is arbitrarily small or zero; a nontrivial global amplitude bound needs U empty or another pointwise certificate on U.
+F1=V392 F5=V392 F6=V393 F35=V394 F36=V395
+R170:MEAN_REMAINDER_BOUND | EXACT_MEASURE_WEIGHTED_REMAINDER_THEOREM | For a fixed justified target probability measure mu, integral_T e is at most integral_C E_C plus M mu(U); if E_C<=b and mu(U)<=epsilon, it is at most b+(M-b)epsilon, without any conclusion about sup_U e.
+F1=V396 F5=V396 F6=V397 F35=V398 F36=V399
+R170:EXCEEDANCE_REMAINDER_BOUND | EXACT_THRESHOLD_MASS_REMAINDER_THEOREM | For tau<M, {e>tau} is contained in {z in C:E_C(z)>tau} union U, so its mu-mass is bounded by the covered-envelope exceedance mass plus mu(U), capped at one; this is not a maximum-effect bound.
+F1=V400 F5=V400 F6=V401 F35=V402 F36=V403
+R170:COVERAGE_CHALLENGE_FALSIFIER | PROSPECTIVE_DOMAIN_AND_REMAINDER_FALSIFIER | A predeclared held-out target context refutes a cell certificate if admission, route identity or budget fails, and refutes a remainder-mass certificate if valid target-frame evidence exceeds its frozen epsilon; neither refutation is a no-mediator, no-experience or anti-C1 result.
+F1=V404 F5=V404 F6=V405 F35=V406 F36=V407
+R170:OPEN_WORLD_COVERAGE_TRIAGE | FIVE_WAY_DOMAIN_COVERAGE_DECISION_CONTRACT | Invalid target/admission/measure/measurement gives INVALID_OPEN_WORLD_PROTOCOL; a valid challenge violation gives COVERAGE_CERTIFICATE_REFUTED; proven empty remainder with valid envelopes gives CLOSED_DOMAIN_AMPLITUDE_CERTIFIED; valid mu(U)<=epsilon with retained amplitude M gives OPEN_WORLD_MASS_CERTIFIED; every other case is UNRESOLVED.
+F1=V408 F5=V408 F6=V409 F35=V410 F36=V411
+R170:R169_OPEN_WORLD_APPLICATION_BOUNDARY | CONDITIONAL_OPEN_WORLD_REFINEMENT_AND_EXPERIENTIAL_BOUNDARY | If the complete R166-R169 witness and a valid R170 target/cell/remainder certificate hold on one common episode, closed-domain amplitude or open-world mean/mass conclusions may be used exactly as typed; no result establishes complete neural organization, derives C1 or B_min, adds a basal gate or selects an exclusive owner.
+F1=V412 F5=V412 F6=V413 F35=V414 F36=V415
+TE20261008:COMPARISON_SETUP | DECLARED_ACTUAL_COMPARISON_PREMISE | For each of two independently admitted actual tokens fix P_i,I_i, common token-relative complete K,D_i,E_i and C1 instance; select grounded relational Sigma contained in K, declared pointed current states/ports/physical parameters, and an actual Sigma-isomorphism f for the preservation route. An abstract model, diagram, transcript or evidence certificate does not establish these instances.
+F1=V416 F5=V416 F6=V417 F37=V418 F38=V419
+TE20261008:SELECTED_TRANSPORT | CONDITIONAL_THEOREM | Under COMPARISON_SETUP and C1, a Sigma-isomorphism f transports as g=h_1 f h_0^-1 between experiential reducts. The converse holds. A grounded Sigma-sentence difference gives a corresponding experiential difference. Equality of proper reducts need not give complete K-type equality.
+F1=V420 F5=V420 F6=V417 F37=V418 F38=V419
+TE20261008:RETIMING_SETUP | DECLARED_MATHEMATICAL_MODEL | Fix an actual differentiable solution of xdot=F(x(t),x(t-d_1),...,x(t-d_m),u(t)), supplied history, fixed delays and constant alpha>0. Set y(t)=x(t/alpha),v(t)=u(t/alpha); scale initial history and every relevant delay together. This is a mathematical solution assumption, not a hardware realization claim.
+F1=V421 F5=V421 F6=V417 F37=V418 F38=V419
+TE20261008:RETIMING_RESULT | MATHEMATICAL_THEOREM | Under RETIMING_SETUP, ydot=(1/alpha)F(y(t),y(t-alpha*d_1),...,y(t-alpha*d_m),v(t)); the inverse is x(s)=y(alpha*s). Slowing local dynamics alone does not establish the correspondence. No physical feasibility or subjective-duration equivalence follows.
+F1=V422 F5=V422 F6=V417 F37=V418 F38=V419
+TE20261008:REFINEMENT_SETUP | FINITE_MODEL_DEFINITION | Fix nonempty finite R subset A x B, A_R its current-value projection, fibers B_a, baseline c0(a) and revised c1(a,b). O0=(a,c0(a)), O1=(a,c1(a,b)) share the SAME R and retain current a. Set r_a=|c1(a,B_a)|. Strict refinement route requires some r_a>1.
+F1=V423 F5=V423 F6=V417 F37=V418 F38=V419
+TE20261008:RELATIONAL_INCREMENT | FINITE_MATHEMATICAL_THEOREM | Under REFINEMENT_SETUP, |im O0|=|A_R| and |im O1|=sum_a r_a; pi(a,c)=(a,c0(a)) is onto and is noninjective iff some r_a>1. In the fixed two-bit XOR witness, rerouting one operand from x to retained m gives image sizes 2 and 4 with four stored states on both sides. The optional log2 ratio describes selected capacity only.
+F1=V424 F5=V424 F6=V417 F37=V418 F38=V419
+TE20261008:EXPERIENTIAL_TEMPORAL_CONTRAST | CONDITIONAL_APPLICATION_THEOREM | Under ACTUAL_TEMPORAL_BRIDGE and each admitted C1 instance, theta_T for the actual past-to-present operand path and theta_diff for its unequal values are preserved and reflected by h. B versus A differs on the selected path; B episodes (x,m)=(1,0) and (1,1) differ on theta_diff despite equal current x. No familiar recollection, felt duration, unity, richness total or new basal-existence gate follows.
+F1=V425 F5=V425 F6=V417 F37=V418 F38=V419
+TE20261008:RELAY_SETUP | FINITE_ACTUAL_EVENT_MODEL_PREMISE | Fix a finite directed trace-event graph, one edge u->v, fresh temporally ordered relay events, faithful copies along the replacement chain, no other incident routes at fresh events and no other old-graph change. Physical applications require actual events and a token/history domain containing them; branch ancestry is distinct from bearer lineage.
+F1=V426 F5=V427 F6=V417 F37=V418 F38=V428
+TE20261008:RELAY_PROVENANCE | CONDITIONAL_RELATIONAL_THEOREM | Under RELAY_SETUP, replacing u->v by the fresh relay chain preserves directed reachability between all old endpoints and faithfully transmitted values. Any finite sequence preserves this selected ancestry relation. Full graph isomorphism, RetBind other clauses, numerical identity and unique subjecthood do not follow.
+F1=V426 F5=V427 F6=V417 F37=V418 F38=V428
+TO20261008:ROUTED_REFERENCE_SETUP | PREMISE_PACKAGE | On one fixed trial history and probe interval, delta=Delta+l_F-l_A; beta updates by beta_next=(1-eta)beta+eta*d with 0<eta<1; q=delta-a*beta; R=1[q-b*beta+epsilon_R>0]; U=q/s+epsilon_U with s>0 and the specified independent consumer port. Compare S=(a,b)=(1,0) and C=(0,1) under identical inputs, registers and conditional noise laws; actual routing differs. Computation follows both arrivals.
+F1=V429 F5=V429 F6=V430 F39=V431 F40=V429
+TO20261008:REFERENCE_CROSSING_AND_RETIMING | CONDITIONAL_MODEL_THEOREM | For constant d and beta_0<delta<d, beta_N=d+(1-eta)^N(beta_0-d) exceeds delta for some finite N; in S q then becomes negative. Uniform positive scaling of all time-valued parameters/history/noise preserves R and U with eta and routes fixed. Unilateral added latency need not preserve either. No phenomenal inversion is entailed.
+F1=V432 F5=V432 F6=V430 F39=V431 F40=V432
+TO20261008:REPORT_ROUTE_NONENTAILMENT | CONDITIONAL_MODEL_THEOREM | R depends on a,b only through a+b. S and C therefore agree pointwise under shared report noise, and have equal report laws for every admitted input/history under the same conditional noise law. Report observations alone do not identify their distinct reference routes.
+F1=V433 F5=V433 F6=V430 F39=V431 F40=V433
+TO20261008:NONREPORT_ROUTE_CONTRAST | CONDITIONAL_MODEL_THEOREM | For the specified common actuator port with identical noise, U_S-U_C=-beta/s. At beta nonzero the architectures differ despite matched reports. For 0<delta<beta and zero noise, removing the S upstream reference changes R and U, whereas removing the C threshold reference changes R only. The corresponding mean difference additionally requires common finite mean-zero actuator noise.
+F1=V434 F5=V434 F6=V430 F39=V431 F40=V434
+TO20261008:PAIRWISE_CLOCK_SETUP | PREMISE_PACKAGE | Fix a finite connected undirected comparison graph, one laboratory arrival time r_i per vertex, and antisymmetric real reference beta_ij per oriented edge. Each comparison is executed after its two arrivals and encodes q_ij=r_j-r_i-beta_ij. Exact global coordinates mean q_ij=u_j-u_i on every edge.
+F1=V435 F5=V435 F6=V430 F39=V431 F40=V435
+TO20261008:GLOBAL_CLOCK_COMPATIBILITY | CONDITIONAL_MODEL_THEOREM | Exact global coordinates exist iff all oriented cycle sums of beta vanish; they are unique up to a common additive constant. For arrivals (0,20,40) and references beta_AB=30,beta_BC=30,beta_AC=0, encoded signs cycle and no global coordinate exists. A nonzero cycle sum alone does not generally imply a sign cycle. Neither result counts subjects.
+F1=V436 F5=V436 F6=V430 F39=V431 F40=V436
+TO20261008:ACTUAL_TEMPORAL_INSTANCE | PREMISE_PACKAGE | Fix an actual token P, declared interval and token-relative complete K-signature admitting C1. Independently ground arrival, reference-read, comparator and consumer events, value/sign types, all physical parameters and their roles in K. Theta_S is the K-definable actual upstream reference-use/negative-comparison/consumer-transfer predicate of §8. Claimed historical events belong to the interval or a justified current relation; external archives, test lists and certificates are not inserted as constituents.
+F1=V437 F5=V437 F6=V430 F39=V431 F40=V437
+TO20261008:EXPERIENTIAL_STRUCTURAL_COUNTERPART | CONDITIONAL_STRUCTURAL_TRANSPORT | Given ACTUAL_TEMPORAL_INSTANCE and A:C1, D_K(P) satisfies theta_S(p) iff E_K(P) satisfies theta_S(h(p)), with all physical parameters transported by the supplied isomorphism. This yields a structural counterpart of the actual comparison/use relation; it does not identify perceived temporal order, felt duration, familiar mineness or an exclusive subject.
+F1=V438 F5=V438 F6=V430 F39=V431 F40=V438
+TO20261008:ORDER_BRIDGE_CANDIDATE | SEMANTIC_BRIDGE_CANDIDATE | B_order proposes that an independently specified consumer-shared temporal relation constitutes a selected perceived event-order target on an independently delimited domain, with fixed orientation/correspondence. This bridge remains OPEN. Reports motivate the target but do not identify this route; a second consumer constrains mechanisms without alone establishing phenomenology.
+F1=V439 F5=V439 F6=V430 F39=V431 F40=V439
+BR20261008:ROLE_EXPANSION_SETUP | PREMISE_PACKAGE | Fix a finite relational structure X in Sigma and a relation R on the same carrier, retaining all old relations. Selected symmetry roles are Aut(X) orbits. This is an organizational change only if R is independently realized; adding knowledge or an analyst tag is different.
+F1=V440 F5=V440 F6=V441 F41=V442 F42=V440
+BR20261008:ROLE_REFINEMENT | CONDITIONAL_STRUCTURAL_THEOREM | Aut(X,R) is the subgroup of Aut(X) preserving R, so new role orbits refine old ones. Strict refinement requires an old orbit to split. A proper subgroup alone does not suffice: uniformly directing a cycle removes reflection but preserves a single vertex orbit.
+F1=V443 F5=V443 F6=V441 F41=V442 F42=V443
+BR20261008:WEIGHTED_RING_SETUP | PREMISE_PACKAGE | Fix n>=3, a symmetric cycle with uniform initial signal 1, common discrete clock, no unique vertex tags, M0=(I+A(Cn))/10 and M_epsilon=M0+(epsilon/10)e1 e0^T, 0<=epsilon<=1/2. Only the directed 0->1 coupling is strengthened; x_next=M_epsilon*x.
+F1=V444 F5=V444 F6=V441 F41=V442 F42=V444
+BR20261008:LOCAL_ASYMMETRY_GLOBAL_ROLES | CONDITIONAL_MODEL_THEOREM | For every n>=3 and epsilon>0 in WEIGHTED_RING_SETUP, the selected weighted graph has identity-only automorphism and n roles versus one at epsilon=0. Yet at each t>=1, ||x_t^epsilon-x_t^0||_infty<=t(epsilon/10)(7/20)^(t-1)||x0||_infty. With the uniform positive initial state, the first change at i is at step 1+dist_Cn(1,i). Exact role count is discontinuous in this matrix norm and is not an established experiential-richness metric.
+F1=V445 F5=V445 F6=V441 F41=V442 F42=V445
+BR20261008:JOINT_MAPPING_SETUP | PREMISE_PACKAGE | Fix finite Sigma-structures X,Y with independently specified relation meanings and candidate pairs A={(a_i,b_i)}. H=Iso(X,Y), H_A={f in H: every f(a_i)=b_i}. H_A may be empty. These are common-map constraints on fixed structures, not physical additions.
+F1=V446 F5=V446 F6=V441 F41=V442 F42=V446
+BR20261008:JOINT_MAPPING_CONSTRAINT | CONDITIONAL_STRUCTURAL_THEOREM | If H_A is nonempty and f0 belongs to it, H_A=f0*Aut(X)_A and possible images of x are f0(Aut(X)_A x). A target is identified exactly when constant over H_A. Separate per-anchor satisfiability does not imply joint satisfiability; the eight-cycle adjacent-to-antipodal pair is an exact witness. Compatible adjacent anchors can determine all remaining matches.
+F1=V447 F5=V447 F6=V441 F41=V442 F42=V447
+BR20261008:ACTUAL_ROLE_GROUNDING | PREMISE_PACKAGE | Fix an actual P and interval, complete K and the C1 domain. Independently interpret the selected weighted ring and its unique-role formulas theta_i within K, with actual weights, executed events, ports, timing and transported parameters. The declared n>=3 and 0<epsilon<=1/2 and model relation must match the instantiated ring result. No completeness is inferred from the finite picture.
+F1=V448 F5=V448 F6=V441 F41=V442 F42=V448
+BR20261008:EXPERIENTIAL_ROLE_TRANSPORT | CONDITIONAL_C1_APPLICATION | Under the ring result, ACTUAL_ROLE_GROUNDING and A:C1, the grounded role formulas and their uniqueness are preserved in E_K(P) by h_P. This yields selected differentiated experiential structural roles. It does not establish specific human qualities, an increase in complete richness, prior absence of all distinctions, report access or a unique owner.
+F1=V449 F5=V449 F6=V441 F41=V442 F42=V449
+BR20261008:PHENOMENAL_MAPPING_ADMISSION | PREMISE_PACKAGE | For one actual P/I/K, independently admit X and candidate experiential Y as common-Sigma selected interpretations and justify that the complete C1 map restricts to an isomorphism X->Y. Candidate anchors assert that same restriction at the listed pairs. All JOINT_MAPPING_SETUP objects and meanings have identical bindings. No family map across trials or substrates follows from tokenwise C1.
+F1=V450 F5=V450 F6=V441 F41=V442 F42=V450
+BR20261008:COMMON_EXPERIENTIAL_CONSTRAINT | CONDITIONAL_C1_APPLICATION | Under A:C1, PHENOMENAL_MAPPING_ADMISSION and the instantiated joint-mapping theorem, the actual restriction lies in H_A: it must be nonempty, and any target constant over H_A is a conditional selected prediction. Empty H_A rejects the joint application/anchor package, not C1 alone. Uniqueness of an ungrounded graph match proves no phenomenal interpretation.
+F1=V451 F5=V451 F6=V441 F41=V442 F42=V451
+R175:BASELINE_ADMITTED_ACTION_DOMAIN | EFFECTIVE_DOMAIN_CONTRACT | The actual baseline trajectory belongs to the operation family used by Avail; on this domain an actual same-episode AgencyLoop contains an admitted action occurrence and therefore implies Avail.
+F1=V452 F5=V453 F43=V454 F44=V455 F45=V456
+R175:SIX_ROW_EVENT_MODELS | FINITE_SEMANTIC_WITNESS_CLASS | Baseline admission implies G=>A, leaving at most six Boolean valuations. All-six semantic realizability is not proved by bit filtering or event-role sketches.
+F1=V457 F5=V453 F43=V454 F44=V458 F45=V456 F3=V459
+R175:EXPLICIT_TWIN_DOMAIN | APPLICATION_PREMISE | The comparison domain explicitly contains two alternative histories with identical present descriptors and different actual provenance/use paths.
+F1=V460 F5=V453 F43=V454 F44=V461 F45=V456
+R175:ADMITTED_HISTORY_TWIN | CORRECTED_COUNTERMODEL_INSTANCE | Given the explicit twin-domain premise, the same-present/different-history pair is admitted and can support the conditional present-slice nonentailment proof.
+F1=V462 F5=V453 F43=V454 F44=V463 F45=V456
+R175:R173_EFFECTIVE_TARGET_SEPARATION | EFFECTIVE_SCOPE_CORRECTION | F_O, F_A and F_F remain separately fixed semantic targets; no eight-way organizational independence is asserted or needed for the familiar-mineness boundary.
+F1=V464 F5=V453 F43=V454 F44=V465 F45=V456
+R175:R174_FIBER_DIRECTION_CORRECTION | EFFECTIVE_EDITORIAL_INFERENCE_CORRECTION | Equal selector with distinct independently warranted targets refutes sufficiency. Current orientation interpretations are not a verified actual physical counterexample.
+F1=V466 F5=V453 F43=V454 F44=V467 F45=V456
+R175:PHYSICAL_TEMPORAL_CHAIN | ACTUAL_ORGANIZATIONAL_TARGET | Four actual physical events form an independently grounded strict order inside one Theta_STC-type route on one token and episode.
+F1=V468 F5=V453 F43=V454 F44=V469 F45=V456
+R175:INDEPENDENT_EXPERIENTIAL_ORDER | EXPERIENTIAL_INTERPRETATION_PREMISE | Four experiential relata and their before/betweenness structure are independently admitted for the same token, not generated by copying the physical chain.
+F1=V470 F5=V453 F43=V454 F44=V471 F45=V456
+R175:BETWEENNESS_CORRESPONDENCE_CLASS | CLASSICAL_FINITE_THEOREM | For equal finite chains n>=3, the betweenness-preserving correspondence class contains exactly the increasing and decreasing maps, leaving one orientation bit.
+F1=V472 F5=V453 F43=V454 F44=V473 F45=V456
+R175:ORIENTATION_ANCHOR_PACKAGE | JOINT_ANCHOR_PREMISE | Two common, independently admitted endpoint correspondences fix the same orientation and are frozen before the middle target is evaluated.
+F1=V474 F5=V453 F43=V454 F44=V475 F45=V456
+R175:HELD_OUT_ORDER_PREDICTION | POSITIVE_HELD_OUT_CONTENT_CONSTRAINT | Oriented anchors select an increasing correspondence between supplied full chains. No independently named experiential-content prediction is established.
+F1=V476 F5=V453 F43=V454 F44=V477 F45=V456 F3=V478
+R175:B_ORDER_NARROWED_BOUNDARY | CONDITIONAL_EXPLANATORY_BOUNDARY | Full-chain correspondence completion is retained. Independent target identity, relation admission, common-map grounding and genuine target separation remain open; the empirical burden was not reduced to orientation alone.
+F1=V479 F5=V453 F43=V454 F44=V480 F45=V456
+R176:PARTIAL_NAMED_ORDER_DOMAIN | ABSTRACT_DOMAIN_CONTRACT | D is all strict total orders on four neutral labels a,b,c,d with a least,d greatest and b,c interior; physical X is fixed x0<x1<x2<x3; only endpoint correspondences are given; T=[b<E c] is fixed independently of map choice.
+F1=V481 F5=V482 F6=V483 F46=V484
+R176:NAMED_ORDER_NOT_IDENTIFIED | FINITE_NONENTAILMENT | Exactly two completions satisfy the partial setup; each admits an endpoint-oriented betweenness map from X, but their fixed named targets T differ. In both, f(x1)<E f(x2); that map-dependent expression does not identify T.
+F1=V485 F5=V486 F6=V487 F46=V488
+R176:CAUSAL_DELAY_SETUP | ABSTRACT_ORGANIZATIONAL_MODEL | Fix producer events Bp,Cp at tB<tC, bound consumer-use events Bu,Cu at uB=tB+dB,uC=tC+dC, with dB,dC>=0; g=tC-tB>0. Fix one episode/consumer and content identity; use is executed, not a timestamp label.
+F1=V489 F5=V490 F6=V491 F46=V492
+R176:DELAY_ORDER_CONTRAST | ELEMENTARY_CONDITIONAL_THEOREM | uB is greater than, equal to, or less than uC exactly as dB-dC is greater than, equal to, or less than g. For (tB,tC,dB,dC)=(1,2,2,0), production and use orders disagree. H_prod and H_use give opposing conditional predictions for one fixed named target; neither bridge is established.
+F1=V493 F5=V494 F6=V495 F46=V496
+IA20261008:CHAIN_DOMAIN | DEFINITION | Fix n>=4, X ordered x0<...<x(n-1), labeled E, and the class of all (n-2)! strict total E-orders with fixed extreme identities x0->e0 and x(n-1)->e(n-1). Interior identity matches may be outcome-dependent only in the adaptive comparison.
+F1=V497 F5=V497 F43=V498 F44=V499 F45=V500
+IA20261008:ADAPTIVE_SATURATION | CONDITIONAL_THEOREM | For every E-order in CHAIN_DOMAIN, the post-outcome rank map is an increasing isomorphism respecting both endpoints. Thus all (n-2)! orders fit while the independently named e1<e2 query varies.
+F1=V501 F5=V501 F43=V502 F44=V499 F45=V500

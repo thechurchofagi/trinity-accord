@@ -1,0 +1,199 @@
+{
+  "schema": "uct-nondeductive-concurrent-normalization-qualifications/1",
+  "source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+  "status": "OPEN_NONDEDUCTIVE_REVIEW_ONLY",
+  "candidate_enabled": false,
+  "apply_as_map_mutation": false,
+  "replacement_objects": [],
+  "new_established_premises": [],
+  "eip_originals_modified": false,
+  "dvc_original_45_objects_modified": false,
+  "aggregate_U_is_designated_consumer_read": false,
+  "actual_application_established": false,
+  "qualifications": [
+    {
+      "id": "EIP-NQ1",
+      "status": "OPEN",
+      "kind": "CLAIM_ID_MAPPING_QUALIFICATION",
+      "source_objects": [
+        {
+          "source_family": "EIP20261010",
+          "source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+          "file": "CLAIM_LEDGER.json",
+          "sha256": "1c6467bafedffbbebf87fc0fad839803747f82206dc217162dbf2018ee0dc939",
+          "selector": "/claims/3",
+          "object_id": "EIP-C4"
+        },
+        {
+          "source_family": "EIP20261010",
+          "source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+          "file": "MAP_EXTENSION.json",
+          "sha256": "64a8b1f82bb92c6158f42a264b92541c7c0ce7cf27a289639d9a54f1301a8adc",
+          "selector": "/nodes/5",
+          "object_id": "EIP:C4"
+        },
+        {
+          "source_family": "EIP20261010",
+          "source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+          "file": "MAP_AUDIT.md",
+          "sha256": "35bfd13d056664340db1e242b5bc9cebf08f9fce4b5ad829e6ec8945f534eed9",
+          "selector": "Required semantic review: joint satisfiability"
+        }
+      ],
+      "finding": "Ledger EIP-C4 is the source-bounded empirical assessment. Map EIP:C4 is guarded UCT interpretation. No explicit mapping licenses treating the two IDs as synonymous.",
+      "preserved_result": "Both can remain separately stated conditional or source-bounded claims; neither is activated.",
+      "required_before_actual_use": "Provide an explicit claim-to-map mapping and separate empirical assessment from UCT application in any future normalized candidate. Disambiguate the audit C4 witness sentence.",
+      "dvc_conclusion_change_required": false
+    },
+    {
+      "id": "EIP-NQ2",
+      "status": "OPEN",
+      "kind": "QUANTIFIER_AND_FIBER_QUALIFICATION",
+      "source_objects": [
+        {
+          "source_family": "EIP20261010",
+          "source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+          "file": "MAP_EXTENSION.json",
+          "sha256": "64a8b1f82bb92c6158f42a264b92541c7c0ce7cf27a289639d9a54f1301a8adc",
+          "selector": "/nodes/2",
+          "object_id": "EIP:C1"
+        },
+        {
+          "source_family": "EIP20261010",
+          "source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+          "file": "CLAIM_LEDGER.json",
+          "sha256": "1c6467bafedffbbebf87fc0fad839803747f82206dc217162dbf2018ee0dc939",
+          "selector": "/claims/0",
+          "object_id": "EIP-C1"
+        },
+        {
+          "source_family": "EIP20261010",
+          "source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+          "file": "EXACT_RESULTS.json",
+          "sha256": "6a14ebf52d93bcd8e426c962351b8b75e808d0a5e639f525886728f3cf92460f",
+          "selector": "/ordinary_countermodels"
+        },
+        {
+          "source_family": "EIP20261010",
+          "source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+          "file": "RESEARCH_NOTE.md",
+          "sha256": "ed46d1a7a7cfff43164d68f2823aed955c8b056a9886adc3922c1836b8139c74",
+          "selector": "section 3"
+        }
+      ],
+      "finding": "Global G nonidentification does not mean every observation fiber is ambiguous. Observation (1,1,0,0) has only row (S,G,X)=(1,0,0), so this fiber identifies G=0.",
+      "preserved_result": "There exist delivered-carrier twins with identical ordinary observations and different G. No decoder recovers G for all eight rows.",
+      "required_before_actual_use": "Use existential twin/global noninjectivity quantifiers. Treat the exclusive-probe assumptions as sufficient within the declared method, not a proved necessary condition for every identification method.",
+      "dvc_conclusion_change_required": false
+    },
+    {
+      "id": "EIP-NQ3",
+      "status": "OPEN",
+      "kind": "GATE_CONFIGURATION_VS_INTAKE_OCCURRENCE_QUALIFICATION",
+      "source_objects": [
+        {
+          "source_family": "EIP20261010",
+          "source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+          "file": "RESEARCH_NOTE.md",
+          "sha256": "ed46d1a7a7cfff43164d68f2823aed955c8b056a9886adc3922c1836b8139c74",
+          "selector": "section 2: S and G definitions"
+        },
+        {
+          "source_family": "EIP20261010",
+          "source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+          "file": "EXACT_RESULTS.json",
+          "sha256": "6a14ebf52d93bcd8e426c962351b8b75e808d0a5e639f525886728f3cf92460f",
+          "selector": "/variables/G"
+        },
+        {
+          "source_family": "EIP20261010",
+          "source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+          "file": "model.py",
+          "sha256": "43ea2686f3db61653b472265dd2da33765906b52ef6370166668b4cd642e0f82",
+          "selector": "rows and obs"
+        },
+        {
+          "source_family": "EIP20261010",
+          "source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+          "file": "MAP_EXTENSION.json",
+          "sha256": "64a8b1f82bb92c6158f42a264b92541c7c0ce7cf27a289639d9a54f1301a8adc",
+          "selector": "/nodes/2",
+          "object_id": "EIP:C1"
+        }
+      ],
+      "finding": "Rows S=0,G=1 need a type distinction if G is called actual read of the selected delivered event. With no retained-token route stipulated, gate configuration does not equal intake occurrence.",
+      "proposed_nonadopted_qualification": "Either type G as gate configuration and define the model indicator I=S AND G, or restrict actual-intake assertions to S=1 and separately specify any retained-token semantics.",
+      "preserved_result": "The delivered S=1 redundant-writer twin and exclusive-probe equation remain valid. Under the optional I=S*G typing, one intake-indicator fiber is ambiguous although three G-configuration fibers are ambiguous.",
+      "required_before_actual_use": "Bind actual source event, arrival, retention, selected read operation and time window independently. Never equate the proposed I indicator or aggregate U with a physically observed designated read.",
+      "dvc_conclusion_change_required": false
+    },
+    {
+      "id": "EIP-NQ4",
+      "status": "OPEN",
+      "kind": "TYPED_GUARD_AND_ACTUAL_APPLICATION_QUALIFICATION",
+      "source_objects": [
+        {
+          "source_family": "EIP20261010",
+          "source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+          "file": "MAP_EXTENSION.json",
+          "sha256": "64a8b1f82bb92c6158f42a264b92541c7c0ce7cf27a289639d9a54f1301a8adc",
+          "selector": "/rules/0",
+          "object_id": "EIP:R1"
+        },
+        {
+          "source_family": "EIP20261010",
+          "source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+          "file": "MAP_EXTENSION.json",
+          "sha256": "64a8b1f82bb92c6158f42a264b92541c7c0ce7cf27a289639d9a54f1301a8adc",
+          "selector": "/rules/1",
+          "object_id": "EIP:R2"
+        },
+        {
+          "source_family": "EIP20261010",
+          "source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+          "file": "MAP_EXTENSION.json",
+          "sha256": "64a8b1f82bb92c6158f42a264b92541c7c0ce7cf27a289639d9a54f1301a8adc",
+          "selector": "/rules/2",
+          "object_id": "EIP:R3"
+        },
+        {
+          "source_family": "EIP20261010",
+          "source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+          "file": "MAP_EXTENSION.json",
+          "sha256": "64a8b1f82bb92c6158f42a264b92541c7c0ce7cf27a289639d9a54f1301a8adc",
+          "selector": "/nodes/3",
+          "object_id": "EIP:C2"
+        },
+        {
+          "source_family": "EIP20261010",
+          "source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+          "file": "MAP_EXTENSION.json",
+          "sha256": "64a8b1f82bb92c6158f42a264b92541c7c0ce7cf27a289639d9a54f1301a8adc",
+          "selector": "/nodes/5",
+          "object_id": "EIP:C4"
+        },
+        {
+          "source_family": "EIP20261010",
+          "source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+          "file": "INSTRUMENT_CONTRACT.md",
+          "sha256": "58063165ca8e66081bd3ad81b44b0ef51d5da90dd9fa5e34749d9035f9cf2f26",
+          "selector": "Level 2; Defeaters"
+        }
+      ],
+      "finding": "Typed all_of does not separately name every independently required interface, delivered-carrier, sole-writer/selectivity, timing/readout or actual complete-signature/target-semantic guard. Prose and guarded conclusions retain some conditions, but the graph cannot discharge them as actual premises.",
+      "preserved_result": "The candidate can denote availability of entire guarded theorems. No actual identification or phenomenal interpretation is inferred.",
+      "required_before_actual_use": "Normalize guard nodes and simultaneous same-installation/episode bindings before promotion or actual application; independently validate all relevant physical and UCT premises. Treat structural PASS as schema evidence only.",
+      "dvc_conclusion_change_required": false
+    }
+  ],
+  "installation_stop_condition": "Do not draw an actual EIP consumer-identification or experiential conclusion, or promote the affected rule, until its applicable normalization qualifications and independent same-installation physical/application premises have been resolved. Saving or discussing the disabled candidate does not resolve them.",
+  "inherited_open": [
+    "QC10",
+    "IA-QC11",
+    "QC12",
+    "QC13",
+    "SCU-OPEN-R191-NORMALIZATION",
+    "SCU-AUDIT-DEPTH"
+  ],
+  "completed_map_release_unchanged": "UCT-MAP-v1.1.2"
+}

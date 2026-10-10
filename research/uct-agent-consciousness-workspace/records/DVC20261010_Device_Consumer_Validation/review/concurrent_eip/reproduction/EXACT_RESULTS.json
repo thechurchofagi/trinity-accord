@@ -1,0 +1,87 @@
+{
+  "schema": "uct-eip-exact-results/1",
+  "variables": {
+    "S": "selected peripheral carrier is delivered in the window",
+    "G": "declared consumer actually gates/reads that carrier",
+    "X": "uncontrolled alternative writer supplies the same consumer update",
+    "U": "consumer update = (S AND G) OR X"
+  },
+  "row_count": 8,
+  "ordinary_observation_groups": 4,
+  "ordinary_gate_ambiguous_groups": 3,
+  "ordinary_countermodels": [
+    {
+      "evidence": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "worlds": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ]
+      ]
+    },
+    {
+      "evidence": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "worlds": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "evidence": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "worlds": [
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          1
+        ]
+      ]
+    }
+  ],
+  "exclusive_probe_gate_ambiguities": 0,
+  "exact_claim": "Upstream delivery plus cortical arrival plus aggregate update/output does not identify consumer read when an alternative writer is uncontrolled.",
+  "probe_claim": "After X is disabled, S=1 and U are sufficient to identify G only under the stipulated Boolean interface, sole-writer and faithful-readout premises.",
+  "limits": [
+    "The Boolean mechanism is a countermodel and measurement contract, not a biological identification.",
+    "Neural activity or an evoked response is evidence of arrival, not by itself proof of causal consumption.",
+    "The exclusive probe is invalid if another writer, common cause, off-target intervention, latency mismatch or unfaithful readout remains."
+  ]
+}

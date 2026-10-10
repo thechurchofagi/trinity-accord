@@ -1,3 +1,9 @@
+## SCUPUB20261010 / DVC20261010 — 2026-10-10 — publication and disabled device checkpoint
+
+SCU-PAPER v1.0.1 is publicly deposited and read back at DOI 10.5281/zenodo.23272690. The frozen scientific paper is unchanged by the later DVC work. DVC adds specified event/cache/commit acquisition contracts, a finite model, and an executed exploratory reanalysis of 18 participants in a public tactile dataset; no new hardware or human observations. Candidate 24/6/15 remains disabled. All 1,608 completed-map IDs received the documented core-layer compatibility visit; historical semantic/proof depth and actual/phenomenal applications remain open. Publication coverage advances to UCT-PUB-v1.0.22 using frozen base plus reviewed claim delta. Concurrent CBI and EIP files and all previous versions are retained.
+
+---
+
 ## R204 — SAU-RESULT-v0.2.0 / UCT-PUB-v1.0.16
 
 Sensorimotor success/alignment/use quartet, explicit discrepancy probes and continuous coordinate. Known antecedents credited; no H closure or completed map change.

@@ -1,0 +1,3 @@
+# Start here — UCT-MAP-v1.1.1
+
+Read `CURRENT_STATE.json` (authoritative completed release, seq3); `RESEARCH_MASTER_GUIDE.md` v2.1 §8A mandatory log/handoff; `RESEARCH_SESSION_LOG_INDEX.json`; `HANDOFF.md`; `versions/UCT-MAP-v1.1.1/AUDIT_REPORT.md`; `records/OL20261009_Observable_Locality/WORK_LOG.md`; `records/OL20261009_Observable_Locality/HANDOFF_ZH.md`. Restore/hash-check actual full effective graph and review ledger from `versions/UCT-MAP-v1.1.1/UCT_MAP_v1.1.1_Capsule.tar.xz`, not root `UCT_FORMAL_GRAPH.json`. Pending R185/AC/IL/R186/UI not promoted. Conditional LTI test is not named experience evidence; no public publication. For the previous completed version use `versions/UCT-MAP-v1.1.0/`.

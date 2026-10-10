@@ -1,0 +1,159 @@
+{
+  "schema": "uct-scoped-node-followup-manifest/1",
+  "directory": "map_followup_nodes",
+  "copy_instruction": "Copy these entries plus this manifest. The four uncompressed logical JSON files are retained locally but their delivered gzip bytes decompress exactly to them. No old frozen component is modified.",
+  "entry_count": 22,
+  "bytes_excluding_manifest": 1524698,
+  "entries": [
+    {
+      "path": "ADJUDICATIONS.json",
+      "bytes": 23307,
+      "sha256": "c2703d83d3f74ff60a04aee7621b8b089a7d8482b4d9e3fb1cae8023841c86a4"
+    },
+    {
+      "path": "COMBINED_NODE_COVERAGE.json",
+      "bytes": 236607,
+      "sha256": "3ed12b0552a7f67005abfa4a52551985e0bcaca51105ea1032149b14d32151fc"
+    },
+    {
+      "path": "EXACT_REMAINING_NODE_FIELDS.json.gz",
+      "bytes": 30566,
+      "sha256": "9e1e7715dc5ad2957d2444a42d5ceac792ced5fb53ada1b9b09be862e7aead83",
+      "logical_uncompressed_name": "EXACT_REMAINING_NODE_FIELDS.json",
+      "uncompressed_bytes": 2236646,
+      "uncompressed_sha256": "325240f1c58a834e0b3c3f2d95c1cdfbe9ca4f5c0e9fbb06801fc3c55a808f2b"
+    },
+    {
+      "path": "EXTRACTED_READ_FIELDS.json.gz",
+      "bytes": 107291,
+      "sha256": "91ae82e59ff2db1da4a4b7377a73f9a6b22c1fe72bafd662b21974127ee38db6",
+      "logical_uncompressed_name": "EXTRACTED_READ_FIELDS.json",
+      "uncompressed_bytes": 634111,
+      "uncompressed_sha256": "a549e4eb7950d2d674aeedbe7568cbd9ca4b1159f4805e7d28465cac8c5c4788"
+    },
+    {
+      "path": "FIELD_VALUE_DICTIONARY.json.gz",
+      "bytes": 42476,
+      "sha256": "f83b94f8b3e4ea6996941fdf92ba3f93b3bfd2149251b65614aadbebfe7e4955",
+      "logical_uncompressed_name": "FIELD_VALUE_DICTIONARY.json",
+      "uncompressed_bytes": 152444,
+      "uncompressed_sha256": "e9019819e0fc5f135ba4c8cfcdd7168cc68d2bc6e511eeb66e4f1daa97b7120a"
+    },
+    {
+      "path": "HANDOFF_ZH.md",
+      "bytes": 1845,
+      "sha256": "2a23e6dc1a47ab9337f2c66d08cf123b294d2871b75c3df0795107058d7665c4"
+    },
+    {
+      "path": "LEDGER_STATUS_GROUP_READ.json",
+      "bytes": 22240,
+      "sha256": "cee652d5a3ae6488a5b1510475727ab0538da2043b483f209d16b05875453538"
+    },
+    {
+      "path": "MAIN_REPORT.md",
+      "bytes": 11382,
+      "sha256": "21879cadb59d2abe207b0e8320724aab3cb6be12acc4ea94a07fe79b1afe444a"
+    },
+    {
+      "path": "PER_ID_NODE_REVIEW.csv",
+      "bytes": 471666,
+      "sha256": "48acf7fcd41617c54e82570c4912c0c8261c2c63fb152b246f20d360e358ef83"
+    },
+    {
+      "path": "PER_ID_NODE_REVIEW.json.gz",
+      "bytes": 213265,
+      "sha256": "947621e2e5f00ab9127b6b24773950d738652323f67dd4e32f20f645c5a20110",
+      "logical_uncompressed_name": "PER_ID_NODE_REVIEW.json",
+      "uncompressed_bytes": 4300087,
+      "uncompressed_sha256": "a14ddd71f6dfe025423bc2e7c9b87ff3af68230f4735320b840d3e615e00b3b6"
+    },
+    {
+      "path": "READING_BATCH_01.txt",
+      "bytes": 29399,
+      "sha256": "e0231ec032303047987aac221a54fd90cd6e65ab367febf8d62750edc2a0125d"
+    },
+    {
+      "path": "READING_BATCH_02.txt",
+      "bytes": 48241,
+      "sha256": "da213c76f8213283c7ffc70ed71dc78b62f64a658e304bb54a52da2cc42d5895"
+    },
+    {
+      "path": "READING_BATCH_03.txt",
+      "bytes": 57636,
+      "sha256": "52f463a2b6f66ef76854a8b8d3fa18056d1f948bf0b512643749c721fd9abe4d"
+    },
+    {
+      "path": "READING_BATCH_04.txt",
+      "bytes": 56567,
+      "sha256": "e87dcb669b1a47951b5b69294355d7d65b4f9f361ca77accace99822ba7d9f97"
+    },
+    {
+      "path": "READING_BATCH_05.txt",
+      "bytes": 30642,
+      "sha256": "ee04d1918586c7859d6a34f64ef4d24732d2f1684dd2144e0aa390233bcf35c6"
+    },
+    {
+      "path": "READING_BATCH_06.txt",
+      "bytes": 26144,
+      "sha256": "930d118aeb1c88a8c5c2bb1d1e8ed721c375f62aabd562c97eda48400c14485b"
+    },
+    {
+      "path": "READING_BATCH_07.txt",
+      "bytes": 24171,
+      "sha256": "1573b92593f02a413821f08bd9befcc1b7804875f98970e96dd6ba2b4f2dec6a"
+    },
+    {
+      "path": "READING_BATCH_08.txt",
+      "bytes": 43816,
+      "sha256": "3faa6bb5df42f43814278a77e47801ce0b52f94a4df7cbab329598bb508d6981"
+    },
+    {
+      "path": "READING_PACK_INDEX.json",
+      "bytes": 35168,
+      "sha256": "49b7630095bb3ed6e999adbe474dc8a10dbc635cdd1260ef6fc591ec819322ef"
+    },
+    {
+      "path": "SUMMARY.json",
+      "bytes": 1746,
+      "sha256": "4a3bf2179f4ff4f80ee8ce0dc4698e8670d321e490d6c1dd4b3aeeb5fb8fba0c"
+    },
+    {
+      "path": "WORK_LOG.md",
+      "bytes": 1596,
+      "sha256": "e198d5f13afe8ec073ab04ac4bf1522445d5916c35772ebc373a7d7b42ebf33c"
+    },
+    {
+      "path": "assemble_followup_ledger.py",
+      "bytes": 8927,
+      "sha256": "fae64f381c7e4e773331505e680fcfb4364268d64aa68a3996232d397799b56f"
+    }
+  ],
+  "not_copied_local_logical_json": [
+    {
+      "path": "EXACT_REMAINING_NODE_FIELDS.json",
+      "bytes": 2236646,
+      "sha256": "325240f1c58a834e0b3c3f2d95c1cdfbe9ca4f5c0e9fbb06801fc3c55a808f2b",
+      "delivered_as": "EXACT_REMAINING_NODE_FIELDS.json.gz"
+    },
+    {
+      "path": "EXTRACTED_READ_FIELDS.json",
+      "bytes": 634111,
+      "sha256": "a549e4eb7950d2d674aeedbe7568cbd9ca4b1159f4805e7d28465cac8c5c4788",
+      "delivered_as": "EXTRACTED_READ_FIELDS.json.gz"
+    },
+    {
+      "path": "FIELD_VALUE_DICTIONARY.json",
+      "bytes": 152444,
+      "sha256": "e9019819e0fc5f135ba4c8cfcdd7168cc68d2bc6e511eeb66e4f1daa97b7120a",
+      "delivered_as": "FIELD_VALUE_DICTIONARY.json.gz"
+    },
+    {
+      "path": "PER_ID_NODE_REVIEW.json",
+      "bytes": 4300087,
+      "sha256": "a14ddd71f6dfe025423bc2e7c9b87ff3af68230f4735320b840d3e615e00b3b6",
+      "delivered_as": "PER_ID_NODE_REVIEW.json.gz"
+    }
+  ],
+  "semantic_verdict": "599 requested nodes scoped-read; combined node coverage913; zero forced node revisions found; deep contracts/proofs and actual application remain open.",
+  "frozen": true
+}

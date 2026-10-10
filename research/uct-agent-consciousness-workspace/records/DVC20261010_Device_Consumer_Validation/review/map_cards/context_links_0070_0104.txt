@@ -1,0 +1,35 @@
+"BASE:CTX:071" | relation="Explicit audit of the conditional-randomness implementation premise" | from="R137:CLOSED_LOOP" | to="R137:SEED_GAP" | deductive=false
+"BASE:CTX:072" | relation="explicit full-interface nonidentification witness; context, not a new proof of C:P2_FULL" | from="R145:SEPARATION" | to="C:P2_FULL" | deductive=false
+"BASE:CTX:073" | relation="compares active-register construction with earlier buffered readout example" | from="R145:SEPARATION" | to="A:TOY_MATH" | deductive=false
+"BASE:CTX:074" | relation="separate actual macro bearer may be invariant; macro actuality not supplied" | from="R145:TYPE_LIMIT" | to="A:MACRO_EXP_EQ" | deductive=false
+"BASE:CTX:075" | relation="same scoped-feedback principle; R145 is deterministic specialization, not contradiction" | from="R137:CLOSED_LOOP" | to="R145:TRANSPORT_BLIND" | deductive=false
+"BASE:CTX:076" | relation="bearer versus exclusive subject; contextual source" | from="A:SUBJECT_FIREWALL" | to="R146:DEFINITION_CONTRACT" | deductive=false
+"BASE:CTX:077" | relation="self-model contract is not an experience prerequisite" | from="A:U3" | to="R146:SELF_CONTRACT" | deductive=false
+"BASE:CTX:078" | relation="grounded bearer antecedent, not deduction of full semantics" | from="D:D0" | to="R146:SELF_CONTRACT" | deductive=false
+"BASE:CTX:079" | relation="installed functional evidence distinct from valence/fear" | from="D:S1" | to="R146:SELF_CONTRACT" | deductive=false
+"BASE:CTX:080" | relation="two-coordinate non-ordering example, not a new proof of general phenomenal claims" | from="R146:DUPLICATE_SEPARATION" | to="C:P3" | deductive=false
+"BASE:CTX:081" | relation="restricted attachment-grounding stress test, not deduction of universal selfhood" | from="R146:SELF_CONTRACT" | to="R147:ROUTING_MODEL" | deductive=false
+"BASE:CTX:082" | relation="avoid requiring a unique uncentered self before local relational analysis" | from="R146:CENTERED_REFERENCE" | to="R147:ROUTING_LIMIT" | deductive=false
+"BASE:CTX:083" | relation="bearer must be justified independently of its self label" | from="D:D0" | to="R147:ACTUAL_BRIDGE" | deductive=false
+"BASE:CTX:084" | relation="token/type/lineage distinction; contextual antecedent" | from="A:P6" | to="R147:MEMORY_LIMIT" | deductive=false
+"BASE:CTX:085" | relation="earlier standard factorization antecedent; contextual attribution" | from="TA15:FIBER" | to="C:P2_COORD" | deductive=false
+"BASE:CTX:086" | relation="mechanism/intervention warnings; no automatic physical bridge" | from="TA16:CAUSAL_LIMITS" | to="A:K" | deductive=false
+"BASE:CTX:087" | relation="historical whole-target gate must not be imported as basal necessity" | from="TA16:RRH_HISTORY" | to="A:U1" | deductive=false
+"BASE:CTX:088" | relation="internal attribution is distinguished from grounded actual membership" | from="TA17:FUNCTIONAL_CONTRACT" | to="R149:SELF_TARGET" | deductive=false
+"BASE:CTX:089" | relation="TA18/TA19 antecedents; retained later A scope" | from="TA19:LOCAL" | to="A:ORBIT_LEMMA" | deductive=false
+"BASE:CTX:090" | relation="prior uncentered obstruction; centered extension retains independent installation premise" | from="TA19:LOCAL" | to="R146:CENTERED_REFERENCE" | deductive=false
+"BASE:CTX:091" | relation="compatibility of a selected germ quotient with a complete target needs type reflection" | from="TA18:FACTOR" | to="R149:COMPATIBILITY" | deductive=false
+"BASE:CTX:092" | relation="experiential axiom does not independently identify the selected mineness coordinate" | from="A:C1" | to="R155:MINENESS_OBLIGATION" | deductive=false
+"BASE:CTX:093" | relation="consumer threshold is not a basal experience gate" | from="A:U1" | to="R155:MODEL" | deductive=false
+"BASE:CTX:094" | relation="target/grounding/use distinctions; source estimate is not automatically an own-target estimator" | from="R146:SELF_CONTRACT" | to="R155:MODEL" | deductive=false
+"BASE:CTX:095" | relation="grounded routing counterexample motivates separation of prediction and attachment; context not a Bayes proof premise" | from="R147:ROUTING_LIMIT" | to="R155:ERROR" | deductive=false
+"BASE:CTX:096" | relation="different isolation assumptions: active consumer memory versus report-only record" | from="R147:MEMORY_LIMIT" | to="R155:MEMORY_BOUNDARY" | deductive=false
+"BASE:CTX:097" | relation="criterion states the unfulfilled selected-target sufficiency obligation" | from="R155:BRIDGE_CRITERION" | to="R155:MINENESS_OBLIGATION" | deductive=false
+"BASE:CTX:098" | relation="equal-descriptor contrast for functional R only; not an independently given phenomenal target" | from="R155:BRIDGE_CRITERION" | to="R156:SNAPSHOT_USE_LIMIT" | deductive=false
+"BASE:CTX:099" | relation="open selected-mineness interpretation remains; no deductive discharge" | from="R156:SNAPSHOT_USE_LIMIT" | to="R155:MINENESS_OBLIGATION" | deductive=false
+"BASE:CTX:100" | relation="causal installation versus record-only isolation comparison" | from="R147:MEMORY_LIMIT" | to="R156:INSTALLATION_WITNESS" | deductive=false
+"BASE:CTX:101" | relation="contrast: arbitrary transported type projection versus internally definable physically grounded selector" | from="R126:P1" | to="R157:DEFINABLE_SELECTOR_SETUP" | deductive=false
+"BASE:CTX:102" | relation="methodological admissibility requirements for the still-open semantic/measurement bridge" | from="B:BAC" | to="R157:MINENESS_BRIDGE_SCHEMA" | deductive=false
+"BASE:CTX:103" | relation="R157 refines the open obligation into structural, semantic and measurement layers" | from="R155:MINENESS_OBLIGATION" | to="R157:MINENESS_BRIDGE_SCHEMA" | deductive=false
+"BASE:CTX:104" | relation="installed use is one possible K-relation, not itself a mineness conclusion" | from="R156:SNAPSHOT_USE_LIMIT" | to="R157:DEFINABLE_SELECTOR_SETUP" | deductive=false
+"BASE:CTX:105" | relation="conditional structural transport discharges only the middle layer" | from="R157:COORDINATE_TRANSPORT" | to="R157:MINENESS_BRIDGE_SCHEMA" | deductive=false

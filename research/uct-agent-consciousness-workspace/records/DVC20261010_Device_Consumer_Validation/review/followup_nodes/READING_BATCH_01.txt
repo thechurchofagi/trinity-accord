@@ -1,0 +1,195 @@
+FIELDS
+F1=/scope
+F2=/formal_contract_R153/quantifier_convention
+F3=LEDGER/semantic_review/assessment/targeted_item_assessment
+F4=/amendment
+NEW EXACT VALUES (old V references retain already-read meanings)
+V1="Finite nonempty sufficient state set, fixed finite total deterministic operation alphabet, p:S->p(S), output r, joint initial observation o=(p,r), fixed time/ports; metric targets only where declared. Projection transport separately uses complete-type bijection."
+V2="The displayed statement and each separate premise route are read together. Model parameters are fixed throughout one instance; universal state/action clauses apply only to that instance. Existential witnesses and alternative routes are not universally asserted."
+V3="Fixed delayed-query task, cut and side-information domain, SAME supported b,q and downstream kernel for cut-TV claims; actual support/relation interpretation requires separately grounded event/constitutive premises. Quantifiers range only over the named admitted protocols."
+V4="The task f:H×Q->Y is required on the full declared product. In a side-information model, impossible (T,X) pairs remove constraints, so counting full Cartesian response profiles can overstate the needed code alphabet. Declare the support relation before deriving graph confusability."
+V5="R130-F20: restore the common-side-information qualification already explicit in R127 §4."
+V6="R130-F20: explicit conditional/joint distinction; theorem ID and original proof retained."
+V7="Finite common sufficient state domain and fixed total operations/Markov kernels; p(S) is the realized joint image. Marginal laws, joint laws and domain restrictions must remain distinct."
+V8="Finite outcome set; fixed exact scalar expectation probes and normalization; universal identification over the full probability simplex. Not complete physical or experiential identification."
+V9="State, action and time semantics are fixed. All states and all allowed total operations, not only one observed trajectory; enabledness for partial operations is outside this theorem."
+V10="Finite fixed model, all states and operations. This does not certify interventions outside the family, hidden-state-dependent policy equivalence, complete organization or a subject."
+V11="Existential construction over the full state domain. Rank deficiency does not force every given kernel to fail closure. Agreement is of measured expectations, not all unmeasured output laws."
+V12="Specified fair prior, two bounded indicator payoffs and same action set. Possible loss, not universal task loss or the numerical value of D separate witness."
+V13="One fixed horizon/boundary/port model; unit tasks, one indivisible slot per served task, one task per slot, no other constraints. Actual implementation needs independent adequacy; no general multi-resource scheduling or experience criterion."
+V14="One fixed horizon/boundary/port model; unit tasks, one indivisible slot per served task, one task per slot, no other constraints. Actual implementation needs independent adequacy; no general multi-resource scheduling or experience criterion. X_i means valid scheduled completion, not correctness by guessing."
+V15="One fixed horizon/boundary/port model; unit tasks, one indivisible slot per served task, one task per slot, no other constraints. Actual implementation needs independent adequacy; no general multi-resource scheduling or experience criterion. Existential family, not a statement about every high-accuracy system."
+V16="Finite nonempty S,O, finite U; fixed scheduler/ports/time; all represented states. Preserve exact enabledness and joint next-summary/output law. Not trace-only equivalence, empirical identification, an actual complete type, or a unique subject."
+V17="Finite nonempty S,O, finite U; fixed scheduler/ports/time; all represented states. Preserve exact enabledness and joint next-summary/output law. Not trace-only equivalence, empirical identification, an actual complete type, or a unique subject. Policy preservation excludes hidden-state-dependent policies."
+V18="Finite nonempty S,O, finite U; fixed scheduler/ports/time; all represented states. Preserve exact enabledness and joint next-summary/output law. Not trace-only equivalence, empirical identification, an actual complete type, or a unique subject. Finite statistical estimates are not exact expectations. Singleton outcome alphabet is handled directly by the closure theorem."
+V19="Finite nonempty S,O, finite U; fixed scheduler/ports/time; all represented states. Preserve exact enabledness and joint next-summary/output law. Not trace-only equivalence, empirical identification, an actual complete type, or a unique subject. Separate state/output marginal probes can miss their dependence."
+V20="Finite nonempty S,O, finite U; fixed scheduler/ports/time; all represented states. Preserve exact enabledness and joint next-summary/output law. Not trace-only equivalence, empirical identification, an actual complete type, or a unique subject. Specified mathematical examples; parity idea already in R128/PLT."
+V21="Finite nonempty S,O, finite U; fixed scheduler/ports/time; all represented states. Preserve exact enabledness and joint next-summary/output law. Not trace-only equivalence, empirical identification, an actual complete type, or a unique subject. No model uncertainty or representative-dependent support-only omission."
+V22="Finite nonempty S,O, finite U; fixed scheduler/ports/time; all represented states. Preserve exact enabledness and joint next-summary/output law. Not trace-only equivalence, empirical identification, an actual complete type, or a unique subject. Compression can be trivial; this is not a minimal physical circuit or model-independent state."
+V23="Finite candidate models and finite states/actions/outputs; one persistent hidden model, known family, fixed sufficient state/scheduler/ports; controller observes actions/outputs only, no free menu/model oracle; universally executable actions; closed goal or persistent success flag; fixed finite horizon. Mathematical model, not an actual complete organization or experience gate."
+V24="Finite candidate models and finite states/actions/outputs; one persistent hidden model, known family, fixed sufficient state/scheduler/ports; controller observes actions/outputs only, no free menu/model oracle; universally executable actions; closed goal or persistent success flag; fixed finite horizon. Mathematical model, not an actual complete organization or experience gate. No Bayesian probabilities or quantitative value sufficiency is asserted."
+V25="Finite candidate models and finite states/actions/outputs; one persistent hidden model, known family, fixed sufficient state/scheduler/ports; controller observes actions/outputs only, no free menu/model oracle; universally executable actions; closed goal or persistent success flag; fixed finite horizon. Mathematical model, not an actual complete organization or experience gate. Not a claim about infinite-horizon almost-sure winning or success probabilities below one."
+V26="Finite one-shot candidate/action family with nonempty good-action sets; success is probability one including enabledness; observation before commitment preserves states, actions and payoff. No full model identification, physical sensor, actual subjective report or quantitative experience conclusion."
+V27="Finite one-shot candidate/action family with nonempty good-action sets; success is probability one including enabledness; observation before commitment preserves states, actions and payoff. No full model identification, physical sensor, actual subjective report or quantitative experience conclusion. Pairwise intersections are not sufficient for a larger cell."
+V28="Finite one-shot candidate/action family with nonempty good-action sets; success is probability one including enabledness; observation before commitment preserves states, actions and payoff. No full model identification, physical sensor, actual subjective report or quantitative experience conclusion. Ideal access to m is a premise, not an inferred physical ability."
+V29="Finite one-shot candidate/action family with nonempty good-action sets; success is probability one including enabledness; observation before commitment preserves states, actions and payoff. No full model identification, physical sensor, actual subjective report or quantitative experience conclusion. Requires ENCODER. No noisy channel, entropy, variable-length coding, adaptive protocol or sensor construction is covered."
+V30="Strongest internal antecedent. Set m=T and let an action a be a complete decoder table X->T. Sources that can share one message are exactly those admitted in one action-cover set; for pair contexts these are independent sets of the confusability graph. Thus min-message graph coloring is already an exact specialization. Any paper must credit this route and locate its increment in a stronger finite-error/feedback formula or a distinct organizational comparison."
+V31="Finite one-shot candidate/action family with nonempty good-action sets; success is probability one including enabledness; observation before commitment preserves states, actions and payoff. No full model identification, physical sensor, actual subjective report or quantitative experience conclusion. Mutually exclusive candidate mechanisms, not simultaneous tasks; n=100 is a specified example, not measured AI accuracy."
+V32="Finite one-shot candidate/action family with nonempty good-action sets; success is probability one including enabledness; observation before commitment preserves states, actions and payoff. No full model identification, physical sensor, actual subjective report or quantitative experience conclusion. Does not contradict R132 coarsest stable refinement for a fixed full interface."
+V33="Finite candidate models and finite states/actions/outputs; one persistent hidden model, known family, fixed sufficient state/scheduler/ports; controller observes actions/outputs only, no free menu/model oracle; universally executable actions; closed goal or persistent success flag; fixed finite horizon. Mathematical model, not an actual complete organization or experience gate. Mathematical devices only. Probing is optional unless explicitly conditioned on it."
+V34="Finite candidate models and finite states/actions/outputs; one persistent hidden model, known family, fixed sufficient state/scheduler/ports; controller observes actions/outputs only, no free menu/model oracle; universally executable actions; closed goal or persistent success flag; fixed finite horizon. Mathematical model, not an actual complete organization or experience gate. Free extra information in C:P7 is a different fixed decision problem; finite uninformative probes cannot improve the one-half bound."
+V35="Finite candidate models and finite states/actions/outputs; one persistent hidden model, known family, fixed sufficient state/scheduler/ports; controller observes actions/outputs only, no free menu/model oracle; universally executable actions; closed goal or persistent success flag; fixed finite horizon. Mathematical model, not an actual complete organization or experience gate. Conservative model switching need not be exact; some other envelopes may be exact. No prior over models is required."
+V36="R133 finite persistent model and joint action/output kernels, sufficient state including resources/clock, common enabled actions, closed goal and fixed finite horizon. Same observable policy across all initial model/state pairs; private randomness independent of the hidden mechanism, retained memory permitted. Nature cannot choose after seeing the private seed. No actual complete-type or experience inference. A known state distribution inside each model would define an explicitly averaged alternative, not this worst-initial-state objective."
+V37="R133 finite persistent model and joint action/output kernels, sufficient state including resources/clock, common enabled actions, closed goal and fixed finite horizon. Same observable policy across all initial model/state pairs; private randomness independent of the hidden mechanism, retained memory permitted. Nature cannot choose after seeing the private seed. No actual complete-type or experience inference. A set indexed by support is not a claim that a deployed quantitative policy may discard observation history; no efficient compression asserted."
+V38="R133 finite persistent model and joint action/output kernels, sufficient state including resources/clock, common enabled actions, closed goal and fixed finite horizon. Same observable policy across all initial model/state pairs; private randomness independent of the hidden mechanism, retained memory permitted. Nature cannot choose after seeing the private seed. No actual complete-type or experience inference. Dual q is a proof weighting, not a supplied prior; standard finite LP/minimax duality."
+NODES
+R126:PROJECTION | ASSUMPTION | On the admitted complete-type domain let Phi:S_D->S_E be a bijection and p:S_D->Z any set map. Define the transported p_E=p composed with Phi inverse on S_E. The existence of this transported map is formal and supplies no physical selected-support mechanism.
+F1=V1 F2=V2
+R126:MODEL | ASSUMPTION | Fix finite nonempty sufficient state set S, total deterministic operations F_a:S->S at named physical ports/time, onto summary p:S->p(S), and output r:S->Y. Quotient requirements range over EVERY s and declared a. Stable-refinement construction starts from ker(o), o(s)=(p(s),r(s)), or an explicitly declared finer initial partition P0.
+F1=V1 F2=V2
+R126:METRIC | ASSUMPTION | Fix a metric d on the next-summary target Z and a predictor u_a:p(S)->Z using only the present summary and the named common action a. Worst-case error is sup_s d(u_a(p(s)),p(F_a(s))). No unrepresented hidden state or side input is allowed.
+F1=V1 F2=V2
+R126:P1 | THEOREM | pE=p∘Phi^-1 gives pE∘Phi=p for every p
+F1=V1 F2=V2
+R126:P2 | THEOREM | A quotient update/output exists iff its next summary/output is constant on each current fiber
+F1=V1 F2=V2
+R126:P3 | THEOREM | Worst-case summary prediction error in a fiber is at least half the successor diameter
+F1=V1 F2=V2
+R126:P4 | THEOREM | Put o(s)=(p(s),r(s)) and start with ker(o), or a declared finer initial partition P0 with b0 blocks. Split by all successor classes for the SAME finite total operations. At most |S|-b0 strict stages occur; the terminal equivalence is the unique coarsest stable refinement of that initial partition, preserving both p and r.
+F1=V1 F2=V2
+R127:TASK | ASSUMPTION | Fix finite nonempty history H, query Q and answer Y sets and f:H x Q->Y on the whole declared Cartesian domain. A deterministic encoder c:H->C is chosen before and without the delayed query; decoder d:C x Q->Y must answer every admitted (h,q). Random/noisy protocols require their separately stated variants.
+F1=V3 F2=V2 F3=V4
+R127:MEDIATION | ASSUMPTION | For common b,q supported under both preparations x,xprime, mu_x=P(C|x,b,q), mu_xprime=P(C|xprime,b,q), and P(Y|x,c,b,q)=W_q(Y|c,b). Queries are externally fixed or independent of encoding/noise. If B is not fixed, use the full joint cut (C,B) with a common downstream kernel instead of marginal C alone.
+F1=V3 F4=V5 F2=V2
+R127:RECOVERY | ASSUMPTION | X has finite alphabet size m>=2 and an estimator Xhat computed from (C,B) plus randomness conditionally independent of X given (C,B), with actual error epsilon=P(Xhat!=X). Conditional data processing X -> (C,B) -> Xhat holds given B. H(X|B), not H(X), is the side-information-adjusted target entropy.
+F1=V3 F2=V2
+R127:EVENT_SUPPORT | ASSUMPTION | In an independently physically grounded finite causal event graph, select a nonempty induced subhistory with connected inherited causal links over a declared interval, represent all materially relevant crossing ports and traceable occurrences/lineage, and identify coordinate renamings as descriptions of the same occurrences.
+F1=V3 F2=V2
+R127:RELATIONAL_SUPPORT | ASSUMPTION | For admitted actual P, a retained sort/relation R and tuple a are physically constitutive in the complete common K. C1's h_P preserves and reflects R. If operations or a subalgebra are claimed, additionally require retained-domain closure or explicit boundary ports; arbitrary subset restriction need not be a subalgebra.
+F1=V3 F2=V2
+R127:PAIR_MODEL | MODEL_SPECIFICATION | X,N are independent fair bits; C=X XOR N and B=N. The decoding relation is X=C XOR B. Comparing C alone discards the side-information dependence; B is part of the complete decoding cut.
+F1=V3 F2=V2
+R127:LOCALIZATION_PAIR | MODEL_SPECIFICATION | Supply two admissible implementations with different internal/external register locations but identical complete exposed-interface law under EVERY allowed preparation/intervention/history policy. The observer has only that interface; no location-correlated timing, energy or side signal is admitted.
+F1=V3 F2=V2
+R127:P1 | THEOREM | Exact answer factorization iff encoder separates all unequal response profiles; code size≥number of profiles
+F1=V3 F2=V2
+R127:QUERY_REFINEMENT | THEOREM | Equality on Q2 entails equality on subset Q1
+F1=V3 F2=V2
+R127:FUTURE_EQ | THEOREM | With o(s)=(p(s),r(s)), s~t iff o(F_w(s))=o(F_w(t)) for every finite word w over the SAME operation alphabet, including the empty word. This is exactly the terminal stable refinement starting from ker(o).
+F1=V3 F2=V2
+R127:P2 | THEOREM | At the same supported b,q and for different correct answers, TV(P(C|x,b,q),P(C|xprime,b,q)) >= 1-epsilon_(x,b,q)-epsilon_(xprime,b,q). Without conditioning on B the applicable cut law is joint (C,B), not C alone.
+F1=V3 F4=V6 F2=V2
+R127:P3 | THEOREM | I(X;C|B)≥H(X|B)−h2(epsilon)−epsilon log2(m−1); for finite C this is at most log2|C|
+F1=V3 F2=V2
+R127:JOINT_INFORMATION | THEOREM | I(X;C)=I(X;B)=0, I(X;C,B)=1 bit
+F1=V3 F2=V2
+R127:LOCALIZATION_LIMIT | THEOREM | Any interface-law-only identification rule agrees on the pair, so cannot identify both different storage locations
+F1=V3 F2=V2
+R127:P4 | THEOREM | Selected grounded subhistory meets A §2.5 actual-token conditions
+F1=V3 F2=V2
+R127:P5 | THEOREM | For retained actual relation R and tuple a, R^D(a) iff R^Phi(h(a))
+F1=V3 F2=V2
+N128:COMMON_DETERMINISTIC | ASSUMPTION | On the SAME sufficient S and total operations F_a, each p_i:S->Z_i obeys p_i F_a=Fbar_(i,a) p_i. Joint summary is p(s)=(p_1(s),p_2(s)) with codomain p(S), not an assumed full Cartesian product.
+F1=V7 F2=V2
+N128:MARKOV_WITNESS | MODEL_SPECIFICATION | S={0,1}^3 with state (X,Y,Z), fresh independent fair U per step, Xplus=U, Yplus=U XOR Z, Zplus=Z. Summaries p1=X,p2=Y; all initial states/distributions are admitted unless a declared invariant restriction is explicitly imposed.
+F1=V7 F2=V2
+N128:KERNEL | ASSUMPTION | Fix finite nonempty S, same total row-stochastic kernels K_a for declared operations a and onto joint summary p=(p1,p2):S->p(S). Projected row at (s,a) is mu_(s,a)(z)=sum_(p(t)=z)K_a(s,t). Closure is constancy of this JOINT law on each present p-fiber.
+F1=V7 F2=V2
+N128:PRODUCT_LAW | ASSUMPTION | For each s,a the next p1,p2 coordinates are conditionally independent under K_a(s,.), and each marginal law depends only on its respective present p_i(s). The factorization and marginal closure hold jointly for the same s,a/time model. Independence is sufficient, not necessary, for joint closure.
+F1=V7 F2=V2
+N128:DET_JOIN | THEOREM | Joint summary update is the pair of component updates on its image
+F1=V7 F2=V2
+N128:MARKOV_JOIN | THEOREM | p1=x and p2=y close; (x,y) fails on all 8 states; closes on invariant 4-state restriction; full-domain stable refinement needs 8 blocks
+F1=V7 F2=V2
+N128:JOINT_CRITERION | THEOREM | Joint law p_*K_a must be constant within each present joint-summary fiber
+F1=V7 F2=V2
+N128:INDEPENDENCE_SUFFICES | THEOREM | Products of closed marginal laws give a closed joint law; a fixed (U,U) joint law shows independence is unnecessary
+F1=V7 F2=V2
+N128:SEPARATION | THEOREM | More identifying information does not by itself imply joint dynamic closure
+F1=V7 F2=V2
+R131:PROBES | DEFINITION | Z finite, n>=2; fixed real f_1,...,f_m; A rows are 1^T,f_1^T,...,f_m^T; y(mu)=A mu for all mu in Delta(Z).
+F1=V8 F2=V2
+R131:TARGET_SPAN | THEOREM | For fixed g, E_mu g factors through A mu on all Delta(Z) iff g belongs to row(A). This is not an iff for argmax identification.
+F1=V8 F2=V2
+R131:COMPLETE_LAW | THEOREM | A mu identifies all mu in Delta(Z) iff rank(A)=n; if deficient, some u,v have Au=Av and TV(u,v)=1. At least n-1 scalar probes are needed in this interface class.
+F1=V8 F2=V2
+R131:FULL_RANK | ASSUMPTION | rank(A)=n for the fixed probe matrix.
+F1=V8 F2=V2
+R131:DEFICIENT | ASSUMPTION | rank(A)<n for the fixed probe matrix.
+F1=V8 F2=V2
+R131:KERNEL | DEFINITION | Finite S; p:S->Z onto; total Markov kernels K_a for declared common operation ports and time grain; mu_s,a=p_*K_a(s,.).
+F1=V9 F2=V2
+R131:PROBE_MATCH | ASSUMPTION | For every s,t,a,i with p(s)=p(t), E_mu_s,a f_i = E_mu_t,a f_i.
+F1=V8 F2=V2
+R131:CLOSURE | THEOREM | Under full rank, within-fiber probe agreement is equivalent to a well-defined kernel bar K_a satisfying p_*K_a(s,.)=bar K_a(p(s),.) for all s,a.
+F1=V10 F2=V2
+R131:BLIND_KERNEL | THEOREM | For every deficient probe interface there exists a kernel on Z x {0,1}, with persistent b and next-Z law u_b, whose probe expectations all agree while the summary p(z,b)=z fails closure and within-fiber next laws have TV=1.
+F1=V11 F2=V2
+R131:DECISION_SETUP | ASSUMPTION | A fair hidden b selects disjoint u,v; observer sees only common A u=A v before acting; action does not alter the outcome; same actions/payoffs h_0=1_supp(u), h_1=1_complement and no side information.
+F1=V8 F2=V2
+R131:DECISION_GAP | THEOREM | In the declared decision witness, context-informed optimal score is 1, every probe-only randomized policy scores 1/2, and the gap is 1/2.
+F1=V12 F2=V2
+R131:LEFT_INVERSE | ASSUMPTION | Fix L with LA=I_n; B drops the normalization column of L. True probe expectation differences have sup norm at most epsilon.
+F1=V8 F2=V2
+R131:ROBUST | THEOREM | TV(mu,nu)<=min(1,||B||_(infty->1) epsilon/2). Statistical confidence requires a separate justified expectation-error bound.
+F1=V8 F2=V2
+R132:SLOT_MODEL | DEFINITION | Tasks I have eligible slot sets N(i); admissible partial executions are exactly injective assignments on subsets of I. For actual use, matching must faithfully represent the entire within-horizon execution constraint.
+F1=V13 F2=V2
+R132:HALL | THEOREM | All requested tasks have a common schedule iff |N(J)|>=|J| for every subset J of I. This is Hall's classical theorem.
+F1=V13 F2=V2
+R132:DEFICIT | THEOREM | delta=max_J(|J|-|N(J)|); maximum completed tasks=n-delta. Every randomized legal schedule satisfies sum_i P(X_i=1)<=n-delta and min_(i in J)P(X_i=1)<=|N(J)|/|J| for nonempty J.
+F1=V14 F2=V2
+R132:UNIFORM_BOTTLENECK | MODEL | n>=3; all task neighbor sets equal the same n-1 slots. Randomized protocol uniformly omits one task and executes the rest.
+F1=V13 F2=V2
+R132:HIGH_ORDER | THEOREM | In the specified bottleneck, every proper task subset is executable, the full set is not; each task completes with probability 1-1/n while all-at-once completion has probability zero.
+F1=V15 F2=V2
+R132:PARTIAL_MODEL | DEFINITION | S,O finite nonempty; U finite; enabled E(s); fixed kernel L_a(s;s_prime,o) normalized only for a in E(s); p:S->Z onto. Scheduler selection is fixed or remains explicitly indexed.
+F1=V16 F2=V2
+R132:PARTIAL_CLOSURE | THEOREM | An exact p quotient exists iff equal-summary states have equal enabled menus and, for every enabled action, equal joint p(next-state)/output laws. Shared summary/output-history policies preserve finite-horizon histories, halting at empty menus.
+F1=V17 F2=V2
+R132:PROBE_SETUP | ASSUMPTION | In the partial model, |Z x O|>=2; fix full-column-rank exact expectation probes with normalization on Z x O; menus agree within every p fiber.
+F1=V18 F2=V2
+R132:PROBE_CERTIFICATE | THEOREM | Under PROBE_SETUP, within-fiber matching of all next-summary/output probe expectations for every enabled action is equivalent to exact interface closure.
+F1=V19 F2=V2
+R132:WITNESS_MODELS | MODEL | Availability: hidden s0/s1 have 2/3 universal slots for 3 tasks, constant summary/output and self transitions. Joint law: S={0,1}^2, p(x,b)=x, one common action, x_next=U, b_next=b, output=U XOR b with fresh fair U.
+F1=V20 F2=V2
+R132:TWO_OBSTRUCTIONS | THEOREM | The availability model agrees on every common enabled response but has different full-task enabledness. The joint-law model has the same menu and separate next-state/output marginals but within-fiber joint TV=1.
+F1=V16 F2=V2
+R132:REFINEMENT_SETUP | ASSUMPTION | A fixed initial partition P0 of finite S is given. Split each block by E(s) and all L_a(s;B,o) for current blocks B and outputs o, with the same fixed partial model throughout.
+F1=V21 F2=V2
+R132:REFINEMENT | THEOREM | Signature splitting terminates after at most |S|-|P0| strict steps at the unique coarsest stable refinement of P0 preserving menus and joint block/output probabilities.
+F1=V22 F2=V2
+R133:PERSISTENT_MODEL | DEFINITION | Augment the partial kernel state to (m,s) with immutable m. For support B use common menu A(B)=intersection E_m(s) and successor support B_(a,o)={(m,s_prime):exists (m,s) in B with K_m(s,a;s_prime,o)>0}.
+F1=V23 F2=V2
+R133:SUPPORT | THEOREM | Recursively updating B along a feasible finite observable action/output history gives exactly its attainable current (m,s) pairs without repasting model choices.
+F1=V24 F2=V2
+R133:COMMON_POLICY | THEOREM | W_0(B)=[B subset G]; W_(h+1)(B)=[B subset G] OR [exists a in A(B), all nonempty B_(a,o) satisfy W_h]. W_H(B) iff one observation-history policy succeeds from every x in B within H transitions with probability one. Deterministic (B,h) policies suffice even when randomization is allowed.
+F1=V25 F2=V2
+R133:DECISION_MODEL | DEFINITION | Each m has nonempty G_m subset U of enabled probability-one successful actions. A deterministic fixed observation h:M->Y arrives without changing this decision problem.
+F1=V26 F2=V2
+R133:CELL_ACTION | THEOREM | A successful observation-based decision rule exists iff each nonempty h fiber has nonempty intersection of its G_m sets. Probability-one randomization cannot repair an empty intersection.
+F1=V27 F2=V2
+R133:ENCODER | ASSUMPTION | For the one-shot decision family, any deterministic h(m) may be selected; count used messages; no side information or sensing cost. The encoder must be supplied for physical application.
+F1=V28 F2=V2
+R133:MESSAGE_COVER | THEOREM | Let C_a={m:a in G_m}. The minimum used-message count is tau=min{|V|:union_(a in V) C_a=M}; minimum fixed-length bits are ceil(log2 tau).
+F1=V29 F2=V2 F3=V30
+R133:AVOIDANCE_MODEL | MODEL | M=U={1,...,n}, n>=2, G_m=U minus {m}; initial observation is constant. An ideal yes/no observation of m=1 is also considered.
+F1=V26 F2=V2
+R133:AVOIDANCE | THEOREM | In AVOIDANCE_MODEL, every proper candidate subset has a common good action and the whole family has none; randomized blind minimax success is 1-1/n. Exactly two ideal messages suffice for perfect task success, whereas exact model identification requires n.
+F1=V31 F2=V2
+R133:NONUNIQUE | THEOREM | For the avoidance family at n=3, each of the three two-cell partitions is successful; all are incomparable and their only common coarsening is the failing one-cell partition.
+F1=V32 F2=V2
+R133:PROBE_MODELS | MODEL | Two persistent models require opposite terminal actions. Each probe consumes one step; preserving probe reports m and preserves choices; uninformative probe reports a common symbol with no effect; destructive probe reports m but enters absorbing failure. Terminal choices consume one step.
+F1=V33 F2=V2
+R133:PROBE_BOUNDARY | THEOREM | For the specified two-model probe systems at H=2, preserving diagnosis gives worst-case success one; uninformative and optional destructive probes leave optimal randomized worst-case success one half. A destructive probe conditional on use has value zero; the preserving diagnostic cannot assure success at H=1.
+F1=V34 F2=V2
+R133:SWITCH_MODEL | MODEL | One fixed model emits (1,0); the other emits (0,1) under the same forced two-stage protocol. The target is at least one 1, tracked by a persistent success flag.
+F1=V23 F2=V2
+R133:PERSISTENCE | THEOREM | Both persistent traces satisfy the target, while the Cartesian product of stagewise output possibilities contains (0,0). After first output 0 the exact support retains only the model whose next output is 1.
+F1=V35 F2=V2
+R134:QUANT_MODEL | DEFINITION | For each legal pure observable policy tree, keep the vector v(x)=P_x(success by H) for every initial x in B. Mixed policies are private distributions on complete pure trees; robust value is max_policy min_x v(x).
+F1=V36 F2=V2
+R134:VECTOR_RECURSION | THEOREM | F_0(B)={1_G restricted to B}; F_(h+1) contains stopping and every common-action backup T_a(w)(x)=sum K(x,a;x_prime,o)w_o(x_prime) with one child vector per output. These are exactly pure-policy profiles; mixed profiles equal conv F_h(B).
+F1=V37 F2=V2
+R134:ROBUST_LP | THEOREM | With pure profiles as columns of A, success >=1-epsilon is feasible iff A lambda >=(1-epsilon)1 for some simplex lambda. Optimal robust value equals min_(q in simplex B) max_j q dot v_j.
+F1=V38 F2=V2

@@ -1,0 +1,27 @@
+{
+  "schema": "uct-interpretation-correction/1",
+  "research_id": "DVC20261010",
+  "status": "EFFECTIVE_PROVENANCE_CLARIFICATION",
+  "target_file": "results/EXACT_RESULTS.json",
+  "target_file_sha256": "0e8ea009806d468a5c39e466639afe0bd2247350f8989f3133bf9ea896c90abd",
+  "target_json_pointer": "/limits/1",
+  "original_statement": "InputValue=1 is interpreted as comparison stronger, consistent with increasing command-response functions and the documented coding convention.",
+  "replacement_statement": "InputValue=1 is interpreted as comparison stronger from ascending command-response functions. The paper describes physical keys 1/2 and the archive uses 0/1; no explicit key-to-InputValue conversion was found in the inspected material. The response interpretation remains an assumption.",
+  "executed_code_reference": {
+    "path": "code/reanalyse_apparatus_data.py",
+    "sha256": "3c60cdf9787198b4a8a63fb9836f4b7d63ec8cc0f34698183bab7442bfe1f3d3",
+    "scope": "The identical old sentence is metadata in the executed result-generating code; the code is retained unchanged to preserve its execution receipt. No numerical function is corrected."
+  },
+  "source_reference": {
+    "doi": "10.3758/s13414-026-03288-7",
+    "section": "Procedure / Data analysis; archived InputValue fields; author fitting code"
+  },
+  "effect": "Corrects source-attribution certainty only. All numerical outputs, fitted-model assumptions and source bytes are unchanged. No exact author-key mapping is newly admitted.",
+  "applies_to_docs": [
+    "DATA_REANALYSIS_REPORT.md",
+    "MAIN_FINDINGS.json",
+    "SOURCE_SCOPE.json"
+  ],
+  "independent_reproduction_report": "The separate coverage_and_prior_art worker reported six reproduced numerical/audit output files byte-identical before this provenance-only clarification; it owns its detailed reproduction receipt.",
+  "coding_invariant_statistic": "PSE is the fitted Pr(InputValue=1)=0.5 location. For the same response curve, relabeling p as 1-p leaves its 0.5 crossing unchanged; the physical stronger/weaker naming still requires the unresolved coding bridge."
+}

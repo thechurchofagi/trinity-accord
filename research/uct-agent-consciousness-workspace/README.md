@@ -1,3 +1,15 @@
+# Current entry — SCU published; DVC device validation checkpoint
+
+Read [RESEARCH_MASTER_GUIDE.md](RESEARCH_MASTER_GUIDE.md) v2.3, [CURRENT_STATE.json](CURRENT_STATE.json), [HANDOFF.md](HANDOFF.md), and [DVC handoff](records/DVC20261010_Device_Consumer_Validation/HANDOFF_ZH.md). **SCU-PAPER v1.0.1 is a public preprint at [DOI 10.5281/zenodo.23272690](https://doi.org/10.5281/zenodo.23272690).** The completed map remains UCT-MAP-v1.1.2 / seq4, with 913 nodes, 424 active conditional rules, 261 contexts, 10 suspended rules and 1,608 review items. Publication coverage is UCT-PUB-v1.0.22 (frozen base plus verified delta). All 25 pending research checkpoints remain disabled.
+
+DVC completed public-data reanalysis, a finite model and apparatus-contract review, with no new human observations or hardware deployment. Full historical semantic/proof depth and QC10/IA-QC11/QC12/QC13 remain open. Independently chosen behavioral endpoints do not by themselves establish familiar H or RetBind. The next step is one accessible installation with actual source, intervention, event/clock, consumer and endpoint evidence. Current guidance does not impose a nonverbal-only endpoint rule.
+
+Concurrent [EIP instrumentation](records/EIP20261010_Exoskeleton_Instrumentation/HANDOFF_ZH.md) and its disabled candidate are preserved; EIP is outside the frozen SCU publication.
+
+**All content below is preserved historical navigation; its old “current”, “next”, version and publication statements are superseded by the current files above.**
+
+---
+
 # Current checkpoint — R196 two-axis phenomenal calibration
 
 Start with [CURRENT_STATE.json](CURRENT_STATE.json), [HANDOFF.md](HANDOFF.md), and the [R196 Chinese handoff](records/R196_Two_Axis_Phenomenal_Calibration_20261009/HANDOFF_ZH.md).

@@ -1,0 +1,181 @@
+{
+  "research_id": "DVC20261010",
+  "component": "apparatus_evidence",
+  "retrieval_date_utc": "2026-10-10",
+  "sources": [
+    {
+      "id": "APP2026",
+      "title": "Effects of prediction and attention on tactile precision in somatosensory gating",
+      "url": "https://link.springer.com/article/10.3758/s13414-026-03288-7",
+      "read_scope": "Version of record: full article body, methods, results, discussion, captions, data/code statements and publication metadata. Bibliography entries read as part of the page; their underlying papers were not all retrieved.",
+      "local_evidence": [
+        {
+          "path": "sources/APP2026_primary_fulltext.html",
+          "sha256": "5af413a364787c1e5c6ea561055d36f378f437b835850e0fa63253f8a27ca342"
+        }
+      ],
+      "doi": "10.3758/s13414-026-03288-7",
+      "authors": [
+        "Pierangelo Nicolas D’Onofrio Pacheco",
+        "Eckart Zimmermann"
+      ],
+      "published": "2026-06-11",
+      "received": "2026-03-11",
+      "accepted": "2026-05-06",
+      "is_future_relative_to_session_date": false,
+      "license": "CC-BY-4.0",
+      "web_ref": "turn50view1",
+      "scope_change": "Extends prior MPC abstract/excerpt reading; does not rewrite what MPC actually read."
+    },
+    {
+      "id": "JNP2026",
+      "title": "Movement enhances tactile sensitivity through prediction",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7619185/",
+      "read_scope": "Full PMC author-manuscript body: Abstract, Introduction, Methods including Experiments 1 and 2, Results, Discussion, figure captions, footnotes/data availability. PubMed record/abstract and publication date separately read. This is not described as a publisher-PDF reading.",
+      "local_evidence": [
+        {
+          "path": "sources/JNP2026_primary_fulltext.html",
+          "sha256": "6d5724ffb5331cc7f3c8787609c6f0a9d216135bb0515eefa4c962a0ebbcf28c"
+        }
+      ],
+      "doi": "10.1152/jn.00558.2025",
+      "authors": [
+        "Pierangelo Nicolas D’Onofrio Pacheco",
+        "Eckart Zimmermann"
+      ],
+      "epub": "2026-03-17",
+      "issue_date": "2026-04-01",
+      "pmc_available": "2026-06-16",
+      "pmid": "41843461",
+      "pmcid": "PMC7619185",
+      "emsaid": "EMS213204",
+      "is_future_relative_to_session_date": false,
+      "primary_date_url": "https://pubmed.ncbi.nlm.nih.gov/41843461/",
+      "web_ref": "turn51view2",
+      "download_scope": "Ordinary public urllib GET yielded full PMC author manuscript; search-service open showed a browser check. Local PubMed GET yielded a cookie wall and is not evidence of a local full record."
+    },
+    {
+      "id": "DATA18877381",
+      "title": "Effects of prediction and attention on tactile precision in somatosensory gating--DATASET",
+      "url": "https://zenodo.org/api/records/18877381",
+      "read_scope": "All 121 raw trial CSVs parsed and inventoried, source README fully read, all 18 rows of fitted PSE/JND table reanalysed. All 108 final participant-condition cells independently fitted twice.",
+      "local_evidence": [
+        {
+          "path": "sources/zenodo_18877381_metadata.json",
+          "sha256": "2412b859b5fff4d1a675064576552792cfba671a4de7eb71085dddd71d3f131c"
+        },
+        {
+          "path": "sources/Zenodo18877381_Data.zip",
+          "sha256": "ed89e94719e87acc19cd905efd7ff44d09abce0e0291f2fd654b0453bfdfbd6a"
+        }
+      ],
+      "doi": "10.5281/zenodo.18877381",
+      "creator": "D’Onofrio Pacheco, Pierangelo",
+      "publication_date": "2026-03-05",
+      "metadata_modified": "2026-05-13T14:30:01.952504+00:00",
+      "license": "CC-BY-4.0",
+      "archive_md5": "2618e6661e94135733595aa9bdc3d26d",
+      "archive_bytes": 161720,
+      "archive_source_url": "https://zenodo.org/api/records/18877381/files/Data.zip/content"
+    },
+    {
+      "id": "AUTHOR_CODE",
+      "title": "Sensory-Gating-Analysis",
+      "url": "https://github.com/pierodonpac/Sensory-Gating-Analysis/tree/e3305c3097a3827fa0ec8f660d587215ad4c7b3e",
+      "read_scope": "Entire README and fit_psychometrics_from_csv.m read. No intact original MATLAB pipeline executed. Missing anamax.m dependency and attention-folder adaptation are recorded.",
+      "local_evidence": [
+        {
+          "path": "sources/published_fit_psychometrics_from_csv.m",
+          "sha256": "721228680db7d0338d94c977927efcb9bd3014b4ae2ed45a463d1b34157523c6"
+        },
+        {
+          "path": "sources/published_analysis_README.md",
+          "sha256": "87103e5fd9b9725ddde493fae7b48c63aa649bef261678ac60e18fc6efb5d273"
+        }
+      ],
+      "commit": "e3305c3097a3827fa0ec8f660d587215ad4c7b3e",
+      "commit_date": "2025-10-21T12:17:57Z",
+      "code_git_blob": "bcae4f34559091985d8a277753d82fda5bf2a352",
+      "code_license": "No license file observed in cited two-file repository; cache excluded from redistribution manifest."
+    },
+    {
+      "id": "TOBII5",
+      "title": "Specifications for Eye Tracker 5",
+      "url": "https://help.tobii.com/hc/en-us/articles/360012483818-Specifications-for-Eye-Tracker-5",
+      "read_scope": "Complete short official specification page; sensor/image/gaze rates inspected against article wording. Actual paper model remains ambiguous.",
+      "local_evidence": [
+        {
+          "path": "sources/Tobii5_official_specification.html",
+          "sha256": "aa39789fc8de7101de0e961749cfcd8e7523cb73998e44b597f929d7d73c189e"
+        }
+      ],
+      "updated": "2024-01-29",
+      "web_ref": "turn61view1",
+      "admitted_comparison": "Paper says Tobii 5 at 250 Hz; this named vendor page says image 133 Hz and gaze 33 Hz. No installed model identity or raw sample stream resolves the difference."
+    },
+    {
+      "id": "OPENHAPTICS_PROGRAMMER",
+      "title": "OpenHaptics Programmer’s Guide",
+      "url": "https://s3.amazonaws.com/dl.3dsystems.com/binaries/Sensable/OH/OpenHaptics_Programmers_Guide.pdf",
+      "read_scope": "Targeted complete reading of printed pp.89–92 (PDF file pages90–93), plus relevant HDAPI introduction and version table. Printed p.91 visually rendered and inspected. Remaining 151-page manual not fully read.",
+      "local_evidence": [
+        {
+          "path": "sources/OpenHaptics_Programmers_Guide.pdf",
+          "sha256": "b17c7176dc95d92e00e69c9de86f3599748d16a071b37b8746d6eaa6f1dc9d99"
+        }
+      ],
+      "edition": "OpenHaptics 3.4.0",
+      "pdf_creation_metadata": "2015-06-17",
+      "web_ref": "turn72view0"
+    },
+    {
+      "id": "OPENHAPTICS_API",
+      "title": "OpenHaptics API Reference Guide",
+      "url": "https://s3.amazonaws.com/dl.3dsystems.com/binaries/Sensable/OH/OpenHaptics_API_Reference_Guide.pdf",
+      "read_scope": "Targeted hdGet/device routines and complete parameter table on printed p.56 (PDF file page57), visually rendered and inspected. Complete manual not read.",
+      "local_evidence": [
+        {
+          "path": "sources/OpenHaptics_API_Reference_Guide.pdf",
+          "sha256": "c21fe7b42481ec28ca619be1a50e35e0d7d6863d60e2260e6a13194fde9def1d"
+        }
+      ],
+      "edition": "OpenHaptics 3.4.0",
+      "pdf_creation_metadata": "2015-06-17",
+      "web_ref": "turn69search19"
+    }
+  ],
+  "local_inputs": [
+    {
+      "repository_path": "research/uct-agent-consciousness-workspace/RESEARCH_MASTER_GUIDE.md",
+      "sha256": "d21e7a19b18390b7eef1b1f75f802a922c3fc2d65d362a9de59a29e35405ef46",
+      "scope": "Entire file read in this continuation",
+      "frozen_remote": "8bac31cc0b9fb4c70d87f688dabbadeb6166addb"
+    },
+    {
+      "repository_path": "research/uct-agent-consciousness-workspace/records/MPC20261010_Motor_Proprioceptive_Consumers/RESEARCH_NOTE.md",
+      "sha256": "f80659a16a4d57703cd30dd6135be2db298ada2488c81d139dae8094bd526783",
+      "scope": "Entire file read in this continuation",
+      "frozen_remote": "8bac31cc0b9fb4c70d87f688dabbadeb6166addb"
+    },
+    {
+      "repository_path": "research/uct-agent-consciousness-workspace/records/MPC20261010_Motor_Proprioceptive_Consumers/SOURCE_SCOPE.md",
+      "sha256": "963b756229f41415957fe8b8b53038de22491c4b649a39108244fd0a4a76a83f",
+      "scope": "Entire file read in this continuation",
+      "frozen_remote": "8bac31cc0b9fb4c70d87f688dabbadeb6166addb"
+    },
+    {
+      "repository_path": "research/uct-agent-consciousness-workspace/records/MPC20261010_Motor_Proprioceptive_Consumers/PROTOCOL.md",
+      "sha256": "b45445365107a68f85ecb8b4d252d303e367e948d7134f51132d25f4de6af63c",
+      "scope": "Entire file read in this continuation",
+      "frozen_remote": "8bac31cc0b9fb4c70d87f688dabbadeb6166addb"
+    }
+  ],
+  "scope_limits": [
+    "Neither 2026 paper is future-dated relative to this session.",
+    "The JNP author-manuscript endpoint definition describes both normal SD and 75%-minus-50%; these are mathematically different and remain source-level ambiguity.",
+    "Prior MPC scope stays historical; this record adds new full-text/data/code reading.",
+    "Primary behavioral results do not directly measure the source or intake of a named human neural consumer.",
+    "Search candidates including Kilteni et al.2020 were not used as the selected apparatus; no new full-method or data-reanalysis claim is made for them.",
+    "The AP&P paper gives physical response keys 1/2, whereas the CSV InputValue is 0/1. An explicit conversion was not found; comparison-response interpretation is inferred from ascending command-response functions."
+  ]
+}

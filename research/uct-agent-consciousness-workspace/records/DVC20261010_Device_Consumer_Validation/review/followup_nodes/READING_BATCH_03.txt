@@ -1,0 +1,358 @@
+FIELDS
+F1=/scope
+F2=/formal_contract_R153/quantifier_convention
+F5=/domain
+F6=/counterexamples_and_limits
+F7=/formal_contract_R155/quantifiers
+F8=/formal_contract_R155/bearer_time_signature
+F9=/formal_contract_R156/quantifiers
+F10=/formal_contract_R156/bearer_time_signature
+F11=/formal_contract_R157/quantifiers
+F12=/formal_contract_R157/bearer_time_signature
+F13=/formal_contract_R158/quantifiers
+F14=/formal_contract_R158/bearer_time_signature
+F15=/formal_contract_R159/quantifiers
+F16=/formal_contract_R159/bearer_time_signature
+F17=/formal_contract_R160/quantifiers
+F18=/formal_contract_R160/bearer_time_signature
+F19=/formal_contract_R161/quantifiers
+F20=/formal_contract_R161/bearer_time_signature
+F21=/formal_contract_R162/quantifiers
+F22=/formal_contract_R162/bearer_time_signature
+F23=/formal_contract_R163/quantifiers
+F24=/formal_contract_R163/bearer_time_signature
+F25=/formal_contract_R164/quantifiers
+F26=/formal_contract_R164/bearer_time_signature
+F27=/formal_contract_R165/quantifiers
+F28=/formal_contract_R165/bearer_time_signature
+F29=/formal_contract_R166/quantifiers
+F30=/formal_contract_R166/bearer_time_signature
+NEW EXACT VALUES (old V references retain already-read meanings)
+V123="Historical proposal for a declared whole-level target, not current basal UCT existence."
+V124="Does not prove either direction; natural units and target bridge remain open. A gate on every admitted actual token requires separate compatibility with A:U1. G.5 is the already published fiber criterion, not a new richness law."
+V125="Fixed output/intervention family; current-process causal grounding is additional to MI. No numerical identity or phenomenality asserted."
+V126="The source notation I(U;Y|do(U)) is normalized here as MI in a randomized interventional joint law, not conditioning on U, which would make conditional MI zero. Self attribution is not its own truth standard."
+V127="For the last clause the consumer class must contain a discriminator for each collapsed pair."
+V128="Does not identify complete physical organization. Intervention-limited learning nonidentification needs two admissible full-model completions with identical observed laws and different unobserved query, not just the word unobserved."
+V129="Finite interventional variables with common H(U)>0; Markov clauses only under their stated chains."
+V130="A positive inheritance score is not numerical identity, personal survival or negative valence."
+V131="Existence counterexamples under FUNCTIONAL_CONTRACT. The normalization clause compares singleton/full-continuation and two-full-successor scenarios under the same calibrated membership rule; includes nonnegativity, full-unique value 1, co-successor preservation and symmetry. It is not a no-go for categorical probabilities over mutually exclusive outcomes."
+V132="Encoding subsets in categorical labels changes the representational state space and removes the individual-only premise. No phenomenological consequence is imported."
+V133="Finite distribution, extended-real KL for support mismatch."
+V134="Known total correlation, not new information theory. Matched two-bit distributions have one bit penalty; logarithm base must be fixed."
+V135="One-decision model; independent policy randomization allowed."
+V136="Exactly DECISION_PREM."
+V137="Published antecedent to D marginal-decision examples; not R149 novelty."
+V138="Physical symmetry must preserve the full admitted description; external marking changes H."
+V139="Exactly GROUP_SETUP; finite orbit required for the probability clause."
+V140="Does not exclude many subject tokens, prove experience or establish the unique subject criterion. TA18 §7 is an earlier published antecedent."
+V141="No assertion at birth/death, merger, split or singular scale changes."
+V142="Exactly COVER."
+V143="Tracking a specified initial token along a path is not selecting it uniquely from an unmarked snapshot. Classical topology."
+V144="The two clauses have separate explicit premises; no candidate birth/death."
+V145="Fixed labels are essential; no physical meaning assigned to the artificial cross-label distance."
+V146="Finite numerical IIT samples do not establish an analytically proven punctured-neighborhood crossing."
+V147="Only the publication report and supplementary tables; no current empirical validation."
+V148="The hash-matched main Markdown ends at the double-cover example; later claims are not assumed to have a main-text proof. S6 supplies the landscape statement separately."
+V149="Type identity is not numerical token identity; complete actual grounding is an independent application obligation."
+V150="No finite descriptor is declared complete merely because it predicts selected outputs."
+V151="Same bearer/interval/complete type contract."
+V152="Classical factorization application and source-compatibility result; not new general mathematics, empirical C1 proof, or reconstruction algorithm."
+V153="Exactly COMPARISON; N and f have the same fixed domain."
+V154="A selected phenomenal feature can remain equal while complete experience differs. Complete-type inequality gives neither a magnitude ordering nor a named quale."
+V155="Bearer/target identity independent of current property equality or predictive success. Semantic aboutness and felt ownership remain further obligations."
+V156="The classification is not an exhaustive three-way partition and does not impose a unique universal bearer or an experience gate."
+V157="Retain R147 independent commands, fixed timing, matched sensor-coordinate comparison and the same actual bearer class."
+V158="If beta is an analyst label or a bearer is silently changed, the actual-bridge premise is unavailable. Does not infer felt ownership, transfer of experience or fear."
+V159="Finite stochastic acquisition device M, not a definition of basal experience."
+V160="Coupled priors/noise, biased selection, drifting laws, alternative efficacy mappings and unbounded acquisition require a changed contract."
+V161="Parameters fixed per instance; all legal histories within T unless the explicitly separate unbounded finite-state proposition applies. Existential witnesses are not universal biological claims."
+V162="Same bearer/candidate/ports, temporal grain, trial schedule and typed state/use roles within each comparison; actual realization is separately required."
+V163="Fixed T>=2, actual-bearer/candidate/port assignment if realized, externally fixed unbiased schedule, n_O,n_A<=T; independent Bernoulli(1/2) H,K priors and conditionally independent trials; X likelihoods 3/4 vs 1/4; randomized U with K=1 noisy-copy Y (error 1/4), K=0 independent fair Y; Z=1[Y=U]; count registers, exact finite rational readouts, theta=2/3 and two installed consumer roles. Statistical hypotheses, actual attachment and experiential targets are distinct."
+V164="Correct relative to M, not guaranteed latent truth. Missing channel data retain prior 1/2. No experiential onset claim."
+V165="Functional source/efficacy attribution only. Not a universal phenomenal dissociation or actual attachment change."
+V166="No inference from posterior confidence to actual membership or felt mineness; even a correctly inferred shared external source need not belong to the containing assembly."
+V167="Fixed T>=2, actual-bearer/candidate/port assignment if realized, externally fixed unbiased schedule, n_O,n_A<=T; independent Bernoulli(1/2) H,K priors and conditionally independent trials; X likelihoods 3/4 vs 1/4; randomized U with K=1 noisy-copy Y (error 1/4), K=0 independent fair Y; Z=1[Y=U]; count registers, exact finite rational readouts, theta=2/3 and two installed consumer roles. Statistical hypotheses, actual attachment and experiential targets are distinct. The unbounded clause deliberately drops the finite horizon and tests a separate finite-state exactness demand."
+V168="Installed memory differs from R147 report-isolated records. Copying breaks automatic posterior/provenance validity and proves no numerical identity or experience transfer."
+V169="Actual configurations with a fixed target convention; no claim that a physically adequate J or identifiable mineness F has already been supplied."
+V170="A mathematical target can be stipulated, but its mineness interpretation remains open."
+V171="The shared Omega,J,F contract of R155:SELECTED_TARGET; decoder required only on realized J values."
+V172="No premises in the acquisition device establish the required phenomenal F or its fiber constancy."
+V173="Restricted bodily/action-related mineness; neither all selfhood nor basal consciousness."
+V174="C1 complete experiential identity does not by itself select this coordinate; naming a register ownership is insufficient."
+V175="Two deterministic typed devices c in {0,1}; current M=D=1; V=c*M+(1-c)*D; identical independent prediction/readout ports; legal do(M=0),do(M=1) keep D=1,c and other ports fixed; snapshot descriptor excludes wiring c. Abstract comparison; physical realization is extra."
+V176="R is a declared functional consumer sensitivity, not selected mineness F_O. Including wiring in the descriptor or changing D under intervention changes the claim. No actual realization, full-type difference or phenomenal contrast is inferred."
+V177="Both c=0,1 devices in W and both separately admissible interventions; one equal-input/different-target counterexample is sufficient to refute a universal decoder on W."
+V178="Fixed typed ports and one pre-intervention instant; actual bearer realization remains extra."
+V179="One admitted actual token P, interval I, complete many-sorted signature K, D_ontic,K(P), Phi_K(P), C1 isomorphism h; correctly sorted tuples and fixed/transported parameters. Formula selection is internal to K and physically grounded separately."
+V180="Arbitrary complete-type projections, frozen external labels and omitted relations do not satisfy this internal-selector contract. Definability alone does not establish semantic correctness."
+V181="Fixed P,I,K and declared parameters per instance. Formula quantifiers range over the correctly sorted carriers of that instance. Semantic vocabulary outside K is never silently quantified as a K-relation."
+V182="Same actual bearer token, interval, complete K, formula and parameter transport throughout one T1 instance."
+V183="One admitted actual token P, interval I, complete many-sorted signature K, D_ontic,K(P), Phi_K(P), C1 isomorphism h; correctly sorted tuples and fixed/transported parameters. Formula selection is internal to K and physically grounded separately. L and nu are metalinguistic, not new relations in K."
+V184="If the mineness predicate is explicitly added to complete K with independently fixed interpretation, this setup changes; its physical/semantic grounding must then be supplied rather than assumed."
+V185="One admitted actual token P, interval I, complete many-sorted signature K, D_ontic,K(P), Phi_K(P), C1 isomorphism h; correctly sorted tuples and fixed/transported parameters. Formula selection is internal to K and physically grounded separately. Same K-structure and experiential structure; only L-assignments differ."
+V186="This does not assign different experiences to identical complete organization. It varies metalinguistic interpretation only; it does not show all names are equally empirically adequate."
+V187="Mixed declared actual domain Omega; report protocol and channel typing fixed. Omega_norep is nonempty for the coverage witness."
+V188="A structural predicate ReportPresent can be total and false outside Omega_rep; that is not the same object as executing the partial measurement protocol."
+V189="Candidate selected bodily-mineness interpretation on a declared actual domain. This is not a basal-experience gate or a proved necessary/sufficient condition."
+V190="No proof that theta_body is complete, necessary, sufficient or realized biologically. A fiber counterexample with independently warranted F_O would refute sufficiency on that domain."
+V191="Declared actual token/candidate domain with typed partial membership and protocol-relative reports."
+V192="A model hand and a virtual referent require different membership typing; R is not F."
+V193="Fixed P,c,I,K per instance; each coordinate has its declared type; no universal F equivalence is asserted."
+V194="As specified per claim; actual token P, candidate c and interval I never conflated. Abstract K-witnesses are not asserted to be actual organisms."
+V195="Classical two-valued scoped domain; actual application additionally requires physical admissibility and independent target evidence."
+V196="Report-only evidence does not establish F_O; undefined predicates require domain repair, not zero fill."
+V197="For each fixed n,Omega,F,(g_i) satisfying all listed premises, select one declared witness w* and j."
+V198="Exactly the fixed classical domain and all simultaneous setup premises."
+V199="Elementary prior mathematics. Requires an independently warranted target witness and admissibility, not arbitrary gate assignments."
+V200="Every setup satisfying all premises; existential counterexample w*; no assertion that any actual F_O witness has been established."
+V201="One fully specified finite abstract K-structure."
+V202="Not a human or experiential observation; arbitrary relational selectors of higher arity are tuple relations."
+V203="This concrete abstract structure; h, when used, is any K-isomorphism transporting a and f."
+V204="Declared actual intervention domain and independently fixed F_O/F_A interpretation, still to be supplied."
+V205="Reports, drift and threat measures are fallible; B+U is not established sufficient for familiar mineness; broad route deletion is not supplied."
+V206="Candidate comparison only; no universal necessity, sufficiency, equivalence or basal-experience threshold."
+V207="Selected installed body-frame organization on one actual-token domain; external reference/organism-membership interpretation is separately declared."
+V208="Name/observer meaning does not install Bind/Use; finite protocol condition bits are not complete neural K; undefined psi/M requires domain restriction."
+V209="Each instance satisfies every conjunct jointly; no universal necessary/sufficient F_O condition. Logical toy satisfiability does not assert physical realization."
+V210="Actual instance fixes P,I,complete K; trial tokens differ while lineage may be retained. Internal r,k and external referent c/E have different sorts. Abstract example is not an actual organism."
+V211="Exactly the common actual P,I,K,D,Phi,h and internally sorted theta_frame from the full contract. External correctness is not a hidden K-premise."
+V212="No h on external c without expanded sorts; no report-to-F, no empirical proof of C1, no claim that reference/world changes preserve every K-fact."
+V213="For every admitted tuple/instance satisfying the simultaneous contract and transport premises; not every actual organism is asserted to realize that contract."
+V214="Declared finite abstract two-input family with strictly bounded thresholds and positive couplings; not measured neural states or fitted human output laws."
+V215="Classic algebra, not new mechanism; zero coupling retains sign pattern, outside stated positive-coupling claim. No subjective F assignment, group means fit, or universal neural independence conclusion."
+V216="For every parameter tuple in the declared domain; nonempty exact witness t_O=t_A=1/2,lambda=mu=1/4. Sign categories apply only to these toy readouts."
+V217="Restricted human body-frame/remapping application motivated by the declared moving-hand protocol, not a universal self or basal-experience gate."
+V218="Tool tracking may satisfy weak frame/use descriptors; post-hoc target refitting forbidden; body-slot discriminant, complete realization and independent F measurement remain open."
+V219="Two predeclared candidate explanations, not necessary/sufficient biconditionals. Full hidden source states cannot be equated with questionnaire values."
+V220="Declared finite protocol only; J_B/J_T fidelity, readout semantics, normalization, error bounds and admissibility are simultaneous premises."
+V221="No actual dataset or selective intervention is supplied; behavioral names do not ground pathways; unsafe interventions excluded."
+V222="For each fixed protocol Pi, candidate slot family k, declared normalized effect/error model and epsilon>0; no universal necessity, sufficiency, anatomical-membership or F_O equivalence."
+V223="Each trial fixes its own actual P_omega,I_omega,complete K_omega,D_omega,Phi_omega,h_omega. Participant lineage does not identify complete organizations across trials. Internal tokens and external referents retain different sorts."
+V224="Exactly one fixed Pi/effect/error model satisfying every R160 profile premise."
+V225="A category is not anatomical membership, complete mechanism, external-reference correctness or F_O. Grid counts are not population frequencies."
+V226="Finite latent-state models with transported initial, transition and emission laws; semantic/anatomical predicates not included among observed grounded variables."
+V227="Independent physical grounding can identify protocol-relative causal roles; it still does not yield anatomy, complete organization or phenomenal ownership. Standard mathematics, no historical novelty claim."
+V228="Same declared trial family and per-trial bindings; no common K,D,Phi,h is presumed across different interventions/times."
+V229="Does not deny cross-trial science; it blocks an illicit object/time/signature substitution. No report-to-F or C1 verification follows."
+V230="Prospective, ethics-approved healthy-adult upper-limb protocol only; no participant was recruited and no intervention was executed in R161."
+V231="Tendon vibration is not afferent-pure; readouts are finite; normalization is conventional; no complete organization or F_O is identified."
+V232="For one fixed protocol, eight conditional simple effects, simultaneous intervals, six fidelity gates and epsilon>0; no universal body/F_O equivalence."
+V233="Each trial/session fixes its own P_omega,I_omega,K_omega,D_omega,Phi_omega,h_omega; participant lineage supplies no common complete organization."
+V234="Exactly the fixed R161 protocol and six named gates; the gate does not prove selective spindle causation, complete neural realization or F_O."
+V235="Passing device and manipulation checks does not prove pathway purity or a phenomenal interpretation."
+V236="One fixed protocol, normalization, epsilon, error model and familywise simultaneous coverage statement; not a test of every possible body organization, C1, B_min or F_O."
+V237="Wide intervals remain unresolved; failed fidelity is invalid; exclusion is protocol-specific and does not refute C1 or F_O."
+V238="Exactly the three primary source/data routes inspected in R162; not an exhaustive registry search or a universal absence claim."
+V239="An undiscovered exact crossed dataset would supersede this finite audit but not the separate-marginal covariance theorem."
+V240="Eight participant-level signed contrasts, one joint covariance, m=8 simultaneous intervals, one pilot-selection map and every frozen plan in its range."
+V241="Population estimators compare distinct participant/trial tokens; no common complete K,D,Phi,h or within-experience covariance is inferred."
+V242="Required contrast components or blocks observed only in disjoint samples, absent a supplied joint-coupling assumption."
+V243="A jointly measured W vector or independently justified coupling model can identify/restrict covariance; setting rho=0 is extra."
+V244="Prospective ethics-approved implementation of the fixed R161 protocol; no pilot, ethics approval or recruitment occurred in R162."
+V245="An internal pilot reusing subjects needs separate adaptive calibration; blinding alone is insufficient; Gaussianity and missingness are open."
+V246="Every plan in the range of the prospective pilot-selection map for one fixed R161 protocol version and declared target population."
+V247="Independent confirmatory data do not repair a misspecified interval, invalid missingness rule or unproved adaptive interval family."
+V248="One fixed R161 protocol version; disjoint pilot/confirmatory records or another valid conditional-calibration theorem; all six gates; declared complete-vector target/model."
+V249="Same-data adaptive tail selection doubles .05 to .10 in the saved witness. The theorem does not validate Gaussianity, missingness, bootstrap calibration or fidelity."
+V250="Finite-dimensional Gaussian vectors and the exact observed bounded R161/R162 contrast vector; approximate or explicit latent Gaussian models are not excluded."
+V251="A degenerate point mass is both bounded and Gaussian; an unbounded latent Gaussian variable is a different target after clipping."
+V252="N independent participant vectors, m frozen components, every pilot-selected plan in the declared bounded family, and every lower/upper missingness endpoint when full outcomes are defined."
+V253="Population estimators compare distinct participant/trial tokens; order mixtures, clipped targets, latent variables, complete organization and within-experience relations remain distinct."
+V254="The fixed Student interval family, independent observations and components, and the explicit two-point law supported in [-1,1]."
+V255="Rejects a universal bounded guarantee, not all uses or asymptotic approximations of Student intervals."
+V256="One fixed R161 protocol, component order, participant positions/strata/randomization law and independent participant vectors; laws need not be identical."
+V257="Participant dependence or post-outcome target changes require another theorem."
+V258="R163 bounded finite-design target, fixed N,m and interval family, independent participant vectors, and no same-data target or family selection."
+V259="Conservative: m=8, alpha=.05 and half-width .05 require N>=4615; participant dependence, invalid bounds or adaptive family selection break the proof."
+V260="Well-defined bounded would-be outcomes for every enrollee, frozen target and components, arbitrary observation indicators, independent participant records."
+V261="Can be vacuous; if safety makes Y undefined, the full-data target is invalid rather than missing."
+V262="R161/R162 observed bounded outcomes under frozen order assignment/randomization and any latent interpretation linked only through clipping."
+V263="Additional mechanistic assumptions, conditional-order estimation or unclipped measurements may identify narrower targets."
+V264="Finite N, one component j, X_ij in [0,1], predictable residual predictors in [0,1], constant lambda_j in (0,1), and the average conditional mean; no independence is required for this algebraic/martingale target identity."
+V265="With varying lambda_ij and unequal mu_ij the exponent controls a lambda-weighted target. Under dependence the average conditional mean can be random and is not silently a fixed superpopulation mean."
+V266="Finite N and m; every component and two tails; every pilot-selected constant bet/predictor plan; every well-defined lower/upper missingness endpoint when that target is invoked."
+V267="Participant vectors, within-participant components, pilot and confirmatory samples, conditional means, finite-design means, endpoint means, actual token organization and experience remain differently typed."
+V268="One fixed R161/R163 confirmatory plan, finite N and m, W_ij in [-1,1], pilot-frozen constant bets, predictable predictors, no same-confirmatory-data family selection, and independent participants for identification with the fixed R163 target."
+V269="Not uniformly narrower than Hoeffding; bad predictors or large residuals can widen it. Variable bets generally change the target. Participant dependence, same-data family selection or invalid range assumptions break the R163 finite-design specialization."
+V270="The explicit independent m-component rare-spike product law and coordinatewise procedures having the stated all-no-spike exclusion property."
+V271="This is necessary only for procedures with the stated coordinatewise failure property and is not a sufficient sample-size theorem. Other spike counts can still cause failure."
+V272="R163 well-defined would-be bounded outcomes, arbitrary observation indicators, independent participant records for fixed finite-design means, frozen endpoint bets/predictors, and no claim for physically undefined post-abort outcomes."
+V273="Does not point-identify MNAR outcomes, reduce the support width or define outcomes that a safety abort makes physically nonexistent."
+V274="One fixed R161/R164 bounded protocol, finite nonempty menu after deterministic resource screening, external pilot and disjoint confirmatory sample; no pilot or human study occurred."
+V275="A finite menu may omit every scientifically useful plan. Freezing does not validate apparatus, participant independence, transport radii or experience-level interpretation."
+V276="Finite m and menu Q, every component-plan pair, every pilot record, every selected plan, finite n_P and N_q, and fixed alpha/beta/width/resource thresholds."
+V277="Pilot and confirmatory participants, menu plans, statistical targets, actual process tokens, complete organizations, experiences and reports remain differently typed and temporally ordered."
+V278="Every pilot record and every selected plan in the fixed menu, with disjoint confirmatory data and all R164 boundedness, target, predictability and participant-independence premises."
+V279="Selecting from confirmatory outcomes can inflate error; menu finiteness does not repair an invalid plan. The theorem says nothing about precision or feasibility."
+V280="One bounded component, two constant centers, one common constant bet and independent deterministic pilot/confirmatory laws."
+V281="It does not challenge interval coverage. A defended transport/stability premise or worst-case bound can restore a width statement."
+V282="Every component and plan in the frozen menu, fixed pilot and confirmatory designs, constant centers, and explicitly declared sensitivity radii."
+V283="The zero-pilot/one-confirmatory counterexample violates every radius below one for the corresponding center. Large radii can make the certificate uninformative."
+V284="Finite m and menu, bounded pilot squared residuals, independent pilot participant vectors, fixed N_q/lambda/c, valid transport radii and the maximum component expected untruncated half-width objective."
+V285="The result fails without transport, is menu-relative, may be loose, and does not certify realized width, power, apparatus or experience."
+V286="A nonempty deterministically admissible R165 menu, simultaneous lower/upper width certificate, fixed w_max and beta; R161 gate failures are evaluated separately."
+V287="The status is relative to menu, objective, transport radii, resource cap and beta. It is not global study impossibility, theoretical exclusion, no mineness or no experience."
+V288="One selected body-frame candidate and its fallible evidence/interpretation chain; not a universal hierarchy of every conscious organization."
+V289="The ladder is not a temporal stage theory or a claim that every system passes through all levels."
+V290="For every admitted application, each claimed promotion must state all bridge premises; existence at a lower level alone is insufficient."
+V291="Population/session summaries, one actual P/I/K/D token, finite instrument views, Phi/h counterparts, external referents and reports remain distinct."
+V292="Finite binary populations of size at least two with a nonconstant response vector; exact enumeration covers sizes two through six."
+V293="Longitudinal or token-specific measurement can add evidence; this result denies only inference from the population summary alone."
+V294="Every nonconstant binary vector for n>=2 admits the swap; the executable check is bounded to 2<=n<=6."
+V295="A statistic of a population/session family is not a K-relation in a named actual P/I token."
+V296="The declared deterministic binary structural models and intervention semantics only; not a complete neural model."
+V297="A mediator or localized cut is informative only under valid realization, fidelity, consistency and exclusion assumptions; finite tests do not reveal complete organization."
+V298="All binary b and do(r) settings in the two fixed models; two off-natural do(k) settings supply discrimination."
+V299="Observed variables in one token remain a finite view; causal equations are candidate abstract models until physically realized and grounded."
+NODES
+TA16:RRH_HISTORY | HISTORICAL_CONJECTURE | RRH proposes a common support/regime/time/intervention/provenance witness. RRH-E conjectures E_whole iff Active AND ND_epsilon AND IRR_epsilon,Q with frozen grain, surrogate class and protocol.
+F1=V123 F5=V123 F6=V124 F2=V2
+TA17:FUNCTIONAL_CONTRACT | DEFINITION | Keep M_attr, endogenous response quotient Z, intervention channel K, inheritance Gamma(S), successor-set belief mu, post-branch P_loc and motivational stake separate. M_attr is a nonexclusive current-source readout. Define Gamma(S)=I(U;Y_S)/H(U) in the joint interventional experiment p(u)p(y_S|do(U=u)), with finite variables and H(U)>0.
+F1=V125 F5=V125 F6=V126 F2=V2
+TA17:QUOTIENT | CONDITIONAL_RESULT | Histories equivalent under every declared future intervention/output law define a quotient. Bijective recoding transporting those laws induces a quotient bijection; behaviorally null nuisance dimensions collapse. No noninjective abstraction preserves every conceivable consumer.
+F1=V127 F5=V127 F6=V128 F2=V2
+TA17:INHERITANCE | CONDITIONAL_RESULT | Gamma is monotone in included outputs; bijective recoding preserves it when intervention distribution/semantics are transported. Readout MI is a lower bound under U->Y->O. Closed-lineage MI cannot increase without violating the specified Markov/no-side-channel premise. Shared-upstream MI alone does not establish current-process descent.
+F1=V129 F5=V129 F6=V130 F2=V2
+TA17:SET_LIMITS | CONDITIONAL_RESULT | Individual-only categorical labels cannot encode arbitrary successor sets. For a nonnegative membership relation across unique-continuation and fission scenarios, assume full unique continuation gives q(A,B)=1, adding an equally full co-successor preserves that value, and equally full copies are symmetric. Then two full successors have total membership at least 2, incompatible with unit-sum normalization. Equal singleton inclusion marginals need not identify mu; equal singleton inheritance need not identify Gamma. Duplication violates conserved-mass and universal supermodularity; secret sharing violates universal submodularity.
+F1=V131 F5=V131 F6=V132 F2=V2
+TA17:KL_COST | CONDITIONAL_RESULT | For finite binary inclusion vector X with law mu, min over product q of KL(mu||q)=sum H(X_i)-H(X), attained at product marginals. Expected sum of inclusion indicators equals expected successor cardinality.
+F1=V133 F5=V133 F6=V134 F2=V2
+TA17:DECISION_PREM | MODEL_PREMISE | Equal prior over muE supported on singleton sets and muJ supported on empty/full pair; actions are rewarded for exactly-one or not-exactly-one. The restricted policy observes only their common singleton marginal vector and no further distinguishing side information.
+F1=V135 F5=V135 F6=V106 F2=V2
+TA17:REGRET | CONDITIONAL_RESULT | Every marginal-only policy has average reward 1/2; access to the full set posterior permits reward 1, so regret is 1/2.
+F1=V136 F5=V136 F6=V137 F2=V2
+TA19:GROUP_SETUP | MATHEMATICAL_DOMAIN | A group G acts on physical configurations and their candidate fibers compatibly. At x0 let H be the stabilizer. A deterministic selector s obeys s(gx)=g s(x). For the orbit clause O is one transitive H-orbit and R is a nonempty H-invariant subset of O.
+F1=V138 F5=V138 F6=V106 F2=V2
+TA19:LOCAL | CONDITIONAL_RESULT | s(x0) must be H-fixed; if no candidate is H-fixed no singleton selector exists. On a transitive orbit every nonempty invariant subset is the whole orbit. A finite transitive orbit has a unique invariant probability, the uniform law.
+F1=V139 F5=V139 F6=V140 F2=V2
+TA19:COVER | MATHEMATICAL_DOMAIN | pi:E->X is a finite covering on the declared regular region; x0 is a base point. Use unique path lifting and the monodromy action of loops based at x0.
+F1=V141 F5=V141 F6=V106 F2=V2
+TA19:MONODROMY | CONDITIONAL_RESULT | A continuous single-valued section selects a point fixed by every monodromy permutation; no common fixed point precludes a section.
+F1=V142 F5=V142 F6=V143 F2=V2
+TA19:TOPOLOGY | MATHEMATICAL_DOMAIN | P,Q are distinct fixed Hausdorff labels. Winners are Q for lambda<0, P for lambda>0 and {P,Q} at zero. Separately, a locally fixed finite candidate set has continuous z_P into metric spaces with capped within-label metric and cross-label distance 2.
+F1=V144 F5=V144 F6=V106 F2=V2
+TA19:REGULARITY | CONDITIONAL_RESULT | Exact-top-tier supported probability laws cannot be continuous at a strict two-sided winner switch. A closed-graph set completion must contain both side limits at the tie. The finite labeled landscape is Hausdorff-continuous when each branch is continuous.
+F1=V145 F5=V145 F6=V146 F2=V2
+TA19:NUMERICS | REPORTED_EVIDENCE | Supplement reports BC->AC->AB across selected negative/zero/positive parameters and robustness/label checks in a pinned PyPhi version. R149 neither reruns nor promotes those numerical results to analytical or phenomenal evidence.
+F1=V147 F5=V147 F6=V148 F2=V2
+R149:COMPARISON | TYPED_DOMAIN | Nonempty Omega assigns actual bearers and intervals in a common complete signature. k and e map configurations to complete organizational and experiential isomorphism types. r:Omega->R is any representation. All claims concern these same target bearers and intervals; optional type invariance is r=b k.
+F1=V149 F5=V149 F6=V150 F2=V2
+R149:COMPATIBILITY | CONDITIONAL_RESULT | Under C1-OI, e=h r iff ker(r) subset ker(k) iff k=a r; image-domain functions are unique. If r=b k, this holds iff b is injective on k(Omega). Thus full C1-OI, complete-experience sufficiency of r, and an equal-r/different-k witness cannot all hold.
+F1=V151 F5=V151 F6=V152 F2=V2
+R149:NULL_TARGET | CONDITIONAL_RESULT | Under C1-OI an equivalence N preserves complete experiential types iff N subset ker(k). For any selected target f, preservation needs only N subset ker(f); f factors through r iff ker(r) subset ker(f).
+F1=V153 F5=V153 F6=V154 F2=V2
+R149:SELF_TARGET | DEFINITION | Extend R146 self contract with grounded actual target Q and property f_Q, declared constituent/overlap relations relative to bearer b, and installed M_attr. Whole Q=b, proper constituent Q<b and disjoint external target are distinct roles; overlaps and cross-boundary relations remain explicit additional cases. M_attr is the system attribution, not the truth criterion for Q or membership.
+F1=V155 F5=V155 F6=V156 F2=V2
+R149:SELF_APPLICATION | CONDITIONAL_RESULT | R147 ordinary and joint-swapped configurations share full sensor-response representation r but disagree on actual assembly-relative binding. With the beta-retaining actual bridge they have different complete k, so r cannot determine complete e under C1-OI. Selected loop prediction can still be exact.
+F1=V157 F5=V157 F6=V158 F2=V2
+R155:MODEL | DEFINITION_AND_ASSUMPTION_PACKAGE | Fixed T>=2, actual-bearer/candidate/port assignment if realized, externally fixed unbiased schedule, n_O,n_A<=T; independent Bernoulli(1/2) H,K priors and conditionally independent trials; X likelihoods 3/4 vs 1/4; randomized U with K=1 noisy-copy Y (error 1/4), K=0 independent fair Y; Z=1[Y=U]; count registers, exact finite rational readouts, theta=2/3 and two installed consumer roles. Statistical hypotheses, actual attachment and experiential targets are distinct.
+F1=V159 F5=V159 F6=V160 F7=V161 F8=V162
+R155:FORMATION | CONDITIONAL_RESULT | For every legal M history, q_O=3^(2r-n_O)/(1+3^(2r-n_O)) and q_A=3^s/(3^s+2^n_A) equal their model posteriors; finite counter updates realize them. For a fixed finite history, posterior dependence on positive prior/likelihood parameters is continuous; threshold consumption may be discontinuous.
+F1=V163 F5=V163 F6=V164 F7=V161 F8=V162
+R155:SEPARATION | CONDITIONAL_RESULT | At n_O=n_A=2, X in {11,00} and Z in {11,00} give q_O in {9/10,1/10}, q_A in {9/13,1/5}; theta=2/3 realizes all four consumer pairs, each with positive conditional probability for every H,K.
+F1=V163 F5=V163 F6=V165 F7=V161 F8=V162
+R155:ERROR | CONDITIONAL_RESULT | Every finite legal history leaves positive posterior mass on every latent pair H,K. The high/high specified history has conditional probability 1/64 when H=K=0 and joint prior-weighted probability 1/256.
+F1=V163 F5=V163 F6=V166 F7=V161 F8=V162
+R155:MEMORY_BOUNDARY | CONDITIONAL_RESULT | Copying installed state (2,2,2,2) over (2,0,2,2), with ports/attachment fixed, changes q_O and its consumer while q_A remains 9/13. Separately, no deterministic finite-state updater with state-only fixed readout and no external unbounded clock/memory can reproduce exact q_O for all unbounded all-success histories.
+F1=V167 F5=V167 F6=V168 F7=V161 F8=V162
+R155:SELECTED_TARGET | DEFINITION_AND_ASSUMPTION_PACKAGE | Fix nonempty actual configuration domain Omega, common bearer/window/signature/target convention, finite descriptor J:Omega->Jspace and independently specified selected experiential target F:Omega->Fspace. Do not define F from J or from a report to make the desired bridge true.
+F1=V169 F5=V169 F6=V170 F7=V161 F8=V162
+R155:BRIDGE_CRITERION | CONDITIONAL_RESULT | A fixed decoder psi on the realized descriptor image with F=psi∘J exists iff F is constant on every J-fiber. This criterion supplies no selected mineness semantics, injectivity, monotonicity or empirical measurement bridge.
+F1=V171 F5=V171 F6=V172 F7=V161 F8=V162
+R155:MINENESS_OBLIGATION | OPEN_OBLIGATION | To interpret the acquisition device as a model of selected felt mineness, independently ground actual realization, selected experiential target, fixed output-blind interpretation, descriptor sufficiency/fiber constancy on a specified domain and an empirical measurement bridge when observations are used. These conditions remain open.
+F1=V173 F5=V173 F6=V174 F7=V161 F8=V162
+R156:INSTALLATION_WITNESS | DEFINITION_AND_ASSUMPTION_PACKAGE | Two deterministic typed devices c in {0,1}; current M=D=1; V=c*M+(1-c)*D; identical independent prediction/readout ports; legal do(M=0),do(M=1) keep D=1,c and other ports fixed; snapshot descriptor excludes wiring c. Abstract comparison; physical realization is extra.
+F1=V175 F5=V175 F6=V176 F9=V177 F10=V178
+R156:SNAPSHOT_USE_LIMIT | CONDITIONAL_RESULT | The devices have the same declared snapshot including M,D,V and attribution/prediction readouts, but R(c)=1[V(do(M=0))!=V(do(M=1))] equals c. No fixed snapshot decoder recovers R for both; the two-entry response table does recover R on this domain.
+F1=V175 F5=V175 F6=V176 F9=V177 F10=V178
+R157:DEFINABLE_SELECTOR_SETUP | DEFINITION_AND_ASSUMPTION_PACKAGE | Fix a parameter-free K-formula theta(x_bar), or declared parameters p_bar transported by h. S_theta(D,p_bar) is the set of tuples satisfying theta. The claimed relations are internal to the complete K-structure and independently physically grounded; analyst-only labels are excluded.
+F1=V179 F5=V179 F6=V180 F11=V181 F12=V182
+R157:SEMANTIC_VOCABULARY_SETUP | DEFINITION_AND_ASSUMPTION_PACKAGE | Let L be a semantic vocabulary outside K containing the expression felt bodily mineness. Metalinguistic assignments nu interpret L without changing D,Phi,h,theta or any K-fact.
+F1=V183 F5=V183 F6=V184 F11=V181 F12=V182
+R157:SEMANTIC_RESIDUAL | CONDITIONAL_LIMIT | A:C1 plus a K-definable transported coordinate does not uniquely determine which external L-name denotes that experiential substructure. In particular, the name felt bodily mineness requires an additional fixed bridge B_min.
+F1=V185 F5=V185 F6=V186 F11=V181 F12=V182
+R157:REPORT_DOMAIN_SETUP | DEFINITION_AND_ASSUMPTION_PACKAGE | Let Omega=Omega_rep union Omega_norep include admitted actual tokens with and without a typed report channel. An operational report measure M_rep has domain Omega_rep because its protocol requires that channel.
+F1=V187 F5=V187 F6=V188 F11=V181 F12=V182
+R157:MINENESS_BRIDGE_SCHEMA | OPEN_BRIDGE_SCHEMA | A candidate B_min must jointly specify: grounded theta_body; T1 transport; independently fixed target semantics; common bearer/body/time/signature/operation domain; separate fallible measurement; and explicit failure criteria. Missing report is not target absence. The candidate theta_body conjunction uses attachment, body-directed sensory routing, body-directed action-consequence routing and installed attribution use; interoception, affect and persistence are named optional extensions.
+F1=V189 F5=V189 F6=V190 F11=V181 F12=V182
+R158:TARGET_SPLIT | DEFINITION | Distinguish actual bearer P/support s from represented candidate c; distinguish actual membership M, coupling C, body-frame binding B, installed use U, intervention-relative efficacy E, internal judgments J, selected felt targets F, beliefs Q and reports R. Undefined membership is not false membership.
+F1=V191 F5=V191 F6=V192 F13=V193 F14=V194
+R158:NECESSITY_WITNESS_SETUP | ASSUMPTION_PACKAGE | Fix nonempty Omega, total Boolean F and n>=1 total Boolean g_i; define Theta=AND_i g_i. Require jointly an admissible w* in Omega and j in {1,...,n} with F(w*)=1 and g_j(w*)=0. F interpretation is independent of Theta.
+F1=V195 F5=V195 F6=V196 F13=V197 F14=V194
+R158:CONJUNCTION_REJECTION | CONDITIONAL_LIMIT | Under NECESSITY_WITNESS_SETUP, not forall w in Omega: F(w)->Theta(w); hence not forall w: F(w)<->Theta(w).
+F1=V198 F5=V198 F6=V199 F13=V200 F14=V194
+R158:RELATIONAL_SELECTION_SETUP | ABSTRACT_WITNESS_PACKAGE | Let K have one sort, constant a and unary f. D has carrier {0,1}, a=0, f(0)=1, f(1)=0; theta(x) is x=a and S={0}.
+F1=V201 F5=V201 F6=V202 F13=V203 F14=V194
+R158:TARGET_SPECIFIC_BRIDGE_PROFILE | OPEN_BRIDGE_SCHEMA | Retain the R157 conjunction only as an unproved joint functional body-use configuration. Compare ownership-oriented body-frame binding/use and agency-oriented source-attribution/use on separately declared target domains. Actual membership and efficacy are separate from judgments; optional coordinates have no proved universal necessity.
+F1=V204 F5=V204 F6=V205 F13=V206 F14=V194
+R159:ANCHOR_BINDING_CONTRACT | DEFINITION_AND_ASSUMPTION_PACKAGE | For a fixed admitted actual P,I,complete K,D,Phi,h, internal sorted tokens r,k support grounded K-relations Anchor(r),Bind(r,k),Use(r,k). theta_frame is their conjunction, with fixed/transported parameters. A separately grounded partial psi maps representation tokens to external E; organism anatomical membership M(O(P),psi(k)) is not internal Bind. No h(c) is asserted unless c is in its declared carrier.
+F1=V207 F5=V207 F6=V208 F15=V209 F16=V210
+R159:FRAME_RELATION_TRANSPORT | CONDITIONAL_STRUCTURAL_APPLICATION | Given R157:COORDINATE_TRANSPORT and ANCHOR_BINDING_CONTRACT on the same instance, D|=theta_frame(r,k) iff Phi|=theta_frame(h(r),h(k)). False external anatomical membership does not logically negate the installed internal relation; this does not establish a familiar F_O interpretation.
+F1=V211 F5=V211 F6=V212 F15=V213 F16=V210
+R159:COUPLED_ROLE_WITNESS | ABSTRACT_COUNTEREXAMPLE_SCHEMA | For b,a in {0,1}, 0<t_O,t_A<1, lambda,mu>0, o=b-t_O+lambda*b*a and q=a-t_A+mu*a*b dissociate by sign at (1,0) and (0,1), yet o(1,1)-o(1,0)=lambda and q(1,1)-q(0,1)=mu are positive. Therefore this explicit schema has role dissociation and graded cross-modulation simultaneously.
+F1=V214 F5=V214 F6=V215 F15=V216 F16=V210
+R159:SELECTED_OWNERSHIP_APPLICATION | OPEN_BRIDGE_APPLICATION | Compare H_B body-frame binding/use with source modulation and H_A ownership solely determined by a separately grounded source-attribution organization. Actual erroneous Bind can refer via psi to an anatomical nonmember without changing actual bearer by definition. Identifying its intrinsic presentation as familiar ownership requires fixed independent B_min, physical relational witnesses and fallible target evidence.
+F1=V217 F5=V217 F6=V218 F15=V219 F16=V210
+R160:INTERVENTION_PROFILE_CONTRACT | DEFINITION_AND_ASSUMPTION_PACKAGE | Fix Pi, actual trial tokens P_omega/I_omega, internal slot family k, independently physically grounded J_B and J_T, tool-absent body readouts Y_B and tool-specific readouts Y_T, preregistered normalized effect bounds L/U and epsilon>0. Let a=delta(Y_B;J_B), x=delta(Y_B;J_T), b=delta(Y_T;J_B), y=delta(Y_T;J_T). Undefined or noncommensurable effects block classification rather than count as zero. Reports do not define these roles.
+F1=V220 F5=V220 F6=V221 F17=V222 F18=V223
+R160:FOUR_WAY_PROFILE | CONDITIONAL_CLASSIFICATION_RESULT | Under the full profile contract, define B_Pi(k) iff L(a)>epsilon and L(a)-U(x)>epsilon; define T_Pi(k) iff L(y)>epsilon and L(y)-U(b)>epsilon. Exactly one Boolean pair (1,0),(0,1),(1,1),(0,0) holds, interpreted only as body-dominant, tool-dominant, overlap or neither in Pi. Positive off-diagonal effects are compatible with every class.
+F1=V224 F5=V224 F6=V225 F17=V222 F18=V223
+R160:LATENT_LABEL_NONIDENTIFICATION | CONDITIONAL_LIMIT_THEOREM | For any finite latent input/output model and any bijection pi of its latent carrier, transporting the initial law, each intervention kernel and the emission kernel by pi leaves every finite observable input/output law unchanged. Hence an ungrounded latent name body/tool is not identified by the observable profile alone.
+F1=V226 F5=V226 F6=V227 F17=V222 F18=V223
+R160:TOKENWISE_APPLICATION_BOUNDARY | CONDITIONAL_SCOPE_RESULT | Given R159 frame-relation transport separately for each admitted trial and the R160 trial-family contract, each trial's grounded internal relation transports under its own h_omega. The cross-trial matrix S_Pi and its class do not thereby become one within-token experiential relation or an F_O contrast; a cross-trial correspondence, measurement bridge and fixed selected target are additional premises.
+F1=V228 F5=V228 F6=V229 F17=V222 F18=V223
+R161:CONCRETE_CROSSED_PROTOCOL | DEFINITION_AND_CANDIDATE_IMPLEMENTATION_CONTRACT | Fix four counterbalanced human sessions q,r in {0,1}: q contrasts logged 100 Hz wrist-tendon vibration with a matched bony-site control; r contrasts a logged 30-degree cursor/tool transform with the identity transform. After separately reinduced blocks, obtain tool-released angular body localization Y_B and tool-held no-cursor angular endpoint Y_T. Normalize both by a frozen 30-degree physical reference to [0,1]. Define conditional simple-effect magnitudes and set a=min_r d_B^B(r), x=max_q d_B^T(q), b=max_r d_T^B(r), y=min_q d_T^T(q).
+F1=V230 F5=V230 F6=V231 F19=V232 F20=V233
+R161:ADMISSIBILITY_GATE | CONDITIONAL_SCOPE_AND_FAILURE_RESULT | For the R161 candidate, classification is admissible iff all six preregistered delivery, cross-invariance, washout and manipulation-sensitivity gates pass. If any gate fails, the only profile output is INVALID_PROTOCOL; failure may not be counted as a neither profile or evidence against basal experience.
+F1=V234 F5=V234 F6=V235 F19=V232 F20=V233
+R161:THREE_WAY_BODY_DECISION | CONDITIONAL_INTERVAL_THEOREM_AND_FALSIFIER | Under the valid R161 gate and simultaneous bounds for the interaction-robust a,x estimands, fix epsilon>0. Confirm body dominance if L(a)>epsilon and L(a)-U(x)>epsilon. Strongly exclude the fixed candidate if U(a)<=epsilon or U(a)-L(x)<=epsilon. Otherwise return unresolved. Confirm and exclude are disjoint; both decisions persist under nested interval refinement. The symmetric construction applies to y,b for tool dominance.
+F1=V236 F5=V236 F6=V237 F19=V232 F20=V233
+R162:PUBLIC_COMPONENT_DATA_SCOPE | EMPIRICAL_SOURCE_SCOPE_AUDIT | The inspected public Ruttle, Mostafa and Le Franc routes support separate visuomotor/localization or tendon-vibration/visual-context components, but none jointly observes the exact R161 q-by-r crossing, both R161 readouts and active-versus-bony vibration contrast in the same participants.
+F1=V238 F5=V238 F6=V239 F21=V240 F22=V241
+R162:COVARIANCE_NONIDENTIFICATION | GENERAL_MATHEMATICAL_NONENTAILMENT_RESULT | Separate datasets identifying only marginal laws of required contrast blocks do not generally identify cross covariance or dominance-difference precision. Unit marginal variances and rho in [-1,1] preserve both marginals while Var(U-V)=2-2rho ranges over [0,4].
+F1=V242 F5=V242 F6=V243 F21=V240 F22=V241
+R162:INDEPENDENT_PILOT_FREEZE_CONTRACT | PROSPECTIVE_DESIGN_DEFINITION | Run the exact R161 protocol in a disjoint external pilot; return only nuisance covariance, variance bounds, completion/fidelity and diagnostic summaries; hide means and R161 labels; freeze the complete confirmatory plan; never pool pilot participants into primary confirmatory intervals. Failed gates yield PILOT_INVALID_PROTOCOL and excessive required N yields DESIGN_NOT_FEASIBLE.
+F1=V244 F5=V244 F6=V245 F21=V240 F22=V241
+R162:PLANWISE_COVERAGE_PREMISE | EXPLICIT_STATISTICAL_PREMISE | For every pilot record in the declared support and every frozen plan selected from it, the interval procedure applied to independent confirmatory data has conditional simultaneous coverage at least 1-alpha under the declared model and target population.
+F1=V246 F5=V246 F6=V247 F21=V240 F22=V241
+R162:INDEPENDENT_FREEZE_COVERAGE | CONDITIONAL_COVERAGE_THEOREM | If a pilot-selected plan is frozen before independent confirmatory data and every plan in the selection range has conditional simultaneous coverage at least 1-alpha, then the randomly selected plan has unconditional simultaneous coverage at least 1-alpha. The declared absolute-value interval transform preserves coverage before applying R161 min/max aggregation.
+F1=V248 F5=V248 F6=V249 F21=V240 F22=V241
+R163:BOUNDED_GAUSSIAN_INCOMPATIBILITY | GENERAL_MATHEMATICAL_INCOMPATIBILITY_RESULT | An almost-surely bounded multivariate Gaussian vector is degenerate in every component; a non-degenerate exact Gaussian law cannot be the exact law of observed W_i in [-1,1]^8.
+F1=V250 F5=V250 F6=V251 F23=V252 F24=V253
+R163:STUDENT_BOUNDED_COUNTEREXAMPLE | EXACT_FINITE_COUNTEREXAMPLE | Student-Bonferroni intervals lack uniform finite-sample simultaneous coverage over bounded laws; at N=36 and m=8, the saved mean-zero two-point law has exact simultaneous coverage 0.2531493943720002 at nominal 0.95.
+F1=V254 F5=V254 F6=V255 F23=V252 F24=V253
+R163:BOUNDED_FINITE_DESIGN_TARGET | FORMAL_TARGET_DEFINITION | For a frozen N-participant design with independent W_i and W_ij in [-1,1], theta_Nj=N^{-1} sum_i E[W_ij] is the finite-design target, including any frozen randomization distribution in the expectation.
+F1=V256 F5=V256 F6=V257 F23=V252 F24=V253
+R163:HOEFFDING_PLANWISE_COVERAGE | FINITE_SAMPLE_SIMULTANEOUS_COVERAGE_THEOREM | For independent participant vectors with each frozen component in [-1,1], Bonferroni-Hoeffding intervals with half-width sqrt(2 log(2m/alpha)/N) simultaneously cover all finite-design component means with probability at least 1-alpha; component independence and identical participant laws are unnecessary.
+F1=V258 F5=V258 F6=V259 F23=V252 F24=V253
+R163:ARBITRARY_MISSINGNESS_BAND | FINITE_SAMPLE_PARTIAL_IDENTIFICATION_COVERAGE_THEOREM | For well-defined Y_ij in [-1,1], L=RY-(1-R) and U=RY+(1-R) bound Y pointwise; [mean L-h_N, mean U+h_N] intersect [-1,1] simultaneously covers all full-data finite-design means with probability at least 1-alpha under arbitrary missingness and independent participants.
+F1=V260 F5=V260 F6=V261 F23=V252 F24=V253
+R163:ORDER_CLIPPING_TARGET_BOUNDARY | TARGET_AND_IDENTIFICATION_BOUNDARY | Coverage for a frozen randomized-order mixture mean does not entail order invariance or a canonical-order effect; coverage for clipped W identifies only the clipped mean, not an unrestricted unclipped latent mean.
+F1=V262 F5=V262 F6=V263 F23=V252 F24=V253
+R164:CONSTANT_BET_AVERAGE_TARGET | TARGET_PRESERVATION_LEMMA | For bounded adapted X_ij with conditional means mu_ij, a predictable empirical-Bernstein exponent with one frozen constant positive bet lambda_j over i has linear term N lambda_j (bar X_j - N^-1 sum_i mu_ij); varying bets instead generally target a weighted average when the conditional means differ.
+F1=V264 F5=V264 F6=V265 F25=V266 F26=V267
+R164:FROZEN_BOUNDED_MARTINGALE_COVERAGE | FINITE_SAMPLE_SIMULTANEOUS_COVERAGE_THEOREM | For m frozen bounded components, constant pilot-frozen bets lambda_j in (0,1), predictable predictors c_ij in [0,1], and L=log(2m/alpha), the W-scale intervals centered at bar W_j with half-width 2[L+g(lambda_j) sum_i(X_ij-c_ij)^2]/(N lambda_j) simultaneously cover all average conditional means with probability at least 1-alpha; for independent participant vectors these are exactly the R163 finite-design means.
+F1=V268 F5=V268 F6=V269 F25=V266 F26=V267
+R164:RARE_SPIKE_ADDITIVE_OBSTRUCTION | FINITE_SAMPLE_NECESSARY_OBSTRUCTION | For the R163 rare-spike law, any coordinatewise interval that excludes mean zero whenever a component has no spikes has m-component simultaneous coverage at most (1-.95^N)^m; at N=36,m=8 this is 0.2531673184308581, and controlling this event alone at familywise alpha=.05 requires N at least 99.
+F1=V270 F5=V270 F6=V271 F25=V266 F26=V267
+R164:MISSINGNESS_ENDPOINT_MARTINGALE_BAND | FINITE_SAMPLE_PARTIAL_IDENTIFICATION_COVERAGE_THEOREM | When every bounded would-be outcome is well-defined, applying the frozen constant-bet theorem to all 2m lower/upper missingness endpoints with log(4m/alpha) gives simultaneous coverage of every all-enrollee finite-design mean, but leaves the support-identification width 2(1-bar R_j) unchanged.
+F1=V272 F5=V272 F6=V273 F25=V266 F26=V267
+R165:FINITE_PILOT_MENU_CONTRACT | PROSPECTIVE_DESIGN_DEFINITION | Before pilot outcomes, freeze a finite menu of confirmatory plans, each containing N_q, one constant bet and constant center per component, the unchanged R161 target/decision/gates, a deterministic tie-break, alpha, beta, transport radii, width objective, resource cap and status boundaries; confirmatory outcomes may not select the plan, target or report.
+F1=V274 F5=V274 F6=V275 F27=V276 F28=V277
+R165:PILOT_SELECTION_COVERAGE_INVARIANCE | CONDITIONAL_SELECTION_THEOREM | Any pilot-measurable deterministic selector from the frozen finite menu preserves R164 simultaneous coverage at level 1-alpha when every selected plan satisfies the R162 planwise premise and uses constant confirmatory bets for the same unweighted finite-design target; menu size is not charged to alpha because exactly one independent-pilot-selected plan is executed.
+F1=V278 F5=V278 F6=V279 F27=V276 F28=V277
+R165:RESIDUAL_TRANSPORT_OBSTRUCTION | EXACT_NONIDENTIFICATION_COUNTEREXAMPLE | Disjoint pilot and confirmatory samples can be independent while reversing the residual-risk ranking of two predictor centers; therefore pilot independence transports planwise coverage but does not identify confirmatory residual risks, expected widths or the width-optimal plan.
+F1=V280 F5=V280 F6=V281 F27=V276 F28=V277
+R165:RESIDUAL_TRANSPORT_PREMISE | EXPLICIT_EMPIRICAL_PREMISE | For every component-plan pair, the absolute difference between the finite-pilot-design and finite-confirmatory-design expected squared residual risks is at most the predeclared nonnegative radius tau_jq.
+F1=V282 F5=V282 F6=V283 F27=V276 F28=V277
+R165:PILOT_WIDTH_REGRET_CERTIFICATE | FINITE_MENU_WIDTH_AND_REGRET_THEOREM | For bounded independent pilot participant vectors, a finite frozen menu and valid residual-transport radii, simultaneous Hoeffding bands cover every confirmatory residual risk with probability at least 1-beta; minimizing the resulting upper expected-width certificate has regret at most max_j 4g(lambda_jq*)[b+tau_jq*]/lambda_jq* relative to the true menu oracle q*.
+F1=V284 F5=V284 F6=V285 F27=V276 F28=V277
+R165:THREE_WAY_FEASIBILITY_TRIAGE | FINITE_MENU_DECISION_THEOREM | After R161 gates and hard resource screening, min_q H_U(q)<=w_max certifies feasibility, min_q H_L(q)>w_max certifies menu-relative DESIGN_NOT_FEASIBLE at width confidence 1-beta, and all remaining cases are PILOT_INCONCLUSIVE; an upper bound above threshold alone never proves infeasibility.
+F1=V286 F5=V286 F6=V287 F27=V276 F28=V277
+R166:EVIDENCE_LEVEL_LADDER | TYPED_EVIDENCE_AND_INTERPRETATION_SEPARATION | Distinguish E0 population/session profile, E1 finite same-token view, E2 actual same-token installed Anchor-Bind-Use relation, E3 its C1 experiential structural counterpart, and E4 a familiar felt-mineness interpretation under independently fixed B_min. No adjacent promotion is automatic, and no level is made a basal-experience gate.
+F1=V288 F5=V288 F6=V289 F29=V290 F30=V291
+R166:POPULATION_TOKEN_NONENTAILMENT | EXACT_PERMUTATION_COUNTEREXAMPLE | A nonconstant binary response vector and a permutation that changes a named coordinate have identical multisets and every permutation-invariant population statistic. Therefore even an exact population profile does not by itself entail that a named actual token installs the candidate relation.
+F1=V292 F5=V292 F6=V293 F29=V294 F30=V295
+R166:FINITE_TRACE_INSTALLATION_NONENTAILMENT | EXACT_STRUCTURAL_CAUSAL_COUNTEREXAMPLE | The path model r:=b,k:=r,u:=k and bypass model r:=b,k:=r,u:=r agree on all natural binary inputs and every do(r) case, including observed r,k,u, although k mediates u only in the first. A do(k) intervention holding r fixed discriminates them. Hence natural or upstream-intervention traces alone do not entail installed use.
+F1=V296 F5=V296 F6=V297 F29=V298 F30=V299

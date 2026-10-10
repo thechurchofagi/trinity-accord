@@ -1,0 +1,35 @@
+"BASE:CTX:176" | relation="selected_order_and_identity_grounding_remain_open" | from="TO20261008:ORDER_BRIDGE_CANDIDATE" | to="IA20261008:FROZEN_IDENTITY_DOMAIN" | deductive=false
+"BASE:CTX:177" | relation="supplies_candidate_rank_independent_physical_binding" | from="R176:CAUSAL_DELAY_SETUP" | to="IA20261008:TRACE_IDENTITY_INVARIANT" | deductive=false
+"BASE:CTX:178" | relation="does_not_select_either_named_phenomenal_bridge" | from="R176:DELAY_ORDER_CONTRAST" | to="IA20261008:TRACE_COUNTERPART" | deductive=false
+"CORE20261008:CTX:001" | relation="SOURCE_AND_SEMANTIC_CONSTRAINT_NOT_DEDUCTION" | from="R155:SELECTED_TARGET" | to="CORE20261008:CONTRACT" | deductive=false
+"CORE20261008:CTX:002" | relation="ACTUALITY_REQUIREMENT" | from="A:ACTUAL_TOKEN" | to="CORE20261008:ACTUAL_BRIDGE" | deductive=false
+"CORE20261008:CTX:003" | relation="OPEN_BRIDGE_REMAINS_OPEN" | from="R155:MINENESS_OBLIGATION" | to="CORE20261008:HUMAN_CORE" | deductive=false
+"CORE20261008:CTX:004" | relation="PERSISTENCE_NOT_TARGET_IDENTITY" | from="CORE20261008:LOCAL_COPRESENCE" | to="CORE20261008:TARGET_LEVELS" | deductive=false
+"CORE20261008:CTX:005" | relation="REPLACEMENT_NOT_EXCISION" | from="CORE20261008:PRIOR_CG_SUB" | to="CORE20261008:CONTRACT" | deductive=false
+"CORE20261008:CTX:006" | relation="CAPABILITY_NOT_NAMED_EXPERIENCE" | from="CORE20261008:PRIOR_CD_CAPABILITY" | to="CORE20261008:INPUT_VS_RETENTION" | deductive=false
+"EI20261008:CTX:001" | relation="inherited_problem_refinement_not_proof" | from="EI20261008:IMPORT_C5" | to="EI20261008:NONTRANSPORT" | source_reference={"identity_claim": false, "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/C_UCT_III_v1_0.md", "related_node_ids": ["C:P1", "C:P3", "C:P7"], "sections": "5.1-5.4;7.1-7.3"} | deductive=false
+"EI20261008:CTX:002" | relation="open_interpretation_no_entailment" | from="EI20261008:STRUCTURAL_INTERPRETATION" | to="EI20261008:NAMED_BRIDGE" | deductive=false
+"R183:CTX:001" | relation="inherited_witness_not_proof" | from="EI20261008:CORE_FAMILY" | to="R183:DISJUNCTIVE_RELEVANCE" | deductive=false
+"R183:CTX:002" | relation="open_interpretation_no_entailment" | from="R183:TRER" | to="R183:NAMED_BRIDGE" | deductive=false
+"R183:CTX:003" | relation="scope_guard_not_deductive_edge" | from="R183:COUNTERFACTUAL_CLASSES" | to="R183:TRER" | deductive=false
+"OO20261008:CTX:001" | relation="Existing constant-on-fiber/sufficiency principle; context not proof." | from="C:P2_COORD" | to="OO20261008:LINEAR_ACCESS" | deductive=false
+"OO20261008:CTX:002" | relation="No contradiction: richer unrestricted encoders can emulate the smaller code." | from="C:P7" | to="OO20261008:EVEN_FAMILY" | deductive=false
+"OO20261008:CTX:003" | relation="Keep actual retained source, reverse bandwidth and timing in the comparison." | from="OO20261008:QUERY_RETURN" | to="OO20261008:PERSISTENT_SOURCE" | deductive=false
+"RU20261008:CTX:001" | relation="Inherited limit on unconditional scalar experiential inference;not proof of a named feeling." | from="C:P3" | to="RU20261008:CALIBRATION" | source="C:P3" | target="RU20261008:CALIBRATION" | deductive=false
+"RU20261008:CTX:002" | relation="Witness and optimum rederived independently;pending OO is not an established premise." | from="OO20261008" | to="RU20261008:EQUALITY_CLASS" | source="OO20261008" | target="RU20261008:EQUALITY_CLASS" | deductive=false
+"R184:CTX:001" | relation="research_direction_not_proof" | from="R184:REFLEX_TWIN" | to="R184:OVERLAP_NEXT" | deductive=false
+"R184:CTX:002" | relation="named_feeling_non_entailment" | from="R184:EXPERIENTIAL_RELEVANCE" | to="R184:REFLEX_TWIN" | deductive=false
+"R184:CTX:003" | relation="actual_application_obligation_not_model_premise" | from="R184:ACTUAL_BRIDGE" | to="R184:INTACT_UNDERIDENTIFICATION" | deductive=false
+"RC20261008:CTX:001" | relation="Prior generic marginal-versus-joint obstruction; no claim of novelty for that principle; this edge is not an inference." | from="R132:HIGH_ORDER" | to="RC20261008:JOINT_GAP" | deductive=false
+"RC20261008:CTX:002" | relation="Inherited example independently proved here; OO pending node not imported as a true premise." | from="OO20261008:EVEN_FAMILY" | to="RC20261008:QUADRATIC_SCORE" | deductive=false
+"RC20261008:CTX:003" | relation="No scalar richness ranking follows." | from="C:P3" | to="RC20261008:TYPE_CONSEQUENCE" | deductive=false
+"IE20261008:CTX:001" | relation="SOURCE_APPLICATION_NOT_NEW_THEOREM" | from="C:P7" | to="IE:ROLE_WITNESS" | from_id="C:P7" | to_id="IE:ROLE_WITNESS" | deductive=false
+"IE20261008:CTX:002" | relation="LIMITS_NOT_RICHNESS" | from="C:P3" | to="IE:UCT_INTERPRETATION" | from_id="C:P3" | to_id="IE:UCT_INTERPRETATION" | deductive=false
+"IE20261008:CTX:003" | relation="MOTIVATION_NOT_EMPIRICAL_PROOF" | from="IE:LATE_QUERY" | to="IE:BIO_SILICON_COMPARISON" | from_id="IE:LATE_QUERY" | to_id="IE:BIO_SILICON_COMPARISON" | deductive=false
+"TH20261009:ctx1" | relation="target-relative support comparison; module reference, not deduction" | source="CORE20261008" | target="TH20261009:MIGRATION" | external_source=true | deductive=false
+"TH20261009:ctx2" | relation="retention during delay/obstruction; extension not premise" | source="R184:RESUMPTION_CONTRACT" | target="TH20261009:HANDOFF_MODEL" | external_source=false | deductive=false
+"TH20261009:ctx3" | relation="the initial masked pair is inherited in substance" | source="R127:PAIR_MODEL" | target="TH20261009:HANDOFF_MODEL" | external_source=false | deductive=false
+"TH20261009:ctx4" | relation="complete-cut warning inherited; not a fresh data-processing discovery" | source="R127:MEDIATION" | target="TH20261009:REUSED_MASK" | external_source=false | deductive=false
+"TH20261009:ctx5" | relation="correlation variation rather than only marginal errors" | source="OO20261008:NOISE_LAW" | target="TH20261009:CORRELATION_LAW" | external_source=false | deductive=false
+"TH20261009:ctx6" | relation="pending checkpoint inspected; no deductive import" | source="R185:ACTION_CENTERING_NEXT" | target="TH20261009:ACTUAL_REALIZATION" | external_source=true | deductive=false
+"TH20261009:ctx7" | relation="no scalar experience interpretation" | source="C:P3" | target="TH20261009:RECOVERY_RANK" | external_source=false | deductive=false

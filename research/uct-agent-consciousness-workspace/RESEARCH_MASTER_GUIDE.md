@@ -6,7 +6,7 @@
 
 **一句话原则：先盘点全部成果及已发表主张的覆盖，判断剩余净增量；不足就选择具体缺口突破，足够就完成可引用论文；每一步实质增量须接入地图，逐项复核全图并重推受影响结论，日志、地图和发表覆盖台账同步更新，保存且向作者反馈后继续。**
 
-**当前已核验接续：** EIP20261010 将外骨骼近似具体化为转导/传递与中央消费者实际读取的两层测量合同，并以冗余写入反例证明“外周传入+中央到达+匹配输出”仍不足以识别读取；只有选择性专属探针在全部接口前提下才条件识别。人类完整安装和命名体验桥仍开放。入口见 [MASTER_INDEX.md](MASTER_INDEX.md) 和 [CURRENT_STATE.json](CURRENT_STATE.json)。下一步只评估一个命名消费者的选择性差异探针，或指出首先失败的选择性/唯一写入前提。
+**当前已核验接续：** SCU v1.0.1已公开（[DOI 10.5281/zenodo.23272690](https://doi.org/10.5281/zenodo.23272690)）；DVC20261010已完成18人公开数据重算、装置消费者采样/commit合同和有限模型，候选停用，尚无新硬件或人体干预。保留并发MPC/CBI/EIP；完成图v1.1.2不变，覆盖v1.0.21。下一步只接入一个可访问的实际载体—事件—消费者—时序装置并独立核验所选端点，失败即停止对应推断；人体结论另需一个命名消费者的可行选择性差异探针。入口见 [MASTER_INDEX.md](MASTER_INDEX.md)、[CURRENT_STATE.json](CURRENT_STATE.json)及[records/DVC20261010_Device_Consumer_Validation/MAP_AUDIT.md](records/DVC20261010_Device_Consumer_Validation/MAP_AUDIT.md)。
 
 原总指南的全部字节保存在同目录 [RESEARCH_MASTER_GUIDE_BEFORE_POLICY20261008.md](RESEARCH_MASTER_GUIDE_BEFORE_POLICY20261008.md)，其相对链接仍有效；其中详细流程、历史成果、失败、有效修订和存储要求按与本指南相容的部分继续适用。现行科研进展以最新版 [HANDOFF.md](HANDOFF.md)、[MASTER_INDEX.md](MASTER_INDEX.md)、[REVIEW_SUPERVISION.md](REVIEW_SUPERVISION.md) 和真实提交为准，不以本文件冻结轮次。请勿再次将大量轮次摘要堆到本政策之前而掩盖最高原则。
 

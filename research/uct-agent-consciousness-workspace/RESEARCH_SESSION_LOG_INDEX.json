@@ -1,8 +1,8 @@
 {
   "current_release": "UCT-MAP-v1.1.2",
-  "latest_research": "EIP20261010",
-  "latest_work_log": "records/EIP20261010_Exoskeleton_Instrumentation/WORK_LOG.md",
-  "latest_handoff": "records/EIP20261010_Exoskeleton_Instrumentation/HANDOFF_ZH.md",
+  "latest_research": "DVC20261010",
+  "latest_work_log": "records/DVC20261010_Device_Consumer_Validation/WORK_LOG.md",
+  "latest_handoff": "records/DVC20261010_Device_Consumer_Validation/HANDOFF_ZH.md",
   "guide": "RESEARCH_MASTER_GUIDE.md v2.3 sections 0.3–0.6 and 8A",
   "archive": "versions/UCT-MAP-v1.1.2/UCT_MAP_v1.1.2_Capsule.tar.xz",
   "readback": "persistence/UCT-MAP-v1.1.2_RECEIPT.json",
@@ -30,19 +30,36 @@
     "SCU20261010",
     "MPC20261010",
     "CBI20261010",
-    "EIP20261010"
+    "EIP20261010",
+    "DVC20261010"
   ],
   "previous_index": "records/PUB20261009_Publication_Coverage/history/RESEARCH_SESSION_LOG_INDEX.json",
-  "latest_activity": "EIP20261010",
-  "latest_pending_research": "EIP20261010",
+  "latest_activity": "DVC20261010",
+  "latest_pending_research": "DVC20261010",
   "publication_coverage": {
     "entry": "PUBLICATION_COVERAGE.json",
-    "version": "UCT-PUB-v1.0.21",
+    "version": "UCT-PUB-v1.0.22",
     "base_census_version": "UCT-PUB-v1.0.0",
-    "update": "records/EIP20261010_Exoskeleton_Instrumentation/PUBLICATION_COVERAGE_UPDATE.json",
-    "report": "records/PUB20261009_Publication_Coverage/PUBLICATION_COVERAGE_REPORT_ZH.md",
-    "nondeductive": true
+    "update": "records/DVC20261010_Device_Consumer_Validation/PUBLICATION_COVERAGE_UPDATE.json",
+    "report": "publication/UCT-PUB-v1.0.22/COVERAGE_REPORT_ZH.md",
+    "nondeductive": true,
+    "counting_scope": "Frozen verified corpus plus one independently verified SCU DOI; not a new worldwide census."
   },
-  "latest_manuscript": "records/SCU20261010_Source_Consumer_Protocols/Matched_Behavior_and_Source_Use_v1.0.0.md",
-  "current_manuscript_decision": "records/SCU20261010_Source_Consumer_Protocols/MANUSCRIPT_DECISION.json"
+  "latest_manuscript": "records/SCUPUB20261010_DOI_Publication/release/matched-behavior-and-source-use-v1.0.1.md",
+  "current_manuscript_decision": "records/SCUPUB20261010_DOI_Publication/PUBLICATION_DECISION.json",
+  "latest_publication": {
+    "research_id": "SCU20261010",
+    "report": "SCU-PAPER",
+    "version": "1.0.1",
+    "status": "PUBLISHED_PREPRINT_PUBLIC_READBACK_AND_DOI_RESOLUTION_VERIFIED",
+    "doi": "10.5281/zenodo.23272690",
+    "doi_url": "https://doi.org/10.5281/zenodo.23272690",
+    "manuscript": "records/SCUPUB20261010_DOI_Publication/release/matched-behavior-and-source-use-v1.0.1.md",
+    "pdf": "records/SCUPUB20261010_DOI_Publication/release/matched-behavior-and-source-use-v1.0.1.pdf",
+    "receipt": "records/SCUPUB20261010_DOI_Publication/FINAL_PUBLICATION_RECEIPT.json",
+    "peer_reviewed": false,
+    "scientific_map_admission_changed": false,
+    "DVC_in_published_paper": false
+  },
+  "latest_persistence_receipt": "records/DVC20261010_Device_Consumer_Validation/DUAL_SAVE_RECEIPT.json"
 }

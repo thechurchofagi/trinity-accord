@@ -1,0 +1,358 @@
+{
+  "review": "BOUNDED_PUBLICATION_COVERAGE_NOT_SCIENTIFIC_REPROOF",
+  "utc": "2026-10-10T02:21:54.280174+00:00",
+  "sources": [
+    {
+      "path": "publication/UCT-PUB-v1.0.21/CLAIM_COVERAGE_DELTA.json",
+      "sha256": "76ad94070418223c24c41bbb1650ccd7972265a0990e162b43e34b5ddc1afaf7",
+      "bytes": 47196
+    },
+    {
+      "path": "publication/UCT-PUB-v1.0.21/CLAIM_ID_INDEX.json",
+      "sha256": "db5b79324f6e405880696b40b6a90311f54f40fd3885eb1f55e2a838a9659fea",
+      "bytes": 295029
+    },
+    {
+      "path": "publication/UCT-PUB-v1.0.21/COVERAGE_LEDGER.json",
+      "sha256": "43b5ac497b180bda50e6fa09483683544dd6d670613085d28048a033c915a0cb",
+      "bytes": 21620
+    },
+    {
+      "path": "publication/UCT-PUB-v1.0.21/PUBLISHED_WORKS_AND_VERSIONS.json",
+      "sha256": "25613b808ffadcea15c792f156e82c32c09a8e12cd9da4c84dbe5ce888cba68e",
+      "bytes": 417951
+    },
+    {
+      "path": "records/SCUPUB20261010_DOI_Publication/release/reproducibility-v1.0.1.zip",
+      "sha256": "80c6839b05da8ca3095f3d2941f837a2bcd8cd81d66e294eb0b4a0f4d6191c06",
+      "bytes": 114649
+    },
+    {
+      "path": "records/SCUPUB20261010_DOI_Publication/release/matched-behavior-and-source-use-v1.0.1.md",
+      "sha256": "8fa23cbe9440922f6f56506e5415d17c47875972bdbde1b9428c0fafaaa425ab",
+      "bytes": 45968
+    },
+    {
+      "path": "records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/RESEARCH_NOTE.md",
+      "sha256": "4f86be11aaf5b7eb487f637aa76e22dd6c8921b22a5289d7038eeb05e96e1f64",
+      "bytes": 11604
+    }
+  ],
+  "zip_member_count": 41,
+  "delta_count": 42,
+  "unique_delta_ids": 42,
+  "scu_exact_comparisons": [
+    {
+      "id": "SCU20261010-C1",
+      "published_statement_exact": true,
+      "published_scope_exact": true
+    },
+    {
+      "id": "SCU20261010-C2",
+      "published_statement_exact": true,
+      "published_scope_exact": true
+    },
+    {
+      "id": "SCU20261010-C3",
+      "published_statement_exact": true,
+      "published_scope_exact": true
+    },
+    {
+      "id": "SCU20261010-C4",
+      "published_statement_exact": true,
+      "published_scope_exact": true
+    },
+    {
+      "id": "SCU20261010-C5",
+      "published_statement_exact": true,
+      "published_scope_exact": true
+    },
+    {
+      "id": "SCU20261010-C6",
+      "published_statement_exact": true,
+      "published_scope_exact": true
+    },
+    {
+      "id": "SCU20261010-C7",
+      "published_statement_exact": true,
+      "published_scope_exact": true
+    },
+    {
+      "id": "SCU20261010-C8",
+      "published_statement_exact": true,
+      "published_scope_exact": true
+    }
+  ],
+  "correction_exact_comparisons": [
+    {
+      "id": "R194:COMPONENT_COUNT",
+      "kind": "override",
+      "published_fields_exact": true,
+      "old_hash_exact": true,
+      "attachment": "corrections/R194_EFFECTIVE_CORRECTION_OVERLAY.json"
+    },
+    {
+      "id": "R194:r_component_count",
+      "kind": "override",
+      "published_fields_exact": true,
+      "old_hash_exact": true,
+      "attachment": "corrections/R194_EFFECTIVE_CORRECTION_OVERLAY.json"
+    },
+    {
+      "id": "R194:RELATIVE_ALIGNMENT",
+      "kind": "override",
+      "published_fields_exact": true,
+      "old_hash_exact": true,
+      "attachment": "corrections/R194_EFFECTIVE_CORRECTION_OVERLAY.json"
+    },
+    {
+      "id": "SCU20261010:CORR_R194_ANCHORED_GRAPH_DOMAIN",
+      "kind": "node",
+      "published_statement_exact": true,
+      "attachment": "corrections/R194_EFFECTIVE_CORRECTION_OVERLAY.json"
+    },
+    {
+      "id": "R201:STRICTNESS_COUNTERMODELS",
+      "kind": "override",
+      "published_fields_exact": true,
+      "old_hash_exact": true,
+      "attachment": "corrections/R201_EFFECTIVE_CORRECTION_OVERLAY.json"
+    },
+    {
+      "id": "R201:r_strictness_witnesses",
+      "kind": "override",
+      "published_fields_exact": true,
+      "old_hash_exact": true,
+      "attachment": "corrections/R201_EFFECTIVE_CORRECTION_OVERLAY.json"
+    },
+    {
+      "id": "SCU20261010:CORR_R201_COHERENT_WITNESS_DOMAIN",
+      "kind": "node",
+      "published_statement_exact": true,
+      "attachment": "corrections/R201_EFFECTIVE_CORRECTION_OVERLAY.json"
+    },
+    {
+      "id": "R202:CONDITIONAL_NONDIFFERENTIALITY",
+      "kind": "override",
+      "published_fields_exact": true,
+      "old_hash_exact": true,
+      "attachment": "corrections/R202_EFFECTIVE_CORRECTION_OVERLAY.json"
+    },
+    {
+      "id": "R202:AUDIT_INVERSION_RESULT",
+      "kind": "override",
+      "published_fields_exact": true,
+      "old_hash_exact": true,
+      "attachment": "corrections/R202_EFFECTIVE_CORRECTION_OVERLAY.json"
+    },
+    {
+      "id": "R202:r_audit_inversion",
+      "kind": "override",
+      "published_fields_exact": true,
+      "old_hash_exact": true,
+      "attachment": "corrections/R202_EFFECTIVE_CORRECTION_OVERLAY.json"
+    },
+    {
+      "id": "SCU20261010:CORR_R202_JOINT_AUDIT_LAW",
+      "kind": "node",
+      "published_statement_exact": true,
+      "attachment": "corrections/R202_EFFECTIVE_CORRECTION_OVERLAY.json"
+    },
+    {
+      "id": "SCU20261010:CORR_R202_ZERO_RESIDUAL",
+      "kind": "node",
+      "published_statement_exact": true,
+      "attachment": "corrections/R202_EFFECTIVE_CORRECTION_OVERLAY.json"
+    },
+    {
+      "id": "SCU20261010:CORR_R202_COMMON_RESIDUAL_BOUND",
+      "kind": "node",
+      "published_statement_exact": true,
+      "attachment": "corrections/R202_EFFECTIVE_CORRECTION_OVERLAY.json"
+    },
+    {
+      "id": "SCU20261010:CORR_R202_COMMON_RESIDUAL_SET",
+      "kind": "node",
+      "published_statement_exact": true,
+      "attachment": "corrections/R202_EFFECTIVE_CORRECTION_OVERLAY.json"
+    },
+    {
+      "id": "SCU20261010:corr_r202_zero_residual_inversion",
+      "kind": "rule",
+      "published_statement_exact": true,
+      "attachment": "corrections/R202_EFFECTIVE_CORRECTION_OVERLAY.json"
+    },
+    {
+      "id": "SCU20261010:corr_r202_bounded_residual_set",
+      "kind": "rule",
+      "published_statement_exact": true,
+      "attachment": "corrections/R202_EFFECTIVE_CORRECTION_OVERLAY.json"
+    }
+  ],
+  "index_size": 1650,
+  "all_42_delta_index_pointers_and_statuses_match": true,
+  "publication_count_fields_equal": true,
+  "counts": {
+    "distinct_research_works": 29,
+    "distinct_research_work_version_label_pairs": 39,
+    "distinct_published_research_doi_records": 40,
+    "separate_editorial_supplement_works": 1,
+    "separate_editorial_doi_records": 1,
+    "all_verified_publication_doi_records_including_editorial": 41,
+    "uninspected_live_account_drafts": "NOT_ENUMERATED",
+    "reserved_only_records_within_verified_publication_records": 0
+  },
+  "incremental_audit_scope": {
+    "base_inventory": {
+      "path": "publication/UCT-PUB-v1.0.0/PUBLISHED_WORKS_AND_VERSIONS.json",
+      "bytes": 412824,
+      "sha256": "a442b3c6fc437c16d264efb4958cd914c812f82335babe88570335317fbfa5a9"
+    },
+    "current_parent_research": "bd66a621949948d49788243e7fa8313f1256dfbb",
+    "current_main_checked": "6cfb89f0b88605da9a44da9c97203729a6742894",
+    "counts_are": "Frozen verified census plus this one separately verified publication; not a new global census.",
+    "prior_read_scope_preserved": true
+  },
+  "scientific_code_rerun_in_this_bounded_review": false,
+  "remote_mutations": false,
+  "publication_artifacts_modified": false,
+  "initial_findings_retained_for_history": [
+    "Required coverage location correction: R204-C2 is natural/null update and forced mismatch (body section 3.2), not successful-output quartet.",
+    "Required coverage location and scope correction: R204-C3 is covariance/mixture; finite executable subcases are published, full historical narrative/general scope is not.",
+    "R205:C4 partial-body-plus-executable status is appropriately limited."
+  ],
+  "final_verification": {
+    "utc": "2026-10-10T02:23:05.401192+00:00",
+    "status": "REQUIRED_CORRECTIONS_CLOSED_BOUNDED_COVERAGE_REVIEW_COMPLETE",
+    "claim_delta_sha256": "e3c76a81c2a5779014038e0806f78b416f25ac45d11d8441dabf55a08a7903c8",
+    "selected_rows": [
+      {
+        "claim_id": "R204-C1",
+        "publication_status": "FORMALLY_PUBLICLY_DISCLOSED_WITH_EXTENT_BELOW",
+        "coverage_status": "SCOPED_BODY_AND_OR_EXECUTABLE_SUPPLEMENT_DISCLOSURE",
+        "body_or_attachment_location": "Section 3.1, finite success/alignment/use separation and successful-output quartet",
+        "work_id": "SCU-PAPER",
+        "version": "1.0.1",
+        "doi": "10.5281/zenodo.23272690",
+        "novelty_status": "INHERITED_WORKSPACE_APPLICATION_NOT_NEW_THIS_TURN",
+        "scope_rule": "Only the located claim and published finite code/result scope; a citation does not publish the whole historical record.",
+        "actual_application_established": false
+      },
+      {
+        "claim_id": "R204-C2",
+        "publication_status": "FORMALLY_PUBLICLY_DISCLOSED_WITH_EXTENT_BELOW",
+        "coverage_status": "SCOPED_BODY_AND_OR_EXECUTABLE_SUPPLEMENT_DISCLOSURE",
+        "body_or_attachment_location": "Section 3.2, natural null-update ambiguity and forced mismatch inference with joint port/writer/readout premises",
+        "work_id": "SCU-PAPER",
+        "version": "1.0.1",
+        "doi": "10.5281/zenodo.23272690",
+        "novelty_status": "INHERITED_WORKSPACE_APPLICATION_NOT_NEW_THIS_TURN",
+        "scope_rule": "Only the located claim and published finite code/result scope; a citation does not publish the whole historical record.",
+        "actual_application_established": false
+      },
+      {
+        "claim_id": "R204-C3",
+        "publication_status": "FORMALLY_PUBLICLY_DISCLOSED_WITH_EXTENT_BELOW",
+        "coverage_status": "PARTIAL_BODY_PLUS_EXECUTABLE_WITNESS_NOT_FULL_NARRATIVE_PROOF",
+        "body_or_attachment_location": "Section 7.4 provides general transport discussion and Section 8 reports computation counts. Formal ZIP reproduction/baseline_R204/check_alignment_and_use.py and EXACT_RESULTS.json disclose port-recoding witnesses for n=2,3,4 (333088 checks) and a uniform-action rational mixture grid lambda in {0,0.1,...,1} (6776 checks). The original full C3 narrative and continuous-lambda formula are not fully restated in this published paper.",
+        "work_id": "SCU-PAPER",
+        "version": "1.0.1",
+        "doi": "10.5281/zenodo.23272690",
+        "novelty_status": "INHERITED_WORKSPACE_APPLICATION_NOT_NEW_THIS_TURN",
+        "scope_rule": "Only the located claim and published finite code/result scope; a citation does not publish the whole historical record.",
+        "actual_application_established": false
+      },
+      {
+        "claim_id": "R205:C2",
+        "publication_status": "FORMALLY_PUBLICLY_DISCLOSED_WITH_EXTENT_BELOW",
+        "coverage_status": "SCOPED_BODY_AND_OR_EXECUTABLE_SUPPLEMENT_DISCLOSURE",
+        "body_or_attachment_location": "Sections 4–5, pure selector recovery under the declared intervention/readout contract; the original two-probe finite implementation is disclosed in reproducibility-v1.0.1.zip: reproduction/baseline_R205/exact_probe.py and EXACT_RESULTS.json",
+        "work_id": "SCU-PAPER",
+        "version": "1.0.1",
+        "doi": "10.5281/zenodo.23272690",
+        "novelty_status": "INHERITED_WORKSPACE_APPLICATION_NOT_NEW_THIS_TURN",
+        "scope_rule": "Only the located claim and published finite code/result scope; a citation does not publish the whole historical record.",
+        "actual_application_established": false
+      },
+      {
+        "claim_id": "R205:C4",
+        "publication_status": "FORMALLY_PUBLICLY_DISCLOSED_WITH_EXTENT_BELOW",
+        "coverage_status": "PARTIAL_BODY_PLUS_EXECUTABLE_WITNESS_NOT_FULL_NARRATIVE_PROOF",
+        "body_or_attachment_location": "Section 7.4 gives general transport discussion; specific compensated-recoding finite witness in reproduction/baseline_R205 code/results",
+        "work_id": "SCU-PAPER",
+        "version": "1.0.1",
+        "doi": "10.5281/zenodo.23272690",
+        "novelty_status": "INHERITED_WORKSPACE_APPLICATION_NOT_NEW_THIS_TURN",
+        "scope_rule": "Only the located claim and published finite code/result scope; a citation does not publish the whole historical record.",
+        "actual_application_established": false
+      }
+    ],
+    "counting_decisions": [
+      {
+        "file": "COVERAGE_LEDGER.json",
+        "counting_decisions": [
+          "Frozen v1.0.0 census decision, retained as provenance: TA01–TA25 are 25 works; TA14-BRIDGE is a separate standalone work; MGTD and RTTH add one work each: 28 research works.",
+          "Frozen v1.0.0 census decision, retained as provenance: UCT I has two verified DOI records both labeled v1.1, 23029358 and 23030207; they remain one work and one version label, but two published deposit records. Current preferred edition is v1.2 DOI23131575.",
+          "Frozen v1.0.0 census decision, retained as provenance: MGTD v1.0.0 DOI23241205 and v1.0.1 DOI23241982 are one methods work, two versions. Report label METHOD20261008 is used rather than inventing a TA26 identifier.",
+          "Frozen v1.0.0 census decision, retained as provenance: RT-TH-2026-01 and RT20261009 receipts describe the same work/version/DOI23251651, not two papers.",
+          "Frozen v1.0.0 census decision, retained as provenance: Editorial DOI22839629 is separately counted. Project-level metadata DOI21675727 and concept DOIs are not independent research-paper works or manuscript versions.",
+          "Frozen v1.0.0 census decision, retained as provenance: DOI resolver lag and OTS/Arweave preservation status do not reverse a submitted published deposit with public-readback receipt. A reserved DOI alone would not establish publication.",
+          "Current verified corpus adds one SCU work/version/DOI: 28+1=29 research works, 38+1=39 work/version label pairs, 39+1=40 research DOI records, plus one separate editorial DOI = 41 records. This is a base-plus-delta update, not a new global census."
+        ],
+        "counts": {
+          "distinct_research_works": 29,
+          "distinct_research_work_version_label_pairs": 39,
+          "distinct_published_research_doi_records": 40,
+          "separate_editorial_supplement_works": 1,
+          "separate_editorial_doi_records": 1,
+          "all_verified_publication_doi_records_including_editorial": 41,
+          "uninspected_live_account_drafts": "NOT_ENUMERATED",
+          "reserved_only_records_within_verified_publication_records": 0
+        }
+      },
+      {
+        "file": "PUBLISHED_WORKS_AND_VERSIONS.json",
+        "counting_decisions": [
+          "Frozen v1.0.0 census decision, retained as provenance: TA01–TA25 are 25 works; TA14-BRIDGE is a separate standalone work; MGTD and RTTH add one work each: 28 research works.",
+          "Frozen v1.0.0 census decision, retained as provenance: UCT I has two verified DOI records both labeled v1.1, 23029358 and 23030207; they remain one work and one version label, but two published deposit records. Current preferred edition is v1.2 DOI23131575.",
+          "Frozen v1.0.0 census decision, retained as provenance: MGTD v1.0.0 DOI23241205 and v1.0.1 DOI23241982 are one methods work, two versions. Report label METHOD20261008 is used rather than inventing a TA26 identifier.",
+          "Frozen v1.0.0 census decision, retained as provenance: RT-TH-2026-01 and RT20261009 receipts describe the same work/version/DOI23251651, not two papers.",
+          "Frozen v1.0.0 census decision, retained as provenance: Editorial DOI22839629 is separately counted. Project-level metadata DOI21675727 and concept DOIs are not independent research-paper works or manuscript versions.",
+          "Frozen v1.0.0 census decision, retained as provenance: DOI resolver lag and OTS/Arweave preservation status do not reverse a submitted published deposit with public-readback receipt. A reserved DOI alone would not establish publication.",
+          "Current verified corpus adds one SCU work/version/DOI: 28+1=29 research works, 38+1=39 work/version label pairs, 39+1=40 research DOI records, plus one separate editorial DOI = 41 records. This is a base-plus-delta update, not a new global census."
+        ],
+        "counts": {
+          "distinct_research_works": 29,
+          "distinct_research_work_version_label_pairs": 39,
+          "distinct_published_research_doi_records": 40,
+          "separate_editorial_supplement_works": 1,
+          "separate_editorial_doi_records": 1,
+          "all_verified_publication_doi_records_including_editorial": 41,
+          "uninspected_live_account_drafts": "NOT_ENUMERATED",
+          "reserved_only_records_within_verified_publication_records": 0
+        }
+      }
+    ],
+    "all_42_index_pointers_and_statuses_still_match": true,
+    "frozen_release_unchanged": true,
+    "scope_extended": false,
+    "final_input_hashes": [
+      {
+        "path": "publication/UCT-PUB-v1.0.21/CLAIM_COVERAGE_DELTA.json",
+        "sha256": "e3c76a81c2a5779014038e0806f78b416f25ac45d11d8441dabf55a08a7903c8"
+      },
+      {
+        "path": "publication/UCT-PUB-v1.0.21/CLAIM_ID_INDEX.json",
+        "sha256": "11acaf29aaacc745dba51a1d51519d7c5708f1e49a8d104a5203e5de224b5b30"
+      },
+      {
+        "path": "publication/UCT-PUB-v1.0.21/COVERAGE_LEDGER.json",
+        "sha256": "43b5ac497b180bda50e6fa09483683544dd6d670613085d28048a033c915a0cb"
+      },
+      {
+        "path": "publication/UCT-PUB-v1.0.21/PUBLISHED_WORKS_AND_VERSIONS.json",
+        "sha256": "25613b808ffadcea15c792f156e82c32c09a8e12cd9da4c84dbe5ce888cba68e"
+      }
+    ]
+  }
+}

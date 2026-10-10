@@ -1,0 +1,228 @@
+FIELDS
+F1=/scope
+F3=LEDGER/semantic_review/assessment/targeted_item_assessment
+F43=/quantifiers
+F44=/limits
+NEW EXACT VALUES (old V references retain already-read meanings)
+V669="Fixed target, interval, information boundary, field and coding/reader contract declared in the cited section."
+V670="Only four memory registers are observed; clocks, transfer machinery and random-source mechanisms are not asserted identical or absent."
+V671="Not a unique actual consciousness core, a lesion criterion, numerical subjective identity or elimination of all stable necessary mechanisms."
+V672="Intermediate complete joint snapshots, cross-register histories, full physical organizations and action outputs are NOT all matched."
+V673="Source law and reader access are fixed; no named experience or real brain deficit is assigned."
+V674="The scalar is task-specific and not a phenomenal coordinate. Nonlinear source encoding, nonuniform priors or extra observations require different formulas."
+V675="rho is source discrimination modulo nuisance, not consciousness, complexity or subject count."
+V676="All estimators included only on this fixed finite uniform linear channel, not arbitrary neural/LLM channels."
+V677="Marginal independence from tau alone is insufficient. Actual cut completeness needs independent grounding."
+V678="This is information loss relative to the task boundary, not loss of experience; access to an omitted helper invalidates the premise."
+V679="A finite linear no-new-noise specialization, not arbitrary perturbation of an actual brain."
+V680="K0,K1 are source-difference kernels, not physical constituents or subjects."
+V681="The installed complete decision policy can be worse than optimal decoding of Z."
+V682="The distinction does not turn an analyst decoder into an installed mechanism."
+V683="Resetting an error law after physical rewiring is not passive recoding."
+V684="No full phenomenal invariance follows solely from one matching rho."
+V685="Both flip marginals are fair, but joint law varies. This is a family of distinct physical-model channels."
+V686="The criterion is not a basal-experience threshold. Epsilon=1 is invertible miscoding, not information destruction."
+V687="Error independence across stages, not merely equal marginals, is required."
+V688="Number of operations is not automatically physical duration or experienced time."
+V689="Refutes target-independent noise as sufficient for irreversible loss; does not refute complete-cut data processing."
+V690="Distinct occurrences are not identified by equal values; source-to-output effects are not a universal actual-cause definition."
+V691="No contradiction of complete-interface composition; the changed joint consumer is part of the organization."
+V692="Mathematical source/readout laws and successful finite tests do not discharge this premise."
+V693="Do not mix optimal-capacity comparisons with different fixed policies or different resource boundaries."
+V694="No named feeling, intensity ranking, exclusive subject or independent validation of C1 follows."
+V695="Do not infer unchanged complete local experience or physical survival from software persistence alone."
+V696="No memory, rank, report, coherence or synchrony threshold for basal experience."
+V697="Has not been supplied in this checkpoint."
+V698="No particular human feeling is inferred here."
+V699="One finite joint law, one full target T, one earlier accessible record X, one deadline and the entire newly admitted transcript. Conditional laws and decoder class remain fixed within each comparison."
+V700="Not an empirical declaration that a measured neural record is a complete physical cut."
+V701="Timing, silence, sender identity, variable length and recalled correlated state must be counted when informative."
+V702="Independence from T alone is not sufficient; no omitted shared key or source path."
+V703="An optimal list-success functional, not consciousness amount or mutual information."
+V704="Requires CONTRACT, ALPHABET, MEDIATION jointly. Arbitrary one-reader failure is not an upper bound on G_1."
+V705="No actual neural or silicon encoder with this access is established."
+V706="Direct nonduplication anchor: the encoder is explicitly allowed to inspect BOTH T and X. Its achievability class is an enlarged hypothetical helper class. The proposed source-only model removes X from the encoder information set; it must not assert that the inherited theorem made an unqualified physical achievability claim."
+V707="Tightness is relative to this unrestricted helper class; not every K-symbol physical pathway attains it."
+V708="Keep this theorem unchanged. The top-K construction is sharp under HELPER, which has T and X, and not for every physical K-symbol channel. A gap for one source-only encoder is compatible and supplies a new quantified specialization, not a refutation of this sharpness theorem."
+V709="A sample accuracy or a fitted model without confidence/realization evidence does not discharge the premise."
+V710="Excess recovery rejects the joint contract, not uniquely one mechanism; target-specific bound."
+V711="The displayed five-state prior, constant X, K in {1,...,5}."
+V712="The coarse ceil(s/p0) lower bound is only two; this example is not a human statistic."
+V713="One TH affine finite-field law instantiated jointly with the same RB target/view/transcript."
+V714="The original rho is a target discrimination dimension, not a substrate or experiential measure."
+V715="Applies to the full incoming transcript. It is stronger than saying a packet has b payload bits."
+V716="Necessary information/deadline budget only; computational or physical implementation can require more."
+V717="The fixed masked-word model, 0<=k<=d; key and reader availability are distinct."
+V718="No recovery can be inferred for the brain from the mathematical model alone."
+V719="Same uniform target and actual-toy decoder interface."
+V720="Data-processing is not violated: the key is additional source-relevant information conditional on C."
+V721="This is an explicit pair of physical-model architectures; equal eventual recall alone is not a fixed deadline-capacity comparison."
+V722="Same deadline distribution and target; routes are physically stipulated parts of the compared models."
+V723="Endpoint equality does not identify continuous accessibility; does not imply a gap in experience."
+V724="Delta must be independently bounded; not set from the desired recovery score."
+V725="A robustness envelope, not empirical identification of the violated mechanism."
+V726="A statistical certificate is not supplied by storing an estimate in the map."
+V727="Same finite target/view labels and admissible lists on both laws."
+V728="One uniform four-state target and invertible code."
+V729="Observed poor decoding cannot establish complete representational absence."
+V730="Four distinguishable arrival slots, no noise."
+V731="Controls the premise of the deadline theorem, not an alternative derivation bypassing it."
+V732="Specific finite prior and coarsened target; the two tasks are explicitly distinct."
+V733="Do not apply the full-T lower bound to a changed task U."
+V734="All RB and TH applications."
+V735="This does not retract U1/P3 or make a subject selector a prerequisite for research."
+V736="UCT research-method choice; no deductive ontology."
+V737="For one complete jointly instantiated comparison of the stated state, ports, future inputs, horizon and observation metric; no cross-model premise splicing."
+V738="A finite mathematical result; no actual neural/phenomenal bearer or feeling established."
+V739="Fixed finite-dimensional LTI system, one prepared matched episode, declared installed local write ports, one calibrated observation clock, fixed common future input, no compensation before the selected horizon."
+NODES
+TH20261009:HANDOFF_MODEL | MODEL_ASSUMPTION | Fair source tau and independent fair eta,xi,zeta. Initially (A,B,C,D)=(tau XOR eta,eta,0,0). Copy to new C,D before clearing A,B. New values use common, reversed-common or independent flips. Fixed XOR reader or explicitly compensated reader.
+F1=V669 F44=V670
+TH20261009:MIGRATION | FINITE_CONSTRUCTION | Shared-flip handoff preserves tau while endpoint minimal decoding supports change from {A,B} to disjoint {C,D}.
+F1=V669 F44=V671
+TH20261009:MATCHED_RECORDS | FINITE_CONSTRUCTION | All variants have identical conditional single-register three-time history laws and identical unconditional complete-register endpoint snapshot distributions.
+F1=V669 F44=V672
+TH20261009:THREE_WAY_DISSOCIATION | FINITE_RESULT | Shared/common-reversed/independent flip with an unchanged XOR reader has accuracy 1,0,1/2 respectively; best final-state decoder accuracy is 1,1,1/2. Reversed plus compensated reader has accuracy 1.
+F1=V669 F44=V673
+TH20261009:FIELD_CONTRACT | MODEL_ASSUMPTION | Over F_q, tau is uniform in d dimensions and eta independently uniform in k dimensions; X=H tau+G eta+b is the entire admitted observation. H,G,b known, b fixed; objective is whole-target correct recovery.
+F1=V669 F44=V674
+TH20261009:RECOVERY_RANK | DEFINITION | rho(H,G)=rank([G H])-rank(G).
+F1=V669 F44=V675
+TH20261009:BAYES_RECOVERY | CONDITIONAL_THEOREM | Under FIELD_CONTRACT, optimal whole-source recovery accuracy is q^(rho-d); perfect recovery iff rho=d iff a linear D satisfies DH=I and DG=0 after offset removal.
+F1=V669 F44=V676
+TH20261009:FRESH_TRANSITION | MODEL_ASSUMPTION | Xplus=F X+E xi+c with xi uniform and independent of the complete source/noise history; next observer has no side source. Hplus=F H, Gplus=[F G E].
+F1=V669 F44=V677
+TH20261009:NO_REGENERATION | CONDITIONAL_THEOREM | rho_next<=rho_current. No downstream processing with the same complete-cut Markov property recovers erased source distinctions without new information.
+F1=V669 F44=V678
+TH20261009:LOSS_SETUP | MODEL_ASSUMPTION | Same FIELD_CONTRACT and deterministic linear F with no added noise; K0={v:Hv in im G}, K1={v:Hv in im G+ker F}.
+F1=V669 F44=V679
+TH20261009:EXACT_LOSS | CONDITIONAL_THEOREM | rho(H,G)-rho(FH,FG)=dim K1-dim K0.
+F1=V669 F44=V680
+TH20261009:READOUT_SETUP | MODEL_ASSUMPTION | A fixed actual-toy linear port observes Z=R X in FIELD_CONTRACT and no other channel.
+F1=V669 F44=V681
+TH20261009:STORED_VS_READ | CONDITIONAL_THEOREM | rho_port=rank([R G R H])-rank(R G)<=rho_stored; its best whole-target decoder has accuracy q^(rho_port-d).
+F1=V669 F44=V682
+TH20261009:COORDINATE_SETUP | MODEL_ASSUMPTION | S is invertible; signal,nuisance,offset,downstream reader,interventions and timing are all transported as required for the same physical question.
+F1=V669 F44=V683
+TH20261009:COORDINATE_INVARIANCE | CONDITIONAL_THEOREM | rho(SH,SG)=rho(H,G); transporting the reader preserves the task.
+F1=V669 F44=V684
+TH20261009:CORRELATION_SETUP | MODEL_ASSUMPTION | In HANDOFF_MODEL use Z1=xi,Z2=xi XOR E, E independent of the past with Bernoulli(epsilon), 0<=epsilon<=1. Reader sees final C,D only.
+F1=V669 F44=V685
+TH20261009:CORRELATION_LAW | CONDITIONAL_THEOREM | Unchanged XOR-reader accuracy is 1-epsilon; best final-state decoding is max(epsilon,1-epsilon).
+F1=V669 F44=V686
+TH20261009:FRESH_CHAIN | MODEL_ASSUMPTION | Perform k handoffs with independent parity errors E_i of rates epsilon_i and no additional retained helper/source.
+F1=V669 F44=V687
+TH20261009:CHAIN_LAW | CONDITIONAL_THEOREM | Optimal final target recovery is (1+abs(product_i(1-2epsilon_i)))/2.
+F1=V669 F44=V688
+TH20261009:REUSED_MASK | COUNTEREXAMPLE | With tau,E independent fair bits, X1=tau XOR E and X2=X1 XOR E recover tau perfectly after an intermediate marginal with chance accuracy. The complete cut (X1,E) was always sufficient.
+F1=V669 F44=V689
+TH20261009:DUPLICATE_SETUP | MODEL_ASSUMPTION | Two physically distinct toy registers retain U=V=tau; compare fixed XOR versus one-branch consumer, with the original source fair.
+F1=V669 F44=V690
+TH20261009:DUPLICATE_CANCEL | FINITE_COUNTEREXAMPLE | Stored rank is 1, XOR-port rank is 0, and one-branch-port rank is 1; adding a correct redundant source path can spoil a selected consumer while local storage persists.
+F1=V669 F44=V691
+TH20261009:ACTUAL_REALIZATION | OPEN_PHYSICAL_BRIDGE | One real comparison independently supplies actual tokens, complete compatible K, interval, faithful transition/noise/source/cut and installed reader, and an admissible isomorphism-invariant fixed capability evaluation.
+F1=V669 F44=V692
+TH20261009:FIXED_REAL_J_DIFFERENCE | OPEN_APPLICATION_OBLIGATION | The same true actual J differs in the two physical systems under that common evaluation contract; a sample difference or changed evaluator is insufficient.
+F1=V669 F44=V693
+TH20261009:EXPERIENTIAL_TYPE | CONDITIONAL_UCT_APPLICATION | Under C1/C:P1 with ACTUAL_REALIZATION and FIXED_REAL_J_DIFFERENCE, complete experiential structural types differ.
+F1=V669 F44=V694
+TH20261009:ACTUAL_LOCAL_PERSISTENCE | OPEN_PHYSICAL_BRIDGE | A specified local actual process continues during the handoff under UCT I P3; loss of its target coding is not termination by definition.
+F1=V669 F44=V695
+TH20261009:LOCAL_EXPERIENCE | CONDITIONAL_UCT_APPLICATION | U1 continues to apply to any local process satisfying ACTUAL_LOCAL_PERSISTENCE, regardless of target recoverability or reader success.
+F1=V669 F44=V696
+TH20261009:NAMED_TARGET_BRIDGE | OPEN_SEMANTIC_BRIDGE | Independently fix and validate correspondence to a selected experiential target rather than rename tau, rho, or a correct answer as a quale.
+F1=V669 F44=V697
+TH20261009:NAMED_TARGET_CLAIM | OPEN_CONDITIONAL_TARGET | A selected named experiential interpretation requires NAMED_TARGET_BRIDGE in addition to the actual structural comparison.
+F1=V669 F44=V698
+RB20261009:CONTRACT | MODEL_ASSUMPTION | T,X,Z are finite; P_TX is specified. T is the full target. Z records all later source-relevant arrivals before the fixed deadline, not only payload bits.
+F1=V699 F44=V700
+RB20261009:ALPHABET | MODEL_ASSUMPTION | For every x with positive probability, the support of Z conditional on X=x has at most the positive integer K elements.
+F1=V699 F44=V701
+RB20261009:MEDIATION | MODEL_ASSUMPTION | For this same law P(Y|T,X,Z)=W(Y|X,Z); all additional randomness obeys the corresponding conditional source-screening relation.
+F1=V699 F44=V702
+RB20261009:TOPK | DEFINITION | G_K(T|X)=sum_x sum of the min(K,|T|) largest joint masses P(T=t,X=x). G_1=p_guess(T|X).
+F1=V699 F44=V703
+RB20261009:BOUND | CONDITIONAL_THEOREM | Pr(Y=T)<=p_guess(T|X,Z)<=G_K(T|X)<=min(1,K*G_1(T|X)).
+F1=V699 F44=V704
+RB20261009:HELPER | MODEL_ASSUMPTION | For the achievability comparison, a hypothetical unrestricted helper encoder is allowed to inspect both T and X and send one of K labels.
+F1=V699 F44=V705 F3=V706
+RB20261009:TIGHT | CONDITIONAL_THEOREM | With HELPER, the supremum recovery over allowed helper encoders and decoders equals G_K by labeling the top-K posterior candidates.
+F1=V699 F44=V707 F3=V708
+RB20261009:CERTIFIED_SUCCESS | OPEN_APPLICATION_OBLIGATION | The true success s, posterior law or certified bounds on it, complete transcript cap, mediation and deadline have been independently justified for this same comparison.
+F1=V699 F44=V709
+RB20261009:INVERSE | CONDITIONAL_THEOREM | A correctly specified comparison achieving success s requires K>=min{k:G_k>=s}, and hence K>=ceil(s/G_1).
+F1=V699 F44=V710
+RB20261009:NONUNIFORM | FINITE_CONSTRUCTION | For target prior (3/5,1/10,1/10,1/10,1/10) and constant X, G_1..G_5=(3/5,7/10,4/5,9/10,1). Success>=9/10 requires at least four transcript values.
+F1=V711 F44=V712
+RB20261009:UNIFORM_RESIDUAL | CONDITIONAL_THEOREM | Under TH FIELD_CONTRACT, every supported X leaves M=q^(d-rho) equiprobable T values; therefore G_K=min(1,K/M), and perfect full-target recovery requires K>=M.
+F1=V713 F44=V714
+RB20261009:SLOTS | MODEL_ASSUMPTION | All newly informative input uses at most Delta fixed slots of b binary symbols each. There are no uncounted timing, silence, variable-length, identity or hidden-source channels.
+F1=V699 F44=V715
+RB20261009:DEADLINE_BOUND | CONDITIONAL_THEOREM | Under UNIFORM_RESIDUAL and SLOTS, success<=min(1,2^(b*Delta)/M). Perfect recovery requires b*Delta>=log2 M.
+F1=V699 F44=V716
+RB20261009:KEY_MODEL | MODEL_ASSUMPTION | T and E are independent uniform d-bit words, C=T XOR E; E physically persists in the larger model. The selected reader sees C and only the declared k key bits by its deadline.
+F1=V717 F44=V718
+RB20261009:KEY_CURVE | FINITE_FAMILY_RESULT | In KEY_MODEL, optimal recovery is 2^(k-d). For d=2, no key/one key bit/full key gives 1/4,1/2,1.
+F1=V719 F44=V720
+RB20261009:DELAY_SETUP | MODEL_ASSUMPTION | Instantiate the two-bit KEY_MODEL in two allowed circuits: key available immediately versus first available at L=2; both face the same independent uniform deadline D in {0,1,2,3}, and no other target side input.
+F1=V699 F44=V721
+RB20261009:DELAY_WITNESS | FINITE_COUNTEREXAMPLE | For d=2, key arrival L=2 and common independent uniform deadline D in {0,1,2,3}, the delayed reader scores 5/8 and immediate reader 1, while both have perfect final recovery.
+F1=V722 F44=V723
+RB20261009:APPROX_SETUP | MODEL_ASSUMPTION | The actual law P_TXZY is within total variation delta of Q=P_TXZ*W(Y|XZ), with the same TXZ marginal and the same K transcript cap.
+F1=V699 F44=V724
+RB20261009:APPROX_BOUND | CONDITIONAL_THEOREM | Under APPROX_SETUP, success<=min(1,G_K(P_TX)+delta).
+F1=V699 F44=V725
+RB20261009:PRIOR_SETUP | MODEL_ASSUMPTION | An estimated R_TX obeys TV(P_TX,R_TX)<=epsilon for the same target and observed alphabet.
+F1=V699 F44=V726
+RB20261009:PRIOR_LIPSCHITZ | CONDITIONAL_THEOREM | |G_K(P_TX)-G_K(R_TX)|<=TV(P_TX,R_TX); combining with APPROX_BOUND gives success<=min(1,G_K(R_TX)+delta+epsilon).
+F1=V699 F44=V727
+RB20261009:WRONG_READER | FINITE_COUNTEREXAMPLE | For a uniform two-bit T and X=T XOR 3, the installed reader X scores zero but an inverted reader and Bayes optimum score one.
+F1=V728 F44=V729
+RB20261009:TIMING_CONTROL | FINITE_COUNTEREXAMPLE | A constant pulse sent at one of four target-dependent times recovers a four-valued target; payload-only K=1 is false for the actual transcript, which has K=4.
+F1=V730 F44=V731
+RB20261009:TARGET_CONTROL | FINITE_COUNTEREXAMPLE | With a uniform four-valued T and Z=T mod 2, full-target success is 1/2 while the parity target U=T mod 2 is known exactly.
+F1=V732 F44=V733
+RB20261009:UCT_BOUNDARY | INFERENCE_GUARD | Applying these task relations to C1 needs the old actual-realization and fixed-real-J obligations; no new rule yields experiential absence, intensity, numerical subject continuity or a named quale.
+F1=V734 F44=V735
+OL20261009:RESEARCH_CHARTER | METHOD_CHARTER | Differentiate externally matched competent controllers with distinct actual installed local intervention organization, without turning task success, synchronized values, or a fitted mathematical chart into a phenomenal-existence gate.
+F1=V736 F43=V737 F44=V738
+OL20261009:MODEL | MODEL_ASSUMPTION | Use z(t+1)=Az(t)+Bu(t), y(t)=Cz(t), real n-state LTI recipient; matched source/recipient episode and identical subsequent controls u. No extra controller or later corrective write before evaluation.
+F1=V739 F43=V737 F44=V738
+OL20261009:HORIZON | DEFINITION | O_H=[C;CA;...;CA^(H-1)] and the H-stack of differences is O_H dz, including immediate lag0; only H declared snapshots are judged.
+F1=V739 F43=V737 F44=V738
+OL20261009:SOURCE_KICK | MODEL_ASSUMPTION | A source primitive write transports through admitted I/O-equivalence map to target recipient state displacement v; a passive coordinate relabeling transports ALL primitive write ports and observers too.
+F1=V739 F43=V737 F44=V738
+OL20261009:WRITE_FAMILY | MODEL_ASSUMPTION | For each admitted subset J of <=k physical primitive recipient write coordinates, the recipient may choose ANY instantaneous amplitude E_J a on that set at the declared write instant; supports are fixed physically and cannot be replaced with analyst-chosen virtual coordinates.
+F1=V739 F43=V737 F44=V738
+OL20261009:METRIC | MODEL_ASSUMPTION | A predeclared positive-definite observation precision matrix Q assigns ||r||_Q^2=rTQr, in fixed calibrated output units across both comparisons.
+F1=V739 F43=V737 F44=V738
+OL20261009:GAP | DEFINITION | Gamma_H,k(v)=min_{|J|<=k} inf_{a} ||Q^(1/2) O_H(v-E_J a)||_2. This is an observable counterfactual imitation gap, NOT an experience measure.
+F1=V739 F43=V737 F44=V738
+OL20261009:PROJECTION | CONDITIONAL_THEOREM | For W=O_H^T Q O_H, Gamma^2=min_J vT[W-W E_J(E_J^T W E_J)^+ E_J^T W]v; use Moore-Penrose + when singular. With O_H full column rank and nonempty J, ordinary inverse applies.
+F1=V739 F43=V737 F44=V738
+OL20261009:ZERO | CONDITIONAL_THEOREM | Gamma=0 iff at least one admissible J has O_H v in range(O_H E_J); a zero observed gap can coexist with nonlocal hidden state differences when O_H is rank deficient.
+F1=V739 F43=V737 F44=V738
+OL20261009:OBSERVABLE | MODEL_ASSUMPTION | O_H has full column rank n (the chosen finite observation horizon sees all n state directions). This is a model/measurement assumption, not an actual-brain empirical certificate.
+F1=V739 F43=V737 F44=V738
+OL20261009:SPARSE_IFF | CONDITIONAL_THEOREM | Under OBSERVABLE, Gamma=0 iff there is an admissible <=k-sparse physical write v. If support(v)>k, Gamma>0 for fixed installed write ports and observation metric.
+F1=V739 F43=V737 F44=V738
+OL20261009:NOISE_CONTRACT | MODEL_ASSUMPTION | Each independently observed H-trace is perturbed by an adversarial additive error of Q-norm at most epsilon; both comparisons use the same calibrated Q and same target condition.
+F1=V739 F43=V737 F44=V738
+OL20261009:NOISE_SEPARATION | CONDITIONAL_THEOREM | If Gamma>2epsilon then no recipient admissible single-write trace and source target trace can share one observed outcome within the two epsilon-balls; if Gamma<=2epsilon this test alone does not force distinguishability.
+F1=V739 F43=V737 F44=V738
+OL20261009:COORDINATE_CONTRACT | MODEL_ASSUMPTION | For any passive invertible z=Lzprime, transform Oprime=O L, vprime=L^-1 v and each installed write subspace WJprime=L^-1 WJ; do not repick coordinate-sparse writes after re-description.
+F1=V739 F43=V737 F44=V738
+OL20261009:COVARIANCE | CONDITIONAL_THEOREM | Under COORDINATE_CONTRACT, Gamma is invariant. Using newly stipulated sparse-coordinate ports after a change of coordinates is a DIFFERENT experimental intervention contract.
+F1=V739 F43=V737 F44=V738
+OL20261009:TWIN_MODEL | FINITE_CONSTRUCTION | Source A=diag(1/2,1/4), B=(1,1), C=(1,1); recipient state z=Sx with S=[[1,1],[1,-1]], Arec=[[3/8,1/8],[1/8,3/8]], Brec=(2,0), Crec=(1,0); matched ordinary IO for all input sequences, independently fixed primitive one-component writes.
+F1=V739 F43=V737 F44=V738
+OL20261009:RESET_NONISO | CONDITIONAL_MATHEMATICAL_THEOREM | For TWIN_MODEL with its independently stipulated physical primitive single-component overwrite families, there is no bijection preserving all primitive resets and dynamics between source and recipient. Product reset normal form restricts candidates to factorwise/permutation maps; recipient dynamics are cross-coupled whereas source is coordinatewise autonomous.
+F1=V739 F43=V737 F44=V738
+OL20261009:PREPARED | FINITE_CONSTRUCTION | From source x=(1,2) and recipient z=(3,-1), desired source x1:=0 transports to recipient v=(-1,-1), requiring both primitive target components if physically enacted.
+F1=V739 F43=V737 F44=V738
+OL20261009:HORIZON_EFFECT | FINITE_PROVED_WITNESS | With k=1, Q=I, H=1 gives Gamma=0 because immediate readout may be matched by z1-only write; at H=2, squared optimal gap becomes 1/73 (>0).
+F1=V739 F43=V737 F44=V738
+OL20261009:OPTIMAL_WRITE | FINITE_PROVED_WITNESS | At H=2 source target outputs (2,1/2). Best one-port recipient writes z1:=143/73 give two-readout squared Euclidean discrepancy 1/73; no one-port write attains zero. Old infinity-norm gap 1/11 remains a different norm and is not replaced.
+F1=V739 F43=V737 F44=V738
+OL20261009:UNOBSERVABLE_CONTROL | FINITE_COUNTEREXAMPLE | O_1=[1,0] is rank deficient: the kick v=(-1,-1) and a matching z1-only kick have identical immediate readout although their states differ; instant endpoint agreement is insufficient.
+F1=V739 F43=V737 F44=V738

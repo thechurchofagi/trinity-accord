@@ -1,0 +1,570 @@
+{
+  "schema": "uct-disabled-composite-checkpoint/1",
+  "research_id": "DVC20261010",
+  "result_version": "DVC-RESULT-v0.1.0",
+  "base_release": "UCT-MAP-v1.1.2",
+  "supplied_remote_sha": "8bac31cc0b9fb4c70d87f688dabbadeb6166addb",
+  "source_note": "RESEARCH_NOTE.md",
+  "claim_ledger": "CLAIM_LEDGER.json",
+  "integration_status": "PENDING_CHECKPOINT_DISABLED",
+  "enabled_as_established_premise": false,
+  "actual_application_established": false,
+  "release_effect": "NONE; completed release unchanged. Parent validates concurrent state and whole-map compatibility.",
+  "nodes": [
+    {
+      "id": "DVC20261010:DOMAIN",
+      "kind": "TYPED_MODEL",
+      "statement": "A finite digital event model with distinct source-issue, port-arrival, capture, invalidation, snapshot commit and designated read events. M_D is a device command copy, P_E a device state token; neither is named a human neural input. Availability, payload and actual occurrence are distinct.",
+      "scope": "Declared installation and one total event order; equal ticks use append order.",
+      "quantifier": "All stated premises apply jointly to each declared instance; actual application remains independently open.",
+      "status": "DECLARATION_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "DVC20261010:EVENT_BUFFER_CONTRACT",
+      "kind": "JOINT_MODEL_PREMISE",
+      "statement": "Capture writes the present source token only through an open gate; closure leaves the buffer unchanged; invalidation clears it. A snapshot copies both cells in one excluded/atomic macrostep, remains immutable, and must commit before the selected reads.",
+      "scope": "Sequential reference semantics, not a measured hardware guarantee.",
+      "quantifier": "All stated premises apply jointly to each declared instance; actual application remains independently open.",
+      "status": "DECLARATION_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "DVC20261010:DESIGNATED_READ_CONTRACT",
+      "kind": "CONSUMER_CLASS_PREMISE",
+      "statement": "For C1's both-read conclusion, the selected operation eagerly reads each committed snapshot cell; a missing cell uses an explicitly tagged absence default. Short-circuit, gate-reflex and live-port bypass are distinct classes.",
+      "scope": "An actual read is not inferred from availability, source value zero, or a function table.",
+      "quantifier": "All stated premises apply jointly to each declared instance; actual application remains independently open.",
+      "status": "DECLARATION_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "DVC20261010:GROUNDED_EPISODE_TARGETS",
+      "kind": "SOURCE_BINDING_PREMISE",
+      "statement": "The expected M and P source-origin events, physical lanes and episode relation are fixed independently of fallible packet headers and equal data values.",
+      "scope": "The model stipulates true ancestry; actual installation needs independent evidence.",
+      "quantifier": "All stated premises apply jointly to each declared instance; actual application remains independently open.",
+      "status": "DECLARATION_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "DVC20261010:CAPTURE_INTERVAL_DOMAIN",
+      "kind": "TIMING_MODEL_PREMISE",
+      "statement": "The exact intended token is stable on the actual sampled port during the half-open interval [a,b); the sampler requires the closed aperture [s-u,s+h], with u,h nonnegative.",
+      "scope": "Alternative interval endpoint or sampler conventions require a separately derived rule.",
+      "quantifier": "All stated premises apply jointly to each declared instance; actual application remains independently open.",
+      "status": "DECLARATION_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "DVC20261010:RECTANGULAR_BOUNDS",
+      "kind": "UNCERTAINTY_CLASS_PREMISE",
+      "statement": "All arrival/departure pairs from [a_min,a_max] x [b_min,b_max] are admissible, and a_max < b_min. Bounds are deterministic; a fixed s must work for every pair.",
+      "scope": "No distributional assertion, clock assumption or measured latency is supplied.",
+      "quantifier": "All stated premises apply jointly to each declared instance; actual application remains independently open.",
+      "status": "DECLARATION_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "DVC20261010:GATE_WRITER_VALIDITY",
+      "kind": "JOINT_TIMING_PREMISE",
+      "statement": "Gate and capture writer satisfy their own declared valid aperture; the intended source interval alone does not discharge gate, writer, clock or acquisition fidelity.",
+      "scope": "Actual numerical margins remain OPEN.",
+      "quantifier": "All stated premises apply jointly to each declared instance; actual application remains independently open.",
+      "status": "DECLARATION_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "DVC20261010:PAIR_JOIN_GUARDS",
+      "kind": "PAIRING_PREMISE",
+      "statement": "For C2's separate-capture conclusion, both individual windows are nonempty, the expected same-episode source relation is independently correct, captures survive until an atomic/equivalently validated commit, no resource conflict prevents the schedule, and the consumer deadline is met.",
+      "scope": "This theorem does not equate non-simultaneous source tokens with a single instantaneous global state.",
+      "quantifier": "All stated premises apply jointly to each declared instance; actual application remains independently open.",
+      "status": "DECLARATION_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "DVC20261010:WITNESS_FAMILY",
+      "kind": "EXPLICIT_COUNTERMODEL_PREMISE",
+      "statement": "Use exactly the displayed warm-buffer, delayed-arrival, retained snapshot/mixed-epoch, swapped-port, old-origin/reheaded, gate-reflex, bypass and disjoint-window executions with the specified source and event contracts.",
+      "scope": "Existential witnesses, not an exhaustive catalogue of all physical rivals.",
+      "quantifier": "All stated premises apply jointly to each declared instance; actual application remains independently open.",
+      "status": "DECLARATION_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "DVC20261010:CURRENT_CONSEQUENCE_CHAIN",
+      "kind": "TIME_INDEX_PREMISE",
+      "statement": "The selected P_e token is produced strictly after Y_e; generation <= capture <= consumption in the same actual time-indexed chain.",
+      "scope": "An earlier state or a later prediction target is a different role.",
+      "quantifier": "All stated premises apply jointly to each declared instance; actual application remains independently open.",
+      "status": "DECLARATION_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "DVC20261010:SHADOW_NO_OUTGOING",
+      "kind": "CAUSAL_MODEL_PREMISE",
+      "statement": "Fix an acyclic structural model in which changing the shadow gates has no directed causal path to the human endpoint itself or any of its ancestors, including movement, touch, received information, instructions, attention, measurement and analysis.",
+      "scope": "An asserted read-only label alone does not establish this topology.",
+      "quantifier": "All stated premises apply jointly to each declared instance; actual application remains independently open.",
+      "status": "DECLARATION_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "DVC20261010:FIXED_EXOGENOUS",
+      "kind": "COUNTERFACTUAL_BINDING_PREMISE",
+      "statement": "Across the paired interventions, all structural functions, other inputs and disturbances are held fixed for the same endpoint model and episode context.",
+      "scope": "Resource contention, visible feedback, sound or scheduling changes can violate these joint premises.",
+      "quantifier": "All stated premises apply jointly to each declared instance; actual application remains independently open.",
+      "status": "DECLARATION_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "DVC20261010:ACTUAL_BINDING",
+      "kind": "ACTUAL_APPLICATION_PREMISE",
+      "statement": "Independently admit a complete actual process P/I/K signature, interval, source paths, retention and actual consumers, with all roles bound to that same installation and history.",
+      "scope": "Not established by this simulation, a report, a log header or program PASS.",
+      "quantifier": "All stated premises apply jointly to each declared instance; actual application remains independently open.",
+      "status": "DECLARATION_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "DVC20261010:TRANSPORT_CONTRACT",
+      "kind": "GUARDED_TRANSPORT_PREMISE",
+      "statement": "Transport correctly grounded source/buffer/read formulas within the same admitted complete organization under C1. Preserve independently admitted local processes and overlapping scales; do not infer partial-process actualness from a selected formula alone.",
+      "scope": "No new basal gate or exclusive subject is introduced.",
+      "quantifier": "All stated premises apply jointly to each declared instance; actual application remains independently open.",
+      "status": "DECLARATION_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "DVC20261010:H_BRIDGE",
+      "kind": "UNRESOLVED_EMPIRICAL_PREMISE",
+      "statement": "No human neural-consumer bridge, familiar H, agency, ownership or RetBind endpoint is validated. The proposed tactile PSE is distinct from discrimination precision and from those targets.",
+      "scope": "Explicit OPEN limitation; never a conclusion of the model or a basal-experience requirement.",
+      "quantifier": "All stated premises apply jointly to each declared instance; actual application remains independently open.",
+      "status": "DECLARATION_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "DVC20261010:C1",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "statement": "For every execution of the declared capture/invalidation/immutable-commit model, each snapshot cell contains the token from its last accepted capture surviving invalidation as of that snapshot's commit boundary, or absence. With the designated eager consumer actually reading that snapshot, it reads both intended tokens exactly when those two cells contain those actual tokens. Gate closure by itself neither clears nor revokes a retained token.",
+      "scope": "One fixed installation, two physically identified source lanes and selected buffers, one specified consumer implementation, intended source occurrences and trial relation, and one declared event order/clock contract. All premises must hold jointly for that instance and its stated episode family; no premise may be borrowed from an unrelated system or trial.",
+      "quantifier": "Universal over the stated model class for C1/C2/C4/C5; existential displayed witnesses for C3; guarded inherited actual application for C6.",
+      "status": "CANDIDATE_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "DVC20261010:C2",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "statement": "For independent bounded arrival/departure uncertainty with stable port interval [a,b), a closed sample aperture [s-u,s+h] lies in every admissible interval exactly when a_max+u <= s < b_min-h. Two safe windows admit a common sample iff their intersection is nonempty. Separate captures can be paired when each is nonempty and the same-episode, retention, atomicity, resource and deadline premises hold.",
+      "scope": "One fixed installation, two physically identified source lanes and selected buffers, one specified consumer implementation, intended source occurrences and trial relation, and one declared event order/clock contract. All premises must hold jointly for that instance and its stated episode family; no premise may be borrowed from an unrelated system or trial.",
+      "quantifier": "Universal over the stated model class for C1/C2/C4/C5; existential displayed witnesses for C3; guarded inherited actual application for C6.",
+      "status": "CANDIDATE_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "DVC20261010:C3",
+      "kind": "CONSTRUCTIVE_COUNTERMODELS",
+      "statement": "There exist nine declared executions or paired executions that defeat stronger deductions from gate flags, source issue, matched outputs, epoch headers or equal values to the specified actual current source/intake relation. They do not exhaust all alternative mechanisms.",
+      "scope": "Each displayed execution fixes its own implementation, physical sources, designated roles and event order jointly. A paired countermodel shares exactly the stated nominal observations but may use a different consumer implementation or pathway within the explicitly declared rival class. Same-instance premise binding applies within each member; it does not require the two rival installations or executions to have identical implementations.",
+      "quantifier": "Universal over the stated model class for C1/C2/C4/C5; existential displayed witnesses for C3; guarded inherited actual application for C6.",
+      "status": "CANDIDATE_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "DVC20261010:C4",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "statement": "If the particular P token is generated strictly after consequence Y, is captured no earlier than generation, and consumed no earlier than capture, its consumption occurs after Y and cannot be that same consequence's pre-consequence prediction. Earlier state or later target is a different legitimate role.",
+      "scope": "One fixed installation, two physically identified source lanes and selected buffers, one specified consumer implementation, intended source occurrences and trial relation, and one declared event order/clock contract. All premises must hold jointly for that instance and its stated episode family; no premise may be borrowed from an unrelated system or trial.",
+      "quantifier": "Universal over the stated model class for C1/C2/C4/C5; existential displayed witnesses for C3; guarded inherited actual application for C6.",
+      "status": "CANDIDATE_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "DVC20261010:C5",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "statement": "In a fixed acyclic structural model, if no shadow-gate intervention has a directed causal path to the participant endpoint itself or any of its ancestors, changing only those gates with all other functions, inputs and disturbances fixed leaves that endpoint invariant.",
+      "scope": "One fixed installation, two physically identified source lanes and selected buffers, one specified consumer implementation, intended source occurrences and trial relation, and one declared event order/clock contract. All premises must hold jointly for that instance and its stated episode family; no premise may be borrowed from an unrelated system or trial.",
+      "quantifier": "Universal over the stated model class for C1/C2/C4/C5; existential displayed witnesses for C3; guarded inherited actual application for C6.",
+      "status": "CANDIDATE_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "DVC20261010:C6",
+      "kind": "GUARDED_UCT_APPLICATION",
+      "statement": "Given an independently admitted complete actual process signature, interval, roles and actual source/buffer/read paths and valid transport, inherited C1 conditionally supplies their experiential structural counterparts. C1-C5 and a software PASS do not establish actual grounding, named H, ownership, agency, RetBind or an additional basal-experience criterion.",
+      "scope": "One independently admitted actual complete process or independently admitted overlapping processes, with joint P/I/K, interval and grounded event roles; no reverse inference from a chosen experiential label.",
+      "quantifier": "Universal over the stated model class for C1/C2/C4/C5; existential displayed witnesses for C3; guarded inherited actual application for C6.",
+      "status": "CANDIDATE_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "DVC20261010:PUBLIC_DATA_DOMAIN",
+      "kind": "EMPIRICAL_ANALYSIS_DOMAIN",
+      "statement": "The frozen public archive DOI 10.5281/zenodo.18877381 and declared exclusions yield 18 included people and 9704 in-range command records in 108 participant-condition cells. Two declared specifications yield 216 fits; participants, records and fits are different denominators.",
+      "scope": "Retrospective analysis of this released dataset and these code versions, not newly collected observations.",
+      "quantifier": "This fixed archive, the source's three exclusions, one out-of-range command exclusion and two explicitly declared analysis specifications only.",
+      "evidence": [
+        "apparatus_evidence/MAIN_FINDINGS.json",
+        "apparatus_evidence/results/EXACT_RESULTS.json",
+        "apparatus_evidence/RESPONSE_CODING_CORRECTION.json"
+      ],
+      "status": "EVIDENCE_RECORDED_CANDIDATE_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_consumer_application_established": false
+    },
+    {
+      "id": "DVC20261010:EXPLORATORY_ENDPOINT_REANALYSIS",
+      "kind": "EMPIRICAL_REANALYSIS_RESULT",
+      "claim_id": "DVC20261010-E1",
+      "statement": "The specified cumulative-normal refits recover separate response-location and precision contrasts. PSE is the fitted Pr(InputValue=1)=0.5 location; independent sigma and source-labelled JND remain separate. Passive Start-minus-End sigma is 0.68299755 in archive command units (rounded; exact values remain in the result files). Physical key mapping, amplitude calibration and equivalence to a named self-related feeling are unverified.",
+      "scope": "Exploratory subject-level comparisons for the fixed 18-person released sample; no installed source-consumer intervention.",
+      "quantifier": "Conditional on the response model, bounds, exclusions and specified paired-t/Holm analysis. Nominal t intervals are not an exact distribution-free finite-sample coverage theorem.",
+      "evidence": [
+        "apparatus_evidence/DATA_REANALYSIS_REPORT.md",
+        "apparatus_evidence/results/INDEPENDENT_REFIT_STATISTICS.json",
+        "apparatus_evidence/RESPONSE_CODING_CORRECTION.json"
+      ],
+      "status": "EVIDENCE_RECORDED_CANDIDATE_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_consumer_application_established": false
+    },
+    {
+      "id": "DVC20261010:ACTUAL_ADMISSION_GAP",
+      "kind": "SOURCE_BOUNDED_EVIDENCE_LIMIT",
+      "claim_id": "DVC20261010-E2",
+      "statement": "The inspected articles, released archive and interface documentation do not jointly ground the selected installation's source tokens, intervention, capture/read events, clock semantics and physical consequences. Conditional parsing of 8985 time-bearing rows does not measure physical tactile onset. M_D and P_E are device-level candidates, not identified human efference-copy/proprioceptive inputs.",
+      "scope": "Inspected sources and released fields through 10 October 2026; not a proof that no feasible human experiment exists.",
+      "quantifier": "Every actual application owes all contract clauses for the same installation, selected consumer and episode; no clause is supplied by a different device, session, fitted curve or model instance.",
+      "evidence": [
+        "apparatus_evidence/APPARATUS_CONTRACT.md",
+        "apparatus_evidence/TIMING_PARSE_REVIEW.md",
+        "PROBE_PROTOCOL.md"
+      ],
+      "status": "EVIDENCE_RECORDED_CANDIDATE_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_consumer_application_established": false
+    }
+  ],
+  "rules": [
+    {
+      "id": "DVC20261010:r_C1",
+      "all_of": [
+        "DVC20261010:DOMAIN",
+        "DVC20261010:EVENT_BUFFER_CONTRACT",
+        "DVC20261010:DESIGNATED_READ_CONTRACT",
+        "DVC20261010:GROUNDED_EPISODE_TARGETS"
+      ],
+      "conclusion": "DVC20261010:C1",
+      "claim_id": "DVC20261010-C1",
+      "kind": "CONDITIONAL_RULE",
+      "statement": "For every execution of the declared capture/invalidation/immutable-commit model, each snapshot cell contains the token from its last accepted capture surviving invalidation as of that snapshot's commit boundary, or absence. With the designated eager consumer actually reading that snapshot, it reads both intended tokens exactly when those two cells contain those actual tokens. Gate closure by itself neither clears nor revokes a retained token.",
+      "same_instance_required": true,
+      "binding": "One fixed installation, two physically identified source lanes and selected buffers, one specified consumer implementation, intended source occurrences and trial relation, and one declared event order/clock contract. All premises must hold jointly for that instance and its stated episode family; no premise may be borrowed from an unrelated system or trial.",
+      "proof_location": "device_model/RESEARCH_NOTE.md section 3; induction on buffer-changing events; 720-schedule independent order predicate",
+      "status": "CANDIDATE_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "DVC20261010:r_C2",
+      "all_of": [
+        "DVC20261010:DOMAIN",
+        "DVC20261010:CAPTURE_INTERVAL_DOMAIN",
+        "DVC20261010:RECTANGULAR_BOUNDS",
+        "DVC20261010:GATE_WRITER_VALIDITY",
+        "DVC20261010:PAIR_JOIN_GUARDS"
+      ],
+      "conclusion": "DVC20261010:C2",
+      "claim_id": "DVC20261010-C2",
+      "kind": "CONDITIONAL_RULE",
+      "statement": "For independent bounded arrival/departure uncertainty with stable port interval [a,b), a closed sample aperture [s-u,s+h] lies in every admissible interval exactly when a_max+u <= s < b_min-h. Two safe windows admit a common sample iff their intersection is nonempty. Separate captures can be paired when each is nonempty and the same-episode, retention, atomicity, resource and deadline premises hold.",
+      "same_instance_required": true,
+      "binding": "One fixed installation, two physically identified source lanes and selected buffers, one specified consumer implementation, intended source occurrences and trial relation, and one declared event order/clock contract. All premises must hold jointly for that instance and its stated episode family; no premise may be borrowed from an unrelated system or trial.",
+      "proof_location": "device_model/RESEARCH_NOTE.md section 4; extremal-bound proof, 4896 finite parameter/sample checks and 400 ordered safe-window pairs",
+      "status": "CANDIDATE_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "DVC20261010:r_C3",
+      "all_of": [
+        "DVC20261010:DOMAIN",
+        "DVC20261010:EVENT_BUFFER_CONTRACT",
+        "DVC20261010:WITNESS_FAMILY"
+      ],
+      "conclusion": "DVC20261010:C3",
+      "claim_id": "DVC20261010-C3",
+      "kind": "CONDITIONAL_RULE",
+      "statement": "There exist nine declared executions or paired executions that defeat stronger deductions from gate flags, source issue, matched outputs, epoch headers or equal values to the specified actual current source/intake relation. They do not exhaust all alternative mechanisms.",
+      "same_instance_required": true,
+      "binding": "Each displayed execution fixes its own implementation, physical sources, designated roles and event order jointly. A paired countermodel shares exactly the stated nominal observations but may use a different consumer implementation or pathway within the explicitly declared rival class. Same-instance premise binding applies within each member; it does not require the two rival installations or executions to have identical implementations.",
+      "proof_location": "device_model/RESEARCH_NOTE.md section 5; device_model/EXACT_RESULTS.json witnesses",
+      "status": "CANDIDATE_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false,
+      "paired_rival_instances_allowed": true
+    },
+    {
+      "id": "DVC20261010:r_C4",
+      "all_of": [
+        "DVC20261010:DOMAIN",
+        "DVC20261010:CURRENT_CONSEQUENCE_CHAIN"
+      ],
+      "conclusion": "DVC20261010:C4",
+      "claim_id": "DVC20261010-C4",
+      "kind": "CONDITIONAL_RULE",
+      "statement": "If the particular P token is generated strictly after consequence Y, is captured no earlier than generation, and consumed no earlier than capture, its consumption occurs after Y and cannot be that same consequence's pre-consequence prediction. Earlier state or later target is a different legitimate role.",
+      "same_instance_required": true,
+      "binding": "One fixed installation, two physically identified source lanes and selected buffers, one specified consumer implementation, intended source occurrences and trial relation, and one declared event order/clock contract. All premises must hold jointly for that instance and its stated episode family; no premise may be borrowed from an unrelated system or trial.",
+      "proof_location": "device_model/RESEARCH_NOTE.md section 6; transitivity; 108 finite chronology instances",
+      "status": "CANDIDATE_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "DVC20261010:r_C5",
+      "all_of": [
+        "DVC20261010:SHADOW_NO_OUTGOING",
+        "DVC20261010:FIXED_EXOGENOUS"
+      ],
+      "conclusion": "DVC20261010:C5",
+      "claim_id": "DVC20261010-C5",
+      "kind": "CONDITIONAL_RULE",
+      "statement": "In a fixed acyclic structural model, if no shadow-gate intervention has a directed causal path to the participant endpoint itself or any of its ancestors, changing only those gates with all other functions, inputs and disturbances fixed leaves that endpoint invariant.",
+      "same_instance_required": true,
+      "binding": "One fixed installation, two physically identified source lanes and selected buffers, one specified consumer implementation, intended source occurrences and trial relation, and one declared event order/clock contract. All premises must hold jointly for that instance and its stated episode family; no premise may be borrowed from an unrelated system or trial.",
+      "proof_location": "device_model/RESEARCH_NOTE.md section 7; induction on endpoint causal ancestors, without synthetic human endpoint generation",
+      "status": "CANDIDATE_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "DVC20261010:r_C6",
+      "all_of": [
+        "A:C1",
+        "DVC20261010:ACTUAL_BINDING",
+        "DVC20261010:TRANSPORT_CONTRACT"
+      ],
+      "conclusion": "DVC20261010:C6",
+      "claim_id": "DVC20261010-C6",
+      "kind": "GUARDED_UCT_APPLICATION",
+      "statement": "Given an independently admitted complete actual process signature, interval, roles and actual source/buffer/read paths and valid transport, inherited C1 conditionally supplies their experiential structural counterparts. C1-C5 and a software PASS do not establish actual grounding, named H, ownership, agency, RetBind or an additional basal-experience criterion.",
+      "same_instance_required": true,
+      "binding": "One independently admitted actual complete process or independently admitted overlapping processes, with joint P/I/K, interval and grounded event roles; no reverse inference from a chosen experiential label.",
+      "proof_location": "device_model/RESEARCH_NOTE.md section 8; inherited C1 direction, not an empirical test",
+      "status": "CANDIDATE_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    }
+  ],
+  "context_links": [
+    {
+      "id": "DVC20261010:ctx_axiom",
+      "type": "INHERITED_AXIOM_CONTEXT",
+      "from": "DVC20261010:ACTUAL_BINDING",
+      "to": "A:C1",
+      "statement": "C1 is inherited; a finite simulator is not its empirical confirmation.",
+      "deductive": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "DVC20261010:ctx_non_gate",
+      "type": "NON_GATE_CONTEXT",
+      "from": "DVC20261010:C6",
+      "to": "A:U1",
+      "statement": "Eligibility, reset, timing, performance, access and reports are not new basal-experience gates.",
+      "deductive": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "DVC20261010:ctx_retention",
+      "type": "INHERITED_RETENTION_CONTEXT",
+      "from": "DVC20261010:C1",
+      "to": "R173:RETENTIVE_BINDING_RELATION",
+      "statement": "Retained actual-token consumption requires grounded history; a warm buffer is not familiar H by label.",
+      "deductive": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "DVC20261010:ctx_fixed_route",
+      "type": "INHERITED_PROTOCOL_CONTEXT",
+      "from": "DVC20261010:C1",
+      "to": "R174:FIXED_ROUTE_PROTOCOL",
+      "statement": "Timing and route premises must hold jointly in the same actual episode.",
+      "deductive": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "DVC20261010:ctx_mediator",
+      "type": "INHERITED_PROBE_CONTEXT",
+      "from": "DVC20261010:C3",
+      "to": "R174:MEDIATOR_CLAMP_SIGNATURE",
+      "statement": "A source-send or gate label does not prove the targeted internal carrier was reached.",
+      "deductive": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "DVC20261010:ctx_overwrite",
+      "type": "INHERITED_BUFFER_CONTEXT",
+      "from": "DVC20261010:C1",
+      "to": "R187:SYNC_ERASURE",
+      "statement": "Overwrites and restoration can hide interventions; ordinary buffering is prior-covered.",
+      "deductive": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "DVC20261010:ctx_lineage",
+      "type": "INHERITED_SOURCE_CONTEXT",
+      "from": "DVC20261010:C3",
+      "to": "R187:LINEAGE_GUARD",
+      "statement": "A new header, equal values or trial label do not certify the intended source occurrence.",
+      "deductive": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "DVC20261010:ctx_port",
+      "type": "INHERITED_FIDELITY_CONTEXT",
+      "from": "DVC20261010:C2",
+      "to": "R187:PORT_FIDELITY",
+      "statement": "Arrival and capture must be justified at the actual target port.",
+      "deductive": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "DVC20261010:ctx_time",
+      "type": "INHERITED_TIME_CONTEXT",
+      "from": "DVC20261010:C4",
+      "to": "TE20261008:ACTUAL_TEMPORAL_BRIDGE",
+      "statement": "A claimed predictive role requires its actual time-indexed bridge.",
+      "deductive": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "DVC20261010:ctx_transport",
+      "type": "INHERITED_TRANSPORT_CONTEXT",
+      "from": "DVC20261010:C6",
+      "to": "R157:COORDINATE_TRANSPORT",
+      "statement": "C1 transports correctly grounded complete-instance relations, not chosen feeling labels.",
+      "deductive": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "DVC20261010:ctx_selection",
+      "type": "SELECTION_LIMIT_CONTEXT",
+      "from": "DVC20261010:TRANSPORT_CONTRACT",
+      "to": "R158:SELECTION_CLOSURE_LIMIT",
+      "statement": "A formula in an admitted process does not independently select a separately actual sub-process.",
+      "deductive": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "DVC20261010:ctx_report",
+      "type": "EMPIRICAL_LIMIT_CONTEXT",
+      "from": "DVC20261010:H_BRIDGE",
+      "to": "R157:REPORT_COVERAGE_LIMIT",
+      "statement": "No report-to-H bridge, conceptual-self equivalence or human neural-consumer identification is supplied.",
+      "deductive": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "DVC20261010:ctx_empirical_endpoint_tensor",
+      "from": "DVC20261010:EXPLORATORY_ENDPOINT_REANALYSIS",
+      "to": "MPC:ENDPOINT_TENSOR",
+      "type": "PENDING_ENDPOINT_CONTEXT",
+      "statement": "Location, precision, agency and ownership are separately typed. This archive estimates only specified behavioral response quantities; MPC itself remains disabled.",
+      "deductive": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "DVC20261010:ctx_empirical_actual_contract",
+      "from": "DVC20261010:ACTUAL_ADMISSION_GAP",
+      "to": "DVC20261010:ACTUAL_BINDING",
+      "type": "OPEN_APPLICATION_CONTEXT",
+      "statement": "Published apparatus descriptions and data reanalysis do not discharge the same-instance actual consumer contract.",
+      "deductive": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "DVC20261010:ctx_empirical_semantic_bridge",
+      "from": "DVC20261010:EXPLORATORY_ENDPOINT_REANALYSIS",
+      "to": "DVC20261010:H_BRIDGE",
+      "type": "NONIDENTIFICATION_CONTEXT",
+      "statement": "A fitted comparison response is not familiar mineness, conceptual self, RetBind or an independently calibrated experiential target.",
+      "deductive": false,
+      "enabled_as_established_premise": false
+    }
+  ],
+  "source_references": [
+    {
+      "type": "source_reference",
+      "reference": "MPC20261010 RESEARCH_NOTE.md and PROTOCOL.md",
+      "role": "Inherited availability factorial and full-table read nonidentifiability; not established graph premises."
+    },
+    {
+      "type": "source_reference",
+      "reference": "SCU20261010 RESEARCH_NOTE.md and check_source_consumers.py",
+      "role": "Inherited source ancestry, intake and chronology limits; frozen paper not expanded."
+    },
+    {
+      "type": "source_reference",
+      "reference": "OpenHaptics Programmer's Guide 3.4.0 pp. 88-91; API Reference pp. 7, 56-57",
+      "role": "Direct manufacturer prior for snapshots, current/last queries and documented position/encoder APIs; actual chosen rig calls are unverified."
+    },
+    {
+      "type": "source_reference",
+      "reference": "Chandy and Lamport (1985), selected passages; D'Onofrio Pacheco and Zimmermann (2026), apparatus passages",
+      "role": "Prior snapshot context and published device context; no new empirical data claimed."
+    }
+  ],
+  "canonical_graph_changed": false,
+  "whole_canonical_semantic_review_performed_by_this_worker": false,
+  "local_structural_check": {
+    "nodes": 24,
+    "rules": 6,
+    "nondeductive_context_links": 15,
+    "additional_pending_reference": "MPC:ENDPOINT_TENSOR",
+    "semantic_certification": false,
+    "completed_graph_changed": false
+  },
+  "integration_parent_sha": "bd66a621949948d49788243e7fa8313f1256dfbb",
+  "model_proof_source": "device_model/RESEARCH_NOTE.md",
+  "assembly_role": "Canonical candidate view; component IDs are aliases, not additional nodes.",
+  "component_manifest": [
+    {
+      "path": "device_model/ARTIFACT_MANIFEST.json",
+      "bytes": 3781,
+      "sha256": "36123e3346af20d3c1bfcec7425b43df4dd663e332730c29e6e65844f064867a"
+    },
+    {
+      "path": "apparatus_evidence/COPY_MANIFEST.json",
+      "bytes": 48544,
+      "sha256": "52ae086c91a5552688b1f3ba985d7371b09124a577096deb4e56ca90c72a356e"
+    }
+  ],
+  "concurrent_research_preserved": "CBI20261010_Consumer_Branch_Isolation",
+  "review_authority": "MAP_AUDIT.md and review receipts, never this assembler"
+}

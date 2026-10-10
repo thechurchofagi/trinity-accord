@@ -1,0 +1,17 @@
+{
+  "schema": "uct-reproduction-editorial-amendment/1",
+  "independent_rerun_receipt": "REPRODUCTION_RECEIPT.json",
+  "executed_code_sha256": "ebd0b0ac69d28cb62887b505a0db228eafe1b79c4900d1ea3083a7808909a440",
+  "executed_result_sha256": "9272a41c5fec78a50811bf43d8e763120a9cbbd553d81744cf2be5093e4cff4a",
+  "final_reviewed_code_sha256": "028a090a4b2826fd58b78738fc80ea5c7a0cd3454da71c751c781f5ea95e1d30",
+  "final_reviewed_result_sha256": "ec0ca95e7eb0aab624d3eeed8093c9b00d398f24e0928522ff31a28335d51d2f",
+  "sole_change": {
+    "json_pointer": "/primary_endpoint_design_only",
+    "old": "PSE from tactile comparison; sigma/JND separate; agency/ownership/H not measured",
+    "new": "Prospective PSE from tactile comparison; independently fitted sigma and source-labelled JND kept distinct; agency/ownership/H not measured"
+  },
+  "all_other_result_fields_identical": true,
+  "code_exact_string_replacement_only": true,
+  "final_bytes_independently_reexecuted": false,
+  "all_computational_results_unchanged": true
+}

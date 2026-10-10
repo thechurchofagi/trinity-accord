@@ -1,0 +1,62 @@
+{
+  "schema": "uct-concurrent-pending-coverage/1",
+  "coverage_version": "UCT-PUB-v1.0.22",
+  "source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+  "source_update": {
+    "path": "records/EIP20261010_Exoskeleton_Instrumentation/PUBLICATION_COVERAGE_UPDATE.json",
+    "bytes": 577,
+    "sha256": "191a410088c4f6c6cbc6995842e2e8f4d7349cfc9573381185be48a1e60a3d17"
+  },
+  "source_claim_ledger": {
+    "path": "records/EIP20261010_Exoskeleton_Instrumentation/CLAIM_LEDGER.json",
+    "bytes": 3511,
+    "sha256": "1c6467bafedffbbebf87fc0fad839803747f82206dc217162dbf2018ee0dc939"
+  },
+  "scope": "Separate inherited EIP checkpoint; none of these four IDs is included in the 42-row SCU/DVC claim delta or asserted as a new publication.",
+  "decision": "HOLD_STANDALONE_INTEGRATE_AS_SCU_MPC_METHODS_SECTION",
+  "formally_published_in_SCU_v1_0_1": false,
+  "items": [
+    {
+      "id": "EIP-C1",
+      "source": "records/EIP20261010_Exoskeleton_Instrumentation/CLAIM_LEDGER.json",
+      "statement": "Peripheral delivery, central arrival, aggregate consumer update and matched output do not identify actual read by a named consumer while an alternative writer is uncontrolled.",
+      "domain": "The eight-row Boolean mechanism S,G,X with U=(S AND G) OR X.",
+      "status": "PENDING_DISABLED_NOT_PUBLISHED_AS_EIP",
+      "actual_application": "OPEN",
+      "publication_count_increment": 0
+    },
+    {
+      "id": "EIP-C2",
+      "source": "records/EIP20261010_Exoskeleton_Instrumentation/CLAIM_LEDGER.json",
+      "statement": "With S=1 and X=0, G is identified by U only if the stipulated interface, selectivity, sole-writer, timing and faithful-readout premises hold.",
+      "domain": "Exclusive-probe rows with delivered selected carrier.",
+      "status": "PENDING_DISABLED_NOT_PUBLISHED_AS_EIP",
+      "actual_application": "OPEN",
+      "publication_count_increment": 0
+    },
+    {
+      "id": "EIP-C3",
+      "source": "records/EIP20261010_Exoskeleton_Instrumentation/CLAIM_LEDGER.json",
+      "statement": "A genuine read-versus-no-read contrast necessarily changes the selected consumer-carrier relation even if a declared distal envelope is matched; other biological co-changes are not entailed by the finite logic.",
+      "domain": "Same declared episode contract and partial distal-output match.",
+      "status": "PENDING_DISABLED_NOT_PUBLISHED_AS_EIP",
+      "actual_application": "OPEN",
+      "publication_count_increment": 0
+    },
+    {
+      "id": "EIP-C4",
+      "source": "records/EIP20261010_Exoskeleton_Instrumentation/CLAIM_LEDGER.json",
+      "statement": "The inspected primary studies establish components of the two-level package but not a complete same-episode selective consumer-read installation.",
+      "domain": "SOURCE_SCOPE.md, sources inspected through 2026-10-10.",
+      "status": "PENDING_DISABLED_NOT_PUBLISHED_AS_EIP",
+      "actual_application": "OPEN",
+      "publication_count_increment": 0
+    }
+  ],
+  "normalization_qualifications": {
+    "path": "records/DVC20261010_Device_Consumer_Validation/review/concurrent_eip/EIP_NORMALIZATION_QUALIFICATIONS.json",
+    "bytes": 10025,
+    "sha256": "04e7936ca25af2c643fcb4a782b85d25592da1cb2e9da01aaa8ea4c824b08bd3"
+  },
+  "claim_id_warning": "EIP-C4 here is the ledger empirical assessment, not map EIP:C4 guarded UCT interpretation."
+}

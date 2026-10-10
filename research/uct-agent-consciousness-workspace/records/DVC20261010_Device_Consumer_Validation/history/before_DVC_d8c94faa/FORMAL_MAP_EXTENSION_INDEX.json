@@ -1,0 +1,10 @@
+{
+ "revision":"UCT-MAP-v1.1.2",
+ "current_pointer":"CURRENT_STATE.json",
+ "authoritative_effective_descriptor":"UCT_FORMAL_GRAPH_MODULES.json",
+ "inherited_reviewed_modules":["CORE20261008","EI20261008","R183","OO20261008","RU20261008","R184","RC20261008","IE20261008"],
+ "added_reviewed_modules":["TH20261009-RB20261009"],
+ "pending_disabled":["AC20261009","IL20261009","ONLINE-AC-PROBE-20261009","R189-HACA-20261009","R190-PCBC-20261009"],
+ "status":"The authoritative completed descriptor is UCT_FORMAL_GRAPH_MODULES.json. R189 and R190 are disabled candidates; no premise truth or actual/phenomenal application promotion.",
+ "prior_index_commit":"11c1af83fa7e9eabca8351b67dfe162f59da7dd1"
+}

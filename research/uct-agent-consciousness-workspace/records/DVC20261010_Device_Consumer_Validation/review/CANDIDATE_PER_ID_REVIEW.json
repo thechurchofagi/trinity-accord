@@ -1,0 +1,759 @@
+{
+  "schema": "uct-independent-candidate-review/1",
+  "source_sha256": "5029f17b7924355c632593d0051c0ecea4eb9f6838703f2a8b39a8b37e1dd423",
+  "local_outcome": "COMPATIBLE_DISABLED_CHECKPOINT; C3_BINDING_CORRECTED",
+  "structural_facts_only": {
+    "baseline_unchanged_by_this_reviewer": true,
+    "new_nodes": 21,
+    "new_rules": 6,
+    "new_contexts": 12,
+    "all_candidates_disabled": true,
+    "external_references": [
+      "A:C1",
+      "A:U1",
+      "R157:COORDINATE_TRANSPORT",
+      "R157:REPORT_COVERAGE_LIMIT",
+      "R158:SELECTION_CLOSURE_LIMIT",
+      "R173:RETENTIVE_BINDING_RELATION",
+      "R174:FIXED_ROUTE_PROTOCOL",
+      "R174:MEDIATOR_CLAMP_SIGNATURE",
+      "R187:LINEAGE_GUARD",
+      "R187:PORT_FIDELITY",
+      "R187:SYNC_ERASURE",
+      "TE20261008:ACTUAL_TEMPORAL_BRIDGE"
+    ],
+    "unresolved_external_references": [],
+    "old_rules_referencing_DVC": [],
+    "semantic_completion_inferred_from_structure": false
+  },
+  "items": [
+    {
+      "item_id": "DVC20261010:DOMAIN",
+      "item_type": "nodes",
+      "record_sha256": "c09852b3470a26521b23d86f7ee797b9885fe672c1cff777a4f81b8197424ba7",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/kind",
+        "/statement",
+        "/scope",
+        "/quantifier",
+        "/status",
+        "/enabled_as_established_premise",
+        "/actual_premises_discharged"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:EVENT_BUFFER_CONTRACT",
+      "item_type": "nodes",
+      "record_sha256": "5acd8e403f4d013846bc180bd442e689b6ccc7137b7e76d55420682fa5f036ef",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/kind",
+        "/statement",
+        "/scope",
+        "/quantifier",
+        "/status",
+        "/enabled_as_established_premise",
+        "/actual_premises_discharged"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:DESIGNATED_READ_CONTRACT",
+      "item_type": "nodes",
+      "record_sha256": "f7f90b053d440df45e26faf715a2ff69c7db26e322e39e97a043705cb40cd6ff",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/kind",
+        "/statement",
+        "/scope",
+        "/quantifier",
+        "/status",
+        "/enabled_as_established_premise",
+        "/actual_premises_discharged"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:GROUNDED_EPISODE_TARGETS",
+      "item_type": "nodes",
+      "record_sha256": "ca1580def0307a43042c4c69ebdb170f2e606089183a5765001c03546c38d0c0",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/kind",
+        "/statement",
+        "/scope",
+        "/quantifier",
+        "/status",
+        "/enabled_as_established_premise",
+        "/actual_premises_discharged"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:CAPTURE_INTERVAL_DOMAIN",
+      "item_type": "nodes",
+      "record_sha256": "9111e4f11dc489a935d65debbf1640cb0a5ba33c27a15bee3d5d8e2957052d68",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/kind",
+        "/statement",
+        "/scope",
+        "/quantifier",
+        "/status",
+        "/enabled_as_established_premise",
+        "/actual_premises_discharged"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:RECTANGULAR_BOUNDS",
+      "item_type": "nodes",
+      "record_sha256": "b062a8f3cb2db312c17cceb398aa1f2e3df4b6c1ed8a85289b0f6e1519daa9a7",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/kind",
+        "/statement",
+        "/scope",
+        "/quantifier",
+        "/status",
+        "/enabled_as_established_premise",
+        "/actual_premises_discharged"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:GATE_WRITER_VALIDITY",
+      "item_type": "nodes",
+      "record_sha256": "b66d43d8a9e4eb8bd0e0e7b43bf4970b16b9b01869bedd5169f23ef1371d308b",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/kind",
+        "/statement",
+        "/scope",
+        "/quantifier",
+        "/status",
+        "/enabled_as_established_premise",
+        "/actual_premises_discharged"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:PAIR_JOIN_GUARDS",
+      "item_type": "nodes",
+      "record_sha256": "2eb57ab789d43a973c8b40cc8cf6178077ac1bdf5b31c2a490b2be5a8edad20c",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/kind",
+        "/statement",
+        "/scope",
+        "/quantifier",
+        "/status",
+        "/enabled_as_established_premise",
+        "/actual_premises_discharged"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:WITNESS_FAMILY",
+      "item_type": "nodes",
+      "record_sha256": "f61455dce8a95de9d1f9aa8c74d62476a39dc7d209b8d157e8e1b3ed7e28e3e6",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/kind",
+        "/statement",
+        "/scope",
+        "/quantifier",
+        "/status",
+        "/enabled_as_established_premise",
+        "/actual_premises_discharged"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:CURRENT_CONSEQUENCE_CHAIN",
+      "item_type": "nodes",
+      "record_sha256": "05ff1f4315d13ed4023c6cd68e445154f905e7d633f08819562cebd25f6384fe",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/kind",
+        "/statement",
+        "/scope",
+        "/quantifier",
+        "/status",
+        "/enabled_as_established_premise",
+        "/actual_premises_discharged"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:SHADOW_NO_OUTGOING",
+      "item_type": "nodes",
+      "record_sha256": "d4d2805ba20363a1682914d92a0ade54ef5798e256b97908c02132bf370c205e",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/kind",
+        "/statement",
+        "/scope",
+        "/quantifier",
+        "/status",
+        "/enabled_as_established_premise",
+        "/actual_premises_discharged"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:FIXED_EXOGENOUS",
+      "item_type": "nodes",
+      "record_sha256": "e9e1d924c64187818ad51fc92e4107f83c61f4f2286b87f2a157287c1017aba3",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/kind",
+        "/statement",
+        "/scope",
+        "/quantifier",
+        "/status",
+        "/enabled_as_established_premise",
+        "/actual_premises_discharged"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:ACTUAL_BINDING",
+      "item_type": "nodes",
+      "record_sha256": "529fb779504f1fa68dad37875b20348e50993708d37f98a4081d9a5dd6402efe",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/kind",
+        "/statement",
+        "/scope",
+        "/quantifier",
+        "/status",
+        "/enabled_as_established_premise",
+        "/actual_premises_discharged"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:TRANSPORT_CONTRACT",
+      "item_type": "nodes",
+      "record_sha256": "469e1444bfed524b6da7e3a34a693888bd62dbe09b46f486297e8ff98e91119b",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/kind",
+        "/statement",
+        "/scope",
+        "/quantifier",
+        "/status",
+        "/enabled_as_established_premise",
+        "/actual_premises_discharged"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:H_BRIDGE",
+      "item_type": "nodes",
+      "record_sha256": "9fde63ac05bef0e479e084867e50cd54a249b0fa170af60ccc81371ea0a1cc01",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/kind",
+        "/statement",
+        "/scope",
+        "/quantifier",
+        "/status",
+        "/enabled_as_established_premise",
+        "/actual_premises_discharged"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:C1",
+      "item_type": "nodes",
+      "record_sha256": "43db7529dbe9d4f374b3fbf4ddf9815df3163d7dfaea7d460d5e8f119b2662dd",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/kind",
+        "/statement",
+        "/scope",
+        "/quantifier",
+        "/status",
+        "/enabled_as_established_premise",
+        "/actual_premises_discharged"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:C2",
+      "item_type": "nodes",
+      "record_sha256": "d9c26e3f795cb632be66c5d866ab72e3086faeaab89d15ae033bb551f01b6e72",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/kind",
+        "/statement",
+        "/scope",
+        "/quantifier",
+        "/status",
+        "/enabled_as_established_premise",
+        "/actual_premises_discharged"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:C3",
+      "item_type": "nodes",
+      "record_sha256": "a8857d08bf2c2d9b816fe742a0c3378edcfdaff19a6b4d0c895f62dd4be3fe3e",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/kind",
+        "/statement",
+        "/scope",
+        "/quantifier",
+        "/status",
+        "/enabled_as_established_premise",
+        "/actual_premises_discharged"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within disabled finite/conditional scope; no actual or named-phenomenal premise discharge. C3 paired-implementation binding corrected and verified.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:C4",
+      "item_type": "nodes",
+      "record_sha256": "61f1c5fad097b916bcd746223cc49d08eaf09fdf8485f28d5f4cffae88bd54a1",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/kind",
+        "/statement",
+        "/scope",
+        "/quantifier",
+        "/status",
+        "/enabled_as_established_premise",
+        "/actual_premises_discharged"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:C5",
+      "item_type": "nodes",
+      "record_sha256": "838e84f5ca03bac464cebc51d95820035db79894be449f81f7e54dac87f6b120",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/kind",
+        "/statement",
+        "/scope",
+        "/quantifier",
+        "/status",
+        "/enabled_as_established_premise",
+        "/actual_premises_discharged"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:C6",
+      "item_type": "nodes",
+      "record_sha256": "2ff1b58d61ef6d501330f3a6e323ed88798a919637a68fdb0dfa1274c08b6f05",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/kind",
+        "/statement",
+        "/scope",
+        "/quantifier",
+        "/status",
+        "/enabled_as_established_premise",
+        "/actual_premises_discharged"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:r_C1",
+      "item_type": "rules",
+      "record_sha256": "9e411f758e3773b67f4643ec9a23b8d984969a834f39706d8b32764e05ca62ef",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/all_of/0",
+        "/all_of/1",
+        "/all_of/2",
+        "/all_of/3",
+        "/conclusion",
+        "/claim_id",
+        "/kind",
+        "/statement",
+        "/same_instance_required",
+        "/binding",
+        "/proof_location",
+        "/status",
+        "/enabled_as_established_premise",
+        "/actual_premises_discharged"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:r_C2",
+      "item_type": "rules",
+      "record_sha256": "fad21470b4614f03a4276b9491060ec72c779fb81f0c6f98e522bc22af81e892",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/all_of/0",
+        "/all_of/1",
+        "/all_of/2",
+        "/all_of/3",
+        "/all_of/4",
+        "/conclusion",
+        "/claim_id",
+        "/kind",
+        "/statement",
+        "/same_instance_required",
+        "/binding",
+        "/proof_location",
+        "/status",
+        "/enabled_as_established_premise",
+        "/actual_premises_discharged"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:r_C3",
+      "item_type": "rules",
+      "record_sha256": "4648892be4acdc0969d9d714359fcc6efcf6516bb56e083c6ab315f8ede79ea2",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/all_of/0",
+        "/all_of/1",
+        "/all_of/2",
+        "/conclusion",
+        "/claim_id",
+        "/kind",
+        "/statement",
+        "/same_instance_required",
+        "/binding",
+        "/proof_location",
+        "/status",
+        "/enabled_as_established_premise",
+        "/actual_premises_discharged",
+        "/paired_rival_instances_allowed"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within disabled finite/conditional scope; no actual or named-phenomenal premise discharge. C3 paired-implementation binding corrected and verified.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:r_C4",
+      "item_type": "rules",
+      "record_sha256": "710c107463770fc711c8ea8292c71008e4c7cefeeee8c77f048365a0a5479a70",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/all_of/0",
+        "/all_of/1",
+        "/conclusion",
+        "/claim_id",
+        "/kind",
+        "/statement",
+        "/same_instance_required",
+        "/binding",
+        "/proof_location",
+        "/status",
+        "/enabled_as_established_premise",
+        "/actual_premises_discharged"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:r_C5",
+      "item_type": "rules",
+      "record_sha256": "a5e0cc0c7e9fa4197d8fae321a98545f32154bcc43b9f51e9b68cdfe3a3dedf6",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/all_of/0",
+        "/all_of/1",
+        "/conclusion",
+        "/claim_id",
+        "/kind",
+        "/statement",
+        "/same_instance_required",
+        "/binding",
+        "/proof_location",
+        "/status",
+        "/enabled_as_established_premise",
+        "/actual_premises_discharged"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:r_C6",
+      "item_type": "rules",
+      "record_sha256": "b724489d3696de08ad4673164041833c6ae2716637d97aaa8ebda57aa1f94eda",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/all_of/0",
+        "/all_of/1",
+        "/all_of/2",
+        "/conclusion",
+        "/claim_id",
+        "/kind",
+        "/statement",
+        "/same_instance_required",
+        "/binding",
+        "/proof_location",
+        "/status",
+        "/enabled_as_established_premise",
+        "/actual_premises_discharged"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:ctx_axiom",
+      "item_type": "context_links",
+      "record_sha256": "2048ed52b95de0c3cb12773adbbdecb3ca5de4d96b3c1a19cdbe5f18541ed3fa",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/type",
+        "/from",
+        "/to",
+        "/statement",
+        "/deductive",
+        "/enabled_as_established_premise"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:ctx_non_gate",
+      "item_type": "context_links",
+      "record_sha256": "595a7eb8d9a5599098037bba5baf0cc171b01d5ee312f8fe9c7139704e886bdb",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/type",
+        "/from",
+        "/to",
+        "/statement",
+        "/deductive",
+        "/enabled_as_established_premise"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:ctx_retention",
+      "item_type": "context_links",
+      "record_sha256": "68445ad9660c41166e45ab629fcc71d7a675a6f2bdae74295f59f0542ed8c89f",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/type",
+        "/from",
+        "/to",
+        "/statement",
+        "/deductive",
+        "/enabled_as_established_premise"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:ctx_fixed_route",
+      "item_type": "context_links",
+      "record_sha256": "fbe61b108befdb2eba1bc5199d400024981918d2a7e5b122d859a0c674c05532",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/type",
+        "/from",
+        "/to",
+        "/statement",
+        "/deductive",
+        "/enabled_as_established_premise"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:ctx_mediator",
+      "item_type": "context_links",
+      "record_sha256": "9a89b1935560c75ff3c79b73eb01b289157d0735d4b88e8f526f406443ce421b",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/type",
+        "/from",
+        "/to",
+        "/statement",
+        "/deductive",
+        "/enabled_as_established_premise"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:ctx_overwrite",
+      "item_type": "context_links",
+      "record_sha256": "9a1f1ab61bd7c699e5ce538a2cb153c2900c570482e89238b7ed4d34fd6de892",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/type",
+        "/from",
+        "/to",
+        "/statement",
+        "/deductive",
+        "/enabled_as_established_premise"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:ctx_lineage",
+      "item_type": "context_links",
+      "record_sha256": "3b0fe6ec65aa746def5ca2b04221016fbe2bd0928e6178379973807e92ae983d",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/type",
+        "/from",
+        "/to",
+        "/statement",
+        "/deductive",
+        "/enabled_as_established_premise"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:ctx_port",
+      "item_type": "context_links",
+      "record_sha256": "4f7f1e9a8b02adff81bc6c1c39882c202227f2b6b1cee041206950d02b7c9856",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/type",
+        "/from",
+        "/to",
+        "/statement",
+        "/deductive",
+        "/enabled_as_established_premise"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:ctx_time",
+      "item_type": "context_links",
+      "record_sha256": "cf8ff284cf0a5ccdbc458da1fdcb0a1624ea9b3f69ca035083fe84702a827c85",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/type",
+        "/from",
+        "/to",
+        "/statement",
+        "/deductive",
+        "/enabled_as_established_premise"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:ctx_transport",
+      "item_type": "context_links",
+      "record_sha256": "4f9b9f0db35e951c71a9d31cd95ba3e714166c62439751a154a8726d51cdf51a",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/type",
+        "/from",
+        "/to",
+        "/statement",
+        "/deductive",
+        "/enabled_as_established_premise"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:ctx_selection",
+      "item_type": "context_links",
+      "record_sha256": "417919e68e309e8ebbf88edf8fcb1a9e3abc2e17fb5c73576baf43596dc0b9ee",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/type",
+        "/from",
+        "/to",
+        "/statement",
+        "/deductive",
+        "/enabled_as_established_premise"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    },
+    {
+      "item_id": "DVC20261010:ctx_report",
+      "item_type": "context_links",
+      "record_sha256": "891b2216d58b79bb74c3875e7dceb930d40d4382768f451871a6a4479791ba56",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/type",
+        "/from",
+        "/to",
+        "/statement",
+        "/deductive",
+        "/enabled_as_established_premise"
+      ],
+      "read_scope": "WHOLE_CURRENT_ITEM; C3 initial whole read followed by complete current-node/rule reread",
+      "assessment": "Compatible within the declared finite, actual-application or explicitly non-deductive scope. All actual and named-phenomenal applications stay open.",
+      "status_changed_by_reviewer": false
+    }
+  ]
+}

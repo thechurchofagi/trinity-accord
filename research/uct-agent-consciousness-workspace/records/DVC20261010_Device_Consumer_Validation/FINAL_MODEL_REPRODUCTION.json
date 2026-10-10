@@ -1,0 +1,38 @@
+{
+  "schema": "uct-final-byte-reproduction/1",
+  "date_utc": "2026-10-10T02:04:25.461884+00:00",
+  "role": "root separate execution of final frozen code after integration copy",
+  "command": "python3 model.py in isolated reproduction directory",
+  "code_sha256": "028a090a4b2826fd58b78738fc80ea5c7a0cd3454da71c751c781f5ea95e1d30",
+  "result_sha256": "ec0ca95e7eb0aab624d3eeed8093c9b00d398f24e0928522ff31a28335d51d2f",
+  "result_byte_identical": true,
+  "runtime_receipt": {
+    "module_id": "DVC20261010",
+    "result_id": "DVC-RESULT-v0.1.0",
+    "command": "python model.py",
+    "python": "3.12.14",
+    "elapsed_seconds": 0.030573,
+    "status": "PASS",
+    "code_sha256": "028a090a4b2826fd58b78738fc80ea5c7a0cd3454da71c751c781f5ea95e1d30",
+    "result_sha256": "ec0ca95e7eb0aab624d3eeed8093c9b00d398f24e0928522ff31a28335d51d2f",
+    "hardware_accessed": false,
+    "human_participants": 0,
+    "remote_save_verified_by_this_worker": false
+  },
+  "stdout": {
+    "status": "PASS",
+    "counts": {
+      "event_order_schedules": 720,
+      "both_current_tokens_consumed": 6,
+      "consume_before_commit_rejected": 360,
+      "matched_output_with_wrong_epoch_or_unarrived_probe": 354,
+      "gate_factorial_pairs": 4,
+      "robust_window_parameter_sample_checks": 4896,
+      "paired_nonempty_safe_window_cases": 400,
+      "current_consequence_encoder_chronology_cases": 108
+    },
+    "witness_count": 9,
+    "elapsed_seconds": 0.030573
+  },
+  "scope": "Final finite digital model only; no hardware or human experiment."
+}

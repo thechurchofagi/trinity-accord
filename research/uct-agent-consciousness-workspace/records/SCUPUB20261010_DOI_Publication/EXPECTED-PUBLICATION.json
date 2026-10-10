@@ -1,0 +1,68 @@
+{
+  "report_number": "SCU-PAPER",
+  "record_id": 23272690,
+  "doi": "10.5281/zenodo.23272690",
+  "title": "Matched Behavior and Source Use",
+  "version": "1.0.1",
+  "file_count": 9,
+  "files": [
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 1199,
+      "sha256": "f25a9d963c200872ca8361b6cb8ff6c22e4dc33c4532b4b69887328a416ca75b"
+    },
+    {
+      "name": "REVIEW-AND-SOURCES.md",
+      "bytes": 20882,
+      "sha256": "2fc6d415930309d4fce40b0cf7a00836b1faf9ffb654455ddf5d7168be40f91d"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 725,
+      "sha256": "eb00d01f330b9469793564def8beba2caa59a1ec4c790446664da06c4f661138"
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 290,
+      "sha256": "9ac926376ba04fb418ae58e8b87f9558dc32a1e3c94255f3779497d750230084"
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 444,
+      "sha256": "d36033981711418d95ae10d243027f125558c0cd28fec617645afa85779e5d34"
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 235,
+      "sha256": "6b24465345d0a6186199875a7a8451b8f959b65bc29eef0701c82305d9e8fdbc"
+    },
+    {
+      "name": "matched-behavior-and-source-use-v1.0.1.md",
+      "bytes": 45968,
+      "sha256": "8fa23cbe9440922f6f56506e5415d17c47875972bdbde1b9428c0fafaaa425ab"
+    },
+    {
+      "name": "matched-behavior-and-source-use-v1.0.1.pdf",
+      "bytes": 279016,
+      "sha256": "7e6e8c181e98975b3ba3e665982a7dd206a2c8efcf543ce865b34d053290754b"
+    },
+    {
+      "name": "reproducibility-v1.0.1.zip",
+      "bytes": 114649,
+      "sha256": "80c6839b05da8ca3095f3d2941f837a2bcd8cd81d66e294eb0b4a0f4d6191c06"
+    }
+  ],
+  "source_inputs": {
+    "source-main.md": "0675c915213448be766f91bccae828674fd46403a76433bafa5bf2d04227e026",
+    "build_pdf.py": "35083a7efaaf34abc67bd524a17b4a88e4102303c662eda47e54435c74283aa5",
+    "reproducibility-v1.0.1.zip": "80c6839b05da8ca3095f3d2941f837a2bcd8cd81d66e294eb0b4a0f4d6191c06",
+    "REVIEW-AND-SOURCES.md": "2fc6d415930309d4fce40b0cf7a00836b1faf9ffb654455ddf5d7168be40f91d",
+    "publication.py": "657d7662e7b4151f8939d750a398c15d536954e2abc3d5b6ccab7159aff62c2d",
+    "pdf_style.tex": "dbf3c624b535823c3adc3d3c1d221ba7c5363b42dfbe9ccaf3e87a2bc7264d88",
+    "figures/source_resolution.png": "82649b57c61b60e90be2d90a4dc0a1885072a31d6e3d0f0cab81676ea182d1d7",
+    "figures/source_resolution.svg": "7291f15460bd19c8a66542a76e8b7e5762125db420ed5c46e9bd2430f677964c"
+  },
+  "source_commit": "2d7fc42d859fada3a316478ac6c0b4b33f1c542d",
+  "workflow_trigger_commit": "67f6fe6337a35c8af30327fbd7bbfb14dabbace0",
+  "prior_records_modified": false
+}

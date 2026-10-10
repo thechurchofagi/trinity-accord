@@ -1,0 +1,27 @@
+{
+  "schema": "uct-dual-save-receipt/1",
+  "research_id": "DVC20261010",
+  "phase": "SCIENCE_PREPARED_AWAITING_GIT_AND_SPACE_READBACK",
+  "expected_research_parent": "afcafa88f457632cd29d4ca1c15cb840edc01781",
+  "concurrent_CBI_preserved": true,
+  "expected_main_handoff_version": 74,
+  "publication": {
+    "research_id": "SCU20261010",
+    "report": "SCU-PAPER",
+    "version": "1.0.1",
+    "status": "PUBLISHED_PREPRINT_PUBLIC_READBACK_AND_DOI_RESOLUTION_VERIFIED",
+    "doi": "10.5281/zenodo.23272690",
+    "doi_url": "https://doi.org/10.5281/zenodo.23272690",
+    "manuscript": "records/SCUPUB20261010_DOI_Publication/release/matched-behavior-and-source-use-v1.0.1.md",
+    "pdf": "records/SCUPUB20261010_DOI_Publication/release/matched-behavior-and-source-use-v1.0.1.pdf",
+    "receipt": "records/SCUPUB20261010_DOI_Publication/FINAL_PUBLICATION_RECEIPT.json",
+    "peer_reviewed": false,
+    "scientific_map_admission_changed": false,
+    "DVC_in_published_paper": false
+  },
+  "research_git_saved": false,
+  "space_saved": false,
+  "receipt_policy": "This initial phase is preserved in science commit and increment archive; a later receipt-only commit records actual dual readbacks. No receipt claims its own unknown commit hash.",
+  "ots_or_arweave_executed": false,
+  "concurrent_EIP_preserved": true
+}

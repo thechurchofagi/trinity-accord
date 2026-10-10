@@ -1,0 +1,11 @@
+{
+  "schema": "uct-concurrent-sync/1",
+  "from": "8bac31cc0b9fb4c70d87f688dabbadeb6166addb",
+  "to": "bd66a621949948d49788243e7fa8313f1256dfbb",
+  "tree": "58768d3cd11c9ae52b945a858a40ca36c49f33b5",
+  "files_hash_verified": 32,
+  "original_commit_timezone": "-0700",
+  "original_message_trailing_newline": false,
+  "local_clean": true,
+  "remote_mutated": false
+}

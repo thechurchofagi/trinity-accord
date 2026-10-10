@@ -1,0 +1,649 @@
+{
+  "analysis_id": "DVC20261010_APParatus_timing_witnesses",
+  "source_doi": "10.5281/zenodo.18877381",
+  "witnesses": [
+    {
+      "source_file": "Active/Start/AD21_Aec.csv",
+      "source_file_sha256": "8e953daa5167eb3f1d5ceda51abcf5e17e661af68e4582c56468343d14c804d4",
+      "source_line": 2,
+      "raw_header": "TrialNumber,InputValue,VibrationCommand,StartMovement(ms),EndMovement(ms),Stimulation,StimulationAfterMovement,Latency,MovementDuration",
+      "raw_line": "1,1,5,14,183,14,841,14,183,0,000,14,183,0,658",
+      "raw_line_utf8_sha256_excluding_line_ending": "31a46e041ac95934815627a5bf64991253756038feb1b50d802fdbf6e8270324",
+      "strict_comma_parse": {
+        "header_fields": 9,
+        "row_fields": 15,
+        "exact_shape": false,
+        "tokens": [
+          "1",
+          "1",
+          "5",
+          "14",
+          "183",
+          "14",
+          "841",
+          "14",
+          "183",
+          "0",
+          "000",
+          "14",
+          "183",
+          "0",
+          "658"
+        ]
+      },
+      "first_three_prefix_fields": {
+        "TrialNumber": "1",
+        "InputValue": "1",
+        "VibrationCommand": "5"
+      },
+      "conditional_pair_parse": {
+        "start_numeric": 14.183,
+        "end_numeric": 14.841,
+        "stimulation_numeric": 14.183,
+        "stimulation_after_numeric": 0.0,
+        "latency_numeric": 14.183,
+        "duration_numeric": 0.658,
+        "speed_code": null
+      },
+      "literal_first_header_width_mapping_with_surplus_retained": {
+        "first_declared_width": {
+          "TrialNumber": "1",
+          "InputValue": "1",
+          "VibrationCommand": "5",
+          "StartMovement(ms)": "14",
+          "EndMovement(ms)": "183",
+          "Stimulation": "14",
+          "StimulationAfterMovement": "841",
+          "Latency": "14",
+          "MovementDuration": "183"
+        },
+        "surplus": [
+          "0",
+          "000",
+          "14",
+          "183",
+          "0",
+          "658"
+        ],
+        "status": "Not a complete declared-schema record. No silent truncation is admissible."
+      },
+      "unit_alternatives": {
+        "decimal_comma_seconds": "Pair a,bbb denotes a.bbb seconds; labels containing (ms) would require an explained label conversion.",
+        "thousands_group_milliseconds": "Pair a,bbb denotes concatenated integer abbb milliseconds; equivalent physical durations to decimal-comma seconds, but exact exporter format is unverified.",
+        "decimal_comma_milliseconds": "Pair a,bbb denotes a.bbb milliseconds; cannot silently replace this literal label reading by seconds.",
+        "status": "No export code, clock-calibration file, or physical onset trace resolves the unit and event contract."
+      }
+    },
+    {
+      "source_file": "Active/Start/AD21_Aec.csv",
+      "source_file_sha256": "8e953daa5167eb3f1d5ceda51abcf5e17e661af68e4582c56468343d14c804d4",
+      "source_line": 3,
+      "raw_header": "TrialNumber,InputValue,VibrationCommand,StartMovement(ms),EndMovement(ms),Stimulation,StimulationAfterMovement,Latency,MovementDuration",
+      "raw_line": "2,1,5,1,937,2,959,1,937,0,000,1,937,1,022",
+      "raw_line_utf8_sha256_excluding_line_ending": "15a6dade4f8e1a34ecf3b9eeafc7d667e5c08718d92c807a5f55e0a9e94750c9",
+      "strict_comma_parse": {
+        "header_fields": 9,
+        "row_fields": 15,
+        "exact_shape": false,
+        "tokens": [
+          "2",
+          "1",
+          "5",
+          "1",
+          "937",
+          "2",
+          "959",
+          "1",
+          "937",
+          "0",
+          "000",
+          "1",
+          "937",
+          "1",
+          "022"
+        ]
+      },
+      "first_three_prefix_fields": {
+        "TrialNumber": "2",
+        "InputValue": "1",
+        "VibrationCommand": "5"
+      },
+      "conditional_pair_parse": {
+        "start_numeric": 1.937,
+        "end_numeric": 2.959,
+        "stimulation_numeric": 1.937,
+        "stimulation_after_numeric": 0.0,
+        "latency_numeric": 1.937,
+        "duration_numeric": 1.022,
+        "speed_code": null
+      },
+      "literal_first_header_width_mapping_with_surplus_retained": {
+        "first_declared_width": {
+          "TrialNumber": "2",
+          "InputValue": "1",
+          "VibrationCommand": "5",
+          "StartMovement(ms)": "1",
+          "EndMovement(ms)": "937",
+          "Stimulation": "2",
+          "StimulationAfterMovement": "959",
+          "Latency": "1",
+          "MovementDuration": "937"
+        },
+        "surplus": [
+          "0",
+          "000",
+          "1",
+          "937",
+          "1",
+          "022"
+        ],
+        "status": "Not a complete declared-schema record. No silent truncation is admissible."
+      },
+      "unit_alternatives": {
+        "decimal_comma_seconds": "Pair a,bbb denotes a.bbb seconds; labels containing (ms) would require an explained label conversion.",
+        "thousands_group_milliseconds": "Pair a,bbb denotes concatenated integer abbb milliseconds; equivalent physical durations to decimal-comma seconds, but exact exporter format is unverified.",
+        "decimal_comma_milliseconds": "Pair a,bbb denotes a.bbb milliseconds; cannot silently replace this literal label reading by seconds.",
+        "status": "No export code, clock-calibration file, or physical onset trace resolves the unit and event contract."
+      }
+    },
+    {
+      "source_file": "Active/End/AD21_Aes.csv",
+      "source_file_sha256": "c474c8d8160df19a8e4b8702936a38373fef6bd835aa4a16d15fe80025c4fc30",
+      "source_line": 6,
+      "raw_header": "TrialNumber,InputValue,VibrationCommand,StartMovement(ms),EndMovement(ms),Stimulation,StimulationAfterMovement,Latency,MovementDuration",
+      "raw_line": "5,1,9,1,776,1,318,1,776,0,000,1,776,NaN",
+      "raw_line_utf8_sha256_excluding_line_ending": "e2c3b4c97d287f72be77e33e11e668a721ee3429ce0bf3eacd2827fc5c14ddf6",
+      "strict_comma_parse": {
+        "header_fields": 9,
+        "row_fields": 14,
+        "exact_shape": false,
+        "tokens": [
+          "5",
+          "1",
+          "9",
+          "1",
+          "776",
+          "1",
+          "318",
+          "1",
+          "776",
+          "0",
+          "000",
+          "1",
+          "776",
+          "NaN"
+        ]
+      },
+      "first_three_prefix_fields": {
+        "TrialNumber": "5",
+        "InputValue": "1",
+        "VibrationCommand": "9"
+      },
+      "conditional_pair_parse": {
+        "start_numeric": 1.776,
+        "end_numeric": 1.318,
+        "stimulation_numeric": 1.776,
+        "stimulation_after_numeric": 0.0,
+        "latency_numeric": 1.776,
+        "duration_numeric": null,
+        "speed_code": null
+      },
+      "literal_first_header_width_mapping_with_surplus_retained": {
+        "first_declared_width": {
+          "TrialNumber": "5",
+          "InputValue": "1",
+          "VibrationCommand": "9",
+          "StartMovement(ms)": "1",
+          "EndMovement(ms)": "776",
+          "Stimulation": "1",
+          "StimulationAfterMovement": "318",
+          "Latency": "1",
+          "MovementDuration": "776"
+        },
+        "surplus": [
+          "0",
+          "000",
+          "1",
+          "776",
+          "NaN"
+        ],
+        "status": "Not a complete declared-schema record. No silent truncation is admissible."
+      },
+      "unit_alternatives": {
+        "decimal_comma_seconds": "Pair a,bbb denotes a.bbb seconds; labels containing (ms) would require an explained label conversion.",
+        "thousands_group_milliseconds": "Pair a,bbb denotes concatenated integer abbb milliseconds; equivalent physical durations to decimal-comma seconds, but exact exporter format is unverified.",
+        "decimal_comma_milliseconds": "Pair a,bbb denotes a.bbb milliseconds; cannot silently replace this literal label reading by seconds.",
+        "status": "No export code, clock-calibration file, or physical onset trace resolves the unit and event contract."
+      }
+    },
+    {
+      "source_file": "Passive/Start/AD21_Pec.csv",
+      "source_file_sha256": "960c8136e253443b9afd96112dc0829af40752b1979a0b7a47bd6210a6b424bf",
+      "source_line": 2,
+      "raw_header": "TrialNumber,InputValue,VibrationCommand,StartMovement(ms),EndMovement(ms),Stimulation,StimulationAfterMovement,Latency,MovementDuration,Speed_Pass",
+      "raw_line": "1,1,2,16,536,17,714,17,036,0,500,16,536,1,178,M",
+      "raw_line_utf8_sha256_excluding_line_ending": "108d7b620011797a151a6b6ab31ba7407d6bb2dbad179e7a613cfb3b682d9105",
+      "strict_comma_parse": {
+        "header_fields": 10,
+        "row_fields": 16,
+        "exact_shape": false,
+        "tokens": [
+          "1",
+          "1",
+          "2",
+          "16",
+          "536",
+          "17",
+          "714",
+          "17",
+          "036",
+          "0",
+          "500",
+          "16",
+          "536",
+          "1",
+          "178",
+          "M"
+        ]
+      },
+      "first_three_prefix_fields": {
+        "TrialNumber": "1",
+        "InputValue": "1",
+        "VibrationCommand": "2"
+      },
+      "conditional_pair_parse": {
+        "start_numeric": 16.536,
+        "end_numeric": 17.714,
+        "stimulation_numeric": 17.036,
+        "stimulation_after_numeric": 0.5,
+        "latency_numeric": 16.536,
+        "duration_numeric": 1.178,
+        "speed_code": "M"
+      },
+      "literal_first_header_width_mapping_with_surplus_retained": {
+        "first_declared_width": {
+          "TrialNumber": "1",
+          "InputValue": "1",
+          "VibrationCommand": "2",
+          "StartMovement(ms)": "16",
+          "EndMovement(ms)": "536",
+          "Stimulation": "17",
+          "StimulationAfterMovement": "714",
+          "Latency": "17",
+          "MovementDuration": "036",
+          "Speed_Pass": "0"
+        },
+        "surplus": [
+          "500",
+          "16",
+          "536",
+          "1",
+          "178",
+          "M"
+        ],
+        "status": "Not a complete declared-schema record. No silent truncation is admissible."
+      },
+      "unit_alternatives": {
+        "decimal_comma_seconds": "Pair a,bbb denotes a.bbb seconds; labels containing (ms) would require an explained label conversion.",
+        "thousands_group_milliseconds": "Pair a,bbb denotes concatenated integer abbb milliseconds; equivalent physical durations to decimal-comma seconds, but exact exporter format is unverified.",
+        "decimal_comma_milliseconds": "Pair a,bbb denotes a.bbb milliseconds; cannot silently replace this literal label reading by seconds.",
+        "status": "No export code, clock-calibration file, or physical onset trace resolves the unit and event contract."
+      }
+    },
+    {
+      "source_file": "Passive/Start/AD21_Pec.csv",
+      "source_file_sha256": "960c8136e253443b9afd96112dc0829af40752b1979a0b7a47bd6210a6b424bf",
+      "source_line": 3,
+      "raw_header": "TrialNumber,InputValue,VibrationCommand,StartMovement(ms),EndMovement(ms),Stimulation,StimulationAfterMovement,Latency,MovementDuration,Speed_Pass",
+      "raw_line": "2,1,9,1,015,2,136,1,515,0,500,1,015,1,121,M",
+      "raw_line_utf8_sha256_excluding_line_ending": "1c4415ec622dda187ffbdd4aa45e9bab067bc812bd3fee741abbee09ff25cf9c",
+      "strict_comma_parse": {
+        "header_fields": 10,
+        "row_fields": 16,
+        "exact_shape": false,
+        "tokens": [
+          "2",
+          "1",
+          "9",
+          "1",
+          "015",
+          "2",
+          "136",
+          "1",
+          "515",
+          "0",
+          "500",
+          "1",
+          "015",
+          "1",
+          "121",
+          "M"
+        ]
+      },
+      "first_three_prefix_fields": {
+        "TrialNumber": "2",
+        "InputValue": "1",
+        "VibrationCommand": "9"
+      },
+      "conditional_pair_parse": {
+        "start_numeric": 1.015,
+        "end_numeric": 2.136,
+        "stimulation_numeric": 1.515,
+        "stimulation_after_numeric": 0.5,
+        "latency_numeric": 1.015,
+        "duration_numeric": 1.121,
+        "speed_code": "M"
+      },
+      "literal_first_header_width_mapping_with_surplus_retained": {
+        "first_declared_width": {
+          "TrialNumber": "2",
+          "InputValue": "1",
+          "VibrationCommand": "9",
+          "StartMovement(ms)": "1",
+          "EndMovement(ms)": "015",
+          "Stimulation": "2",
+          "StimulationAfterMovement": "136",
+          "Latency": "1",
+          "MovementDuration": "515",
+          "Speed_Pass": "0"
+        },
+        "surplus": [
+          "500",
+          "1",
+          "015",
+          "1",
+          "121",
+          "M"
+        ],
+        "status": "Not a complete declared-schema record. No silent truncation is admissible."
+      },
+      "unit_alternatives": {
+        "decimal_comma_seconds": "Pair a,bbb denotes a.bbb seconds; labels containing (ms) would require an explained label conversion.",
+        "thousands_group_milliseconds": "Pair a,bbb denotes concatenated integer abbb milliseconds; equivalent physical durations to decimal-comma seconds, but exact exporter format is unverified.",
+        "decimal_comma_milliseconds": "Pair a,bbb denotes a.bbb milliseconds; cannot silently replace this literal label reading by seconds.",
+        "status": "No export code, clock-calibration file, or physical onset trace resolves the unit and event contract."
+      }
+    },
+    {
+      "source_file": "Passive/End/ZO41_Pes.csv",
+      "source_file_sha256": "f7c1a97d477e1c922382de41c806d3d4a257e97d82eb6e84b4554231918e499c",
+      "source_line": 2,
+      "raw_header": "TrialNumber,InputValue,VibrationCommand,StartMovement(ms),EndMovement(ms),Stimulation,StimulationAfterMovement,Latency,MovementDuration,Speed_Pass",
+      "raw_line": "",
+      "raw_line_utf8_sha256_excluding_line_ending": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "strict_comma_parse": {
+        "header_fields": 10,
+        "row_fields": 0,
+        "exact_shape": false,
+        "tokens": []
+      },
+      "first_three_prefix_fields": {},
+      "status": "Archived blank line. Not an endpoint or timing observation."
+    },
+    {
+      "source_file": "Passive/End/ZO41_Pes.csv",
+      "source_file_sha256": "f7c1a97d477e1c922382de41c806d3d4a257e97d82eb6e84b4554231918e499c",
+      "source_line": 3,
+      "raw_header": "TrialNumber,InputValue,VibrationCommand,StartMovement(ms),EndMovement(ms),Stimulation,StimulationAfterMovement,Latency,MovementDuration,Speed_Pass",
+      "raw_line": "2,1,3,0,834,1,897,1,334,0,500,0,834,1,063,M",
+      "raw_line_utf8_sha256_excluding_line_ending": "3419f24b7c94aab54b2b63fa8342c8b7535099bf8013228c0c86cc4d1e73be38",
+      "strict_comma_parse": {
+        "header_fields": 10,
+        "row_fields": 16,
+        "exact_shape": false,
+        "tokens": [
+          "2",
+          "1",
+          "3",
+          "0",
+          "834",
+          "1",
+          "897",
+          "1",
+          "334",
+          "0",
+          "500",
+          "0",
+          "834",
+          "1",
+          "063",
+          "M"
+        ]
+      },
+      "first_three_prefix_fields": {
+        "TrialNumber": "2",
+        "InputValue": "1",
+        "VibrationCommand": "3"
+      },
+      "conditional_pair_parse": {
+        "start_numeric": 0.834,
+        "end_numeric": 1.897,
+        "stimulation_numeric": 1.334,
+        "stimulation_after_numeric": 0.5,
+        "latency_numeric": 0.834,
+        "duration_numeric": 1.063,
+        "speed_code": "M"
+      },
+      "literal_first_header_width_mapping_with_surplus_retained": {
+        "first_declared_width": {
+          "TrialNumber": "2",
+          "InputValue": "1",
+          "VibrationCommand": "3",
+          "StartMovement(ms)": "0",
+          "EndMovement(ms)": "834",
+          "Stimulation": "1",
+          "StimulationAfterMovement": "897",
+          "Latency": "1",
+          "MovementDuration": "334",
+          "Speed_Pass": "0"
+        },
+        "surplus": [
+          "500",
+          "0",
+          "834",
+          "1",
+          "063",
+          "M"
+        ],
+        "status": "Not a complete declared-schema record. No silent truncation is admissible."
+      },
+      "unit_alternatives": {
+        "decimal_comma_seconds": "Pair a,bbb denotes a.bbb seconds; labels containing (ms) would require an explained label conversion.",
+        "thousands_group_milliseconds": "Pair a,bbb denotes concatenated integer abbb milliseconds; equivalent physical durations to decimal-comma seconds, but exact exporter format is unverified.",
+        "decimal_comma_milliseconds": "Pair a,bbb denotes a.bbb milliseconds; cannot silently replace this literal label reading by seconds.",
+        "status": "No export code, clock-calibration file, or physical onset trace resolves the unit and event contract."
+      }
+    },
+    {
+      "source_file": "Passive/Start/TP97_Pec.csv",
+      "source_file_sha256": "7d16fcc42e9c54db654a588a54eb9fdddf06b51357d326ca5b81577cddcda405",
+      "source_line": 91,
+      "raw_header": "TrialNumber,InputValue,VibrationCommand,StartMovement(ms),EndMovement(ms),Stimulation,StimulationAfterMovement,Latency,MovementDuration,Speed_Pass",
+      "raw_line": "90,1,0,1,822,0,000,1,822,0,000,1,822,NaN,M",
+      "raw_line_utf8_sha256_excluding_line_ending": "d6e0f40bc52d8326af0e8806ce5257e8d6af78cb4fba8b2ea0c20ef389719f11",
+      "strict_comma_parse": {
+        "header_fields": 10,
+        "row_fields": 15,
+        "exact_shape": false,
+        "tokens": [
+          "90",
+          "1",
+          "0",
+          "1",
+          "822",
+          "0",
+          "000",
+          "1",
+          "822",
+          "0",
+          "000",
+          "1",
+          "822",
+          "NaN",
+          "M"
+        ]
+      },
+      "first_three_prefix_fields": {
+        "TrialNumber": "90",
+        "InputValue": "1",
+        "VibrationCommand": "0"
+      },
+      "conditional_pair_parse": {
+        "start_numeric": 1.822,
+        "end_numeric": 0.0,
+        "stimulation_numeric": 1.822,
+        "stimulation_after_numeric": 0.0,
+        "latency_numeric": 1.822,
+        "duration_numeric": null,
+        "speed_code": "M"
+      },
+      "literal_first_header_width_mapping_with_surplus_retained": {
+        "first_declared_width": {
+          "TrialNumber": "90",
+          "InputValue": "1",
+          "VibrationCommand": "0",
+          "StartMovement(ms)": "1",
+          "EndMovement(ms)": "822",
+          "Stimulation": "0",
+          "StimulationAfterMovement": "000",
+          "Latency": "1",
+          "MovementDuration": "822",
+          "Speed_Pass": "0"
+        },
+        "surplus": [
+          "000",
+          "1",
+          "822",
+          "NaN",
+          "M"
+        ],
+        "status": "Not a complete declared-schema record. No silent truncation is admissible."
+      },
+      "unit_alternatives": {
+        "decimal_comma_seconds": "Pair a,bbb denotes a.bbb seconds; labels containing (ms) would require an explained label conversion.",
+        "thousands_group_milliseconds": "Pair a,bbb denotes concatenated integer abbb milliseconds; equivalent physical durations to decimal-comma seconds, but exact exporter format is unverified.",
+        "decimal_comma_milliseconds": "Pair a,bbb denotes a.bbb milliseconds; cannot silently replace this literal label reading by seconds.",
+        "status": "No export code, clock-calibration file, or physical onset trace resolves the unit and event contract."
+      }
+    },
+    {
+      "source_file": "Control/End/AD21_Ces.csv",
+      "source_file_sha256": "d60c0a289a146dc5fc8d76ab5b63146c1839772a7076d8ae1d79dc5bcd63006d",
+      "source_line": 2,
+      "raw_header": "TrialNumber,InputValue,VibrationCommand,StartMovement(ms),EndMovement(ms),Stimulation,StimulationAfterMovement,Latency,MovementDuration",
+      "raw_line": "1,0,2,0,000,0,000,0,000,0,000,0,000,0,000",
+      "raw_line_utf8_sha256_excluding_line_ending": "c03fd0fd2e081cc69b1b56b6ed02c4427fc44f1c1bc4f5e0677f97a53c3a0dfe",
+      "strict_comma_parse": {
+        "header_fields": 9,
+        "row_fields": 15,
+        "exact_shape": false,
+        "tokens": [
+          "1",
+          "0",
+          "2",
+          "0",
+          "000",
+          "0",
+          "000",
+          "0",
+          "000",
+          "0",
+          "000",
+          "0",
+          "000",
+          "0",
+          "000"
+        ]
+      },
+      "first_three_prefix_fields": {
+        "TrialNumber": "1",
+        "InputValue": "0",
+        "VibrationCommand": "2"
+      },
+      "conditional_pair_parse": {
+        "start_numeric": 0.0,
+        "end_numeric": 0.0,
+        "stimulation_numeric": 0.0,
+        "stimulation_after_numeric": 0.0,
+        "latency_numeric": 0.0,
+        "duration_numeric": 0.0,
+        "speed_code": null
+      },
+      "literal_first_header_width_mapping_with_surplus_retained": {
+        "first_declared_width": {
+          "TrialNumber": "1",
+          "InputValue": "0",
+          "VibrationCommand": "2",
+          "StartMovement(ms)": "0",
+          "EndMovement(ms)": "000",
+          "Stimulation": "0",
+          "StimulationAfterMovement": "000",
+          "Latency": "0",
+          "MovementDuration": "000"
+        },
+        "surplus": [
+          "0",
+          "000",
+          "0",
+          "000",
+          "0",
+          "000"
+        ],
+        "status": "Not a complete declared-schema record. No silent truncation is admissible."
+      },
+      "unit_alternatives": {
+        "decimal_comma_seconds": "Pair a,bbb denotes a.bbb seconds; labels containing (ms) would require an explained label conversion.",
+        "thousands_group_milliseconds": "Pair a,bbb denotes concatenated integer abbb milliseconds; equivalent physical durations to decimal-comma seconds, but exact exporter format is unverified.",
+        "decimal_comma_milliseconds": "Pair a,bbb denotes a.bbb milliseconds; cannot silently replace this literal label reading by seconds.",
+        "status": "No export code, clock-calibration file, or physical onset trace resolves the unit and event contract."
+      }
+    },
+    {
+      "source_file": "Control/Start/AD21_Cec.csv",
+      "source_file_sha256": "e71281d4e7d994b1cbc3682503f13eb1ea2dbc1e7c860ad9fea5bb11580a44d9",
+      "source_line": 2,
+      "raw_header": "TrialNumber,InputValue,VibrationCommand",
+      "raw_line": "1,1,1",
+      "raw_line_utf8_sha256_excluding_line_ending": "f3176ea4064dc47ccab85eb06a79460c0a07325bfdc3da7863dbd974031ee89b",
+      "strict_comma_parse": {
+        "header_fields": 3,
+        "row_fields": 3,
+        "exact_shape": true,
+        "tokens": [
+          "1",
+          "1",
+          "1"
+        ]
+      },
+      "first_three_prefix_fields": {
+        "TrialNumber": "1",
+        "InputValue": "1",
+        "VibrationCommand": "1"
+      },
+      "status": "Endpoint-only source record. No time fields are present."
+    }
+  ],
+  "event_layers": [
+    {
+      "layer": "intended_schedule",
+      "definition": "Prospective onset delay or target time requested by experimental code.",
+      "source_status": "Paper reports 200 ms after movement onset for both movement conditions."
+    },
+    {
+      "layer": "software_record",
+      "definition": "A program event or variable serialized under a column label.",
+      "source_status": "Archived fields exist, but their exact assignment sites, clocks and reset semantics are unavailable."
+    },
+    {
+      "layer": "physical_stimulus_onset",
+      "definition": "Measured onset of delivered skin vibration under a prespecified physical threshold.",
+      "source_status": "No accelerometer, displacement, force or equivalent physical onset trace in this release."
+    },
+    {
+      "layer": "neural_consumer_intake",
+      "definition": "Actual uptake of a specified input token by the selected neural consumer in that trial.",
+      "source_status": "No named neural consumer or event-specific intake telemetry in this release."
+    }
+  ],
+  "interpretation": "Column arithmetic is an archival diagnostic. It neither identifies physical onset nor disproves the published behavioral effect."
+}

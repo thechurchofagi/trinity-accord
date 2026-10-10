@@ -1,0 +1,19 @@
+{
+  "status": "PASS_WITH_SCOPE",
+  "reviewer_role": "internal_read_only_AI",
+  "delta": {
+    "path": "publication/UCT-PUB-v1.0.22/CLAIM_COVERAGE_DELTA.json",
+    "bytes": 47820,
+    "sha256": "3129227e45be9a9fdc14a3a87a1e551149014e7b1f25047bc56431824a2edaf4"
+  },
+  "old_delta": {
+    "path": "records/DVC20261010_Device_Consumer_Validation/history/unpublished_pre_save_coverage_v21/CLAIM_COVERAGE_DELTA.json",
+    "bytes": 47820,
+    "sha256": "e3c76a81c2a5779014038e0806f78b416f25ac45d11d8441dabf55a08a7903c8"
+  },
+  "42_claim_objects_exactly_unchanged": true,
+  "nested_bindings_checked": 45,
+  "navigation_targets_checked": 160,
+  "preservation_comparisons": 39,
+  "scope": "Before final manifest and actual dual save; no scientific promotion or public-file modification."
+}

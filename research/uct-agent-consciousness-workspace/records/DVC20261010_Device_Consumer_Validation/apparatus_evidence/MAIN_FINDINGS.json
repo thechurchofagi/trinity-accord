@@ -1,0 +1,270 @@
+{
+  "research_id": "DVC20261010",
+  "component": "apparatus_evidence",
+  "status": "PUBLIC_DATA_REANALYSIS_COMPLETE; ACTUAL_CONSUMER_APPLICATION_UNADMITTED",
+  "new_human_data_collected": false,
+  "new_hardware_experiment_run": false,
+  "preregistered_reanalysis": false,
+  "future_primary_endpoint": "Comparative tactile intensity, operationalized as PSE; not a retrospective preregistration claim.",
+  "counts": {
+    "trial_csv_count": 121,
+    "archived_subject_count": 21,
+    "included_subject_count": 18,
+    "nonempty_trial_records_all": 10875,
+    "nonempty_trial_records_included": 9705,
+    "valid_command_records_included": 9704,
+    "psychometric_parameter_cells": 108,
+    "independent_fit_runs": 216,
+    "optimizer_successful_runs": 216,
+    "fits_at_parameter_bound": 0
+  },
+  "fit_count_meaning": "18 people × 6 cells × 2 analysis specifications = 216 numerical fits; only 18 participants.",
+  "key_contrasts": {
+    "archived_JND_passive_Start_minus_End": {
+      "contrast": "Passive: Start - End",
+      "n": 18,
+      "mean_difference": 0.4981988888888888,
+      "sd_difference": 0.5516484002129584,
+      "ci95_lower": 0.22387059335595066,
+      "ci95_upper": 0.7725271844218269,
+      "t": 3.8315689404005426,
+      "df": 17,
+      "p_two_sided": 0.0013360735844510589,
+      "effect_dz": 0.9031094601136596,
+      "p_Holm_family_3_within_movement": 0.0040082207533531766
+    },
+    "independent_sigma_passive_Start_minus_End": {
+      "contrast": "Passive: Start - End",
+      "n": 18,
+      "mean_difference": 0.6829975493278883,
+      "sd_difference": 0.7619867015143625,
+      "ci95_lower": 0.30407047736591925,
+      "ci95_upper": 1.0619246212898572,
+      "t": 3.802839585287226,
+      "df": 17,
+      "p_two_sided": 0.0014220525601161872,
+      "effect_dz": 0.8963378861737452,
+      "p_Holm_family_3_within_movement": 0.004266157680348562
+    },
+    "independent_sigma_passive_minus_active_attention_effect": {
+      "contrast": "(Passive Start - End) - (Active Start - End)",
+      "n": 18,
+      "mean_difference": 0.7585678362526835,
+      "sd_difference": 0.9463163118293709,
+      "ci95_lower": 0.28797580560607744,
+      "ci95_upper": 1.2291598668992896,
+      "t": 3.4009038265483977,
+      "df": 17,
+      "p_two_sided": 0.0034011194724800128,
+      "effect_dz": 0.8016007193052167,
+      "p_Holm_family_3_interaction_pairs": 0.010203358417440038
+    },
+    "sensitivity_sigma_passive_minus_active_attention_effect": {
+      "contrast": "(Passive Start - End) - (Active Start - End)",
+      "n": 18,
+      "mean_difference": 0.753182665783926,
+      "sd_difference": 0.9659094324904947,
+      "ci95_lower": 0.2728472054580852,
+      "ci95_upper": 1.2335181261097667,
+      "t": 3.3082640206221368,
+      "df": 17,
+      "p_two_sided": 0.004155291637392493,
+      "effect_dz": 0.7797653076457952,
+      "p_Holm_family_3_interaction_pairs": 0.01246587491217748
+    },
+    "independent_PSE_Active_minus_Control": {
+      "contrast": "Active - Control averaged over attention",
+      "n": 18,
+      "mean_difference": -0.40792984778336505,
+      "sd_difference": 0.6070120913468786,
+      "ci95_lower": -0.7097898592014888,
+      "ci95_upper": -0.1060698363652412,
+      "t": -2.8511784103935884,
+      "df": 17,
+      "p_two_sided": 0.011046711696431564,
+      "effect_dz": -0.6720291961206626,
+      "p_Holm_family_3_marginal": 0.02209342339286313
+    },
+    "independent_PSE_Passive_minus_Control": {
+      "contrast": "Passive - Control averaged over attention",
+      "n": 18,
+      "mean_difference": -0.7505015430035038,
+      "sd_difference": 0.4164770184616015,
+      "ci95_lower": -0.9576106918002836,
+      "ci95_upper": -0.543392394206724,
+      "t": -7.645339937012728,
+      "df": 17,
+      "p_two_sided": 6.729550194941832e-07,
+      "effect_dz": -1.8020239046460107,
+      "p_Holm_family_3_marginal": 2.0188650584825495e-06
+    }
+  },
+  "ANOVA_reproduction": {
+    "archived_PSE": {
+      "movement": {
+        "F": 18.30095903854588,
+        "df_numerator": 2,
+        "df_denominator": 34,
+        "p_uncorrected": 4.0295921457300316e-06,
+        "GG_epsilon": 0.8736181728939593,
+        "p_GG": 1.3570858139347514e-05
+      },
+      "attention": {
+        "F": 0.7653968970036118,
+        "df_numerator": 1,
+        "df_denominator": 17,
+        "p_uncorrected": 0.39383754195163917,
+        "GG_epsilon": 1.0,
+        "p_GG": 0.39383754195163917
+      },
+      "movement_by_attention": {
+        "F": 1.5942389993465023,
+        "df_numerator": 2,
+        "df_denominator": 34,
+        "p_uncorrected": 0.21787064214690613,
+        "GG_epsilon": 0.887215836752362,
+        "p_GG": 0.22076646378111708
+      }
+    },
+    "archived_JND": {
+      "movement": {
+        "F": 1.4145475392165285,
+        "df_numerator": 2,
+        "df_denominator": 34,
+        "p_uncorrected": 0.2569767152699103,
+        "GG_epsilon": 0.962213407382429,
+        "p_GG": 0.2572619990194032
+      },
+      "attention": {
+        "F": 19.824853885946716,
+        "df_numerator": 1,
+        "df_denominator": 17,
+        "p_uncorrected": 0.00034953220180822156,
+        "GG_epsilon": 1.0,
+        "p_GG": 0.00034953220180822156
+      },
+      "movement_by_attention": {
+        "F": 6.64761942038859,
+        "df_numerator": 2,
+        "df_denominator": 34,
+        "p_uncorrected": 0.0036580142992541555,
+        "GG_epsilon": 0.7990964223307079,
+        "p_GG": 0.007140442753694992
+      }
+    }
+  },
+  "open_issues": [
+    {
+      "id": "DVC-APP-O1",
+      "issue": "No anatomical consumer or token-level motor/proprioceptive intake record",
+      "affected_premises": [
+        "actual carrier grounding",
+        "selected consumer identity",
+        "actual intake occurrence"
+      ],
+      "status": "UNADMITTED"
+    },
+    {
+      "id": "DVC-APP-O2",
+      "issue": "No physical 10-cell branch isolation with fixed plant consequence",
+      "affected_premises": [
+        "branch-local intervention",
+        "same actual instance",
+        "matched movement/tactile consequences"
+      ],
+      "status": "UNADMITTED"
+    },
+    {
+      "id": "DVC-APP-O3",
+      "issue": "8985 time-bearing rows exceed declared CSV widths; explicit conditional pair/NaN parse succeeds but event/clock semantics remain unresolved",
+      "affected_premises": [
+        "time and unit fidelity",
+        "physical stimulus onset",
+        "same probe epoch"
+      ],
+      "status": "OPEN"
+    },
+    {
+      "id": "DVC-APP-O4",
+      "issue": "Tobii 5 250-Hz publication wording versus Eye Tracker 5 133-Hz image/33-Hz gaze vendor specification; installed model unidentified",
+      "affected_premises": [
+        "context fixation/attention measurement",
+        "device identity"
+      ],
+      "status": "OPEN"
+    },
+    {
+      "id": "DVC-APP-O5",
+      "issue": "JND 16-person degrees of freedom are not reconstructed from complete 18-person release; difference-score F=6.65 is reproduced",
+      "affected_premises": [
+        "analysis population consistency",
+        "parameter/result provenance"
+      ],
+      "status": "OPEN"
+    },
+    {
+      "id": "DVC-APP-O6",
+      "issue": "Archived JND is not independently reproduced as fitted normal sigma; missing anamax and complete preprocessing",
+      "affected_premises": [
+        "endpoint unit/functional definition",
+        "analysis reproducibility"
+      ],
+      "status": "OPEN"
+    },
+    {
+      "id": "DVC-APP-O7",
+      "issue": "Agency, ownership, conceptual self and familiar mineness not measured",
+      "affected_premises": [
+        "named-target semantic bridge"
+      ],
+      "status": "UNADMITTED"
+    }
+  ],
+  "affected_claims": [
+    {
+      "claim_locator": "MPC20261010-C5",
+      "effect": "Behavioral endpoint distinction receives actual-data support within explicit refit scope; no biological OR gate or equivalence upgrade."
+    },
+    {
+      "claim_locator": "MPC20261010-C6",
+      "effect": "Actual-instance/consumer premises remain unadmitted; C1 conditional interpretation is unchanged."
+    },
+    {
+      "claim_locator": "SCU20261010-C1–C7",
+      "effect": "Finite routing/probe theorems unchanged. Their hardware premises are not established by this archive."
+    },
+    {
+      "claim_locator": "SCU20261010-C8",
+      "effect": "Guarded UCT application unchanged; no new H_fam endpoint or basal gate."
+    }
+  ],
+  "novelty_deduction": {
+    "INHERITED": [
+      "Behavioral bias/precision dissociation and attention findings",
+      "MPC missing-corner and full-table/read distinction",
+      "SCU actual source/use and finite-model boundaries",
+      "Vendor frame, flush, overwrite and synchronization semantics"
+    ],
+    "NEW_APPLICATION": [
+      "Carrier/consumer/schedule/software-event/physical-onset contract for the published device family",
+      "Independent 108-cell reanalysis and explicit archive/sigma endpoint separation"
+    ],
+    "NEGATIVE_RESULT": [
+      "Released material does not certify human M/P consumer admission"
+    ],
+    "PRIORITY_UNVERIFIED": [
+      "No broad novelty or priority claim for generic sampling, snapshots, provenance or psychometric methods"
+    ]
+  },
+  "source_doi": "10.5281/zenodo.18877381",
+  "source_zip_sha256": "ed89e94719e87acc19cd905efd7ff44d09abce0e0291f2fd654b0453bfdfbd6a",
+  "executed_analysis_code_sha256": "3c60cdf9787198b4a8a63fb9836f4b7d63ec8cc0f34698183bab7442bfe1f3d3",
+  "response_coding_status": {
+    "status": "INTERPRETED_NOT_DIRECTLY_VERIFIED",
+    "interpretation": "InputValue=1 is treated as comparison stronger based on ascending command-response functions.",
+    "unresolved": "The paper reports physical keys 1/2; the source CSV is coded 0/1. An explicit conversion was not found.",
+    "correction_overlay": "RESPONSE_CODING_CORRECTION.json",
+    "numerical_refits_changed": false,
+    "coding_invariant_statistic": "PSE is the fitted Pr(InputValue=1)=0.5 location. For the same response curve, relabeling p as 1-p leaves its 0.5 crossing unchanged; the physical stronger/weaker naming still requires the unresolved coding bridge."
+  }
+}

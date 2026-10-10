@@ -1,0 +1,164 @@
+{
+  "schema": "uct-source-reading-scope/1",
+  "research_id": "DVC20261010",
+  "supplied_remote_sha": "8bac31cc0b9fb4c70d87f688dabbadeb6166addb",
+  "remote_sha_verified_by": "Parent; this worker used the shared verified snapshot and did not independently read the remote.",
+  "four_foundation_status": "Four-paper source versions and their actual reading ranges remain in the parent’s session record and master guide. This scoped device worker does not claim new complete reads of those foundation texts. C1/U1 and effective amendments remain inherited constraints.",
+  "internal_reads": [
+    {
+      "path": "../AGENTS.md",
+      "sha256_at_receipt": "68dbcac80bcfa7e5769c8d0c7398003ff456f8f2c819f0ed1e9a4c9c6a5c19cf",
+      "bytes": 1594,
+      "scope": "Complete fresh read of parent research instructions.",
+      "read_type": "FULL_FRESH"
+    },
+    {
+      "path": "RESEARCH_MASTER_GUIDE.md",
+      "exists": true,
+      "sha256_at_receipt": "d21e7a19b18390b7eef1b1f75f802a922c3fc2d65d362a9de59a29e35405ef46",
+      "bytes": 29594,
+      "line_count": 220,
+      "scope": "Complete fresh read, 218-line v2.3 source supplied for this task.",
+      "read_type": "FULL_FRESH"
+    },
+    {
+      "path": "AGENTS.md",
+      "exists": true,
+      "sha256_at_receipt": "60cc6cf74b8ffc6bf7b6263f0c84afb1c93cd9543112359bfdc53b83a27d9037",
+      "bytes": 97763,
+      "line_count": 561,
+      "scope": "Effective current instructions and additional historical passages freshly read; tool truncation occurred in historical blocks. Do not assert a complete fresh reread of all historical notices. Prior SCU task included a full earlier-version read.",
+      "read_type": "PARTIAL_FRESH_WITH_PRIOR_CONTEXT"
+    },
+    {
+      "path": "FORMAL_MAP_REVIEW_POLICY.json",
+      "exists": true,
+      "sha256_at_receipt": "5e743007e31f1ee37241e932f8358d3cdc72b0ee88bfb51d5156b5c782e939c2",
+      "bytes": 7340,
+      "line_count": 172,
+      "scope": "Complete fresh read of v2.4 methodology.",
+      "read_type": "FULL_FRESH"
+    },
+    {
+      "path": "CURRENT_STATE.json",
+      "exists": true,
+      "sha256_at_receipt": "77b2f732812e0e3199a5d69fb573613520fc0980288d38dd076a6bae7b9fc1b0",
+      "bytes": 6882,
+      "line_count": 134,
+      "scope": "Full state at task start and selected refreshed current fields after the parent synchronized MPC; final hash records this supplied local snapshot, not an independent remote check.",
+      "read_type": "FULL_THEN_SELECTED_REFRESH"
+    },
+    {
+      "path": "records/MPC20261010_Motor_Proprioceptive_Consumers/RESEARCH_NOTE.md",
+      "exists": true,
+      "sha256_at_receipt": "f80659a16a4d57703cd30dd6135be2db298ada2488c81d139dae8094bd526783",
+      "bytes": 16188,
+      "line_count": 154,
+      "scope": "Complete fresh read.",
+      "read_type": "FULL_FRESH"
+    },
+    {
+      "path": "records/MPC20261010_Motor_Proprioceptive_Consumers/PROTOCOL.md",
+      "exists": true,
+      "sha256_at_receipt": "b45445365107a68f85ecb8b4d252d303e367e948d7134f51132d25f4de6af63c",
+      "bytes": 1888,
+      "line_count": 31,
+      "scope": "Complete fresh read.",
+      "read_type": "FULL_FRESH"
+    },
+    {
+      "path": "records/MPC20261010_Motor_Proprioceptive_Consumers/model.py",
+      "exists": true,
+      "sha256_at_receipt": "2a9df35c5bfd1bdbab802772a5ee7be8772499b9ec3b4e87455c2f17bcf29330",
+      "bytes": 3187,
+      "line_count": 112,
+      "scope": "Complete fresh read.",
+      "read_type": "FULL_FRESH"
+    },
+    {
+      "path": "records/MPC20261010_Motor_Proprioceptive_Consumers/EXACT_RESULTS.json",
+      "exists": true,
+      "sha256_at_receipt": "d0e3393fd51d1f4a69e4d703e33775ae37cdabe4387b9fd5ee80e53a3cbf330e",
+      "bytes": 2372,
+      "line_count": 142,
+      "scope": "Complete fresh read.",
+      "read_type": "FULL_FRESH"
+    },
+    {
+      "path": "records/MPC20261010_Motor_Proprioceptive_Consumers/FAILURES.md",
+      "exists": true,
+      "sha256_at_receipt": "10b39f3a0d921a067b9aef75dd95af3afea08c85516b4a11e7f3ed6ccd3845c0",
+      "bytes": 1607,
+      "line_count": 12,
+      "scope": "Complete fresh read.",
+      "read_type": "FULL_FRESH"
+    },
+    {
+      "path": "records/SCU20261010_Source_Consumer_Protocols/RESEARCH_NOTE.md",
+      "exists": true,
+      "sha256_at_receipt": "5f9249a9fbe6ea96342b6b004e34332a5dbd86fbea5c8261816aac983f212fa7",
+      "bytes": 31169,
+      "line_count": 280,
+      "scope": "Full authorship and prior-task review; used inherited source/consumer/probe/chronology contracts, not claimed as a new complete reread in this task.",
+      "read_type": "PRIOR_FULL_AUTHOR_REVIEW"
+    },
+    {
+      "path": "records/SCU20261010_Source_Consumer_Protocols/check_source_consumers.py",
+      "exists": true,
+      "scope": "Full prior-task authorship and independent parent rerun; current code used as antecedent, not as a newly executed device.",
+      "read_type": "PRIOR_FULL_AUTHOR_REVIEW",
+      "sha256_at_receipt": "8643c0b7fa63cf78b0aa4c5f8a558480e8108e29a8a7eb6b6895c0930b7690cb",
+      "bytes": 20209,
+      "line_count": 412
+    }
+  ],
+  "external_reads": [
+    {
+      "id": "SRC-DVC-APPARATUS",
+      "type": "PRIMARY_RESEARCH",
+      "title": "Effects of prediction and attention on tactile precision in somatosensory gating",
+      "authors": "D’Onofrio Pacheco and Zimmermann",
+      "year": 2026,
+      "doi": "10.3758/s13414-026-03288-7",
+      "url": "https://link.springer.com/article/10.3758/s13414-026-03288-7",
+      "worker_scope": "Article metadata and Apparatus and materials passages directly inspected. Independent device/evidence worker read the full article and downloaded trial-level data; this worker does not claim that broader read or data download.",
+      "supports": "Existing public Touch X/Arduino apparatus context.",
+      "does_not_support": "Actual shadow implementation, command-copy/encoder call sites, capture/read event streams, human neural consumers or H."
+    },
+    {
+      "id": "SRC-DVC-SNAPSHOT",
+      "type": "PRIMARY_RESEARCH",
+      "title": "Distributed snapshots: determining global states of distributed systems",
+      "authors": "Chandy and Lamport",
+      "year": 1985,
+      "doi": "10.1145/214451.214456",
+      "url": "https://lamport.azurewebsites.net/pubs/chandy.pdf",
+      "worker_scope": "Sections 1–2 and selected 3–4 passages; not the full proof or all pages.",
+      "supports": "Prior distributed snapshot/global-state context.",
+      "does_not_support": "This two-latch implementation is not the Chandy–Lamport algorithm, nor does that source establish DVC physical-token/epoch premises."
+    },
+    {
+      "id": "SRC-DVC-OH-PROGRAMMER",
+      "type": "OFFICIAL_MANUFACTURER_DOCUMENTATION",
+      "title": "OpenHaptics Programmer’s Guide",
+      "version": "3.4.0; 2015 footer in retrieved document",
+      "url": "https://s3.amazonaws.com/dl.3dsystems.com/binaries/Sensable/OH/OpenHaptics_Programmers_Guide.pdf",
+      "worker_scope": "Direct relevant excerpts on printed pp. 88–91: haptic frames, synchronous scheduler snapshots, current/last state and frame-end setting semantics. Not a complete-manual read.",
+      "supports": "Direct existing interface prior for snapshot/last-frame behavior and buffered setting versus frame-end transmission.",
+      "does_not_support": "Study-specific SDK use, measured timing, actual Arduino rail command identity, or physically completed motion."
+    },
+    {
+      "id": "SRC-DVC-OH-API",
+      "type": "OFFICIAL_MANUFACTURER_DOCUMENTATION",
+      "title": "OpenHaptics API Reference Guide",
+      "url": "https://s3.amazonaws.com/dl.3dsystems.com/binaries/Sensable/OH/OpenHaptics_API_Reference_Guide.pdf",
+      "worker_scope": "Direct selected position/raw-encoder/frame-query passages at printed pp. 7, 56–57; not complete manual.",
+      "supports": "Documented candidate position (millimeter) and raw-encoder interfaces.",
+      "does_not_support": "Installed source port, selected study call sites, actual source timestamp or physical read fidelity."
+    }
+  ],
+  "historical_predecessor_scope": "R173/R174/R187/TE/R157/R158 neighboring contracts were reported by the map auditor and available from prior SCU review; this worker did not freshly re-prove the complete history. Graph/source-locator distinction retained.",
+  "primary_source_only_for_technical_prior": true,
+  "worldwide_priority_established": false,
+  "actual_device_access": false
+}

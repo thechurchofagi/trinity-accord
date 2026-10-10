@@ -1,0 +1,86 @@
+{
+  "pages": 15,
+  "pdf_bytes": 279016,
+  "pdf_sha256": "7e6e8c181e98975b3ba3e665982a7dd206a2c8efcf543ce865b34d053290754b",
+  "expected_manifest_sha256": "4f976e85774d787dcafbcd85dd4784637ae67510836847905f938ec3bb6d755d",
+  "checks": [
+    {
+      "page": 1,
+      "words": 362,
+      "outside_page": []
+    },
+    {
+      "page": 2,
+      "words": 529,
+      "outside_page": []
+    },
+    {
+      "page": 3,
+      "words": 461,
+      "outside_page": []
+    },
+    {
+      "page": 4,
+      "words": 404,
+      "outside_page": []
+    },
+    {
+      "page": 5,
+      "words": 469,
+      "outside_page": []
+    },
+    {
+      "page": 6,
+      "words": 393,
+      "outside_page": []
+    },
+    {
+      "page": 7,
+      "words": 433,
+      "outside_page": []
+    },
+    {
+      "page": 8,
+      "words": 448,
+      "outside_page": []
+    },
+    {
+      "page": 9,
+      "words": 393,
+      "outside_page": []
+    },
+    {
+      "page": 10,
+      "words": 330,
+      "outside_page": []
+    },
+    {
+      "page": 11,
+      "words": 374,
+      "outside_page": []
+    },
+    {
+      "page": 12,
+      "words": 509,
+      "outside_page": []
+    },
+    {
+      "page": 13,
+      "words": 503,
+      "outside_page": []
+    },
+    {
+      "page": 14,
+      "words": 409,
+      "outside_page": []
+    },
+    {
+      "page": 15,
+      "words": 366,
+      "outside_page": []
+    }
+  ],
+  "all_visual_pages_rendered": true,
+  "visual_inspection_status": "PASS",
+  "reviewed_at_utc": "2026-10-10T01:44:01.075673+00:00"
+}

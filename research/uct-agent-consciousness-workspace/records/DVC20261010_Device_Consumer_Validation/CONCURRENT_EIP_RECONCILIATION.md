@@ -1,0 +1,19 @@
+# Concurrent EIP preservation and DVC reconciliation
+
+The pre-save ref check found `d8c94faa846fc4d459628c9bc896adfb4a038d7e`, a child of the prepared parent `79ec03184ce66ac2c1e44d0dc6ba88c3f774d33a`. All 33 changed files were downloaded and Git-blob verified. Root read all 12 modified-root patches and the EIP research note, instrument contract, claim ledger, publication update, map audit, gap ledger, failures and Chinese handoff. The exact current root bytes are preserved under `history/before_DVC_d8c94faa`; the earlier prepared DVC navigation and coverage are separately preserved as unpublished pre-save history.
+
+EIP adds a disabled 6/3/5 candidate. In its finite Boolean interface `U=(S AND G) OR X`, `S=1,X=1` admits both G values under identical arrival/update/output; `S=1,X=0` permits U=G only under the declared interface, writer exclusion, timing and faithful-readout conditions. This is compatible with DVC's cache/commit and actual-read contracts. It is not a measured neural consumer, an experience endpoint or a new experience-existence criterion. The logical unavoidable difference is the selected relation itself; changes in effort, attention or EMG are not universally entailed by that finite proof.
+
+DVC does not count the arrival/read or redundant-writer boundary as a distinct newly discovered contribution after this reconciliation. Its remaining scope is the explicit acquisition/cache/commit/timing application and the executed public-data reanalysis. An external M_D/P_E consumer or causally isolated shadow cannot stand in for an independently named human central consumer. The latter still requires a feasible selective discrepancy probe and independently warranted exclusion of alternative writers.
+
+EIP remains preserved without edits and is not inserted into SCU v1.0.1. The published PDF and all nine public files remain fixed. EIP's four claims retain a separate pending-coverage table and do not enter the reviewed 42-row SCU/DVC disclosure delta or increase publication counts. Since EIP already committed UCT-PUB-v1.0.21, the aggregate coverage is now UCT-PUB-v1.0.22, with EIP v1.0.21 as its actual parent.
+
+The completed map and its two canonical hashes are unchanged. The full 1,608-item DVC core-layer review remains the same frozen-baseline review; this concurrency check does not promote it to a fresh historical-proof reconstruction. All standing QCs and actual/phenomenal applications remain open. A bounded independent EIP/DVC compatibility review is saved separately before final persistence.
+
+## Completed bounded review and mandatory open qualifications
+
+The independent internal review is now complete: [review/concurrent_eip/REVIEW.md](review/concurrent_eip/REVIEW.md) and its frozen reading/manifest receipts. It read all 14 EIP map objects and all 45 DVC objects, and independently reproduced EIP's eight-row results. No DVC conclusion or object changed.
+
+Four qualifications remain OPEN: ledger EIP-C4 must not be conflated with map EIP:C4; global nonidentification is not ambiguity of every observation fiber; S=0 gate configuration is not automatically actual intake of that event; and typed rules do not independently discharge their narrative interface, sole-writer, selectivity, timing, readout or actual UCT guards. Observation (1,1,0,0) identifies G=0 in the finite model. The optional model typing I=S AND G is proposed, not adopted physical read evidence. See [EIP_NORMALIZATION_QUALIFICATIONS.json](review/concurrent_eip/EIP_NORMALIZATION_QUALIFICATIONS.json).
+
+These are nondeductive source-bound qualifications with no replacement map objects or new established premises. They stop the corresponding actual inference or promotion until resolved. EIP's source papers were not independently reopened in this bounded reconciliation; their component evidence is not merged across studies into one actual installation. Submission order supplies no exclusive invention priority.

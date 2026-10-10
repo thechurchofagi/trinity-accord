@@ -1,0 +1,155 @@
+{
+  "schema": "uct-model-claim-ledger/1",
+  "research_id": "DVC20261010",
+  "result_id": "DVC-RESULT-v0.1.0",
+  "candidate_enabled": false,
+  "actual_application_established": false,
+  "whole_map_semantic_certification": false,
+  "claims": [
+    {
+      "id": "DVC20261010-C1",
+      "title": "Last surviving capture and current-token criterion",
+      "statement": "For every execution of the declared capture/invalidation/immutable-commit model, each snapshot cell contains the token from its last accepted capture surviving invalidation as of that snapshot's commit boundary, or absence. With the designated eager consumer actually reading that snapshot, it reads both intended tokens exactly when those two cells contain those actual tokens. Gate closure by itself neither clears nor revokes a retained token.",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "all_of": [
+        "DVC20261010:DOMAIN",
+        "DVC20261010:EVENT_BUFFER_CONTRACT",
+        "DVC20261010:DESIGNATED_READ_CONTRACT",
+        "DVC20261010:GROUNDED_EPISODE_TARGETS"
+      ],
+      "same_instance_required": true,
+      "binding": "One fixed installation, two physically identified source lanes and selected buffers, one specified consumer implementation, intended source occurrences and trial relation, and one declared event order/clock contract. All premises must hold jointly for that instance and its stated episode family; no premise may be borrowed from an unrelated system or trial.",
+      "proof_or_witness": "RESEARCH_NOTE.md section 3; induction on buffer-changing events; 720-schedule independent order predicate",
+      "novelty_status": "Register retention and actual-history premises are inherited; the specific MPC consumer-cell admission repair is a NEW_APPLICATION.",
+      "limits": [
+        "Actual gates, resets, sources, snapshots and reads remain unverified.",
+        "Snapshot readiness does not establish eager reading in an unspecified consumer.",
+        "Six valid, 360 premature-consume, 354 matched-but-wrong cases partition one 720-order family; they are not physical rates."
+      ],
+      "organizational_result": true,
+      "UCT_interpretation": "Only conditional on independently grounded complete actual organization and C1; see C6.",
+      "actual_evidence": "Finite reference code/proofs only; hardware accessed false; human participants 0.",
+      "status": "CANDIDATE_DISABLED"
+    },
+    {
+      "id": "DVC20261010-C2",
+      "title": "Exact robust aperture and asynchronous same-episode join",
+      "statement": "For independent bounded arrival/departure uncertainty with stable port interval [a,b), a closed sample aperture [s-u,s+h] lies in every admissible interval exactly when a_max+u <= s < b_min-h. Two safe windows admit a common sample iff their intersection is nonempty. Separate captures can be paired when each is nonempty and the same-episode, retention, atomicity, resource and deadline premises hold.",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "all_of": [
+        "DVC20261010:DOMAIN",
+        "DVC20261010:CAPTURE_INTERVAL_DOMAIN",
+        "DVC20261010:RECTANGULAR_BOUNDS",
+        "DVC20261010:GATE_WRITER_VALIDITY",
+        "DVC20261010:PAIR_JOIN_GUARDS"
+      ],
+      "same_instance_required": true,
+      "binding": "One fixed installation, two physically identified source lanes and selected buffers, one specified consumer implementation, intended source occurrences and trial relation, and one declared event order/clock contract. All premises must hold jointly for that instance and its stated episode family; no premise may be borrowed from an unrelated system or trial.",
+      "proof_or_witness": "RESEARCH_NOTE.md section 4; extremal-bound proof, 4896 finite parameter/sample checks and 400 ordered safe-window pairs",
+      "novelty_status": "Setup/hold timing and snapshot reasoning are inherited; the two consumer-branch admission contract is a NEW_APPLICATION.",
+      "limits": [
+        "Rectangular uncertainty, half-open validity and closed aperture are essential to the displayed iff.",
+        "Actual timing margins and gate apertures are not measured.",
+        "Same-episode captures need not be simultaneous or ever coexist at their source ports."
+      ],
+      "organizational_result": true,
+      "UCT_interpretation": "Only conditional on independently grounded complete actual organization and C1; see C6.",
+      "actual_evidence": "Finite reference code/proofs only; hardware accessed false; human participants 0.",
+      "status": "CANDIDATE_DISABLED"
+    },
+    {
+      "id": "DVC20261010-C3",
+      "title": "Displayed implementation countermodels",
+      "statement": "There exist nine declared executions or paired executions that defeat stronger deductions from gate flags, source issue, matched outputs, epoch headers or equal values to the specified actual current source/intake relation. They do not exhaust all alternative mechanisms.",
+      "kind": "CONSTRUCTIVE_COUNTERMODELS",
+      "all_of": [
+        "DVC20261010:DOMAIN",
+        "DVC20261010:EVENT_BUFFER_CONTRACT",
+        "DVC20261010:WITNESS_FAMILY"
+      ],
+      "same_instance_required": true,
+      "binding": "Each displayed execution fixes its own implementation, physical sources, designated roles and event order jointly. A paired countermodel shares exactly the stated nominal observations but may use a different consumer implementation or pathway within the explicitly declared rival class. Same-instance premise binding applies within each member; it does not require the two rival installations or executions to have identical implementations.",
+      "proof_or_witness": "RESEARCH_NOTE.md section 5; EXACT_RESULTS.json witnesses",
+      "novelty_status": "Missing-cell and read nonidentifiability are inherited from MPC/SCU; warm-latch, arrival and same-episode fault matrix is a NEW_APPLICATION.",
+      "limits": [
+        "Source metadata is fallible.",
+        "The model stipulates its true physical-event correspondence; a hardware log is not self-authenticating.",
+        "The fixed-gate zero-payload challenge rejects the displayed reflex only; zero payload remains supplied input."
+      ],
+      "organizational_result": true,
+      "UCT_interpretation": "Only conditional on independently grounded complete actual organization and C1; see C6.",
+      "actual_evidence": "Finite reference code/proofs only; hardware accessed false; human participants 0.",
+      "status": "CANDIDATE_DISABLED",
+      "paired_rival_instances_allowed": true
+    },
+    {
+      "id": "DVC20261010-C4",
+      "title": "Current-consequence feedback deadline",
+      "statement": "If the particular P token is generated strictly after consequence Y, is captured no earlier than generation, and consumed no earlier than capture, its consumption occurs after Y and cannot be that same consequence's pre-consequence prediction. Earlier state or later target is a different legitimate role.",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "all_of": [
+        "DVC20261010:DOMAIN",
+        "DVC20261010:CURRENT_CONSEQUENCE_CHAIN"
+      ],
+      "same_instance_required": true,
+      "binding": "One fixed installation, two physically identified source lanes and selected buffers, one specified consumer implementation, intended source occurrences and trial relation, and one declared event order/clock contract. All premises must hold jointly for that instance and its stated episode family; no premise may be borrowed from an unrelated system or trial.",
+      "proof_or_witness": "RESEARCH_NOTE.md section 6; transitivity; 108 finite chronology instances",
+      "novelty_status": "INHERITED chronology principle and SCU role limit; applied to the proposed current-state port.",
+      "limits": [
+        "No claim that proprioceptive information generally cannot support prediction.",
+        "The time index and actual event relation must be grounded."
+      ],
+      "organizational_result": true,
+      "UCT_interpretation": "Only conditional on independently grounded complete actual organization and C1; see C6.",
+      "actual_evidence": "Finite reference code/proofs only; hardware accessed false; human participants 0.",
+      "status": "CANDIDATE_DISABLED"
+    },
+    {
+      "id": "DVC20261010-C5",
+      "title": "Read-only shadow endpoint isolation",
+      "statement": "In a fixed acyclic structural model, if no shadow-gate intervention has a directed causal path to the participant endpoint itself or any of its ancestors, changing only those gates with all other functions, inputs and disturbances fixed leaves that endpoint invariant.",
+      "kind": "DEDUCTIVE_CONDITIONAL",
+      "all_of": [
+        "DVC20261010:SHADOW_NO_OUTGOING",
+        "DVC20261010:FIXED_EXOGENOUS"
+      ],
+      "same_instance_required": true,
+      "binding": "One fixed installation, two physically identified source lanes and selected buffers, one specified consumer implementation, intended source occurrences and trial relation, and one declared event order/clock contract. All premises must hold jointly for that instance and its stated episode family; no premise may be borrowed from an unrelated system or trial.",
+      "proof_or_witness": "RESEARCH_NOTE.md section 7; induction on endpoint causal ancestors, without synthetic human endpoint generation",
+      "novelty_status": "INHERITED causal isolation; NEW_APPLICATION as a device-to-human experimental-design boundary.",
+      "limits": [
+        "Shared resources, timing, sound, visible cues, instructions, measurement and analysis can violate isolation.",
+        "No human neural consumer is intervened on merely by instrumenting a shadow.",
+        "PSE is a prospective endpoint choice, not retrospective preregistration; independently fitted sigma and source-labelled JND are separate quantities, and agency, ownership and H are distinct targets."
+      ],
+      "organizational_result": true,
+      "UCT_interpretation": "Only conditional on independently grounded complete actual organization and C1; see C6.",
+      "actual_evidence": "Finite reference code/proofs only; hardware accessed false; human participants 0.",
+      "status": "CANDIDATE_DISABLED"
+    },
+    {
+      "id": "DVC20261010-C6",
+      "title": "Guarded UCT structural relevance without an experience gate",
+      "statement": "Given an independently admitted complete actual process signature, interval, roles and actual source/buffer/read paths and valid transport, inherited C1 conditionally supplies their experiential structural counterparts. C1-C5 and a software PASS do not establish actual grounding, named H, ownership, agency, RetBind or an additional basal-experience criterion.",
+      "kind": "GUARDED_UCT_APPLICATION",
+      "all_of": [
+        "A:C1",
+        "DVC20261010:ACTUAL_BINDING",
+        "DVC20261010:TRANSPORT_CONTRACT"
+      ],
+      "same_instance_required": true,
+      "binding": "One independently admitted actual complete process or independently admitted overlapping processes, with joint P/I/K, interval and grounded event roles; no reverse inference from a chosen experiential label.",
+      "proof_or_witness": "RESEARCH_NOTE.md section 8; inherited C1 direction, not an empirical test",
+      "novelty_status": "INHERITED C1/U1 application and no-new-gate requirement.",
+      "limits": [
+        "No selected partial relation substitutes for the complete actual P/I/K signature.",
+        "Persisting local admitted processes are retained; no exclusive owner is selected.",
+        "Reflex or complete-copy labels cannot by themselves entail absent or opposite experience."
+      ],
+      "organizational_result": false,
+      "UCT_interpretation": "Only conditional on independently grounded complete actual organization and C1; see C6.",
+      "actual_evidence": "Finite reference code/proofs only; hardware accessed false; human participants 0.",
+      "status": "CANDIDATE_DISABLED"
+    }
+  ]
+}

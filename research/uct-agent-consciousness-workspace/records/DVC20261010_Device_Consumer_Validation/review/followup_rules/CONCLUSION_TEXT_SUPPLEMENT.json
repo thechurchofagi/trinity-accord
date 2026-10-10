@@ -1,0 +1,508 @@
+[
+  {
+    "rule_id": "TH20261009:r_migration",
+    "conclusion_node_id": "TH20261009:MIGRATION",
+    "fields": {
+      "id": "TH20261009:MIGRATION",
+      "kind": "FINITE_CONSTRUCTION",
+      "statement": "Shared-flip handoff preserves tau while endpoint minimal decoding supports change from {A,B} to disjoint {C,D}.",
+      "scope": "Fixed target, interval, information boundary, field and coding/reader contract declared in the cited section."
+    }
+  },
+  {
+    "rule_id": "TH20261009:r_match",
+    "conclusion_node_id": "TH20261009:MATCHED_RECORDS",
+    "fields": {
+      "id": "TH20261009:MATCHED_RECORDS",
+      "kind": "FINITE_CONSTRUCTION",
+      "statement": "All variants have identical conditional single-register three-time history laws and identical unconditional complete-register endpoint snapshot distributions.",
+      "scope": "Fixed target, interval, information boundary, field and coding/reader contract declared in the cited section."
+    }
+  },
+  {
+    "rule_id": "TH20261009:r_three",
+    "conclusion_node_id": "TH20261009:THREE_WAY_DISSOCIATION",
+    "fields": {
+      "id": "TH20261009:THREE_WAY_DISSOCIATION",
+      "kind": "FINITE_RESULT",
+      "statement": "Shared/common-reversed/independent flip with an unchanged XOR reader has accuracy 1,0,1/2 respectively; best final-state decoder accuracy is 1,1,1/2. Reversed plus compensated reader has accuracy 1.",
+      "scope": "Fixed target, interval, information boundary, field and coding/reader contract declared in the cited section."
+    }
+  },
+  {
+    "rule_id": "TH20261009:r_rank",
+    "conclusion_node_id": "TH20261009:BAYES_RECOVERY",
+    "fields": {
+      "id": "TH20261009:BAYES_RECOVERY",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "Under FIELD_CONTRACT, optimal whole-source recovery accuracy is q^(rho-d); perfect recovery iff rho=d iff a linear D satisfies DH=I and DG=0 after offset removal.",
+      "scope": "Fixed target, interval, information boundary, field and coding/reader contract declared in the cited section."
+    }
+  },
+  {
+    "rule_id": "TH20261009:r_no_regen",
+    "conclusion_node_id": "TH20261009:NO_REGENERATION",
+    "fields": {
+      "id": "TH20261009:NO_REGENERATION",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "rho_next<=rho_current. No downstream processing with the same complete-cut Markov property recovers erased source distinctions without new information.",
+      "scope": "Fixed target, interval, information boundary, field and coding/reader contract declared in the cited section."
+    }
+  },
+  {
+    "rule_id": "TH20261009:r_loss",
+    "conclusion_node_id": "TH20261009:EXACT_LOSS",
+    "fields": {
+      "id": "TH20261009:EXACT_LOSS",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "rho(H,G)-rho(FH,FG)=dim K1-dim K0.",
+      "scope": "Fixed target, interval, information boundary, field and coding/reader contract declared in the cited section."
+    }
+  },
+  {
+    "rule_id": "TH20261009:r_port",
+    "conclusion_node_id": "TH20261009:STORED_VS_READ",
+    "fields": {
+      "id": "TH20261009:STORED_VS_READ",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "rho_port=rank([R G R H])-rank(R G)<=rho_stored; its best whole-target decoder has accuracy q^(rho_port-d).",
+      "scope": "Fixed target, interval, information boundary, field and coding/reader contract declared in the cited section."
+    }
+  },
+  {
+    "rule_id": "TH20261009:r_coordinates",
+    "conclusion_node_id": "TH20261009:COORDINATE_INVARIANCE",
+    "fields": {
+      "id": "TH20261009:COORDINATE_INVARIANCE",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "rho(SH,SG)=rho(H,G); transporting the reader preserves the task.",
+      "scope": "Fixed target, interval, information boundary, field and coding/reader contract declared in the cited section."
+    }
+  },
+  {
+    "rule_id": "TH20261009:r_correlation",
+    "conclusion_node_id": "TH20261009:CORRELATION_LAW",
+    "fields": {
+      "id": "TH20261009:CORRELATION_LAW",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "Unchanged XOR-reader accuracy is 1-epsilon; best final-state decoding is max(epsilon,1-epsilon).",
+      "scope": "Fixed target, interval, information boundary, field and coding/reader contract declared in the cited section."
+    }
+  },
+  {
+    "rule_id": "TH20261009:r_chain",
+    "conclusion_node_id": "TH20261009:CHAIN_LAW",
+    "fields": {
+      "id": "TH20261009:CHAIN_LAW",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "Optimal final target recovery is (1+abs(product_i(1-2epsilon_i)))/2.",
+      "scope": "Fixed target, interval, information boundary, field and coding/reader contract declared in the cited section."
+    }
+  },
+  {
+    "rule_id": "TH20261009:r_cancel",
+    "conclusion_node_id": "TH20261009:DUPLICATE_CANCEL",
+    "fields": {
+      "id": "TH20261009:DUPLICATE_CANCEL",
+      "kind": "FINITE_COUNTEREXAMPLE",
+      "statement": "Stored rank is 1, XOR-port rank is 0, and one-branch-port rank is 1; adding a correct redundant source path can spoil a selected consumer while local storage persists.",
+      "scope": "Fixed target, interval, information boundary, field and coding/reader contract declared in the cited section."
+    }
+  },
+  {
+    "rule_id": "TH20261009:r_phi",
+    "conclusion_node_id": "TH20261009:EXPERIENTIAL_TYPE",
+    "fields": {
+      "id": "TH20261009:EXPERIENTIAL_TYPE",
+      "kind": "CONDITIONAL_UCT_APPLICATION",
+      "statement": "Under C1/C:P1 with ACTUAL_REALIZATION and FIXED_REAL_J_DIFFERENCE, complete experiential structural types differ.",
+      "scope": "Fixed target, interval, information boundary, field and coding/reader contract declared in the cited section."
+    }
+  },
+  {
+    "rule_id": "TH20261009:r_local",
+    "conclusion_node_id": "TH20261009:LOCAL_EXPERIENCE",
+    "fields": {
+      "id": "TH20261009:LOCAL_EXPERIENCE",
+      "kind": "CONDITIONAL_UCT_APPLICATION",
+      "statement": "U1 continues to apply to any local process satisfying ACTUAL_LOCAL_PERSISTENCE, regardless of target recoverability or reader success.",
+      "scope": "Fixed target, interval, information boundary, field and coding/reader contract declared in the cited section."
+    }
+  },
+  {
+    "rule_id": "TH20261009:r_named",
+    "conclusion_node_id": "TH20261009:NAMED_TARGET_CLAIM",
+    "fields": {
+      "id": "TH20261009:NAMED_TARGET_CLAIM",
+      "kind": "OPEN_CONDITIONAL_TARGET",
+      "statement": "A selected named experiential interpretation requires NAMED_TARGET_BRIDGE in addition to the actual structural comparison.",
+      "scope": "Fixed target, interval, information boundary, field and coding/reader contract declared in the cited section."
+    }
+  },
+  {
+    "rule_id": "RB20261009:r_bound",
+    "conclusion_node_id": "RB20261009:BOUND",
+    "fields": {
+      "id": "RB20261009:BOUND",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "Pr(Y=T)<=p_guess(T|X,Z)<=G_K(T|X)<=min(1,K*G_1(T|X)).",
+      "scope": "One finite joint law, one full target T, one earlier accessible record X, one deadline and the entire newly admitted transcript. Conditional laws and decoder class remain fixed within each comparison."
+    }
+  },
+  {
+    "rule_id": "RB20261009:r_tight",
+    "conclusion_node_id": "RB20261009:TIGHT",
+    "fields": {
+      "id": "RB20261009:TIGHT",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "With HELPER, the supremum recovery over allowed helper encoders and decoders equals G_K by labeling the top-K posterior candidates.",
+      "scope": "One finite joint law, one full target T, one earlier accessible record X, one deadline and the entire newly admitted transcript. Conditional laws and decoder class remain fixed within each comparison."
+    }
+  },
+  {
+    "rule_id": "RB20261009:r_inverse",
+    "conclusion_node_id": "RB20261009:INVERSE",
+    "fields": {
+      "id": "RB20261009:INVERSE",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "A correctly specified comparison achieving success s requires K>=min{k:G_k>=s}, and hence K>=ceil(s/G_1).",
+      "scope": "One finite joint law, one full target T, one earlier accessible record X, one deadline and the entire newly admitted transcript. Conditional laws and decoder class remain fixed within each comparison."
+    }
+  },
+  {
+    "rule_id": "RB20261009:r_uniform",
+    "conclusion_node_id": "RB20261009:UNIFORM_RESIDUAL",
+    "fields": {
+      "id": "RB20261009:UNIFORM_RESIDUAL",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "Under TH FIELD_CONTRACT, every supported X leaves M=q^(d-rho) equiprobable T values; therefore G_K=min(1,K/M), and perfect full-target recovery requires K>=M.",
+      "scope": "One TH affine finite-field law instantiated jointly with the same RB target/view/transcript."
+    }
+  },
+  {
+    "rule_id": "RB20261009:r_deadline",
+    "conclusion_node_id": "RB20261009:DEADLINE_BOUND",
+    "fields": {
+      "id": "RB20261009:DEADLINE_BOUND",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "Under UNIFORM_RESIDUAL and SLOTS, success<=min(1,2^(b*Delta)/M). Perfect recovery requires b*Delta>=log2 M.",
+      "scope": "One finite joint law, one full target T, one earlier accessible record X, one deadline and the entire newly admitted transcript. Conditional laws and decoder class remain fixed within each comparison."
+    }
+  },
+  {
+    "rule_id": "RB20261009:r_key",
+    "conclusion_node_id": "RB20261009:KEY_CURVE",
+    "fields": {
+      "id": "RB20261009:KEY_CURVE",
+      "kind": "FINITE_FAMILY_RESULT",
+      "statement": "In KEY_MODEL, optimal recovery is 2^(k-d). For d=2, no key/one key bit/full key gives 1/4,1/2,1.",
+      "scope": "Same uniform target and actual-toy decoder interface."
+    }
+  },
+  {
+    "rule_id": "RB20261009:r_delay",
+    "conclusion_node_id": "RB20261009:DELAY_WITNESS",
+    "fields": {
+      "id": "RB20261009:DELAY_WITNESS",
+      "kind": "FINITE_COUNTEREXAMPLE",
+      "statement": "For d=2, key arrival L=2 and common independent uniform deadline D in {0,1,2,3}, the delayed reader scores 5/8 and immediate reader 1, while both have perfect final recovery.",
+      "scope": "Same deadline distribution and target; routes are physically stipulated parts of the compared models."
+    }
+  },
+  {
+    "rule_id": "RB20261009:r_approx",
+    "conclusion_node_id": "RB20261009:APPROX_BOUND",
+    "fields": {
+      "id": "RB20261009:APPROX_BOUND",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "Under APPROX_SETUP, success<=min(1,G_K(P_TX)+delta).",
+      "scope": "One finite joint law, one full target T, one earlier accessible record X, one deadline and the entire newly admitted transcript. Conditional laws and decoder class remain fixed within each comparison."
+    }
+  },
+  {
+    "rule_id": "RB20261009:r_prior",
+    "conclusion_node_id": "RB20261009:PRIOR_LIPSCHITZ",
+    "fields": {
+      "id": "RB20261009:PRIOR_LIPSCHITZ",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "|G_K(P_TX)-G_K(R_TX)|<=TV(P_TX,R_TX); combining with APPROX_BOUND gives success<=min(1,G_K(R_TX)+delta+epsilon).",
+      "scope": "One finite joint law, one full target T, one earlier accessible record X, one deadline and the entire newly admitted transcript. Conditional laws and decoder class remain fixed within each comparison."
+    }
+  },
+  {
+    "rule_id": "UI20261009:r_commute",
+    "conclusion_node_id": "UI20261009:COMMUTATION",
+    "fields": {
+      "id": "UI20261009:COMMUTATION",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "PRODUCT implies AB=BA and identical endpoint laws under any same preparation and readout.",
+      "scope": "Finite fixed sufficient state/clock, fixed total update operations and one fixed endpoint readout, same initial preparation and two legal orders; no direct order-label leak.",
+      "quantifiers": "Exactly the finite domains, preparations, operations, noises and observer class stated here; all premises share the same instance.",
+      "actual_application_status": "OPEN",
+      "same_instance_required": true
+    }
+  },
+  {
+    "rule_id": "UI20261009:r_obstruct",
+    "conclusion_node_id": "UI20261009:OBSTRUCTION",
+    "fields": {
+      "id": "UI20261009:OBSTRUCTION",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "Delta>0 excludes every independently updating product realization preserving the comparison contract.",
+      "scope": "Finite fixed sufficient state/clock, fixed total update operations and one fixed endpoint readout, same initial preparation and two legal orders; no direct order-label leak.",
+      "quantifiers": "Exactly the finite domains, preparations, operations, noises and observer class stated here; all premises share the same instance.",
+      "actual_application_status": "OPEN",
+      "same_instance_required": true
+    }
+  },
+  {
+    "rule_id": "UI20261009:r_bit",
+    "conclusion_node_id": "UI20261009:BIT_WITNESS",
+    "fields": {
+      "id": "UI20261009:BIT_WITNESS",
+      "kind": "CONSTRUCTION",
+      "statement": "No action, A alone and B alone match in both devices. AB vs BA outputs are 0 vs 1 in BC, and 1 vs 1 in BD.",
+      "scope": "Finite fixed sufficient state/clock, fixed total update operations and one fixed endpoint readout, same initial preparation and two legal orders; no direct order-label leak.",
+      "quantifiers": "Exactly the finite domains, preparations, operations, noises and observer class stated here; all premises share the same instance.",
+      "actual_application_status": "OPEN",
+      "same_instance_required": true
+    }
+  },
+  {
+    "rule_id": "UI20261009:r_recode",
+    "conclusion_node_id": "UI20261009:RECODING",
+    "fields": {
+      "id": "UI20261009:RECODING",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "Conjugate both updates and transport preparation/readout; commutation and observed contrasts are invariant.",
+      "scope": "Finite fixed sufficient state/clock, fixed total update operations and one fixed endpoint readout, same initial preparation and two legal orders; no direct order-label leak.",
+      "quantifiers": "Exactly the finite domains, preparations, operations, noises and observer class stated here; all premises share the same instance.",
+      "actual_application_status": "OPEN",
+      "same_instance_required": true
+    }
+  },
+  {
+    "rule_id": "UI20261009:r_pred",
+    "conclusion_node_id": "UI20261009:PRED_BOUND",
+    "fields": {
+      "id": "UI20261009:PRED_BOUND",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "eAB+eBA>=Delta and max(eAB,eBA)>=Delta/2.",
+      "scope": "Finite fixed sufficient state/clock, fixed total update operations and one fixed endpoint readout, same initial preparation and two legal orders; no direct order-label leak.",
+      "quantifiers": "Exactly the finite domains, preparations, operations, noises and observer class stated here; all premises share the same instance.",
+      "actual_application_status": "OPEN",
+      "same_instance_required": true
+    }
+  },
+  {
+    "rule_id": "UI20261009:r_kernel",
+    "conclusion_node_id": "UI20261009:KERNEL_BOUND",
+    "fields": {
+      "id": "UI20261009:KERNEL_BOUND",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "Delta<=2(epsilonA+epsilonB) by contraction and telescoping.",
+      "scope": "Finite fixed sufficient state/clock, fixed total update operations and one fixed endpoint readout, same initial preparation and two legal orders; no direct order-label leak.",
+      "quantifiers": "Exactly the finite domains, preparations, operations, noises and observer class stated here; all premises share the same instance.",
+      "actual_application_status": "OPEN",
+      "same_instance_required": true
+    }
+  },
+  {
+    "rule_id": "UI20261009:r_noise",
+    "conclusion_node_id": "UI20261009:NOISE_RESULT",
+    "fields": {
+      "id": "UI20261009:NOISE_RESULT",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "For NOISE_MODEL, Delta_internal=TV(mu A B_alpha R0,mu B_alpha A R0)=alpha; Delta_observed=TV(mu A B_alpha R_eta,mu B_alpha A R_eta)=alpha*abs(1-2eta). These are two explicitly named readout instances.",
+      "scope": "Finite fixed sufficient state/clock, fixed total update operations and one fixed endpoint readout, same initial preparation and two legal orders; no direct order-label leak.",
+      "quantifiers": "Exactly the finite domains, preparations, operations, noises and observer class stated here; all premises share the same instance.",
+      "actual_application_status": "OPEN",
+      "same_instance_required": true
+    }
+  },
+  {
+    "rule_id": "UI20261009:r_quotient",
+    "conclusion_node_id": "UI20261009:FUTURE_QUOTIENT",
+    "fields": {
+      "id": "UI20261009:FUTURE_QUOTIENT",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "On FUTURE_DOMAIN, future-readout equality is the coarsest update-stable refinement of current-readout equality. Every admitted F_u descends to S/~; for admitted A,B, their quotient maps commute iff no common future word distinguishes the two orders from any initial state.",
+      "scope": "Finite fixed sufficient state/clock, fixed total update operations and one fixed endpoint readout, same initial preparation and two legal orders; no direct order-label leak.",
+      "quantifiers": "Exactly the finite domains, preparations, operations, noises and observer class stated here; all premises share the same instance.",
+      "actual_application_status": "OPEN",
+      "same_instance_required": true
+    }
+  },
+  {
+    "rule_id": "UI20261009:r_finite",
+    "conclusion_node_id": "UI20261009:FINITE_WITNESS",
+    "fields": {
+      "id": "UI20261009:FINITE_WITNESS",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "With c initial readout classes, any distinguishable pair has some separating word of length <=n-c.",
+      "scope": "Finite fixed sufficient state/clock, fixed total update operations and one fixed endpoint readout, same initial preparation and two legal orders; no direct order-label leak.",
+      "quantifiers": "Exactly the finite domains, preparations, operations, noises and observer class stated here; all premises share the same instance.",
+      "actual_application_status": "OPEN",
+      "same_instance_required": true
+    }
+  },
+  {
+    "rule_id": "UI20261009:r_delay",
+    "conclusion_node_id": "UI20261009:DELAY_WITNESS",
+    "fields": {
+      "id": "UI20261009:DELAY_WITNESS",
+      "kind": "CONSTRUCTION",
+      "statement": "Under DELAY_MODEL, A then BC ends at (0,0), while BC then A ends at (1,0). Their fixed r_y readings are both zero immediately; after the same later V they are respectively zero and one. This is retained-state revelation in the separately fixed r_y protocol.",
+      "scope": "Finite fixed sufficient state/clock, fixed total update operations and one fixed endpoint readout, same initial preparation and two legal orders; no direct order-label leak.",
+      "quantifiers": "Exactly the finite domains, preparations, operations, noises and observer class stated here; all premises share the same instance.",
+      "actual_application_status": "OPEN",
+      "same_instance_required": true
+    }
+  },
+  {
+    "rule_id": "UI20261009:r_type",
+    "conclusion_node_id": "UI20261009:TYPE_TRANSFER",
+    "fields": {
+      "id": "UI20261009:TYPE_TRANSFER",
+      "kind": "CONDITIONAL_UCT_APPLICATION",
+      "statement": "For the explicitly paired actual comparison satisfying REALIZATION, TYPE_WITNESS_GUARD, common complete A:K and inherited A:C1_OI, one member has corresponding commuting operations and the other justified positive order contrast. This grounded K-invariant difference excludes full K-isomorphism and implies distinct complete experiential K-types. No named quality, intensity, intelligence level or subject count follows.",
+      "scope": "Finite fixed sufficient state/clock, fixed total update operations and one fixed endpoint readout, same initial preparation and two legal orders; no direct order-label leak.",
+      "quantifiers": "Exactly the finite domains, preparations, operations, noises and observer class stated here; all premises share the same instance.",
+      "actual_application_status": "OPEN",
+      "same_instance_required": true
+    }
+  },
+  {
+    "rule_id": "UI20261009:r_persist",
+    "conclusion_node_id": "UI20261009:PERSISTENCE",
+    "fields": {
+      "id": "UI20261009:PERSISTENCE",
+      "kind": "INHERITED_CONDITIONAL",
+      "statement": "For that persisting admitted local token, U1 remains applicable regardless of the order contrast or task success.",
+      "scope": "Finite fixed sufficient state/clock, fixed total update operations and one fixed endpoint readout, same initial preparation and two legal orders; no direct order-label leak.",
+      "quantifiers": "Exactly the finite domains, preparations, operations, noises and observer class stated here; all premises share the same instance.",
+      "actual_application_status": "OPEN",
+      "same_instance_required": true
+    }
+  },
+  {
+    "rule_id": "CM20261009:r_ident",
+    "conclusion_node_id": "CM20261009:IDENTIFICATION",
+    "fields": {
+      "scope": "Declared finite real-valued models; actual and phenomenal application require independent same-instance evidence.",
+      "id": "CM20261009:IDENTIFICATION",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "In EXACT_MODEL and UNRESTRICTED, Kd is determined by (e,z) iff ker H subset ker(KM), equivalently KM=LH. Then q=Ke-Lz. Kernel-violating v gives indistinguishable (d,u)=(0,0),(-Mv,v).",
+      "actual_application_status": "OPEN",
+      "same_instance_required": true
+    }
+  },
+  {
+    "rule_id": "CM20261009:r_channels",
+    "conclusion_node_id": "CM20261009:CHANNEL_BOUND",
+    "fields": {
+      "scope": "Declared finite real-valued models; actual and phenomenal application require independent same-instance evidence.",
+      "id": "CM20261009:CHANNEL_BOUND",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "Minimum independent real monitor channels under FREE_MONITOR and UNRESTRICTED equal rank(KM), attained by a row basis of KM. Not a bit/anatomical/phenomenal bound.",
+      "actual_application_status": "OPEN",
+      "same_instance_required": true
+    }
+  },
+  {
+    "rule_id": "CM20261009:r_sumdiff",
+    "conclusion_node_id": "CM20261009:SUMDIFF",
+    "fields": {
+      "scope": "Declared finite real-valued models; actual and phenomenal application require independent same-instance evidence.",
+      "id": "CM20261009:SUMDIFF",
+      "kind": "COUNTEREXAMPLE",
+      "statement": "Hplus determines d=e-z; Hminus yields e=z=0 for both specified alternatives although d differs. Equal monitor dimension is insufficient.",
+      "actual_application_status": "OPEN",
+      "same_instance_required": true
+    }
+  },
+  {
+    "rule_id": "CM20261009:r_radius",
+    "conclusion_node_id": "CM20261009:MINIMAX_RADIUS",
+    "fields": {
+      "scope": "Declared finite real-valued models; actual and phenomenal application require independent same-instance evidence.",
+      "id": "CM20261009:MINIMAX_RADIUS",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "u0=H^+z,P=I-H^+H. Feasible q set is Ke-KMu0 minus KM times the ker H ball of radius sqrt(rho^2-||u0||^2). Exact minimax Euclidean radius is that radius times ||KMP||_2; center estimator Ke-KMu0 attains it.",
+      "actual_application_status": "OPEN",
+      "same_instance_required": true
+    }
+  },
+  {
+    "rule_id": "CM20261009:r_causal",
+    "conclusion_node_id": "CM20261009:CAUSAL_MASK",
+    "fields": {
+      "scope": "Declared finite real-valued models; actual and phenomenal application require independent same-instance evidence.",
+      "id": "CM20261009:CAUSAL_MASK",
+      "kind": "CONDITIONAL_RESULT",
+      "statement": "e_t=d(1-alpha)^t,u_t=-d[1-(1-alpha)^t]. Alpha=1 gives all late t>=1 output zero while e_t-u_t=d; initial reading reveals d. Late-only equality is not full-trajectory equality.",
+      "actual_application_status": "OPEN",
+      "same_instance_required": true
+    }
+  },
+  {
+    "rule_id": "CM20261009:r_budget",
+    "conclusion_node_id": "CM20261009:BUDGET_GUARD",
+    "fields": {
+      "scope": "Declared finite real-valued models; actual and phenomenal application require independent same-instance evidence.",
+      "id": "CM20261009:BUDGET_GUARD",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "||d||<=epsilon+||M||rho. For scalar M=1 minimal residual is max(0,|d|-rho). Quiet output alone is not a bound without correction constraints.",
+      "actual_application_status": "OPEN",
+      "same_instance_required": true
+    }
+  },
+  {
+    "rule_id": "CM20261009:r_robust",
+    "conclusion_node_id": "CM20261009:ROBUST_RECONSTRUCTION",
+    "fields": {
+      "scope": "Declared finite real-valued models; actual and phenomenal application require independent same-instance evidence.",
+      "id": "CM20261009:ROBUST_RECONSTRUCTION",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "||K e_measured-L z_measured-Kd|| <= ||K||(epsilon_e+epsilon_m)+||L||epsilon_z. Calibrated bounds and causal interpretation remain independent obligations.",
+      "actual_application_status": "OPEN",
+      "same_instance_required": true
+    }
+  },
+  {
+    "rule_id": "CM20261009:r_probe",
+    "conclusion_node_id": "CM20261009:PROBE_IDENTIFICATION",
+    "fields": {
+      "scope": "Declared finite real-valued models; actual and phenomenal application require independent same-instance evidence.",
+      "id": "CM20261009:PROBE_IDENTIFICATION",
+      "kind": "CONDITIONAL_THEOREM",
+      "statement": "Under PROBE_SETUP, E[e xi^T]=G Sigma; for the fixed symmetric PSD Q, E||Q^(1/2)e||^2=tr(Q G Sigma G^T)+E||Q^(1/2)b||^2. These are population identities under the declared information/timing contract, not finite-sample significance guarantees.",
+      "actual_application_status": "OPEN",
+      "same_instance_required": true
+    }
+  },
+  {
+    "rule_id": "CM20261009:r_type",
+    "conclusion_node_id": "CM20261009:TYPE_CONSEQUENCE",
+    "fields": {
+      "scope": "Declared finite real-valued models; actual and phenomenal application require independent same-instance evidence.",
+      "id": "CM20261009:TYPE_CONSEQUENCE",
+      "kind": "INHERITED_CONDITIONAL_APPLICATION",
+      "statement": "ACTUAL_BRIDGE and NONISOMORPHISM with A:C1_OI imply distinct complete experiential structural types. No named quality,magnitude or subject count follows.",
+      "actual_application_status": "OPEN",
+      "same_instance_required": true
+    }
+  },
+  {
+    "rule_id": "CM20261009:r_persist",
+    "conclusion_node_id": "CM20261009:NONERASURE",
+    "fields": {
+      "scope": "Declared finite real-valued models; actual and phenomenal application require independent same-instance evidence.",
+      "id": "CM20261009:NONERASURE",
+      "kind": "INHERITED_CONDITIONAL_APPLICATION",
+      "statement": "Given PERSISTENCE and A:U1, local experience stays nonempty regardless of output recovery/monitor adequacy. Not unchanged content or guaranteed survival after destructive removal.",
+      "actual_application_status": "OPEN",
+      "same_instance_required": true
+    }
+  }
+]

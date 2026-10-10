@@ -1,0 +1,116 @@
+{
+  "schema": "uct-worker-freeze-manifest/1",
+  "research_id": "DVC20261010",
+  "record_name": "DVC20261010_Device_Consumer_Validation",
+  "status": "FINAL_WORKER_FREEZE",
+  "date_utc": "2026-10-10",
+  "scope": "This workbench package only; parent may add its independently authored evidence and review without misrepresenting this manifest as covering those files.",
+  "source_remote_sha_supplied_by_parent": "8bac31cc0b9fb4c70d87f688dabbadeb6166addb",
+  "candidate_enabled": false,
+  "actual_application_established": false,
+  "file_count": 20,
+  "files": [
+    {
+      "path": "CLAIM_LEDGER.json",
+      "bytes": 11923,
+      "sha256": "89bf959cce082645fe1b6c3ea945fe135cc6246ffcbd0604f7ae9cad7e210e1e"
+    },
+    {
+      "path": "DEVICE_TIMING_CONTRACT.md",
+      "bytes": 8421,
+      "sha256": "4c78e26d2d45e161b595223dc8212a742740941b20d6bc7f0335b2bddea25da3"
+    },
+    {
+      "path": "EXACT_RESULTS.json",
+      "bytes": 58665,
+      "sha256": "ec0ca95e7eb0aab624d3eeed8093c9b00d398f24e0928522ff31a28335d51d2f"
+    },
+    {
+      "path": "FAILURES.md",
+      "bytes": 5213,
+      "sha256": "ff61e6e753ce5e0fe0a6b185a1a4797e89799446058cdfe8b3051fbae1197bfb"
+    },
+    {
+      "path": "GAP_LEDGER.md",
+      "bytes": 3247,
+      "sha256": "5036afd4619b2472445feb15e24d7b4f3762f87676c8ae4493001d1ee19f6221"
+    },
+    {
+      "path": "HANDOFF_ZH.md",
+      "bytes": 4366,
+      "sha256": "3dbee6644518defa125f34db839cf8a7da359090929d79adecd9e3b1864442e7"
+    },
+    {
+      "path": "LOCAL_VALIDATION_RECEIPT.json",
+      "bytes": 795,
+      "sha256": "d49fef0ba559cac3174170282b342d8dad73090c00ad300a8b8368a786be2188"
+    },
+    {
+      "path": "MAP_AUDIT.md",
+      "bytes": 3133,
+      "sha256": "3652f8be34059fa757f0ffd335094f0fa4d05ef8ff48372f319f39c2bc19a42a"
+    },
+    {
+      "path": "MAP_EXTENSION.json",
+      "bytes": 31413,
+      "sha256": "5029f17b7924355c632593d0051c0ecea4eb9f6838703f2a8b39a8b37e1dd423"
+    },
+    {
+      "path": "PROTOCOL.md",
+      "bytes": 4063,
+      "sha256": "4517c646ecfc297488dea7f360f311c05060b48f04ddf9c84658147e6eaa3337"
+    },
+    {
+      "path": "PUBLICATION_COVERAGE_UPDATE.json",
+      "bytes": 1866,
+      "sha256": "23fcb86db694611a284207694d089c77249959eddcb86a25a1b0617dcf4f6a64"
+    },
+    {
+      "path": "RESEARCH_NOTE.md",
+      "bytes": 23459,
+      "sha256": "6a9dc08b1a42c38c618448403cbef3fe8cf04abe57a9bb9f7e6fc7992fdefd54"
+    },
+    {
+      "path": "REVIEW_RESPONSE.md",
+      "bytes": 4595,
+      "sha256": "e14ff6826700fbaa263fdccf432aedbc35960e9a5a1db17e7fc520c4e319df90"
+    },
+    {
+      "path": "RUN_RECEIPT.json",
+      "bytes": 452,
+      "sha256": "8bef19108bdfd98473fe9b734be3f316a0e661d6fb60200341f1b7bcf4842dbf"
+    },
+    {
+      "path": "SOURCE_SCOPE.json",
+      "bytes": 8396,
+      "sha256": "f967fcdc2ffb06b70df04e19b674e4bf6f7f8afb06a7b73d0a5ba98937d4f53c"
+    },
+    {
+      "path": "WORK_LOG.md",
+      "bytes": 3271,
+      "sha256": "c3753d67499c1b729afe3b11785dd50f5ab92fa2fe22d7f41f4d3cff53be1d5e"
+    },
+    {
+      "path": "history/slc_provisional_first_run/EXACT_RESULTS.json",
+      "bytes": 56600,
+      "sha256": "1a27435f33c5b63faf823d82d9060b54a55908fd0c3cabc176c1cc46e3fce637"
+    },
+    {
+      "path": "history/slc_provisional_first_run/RUN_RECEIPT.json",
+      "bytes": 452,
+      "sha256": "db47a078b0f8880d520f50c93ceea9aa4fcaa29a2293fa96d0a762e271bd0622"
+    },
+    {
+      "path": "history/slc_provisional_first_run/model.py",
+      "bytes": 22048,
+      "sha256": "190b5bb74e365991d4dcb20da14d0a07736e3c85951381a85808e36f563ea219"
+    },
+    {
+      "path": "model.py",
+      "bytes": 23051,
+      "sha256": "028a090a4b2826fd58b78738fc80ea5c7a0cd3454da71c751c781f5ea95e1d30"
+    }
+  ],
+  "self_hash_excluded": true,
+  "remote_and_space_verified_by_this_worker": false
+}

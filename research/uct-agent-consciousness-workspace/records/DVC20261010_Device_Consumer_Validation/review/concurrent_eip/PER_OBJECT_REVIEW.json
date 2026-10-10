@@ -1,0 +1,394 @@
+{
+  "schema": "uct-eip-scoped-object-review/1",
+  "counts": {
+    "nodes": 6,
+    "rules": 3,
+    "contexts": 5,
+    "total": 14
+  },
+  "historical_map_reread": false,
+  "items": [
+    {
+      "id": "EIP:EPISODE_CONTRACT",
+      "family": "nodes",
+      "source": {
+        "source_family": "EIP20261010",
+        "source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+        "file": "MAP_EXTENSION.json",
+        "sha256": "64a8b1f82bb92c6158f42a264b92541c7c0ce7cf27a289639d9a54f1301a8adc",
+        "selector": "/nodes/0",
+        "object_id": "EIP:EPISODE_CONTRACT"
+      },
+      "read_fields": [
+        "id",
+        "kind",
+        "statement",
+        "scope",
+        "quantifier",
+        "status",
+        "all_premises",
+        "proof_location",
+        "counterexamples_and_limits",
+        "thought_experiment_role",
+        "automatic_premise_truth"
+      ],
+      "read_scope": "Every field of this supplied object, in full; referenced external proofs not expanded in this reconciliation.",
+      "outcome": "COMPATIBLE_PROSPECTIVE_DOMAIN",
+      "rationale": "The selected carrier, named consumer, episode and windows are bound; partial distal/motor envelopes do not claim complete equality or actual realization.",
+      "dvc_forced_revision": false,
+      "enabled_by_review": false
+    },
+    {
+      "id": "EIP:TWO_LEVEL_EVIDENCE",
+      "family": "nodes",
+      "source": {
+        "source_family": "EIP20261010",
+        "source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+        "file": "MAP_EXTENSION.json",
+        "sha256": "64a8b1f82bb92c6158f42a264b92541c7c0ce7cf27a289639d9a54f1301a8adc",
+        "selector": "/nodes/1",
+        "object_id": "EIP:TWO_LEVEL_EVIDENCE"
+      },
+      "read_fields": [
+        "id",
+        "kind",
+        "statement",
+        "scope",
+        "quantifier",
+        "status",
+        "all_premises",
+        "proof_location",
+        "counterexamples_and_limits",
+        "thought_experiment_role",
+        "automatic_premise_truth"
+      ],
+      "read_scope": "Every field of this supplied object, in full; referenced external proofs not expanded in this reconciliation.",
+      "outcome": "COMPATIBLE_EVIDENCE_SEPARATION",
+      "rationale": "Separates transduction, arrival, aggregate state and specified read; it does not establish an implementation of the latter.",
+      "dvc_forced_revision": false,
+      "enabled_by_review": false
+    },
+    {
+      "id": "EIP:C1",
+      "family": "nodes",
+      "source": {
+        "source_family": "EIP20261010",
+        "source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+        "file": "MAP_EXTENSION.json",
+        "sha256": "64a8b1f82bb92c6158f42a264b92541c7c0ce7cf27a289639d9a54f1301a8adc",
+        "selector": "/nodes/2",
+        "object_id": "EIP:C1"
+      },
+      "read_fields": [
+        "id",
+        "kind",
+        "statement",
+        "scope",
+        "quantifier",
+        "status",
+        "all_premises",
+        "proof_location",
+        "counterexamples_and_limits",
+        "thought_experiment_role",
+        "automatic_premise_truth"
+      ],
+      "read_scope": "Every field of this supplied object, in full; referenced external proofs not expanded in this reconciliation.",
+      "outcome": "COMPATIBLE_WITH_OPEN_NQ2_NQ3",
+      "rationale": "Delivered twins establish global nonidentification; all-fiber ambiguity and absent-delivery actual-intake readings require the listed qualifications.",
+      "dvc_forced_revision": false,
+      "enabled_by_review": false
+    },
+    {
+      "id": "EIP:C2",
+      "family": "nodes",
+      "source": {
+        "source_family": "EIP20261010",
+        "source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+        "file": "MAP_EXTENSION.json",
+        "sha256": "64a8b1f82bb92c6158f42a264b92541c7c0ce7cf27a289639d9a54f1301a8adc",
+        "selector": "/nodes/3",
+        "object_id": "EIP:C2"
+      },
+      "read_fields": [
+        "id",
+        "kind",
+        "statement",
+        "scope",
+        "quantifier",
+        "status",
+        "all_premises",
+        "proof_location",
+        "counterexamples_and_limits",
+        "thought_experiment_role",
+        "automatic_premise_truth"
+      ],
+      "read_scope": "Every field of this supplied object, in full; referenced external proofs not expanded in this reconciliation.",
+      "outcome": "COMPATIBLE_GUARDED_ONLY_OPEN_NQ4",
+      "rationale": "For S=1 and X=0 the stipulated equation gives U=G, but physical exclusivity, interface, timing and readout remain unvalidated; sufficient method does not establish universal necessity.",
+      "dvc_forced_revision": false,
+      "enabled_by_review": false
+    },
+    {
+      "id": "EIP:C3",
+      "family": "nodes",
+      "source": {
+        "source_family": "EIP20261010",
+        "source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+        "file": "MAP_EXTENSION.json",
+        "sha256": "64a8b1f82bb92c6158f42a264b92541c7c0ce7cf27a289639d9a54f1301a8adc",
+        "selector": "/nodes/4",
+        "object_id": "EIP:C3"
+      },
+      "read_fields": [
+        "id",
+        "kind",
+        "statement",
+        "scope",
+        "quantifier",
+        "status",
+        "all_premises",
+        "proof_location",
+        "counterexamples_and_limits",
+        "thought_experiment_role",
+        "automatic_premise_truth"
+      ],
+      "read_scope": "Every field of this supplied object, in full; referenced external proofs not expanded in this reconciliation.",
+      "outcome": "COMPATIBLE_SCOPE_CONSTRAINT",
+      "rationale": "A changed admitted relation changes complete organization by the selected semantics; the logic does not force every biological covariate or endpoint to change.",
+      "dvc_forced_revision": false,
+      "enabled_by_review": false
+    },
+    {
+      "id": "EIP:C4",
+      "family": "nodes",
+      "source": {
+        "source_family": "EIP20261010",
+        "source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+        "file": "MAP_EXTENSION.json",
+        "sha256": "64a8b1f82bb92c6158f42a264b92541c7c0ce7cf27a289639d9a54f1301a8adc",
+        "selector": "/nodes/5",
+        "object_id": "EIP:C4"
+      },
+      "read_fields": [
+        "id",
+        "kind",
+        "statement",
+        "scope",
+        "quantifier",
+        "status",
+        "all_premises",
+        "proof_location",
+        "counterexamples_and_limits",
+        "thought_experiment_role",
+        "automatic_premise_truth"
+      ],
+      "read_scope": "Every field of this supplied object, in full; referenced external proofs not expanded in this reconciliation.",
+      "outcome": "COMPATIBLE_GUARDED_ONLY_OPEN_NQ1_NQ4",
+      "rationale": "Retains independent actual/complete-signature/constitutive/semantic gates to C1 application without adding a basal-experience gate; ledger C4 is a different claim.",
+      "dvc_forced_revision": false,
+      "enabled_by_review": false
+    },
+    {
+      "id": "EIP:R1",
+      "family": "rules",
+      "source": {
+        "source_family": "EIP20261010",
+        "source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+        "file": "MAP_EXTENSION.json",
+        "sha256": "64a8b1f82bb92c6158f42a264b92541c7c0ce7cf27a289639d9a54f1301a8adc",
+        "selector": "/rules/0",
+        "object_id": "EIP:R1"
+      },
+      "read_fields": [
+        "id",
+        "all_of",
+        "conclusion",
+        "type",
+        "same_instance_required",
+        "binding",
+        "proof_location",
+        "alternative_route_semantics",
+        "joint_witness",
+        "enabled_as_established_premise"
+      ],
+      "read_scope": "Every field of this supplied object, in full; referenced external proofs not expanded in this reconciliation.",
+      "outcome": "DISABLED_GUARDED_THEOREM_ONLY_OPEN_NQ4",
+      "rationale": "Episode and evidence partition do not alone instantiate the Boolean interface; conclusion can be retained only as the full scoped conditional theorem.",
+      "dvc_forced_revision": false,
+      "enabled_by_review": false
+    },
+    {
+      "id": "EIP:R2",
+      "family": "rules",
+      "source": {
+        "source_family": "EIP20261010",
+        "source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+        "file": "MAP_EXTENSION.json",
+        "sha256": "64a8b1f82bb92c6158f42a264b92541c7c0ce7cf27a289639d9a54f1301a8adc",
+        "selector": "/rules/1",
+        "object_id": "EIP:R2"
+      },
+      "read_fields": [
+        "id",
+        "all_of",
+        "conclusion",
+        "type",
+        "same_instance_required",
+        "binding",
+        "proof_location",
+        "alternative_route_semantics",
+        "joint_witness",
+        "enabled_as_established_premise"
+      ],
+      "read_scope": "Every field of this supplied object, in full; referenced external proofs not expanded in this reconciliation.",
+      "outcome": "DISABLED_GUARDED_THEOREM_ONLY_OPEN_NQ4",
+      "rationale": "C1 and episode IDs do not discharge S=1, X=0, selective timing or faithful readout; no actual G conclusion is admitted.",
+      "dvc_forced_revision": false,
+      "enabled_by_review": false
+    },
+    {
+      "id": "EIP:R3",
+      "family": "rules",
+      "source": {
+        "source_family": "EIP20261010",
+        "source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+        "file": "MAP_EXTENSION.json",
+        "sha256": "64a8b1f82bb92c6158f42a264b92541c7c0ce7cf27a289639d9a54f1301a8adc",
+        "selector": "/rules/2",
+        "object_id": "EIP:R3"
+      },
+      "read_fields": [
+        "id",
+        "all_of",
+        "conclusion",
+        "type",
+        "same_instance_required",
+        "binding",
+        "proof_location",
+        "alternative_route_semantics",
+        "joint_witness",
+        "enabled_as_established_premise"
+      ],
+      "read_scope": "Every field of this supplied object, in full; referenced external proofs not expanded in this reconciliation.",
+      "outcome": "DISABLED_GUARDED_THEOREM_ONLY_OPEN_NQ4",
+      "rationale": "C3 plus A:C1 does not supply an actual bearer, complete signature, constitutive relation or target meaning; narrative binding remains required.",
+      "dvc_forced_revision": false,
+      "enabled_by_review": false
+    },
+    {
+      "id": "EIP:CTX1",
+      "family": "context_links",
+      "source": {
+        "source_family": "EIP20261010",
+        "source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+        "file": "MAP_EXTENSION.json",
+        "sha256": "64a8b1f82bb92c6158f42a264b92541c7c0ce7cf27a289639d9a54f1301a8adc",
+        "selector": "/context_links/0",
+        "object_id": "EIP:CTX1"
+      },
+      "read_fields": [
+        "id",
+        "from",
+        "to",
+        "type"
+      ],
+      "read_scope": "Every field of this supplied object, in full; referenced external proofs not expanded in this reconciliation.",
+      "outcome": "COMPATIBLE_NONDEDUCTIVE_CONTEXT",
+      "rationale": "C1 is retained as the explanatory axiom; this edge supplies no empirical confirmation or actual bearer.",
+      "dvc_forced_revision": false,
+      "enabled_by_review": false
+    },
+    {
+      "id": "EIP:CTX2",
+      "family": "context_links",
+      "source": {
+        "source_family": "EIP20261010",
+        "source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+        "file": "MAP_EXTENSION.json",
+        "sha256": "64a8b1f82bb92c6158f42a264b92541c7c0ce7cf27a289639d9a54f1301a8adc",
+        "selector": "/context_links/1",
+        "object_id": "EIP:CTX2"
+      },
+      "read_fields": [
+        "id",
+        "from",
+        "to",
+        "type"
+      ],
+      "read_scope": "Every field of this supplied object, in full; referenced external proofs not expanded in this reconciliation.",
+      "outcome": "COMPATIBLE_NONDEDUCTIVE_CONTEXT",
+      "rationale": "CBI intake-event follow-up does not turn recording or aggregate activity into an observed specified intake. CBI proof is not reconstructed here.",
+      "dvc_forced_revision": false,
+      "enabled_by_review": false
+    },
+    {
+      "id": "EIP:CTX3",
+      "family": "context_links",
+      "source": {
+        "source_family": "EIP20261010",
+        "source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+        "file": "MAP_EXTENSION.json",
+        "sha256": "64a8b1f82bb92c6158f42a264b92541c7c0ce7cf27a289639d9a54f1301a8adc",
+        "selector": "/context_links/2",
+        "object_id": "EIP:CTX3"
+      },
+      "read_fields": [
+        "id",
+        "from",
+        "to",
+        "type"
+      ],
+      "read_scope": "Every field of this supplied object, in full; referenced external proofs not expanded in this reconciliation.",
+      "outcome": "COMPATIBLE_NONDEDUCTIVE_CONTEXT",
+      "rationale": "R204 probe-signature context preserves fidelity and writer premises; the pending target is not promoted or treated as an established physical witness.",
+      "dvc_forced_revision": false,
+      "enabled_by_review": false
+    },
+    {
+      "id": "EIP:CTX4",
+      "family": "context_links",
+      "source": {
+        "source_family": "EIP20261010",
+        "source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+        "file": "MAP_EXTENSION.json",
+        "sha256": "64a8b1f82bb92c6158f42a264b92541c7c0ce7cf27a289639d9a54f1301a8adc",
+        "selector": "/context_links/3",
+        "object_id": "EIP:CTX4"
+      },
+      "read_fields": [
+        "id",
+        "from",
+        "to",
+        "type"
+      ],
+      "read_scope": "Every field of this supplied object, in full; referenced external proofs not expanded in this reconciliation.",
+      "outcome": "COMPATIBLE_NONDEDUCTIVE_CONTEXT",
+      "rationale": "MPC context concerns partial matched-output scope and supplies no complete-organization equality or actual branch-isolation installation.",
+      "dvc_forced_revision": false,
+      "enabled_by_review": false
+    },
+    {
+      "id": "EIP:CTX5",
+      "family": "context_links",
+      "source": {
+        "source_family": "EIP20261010",
+        "source_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+        "file": "MAP_EXTENSION.json",
+        "sha256": "64a8b1f82bb92c6158f42a264b92541c7c0ce7cf27a289639d9a54f1301a8adc",
+        "selector": "/context_links/4",
+        "object_id": "EIP:CTX5"
+      },
+      "read_fields": [
+        "id",
+        "from",
+        "to",
+        "type"
+      ],
+      "read_scope": "Every field of this supplied object, in full; referenced external proofs not expanded in this reconciliation.",
+      "outcome": "COMPATIBLE_NONDEDUCTIVE_CONTEXT",
+      "rationale": "Preserves the no-current-consciousness-or-fear inference limit; no H, ownership, agency or conceptual-self conclusion is supplied.",
+      "dvc_forced_revision": false,
+      "enabled_by_review": false
+    }
+  ]
+}

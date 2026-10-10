@@ -1,0 +1,154 @@
+{
+  "schema": "uct-navigation-update/2",
+  "science_parent": "afcafa88f457632cd29d4ca1c15cb840edc01781",
+  "concurrent_science": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+  "files": [
+    {
+      "file": "CURRENT_STATE.json",
+      "mode": "latest_concurrent_original_exact_json_in_history",
+      "current": {
+        "path": "CURRENT_STATE.json",
+        "bytes": 9677,
+        "sha256": "28b536692ce3bf95a7302149a572ffbbe2d05eab16e0eb7c8a35724b45d296d3"
+      }
+    },
+    {
+      "file": "PUBLICATION_COVERAGE.json",
+      "mode": "latest_concurrent_original_exact_json_in_history",
+      "current": {
+        "path": "PUBLICATION_COVERAGE.json",
+        "bytes": 5460,
+        "sha256": "4046436eb71720c43a9fa2f91c74404b2939cf54fec2f7c68cf2f264e527f2c3"
+      }
+    },
+    {
+      "file": "RESEARCH_REGISTRY.json",
+      "mode": "latest_concurrent_original_exact_json_in_history",
+      "current": {
+        "path": "RESEARCH_REGISTRY.json",
+        "bytes": 26898,
+        "sha256": "8af9327c6a13e835892ab55dca0b1adcc50e34e3beef9ba3093e5ae161896b0b"
+      }
+    },
+    {
+      "file": "RESEARCH_SESSION_LOG_INDEX.json",
+      "mode": "latest_concurrent_original_exact_json_in_history",
+      "current": {
+        "path": "RESEARCH_SESSION_LOG_INDEX.json",
+        "bytes": 2738,
+        "sha256": "0d387e9510edf635dab2ae652749ae0c203b622ca0ee0588731133c1bbd86813"
+      }
+    },
+    {
+      "file": "FORMAL_MAP_EXTENSION_INDEX.json",
+      "mode": "latest_concurrent_original_exact_json_in_history",
+      "current": {
+        "path": "FORMAL_MAP_EXTENSION_INDEX.json",
+        "bytes": 1975,
+        "sha256": "18f344b9b36850f6d67d615fc61503c05eb9e3c461490a9884f9716b0b5126f4"
+      }
+    },
+    {
+      "file": "RESEARCH_MASTER_GUIDE.md",
+      "mode": "only_current_navigation_changed_policy_unchanged",
+      "current": {
+        "path": "RESEARCH_MASTER_GUIDE.md",
+        "bytes": 29937,
+        "sha256": "de8f5d612842731aa836241f2f1ff5a866286d338f5be93e0d54dbcd789e05f8"
+      }
+    },
+    {
+      "file": "AGENTS.md",
+      "mode": "latest_concurrent_original_exact_suffix",
+      "current": {
+        "path": "AGENTS.md",
+        "bytes": 101920,
+        "sha256": "620b20f6e58b22a5088b65c60d3be7422eabadf65028a864bea0f55daeead81b"
+      }
+    },
+    {
+      "file": "MEMORY.md",
+      "mode": "latest_concurrent_original_exact_suffix",
+      "current": {
+        "path": "MEMORY.md",
+        "bytes": 17659,
+        "sha256": "7f69779c54c52013f412ae31cd9a79bc0ca546838d3fc50341cdd8194cbcd6f2"
+      }
+    },
+    {
+      "file": "HANDOFF.md",
+      "mode": "latest_concurrent_original_exact_suffix",
+      "current": {
+        "path": "HANDOFF.md",
+        "bytes": 36675,
+        "sha256": "513b489321203f67b3170eb82b13eb01b783d6bb2e241c76db2f4dbd59380bb2"
+      }
+    },
+    {
+      "file": "MASTER_INDEX.md",
+      "mode": "latest_concurrent_original_exact_suffix",
+      "current": {
+        "path": "MASTER_INDEX.md",
+        "bytes": 27887,
+        "sha256": "ee8868ca1aa3ecfcdace0ac97d933a4d3f6c66fe232f9048b033e0b8fa7b0e72"
+      }
+    },
+    {
+      "file": "REVIEW_SUPERVISION.md",
+      "mode": "latest_concurrent_original_exact_prefix",
+      "current": {
+        "path": "REVIEW_SUPERVISION.md",
+        "bytes": 100446,
+        "sha256": "ec71ed899cafa008f1d78fbdc726e994fdfd29afa433f7ccd0b75b037bd0058a"
+      }
+    },
+    {
+      "file": "UCT_FORMAL_MAP.md",
+      "mode": "latest_concurrent_original_exact_suffix",
+      "current": {
+        "path": "UCT_FORMAL_MAP.md",
+        "bytes": 15286,
+        "sha256": "f14d887eb4714573edadfb1e7c93c1815964e57b346264e3a9950b143281ea4b"
+      }
+    },
+    {
+      "file": "UCT_FORMAL_AUDIT.md",
+      "mode": "latest_concurrent_original_exact_suffix",
+      "current": {
+        "path": "UCT_FORMAL_AUDIT.md",
+        "bytes": 16188,
+        "sha256": "ed7806ebfd4ee56aaf6bddc4bd8d7d649322d2a4eb8b87df111f0485461bd075"
+      }
+    },
+    {
+      "file": "CHANGELOG.md",
+      "mode": "latest_concurrent_original_exact_suffix",
+      "current": {
+        "path": "CHANGELOG.md",
+        "bytes": 12396,
+        "sha256": "746173142e165e70009310ab4f475a35a963409f321a7bcf55ed0c70f5258c50"
+      }
+    },
+    {
+      "file": "START_HERE.md",
+      "mode": "latest_concurrent_original_exact_suffix",
+      "current": {
+        "path": "START_HERE.md",
+        "bytes": 2250,
+        "sha256": "f30d15bba4fc68ce0d6d988b555b4a514faa6baf20829d7809f2d2706c459a84"
+      }
+    },
+    {
+      "file": "README.md",
+      "mode": "latest_concurrent_original_exact_suffix",
+      "current": {
+        "path": "README.md",
+        "bytes": 11558,
+        "sha256": "df959ce81dbc4bcab2ccd4d0aeae5770d7ee7917fe07900c32878d277020b9d8"
+      }
+    }
+  ],
+  "graph_release_unchanged": true,
+  "pending_count": 25,
+  "coverage": "UCT-PUB-v1.0.22"
+}

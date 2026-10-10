@@ -1,0 +1,55 @@
+{
+  "schema": "uct-dvc-composite-results/1",
+  "research_id": "DVC20261010",
+  "result_version": "DVC-RESULT-v0.1.0",
+  "model": {
+    "source": {
+      "path": "device_model/EXACT_RESULTS.json",
+      "bytes": 58665,
+      "sha256": "ec0ca95e7eb0aab624d3eeed8093c9b00d398f24e0928522ff31a28335d51d2f"
+    },
+    "counts": {
+      "event_order_schedules": 720,
+      "both_current_tokens_consumed": 6,
+      "consume_before_commit_rejected": 360,
+      "matched_output_with_wrong_epoch_or_unarrived_probe": 354,
+      "gate_factorial_pairs": 4,
+      "robust_window_parameter_sample_checks": 4896,
+      "paired_nonempty_safe_window_cases": 400,
+      "current_consequence_encoder_chronology_cases": 108
+    },
+    "violations": 0,
+    "hardware_accessed": false,
+    "human_participants": 0
+  },
+  "public_data_reanalysis": {
+    "source": {
+      "path": "apparatus_evidence/MAIN_FINDINGS.json",
+      "bytes": 10058,
+      "sha256": "cb7ef67f7f6c03d882015cccc4e25c4a9a626feff9f8d9a1551d6df013d9fd23"
+    },
+    "executed_results": {
+      "path": "apparatus_evidence/results/EXACT_RESULTS.json",
+      "bytes": 5651,
+      "sha256": "0e8ea009806d468a5c39e466639afe0bd2247350f8989f3133bf9ea896c90abd"
+    },
+    "effective_interpretation_correction": {
+      "path": "apparatus_evidence/RESPONSE_CODING_CORRECTION.json",
+      "bytes": 2104,
+      "sha256": "2caa18ffeacc27e6885d8e250dfe985918456f991df032e289b03e64ee023798"
+    },
+    "included_people": 18,
+    "in_range_records": 9704,
+    "participant_condition_cells": 108,
+    "analysis_specifications": 2,
+    "fits": 216
+  },
+  "new_human_observations_collected": 0,
+  "new_hardware_deployed": false,
+  "actual_human_consumer_application_established": false,
+  "named_H_semantics_established": false,
+  "candidate_enabled": false,
+  "completed_map": "UCT-MAP-v1.1.2",
+  "independent_review": "review/INDEPENDENT_REVIEW.md",
+  "denominators_must_not_be_summed": true
+}

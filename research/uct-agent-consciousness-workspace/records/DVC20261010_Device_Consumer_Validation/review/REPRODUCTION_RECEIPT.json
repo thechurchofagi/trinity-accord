@@ -1,0 +1,56 @@
+{
+  "read_only_sources": true,
+  "hardware_accessed": false,
+  "new_human_data": false,
+  "comparisons": [
+    {
+      "family": "device_model",
+      "file": "EXACT_RESULTS.json",
+      "byte_equal": true,
+      "original_sha256": "9272a41c5fec78a50811bf43d8e763120a9cbbd553d81744cf2be5093e4cff4a",
+      "rerun_sha256": "9272a41c5fec78a50811bf43d8e763120a9cbbd553d81744cf2be5093e4cff4a"
+    },
+    {
+      "family": "apparatus_evidence",
+      "file": "EXACT_RESULTS.json",
+      "byte_equal": true,
+      "original_sha256": "0e8ea009806d468a5c39e466639afe0bd2247350f8989f3133bf9ea896c90abd",
+      "rerun_sha256": "0e8ea009806d468a5c39e466639afe0bd2247350f8989f3133bf9ea896c90abd"
+    },
+    {
+      "family": "apparatus_evidence",
+      "file": "ARCHIVED_PARAMETER_REANALYSIS.json",
+      "byte_equal": true,
+      "original_sha256": "82029912a3acf7750dd927504a3e087d68ed18257fe51e0737892d319015ed48",
+      "rerun_sha256": "82029912a3acf7750dd927504a3e087d68ed18257fe51e0737892d319015ed48"
+    },
+    {
+      "family": "apparatus_evidence",
+      "file": "INDEPENDENT_REFIT_STATISTICS.json",
+      "byte_equal": true,
+      "original_sha256": "c47f1d7643e146cc91c4fecbf307fc7edc30fdc000f8a6bfa9051f76460d39e9",
+      "rerun_sha256": "c47f1d7643e146cc91c4fecbf307fc7edc30fdc000f8a6bfa9051f76460d39e9"
+    },
+    {
+      "family": "apparatus_evidence",
+      "file": "INDEPENDENT_PSYCHOMETRIC_FITS.csv",
+      "byte_equal": true,
+      "original_sha256": "b93b8ae64a2a83c1c778a06a1d9d885718eeac548b7163092ebd3666c1aa7bb2",
+      "rerun_sha256": "b93b8ae64a2a83c1c778a06a1d9d885718eeac548b7163092ebd3666c1aa7bb2"
+    },
+    {
+      "family": "apparatus_evidence",
+      "file": "SOURCE_FILE_AUDIT.csv",
+      "byte_equal": true,
+      "original_sha256": "3ce1cef586b9dce4df21e559d04486c278ca3faaaa7f63e7e4fed759a5bdab67",
+      "rerun_sha256": "3ce1cef586b9dce4df21e559d04486c278ca3faaaa7f63e7e4fed759a5bdab67"
+    },
+    {
+      "family": "apparatus_evidence",
+      "file": "TIMING_FIELD_AUDIT.json",
+      "byte_equal": true,
+      "original_sha256": "d2c9fcc86874d10eb1db76fef66e2c490e51c39b43ad7910f19d82e30da379e8",
+      "rerun_sha256": "d2c9fcc86874d10eb1db76fef66e2c490e51c39b43ad7910f19d82e30da379e8"
+    }
+  ]
+}

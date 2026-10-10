@@ -1,0 +1,19 @@
+{
+  "schema": "publication-status-git-readback/1",
+  "branch": "research/scu-source-use-v101-20261010",
+  "previous_sha": "094fc4731bd61126e15232ba7fbeb74893d50d02",
+  "commit": "571d2b5c9564179edbf83a43dd6be1d801153766",
+  "expected_sha_guard_pass": true,
+  "readback": [
+    {
+      "path": "doi-resolution.json",
+      "git_blob_sha": "479acc362aac75d604b0f5db49e67a2a704c5809",
+      "readback_byte_equal": true
+    },
+    {
+      "path": "RELEASE_STATUS.json",
+      "git_blob_sha": "b87a9f1399ba67f2aee8d3c783a365c540254b39",
+      "readback_byte_equal": true
+    }
+  ]
+}

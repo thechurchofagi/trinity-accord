@@ -1,0 +1,30 @@
+{
+  "schema": "uct-dvc-followup-summary/1",
+  "decision": "RETAIN_DISABLED_DVC_AND_EXPLORATORY_EVIDENCE; NO_NEW_LOCAL_SCIENTIFIC_BLOCKER",
+  "counts": {
+    "rules": 424,
+    "new287_whole_value_fields": 4350,
+    "prior137_additional_whole_value_fields": 1510,
+    "cumulative_rule_leaf_paths_read": 10319,
+    "unread_subtree_pointers": 5155
+  },
+  "rule_ids_without_any_core_visit_this_round": [],
+  "core_fields_do_not_equal_full_record_or_full_proof_review": true,
+  "whole_map_semantic_completion": false,
+  "historical_depth_gaps_kept_open": {
+    "ids_with_historical_deeper_fields": 1034,
+    "historical_deeper_fields": 1828,
+    "historical_proof_ids": 1347,
+    "review_items_open": [
+      "QC10",
+      "IA-QC11",
+      "QC12",
+      "QC13"
+    ],
+    "closed_by_this_core_reading": false,
+    "explanation": "Specific additional core pointers are now read. The inherited gap ledger is preserved; no deep-proof rereview or blanket historical closure is claimed."
+  },
+  "completed_map_version_unchanged": "UCT-MAP-v1.1.2",
+  "new_candidate_rules_enabled": 0,
+  "whole_1608_id_aggregation": "Not certified by this subagent: parent must combine exact per-ID node, context, suspended-rule and rule scopes from their separate audits."
+}

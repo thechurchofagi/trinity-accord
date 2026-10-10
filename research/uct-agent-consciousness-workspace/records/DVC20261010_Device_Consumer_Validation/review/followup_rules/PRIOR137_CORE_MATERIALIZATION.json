@@ -1,0 +1,3452 @@
+{
+  "status": "MATERIALIZED_NOT_YET_READING_CLAIM",
+  "reference_contract": "PREVIOUS287 is an exactly equal whole value already read at the cited rule/path. NEW_VALUE identifiers are defined in the catalogue. No proofs are imported by a value reference.",
+  "items": [
+    {
+      "ordinal": 0,
+      "id": "a01",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 1,
+      "id": "a02",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 2,
+      "id": "a03",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 3,
+      "id": "a04",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 4,
+      "id": "a05",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 5,
+      "id": "a06",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 6,
+      "id": "a07",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 7,
+      "id": "a08",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 8,
+      "id": "a09",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 9,
+      "id": "a10",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 10,
+      "id": "a11",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 11,
+      "id": "a12",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 12,
+      "id": "a13",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 13,
+      "id": "a14",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 14,
+      "id": "a15",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 15,
+      "id": "a16",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 16,
+      "id": "a17",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 17,
+      "id": "a18",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 18,
+      "id": "a19",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 19,
+      "id": "a20",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 20,
+      "id": "a21",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 21,
+      "id": "a22",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 22,
+      "id": "a23a",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 23,
+      "id": "a23b",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 24,
+      "id": "a24",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 25,
+      "id": "a25",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 26,
+      "id": "a26",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 27,
+      "id": "a27",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 28,
+      "id": "a28",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 29,
+      "id": "a29",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 30,
+      "id": "a30",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 31,
+      "id": "a31",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 32,
+      "id": "a32",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 33,
+      "id": "a33",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 34,
+      "id": "a34",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 35,
+      "id": "b01",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 36,
+      "id": "b02",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 37,
+      "id": "b03",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 38,
+      "id": "b_IIT",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 39,
+      "id": "b_RPT",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 40,
+      "id": "b_GNWT",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 41,
+      "id": "b_HOT",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 42,
+      "id": "b_AST",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 43,
+      "id": "b_PP_AI",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 44,
+      "id": "b_DIT",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 45,
+      "id": "b_MTOC",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 46,
+      "id": "b_TTC",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 47,
+      "id": "b04",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 48,
+      "id": "b05",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 49,
+      "id": "b06",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 50,
+      "id": "b07",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 51,
+      "id": "a35",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 52,
+      "id": "a36",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 53,
+      "id": "a37",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 54,
+      "id": "c01",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 55,
+      "id": "c02",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 56,
+      "id": "c03",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 57,
+      "id": "c04",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 58,
+      "id": "c05",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 59,
+      "id": "c06",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 60,
+      "id": "c07",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 61,
+      "id": "c08",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 62,
+      "id": "c09",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 63,
+      "id": "c10",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 64,
+      "id": "c11",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 65,
+      "id": "c12",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 66,
+      "id": "c13",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 67,
+      "id": "c14",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 68,
+      "id": "c15",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 69,
+      "id": "c16",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 70,
+      "id": "c17",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 71,
+      "id": "c18",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 72,
+      "id": "c19",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 73,
+      "id": "c20",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 74,
+      "id": "c21",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 75,
+      "id": "c22",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 76,
+      "id": "c23",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 77,
+      "id": "c24",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 78,
+      "id": "a38",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 79,
+      "id": "d129_bundled",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 80,
+      "id": "d129_direct",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 81,
+      "id": "d129_payoff",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 82,
+      "id": "d129_marginal_counter",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 83,
+      "id": "d129_value_gap",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 84,
+      "id": "d129_frechet",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 85,
+      "id": "d129_grid",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 86,
+      "id": "d129_separable",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 87,
+      "id": "d129_uct",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 88,
+      "id": "r147_routing",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 89,
+      "id": "r147_memory",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 90,
+      "id": "r147_type",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 91,
+      "id": "r149_ta18_germ_nonfactor",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 92,
+      "id": "r149_ta18_phen_nonfactor",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 93,
+      "id": "r149_ta18_idle",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 94,
+      "id": "r149_ta18_factor",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 95,
+      "id": "r149_ta18_underdetermination",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R153/relation_type",
+        "/formal_contract_R153/premise_connective",
+        "/formal_contract_R153/alternative_routes",
+        "/formal_contract_R153/quantification",
+        "/formal_contract_R153/bindings_required",
+        "/formal_contract_R153/root_premise_routes",
+        "/formal_contract_R154/relation_type",
+        "/formal_contract_R154/premise_connective",
+        "/formal_contract_R154/alternative_routes",
+        "/formal_contract_R154/quantification",
+        "/formal_contract_R154/bindings_required",
+        "/formal_contract_R154/root_premise_routes"
+      ]
+    },
+    {
+      "ordinal": 96,
+      "id": "r169_compositional_effect_bound",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R169/premise_connective",
+        "/formal_contract_R169/quantification",
+        "/formal_contract_R169/bindings_required"
+      ]
+    },
+    {
+      "ordinal": 97,
+      "id": "r169_direct_route_envelope",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R169/premise_connective",
+        "/formal_contract_R169/quantification",
+        "/formal_contract_R169/bindings_required"
+      ]
+    },
+    {
+      "ordinal": 98,
+      "id": "r169_partial_view_direct_radius",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R169/premise_connective",
+        "/formal_contract_R169/quantification",
+        "/formal_contract_R169/bindings_required"
+      ]
+    },
+    {
+      "ordinal": 99,
+      "id": "r169_route_calibration_triage",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R169/premise_connective",
+        "/formal_contract_R169/quantification",
+        "/formal_contract_R169/bindings_required"
+      ]
+    },
+    {
+      "ordinal": 100,
+      "id": "r169_route_application_boundary",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R169/premise_connective",
+        "/formal_contract_R169/quantification",
+        "/formal_contract_R169/bindings_required"
+      ]
+    },
+    {
+      "ordinal": 101,
+      "id": "r171_direct_range_closure",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R171/premise_connective",
+        "/formal_contract_R171/quantification",
+        "/formal_contract_R171/bindings_required"
+      ]
+    },
+    {
+      "ordinal": 102,
+      "id": "r171_inductive_range_closure",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R171/premise_connective",
+        "/formal_contract_R171/quantification",
+        "/formal_contract_R171/bindings_required"
+      ]
+    },
+    {
+      "ordinal": 103,
+      "id": "r171_fitted_cover_nonentailment",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R171/premise_connective",
+        "/formal_contract_R171/quantification",
+        "/formal_contract_R171/bindings_required"
+      ]
+    },
+    {
+      "ordinal": 104,
+      "id": "r171_four_domain_application",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R171/premise_connective",
+        "/formal_contract_R171/quantification",
+        "/formal_contract_R171/bindings_required"
+      ]
+    },
+    {
+      "ordinal": 105,
+      "id": "r171_range_certificate_triage",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R171/premise_connective",
+        "/formal_contract_R171/quantification",
+        "/formal_contract_R171/bindings_required"
+      ]
+    },
+    {
+      "ordinal": 106,
+      "id": "r172_interface_composition",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R172/premise_connective",
+        "/formal_contract_R172/quantification",
+        "/formal_contract_R172/bindings_required"
+      ]
+    },
+    {
+      "ordinal": 107,
+      "id": "r173_retentive_coordinate_transport",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R173/premise_connective",
+        "/formal_contract_R173/quantification",
+        "/formal_contract_R173/bindings_required"
+      ]
+    },
+    {
+      "ordinal": 108,
+      "id": "r174_mediator_clamp_separation",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R174/premise_connective",
+        "/formal_contract_R174/quantification",
+        "/formal_contract_R174/bindings_required"
+      ]
+    },
+    {
+      "ordinal": 109,
+      "id": "r174_finite_route_nonidentification",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R174/premise_connective",
+        "/formal_contract_R174/quantification",
+        "/formal_contract_R174/bindings_required"
+      ]
+    },
+    {
+      "ordinal": 110,
+      "id": "r174_experiential_coordinate_transport",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R174/premise_connective",
+        "/formal_contract_R174/quantification",
+        "/formal_contract_R174/bindings_required"
+      ]
+    },
+    {
+      "ordinal": 111,
+      "id": "r174_order_bridge_boundary",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R174/premise_connective",
+        "/formal_contract_R174/quantification",
+        "/formal_contract_R174/bindings_required"
+      ]
+    },
+    {
+      "ordinal": 112,
+      "id": "r175_r173_target_boundary_effective",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations"
+      ]
+    },
+    {
+      "ordinal": 113,
+      "id": "r176_present_slice_effective",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/formal_contract_R176/connective",
+        "/formal_contract_R176/same_binding"
+      ]
+    },
+    {
+      "ordinal": 114,
+      "id": "r171_range_application_boundary_direct_effective",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/instance_obligations",
+        "/actual_application_status",
+        "/premise_mode",
+        "/may_infer"
+      ]
+    },
+    {
+      "ordinal": 115,
+      "id": "r171_range_application_boundary_reachable_effective",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/instance_obligations",
+        "/actual_application_status",
+        "/premise_mode",
+        "/may_infer"
+      ]
+    },
+    {
+      "ordinal": 116,
+      "id": "r172_witnessed_online_action_use_effective",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/instance_obligations",
+        "/actual_application_status",
+        "/premise_mode",
+        "/may_infer"
+      ]
+    },
+    {
+      "ordinal": 117,
+      "id": "r172_experience_internal_action_coordinate_effective",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/instance_obligations",
+        "/actual_application_status",
+        "/premise_mode",
+        "/may_infer"
+      ]
+    },
+    {
+      "ordinal": 118,
+      "id": "r172_bio_ai_application_boundary_effective",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/instance_obligations",
+        "/actual_application_status",
+        "/premise_mode",
+        "/may_infer"
+      ]
+    },
+    {
+      "ordinal": 119,
+      "id": "R187:r_allpolicy",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/binding",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/enabled_as_established_premise",
+        "/guard",
+        "/no_assumption_promotion"
+      ]
+    },
+    {
+      "ordinal": 120,
+      "id": "R187:r_diagonal",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/binding",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/enabled_as_established_premise",
+        "/guard",
+        "/no_assumption_promotion"
+      ]
+    },
+    {
+      "ordinal": 121,
+      "id": "R187:r_duration",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/binding",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/enabled_as_established_premise",
+        "/guard",
+        "/no_assumption_promotion"
+      ]
+    },
+    {
+      "ordinal": 122,
+      "id": "R187:r_selective",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/binding",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/enabled_as_established_premise",
+        "/guard",
+        "/no_assumption_promotion"
+      ]
+    },
+    {
+      "ordinal": 123,
+      "id": "R187:r_noise",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/binding",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/enabled_as_established_premise",
+        "/guard",
+        "/no_assumption_promotion"
+      ]
+    },
+    {
+      "ordinal": 124,
+      "id": "R187:r_tv",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/binding",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/enabled_as_established_premise",
+        "/guard",
+        "/no_assumption_promotion"
+      ]
+    },
+    {
+      "ordinal": 125,
+      "id": "R187:r_coupling",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/binding",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/enabled_as_established_premise",
+        "/guard",
+        "/no_assumption_promotion"
+      ]
+    },
+    {
+      "ordinal": 126,
+      "id": "R188:r_word",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/binding",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/enabled_as_established_premise"
+      ]
+    },
+    {
+      "ordinal": 127,
+      "id": "R188:r_score",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/binding",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/enabled_as_established_premise"
+      ]
+    },
+    {
+      "ordinal": 128,
+      "id": "R188:r_coins",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/binding",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/enabled_as_established_premise"
+      ]
+    },
+    {
+      "ordinal": 129,
+      "id": "R188:r_zero",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/binding",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/enabled_as_established_premise"
+      ]
+    },
+    {
+      "ordinal": 130,
+      "id": "R188:r_profile",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/binding",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/enabled_as_established_premise"
+      ]
+    },
+    {
+      "ordinal": 131,
+      "id": "R188:r_gap",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/binding",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/enabled_as_established_premise"
+      ]
+    },
+    {
+      "ordinal": 132,
+      "id": "R188:r_repair",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/binding",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/enabled_as_established_premise"
+      ]
+    },
+    {
+      "ordinal": 133,
+      "id": "R188:r_late",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/binding",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/enabled_as_established_premise"
+      ]
+    },
+    {
+      "ordinal": 134,
+      "id": "R188:r_nonsuff",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/binding",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/enabled_as_established_premise"
+      ]
+    },
+    {
+      "ordinal": 135,
+      "id": "R188:r_complete",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/binding",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/instance_obligations",
+        "/enabled_as_established_premise"
+      ]
+    },
+    {
+      "ordinal": 136,
+      "id": "R188:r_uct",
+      "previous_paths_read": [
+        "/id",
+        "/statement",
+        "/all_of",
+        "/conclusion",
+        "/same_instance_required",
+        "/binding",
+        "/alternative_route_semantics"
+      ],
+      "additional_paths_materialized": [
+        "/kind",
+        "/enabled_as_established_premise"
+      ]
+    }
+  ]
+}

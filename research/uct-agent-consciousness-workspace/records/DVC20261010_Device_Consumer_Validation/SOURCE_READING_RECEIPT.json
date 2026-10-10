@@ -1,0 +1,103 @@
+{
+  "schema": "uct-dvc-source-reading/1",
+  "date_utc": "2026-10-10",
+  "current_guide": "RESEARCH_MASTER_GUIDE.md v2.3",
+  "reading_is_not_proof_or_actuality": true,
+  "inherited_foundation_and_initial_root_read_scope": {
+    "path": "records/DVC20261010_Device_Consumer_Validation/sources/INHERITED_FOUNDATION_READING_RECEIPT.json",
+    "bytes": 9229,
+    "sha256": "fbab7ad4c5031bb33634c3e4b1fd90697d6827fa2ab9e647b21445d3a516c038"
+  },
+  "inherited_scope_rule": "Preserve the exact recorded foundation versions, hashes and read ranges. No claim that all four entire papers were freshly reread in this continuation.",
+  "current_root_delta_read_scope": "At 8bac, current state/coverage/memory and applicable root guidance were read as recorded in the continuation. At bd66, all 12 modified root-file patches were read; guide current navigation and policy front sections were read separately. All prior full-file bytes are preserved.",
+  "concurrent_CBI": {
+    "commit": "bd66a621949948d49788243e7fa8313f1256dfbb",
+    "root_complete_reads": [
+      "RESEARCH_NOTE.md",
+      "MAP_AUDIT.md",
+      "SOURCE_SCOPE.md",
+      "PUBLICATION_COVERAGE_UPDATE.json",
+      "CLAIM_LEDGER.json",
+      "EXACT_RESULTS.json",
+      "model.py"
+    ],
+    "remote_sync_receipt": {
+      "path": "records/DVC20261010_Device_Consumer_Validation/sources/CONCURRENT_CBI_SYNC_RECEIPT.json",
+      "bytes": 364,
+      "sha256": "5edc13c1510989cc17687af5feb174a2ecd48aa201e91285e552e205eb53f462"
+    },
+    "bibliographic_worker_review": "CONCURRENT_CBI_RECONCILIATION.md"
+  },
+  "primary_apparatus_sources_and_exact_worker_ranges": "apparatus_evidence/SOURCE_SCOPE.json",
+  "model_sources_and_range": "device_model/SOURCE_SCOPE.md",
+  "independent_scientific_read_scope": "review/SOURCE_READ_SCOPE.json",
+  "root_primary_additional_checks": [
+    {
+      "url": "https://link.springer.com/article/10.3758/s13414-026-03288-7",
+      "scope": "Published apparatus/methods, response model and selected results; exact dataset separately reanalyzed."
+    },
+    {
+      "url": "https://help.tobii.com/hc/en-us/articles/360012483818-Specifications-for-Eye-Tracker-5",
+      "scope": "Official specification; actual device/model correspondence not established."
+    },
+    {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/14656504/",
+      "scope": "Bibliographic tuple and complete indexed abstract, not full methods."
+    },
+    {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/16439427/",
+      "scope": "Bibliographic identity for position-sense correction; not claimed full-paper read."
+    },
+    {
+      "url": "https://link.springer.com/article/10.1007/s00221-024-06901-z",
+      "scope": "Official title/journal/volume/pages; not claimed new full methods read."
+    }
+  ],
+  "main_handoff_read_scope": {
+    "verified_at_start_version": 72,
+    "bytes": 681862,
+    "sha256": "f5e051af09b67b75bd409b2914b4adb08c296dd7d9ed958a56001071ab8b92da",
+    "scope": "New v72 prefix read; all preceding bytes materialized and preserved, not all historical prose freshly reread."
+  },
+  "public_SCU_release_verification": "../SCUPUB20261010_DOI_Publication/FINAL_PUBLICATION_RECEIPT.json",
+  "full_map_depth_status": "See MAP_AUDIT.md and per-ID exact omissions; historical deep fields and proof IDs remain OPEN.",
+  "pre_save_concurrent_receipt_commit": "79ec03184ce66ac2c1e44d0dc6ba88c3f774d33a",
+  "pre_save_main_handoff": {
+    "version": 73,
+    "bytes": 685815,
+    "sha256": "e39617af5a4979a50f2fefc436662f376317583016561c9df3ab9d681f031ef1",
+    "new_prefix_bytes": 3953,
+    "new_prefix_read_in_full": true,
+    "v72_preserved_as_exact_suffix": true
+  },
+  "last_concurrent_ref_detected": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+  "concurrent_EIP_scope": {
+    "root_modified_patches_read": 12,
+    "all_changed_files_downloaded_hash_verified": 33,
+    "root_full_EIP_files_read": [
+      "RESEARCH_NOTE.md",
+      "INSTRUMENT_CONTRACT.md",
+      "CLAIM_LEDGER.json",
+      "PUBLICATION_COVERAGE_UPDATE.json",
+      "MAP_AUDIT.md",
+      "GAP_LEDGER.md",
+      "FAILURES.md",
+      "HANDOFF_ZH.md"
+    ],
+    "full_historical_roots_reread": false,
+    "source_note": "Only the stated new deltas were read; no expanded read scope is inferred from hash validation."
+  },
+  "final_pre_save_parent": "afcafa88f457632cd29d4ca1c15cb840edc01781",
+  "main_handoff_last_verified": {
+    "version": 74,
+    "bytes": 690479,
+    "sha256": "e1c11fe8b2ca8ec9b67fa86c5dcdbb02e17a1f454f167e3399afeb5aa4b859b7",
+    "new_prefix_read_bytes": 4664,
+    "v73_exact_suffix_verified": true
+  },
+  "concurrent_EIP_independent_reading_receipt": "review/concurrent_eip/READING_RECEIPT.json",
+  "root_additional_review_read": [
+    "review/concurrent_eip/REVIEW.md",
+    "review/concurrent_eip/EIP_NORMALIZATION_QUALIFICATIONS.json"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "schema": "uct-publication-coverage-proposal/1",
+  "research_id": "DVC20261010",
+  "supplied_base_version": "UCT-PUB-v1.0.19",
+  "coverage_version_changed_by_this_worker": false,
+  "parent_must_reconcile_current_version": true,
+  "decision": "HOLD_STANDALONE_PAPER; retain disabled device-validation checkpoint",
+  "frozen_SCU_manuscript": "Do not add DVC during its separately authorized DOI/publication task. Parent controls SCU release status.",
+  "inherited_deductions": [
+    "MPC missing motor-only input cell and complete-table read ambiguity",
+    "SCU source ancestry, intake identity, probe and chronology limits",
+    "R173 actual retention; R174 fixed-route/internal-target timing; R187 overwrite and source-lineage bounds",
+    "Ordinary register, setup/hold and snapshot theory; manufacturer OpenHaptics frame behavior",
+    "Causal-isolation and C1/U1 conditional interpretation"
+  ],
+  "net_application": [
+    "Explicit gate-to-current-intake admission repair for the proposed two-input digital shadow",
+    "Exact stated aperture and same-episode latch/commit contract with nine finite implementation witnesses",
+    "Concrete boundary between read-only device validation and independent human endpoint intervention"
+  ],
+  "claims": "DVC20261010-C1 through C6; see CLAIM_LEDGER.json for inherited versus application status",
+  "paper_threshold_reason": "No new deployed instrument, no human neural consumer or experiential bridge, no new empirical endpoint evidence and no established worldwide priority. Useful reusable protocol application, not a demonstrated standalone theoretical breakthrough.",
+  "next_work": "Ground one actual accessible command/state/acquisition/read implementation and its timing before human bridge claims.",
+  "candidate_enabled": false,
+  "new_DVC_DOI_created": false,
+  "new_DVC_OTS_or_Arweave_actions": false
+}

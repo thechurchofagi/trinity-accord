@@ -1,0 +1,225 @@
+{
+  "schema": "uct-bounded-concurrent-reading-receipt/1",
+  "reviewed_at_utc": "2026-10-10T02:55:56.453671+00:00",
+  "eip_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+  "eip_commit_parent_from_run_receipt": "79ec03184ce66ac2c1e44d0dc6ba88c3f774d33a",
+  "eip_download_and_git_blob_verification": "Parent reports all 33 concurrent commit files downloaded and Git blob hashes checked. This worker independently hashes only the identified local review sources, not the remote commit.",
+  "eip_local_source_root": "/workspace/scratch/465328c0080c/workbench/doi20261010/concurrent_eip/files/research/uct-agent-consciousness-workspace/records/EIP20261010_Exoskeleton_Instrumentation",
+  "dvc_local_source_root": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/DVC20261010_Device_Consumer_Validation",
+  "eip_complete_reads": [
+    {
+      "file": "RESEARCH_NOTE.md",
+      "bytes": 7275,
+      "sha256": "ed46d1a7a7cfff43164d68f2823aed955c8b056a9886adc3922c1836b8139c74",
+      "scope": "Complete supplied file read in this reconciliation",
+      "external_references_opened_here": false
+    },
+    {
+      "file": "INSTRUMENT_CONTRACT.md",
+      "bytes": 4010,
+      "sha256": "58063165ca8e66081bd3ad81b44b0ef51d5da90dd9fa5e34749d9035f9cf2f26",
+      "scope": "Complete supplied file read in this reconciliation",
+      "external_references_opened_here": false
+    },
+    {
+      "file": "CLAIM_LEDGER.json",
+      "bytes": 3511,
+      "sha256": "1c6467bafedffbbebf87fc0fad839803747f82206dc217162dbf2018ee0dc939",
+      "scope": "Complete supplied file read in this reconciliation",
+      "external_references_opened_here": false
+    },
+    {
+      "file": "EXACT_RESULTS.json",
+      "bytes": 1941,
+      "sha256": "6a14ebf52d93bcd8e426c962351b8b75e808d0a5e639f525886728f3cf92460f",
+      "scope": "Complete supplied file read in this reconciliation",
+      "external_references_opened_here": false
+    },
+    {
+      "file": "model.py",
+      "bytes": 2863,
+      "sha256": "43ea2686f3db61653b472265dd2da33765906b52ef6370166668b4cd642e0f82",
+      "scope": "Complete supplied file read in this reconciliation",
+      "external_references_opened_here": false
+    },
+    {
+      "file": "MAP_AUDIT.md",
+      "bytes": 2508,
+      "sha256": "35bfd13d056664340db1e242b5bc9cebf08f9fce4b5ad829e6ec8945f534eed9",
+      "scope": "Complete supplied file read in this reconciliation",
+      "external_references_opened_here": false
+    },
+    {
+      "file": "GAP_LEDGER.md",
+      "bytes": 1439,
+      "sha256": "59212943cf860dcaf3330fd64a5c88e74e138a5864e8ff35b2d0e944adf12d29",
+      "scope": "Complete supplied file read in this reconciliation",
+      "external_references_opened_here": false
+    },
+    {
+      "file": "FAILURES.md",
+      "bytes": 693,
+      "sha256": "a4a10a69cb2720aeaa8aab5dead710d0a77d8b12abaa16b572eef00ba2b57a3c",
+      "scope": "Complete supplied file read in this reconciliation",
+      "external_references_opened_here": false
+    },
+    {
+      "file": "SOURCE_SCOPE.md",
+      "bytes": 1912,
+      "sha256": "eb035258b9d45597bb8dc165e5f70151cf04b43d432fa9e26bb039d79a2bb779",
+      "scope": "Complete supplied file read in this reconciliation",
+      "external_references_opened_here": false
+    },
+    {
+      "file": "MAP_COMPATIBILITY_AUDIT.json",
+      "bytes": 1175,
+      "sha256": "75ae4a38b61b500f2ce40681650bda036b7330805cae7adaa082d7d1272c0b6f",
+      "scope": "Complete supplied file read in this reconciliation",
+      "external_references_opened_here": false
+    },
+    {
+      "file": "REVIEW_RESPONSE.md",
+      "bytes": 1350,
+      "sha256": "f61a7c43150f203ccecc82e0187570b27a0b9949e55ab85c2a35ce1822dab119",
+      "scope": "Complete supplied file read in this reconciliation",
+      "external_references_opened_here": false
+    },
+    {
+      "file": "MAP_EXTENSION.json",
+      "bytes": 7661,
+      "sha256": "64a8b1f82bb92c6158f42a264b92541c7c0ce7cf27a289639d9a54f1301a8adc",
+      "scope": "Complete supplied file read in this reconciliation",
+      "external_references_opened_here": false
+    },
+    {
+      "file": "RUN_RECEIPT.json",
+      "bytes": 1048,
+      "sha256": "a9af31101275c2874cd7f052ca2893e311d1434767701673d1acc85676b99f4f",
+      "scope": "Complete supplied file read in this reconciliation",
+      "external_references_opened_here": false
+    },
+    {
+      "file": "PUBLICATION_COVERAGE_UPDATE.json",
+      "bytes": 577,
+      "sha256": "191a410088c4f6c6cbc6995842e2e8f4d7349cfc9573381185be48a1e60a3d17",
+      "scope": "Complete supplied file read in this reconciliation",
+      "external_references_opened_here": false
+    },
+    {
+      "file": "THOUGHT_EXPERIMENT_MATRIX.md",
+      "bytes": 1402,
+      "sha256": "ad4b7b8a897db2ef34b8f26669e44e3e2ce93f9dbb32be463099ca57e0ca3b1c",
+      "scope": "Complete supplied file read in this reconciliation",
+      "external_references_opened_here": false
+    }
+  ],
+  "eip_all_map_ids_read": [
+    "EIP:EPISODE_CONTRACT",
+    "EIP:TWO_LEVEL_EVIDENCE",
+    "EIP:C1",
+    "EIP:C2",
+    "EIP:C3",
+    "EIP:C4",
+    "EIP:R1",
+    "EIP:R2",
+    "EIP:R3",
+    "EIP:CTX1",
+    "EIP:CTX2",
+    "EIP:CTX3",
+    "EIP:CTX4",
+    "EIP:CTX5"
+  ],
+  "eip_files_not_read_in_this_reconciliation": [
+    "HANDOFF_ZH.md",
+    "README.md",
+    "ROUND_RECORD.md",
+    "WHOLE_MAP_COVERAGE.json.gz",
+    "WORK_LOG.md",
+    "validate_map.py"
+  ],
+  "dvc_complete_reads": [
+    {
+      "file": "MAP_EXTENSION.json",
+      "bytes": 36774,
+      "sha256": "c35c38d5046dcf3aa30646e2fd27237f53a75505922be9ae1854c15e90e8db29",
+      "scope": "Complete supplied file, including all 45 composite map objects for MAP_EXTENSION.json"
+    },
+    {
+      "file": "CLAIM_LEDGER.json",
+      "bytes": 15875,
+      "sha256": "87bc6007eefa765afe88cd76ac56849524aaaa2a800c46ea4673a3ccea7132d5",
+      "scope": "Complete supplied file, including all 45 composite map objects for MAP_EXTENSION.json"
+    },
+    {
+      "file": "EXACT_RESULTS.json",
+      "bytes": 1927,
+      "sha256": "a40ece2c4687636c6e6ca5958923020d063a767df1d9e27f776c30fdd693f37a",
+      "scope": "Complete supplied file, including all 45 composite map objects for MAP_EXTENSION.json"
+    },
+    {
+      "file": "EVIDENCE_CANDIDATE_ADDITION.json",
+      "bytes": 5004,
+      "sha256": "c2dc72bd756de37262016a429c596c722b68776858ffe0f8e50ad396125b0c8b",
+      "scope": "Complete supplied file, including all 45 composite map objects for MAP_EXTENSION.json"
+    }
+  ],
+  "dvc_partial_read_not_counted_complete": {
+    "file": "MAP_COMPATIBILITY_AUDIT.json",
+    "reason": "The combined tool output was truncated in the syntactic-closure list; no claim of complete file reading is made. Its 45 actual candidate objects were separately reread in full from MAP_EXTENSION.json."
+  },
+  "dvc_45_object_ids_read": [
+    "DVC20261010:DOMAIN",
+    "DVC20261010:EVENT_BUFFER_CONTRACT",
+    "DVC20261010:DESIGNATED_READ_CONTRACT",
+    "DVC20261010:GROUNDED_EPISODE_TARGETS",
+    "DVC20261010:CAPTURE_INTERVAL_DOMAIN",
+    "DVC20261010:RECTANGULAR_BOUNDS",
+    "DVC20261010:GATE_WRITER_VALIDITY",
+    "DVC20261010:PAIR_JOIN_GUARDS",
+    "DVC20261010:WITNESS_FAMILY",
+    "DVC20261010:CURRENT_CONSEQUENCE_CHAIN",
+    "DVC20261010:SHADOW_NO_OUTGOING",
+    "DVC20261010:FIXED_EXOGENOUS",
+    "DVC20261010:ACTUAL_BINDING",
+    "DVC20261010:TRANSPORT_CONTRACT",
+    "DVC20261010:H_BRIDGE",
+    "DVC20261010:C1",
+    "DVC20261010:C2",
+    "DVC20261010:C3",
+    "DVC20261010:C4",
+    "DVC20261010:C5",
+    "DVC20261010:C6",
+    "DVC20261010:PUBLIC_DATA_DOMAIN",
+    "DVC20261010:EXPLORATORY_ENDPOINT_REANALYSIS",
+    "DVC20261010:ACTUAL_ADMISSION_GAP",
+    "DVC20261010:r_C1",
+    "DVC20261010:r_C2",
+    "DVC20261010:r_C3",
+    "DVC20261010:r_C4",
+    "DVC20261010:r_C5",
+    "DVC20261010:r_C6",
+    "DVC20261010:ctx_axiom",
+    "DVC20261010:ctx_non_gate",
+    "DVC20261010:ctx_retention",
+    "DVC20261010:ctx_fixed_route",
+    "DVC20261010:ctx_mediator",
+    "DVC20261010:ctx_overwrite",
+    "DVC20261010:ctx_lineage",
+    "DVC20261010:ctx_port",
+    "DVC20261010:ctx_time",
+    "DVC20261010:ctx_transport",
+    "DVC20261010:ctx_selection",
+    "DVC20261010:ctx_report",
+    "DVC20261010:ctx_empirical_endpoint_tensor",
+    "DVC20261010:ctx_empirical_actual_contract",
+    "DVC20261010:ctx_empirical_semantic_bridge"
+  ],
+  "new_eip_primary_paper_full_reads": 0,
+  "new_broad_web_searches": 0,
+  "new_human_observations": 0,
+  "new_hardware_deployments": 0,
+  "proof_scope": "EIP finite arithmetic was independently checked and its copied model replayed. EIP C3/C4 prose/guards were semantically reviewed. DVC prior proof sources remain frozen and were not rerun/reconstructed in this task.",
+  "inherited_history_scope": "No historical 1608-item proof reconstruction; 1034 IDs/1828 deeper fields and 1347 proof IDs remain open. No full-map semantic completion claim.",
+  "eip_normalization_status": "4 OPEN nondeductive qualifications; not applied as replacements",
+  "completed_map_release": "UCT-MAP-v1.1.2 unchanged"
+}

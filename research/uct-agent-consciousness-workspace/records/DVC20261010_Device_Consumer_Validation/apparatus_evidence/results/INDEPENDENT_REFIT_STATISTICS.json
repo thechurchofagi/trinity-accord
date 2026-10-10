@@ -1,0 +1,1176 @@
+{
+  "all_endpoint_records": {
+    "pse": {
+      "cells": [
+        {
+          "condition": "Control",
+          "attention": "Start",
+          "n": 18,
+          "mean": 4.490407868364108,
+          "sd": 0.6321195163189557
+        },
+        {
+          "condition": "Control",
+          "attention": "End",
+          "n": 18,
+          "mean": 4.335124018483383,
+          "sd": 0.5236730683331408
+        },
+        {
+          "condition": "Active",
+          "attention": "Start",
+          "n": 18,
+          "mean": 3.9265687274194536,
+          "sd": 0.8253534702836431
+        },
+        {
+          "condition": "Active",
+          "attention": "End",
+          "n": 18,
+          "mean": 4.083103463861306,
+          "sd": 0.820523561247908
+        },
+        {
+          "condition": "Passive",
+          "attention": "Start",
+          "n": 18,
+          "mean": 3.5262710516465643,
+          "sd": 0.6783947111669574
+        },
+        {
+          "condition": "Passive",
+          "attention": "End",
+          "n": 18,
+          "mean": 3.7982577491939176,
+          "sd": 0.7916251771067271
+        }
+      ],
+      "within_movement": [
+        {
+          "contrast": "Control: Start - End",
+          "n": 18,
+          "mean_difference": 0.155283849880724,
+          "sd_difference": 0.6068140730692941,
+          "ci95_lower": -0.1464776893646297,
+          "ci95_upper": 0.45704538912607773,
+          "t": 1.0856926508381268,
+          "df": 17,
+          "p_two_sided": 0.2927712008745444,
+          "effect_dz": 0.255900211897346,
+          "p_Holm_family_3_within_movement": 0.6567444418178039
+        },
+        {
+          "contrast": "Active: Start - End",
+          "n": 18,
+          "mean_difference": -0.15653473644185215,
+          "sd_difference": 0.5202347956900513,
+          "ci95_lower": -0.41524141396232417,
+          "ci95_upper": 0.10217194107861985,
+          "t": -1.2765786665514962,
+          "df": 17,
+          "p_two_sided": 0.21891481393926795,
+          "effect_dz": -0.3008924772788812,
+          "p_Holm_family_3_within_movement": 0.6567444418178039
+        },
+        {
+          "contrast": "Passive: Start - End",
+          "n": 18,
+          "mean_difference": -0.27198669754735344,
+          "sd_difference": 0.9223090630460374,
+          "ci95_lower": -0.7306402042417017,
+          "ci95_upper": 0.1866668091469949,
+          "t": -1.2511444109185872,
+          "df": 17,
+          "p_two_sided": 0.22782662078628974,
+          "effect_dz": -0.29489756573472714,
+          "p_Holm_family_3_within_movement": 0.6567444418178039
+        }
+      ],
+      "interaction_pairs": [
+        {
+          "contrast": "(Passive Start - End) - (Active Start - End)",
+          "n": 18,
+          "mean_difference": -0.11545196110550128,
+          "sd_difference": 1.1435769291040847,
+          "ci95_lower": -0.6841393889142441,
+          "ci95_upper": 0.45323546670324155,
+          "t": -0.4283237752773263,
+          "df": 17,
+          "p_two_sided": 0.6737929719956777,
+          "effect_dz": -0.10095688201400678,
+          "p_Holm_family_3_interaction_pairs": 0.6737929719956777
+        },
+        {
+          "contrast": "(Passive Start - End) - (Control Start - End)",
+          "n": 18,
+          "mean_difference": -0.4272705474280774,
+          "sd_difference": 1.0693106122644724,
+          "ci95_lower": -0.9590262047354374,
+          "ci95_upper": 0.10448510987928256,
+          "t": -1.695256166108022,
+          "df": 17,
+          "p_two_sided": 0.10826337161080132,
+          "effect_dz": -0.3995757103010969,
+          "p_Holm_family_3_interaction_pairs": 0.32479011483240394
+        },
+        {
+          "contrast": "(Active Start - End) - (Control Start - End)",
+          "n": 18,
+          "mean_difference": -0.3118185863225762,
+          "sd_difference": 0.788335665621188,
+          "ci95_lower": -0.7038486898707759,
+          "ci95_upper": 0.08021151722562342,
+          "t": -1.678135696537009,
+          "df": 17,
+          "p_two_sided": 0.1116074254284265,
+          "effect_dz": -0.39554037692417643,
+          "p_Holm_family_3_interaction_pairs": 0.32479011483240394
+        }
+      ],
+      "marginal_contrasts": [
+        {
+          "contrast": "Active - Control averaged over attention",
+          "n": 18,
+          "mean_difference": -0.40792984778336505,
+          "sd_difference": 0.6070120913468786,
+          "ci95_lower": -0.7097898592014888,
+          "ci95_upper": -0.1060698363652412,
+          "t": -2.8511784103935884,
+          "df": 17,
+          "p_two_sided": 0.011046711696431564,
+          "effect_dz": -0.6720291961206626,
+          "p_Holm_family_3_marginal": 0.02209342339286313
+        },
+        {
+          "contrast": "Passive - Control averaged over attention",
+          "n": 18,
+          "mean_difference": -0.7505015430035038,
+          "sd_difference": 0.4164770184616015,
+          "ci95_lower": -0.9576106918002836,
+          "ci95_upper": -0.543392394206724,
+          "t": -7.645339937012728,
+          "df": 17,
+          "p_two_sided": 6.729550194941832e-07,
+          "effect_dz": -1.8020239046460107,
+          "p_Holm_family_3_marginal": 2.0188650584825495e-06
+        },
+        {
+          "contrast": "Active - Passive averaged over attention",
+          "n": 18,
+          "mean_difference": 0.3425716952201388,
+          "sd_difference": 0.569939895506427,
+          "ci95_lower": 0.059147253075212125,
+          "ci95_upper": 0.6259961373650655,
+          "t": 2.5501085708431486,
+          "df": 17,
+          "p_two_sided": 0.020705214937405854,
+          "effect_dz": 0.6010663544017086,
+          "p_Holm_family_3_marginal": 0.02209342339286313
+        }
+      ],
+      "ANOVA": {
+        "movement": {
+          "F": 17.590187366193025,
+          "df_numerator": 2,
+          "df_denominator": 34,
+          "p_uncorrected": 5.694192136059208e-06,
+          "GG_epsilon": 0.8566660264724963,
+          "p_GG": 2.1538430760192076e-05
+        },
+        "attention": {
+          "F": 0.9627191895982108,
+          "df_numerator": 1,
+          "df_denominator": 17,
+          "p_uncorrected": 0.34026119583132486,
+          "GG_epsilon": 1.0,
+          "p_GG": 0.34026119583132486
+        },
+        "movement_by_attention": {
+          "F": 1.7171280783086509,
+          "df_numerator": 2,
+          "df_denominator": 34,
+          "p_uncorrected": 0.1947892819138459,
+          "GG_epsilon": 0.8596918904138412,
+          "p_GG": 0.19984400538712116
+        }
+      }
+    },
+    "sigma": {
+      "cells": [
+        {
+          "condition": "Control",
+          "attention": "Start",
+          "n": 18,
+          "mean": 1.811212439637738,
+          "sd": 0.4991893953171947
+        },
+        {
+          "condition": "Control",
+          "attention": "End",
+          "n": 18,
+          "mean": 1.5948346353924077,
+          "sd": 0.46182988235072786
+        },
+        {
+          "condition": "Active",
+          "attention": "Start",
+          "n": 18,
+          "mean": 1.812906136038498,
+          "sd": 0.6539443122240807
+        },
+        {
+          "condition": "Active",
+          "attention": "End",
+          "n": 18,
+          "mean": 1.888476422963293,
+          "sd": 0.5251703651360559
+        },
+        {
+          "condition": "Passive",
+          "attention": "Start",
+          "n": 18,
+          "mean": 2.2808108226907393,
+          "sd": 0.9755333466918613
+        },
+        {
+          "condition": "Passive",
+          "attention": "End",
+          "n": 18,
+          "mean": 1.5978132733628512,
+          "sd": 0.596730180479342
+        }
+      ],
+      "within_movement": [
+        {
+          "contrast": "Control: Start - End",
+          "n": 18,
+          "mean_difference": 0.21637780424533076,
+          "sd_difference": 0.4929796237711211,
+          "ci95_lower": -0.028775195145936183,
+          "ci95_upper": 0.4615308036365977,
+          "t": 1.86217286032695,
+          "df": 17,
+          "p_two_sided": 0.0799558879245586,
+          "effect_dz": 0.43891835242624533,
+          "p_Holm_family_3_within_movement": 0.1599117758491172
+        },
+        {
+          "contrast": "Active: Start - End",
+          "n": 18,
+          "mean_difference": -0.07557028692479531,
+          "sd_difference": 0.43448015629596426,
+          "ci95_lower": -0.2916321855427271,
+          "ci95_upper": 0.14049161169313643,
+          "t": -0.7379337569240172,
+          "df": 17,
+          "p_two_sided": 0.4706193323503794,
+          "effect_dz": -0.173932654529146,
+          "p_Holm_family_3_within_movement": 0.4706193323503794
+        },
+        {
+          "contrast": "Passive: Start - End",
+          "n": 18,
+          "mean_difference": 0.6829975493278883,
+          "sd_difference": 0.7619867015143625,
+          "ci95_lower": 0.30407047736591925,
+          "ci95_upper": 1.0619246212898572,
+          "t": 3.802839585287226,
+          "df": 17,
+          "p_two_sided": 0.0014220525601161872,
+          "effect_dz": 0.8963378861737452,
+          "p_Holm_family_3_within_movement": 0.004266157680348562
+        }
+      ],
+      "interaction_pairs": [
+        {
+          "contrast": "(Passive Start - End) - (Active Start - End)",
+          "n": 18,
+          "mean_difference": 0.7585678362526835,
+          "sd_difference": 0.9463163118293709,
+          "ci95_lower": 0.28797580560607744,
+          "ci95_upper": 1.2291598668992896,
+          "t": 3.4009038265483977,
+          "df": 17,
+          "p_two_sided": 0.0034011194724800128,
+          "effect_dz": 0.8016007193052167,
+          "p_Holm_family_3_interaction_pairs": 0.010203358417440038
+        },
+        {
+          "contrast": "(Passive Start - End) - (Control Start - End)",
+          "n": 18,
+          "mean_difference": 0.4666197450825573,
+          "sd_difference": 1.024663768809354,
+          "ci95_lower": -0.04293355931080811,
+          "ci95_upper": 0.9761730494759228,
+          "t": 1.9320483227399288,
+          "df": 17,
+          "p_two_sided": 0.07019489749652674,
+          "effect_dz": 0.4553881568631663,
+          "p_Holm_family_3_interaction_pairs": 0.13140851731472594
+        },
+        {
+          "contrast": "(Active Start - End) - (Control Start - End)",
+          "n": 18,
+          "mean_difference": -0.291948091170126,
+          "sd_difference": 0.6296554771400401,
+          "ci95_lower": -0.6050683934317196,
+          "ci95_upper": 0.021172211091467663,
+          "t": -1.9671564769851213,
+          "df": 17,
+          "p_two_sided": 0.06570425865736297,
+          "effect_dz": -0.4636632281770727,
+          "p_Holm_family_3_interaction_pairs": 0.13140851731472594
+        }
+      ],
+      "marginal_contrasts": [
+        {
+          "contrast": "Active - Control averaged over attention",
+          "n": 18,
+          "mean_difference": 0.1476677419858225,
+          "sd_difference": 0.5816989175793522,
+          "ci95_lower": -0.14160432426379566,
+          "ci95_upper": 0.43693980823544065,
+          "t": 1.0770196598115886,
+          "df": 17,
+          "p_two_sided": 0.2965184810276059,
+          "effect_dz": 0.25385596830800095,
+          "p_Holm_family_3_marginal": 0.5930369620552118
+        },
+        {
+          "contrast": "Passive - Control averaged over attention",
+          "n": 18,
+          "mean_difference": 0.2362885105117224,
+          "sd_difference": 0.5250369528671335,
+          "ci95_lower": -0.024806223591097465,
+          "ci95_upper": 0.49738324461454225,
+          "t": 1.9093651277713721,
+          "df": 17,
+          "p_two_sided": 0.07324030389709658,
+          "effect_dz": 0.4500416765360854,
+          "p_Holm_family_3_marginal": 0.21972091169128977
+        },
+        {
+          "contrast": "Active - Passive averaged over attention",
+          "n": 18,
+          "mean_difference": -0.08862076852589985,
+          "sd_difference": 0.6310377687431569,
+          "ci95_lower": -0.4024284682298972,
+          "ci95_upper": 0.22518693117809752,
+          "t": -0.595821830158625,
+          "df": 17,
+          "p_two_sided": 0.5591442703987011,
+          "effect_dz": -0.14043655216138104,
+          "p_Holm_family_3_marginal": 0.5930369620552118
+        }
+      ],
+      "ANOVA": {
+        "movement": {
+          "F": 1.5202330084076705,
+          "df_numerator": 2,
+          "df_denominator": 34,
+          "p_uncorrected": 0.23315357298466077,
+          "GG_epsilon": 0.9578761294060067,
+          "p_GG": 0.23397716267646945
+        },
+        "attention": {
+          "F": 17.56755773071194,
+          "df_numerator": 1,
+          "df_denominator": 17,
+          "p_uncorrected": 0.0006129381759351158,
+          "GG_epsilon": 1.0,
+          "p_GG": 0.0006129381759351158
+        },
+        "movement_by_attention": {
+          "F": 6.751338740108375,
+          "df_numerator": 2,
+          "df_denominator": 34,
+          "p_uncorrected": 0.0033957372013581413,
+          "GG_epsilon": 0.7966657140334626,
+          "p_GG": 0.0067719667084206936
+        }
+      }
+    },
+    "jnd_75_minus_50": {
+      "cells": [
+        {
+          "condition": "Control",
+          "attention": "Start",
+          "n": 18,
+          "mean": 1.2216442259632938,
+          "sd": 0.33669813054802766
+        },
+        {
+          "condition": "Control",
+          "attention": "End",
+          "n": 18,
+          "mean": 1.0756996148298839,
+          "sd": 0.3114995219798282
+        },
+        {
+          "condition": "Active",
+          "attention": "Start",
+          "n": 18,
+          "mean": 1.22278660682555,
+          "sd": 0.4410787357941686
+        },
+        {
+          "condition": "Active",
+          "attention": "End",
+          "n": 18,
+          "mean": 1.2737579907757015,
+          "sd": 0.35422202839100336
+        },
+        {
+          "condition": "Passive",
+          "attention": "Start",
+          "n": 18,
+          "mean": 1.5383835220411965,
+          "sd": 0.6579872433181412
+        },
+        {
+          "condition": "Passive",
+          "attention": "End",
+          "n": 18,
+          "mean": 1.077708675610493,
+          "sd": 0.40248839036597417
+        }
+      ],
+      "within_movement": [
+        {
+          "contrast": "Control: Start - End",
+          "n": 18,
+          "mean_difference": 0.14594461113340979,
+          "sd_difference": 0.33250970328914187,
+          "ci95_lower": -0.01940857418582606,
+          "ci95_upper": 0.31129779645264566,
+          "t": 1.8621728603269494,
+          "df": 17,
+          "p_two_sided": 0.07995588792455877,
+          "effect_dz": 0.43891835242624516,
+          "p_Holm_family_3_within_movement": 0.15991177584911753
+        },
+        {
+          "contrast": "Active: Start - End",
+          "n": 18,
+          "mean_difference": -0.05097138395015141,
+          "sd_difference": 0.2930524120852195,
+          "ci95_lower": -0.19670291997585132,
+          "ci95_upper": 0.0947601520755485,
+          "t": -0.7379337569240172,
+          "df": 17,
+          "p_two_sided": 0.4706193323503794,
+          "effect_dz": -0.173932654529146,
+          "p_Holm_family_3_within_movement": 0.4706193323503794
+        },
+        {
+          "contrast": "Passive: Start - End",
+          "n": 18,
+          "mean_difference": 0.46067484643070333,
+          "sd_difference": 0.5139522199571587,
+          "ci95_lower": 0.20509242032054215,
+          "ci95_upper": 0.7162572725408645,
+          "t": 3.8028395852872254,
+          "df": 17,
+          "p_two_sided": 0.0014220525601161872,
+          "effect_dz": 0.8963378861737452,
+          "p_Holm_family_3_within_movement": 0.004266157680348562
+        }
+      ],
+      "interaction_pairs": [
+        {
+          "contrast": "(Passive Start - End) - (Active Start - End)",
+          "n": 18,
+          "mean_difference": 0.5116462303808548,
+          "sd_difference": 0.6382806527722698,
+          "ci95_lower": 0.19423672918575857,
+          "ci95_upper": 0.829055731575951,
+          "t": 3.4009038265483977,
+          "df": 17,
+          "p_two_sided": 0.0034011194724800128,
+          "effect_dz": 0.8016007193052168,
+          "p_Holm_family_3_interaction_pairs": 0.010203358417440038
+        },
+        {
+          "contrast": "(Passive Start - End) - (Control Start - End)",
+          "n": 18,
+          "mean_difference": 0.3147302352972935,
+          "sd_difference": 0.6911252094591969,
+          "ci95_lower": -0.028958245694575613,
+          "ci95_upper": 0.6584187162891626,
+          "t": 1.932048322739929,
+          "df": 17,
+          "p_two_sided": 0.07019489749652674,
+          "effect_dz": 0.4553881568631664,
+          "p_Holm_family_3_interaction_pairs": 0.13140851731472597
+        },
+        {
+          "contrast": "(Active Start - End) - (Control Start - End)",
+          "n": 18,
+          "mean_difference": -0.1969159950835612,
+          "sd_difference": 0.4246961654857802,
+          "ci95_lower": -0.4081124295373051,
+          "ci95_upper": 0.014280439370182668,
+          "t": -1.967156476985122,
+          "df": 17,
+          "p_two_sided": 0.06570425865736298,
+          "effect_dz": -0.46366322817707284,
+          "p_Holm_family_3_interaction_pairs": 0.13140851731472597
+        }
+      ],
+      "marginal_contrasts": [
+        {
+          "contrast": "Active - Control averaged over attention",
+          "n": 18,
+          "mean_difference": 0.09960037840403685,
+          "sd_difference": 0.3923499576074284,
+          "ci95_lower": -0.09551066529937252,
+          "ci95_upper": 0.2947114221074462,
+          "t": 1.0770196598115884,
+          "df": 17,
+          "p_two_sided": 0.29651848102760603,
+          "effect_dz": 0.2538559683080009,
+          "p_Holm_family_3_marginal": 0.5930369620552121
+        },
+        {
+          "contrast": "Passive - Control averaged over attention",
+          "n": 18,
+          "mean_difference": 0.15937417842925583,
+          "sd_difference": 0.3541320431830648,
+          "ci95_lower": -0.016731543553267503,
+          "ci95_upper": 0.33547990041177916,
+          "t": 1.9093651277713717,
+          "df": 17,
+          "p_two_sided": 0.0732403038970967,
+          "effect_dz": 0.4500416765360853,
+          "p_Holm_family_3_marginal": 0.2197209116912901
+        },
+        {
+          "contrast": "Active - Passive averaged over attention",
+          "n": 18,
+          "mean_difference": -0.059773800025218975,
+          "sd_difference": 0.42562850700386473,
+          "ci95_lower": -0.27143387700817523,
+          "ci95_upper": 0.1518862769577373,
+          "t": -0.5958218301586249,
+          "df": 17,
+          "p_two_sided": 0.5591442703987012,
+          "effect_dz": -0.140436552161381,
+          "p_Holm_family_3_marginal": 0.5930369620552121
+        }
+      ],
+      "ANOVA": {
+        "movement": {
+          "F": 1.5202330084076696,
+          "df_numerator": 2,
+          "df_denominator": 34,
+          "p_uncorrected": 0.2331535729846609,
+          "GG_epsilon": 0.9578761294060066,
+          "p_GG": 0.23397716267646967
+        },
+        "attention": {
+          "F": 17.567557730711943,
+          "df_numerator": 1,
+          "df_denominator": 17,
+          "p_uncorrected": 0.0006129381759351158,
+          "GG_epsilon": 1.0,
+          "p_GG": 0.0006129381759351158
+        },
+        "movement_by_attention": {
+          "F": 6.751338740108372,
+          "df_numerator": 2,
+          "df_denominator": 34,
+          "p_uncorrected": 0.0033957372013581504,
+          "GG_epsilon": 0.7966657140334628,
+          "p_GG": 0.006771966708420738
+        }
+      }
+    }
+  },
+  "active_available_timing_filter": {
+    "pse": {
+      "cells": [
+        {
+          "condition": "Control",
+          "attention": "Start",
+          "n": 18,
+          "mean": 4.490407868364108,
+          "sd": 0.6321195163189557
+        },
+        {
+          "condition": "Control",
+          "attention": "End",
+          "n": 18,
+          "mean": 4.335124018483383,
+          "sd": 0.5236730683331408
+        },
+        {
+          "condition": "Active",
+          "attention": "Start",
+          "n": 18,
+          "mean": 3.9256522006967773,
+          "sd": 0.8324653217336069
+        },
+        {
+          "condition": "Active",
+          "attention": "End",
+          "n": 18,
+          "mean": 4.136549785738938,
+          "sd": 0.7812515714137132
+        },
+        {
+          "condition": "Passive",
+          "attention": "Start",
+          "n": 18,
+          "mean": 3.5262710516465643,
+          "sd": 0.6783947111669574
+        },
+        {
+          "condition": "Passive",
+          "attention": "End",
+          "n": 18,
+          "mean": 3.7982577491939176,
+          "sd": 0.7916251771067271
+        }
+      ],
+      "within_movement": [
+        {
+          "contrast": "Control: Start - End",
+          "n": 18,
+          "mean_difference": 0.155283849880724,
+          "sd_difference": 0.6068140730692941,
+          "ci95_lower": -0.1464776893646297,
+          "ci95_upper": 0.45704538912607773,
+          "t": 1.0856926508381268,
+          "df": 17,
+          "p_two_sided": 0.2927712008745444,
+          "effect_dz": 0.255900211897346,
+          "p_Holm_family_3_within_movement": 0.45565324157257947
+        },
+        {
+          "contrast": "Active: Start - End",
+          "n": 18,
+          "mean_difference": -0.21089758504216072,
+          "sd_difference": 0.5426914858479244,
+          "ci95_lower": -0.48077171185087936,
+          "ci95_upper": 0.05897654176655792,
+          "t": -1.6487501618291562,
+          "df": 17,
+          "p_two_sided": 0.11755419761308059,
+          "effect_dz": -0.3886141399706047,
+          "p_Holm_family_3_within_movement": 0.35266259283924173
+        },
+        {
+          "contrast": "Passive: Start - End",
+          "n": 18,
+          "mean_difference": -0.27198669754735344,
+          "sd_difference": 0.9223090630460374,
+          "ci95_lower": -0.7306402042417017,
+          "ci95_upper": 0.1866668091469949,
+          "t": -1.2511444109185872,
+          "df": 17,
+          "p_two_sided": 0.22782662078628974,
+          "effect_dz": -0.29489756573472714,
+          "p_Holm_family_3_within_movement": 0.45565324157257947
+        }
+      ],
+      "interaction_pairs": [
+        {
+          "contrast": "(Passive Start - End) - (Active Start - End)",
+          "n": 18,
+          "mean_difference": -0.061089112505192694,
+          "sd_difference": 1.1394994815843016,
+          "ci95_lower": -0.627748873365576,
+          "ci95_upper": 0.5055706483551907,
+          "t": -0.22744999751486386,
+          "df": 17,
+          "p_two_sided": 0.8227867677554399,
+          "effect_dz": -0.05361047854120787,
+          "p_Holm_family_3_interaction_pairs": 0.8227867677554399
+        },
+        {
+          "contrast": "(Passive Start - End) - (Control Start - End)",
+          "n": 18,
+          "mean_difference": -0.4272705474280774,
+          "sd_difference": 1.0693106122644724,
+          "ci95_lower": -0.9590262047354374,
+          "ci95_upper": 0.10448510987928256,
+          "t": -1.695256166108022,
+          "df": 17,
+          "p_two_sided": 0.10826337161080132,
+          "effect_dz": -0.3995757103010969,
+          "p_Holm_family_3_interaction_pairs": 0.21652674322160265
+        },
+        {
+          "contrast": "(Active Start - End) - (Control Start - End)",
+          "n": 18,
+          "mean_difference": -0.36618143492288474,
+          "sd_difference": 0.7321315771923292,
+          "ci95_lower": -0.7302619028431749,
+          "ci95_upper": -0.0021009670025944893,
+          "t": -2.1219905042607285,
+          "df": 17,
+          "p_two_sided": 0.048832384260416715,
+          "effect_dz": -0.5001579583920743,
+          "p_Holm_family_3_interaction_pairs": 0.14649715278125014
+        }
+      ],
+      "marginal_contrasts": [
+        {
+          "contrast": "Active - Control averaged over attention",
+          "n": 18,
+          "mean_difference": -0.3816649502058874,
+          "sd_difference": 0.5883891221264811,
+          "ci95_lower": -0.6742639769061696,
+          "ci95_upper": -0.08906592350560527,
+          "t": -2.7520346411889878,
+          "df": 17,
+          "p_two_sided": 0.01360982266847783,
+          "effect_dz": -0.6486607856150068,
+          "p_Holm_family_3_marginal": 0.02721964533695566
+        },
+        {
+          "contrast": "Passive - Control averaged over attention",
+          "n": 18,
+          "mean_difference": -0.7505015430035038,
+          "sd_difference": 0.4164770184616015,
+          "ci95_lower": -0.9576106918002836,
+          "ci95_upper": -0.543392394206724,
+          "t": -7.645339937012728,
+          "df": 17,
+          "p_two_sided": 6.729550194941832e-07,
+          "effect_dz": -1.8020239046460107,
+          "p_Holm_family_3_marginal": 2.0188650584825495e-06
+        },
+        {
+          "contrast": "Active - Passive averaged over attention",
+          "n": 18,
+          "mean_difference": 0.3688365927976164,
+          "sd_difference": 0.5791380982387344,
+          "ci95_lower": 0.08083799204632697,
+          "ci95_upper": 0.6568351935489058,
+          "t": 2.702017256783114,
+          "df": 17,
+          "p_two_sided": 0.015111268285715261,
+          "effect_dz": 0.6368715750514711,
+          "p_Holm_family_3_marginal": 0.02721964533695566
+        }
+      ],
+      "ANOVA": {
+        "movement": {
+          "F": 17.787494494266802,
+          "df_numerator": 2,
+          "df_denominator": 34,
+          "p_uncorrected": 5.169375772928691e-06,
+          "GG_epsilon": 0.86677800086167,
+          "p_GG": 1.801707609199999e-05
+        },
+        "attention": {
+          "F": 1.2365294044083126,
+          "df_numerator": 1,
+          "df_denominator": 17,
+          "p_uncorrected": 0.28161987055693827,
+          "GG_epsilon": 1.0,
+          "p_GG": 0.28161987055693827
+        },
+        "movement_by_attention": {
+          "F": 1.9365504019908106,
+          "df_numerator": 2,
+          "df_denominator": 34,
+          "p_uncorrected": 0.15977797225951024,
+          "GG_epsilon": 0.8198493392060705,
+          "p_GG": 0.16882233836061367
+        }
+      }
+    },
+    "sigma": {
+      "cells": [
+        {
+          "condition": "Control",
+          "attention": "Start",
+          "n": 18,
+          "mean": 1.811212439637738,
+          "sd": 0.4991893953171947
+        },
+        {
+          "condition": "Control",
+          "attention": "End",
+          "n": 18,
+          "mean": 1.5948346353924077,
+          "sd": 0.46182988235072786
+        },
+        {
+          "condition": "Active",
+          "attention": "Start",
+          "n": 18,
+          "mean": 1.7660202274197472,
+          "sd": 0.6708234430306472
+        },
+        {
+          "condition": "Active",
+          "attention": "End",
+          "n": 18,
+          "mean": 1.836205343875785,
+          "sd": 0.5257645818766767
+        },
+        {
+          "condition": "Passive",
+          "attention": "Start",
+          "n": 18,
+          "mean": 2.2808108226907393,
+          "sd": 0.9755333466918613
+        },
+        {
+          "condition": "Passive",
+          "attention": "End",
+          "n": 18,
+          "mean": 1.5978132733628512,
+          "sd": 0.596730180479342
+        }
+      ],
+      "within_movement": [
+        {
+          "contrast": "Control: Start - End",
+          "n": 18,
+          "mean_difference": 0.21637780424533076,
+          "sd_difference": 0.4929796237711211,
+          "ci95_lower": -0.028775195145936183,
+          "ci95_upper": 0.4615308036365977,
+          "t": 1.86217286032695,
+          "df": 17,
+          "p_two_sided": 0.0799558879245586,
+          "effect_dz": 0.43891835242624533,
+          "p_Holm_family_3_within_movement": 0.1599117758491172
+        },
+        {
+          "contrast": "Active: Start - End",
+          "n": 18,
+          "mean_difference": -0.07018511645603794,
+          "sd_difference": 0.5503896166690275,
+          "ci95_lower": -0.34388743365944924,
+          "ci95_upper": 0.2035172007473734,
+          "t": -0.5410171661825764,
+          "df": 17,
+          "p_two_sided": 0.5955147287662581,
+          "effect_dz": -0.1275189689820097,
+          "p_Holm_family_3_within_movement": 0.5955147287662581
+        },
+        {
+          "contrast": "Passive: Start - End",
+          "n": 18,
+          "mean_difference": 0.6829975493278883,
+          "sd_difference": 0.7619867015143625,
+          "ci95_lower": 0.30407047736591925,
+          "ci95_upper": 1.0619246212898572,
+          "t": 3.802839585287226,
+          "df": 17,
+          "p_two_sided": 0.0014220525601161872,
+          "effect_dz": 0.8963378861737452,
+          "p_Holm_family_3_within_movement": 0.004266157680348562
+        }
+      ],
+      "interaction_pairs": [
+        {
+          "contrast": "(Passive Start - End) - (Active Start - End)",
+          "n": 18,
+          "mean_difference": 0.753182665783926,
+          "sd_difference": 0.9659094324904947,
+          "ci95_lower": 0.2728472054580852,
+          "ci95_upper": 1.2335181261097667,
+          "t": 3.3082640206221368,
+          "df": 17,
+          "p_two_sided": 0.004155291637392493,
+          "effect_dz": 0.7797653076457952,
+          "p_Holm_family_3_interaction_pairs": 0.01246587491217748
+        },
+        {
+          "contrast": "(Passive Start - End) - (Control Start - End)",
+          "n": 18,
+          "mean_difference": 0.4666197450825573,
+          "sd_difference": 1.024663768809354,
+          "ci95_lower": -0.04293355931080811,
+          "ci95_upper": 0.9761730494759228,
+          "t": 1.9320483227399288,
+          "df": 17,
+          "p_two_sided": 0.07019489749652674,
+          "effect_dz": 0.4553881568631663,
+          "p_Holm_family_3_interaction_pairs": 0.14038979499305348
+        },
+        {
+          "contrast": "(Active Start - End) - (Control Start - End)",
+          "n": 18,
+          "mean_difference": -0.2865629207013687,
+          "sd_difference": 0.755846409929193,
+          "ci95_lower": -0.6624364974950666,
+          "ci95_upper": 0.08931065609232924,
+          "t": -1.608506028230335,
+          "df": 17,
+          "p_two_sided": 0.12613641110027085,
+          "effect_dz": -0.3791285067137034,
+          "p_Holm_family_3_interaction_pairs": 0.14038979499305348
+        }
+      ],
+      "marginal_contrasts": [
+        {
+          "contrast": "Active - Control averaged over attention",
+          "n": 18,
+          "mean_difference": 0.09808924813269305,
+          "sd_difference": 0.5881057356546349,
+          "ci95_lower": -0.19436885379055963,
+          "ci95_upper": 0.3905473500559457,
+          "t": 0.7076234933051077,
+          "df": 17,
+          "p_two_sided": 0.48876762823792885,
+          "effect_dz": 0.16678845688098504,
+          "p_Holm_family_3_marginal": 0.7545078746522194
+        },
+        {
+          "contrast": "Passive - Control averaged over attention",
+          "n": 18,
+          "mean_difference": 0.2362885105117224,
+          "sd_difference": 0.5250369528671335,
+          "ci95_lower": -0.024806223591097465,
+          "ci95_upper": 0.49738324461454225,
+          "t": 1.9093651277713721,
+          "df": 17,
+          "p_two_sided": 0.07324030389709658,
+          "effect_dz": 0.4500416765360854,
+          "p_Holm_family_3_marginal": 0.21972091169128977
+        },
+        {
+          "contrast": "Active - Passive averaged over attention",
+          "n": 18,
+          "mean_difference": -0.13819926237902933,
+          "sd_difference": 0.6466850393293498,
+          "ci95_lower": -0.4597881666836309,
+          "ci95_upper": 0.18338964192557225,
+          "t": -0.9066698281859149,
+          "df": 17,
+          "p_two_sided": 0.3772539373261097,
+          "effect_dz": -0.21370412793583415,
+          "p_Holm_family_3_marginal": 0.7545078746522194
+        }
+      ],
+      "ANOVA": {
+        "movement": {
+          "F": 1.4637886096235049,
+          "df_numerator": 2,
+          "df_denominator": 34,
+          "p_uncorrected": 0.2455713712408565,
+          "GG_epsilon": 0.9466239404739692,
+          "p_GG": 0.24626978141300715
+        },
+        "attention": {
+          "F": 14.991719560347587,
+          "df_numerator": 1,
+          "df_denominator": 17,
+          "p_uncorrected": 0.0012240595106298158,
+          "GG_epsilon": 1.0,
+          "p_GG": 0.0012240595106298158
+        },
+        "movement_by_attention": {
+          "F": 6.110848527332476,
+          "df_numerator": 2,
+          "df_denominator": 34,
+          "p_uncorrected": 0.005404574580032465,
+          "GG_epsilon": 0.8972445876655927,
+          "p_GG": 0.007342205986718924
+        }
+      }
+    },
+    "jnd_75_minus_50": {
+      "cells": [
+        {
+          "condition": "Control",
+          "attention": "Start",
+          "n": 18,
+          "mean": 1.2216442259632938,
+          "sd": 0.33669813054802766
+        },
+        {
+          "condition": "Control",
+          "attention": "End",
+          "n": 18,
+          "mean": 1.0756996148298839,
+          "sd": 0.3114995219798282
+        },
+        {
+          "condition": "Active",
+          "attention": "Start",
+          "n": 18,
+          "mean": 1.1911625420335725,
+          "sd": 0.4524635365154168
+        },
+        {
+          "condition": "Active",
+          "attention": "End",
+          "n": 18,
+          "mean": 1.2385016836994884,
+          "sd": 0.35462282149194707
+        },
+        {
+          "condition": "Passive",
+          "attention": "Start",
+          "n": 18,
+          "mean": 1.5383835220411965,
+          "sd": 0.6579872433181412
+        },
+        {
+          "condition": "Passive",
+          "attention": "End",
+          "n": 18,
+          "mean": 1.077708675610493,
+          "sd": 0.40248839036597417
+        }
+      ],
+      "within_movement": [
+        {
+          "contrast": "Control: Start - End",
+          "n": 18,
+          "mean_difference": 0.14594461113340979,
+          "sd_difference": 0.33250970328914187,
+          "ci95_lower": -0.01940857418582606,
+          "ci95_upper": 0.31129779645264566,
+          "t": 1.8621728603269494,
+          "df": 17,
+          "p_two_sided": 0.07995588792455877,
+          "effect_dz": 0.43891835242624516,
+          "p_Holm_family_3_within_movement": 0.15991177584911753
+        },
+        {
+          "contrast": "Active: Start - End",
+          "n": 18,
+          "mean_difference": -0.047339141665915935,
+          "sd_difference": 0.3712321550576096,
+          "ci95_lower": -0.23194854922453356,
+          "ci95_upper": 0.1372702658927017,
+          "t": -0.5410171661825764,
+          "df": 17,
+          "p_two_sided": 0.5955147287662581,
+          "effect_dz": -0.1275189689820097,
+          "p_Holm_family_3_within_movement": 0.5955147287662581
+        },
+        {
+          "contrast": "Passive: Start - End",
+          "n": 18,
+          "mean_difference": 0.46067484643070333,
+          "sd_difference": 0.5139522199571587,
+          "ci95_lower": 0.20509242032054215,
+          "ci95_upper": 0.7162572725408645,
+          "t": 3.8028395852872254,
+          "df": 17,
+          "p_two_sided": 0.0014220525601161872,
+          "effect_dz": 0.8963378861737452,
+          "p_Holm_family_3_within_movement": 0.004266157680348562
+        }
+      ],
+      "interaction_pairs": [
+        {
+          "contrast": "(Passive Start - End) - (Active Start - End)",
+          "n": 18,
+          "mean_difference": 0.5080139880966192,
+          "sd_difference": 0.6514960118325527,
+          "ci95_lower": 0.18403264345112308,
+          "ci95_upper": 0.8319953327421155,
+          "t": 3.3082640206221385,
+          "df": 17,
+          "p_two_sided": 0.00415529163739248,
+          "effect_dz": 0.7797653076457954,
+          "p_Holm_family_3_interaction_pairs": 0.01246587491217744
+        },
+        {
+          "contrast": "(Passive Start - End) - (Control Start - End)",
+          "n": 18,
+          "mean_difference": 0.3147302352972935,
+          "sd_difference": 0.6911252094591969,
+          "ci95_lower": -0.028958245694575613,
+          "ci95_upper": 0.6584187162891626,
+          "t": 1.932048322739929,
+          "df": 17,
+          "p_two_sided": 0.07019489749652674,
+          "effect_dz": 0.4553881568631664,
+          "p_Holm_family_3_interaction_pairs": 0.14038979499305348
+        },
+        {
+          "contrast": "(Active Start - End) - (Control Start - End)",
+          "n": 18,
+          "mean_difference": -0.19328375279932575,
+          "sd_difference": 0.5098106562197466,
+          "ci95_lower": -0.44680662771621477,
+          "ci95_upper": 0.06023912211756327,
+          "t": -1.608506028230335,
+          "df": 17,
+          "p_two_sided": 0.12613641110027085,
+          "effect_dz": -0.3791285067137034,
+          "p_Holm_family_3_interaction_pairs": 0.14038979499305348
+        }
+      ],
+      "marginal_contrasts": [
+        {
+          "contrast": "Active - Control averaged over attention",
+          "n": 18,
+          "mean_difference": 0.06616019246994158,
+          "sd_difference": 0.3966712907305775,
+          "ci95_lower": -0.1310997996390933,
+          "ci95_upper": 0.2634201845789765,
+          "t": 0.7076234933051073,
+          "df": 17,
+          "p_two_sided": 0.4887676282379289,
+          "effect_dz": 0.16678845688098498,
+          "p_Holm_family_3_marginal": 0.754507874652219
+        },
+        {
+          "contrast": "Passive - Control averaged over attention",
+          "n": 18,
+          "mean_difference": 0.15937417842925583,
+          "sd_difference": 0.3541320431830648,
+          "ci95_lower": -0.016731543553267503,
+          "ci95_upper": 0.33547990041177916,
+          "t": 1.9093651277713717,
+          "df": 17,
+          "p_two_sided": 0.0732403038970967,
+          "effect_dz": 0.4500416765360853,
+          "p_Holm_family_3_marginal": 0.2197209116912901
+        },
+        {
+          "contrast": "Active - Passive averaged over attention",
+          "n": 18,
+          "mean_difference": -0.09321398595931427,
+          "sd_difference": 0.4361824306327964,
+          "ci95_lower": -0.31012240568955657,
+          "ci95_upper": 0.12369443377092804,
+          "t": -0.9066698281859153,
+          "df": 17,
+          "p_two_sided": 0.3772539373261095,
+          "effect_dz": -0.21370412793583424,
+          "p_Holm_family_3_marginal": 0.754507874652219
+        }
+      ],
+      "ANOVA": {
+        "movement": {
+          "F": 1.4637886096235038,
+          "df_numerator": 2,
+          "df_denominator": 34,
+          "p_uncorrected": 0.24557137124085673,
+          "GG_epsilon": 0.9466239404739694,
+          "p_GG": 0.24626978141300726
+        },
+        "attention": {
+          "F": 14.991719560347592,
+          "df_numerator": 1,
+          "df_denominator": 17,
+          "p_uncorrected": 0.0012240595106298136,
+          "GG_epsilon": 1.0,
+          "p_GG": 0.0012240595106298136
+        },
+        "movement_by_attention": {
+          "F": 6.110848527332476,
+          "df_numerator": 2,
+          "df_denominator": 34,
+          "p_uncorrected": 0.005404574580032465,
+          "GG_epsilon": 0.8972445876655929,
+          "p_GG": 0.007342205986718932
+        }
+      }
+    }
+  }
+}

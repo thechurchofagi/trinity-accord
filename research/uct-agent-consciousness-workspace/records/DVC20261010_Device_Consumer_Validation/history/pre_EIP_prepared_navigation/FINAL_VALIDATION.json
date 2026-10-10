@@ -1,0 +1,48 @@
+{
+  "schema": "uct-final-packaging-validation/1",
+  "observed_at_utc": "2026-10-10T02:34:11.658937+00:00",
+  "status": "PASS_WITH_EXPLICIT_SCIENTIFIC_SCOPE",
+  "component_checks": [
+    {
+      "component_manifest": "device_model/ARTIFACT_MANIFEST.json",
+      "files_verified": 20,
+      "sha256": "36123e3346af20d3c1bfcec7425b43df4dd663e332730c29e6e65844f064867a"
+    },
+    {
+      "component_manifest": "apparatus_evidence/COPY_MANIFEST.json",
+      "files_verified": 21,
+      "sha256": "52ae086c91a5552688b1f3ba985d7371b09124a577096deb4e56ca90c72a356e"
+    },
+    {
+      "component_manifest": "review/ARTIFACT_MANIFEST.json",
+      "files_verified": 48,
+      "sha256": "65bbbb6f90e4fd9a96f1263b0d0f481e0db241d3f1ce6c28a7aa0df1a36eda1b"
+    },
+    {
+      "component_manifest": "review/followup_nodes/ARTIFACT_MANIFEST.json",
+      "files_verified": 22,
+      "sha256": "90c24458472cbdce4100c691bdaf16a77554e209e07888e9948f84c319d807a9"
+    },
+    {
+      "component_manifest": "review/followup_rules/ARTIFACT_MANIFEST.json",
+      "files_verified": 54,
+      "sha256": "6d811a49d359bfa186889d850aa9bfc1369baa5c03f954aa771d7a5743cc0c4f"
+    }
+  ],
+  "public_release_files_hash_verified": 9,
+  "final_coverage_delta_sha256": "e3c76a81c2a5779014038e0806f78b416f25ac45d11d8441dabf55a08a7903c8",
+  "root_navigation_consistent": true,
+  "pending_disabled_count": 24,
+  "new_local_markdown_links_checked": 69,
+  "source_history_preserved": true,
+  "model_and_data_reproduction": "Previously completed; receipts preserved; no optional rerun in this packaging check.",
+  "full_map_semantic_proof_completed": false,
+  "new_hardware_or_human_data": false,
+  "root_navigation_files_preserved_and_updated": 16,
+  "stale_entry_pages_repaired": [
+    "START_HERE.md",
+    "README.md"
+  ],
+  "independent_internal_navigation_review": "NAVIGATION_REVIEW.md",
+  "navigation_review_status": "PASS_WITH_SCOPE"
+}

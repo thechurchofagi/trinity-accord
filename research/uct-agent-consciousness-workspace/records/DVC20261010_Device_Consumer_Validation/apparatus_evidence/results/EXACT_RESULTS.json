@@ -1,0 +1,206 @@
+{
+  "analysis_id": "APPARATUS20261010",
+  "status": "PUBLIC_HUMAN_DATA_REANALYSED; NO_NEW_HARDWARE_OR_HUMAN_EXPERIMENT",
+  "source_doi": "10.5281/zenodo.18877381",
+  "source_zip_sha256": "ed89e94719e87acc19cd905efd7ff44d09abce0e0291f2fd654b0453bfdfbd6a",
+  "analysis_code_sha256": "3c60cdf9787198b4a8a63fb9836f4b7d63ec8cc0f34698183bab7442bfe1f3d3",
+  "runtime": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0"
+  },
+  "trial_csv_count": 121,
+  "archived_subject_count": 21,
+  "included_subject_count": 18,
+  "included_subject_ids": [
+    "AD21",
+    "EM12",
+    "FE38",
+    "FS98",
+    "HF26",
+    "HG15",
+    "JA13",
+    "KC21",
+    "LT68",
+    "OW21",
+    "PA13",
+    "PA19",
+    "PQ91",
+    "PS73",
+    "SW73",
+    "TP97",
+    "ZO41",
+    "ZY12"
+  ],
+  "explicit_source_exclusions": [
+    "HN77",
+    "JD14",
+    "JN98"
+  ],
+  "nonempty_trial_records_all": 10875,
+  "nonempty_trial_records_included": 9705,
+  "valid_command_records_included": 9704,
+  "out_of_declared_command_records_all": 22,
+  "out_of_declared_command_records_included": 1,
+  "out_of_declared_command_locators": [
+    {
+      "file": "Control/Start/JD14_Cec.csv",
+      "line": 91,
+      "command": 0,
+      "included_subject": false
+    },
+    {
+      "file": "Passive/End/HN77_Pes.csv",
+      "line": 88,
+      "command": 0,
+      "included_subject": false
+    },
+    {
+      "file": "Passive/End/HN77_Pes.csv",
+      "line": 89,
+      "command": 0,
+      "included_subject": false
+    },
+    {
+      "file": "Passive/End/HN77_Pes.csv",
+      "line": 90,
+      "command": 0,
+      "included_subject": false
+    },
+    {
+      "file": "Passive/End/HN77_Pes.csv",
+      "line": 91,
+      "command": 0,
+      "included_subject": false
+    },
+    {
+      "file": "Passive/End/JD14_Pes.csv",
+      "line": 89,
+      "command": 0,
+      "included_subject": false
+    },
+    {
+      "file": "Passive/End/JD14_Pes.csv",
+      "line": 90,
+      "command": 0,
+      "included_subject": false
+    },
+    {
+      "file": "Passive/End/JD14_Pes.csv",
+      "line": 91,
+      "command": 0,
+      "included_subject": false
+    },
+    {
+      "file": "Passive/Start/HN77_Pec.csv",
+      "line": 80,
+      "command": 0,
+      "included_subject": false
+    },
+    {
+      "file": "Passive/Start/HN77_Pec.csv",
+      "line": 81,
+      "command": 0,
+      "included_subject": false
+    },
+    {
+      "file": "Passive/Start/HN77_Pec.csv",
+      "line": 82,
+      "command": 0,
+      "included_subject": false
+    },
+    {
+      "file": "Passive/Start/HN77_Pec.csv",
+      "line": 83,
+      "command": 0,
+      "included_subject": false
+    },
+    {
+      "file": "Passive/Start/HN77_Pec.csv",
+      "line": 84,
+      "command": 0,
+      "included_subject": false
+    },
+    {
+      "file": "Passive/Start/HN77_Pec.csv",
+      "line": 85,
+      "command": 0,
+      "included_subject": false
+    },
+    {
+      "file": "Passive/Start/HN77_Pec.csv",
+      "line": 86,
+      "command": 0,
+      "included_subject": false
+    },
+    {
+      "file": "Passive/Start/HN77_Pec.csv",
+      "line": 87,
+      "command": 0,
+      "included_subject": false
+    },
+    {
+      "file": "Passive/Start/HN77_Pec.csv",
+      "line": 88,
+      "command": 0,
+      "included_subject": false
+    },
+    {
+      "file": "Passive/Start/HN77_Pec.csv",
+      "line": 89,
+      "command": 0,
+      "included_subject": false
+    },
+    {
+      "file": "Passive/Start/HN77_Pec.csv",
+      "line": 90,
+      "command": 0,
+      "included_subject": false
+    },
+    {
+      "file": "Passive/Start/HN77_Pec.csv",
+      "line": 91,
+      "command": 0,
+      "included_subject": false
+    },
+    {
+      "file": "Passive/Start/JD14_Pec.csv",
+      "line": 91,
+      "command": 0,
+      "included_subject": false
+    },
+    {
+      "file": "Passive/Start/TP97_Pec.csv",
+      "line": 91,
+      "command": 0,
+      "included_subject": true
+    }
+  ],
+  "blank_lines": 5,
+  "raw_field_count_mismatch_records": 8985,
+  "conditionally_reconstructed_clock_records": 8985,
+  "source_duration_nan_records": 242,
+  "psychometric_parameter_cells": 108,
+  "independent_fit_runs": 216,
+  "optimizer_successful_runs": 216,
+  "fits_at_parameter_bound": 0,
+  "max_multistart_objective_spread": 5.510640832540048e-10,
+  "available_filter_removed_records": 341,
+  "archived_jnd_over_independent_unfiltered_sigma": {
+    "min": 0.6866973994086321,
+    "median": 0.7325567591011523,
+    "max": 0.8023325737656484
+  },
+  "max_abs_unfiltered_pse_difference_from_archive": 0.5249982148541861,
+  "limits": [
+    "The source anamax.m dependency and experiment-control C#/Arduino code were not in the cited fitting repository.",
+    "InputValue=1 is interpreted as comparison stronger, consistent with increasing command-response functions and the documented coding convention.",
+    "The first three source fields support psychometric refitting without any time-column reconstruction.",
+    "A recorded command zero is outside the declared 1–9 stimulus set and is excluded from independent endpoint fits; all such source rows remain in the audit.",
+    "No source gaze, continuous trajectory, physical actuator onset, EMG, efference-copy or neural-consumer intake stream was provided.",
+    "The source time columns have unquoted decimal commas and unvalidated units/trigger semantics.",
+    "The sensitivity filter uses available Active latency/duration only, not absent path curvature or gaze.",
+    "Fitted sigma, Phi^-1(.75)*sigma and archived JND are retained as separate named quantities.",
+    "No equality/equivalence, anatomical OR gate, M/P consumer intervention or familiar feeling is established by these tests."
+  ]
+}

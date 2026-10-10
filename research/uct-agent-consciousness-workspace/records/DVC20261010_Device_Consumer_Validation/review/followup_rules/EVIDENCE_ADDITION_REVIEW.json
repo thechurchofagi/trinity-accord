@@ -1,0 +1,209 @@
+{
+  "schema": "uct-dvc-independent-evidence-addition-review/1",
+  "source_file_sha256": "c2dc72bd756de37262016a429c596c722b68776858ffe0f8e50ad396125b0c8b",
+  "assembled_map_sha256_at_review": "c35c38d5046dcf3aa30646e2fd27237f53a75505922be9ae1854c15e90e8db29",
+  "counts": {
+    "new_empirical_nodes": 3,
+    "new_nondeductive_contexts": 3,
+    "new_rules": 0,
+    "assembled_nodes": 24,
+    "assembled_rules": 6,
+    "assembled_contexts": 15
+  },
+  "items": [
+    {
+      "id": "DVC20261010:PUBLIC_DATA_DOMAIN",
+      "item_type": "nodes",
+      "source_record_sha256": "0c15ca5eaf1622e5815bc5aa2130591c9947ed739d68e132a7d8c3fd97b6c369",
+      "read_scope": "ENTIRE_SERIALIZED_RECORD",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/kind",
+        "/statement",
+        "/scope",
+        "/quantifier",
+        "/evidence/0",
+        "/evidence/1",
+        "/evidence/2",
+        "/status",
+        "/enabled_as_established_premise",
+        "/actual_consumer_application_established"
+      ],
+      "assessment": "The archive, exclusions and exact analysis specifications are frozen. The 18 participants, 9704 in-range command records, 108 cells and 216 fits are different denominators. These describe a public-data reanalysis rather than new collected observations; actual consumer application remains false.",
+      "decision": "RETAIN_AS_DISABLED_EVIDENCE_OR_NONDEDUCTIVE_CONTEXT",
+      "blocking_issue": null
+    },
+    {
+      "id": "DVC20261010:EXPLORATORY_ENDPOINT_REANALYSIS",
+      "item_type": "nodes",
+      "source_record_sha256": "c415898558871282018cbb0a5bc90f897f44cfbfc8d688b31ce0ddc2993ad2d6",
+      "read_scope": "ENTIRE_SERIALIZED_RECORD",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/kind",
+        "/claim_id",
+        "/statement",
+        "/scope",
+        "/quantifier",
+        "/evidence/0",
+        "/evidence/1",
+        "/evidence/2",
+        "/status",
+        "/enabled_as_established_premise",
+        "/actual_consumer_application_established"
+      ],
+      "assessment": "The stated 0.68299755 passive Start-minus-End sigma matches the frozen independent reanalysis. PSE means the model-dependent 0.5 crossing; physical response-code orientation remains unverified. Independent sigma and source-labelled JND remain separate. Paired-t/Holm results are explicitly exploratory and not distribution-free coverage, an installed intake contrast or H evidence.",
+      "decision": "RETAIN_AS_DISABLED_EVIDENCE_OR_NONDEDUCTIVE_CONTEXT",
+      "blocking_issue": null
+    },
+    {
+      "id": "DVC20261010:ACTUAL_ADMISSION_GAP",
+      "item_type": "nodes",
+      "source_record_sha256": "7d1d39a924e5707083677b2ca6efe81188d14385aaabde12072fd121834210d6",
+      "read_scope": "ENTIRE_SERIALIZED_RECORD",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/kind",
+        "/claim_id",
+        "/statement",
+        "/scope",
+        "/quantifier",
+        "/evidence/0",
+        "/evidence/1",
+        "/evidence/2",
+        "/status",
+        "/enabled_as_established_premise",
+        "/actual_consumer_application_established"
+      ],
+      "assessment": "This is a bounded statement about the inspected sources, not impossibility of an experiment. Parsed time-bearing rows do not identify physical onset. Every token, consumer, clock, capture/read and consequence clause must hold in one installation/episode, and device M_D/P_E are not identified human neural inputs.",
+      "decision": "RETAIN_AS_DISABLED_EVIDENCE_OR_NONDEDUCTIVE_CONTEXT",
+      "blocking_issue": null
+    },
+    {
+      "id": "DVC20261010:ctx_empirical_endpoint_tensor",
+      "item_type": "context_links",
+      "source_record_sha256": "561e52beef0d933a04975e2188ad215cdd1898247b59c454e85e4d773dbeefe0",
+      "read_scope": "ENTIRE_SERIALIZED_RECORD",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/from",
+        "/to",
+        "/type",
+        "/statement",
+        "/deductive",
+        "/enabled_as_established_premise"
+      ],
+      "assessment": "An explicitly nondeductive connection to the separately typed, disabled MPC endpoint tensor; it neither equates precision with response location nor identifies agency/ownership.",
+      "decision": "RETAIN_AS_DISABLED_EVIDENCE_OR_NONDEDUCTIVE_CONTEXT",
+      "blocking_issue": null
+    },
+    {
+      "id": "DVC20261010:ctx_empirical_actual_contract",
+      "item_type": "context_links",
+      "source_record_sha256": "fa94ef4f8d124799d0916255688c58637b4c2d56d36b2857cb231866bee59837",
+      "read_scope": "ENTIRE_SERIALIZED_RECORD",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/from",
+        "/to",
+        "/type",
+        "/statement",
+        "/deductive",
+        "/enabled_as_established_premise"
+      ],
+      "assessment": "An explicitly nondeductive statement of the unfilled same-instance actual-consumer contract; it creates no rule applying empirical fits to hardware validity.",
+      "decision": "RETAIN_AS_DISABLED_EVIDENCE_OR_NONDEDUCTIVE_CONTEXT",
+      "blocking_issue": null
+    },
+    {
+      "id": "DVC20261010:ctx_empirical_semantic_bridge",
+      "item_type": "context_links",
+      "source_record_sha256": "dee83d5cdf92efc63eefca02bc4ebcd5828341cef78eee1b66a380b7e560cafe",
+      "read_scope": "ENTIRE_SERIALIZED_RECORD",
+      "exact_leaf_paths_read": [
+        "/id",
+        "/from",
+        "/to",
+        "/type",
+        "/statement",
+        "/deductive",
+        "/enabled_as_established_premise"
+      ],
+      "assessment": "An explicitly nondeductive nonidentification context: a fitted comparison response is not familiar mineness, conceptual self, RetBind or a validated target bridge.",
+      "decision": "RETAIN_AS_DISABLED_EVIDENCE_OR_NONDEDUCTIVE_CONTEXT",
+      "blocking_issue": null
+    }
+  ],
+  "scientific_blocking_issues": [],
+  "nonblocking_clarification": "If edited later, Pr(InputValue=1 | command=x)=0.5 would make the covariate explicit in the PSE sentence; the current fitted-location wording is already scoped and scientifically acceptable.",
+  "original_39_items": {
+    "scope": "Alias/preservation verification against the independently reviewed frozen component; no duplicate new scientific credit.",
+    "unchanged_nodes": 21,
+    "unchanged_contexts": 12,
+    "rules_changed_only_in_proof_location": [
+      {
+        "id": "DVC20261010:r_C1",
+        "changed_fields": {
+          "proof_location": {
+            "old": "RESEARCH_NOTE.md section 3; induction on buffer-changing events; 720-schedule independent order predicate",
+            "new": "device_model/RESEARCH_NOTE.md section 3; induction on buffer-changing events; 720-schedule independent order predicate"
+          }
+        }
+      },
+      {
+        "id": "DVC20261010:r_C2",
+        "changed_fields": {
+          "proof_location": {
+            "old": "RESEARCH_NOTE.md section 4; extremal-bound proof, 4896 finite parameter/sample checks and 400 ordered safe-window pairs",
+            "new": "device_model/RESEARCH_NOTE.md section 4; extremal-bound proof, 4896 finite parameter/sample checks and 400 ordered safe-window pairs"
+          }
+        }
+      },
+      {
+        "id": "DVC20261010:r_C3",
+        "changed_fields": {
+          "proof_location": {
+            "old": "RESEARCH_NOTE.md section 5; EXACT_RESULTS.json witnesses",
+            "new": "device_model/RESEARCH_NOTE.md section 5; device_model/EXACT_RESULTS.json witnesses"
+          }
+        }
+      },
+      {
+        "id": "DVC20261010:r_C4",
+        "changed_fields": {
+          "proof_location": {
+            "old": "RESEARCH_NOTE.md section 6; transitivity; 108 finite chronology instances",
+            "new": "device_model/RESEARCH_NOTE.md section 6; transitivity; 108 finite chronology instances"
+          }
+        }
+      },
+      {
+        "id": "DVC20261010:r_C5",
+        "changed_fields": {
+          "proof_location": {
+            "old": "RESEARCH_NOTE.md section 7; induction on endpoint causal ancestors, without synthetic human endpoint generation",
+            "new": "device_model/RESEARCH_NOTE.md section 7; induction on endpoint causal ancestors, without synthetic human endpoint generation"
+          }
+        }
+      },
+      {
+        "id": "DVC20261010:r_C6",
+        "changed_fields": {
+          "proof_location": {
+            "old": "RESEARCH_NOTE.md section 8; inherited C1 direction, not an empirical test",
+            "new": "device_model/RESEARCH_NOTE.md section 8; inherited C1 direction, not an empirical test"
+          }
+        }
+      }
+    ]
+  },
+  "concurrent_CBI": {
+    "remote_commit_supplied_by_parent": "bd66a621949948d49788243e7fa8313f1256dfbb",
+    "note_sha256": "183e2ae49a3c8f2cb3bfb520675ecf73a05d31d9bda876ce08c27c37e31a3746",
+    "actual_read_scope": "RESEARCH_NOTE.md in full, all eight sections; no new rereview of the external primary studies or CBI proofs.",
+    "net_increment_deduction": "CBI already supplies consumer-relative P=0, the transduction/delivery/read branch-cut boundary, matched-world-output versus complete-organization distinction and source-constrained human feasibility. None is newly credited to DVC. DVC retains event admission, buffers/capture/commit/read, interval/deadline contracts and its explicitly exploratory reanalysis."
+  },
+  "actual_consumer_application_established": false,
+  "phenomenal_bridge_established": false,
+  "publication_of_new_DVC_paper_recommended": false
+}

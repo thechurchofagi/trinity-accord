@@ -1,0 +1,242 @@
+FIELDS
+F1=/scope
+F2=/formal_contract_R153/quantifier_convention
+F3=LEDGER/semantic_review/assessment/targeted_item_assessment
+F5=/domain
+F6=/counterexamples_and_limits
+NEW EXACT VALUES (old V references retain already-read meanings)
+V39="R133 finite persistent model and joint action/output kernels, sufficient state including resources/clock, common enabled actions, closed goal and fixed finite horizon. Same observable policy across all initial model/state pairs; private randomness independent of the hidden mechanism, retained memory permitted. Nature cannot choose after seeing the private seed. No actual complete-type or experience inference. Positive-mass mixture columns must all be one to attain an all-one vector."
+V40="R133 finite persistent model and joint action/output kernels, sufficient state including resources/clock, common enabled actions, closed goal and fixed finite horizon. Same observable policy across all initial model/state pairs; private randomness independent of the hidden mechanism, retained memory permitted. Nature cannot choose after seeing the private seed. No actual complete-type or experience inference."
+V41="R133 finite persistent model and joint action/output kernels, sufficient state including resources/clock, common enabled actions, closed goal and fixed finite horizon. Same observable policy across all initial model/state pairs; private randomness independent of the hidden mechanism, retained memory permitted. Nature cannot choose after seeing the private seed. No actual complete-type or experience inference. Counterexamples to scalar/support-only quantitative reduction, not to R133 probability-one theorem."
+V42="Two fixed hidden mechanisms, finite probe transcript, terminal actions correct only for their corresponding mechanism; no later useful signal. Weighted transcript masses include specified conditional opportunity survival. Mathematical task success, not phenomenology, physical sensor validation or generic acquisition utility. Survival is not an additional observable decision signal unless included in Y."
+V43="Two fixed hidden mechanisms, finite probe transcript, terminal actions correct only for their corresponding mechanism; no later useful signal. Weighted transcript masses include specified conditional opportunity survival. Mathematical task success, not phenomenology, physical sensor validation or generic acquisition utility. One fixed probe followed by one terminal choice; not a solution of unrestricted adaptive sensing."
+V44="Two fixed hidden mechanisms, finite probe transcript, terminal actions correct only for their corresponding mechanism; no later useful signal. Weighted transcript masses include specified conditional opportunity survival. Mathematical task success, not phenomenology, physical sensor validation or generic acquisition utility. This multiplicative completion probability is not a generic additive money, energy or fitness cost."
+V45="Two fixed hidden mechanisms, finite probe transcript, terminal actions correct only for their corresponding mechanism; no later useful signal. Weighted transcript masses include specified conditional opportunity survival. Mathematical task success, not phenomenology, physical sensor validation or generic acquisition utility. Equal-prior average discrimination must not be substituted for the minimum over mechanisms; necessary epsilon bounds need not be sufficient."
+V46="Two fixed hidden mechanisms, finite probe transcript, terminal actions correct only for their corresponding mechanism; no later useful signal. Weighted transcript masses include specified conditional opportunity survival. Mathematical task success, not phenomenology, physical sensor validation or generic acquisition utility. No private coin revealed to nature before mechanism selection; no later extra choice class omitted."
+V47="Two fixed hidden mechanisms, finite probe transcript, terminal actions correct only for their corresponding mechanism; no later useful signal. Weighted transcript masses include specified conditional opportunity survival. Mathematical task success, not phenomenology, physical sensor validation or generic acquisition utility. Requires OPTIONAL_MODEL; scalar robust values of separate strategy classes are insufficient for their randomized union."
+V48="Two fixed hidden mechanisms, finite probe transcript, terminal actions correct only for their corresponding mechanism; no later useful signal. Weighted transcript masses include specified conditional opportunity survival. Mathematical task success, not phenomenology, physical sensor validation or generic acquisition utility."
+V49="Two fixed hidden mechanisms, finite probe transcript, terminal actions correct only for their corresponding mechanism; no later useful signal. Weighted transcript masses include specified conditional opportunity survival. Mathematical task success, not phenomenology, physical sensor validation or generic acquisition utility. Specified family and order of play only; no historical novelty or measured AI/biological performance claim."
+V50="Nonempty compact convex C,D in [0,1]^n; identical named evaluation coordinates, tasks, time, resources and observation protocol; one policy across coordinates, permitted independent private mixtures. Mathematical task comparison; no actual organization or physical translator inferred. For each source profile there is one target profile, not one policy per coordinate."
+V51="Nonempty compact convex C,D in [0,1]^n; identical named evaluation coordinates, tasks, time, resources and observation protocol; one policy across coordinates, permitted independent private mixtures. Mathematical task comparison; no actual organization or physical translator inferred. Standard convex minimax/support-function argument; no historical priority claim."
+V52="Nonempty compact convex C,D in [0,1]^n; identical named evaluation coordinates, tasks, time, resources and observation protocol; one policy across coordinates, permitted independent private mixtures. Mathematical task comparison; no actual organization or physical translator inferred. Convexity cannot be silently dropped if randomization is unavailable."
+V53="Nonempty compact convex C,D in [0,1]^n; identical named evaluation coordinates, tasks, time, resources and observation protocol; one policy across coordinates, permitted independent private mixtures. Mathematical task comparison; no actual organization or physical translator inferred. Lipschitz norm is the maximum norm; signed/nonmonotone diagnostics and exact named-policy distributions are not covered."
+V54="Nonempty compact convex C,D in [0,1]^n; identical named evaluation coordinates, tasks, time, resources and observation protocol; one policy across coordinates, permitted independent private mixtures. Mathematical task comparison; no actual organization or physical translator inferred. Explicit mathematical profiles, not actual brain or AI realizations."
+V55="Nonempty compact convex C,D in [0,1]^n; identical named evaluation coordinates, tasks, time, resources and observation protocol; one policy across coordinates, permitted independent private mixtures. Mathematical task comparison; no actual organization or physical translator inferred. These examples separate selected mathematical summaries; they do not exhibit actual experiential noninjectivity."
+V56="Finite persistent paired models and fixed state maps, common total action set (or a declared globally safe subset), same observable-history policy class/private randomness, time and output labels; joint next-mapped-state/output TV <=epsilon uniformly; terminal [0,1] payoff exactly pulled back; paired initial states. Actual port adequacy separately assumed. A finite fit or matching separate marginals does not establish this premise."
+V57="Finite persistent paired models and fixed state maps, common total action set (or a declared globally safe subset), same observable-history policy class/private randomness, time and output labels; joint next-mapped-state/output TV <=epsilon uniformly; terminal [0,1] payoff exactly pulled back; paired initial states. Actual port adequacy separately assumed. Classical finite-horizon coupling/simulation bound; no uniform small-error claim for unbounded time."
+V58="Finite persistent paired models and fixed state maps, common total action set (or a declared globally safe subset), same observable-history policy class/private randomness, time and output labels; joint next-mapped-state/output TV <=epsilon uniformly; terminal [0,1] payoff exactly pulled back; paired initial states. Actual port adequacy separately assumed. A guarantee certificate and regret relative to an unknown optimum are different quantities; neither implies complete-type equality."
+V59="Hard legality requires an action enabled at every history-compatible state. Identity state map, common goal payoff, row TV delta. This partial-action model deliberately violates SIMULATION_SETUP."
+V60="Support-based legal policy classes can change discontinuously despite pointwise menu equality. Not a counterexample to POLICY_BOUND or to A:U2; not an experience threshold."
+V61="Actual support and complete-type adequacy are independent premises, not certified by finite profile examples, decoder scores or small transition error."
+V62="Direct application of published C:P1/P2, not a new constitutive theorem. Equal guarantees alone do not prove experiential equality; no universal noninjectivity on every actual domain asserted. No new U1 gate."
+V63="Finite hidden parameter and signal sets; fixed row-stochastic observation experiments P,Q; one terminal decision after observation; full-support fixed prior; all finite randomized decision rules; no omitted costs, deadlines or side effects. A statistical postprocessor is not a physical organization isomorphism."
+V64="Finite hidden parameter and signal sets; fixed row-stochastic observation experiments P,Q; one terminal decision after observation; full-support fixed prior; all finite randomized decision rules; no omitted costs, deadlines or side effects. A statistical postprocessor is not a physical organization isomorphism. Classical Blackwell randomization theorem, not a new project theorem. Varying every utility is stronger than reweighting one fixed success-profile family."
+V65="Finite exogenous path experiments P_theta,Q_theta with common parameter and clock; one causal translator sees only current/past Y and uses private randomness independent of theta and the entire stream. No action feedback into future observations. All output-prefix marginals independent of future inputs. Physical port adequacy is not established. One kernel must work for all parameters, including indistinguishable histories; full-alphabet constraints permit arbitrary causal extension of unused histories."
+V66="Finite exogenous path experiments P_theta,Q_theta with common parameter and clock; one causal translator sees only current/past Y and uses private randomness independent of theta and the entire stream. No action feedback into future observations. All output-prefix marginals independent of future inputs. Physical port adequacy is not established. Construct conditional time kernels by prefix probability ratios; define zero-denominator rows arbitrarily. This is not a certificate for arbitrary controlled feedback."
+V67="Finite exogenous path experiments P_theta,Q_theta with common parameter and clock; one causal translator sees only current/past Y and uses private randomness independent of theta and the entire stream. No action feedback into future observations. All output-prefix marginals independent of future inputs. Physical port adequacy is not established. No additional raw-Y correlation in payoff; translator costs excluded unless modeled. Independent seeds implement composition; two-way simulation need not be a complete physical isomorphism."
+V68="Finite exogenous path experiments P_theta,Q_theta with common parameter and clock; one causal translator sees only current/past Y and uses private randomness independent of theta and the entire stream. No action feedback into future observations. All output-prefix marginals independent of future inputs. Physical port adequacy is not established."
+V69="Finite exogenous path experiments P_theta,Q_theta with common parameter and clock; one causal translator sees only current/past Y and uses private randomness independent of theta and the entire stream. No action feedback into future observations. All output-prefix marginals independent of future inputs. Physical port adequacy is not established. A full-record fiber condition at H alone does not impose the earlier deadlines."
+V70="Finite exogenous path experiments P_theta,Q_theta with common parameter and clock; one causal translator sees only current/past Y and uses private randomness independent of theta and the entire stream. No action feedback into future observations. All output-prefix marginals independent of future inputs. Physical port adequacy is not established. Both completed records identify theta; the first output has a fixed earlier deadline."
+V71="Finite exogenous path experiments P_theta,Q_theta with common parameter and clock; one causal translator sees only current/past Y and uses private randomness independent of theta and the entire stream. No action feedback into future observations. All output-prefix marginals independent of future inputs. Physical port adequacy is not established. Fair early guessing attains the lower bound; waiting changes the protocol, so static Blackwell is not contradicted."
+V72="Fixed hidden n-bit string; at most k distinct adaptive bit reads before the query is revealed; all read transcripts/private state may be retained; no later read; nature does not see the private seed. This is a query-access budget, not arbitrary k-bit encoding of a fully seen string or quantum coding."
+V73="Fixed hidden n-bit string; at most k distinct adaptive bit reads before the query is revealed; all read transcripts/private state may be retained; no later read; nature does not see the private seed. This is a query-access budget, not arbitrary k-bit encoding of a fully seen string or quantum coding. Upper bound averages uniform b,q and conditions on the read transcript, leaving uninspected bits fair. A memory-capacity bound would require a different theorem."
+V74="Fixed hidden n-bit string; at most k distinct adaptive bit reads before the query is revealed; all read transcripts/private state may be retained; no later read; nature does not see the private seed. This is a query-access budget, not arbitrary k-bit encoding of a fully seen string or quantum coding. Each comparison uses a common protocol internally; pre-announced and delayed protocols are explicitly different. This is not a counterexample to R135 or a universal impossibility of translators."
+V75="This already states that each pre-announced task can be perfectly solved while the delayed-query common resource cannot. The new side-information witness must acknowledge that generic local/global access lesson as inherited."
+V76="S,Z,O,A are finite nonempty sets, alpha:S->Z is onto and visible; m=|A|>=1. Concrete state is Markov-sufficient, with partial menus A(s), joint successor/output kernels and paired pointed state/clock. The memoryless decoder w(a|z,u) uses only visible z and request u with fresh conditional randomness. U(z) is nonempty; abstract history policies are legally specified on all projected histories, including nominally zero-probability ones, and cannot read decoder coins/concrete action labels. Every represented start is covered; physical adequacy is independent. This is one specified decoder class, not all causal interfaces."
+V77="Finite Markov-sufficient concrete S, visible onto alpha:S->Z, legal action menus A(s), joint next-state/output kernel, fixed time and pointed state. Decoder w(a|z,u) uses only current visible z/request u and fresh conditional randomness; abstract controllers may use projected history but not decoder coins/concrete actions. All represented starts; physical adequacy independently supplied. This is a supplied feasible decoder, not a consequence of individual-state feasibility."
+V78="Finite Markov-sufficient concrete S, visible onto alpha:S->Z, legal action menus A(s), joint next-state/output kernel, fixed time and pointed state. Decoder w(a|z,u) uses only current visible z/request u and fresh conditional randomness; abstract controllers may use projected history but not decoder coins/concrete actions. All represented starts; physical adequacy independently supplied. Necessity/sufficiency is restricted to this decoder class and every represented state. Joint rows, not separate next-state/output marginals."
+V79="The feasible decoder is one point in the intersection of all compatible-state constraint sets. The prospective source-only encoder is likewise one implementation across contexts; pointwise existence does not supply that intersection."
+V80="Finite Markov-sufficient concrete S, visible onto alpha:S->Z, legal action menus A(s), joint next-state/output kernel, fixed time and pointed state. Decoder w(a|z,u) uses only current visible z/request u and fresh conditional randomness; abstract controllers may use projected history but not decoder coins/concrete actions. All represented starts; physical adequacy independently supplied. Controller seed may be coupled; no concrete hidden-state/action/cost law is promised. Feedback is handled by conditional controlled rows, not a passive full-path kernel."
+V81="Finite Markov-sufficient concrete S, visible onto alpha:S->Z, legal action menus A(s), joint next-state/output kernel, fixed time and pointed state. Decoder w(a|z,u) uses only current visible z/request u and fresh conditional randomness; abstract controllers may use projected history but not decoder coins/concrete actions. All represented starts; physical adequacy independently supplied. Approximation does not permit illegal concrete actions or undefined policies after mismatches."
+V82="Finite Markov-sufficient concrete S, visible onto alpha:S->Z, legal action menus A(s), joint next-state/output kernel, fixed time and pointed state. Decoder w(a|z,u) uses only current visible z/request u and fresh conditional randomness; abstract controllers may use projected history but not decoder coins/concrete actions. All represented starts; physical adequacy independently supplied. Classical coupling bound applied after action decoding; no infinite-horizon small-error or omitted-cost guarantee."
+V83="Finite Markov-sufficient concrete S, visible onto alpha:S->Z, legal action menus A(s), joint next-state/output kernel, fixed time and pointed state. Decoder w(a|z,u) uses only current visible z/request u and fresh conditional randomness; abstract controllers may use projected history but not decoder coins/concrete actions. All represented starts; physical adequacy independently supplied. Classical finite Helly/Radon argument in the (m-1)-dimensional simplex; fixed error budget. Not a sample-complexity or unknown-continuum certification theorem."
+V84="Finite Markov-sufficient concrete S, visible onto alpha:S->Z, legal action menus A(s), joint next-state/output kernel, fixed time and pointed state. Decoder w(a|z,u) uses only current visible z/request u and fresh conditional randomness; abstract controllers may use projected history but not decoder coins/concrete actions. All represented starts; physical adequacy independently supplied. Specified finite model; hidden ready-state label unavailable to the decoder."
+V85="Finite Markov-sufficient concrete S, visible onto alpha:S->Z, legal action menus A(s), joint next-state/output kernel, fixed time and pointed state. Decoder w(a|z,u) uses only current visible z/request u and fresh conditional randomness; abstract controllers may use projected history but not decoder coins/concrete actions. All represented starts; physical adequacy independently supplied. Exactness requires w_i=0 for each represented hidden state; uniform mixing attains the approximate optimum. Different from R132 simultaneous task-slot scheduling."
+V86="Finite Markov-sufficient concrete S, visible onto alpha:S->Z, legal action menus A(s), joint next-state/output kernel, fixed time and pointed state. Decoder w(a|z,u) uses only current visible z/request u and fresh conditional randomness; abstract controllers may use projected history but not decoder coins/concrete actions. All represented starts; physical adequacy independently supplied. Reuses the blind opposite-action pattern already in R134; not claimed as a new historical counterexample."
+V87="Finite Markov-sufficient concrete S, visible onto alpha:S->Z, legal action menus A(s), joint next-state/output kernel, fixed time and pointed state. Decoder w(a|z,u) uses only current visible z/request u and fresh conditional randomness; abstract controllers may use projected history but not decoder coins/concrete actions. All represented starts; physical adequacy independently supplied. An added timely sensor can change the observation contract; no free sensor or full-state access assumed."
+V88="Finite Markov-sufficient concrete S, visible onto alpha:S->Z, legal action menus A(s), joint next-state/output kernel, fixed time and pointed state. Decoder w(a|z,u) uses only current visible z/request u and fresh conditional randomness; abstract controllers may use projected history but not decoder coins/concrete actions. All represented starts; physical adequacy independently supplied. Reused coin is persistent interface memory and violates the declared conditional action law after the first observation."
+V89="Finite Markov-sufficient concrete S, visible onto alpha:S->Z, legal action menus A(s), joint next-state/output kernel, fixed time and pointed state. Decoder w(a|z,u) uses only current visible z/request u and fresh conditional randomness; abstract controllers may use projected history but not decoder coins/concrete actions. All represented starts; physical adequacy independently supplied. Temporal joint-law counterexample, not a refutation of CLOSED_LOOP. Persistent memory must be represented or the conditional decoder contract verified."
+V90="Common initial logical state, fixed operation timing, legal observed-history policies and private randomness independent of model/hidden state. No extra state, parameter, energy or timing readout. Equality is of every finite logical-history law."
+V91="Exactly the observation, initial-state, action, randomness and timing contract of TRANSPORT_SETUP. Does not cover non-descending interventions or richer observations. Standard quotient induction, not a new general control theorem."
+V92="Deterministic exact one-tick model; k is mechanism parameter, not per-step noise or an observable label. Pairwise nonisomorphism uses fixed labeled input/output ports; the pointed zero/nonzero distinction survives alphabet permutations. For n>1 there are n elementary coupled pairs, not a globally strongly connected bit graph. This model is not itself a physical token."
+V93="Exactly FAMILY and TRANSPORT_SETUP. All finite-history laws, not all physical observation channels. Labeled pairwise nonisomorphism is not upgraded to unlabeled pairwise nonisomorphism. Reset needs one-tick access; two-tick endpoint statement excludes intermediate observations/interventions. No idle-state padding, but no universal minimality, integration measure or empirical consciousness claim."
+V94="Exact known controls/offsets, noiseless n-bit logical readout, fixed independent preparation trials. The setup does not claim optimality over general multistep adaptive experiments. Matrices are intervention maps, not experiential measures."
+V95="FAMILY plus AFFINE_SETUP. Standard fiber-constancy and binary rank-nullity calculation applied to this construction. Descent criterion holds over all model states, not a selected initial distribution. No general adaptive-optimality, noisy bound or experience measurement."
+V96="Independent physical premise. Analyst-assigned labels and successful finite prediction alone do not discharge it. If reset hardware changes the token, a further bridge to the original target is needed. Pairwise labeled conclusion requires constitutive fixed ports; the zero/nonzero pointed route does not depend on alphabet names. Macro quotient tokens require separate actual grounding."
+V97="Same actual bearers and constitutive signature throughout; conditional UCT interpretation, not evidence for C1. No inference of human phenomenology, scalar richness, valence, fear, unique subject or absence of constituent experience. Macro equality requires A:MACRO_EQ separately and is not proved by the quotient."
+V98="Consolidation of A/B/C/D and R138, not independent validation of C1 or a universal constitutive-selection algorithm. No self-model, report, recurrence, intelligence or continuation-control condition is added to experience existence. No claim to first mathematical definitions in the literature."
+V99="Restricted predictive functional model, not a universal semantic or phenomenal self definition. Grounding is an independent premise, not inferred from accuracy, correlation or naming. Coordinate renaming transports b/alpha/ports/targets together; physical sensor reassignment changes the model. Erroneous self-models are allowed. Common legal plans and fixed horizons are required. For decoder-existence mathematics, arbitrary abstract rows are permitted; installation/resources remain separate. No experience-existence gate."
+V100="No fixed candidate in the declared candidate domain. Extra labels, realized seeds, asymmetry or distinguished centers change the available structure. Candidate tokens need actual grounding for a physical application. Taking a center as argument is explicitly not deriving it from W."
+V101="Elementary application of A orbit lemma and identity-map covariance, not a new symmetry theorem or historical indexicality claim. The identity map itself does not install a self-model or establish a unique phenomenal subject."
+V102="Finite exact model; no empirical or complete-ontic realization claim. Cell permutations transport attachments together. External-label protocol excludes every label-correlated signal/history; local-prediction protocol retains its local sensor. The four-pair witness fixes independent task and prediction ports/resources and concerns external accuracy and selected prediction error only."
+V103="Does not equate local target access with external numerical identity knowledge. Does not prove that all intelligence and all self-modeling are independent, that a wrong predictor lacks self organization, or that any model has phenomenal selfhood. XOR and no-information decision principles are classical; the combination is a project-level clarifying example."
+V104="Finite nonempty target alphabet, common legal plans, nonempty domain, exact target laws, arbitrary uncoupled decoder rows. No computability, resource, installation, statistical-estimation or semantic guarantee. Half-diameter is only a lower bound; three distinct point masses have radius 2/3 and diameter 1. Classical factorization/metric application of C:P2_COORD, not new consciousness mathematics."
+V105="Declared system-in-regime and query semantics."
+V106="Scope is limited to the stated domain and premises; no independent consciousness evidence follows."
+V107="Specified external comparison model class; the pair is assumed admissible, not constructed for every system."
+V108="Opposite claims for the same admitted actual token are not both models of fixed C1/U1. This is a meta-theory/evidence premise."
+V109="Exactly OBS_EQ_PREM."
+V110="New discriminating protocols or restrictive structural assumptions can remove the premise."
+V111="Set maps with a declared query; no empirical target discovery assumed."
+V112="Set maps; equality refers to the declared target semantics."
+V113="Does not show that h equals an already named source query; calibration is separate. Published standard mathematics."
+V114="Relations between declared interfaces."
+V115="Exactly RELATION_PREM."
+V116="Incompatible possible models cannot be conjoined; empty images reject a conjunction, not necessarily existence. Statistical likelihood multiplication is not licensed."
+V117="Nonnegative finite error bounds; justified common domain and semantics."
+V118="Exactly METRIC_PREM; probability clause has its stated event assumptions."
+V119="Not a scalar distance between complete experiences without a separately justified metric."
+V120="Each clause applies to its stated family, not every physical system."
+V121="Nonnegative matrix clause excludes cancellation/single-vertex vacuity; capacity uses unrestricted deterministic input preparation."
+V122="Graph/capacity/redundancy claims do not determine experience. Decoder/hardware noise is outside the wrapper guarantee."
+NODES
+R134:ZERO_ERROR | THEOREM | Robust value one iff a pure profile is one at every coordinate, iff R133 COMMON_POLICY holds. Below one, randomization may improve the best guaranteed success.
+F1=V39 F2=V2
+R134:SCALAR_MODELS | MODEL | Blind terminal action profiles are (1,0),(0,1). In a second case the free binary signal laws are (3/4,1/4) and (1/4,3/4), followed by the action naming the model; both outputs leave both models possible.
+F1=V40 F2=V2
+R134:SCALAR_FAILURE | THEOREM | Coordinatewise maxima of blind profiles fabricate unattainable (1,1); half-half mixing instead guarantees 1/2. In the noisy-signal case, using observed output attains (3/4,3/4), while any terminal policy retaining only identical support/time guarantees at most 1/2.
+F1=V41 F2=V2
+R134:PROBE_MODEL | DEFINITION | Probe law P_m(y) and conditional correct-completion survival r_m(y) give a_y=P_0(y)r_0(y), b_y=P_1(y)r_1(y). A randomized decision d_y produces success pair (sum a_y d_y, sum b_y(1-d_y)).
+F1=V42 F2=V2
+R134:PROBE_DUAL | THEOREM | Forced-probe robust success equals min_(0<=q<=1) F(q), F(q)=sum_y max(q*a_y,(1-q)*b_y). Evaluate endpoints and breakpoints q=b_y/(a_y+b_y) ONLY for y with a_y+b_y>0. Rows with both masses zero contribute identically zero and supply no breakpoint.
+F1=V43 F2=V2
+R134:COMMON_SURVIVAL | ASSUMPTION | In PROBE_MODEL, r_m(y)=rho in [0,1] for every mechanism and transcript.
+F1=V44 F2=V2
+R134:TV_OPPORTUNITY | THEOREM | Generally V_probe <=(sum a+sum b+norm1(a-b))/4. Under COMMON_SURVIVAL, V_probe <=rho(1+TV(P_0,P_1))/2; tight for symmetric binary errors, not every pair. Equal TV can give unequal robust values.
+F1=V45 F2=V2
+R134:OPTIONAL_MODEL | ASSUMPTION | In the binary task, before observing any signal the policy may choose immediate profiles (1,0),(0,1) or the specified probe, and privately mix these choices. Blind actions avoid probe-induced opportunity loss.
+F1=V46 F2=V2
+R134:OPTIONAL_PROBE | THEOREM | Optional robust value is min_q max(q,1-q,F(q)). This may strictly exceed max(1/2,V_probe).
+F1=V47 F2=V2
+R134:ASYM_MODEL | MODEL | P_0=(1,0), P_1=(1/2,1/2); probe survival is the same rho in [0,1] for both mechanisms; immediate blind actions remain available.
+F1=V48 F2=V2
+R134:MIXING_WITNESS | THEOREM | In ASYM_MODEL, forced value=2rho/3; optional value=max(1/2,2rho/(2+rho)). For 2/3<rho<3/4 probing alone is inferior, while optimal optional mixing improves on blind value 1/2. At rho=7/10 the exact optimum is 14/27, attained with probe probability 20/27 and dual weight q=13/27.
+F1=V49 F2=V2
+R135:PROFILE_PAIR | DEFINITION | G(C)={b in [0,1]^n: some v in C dominates b}; h_C(q)=max_v q dot v for q in Delta_n including zero weights; delta(C->D)=max_v min_w max_i(v_i-w_i)_+.
+F1=V50 F2=V2
+R135:DEFICIENCY | THEOREM | delta(C->D)=max_(q in Delta_n)[h_C(q)-h_D(q)]_+.
+F1=V51 F2=V2
+R135:GUARANTEE_EQ | THEOREM | G(C) subset G(D) iff delta(C->D)=0 iff h_C(q)<=h_D(q) for all q in Delta_n. Equality of guarantee regions iff equality of all such weighted optima.
+F1=V52 F2=V2
+R135:VALUE_BOUND | THEOREM | delta(C->D)<=epsilon transfers thresholds after clipping b-epsilon 1 and bounds sup_C F <=sup_D F+L epsilon for every monotone L-Lipschitz F. delta(C->E)<=delta(C->D)+delta(D->E) for another comparable E.
+F1=V53 F2=V2
+R135:HIERARCHY_MODELS | MODEL | C1=conv{(0,0),(1,0),(0,1)}, D1=conv{(0,0),(1/2,1/2)}; C2=conv{(0,0),(1,1)}, D2=conv{(0,0),(1,1),(1,0)}.
+F1=V54 F2=V2
+R135:HIERARCHY | THEOREM | C1,D1 both have robust value 1/2, but delta(C1->D1)=1/2 and reverse loss zero. C2,D2 have identical square guarantee regions/all nonnegative weighted optima, yet only D2 contains exact profile (1,0).
+F1=V55 F2=V2
+R135:SIMULATION_SETUP | ASSUMPTION | For every represented m,s,a, TV((alpha_m,id)_*K_m(s,a),Kbar_m(alpha_m(s),a))<=epsilon; 0<=epsilon<=1. g_m=gbar_m composed with alpha_m; same total actions and observable policy class.
+F1=V56 F2=V2
+R135:POLICY_BOUND | THEOREM | Every common observable policy has coordinate error <=beta_H=1-(1-epsilon)^H<=min(1,H epsilon); the uniform terminal-payoff bound is sharp.
+F1=V57 F2=V2
+R135:TRANSFER_BOUND | THEOREM | For pulled-back comparable profile sets both directed losses and robust optimal-value gap are <=beta_H. Copying an abstract eta-optimal policy gives concrete robust success >=V_star-2 beta_H-eta; a particular abstract guarantee loses only beta_H.
+F1=V58 F2=V2
+R135:LEGALITY_MODEL | MODEL | At start only p is enabled; at good only a leads to goal; at bad no non-stop action is enabled; stop is always available and succeeds only at goal. Outputs are constant. K0:p->good; Kdelta:p->(1-delta)good+delta bad. Other rows and pointwise menus agree; H=2.
+F1=V59 F2=V2
+R135:LEGALITY_JUMP | THEOREM | For LEGALITY_MODEL, K0 has value one and Kdelta value zero for every delta>0. If attempting a at bad is explicitly made legal with failure, the changed protocol instead has value 1-delta.
+F1=V60 F2=V2
+R135:ACTUAL_PROFILE | ASSUMPTION | Actual valid process tokens, a common complete structural signature and fixed grounded tasks/ports/resources/observation rules supply a well-defined guarantee-region map s->G(s) invariant under allowed structural isomorphisms.
+F1=V61 F2=V2
+R135:UCT_INTERPRETATION | CONDITIONAL_INTERPRETATION | Under A:C1 and ACTUAL_PROFILE, different G implies different complete experiential types; G identifies full experiential type iff s->G(s) is injective; a selected coordinate is recoverable iff constant on G-fibers.
+F1=V62 F2=V2
+R136:STATIC_SETUP | DEFINITION | P_theta(x),Q_theta(y) are fixed experiments; V_P(u),V_Q(u) optimize a common finite decision problem after observation with full-support prior p. Translators R(x|y) are independent of theta.
+F1=V63 F2=V2
+R136:BLACKWELL | THEOREM | P=QR for a common stochastic R iff V_Q(u)>=V_P(u) for every finite decision problem. It suffices to vary all utilities with action set X. Utilities can be normalized to [0,1].
+F1=V64 F2=V2
+R136:STREAM_SETUP | DEFINITION | Causal(Y,X) contains stochastic full-path kernels whose output-prefix marginal at time t depends only on y_<=t. d_c(P<-Q)=min_R max_theta TV(P_theta,Q_theta R) over that polytope.
+F1=V65 F2=V2
+R136:CAUSAL_LP | THEOREM | A common causal transducer exists iff R>=0, row sums one, prefix nonanticipation constraints and P=QR are jointly feasible. Minimum uniform TV error is attained and is a finite LP via absolute-value epigraph variables.
+F1=V66 F2=V2
+R136:COMPOSITION | THEOREM | d_c(P<-W)<=d_c(P<-Q)+d_c(Q<-W). A copied causal downstream decision rule loses at most d_c in any [0,1] payoff g_theta(translated_stream,action_path), with unchanged legal actions and no feedback.
+F1=V67 F2=V2
+R136:DETERMINISTIC | ASSUMPTION | Each desired P_theta is concentrated on x(theta), and each available Q_theta on y(theta).
+F1=V68 F2=V2
+R136:PREFIX | THEOREM | Exact causal simulation in DETERMINISTIC exists iff y_<=t(theta)=y_<=t(theta_prime) implies x_<=t(theta)=x_<=t(theta_prime), for all pairs and t. A deterministic translator then suffices.
+F1=V69 F2=V2
+R136:DELAY_MODEL | MODEL | Theta={0,1}, H=2. Desired stream x(theta)=(theta,blank); available stream y(theta)=(blank,theta).
+F1=V70 F2=V2
+R136:DELAY_GAP | THEOREM | DELAY_MODEL has exact offline translation (y2,blank) but d_c(P<-Q)=1/2. First-deadline guessing has desired value one versus available value one half.
+F1=V71 F2=V2
+R136:QUERY_MODEL | MODEL | For n>=2 and 0<=k<=n, read at most k coordinates of b in {0,1}^n before q in {1,...,n} is revealed; then guess b_q. V_nk=sup_policy min_(b,q) success.
+F1=V72 F2=V2
+R136:QUERY_BOUND | THEOREM | V_nk=1/2+k/(2n). Uniform k-subset reading and fair guessing on unread coordinates attain the bound for every b,q; adaptive preparation cannot improve it.
+F1=V73 F2=V2
+R136:TASK_ORDER | THEOREM | For 1<=k<n every pre-announced q has full-reader and restricted-reader guarantee region [0,1]^(2^n). Under delayed q, full-to-restricted directional guarantee loss is (n-k)/(2n), reverse zero; no exact response translator respecting the restricted read budget and deadline exists.
+F1=V74 F2=V2 F3=V75
+R137:CONTROL_MODEL | DEFINITION | Projected rows p_s,a(z_prime,o)=sum_(alpha(s_prime)=z_prime)K(s,a;s_prime,o). For fixed z,u and target q=Kbar(z,u), W_s^epsilon is the simplex of action weights legal at s and within TV epsilon of q. One common decoder must lie in every W_s^epsilon in the visible fiber.
+F1=V76 F2=V2
+R137:EXACT_INTERFACE | ASSUMPTION | For every z and u in U(z), choose one w_z,u in the intersection of all W_s^0 with alpha(s)=z; sample it with the stated conditional-randomness contract.
+F1=V77 F2=V2
+R137:LOCAL_LP | THEOREM | A legal decoder with uniform row error <=epsilon exists iff intersection_(s in fiber z) W_s^epsilon is nonempty. One common simplex vector, illegal-action zeros and per-state joint-row TV epigraphs give a finite LP. Empty common legal menu remains infeasible at epsilon=1.
+F1=V78 F2=V2 F3=V79
+R137:CLOSED_LOOP | THEOREM | Under EXACT_INTERFACE every legal abstract projected-history controller preserves its entire finite-horizon joint z/request/output law from paired starts and executes only legal concrete actions. Conversely universal one-step law preservation by a fixed decoder forces its exact local rows.
+F1=V80 F2=V2
+R137:APPROX_INTERFACE | ASSUMPTION | For every z,u a common legal w_z,u has TV(sum_a w_a p_s,a,Kbar(z,u))<=epsilon for all s in the fiber, 0<=epsilon<=1. Conditional randomization and legal controller extension on all projected histories are supplied.
+F1=V81 F2=V2
+R137:APPROX | THEOREM | Under APPROX_INTERFACE the projected length-H closed-loop path-TV error for any common abstract controller is <=1-(1-epsilon)^H<=min(1,H epsilon); every common [0,1] projected-history payoff changes by at most this amount.
+F1=V82 F2=V2
+R137:OBSTRUCTION | THEOREM | If a fixed visible request has no common legal epsilon-accurate decoder and m=|A|, at most m states of its visible fiber already have empty intersection of W_s^epsilon.
+F1=V83 F2=V2
+R137:FORBIDDEN_MODEL | MODEL | There are m>=2 indistinguishable ready states i and m universally legal actions a. Action a fails iff a=i; target abstract request succeeds certainly. Outcomes are distinct visible absorbing states.
+F1=V84 F2=V2
+R137:SHARP_OBSTRUCTION | THEOREM | In FORBIDDEN_MODEL every proper subset of ready states admits an exact common decoder but all m do not. Minimum uniform row-TV error is 1/m; best worst-case success is 1-1/m.
+F1=V85 F2=V2
+R137:BLIND_MODEL | MODEL | Two hidden ready states b share an observation; two actions a are legal everywhere and succeed iff a=b. Compare certain-success and fair success/failure target rows.
+F1=V86 F2=V2
+R137:OBSERVATION_GAP | THEOREM | In BLIND_MODEL, hidden-state-aware error is zero for the certain-success target, but visible-only uniform error is at least 1/2 and attainable. A fair target is exactly realizable by equal mixing, with neither deterministic action exact.
+F1=V87 F2=V2
+R137:SEED_MODEL | MODEL | One-state concrete plant outputs chosen action bit and returns to itself. Abstract single request emits an independent fair bit each step. Compare fresh fair actions to one fair coin reused for all H steps.
+F1=V88 F2=V2
+R137:SEED_GAP | THEOREM | In SEED_MODEL fresh sampling is exact; reusing one coin preserves every one-time output marginal but yields path-TV error 1-2^(1-H), H>=1.
+F1=V89 F2=V2
+R145:TRANSPORT_SETUP | DEFINITION_AND_DOMAIN | Finite deterministic implementation family with onto projections to a common logical state space; every named update and admitted intervention has the same descended logical map across models. The observer sees logical state only.
+F1=V90 F2=V2
+R145:TRANSPORT_BLIND | THEOREM_RESTATEMENT | Under TRANSPORT_SETUP, all models have the same logical observed-history law for every admitted adaptive policy. More descending interventions need not split the equivalence.
+F1=V91 F2=V2
+R145:FAMILY | MODEL | For n>=1, G=F2^n, S=GxG, initial (0,0), fixed k in G, input u in G, pi(x,y)=x+y, T^k_u(x,y)=(y+k,x+u+k). Common descending state maps include all translations J_ab(x,y)=(x+a,y+b).
+F1=V92 F2=V2
+R145:SEPARATION | THEOREM | FAMILY realizes z->z+u and is blind to k under the full common descending-intervention feedback class. All states are reachable in two updates and all updates bijective; every bit affects output and register updates mutually depend. Distinct k are nonisomorphic as labeled structures; zero vs nonzero also differ by a pointed self-loop invariant. One zero-input update followed by R_x(x,y)=(0,y) reveals k; R_x does not descend. Two uninterrupted updates satisfy T^k_v T^k_u(x,y)=(x+u,y+v), independent of k.
+F1=V93 F2=V2
+R145:AFFINE_SETUP | DEFINITION_AND_PROTOCOL | On FAMILY, J(x,y)=(Ax+By+a,Cx+Dy+b) with n-by-n binary blocks; L_J=A+B+C+D. Each probe trial starts at (0,0), uses one zero-input update, then J, then reads pi. Repetitions use the same fixed k and a fixed chosen probe list.
+F1=V94 F2=V2
+R145:AFFINE_DIAGNOSTIC | THEOREM_APPLICATION | J descends iff L_J=0. The stipulated probe returns L_J k+a+b. A fixed probe list identifies all k iff its stacked L matrices have rank n; a consistent response has 2^(n-r) candidate parameters when rank is r.
+F1=V95 F2=V2
+R145:ACTUAL_BRIDGE | PHYSICAL_AND_CONSTITUTIVE_PREMISE | The compared FAMILY members are faithfully realized by actual valid tokens; their represented pointed state/update/port distinctions are genuinely constitutive. Any admitted complete-organization isomorphism induces an isomorphism of the specified represented structures.
+F1=V96 F2=V2
+R145:TYPE_LIMIT | CONDITIONAL_INTERPRETATION | Under ACTUAL_BRIDGE and A:C1_OI, the represented nonisomorphism in SEPARATION implies inequivalent complete experiential types for the corresponding actual implementation tokens despite matched logical feedback laws.
+F1=V97 F2=V2
+R146:DEFINITION_CONTRACT | DEFINITION_CONSOLIDATION | Actual token, complete organization, model, view, estimate and type are distinguished. Experience retains C1 interpretive identity; basal phenomenal consciousness abbreviates nonempty experiential carrier. Intelligence is a well-defined isomorphism-invariant fixed-contract capability profile. Functional self targets are distinct from conceptual and phenomenal selfhood.
+F1=V98 F2=V2
+R146:SELF_CONTRACT | DEFINITION_AND_DOMAIN | Admissible nonempty centered configuration domain Omega; grounded bearer b and physical attachment alpha; installed representation m:Omega->M; nonempty finite target alphabet Z; common nonempty legal plan set A0; own-target law Q:Omega x A0->Delta(Z); installed predictor d:M x A0->Delta(Z), error sup TV(d(m(omega),a),Q(omega,a)); optional separately specified installed causal use.
+F1=V99 F2=V2
+R146:SYMMETRY_SETUP | MODEL_PREMISE | Finite nonempty candidate family B(W), invariant under automorphism group Gamma of W; each candidate is moved by at least one group element. A singleton selector is deterministic and equivariant and receives only W. A centered reference family instead receives P in B(W) as an argument.
+F1=V100 F2=V2
+R146:CENTERED_REFERENCE | THEOREM_APPLICATION | Under SYMMETRY_SETUP there is no equivariant singleton selector, while iota_W(P)=P is an equivariant family. Therefore that selector obstruction does not imply an obstruction to every centered reference relation.
+F1=V101 F2=V2
+R146:DUPLICATE_SETUP | MODEL | n>=2 identical cells z_i in {0,1}, local inputs a_i, update z_i prime=z_i XOR a_i, installed local sensor m_i=z_i and predictor delta_(m_i XOR a_i). In a separate identification protocol, external label B is uniform over n cells and independent of complete available history H and private seed R; guesses are labels. For a two-coordinate witness, independent external bit c and separate task/predictor branches optionally complement their correct outputs.
+F1=V102 F2=V2
+R146:DUPLICATE_SEPARATION | CONSTRUCTIVE_PROPOSITION | DUPLICATE_SETUP has zero local prediction error for every state/action and permutation covariance, while every external-label guess has success 1/n under the independent-label protocol. The independent branch example realizes all four pairs external accuracy in {0,1} and self-prediction TV error in {0,1}.
+F1=V103 F2=V2
+R146:SELF_TARGET_SUFFICIENCY | THEOREM_APPLICATION | Under SELF_CONTRACT, an abstract zero-error decoder exists iff Q(omega,a) is constant on each m fiber for every common plan a. Two same-fiber targets at TV distance delta force worst-case error >=delta/2. With unrestricted rows, optimal worst-case error equals the supremum over (m,a) of the smallest TV radius covering that fiber target set.
+F1=V104 F2=V2
+TA15:TYPED_CONTRACT | DEFINITION | Six target kinds E, character, valence, perspective, continuation and multiplicity are distinct query types. A transport certificate records common regime, bearer, interfaces, paired interventions, bridge guards and evidence; it is not proof of the guards.
+F1=V105 F5=V105 F6=V106 F2=V2
+TA15:OBS_EQ_PREM | MODEL_CLASS_PREMISE | A model class admits m0,m1 with opposite binary existence claims and identical transcript distributions under every complete allowed adaptive protocol, including randomization and stopping.
+F1=V107 F5=V107 F6=V108 F2=V2
+TA15:NONIDENT | CONDITIONAL_RESULT | No decision rule using only the allowed protocols is almost surely correct for both opposing models.
+F1=V109 F5=V109 F6=V110 F2=V2
+TA15:MAPS | MATHEMATICAL_DOMAIN | Fix sets U,X,Y and maps alpha:U->X and f:U->Y; work on alpha(U).
+F1=V111 F5=V111 F6=V106 F2=V2
+TA15:FIBER | CONDITIONAL_RESULT | There is a unique h on alpha(U) with f=h alpha iff equal alpha-values imply equal f-values.
+F1=V112 F5=V112 F6=V113 F2=V2
+TA15:RELATION_PREM | MATHEMATICAL_DOMAIN | zS lies in QS, (zS,zT) in RST and (zT,zU) in RTU. Both certificates use the same actual intermediate zT and compatible type, interval, regime and interpretation; all guards jointly hold.
+F1=V114 F5=V114 F6=V106 F2=V2
+TA15:COMPOSITION | CONDITIONAL_RESULT | zU belongs to RTU[RST[QS]].
+F1=V115 F5=V115 F6=V116 F2=V2
+TA15:METRIC_PREM | MATHEMATICAL_DOMAIN | Metric interfaces and maps satisfy dT(zT,gST(zS))<=epsST, dU(zU,gTU(zT))<=epsTU; gTU is L-Lipschitz on all relevant points.
+F1=V117 F5=V117 F6=V106 F2=V2
+TA15:ERROR | CONDITIONAL_RESULT | dU(zU,gTU(gST(zS)))<=epsTU+L epsST. If the two errors hold except on events of probabilities delta1,delta2 and the Lipschitz bound is certain, coverage is at least max(0,1-delta1-delta2).
+F1=V118 F5=V118 F6=V119 F2=V2
+TA16:FINITE_CONTRACT | MODEL_AND_DOMAIN | Finite nonnegative weighted digraphs n>=2 with cuts deleting all crossing edges; Boolean parity/shift maps; invertible recodings with transported interventions; odd repetition encoders E and majority decoders D with DE=id.
+F1=V120 F5=V120 F6=V106 F2=V2
+TA16:CAUSAL_LIMITS | CONDITIONAL_RESULT | For every nonnegative n-by-n W with n>=2, the positive-edge graph is strongly connected iff for every nontrivial bipartition pi and every vertex i there exists an integer k with 1<=k<=2(n-1) and (W^k-W_pi^k)_[i,i]>0, where W_pi deletes all crossing edges. Strong connectivity alone does not determine retained information; incompatible modes cannot jointly witness different maxima; recoding preserves the physical question when interventions are transported; every finite Boolean F has an exact wrapper Ftilde=EFD on valid codewords with DE=id.
+F1=V121 F5=V121 F6=V122 F2=V2

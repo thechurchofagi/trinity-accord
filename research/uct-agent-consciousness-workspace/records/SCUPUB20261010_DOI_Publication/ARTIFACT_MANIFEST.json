@@ -1,0 +1,193 @@
+{
+  "schema": "uct-integrated-artifact-manifest/1",
+  "date_utc": "2026-10-10",
+  "scope": "records/SCUPUB20261010_DOI_Publication",
+  "files": [
+    {
+      "path": "EXPECTED-PUBLICATION.json",
+      "bytes": 2582,
+      "sha256": "4f976e85774d787dcafbcd85dd4784637ae67510836847905f938ec3bb6d755d"
+    },
+    {
+      "path": "FINAL_PUBLICATION_RECEIPT.json",
+      "bytes": 5278,
+      "sha256": "c47680350df514926d5d7aa180b0b3871a153d9611faf0156979c59dce570847"
+    },
+    {
+      "path": "PUBLICATION_COVERAGE_UPDATE.json",
+      "bytes": 3777,
+      "sha256": "dd875e1fffdfd8f2d6f1d9befecf36c071388668ad6f1c319b444909306065da"
+    },
+    {
+      "path": "PUBLICATION_DECISION.json",
+      "bytes": 1929,
+      "sha256": "408b8c41fc54fe582a9e9af9647e44eb1fdf5e3c221f06a1062a539897087c3b"
+    },
+    {
+      "path": "PUBLICATION_STATUS_GIT_RECEIPT.json",
+      "bytes": 578,
+      "sha256": "224266cbba5a85c4197d6958c02b118fddf30936f50c7d8795e91db42599eded"
+    },
+    {
+      "path": "PUBLIC_READBACK.json",
+      "bytes": 1302,
+      "sha256": "2f41710c054c7cafd88557c3ddbe140b3a4d20e8a650a960f017fdb90eff3ad5"
+    },
+    {
+      "path": "PUBLISH-AUTHORIZATION.json",
+      "bytes": 1062,
+      "sha256": "6ef9775ebd0d6efe93e3c9c944b68088d735b7e4fb81938ead01c1852472d45c"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3136,
+      "sha256": "189f5fc21bd5202e9312d167dea2d0c2086a9952951b0fdab3d52d24328a6fcc"
+    },
+    {
+      "path": "RELEASE_STATUS.json",
+      "bytes": 834,
+      "sha256": "792fd33d05fe5860c5ea0f85669a391dee5b8cb6c365e0af2d1ced6ac12bfc37"
+    },
+    {
+      "path": "WORK_LOG.md",
+      "bytes": 2992,
+      "sha256": "2a9f263958410b0dcf01f9444f92612b41efd1eacaf521e2b0dd3dff38a5c947"
+    },
+    {
+      "path": "doi-resolution.json",
+      "bytes": 1576,
+      "sha256": "5c16764a045c078b81bf297ce6ead1d53f4d9a597545da0f5ac701140e7aa97f"
+    },
+    {
+      "path": "publication-record.json",
+      "bytes": 3278,
+      "sha256": "ca249e155b8721a1c21a66522046ae0280f874307a767fd2141bf6061b1c5e27"
+    },
+    {
+      "path": "record_api.json",
+      "bytes": 9282,
+      "sha256": "b55979efe74dfc2062e62290a058a95a7973be1e635df4e7d6f47b57b110bd98"
+    },
+    {
+      "path": "release/README-LICENSE.txt",
+      "bytes": 1199,
+      "sha256": "f25a9d963c200872ca8361b6cb8ff6c22e4dc33c4532b4b69887328a416ca75b"
+    },
+    {
+      "path": "release/REVIEW-AND-SOURCES.md",
+      "bytes": 20882,
+      "sha256": "2fc6d415930309d4fce40b0cf7a00836b1faf9ffb654455ddf5d7168be40f91d"
+    },
+    {
+      "path": "release/SHA256SUMS.txt",
+      "bytes": 725,
+      "sha256": "eb00d01f330b9469793564def8beba2caa59a1ec4c790446664da06c4f661138"
+    },
+    {
+      "path": "release/citation.bib",
+      "bytes": 290,
+      "sha256": "9ac926376ba04fb418ae58e8b87f9558dc32a1e3c94255f3779497d750230084"
+    },
+    {
+      "path": "release/citation.csl.json",
+      "bytes": 444,
+      "sha256": "d36033981711418d95ae10d243027f125558c0cd28fec617645afa85779e5d34"
+    },
+    {
+      "path": "release/citation.ris",
+      "bytes": 235,
+      "sha256": "6b24465345d0a6186199875a7a8451b8f959b65bc29eef0701c82305d9e8fdbc"
+    },
+    {
+      "path": "release/matched-behavior-and-source-use-v1.0.1.md",
+      "bytes": 45968,
+      "sha256": "8fa23cbe9440922f6f56506e5415d17c47875972bdbde1b9428c0fafaaa425ab"
+    },
+    {
+      "path": "release/matched-behavior-and-source-use-v1.0.1.pdf",
+      "bytes": 279016,
+      "sha256": "7e6e8c181e98975b3ba3e665982a7dd206a2c8efcf543ce865b34d053290754b"
+    },
+    {
+      "path": "release/reproducibility-v1.0.1.zip",
+      "bytes": 114649,
+      "sha256": "80c6839b05da8ca3095f3d2941f837a2bcd8cd81d66e294eb0b4a0f4d6191c06"
+    },
+    {
+      "path": "review/PDF_CHECKS.json",
+      "bytes": 1504,
+      "sha256": "29c8aa9db5fdb63ef060b0c0d43aed470731dca1ad4c6dfed570e0c31d293ea8"
+    },
+    {
+      "path": "review/PUBLICATION_IDENTITY_CHECK.json",
+      "bytes": 995,
+      "sha256": "0c29aac0c76660a355756c71b2a823cdb825acef080be45fddfaec2a5f853921"
+    },
+    {
+      "path": "review/PUBLICATION_READINESS_REVIEW.md",
+      "bytes": 20625,
+      "sha256": "0a4e858d1d820b307e56b89afac0ec601df5a619e828815845a9e5db74aea812"
+    },
+    {
+      "path": "review/PUBLISHER_REVIEW.md",
+      "bytes": 7479,
+      "sha256": "0d881269c1da3853b0a26948eeceabf9bf2dc64d95566e6863bfa79d3bae1a0c"
+    },
+    {
+      "path": "review/PUBLISHER_REVIEW_RECEIPT.json",
+      "bytes": 3440,
+      "sha256": "14b87dc61fbba807f4aa10a0f6796c4132a0bcc0b13a317284217b1a60e7b99f"
+    },
+    {
+      "path": "review/PUBLISHER_SAFETY_CONTRACT.md",
+      "bytes": 7866,
+      "sha256": "1dc1d713c63cbf7832721dbe8cf3fa7ed3f42b821c5aa111ac89e926900c0f84"
+    },
+    {
+      "path": "review/REVIEW_MANIFEST.json",
+      "bytes": 14069,
+      "sha256": "797965958abf553d3798f4dfb013e0607e8c72c6eb00edf1a2f3f071250e4590"
+    },
+    {
+      "path": "review/SCU_REPRODUCTION_20261010.json",
+      "bytes": 1651,
+      "sha256": "ed694d0d75cbfdd3596c5d94dd874e550e1e5d8e4abc4fa7f6b85dc957333108"
+    },
+    {
+      "path": "review/coverage_delta/PROPOSED_LOCATION_CORRECTIONS.json",
+      "bytes": 1654,
+      "sha256": "969d38a220b8c5564aa19c1e7f7e393a65e3f21703edda203f50b5dc8633d35c"
+    },
+    {
+      "path": "review/coverage_delta/PUBLICATION_COVERAGE_REVIEW.md",
+      "bytes": 8203,
+      "sha256": "04287f77593af7317bc17ee60f051e14450f36414f9dd9e67f7c6e6d09bd87c1"
+    },
+    {
+      "path": "review/coverage_delta/REVIEW_RECEIPT.json",
+      "bytes": 17468,
+      "sha256": "dd65f704d2fad55f549adc0cb3f9563fffebce4a9e207547b2d65f5e06b1f702"
+    },
+    {
+      "path": "review/coverage_v22/RECEIPT.json",
+      "bytes": 780,
+      "sha256": "ca1cd856292d7aceb1da729603305f38eda50e970a784ff43de27e04351bf03e"
+    },
+    {
+      "path": "review/coverage_v22/REVIEW.md",
+      "bytes": 1877,
+      "sha256": "f1c8678e63ba49976facf079ce79214de34c61bb8c0ad4882b53ed2fd7112222"
+    },
+    {
+      "path": "visual-review.json",
+      "bytes": 1155,
+      "sha256": "c805a75d3d76d996b97b46528b032f18b3986b664fa6106ade8c2614d8be5b5b"
+    }
+  ],
+  "file_count": 36,
+  "total_bytes": 589780,
+  "excluded": [
+    "ARTIFACT_MANIFEST.json"
+  ],
+  "exclusion_reason": "Manifest self-hash and, for DVC only, separately versioned dual-save receipt. Child manifests retain original scope."
+}

@@ -15,14 +15,15 @@
   "version_policy": "VERSIONING_POLICY.md",
   "changelog": "CHANGELOG.md",
   "latest_research": {
-    "id": "EIP20261010",
-    "result_version": "EIP-RESULT-v0.1.0",
+    "id": "DVC20261010",
+    "result_version": "DVC-RESULT-v0.1.0",
     "status": "PENDING_CHECKPOINT_DISABLED",
-    "source": "records/EIP20261010_Exoskeleton_Instrumentation/RESEARCH_NOTE.md",
-    "handoff": "records/EIP20261010_Exoskeleton_Instrumentation/HANDOFF_ZH.md",
-    "work_log": "records/EIP20261010_Exoskeleton_Instrumentation/WORK_LOG.md",
+    "source": "records/DVC20261010_Device_Consumer_Validation/RESEARCH_NOTE.md",
+    "handoff": "records/DVC20261010_Device_Consumer_Validation/HANDOFF_ZH.md",
+    "work_log": "records/DVC20261010_Device_Consumer_Validation/WORK_LOG.md",
     "enabled_as_established_premises": false,
-    "manuscript_status": "HOLD_STANDALONE_INTEGRATE_AS_SCU_MPC_METHODS_SECTION"
+    "manuscript_status": "HOLD_STANDALONE_POST_PUBLICATION_TECHNICAL_SUPPLEMENT",
+    "evidence_status": "PUBLIC_DATA_REANALYSIS_AND_FINITE_MODEL_COMPLETED; NO_NEW_HARDWARE_OR_HUMAN_DATA"
   },
   "latest_integrated_research": {
     "id": "R188-CER-20261009",
@@ -69,7 +70,8 @@
     "SCU20261010",
     "MPC20261010",
     "CBI20261010",
-    "EIP20261010"
+    "EIP20261010",
+    "DVC20261010"
   ],
   "current_guide": "RESEARCH_MASTER_GUIDE.md v2.3",
   "complete_map_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
@@ -81,47 +83,58 @@
     "nondeductive_context_links": 261,
     "total_review_items": 1608
   },
-  "pending_note": "AC, IL, ONLINE-AC, R189–R205, SCU20261010, MPC20261010, CBI20261010 and EIP20261010 remain disabled. Six additional correction nodes and two rules override eight pending records only; neither candidate nor correction counts enter the completed graph.",
+  "pending_note": "All 25 listed checkpoints remain disabled, including SCU despite public disclosure. DVC contributes 24 nodes, 6 rules and 15 nondeductive contexts only to the candidate layer. Existing correction overlays remain disabled; no candidate counts enter the completed graph. Concurrent EIP 6/3/5 is preserved separately and remains disabled.",
   "publication_coverage": {
     "entry": "PUBLICATION_COVERAGE.json",
-    "version": "UCT-PUB-v1.0.21",
+    "version": "UCT-PUB-v1.0.22",
     "base_census_version": "UCT-PUB-v1.0.0",
-    "update": "records/EIP20261010_Exoskeleton_Instrumentation/PUBLICATION_COVERAGE_UPDATE.json",
-    "report": "records/PUB20261009_Publication_Coverage/PUBLICATION_COVERAGE_REPORT_ZH.md",
-    "nondeductive": true
+    "update": "records/DVC20261010_Device_Consumer_Validation/PUBLICATION_COVERAGE_UPDATE.json",
+    "report": "publication/UCT-PUB-v1.0.22/COVERAGE_REPORT_ZH.md",
+    "nondeductive": true,
+    "counting_scope": "Frozen verified corpus plus one independently verified SCU DOI; not a new worldwide census."
   },
   "latest_activity": {
-    "id": "EIP20261010",
-    "kind": "exoskeleton_instrumentation_and_consumer_read_nonidentification",
-    "work_log": "records/EIP20261010_Exoskeleton_Instrumentation/WORK_LOG.md",
-    "handoff": "records/EIP20261010_Exoskeleton_Instrumentation/HANDOFF_ZH.md"
+    "id": "DVC20261010",
+    "kind": "device_contract_and_public_data_reanalysis_with_SCU_publication",
+    "work_log": "records/DVC20261010_Device_Consumer_Validation/WORK_LOG.md",
+    "handoff": "records/DVC20261010_Device_Consumer_Validation/HANDOFF_ZH.md"
   },
   "latest_pending_research": {
-    "id": "EIP20261010",
-    "result_version": "EIP-RESULT-v0.1.0",
+    "id": "DVC20261010",
+    "result_version": "DVC-RESULT-v0.1.0",
     "status": "PENDING_CHECKPOINT_DISABLED",
-    "source": "records/EIP20261010_Exoskeleton_Instrumentation/RESEARCH_NOTE.md",
-    "handoff": "records/EIP20261010_Exoskeleton_Instrumentation/HANDOFF_ZH.md",
-    "work_log": "records/EIP20261010_Exoskeleton_Instrumentation/WORK_LOG.md",
+    "source": "records/DVC20261010_Device_Consumer_Validation/RESEARCH_NOTE.md",
+    "handoff": "records/DVC20261010_Device_Consumer_Validation/HANDOFF_ZH.md",
+    "work_log": "records/DVC20261010_Device_Consumer_Validation/WORK_LOG.md",
     "enabled_as_established_premises": false,
-    "manuscript_status": "HOLD_STANDALONE_INTEGRATE_AS_SCU_MPC_METHODS_SECTION"
+    "manuscript_status": "HOLD_STANDALONE_POST_PUBLICATION_TECHNICAL_SUPPLEMENT",
+    "evidence_status": "PUBLIC_DATA_REANALYSIS_AND_FINITE_MODEL_COMPLETED; NO_NEW_HARDWARE_OR_HUMAN_DATA"
   },
-  "review_status_scope": "Completed release UCT-MAP-v1.1.2 only. EIP20261010 traversed every completed node/rule/context and the 1,608-item ledger for scoped compatibility, but inherited raw-contract/schema variation and historical proof reconstruction remain explicitly incomplete; no new completed map release, actual selective-read installation, named phenomenal bridge or reviewer closure.",
-  "next_priority": "Select one named central consumer and assess whether a physically and ethically credible selective discrepancy probe can satisfy carrier, timing, alternative-writer exclusion and faithful-readout premises; otherwise identify the first premise that fails. Do not resume generic source or control enumeration.",
+  "review_status_scope": "UCT-MAP-v1.1.2 is unchanged. DVC core-layer per-ID review covers all 1,608 completed items and all 45 DVC candidate items, with exact read and omitted fields in source receipts. Historical raw-contract/semantic/proof reconstruction debt remains unclosed; no new full-map semantic completion, actual installation or named phenomenal bridge.",
+  "next_priority": "Access one concrete installation and document M_D/P_E physical source ports, writer/cache state, issue/arrival/capture/commit/read events, independent clock bounds, same-episode binding, measured movement/tactile consequences and prospectively chosen response coding/PSE endpoint. A shadow without a path to the human endpoint supports only the external digital-consumer claim. Stop the corresponding actual-source inference when any required contract fails. For an inference about a human central consumer, additionally select one named consumer and evaluate a selective discrepancy probe with alternative-writer exclusion; if that cannot be secured, identify the first failed premise. Preserve the EIP partial-output versus complete-organization distinction.",
   "latest_scoped_review": {
-    "audit": "records/SCU20261010_Source_Consumer_Protocols/MAP_AUDIT.md",
-    "exact_unread_scope": "records/SCU20261010_Source_Consumer_Protocols/review/EXACT_UNREAD_SCOPE.json",
-    "status": "AUDIT_INCOMPLETE_AT_FULL_RAW_CONTRACT_AND_HISTORICAL_PROOF_DEPTH",
-    "statement_premise_relationship_items_read": 1608,
-    "unread_statement_premise_relationship_ids": [],
-    "raw_contract_item_ids_not_fully_reread": 901,
-    "raw_contract_fields_not_fully_reread": 1101,
-    "supplementary_semantic_field_item_ids_not_fully_reread": 495,
-    "counts_overlap_do_not_sum": true,
-    "supplementary_semantic_fields_not_fully_reread": 727,
-    "distinct_item_ids_with_unreviewed_nested_or_supplementary_fields": 1034,
-    "distinct_unreviewed_nested_or_supplementary_fields": 1828,
-    "historical_source_proof_ids_not_fully_independently_reconstructed": 1347
+    "audit": "records/DVC20261010_Device_Consumer_Validation/MAP_AUDIT.md",
+    "per_id_core_review": "records/DVC20261010_Device_Consumer_Validation/ALL_MAP_CORE_REVIEW.json.gz",
+    "summary": "records/DVC20261010_Device_Consumer_Validation/ALL_MAP_CORE_REVIEW_SUMMARY.json",
+    "status": "CORE_LAYER_COMPATIBILITY_REVIEW_COMPLETE; FULL_HISTORICAL_DEPTH_OPEN",
+    "core_layer_item_ids_visited": 1608,
+    "unvisited_core_ids": [],
+    "candidate_items_independently_reviewed": 45,
+    "full_map_semantic_completion": false,
+    "inherited_unclosed_depth_ledger": {
+      "ids": 1034,
+      "fields": 1828,
+      "proof_ids": 1347,
+      "counting_warning": "Historical unresolved audit debt, not a newly computed count of all currently unread leaf paths; newer per-component pointers cannot be directly subtracted."
+    },
+    "qc_open": [
+      "QC-20261008-10",
+      "IA-QC11",
+      "QC-20261008-12",
+      "QC-20261008-13",
+      "SCU-OPEN-R191-NORMALIZATION",
+      "SCU-AUDIT-DEPTH"
+    ]
   },
   "effective_pending_corrections": {
     "index": "records/SCU20261010_Source_Consumer_Protocols/corrections/EFFECTIVE_CORRECTION_INDEX.json",
@@ -132,5 +145,45 @@
       "R201",
       "R202"
     ]
+  },
+  "latest_publication": {
+    "research_id": "SCU20261010",
+    "report": "SCU-PAPER",
+    "version": "1.0.1",
+    "status": "PUBLISHED_PREPRINT_PUBLIC_READBACK_AND_DOI_RESOLUTION_VERIFIED",
+    "doi": "10.5281/zenodo.23272690",
+    "doi_url": "https://doi.org/10.5281/zenodo.23272690",
+    "manuscript": "records/SCUPUB20261010_DOI_Publication/release/matched-behavior-and-source-use-v1.0.1.md",
+    "pdf": "records/SCUPUB20261010_DOI_Publication/release/matched-behavior-and-source-use-v1.0.1.pdf",
+    "receipt": "records/SCUPUB20261010_DOI_Publication/FINAL_PUBLICATION_RECEIPT.json",
+    "peer_reviewed": false,
+    "scientific_map_admission_changed": false,
+    "DVC_in_published_paper": false
+  },
+  "prior_scoped_review_snapshot": {
+    "source": "records/DVC20261010_Device_Consumer_Validation/history/before_DVC_bd66a621/CURRENT_STATE.json",
+    "field": "latest_scoped_review",
+    "role": "Historical unresolved audit-debt record; old numbers are not newly measured current unread totals."
+  },
+  "latest_activity_persistence": "records/DVC20261010_Device_Consumer_Validation/DUAL_SAVE_RECEIPT.json",
+  "concurrent_research_preserved": {
+    "id": "EIP20261010",
+    "commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+    "source": "records/EIP20261010_Exoskeleton_Instrumentation/RESEARCH_NOTE.md",
+    "handoff": "records/EIP20261010_Exoskeleton_Instrumentation/HANDOFF_ZH.md",
+    "status": "PENDING_CHECKPOINT_DISABLED",
+    "snapshot": "records/DVC20261010_Device_Consumer_Validation/history/before_DVC_d8c94faa/CURRENT_STATE.json"
+  },
+  "additional_candidate_normalization_open": {
+    "source": "records/DVC20261010_Device_Consumer_Validation/review/concurrent_eip/EIP_NORMALIZATION_QUALIFICATIONS.json",
+    "ids": [
+      "EIP-NQ1",
+      "EIP-NQ2",
+      "EIP-NQ3",
+      "EIP-NQ4"
+    ],
+    "nondeductive": true,
+    "map_replacement": false,
+    "actual_application_established": false
   }
 }

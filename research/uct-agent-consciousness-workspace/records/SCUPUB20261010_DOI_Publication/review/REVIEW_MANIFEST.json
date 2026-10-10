@@ -1,0 +1,306 @@
+{
+  "schema": "uct-publication-readiness-audit/1",
+  "review_id": "SCU-RELEASE-REVIEW-20261010-v1.0.0",
+  "generated_utc": "2026-10-10T01:28:28.366076+00:00",
+  "research_sha": "8bac31cc0b9fb4c70d87f688dabbadeb6166addb",
+  "main_sha": "6cfb89f0b88605da9a44da9c97203729a6742894",
+  "frozen_census_main": "fc568e8718e82b3cda6ede0e628aa3342179bebc",
+  "decision": "SCIENTIFICALLY_READY_MINIMAL_RELEASE_STATUS_REVISION",
+  "new_scientific_blockers": [],
+  "release_editorial_conditions": [
+    "PR-01: replace historical no-DOI status in a separately preserved release copy"
+  ],
+  "operator_verification": [
+    "PR-02: inspect/reuse any matching signed-in DOI deposit record before creating a new work"
+  ],
+  "nonblocking": [
+    "PR-03: MPC follow-up citation optional; do not silently identify availability indicators with source values",
+    "PR-04: map and actual/H gaps remain disclosed",
+    "PR-05: retained exact empirical read scope",
+    "PR-06: stable companion release pointer"
+  ],
+  "mpc_action": "OPTIONAL_PINNED_FOLLOWUP_REFERENCE_NO_FULL_MERGE_REQUIRED",
+  "scope": "One cumulative R204/R205/SCU theoretical methods/application preprint; no general mathematical priority or actual phenomenal validation.",
+  "local_read_scopes": [
+    {
+      "path": "RESEARCH_MASTER_GUIDE.md",
+      "sha256": "d21e7a19b18390b7eef1b1f75f802a922c3fc2d65d362a9de59a29e35405ef46",
+      "bytes": 29594,
+      "lines": 220,
+      "actual_scope": "Entire pre-MPC body reread this audit; exact two-line MPC insertion independently read from final commit diff. Complete final policy coverage, not complete source-proof reconstruction."
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "60cc6cf74b8ffc6bf7b6263f0c84afb1c93cd9543112359bfdc53b83a27d9037",
+      "bytes": 97763,
+      "lines": 561,
+      "actual_scope": "Operative current checkpoint plus exact concurrent insertion and relevant parent publication policy. Historical body inherited from previous task reading; not claimed freshly fully reread."
+    },
+    {
+      "path": "records/SCU20261010_Source_Consumer_Protocols/Matched_Behavior_and_Source_Use_v1.0.0.md",
+      "sha256": "8e5bdfd1d4e5adc537a20424c5648350c6c6f6e4d9181a9d78bdd2aec73aed4c",
+      "bytes": 45595,
+      "lines": 392,
+      "actual_scope": "Entire current manuscript including all proofs, abstract, references and declarations."
+    },
+    {
+      "path": "records/SCU20261010_Source_Consumer_Protocols/Matched_Behavior_and_Source_Use_v1.0.0.pdf",
+      "sha256": "5c4afbe1c5d5b51994f3fc5a60fb49e75f5114b6831fcba4ab470295cd0d62bb",
+      "bytes": 278096,
+      "lines": null,
+      "actual_scope": "Bytes hashed and matched existing all-page PDF_QA_RECEIPT; no new visual rendering performed by this reviewer."
+    },
+    {
+      "path": "records/SCU20261010_Source_Consumer_Protocols/RESEARCH_NOTE.md",
+      "sha256": "5f9249a9fbe6ea96342b6b004e34332a5dbd86fbea5c8261816aac983f212fa7",
+      "bytes": 31169,
+      "lines": 280,
+      "actual_scope": "Entire 280-line note including all proofs, scope and prior-subtraction table."
+    },
+    {
+      "path": "records/SCU20261010_Source_Consumer_Protocols/MODEL_CLAIM_CONTRACTS.json",
+      "sha256": "2fd7a42632cae3fbf91ec9b1e0304d643c4c9fd53c3abc703191f52e91c84ddb",
+      "bytes": 16133,
+      "lines": 398,
+      "actual_scope": "Entire sidecar; effective current claim status separately read from decision/review response."
+    },
+    {
+      "path": "records/SCU20261010_Source_Consumer_Protocols/CLAIM_LEDGER.json",
+      "sha256": "b7dd2b9072e812b414fb851d729aa294fea6f5cf3c514d2c7e0dc5f7e3dc2a06",
+      "bytes": 16392,
+      "lines": 393,
+      "actual_scope": "Partial printed statement/status excerpts and full machine claim-ID comparison; do not claim full fresh text reading."
+    },
+    {
+      "path": "records/SCU20261010_Source_Consumer_Protocols/SOURCE_SCOPE.json",
+      "sha256": "3bc8813d9f85a297989c7d74191a99da0332a7d2f172cf5bc7b5f993b7c0626e",
+      "bytes": 6474,
+      "lines": 161,
+      "actual_scope": "Entire file."
+    },
+    {
+      "path": "records/SCU20261010_Source_Consumer_Protocols/SOURCE_READING_RECEIPT.json",
+      "sha256": "fbab7ad4c5031bb33634c3e4b1fd90697d6827fa2ab9e647b21445d3a516c038",
+      "bytes": 9229,
+      "lines": 200,
+      "actual_scope": "Entire file; distinguishes this reviewer fresh read from original root/worker scopes."
+    },
+    {
+      "path": "records/SCU20261010_Source_Consumer_Protocols/REVIEW_RESPONSE.md",
+      "sha256": "f875c4bf3c01a282a49b2fbc028c2fc0602ace185a3fc43858191fc111bcb051",
+      "bytes": 6538,
+      "lines": 50,
+      "actual_scope": "Entire response including current disposition and old-issue table."
+    },
+    {
+      "path": "records/SCU20261010_Source_Consumer_Protocols/MANUSCRIPT_DECISION.json",
+      "sha256": "71580cd5634dd6cf3d38104e5b71ca3842586a0a7a0e1ea774e31b4b6c0ea530",
+      "bytes": 2371,
+      "lines": 47,
+      "actual_scope": "Entire file; authorization=false is historical, superseded by parent-reported current user authorization."
+    },
+    {
+      "path": "records/SCU20261010_Source_Consumer_Protocols/PUBLICATION_COVERAGE_UPDATE.json",
+      "sha256": "fdd414e4d1f6eb748ae43d6c826632772b4d2f4f06076634b9e4d1a68848bc08",
+      "bytes": 5891,
+      "lines": 138,
+      "actual_scope": "Entire file; stable CP IDs retained."
+    },
+    {
+      "path": "records/SCU20261010_Source_Consumer_Protocols/review/PRIOR_ART_MANUSCRIPT_REVIEW.md",
+      "sha256": "0da226cc8aac8054576ab6efe87e3790f7a1b34fd70feff9b36b127c2639608e",
+      "bytes": 13063,
+      "lines": 133,
+      "actual_scope": "Entire previous review, originally authored by this reviewer; all revised issues compared to current manuscript."
+    },
+    {
+      "path": "records/SCU20261010_Source_Consumer_Protocols/review/MODEL_MANUSCRIPT_REVIEW.md",
+      "sha256": "f9339715590fc94229dafcd12b464ef3dabbe884006d223ebdd54e4a82b34ee5",
+      "bytes": 8263,
+      "lines": 49,
+      "actual_scope": "Entire prior model review; proof claims assessed against current text."
+    },
+    {
+      "path": "records/SCU20261010_Source_Consumer_Protocols/review/COVERAGE_AND_PRIOR_ART_REPORT.md",
+      "sha256": "84bc4ea8463768c821f304743a7cdd4a46ff7b26b06e1886e0595793183344e6",
+      "bytes": 25198,
+      "lines": 129,
+      "actual_scope": "Inherited complete prior-audit read and authored analysis from same session, not freshly fully reread in this release audit."
+    },
+    {
+      "path": "records/SCU20261010_Source_Consumer_Protocols/review/SOURCE_AND_COVERAGE_INVENTORY.json",
+      "sha256": "5ee8d838a8ed8e9fb72252352ec9e7b62390112c3f946df632b850c949a2fc92",
+      "bytes": 112887,
+      "lines": 2147,
+      "actual_scope": "Inherited prior-audit inventory; byte identity now recorded, not fresh full source rereading."
+    },
+    {
+      "path": "records/SCU20261010_Source_Consumer_Protocols/GAP_LEDGER.md",
+      "sha256": "27b222a14c3d029629e947ab34cc7decf21cdc3b0bce93c57988924f81440641",
+      "bytes": 3074,
+      "lines": 22,
+      "actual_scope": "Entire file."
+    },
+    {
+      "path": "records/SCU20261010_Source_Consumer_Protocols/FAILURES.md",
+      "sha256": "586a95f8678794a87f8851e66c5ad929bac30a1f453f0493ef8bb41e9cc768cf",
+      "bytes": 5777,
+      "lines": 32,
+      "actual_scope": "Entire file."
+    },
+    {
+      "path": "records/SCU20261010_Source_Consumer_Protocols/FINAL_REPRODUCTION_RECEIPT.json",
+      "sha256": "ed694d0d75cbfdd3596c5d94dd874e550e1e5d8e4abc4fa7f6b85dc957333108",
+      "bytes": 1651,
+      "lines": 42,
+      "actual_scope": "Entire file; compared to new six-job byte-identical rerun."
+    },
+    {
+      "path": "records/SCU20261010_Source_Consumer_Protocols/PDF_QA_RECEIPT.json",
+      "sha256": "10e97110ad6c0235a6839a7f149a3224e14fbf8810b3c648dbc7dcde2cf79bda",
+      "bytes": 854,
+      "lines": 20,
+      "actual_scope": "Entire file, artifact hashes compared."
+    },
+    {
+      "path": "records/SCU20261010_Source_Consumer_Protocols/reproduce_all.py",
+      "sha256": "3327a14961bbde9cd708585525332935408a0758625eeb6edbd909b9c1d21289",
+      "bytes": 2098,
+      "lines": 43,
+      "actual_scope": "Entire script; executed with TMPDIR inside approved review write directory."
+    },
+    {
+      "path": "records/SCU20261010_Source_Consumer_Protocols/check_source_consumers.py",
+      "sha256": "8643c0b7fa63cf78b0aa4c5f8a558480e8108e29a8a7eb6b6895c0930b7690cb",
+      "bytes": 20209,
+      "lines": 412,
+      "actual_scope": "Code identity checked against prior reviewed final version; executed through isolated reproducer. No fresh complete code line-by-line claim."
+    },
+    {
+      "path": "records/SCU20261010_Source_Consumer_Protocols/EXACT_RESULTS.json",
+      "sha256": "ef545c13518f1ff1292d8214dc455b2cf05239c497879550a525004372692300",
+      "bytes": 9742,
+      "lines": 528,
+      "actual_scope": "Byte identity checked through fresh independent execution; scientific counts compared with manuscript and prior reviewed result."
+    },
+    {
+      "path": "records/MPC20261010_Motor_Proprioceptive_Consumers/RESEARCH_NOTE.md",
+      "sha256": "f80659a16a4d57703cd30dd6135be2db298ada2488c81d139dae8094bd526783",
+      "bytes": 16188,
+      "lines": 154,
+      "actual_scope": "Entire note, all six claims and seven sections."
+    },
+    {
+      "path": "records/MPC20261010_Motor_Proprioceptive_Consumers/PROTOCOL.md",
+      "sha256": "b45445365107a68f85ecb8b4d252d303e367e948d7134f51132d25f4de6af63c",
+      "bytes": 1888,
+      "lines": 31,
+      "actual_scope": "Entire protocol."
+    },
+    {
+      "path": "records/MPC20261010_Motor_Proprioceptive_Consumers/SOURCE_SCOPE.md",
+      "sha256": "963b756229f41415957fe8b8b53038de22491c4b649a39108244fd0a4a76a83f",
+      "bytes": 4688,
+      "lines": 24,
+      "actual_scope": "Entire source-scope declaration; one new primary empirical source independently retrieved, others retained as declared inherited scope."
+    },
+    {
+      "path": "records/MPC20261010_Motor_Proprioceptive_Consumers/PUBLICATION_COVERAGE_UPDATE.json",
+      "sha256": "11409a152e1accde4984ca4c83b7e67364eb10707e8f5897290650f871b4eaaa",
+      "bytes": 2286,
+      "lines": 41,
+      "actual_scope": "Entire file."
+    },
+    {
+      "path": "records/MPC20261010_Motor_Proprioceptive_Consumers/GAP_LEDGER.md",
+      "sha256": "9162d04262745c749e907dddae4a52adf72960afb77834f7d15b4fb43ca23e5d",
+      "bytes": 2581,
+      "lines": 16,
+      "actual_scope": "Entire file."
+    },
+    {
+      "path": "records/MPC20261010_Motor_Proprioceptive_Consumers/FAILURES.md",
+      "sha256": "10b39f3a0d921a067b9aef75dd95af3afea08c85516b4a11e7f3ed6ccd3845c0",
+      "bytes": 1607,
+      "lines": 12,
+      "actual_scope": "Entire file."
+    }
+  ],
+  "external_fresh_reads": [
+    {
+      "id": "EXT-SCU-BS-META",
+      "url": "https://digitalcommons.memphis.edu/facpubs/5309/",
+      "refs": [
+        "turn56view2"
+      ],
+      "scope": "Complete institutional metadata confirming 28(4),1068-1071,2007,DOI; earlier full author manuscript read reused."
+    },
+    {
+      "id": "EXT-SCU-GANESH-META-ABSTRACT",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/29750195/",
+      "refs": [
+        "turn56view1"
+      ],
+      "scope": "Full eight-author metadata, abstract and indexed figure descriptions; no full experimental methods or raw-data audit."
+    },
+    {
+      "id": "EXT-MPC-2026-ATTENTION",
+      "url": "https://link.springer.com/article/10.3758/s13414-026-03288-7",
+      "refs": [
+        "turn57search0",
+        "turn57search1"
+      ],
+      "scope": "Primary abstract/introduction/open-practices and retrieved results excerpts; no full methods/raw data; DOI redirect failed before successful publisher search retrieval."
+    }
+  ],
+  "publication_identity_check": "PUBLICATION_IDENTITY_CHECK.json",
+  "search_limitations": {
+    "exact_title_queries": "Both search systems returned unrelated fallback results, no positive SCU hit. Negative search is not absence proof.",
+    "zenodo_account": "Not inspected by this reviewer",
+    "github_releases": "First30 visible records only"
+  },
+  "reproduction": {
+    "status": "PASS",
+    "runs": [
+      {
+        "name": "SCU",
+        "byte_equal": true,
+        "code_sha256": "8643c0b7fa63cf78b0aa4c5f8a558480e8108e29a8a7eb6b6895c0930b7690cb",
+        "result_sha256": "ef545c13518f1ff1292d8214dc455b2cf05239c497879550a525004372692300"
+      },
+      {
+        "name": "R204",
+        "byte_equal": true,
+        "code_sha256": "08e0556cb81055da7f78320f637358e83e366750df148430aa3a6a1c42ada99c",
+        "result_sha256": "3017d46e6647e6f299ee798688267ae31236979bb1644c3129414c73f7fb3adc"
+      },
+      {
+        "name": "R205",
+        "byte_equal": true,
+        "code_sha256": "1dc78420dee7066fa285cf5461cd4931628ba6dfa6afaf1ec73a9065d42f60d2",
+        "result_sha256": "4fe583d4bb6d8b37ea71d98ee226097f107e65c117831cfe497ec1a0efe0216e"
+      },
+      {
+        "name": "R201 coherent witnesses",
+        "byte_equal": true,
+        "code_sha256": "61016b93e306f70c7ce697a7d4adf221cf07b7e4c86b2f2311e8f795685ad84d",
+        "result_sha256": "c938155825fb385e86259285ee3c3fd9619b4007dd9ec4a10367623f133b77d5"
+      },
+      {
+        "name": "R202 residual witness",
+        "byte_equal": true,
+        "code_sha256": "b872ca1e015d2ea55aaf1c1078326549f0a5603e929d72696b3eb3589b0a64b7",
+        "result_sha256": "ce26b4c3d5f7ff7f742f120cb888cc9ade4a72d8dbd7ac0ecbec54602ddbd5c5"
+      },
+      {
+        "name": "R194/R201/R202 effective corrections",
+        "byte_equal": true,
+        "code_sha256": "69572b7dfc7b6d61e10a0ac9a34e0453bd22058c7893517c18cf8e00e097a1b0",
+        "result_sha256": "ec959982e7fb2b76f218dd7d4e0574d82819037698d50330d0f8a227b071a8cf"
+      }
+    ],
+    "scope": "Deterministic model/rational-witness reproduction only; no actual or phenomenal inference."
+  },
+  "authorization": "Parent reports explicit new user authorization for publication attempts. Reviewer performed no external write or deposit.",
+  "preservation": "Canonical manuscripts, remote branches and shared entry files were not edited by reviewer."
+}

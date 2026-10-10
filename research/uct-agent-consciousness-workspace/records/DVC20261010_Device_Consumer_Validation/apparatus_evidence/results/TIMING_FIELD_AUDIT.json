@@ -1,0 +1,252 @@
+{
+  "status": "EVENT_SEMANTICS_AND_UNITS_UNVALIDATED",
+  "numeric_reconstruction": "One NaN or integer + three-decimal-digit pair per declared time field",
+  "claim_limit": "Clock labels and decimal reconstruction do not measure physical stimulus onset or neural intake.",
+  "by_cell": [
+    {
+      "condition": "Control",
+      "attention": "Start",
+      "sample": "all_archived_subjects",
+      "nonempty_records": 1890,
+      "parsed_clock_records": 0,
+      "stimulation_minus_start_counts": {},
+      "stimulation_after_counts": {},
+      "speed_codes": {},
+      "duration_finite_n": 0,
+      "duration_median_numeric": null,
+      "duration_max_end_start_error": null,
+      "latency_equals_start_count": 0
+    },
+    {
+      "condition": "Control",
+      "attention": "Start",
+      "sample": "18_included_subjects",
+      "nonempty_records": 1620,
+      "parsed_clock_records": 0,
+      "stimulation_minus_start_counts": {},
+      "stimulation_after_counts": {},
+      "speed_codes": {},
+      "duration_finite_n": 0,
+      "duration_median_numeric": null,
+      "duration_max_end_start_error": null,
+      "latency_equals_start_count": 0
+    },
+    {
+      "condition": "Control",
+      "attention": "End",
+      "sample": "all_archived_subjects",
+      "nonempty_records": 1800,
+      "parsed_clock_records": 1800,
+      "stimulation_minus_start_counts": {
+        "0.0": 1800
+      },
+      "stimulation_after_counts": {
+        "0.0": 1800
+      },
+      "speed_codes": {},
+      "duration_finite_n": 1800,
+      "duration_median_numeric": 0.0,
+      "duration_max_end_start_error": 0.0,
+      "latency_equals_start_count": 1800
+    },
+    {
+      "condition": "Control",
+      "attention": "End",
+      "sample": "18_included_subjects",
+      "nonempty_records": 1620,
+      "parsed_clock_records": 1620,
+      "stimulation_minus_start_counts": {
+        "0.0": 1620
+      },
+      "stimulation_after_counts": {
+        "0.0": 1620
+      },
+      "speed_codes": {},
+      "duration_finite_n": 1620,
+      "duration_median_numeric": 0.0,
+      "duration_max_end_start_error": 0.0,
+      "latency_equals_start_count": 1620
+    },
+    {
+      "condition": "Active",
+      "attention": "Start",
+      "sample": "all_archived_subjects",
+      "nonempty_records": 1800,
+      "parsed_clock_records": 1800,
+      "stimulation_minus_start_counts": {
+        "0.0": 1800
+      },
+      "stimulation_after_counts": {
+        "0.0": 1800
+      },
+      "speed_codes": {},
+      "duration_finite_n": 1738,
+      "duration_median_numeric": 0.5985,
+      "duration_max_end_start_error": 0.0010000000000012221,
+      "latency_equals_start_count": 1800
+    },
+    {
+      "condition": "Active",
+      "attention": "Start",
+      "sample": "18_included_subjects",
+      "nonempty_records": 1620,
+      "parsed_clock_records": 1620,
+      "stimulation_minus_start_counts": {
+        "0.0": 1620
+      },
+      "stimulation_after_counts": {
+        "0.0": 1620
+      },
+      "speed_codes": {},
+      "duration_finite_n": 1593,
+      "duration_median_numeric": 0.58,
+      "duration_max_end_start_error": 0.0010000000000012221,
+      "latency_equals_start_count": 1620
+    },
+    {
+      "condition": "Active",
+      "attention": "End",
+      "sample": "all_archived_subjects",
+      "nonempty_records": 1800,
+      "parsed_clock_records": 1800,
+      "stimulation_minus_start_counts": {
+        "0.0": 1800
+      },
+      "stimulation_after_counts": {
+        "0.0": 1800
+      },
+      "speed_codes": {},
+      "duration_finite_n": 1673,
+      "duration_median_numeric": 0.684,
+      "duration_max_end_start_error": 0.001000000000000778,
+      "latency_equals_start_count": 1800
+    },
+    {
+      "condition": "Active",
+      "attention": "End",
+      "sample": "18_included_subjects",
+      "nonempty_records": 1620,
+      "parsed_clock_records": 1620,
+      "stimulation_minus_start_counts": {
+        "0.0": 1620
+      },
+      "stimulation_after_counts": {
+        "0.0": 1620
+      },
+      "speed_codes": {},
+      "duration_finite_n": 1531,
+      "duration_median_numeric": 0.679,
+      "duration_max_end_start_error": 0.001000000000000778,
+      "latency_equals_start_count": 1620
+    },
+    {
+      "condition": "Passive",
+      "attention": "Start",
+      "sample": "all_archived_subjects",
+      "nonempty_records": 1790,
+      "parsed_clock_records": 1790,
+      "stimulation_minus_start_counts": {
+        "0.5": 1776,
+        "0.0": 14
+      },
+      "stimulation_after_counts": {
+        "0.5": 1776,
+        "0.0": 14
+      },
+      "speed_codes": {
+        "M": 1790
+      },
+      "duration_finite_n": 1763,
+      "duration_median_numeric": 1.092,
+      "duration_max_end_start_error": 0.0010000000000018883,
+      "latency_equals_start_count": 1790
+    },
+    {
+      "condition": "Passive",
+      "attention": "Start",
+      "sample": "18_included_subjects",
+      "nonempty_records": 1610,
+      "parsed_clock_records": 1610,
+      "stimulation_minus_start_counts": {
+        "0.5": 1609,
+        "0.0": 1
+      },
+      "stimulation_after_counts": {
+        "0.5": 1609,
+        "0.0": 1
+      },
+      "speed_codes": {
+        "M": 1610
+      },
+      "duration_finite_n": 1607,
+      "duration_median_numeric": 1.088,
+      "duration_max_end_start_error": 0.0010000000000018883,
+      "latency_equals_start_count": 1610
+    },
+    {
+      "condition": "Passive",
+      "attention": "End",
+      "sample": "all_archived_subjects",
+      "nonempty_records": 1795,
+      "parsed_clock_records": 1795,
+      "stimulation_minus_start_counts": {
+        "0.5": 1788,
+        "0.0": 7
+      },
+      "stimulation_after_counts": {
+        "0.5": 1788,
+        "0.0": 7
+      },
+      "speed_codes": {
+        "M": 1795
+      },
+      "duration_finite_n": 1769,
+      "duration_median_numeric": 1.109,
+      "duration_max_end_start_error": 0.0010000000000012221,
+      "latency_equals_start_count": 1795
+    },
+    {
+      "condition": "Passive",
+      "attention": "End",
+      "sample": "18_included_subjects",
+      "nonempty_records": 1615,
+      "parsed_clock_records": 1615,
+      "stimulation_minus_start_counts": {
+        "0.5": 1615
+      },
+      "stimulation_after_counts": {
+        "0.5": 1615
+      },
+      "speed_codes": {
+        "M": 1615
+      },
+      "duration_finite_n": 1613,
+      "duration_median_numeric": 1.105,
+      "duration_max_end_start_error": 0.0010000000000012221,
+      "latency_equals_start_count": 1615
+    }
+  ],
+  "blank_lines": [
+    {
+      "file": "Passive/End/SW73_Pes.csv",
+      "line": 88
+    },
+    {
+      "file": "Passive/End/ZO41_Pes.csv",
+      "line": 2
+    },
+    {
+      "file": "Passive/Start/KC21_Pec.csv",
+      "line": 89
+    },
+    {
+      "file": "Passive/Start/LT68_Pec.csv",
+      "line": 91
+    },
+    {
+      "file": "Passive/Start/SW73_Pec.csv",
+      "line": 90
+    }
+  ],
+  "unreconstructed_rows": []
+}

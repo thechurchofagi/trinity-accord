@@ -1,0 +1,2658 @@
+{
+  "module_id": "DVC20261010",
+  "result_id": "DVC-RESULT-v0.1.0",
+  "status": "PASS",
+  "violations": 0,
+  "counts": {
+    "event_order_schedules": 720,
+    "both_current_tokens_consumed": 6,
+    "consume_before_commit_rejected": 360,
+    "matched_output_with_wrong_epoch_or_unarrived_probe": 354,
+    "gate_factorial_pairs": 4,
+    "robust_window_parameter_sample_checks": 4896,
+    "paired_nonempty_safe_window_cases": 400,
+    "current_consequence_encoder_chronology_cases": 108
+  },
+  "execution_type": "Python finite event simulation and independent temporal formulas",
+  "hardware_accessed": false,
+  "human_participants": 0,
+  "phenomenal_variables_generated": false,
+  "primary_endpoint_design_only": "Prospective PSE from tactile comparison; independently fitted sigma and source-labelled JND kept distinct; agency/ownership/H not measured",
+  "witnesses": [
+    {
+      "id": "gate_closed_retains_old_latch",
+      "rows": [
+        {
+          "configured_mask_MP": [
+            0,
+            0
+          ],
+          "retained_buffer_input_values": [
+            1,
+            1
+          ],
+          "retained_buffer_source_epochs": [
+            0,
+            0
+          ],
+          "retained_output_AND": 1,
+          "invalidated_input_values": [
+            0,
+            0
+          ],
+          "invalidated_output_AND": 0
+        },
+        {
+          "configured_mask_MP": [
+            0,
+            1
+          ],
+          "retained_buffer_input_values": [
+            1,
+            1
+          ],
+          "retained_buffer_source_epochs": [
+            0,
+            1
+          ],
+          "retained_output_AND": 1,
+          "invalidated_input_values": [
+            0,
+            1
+          ],
+          "invalidated_output_AND": 0
+        },
+        {
+          "configured_mask_MP": [
+            1,
+            0
+          ],
+          "retained_buffer_input_values": [
+            1,
+            1
+          ],
+          "retained_buffer_source_epochs": [
+            1,
+            0
+          ],
+          "retained_output_AND": 1,
+          "invalidated_input_values": [
+            1,
+            0
+          ],
+          "invalidated_output_AND": 0
+        },
+        {
+          "configured_mask_MP": [
+            1,
+            1
+          ],
+          "retained_buffer_input_values": [
+            1,
+            1
+          ],
+          "retained_buffer_source_epochs": [
+            1,
+            1
+          ],
+          "retained_output_AND": 1,
+          "invalidated_input_values": [
+            1,
+            1
+          ],
+          "invalidated_output_AND": 1
+        }
+      ],
+      "plant_traces_equal_in_declared_decoupled_model": true
+    },
+    {
+      "id": "closed_at_consume_but_current_tokens_read",
+      "result": {
+        "output": 1,
+        "reads": [
+          {
+            "lane": "M",
+            "source_id": "ev13",
+            "source_epoch": 1,
+            "source_lane": "M",
+            "intake": "ev21",
+            "value": 1,
+            "kind": "data",
+            "source_supplied": true,
+            "read_event": "ev26"
+          },
+          {
+            "lane": "P",
+            "source_id": "ev14",
+            "source_epoch": 1,
+            "source_lane": "P",
+            "intake": "ev22",
+            "value": 1,
+            "kind": "data",
+            "source_supplied": true,
+            "read_event": "ev27"
+          }
+        ],
+        "snapshot_id": "ev23"
+      },
+      "events": [
+        {
+          "id": "ev0",
+          "kind": "source_issue",
+          "tick": -6,
+          "parents": [],
+          "lane": "M",
+          "epoch": 0,
+          "value": 1
+        },
+        {
+          "id": "ev1",
+          "kind": "source_issue",
+          "tick": -6,
+          "parents": [],
+          "lane": "P",
+          "epoch": 0,
+          "value": 1
+        },
+        {
+          "id": "ev2",
+          "kind": "port_arrival",
+          "tick": -5,
+          "parents": [
+            "ev0"
+          ],
+          "destination": "M",
+          "source_lane": "M",
+          "source_epoch": 0,
+          "claimed_epoch": 0,
+          "value": 1
+        },
+        {
+          "id": "ev3",
+          "kind": "port_arrival",
+          "tick": -5,
+          "parents": [
+            "ev1"
+          ],
+          "destination": "P",
+          "source_lane": "P",
+          "source_epoch": 0,
+          "claimed_epoch": 0,
+          "value": 1
+        },
+        {
+          "id": "ev4",
+          "kind": "capture_gate",
+          "tick": -4,
+          "parents": [],
+          "lane": "M",
+          "open": true
+        },
+        {
+          "id": "ev5",
+          "kind": "capture_gate",
+          "tick": -4,
+          "parents": [],
+          "lane": "P",
+          "open": true
+        },
+        {
+          "id": "ev6",
+          "kind": "sample_latch",
+          "tick": -3,
+          "parents": [
+            "ev2"
+          ],
+          "lane": "M",
+          "source_id": "ev0",
+          "source_epoch": 0,
+          "source_lane": "M",
+          "value": 1
+        },
+        {
+          "id": "ev7",
+          "kind": "sample_latch",
+          "tick": -3,
+          "parents": [
+            "ev3"
+          ],
+          "lane": "P",
+          "source_id": "ev1",
+          "source_epoch": 0,
+          "source_lane": "P",
+          "value": 1
+        },
+        {
+          "id": "ev8",
+          "kind": "trial_begin",
+          "tick": 0,
+          "parents": [],
+          "epoch": 1,
+          "mask": [
+            1,
+            1
+          ],
+          "invalidate": true
+        },
+        {
+          "id": "ev9",
+          "kind": "buffer_invalidate",
+          "tick": 0,
+          "parents": [],
+          "lane": "M",
+          "epoch": 1
+        },
+        {
+          "id": "ev10",
+          "kind": "buffer_invalidate",
+          "tick": 0,
+          "parents": [],
+          "lane": "P",
+          "epoch": 1
+        },
+        {
+          "id": "ev11",
+          "kind": "capture_gate",
+          "tick": 0,
+          "parents": [],
+          "lane": "M",
+          "open": true
+        },
+        {
+          "id": "ev12",
+          "kind": "capture_gate",
+          "tick": 0,
+          "parents": [],
+          "lane": "P",
+          "open": true
+        },
+        {
+          "id": "ev13",
+          "kind": "source_issue",
+          "tick": 0,
+          "parents": [],
+          "lane": "M",
+          "epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev14",
+          "kind": "source_issue",
+          "tick": 0,
+          "parents": [],
+          "lane": "P",
+          "epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev15",
+          "kind": "plant_step",
+          "tick": 0,
+          "parents": [],
+          "command": 0,
+          "position": 0
+        },
+        {
+          "id": "ev16",
+          "kind": "plant_step",
+          "tick": 1,
+          "parents": [],
+          "command": 1,
+          "position": 1
+        },
+        {
+          "id": "ev17",
+          "kind": "port_arrival",
+          "tick": 2,
+          "parents": [
+            "ev13"
+          ],
+          "destination": "M",
+          "source_lane": "M",
+          "source_epoch": 1,
+          "claimed_epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev18",
+          "kind": "port_arrival",
+          "tick": 2,
+          "parents": [
+            "ev14"
+          ],
+          "destination": "P",
+          "source_lane": "P",
+          "source_epoch": 1,
+          "claimed_epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev19",
+          "kind": "sample_latch",
+          "tick": 3,
+          "parents": [
+            "ev17"
+          ],
+          "lane": "M",
+          "source_id": "ev13",
+          "source_epoch": 1,
+          "source_lane": "M",
+          "value": 1
+        },
+        {
+          "id": "ev20",
+          "kind": "sample_latch",
+          "tick": 3,
+          "parents": [
+            "ev18"
+          ],
+          "lane": "P",
+          "source_id": "ev14",
+          "source_epoch": 1,
+          "source_lane": "P",
+          "value": 1
+        },
+        {
+          "id": "ev21",
+          "kind": "snapshot_copy",
+          "tick": 4,
+          "parents": [
+            "ev19"
+          ],
+          "lane": "M",
+          "source_id": "ev13",
+          "source_epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev22",
+          "kind": "snapshot_copy",
+          "tick": 4,
+          "parents": [
+            "ev20"
+          ],
+          "lane": "P",
+          "source_id": "ev14",
+          "source_epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev23",
+          "kind": "snapshot_commit",
+          "tick": 4,
+          "parents": [
+            "ev21",
+            "ev22"
+          ],
+          "epoch": 1,
+          "mask": [
+            1,
+            1
+          ]
+        },
+        {
+          "id": "ev24",
+          "kind": "capture_gate",
+          "tick": 5,
+          "parents": [],
+          "lane": "M",
+          "open": false
+        },
+        {
+          "id": "ev25",
+          "kind": "capture_gate",
+          "tick": 5,
+          "parents": [],
+          "lane": "P",
+          "open": false
+        },
+        {
+          "id": "ev26",
+          "kind": "consumer_read",
+          "tick": 6,
+          "parents": [
+            "ev21"
+          ],
+          "lane": "M",
+          "source_id": "ev13",
+          "source_epoch": 1,
+          "value": 1,
+          "interface": "immutable_snapshot"
+        },
+        {
+          "id": "ev27",
+          "kind": "consumer_read",
+          "tick": 6,
+          "parents": [
+            "ev22"
+          ],
+          "lane": "P",
+          "source_id": "ev14",
+          "source_epoch": 1,
+          "value": 1,
+          "interface": "immutable_snapshot"
+        },
+        {
+          "id": "ev28",
+          "kind": "consumer_output",
+          "tick": 6,
+          "parents": [
+            "ev26",
+            "ev27"
+          ],
+          "output": 1,
+          "mode": "eager_or"
+        }
+      ]
+    },
+    {
+      "id": "issued_but_not_arrived_probe",
+      "result": {
+        "output": 1,
+        "reads": [
+          {
+            "lane": "M",
+            "source_id": "ev11",
+            "source_epoch": 1,
+            "source_lane": "M",
+            "intake": "ev16",
+            "value": 1,
+            "kind": "data",
+            "source_supplied": true,
+            "read_event": "ev19"
+          },
+          {
+            "lane": "P",
+            "source_id": "ev1",
+            "source_epoch": 0,
+            "source_lane": "P",
+            "intake": "ev17",
+            "value": 1,
+            "kind": "data",
+            "source_supplied": true,
+            "read_event": "ev20"
+          }
+        ],
+        "snapshot_id": "ev18"
+      },
+      "failures": [
+        "P:wrong_source_token_or_epoch"
+      ],
+      "events": [
+        {
+          "id": "ev0",
+          "kind": "source_issue",
+          "tick": -6,
+          "parents": [],
+          "lane": "M",
+          "epoch": 0,
+          "value": 1
+        },
+        {
+          "id": "ev1",
+          "kind": "source_issue",
+          "tick": -6,
+          "parents": [],
+          "lane": "P",
+          "epoch": 0,
+          "value": 1
+        },
+        {
+          "id": "ev2",
+          "kind": "port_arrival",
+          "tick": -5,
+          "parents": [
+            "ev0"
+          ],
+          "destination": "M",
+          "source_lane": "M",
+          "source_epoch": 0,
+          "claimed_epoch": 0,
+          "value": 1
+        },
+        {
+          "id": "ev3",
+          "kind": "port_arrival",
+          "tick": -5,
+          "parents": [
+            "ev1"
+          ],
+          "destination": "P",
+          "source_lane": "P",
+          "source_epoch": 0,
+          "claimed_epoch": 0,
+          "value": 1
+        },
+        {
+          "id": "ev4",
+          "kind": "capture_gate",
+          "tick": -4,
+          "parents": [],
+          "lane": "M",
+          "open": true
+        },
+        {
+          "id": "ev5",
+          "kind": "capture_gate",
+          "tick": -4,
+          "parents": [],
+          "lane": "P",
+          "open": true
+        },
+        {
+          "id": "ev6",
+          "kind": "sample_latch",
+          "tick": -3,
+          "parents": [
+            "ev2"
+          ],
+          "lane": "M",
+          "source_id": "ev0",
+          "source_epoch": 0,
+          "source_lane": "M",
+          "value": 1
+        },
+        {
+          "id": "ev7",
+          "kind": "sample_latch",
+          "tick": -3,
+          "parents": [
+            "ev3"
+          ],
+          "lane": "P",
+          "source_id": "ev1",
+          "source_epoch": 0,
+          "source_lane": "P",
+          "value": 1
+        },
+        {
+          "id": "ev8",
+          "kind": "trial_begin",
+          "tick": 0,
+          "parents": [],
+          "epoch": 1,
+          "mask": [
+            1,
+            1
+          ],
+          "invalidate": false
+        },
+        {
+          "id": "ev9",
+          "kind": "capture_gate",
+          "tick": 0,
+          "parents": [],
+          "lane": "M",
+          "open": true
+        },
+        {
+          "id": "ev10",
+          "kind": "capture_gate",
+          "tick": 0,
+          "parents": [],
+          "lane": "P",
+          "open": true
+        },
+        {
+          "id": "ev11",
+          "kind": "source_issue",
+          "tick": 0,
+          "parents": [],
+          "lane": "M",
+          "epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev12",
+          "kind": "source_issue",
+          "tick": 0,
+          "parents": [],
+          "lane": "P",
+          "epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev13",
+          "kind": "port_arrival",
+          "tick": 1,
+          "parents": [
+            "ev11"
+          ],
+          "destination": "M",
+          "source_lane": "M",
+          "source_epoch": 1,
+          "claimed_epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev14",
+          "kind": "sample_latch",
+          "tick": 2,
+          "parents": [
+            "ev13"
+          ],
+          "lane": "M",
+          "source_id": "ev11",
+          "source_epoch": 1,
+          "source_lane": "M",
+          "value": 1
+        },
+        {
+          "id": "ev15",
+          "kind": "sample_latch",
+          "tick": 2,
+          "parents": [
+            "ev3"
+          ],
+          "lane": "P",
+          "source_id": "ev1",
+          "source_epoch": 0,
+          "source_lane": "P",
+          "value": 1
+        },
+        {
+          "id": "ev16",
+          "kind": "snapshot_copy",
+          "tick": 3,
+          "parents": [
+            "ev14"
+          ],
+          "lane": "M",
+          "source_id": "ev11",
+          "source_epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev17",
+          "kind": "snapshot_copy",
+          "tick": 3,
+          "parents": [
+            "ev15"
+          ],
+          "lane": "P",
+          "source_id": "ev1",
+          "source_epoch": 0,
+          "value": 1
+        },
+        {
+          "id": "ev18",
+          "kind": "snapshot_commit",
+          "tick": 3,
+          "parents": [
+            "ev16",
+            "ev17"
+          ],
+          "epoch": 1,
+          "mask": [
+            1,
+            1
+          ]
+        },
+        {
+          "id": "ev19",
+          "kind": "consumer_read",
+          "tick": 4,
+          "parents": [
+            "ev16"
+          ],
+          "lane": "M",
+          "source_id": "ev11",
+          "source_epoch": 1,
+          "value": 1,
+          "interface": "immutable_snapshot"
+        },
+        {
+          "id": "ev20",
+          "kind": "consumer_read",
+          "tick": 4,
+          "parents": [
+            "ev17"
+          ],
+          "lane": "P",
+          "source_id": "ev1",
+          "source_epoch": 0,
+          "value": 1,
+          "interface": "immutable_snapshot"
+        },
+        {
+          "id": "ev21",
+          "kind": "consumer_output",
+          "tick": 4,
+          "parents": [
+            "ev19",
+            "ev20"
+          ],
+          "output": 1,
+          "mode": "eager_or"
+        },
+        {
+          "id": "ev22",
+          "kind": "port_arrival",
+          "tick": 5,
+          "parents": [
+            "ev12"
+          ],
+          "destination": "P",
+          "source_lane": "P",
+          "source_epoch": 1,
+          "claimed_epoch": 1,
+          "value": 1
+        }
+      ]
+    },
+    {
+      "id": "postcommit_overwrite_and_mixed_epochs",
+      "stable": {
+        "output": 1,
+        "reads": [
+          {
+            "lane": "M",
+            "source_id": "ev13",
+            "source_epoch": 1,
+            "source_lane": "M",
+            "intake": "ev21",
+            "value": 1,
+            "kind": "data",
+            "source_supplied": true,
+            "read_event": "ev27"
+          },
+          {
+            "lane": "P",
+            "source_id": "ev14",
+            "source_epoch": 1,
+            "source_lane": "P",
+            "intake": "ev22",
+            "value": 1,
+            "kind": "data",
+            "source_supplied": true,
+            "read_event": "ev28"
+          }
+        ],
+        "snapshot_id": "ev23"
+      },
+      "mixed": {
+        "output": 1,
+        "reads": [
+          {
+            "lane": "M",
+            "source_id": "ev13",
+            "source_epoch": 1,
+            "source_lane": "M",
+            "intake": "ev30",
+            "value": 1,
+            "kind": "data",
+            "source_supplied": true,
+            "read_event": "ev33"
+          },
+          {
+            "lane": "P",
+            "source_id": "ev24",
+            "source_epoch": 2,
+            "source_lane": "P",
+            "intake": "ev31",
+            "value": 1,
+            "kind": "data",
+            "source_supplied": true,
+            "read_event": "ev34"
+          }
+        ],
+        "snapshot_id": "ev32"
+      },
+      "events": [
+        {
+          "id": "ev0",
+          "kind": "source_issue",
+          "tick": -6,
+          "parents": [],
+          "lane": "M",
+          "epoch": 0,
+          "value": 1
+        },
+        {
+          "id": "ev1",
+          "kind": "source_issue",
+          "tick": -6,
+          "parents": [],
+          "lane": "P",
+          "epoch": 0,
+          "value": 1
+        },
+        {
+          "id": "ev2",
+          "kind": "port_arrival",
+          "tick": -5,
+          "parents": [
+            "ev0"
+          ],
+          "destination": "M",
+          "source_lane": "M",
+          "source_epoch": 0,
+          "claimed_epoch": 0,
+          "value": 1
+        },
+        {
+          "id": "ev3",
+          "kind": "port_arrival",
+          "tick": -5,
+          "parents": [
+            "ev1"
+          ],
+          "destination": "P",
+          "source_lane": "P",
+          "source_epoch": 0,
+          "claimed_epoch": 0,
+          "value": 1
+        },
+        {
+          "id": "ev4",
+          "kind": "capture_gate",
+          "tick": -4,
+          "parents": [],
+          "lane": "M",
+          "open": true
+        },
+        {
+          "id": "ev5",
+          "kind": "capture_gate",
+          "tick": -4,
+          "parents": [],
+          "lane": "P",
+          "open": true
+        },
+        {
+          "id": "ev6",
+          "kind": "sample_latch",
+          "tick": -3,
+          "parents": [
+            "ev2"
+          ],
+          "lane": "M",
+          "source_id": "ev0",
+          "source_epoch": 0,
+          "source_lane": "M",
+          "value": 1
+        },
+        {
+          "id": "ev7",
+          "kind": "sample_latch",
+          "tick": -3,
+          "parents": [
+            "ev3"
+          ],
+          "lane": "P",
+          "source_id": "ev1",
+          "source_epoch": 0,
+          "source_lane": "P",
+          "value": 1
+        },
+        {
+          "id": "ev8",
+          "kind": "trial_begin",
+          "tick": 0,
+          "parents": [],
+          "epoch": 1,
+          "mask": [
+            1,
+            1
+          ],
+          "invalidate": true
+        },
+        {
+          "id": "ev9",
+          "kind": "buffer_invalidate",
+          "tick": 0,
+          "parents": [],
+          "lane": "M",
+          "epoch": 1
+        },
+        {
+          "id": "ev10",
+          "kind": "buffer_invalidate",
+          "tick": 0,
+          "parents": [],
+          "lane": "P",
+          "epoch": 1
+        },
+        {
+          "id": "ev11",
+          "kind": "capture_gate",
+          "tick": 0,
+          "parents": [],
+          "lane": "M",
+          "open": true
+        },
+        {
+          "id": "ev12",
+          "kind": "capture_gate",
+          "tick": 0,
+          "parents": [],
+          "lane": "P",
+          "open": true
+        },
+        {
+          "id": "ev13",
+          "kind": "source_issue",
+          "tick": 0,
+          "parents": [],
+          "lane": "M",
+          "epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev14",
+          "kind": "source_issue",
+          "tick": 0,
+          "parents": [],
+          "lane": "P",
+          "epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev15",
+          "kind": "plant_step",
+          "tick": 0,
+          "parents": [],
+          "command": 0,
+          "position": 0
+        },
+        {
+          "id": "ev16",
+          "kind": "plant_step",
+          "tick": 1,
+          "parents": [],
+          "command": 1,
+          "position": 1
+        },
+        {
+          "id": "ev17",
+          "kind": "port_arrival",
+          "tick": 2,
+          "parents": [
+            "ev13"
+          ],
+          "destination": "M",
+          "source_lane": "M",
+          "source_epoch": 1,
+          "claimed_epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev18",
+          "kind": "port_arrival",
+          "tick": 2,
+          "parents": [
+            "ev14"
+          ],
+          "destination": "P",
+          "source_lane": "P",
+          "source_epoch": 1,
+          "claimed_epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev19",
+          "kind": "sample_latch",
+          "tick": 3,
+          "parents": [
+            "ev17"
+          ],
+          "lane": "M",
+          "source_id": "ev13",
+          "source_epoch": 1,
+          "source_lane": "M",
+          "value": 1
+        },
+        {
+          "id": "ev20",
+          "kind": "sample_latch",
+          "tick": 3,
+          "parents": [
+            "ev18"
+          ],
+          "lane": "P",
+          "source_id": "ev14",
+          "source_epoch": 1,
+          "source_lane": "P",
+          "value": 1
+        },
+        {
+          "id": "ev21",
+          "kind": "snapshot_copy",
+          "tick": 4,
+          "parents": [
+            "ev19"
+          ],
+          "lane": "M",
+          "source_id": "ev13",
+          "source_epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev22",
+          "kind": "snapshot_copy",
+          "tick": 4,
+          "parents": [
+            "ev20"
+          ],
+          "lane": "P",
+          "source_id": "ev14",
+          "source_epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev23",
+          "kind": "snapshot_commit",
+          "tick": 4,
+          "parents": [
+            "ev21",
+            "ev22"
+          ],
+          "epoch": 1,
+          "mask": [
+            1,
+            1
+          ]
+        },
+        {
+          "id": "ev24",
+          "kind": "source_issue",
+          "tick": 5,
+          "parents": [],
+          "lane": "P",
+          "epoch": 2,
+          "value": 1
+        },
+        {
+          "id": "ev25",
+          "kind": "port_arrival",
+          "tick": 6,
+          "parents": [
+            "ev24"
+          ],
+          "destination": "P",
+          "source_lane": "P",
+          "source_epoch": 2,
+          "claimed_epoch": 2,
+          "value": 1
+        },
+        {
+          "id": "ev26",
+          "kind": "sample_latch",
+          "tick": 7,
+          "parents": [
+            "ev25"
+          ],
+          "lane": "P",
+          "source_id": "ev24",
+          "source_epoch": 2,
+          "source_lane": "P",
+          "value": 1
+        },
+        {
+          "id": "ev27",
+          "kind": "consumer_read",
+          "tick": 8,
+          "parents": [
+            "ev21"
+          ],
+          "lane": "M",
+          "source_id": "ev13",
+          "source_epoch": 1,
+          "value": 1,
+          "interface": "immutable_snapshot"
+        },
+        {
+          "id": "ev28",
+          "kind": "consumer_read",
+          "tick": 8,
+          "parents": [
+            "ev22"
+          ],
+          "lane": "P",
+          "source_id": "ev14",
+          "source_epoch": 1,
+          "value": 1,
+          "interface": "immutable_snapshot"
+        },
+        {
+          "id": "ev29",
+          "kind": "consumer_output",
+          "tick": 8,
+          "parents": [
+            "ev27",
+            "ev28"
+          ],
+          "output": 1,
+          "mode": "eager_or"
+        },
+        {
+          "id": "ev30",
+          "kind": "snapshot_copy",
+          "tick": 9,
+          "parents": [
+            "ev19"
+          ],
+          "lane": "M",
+          "source_id": "ev13",
+          "source_epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev31",
+          "kind": "snapshot_copy",
+          "tick": 9,
+          "parents": [
+            "ev26"
+          ],
+          "lane": "P",
+          "source_id": "ev24",
+          "source_epoch": 2,
+          "value": 1
+        },
+        {
+          "id": "ev32",
+          "kind": "snapshot_commit",
+          "tick": 9,
+          "parents": [
+            "ev30",
+            "ev31"
+          ],
+          "epoch": 1,
+          "mask": [
+            1,
+            1
+          ]
+        },
+        {
+          "id": "ev33",
+          "kind": "consumer_read",
+          "tick": 10,
+          "parents": [
+            "ev30"
+          ],
+          "lane": "M",
+          "source_id": "ev13",
+          "source_epoch": 1,
+          "value": 1,
+          "interface": "immutable_snapshot"
+        },
+        {
+          "id": "ev34",
+          "kind": "consumer_read",
+          "tick": 10,
+          "parents": [
+            "ev31"
+          ],
+          "lane": "P",
+          "source_id": "ev24",
+          "source_epoch": 2,
+          "value": 1,
+          "interface": "immutable_snapshot"
+        },
+        {
+          "id": "ev35",
+          "kind": "consumer_output",
+          "tick": 10,
+          "parents": [
+            "ev33",
+            "ev34"
+          ],
+          "output": 1,
+          "mode": "eager_or"
+        }
+      ]
+    },
+    {
+      "id": "epoch_valid_but_source_ports_swapped",
+      "result": {
+        "output": 1,
+        "reads": [
+          {
+            "lane": "M",
+            "source_id": "ev14",
+            "source_epoch": 1,
+            "source_lane": "P",
+            "intake": "ev19",
+            "value": 1,
+            "kind": "data",
+            "source_supplied": true,
+            "read_event": "ev22"
+          },
+          {
+            "lane": "P",
+            "source_id": "ev13",
+            "source_epoch": 1,
+            "source_lane": "M",
+            "intake": "ev20",
+            "value": 1,
+            "kind": "data",
+            "source_supplied": true,
+            "read_event": "ev23"
+          }
+        ],
+        "snapshot_id": "ev21"
+      },
+      "strict_failures": [
+        "M:wrong_source_token_or_epoch",
+        "P:wrong_source_token_or_epoch"
+      ],
+      "events": [
+        {
+          "id": "ev0",
+          "kind": "source_issue",
+          "tick": -6,
+          "parents": [],
+          "lane": "M",
+          "epoch": 0,
+          "value": 1
+        },
+        {
+          "id": "ev1",
+          "kind": "source_issue",
+          "tick": -6,
+          "parents": [],
+          "lane": "P",
+          "epoch": 0,
+          "value": 1
+        },
+        {
+          "id": "ev2",
+          "kind": "port_arrival",
+          "tick": -5,
+          "parents": [
+            "ev0"
+          ],
+          "destination": "M",
+          "source_lane": "M",
+          "source_epoch": 0,
+          "claimed_epoch": 0,
+          "value": 1
+        },
+        {
+          "id": "ev3",
+          "kind": "port_arrival",
+          "tick": -5,
+          "parents": [
+            "ev1"
+          ],
+          "destination": "P",
+          "source_lane": "P",
+          "source_epoch": 0,
+          "claimed_epoch": 0,
+          "value": 1
+        },
+        {
+          "id": "ev4",
+          "kind": "capture_gate",
+          "tick": -4,
+          "parents": [],
+          "lane": "M",
+          "open": true
+        },
+        {
+          "id": "ev5",
+          "kind": "capture_gate",
+          "tick": -4,
+          "parents": [],
+          "lane": "P",
+          "open": true
+        },
+        {
+          "id": "ev6",
+          "kind": "sample_latch",
+          "tick": -3,
+          "parents": [
+            "ev2"
+          ],
+          "lane": "M",
+          "source_id": "ev0",
+          "source_epoch": 0,
+          "source_lane": "M",
+          "value": 1
+        },
+        {
+          "id": "ev7",
+          "kind": "sample_latch",
+          "tick": -3,
+          "parents": [
+            "ev3"
+          ],
+          "lane": "P",
+          "source_id": "ev1",
+          "source_epoch": 0,
+          "source_lane": "P",
+          "value": 1
+        },
+        {
+          "id": "ev8",
+          "kind": "trial_begin",
+          "tick": 0,
+          "parents": [],
+          "epoch": 1,
+          "mask": [
+            1,
+            1
+          ],
+          "invalidate": true
+        },
+        {
+          "id": "ev9",
+          "kind": "buffer_invalidate",
+          "tick": 0,
+          "parents": [],
+          "lane": "M",
+          "epoch": 1
+        },
+        {
+          "id": "ev10",
+          "kind": "buffer_invalidate",
+          "tick": 0,
+          "parents": [],
+          "lane": "P",
+          "epoch": 1
+        },
+        {
+          "id": "ev11",
+          "kind": "capture_gate",
+          "tick": 0,
+          "parents": [],
+          "lane": "M",
+          "open": true
+        },
+        {
+          "id": "ev12",
+          "kind": "capture_gate",
+          "tick": 0,
+          "parents": [],
+          "lane": "P",
+          "open": true
+        },
+        {
+          "id": "ev13",
+          "kind": "source_issue",
+          "tick": 0,
+          "parents": [],
+          "lane": "M",
+          "epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev14",
+          "kind": "source_issue",
+          "tick": 0,
+          "parents": [],
+          "lane": "P",
+          "epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev15",
+          "kind": "port_arrival",
+          "tick": 1,
+          "parents": [
+            "ev14"
+          ],
+          "destination": "M",
+          "source_lane": "P",
+          "source_epoch": 1,
+          "claimed_epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev16",
+          "kind": "port_arrival",
+          "tick": 1,
+          "parents": [
+            "ev13"
+          ],
+          "destination": "P",
+          "source_lane": "M",
+          "source_epoch": 1,
+          "claimed_epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev17",
+          "kind": "sample_latch",
+          "tick": 2,
+          "parents": [
+            "ev15"
+          ],
+          "lane": "M",
+          "source_id": "ev14",
+          "source_epoch": 1,
+          "source_lane": "P",
+          "value": 1
+        },
+        {
+          "id": "ev18",
+          "kind": "sample_latch",
+          "tick": 2,
+          "parents": [
+            "ev16"
+          ],
+          "lane": "P",
+          "source_id": "ev13",
+          "source_epoch": 1,
+          "source_lane": "M",
+          "value": 1
+        },
+        {
+          "id": "ev19",
+          "kind": "snapshot_copy",
+          "tick": 3,
+          "parents": [
+            "ev17"
+          ],
+          "lane": "M",
+          "source_id": "ev14",
+          "source_epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev20",
+          "kind": "snapshot_copy",
+          "tick": 3,
+          "parents": [
+            "ev18"
+          ],
+          "lane": "P",
+          "source_id": "ev13",
+          "source_epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev21",
+          "kind": "snapshot_commit",
+          "tick": 3,
+          "parents": [
+            "ev19",
+            "ev20"
+          ],
+          "epoch": 1,
+          "mask": [
+            1,
+            1
+          ]
+        },
+        {
+          "id": "ev22",
+          "kind": "consumer_read",
+          "tick": 4,
+          "parents": [
+            "ev19"
+          ],
+          "lane": "M",
+          "source_id": "ev14",
+          "source_epoch": 1,
+          "value": 1,
+          "interface": "immutable_snapshot"
+        },
+        {
+          "id": "ev23",
+          "kind": "consumer_read",
+          "tick": 4,
+          "parents": [
+            "ev20"
+          ],
+          "lane": "P",
+          "source_id": "ev13",
+          "source_epoch": 1,
+          "value": 1,
+          "interface": "immutable_snapshot"
+        },
+        {
+          "id": "ev24",
+          "kind": "consumer_output",
+          "tick": 4,
+          "parents": [
+            "ev22",
+            "ev23"
+          ],
+          "output": 1,
+          "mode": "eager_or"
+        }
+      ]
+    },
+    {
+      "id": "stale_origin_with_current_epoch_header",
+      "result": {
+        "output": 1,
+        "reads": [
+          {
+            "lane": "M",
+            "source_id": "ev13",
+            "source_epoch": 1,
+            "source_lane": "M",
+            "intake": "ev20",
+            "value": 1,
+            "kind": "data",
+            "source_supplied": true,
+            "read_event": "ev23"
+          },
+          {
+            "lane": "P",
+            "source_id": "ev1",
+            "source_epoch": 0,
+            "source_lane": "P",
+            "intake": "ev21",
+            "value": 1,
+            "kind": "data",
+            "source_supplied": true,
+            "read_event": "ev24"
+          }
+        ],
+        "snapshot_id": "ev22"
+      },
+      "strict_failures": [
+        "P:wrong_source_token_or_epoch"
+      ],
+      "events": [
+        {
+          "id": "ev0",
+          "kind": "source_issue",
+          "tick": -6,
+          "parents": [],
+          "lane": "M",
+          "epoch": 0,
+          "value": 1
+        },
+        {
+          "id": "ev1",
+          "kind": "source_issue",
+          "tick": -6,
+          "parents": [],
+          "lane": "P",
+          "epoch": 0,
+          "value": 1
+        },
+        {
+          "id": "ev2",
+          "kind": "port_arrival",
+          "tick": -5,
+          "parents": [
+            "ev0"
+          ],
+          "destination": "M",
+          "source_lane": "M",
+          "source_epoch": 0,
+          "claimed_epoch": 0,
+          "value": 1
+        },
+        {
+          "id": "ev3",
+          "kind": "port_arrival",
+          "tick": -5,
+          "parents": [
+            "ev1"
+          ],
+          "destination": "P",
+          "source_lane": "P",
+          "source_epoch": 0,
+          "claimed_epoch": 0,
+          "value": 1
+        },
+        {
+          "id": "ev4",
+          "kind": "capture_gate",
+          "tick": -4,
+          "parents": [],
+          "lane": "M",
+          "open": true
+        },
+        {
+          "id": "ev5",
+          "kind": "capture_gate",
+          "tick": -4,
+          "parents": [],
+          "lane": "P",
+          "open": true
+        },
+        {
+          "id": "ev6",
+          "kind": "sample_latch",
+          "tick": -3,
+          "parents": [
+            "ev2"
+          ],
+          "lane": "M",
+          "source_id": "ev0",
+          "source_epoch": 0,
+          "source_lane": "M",
+          "value": 1
+        },
+        {
+          "id": "ev7",
+          "kind": "sample_latch",
+          "tick": -3,
+          "parents": [
+            "ev3"
+          ],
+          "lane": "P",
+          "source_id": "ev1",
+          "source_epoch": 0,
+          "source_lane": "P",
+          "value": 1
+        },
+        {
+          "id": "ev8",
+          "kind": "trial_begin",
+          "tick": 0,
+          "parents": [],
+          "epoch": 1,
+          "mask": [
+            1,
+            1
+          ],
+          "invalidate": true
+        },
+        {
+          "id": "ev9",
+          "kind": "buffer_invalidate",
+          "tick": 0,
+          "parents": [],
+          "lane": "M",
+          "epoch": 1
+        },
+        {
+          "id": "ev10",
+          "kind": "buffer_invalidate",
+          "tick": 0,
+          "parents": [],
+          "lane": "P",
+          "epoch": 1
+        },
+        {
+          "id": "ev11",
+          "kind": "capture_gate",
+          "tick": 0,
+          "parents": [],
+          "lane": "M",
+          "open": true
+        },
+        {
+          "id": "ev12",
+          "kind": "capture_gate",
+          "tick": 0,
+          "parents": [],
+          "lane": "P",
+          "open": true
+        },
+        {
+          "id": "ev13",
+          "kind": "source_issue",
+          "tick": 0,
+          "parents": [],
+          "lane": "M",
+          "epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev14",
+          "kind": "source_issue",
+          "tick": 0,
+          "parents": [],
+          "lane": "P",
+          "epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev15",
+          "kind": "metadata_relabel",
+          "tick": 0,
+          "parents": [
+            "ev1"
+          ],
+          "claimed_epoch": 1
+        },
+        {
+          "id": "ev16",
+          "kind": "port_arrival",
+          "tick": 1,
+          "parents": [
+            "ev13"
+          ],
+          "destination": "M",
+          "source_lane": "M",
+          "source_epoch": 1,
+          "claimed_epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev17",
+          "kind": "port_arrival",
+          "tick": 1,
+          "parents": [
+            "ev1"
+          ],
+          "destination": "P",
+          "source_lane": "P",
+          "source_epoch": 0,
+          "claimed_epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev18",
+          "kind": "sample_latch",
+          "tick": 2,
+          "parents": [
+            "ev16"
+          ],
+          "lane": "M",
+          "source_id": "ev13",
+          "source_epoch": 1,
+          "source_lane": "M",
+          "value": 1
+        },
+        {
+          "id": "ev19",
+          "kind": "sample_latch",
+          "tick": 2,
+          "parents": [
+            "ev17"
+          ],
+          "lane": "P",
+          "source_id": "ev1",
+          "source_epoch": 0,
+          "source_lane": "P",
+          "value": 1
+        },
+        {
+          "id": "ev20",
+          "kind": "snapshot_copy",
+          "tick": 3,
+          "parents": [
+            "ev18"
+          ],
+          "lane": "M",
+          "source_id": "ev13",
+          "source_epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev21",
+          "kind": "snapshot_copy",
+          "tick": 3,
+          "parents": [
+            "ev19"
+          ],
+          "lane": "P",
+          "source_id": "ev1",
+          "source_epoch": 0,
+          "value": 1
+        },
+        {
+          "id": "ev22",
+          "kind": "snapshot_commit",
+          "tick": 3,
+          "parents": [
+            "ev20",
+            "ev21"
+          ],
+          "epoch": 1,
+          "mask": [
+            1,
+            1
+          ]
+        },
+        {
+          "id": "ev23",
+          "kind": "consumer_read",
+          "tick": 4,
+          "parents": [
+            "ev20"
+          ],
+          "lane": "M",
+          "source_id": "ev13",
+          "source_epoch": 1,
+          "value": 1,
+          "interface": "immutable_snapshot"
+        },
+        {
+          "id": "ev24",
+          "kind": "consumer_read",
+          "tick": 4,
+          "parents": [
+            "ev21"
+          ],
+          "lane": "P",
+          "source_id": "ev1",
+          "source_epoch": 0,
+          "value": 1,
+          "interface": "immutable_snapshot"
+        },
+        {
+          "id": "ev25",
+          "kind": "consumer_output",
+          "tick": 4,
+          "parents": [
+            "ev23",
+            "ev24"
+          ],
+          "output": 1,
+          "mode": "eager_or"
+        }
+      ]
+    },
+    {
+      "id": "gate_label_reflex",
+      "nominal_factorial": [
+        {
+          "mask": [
+            0,
+            0
+          ],
+          "output": 0,
+          "actual_sources": [
+            null,
+            null
+          ],
+          "reflex_sources": [
+            null,
+            null
+          ]
+        },
+        {
+          "mask": [
+            0,
+            1
+          ],
+          "output": 1,
+          "actual_sources": [
+            null,
+            "ev14"
+          ],
+          "reflex_sources": [
+            null,
+            null
+          ]
+        },
+        {
+          "mask": [
+            1,
+            0
+          ],
+          "output": 1,
+          "actual_sources": [
+            "ev13",
+            null
+          ],
+          "reflex_sources": [
+            null,
+            null
+          ]
+        },
+        {
+          "mask": [
+            1,
+            1
+          ],
+          "output": 1,
+          "actual_sources": [
+            "ev13",
+            "ev14"
+          ],
+          "reflex_sources": [
+            null,
+            null
+          ]
+        }
+      ],
+      "payload_challenge_outputs": [
+        0,
+        1
+      ]
+    },
+    {
+      "id": "port_bypass_same_output_different_intakes",
+      "snapshot": {
+        "output": 1,
+        "reads": [
+          {
+            "lane": "M",
+            "source_id": "ev13",
+            "source_epoch": 1,
+            "source_lane": "M",
+            "intake": "ev21",
+            "value": 1,
+            "kind": "data",
+            "source_supplied": true,
+            "read_event": "ev24"
+          },
+          {
+            "lane": "P",
+            "source_id": "ev14",
+            "source_epoch": 1,
+            "source_lane": "P",
+            "intake": "ev22",
+            "value": 1,
+            "kind": "data",
+            "source_supplied": true,
+            "read_event": "ev25"
+          }
+        ],
+        "snapshot_id": "ev23"
+      },
+      "bypass": {
+        "output": 1,
+        "reads": [
+          {
+            "lane": "M",
+            "source_id": "ev13",
+            "source_epoch": 1,
+            "source_lane": "M",
+            "intake": "ev17",
+            "value": 1,
+            "kind": "data",
+            "source_supplied": true,
+            "read_event": "ev27"
+          },
+          {
+            "lane": "P",
+            "source_id": "ev14",
+            "source_epoch": 1,
+            "source_lane": "P",
+            "intake": "ev18",
+            "value": 1,
+            "kind": "data",
+            "source_supplied": true,
+            "read_event": "ev28"
+          }
+        ],
+        "snapshot_id": "ev23"
+      },
+      "events": [
+        {
+          "id": "ev0",
+          "kind": "source_issue",
+          "tick": -6,
+          "parents": [],
+          "lane": "M",
+          "epoch": 0,
+          "value": 1
+        },
+        {
+          "id": "ev1",
+          "kind": "source_issue",
+          "tick": -6,
+          "parents": [],
+          "lane": "P",
+          "epoch": 0,
+          "value": 1
+        },
+        {
+          "id": "ev2",
+          "kind": "port_arrival",
+          "tick": -5,
+          "parents": [
+            "ev0"
+          ],
+          "destination": "M",
+          "source_lane": "M",
+          "source_epoch": 0,
+          "claimed_epoch": 0,
+          "value": 1
+        },
+        {
+          "id": "ev3",
+          "kind": "port_arrival",
+          "tick": -5,
+          "parents": [
+            "ev1"
+          ],
+          "destination": "P",
+          "source_lane": "P",
+          "source_epoch": 0,
+          "claimed_epoch": 0,
+          "value": 1
+        },
+        {
+          "id": "ev4",
+          "kind": "capture_gate",
+          "tick": -4,
+          "parents": [],
+          "lane": "M",
+          "open": true
+        },
+        {
+          "id": "ev5",
+          "kind": "capture_gate",
+          "tick": -4,
+          "parents": [],
+          "lane": "P",
+          "open": true
+        },
+        {
+          "id": "ev6",
+          "kind": "sample_latch",
+          "tick": -3,
+          "parents": [
+            "ev2"
+          ],
+          "lane": "M",
+          "source_id": "ev0",
+          "source_epoch": 0,
+          "source_lane": "M",
+          "value": 1
+        },
+        {
+          "id": "ev7",
+          "kind": "sample_latch",
+          "tick": -3,
+          "parents": [
+            "ev3"
+          ],
+          "lane": "P",
+          "source_id": "ev1",
+          "source_epoch": 0,
+          "source_lane": "P",
+          "value": 1
+        },
+        {
+          "id": "ev8",
+          "kind": "trial_begin",
+          "tick": 0,
+          "parents": [],
+          "epoch": 1,
+          "mask": [
+            1,
+            1
+          ],
+          "invalidate": true
+        },
+        {
+          "id": "ev9",
+          "kind": "buffer_invalidate",
+          "tick": 0,
+          "parents": [],
+          "lane": "M",
+          "epoch": 1
+        },
+        {
+          "id": "ev10",
+          "kind": "buffer_invalidate",
+          "tick": 0,
+          "parents": [],
+          "lane": "P",
+          "epoch": 1
+        },
+        {
+          "id": "ev11",
+          "kind": "capture_gate",
+          "tick": 0,
+          "parents": [],
+          "lane": "M",
+          "open": true
+        },
+        {
+          "id": "ev12",
+          "kind": "capture_gate",
+          "tick": 0,
+          "parents": [],
+          "lane": "P",
+          "open": true
+        },
+        {
+          "id": "ev13",
+          "kind": "source_issue",
+          "tick": 0,
+          "parents": [],
+          "lane": "M",
+          "epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev14",
+          "kind": "source_issue",
+          "tick": 0,
+          "parents": [],
+          "lane": "P",
+          "epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev15",
+          "kind": "plant_step",
+          "tick": 0,
+          "parents": [],
+          "command": 0,
+          "position": 0
+        },
+        {
+          "id": "ev16",
+          "kind": "plant_step",
+          "tick": 1,
+          "parents": [],
+          "command": 1,
+          "position": 1
+        },
+        {
+          "id": "ev17",
+          "kind": "port_arrival",
+          "tick": 2,
+          "parents": [
+            "ev13"
+          ],
+          "destination": "M",
+          "source_lane": "M",
+          "source_epoch": 1,
+          "claimed_epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev18",
+          "kind": "port_arrival",
+          "tick": 2,
+          "parents": [
+            "ev14"
+          ],
+          "destination": "P",
+          "source_lane": "P",
+          "source_epoch": 1,
+          "claimed_epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev19",
+          "kind": "sample_latch",
+          "tick": 3,
+          "parents": [
+            "ev17"
+          ],
+          "lane": "M",
+          "source_id": "ev13",
+          "source_epoch": 1,
+          "source_lane": "M",
+          "value": 1
+        },
+        {
+          "id": "ev20",
+          "kind": "sample_latch",
+          "tick": 3,
+          "parents": [
+            "ev18"
+          ],
+          "lane": "P",
+          "source_id": "ev14",
+          "source_epoch": 1,
+          "source_lane": "P",
+          "value": 1
+        },
+        {
+          "id": "ev21",
+          "kind": "snapshot_copy",
+          "tick": 4,
+          "parents": [
+            "ev19"
+          ],
+          "lane": "M",
+          "source_id": "ev13",
+          "source_epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev22",
+          "kind": "snapshot_copy",
+          "tick": 4,
+          "parents": [
+            "ev20"
+          ],
+          "lane": "P",
+          "source_id": "ev14",
+          "source_epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev23",
+          "kind": "snapshot_commit",
+          "tick": 4,
+          "parents": [
+            "ev21",
+            "ev22"
+          ],
+          "epoch": 1,
+          "mask": [
+            1,
+            1
+          ]
+        },
+        {
+          "id": "ev24",
+          "kind": "consumer_read",
+          "tick": 5,
+          "parents": [
+            "ev21"
+          ],
+          "lane": "M",
+          "source_id": "ev13",
+          "source_epoch": 1,
+          "value": 1,
+          "interface": "immutable_snapshot"
+        },
+        {
+          "id": "ev25",
+          "kind": "consumer_read",
+          "tick": 5,
+          "parents": [
+            "ev22"
+          ],
+          "lane": "P",
+          "source_id": "ev14",
+          "source_epoch": 1,
+          "value": 1,
+          "interface": "immutable_snapshot"
+        },
+        {
+          "id": "ev26",
+          "kind": "consumer_output",
+          "tick": 5,
+          "parents": [
+            "ev24",
+            "ev25"
+          ],
+          "output": 1,
+          "mode": "eager_or"
+        },
+        {
+          "id": "ev27",
+          "kind": "consumer_read",
+          "tick": 6,
+          "parents": [
+            "ev17"
+          ],
+          "lane": "M",
+          "source_id": "ev13",
+          "source_epoch": 1,
+          "value": 1,
+          "interface": "port_bypass"
+        },
+        {
+          "id": "ev28",
+          "kind": "consumer_read",
+          "tick": 6,
+          "parents": [
+            "ev18"
+          ],
+          "lane": "P",
+          "source_id": "ev14",
+          "source_epoch": 1,
+          "value": 1,
+          "interface": "port_bypass"
+        },
+        {
+          "id": "ev29",
+          "kind": "consumer_output",
+          "tick": 6,
+          "parents": [
+            "ev27",
+            "ev28"
+          ],
+          "output": 1,
+          "mode": "bypass_or"
+        }
+      ]
+    },
+    {
+      "id": "disjoint_capture_windows_same_epoch_join",
+      "M_port_valid_window": [
+        2,
+        4
+      ],
+      "P_port_valid_window": [
+        6,
+        8
+      ],
+      "interval_semantics": "half-open [start,end); zero aperture in this trace",
+      "no_common_sample_time": true,
+      "result": {
+        "output": 1,
+        "reads": [
+          {
+            "lane": "M",
+            "source_id": "ev13",
+            "source_epoch": 1,
+            "source_lane": "M",
+            "intake": "ev23",
+            "value": 1,
+            "kind": "data",
+            "source_supplied": true,
+            "read_event": "ev26"
+          },
+          {
+            "lane": "P",
+            "source_id": "ev14",
+            "source_epoch": 1,
+            "source_lane": "P",
+            "intake": "ev24",
+            "value": 1,
+            "kind": "data",
+            "source_supplied": true,
+            "read_event": "ev27"
+          }
+        ],
+        "snapshot_id": "ev25"
+      },
+      "events": [
+        {
+          "id": "ev0",
+          "kind": "source_issue",
+          "tick": -6,
+          "parents": [],
+          "lane": "M",
+          "epoch": 0,
+          "value": 1
+        },
+        {
+          "id": "ev1",
+          "kind": "source_issue",
+          "tick": -6,
+          "parents": [],
+          "lane": "P",
+          "epoch": 0,
+          "value": 1
+        },
+        {
+          "id": "ev2",
+          "kind": "port_arrival",
+          "tick": -5,
+          "parents": [
+            "ev0"
+          ],
+          "destination": "M",
+          "source_lane": "M",
+          "source_epoch": 0,
+          "claimed_epoch": 0,
+          "value": 1
+        },
+        {
+          "id": "ev3",
+          "kind": "port_arrival",
+          "tick": -5,
+          "parents": [
+            "ev1"
+          ],
+          "destination": "P",
+          "source_lane": "P",
+          "source_epoch": 0,
+          "claimed_epoch": 0,
+          "value": 1
+        },
+        {
+          "id": "ev4",
+          "kind": "capture_gate",
+          "tick": -4,
+          "parents": [],
+          "lane": "M",
+          "open": true
+        },
+        {
+          "id": "ev5",
+          "kind": "capture_gate",
+          "tick": -4,
+          "parents": [],
+          "lane": "P",
+          "open": true
+        },
+        {
+          "id": "ev6",
+          "kind": "sample_latch",
+          "tick": -3,
+          "parents": [
+            "ev2"
+          ],
+          "lane": "M",
+          "source_id": "ev0",
+          "source_epoch": 0,
+          "source_lane": "M",
+          "value": 1
+        },
+        {
+          "id": "ev7",
+          "kind": "sample_latch",
+          "tick": -3,
+          "parents": [
+            "ev3"
+          ],
+          "lane": "P",
+          "source_id": "ev1",
+          "source_epoch": 0,
+          "source_lane": "P",
+          "value": 1
+        },
+        {
+          "id": "ev8",
+          "kind": "trial_begin",
+          "tick": 0,
+          "parents": [],
+          "epoch": 1,
+          "mask": [
+            1,
+            1
+          ],
+          "invalidate": true
+        },
+        {
+          "id": "ev9",
+          "kind": "buffer_invalidate",
+          "tick": 0,
+          "parents": [],
+          "lane": "M",
+          "epoch": 1
+        },
+        {
+          "id": "ev10",
+          "kind": "buffer_invalidate",
+          "tick": 0,
+          "parents": [],
+          "lane": "P",
+          "epoch": 1
+        },
+        {
+          "id": "ev11",
+          "kind": "capture_gate",
+          "tick": 0,
+          "parents": [],
+          "lane": "M",
+          "open": true
+        },
+        {
+          "id": "ev12",
+          "kind": "capture_gate",
+          "tick": 0,
+          "parents": [],
+          "lane": "P",
+          "open": true
+        },
+        {
+          "id": "ev13",
+          "kind": "source_issue",
+          "tick": 0,
+          "parents": [],
+          "lane": "M",
+          "epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev14",
+          "kind": "source_issue",
+          "tick": 0,
+          "parents": [],
+          "lane": "P",
+          "epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev15",
+          "kind": "source_issue",
+          "tick": 0,
+          "parents": [],
+          "lane": "M",
+          "epoch": 2,
+          "value": 1
+        },
+        {
+          "id": "ev16",
+          "kind": "source_issue",
+          "tick": 0,
+          "parents": [],
+          "lane": "P",
+          "epoch": 2,
+          "value": 1
+        },
+        {
+          "id": "ev17",
+          "kind": "port_arrival",
+          "tick": 2,
+          "parents": [
+            "ev13"
+          ],
+          "destination": "M",
+          "source_lane": "M",
+          "source_epoch": 1,
+          "claimed_epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev18",
+          "kind": "sample_latch",
+          "tick": 3,
+          "parents": [
+            "ev17"
+          ],
+          "lane": "M",
+          "source_id": "ev13",
+          "source_epoch": 1,
+          "source_lane": "M",
+          "value": 1
+        },
+        {
+          "id": "ev19",
+          "kind": "port_arrival",
+          "tick": 4,
+          "parents": [
+            "ev15"
+          ],
+          "destination": "M",
+          "source_lane": "M",
+          "source_epoch": 2,
+          "claimed_epoch": 2,
+          "value": 1
+        },
+        {
+          "id": "ev20",
+          "kind": "port_arrival",
+          "tick": 6,
+          "parents": [
+            "ev14"
+          ],
+          "destination": "P",
+          "source_lane": "P",
+          "source_epoch": 1,
+          "claimed_epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev21",
+          "kind": "sample_latch",
+          "tick": 7,
+          "parents": [
+            "ev20"
+          ],
+          "lane": "P",
+          "source_id": "ev14",
+          "source_epoch": 1,
+          "source_lane": "P",
+          "value": 1
+        },
+        {
+          "id": "ev22",
+          "kind": "port_arrival",
+          "tick": 8,
+          "parents": [
+            "ev16"
+          ],
+          "destination": "P",
+          "source_lane": "P",
+          "source_epoch": 2,
+          "claimed_epoch": 2,
+          "value": 1
+        },
+        {
+          "id": "ev23",
+          "kind": "snapshot_copy",
+          "tick": 8,
+          "parents": [
+            "ev18"
+          ],
+          "lane": "M",
+          "source_id": "ev13",
+          "source_epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev24",
+          "kind": "snapshot_copy",
+          "tick": 8,
+          "parents": [
+            "ev21"
+          ],
+          "lane": "P",
+          "source_id": "ev14",
+          "source_epoch": 1,
+          "value": 1
+        },
+        {
+          "id": "ev25",
+          "kind": "snapshot_commit",
+          "tick": 8,
+          "parents": [
+            "ev23",
+            "ev24"
+          ],
+          "epoch": 1,
+          "mask": [
+            1,
+            1
+          ]
+        },
+        {
+          "id": "ev26",
+          "kind": "consumer_read",
+          "tick": 9,
+          "parents": [
+            "ev23"
+          ],
+          "lane": "M",
+          "source_id": "ev13",
+          "source_epoch": 1,
+          "value": 1,
+          "interface": "immutable_snapshot"
+        },
+        {
+          "id": "ev27",
+          "kind": "consumer_read",
+          "tick": 9,
+          "parents": [
+            "ev24"
+          ],
+          "lane": "P",
+          "source_id": "ev14",
+          "source_epoch": 1,
+          "value": 1,
+          "interface": "immutable_snapshot"
+        },
+        {
+          "id": "ev28",
+          "kind": "consumer_output",
+          "tick": 9,
+          "parents": [
+            "ev26",
+            "ev27"
+          ],
+          "output": 1,
+          "mode": "eager_or"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "schema": "uct-publisher-review/1",
+  "review_id": "SCU-PUBLISHER-REVIEW-20261010-v1.0.0",
+  "generated_utc": "2026-10-10T01:38:02.286367+00:00",
+  "decision": "READY_FOR_AUTHORIZED_PREPARE_EXISTING_PUBLICATION_GATES_REMAIN",
+  "files": [
+    {
+      "path": "research/matched-behavior-source-use/publication.py",
+      "bytes": 27734,
+      "sha256": "657d7662e7b4151f8939d750a398c15d536954e2abc3d5b6ccab7159aff62c2d"
+    },
+    {
+      "path": "research/matched-behavior-source-use/test_publication.py",
+      "bytes": 17269,
+      "sha256": "a401a473373803f81f49b011c016b2e9fea3640cc2d6d102841505df18ce4949"
+    },
+    {
+      "path": ".github/workflows/prepare-scu-source-use-v101.yml",
+      "bytes": 2062,
+      "sha256": "47a910832a347dff77713c769986c56abbdd68636f06763a76d07dd71746a468"
+    },
+    {
+      "path": ".github/workflows/publish-scu-source-use-v101.yml",
+      "bytes": 2112,
+      "sha256": "5979d34fd32b6298e619cb9ccd8cb14e19d9d989400201f779207e7868117cc5"
+    },
+    {
+      "path": "research/matched-behavior-source-use/source-main.md",
+      "bytes": 45976,
+      "sha256": "0675c915213448be766f91bccae828674fd46403a76433bafa5bf2d04227e026"
+    },
+    {
+      "path": "research/matched-behavior-source-use/REVIEW-AND-SOURCES.md",
+      "bytes": 20882,
+      "sha256": "2fc6d415930309d4fce40b0cf7a00836b1faf9ffb654455ddf5d7168be40f91d"
+    },
+    {
+      "path": "research/matched-behavior-source-use/reproducibility-v1.0.1.zip",
+      "bytes": 114649,
+      "sha256": "80c6839b05da8ca3095f3d2941f837a2bcd8cd81d66e294eb0b4a0f4d6191c06"
+    }
+  ],
+  "reviewer_modified_paths": [
+    "research/matched-behavior-source-use/publication.py",
+    "research/matched-behavior-source-use/test_publication.py"
+  ],
+  "test_count": 17,
+  "tests": [
+    "test_exact_package_and_visual_authorization",
+    "test_byte_manifest_and_source_mutations_fail",
+    "test_missing_duplicate_and_extra_inventory_fail",
+    "test_record_identity_and_protected_records",
+    "test_only_zenodo_https_and_no_redirects",
+    "test_uncertain_creation_is_never_posted_twice",
+    "test_uncertain_publish_is_never_posted_twice",
+    "test_already_published_resumes_only_anonymous_readback",
+    "test_normalized_title_other_version_and_subtitle_block_creation",
+    "test_later_page_same_marker_recovers_without_post",
+    "test_exact_record_without_marker_cannot_be_adopted",
+    "test_incomplete_or_malformed_listing_never_allows_creation",
+    "test_checked_out_commit_is_read_from_git_not_trigger_environment",
+    "test_creation_checkpoint_failure_blocks_post_and_records_actual_head",
+    "test_publish_checkpoint_failure_blocks_post",
+    "test_manifest_change_during_upload_blocks_publish",
+    "test_bad_public_bytes_never_produce_success_receipt"
+  ],
+  "observed_result": "17 tests passed, exit0",
+  "network_used_by_tests": false,
+  "live_post_count_by_reviewer": 0,
+  "real_record_id": null,
+  "real_doi": null,
+  "authority": "Parent explicitly delegated edits to publisher and tests; no reviewer publication authority exercised.",
+  "limits": [
+    "Conservative normalized-title guard does not recognize every possible paraphrase",
+    "Account scan fails closed at20 full pages or unstable pagination",
+    "Final real-DOI PDF visual and exact authorization gates remain pending",
+    "No DOI/OTS/Arweave success inferred from fake tests"
+  ],
+  "contract": "PUBLISHER_SAFETY_CONTRACT.md",
+  "report": "PUBLISHER_REVIEW.md"
+}

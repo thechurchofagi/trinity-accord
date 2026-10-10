@@ -1,0 +1,283 @@
+FIELDS
+F1=/scope
+F43=/quantifiers
+F44=/limits
+F51=LEDGER/semantic_review/review_reason
+F52=/same_instance_required
+F53=/formal_contract/quantifiers
+F54=/formal_contract/mathematical_and_actual_instances_are_distinct
+F55=/formal_contract/instance_binding
+F56=/formal_contract/no_inference_to
+F57=LEDGER/semantic_review/normalized_review_rationale
+NEW EXACT VALUES (old V references retain already-read meanings)
+V740="Actual organism, cell, neural ensemble or deployed AI process; independent ontic grounding required."
+V741="OPEN physical instantiation, not inferred from fitted mathematical outputs."
+V742="Two separately admitted actual process tokens, common complete K, same comparison scale and physically grounded reduct."
+V743="C1 truth not independently proved, actual bearer/ports and named phenomenal quality still OPEN."
+V744="Actual local process persistence, independently checked; not mathematical storage only."
+V745="Research priority, not theorem premise."
+V746="Named phenomenal interpretation remains OPEN."
+V747="This target may guide future theory, not a solved claim."
+V748="One declared actual episode and signature; analyst labels and equal values cannot create identity. When occurrence identity is represented or transported, use an explicit occurrence sort together with its endpoint/type/port/time maps; equal relation tuples alone need not encode multiplicity."
+V749="Typed physical occurrence identity is separate from value; explicit occurrence-sort expansion prevents duplicate tuples from being treated as the same event."
+V750="Actuality, support, signature and boundary accountability are simultaneous premises; a scientific view is not automatically a token."
+V751="All actuality, support, complete signature and boundary clauses are simultaneous; a view containing a matching value does not establish membership."
+V752="Value, type or output equality is insufficient."
+V753="Comparison is through grounded maps on occurrence as well as event sorts. Equality of displayed values or event tuples is insufficient."
+V754="No consciousness amount, richness score or subject count is defined."
+V755="The one-column shared versus two-column copied incidence count is ordinary set incidence, not a numerical experiential measure."
+V756="Same episode, time and occurrence bindings throughout; finite checker does not discharge this premise. The complete K_i include the relevant occurrence sort or an explicitly faithful encoding of it; carrier inclusion alone does not create an occurrence-identity map."
+V757="Retain OPEN_ACTUAL_INSTANCE. The finite shared/copy example does not supply actual K-completeness or carrier/occurrence grounding."
+V758="Conditional on ACTUAL_MEMBERSHIP_PACKAGE; no subject or phenomenal conclusion."
+V759="Definition expansion gives one occurrence with multiple memberships only after the common actual package. No global owner is selected."
+V760="Finite declared model; not complete-organization equality or an actual human instance."
+V761="The stipulated columns (1,1,1) versus (1,0,1),(0,1,1) give equal values but different incidence; explicitly finite and existential."
+V762="Declared directed synchronizer and clamp; actual intervention fidelity remains open."
+V763="Propagation through a separate synchronizer is an added relation and never a quotient identifying two occurrence IDs."
+V764="Inherited conditional package; arbitrary phenomenal maps, actual-token admission and subject identity are not supplied by the card."
+V765="Inherited CG/R157 structure requires actual compatible overlap maps and primitive coverage. CORE prior CG cards already provide this antecedent."
+V766="No numerically single phenomenal event, named feeling, basal gate, sum or exclusive owner follows."
+V767="Each actual token has its own h_i; coherent comparison transports structural relation roles, not cross-token numerical phenomenal identity."
+V768="Leaves selected unity/mineness interpretation and subject individuation open."
+V769="Tokenwise isomorphisms are consistent with separately represented codomains and do not choose a subject partition or extra identity relation."
+V770="Seek a noncircular selected relation or underidentification proof, not an exclusive owner or new feeling label."
+V771="Keep as open research direction. R188 quantifies reader access but does not finish this actual centering/occurrence discriminator."
+V772="For each integer m>=1, compare two deterministic finite machines on S={0,1}^{m+1} from the same zero reset, with common action alphabet {A_1,...,A_m,C} and full-state readout after each operation. Only those actions, that reset and discrete operation boundary times are admitted. Finite model statements do not establish actual physical realization."
+V773="The abbreviation is now fully expanded: m>=1, state/reset, each flag write, gated flip, idle comparator and complete trace are fixed."
+V774="Before any C in <=m actions at least one flag is zero. Induction proves full-state prefix equality for every shorter word, not just sampled examples."
+V775="All m distinct flags followed by C separates at m+1; the counting proof also establishes minimality from that reset."
+V776="Different resets or complete state-transition access change the claim. No assertion of universal nonidentifiability under richer interventions."
+V777="The hidden interaction is a finite organization fact; actual realization, C1 application, named feeling and subject count remain unproved."
+V778="Finite fixed sufficient state/clock, fixed total update operations and one fixed endpoint readout, same initial preparation and two legal orders; no direct order-label leak."
+V779="Exactly the finite domains, preparations, operations, noises and observer class stated here; all premises share the same instance."
+V780="No phenomenal intensity, unique subject, literal shared-carrier identity, biological threshold or empirical confirmation."
+V781=true
+V782="Definitions/model hypotheses are declared schemas. A theorem quantifies only over instances satisfying its full same-submodel assumptions; an open physical bridge is not discharged by declaration."
+V783="Use this exact declared model/paired comparison with its fixed target, time, ports, observer and units. Separate alternatives or observer instances are identified explicitly."
+V784=["named_quality", "phenomenal_intensity", "unique_subject", "subject_count", "basal_experience_threshold", "actual_source_occurrence_without_evidence"]
+V785="The two order protocols share preparation, sufficient state, clock, installed actions and passive readout. This rules out preparation drift and direct order-label leakage; it does not establish that a biological or deployed model obeys the contract."
+V786="Initial correlation is allowed; mutable shared context cannot be omitted."
+V787="The normalized product definition now explicitly supplies factor-local deterministic maps or conditional kernels, frozen context and sufficient-state noise treatment. Either order applies F_e to a and G_e to b, including the product-kernel case; initial coordinate correlation does not spoil this argument."
+V788="Converse false; model structural property, not an experience gate."
+V789="The proof sends both orders to (F(a),G(b)), or to the same product of conditional factor kernels. It is a theorem schema PRODUCT=>AB=BA, not evidence that a nominated actual pair commutes; the converse is explicitly false."
+V790="A task-specific endpoint contrast, not a consciousness scale."
+V791="Total variation compares the same two endpoint laws and lies in [0,1]. Left-to-right row-kernel composition is consistent with the displayed bit table; the number is an operational diagnostic, not an experiential magnitude."
+V792="Positive Delta contradicts the common-endpoint consequence of any admitted independent realization. Its useful conclusion is conditional on independently justified Delta>0 and the common protocol; it neither identifies one carrier nor distinguishes coordination from shared storage."
+V793="Single-operation match is only from the stipulated baseline, not all preparations."
+V794="The paired devices agree on S, initial 00, A and parity readout while BC and BD are explicitly different installed maps. Their baseline-only single-probe agreement cannot be generalized to all preparations; the paired models are alternatives, not one conjunction of incompatible B maps."
+V795="Direct substitution gives initial 0, A-only 1 and B-only 0 in both devices, then 0/1 for the two BC orders and 1/1 for BD. This is an exact finite construction with no physical instantiation or named-feeling inference."
+V796="Changing only a route, noise law or observer is not passive recoding."
+V797="Simultaneously conjugating both maps and transporting preparation/readout preserves the complete two-protocol law. Changing only one operation or the noise/readout is a different comparison, so passive coordinate freedom cannot manufacture or remove the contrast."
+V798="Even larger hidden models are covered only if they predict one same endpoint law."
+V799="The comparison model must predict one common law Q for both orders even if it has a larger hidden space. Merely being described verbally as independent does not supply this equality when clocks, mutable background or order-aware readouts differ."
+V800="Not every constrained model class attains the bound."
+V801="Triangle inequality through Q gives eAB+eBA>=Delta, hence the max bound. The fair-output midpoint demonstrates sharpness only for the two endpoint point masses, not simultaneous fitting of all earlier probes or every constrained model class."
+V802="State alignment and sufficient Markov state must be independently justified."
+V803="Uniform row-TV error uses a common aligned sufficient state space and commuting A0,B0. An unidentified coarse state or omitted retained noise would invalidate the uniform-kernel premise; it cannot be supplied by endpoint agreement alone."
+V804="No claim that this is a generally optimal approximation constant."
+V805="Replace two kernels sequentially in each order and contract TV through later kernels/readout; each route costs epsilonA+epsilonB. The two routes give the displayed factor 2, without claiming a generally optimal constant or a coupling-energy interpretation."
+V806="Finite fixed sufficient state/clock, fixed total update operations and one fixed endpoint readout, same initial preparation and two legal orders; no direct order-label leak. alpha,eta in [0,1]."
+V807="A probability of using a route is not proof of actual participation in an individual episode."
+V808="The mixture uses a fresh route draw and the same independent output-flip channel in both orders, with alpha,eta in [0,1]. A model probability of routing is distinct from evidence of a particular actual occurrence."
+V809="At eta=1/2 absence of visible contrast does not imply independence."
+V810="The BC route suppresses the A-first parity outcome with probability alpha, giving Delta=alpha; the fixed binary-flip channel multiplies the difference by abs(1-2eta). Eta=1/2 destroys this observation while preserving possible hidden dependence."
+V811="Deterministic result; no unproved stochastic-bisimulation extension."
+V812="The normalized finite deterministic domain explicitly includes A,B in U and fixes n,c, all common words and the empty word. Every quotient-action reference is now typed; applying an external action still needs its own preservation proof."
+V813="Future-readout equivalence is not complete experiential equivalence."
+V814="Equality of every future readout is an equivalence because it is the intersection of equal-output relations over fixed words, including the empty word. It remains relative to the chosen actions/readout and cannot be read as full experiential equivalence."
+V815="A standard behavioral quotient, not a subject selector."
+V816="With A,B now explicitly in the finite action alphabet, prefixing an admitted action preserves future equality and all named actions descend. The coarsest stable-refinement and quotient-commutation iff argument is valid in this deterministic selected-view domain."
+V817="Bound requires complete finite state/action model; no universal human time bound."
+V818="Starting with c readout classes, each proper refinement increases class count, so the partition stabilizes within n-c rounds. A first separation in round k gives a word of length at most k. This assumes complete finite actions/state, not a bound on human latency or discovery effort."
+V819="This is a separate predeclared readout instance, not a post-hoc empirical readout choice."
+V820="The normalized node explicitly fixes S=bit pairs,s0=00,A,BC,V and the scored r_y observer for both orders. BIT_MODEL is now only the source of the restated state/update construction; the parity observer is not imported into this diagnostic."
+V821="No subjective awareness assertion."
+V822="The complete normalized delayed protocol gives states 00 and 10 after the two orders, with equal immediate r_y=0. The common V maps them to 00 and 11, giving r_y=0 and 1. This is a retained-state witness within one fixed observer protocol, not supplied order-label information."
+V823="No converse, same-event identity, recurrence, or theory-exclusive consciousness inference."
+V824="Each listed limit is a separate explicitly described model or a violation of a selected hypothesis. Do not conjoin the commuting counterexamples, order-label leak and coordinating-copy examples into one purported DOMAIN instance."
+V825="The order-four permutation cannot act only on a binary factor; same-carrier toggles commute; order leakage can fabricate contrast; coordinating copies can reproduce an operation algebra. The four-cycle nonfactorization is inherited in CORE20261008:PRIOR_CD_FACTOR; no unique-subject or theory-exclusive conclusion is licensed."
+V826="A toy trace, paper title, fitting score or hypothetical intervention does not discharge this."
+V827="This is an unfulfilled actual-application bridge: actual tokens, complete common K and physically installed operations/ports/timing/noise/provenance must be independently grounded. Finite-model correctness or hypothetical intervention sensitivity does not discharge it."
+V828="No finite model witness proves this premise for a human or deployed AI."
+V829="The pair binding correctly assigns commuting operations to one admitted organization and positive contrast to the other. They are properties of different members of one explicit comparison, not contradictory facts about a single token; actual evidence remains open."
+V830="No named quality or level of intelligence follows; result inherits C1 rather than proving it."
+V831="The normalized standalone statement now explicitly includes REALIZATION, TYPE_WITNESS_GUARD, common complete A:K and A:C1_OI. A grounded operator invariant difference excludes full K-isomorphism only in that actual paired comparison; the open realization/invariant premises remain unfulfilled."
+V832="A changing role is not automatically cessation; persistence is not complete type invariance."
+V833="Continuing constitutive support and lineage under original P3 is an independent actual premise. Changed update role need not be termination, but persistence also does not mean unchanged full type or survival of an actually destroyed process."
+V834="No blanket survival guarantee if the original process physically terminates."
+V835="For an independently admitted persisting local token, U1 continues to yield a nonempty experiential carrier. Success, commutation and contrast magnitude add no basal-experience gate and do not prove physical persistence themselves."
+V836="Declared finite real-valued models; actual and phenomenal application require independent same-instance evidence."
+V837="The normalized vocabulary explicitly fixes m,p,r,k, all matrix/vector dimensions, Euclidean and spectral norms and Moore-Penrose inverse. K_target, K_UCT and K_alphabet are distinct typed symbols, so no real-channel rank is silently read as a finite-bit or experiential count."
+V838="e=d+Mu,z=Hu is a fixed linear model with complete admitted correction inputs. Algebra alone defines a residual; interpreting d as a correction-clamped causal effect additionally needs the stated independent modular/clamp evidence and apparatus boundary."
+V839="The necessity and lower-bound witnesses require every real (d,u) pair, not a physiological feasible subset. Keeping this as a domain premise preserves sufficiency of reconstruction even when physical restrictions invalidate necessity."
+V840="If KM=LH, substitution gives Kd=Ke-Lz. Otherwise v in ker(H) with KMv!=0 produces (0,0) and (-Mv,v) with equal observations and unequal target; this proves impossibility for any decoder, including nonlinear ones, in the unrestricted class."
+V841="Arbitrary ideal real-valued linear monitor design and noiseless real precision are explicit comparison assumptions. They neither establish physical installability nor count finite transcript symbols, bits, tissue regions or energy."
+V842="Identification forces row(KM) subset row(H), hence rank(H)>=rank(KM); a row basis attains it with an ideal monitor. The count is independent real channels under unrestricted d,u, not the finite alphabet budget of RB/R188."
+V843="The two scalar-output monitor designs have the same one-dimensional output but observe different correction combinations. The concrete alternative d=1,u=(-1/2,-1/2) is admitted by the unrestricted exact model."
+V844="Hplus observes u1+u2 and reconstructs d=e-z; Hminus annihilates the equally split correction while e=0, so it cannot distinguish the two targets. Equal observation dimension alone does not imply target sufficiency."
+V845="The Euclidean correction ball is a genuine fixed model constraint, while d remains unrestricted. Feasible z must lie in im(H) and its least-norm preimage must fit rho; passive recoding must transport the physical budget ellipsoid."
+V846="Every compatible correction is H^+z+v with v in ker(H); orthogonality leaves radius s. The target set is a centrally symmetric linear image, so antipodal maximal singular-vector points force minimax radius s||KMP||, attained at the center. Constraints on d could shrink this set and invalidate equality."
+V847="The scalar constant disturbance is observed before the next correction update; u0=0 and 0<alpha<=1 fix a causal loop with no omitted input. There is no instantaneous access to future error in this witness."
+V848="Induction gives the two geometric formulas. Alpha=1 makes every t>=1 output zero but leaves a correction trace; t=0 still identifies the disturbance, so late-only agreement must not be reported as full trajectory equivalence."
+V849="Outcome/correction bounds use declared Euclidean units in the exact model. A correction magnitude is not an experience measure or a thermodynamic quantity by notation alone."
+V850="Triangle inequality gives ||d||<=epsilon+||M||rho. In the scalar unit-gain case minimizing |d+u| over |u|<=rho yields max(0,|d|-rho); quiet output without a justified correction bound supplies no comparable finite guarantee."
+V851="The model explicitly includes a bounded remainder and measurement errors with fixed KM=LH. These are deterministic bounds needing calibration; no distribution or independence assumption is required for the subsequent inequality."
+V852="Substitution leaves K times outcome noise/model remainder minus L times monitor noise. Operator-norm triangle bounds give the displayed error; unmodeled correction inputs or changing matrices would require new terms rather than being absorbed without a bound."
+V853="The pre-readout information must be independent of a centered current probe; b is measurable from that information and has finite second moment. Independence is a physical timing/access premise, not a conclusion from random-looking samples."
+V854="The normalized probe contract fixes dimensions, the centered probe, its independent pre-readout information boundary, finite second moments and symmetric PSD Q. Vanishing cross moments give both displayed population identities; no sample significance or empirical independence is inferred."
+V855="This is the separate countercontract that permits current-probe access, explicitly violating the protected-information hypothesis. The protected setup and countercontract are compared, not conjoined as one instance."
+V856="Allowing b=-Gxi uses current-probe information and annihilates the outcome, explicitly violating the protected-information premise. It is a boundary counterexample, not evidence against the conditional moment identities."
+V857="Actual P,Q, full common signature, correction-baseline comparison, timing, ports and calibrated decomposition are open independent obligations. A finite correction matrix or successful simulation is not complete actual organization."
+V858="An independently established difference must concern a feature preserved by every complete structural isomorphism of that same actual comparison. An analyst-selected score or label cannot discharge this premise."
+V859="Under both open actual guards, invariant reduct nonisomorphism excludes full structural isomorphism and inherited A:C1_OI gives complete experiential-type difference. Neither equation (1) alone nor a changed correction trace predicts named quality, magnitude or subject count."
+V860="This open premise requires continuing constitutive support and lineage of the nominated local actual process under P3. Embedding or a saved variable name supplies neither persistence nor cessation evidence."
+V861="When the same local actual token persists, U1 continues to imply nonempty experience independently of compensation success or monitor adequacy. It does not imply unchanged content or survival after actual destructive removal."
+NODES
+OL20261009:FALSE_GAUGE_CONTROL | FINITE_COUNTEREXAMPLE | For K=I2, v=(1,1), k=1 original squared gap is1; after passive L=[[1,1],[1,-1]], illegitimately redefining recipient primitive ports as new coordinate axes can produce zero gap. This is a different intervention set, not invariance failure.
+F1=V739 F43=V737 F44=V738
+OL20261009:COMPENSATION_CONTROL | INFERENCE_GUARD | Allowing an unmodeled second write, new side input, alternate readout or modified horizon can erase the target residual. Without installed physical port scope and full incoming transcript, Gamma is not a physical organization certificate.
+F1=V739 F43=V737 F44=V738
+OL20261009:PHYSICAL_REDUCT | OPEN_PHYSICAL_BRIDGE | Before a real-world UCT application, independently identify actual tokens, complete common signature K, physical part/port ontology, timed write events, source-target matching, and a constitutive reduct whose full isomorphisms preserve these operations. No simulated fit or report completes this obligation.
+F1=V740 F43=V737 F44=V741
+OL20261009:C1_APPLICATION | CONDITIONAL_UCT_APPLICATION | If PHYSICAL_REDUCT is independently discharged for two actual tokens, their complete K-isomorphisms must preserve grounded local-write structures. Nonisomorphism of those reducts excludes full isomorphism; inherited A:C1_OI then implies distinct COMPLETE phenomenal structural types, not named qualia or scalar intensity.
+F1=V742 F43=V737 F44=V743
+OL20261009:LOCAL_NO_ERASURE | INHERITED_CONDITIONAL_GUARD | Where real local processes continue over the episode and meet A:P3/A:U1, altering accessible ports, noise tolerance or reader competence does not by itself erase their nonempty experience; complete token-relative types may change.
+F1=V744 F43=V737 F44=V738
+OL20261009:NOVELTY | PRIOR_ART_BOUNDARY | Optimal projection, observability Gramians, robust residuals and sparse actuation are established mathematics. New scoped contribution is operationally combining their calibrated finite-horizon quotient with IL local-write counterexample and UCT token/port caveats; first-in-literature priority NOT claimed.
+F1=V745 F43=V737 F44=V738
+OL20261009:OPEN_AGENCY | OPEN_PHENOMENAL_BRIDGE | A gap in physically grounded local write imitation may identify organization relevant to control, but no independent mapping to felt agency, bodily mineness, particular pleasure/pain, personal identity, global richness or subject count is supplied.
+F1=V746 F43=V737 F44=V747
+R185:EPISODE_OCCURRENCE | definition | A relation occurrence is a grounded episode-relative occurrence identifier, typed ordered endpoint tuple, mechanism/port role and time; its carried value is not its numerical identity.
+F1=V748 F51=V749
+R185:TOKEN_MEMBERSHIP | definition | Mem(rho;P,K) holds only for an independently actual token whose complete token-relative organization faithfully contains rho's full constitutive support and boundary facts.
+F1=V750 F51=V751
+R185:SAME_OCCURRENCE | definition | Two local representatives are same-occurrence exactly when grounded inclusion maps on the event and occurrence sorts identify the same physical occurrence, preserving endpoints, type, mechanism/ports and time.
+F1=V752 F51=V753
+R185:INCIDENCE_PROFILE | definition | The incidence matrix records which actual tokens contain each grounded occurrence class; membership count and occurrence count are different quantities.
+F1=V754 F51=V755
+R185:ACTUAL_MEMBERSHIP_PACKAGE | unresolved_premise | One episode jointly supplies actual token status, complete compatible signatures, grounded occurrence identity, faithful inclusions and boundary-accountable membership for every selected scale.
+F1=V756 F51=V757
+R185:SHARED_MEMBERSHIP | conditional_result | One grounded occurrence included constitutionally in several actual token organizations has one occurrence class and a multi-token incidence profile rather than one copy per membership.
+F1=V758 F51=V759
+R185:COPIED_COUNTERMODEL | counterexample | A one-occurrence shared architecture and a two-occurrence copied architecture can match relation values, local views, whole output and report while differing in occurrence count and incidence profile.
+F1=V760 F51=V761
+R185:SYNCHRONIZER_BOUNDARY | counterexample_boundary | A synchronizer can propagate a change between distinct copies but is an additional whole-organization relation and does not merge their occurrence identities.
+F1=V762 F51=V763
+R185:COHERENT_OVERLAP_PACKAGE | inherited_conditional_source_card | Grounded physically identified overlap maps and interaction-complete compatible token signatures admit the coherent structural comparison described in CG20261008.
+F1=V764 F51=V765
+R185:EXPERIENTIAL_COUNTERPART | conditional_application | For each actual member token, C1 transports rho to a token-relative experiential structural counterpart; a grounded overlap package coherently relates those images.
+F1=V766 F51=V767
+R185:CROSS_TOKEN_IDENTITY_LIMIT | inference_limit | Tokenwise C1 and coherent structural comparison do not by themselves establish cross-token numerical phenomenal identity or a unique subject partition.
+F1=V768 F51=V769
+R185:ACTION_CENTERING_NEXT | open_problem | Determine whether one action-centering relation is invariantly grounded across the shared-occurrence incidence diagram and distinguished from a synchronized copied diagram.
+F1=V770 F51=V771
+HOM:MODEL | FINITE_MODEL | Fix m>=1 and state (f_1,...,f_m,z) in {0,1}^{m+1}, initially all zero. In both machines A_i sets f_i=1 and leaves other coordinates fixed. In the coupled machine C flips z iff all m flags equal1; comparator N has C=id. Full state is observed after each admitted action.
+F1=V772 F51=V773
+HOM:SHORT_EQ | CONDITIONAL_THEOREM | For every m>=1 and every word over {A_1,...,A_m,C} of length at most m, the two HOM:MODEL machines from zero reset have identical full-state traces at every prefix, including the empty prefix.
+F1=V772 F51=V774
+HOM:DEEP_WITNESS | CONDITIONAL_THEOREM | For every m>=1, the word A_1,...,A_m,C of length m+1 yields z=1 in the coupled machine and z=0 in N. No shorter word separates the machines under the same zero-reset full-state contract.
+F1=V772 F51=V775
+HOM:BOUNDARY | COUNTEREXAMPLE_LIMIT | Presetting all flags to1 changes the reset contract and lets C separate in one action. Testing every state/transition under justified finite-state bounds is a different information class. Commutation alone does not imply independent-product factorization. The theorem concerns no continuous-time or unrestricted intervention claim.
+F1=V772 F51=V776
+HOM:EXPERIENCE_GUARD | OPEN_BRIDGE | Actual tokenhood, a complete constitutive signature and a comparison-preserving physical realization are independent OPEN premises. The finite construction neither assigns named phenomenal content nor introduces an experience gate, subject count or richness measure; any continuing independently actual local token retains the inherited U1/P3 boundary.
+F1=V772 F51=V777
+UI20261009:DOMAIN | MODEL_PREMISE | Fix a finite nonempty sufficient state/clock, the same total deterministic updates or Markov kernels A,B, identical preparation, and one fixed passive endpoint readout for the two legal orders. Include retained randomness and mutable background state; fix ports/timing/source treatment; no direct order-label input.
+F1=V778 F43=V779 F44=V780 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V785
+UI20261009:PRODUCT | DEFINITION | For each frozen context e, a state bijection exposes factors with A_e(a,b)=(F_e(a),b) and B_e(a,b)=(a,G_e(b)). In the stochastic case the factor-local conditional kernels are K_A,e(a,a_prime)delta_b and delta_a K_B,e(b,b_prime). Neither action changes e or depends on the other mutable factor; initial factors may be correlated and no mutable noise/context is omitted.
+F1=V778 F43=V779 F44=V786 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V787
+UI20261009:COMMUTATION | CONDITIONAL_THEOREM | PRODUCT implies AB=BA and identical endpoint laws under any same preparation and readout.
+F1=V778 F43=V779 F44=V788 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V789
+UI20261009:ORDER_GAP | DEFINITION | Delta=TV(mu A B R,mu B A R). Row-vector kernels compose left-to-right.
+F1=V778 F43=V779 F44=V790 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V791
+UI20261009:OBSTRUCTION | CONDITIONAL_THEOREM | Delta>0 excludes every independently updating product realization preserving the comparison contract.
+F1=V778 F43=V779 F44=V780 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V792
+UI20261009:BIT_MODEL | MODEL_PREMISE | S={0,1}^2, s0=00, r=x XOR y, A=(1-x,y). BC=(0,y); BD=(x,0). The two devices are compared, not conjoined.
+F1=V778 F43=V779 F44=V793 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V794
+UI20261009:BIT_WITNESS | CONSTRUCTION | No action, A alone and B alone match in both devices. AB vs BA outputs are 0 vs 1 in BC, and 1 vs 1 in BD.
+F1=V778 F43=V779 F44=V780 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V795
+UI20261009:RECODING | CONDITIONAL_THEOREM | Conjugate both updates and transport preparation/readout; commutation and observed contrasts are invariant.
+F1=V778 F43=V779 F44=V796 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V797
+UI20261009:APPROX_PRED | MODEL_PREMISE | An independent comparison model predicts one common endpoint law Q, with TV errors eAB and eBA against the two observed laws.
+F1=V778 F43=V779 F44=V798 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V799
+UI20261009:PRED_BOUND | CONDITIONAL_THEOREM | eAB+eBA>=Delta and max(eAB,eBA)>=Delta/2.
+F1=V778 F43=V779 F44=V800 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V801
+UI20261009:KERNEL_APPROX | MODEL_PREMISE | A0,B0 commute on the same state space; uniform row-TV distances to A,B are <=epsilonA,epsilonB.
+F1=V778 F43=V779 F44=V802 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V803
+UI20261009:KERNEL_BOUND | CONDITIONAL_THEOREM | Delta<=2(epsilonA+epsilonB) by contraction and telescoping.
+F1=V778 F43=V779 F44=V804 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V805
+UI20261009:NOISE_MODEL | MODEL_PREMISE | Reuse BIT_MODEL state/maps/preparation with B_alpha=alpha BC+(1-alpha)BD and a fresh route draw, alpha in [0,1]. R0 is parity; R_eta is R0 followed by the same independent bit-flip channel of rate eta in [0,1]. The two orders share R0 within the internal protocol and R_eta within the separately named noisy protocol.
+F1=V806 F43=V779 F44=V807 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V808
+UI20261009:NOISE_RESULT | CONDITIONAL_THEOREM | For NOISE_MODEL, Delta_internal=TV(mu A B_alpha R0,mu B_alpha A R0)=alpha; Delta_observed=TV(mu A B_alpha R_eta,mu B_alpha A R_eta)=alpha*abs(1-2eta). These are two explicitly named readout instances.
+F1=V778 F43=V779 F44=V809 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V810
+UI20261009:FUTURE_DOMAIN | MODEL_PREMISE | S is finite nonempty, |S|=n; U is a finite alphabet of deterministic total updates F_u:S->S, fixed readout r has c=|r(S)| classes, and all finite common words including empty are allowed. A and B in the quotient claim belong to U; external actions require a separate equivalence-preservation proof.
+F1=V778 F43=V779 F44=V811 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V812
+UI20261009:FUTURE_EQ | DEFINITION | s~t iff r(F_w(s))=r(F_w(t)) for every finite word w, including empty.
+F1=V778 F43=V779 F44=V813 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V814
+UI20261009:FUTURE_QUOTIENT | CONDITIONAL_THEOREM | On FUTURE_DOMAIN, future-readout equality is the coarsest update-stable refinement of current-readout equality. Every admitted F_u descends to S/~; for admitted A,B, their quotient maps commute iff no common future word distinguishes the two orders from any initial state.
+F1=V778 F43=V779 F44=V815 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V816
+UI20261009:FINITE_WITNESS | CONDITIONAL_THEOREM | With c initial readout classes, any distinguishable pair has some separating word of length <=n-c.
+F1=V778 F43=V779 F44=V817 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V818
+UI20261009:DELAY_MODEL | MODEL_PREMISE | In this separately predeclared diagnostic S={0,1}^2,s0=(0,0),A(x,y)=(1-x,y),BC(x,y)=(0,y),r_y(x,y)=y,V(x,y)=(x,x). Both orders use the same preparation/clock/ports and fixed r_y; V receives no order label. Only S,s0,A,BC are inherited from the BIT_MODEL construction; its parity observer is not a scored observer here.
+F1=V778 F43=V779 F44=V819 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V820
+UI20261009:DELAY_WITNESS | CONSTRUCTION | Under DELAY_MODEL, A then BC ends at (0,0), while BC then A ends at (1,0). Their fixed r_y readings are both zero immediately; after the same later V they are respectively zero and one. This is retained-state revelation in the separately fixed r_y protocol.
+F1=V778 F43=V779 F44=V821 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V822
+UI20261009:LIMITS | COUNTEREXAMPLE_FAMILY | Four-cycle and its square commute without a binary product factorization; two same-carrier toggles commute; an order-label leak can create spurious contrast; coordinating copies can emulate shared updates.
+F1=V778 F43=V779 F44=V823 F52=V781 F53=V782 F54=V781 F55=V824 F56=V784 F57=V825
+UI20261009:REALIZATION | OPEN_BRIDGE | Actual compared processes, common complete K, installed operations and physical ports/timing/noise/provenance are independently anchored; operator contrast is a constitutive invariant of that same actual comparison.
+F1=V778 F43=V779 F44=V826 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V827
+UI20261009:TYPE_WITNESS_GUARD | OPEN_COMPARISON_PREMISE | For this explicitly paired actual comparison, one organization has a declared commuting pair, while the other has a justified positive order contrast for corresponding operations/preparation/readout. Do not assign both incompatible properties to one instance.
+F1=V778 F43=V779 F44=V828 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V829
+UI20261009:TYPE_TRANSFER | CONDITIONAL_UCT_APPLICATION | For the explicitly paired actual comparison satisfying REALIZATION, TYPE_WITNESS_GUARD, common complete A:K and inherited A:C1_OI, one member has corresponding commuting operations and the other justified positive order contrast. This grounded K-invariant difference excludes full K-isomorphism and implies distinct complete experiential K-types. No named quality, intensity, intelligence level or subject count follows.
+F1=V778 F43=V779 F44=V830 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V831
+UI20261009:PERSIST_GUARD | OPEN_PHYSICAL_PREMISE | Independently establish that the same nominated local actual process continues through the declared interval with constitutive support, dynamics, boundary and lineage under the original A:P3 criterion. Embedding or task success alone does not establish persistence; persistence does not imply unchanged complete type.
+F1=V778 F43=V779 F44=V832 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V833
+UI20261009:PERSISTENCE | INHERITED_CONDITIONAL | For that persisting admitted local token, U1 remains applicable regardless of the order contrast or task success.
+F1=V778 F43=V779 F44=V834 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V835
+CM20261009:VOCAB | DEFINITION | Fix finite m,p,r,k; e,d in R^m,u in R^p,z in R^k,q=K_target d in R^r; M in R^(m*p),H in R^(k*p),K_target in R^(r*m),L in R^(r*k). Source symbol K means K_target, not full K_UCT or finite K_alphabet. Vector norms are Euclidean, matrix norms spectral, and H^+ is Moore-Penrose. Preparation,target,time,units,ports and readouts are independently fixed.
+F1=V836 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V837
+CM20261009:EXACT_MODEL | MODEL_ASSUMPTION | e=d+Mu,z=Hu with fixed calibrated M,H,K and no omitted corrective input/remainder. d has a causal clamp interpretation only with independent modular evidence.
+F1=V836 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V838
+CM20261009:UNRESTRICTED | DOMAIN_ASSUMPTION | For necessity, every (d,u) in R^m times R^p is admitted. Restricted physical alternatives can weaken necessity.
+F1=V836 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V839
+CM20261009:IDENTIFICATION | CONDITIONAL_THEOREM | In EXACT_MODEL and UNRESTRICTED, Kd is determined by (e,z) iff ker H subset ker(KM), equivalently KM=LH. Then q=Ke-Lz. Kernel-violating v gives indistinguishable (d,u)=(0,0),(-Mv,v).
+F1=V836 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V840
+CM20261009:FREE_MONITOR | DOMAIN_ASSUMPTION | Freely designable noiseless linear monitors with arbitrary real precision are allowed in the abstract comparison; physical installation is separate.
+F1=V836 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V841
+CM20261009:CHANNEL_BOUND | CONDITIONAL_THEOREM | Minimum independent real monitor channels under FREE_MONITOR and UNRESTRICTED equal rank(KM), attained by a row basis of KM. Not a bit/anatomical/phenomenal bound.
+F1=V836 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V842
+CM20261009:SUMDIFF_SETUP | WITNESS_ASSUMPTION | m=r=1,p=2,K=1,M=[1,1]; Hplus=[1,1] or Hminus=[1,-1]. Compare (d,u)=(0,(0,0)) and (1,(-1/2,-1/2)).
+F1=V836 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V843
+CM20261009:SUMDIFF | COUNTEREXAMPLE | Hplus determines d=e-z; Hminus yields e=z=0 for both specified alternatives although d differs. Equal monitor dimension is insufficient.
+F1=V836 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V844
+CM20261009:BOUNDED_SETUP | DOMAIN_ASSUMPTION | ||u||_2<=rho>=0,d otherwise unrestricted; exact feasible z in im H with ||H^+z||<=rho. Transport physical norms and coordinates together.
+F1=V836 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V845
+CM20261009:MINIMAX_RADIUS | CONDITIONAL_THEOREM | u0=H^+z,P=I-H^+H. Feasible q set is Ke-KMu0 minus KM times the ker H ball of radius sqrt(rho^2-||u0||^2). Exact minimax Euclidean radius is that radius times ||KMP||_2; center estimator Ke-KMu0 attains it.
+F1=V836 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V846
+CM20261009:FEEDBACK_SETUP | WITNESS_ASSUMPTION | Scalar constant d,e_t=d+u_t read before u_(t+1)=u_t-alpha e_t; u0=0,0<alpha<=1; no other inputs.
+F1=V836 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V847
+CM20261009:CAUSAL_MASK | CONDITIONAL_RESULT | e_t=d(1-alpha)^t,u_t=-d[1-(1-alpha)^t]. Alpha=1 gives all late t>=1 output zero while e_t-u_t=d; initial reading reveals d. Late-only equality is not full-trajectory equality.
+F1=V836 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V848
+CM20261009:BUDGET_OBSERVATION | DOMAIN_ASSUMPTION | Within EXACT_MODEL and fixed Euclidean units, ||u||<=rho and ||e||<=epsilon; these quantities are not experience or energy by fiat.
+F1=V836 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V849
+CM20261009:BUDGET_GUARD | CONDITIONAL_THEOREM | ||d||<=epsilon+||M||rho. For scalar M=1 minimal residual is max(0,|d|-rho). Quiet output alone is not a bound without correction constraints.
+F1=V836 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V850
+CM20261009:APPROXIMATE_MODEL | MODEL_ASSUMPTION | e=d+Mu+w,||w||<=epsilon_m; measured e,z errors bounded by epsilon_e,epsilon_z; z=Hu and KM=LH with fixed matrices. No independence of bounded errors assumed.
+F1=V836 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V851
+CM20261009:ROBUST_RECONSTRUCTION | CONDITIONAL_THEOREM | ||K e_measured-L z_measured-Kd|| <= ||K||(epsilon_e+epsilon_m)+||L||epsilon_z. Calibrated bounds and causal interpretation remain independent obligations.
+F1=V836 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V852
+CM20261009:PROBE_SETUP | DOMAIN_ASSUMPTION | Fix e,b in R^m,xi in R^a,G in R^(m*a),e=Gxi+b. E[xi]=0 and Sigma=E[xi xi^T] is nonsingular. xi is independent of the compensator pre-readout information sigma-algebra F_prior, b is F_prior-measurable, and all relevant second moments are finite. For the energy identity Q is a fixed symmetric PSD m-by-m matrix with its PSD square root.
+F1=V836 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V853
+CM20261009:PROBE_IDENTIFICATION | CONDITIONAL_THEOREM | Under PROBE_SETUP, E[e xi^T]=G Sigma; for the fixed symmetric PSD Q, E||Q^(1/2)e||^2=tr(Q G Sigma G^T)+E||Q^(1/2)b||^2. These are population identities under the declared information/timing contract, not finite-sample significance guarantees.
+F1=V836 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V854
+CM20261009:PROBE_COUNTERCONTROL | COUNTEREXAMPLE | Allow current-probe access and b=-G xi gives e=0. This violates PROBE_SETUP rather than refuting it. Hidden/predictable probe routes require new review.
+F1=V836 F52=V781 F53=V782 F54=V781 F55=V855 F56=V784 F57=V856
+CM20261009:ACTUAL_BRIDGE | OPEN_BRIDGE | Independently admit actual P,Q, common complete signature,timing,ports and calibrated causal decomposition with physically justified correction-baseline comparison. Finite operator views are not complete actual organization.
+F1=V836 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V857
+CM20261009:NONISOMORPHISM | OPEN_INSTANCE_PREMISE | In that same actual comparison, a feature necessarily preserved by complete structural isomorphisms is independently shown to differ. A score or analyst label does not discharge this.
+F1=V836 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V858
+CM20261009:TYPE_CONSEQUENCE | INHERITED_CONDITIONAL_APPLICATION | ACTUAL_BRIDGE and NONISOMORPHISM with A:C1_OI imply distinct complete experiential structural types. No named quality,magnitude or subject count follows.
+F1=V836 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V859
+CM20261009:PERSISTENCE | OPEN_INSTANCE_PREMISE | Nominated local actual process persists through correction/intervention under A:P3, with continuing constitutive support and lineage; embedding alone does not establish this.
+F1=V836 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V860
+CM20261009:NONERASURE | INHERITED_CONDITIONAL_APPLICATION | Given PERSISTENCE and A:U1, local experience stays nonempty regardless of output recovery/monitor adequacy. Not unchanged content or guaranteed survival after destructive removal.
+F1=V836 F52=V781 F53=V782 F54=V781 F55=V783 F56=V784 F57=V861

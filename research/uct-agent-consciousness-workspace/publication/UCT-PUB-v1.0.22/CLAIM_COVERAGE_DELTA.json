@@ -1,0 +1,738 @@
+{
+  "schema": "uct-publication-claim-delta/1",
+  "coverage_version": "UCT-PUB-v1.0.22",
+  "parent_coverage_version": "UCT-PUB-v1.0.21",
+  "base_ledger": {
+    "path": "publication/UCT-PUB-v1.0.0/COVERAGE_LEDGER.json",
+    "bytes": 20787,
+    "sha256": "e976c3c5a65dddb284aaebc5a7a12330285979f1f8c7e848a41b1e0324fdadbb"
+  },
+  "publication_evidence": {
+    "path": "records/SCUPUB20261010_DOI_Publication/FINAL_PUBLICATION_RECEIPT.json",
+    "bytes": 5278,
+    "sha256": "c47680350df514926d5d7aa180b0b3871a153d9611faf0156979c59dce570847"
+  },
+  "scientific_map": "UCT-MAP-v1.1.2",
+  "nondeductive": true,
+  "publication_implies_validity": false,
+  "unknown_is_unpublished": false,
+  "claims": [
+    {
+      "claim_id": "SCU20261010-C1",
+      "statement": "For every n>=2, route pair (a,b) and finite target word, setting all source values to each target yields correct action and prediction with zero discrepancy at every step; an appended calibrated R204 row-replacement predictor retains the same forward-state trace.",
+      "scope": [
+        "n>=2",
+        "arbitrary finite nominal target words",
+        "pure fixed routes with a calibrated identity plant/predictor"
+      ],
+      "publication_status": "FORMALLY_PUBLICLY_DISCLOSED",
+      "coverage_status": "FULL_WITHIN_STATED_CLAIM_SCOPE_IN_BODY_AND_OR_FORMAL_SUPPLEMENT",
+      "work_id": "SCU-PAPER",
+      "version": "1.0.1",
+      "doi": "10.5281/zenodo.23272690",
+      "body_location": "Sections 3.3 and 4; exact nominal all-word statement in formal supplement CLAIM_LEDGER.json and RESEARCH_NOTE.md",
+      "supplement_location": "reproducibility-v1.0.1.zip: CLAIM_LEDGER.json, RESEARCH_NOTE.md, MODEL_CLAIM_CONTRACTS.json and code",
+      "scientific_status": "CONDITIONAL_RESULT_REVIEWED_CANDIDATE_DISABLED_FULL_MAP_ADOPTION_INCOMPLETE",
+      "actual_application_established": false,
+      "worldwide_priority_certified": false
+    },
+    {
+      "claim_id": "SCU20261010-C2",
+      "statement": "For schedule W with source columns c_i, full consumer readouts yield product fibers of equal columns; mismatch-only observation yields {(i,j):c_i XOR c_j=d}. Under a restricted intervention family sources equivalent on every admissible input remain indistinguishable.",
+      "scope": [
+        "fixed nonadaptive schedule",
+        "finite source sites and pure route consumers"
+      ],
+      "publication_status": "FORMALLY_PUBLICLY_DISCLOSED",
+      "coverage_status": "FULL_WITHIN_STATED_CLAIM_SCOPE_IN_BODY_AND_OR_FORMAL_SUPPLEMENT",
+      "work_id": "SCU-PAPER",
+      "version": "1.0.1",
+      "doi": "10.5281/zenodo.23272690",
+      "body_location": "Section 5.1, observation fibers and Theorem 3",
+      "supplement_location": "reproducibility-v1.0.1.zip: CLAIM_LEDGER.json, RESEARCH_NOTE.md, MODEL_CLAIM_CONTRACTS.json and code",
+      "scientific_status": "CONDITIONAL_RESULT_REVIEWED_CANDIDATE_DISABLED_FULL_MAP_ADOPTION_INCOMPLETE",
+      "actual_application_established": false,
+      "worldwide_priority_certified": false
+    },
+    {
+      "claim_id": "SCU20261010-C3",
+      "statement": "For n>=2 unknown pure-route roots, uniform exact decision of their equality using binary source interventions and mismatch-only observations has worst-case minimum ceil(log2 n), including deterministic adaptive protocols.",
+      "scope": [
+        "n>=2",
+        "all unknown ordered route pairs",
+        "deterministic exact worst-case protocols"
+      ],
+      "publication_status": "FORMALLY_PUBLICLY_DISCLOSED",
+      "coverage_status": "FULL_WITHIN_STATED_CLAIM_SCOPE_IN_BODY_AND_OR_FORMAL_SUPPLEMENT",
+      "work_id": "SCU-PAPER",
+      "version": "1.0.1",
+      "doi": "10.5281/zenodo.23272690",
+      "body_location": "Sections 5.1–5.2, Theorems 3–4 including adaptive lower bound",
+      "supplement_location": "reproducibility-v1.0.1.zip: CLAIM_LEDGER.json, RESEARCH_NOTE.md, MODEL_CLAIM_CONTRACTS.json and code",
+      "scientific_status": "CONDITIONAL_RESULT_REVIEWED_CANDIDATE_DISABLED_FULL_MAP_ADOPTION_INCOMPLETE",
+      "actual_application_established": false,
+      "worldwide_priority_certified": false
+    },
+    {
+      "claim_id": "SCU20261010-C4",
+      "statement": "For n>=2 and an independently known motor root a, setting a to zero and all other roots to one decides equality with an unknown predictor root in one probe. It also identifies B={a} for a predictor OR of a nonempty subset B.",
+      "scope": [
+        "n>=2",
+        "independently known single motor source",
+        "pure or nonempty-OR predictor"
+      ],
+      "publication_status": "FORMALLY_PUBLICLY_DISCLOSED",
+      "coverage_status": "FULL_WITHIN_STATED_CLAIM_SCOPE_IN_BODY_AND_OR_FORMAL_SUPPLEMENT",
+      "work_id": "SCU-PAPER",
+      "version": "1.0.1",
+      "doi": "10.5281/zenodo.23272690",
+      "body_location": "Section 5.3, Theorem 5 and nonempty OR predictor extension",
+      "supplement_location": "reproducibility-v1.0.1.zip: CLAIM_LEDGER.json, RESEARCH_NOTE.md, MODEL_CLAIM_CONTRACTS.json and code",
+      "scientific_status": "CONDITIONAL_RESULT_REVIEWED_CANDIDATE_DISABLED_FULL_MAP_ADOPTION_INCOMPLETE",
+      "actual_application_established": false,
+      "worldwide_priority_certified": false
+    },
+    {
+      "claim_id": "SCU20261010-C5",
+      "statement": "For n>=2, exact uniform equality decision between arbitrary nonempty OR source subsets requires exactly n probes in the worst case, even adaptively. Along the zero-discrepancy branch each unit input e_i is necessary; all unit inputs suffice. A four-source disjoint-set construction defeats the two-bit pure-route code.",
+      "scope": [
+        "n>=2",
+        "both consumers OR arbitrary nonempty subsets of the n sources",
+        "all pairs of subsets",
+        "exact worst-case mismatch-only protocol"
+      ],
+      "publication_status": "FORMALLY_PUBLICLY_DISCLOSED",
+      "coverage_status": "FULL_WITHIN_STATED_CLAIM_SCOPE_IN_BODY_AND_OR_FORMAL_SUPPLEMENT",
+      "work_id": "SCU-PAPER",
+      "version": "1.0.1",
+      "doi": "10.5281/zenodo.23272690",
+      "body_location": "Sections 6.1–6.2, alias construction and Theorem 6",
+      "supplement_location": "reproducibility-v1.0.1.zip: CLAIM_LEDGER.json, RESEARCH_NOTE.md, MODEL_CLAIM_CONTRACTS.json and code",
+      "scientific_status": "CONDITIONAL_RESULT_REVIEWED_CANDIDATE_DISABLED_FULL_MAP_ADOPTION_INCOMPLETE",
+      "actual_application_established": false,
+      "worldwide_priority_certified": false
+    },
+    {
+      "claim_id": "SCU20261010-C6",
+      "statement": "Faithful copy networks with the same composite root-to-consumer map yield identical readouts for all source inputs, while immediate intake carrier identity can differ. A node write and a branch-edge replacement can have distinct cross-consumer effects; only the former separates the displayed shared/separate relay pair under additional targeting premises.",
+      "scope": [
+        "finite faithful-copy feedforward networks",
+        "common composite source map",
+        "specific shared/separate relay alternative for clamp comparison"
+      ],
+      "publication_status": "FORMALLY_PUBLICLY_DISCLOSED",
+      "coverage_status": "FULL_WITHIN_STATED_CLAIM_SCOPE_IN_BODY_AND_OR_FORMAL_SUPPLEMENT",
+      "work_id": "SCU-PAPER",
+      "version": "1.0.1",
+      "doi": "10.5281/zenodo.23272690",
+      "body_location": "Sections 7.1–7.2, intake occurrence, node write and edge substitution",
+      "supplement_location": "reproducibility-v1.0.1.zip: CLAIM_LEDGER.json, RESEARCH_NOTE.md, MODEL_CLAIM_CONTRACTS.json and code",
+      "scientific_status": "CONDITIONAL_RESULT_REVIEWED_CANDIDATE_DISABLED_FULL_MAP_ADOPTION_INCOMPLETE",
+      "actual_application_established": false,
+      "worldwide_priority_certified": false
+    },
+    {
+      "claim_id": "SCU20261010-C7",
+      "statement": "A postconsequence copy can match all source/readout values of a preconsequence predictor; values alone do not establish the prediction role. The event model distinguishes the implementations by independently recorded chronology.",
+      "scope": [
+        "one pure-root source/actuation response",
+        "pre- versus post-consequence readout alternatives",
+        "complete source input cube"
+      ],
+      "publication_status": "FORMALLY_PUBLICLY_DISCLOSED",
+      "coverage_status": "FULL_WITHIN_STATED_CLAIM_SCOPE_IN_BODY_AND_OR_FORMAL_SUPPLEMENT",
+      "work_id": "SCU-PAPER",
+      "version": "1.0.1",
+      "doi": "10.5281/zenodo.23272690",
+      "body_location": "Section 7.3, chronology counterexample",
+      "supplement_location": "reproducibility-v1.0.1.zip: CLAIM_LEDGER.json, RESEARCH_NOTE.md, MODEL_CLAIM_CONTRACTS.json and code",
+      "scientific_status": "CONDITIONAL_RESULT_REVIEWED_CANDIDATE_DISABLED_FULL_MAP_ADOPTION_INCOMPLETE",
+      "actual_application_established": false,
+      "worldwide_priority_certified": false
+    },
+    {
+      "claim_id": "SCU20261010-C8",
+      "statement": "Only under actual-process admission, one complete P/I/K binding, grounded role/trace/time relations, transported physical parameters and C1 do the actual source-consumer relations have experiential structural counterparts. No source confluence, calibration, use, history, language or report threshold is added; H, local membership and conceptual self are not inferred.",
+      "scope": [
+        "one admitted actual process or independently admitted overlapping processes",
+        "common complete signature",
+        "all relevant parameters transported"
+      ],
+      "publication_status": "FORMALLY_PUBLICLY_DISCLOSED",
+      "coverage_status": "FULL_WITHIN_STATED_CLAIM_SCOPE_IN_BODY_AND_OR_FORMAL_SUPPLEMENT",
+      "work_id": "SCU-PAPER",
+      "version": "1.0.1",
+      "doi": "10.5281/zenodo.23272690",
+      "body_location": "Sections 2, 7.4, 9 and 10, conditional UCT counterpart and limits",
+      "supplement_location": "reproducibility-v1.0.1.zip: CLAIM_LEDGER.json, RESEARCH_NOTE.md, MODEL_CLAIM_CONTRACTS.json and code",
+      "scientific_status": "CONDITIONAL_RESULT_REVIEWED_CANDIDATE_DISABLED_FULL_MAP_ADOPTION_INCOMPLETE",
+      "actual_application_established": false,
+      "worldwide_priority_certified": false
+    },
+    {
+      "claim_id": "R204-C1",
+      "publication_status": "FORMALLY_PUBLICLY_DISCLOSED_WITH_EXTENT_BELOW",
+      "coverage_status": "SCOPED_BODY_AND_OR_EXECUTABLE_SUPPLEMENT_DISCLOSURE",
+      "body_or_attachment_location": "Section 3.1, finite success/alignment/use separation and successful-output quartet",
+      "work_id": "SCU-PAPER",
+      "version": "1.0.1",
+      "doi": "10.5281/zenodo.23272690",
+      "novelty_status": "INHERITED_WORKSPACE_APPLICATION_NOT_NEW_THIS_TURN",
+      "scope_rule": "Only the located claim and published finite code/result scope; a citation does not publish the whole historical record.",
+      "actual_application_established": false
+    },
+    {
+      "claim_id": "R204-C2",
+      "publication_status": "FORMALLY_PUBLICLY_DISCLOSED_WITH_EXTENT_BELOW",
+      "coverage_status": "SCOPED_BODY_AND_OR_EXECUTABLE_SUPPLEMENT_DISCLOSURE",
+      "body_or_attachment_location": "Section 3.2, natural null-update ambiguity and forced mismatch inference with joint port/writer/readout premises",
+      "work_id": "SCU-PAPER",
+      "version": "1.0.1",
+      "doi": "10.5281/zenodo.23272690",
+      "novelty_status": "INHERITED_WORKSPACE_APPLICATION_NOT_NEW_THIS_TURN",
+      "scope_rule": "Only the located claim and published finite code/result scope; a citation does not publish the whole historical record.",
+      "actual_application_established": false
+    },
+    {
+      "claim_id": "R204-C3",
+      "publication_status": "FORMALLY_PUBLICLY_DISCLOSED_WITH_EXTENT_BELOW",
+      "coverage_status": "PARTIAL_BODY_PLUS_EXECUTABLE_WITNESS_NOT_FULL_NARRATIVE_PROOF",
+      "body_or_attachment_location": "Section 7.4 provides general transport discussion and Section 8 reports computation counts. Formal ZIP reproduction/baseline_R204/check_alignment_and_use.py and EXACT_RESULTS.json disclose port-recoding witnesses for n=2,3,4 (333088 checks) and a uniform-action rational mixture grid lambda in {0,0.1,...,1} (6776 checks). The original full C3 narrative and continuous-lambda formula are not fully restated in this published paper.",
+      "work_id": "SCU-PAPER",
+      "version": "1.0.1",
+      "doi": "10.5281/zenodo.23272690",
+      "novelty_status": "INHERITED_WORKSPACE_APPLICATION_NOT_NEW_THIS_TURN",
+      "scope_rule": "Only the located claim and published finite code/result scope; a citation does not publish the whole historical record.",
+      "actual_application_established": false
+    },
+    {
+      "claim_id": "R204-C4",
+      "publication_status": "FORMALLY_PUBLICLY_DISCLOSED_WITH_EXTENT_BELOW",
+      "coverage_status": "SCOPED_BODY_AND_OR_EXECUTABLE_SUPPLEMENT_DISCLOSURE",
+      "body_or_attachment_location": "Sections 2 and 9, inherited conditional UCT and independent H semantics",
+      "work_id": "SCU-PAPER",
+      "version": "1.0.1",
+      "doi": "10.5281/zenodo.23272690",
+      "novelty_status": "INHERITED_WORKSPACE_APPLICATION_NOT_NEW_THIS_TURN",
+      "scope_rule": "Only the located claim and published finite code/result scope; a citation does not publish the whole historical record.",
+      "actual_application_established": false
+    },
+    {
+      "claim_id": "R204-C5",
+      "publication_status": "FORMALLY_PUBLICLY_DISCLOSED_WITH_EXTENT_BELOW",
+      "coverage_status": "SCOPED_BODY_AND_OR_EXECUTABLE_SUPPLEMENT_DISCLOSURE",
+      "body_or_attachment_location": "Section 3.3, all-sequence state-trajectory equality of comparator and reflex",
+      "work_id": "SCU-PAPER",
+      "version": "1.0.1",
+      "doi": "10.5281/zenodo.23272690",
+      "novelty_status": "INHERITED_WORKSPACE_APPLICATION_NOT_NEW_THIS_TURN",
+      "scope_rule": "Only the located claim and published finite code/result scope; a citation does not publish the whole historical record.",
+      "actual_application_established": false
+    },
+    {
+      "claim_id": "R205:C1",
+      "publication_status": "FORMALLY_PUBLICLY_DISCLOSED_WITH_EXTENT_BELOW",
+      "coverage_status": "SCOPED_BODY_AND_OR_EXECUTABLE_SUPPLEMENT_DISCLOSURE",
+      "body_or_attachment_location": "Section 4, source/consumer square; executable source model in formal supplement",
+      "work_id": "SCU-PAPER",
+      "version": "1.0.1",
+      "doi": "10.5281/zenodo.23272690",
+      "novelty_status": "INHERITED_WORKSPACE_APPLICATION_NOT_NEW_THIS_TURN",
+      "scope_rule": "Only the located claim and published finite code/result scope; a citation does not publish the whole historical record.",
+      "actual_application_established": false
+    },
+    {
+      "claim_id": "R205:C2",
+      "publication_status": "FORMALLY_PUBLICLY_DISCLOSED_WITH_EXTENT_BELOW",
+      "coverage_status": "SCOPED_BODY_AND_OR_EXECUTABLE_SUPPLEMENT_DISCLOSURE",
+      "body_or_attachment_location": "Sections 4–5, pure selector recovery under the declared intervention/readout contract; the original two-probe finite implementation is disclosed in reproducibility-v1.0.1.zip: reproduction/baseline_R205/exact_probe.py and EXACT_RESULTS.json",
+      "work_id": "SCU-PAPER",
+      "version": "1.0.1",
+      "doi": "10.5281/zenodo.23272690",
+      "novelty_status": "INHERITED_WORKSPACE_APPLICATION_NOT_NEW_THIS_TURN",
+      "scope_rule": "Only the located claim and published finite code/result scope; a citation does not publish the whole historical record.",
+      "actual_application_established": false
+    },
+    {
+      "claim_id": "R205:C3",
+      "publication_status": "FORMALLY_PUBLICLY_DISCLOSED_WITH_EXTENT_BELOW",
+      "coverage_status": "SCOPED_BODY_AND_OR_EXECUTABLE_SUPPLEMENT_DISCLOSURE",
+      "body_or_attachment_location": "Section 7.1, cancellation and consumed branches",
+      "work_id": "SCU-PAPER",
+      "version": "1.0.1",
+      "doi": "10.5281/zenodo.23272690",
+      "novelty_status": "INHERITED_WORKSPACE_APPLICATION_NOT_NEW_THIS_TURN",
+      "scope_rule": "Only the located claim and published finite code/result scope; a citation does not publish the whole historical record.",
+      "actual_application_established": false
+    },
+    {
+      "claim_id": "R205:C4",
+      "publication_status": "FORMALLY_PUBLICLY_DISCLOSED_WITH_EXTENT_BELOW",
+      "coverage_status": "PARTIAL_BODY_PLUS_EXECUTABLE_WITNESS_NOT_FULL_NARRATIVE_PROOF",
+      "body_or_attachment_location": "Section 7.4 gives general transport discussion; specific compensated-recoding finite witness in reproduction/baseline_R205 code/results",
+      "work_id": "SCU-PAPER",
+      "version": "1.0.1",
+      "doi": "10.5281/zenodo.23272690",
+      "novelty_status": "INHERITED_WORKSPACE_APPLICATION_NOT_NEW_THIS_TURN",
+      "scope_rule": "Only the located claim and published finite code/result scope; a citation does not publish the whole historical record.",
+      "actual_application_established": false
+    },
+    {
+      "claim_id": "R205:C5",
+      "publication_status": "FORMALLY_PUBLICLY_DISCLOSED_WITH_EXTENT_BELOW",
+      "coverage_status": "SCOPED_BODY_AND_OR_EXECUTABLE_SUPPLEMENT_DISCLOSURE",
+      "body_or_attachment_location": "Sections 2, 7.4 and 9, conditional UCT relation",
+      "work_id": "SCU-PAPER",
+      "version": "1.0.1",
+      "doi": "10.5281/zenodo.23272690",
+      "novelty_status": "INHERITED_WORKSPACE_APPLICATION_NOT_NEW_THIS_TURN",
+      "scope_rule": "Only the located claim and published finite code/result scope; a citation does not publish the whole historical record.",
+      "actual_application_established": false
+    },
+    {
+      "claim_id": "R194:COMPONENT_COUNT",
+      "publication_status": "CORRECTION_DISCLOSED_IN_FORMAL_SUPPLEMENT",
+      "coverage_status": "EXACT_OVERLAY_FIELDS_AND_RECORDED_SCOPED_PROOF",
+      "work_id": "SCU-PAPER",
+      "version": "1.0.1",
+      "doi": "10.5281/zenodo.23272690",
+      "attachment_location": "reproducibility-v1.0.1.zip: corrections/R194_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "effective_fields": {
+        "statement": "For a finite signed graph with a fixed partial binary anchor map, the compatible-labelling count is zero if an XOR-parity cycle is inconsistent or two anchors in one component disagree with path parity. Otherwise it is exactly 2^c, where c is the number of unanchored connected components. In particular one anchor per component gives a unique numeric labelling when all cycle constraints are consistent.",
+        "scope": "All finite XOR graphs with fixed partial anchor assignments; consistency covers edges AND anchors on that same graph.",
+        "quantifier": "For every fixed graph, parity assignment and partial anchor map in the declared domain.",
+        "enabled_as_established_premise": false,
+        "actual_premises_discharged": false,
+        "proof_location": "EFFECTIVE_CORRECTIONS.md; EFFECTIVE_CORRECTION_EXACT_RESULTS.json; verify_effective_corrections.py",
+        "effective_correction_status": "CANDIDATE_DISABLED"
+      },
+      "old_record_sha256": "265f726569c15158b04c32eeec0ca2c6d94af8cb4e85c45c2a9020fff4b1b629",
+      "original_history_preserved": true,
+      "main_paper_contribution": false,
+      "science_promotion": false
+    },
+    {
+      "claim_id": "R194:r_component_count",
+      "publication_status": "CORRECTION_DISCLOSED_IN_FORMAL_SUPPLEMENT",
+      "coverage_status": "EXACT_OVERLAY_FIELDS_AND_RECORDED_SCOPED_PROOF",
+      "work_id": "SCU-PAPER",
+      "version": "1.0.1",
+      "doi": "10.5281/zenodo.23272690",
+      "attachment_location": "reproducibility-v1.0.1.zip: corrections/R194_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "effective_fields": {
+        "all_of": [
+          "R194:DOMAIN",
+          "R194:SIGNED_GRAPH",
+          "SCU20261010:CORR_R194_ANCHORED_GRAPH_DOMAIN",
+          "R149:COMPATIBILITY",
+          "R157:COORDINATE_TRANSPORT"
+        ],
+        "statement": "Propagate parity from one root per component; reject cycle or anchor/path conflicts. Each remaining unanchored component has two root values and each compatible anchored component one.",
+        "binding": "One V,E,edge-parity map, partial anchor map eta and coordinate interpretation are retained. The theorem evaluates all constraints jointly; an anchor from another graph or target cannot be pasted into this instance.",
+        "alternative_route_semantics": "Conflicting cycles and conflicting anchors are two failure cases, not alternative positive proofs. The 2^c branch requires joint consistency.",
+        "enabled_as_established_premise": false,
+        "actual_premises_discharged": false,
+        "proof_location": "EFFECTIVE_CORRECTIONS.md; EFFECTIVE_CORRECTION_EXACT_RESULTS.json; verify_effective_corrections.py",
+        "effective_correction_status": "CANDIDATE_DISABLED"
+      },
+      "old_record_sha256": "4f837e7a74da5ee611e2fd72e27581cfb90eb96c2763106d2eb5cd0aa2e2bdae",
+      "original_history_preserved": true,
+      "main_paper_contribution": false,
+      "science_promotion": false
+    },
+    {
+      "claim_id": "R194:RELATIVE_ALIGNMENT",
+      "publication_status": "CORRECTION_DISCLOSED_IN_FORMAL_SUPPLEMENT",
+      "coverage_status": "EXACT_OVERLAY_FIELDS_AND_RECORDED_SCOPED_PROOF",
+      "work_id": "SCU-PAPER",
+      "version": "1.0.1",
+      "doi": "10.5281/zenodo.23272690",
+      "attachment_location": "reproducibility-v1.0.1.zip: corrections/R194_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "effective_fields": {
+        "statement": "Multiple populations, markers and known reversal relations can identify relative channel polarity and connect components when all edge constraints and any supplied anchors are jointly consistent.",
+        "scope": "One fixed signed comparison design; same-target transport, edge truth and anchor/path compatibility remain simultaneous premises.",
+        "enabled_as_established_premise": false,
+        "actual_premises_discharged": false,
+        "proof_location": "EFFECTIVE_CORRECTIONS.md; EFFECTIVE_CORRECTION_EXACT_RESULTS.json; verify_effective_corrections.py",
+        "effective_correction_status": "CANDIDATE_DISABLED"
+      },
+      "old_record_sha256": "ee7d93c062f4e002c6ea6d084c0c8ad603e0af6a39161a76f3ddd71d5efb8e3c",
+      "original_history_preserved": true,
+      "main_paper_contribution": false,
+      "science_promotion": false
+    },
+    {
+      "claim_id": "SCU20261010:CORR_R194_ANCHORED_GRAPH_DOMAIN",
+      "publication_status": "CORRECTION_DISCLOSED_IN_FORMAL_SUPPLEMENT",
+      "coverage_status": "EXACT_DISABLED_CORRECTION_RECORD",
+      "work_id": "SCU-PAPER",
+      "version": "1.0.1",
+      "doi": "10.5281/zenodo.23272690",
+      "attachment_location": "reproducibility-v1.0.1.zip: corrections/R194_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "statement": "Fix one finite vertex set V, one undirected XOR-parity edge set E, and one partial anchor function eta:V->{0,1}. For vertices in one component, anchor values must agree with the parity of a connecting path for joint satisfiability. Multiple anchors are permitted and tested, not silently assumed compatible.",
+      "main_paper_contribution": false,
+      "science_promotion": false
+    },
+    {
+      "claim_id": "R201:STRICTNESS_COUNTERMODELS",
+      "publication_status": "CORRECTION_DISCLOSED_IN_FORMAL_SUPPLEMENT",
+      "coverage_status": "EXACT_OVERLAY_FIELDS_AND_RECORDED_SCOPED_PROOF",
+      "work_id": "SCU-PAPER",
+      "version": "1.0.1",
+      "doi": "10.5281/zenodo.23272690",
+      "attachment_location": "reproducibility-v1.0.1.zip: corrections/R201_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "effective_fields": {
+        "statement": "There exists a coherent equality example with rho=1/2, b=beta=1/10 and epsilon0=epsilon1=0 in which delta=1/10 and Delta_T=0. There exists a separate coherent below-threshold example with rho=1/2, b=beta=1/10, epsilon0=epsilon1=1/10, delta=3/20 and Delta_T=-1/10. Without independently positive endpoint sign, a separate reversed-endpoint example has delta=1 and Delta_C=-1. These witness failure of a general non-strict replacement and of unconstrained endpoint orientation; they do not prove sharpness at every nuisance-budget tuple.",
+        "scope": "Coherent binary probability laws; original rho=1,b=1/10 scalar tuples are withdrawn as unrealizable probability witnesses.",
+        "quantifier": "Existential: one coherent witness per displayed failure mode, with separate world and budget binding.",
+        "enabled_as_established_premise": false,
+        "actual_premises_discharged": false,
+        "proof_location": "EFFECTIVE_CORRECTIONS.md; EFFECTIVE_CORRECTION_EXACT_RESULTS.json; verify_effective_corrections.py",
+        "effective_correction_status": "CANDIDATE_DISABLED"
+      },
+      "old_record_sha256": "ab8441e6e3f4f0752436dde8f3dbb2b4b116d67cf11e8a56716f6eceeaeba741",
+      "original_history_preserved": true,
+      "main_paper_contribution": false,
+      "science_promotion": false
+    },
+    {
+      "claim_id": "R201:r_strictness_witnesses",
+      "publication_status": "CORRECTION_DISCLOSED_IN_FORMAL_SUPPLEMENT",
+      "coverage_status": "EXACT_OVERLAY_FIELDS_AND_RECORDED_SCOPED_PROOF",
+      "work_id": "SCU-PAPER",
+      "version": "1.0.1",
+      "doi": "10.5281/zenodo.23272690",
+      "attachment_location": "reproducibility-v1.0.1.zip: corrections/R201_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "effective_fields": {
+        "all_of": [
+          "R201:FIXED_CALIBRATION_TRANSPORT_DOMAIN",
+          "SCU20261010:CORR_R201_COHERENT_WITNESS_DOMAIN"
+        ],
+        "statement": "Evaluate the three explicitly coherent rational probability witnesses under their own retained premises. Equality and below-threshold worlds are not required to satisfy the strict-margin certificate premise.",
+        "binding": "Fix target meaning and variable sorts at schema level. Bind C,T,H,J,M,U=1, a single coherent joint calibration law, target conditionals and budgets separately inside each existential witness. Never combine a strict-margin instance with a different equality or reversal instance.",
+        "alternative_route_semantics": "The three failure modes are alternative witnesses. Positive endpoint sign is retained in the first two and deliberately dropped in the third.",
+        "enabled_as_established_premise": false,
+        "actual_premises_discharged": false,
+        "proof_location": "EFFECTIVE_CORRECTIONS.md; EFFECTIVE_CORRECTION_EXACT_RESULTS.json; verify_effective_corrections.py",
+        "effective_correction_status": "CANDIDATE_DISABLED"
+      },
+      "old_record_sha256": "8bed0049051d00c62cd0d7db94cf0d6645b9d82c3d8659df4fcc7c7950e97d0b",
+      "original_history_preserved": true,
+      "main_paper_contribution": false,
+      "science_promotion": false
+    },
+    {
+      "claim_id": "SCU20261010:CORR_R201_COHERENT_WITNESS_DOMAIN",
+      "publication_status": "CORRECTION_DISCLOSED_IN_FORMAL_SUPPLEMENT",
+      "coverage_status": "EXACT_DISABLED_CORRECTION_RECORD",
+      "work_id": "SCU-PAPER",
+      "version": "1.0.1",
+      "doi": "10.5281/zenodo.23272690",
+      "attachment_location": "reproducibility-v1.0.1.zip: corrections/R201_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "statement": "Fix a mathematical family of coherent binary calibration and target probability laws with supported H/J strata and explicit nuisance budgets. Each displayed equality, below-threshold, or unsigned-endpoint counterexample is a SEPARATE joint law satisfying its own retained premises. The strict positive-margin premise is deliberately not imposed on equality or below-threshold witnesses.",
+      "main_paper_contribution": false,
+      "science_promotion": false
+    },
+    {
+      "claim_id": "R202:CONDITIONAL_NONDIFFERENTIALITY",
+      "publication_status": "CORRECTION_DISCLOSED_IN_FORMAL_SUPPLEMENT",
+      "coverage_status": "EXACT_OVERLAY_FIELDS_AND_RECORDED_SCOPED_PROOF",
+      "work_id": "SCU-PAPER",
+      "version": "1.0.1",
+      "doi": "10.5281/zenodo.23272690",
+      "attachment_location": "reproducibility-v1.0.1.zip: corrections/R202_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "effective_fields": {
+        "statement": "Within the same validation domain V and actual U=1, endpoint J is conditionally independent of marker M given H in both supported H classes. Bounded departures are a separate residual-sensitivity route and do not satisfy this exact-inversion premise.",
+        "scope": "Exact nondifferential-error route only. Aggregate R=0 is an alternative sufficient premise in a separate rule.",
+        "enabled_as_established_premise": false,
+        "actual_premises_discharged": false,
+        "proof_location": "EFFECTIVE_CORRECTIONS.md; EFFECTIVE_CORRECTION_EXACT_RESULTS.json; verify_effective_corrections.py",
+        "effective_correction_status": "CANDIDATE_DISABLED"
+      },
+      "old_record_sha256": "ddfd64d9823b968613e376ceed11a17528a362623ed3375c1841223398008b95",
+      "original_history_preserved": true,
+      "main_paper_contribution": false,
+      "science_promotion": false
+    },
+    {
+      "claim_id": "R202:AUDIT_INVERSION_RESULT",
+      "publication_status": "CORRECTION_DISCLOSED_IN_FORMAL_SUPPLEMENT",
+      "coverage_status": "EXACT_OVERLAY_FIELDS_AND_RECORDED_SCOPED_PROOF",
+      "work_id": "SCU-PAPER",
+      "version": "1.0.1",
+      "doi": "10.5281/zenodo.23272690",
+      "attachment_location": "reproducibility-v1.0.1.zip: corrections/R202_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "effective_fields": {
+        "statement": "Under the fixed coherent audit/endpoint/actual-use contract, positivity c<j<a, and zero aggregate residual R, recover pi=(j-c)/(a-c), q1=(r-c*m)/(j-c), q0=(a*m-r)/(a-j). Conditional independence is sufficient for R=0. A nonzero residual bound alone gives the separately defined common-residual feasible set, not these exact values.",
+        "scope": "Only the same V,H,M,J,A,U=1 law and calibrated endpoint matrix; no V-to-T transport inference is included.",
+        "enabled_as_established_premise": false,
+        "actual_premises_discharged": false,
+        "proof_location": "EFFECTIVE_CORRECTIONS.md; EFFECTIVE_CORRECTION_EXACT_RESULTS.json; verify_effective_corrections.py",
+        "effective_correction_status": "CANDIDATE_DISABLED"
+      },
+      "old_record_sha256": "e98fdfd5d1d782b362af54213421665fe2c69f4e0a5d9144cbacad7b68f39e4e",
+      "original_history_preserved": true,
+      "main_paper_contribution": false,
+      "science_promotion": false
+    },
+    {
+      "claim_id": "R202:r_audit_inversion",
+      "publication_status": "CORRECTION_DISCLOSED_IN_FORMAL_SUPPLEMENT",
+      "coverage_status": "EXACT_OVERLAY_FIELDS_AND_RECORDED_SCOPED_PROOF",
+      "work_id": "SCU-PAPER",
+      "version": "1.0.1",
+      "doi": "10.5281/zenodo.23272690",
+      "attachment_location": "reproducibility-v1.0.1.zip: corrections/R202_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "effective_fields": {
+        "all_of": [
+          "R202:FIXED_THREE_DOMAIN_CONTRACT",
+          "R202:PROSPECTIVE_IGNORABLE_AUDIT",
+          "R202:INFORMATIVE_SIGNED_ENDPOINT",
+          "R202:CONDITIONAL_NONDIFFERENTIALITY",
+          "R202:ACTUAL_USE_EVIDENCE_FIREWALL",
+          "SCU20261010:CORR_R202_JOINT_AUDIT_LAW"
+        ],
+        "statement": "Conditional independence makes R=0; invert the same two-by-two mixture law at c<j<a to recover pi,q0,q1 exactly.",
+        "binding": "One V,H,M,J,A,U=1 joint law, endpoint-error calibration, audit-selection contract, observed M/J law and positive-support condition are retained. A different dependence model cannot be substituted while keeping the zero-residual answer.",
+        "alternative_route_semantics": "Use the separately guarded zero-aggregate-residual route if independence is absent; a nonzero bound invokes the sensitivity-set rule instead.",
+        "enabled_as_established_premise": false,
+        "actual_premises_discharged": false,
+        "proof_location": "EFFECTIVE_CORRECTIONS.md; EFFECTIVE_CORRECTION_EXACT_RESULTS.json; verify_effective_corrections.py",
+        "effective_correction_status": "CANDIDATE_DISABLED"
+      },
+      "old_record_sha256": "a2c290dbed5e5f4688560af3adb02e7adc270864dcdc4a3124e32694b4a2b639",
+      "original_history_preserved": true,
+      "main_paper_contribution": false,
+      "science_promotion": false
+    },
+    {
+      "claim_id": "SCU20261010:CORR_R202_JOINT_AUDIT_LAW",
+      "publication_status": "CORRECTION_DISCLOSED_IN_FORMAL_SUPPLEMENT",
+      "coverage_status": "EXACT_DISABLED_CORRECTION_RECORD",
+      "work_id": "SCU-PAPER",
+      "version": "1.0.1",
+      "doi": "10.5281/zenodo.23272690",
+      "attachment_location": "reproducibility-v1.0.1.zip: corrections/R202_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "statement": "Use one coherent binary joint law of H,M,J in V conditional on actual U=1, with the independently calibrated endpoint rates a=P(J=1|H=1), c=P(J=1|H=0), a>c, and c<j=P(J=1)<a. The audited m=P(M=1),j,r=P(M=1,J=1) must concern that same validation law after justified sampling correction.",
+      "main_paper_contribution": false,
+      "science_promotion": false
+    },
+    {
+      "claim_id": "SCU20261010:CORR_R202_ZERO_RESIDUAL",
+      "publication_status": "CORRECTION_DISCLOSED_IN_FORMAL_SUPPLEMENT",
+      "coverage_status": "EXACT_DISABLED_CORRECTION_RECORD",
+      "work_id": "SCU-PAPER",
+      "version": "1.0.1",
+      "doi": "10.5281/zenodo.23272690",
+      "attachment_location": "reproducibility-v1.0.1.zip: corrections/R202_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "statement": "The aggregate conditional covariance R=(1-pi)Cov(M,J|H=0)+pi Cov(M,J|H=1) is zero in the same validation law. Conditional independence J independent of M given H is sufficient; an asserted cancellation requires independent justification.",
+      "main_paper_contribution": false,
+      "science_promotion": false
+    },
+    {
+      "claim_id": "SCU20261010:CORR_R202_COMMON_RESIDUAL_BOUND",
+      "publication_status": "CORRECTION_DISCLOSED_IN_FORMAL_SUPPLEMENT",
+      "coverage_status": "EXACT_DISABLED_CORRECTION_RECORD",
+      "work_id": "SCU-PAPER",
+      "version": "1.0.1",
+      "doi": "10.5281/zenodo.23272690",
+      "attachment_location": "reproducibility-v1.0.1.zip: corrections/R202_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "statement": "An independently justified kappa>=0 bounds the one common aggregate residual |R|<=kappa in the fixed validation law. H-specific component covariances obey a coherent binary joint law.",
+      "main_paper_contribution": false,
+      "science_promotion": false
+    },
+    {
+      "claim_id": "SCU20261010:CORR_R202_COMMON_RESIDUAL_SET",
+      "publication_status": "CORRECTION_DISCLOSED_IN_FORMAL_SUPPLEMENT",
+      "coverage_status": "EXACT_DISABLED_CORRECTION_RECORD",
+      "work_id": "SCU-PAPER",
+      "version": "1.0.1",
+      "doi": "10.5281/zenodo.23272690",
+      "attachment_location": "reproducibility-v1.0.1.zip: corrections/R202_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "statement": "pi=(j-c)/(a-c), q1=(r-c*m-R)/(j-c), q0=(a*m-r+R)/(a-j), with the SAME R. Under |R|<=kappa retain all jointly coherent candidate laws and their rate pairs satisfying those equations. Marginal intervals qhat1 plus/minus kappa/(j-c) and qhat0 plus/minus kappa/(a-j), clipped to [0,1], are conservative outer intervals, not independent choices or a claim of arbitrary-budget sharpness.",
+      "main_paper_contribution": false,
+      "science_promotion": false
+    },
+    {
+      "claim_id": "SCU20261010:corr_r202_zero_residual_inversion",
+      "publication_status": "CORRECTION_DISCLOSED_IN_FORMAL_SUPPLEMENT",
+      "coverage_status": "EXACT_DISABLED_CORRECTION_RECORD",
+      "work_id": "SCU-PAPER",
+      "version": "1.0.1",
+      "doi": "10.5281/zenodo.23272690",
+      "attachment_location": "reproducibility-v1.0.1.zip: corrections/R202_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "statement": "Invert the mixture equations with the independently supplied common R=0; conditional independence is not necessary if the aggregate zero is otherwise justified.",
+      "main_paper_contribution": false,
+      "science_promotion": false
+    },
+    {
+      "claim_id": "SCU20261010:corr_r202_bounded_residual_set",
+      "publication_status": "CORRECTION_DISCLOSED_IN_FORMAL_SUPPLEMENT",
+      "coverage_status": "EXACT_DISABLED_CORRECTION_RECORD",
+      "work_id": "SCU-PAPER",
+      "version": "1.0.1",
+      "doi": "10.5281/zenodo.23272690",
+      "attachment_location": "reproducibility-v1.0.1.zip: corrections/R202_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "statement": "Retain the common-residual formulas and probability-coherent feasible laws; derive clipped marginal outer intervals by |R|<=kappa. Do not report unique rates from the bound alone.",
+      "main_paper_contribution": false,
+      "science_promotion": false
+    },
+    {
+      "claim_id": "DVC20261010-C1",
+      "publication_status": "GITHUB_RESEARCH_CHECKPOINT_NOT_A_NEW_DOI_PUBLICATION",
+      "coverage_status": "NOT_DISCLOSED_IN_FROZEN_SCU_V1_0_1_AS_THIS_DVC_RESULT",
+      "source": "records/DVC20261010_Device_Consumer_Validation/CLAIM_LEDGER.json",
+      "statement": "For every execution of the declared capture/invalidation/immutable-commit model, each snapshot cell contains the token from its last accepted capture surviving invalidation as of that snapshot's commit boundary, or absence. With the designated eager consumer actually reading that snapshot, it reads both intended tokens exactly when those two cells contain those actual tokens. Gate closure by itself neither clears nor revokes a retained token.",
+      "novelty_status": "Register retention and actual-history premises are inherited; the specific MPC consumer-cell admission repair is a NEW_APPLICATION.",
+      "deducted_prior_work": [
+        "SCU-PAPER v1.0.1",
+        "MPC20261010",
+        "CBI20261010 branch-relative minimal-cut result",
+        "ordinary register/snapshot/timing and causal isolation principles",
+        "prior published tactile findings and psychometric methods"
+      ],
+      "standalone_manuscript_decision": "HOLD_STANDALONE_PRESERVE_DEVICE_VALIDATION_AND_REANALYSIS_SUPPLEMENT",
+      "actual_human_consumer_application_established": false,
+      "worldwide_priority_certified": false
+    },
+    {
+      "claim_id": "DVC20261010-C2",
+      "publication_status": "GITHUB_RESEARCH_CHECKPOINT_NOT_A_NEW_DOI_PUBLICATION",
+      "coverage_status": "NOT_DISCLOSED_IN_FROZEN_SCU_V1_0_1_AS_THIS_DVC_RESULT",
+      "source": "records/DVC20261010_Device_Consumer_Validation/CLAIM_LEDGER.json",
+      "statement": "For independent bounded arrival/departure uncertainty with stable port interval [a,b), a closed sample aperture [s-u,s+h] lies in every admissible interval exactly when a_max+u <= s < b_min-h. Two safe windows admit a common sample iff their intersection is nonempty. Separate captures can be paired when each is nonempty and the same-episode, retention, atomicity, resource and deadline premises hold.",
+      "novelty_status": "Setup/hold timing and snapshot reasoning are inherited; the two consumer-branch admission contract is a NEW_APPLICATION.",
+      "deducted_prior_work": [
+        "SCU-PAPER v1.0.1",
+        "MPC20261010",
+        "CBI20261010 branch-relative minimal-cut result",
+        "ordinary register/snapshot/timing and causal isolation principles",
+        "prior published tactile findings and psychometric methods"
+      ],
+      "standalone_manuscript_decision": "HOLD_STANDALONE_PRESERVE_DEVICE_VALIDATION_AND_REANALYSIS_SUPPLEMENT",
+      "actual_human_consumer_application_established": false,
+      "worldwide_priority_certified": false
+    },
+    {
+      "claim_id": "DVC20261010-C3",
+      "publication_status": "GITHUB_RESEARCH_CHECKPOINT_NOT_A_NEW_DOI_PUBLICATION",
+      "coverage_status": "NOT_DISCLOSED_IN_FROZEN_SCU_V1_0_1_AS_THIS_DVC_RESULT",
+      "source": "records/DVC20261010_Device_Consumer_Validation/CLAIM_LEDGER.json",
+      "statement": "There exist nine declared executions or paired executions that defeat stronger deductions from gate flags, source issue, matched outputs, epoch headers or equal values to the specified actual current source/intake relation. They do not exhaust all alternative mechanisms.",
+      "novelty_status": "Missing-cell and read nonidentifiability are inherited from MPC/SCU; warm-latch, arrival and same-episode fault matrix is a NEW_APPLICATION.",
+      "deducted_prior_work": [
+        "SCU-PAPER v1.0.1",
+        "MPC20261010",
+        "CBI20261010 branch-relative minimal-cut result",
+        "ordinary register/snapshot/timing and causal isolation principles",
+        "prior published tactile findings and psychometric methods"
+      ],
+      "standalone_manuscript_decision": "HOLD_STANDALONE_PRESERVE_DEVICE_VALIDATION_AND_REANALYSIS_SUPPLEMENT",
+      "actual_human_consumer_application_established": false,
+      "worldwide_priority_certified": false
+    },
+    {
+      "claim_id": "DVC20261010-C4",
+      "publication_status": "GITHUB_RESEARCH_CHECKPOINT_NOT_A_NEW_DOI_PUBLICATION",
+      "coverage_status": "NOT_DISCLOSED_IN_FROZEN_SCU_V1_0_1_AS_THIS_DVC_RESULT",
+      "source": "records/DVC20261010_Device_Consumer_Validation/CLAIM_LEDGER.json",
+      "statement": "If the particular P token is generated strictly after consequence Y, is captured no earlier than generation, and consumed no earlier than capture, its consumption occurs after Y and cannot be that same consequence's pre-consequence prediction. Earlier state or later target is a different legitimate role.",
+      "novelty_status": "INHERITED chronology principle and SCU role limit; applied to the proposed current-state port.",
+      "deducted_prior_work": [
+        "SCU-PAPER v1.0.1",
+        "MPC20261010",
+        "CBI20261010 branch-relative minimal-cut result",
+        "ordinary register/snapshot/timing and causal isolation principles",
+        "prior published tactile findings and psychometric methods"
+      ],
+      "standalone_manuscript_decision": "HOLD_STANDALONE_PRESERVE_DEVICE_VALIDATION_AND_REANALYSIS_SUPPLEMENT",
+      "actual_human_consumer_application_established": false,
+      "worldwide_priority_certified": false
+    },
+    {
+      "claim_id": "DVC20261010-C5",
+      "publication_status": "GITHUB_RESEARCH_CHECKPOINT_NOT_A_NEW_DOI_PUBLICATION",
+      "coverage_status": "NOT_DISCLOSED_IN_FROZEN_SCU_V1_0_1_AS_THIS_DVC_RESULT",
+      "source": "records/DVC20261010_Device_Consumer_Validation/CLAIM_LEDGER.json",
+      "statement": "In a fixed acyclic structural model, if no shadow-gate intervention has a directed causal path to the participant endpoint itself or any of its ancestors, changing only those gates with all other functions, inputs and disturbances fixed leaves that endpoint invariant.",
+      "novelty_status": "INHERITED causal isolation; NEW_APPLICATION as a device-to-human experimental-design boundary.",
+      "deducted_prior_work": [
+        "SCU-PAPER v1.0.1",
+        "MPC20261010",
+        "CBI20261010 branch-relative minimal-cut result",
+        "ordinary register/snapshot/timing and causal isolation principles",
+        "prior published tactile findings and psychometric methods"
+      ],
+      "standalone_manuscript_decision": "HOLD_STANDALONE_PRESERVE_DEVICE_VALIDATION_AND_REANALYSIS_SUPPLEMENT",
+      "actual_human_consumer_application_established": false,
+      "worldwide_priority_certified": false
+    },
+    {
+      "claim_id": "DVC20261010-C6",
+      "publication_status": "GITHUB_RESEARCH_CHECKPOINT_NOT_A_NEW_DOI_PUBLICATION",
+      "coverage_status": "NOT_DISCLOSED_IN_FROZEN_SCU_V1_0_1_AS_THIS_DVC_RESULT",
+      "source": "records/DVC20261010_Device_Consumer_Validation/CLAIM_LEDGER.json",
+      "statement": "Given an independently admitted complete actual process signature, interval, roles and actual source/buffer/read paths and valid transport, inherited C1 conditionally supplies their experiential structural counterparts. C1-C5 and a software PASS do not establish actual grounding, named H, ownership, agency, RetBind or an additional basal-experience criterion.",
+      "novelty_status": "INHERITED C1/U1 application and no-new-gate requirement.",
+      "deducted_prior_work": [
+        "SCU-PAPER v1.0.1",
+        "MPC20261010",
+        "CBI20261010 branch-relative minimal-cut result",
+        "ordinary register/snapshot/timing and causal isolation principles",
+        "prior published tactile findings and psychometric methods"
+      ],
+      "standalone_manuscript_decision": "HOLD_STANDALONE_PRESERVE_DEVICE_VALIDATION_AND_REANALYSIS_SUPPLEMENT",
+      "actual_human_consumer_application_established": false,
+      "worldwide_priority_certified": false
+    },
+    {
+      "claim_id": "DVC20261010-E1",
+      "publication_status": "GITHUB_RESEARCH_CHECKPOINT_NOT_A_NEW_DOI_PUBLICATION",
+      "coverage_status": "NOT_DISCLOSED_IN_FROZEN_SCU_V1_0_1_AS_THIS_DVC_RESULT",
+      "source": "records/DVC20261010_Device_Consumer_Validation/CLAIM_LEDGER.json",
+      "statement": "The specified cumulative-normal refits recover separate response-location and precision contrasts. PSE is the fitted Pr(InputValue=1)=0.5 location; independent sigma and source-labelled JND remain separate. Passive Start-minus-End sigma is 0.68299755 in archive command units (rounded; exact values remain in the result files). Physical key mapping, amplitude calibration and equivalence to a named self-related feeling are unverified.",
+      "novelty_status": "NEW_REANALYSIS_OR_SOURCE_AUDIT; inherited empirical phenomena, statistics and causal principles credited",
+      "deducted_prior_work": [
+        "SCU-PAPER v1.0.1",
+        "MPC20261010",
+        "CBI20261010 branch-relative minimal-cut result",
+        "ordinary register/snapshot/timing and causal isolation principles",
+        "prior published tactile findings and psychometric methods"
+      ],
+      "standalone_manuscript_decision": "HOLD_STANDALONE_PRESERVE_DEVICE_VALIDATION_AND_REANALYSIS_SUPPLEMENT",
+      "actual_human_consumer_application_established": false,
+      "worldwide_priority_certified": false
+    },
+    {
+      "claim_id": "DVC20261010-E2",
+      "publication_status": "GITHUB_RESEARCH_CHECKPOINT_NOT_A_NEW_DOI_PUBLICATION",
+      "coverage_status": "NOT_DISCLOSED_IN_FROZEN_SCU_V1_0_1_AS_THIS_DVC_RESULT",
+      "source": "records/DVC20261010_Device_Consumer_Validation/CLAIM_LEDGER.json",
+      "statement": "The inspected articles, released archive and interface documentation do not jointly ground the selected installation's source tokens, intervention, capture/read events, clock semantics and physical consequences. Conditional parsing of 8985 time-bearing rows does not measure physical tactile onset. M_D and P_E are device-level candidates, not identified human efference-copy/proprioceptive inputs.",
+      "novelty_status": "NEW_REANALYSIS_OR_SOURCE_AUDIT; inherited empirical phenomena, statistics and causal principles credited",
+      "deducted_prior_work": [
+        "SCU-PAPER v1.0.1",
+        "MPC20261010",
+        "CBI20261010 branch-relative minimal-cut result",
+        "ordinary register/snapshot/timing and causal isolation principles",
+        "prior published tactile findings and psychometric methods"
+      ],
+      "standalone_manuscript_decision": "HOLD_STANDALONE_PRESERVE_DEVICE_VALIDATION_AND_REANALYSIS_SUPPLEMENT",
+      "actual_human_consumer_application_established": false,
+      "worldwide_priority_certified": false
+    }
+  ],
+  "metadata_correction": "records/DVC20261010_Device_Consumer_Validation/CONCURRENT_CBI_RECONCILIATION.md",
+  "unverified_scope": [
+    "No renewed worldwide or private-draft census",
+    "No new actual hardware or neural-consumer application",
+    "No complete nested-contract or historical-proof reconstruction",
+    "No journal peer review, OTS or Arweave action"
+  ],
+  "counts": {
+    "claim_records": 42,
+    "new_publication_works": 1,
+    "new_publication_doi_records": 1,
+    "dvc_standalone_papers": 0
+  }
+}

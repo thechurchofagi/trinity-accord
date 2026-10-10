@@ -1,0 +1,34 @@
+{
+  "schema": "uct-publication-decision/1",
+  "work_id": "SCU-PAPER",
+  "version": "1.0.1",
+  "decision": "PUBLISHED_ONE_SCOPED_METHODS_APPLICATION_PREPRINT",
+  "doi": "10.5281/zenodo.23272690",
+  "publication_evidence": {
+    "path": "records/SCUPUB20261010_DOI_Publication/FINAL_PUBLICATION_RECEIPT.json",
+    "bytes": 5278,
+    "sha256": "c47680350df514926d5d7aa180b0b3871a153d9611faf0156979c59dce570847"
+  },
+  "review_evidence": {
+    "path": "records/SCUPUB20261010_DOI_Publication/review/PUBLICATION_READINESS_REVIEW.md",
+    "bytes": 20625,
+    "sha256": "0a4e858d1d820b307e56b89afac0ec601df5a619e828815845a9e5db74aea812"
+  },
+  "net_contribution": "An exact physically addressed source-equality intervention protocol with observation fibers, separate pure/known-root/redundant-OR query classes, same-instance premises, and occurrence/chronology stopping boundaries. R204/R205 results are integrated; classical mathematics and prior sensorimotor limitations are credited.",
+  "inherited_and_prior_art_review": {
+    "path": "records/SCU20261010_Source_Consumer_Protocols/PUBLICATION_COVERAGE_UPDATE.json",
+    "bytes": 5891,
+    "sha256": "fdd414e4d1f6eb748ae43d6c826632772b4d2f4f06076634b9e4d1a68848bc08"
+  },
+  "worldwide_priority_certified": false,
+  "original_working_version_preserved": true,
+  "scientific_content_changes_in_v1_0_1": false,
+  "empirical_validation_of_C1": false,
+  "external_journal_peer_review": false,
+  "user_authorization_source": "接着研究，根据总研究指南，尝试发表论文 doi",
+  "authorization_scope": "Research, saving and this DOI publication; OTS and Arweave require separate explicit authorization.",
+  "DVC_standalone_decision": "HOLD_STANDALONE_PRESERVE_DISABLED_DEVICE_VALIDATION_AND_PUBLIC_DATA_REANALYSIS",
+  "DVC_in_published_version": false,
+  "coverage_version": "UCT-PUB-v1.0.22",
+  "coverage_parent": "EIP v1.0.21 at d8c94faa846fc4d459628c9bc896adfb4a038d7e"
+}

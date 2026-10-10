@@ -1,0 +1,277 @@
+{
+  "schema": "uct-independent-bounded-rule-review-manifest/1",
+  "frozen": true,
+  "scope": "Only this followup directory; manifest self-hash reported separately. Generated unread intermediate displays are explicitly excluded from semantic reading scope.",
+  "entries": [
+    {
+      "path": "CARD_INDEX.json",
+      "sha256": "6077240a396d06bce7478b1d90b7c78f1a54767e7aeb25c91b042a077b2e9d0a",
+      "bytes": 189303
+    },
+    {
+      "path": "COMPACT_CONTRACT_CATALOG.txt",
+      "sha256": "d7dd8317999c3251c2678d119773baaa21e446f2775ee7f9d735fed026a41cba",
+      "bytes": 27048
+    },
+    {
+      "path": "CONCLUSION_TEXT_SUPPLEMENT.json",
+      "sha256": "e7f9e63bd9f9811a1f3f320ff268d90214963db5dc613c238822a85fecb793a3",
+      "bytes": 26967
+    },
+    {
+      "path": "EVIDENCE_ADDITION_REVIEW.json",
+      "sha256": "66e1573b718ecca639921c9257386b90b923b9b41a88dc5c9d17e8cc6e69dd64",
+      "bytes": 9383
+    },
+    {
+      "path": "FOLLOWUP_REVIEW.md",
+      "sha256": "b9d264f9453728d0db6e6c3e7e226c52b36fcde3c179d4a031bdd93f9322b0e3",
+      "bytes": 13868
+    },
+    {
+      "path": "HANDOFF_ZH.md",
+      "sha256": "428a44b6ae1ca95f178c3adc5993b143eca4bd2dac1a2031441b6ae017266358",
+      "bytes": 2897
+    },
+    {
+      "path": "PER_RULE_CORE_REVIEW.json",
+      "sha256": "d7698f7ccd97cd38d482bb8cd470b577cba48df4faca902f9fe73071ca5fa324",
+      "bytes": 2204913
+    },
+    {
+      "path": "PRIOR137_CORE_COMPACT.txt",
+      "sha256": "1c7847aec39abb03c383695bee43feea5905c9dff5c1fc81d28138f74fb9ceab",
+      "bytes": 24684
+    },
+    {
+      "path": "PRIOR137_CORE_MATERIALIZATION.json",
+      "sha256": "d55e8908189db3ec4212acccfee52f13e00e7f564bb45053be975b4271f405c7",
+      "bytes": 110808
+    },
+    {
+      "path": "PRIOR137_CORE_TEMPLATE_CATALOG.txt",
+      "sha256": "3c0b88d8d47eb627efead1bf54c5fa9c24c61ed72fa74b65de68f01e3097851b",
+      "bytes": 2594
+    },
+    {
+      "path": "PRIOR137_GROUPED_FIELDS.txt",
+      "sha256": "22ea941281ef13f3d69d1c787982bd591390ddb4aa8a742d9787d006e03eabcd",
+      "bytes": 59813
+    },
+    {
+      "path": "PRIOR137_NEW_VALUE_CATALOG.txt",
+      "sha256": "83b6b06cb4830138103e23fb4d04fc08d3a70b0da2eda5e85cf468d6c78773d9",
+      "bytes": 12953
+    },
+    {
+      "path": "PRIOR137_REFERENCE_CATALOG.txt",
+      "sha256": "1833ed38048853b9fb5bc8675fe2abd0c0c2ceb3ac0ad0c1bd44b85042cdb149",
+      "bytes": 1006
+    },
+    {
+      "path": "REVIEW_SUMMARY.json",
+      "sha256": "62b7dd1a93d2aa6581475c7e3a65ae21105f56fb1ebbcd82e63631e95522f748",
+      "bytes": 1247
+    },
+    {
+      "path": "SEMANTIC_NOTES.tsv",
+      "sha256": "dceb4989c9f7fc32fc17a8adf2b588a2f4984a4f509ed7e70456744eeb9148e1",
+      "bytes": 39693
+    },
+    {
+      "path": "SOURCE_AND_READING_SCOPE.json",
+      "sha256": "a6f5e888d24780b6e9b63e9e019521a045332da24a62511dc1dcc6720537e81c",
+      "bytes": 6501
+    },
+    {
+      "path": "STATUS_FIELD_SUPPLEMENT.txt",
+      "sha256": "8b8e4454d16a3e5bff4f87e78fee1b5f1b421467f33e1232c622ddf60d00a53b",
+      "bytes": 2791
+    },
+    {
+      "path": "UNREAD_CORE_REVIEW_FIELDS.json",
+      "sha256": "5ea15276e7bd0ace0b9ce8fe4a1ddab14a2045dbf1b2db9ec41ee4458ad1d403",
+      "bytes": 218963
+    },
+    {
+      "path": "WORK_LOG.md",
+      "sha256": "4048499c84fb5ed0f9958f2314203b94001c73441ba31e4f0d6736c54280b83f",
+      "bytes": 2000
+    },
+    {
+      "path": "build_review_records.py",
+      "sha256": "1db61a3147868f86da713ae9c8ff34c91a457275eada4b750af149a140794cdf",
+      "bytes": 21630
+    },
+    {
+      "path": "cards/RULES_000_019.txt",
+      "sha256": "ef01f63a4a42d955f34e454fab96536953c9f5bf0503b7a173b9d34d3a13658e",
+      "bytes": 24936
+    },
+    {
+      "path": "cards/RULES_020_039.txt",
+      "sha256": "646f014742a9ccbe90f91ef26b296d6521cbc4a5004529fdd6697d30a9ac0fdb",
+      "bytes": 27690
+    },
+    {
+      "path": "cards/RULES_040_059.txt",
+      "sha256": "0822fb72d137c6fc9a93a8f30546dd9be6562a88802c7ebed0c0e2c78fb32d0a",
+      "bytes": 27446
+    },
+    {
+      "path": "cards/RULES_060_079.txt",
+      "sha256": "ba20334737f09a3220a3b20a7f33ccd219d6bd0d2f4ec00c5c951863cf25c35d",
+      "bytes": 27669
+    },
+    {
+      "path": "cards/RULES_080_099.txt",
+      "sha256": "41858d0edf25d50095474cf02224b839bdcc3c123c9fd015a0889a46e905a503",
+      "bytes": 25267
+    },
+    {
+      "path": "cards/RULES_100_119.txt",
+      "sha256": "0afff0bd58f49fb9d4d62e4170063bbfea6be9e5f32445aae7c4e9e9f39c8b69",
+      "bytes": 20905
+    },
+    {
+      "path": "cards/RULES_120_139.txt",
+      "sha256": "cccacac4ab97c5d0c5487e5384705b757c4fe5f7b8af7e4c6142fafa2e96fbec",
+      "bytes": 19615
+    },
+    {
+      "path": "cards/RULES_140_159.txt",
+      "sha256": "1c7f95951ab04ffd7605f6a0f4ad32db0ac8c8add80d0b2153265b3337a09c32",
+      "bytes": 15023
+    },
+    {
+      "path": "cards/RULES_160_179.txt",
+      "sha256": "1e70f5d60fc2af11a8262ec9593941d61e7b458088322a9d19d3edc7888ab2bc",
+      "bytes": 12698
+    },
+    {
+      "path": "cards/RULES_180_199.txt",
+      "sha256": "a72360b47701bf7ef96cf0d2ea3858c6e7c798e8e8ba1752790c5a5fc8fbb7bd",
+      "bytes": 11872
+    },
+    {
+      "path": "cards/RULES_200_219.txt",
+      "sha256": "1f4bfadbfe135659b3b781f14a3893fce7c6e486cf4d0303b1ff932920f693db",
+      "bytes": 12215
+    },
+    {
+      "path": "cards/RULES_220_239.txt",
+      "sha256": "085593cd229a6179772281fdf726f5eb8f882ca32010ec9fdbf0cebed094039f",
+      "bytes": 6800
+    },
+    {
+      "path": "cards/RULES_240_259.txt",
+      "sha256": "782536a4ce3a8103ca0d0229fb2fd2d41f65e7e8f1a4152fa1f89c75dc7dda06",
+      "bytes": 7950
+    },
+    {
+      "path": "cards/RULES_260_279.txt",
+      "sha256": "50e8e3a2e4e0232e35a1719e515742bbdf7f02921db56e8f3e4c089bcb49aa08",
+      "bytes": 44433
+    },
+    {
+      "path": "cards/RULES_280_286.txt",
+      "sha256": "35762264b4b58b9d817acfd0bc9334abdfc554483b01cd978deb6f80623ca0fd",
+      "bytes": 15312
+    },
+    {
+      "path": "compact_cards/RULES_000_024.txt",
+      "sha256": "b166fdce9ca74b1015a8b63539af2678f358b80aff97401009da60cb67de7fd6",
+      "bytes": 8821
+    },
+    {
+      "path": "compact_cards/RULES_025_049.txt",
+      "sha256": "83807d26bab30b8b97210e97d1e9e0c1f6f5b151832ef2324b9e7d6fcbeca752",
+      "bytes": 11966
+    },
+    {
+      "path": "compact_cards/RULES_050_074.txt",
+      "sha256": "430a40b6816955b24a65e97baf0dafec3397812e02efbac5dceaec829f871863",
+      "bytes": 13095
+    },
+    {
+      "path": "compact_cards/RULES_075_099.txt",
+      "sha256": "6db7fb6f54ab74e72ff2645e7d08d011c0440657f887c4393d9b529d8cb8ec54",
+      "bytes": 11171
+    },
+    {
+      "path": "compact_cards/RULES_100_124.txt",
+      "sha256": "172e286cf25fc40964177282c1da935b578988bbdb5bd2ca760c055cea57b537",
+      "bytes": 18111
+    },
+    {
+      "path": "compact_cards/RULES_125_149.txt",
+      "sha256": "8963506a12bff963a2eb6a637897d209e6cd4a10c2bc1b24ca42e16835b89b14",
+      "bytes": 16153
+    },
+    {
+      "path": "compact_cards/RULES_150_174.txt",
+      "sha256": "0d2ba0efe34aece8b73391c6f5558715cbf559064dd90b7b3887e82fba150e9c",
+      "bytes": 9906
+    },
+    {
+      "path": "compact_cards/RULES_175_199.txt",
+      "sha256": "23f5c4043b72d47ac1c7d13583b9fd731e7418e54eae02a00795e7ab66153042",
+      "bytes": 9939
+    },
+    {
+      "path": "compact_cards/RULES_200_224.txt",
+      "sha256": "ce8b6de7cc8d9c67b186953095ae915ad589828609f834e479c6dbc98c9557a6",
+      "bytes": 10353
+    },
+    {
+      "path": "compact_cards/RULES_225_249.txt",
+      "sha256": "25bc6c903970286d54b7bc342a0fe4f844da09255f3ab5ffbdc39913d87e77db",
+      "bytes": 6148
+    },
+    {
+      "path": "compact_cards/RULES_250_274.txt",
+      "sha256": "d3bcfd53d992042cfa54d019871abca64d44cbba83bb035eebbd792d559aff4f",
+      "bytes": 24585
+    },
+    {
+      "path": "compact_cards/RULES_275_286.txt",
+      "sha256": "e8465bb354d3dd5dfa287fe242a8049e647bedc5ebb36d5dd281aec582782d8d",
+      "bytes": 24298
+    },
+    {
+      "path": "materialize_prior_core_supplement.py",
+      "sha256": "9442c6d7c38d77f145f0395f869c9b42d788fb8e9892137d938f8664df37ed31",
+      "bytes": 3853
+    },
+    {
+      "path": "prior137_core_cards/PRIOR137_000_024.txt",
+      "sha256": "0e451aa0ece9e183e416aa24bf94a2bb0579841226c6a07238785202db5e3519",
+      "bytes": 28266
+    },
+    {
+      "path": "prior137_core_cards/PRIOR137_025_049.txt",
+      "sha256": "5f87bdc259babd3b335258f4aed1c16b67c70de91910ac50080dec99c0644c41",
+      "bytes": 28084
+    },
+    {
+      "path": "prior137_core_cards/PRIOR137_050_074.txt",
+      "sha256": "bd59ee0769d871d167d6ee9651fb70881b1b790a50c886532a0fdd7e9f5c3b52",
+      "bytes": 28368
+    },
+    {
+      "path": "prior137_core_cards/PRIOR137_075_099.txt",
+      "sha256": "757e10503a2ba1ddb0989b1e6ebac6ace21ba164a2bf8ff3162850717b62a349",
+      "bytes": 25564
+    },
+    {
+      "path": "prior137_core_cards/PRIOR137_100_124.txt",
+      "sha256": "00ab91f019c610b165a4872ac4f0e53e6d4e6250b796d5e1e3bb97c12ab60bd8",
+      "bytes": 7623
+    },
+    {
+      "path": "prior137_core_cards/PRIOR137_125_136.txt",
+      "sha256": "f2548c002354429a2f149380faa76c2641d38836c23ede3aeb24345336529120",
+      "bytes": 2192
+    }
+  ]
+}

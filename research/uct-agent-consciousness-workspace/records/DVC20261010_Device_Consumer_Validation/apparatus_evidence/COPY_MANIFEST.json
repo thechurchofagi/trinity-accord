@@ -1,0 +1,1090 @@
+{
+  "schema": "uct-component-copy-manifest/1",
+  "research_id": "DVC20261010",
+  "component": "apparatus_evidence",
+  "frozen_date_utc": "2026-10-10",
+  "copy_instruction": "Copy only listed entries plus this manifest to preserve relative paths. Excluded inspection caches are not deliverables. The manifest does not hash itself.",
+  "entry_count": 21,
+  "total_deliverable_bytes_excluding_manifest": 424443,
+  "entries": [
+    {
+      "path": "README.md",
+      "bytes": 3137,
+      "sha256": "66aac480cbb8127b1de0fcd6758065843a54870d4237b71145e58f29c2430137",
+      "role": "new component deliverable"
+    },
+    {
+      "path": "APPARATUS_CONTRACT.md",
+      "bytes": 10772,
+      "sha256": "d6b21363289ebffc1d3bad852a5016b2828aba6232348293bc34bd19b49918f1",
+      "role": "new component deliverable"
+    },
+    {
+      "path": "DATA_REANALYSIS_REPORT.md",
+      "bytes": 8884,
+      "sha256": "e6beefac8089c09efa71565d10f2fd999af547801092d5c237630fbd920f3404",
+      "role": "new component deliverable"
+    },
+    {
+      "path": "TIMING_PARSE_REVIEW.md",
+      "bytes": 6019,
+      "sha256": "f74f98c1d341e7ae66ffe2786100515407e332441213bde8ab7bf06100f615cf",
+      "role": "new component deliverable"
+    },
+    {
+      "path": "SOURCE_SCOPE.json",
+      "bytes": 9418,
+      "sha256": "9ba21ccbb003d3c172b2802c84040f9745d294ff51a64c5be98e15931365065f",
+      "role": "new component deliverable"
+    },
+    {
+      "path": "MAIN_FINDINGS.json",
+      "bytes": 10058,
+      "sha256": "cb7ef67f7f6c03d882015cccc4e25c4a9a626feff9f8d9a1551d6df013d9fd23",
+      "role": "new component deliverable"
+    },
+    {
+      "path": "HANDOFF_ZH.md",
+      "bytes": 3560,
+      "sha256": "eb9c436d0a62140581988a24d30f675fb52033173e8f5f660a9e8adcf68594de",
+      "role": "new component deliverable"
+    },
+    {
+      "path": "WORK_LOG.md",
+      "bytes": 2674,
+      "sha256": "d000c0cc7ec935f7cca340214f8103060775b3607fa84a840e16d9e10718440f",
+      "role": "new component deliverable"
+    },
+    {
+      "path": "code/build_timing_witnesses.py",
+      "bytes": 4557,
+      "sha256": "573e5676982b8b121eb00874257fe1b4f136ac4abfd158cdd6baf2ede5a595b7",
+      "role": "new component deliverable"
+    },
+    {
+      "path": "code/fetch_public_dataset.py",
+      "bytes": 2213,
+      "sha256": "62146b9ff599f8fe169f7df2a4af05cd98ef14a0d951f54762e1a566cc1b5673",
+      "role": "new component deliverable"
+    },
+    {
+      "path": "code/reanalyse_apparatus_data.py",
+      "bytes": 21793,
+      "sha256": "3c60cdf9787198b4a8a63fb9836f4b7d63ec8cc0f34698183bab7442bfe1f3d3",
+      "role": "new component deliverable"
+    },
+    {
+      "path": "results/ARCHIVED_PARAMETER_REANALYSIS.json",
+      "bytes": 12174,
+      "sha256": "82029912a3acf7750dd927504a3e087d68ed18257fe51e0737892d319015ed48",
+      "role": "new component deliverable"
+    },
+    {
+      "path": "results/EXACT_RESULTS.json",
+      "bytes": 5651,
+      "sha256": "0e8ea009806d468a5c39e466639afe0bd2247350f8989f3133bf9ea896c90abd",
+      "role": "new component deliverable"
+    },
+    {
+      "path": "results/INDEPENDENT_PSYCHOMETRIC_FITS.csv",
+      "bytes": 50534,
+      "sha256": "b93b8ae64a2a83c1c778a06a1d9d885718eeac548b7163092ebd3666c1aa7bb2",
+      "role": "new component deliverable"
+    },
+    {
+      "path": "results/INDEPENDENT_REFIT_STATISTICS.json",
+      "bytes": 39025,
+      "sha256": "c47f1d7643e146cc91c4fecbf307fc7edc30fdc000f8a6bfa9051f76460d39e9",
+      "role": "new component deliverable"
+    },
+    {
+      "path": "results/SOURCE_FILE_AUDIT.csv",
+      "bytes": 33765,
+      "sha256": "3ce1cef586b9dce4df21e559d04486c278ca3faaaa7f63e7e4fed759a5bdab67",
+      "role": "new component deliverable"
+    },
+    {
+      "path": "results/TIMING_FIELD_AUDIT.json",
+      "bytes": 6887,
+      "sha256": "d2c9fcc86874d10eb1db76fef66e2c490e51c39b43ad7910f19d82e30da379e8",
+      "role": "new component deliverable"
+    },
+    {
+      "path": "results/TIMING_PARSE_WITNESSES.json",
+      "bytes": 23993,
+      "sha256": "a625f043e2c228c6a8e1602e7cd3fa15b13d2b8fb7668ae2e41b44b85b45e41a",
+      "role": "new component deliverable"
+    },
+    {
+      "path": "sources/zenodo_18877381_metadata.json",
+      "bytes": 5505,
+      "sha256": "2412b859b5fff4d1a675064576552792cfba671a4de7eb71085dddd71d3f131c",
+      "role": "original public metadata capture"
+    },
+    {
+      "path": "sources/Zenodo18877381_Data.zip",
+      "bytes": 161720,
+      "sha256": "ed89e94719e87acc19cd905efd7ff44d09abce0e0291f2fd654b0453bfdfbd6a",
+      "role": "unchanged author CC-BY-4.0 dataset"
+    },
+    {
+      "path": "RESPONSE_CODING_CORRECTION.json",
+      "bytes": 2104,
+      "sha256": "2caa18ffeacc27e6885d8e250dfe985918456f991df032e289b03e64ee023798",
+      "role": "new component deliverable"
+    }
+  ],
+  "source_attribution": {
+    "creator": "Pierangelo D’Onofrio Pacheco",
+    "title": "Effects of prediction and attention on tactile precision in somatosensory gating--DATASET",
+    "doi": "10.5281/zenodo.18877381",
+    "license": "CC-BY-4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "source_archive_unchanged": true
+  },
+  "verification": {
+    "all_deliverable_sha256_computed": true,
+    "source_capture_hashes_match": true,
+    "main_counts_match_executed_result": true,
+    "source_audit_rows": 121,
+    "fit_rows": 216,
+    "raw_row_witnesses": 10,
+    "semantic_certification": false,
+    "hardware_or_new_human_experiment": false
+  },
+  "excluded_inspection_caches": [
+    {
+      "path": "code/__pycache__/reanalyse_apparatus_data.cpython-312.pyc",
+      "bytes": 34726,
+      "sha256": "920645af1d6acfe11817ebaa7794110409446e350ccd636ec2ed552a6393f77d",
+      "reason": "generated interpreter cache"
+    },
+    {
+      "path": "sources/APP2026_primary_fulltext.html",
+      "bytes": 353844,
+      "sha256": "5af413a364787c1e5c6ea561055d36f378f437b835850e0fa63253f8a27ca342",
+      "reason": "inspection cache only; primary URL/version/hash and actual read scope retained in SOURCE_SCOPE.json; not included in redistribution"
+    },
+    {
+      "path": "sources/APP2026_primary_fulltext.txt",
+      "bytes": 38085,
+      "sha256": "7145294aded099fd4b434e3d0808f4d2c2dda9d6312b89e4afe80db238ec7f4e",
+      "reason": "inspection cache only; primary URL/version/hash and actual read scope retained in SOURCE_SCOPE.json; not included in redistribution"
+    },
+    {
+      "path": "sources/JNP2026_primary_fulltext.html",
+      "bytes": 169492,
+      "sha256": "6d5724ffb5331cc7f3c8787609c6f0a9d216135bb0515eefa4c962a0ebbcf28c",
+      "reason": "inspection cache only; primary URL/version/hash and actual read scope retained in SOURCE_SCOPE.json; not included in redistribution"
+    },
+    {
+      "path": "sources/JNP2026_primary_fulltext.txt",
+      "bytes": 47252,
+      "sha256": "8b25ab6b7573e98eba0034a1ca7e837c41a3e769561d993be76d77fcc5f99e66",
+      "reason": "inspection cache only; primary URL/version/hash and actual read scope retained in SOURCE_SCOPE.json; not included in redistribution"
+    },
+    {
+      "path": "sources/JNP2026_pubmed.html",
+      "bytes": 5590,
+      "sha256": "a9cc22ae328ba15a47caf563bd9d537f46d66dc59228fefdbdb1955fbe099fb4",
+      "reason": "inspection cache only; primary URL/version/hash and actual read scope retained in SOURCE_SCOPE.json; not included in redistribution"
+    },
+    {
+      "path": "sources/JNP2026_pubmed.txt",
+      "bytes": 162,
+      "sha256": "f3f06db744882458f2e1b2f6e2d30381ce81c2b2e618ce98a650316e40570c7b",
+      "reason": "inspection cache only; primary URL/version/hash and actual read scope retained in SOURCE_SCOPE.json; not included in redistribution"
+    },
+    {
+      "path": "sources/OpenHaptics_API_Reference_Guide.pdf",
+      "bytes": 1778565,
+      "sha256": "c21fe7b42481ec28ca619be1a50e35e0d7d6863d60e2260e6a13194fde9def1d",
+      "reason": "inspection cache only; primary URL/version/hash and actual read scope retained in SOURCE_SCOPE.json; not included in redistribution"
+    },
+    {
+      "path": "sources/OpenHaptics_API_Reference_Guide_page_1.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "inspection cache only; primary URL/version/hash and actual read scope retained in SOURCE_SCOPE.json; not included in redistribution"
+    },
+    {
+      "path": "sources/OpenHaptics_API_Reference_Guide_page_2.txt",
+      "bytes": 883,
+      "sha256": "eaca41bf383d5bdacbc3a91bbc506aec2105f2c72e8fea411791f645c445db2d",
+      "reason": "inspection cache only; primary URL/version/hash and actual read scope retained in SOURCE_SCOPE.json; not included in redistribution"
+    },
+    {
+      "path": "sources/OpenHaptics_API_Reference_Guide_page_57.txt",
+      "bytes": 2425,
+      "sha256": "0b1942a69185dc8f1c92920663dab7dcaeb2e7ad563391ef581917b6e4c68584",
+      "reason": "inspection cache only; primary URL/version/hash and actual read scope retained in SOURCE_SCOPE.json; not included in redistribution"
+    },
+    {
+      "path": "sources/OpenHaptics_API_Reference_Guide_page_58.txt",
+      "bytes": 3189,
+      "sha256": "41cb0fc6a9500a0d7c63600544784bf9fa11161b93fbee4622887453304d7b26",
+      "reason": "inspection cache only; primary URL/version/hash and actual read scope retained in SOURCE_SCOPE.json; not included in redistribution"
+    },
+    {
+      "path": "sources/OpenHaptics_API_Reference_Guide_page_59.txt",
+      "bytes": 1729,
+      "sha256": "a21e333226938d156cb33b77b812589c75a742d8b44828ad6f2cbc76a70417d7",
+      "reason": "inspection cache only; primary URL/version/hash and actual read scope retained in SOURCE_SCOPE.json; not included in redistribution"
+    },
+    {
+      "path": "sources/OpenHaptics_API_Reference_Guide_page_8.txt",
+      "bytes": 2307,
+      "sha256": "4c2134412aa54c527cf9d2d4833083ff30b46c02401a95a5b1331e30114062d6",
+      "reason": "inspection cache only; primary URL/version/hash and actual read scope retained in SOURCE_SCOPE.json; not included in redistribution"
+    },
+    {
+      "path": "sources/OpenHaptics_Programmers_Guide.pdf",
+      "bytes": 5617337,
+      "sha256": "b17c7176dc95d92e00e69c9de86f3599748d16a071b37b8746d6eaa6f1dc9d99",
+      "reason": "inspection cache only; primary URL/version/hash and actual read scope retained in SOURCE_SCOPE.json; not included in redistribution"
+    },
+    {
+      "path": "sources/OpenHaptics_Programmers_Guide_page_1.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "inspection cache only; primary URL/version/hash and actual read scope retained in SOURCE_SCOPE.json; not included in redistribution"
+    },
+    {
+      "path": "sources/OpenHaptics_Programmers_Guide_page_2.txt",
+      "bytes": 1558,
+      "sha256": "b12779186b1660d56df0d86992a690aac39fd8128d373fff59bef0809b81828a",
+      "reason": "inspection cache only; primary URL/version/hash and actual read scope retained in SOURCE_SCOPE.json; not included in redistribution"
+    },
+    {
+      "path": "sources/OpenHaptics_Programmers_Guide_page_90.txt",
+      "bytes": 1854,
+      "sha256": "1d297c36f4a33cad292e2ebd527e290afa0ee2441fc480a06525ee756efee767",
+      "reason": "inspection cache only; primary URL/version/hash and actual read scope retained in SOURCE_SCOPE.json; not included in redistribution"
+    },
+    {
+      "path": "sources/OpenHaptics_Programmers_Guide_page_91.txt",
+      "bytes": 3007,
+      "sha256": "b9a3706df5ffa867525c67410fa1c2db14423dcda6b5a52fac1791e7920bef8f",
+      "reason": "inspection cache only; primary URL/version/hash and actual read scope retained in SOURCE_SCOPE.json; not included in redistribution"
+    },
+    {
+      "path": "sources/OpenHaptics_Programmers_Guide_page_92.txt",
+      "bytes": 2778,
+      "sha256": "9af57ad970b8f5268ea8a59d9d93a3109831c4011fbf638eeeb5eddcd1489c50",
+      "reason": "inspection cache only; primary URL/version/hash and actual read scope retained in SOURCE_SCOPE.json; not included in redistribution"
+    },
+    {
+      "path": "sources/OpenHaptics_Programmers_Guide_page_93.txt",
+      "bytes": 3391,
+      "sha256": "e39ce52fad710b2f807f37b82fac9f4f4ab60de06d3fdeecd111899eb2372d02",
+      "reason": "inspection cache only; primary URL/version/hash and actual read scope retained in SOURCE_SCOPE.json; not included in redistribution"
+    },
+    {
+      "path": "sources/Tobii5_official_specification.html",
+      "bytes": 36357,
+      "sha256": "aa39789fc8de7101de0e961749cfcd8e7523cb73998e44b597f929d7d73c189e",
+      "reason": "inspection cache only; primary URL/version/hash and actual read scope retained in SOURCE_SCOPE.json; not included in redistribution"
+    },
+    {
+      "path": "sources/Tobii5_official_specification.txt",
+      "bytes": 3357,
+      "sha256": "880a03bd3448767a9064e5645e6266926ffad775638c5d58169ef832575edba4",
+      "reason": "inspection cache only; primary URL/version/hash and actual read scope retained in SOURCE_SCOPE.json; not included in redistribution"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/End/AD21_Aes.csv",
+      "bytes": 4067,
+      "sha256": "c474c8d8160df19a8e4b8702936a38373fef6bd835aa4a16d15fe80025c4fc30",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/End/EM12_Aes.csv",
+      "bytes": 4064,
+      "sha256": "3ac5dd71c9c9f2af30df29bb0e44ad103bb32dbf430f741afa1268c73825671a",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/End/FE38_Aes.csv",
+      "bytes": 4088,
+      "sha256": "ab22574100872fefc9b42af0d9ced3bd8b20b2e86c6786e13ee9a2e80cc40210",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/End/FS98_Aes.csv",
+      "bytes": 4088,
+      "sha256": "d0332ea442b5bec2e851696a341c6e53d735cc8dd12dd4d2604cc86f9e236fcd",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/End/HF26_Aes.csv",
+      "bytes": 4092,
+      "sha256": "312059beb43d5c0f46b091f855222a5b268eaca76f087d70551227108a97d800",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/End/HG15_Aes.csv",
+      "bytes": 4088,
+      "sha256": "69236adc29251fd917f63d57e2a7f5c3c9b7277ad1a52ad930a56a9fd2919284",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/End/HN77_Aes.csv",
+      "bytes": 4054,
+      "sha256": "f34c786485db55b37f843c7b6377f175ce5de0675cc4f6a15cd54d60c7d8e101",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/End/JA13_Aes.csv",
+      "bytes": 4074,
+      "sha256": "902f9d231ceda278658be39840304891ba650cfea9ded8424fc0e51a6a1313ab",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/End/JD14_Aes.csv",
+      "bytes": 4050,
+      "sha256": "9fefba9e18c1bc9e66434bd8377239dcaa142bdfd65cd0d67db4cc823c250d74",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/End/KC21_Aes.csv",
+      "bytes": 4086,
+      "sha256": "4c3766687079649b55b30823ef126fcb8625bcff65714e909fdc72d10a29f7e2",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/End/LT68_Aes.csv",
+      "bytes": 4084,
+      "sha256": "30b36d653bea03a3f547258ff4260b68c012c48dda97dfbf46e80c56dbe4cc26",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/End/OW21_Aes.csv",
+      "bytes": 4088,
+      "sha256": "7cf5ea6fd2d81f822c1b676d5014c76b6e1dcc367fba3c9ec5f275c44a8fcfd2",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/End/PA13_Aes.csv",
+      "bytes": 4072,
+      "sha256": "6307a15cd2563227ed7e7d6bd2fd539d3f91eb99636adc0c75910065b7fd39e4",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/End/PA19_Aes.csv",
+      "bytes": 4064,
+      "sha256": "1e578885da435b780163ce403bb7fac3fa058a8d446a5c87f278046b5d5550de",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/End/PQ91_Aes.csv",
+      "bytes": 4084,
+      "sha256": "8e12353115f0e3fe38ce2db31f4e2cf9730d9e4620d16a1e4407c809e6b85923",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/End/PS73_Aes.csv",
+      "bytes": 4078,
+      "sha256": "a92b2c7db6d3ee46cc3669f1dc9e733760f5a9c6c748b67cc1df4c9e68950d89",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/End/SW73_Aes.csv",
+      "bytes": 4088,
+      "sha256": "333c991a9ddc4b93c319d0aae9b8f78ac59842dfc031f1308ad5d1a32da8717f",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/End/TP97_Aes.csv",
+      "bytes": 4084,
+      "sha256": "a950144524c08d0e7b497372855af9bb79d298d311ea453032952f414fc809c8",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/End/ZO41_Aes.csv",
+      "bytes": 4068,
+      "sha256": "f6411fba8ba642adc9ff8fd152c7e2de32a54bf6f3bfd6c76c55768c5bda8060",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/End/ZY12_Aes.csv",
+      "bytes": 4073,
+      "sha256": "00cc2459651fd1cd42846f54cff0397db81efff46ae84a20bbccbcc7efc4af20",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/End/desktop.ini",
+      "bytes": 622,
+      "sha256": "ad173c402a6b1c19434ad017d9070b146c6c55e99917a6d3353535074b72c956",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/Start/AD21_Aec.csv",
+      "bytes": 4092,
+      "sha256": "8e953daa5167eb3f1d5ceda51abcf5e17e661af68e4582c56468343d14c804d4",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/Start/EM12_Aec.csv",
+      "bytes": 4084,
+      "sha256": "eccd6e794528f0a7fd7f70a9c1d9e4b204a14d5d1487451397fecae5473a1978",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/Start/FE38_Aec.csv",
+      "bytes": 4088,
+      "sha256": "164f3ef47d004642712c5140a39dfd7f15930803cbab5b76ce9427b701659157",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/Start/FS98_Aec.csv",
+      "bytes": 4088,
+      "sha256": "a7fc9410bb36e7ef7d69cf614781bbc875e3e41060170fc6036806106705a61e",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/Start/HF26_Aec.csv",
+      "bytes": 4088,
+      "sha256": "7120bcfca38835a07fd127f56fb8c58fb4a848fa392a6c0009bf44b9f8a43730",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/Start/HG15_Aec.csv",
+      "bytes": 4092,
+      "sha256": "70e48b29a0637157606fbf4e128b8404af18f08b44a70786585a1e7d9dbb24c1",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/Start/HN77_Aec.csv",
+      "bytes": 4035,
+      "sha256": "d360c789456eb4ead4ddb3ff654e96a51a19d5ddd98aa8b29d6c6199ac94c689",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/Start/JA13_Aec.csv",
+      "bytes": 4086,
+      "sha256": "0b73f907994d7fb0e3d00132bba1fde5d31f904e0fa81767c78d07204262c2ae",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/Start/JD14_Aec.csv",
+      "bytes": 4072,
+      "sha256": "8c1147d145a50a99b01f3a381eea6899e71db65d286651f99b9383b265efe3d7",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/Start/KC21_Aec.csv",
+      "bytes": 4080,
+      "sha256": "21fb85ff901d2b12cb9421ae41c3bf7fda48c899c7c2e381453032447ba9d96b",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/Start/LT68_Aec.csv",
+      "bytes": 4080,
+      "sha256": "176fbce0cd13ce004afc825a279255070c5a6b3a7a5514c031206ffd2f853684",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/Start/OW21_Aec.csv",
+      "bytes": 4092,
+      "sha256": "37116fcf5a536f7b8dfe6a597e929dfdaaa542add2cd0aebd343173ffbb7c529",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/Start/PA13_Aec.csv",
+      "bytes": 4088,
+      "sha256": "2d8606d3057dbb4e504282847b893ead172ba8160bee5037dda40e62850cd171",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/Start/PA19_Aec.csv",
+      "bytes": 4088,
+      "sha256": "4b43efb2a7dfc92a17dd0c81b406a7e8cecc9fca1206f9876e913aebc6441a39",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/Start/PQ91_Aec.csv",
+      "bytes": 4078,
+      "sha256": "27f6c499e911a0dce9ed1027a234e3f9366b7f1e5a636f26343ddce9bb9fdbc2",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/Start/PS73_Aec.csv",
+      "bytes": 4088,
+      "sha256": "0b7315548a41947cf70f50f02483a7961c0d05ff8ad9d4d2ff28b006f3d45462",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/Start/SW73_Aec.csv",
+      "bytes": 4088,
+      "sha256": "3370099558a8f0d40bcc00d3e45456eeaa292599e3d894f2269d22d3afa77ac8",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/Start/TP97_Aec.csv",
+      "bytes": 4088,
+      "sha256": "e60db88f55c574e292000a44759b60cb4316ae7402c09f4ee6dac8346d455158",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/Start/ZO41_Aec.csv",
+      "bytes": 4082,
+      "sha256": "8dc614f0b8830ba6280087e75b1a4f9c02361e7dc0738274e6db919f8a79a9ed",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Active/Start/ZY12_Aec.csv",
+      "bytes": 4079,
+      "sha256": "106632c5268866f59c83504e46f16ef07178a8159096ad61a38ad3a56205048d",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/End/AD21_Ces.csv",
+      "bytes": 4088,
+      "sha256": "d60c0a289a146dc5fc8d76ab5b63146c1839772a7076d8ae1d79dc5bcd63006d",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/End/EM12_Ces.csv",
+      "bytes": 4088,
+      "sha256": "2cb26120e159d73f6f4179d2018356badc27746458358c9b8953c1a5c5261ec1",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/End/FE38_Ces.csv",
+      "bytes": 4088,
+      "sha256": "dc640fa36244530e28b33abd8ea12d753e6bd3a01db37f4414ce4213f1839cc3",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/End/FS98_Ces.csv",
+      "bytes": 4088,
+      "sha256": "f44e214abb67c772c566bafd193816efe0ee8f6b7884b1f5dc357c36e16c96b9",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/End/HF26_Ces.csv",
+      "bytes": 4088,
+      "sha256": "ef68dad49cdd5a17042fb9410a18813f979a146727efc03e5c2b9b66c6f511b9",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/End/HG15_Ces.csv",
+      "bytes": 4088,
+      "sha256": "4a6edea2da8245a1d387fa2e99d2f78140451d7a2a627210e297f120c18f8662",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/End/HN77_Ces.csv",
+      "bytes": 4088,
+      "sha256": "2c1f0e7c77bfe966feedc0af9573350758707b8401b895d32f595850d0e5bc70",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/End/JA13_Ces.csv",
+      "bytes": 4088,
+      "sha256": "5498a72aa22c1c7ffd8d76b707e556fcd85fc2e01319e070db578dd5f6b4d86e",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/End/JD14_Ces.csv",
+      "bytes": 4088,
+      "sha256": "ddffb2f0142d33337fcaf2a7932698ecadac466503986a498a31f345a572500d",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/End/KC21_Ces.csv",
+      "bytes": 4088,
+      "sha256": "69abc257017e8faafac8fd430fafceeae8093d73a68257c37443a1cff288045d",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/End/LT68_Ces.csv",
+      "bytes": 4088,
+      "sha256": "b4f6359af3259f433e2435308cc554ffcea134d25a368549e54b597400566ce7",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/End/OW21_Ces.csv",
+      "bytes": 4088,
+      "sha256": "0647b432b2bfd130731a710347ad6d6beab322eefc0712c09d2a4ef61c3b74da",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/End/PA13_Ces.csv",
+      "bytes": 4088,
+      "sha256": "1908c705423976d8260eaa9736e224a822670693861b1b2d92407a02696dff1e",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/End/PA19_Ces.csv",
+      "bytes": 4088,
+      "sha256": "2ca9206c45bee291f53d40b080ab7119027c9851231ed07e3df0023f1ffd9f46",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/End/PQ91_Ces.csv",
+      "bytes": 4088,
+      "sha256": "921b1a200c8975f78a65be193b05ec94751bad01dfea08deae954d88ca8000e4",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/End/PS73_Ces.csv",
+      "bytes": 4088,
+      "sha256": "ff67adcd3602185cb6a1de100580ab893bc80e75faab608b2249bb8642c492c8",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/End/SW73_Ces.csv",
+      "bytes": 4088,
+      "sha256": "fc0069edd2a44d38e1b32cefdb12a06cf99bbbbf47a02aca6ed8aa94159ca61f",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/End/TP97_Ces.csv",
+      "bytes": 4088,
+      "sha256": "0010ea901f2de6f9b7ca9fd11e0e80daa078f65e26e1ef4a7333e2c6be4e14b8",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/End/ZO41_Ces.csv",
+      "bytes": 4088,
+      "sha256": "5eb0629c13e6e62342f1cf25bbef42f69ddea791bcedc955ff125c9046b78182",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/End/ZY12_Ces.csv",
+      "bytes": 4088,
+      "sha256": "79feed247093db6b4b9aba61ef7bf50620a694835df796abfd9b2840cf2d2e99",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/End/desktop.ini",
+      "bytes": 652,
+      "sha256": "69b3d8bec743458b7f35eb1176dcb551f98f4df29daf12c768c1662304450aef",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/Start/AD21_Cec.csv",
+      "bytes": 752,
+      "sha256": "e71281d4e7d994b1cbc3682503f13eb1ea2dbc1e7c860ad9fea5bb11580a44d9",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/Start/EM12_Cec.csv",
+      "bytes": 752,
+      "sha256": "b983c0dc3c435f348bea09f8547ce18ea2baf144fc104fe0cf1f1219056f2eb8",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/Start/FE38_Cec.csv",
+      "bytes": 752,
+      "sha256": "7e3aa23dab3f99461b33607a6037ea7fd3c2ff785ff854bfd171c19f47dabdc4",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/Start/FS98_Cec.csv",
+      "bytes": 752,
+      "sha256": "d12bbf0de0fe0c7996e414469bafacabc9213adc6ceb009a300e24850235004c",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/Start/HF26_Cec.csv",
+      "bytes": 752,
+      "sha256": "316f63b3bdd55fd96349158f2ff7d0554689918ad03ef5d35e09d49c259b3a3e",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/Start/HG15_Cec.csv",
+      "bytes": 752,
+      "sha256": "ae4c68cd9c80d83cdf24b9be06da71c3ea7a0433c4e6d70e62b13b78693b8381",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/Start/HN77_Cec.csv",
+      "bytes": 752,
+      "sha256": "333b5c601773af3c0eb7462f5ed5a1d4398d1a33eb5da5a7a268159b201fc071",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/Start/JA13_Cec.csv",
+      "bytes": 752,
+      "sha256": "2f30e258ed493e1e4436eb455b1c05885af8b46e7d4e9668753373c5cb919b24",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/Start/JD14_Cec.csv",
+      "bytes": 752,
+      "sha256": "9af5dd610c175373a1c5ff238147c9a3dfaf09ba0ad83a111538004180e7a488",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/Start/JN98_Cec.csv",
+      "bytes": 752,
+      "sha256": "5a2f5b23786cff20bb65153d740a17ac2540de1f440e6661480afd7ccf9de167",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/Start/KC21_Cec.csv",
+      "bytes": 752,
+      "sha256": "9b78b2ae0424b7acb118bafc019b3c9f3f41aef1c881e51cc6063eb81bc9efb6",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/Start/LT68_Cec.csv",
+      "bytes": 752,
+      "sha256": "6aeef1f872da12c1d8686f16f6cc6d946936056cb85c60d25251524728a98e15",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/Start/OW21_Cec.csv",
+      "bytes": 752,
+      "sha256": "7c652c284290c909dc052dd5686ed415c43b7b8512e76f38183f0282d3779818",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/Start/PA13_Cec.csv",
+      "bytes": 752,
+      "sha256": "9c8e4a89df88d394a796a9c5e2edaf7dc61285b7e3593a8ba25d1723319092c1",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/Start/PA19_Cec.csv",
+      "bytes": 752,
+      "sha256": "c4f5a45f194ab1ee22a9f9f2c85bdbe06d399018485e43c3a97654192d16d522",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/Start/PQ91_Cec.csv",
+      "bytes": 752,
+      "sha256": "068de8677ae6e5e282db4116398b6c453fe3bb18f53850d25784f74ca2183820",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/Start/PS73_Cec.csv",
+      "bytes": 752,
+      "sha256": "41cb4e1472caa4b13eb899f67609a53a595d1592be0bf3bdcec4713be65a6e4b",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/Start/SW73_Cec.csv",
+      "bytes": 752,
+      "sha256": "a1e743fdf64553b2cb4be573e97ec17a532dfdf20cb5aa050e8c50bb8cd52fb3",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/Start/TP97_Cec.csv",
+      "bytes": 752,
+      "sha256": "560f91bdd131fa3b3c6164083d24213c63b3aacf0795ae07da630794d27f9ba8",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/Start/ZO41_Cec.csv",
+      "bytes": 752,
+      "sha256": "bbe490537a31975b7df1512a6cbcd59812ccb61000d7ef0f1876141709c10ddc",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/Start/ZY12_Cec.csv",
+      "bytes": 752,
+      "sha256": "6c4d784a49274accf7c8656d18748944ce18f431c8491f1b9e03e6fd9459443a",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Control/Start/desktop.ini",
+      "bytes": 652,
+      "sha256": "d3c1c48f8a54e0284d70e09c50c74b53435cf06b3c46a868bf666a02c3901d3c",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/PSE_and_JND.csv",
+      "bytes": 2108,
+      "sha256": "a52f4274683ed7b185e45d37dd4daabb24989eb8ce635d3d774bfdd167a1a03e",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/End/AD21_Pes.csv",
+      "bytes": 4279,
+      "sha256": "e6075025899516bee3c28cfce53ec9783b1990e6790aed5369466a635ee4902f",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/End/EM12_Pes.csv",
+      "bytes": 4283,
+      "sha256": "21b3d83e21d585d620f1fefdd23e7bba8b0cd24253c68707c2e651a3aa3e3e3d",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/End/FE38_Pes.csv",
+      "bytes": 4283,
+      "sha256": "2d09e4e21b51d3dcba0eea58b4aa50104e1576d5a2bb6e78f78ce57ef2e1474b",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/End/FS98_Pes.csv",
+      "bytes": 4283,
+      "sha256": "9467239108dc1eada6f482d246b6b1df54e386d12809b882140d9ce44305a5df",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/End/HF26_Pes.csv",
+      "bytes": 4283,
+      "sha256": "bec8e4ee41ce63181feb4a3ce1b7d26a40810a10b9350da42ee65cbbdb7ef9e0",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/End/HG15_Pes.csv",
+      "bytes": 4283,
+      "sha256": "b0bc34877303d47b821d909e8db6e449ba616ce56827ce4158ac5b5e76a20e23",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/End/HN77_Pes.csv",
+      "bytes": 4260,
+      "sha256": "4a394c71fc582b321cd486cc8c4b6fb7b468b414a013616b4051c3b23fb38aae",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/End/JA13_Pes.csv",
+      "bytes": 4287,
+      "sha256": "68235bdfd3c593a6d2b060d12a68f7156ca1a7888ff6043ac54a4f4f169a3aa7",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/End/JD14_Pes.csv",
+      "bytes": 4273,
+      "sha256": "f7b5685ac43f44db1c22b0387971bc9adb9614792edb6e3ffb332a8e0aa8d3d2",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/End/KC21_Pes.csv",
+      "bytes": 4283,
+      "sha256": "058f6332440ba88cca6dc8e596affc93b9af6317edfb5e85d8c531e377767089",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/End/LT68_Pes.csv",
+      "bytes": 4283,
+      "sha256": "489c426e5a1eedf51f36960a0dfd7e0cfb3f5eb18f58c7c7fed67ffba9fbfc80",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/End/OW21_Pes.csv",
+      "bytes": 4283,
+      "sha256": "de50399a66c577c68842fae7a202bd991542e0321d049e724504ee4733274149",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/End/PA13_Pes.csv",
+      "bytes": 4280,
+      "sha256": "34330ba25937caf7a79a48a5a6673d0c41d0af937ec482a6e5fba3c6ae1687c3",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/End/PA19_Pes.csv",
+      "bytes": 4283,
+      "sha256": "23e60cf45218123524ea5cd8bb0e7b7c4a0196bc4da5dff0a30b7e586a89a826",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/End/PQ91_Pes.csv",
+      "bytes": 4283,
+      "sha256": "d4fb04ed499d08d29098c147a67b1e9c3f8a1a7582c87f555967a2edb4afe3d1",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/End/PS73_Pes.csv",
+      "bytes": 4283,
+      "sha256": "628be9271fec9b0a0398759670f6c8c6fca4207c9b16a6d650cd299e3e50abb1",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/End/SW73_Pes.csv",
+      "bytes": 4101,
+      "sha256": "8f946cf8abb5a616364e52cb4b3602e3feb9617b92bb0e3692d5eebc1b92990c",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/End/TP97_Pes.csv",
+      "bytes": 4283,
+      "sha256": "01c7c61ce1f4692d8be71bb8bd50c13a28de8ef692a8eb0ee9d25d6aacf459dd",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/End/ZO41_Pes.csv",
+      "bytes": 4236,
+      "sha256": "f7c1a97d477e1c922382de41c806d3d4a257e97d82eb6e84b4554231918e499c",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/End/ZY12_Pes.csv",
+      "bytes": 4283,
+      "sha256": "771fcaae5a06a568296a4b1384e8374bdf3acb326fc10b98baa891899b72c71c",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/End/desktop.ini",
+      "bytes": 652,
+      "sha256": "19acd088edcb1fc32218f79461a8b4979334ff7cc5b1dc9fcf6d625d3407095b",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/Start/AD21_Pec.csv",
+      "bytes": 4283,
+      "sha256": "960c8136e253443b9afd96112dc0829af40752b1979a0b7a47bd6210a6b424bf",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/Start/EM12_Pec.csv",
+      "bytes": 4188,
+      "sha256": "753f8615bc91114ef0aa2aac4b6bfc7735bbb5f9c0fcc86c6d90912d3b21ee65",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/Start/FE38_Pec.csv",
+      "bytes": 4283,
+      "sha256": "a3bca7270e07d44e05193a193ef772da8c7846ade342f368b071163d1eb130c4",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/Start/FS98_Pec.csv",
+      "bytes": 4283,
+      "sha256": "367dfc72542027f981103428f2557e1e0bea10c375ef8dd3c0647e1ea3b21c39",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/Start/HF26_Pec.csv",
+      "bytes": 4188,
+      "sha256": "d7fe8a84099e3730f33e440de41828faa904575f136e92e5b16cef34f9187aad",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/Start/HG15_Pec.csv",
+      "bytes": 4279,
+      "sha256": "60bed2a6fc88e8a584bcd3cf86e2cbfb3db968b24083fc5a0828ab21dbf8bdbd",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/Start/HN77_Pec.csv",
+      "bytes": 4241,
+      "sha256": "a4668f3be211cd682a8c86a917e931a74fb4226ad87766ff7ab2674e1b4fbf4b",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/Start/JA13_Pec.csv",
+      "bytes": 4279,
+      "sha256": "28e653d7f3d54b48c38d907ea3bf47452ed9629c39b1cec38a168b9d7cd60909",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/Start/JD14_Pec.csv",
+      "bytes": 4281,
+      "sha256": "7207fe7d826da86dccc9cb4b3bf9f4e12ea811a18703fac78b0796b7a1ecfb02",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/Start/KC21_Pec.csv",
+      "bytes": 4147,
+      "sha256": "b2e50782670178a37078c17afb9af4b3dbd380f6a6e9cc5808dae496dea829e4",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/Start/LT68_Pec.csv",
+      "bytes": 4235,
+      "sha256": "f180cde1b29e085f067cd32b045eb1d308edd6ae4f566f4f7c7923461dd20b11",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/Start/OW21_Pec.csv",
+      "bytes": 4283,
+      "sha256": "50522d225d20cefbb7b4353a5074f7eccbdb302e417347e624c4844164af196d",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/Start/PA13_Pec.csv",
+      "bytes": 4283,
+      "sha256": "97eec278ac55e32b0e911263dc7ac5fc1acc5c143d7034dd3a46b42375bd7c5a",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/Start/PA19_Pec.csv",
+      "bytes": 4287,
+      "sha256": "22492818ac4d9612bdbc1841f7832dc08accb54ed64125fb3ffdd0c71da6fe7b",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/Start/PQ91_Pec.csv",
+      "bytes": 4283,
+      "sha256": "2dc872f52fde2972c2308da90021f89de6dfa638ba318add6d09bc5bb749d14f",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/Start/PS73_Pec.csv",
+      "bytes": 4283,
+      "sha256": "91b4d008351d588d4679f698a3a7d722c526cabdf8901f150b2c81746a013a91",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/Start/SW73_Pec.csv",
+      "bytes": 4189,
+      "sha256": "a8f0c02acaf0193b9c33f8b25688be82af59bc5e1fa3201d17b6ef385bcbb1e7",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/Start/TP97_Pec.csv",
+      "bytes": 4277,
+      "sha256": "7d16fcc42e9c54db654a588a54eb9fdddf06b51357d326ca5b81577cddcda405",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/Start/ZO41_Pec.csv",
+      "bytes": 4279,
+      "sha256": "7368e4ea25402eb9e6641f60242488414022e284a3b66079b6485dcaa55cd9c5",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/Start/ZY12_Pec.csv",
+      "bytes": 4283,
+      "sha256": "cec3482f16656288960cfe7731d2d9380c2c23043ed9cca8bbc03f9d31602a56",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/Passive/Start/desktop.ini",
+      "bytes": 652,
+      "sha256": "52439115ae81421d1934e1d63ea4af4128f05607d362a471d62bea67a752e083",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/Zenodo18877381/Data/READme.txt",
+      "bytes": 1597,
+      "sha256": "c4506b9827092a4cfed1fc21e7c14ef954fb0ae3824ef865fe6a7a5d18ba0b0c",
+      "reason": "expanded unchanged source, reproducible from delivered ZIP"
+    },
+    {
+      "path": "sources/api_reference_page57.png",
+      "bytes": 329546,
+      "sha256": "d985f0a90981f1557d57f266e07d45715e550387f2ebbc7c951950e9bf5493d2",
+      "reason": "inspection cache only; primary URL/version/hash and actual read scope retained in SOURCE_SCOPE.json; not included in redistribution"
+    },
+    {
+      "path": "sources/programmer_guide_page92.png",
+      "bytes": 299715,
+      "sha256": "40913998649b79bb4cc7503cd51b401daacb6f5d8c5700f1220c33a328776772",
+      "reason": "inspection cache only; primary URL/version/hash and actual read scope retained in SOURCE_SCOPE.json; not included in redistribution"
+    },
+    {
+      "path": "sources/published_analysis_README.md",
+      "bytes": 1142,
+      "sha256": "87103e5fd9b9725ddde493fae7b48c63aa649bef261678ac60e18fc6efb5d273",
+      "reason": "inspection cache only; primary URL/version/hash and actual read scope retained in SOURCE_SCOPE.json; not included in redistribution"
+    },
+    {
+      "path": "sources/published_fit_psychometrics_from_csv.m",
+      "bytes": 7972,
+      "sha256": "721228680db7d0338d94c977927efcb9bd3014b4ae2ed45a463d1b34157523c6",
+      "reason": "inspection cache only; primary URL/version/hash and actual read scope retained in SOURCE_SCOPE.json; not included in redistribution"
+    }
+  ],
+  "supersedes_manifest_sha256": "a9f1199dd119d8950f6600f8c30b7097d7c4548972e50c6afc7e98d39677ada8",
+  "revision_reason": "Response-key conversion provenance clarified by a correction overlay; numerical code and output bytes unchanged.",
+  "final_revision": "Response provenance clarification complete; package frozen."
+}

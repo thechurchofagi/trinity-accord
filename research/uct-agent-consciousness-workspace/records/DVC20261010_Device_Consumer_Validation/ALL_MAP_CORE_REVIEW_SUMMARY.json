@@ -1,0 +1,87 @@
+{
+  "schema": "uct-combined-core-review-summary/1",
+  "baseline": "UCT-MAP-v1.1.2",
+  "counts": {
+    "node": 913,
+    "rule": 424,
+    "context": 261,
+    "suspended_historical_rule": 10
+  },
+  "total_ids": 1608,
+  "unvisited_core_ids": [],
+  "candidate": {
+    "nodes": 24,
+    "rules": 6,
+    "contexts": 15,
+    "all_45_items_independently_reviewed": true,
+    "enabled": false
+  },
+  "source_receipts": [
+    {
+      "path": "review/BASELINE_PER_ID_READ_SCOPE.json",
+      "bytes": 1991281,
+      "sha256": "e44b1c1ef334d0f463f14f44e2423012fee6ecd7050f1eebff6fdb58a964deee"
+    },
+    {
+      "path": "review/followup_nodes/COMBINED_NODE_COVERAGE.json",
+      "bytes": 236607,
+      "sha256": "3ed12b0552a7f67005abfa4a52551985e0bcaca51105ea1032149b14d32151fc"
+    },
+    {
+      "path": "review/followup_nodes/PER_ID_NODE_REVIEW.json.gz",
+      "bytes": 213265,
+      "sha256": "947621e2e5f00ab9127b6b24773950d738652323f67dd4e32f20f645c5a20110"
+    },
+    {
+      "path": "review/followup_rules/PER_RULE_CORE_REVIEW.json",
+      "bytes": 2204913,
+      "sha256": "d7698f7ccd97cd38d482bb8cd470b577cba48df4faca902f9fe73071ca5fa324"
+    },
+    {
+      "path": "review/followup_rules/EVIDENCE_ADDITION_REVIEW.json",
+      "bytes": 9383,
+      "sha256": "66e1573b718ecca639921c9257386b90b923b9b41a88dc5c9d17e8cc6e69dd64"
+    }
+  ],
+  "compressed_per_id_file": {
+    "path": "ALL_MAP_CORE_REVIEW.json.gz",
+    "bytes": 20204,
+    "sha256": "ade63e8dd4e95854db32cd7267ff504918a6c51b396e844c0ce57361c232b889"
+  },
+  "decompressed_json_sha256": "88042a78cfafb21902909916cac60e8654a4c39fb1fc982fe7cbebfd26721ad6",
+  "decompressed_json_bytes": 494003,
+  "semantic_scope": "Every ID has the specified core-layer visit; field paths and omissions differ and must be read in their exact receipt. External source-section locators are not expanded proofs.",
+  "full_map_semantic_completion": false,
+  "existing_nodes_or_rules_requiring_DVC_revision_found": 0,
+  "syntactic_affected_rules": 92,
+  "syntactic_closure_is_not_fresh_proof_reconstruction": true,
+  "inherited_unclosed_depth_ledger": {
+    "ids": 1034,
+    "fields": 1828,
+    "proof_ids": 1347,
+    "counting_warning": "Historical unresolved audit debt, not a newly computed count of all currently unread leaf paths; newer per-component pointers cannot be directly subtracted."
+  },
+  "open_review_ids": [
+    "QC-20261008-10",
+    "IA-QC11",
+    "QC-20261008-12",
+    "QC-20261008-13",
+    "SCU-OPEN-R191-NORMALIZATION",
+    "SCU-AUDIT-DEPTH"
+  ],
+  "actual_application_established": false,
+  "completed_map_changed": false,
+  "concurrent_EIP_review": {
+    "source": "review/concurrent_eip/REVIEW.md",
+    "EIP_candidate_objects_read": 14,
+    "DVC_objects_rechecked": 45,
+    "normalization_open": [
+      "EIP-NQ1",
+      "EIP-NQ2",
+      "EIP-NQ3",
+      "EIP-NQ4"
+    ],
+    "full_historical_review_rerun": false,
+    "DVC_objects_changed": false
+  }
+}

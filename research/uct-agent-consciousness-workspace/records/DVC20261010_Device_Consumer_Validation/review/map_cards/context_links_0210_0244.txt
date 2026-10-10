@@ -1,0 +1,35 @@
+"TH20261009:ctx8" | relation="structural interpretation requires grounded K and transported parameters" | source="R157:COORDINATE_TRANSPORT" | target="TH20261009:EXPERIENTIAL_TYPE" | external_source=false | deductive=false
+"RB20261009:ctx1" | relation="Prior complete-cut contract; the coarse information bound is not new." | source="R127:MEDIATION" | target="RB20261009:BOUND" | external_source=false | deductive=false
+"RB20261009:ctx2" | relation="Endpoint/timing distinction inherited; numerical witness specialized." | source="R136:DELAY_GAP" | target="RB20261009:DELAY_WITNESS" | external_source=false | deductive=false
+"RB20261009:ctx3" | relation="Count returning target-dependent query/answer information; no silent change of architecture." | source="OO20261008:QUERY_RETURN" | target="RB20261009:ALPHABET" | external_source=false | deductive=false
+"RB20261009:ctx4" | relation="Joint conditional dependence survives marginal target independence." | source="TH20261009:REUSED_MASK" | target="RB20261009:MEDIATION" | external_source=false | deductive=false
+"RB20261009:ctx5" | relation="No scalar experiential ordering inferred." | source="C:P3" | target="RB20261009:UCT_BOUNDARY" | external_source=false | deductive=false
+"RB20261009:ctx6" | relation="Continuing local experience is not revoked by access failure." | source="TH20261009:LOCAL_EXPERIENCE" | target="RB20261009:UCT_BOUNDARY" | external_source=false | deductive=false
+"RB20261009:ctx7" | relation="Possible future application; neither node discharges the other." | source="RB20261009:BOUND" | target="TH20261009:ACTUAL_REALIZATION" | external_source=false | deductive=false
+"RB20261009:ctx8" | relation="Established conditional guessing/min-entropy alphabet bound; credit prior art." | source="EXTERNAL:Dodis2008Lemma2.2b" | target="RB20261009:BOUND" | external_source=true | deductive=false
+"RB20261009:ctx9" | relation="Original experiment motivates observational distinction, not an upper bound on all neural information." | source="EXTERNAL:Wolff2017" | target="RB20261009:WRONG_READER" | external_source=true | deductive=false
+"RB20261009:ctx10" | relation="Related task-specific binding record remains separately pending." | source="PENDING:AC20261009" | target="RB20261009:TARGET_CONTROL" | external_source=true | deductive=false
+"OL20261009:ctx_token" | relation="Actual-token criteria are NOT discharged by state-space fitting or measured output." | from="A:TOKEN_CRITERIA" | to="OL20261009:PHYSICAL_REDUCT" | deductive=false
+"OL20261009:ctx_sig" | relation="The complete comparison signature must preserve physically installed part and write port sorts, not just chosen coordinates." | from="A:K" | to="OL20261009:COORDINATE_CONTRACT" | deductive=false
+"OL20261009:ctx_c1" | relation="Conditional C1 transport; mathematical residual is not direct qualitative feeling." | from="A:C1_OI" | to="OL20261009:C1_APPLICATION" | deductive=false
+"OL20261009:ctx_capacity" | relation="A gap in one observable intervention contract is not a fixed-J maximal task-capability difference." | from="C:P1" | to="OL20261009:GAP" | deductive=false
+"OL20261009:ctx_th" | relation="A memory cut and finite observation horizon are different experimental contracts; no substitution." | from="TH20261009:FIELD_CONTRACT" | to="OL20261009:HORIZON" | deductive=false
+"OL20261009:ctx_rb" | relation="Top-K posterior bounds neither prove local installed write scope nor replace known Q observation metric." | from="RB20261009:BOUND" | to="OL20261009:NOISE_CONTRACT" | deductive=false
+"OL20261009:ctx_p3" | relation="Preserve actually continuing local tokens; no exclusive owner asserted." | from="A:P3" | to="OL20261009:LOCAL_NO_ERASURE" | deductive=false
+"R185:CTX:001" | relation="research_progression_not_proof" | from="R184:OVERLAP_NEXT" | to="R185:ACTION_CENTERING_NEXT" | deductive=false
+"R185:CTX:002" | relation="actual_evidence_obligation_not_premise" | from="R185:COPIED_COUNTERMODEL" | to="R185:ACTUAL_MEMBERSHIP_PACKAGE" | deductive=false
+"R185:CTX:003" | relation="interpretive_boundary" | from="R185:EXPERIENTIAL_COUNTERPART" | to="R185:CROSS_TOKEN_IDENTITY_LIMIT" | deductive=false
+"R185:CTX:004" | relation="occurrence_count_vs_membership_count_clarification" | from="R185:SHARED_MEMBERSHIP" | to="R185:INCIDENCE_PROFILE" | deductive=false
+"HOM:CTX:001" | relation="LIMITATION_NOT_DEDUCTION" | from="HOM:SHORT_EQ" | to="HOM:BOUNDARY" | deductive=false
+"HOM:CTX:002" | relation="APPLICATION_GUARD_NOT_DEDUCTION" | from="HOM:DEEP_WITNESS" | to="HOM:EXPERIENCE_GUARD" | deductive=false
+"UI20261009:ctx_scope" | statement="Declared signatures preserve relevant ports, preparation and time; model signature is not automatically ontically complete." | from="A:K" | to="UI20261009:DOMAIN" | deductive=false
+"UI20261009:ctx_view" | statement="A selected observer and future menu are a view, not the complete actual process." | from="A:VIEW" | to="UI20261009:FUTURE_EQ" | deductive=false
+"UI20261009:ctx_closure" | statement="Inherited controlled-summary closure; the new quotient construction is standard mathematics." | from="N128:COMMON_DETERMINISTIC" | to="UI20261009:FUTURE_QUOTIENT" | deductive=false
+"UI20261009:ctx_noscale" | statement="No scalar experience ranking from contrast magnitude." | from="C:P3" | to="UI20261009:NOISE_RESULT" | deductive=false
+"UI20261009:ctx_capability" | statement="If a capability route is used instead, genuine fixed-J differences must be independently established; observed Delta is not automatically intelligence." | from="C:FIXED_J" | to="UI20261009:TYPE_TRANSFER" | deductive=false
+"CM20261009:ctx_fiber" | from="C:P2_COORD" | to="CM20261009:IDENTIFICATION" | deductive=false
+"CM20261009:ctx_recoding" | from="R177:COMPENSATED_FEATURE_PRESERVATION" | to="CM20261009:CAUSAL_MASK" | deductive=false
+"CM20261009:ctx_fixedJ" | from="C:FIXED_J" | to="CM20261009:TYPE_CONSEQUENCE" | deductive=false
+"CM20261009:ctx_richness" | from="C:P3" | to="CM20261009:BUDGET_GUARD" | deductive=false
+"R187:ctx_r185" | relation="CONTEXT_NOT_DEDUCTION" | from="R185:SAME_OCCURRENCE" | to="R187:OCCURRENCE_DISTINCTION" | source="R185:SAME_OCCURRENCE" | target="R187:OCCURRENCE_DISTINCTION" | deductive=false | reason="R185 pending occurrence identity definition; no premise promotion"
+"R187:ctx_r185_copy" | relation="CONTEXT_NOT_DEDUCTION" | from="R185:COPIED_COUNTERMODEL" | to="R187:DIAGONAL_WITNESS" | source="R185:COPIED_COUNTERMODEL" | target="R187:DIAGONAL_WITNESS" | deductive=false | reason="All-policy extension of copied/shared finite witness"

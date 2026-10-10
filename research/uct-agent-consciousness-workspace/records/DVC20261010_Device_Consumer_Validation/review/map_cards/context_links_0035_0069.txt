@@ -1,0 +1,35 @@
+"BASE:CTX:036" | relation="Target-relative and joint-dependence motivation, not a new payoff decomposition" | from="D:PAYOFF" | to="R132:TWO_OBSTRUCTIONS" | deductive=false
+"BASE:CTX:037" | relation="A grounded difference in well-defined joint capability can enter C:P1; no scalar richness or existence gate follows" | from="R132:HIGH_ORDER" | to="C:P1" | deductive=false
+"BASE:CTX:038" | relation="Specialize partial joint kernels to a fixed unknown member of a finite family; explicit new information contract" | from="R132:PARTIAL_MODEL" | to="R133:PERSISTENT_MODEL" | deductive=false
+"BASE:CTX:039" | relation="Observation/time/port/scheduler grounding obligation, not automatic physical adequacy" | from="B:VIEW" | to="R133:PERSISTENT_MODEL" | deductive=false
+"BASE:CTX:040" | relation="Common successful actions relate to the published common-optimum condition" | from="C:P7" | to="R133:CELL_ACTION" | deductive=false
+"BASE:CTX:041" | relation="Costly state-changing probes must not be treated as free information with fixed actions/payoff" | from="C:P7" | to="R133:PROBE_BOUNDARY" | deductive=false
+"BASE:CTX:042" | relation="Success is target-relative; no universal utility or valence inferred" | from="D:PAYOFF" | to="R133:DECISION_MODEL" | deductive=false
+"BASE:CTX:043" | relation="Action selection sufficiency differs from identifying all expected payoffs" | from="R131:TARGET_SPAN" | to="R133:MESSAGE_COVER" | deductive=false
+"BASE:CTX:044" | relation="Full-interface stable refinement and task-relative sufficient partitions have different uniqueness properties" | from="R132:REFINEMENT" | to="R133:NONUNIQUE" | deductive=false
+"BASE:CTX:045" | relation="The source already treats fixed-problem value of information and warns about costs; R134 changes to a robust target with explicit survival" | from="C:P7" | to="R134:PROBE_MODEL" | deductive=false
+"BASE:CTX:046" | relation="Joint target-relevant consequences include transcript and viable completion" | from="D:PAYOFF" | to="R134:PROBE_MODEL" | deductive=false
+"BASE:CTX:047" | relation="Physical time/port/scheduler adequacy remains an independent premise" | from="B:VIEW" | to="R134:QUANT_MODEL" | deductive=false
+"BASE:CTX:048" | relation="Quantitative continuation of the probe/opportunity distinction" | from="R133:PROBE_BOUNDARY" | to="R134:TV_OPPORTUNITY" | deductive=false
+"BASE:CTX:049" | relation="A task-relative representation must preserve the selected control object; no unique coarsest task compression inferred" | from="R133:NONUNIQUE" | to="R134:VECTOR_RECURSION" | deductive=false
+"BASE:CTX:050" | relation="Full-interface preservation is stronger than retaining a selected attainable task profile set" | from="R132:PARTIAL_CLOSURE" | to="R134:VECTOR_RECURSION" | deductive=false
+"BASE:CTX:051" | relation="Finite common-policy vectors supply a motivating compact convex profile set" | from="R134:VECTOR_RECURSION" | to="R135:PROFILE_PAIR" | deductive=false
+"BASE:CTX:052" | relation="A scalar robust optimum preserves less than all threshold guarantees" | from="R134:ROBUST_LP" | to="R135:HIERARCHY" | deductive=false
+"BASE:CTX:053" | relation="Grounded state/time/port adequacy remains independent of a mathematical approximation bound" | from="B:VIEW" | to="R135:SIMULATION_SETUP" | deductive=false
+"BASE:CTX:054" | relation="Capabilities remain relative to declared task consequences" | from="D:PAYOFF" | to="R135:PROFILE_PAIR" | deductive=false
+"BASE:CTX:055" | relation="Approximation must additionally preserve executability under changed information supports" | from="R132:PARTIAL_CLOSURE" | to="R135:LEGALITY_JUMP" | deductive=false
+"BASE:CTX:056" | relation="Derived hard-feasibility discontinuity is not a constitutive continuity refutation" | from="A:U2" | to="R135:LEGALITY_JUMP" | deductive=false
+"BASE:CTX:057" | relation="A finite translator must declare time, observation roles and physical adequacy" | from="B:VIEW" | to="R136:STREAM_SETUP" | deductive=false
+"BASE:CTX:058" | relation="Task revelation and read ports belong in the declared bridge contract" | from="B:BAC" | to="R136:TASK_ORDER" | deductive=false
+"BASE:CTX:059" | relation="Decision-relevant consequence sufficiency includes information availability at the deadline" | from="D:PAYOFF" | to="R136:DELAY_GAP" | deductive=false
+"BASE:CTX:060" | relation="Universal utilities for fixed channels differ from weights on one fixed profile set" | from="R135:GUARANTEE_EQ" | to="R136:BLACKWELL" | deductive=false
+"BASE:CTX:061" | relation="Experiential use remains conditional on actual support and a common complete signature" | from="R135:UCT_INTERPRETATION" | to="R136:TASK_ORDER" | deductive=false
+"BASE:CTX:062" | relation="Information arriving after an action deadline can be useless for that action" | from="R133:PROBE_BOUNDARY" | to="R136:DELAY_GAP" | deductive=false
+"BASE:CTX:063" | relation="Action translation may use only grounded visible information, ports and time" | from="B:BAC" | to="R137:CONTROL_MODEL" | deductive=false
+"BASE:CTX:064" | relation="Observable implementability imposes a common choice on each information fiber" | from="C:P2_COORD" | to="R137:LOCAL_LP" | deductive=false
+"BASE:CTX:065" | relation="Joint consequence sufficiency must include temporal dependence" | from="D:PAYOFF" | to="R137:SEED_GAP" | deductive=false
+"BASE:CTX:066" | relation="Extends common native-action row closure to declared randomized action decoding" | from="R132:PARTIAL_CLOSURE" | to="R137:CLOSED_LOOP" | deductive=false
+"BASE:CTX:067" | relation="Reuses the earlier opposite-action blind witness to audit hidden-state access" | from="R134:SCALAR_FAILURE" | to="R137:OBSERVATION_GAP" | deductive=false
+"BASE:CTX:068" | relation="Reuses finite-horizon coupling after an executable action interface is supplied" | from="R135:POLICY_BOUND" | to="R137:APPROX" | deductive=false
+"BASE:CTX:069" | relation="Controlled conditional rows address the previous exogenous-path limitation" | from="R136:CAUSAL_LP" | to="R137:CLOSED_LOOP" | deductive=false
+"BASE:CTX:070" | relation="Actual-support and complete-signature premises remain separate from finite refinement" | from="R135:UCT_INTERPRETATION" | to="R137:CLOSED_LOOP" | deductive=false

@@ -1,0 +1,43 @@
+{
+  "schema": "uct-integrated-artifact-manifest/1",
+  "date_utc": "2026-10-10",
+  "scope": "publication/UCT-PUB-v1.0.22",
+  "files": [
+    {
+      "path": "CLAIM_COVERAGE_DELTA.json",
+      "bytes": 47820,
+      "sha256": "3129227e45be9a9fdc14a3a87a1e551149014e7b1f25047bc56431824a2edaf4"
+    },
+    {
+      "path": "CLAIM_ID_INDEX.json",
+      "bytes": 295216,
+      "sha256": "e36861664924bf41f5cbaff395b18ba93b200ebb4a943876a45968192f9f93ee"
+    },
+    {
+      "path": "CONCURRENT_PENDING_COVERAGE.json",
+      "bytes": 3335,
+      "sha256": "36294b476bc7555e60c03da2d9f181064e777c5cac1884f3e798faf15f2b658f"
+    },
+    {
+      "path": "COVERAGE_LEDGER.json",
+      "bytes": 22744,
+      "sha256": "5ce29d547a10900020f7f8656a5ece6a0686b54c4d0fad612f31e5c2ff37d07c"
+    },
+    {
+      "path": "COVERAGE_REPORT_ZH.md",
+      "bytes": 3429,
+      "sha256": "097dac5a86a671aa3cd16b92ebf9290fce13d4653d288a5290285b87c70475f1"
+    },
+    {
+      "path": "PUBLISHED_WORKS_AND_VERSIONS.json",
+      "bytes": 417951,
+      "sha256": "7926e32d73e885f3e840bb6c46a6583b57c83790e0076cffe5b6c1e6e951e306"
+    }
+  ],
+  "file_count": 6,
+  "total_bytes": 790495,
+  "excluded": [
+    "ARTIFACT_MANIFEST.json"
+  ],
+  "exclusion_reason": "Manifest self-hash and, for DVC only, separately versioned dual-save receipt. Child manifests retain original scope."
+}

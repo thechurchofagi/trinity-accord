@@ -1,0 +1,132 @@
+{
+  "schema": "uct-verified-publication-receipt/1",
+  "state": "PUBLISHED_PUBLIC_FILES_READ_BACK_AND_DOI_RESOLVED",
+  "title": "Matched Behavior and Source Use",
+  "author": "Hongju Liu",
+  "report_number": "SCU-PAPER",
+  "version": "1.0.1",
+  "doi": "10.5281/zenodo.23272690",
+  "doi_url": "https://doi.org/10.5281/zenodo.23272690",
+  "record_url": "https://zenodo.org/records/23272690",
+  "record_id": 23272690,
+  "publication_branch": "research/scu-source-use-v101-20261010",
+  "publication_workflow_run_id": 38014331872,
+  "publication_workflow_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/38014331872",
+  "prepared_source_commit": "2d7fc42d859fada3a316478ac6c0b4b33f1c542d",
+  "publish_trigger_commit": "d829393fc4ae61778e42a21ea93f57ee4dfb8052",
+  "publication_receipts_commit": "094fc4731bd61126e15232ba7fbeb74893d50d02",
+  "expected_manifest": {
+    "path": "EXPECTED-PUBLICATION.json",
+    "bytes": 2582,
+    "sha256": "4f976e85774d787dcafbcd85dd4784637ae67510836847905f938ec3bb6d755d"
+  },
+  "historical_workflow_receipt": {
+    "path": "publication-record.json",
+    "bytes": 3278,
+    "sha256": "ca249e155b8721a1c21a66522046ae0280f874307a767fd2141bf6061b1c5e27"
+  },
+  "workflow_public_file_readback_count": 9,
+  "workflow_readback_authenticated": false,
+  "independent_root_readback": {
+    "path": "PUBLIC_READBACK.json",
+    "bytes": 1302,
+    "sha256": "2f41710c054c7cafd88557c3ddbe140b3a4d20e8a650a960f017fdb90eff3ad5"
+  },
+  "independent_root_observations": {
+    "observed_at_utc": "2026-10-10T01:47:07.972728+00:00",
+    "checks": [
+      {
+        "kind": "doi_resolver",
+        "requested_url": "https://doi.org/10.5281/zenodo.23272690",
+        "final_url": "https://zenodo.org/records/23272690",
+        "status": 200,
+        "bytes": 112895,
+        "sha256": "6e848778be3b4ff6f5c0e75805022459694f84ca3ab56e5c21601ef1abe416d5",
+        "authenticated": false
+      },
+      {
+        "kind": "record_api",
+        "requested_url": "https://zenodo.org/api/records/23272690",
+        "final_url": "https://zenodo.org/api/records/23272690",
+        "status": 200,
+        "bytes": 9282,
+        "sha256": "b55979efe74dfc2062e62290a058a95a7973be1e635df4e7d6f47b57b110bd98",
+        "authenticated": false,
+        "record_id": 23272690,
+        "doi": "10.5281/zenodo.23272690",
+        "title": "Matched Behavior and Source Use",
+        "version": "1.0.1"
+      },
+      {
+        "kind": "pdf",
+        "requested_url": "https://zenodo.org/records/23272690/files/matched-behavior-and-source-use-v1.0.1.pdf?download=1",
+        "final_url": "https://zenodo.org/records/23272690/files/matched-behavior-and-source-use-v1.0.1.pdf?download=1",
+        "status": 200,
+        "bytes": 279016,
+        "sha256": "7e6e8c181e98975b3ba3e665982a7dd206a2c8efcf543ce865b34d053290754b",
+        "authenticated": false
+      }
+    ]
+  },
+  "pdf_pages": 15,
+  "public_files": [
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 1199,
+      "sha256": "f25a9d963c200872ca8361b6cb8ff6c22e4dc33c4532b4b69887328a416ca75b"
+    },
+    {
+      "name": "REVIEW-AND-SOURCES.md",
+      "bytes": 20882,
+      "sha256": "2fc6d415930309d4fce40b0cf7a00836b1faf9ffb654455ddf5d7168be40f91d"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 725,
+      "sha256": "eb00d01f330b9469793564def8beba2caa59a1ec4c790446664da06c4f661138"
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 290,
+      "sha256": "9ac926376ba04fb418ae58e8b87f9558dc32a1e3c94255f3779497d750230084"
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 444,
+      "sha256": "d36033981711418d95ae10d243027f125558c0cd28fec617645afa85779e5d34"
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 235,
+      "sha256": "6b24465345d0a6186199875a7a8451b8f959b65bc29eef0701c82305d9e8fdbc"
+    },
+    {
+      "name": "matched-behavior-and-source-use-v1.0.1.md",
+      "bytes": 45968,
+      "sha256": "8fa23cbe9440922f6f56506e5415d17c47875972bdbde1b9428c0fafaaa425ab"
+    },
+    {
+      "name": "matched-behavior-and-source-use-v1.0.1.pdf",
+      "bytes": 279016,
+      "sha256": "7e6e8c181e98975b3ba3e665982a7dd206a2c8efcf543ce865b34d053290754b"
+    },
+    {
+      "name": "reproducibility-v1.0.1.zip",
+      "bytes": 114649,
+      "sha256": "80c6839b05da8ca3095f3d2941f837a2bcd8cd81d66e294eb0b4a0f4d6191c06"
+    }
+  ],
+  "publication_type": "preprint",
+  "peer_reviewed": false,
+  "review_type": "Internal AI scientific and release review disclosed in the paper; no external journal peer review",
+  "scientific_claims_changed_from_working_v1_0_0": false,
+  "old_working_version_preserved": true,
+  "new_DVC_results_in_published_paper": false,
+  "c1_empirically_validated": false,
+  "ots_status": "NOT_EXECUTED_REQUIRES_SEPARATE_EXPLICIT_AUTHORIZATION",
+  "arweave_status": "NOT_EXECUTED_REQUIRES_SEPARATE_EXPLICIT_AUTHORIZATION",
+  "historical_receipt_not_rewritten": true,
+  "final_publication_status_commit": "571d2b5c9564179edbf83a43dd6be1d801153766",
+  "dual_save_status_reference": "../DVC20261010_Device_Consumer_Validation/DUAL_SAVE_RECEIPT.json",
+  "preservation_scope": "Public publication/readback is complete. Research-branch and Space persistence have separately versioned receipts; this publication receipt does not certify its own future save."
+}

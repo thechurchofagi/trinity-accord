@@ -1,0 +1,172 @@
+{
+  "commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+  "parent": "79ec03184ce66ac2c1e44d0dc6ba88c3f774d33a",
+  "files": [
+    {
+      "path": "research/uct-agent-consciousness-workspace/AGENTS.md",
+      "sha": "ba5430ff86be657c32b1ef6ca1faaf611e9b8207",
+      "status": "modified"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/CURRENT_STATE.json",
+      "sha": "ae0b546c6746df76eeebe889dd03a7d5d518bdd6",
+      "status": "modified"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/HANDOFF.md",
+      "sha": "18b4e53f7551a90ff43afaedf9657b67b8f1fc04",
+      "status": "modified"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/MASTER_INDEX.md",
+      "sha": "90c75718207ab94bf26ef8c2d095ab97382585d7",
+      "status": "modified"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/MEMORY.md",
+      "sha": "667b86cd0ddc3b452c5b02a4179996a0c67cbc7a",
+      "status": "modified"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/PUBLICATION_COVERAGE.json",
+      "sha": "476f9ebf1fb6aa2eb5fe1498db6b5aa60d85b681",
+      "status": "modified"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/RESEARCH_MASTER_GUIDE.md",
+      "sha": "30085b0c527cfcee4ee16b520ce2c85360a5b414",
+      "status": "modified"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/RESEARCH_REGISTRY.json",
+      "sha": "22e6ef87b384b8e26cd08681f19663f386299fea",
+      "status": "modified"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/RESEARCH_SESSION_LOG_INDEX.json",
+      "sha": "37399eca578cbeb0b7db2d798f8d36392056e08e",
+      "status": "modified"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/REVIEW_SUPERVISION.md",
+      "sha": "8f929924632aa96bfa4ecffc0dbd3cb10dc4ceea",
+      "status": "modified"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_AUDIT.md",
+      "sha": "2b9207420722a71fe5148b0b52d9c3eca7b5e271",
+      "status": "modified"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_MAP.md",
+      "sha": "704295d2a1f2309dd359f0d2f83fa1e789f88dae",
+      "status": "modified"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/EIP20261010_Exoskeleton_Instrumentation/CLAIM_LEDGER.json",
+      "sha": "65598296b5153628c8ba86059b91dc18085a497a",
+      "status": "added"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/EIP20261010_Exoskeleton_Instrumentation/EXACT_RESULTS.json",
+      "sha": "bdf26929ec77752136be0aaff7cde42d8e71b19f",
+      "status": "added"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/EIP20261010_Exoskeleton_Instrumentation/FAILURES.md",
+      "sha": "e26309c91a8e87ad4d07e8dc7817f147ea905168",
+      "status": "added"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/EIP20261010_Exoskeleton_Instrumentation/GAP_LEDGER.md",
+      "sha": "9c2a4008bd026cf8667f5b76fcfe227d31053c09",
+      "status": "added"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/EIP20261010_Exoskeleton_Instrumentation/HANDOFF_ZH.md",
+      "sha": "71ad507f32649081659caeaeac8ac9c0acda8724",
+      "status": "added"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/EIP20261010_Exoskeleton_Instrumentation/INSTRUMENT_CONTRACT.md",
+      "sha": "8566bd4ecbc9f4d264c45d19fb69ca9b2b239087",
+      "status": "added"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/EIP20261010_Exoskeleton_Instrumentation/MAP_AUDIT.md",
+      "sha": "4adb87c62e089c076cfa1e411861957d127190cf",
+      "status": "added"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/EIP20261010_Exoskeleton_Instrumentation/MAP_COMPATIBILITY_AUDIT.json",
+      "sha": "06cab13096380c0c7010c1296f7d13460c8a7256",
+      "status": "added"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/EIP20261010_Exoskeleton_Instrumentation/MAP_EXTENSION.json",
+      "sha": "e41f2c6f9849d7f1c3a18bf7afb56287c010d127",
+      "status": "added"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/EIP20261010_Exoskeleton_Instrumentation/PUBLICATION_COVERAGE_UPDATE.json",
+      "sha": "9d2ec038c07ce0ce5aa730fe58a2addef8948052",
+      "status": "added"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/EIP20261010_Exoskeleton_Instrumentation/README.md",
+      "sha": "62c560ad1127eb90dbd8a7da1e7d3f15007a91de",
+      "status": "added"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/EIP20261010_Exoskeleton_Instrumentation/RESEARCH_NOTE.md",
+      "sha": "ebc14a99c6a9d984f417ae88d6cf9efa84a0606a",
+      "status": "added"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/EIP20261010_Exoskeleton_Instrumentation/REVIEW_RESPONSE.md",
+      "sha": "2ef7ac1619d6b4513737f76db3090ee639510924",
+      "status": "added"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/EIP20261010_Exoskeleton_Instrumentation/ROUND_RECORD.md",
+      "sha": "5c99f64f9166c450cf5ac4b28516c1bfe815b320",
+      "status": "added"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/EIP20261010_Exoskeleton_Instrumentation/RUN_RECEIPT.json",
+      "sha": "b91daafd7b47decbc4520b4e67e47a1bcdd8b2d3",
+      "status": "added"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/EIP20261010_Exoskeleton_Instrumentation/SOURCE_SCOPE.md",
+      "sha": "de4405760ce6977a61d4a96602993aea4ff9a108",
+      "status": "added"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/EIP20261010_Exoskeleton_Instrumentation/THOUGHT_EXPERIMENT_MATRIX.md",
+      "sha": "61be5f2b62268cd60bbb18edf0bca76c5f6a0327",
+      "status": "added"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/EIP20261010_Exoskeleton_Instrumentation/WHOLE_MAP_COVERAGE.json.gz",
+      "sha": "10c41e3a50c9fa63296ceb5893de3b74aabf906d",
+      "status": "added"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/EIP20261010_Exoskeleton_Instrumentation/WORK_LOG.md",
+      "sha": "37916693f37517721286f6c349fb3b71ea548b9d",
+      "status": "added"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/EIP20261010_Exoskeleton_Instrumentation/model.py",
+      "sha": "331be6bed6d4ef7db41e9bac83cde610c282bf13",
+      "status": "added"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/EIP20261010_Exoskeleton_Instrumentation/validate_map.py",
+      "sha": "e94a2c50ee12a20d2ecb787b9dda2a96f0f7587b",
+      "status": "added"
+    }
+  ],
+  "all_33_git_blobs_verified": true
+}

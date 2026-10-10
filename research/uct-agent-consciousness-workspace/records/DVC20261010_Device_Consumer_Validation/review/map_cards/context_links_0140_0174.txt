@@ -1,0 +1,35 @@
+"BASE:CTX:141" | relation="no interface, online-use, report or mineness condition is added to basal-experience existence" | from="R172:EXPERIENCE_INTERNAL_ACTION_COORDINATE" | to="A:U1" | deductive=false
+"BASE:CTX:142" | relation="context only: adds an actual history-indexed conjunct to the corrected path candidate" | from="R173:RETENTIVE_EXPERIENTIAL_COORDINATE" | to="R172:EXPERIENCE_INTERNAL_ACTION_COORDINATE" | deductive=false
+"BASE:CTX:143" | relation="Context only: distinguishes the separately fixed ownership, agency and familiar-history targets under the R175 effective correction; does not assert eight-way organizational independence or all-six semantic realizability." | from="R173:THREE_TARGET_SEPARATION" | to="R158:TARGET_SPLIT" | deductive=false
+"BASE:CTX:144" | relation="context only: narrows but does not close the independent mineness obligation" | from="R173:FAMILIAR_MINENESS_BOUNDARY" | to="R155:MINENESS_OBLIGATION" | deductive=false
+"BASE:CTX:145" | relation="context only: retentive use can occur without conceptual selfhood and is not a basal gate" | from="R173:RETENTIVE_BINDING_RELATION" | to="R146:SELF_CONTRACT" | deductive=false
+"BASE:CTX:146" | relation="historical selected-versus-complete scope; no claim of a new full-type theorem" | from="R149:NULL_TARGET" | to="TE20261008:SELECTED_TRANSPORT" | deductive=false
+"BASE:CTX:147" | relation="context only; governed by R172 QC06/QC07 effective overlay, not the raw historical predicate" | from="R172:ONLINE_ACTION_USE_RELATION" | to="TE20261008:ACTUAL_TEMPORAL_BRIDGE" | deductive=false
+"BASE:CTX:148" | relation="separate physical support, internal frame and external referent" | from="R159:ANCHOR_BINDING_CONTRACT" | to="TE20261008:COMPARISON_SETUP" | deductive=false
+"BASE:CTX:149" | relation="motivation only; finite capacity counting does not discharge actual realization or C1" | from="TE20261008:RELATIONAL_INCREMENT" | to="TE20261008:EXPERIENTIAL_TEMPORAL_CONTRAST" | deductive=false
+"BASE:CTX:150" | relation="potential implementation evidence only; no automatic actual isomorphism or felt-duration deduction" | from="TE20261008:RETIMING_RESULT" | to="TE20261008:SELECTED_TRANSPORT" | deductive=false
+"BASE:CTX:151" | relation="no temporal comparison, memory, report or integration threshold is added to basal experience" | from="TE20261008:EXPERIENTIAL_TEMPORAL_CONTRAST" | to="A:U1" | deductive=false
+"BASE:CTX:152" | relation="motivation for preserving actual ancestry across replacement; RetBind lineage and other clauses are not derived by graph reachability" | from="R173:RETENTIVE_BINDING_RELATION" | to="TE20261008:RELAY_SETUP" | deductive=false
+"BASE:CTX:153" | relation="selected physical relation preservation only; separate actual K-grounding/C1 needed for experiential application" | from="TE20261008:RELAY_PROVENANCE" | to="TE20261008:SELECTED_TRANSPORT" | deductive=false
+"BASE:CTX:154" | relation="same present descriptor does not identify provenance; current complete token and extended history must remain distinct" | from="R173:PRESENT_SLICE_NONENTAILMENT" | to="TE20261008:ACTUAL_TEMPORAL_BRIDGE" | deductive=false
+"BASE:CTX:155" | relation="selected temporal-reference application; contextual, not an extra premise" | from="TE20261008:RETIMING_RESULT" | to="TO20261008:REFERENCE_CROSSING_AND_RETIMING" | deductive=false
+"BASE:CTX:156" | relation="history acts here through present reference and execution; no external-history-only current difference" | from="R173:RETENTIVE_BINDING_RELATION" | to="TO20261008:ROUTED_REFERENCE_SETUP" | deductive=false
+"BASE:CTX:157" | relation="specific executed-use contrast; no total richness ordering" | from="TE20261008:RELATIONAL_INCREMENT" | to="TO20261008:NONREPORT_ROUTE_CONTRAST" | deductive=false
+"BASE:CTX:158" | relation="existing theorem instantiated by the explicit actual package" | from="R157:COORDINATE_TRANSPORT" | to="TO20261008:EXPERIENTIAL_STRUCTURAL_COUNTERPART" | deductive=false
+"BASE:CTX:159" | relation="structural transport leaves selected phenomenal interpretation open" | from="R157:SEMANTIC_RESIDUAL" | to="TO20261008:ORDER_BRIDGE_CANDIDATE" | deductive=false
+"BASE:CTX:160" | relation="extends the explicit S/C pair with a downstream-bypass rival; contextual, not a premise" | from="TO20261008:ROUTED_REFERENCE_SETUP" | to="R174:THREE_RIVAL_ROUTE_CLASS" | deductive=false
+"BASE:CTX:161" | relation="repairs pair-relative nonreport separation by adding mediator intervention; contextual" | from="TO20261008:NONREPORT_ROUTE_CONTRAST" | to="R174:MEDIATOR_CLAMP_SIGNATURE" | deductive=false
+"BASE:CTX:162" | relation="inherits actual-use versus evidence typing through the effective overlay; contextual" | from="R172:ONLINE_ACTION_USE_RELATION" | to="R174:SHARED_TEMPORAL_COORDINATE" | deductive=false
+"BASE:CTX:163" | relation="a retained reference can enter the current relation only through grounded present use; contextual" | from="R173:RETENTIVE_BINDING_RELATION" | to="R174:SHARED_TEMPORAL_COORDINATE" | deductive=false
+"BASE:CTX:164" | relation="existing symmetry apparatus; no originality claim" | from="A:SYM_PREM" | to="BR20261008:ROLE_EXPANSION_SETUP" | deductive=false
+"BASE:CTX:165" | relation="role individuation is not selection of a unique owner" | from="R146:CENTERED_REFERENCE" | to="BR20261008:EXPERIENTIAL_ROLE_TRANSPORT" | deductive=false
+"BASE:CTX:166" | relation="independent semantic interpretation remains required" | from="R157:SEMANTIC_RESIDUAL" | to="BR20261008:PHENOMENAL_MAPPING_ADMISSION" | deductive=false
+"BASE:CTX:167" | relation="grounded formula transport used with full parameter mapping" | from="R157:COORDINATE_TRANSPORT" | to="BR20261008:EXPERIENTIAL_ROLE_TRANSPORT" | deductive=false
+"BASE:CTX:168" | relation="proposed joint-constraint research direction; does not establish B_order" | from="R174:B_ORDER_BOUNDARY" | to="BR20261008:COMMON_EXPERIENTIAL_CONSTRAINT" | deductive=false
+"BASE:CTX:169" | relation="review_corrected_by" | from="R173:THREE_TARGET_SEPARATION" | to="R175:R173_EFFECTIVE_TARGET_SEPARATION" | deductive=false
+"BASE:CTX:170" | relation="failure_direction_corrected_by" | from="R174:B_ORDER_BOUNDARY" | to="R175:R174_FIBER_DIRECTION_CORRECTION" | deductive=false
+"BASE:CTX:171" | relation="instantiated_by" | from="BR20261008:COMMON_EXPERIENTIAL_CONSTRAINT" | to="R175:HELD_OUT_ORDER_PREDICTION" | deductive=false
+"BASE:CTX:172" | relation="scoped_as" | from="R174:SHARED_TEMPORAL_COORDINATE" | to="R175:PHYSICAL_TEMPORAL_CHAIN" | deductive=false
+"BASE:CTX:173" | relation="does_not_close" | from="R175:HELD_OUT_ORDER_PREDICTION" | to="R173:FAMILIAR_MINENESS_BOUNDARY" | deductive=false
+"BASE:CTX:174" | relation="empirical_reading_requires_fixed_target_identity" | from="R175:HELD_OUT_ORDER_PREDICTION" | to="IA20261008:FIXED_TARGET_CONSTRAINT" | deductive=false
+"BASE:CTX:175" | relation="fixed_vs_outcome_dependent_structures" | from="BR20261008:JOINT_MAPPING_CONSTRAINT" | to="IA20261008:ADAPTIVE_SATURATION" | deductive=false
