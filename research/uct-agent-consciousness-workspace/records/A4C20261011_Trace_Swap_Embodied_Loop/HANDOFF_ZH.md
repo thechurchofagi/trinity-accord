@@ -33,3 +33,11 @@
 ## 恢复动作
 
 从本目录的 `ROUND_RECORD.json`、`TRACE_SWAP_PROTOCOL.md`、`EXACT_RESULTS.json`、`FORMAL_AUDIT.md` 和 `REVIEW_RESPONSE.md` 恢复；重跑 `python records/A4C20261011_Trace_Swap_Embodied_Loop/run_trace_swap_study.py run`，先核验固定种子 `2026101102` 与四臂均值，再检查远端提交和固定主交接的最新版本。
+
+## 双份保存
+
+- GitHub 科学/入口提交已核验为 `428e49944b503a43b9e79d057b676a4f9f4918a7`；最终保存元数据将作为其快进后继。
+- 固定主交接保持同一 ID `libfile_4175a81748fc819187fa8f5771f056fa`，v112 已回读。
+- A4C 增量包：`libfile_8aa2bbbde78881919f6ae24cb5fcd1c0`，178392 字节，SHA256 `1a7fb111fa05d31c0e1005749605ec8f181438b391cb4561b2964114eccd4488`。
+- 增量清单：`libfile_8b236e18ad6481918ab2525ca1444063`，1989 字节，SHA256 `2012be2a04ce35c10901474e1a67e2f21a08fd72e345c4e5a31c782b7bbd3480`。
+- 两文件均已重新物化、逐字节比较和 SHA256 回读通过。它们是从 A4B 已核验头到 A4C 整合树的 91 文件增量，不是完整仓库、完整工作集或全部历史备份。

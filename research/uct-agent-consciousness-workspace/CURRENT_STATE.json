@@ -197,12 +197,12 @@
     "role": "Historical unresolved audit-debt record; old numbers are not newly measured current unread totals."
   },
   "latest_activity_persistence": {
-    "status": "A4B_GITHUB_SCIENCE_INTEGRATION_AND_WORKSPACE_MASTER_V110_INCREMENT_CONFIRMED; FINAL_METADATA_COMMIT_IS_BRANCH_HEAD_SUCCESSOR",
-    "receipt": "records/A4B20261011_Formation_Route_Dual_Key/PERSISTENCE_RECEIPT.json",
-    "github_science_integration_commit": "7eec64da21c5bad51435cd2a5c5525fa1beb3e9d",
-    "library_master_version": 110,
-    "library_increment_id": "libfile_faf36b62ce308191980bf7f2f4d6196c",
-    "library_manifest_id": "libfile_55ae6ac4c66081918b073a52cda74e0d"
+    "status": "A4C_GITHUB_SCIENCE_INTEGRATION_AND_WORKSPACE_MASTER_V112_INCREMENT_CONFIRMED; FINAL_METADATA_COMMIT_IS_BRANCH_HEAD_SUCCESSOR",
+    "receipt": "records/A4C20261011_Trace_Swap_Embodied_Loop/PERSISTENCE_RECEIPT.json",
+    "github_science_integration_commit": "428e49944b503a43b9e79d057b676a4f9f4918a7",
+    "library_master_version": 112,
+    "library_increment_id": "libfile_8aa2bbbde78881919f6ae24cb5fcd1c0",
+    "library_manifest_id": "libfile_8b236e18ad6481918ab2525ca1444063"
   },
   "concurrent_research_preserved": {
     "id": "EIP20261010",
@@ -224,7 +224,7 @@
     "map_replacement": false,
     "actual_application_established": false
   },
-  "latest_persistence_receipt": "records/A4B20261011_Formation_Route_Dual_Key/PERSISTENCE_RECEIPT.json",
+  "latest_persistence_receipt": "records/A4C20261011_Trace_Swap_Embodied_Loop/PERSISTENCE_RECEIPT.json",
   "previous_latest_research_before_CTD": {
     "id": "A3L20261010",
     "result_version": "A3L-RESULT-v0.1.0",
@@ -551,6 +551,7 @@
     "claim_ledger": "records/A4C20261011_Trace_Swap_Embodied_Loop/CLAIM_LEDGER.json",
     "map_extension": "records/A4C20261011_Trace_Swap_Embodied_Loop/MAP_EXTENSION.json",
     "exact_results": "records/A4C20261011_Trace_Swap_Embodied_Loop/EXACT_RESULTS.json",
+    "persistence_receipt": "records/A4C20261011_Trace_Swap_Embodied_Loop/PERSISTENCE_RECEIPT.json",
     "parent_science": "A3V20261010",
     "parent_followup": "A4B20261011",
     "completed_map": "UCT-MAP-v1.1.2",
@@ -733,6 +734,7 @@
       "claim_ledger": "records/A4C20261011_Trace_Swap_Embodied_Loop/CLAIM_LEDGER.json",
       "map_extension": "records/A4C20261011_Trace_Swap_Embodied_Loop/MAP_EXTENSION.json",
       "exact_results": "records/A4C20261011_Trace_Swap_Embodied_Loop/EXACT_RESULTS.json",
+      "persistence_receipt": "records/A4C20261011_Trace_Swap_Embodied_Loop/PERSISTENCE_RECEIPT.json",
       "parent_science": "A3V20261010",
       "parent_followup": "A4B20261011",
       "completed_map": "UCT-MAP-v1.1.2",

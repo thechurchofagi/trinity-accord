@@ -1,0 +1,44 @@
+{
+  "schema": "a4c-persistence-receipt/1.0",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "verified_parent": "8eaaabe9dc498e8d90b67ed2ee663c70d4ef4cca",
+    "round_record_checkpoint": "b0cd0771cafb6fd87b46ff0a06f7956b2035f435",
+    "science_checkpoint": "cafb48e4ff184818c8af711f9c2f83aa97bfb9cf",
+    "science_integration_commit": "428e49944b503a43b9e79d057b676a4f9f4918a7",
+    "science_integration_tree": "28a4502f5a7a85f86b54d996e020884b98623436",
+    "fast_forward_expected_sha_verified": true,
+    "remote_head_and_key_file_readback": true,
+    "status": "SCIENCE_AND_INTEGRATION_CONFIRMED"
+  },
+  "workspace": {
+    "fixed_master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "fixed_master_previous_version": 111,
+    "fixed_master_version": 112,
+    "fixed_master_file_id": "file_000000008e4881f59f0bcbe3714d0774",
+    "fixed_master_sha256": "af56f74cc0f75336f2c58f18cff785a4eab1cf3f71a9c1e320f0670443791c0a",
+    "fixed_master_size_bytes": 43445,
+    "fixed_master_readback_confirmed": true,
+    "increment_library_file_id": "libfile_8aa2bbbde78881919f6ae24cb5fcd1c0",
+    "increment_manifest_library_file_id": "libfile_8b236e18ad6481918ab2525ca1444063",
+    "increment_sha256": "1a7fb111fa05d31c0e1005749605ec8f181438b391cb4561b2964114eccd4488",
+    "increment_manifest_sha256": "2012be2a04ce35c10901474e1a67e2f21a08fd72e345c4e5a31c782b7bbd3480",
+    "increment_size_bytes": 178392,
+    "increment_manifest_size_bytes": 1989,
+    "increment_file_count": 91,
+    "increment_and_manifest_byte_readback_confirmed": true,
+    "classification": "INCREMENT_ONLY_NOT_FULL_REPOSITORY_OR_HISTORY_BACKUP",
+    "status": "INCREMENT_MANIFEST_AND_FIXED_MASTER_V112_CONFIRMED"
+  },
+  "scope_note": "The increment freezes the A4C science/integration tree. This receipt and its final metadata successor are intentionally post-package and are recovered from the remote branch or fixed master.",
+  "latest_completed_step": "A4C same-bearer trace block/swap/rescue simulation, endpoint-only twin rejection by action replay, formal/review audit, GitHub fast-forward checkpoints and readback, recovery increment plus manifest byte readback, and fixed-master v112 readback.",
+  "unfinished": [
+    "No physical robot or human trace-specific intervention has been installed.",
+    "No complete physical K-signature binding has been established.",
+    "No independent identity or polarity calibration for H_way has been established.",
+    "Open supervision items and the full historical semantic audit remain unresolved."
+  ],
+  "failures": "FAILURES.md",
+  "resume": "Read fixed master v112 or a verified successor; verify the branch is 428e499 or a fast-forward successor; verify increment and manifest hashes; read REVIEW_SUPERVISION and the A4C ledgers; rerun run_trace_swap_study.py run; then attempt only one physical-robot trace block/swap/rescue installation and retain the H-level stop."
+}
