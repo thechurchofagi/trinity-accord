@@ -1,0 +1,12 @@
+{
+  "schema": "uct-a3r-claim-ledger/1",
+  "research_id": "A3R20261010",
+  "claims": [
+    {"id":"A3R-C1","type":"DEFINITIONAL_OPERATIONAL_CONTRACT","status":"EXACT_DEFINITIONAL_CONTRACT_PHYSICAL_APPLICATION_OPEN","domain":"one fixed-rho selector episode","premises":["LiveJoin","LocalRead","Mediate","same bearer/target/clock/window/signature","intervention specificity","validated readout","selective cut","faithful replay","declared no-bypass scope"],"counterexample":"side-recorder liveness without resolver read, or winner-only mandatory resolver"},
+    {"id":"A3R-C2","type":"EXACT_FINITE_NONIDENTIFICATION","status":"PROVED_IN_DECLARED_FINITE_FAMILY_NO_INSTALLATION","domain":"256 Boolean configurations and 512 intervention episodes","premises":["declared finite model","fixed live winner and route exclusion"],"proof":"check_participation_contract.py and EXACT_RESULTS.json","counterexample":"joint-consumption and side-recorder/bypass observational twins"},
+    {"id":"A3R-C3","type":"EXHAUSTIVE_FINITE_IMPLICATION","status":"PROVED_FINITE_SOUNDNESS_SUFFICIENT_NOT_UNIVERSALLY_NECESSARY","domain":"declared finite family","premises":["independently grounded readout validation","independently grounded replay fidelity"],"proof":"2 certificate-positive, 0 false-positive configurations","counterexample":"real-world premise assertion without independent grounding"},
+    {"id":"A3R-C4","type":"FAILURE_SEMANTICS","status":"EXACT_IN_MODEL_AND_NORMATIVE_SCOPE_RULE","domain":"applications of the bounded certificate","premises":["certificate is sufficient rather than universal"],"proof":"6 target-true configurations lack the full certificate","counterexample":"actual target with unvalidated readout"},
+    {"id":"A3R-C5","type":"CONDITIONAL_UCT_APPLICATION","status":"OPEN_CONDITIONAL_APPLICATION","domain":"one same-instance UCT application","premises":["C1","corrected R172","R173","A3O frozen rho","A3Q actual event ancestry","A3R SPC","actual installation","complete signature transport","independent H bridge"],"counterexample":"wrong trial, copied token, side log, hidden bypass, nonfaithful replay, changed rho or report-demand endpoint"}
+  ]
+}
+

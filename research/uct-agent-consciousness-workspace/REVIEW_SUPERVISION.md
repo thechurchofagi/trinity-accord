@@ -1,3 +1,11 @@
+# A3R20261010 researcher response — same-instance selector participation contract
+
+The latest ledger and every carried OPEN/application-open item were read before selection, after result formation and before save. Evidence: [response](records/A3R20261010_Selector_Participation_Contract/REVIEW_RESPONSE.md), [note](records/A3R20261010_Selector_Participation_Contract/RESEARCH_NOTE.md), [exact results](records/A3R20261010_Selector_Participation_Contract/EXACT_RESULTS.json), [gaps](records/A3R20261010_Selector_Participation_Contract/GAP_LEDGER.md), and [map audit](records/A3R20261010_Selector_Participation_Contract/MAP_AUDIT.md).
+
+`QC-20261008-10`, `IA-QC11`, `QC-20261008-12/13`, `SCU-OPEN-R191-NORMALIZATION`, and `SCU-AUDIT-DEPTH` all retain their previous OPEN/application-open/incomplete status. A3R concretely answers the evidence/actuality concern by requiring `LiveJoin AND LocalRead AND Mediate` and by constructing an exact side-recorder/bypass observational twin. No physical instance, validated resolver port, signed `H` endpoint or full-depth semantic audit is claimed. The 0/0/0 application remains disabled; C1/U1 and the completed map are unchanged. This is a researcher response, not self-closure.
+
+---
+
 # A3Q20261010 researcher response — selector ancestry versus dominance
 
 The latest ledger and every carried OPEN/application-open item were read before selection and rechecked before save. Evidence: [response](records/A3Q20261010_Selector_Ancestry_Dominance/REVIEW_RESPONSE.md), [note](records/A3Q20261010_Selector_Ancestry_Dominance/RESEARCH_NOTE.md), [exact results](records/A3Q20261010_Selector_Ancestry_Dominance/EXACT_RESULTS.json), [gaps](records/A3Q20261010_Selector_Ancestry_Dominance/GAP_LEDGER.md), and [map audit](records/A3Q20261010_Selector_Ancestry_Dominance/MAP_AUDIT.md).

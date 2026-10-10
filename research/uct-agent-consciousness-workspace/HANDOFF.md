@@ -1,4 +1,12 @@
-# 当前科学接续 A3Q20261010；完成图仍为 UCT-MAP-v1.1.2
+# 当前科学接续 A3R20261010；完成图仍为 UCT-MAP-v1.1.2
+
+[中文交接](records/A3R20261010_Selector_Participation_Contract/HANDOFF_ZH.md) · [研究稿](records/A3R20261010_Selector_Participation_Contract/RESEARCH_NOTE.md) · [精确结果](records/A3R20261010_Selector_Participation_Contract/EXACT_RESULTS.json) · [地图审计](records/A3R20261010_Selector_Participation_Contract/MAP_AUDIT.md)。A3R给出`LiveJoin AND LocalRead AND Mediate`联合合同，并构造“真实分辨读入”与“旁路记录器+直达调度”在调度/公共日志上相同的精确双胞胎。256配置/512回合中完整证书0假阳性，但不冒称普遍必要。没有实际安装、端口验证或H识别，0新增节点/规则/上下文，全部审查OPEN保留。
+
+下一题只检查一个具体动作系统能否在保持活跃性、共同事件时序、赢家内容和冻结`rho`时验证局部分辨端口，并以选择性切断/忠实重放排除直达与补偿旁路。失败即停止对应`SPC/L_sel/H`推断。
+
+---
+
+# 前一科学接续 A3Q20261010；完成图仍为 UCT-MAP-v1.1.2
 
 [中文交接](records/A3Q20261010_Selector_Ancestry_Dominance/HANDOFF_ZH.md) · [研究稿](records/A3Q20261010_Selector_Ancestry_Dominance/RESEARCH_NOTE.md) · [精确结果](records/A3Q20261010_Selector_Ancestry_Dominance/EXACT_RESULTS.json) · [地图审计](records/A3Q20261010_Selector_Ancestry_Dominance/MAP_AUDIT.md)。A3Q纠正A3O遗留的实际性歧义：本回合的双政策分辨消费是实际事件祖先关系；分辨节点是否位于所有允许调度路径上是架构支配关系。二者在有限模型中双向不蕴含，图形、日志、RT与报告均不能替代实际发生。无物理安装或H识别，0新增节点/规则/上下文，全部审查OPEN保留。
 

@@ -1,0 +1,17 @@
+{
+  "schema": "uct-a3r-disabled-application/1",
+  "id": "A3R20261010",
+  "enabled": false,
+  "enabled_as_established_premise": false,
+  "foundation_effect": "NONE",
+  "nodes": [],
+  "rules": [],
+  "context_links": [],
+  "applications": [{
+    "id": "A3R:SAME_INSTANCE_SELECTOR_PARTICIPATION_APPLICATION",
+    "completed_node_refs": ["R172:ONLINE_ACTION_USE_RELATION", "R173:RETENTIVE_BINDING_RELATION", "R175:R173_EFFECTIVE_TARGET_SEPARATION", "R177:SOURCE_FEATURE_SEPARATION"],
+    "actual_premises_discharged": false,
+    "status": "DISABLED_OPEN_APPLICATION"
+  }]
+}
+

@@ -1,4 +1,12 @@
-# 最新科学接续 A3Q20261010：实际选择使用是事件祖先关系，不是架构支配
+# 最新科学接续 A3R20261010：同实例活跃输家参与需要三层联合证书
+
+[研究稿](records/A3R20261010_Selector_Participation_Contract/RESEARCH_NOTE.md) · [精确结果](records/A3R20261010_Selector_Participation_Contract/EXACT_RESULTS.json) · [地图审计](records/A3R20261010_Selector_Participation_Contract/MAP_AUDIT.md) · [中文交接](records/A3R20261010_Selector_Participation_Contract/HANDOFF_ZH.md)。A3R把A3Q的实际选择使用进一步分解为`LiveJoin AND LocalRead AND Mediate`：同回合政策保活、经独立验证的分辨端口对输家内容敏感、以及无旁路切断/忠实重放所示的调度中介必须同时成立。256个配置/512个干预回合中，未验证调度+日志有一个混合目标与非目标的等价类（72个配置）；完整证书2个通过、0假阳性，但6个目标真配置因验证/重放欠缺不能获证。故证书失败只得记未决/协议无效，不能推断无体验、无我感或无选择。
+
+没有实际选择器安装、分辨端口验证、物理切断/重放、`J_H`可靠性或`H`识别；0/0/0停用应用，完成图、C1/U1与全部OPEN不变。下一具体问题：在一个具体动作系统中给出保持输家活跃性、共同事件钟与冻结`rho`的局部端口扰动，并排除直达/补偿旁路；做不到即停止相应`SPC/L_sel/H`推断。覆盖仍为UCT-PUB-v1.0.31，无新论文、DOI或发布。
+
+---
+
+# 前一科学接续 A3Q20261010：实际选择使用是事件祖先关系，不是架构支配
 
 [研究稿](records/A3Q20261010_Selector_Ancestry_Dominance/RESEARCH_NOTE.md) · [精确结果](records/A3Q20261010_Selector_Ancestry_Dominance/EXACT_RESULTS.json) · [地图审计](records/A3Q20261010_Selector_Ancestry_Dominance/MAP_AUDIT.md) · [中文交接](records/A3Q20261010_Selector_Ancestry_Dominance/HANDOFF_ZH.md)。A3Q把A3O的“实际分辨被消费”收窄为同一回合中两个实际活跃、互斥政策进入同一分辨事件，且该事件因果进入实际调度；已安装图中分辨节点支配调度是另一种全路径命题。19,683个有限配置给出双向非蕴含：70个实际使用但不支配，1,413个支配但无双政策实际使用。没有实际选择器安装、`J_H`可靠性或`H`识别；0/0/0停用应用，完成图、C1/U1与全部OPEN不变。
 

@@ -1,4 +1,10 @@
-# 当前科学接续 A3Q20261010
+# 当前科学接续 A3R20261010
+
+先读[A3R交接](records/A3R20261010_Selector_Participation_Contract/HANDOFF_ZH.md)、[研究稿](records/A3R20261010_Selector_Participation_Contract/RESEARCH_NOTE.md)和[地图审计](records/A3R20261010_Selector_Participation_Contract/MAP_AUDIT.md)。`SPC`要求`LiveJoin AND LocalRead AND Mediate`；调度、时延、日志或单一干预不能替代联合前提。0/0/0停用，完成图及全部OPEN不变。下一题仅做一个具体动作系统的局部分辨端口验证与保持`rho`的切断/重放可实现性。
+
+---
+
+# 前一科学接续 A3Q20261010
 
 先读[A3Q交接](records/A3Q20261010_Selector_Ancestry_Dominance/HANDOFF_ZH.md)、[研究稿](records/A3Q20261010_Selector_Ancestry_Dominance/RESEARCH_NOTE.md)和[地图审计](records/A3Q20261010_Selector_Ancestry_Dominance/MAP_AUDIT.md)。实际选择使用必须绑定同一回合的双政策—分辨—调度因果祖先；可能执行图的支配、日志、RT或报告均不代替实际发生。0/0/0停用，完成图及全部OPEN不变。
 

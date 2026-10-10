@@ -1,0 +1,153 @@
+{
+  "canonical_observational_twins": {
+    "actual_joint_consumption": {
+      "certificate": true,
+      "configuration": {
+        "direct_bypass": 0,
+        "live_loser": 1,
+        "log_side_copy": 0,
+        "readout_validated": 1,
+        "replay_faithful": 1,
+        "resolution_mediates": 1,
+        "resolver_reads_loser": 1,
+        "same_event_clock": 1
+      },
+      "episodes": [
+        {
+          "dispatch": 1,
+          "dispatch_after_faithful_replay": 1,
+          "dispatch_after_resolution_cut": 0,
+          "public_log": [
+            1,
+            0
+          ],
+          "validated_resolver_port": [
+            1,
+            0
+          ]
+        },
+        {
+          "dispatch": 1,
+          "dispatch_after_faithful_replay": 1,
+          "dispatch_after_resolution_cut": 0,
+          "public_log": [
+            1,
+            1
+          ],
+          "validated_resolver_port": [
+            1,
+            1
+          ]
+        }
+      ],
+      "target": true,
+      "weak_signature": [
+        1,
+        [
+          1,
+          0
+        ],
+        1,
+        [
+          1,
+          1
+        ]
+      ]
+    },
+    "side_recorder_plus_bypass": {
+      "certificate": false,
+      "configuration": {
+        "direct_bypass": 1,
+        "live_loser": 1,
+        "log_side_copy": 1,
+        "readout_validated": 0,
+        "replay_faithful": 0,
+        "resolution_mediates": 0,
+        "resolver_reads_loser": 0,
+        "same_event_clock": 1
+      },
+      "episodes": [
+        {
+          "dispatch": 1,
+          "dispatch_after_faithful_replay": 1,
+          "dispatch_after_resolution_cut": 1,
+          "public_log": [
+            1,
+            0
+          ],
+          "validated_resolver_port": [
+            1,
+            0
+          ]
+        },
+        {
+          "dispatch": 1,
+          "dispatch_after_faithful_replay": 1,
+          "dispatch_after_resolution_cut": 1,
+          "public_log": [
+            1,
+            1
+          ],
+          "validated_resolver_port": [
+            1,
+            0
+          ]
+        }
+      ],
+      "target": false,
+      "weak_signature": [
+        1,
+        [
+          1,
+          0
+        ],
+        1,
+        [
+          1,
+          1
+        ]
+      ]
+    }
+  },
+  "counts": {
+    "certificate_false_positives": 0,
+    "certificate_true": 2,
+    "configurations_in_mixed_weak_classes": 72,
+    "target_true": 8,
+    "target_without_full_certificate": 6,
+    "weak_classes_mixing_target_and_nontarget": 1,
+    "weak_observation_classes": 4
+  },
+  "interpretive_limits": [
+    "Finite-model implication is not physical installation.",
+    "The certificate is sufficient in this declared family, not necessary for every selector architecture.",
+    "A failed or invalid certificate does not imply no experience, mineness, intelligence, or policy use by another mechanism."
+  ],
+  "model_scope": {
+    "boolean_factors": [
+      "live_loser",
+      "same_event_clock",
+      "resolver_reads_loser",
+      "resolution_mediates",
+      "direct_bypass",
+      "log_side_copy",
+      "readout_validated",
+      "replay_faithful"
+    ],
+    "configurations": 256,
+    "episodes_evaluated": 512,
+    "fixed": [
+      "one live winner token",
+      "winner and loser routes mutually exclusive under frozen rho",
+      "one declared resolver window"
+    ],
+    "losing_token_interventions_per_configuration": 2
+  },
+  "research_id": "A3R20261010",
+  "schema": "uct-a3r-exact-results/1",
+  "theorems_checked": {
+    "A3R_T1_dispatch_log_nonidentification": true,
+    "A3R_T2_certificate_sound_in_declared_model": true,
+    "A3R_T3_certificate_not_necessary_without_validation_premises": true
+  }
+}

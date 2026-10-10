@@ -1,4 +1,17 @@
-# 最新科学接续 A3Q20261010；完成图仍为 UCT-MAP-v1.1.2
+# 最新科学接续 A3R20261010；完成图仍为 UCT-MAP-v1.1.2
+
+- [中文交接](records/A3R20261010_Selector_Participation_Contract/HANDOFF_ZH.md)
+- [英文研究稿](records/A3R20261010_Selector_Participation_Contract/RESEARCH_NOTE.md)
+- [声明台账](records/A3R20261010_Selector_Participation_Contract/CLAIM_LEDGER.json)
+- [精确结果](records/A3R20261010_Selector_Participation_Contract/EXACT_RESULTS.json)
+- [全图审计](records/A3R20261010_Selector_Participation_Contract/MAP_AUDIT.md)
+- [审查回应](records/A3R20261010_Selector_Participation_Contract/REVIEW_RESPONSE.md)
+
+净增量：把A3Q的实际双政策分辨使用操作化为同回合`LiveJoin AND LocalRead AND Mediate`；精确旁路记录器双胞胎证明调度和未验证日志不识别该关系。完整证书在声明有限族中0假阳性，但不充当普遍必要定义。0/0/0停用，完成图、发表计数、C1/U1与所有OPEN不变。
+
+---
+
+# 前一科学接续 A3Q20261010；完成图仍为 UCT-MAP-v1.1.2
 
 - [中文交接](records/A3Q20261010_Selector_Ancestry_Dominance/HANDOFF_ZH.md)
 - [英文研究稿](records/A3Q20261010_Selector_Ancestry_Dominance/RESEARCH_NOTE.md)

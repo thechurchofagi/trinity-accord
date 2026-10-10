@@ -1,0 +1,14 @@
+{
+  "schema": "uct-publication-coverage-update/1",
+  "research_id": "A3R20261010",
+  "coverage_version": "UCT-PUB-v1.0.31",
+  "base_census_version": "UCT-PUB-v1.0.0",
+  "completed_map": "UCT-MAP-v1.1.2",
+  "decision": "HOLD_STANDALONE_USE_AS_A3Q_APPLICATION_CONTRACT",
+  "formal_publication_counts_changed": false,
+  "new_doi": false,
+  "net_increment": ["same-instance LiveJoin/LocalRead/Mediate contract", "side-recorder plus bypass observational twins", "finite certificate soundness and non-necessity boundary", "typed invalidity semantics"],
+  "inherited": ["structural interventions", "mediation and bypass control", "finite Boolean enumeration", "A3Q actual-event ancestry", "A3O fixed route grain", "R172/R173/R177", "C1 conditional transport"],
+  "open_before_standalone_use": ["actual selector installation", "live-token and local-port validation", "selective cut and faithful replay", "bypass/compensation bounds", "signed J_H reliability", "phenomenal interpretation bridge"],
+  "priority_status": "PROJECT_LEVEL_CONTRACT_INCREMENT_ONLY_WORLDWIDE_PRIORITY_UNVERIFIED"
+}
