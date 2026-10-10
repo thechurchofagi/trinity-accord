@@ -1,0 +1,38 @@
+{
+  "schema": "a4e-claim-ledger/1.0",
+  "claims": [
+    {
+      "id": "A4E-N1",
+      "type": "NEGATIVE_RESULT_EXACT_FINITE",
+      "statement": "For q equal to verified pre-state, no write, target write and hidden write are level-observationally identical although current event/source facts differ.",
+      "domain": "One binary hold-or-write trial with sources none/target/hidden.",
+      "premises": ["No-write holds pre-state", "Any write sets the level to q", "Observation contains only pre-state, challenge and final level"],
+      "proof": "Twelve-history exhaustive enumeration; two same-value level classes have size three.",
+      "counterexamples": ["already-positioned abacus bead", "latched register", "held limb posture"],
+      "status": "ESTABLISHED_IN_DECLARED_FINITE_MODEL_DISABLED_APPLICATION",
+      "thought_experiment_role": "Fix displayed value while varying present event and source."
+    },
+    {
+      "id": "A4E-N2",
+      "type": "NEGATIVE_RESULT_EXACT_FINITE",
+      "statement": "For q unequal to pre-state, a level change establishes some write in the declared model but does not distinguish target from hidden writer.",
+      "domain": "Same finite model.",
+      "premises": ["Verified pre-state", "Hold-or-write transition law", "Level-only observation"],
+      "proof": "Two changed-value observation classes each contain target and hidden histories.",
+      "counterexamples": ["parallel bus master writing the same value"],
+      "status": "ESTABLISHED_IN_DECLARED_FINITE_MODEL_DISABLED_APPLICATION",
+      "thought_experiment_role": "Shows A4E event necessity and A4D writer completeness are separate conjuncts."
+    },
+    {
+      "id": "A4E-C1",
+      "type": "CONDITIONAL_DEVICE_RELATIVE_RESULT",
+      "statement": "Verified anti-current challenge plus baseline change, target-cut hold and same-interface rescue change supports a current target-route contribution when every A4D writer/completeness and locality premise is jointly satisfied.",
+      "domain": "One bounded device, declared binary transition law and one trial family.",
+      "premises": ["verified pre-state", "q differs from pre-state", "complete writer inventory", "non-target isolation", "faithful target cut", "same-interface rescue", "post-arbitration/pre-plant probe", "valid chronology"],
+      "proof": "The challenge makes positive-arm changes require a write; cut removes the target contribution; rescue restores it through the declared interface. A4D premises exclude alternative timely writers.",
+      "counterexamples": ["autonomous drift", "hidden energy storage", "omitted writer", "upstream source tag"],
+      "status": "PROSPECTIVE_DISABLED_NOT_INSTALLED",
+      "thought_experiment_role": "Provides the bounded return condition to actual organization without entering H_way."
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "schema": "a4e-map-extension/1.0",
+  "status": "DISABLED_SCOPED_NEGATIVE_AND_PROTOCOL_APPLICATION",
+  "enabled_as_established_premises": false,
+  "formal_delta": {"nodes": 0, "rules": 0, "context_links": 0},
+  "claims": ["A4E-N1", "A4E-N2", "A4E-C1"],
+  "reason_not_promoted": "The exact claims are finite-model applications and the positive protocol is uninstalled; complete physical actuality and phenomenal semantics remain open."
+}

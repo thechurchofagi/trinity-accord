@@ -29,3 +29,5 @@ REV基础问题复核：[审查](records/REV20261010_Retained_Premise_Revision/A
 A4C同承载者痕迹换接复核：[审查](records/A4C20261011_Trace_Swap_Embodied_Loop/FORMAL_AUDIT.md) · [精确结果](records/A4C20261011_Trace_Swap_Embodied_Loop/EXACT_RESULTS.json)。历史根图584/284/178已读，统一图恢复为913/424/261并保持727个待定对象停用；相关C1/U1/R157/R172/R173节点、`all_of`方向、对象/时间/签名/实际性和证据层级复核。执行成功仅及声明的具身模拟，不能触发R173体验坐标路线；全历史深审仍AUDIT_INCOMPLETE，0正式图增量。
 
 A4D执行器写入器完备性复核：[审查](records/A4D20261011_Actuator_Writer_Completeness/FORMAL_AUDIT.md) · [逐ID结构记录](records/A4D20261011_Actuator_Writer_Completeness/PER_ID_AUDIT.json.gz) · [精确结果](records/A4D20261011_Actuator_Writer_Completeness/EXACT_RESULTS.json)。913/424/261逐项遍历，所有`all_of`按AND；保留81条本地AND注记缺失与22条非演绎语境端点格式差异为历史债。A4D证据不替代实际路线、完整K或现象语义，R173路线未触发；全历史深审仍AUDIT_INCOMPLETE，0正式图增量。
+
+A4E当前写入事件复核：[审查](records/A4E20261011_Actuation_Event_vs_Held_State/FORMAL_AUDIT.md) · [审计摘要](records/A4E20261011_Actuation_Event_vs_Held_State/AUDIT_SUMMARY.json) · [精确结果](records/A4E20261011_Actuation_Event_vs_Held_State/EXACT_RESULTS.json)。A4D全图验证器重跑并逐字节复现913/424/261结构结果；所有`all_of`按AND。最终电平、提交事件、选择写入者和实际路线使用保持分型，R173路线未触发；全历史深审仍AUDIT_INCOMPLETE，0正式图增量。

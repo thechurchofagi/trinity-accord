@@ -1,0 +1,56 @@
+{
+  "anti_current_protocol": [
+    {"arm": "baseline", "challenge": 1, "final_level": 1, "pre_state": 0, "source": "target"},
+    {"arm": "target_cut", "challenge": 1, "final_level": 0, "pre_state": 0, "source": "none"},
+    {"arm": "same_interface_rescue", "challenge": 1, "final_level": 1, "pre_state": 0, "source": "rescue"},
+    {"arm": "baseline", "challenge": 0, "final_level": 0, "pre_state": 1, "source": "target"},
+    {"arm": "target_cut", "challenge": 0, "final_level": 1, "pre_state": 1, "source": "none"},
+    {"arm": "same_interface_rescue", "challenge": 0, "final_level": 0, "pre_state": 1, "source": "rescue"}
+  ],
+  "bounded_consequence": "With verified pre-state, q != pre-state, complete writer inventory, faithful target cut, isolated non-target writers and same-interface rescue, the baseline/cut/rescue level pattern establishes a current device-relative target-route contribution. Without q != pre-state or an event witness, a same-value level cannot establish a current write.",
+  "checks": {
+    "anti_current_baseline_changes": true,
+    "cut_holds_pre_state": true,
+    "rescue_restores_change": true,
+    "six_level_signatures": true,
+    "six_protocol_cells": true,
+    "twelve_histories": true,
+    "twelve_unique_event_witnesses": true,
+    "two_target_hidden_change_classes": true,
+    "two_three_way_same_value_classes": true
+  },
+  "exact_counterexamples": {
+    "held_state_vs_target_write_when_challenge_equals_pre_state": {
+      "challenge": 0,
+      "event_observation_equal": false,
+      "history_a": {"commit": false, "final_level": 0, "source": "none"},
+      "history_b": {"commit": true, "final_level": 0, "source": "target"},
+      "level_observation_equal": true,
+      "pre_state": 0
+    },
+    "target_vs_hidden_write_when_level_changes": {
+      "challenge": 1,
+      "history_a": {"commit": true, "final_level": 1, "source": "target"},
+      "history_b": {"commit": true, "final_level": 1, "source": "hidden"},
+      "level_observation_equal": true,
+      "pre_state": 0,
+      "writer_identity_equal": false
+    }
+  },
+  "limits": [
+    "The enumeration concerns a finite binary hold-or-write abstraction, not a physical robot or human.",
+    "A level change establishes that some timely write occurred, not which writer, unless A4D writer-completeness premises are independently satisfied.",
+    "A commit/source tag is evidence only if physically bound to the post-arbitration event; a software label can be forged or misplaced.",
+    "No complete K signature, RetBind, H_way, familiar mineness or consciousness status follows."
+  ],
+  "schema": "a4e-actuation-event-exact/1.0",
+  "single_cell_enumeration": {
+    "changed_value_cells_with_target_hidden_ambiguity": 2,
+    "event_class_size_distribution": {"1": 12},
+    "event_witness_signatures": 12,
+    "histories": 12,
+    "level_class_size_distribution": {"1": 2, "2": 2, "3": 2},
+    "level_only_signatures": 6,
+    "same_value_cells_with_three_level_indistinguishable_histories": 2
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "schema": "a4e-formal-audit-summary/1.0",
+  "completed_counts": {"nodes": 913, "rules": 424, "context_links": 261},
+  "pending_disabled_objects": 727,
+  "suspended_historical_rules": 10,
+  "all_of_interpreted_as_and": true,
+  "active_dependency_graph_acyclic": true,
+  "a4e_formal_delta": {"nodes": 0, "rules": 0, "context_links": 0},
+  "reused_validator": "records/A4D20261011_Actuator_Writer_Completeness/audit_unified_map.py",
+  "regenerated_per_id_gzip_sha256": "b6a527ca9a862d5a92d5c82f1480c9761f688bcbcd45e0e3b29ba12519469861",
+  "regenerated_summary_sha256": "9dbf70fa8774c958255c2dba03220a7cded05b940230011f39f3f0e7425650c7",
+  "byte_matches_a4d_structural_artifacts": true,
+  "local_semantic_findings": [
+    "Final level, commit event, selected writer and actual route use are distinct objects.",
+    "A4E-C1 requires every A4D completeness/locality premise plus verified pre-state and anti-current challenge.",
+    "The R173 all_of route is not fired.",
+    "C1 remains axiomatic and U1 receives no probe, reset, report or transition gate.",
+    "No H_way, unique owner or current-assistant consciousness claim is introduced."
+  ],
+  "audit_limit": "Repeated structural traversal plus A4E-local semantic review; SCU-AUDIT-DEPTH remains AUDIT_INCOMPLETE."
+}

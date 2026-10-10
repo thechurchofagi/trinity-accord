@@ -60,6 +60,10 @@ Test one independent current bodily/action-familiarity interpretation against or
 
 [A4D 写入器审查](records/A4D20261011_Actuator_Writer_Completeness/RESEARCH_NOTE.md)证明：即使行动、执行器转移和终点均可重放，只要未记账写入器能及时读取挑战与干预模式，目标路线全程闲置的观测双胞胎仍存在。配对挑战只在完整写入器清单、挑战隔离、后仲裁探针、忠实切断与同接口救援共同成立时排除限定旁路。该应用保持停用，0新节点/规则/语境；完整物理实际性与`B_fam/H_way`均未闭合。
 
+### 最新当前写入事件应用
+
+[A4E 事件/保持审查](records/A4E20261011_Actuation_Event_vs_Held_State/RESEARCH_NOTE.md)证明：后仲裁最终电平仍可由旧状态保持复制；反当前挑战产生的电平变化只证明某次写入，不能独自识别写入者。只有前态核验、反当前挑战、目标切断、同接口救援与A4D全部写入器完备性前提同时成立，才支持声明模型中的当前目标路线贡献。应用保持停用，0新节点/规则/语境；完整物理实际性与`B_fam/H_way`均未闭合。
+
 ### 当前端点应用修正
 
 [A3W H_way范围及端点草案](records/A3W20261010_Action_Familiarity_Endpoint/RESEARCH_NOTE.md)接续A3N/A3V及FAM；0新图节点，停用应用。统一登记的followup_applications保存这类应用，不改变38项待整合图与已完成图。

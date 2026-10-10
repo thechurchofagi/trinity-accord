@@ -1,0 +1,12 @@
+{
+  "schema": "uct-publication-coverage-update/1",
+  "round": "A4E20261011",
+  "formal_publication_counts_unchanged": true,
+  "completed_map_changed": false,
+  "result_class": "DISABLED_SCOPED_NEGATIVE_AND_PROTOCOL_APPLICATION",
+  "net_claims": ["A4E-N1", "A4E-N2", "A4E-C1"],
+  "deductions": ["Elementary latch/state-transition reasoning", "A4D writer completeness", "R172 evidence/use distinction", "R173 actual retentive binding", "UCT C1/U1"],
+  "decision": "HOLD_STANDALONE; integrate as a probe-semantics correction to the A4D physical protocol",
+  "world_priority_verified": false,
+  "new_doi_or_timestamp_action": false
+}
