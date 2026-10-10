@@ -1,0 +1,72 @@
+{
+  "schema": "uct-a3x-dual-persistence-receipt-v1",
+  "round_id": "A3X20261010_Action_Familiarity_Content_Admissibility",
+  "status": "GITHUB_SCIENCE_NAVIGATION_AND_LIBRARY_V103_READBACK_CONFIRMED",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "initial_verified_head": "6628f74b10c93e1a97f64507b99af15f012f3005",
+    "first_recoverable_checkpoint": "d0552cddd041d74119b9659cdec9166e2b06406b",
+    "science_and_navigation_commit": "2ddf011533573c1ea3e9d8dcfe92ef177d4ebde0",
+    "update_method": "GitHub Git-data API create-blob/create-tree/create-commit and expected-SHA non-force ref update",
+    "fast_forward_and_expected_sha": true,
+    "remote_branch_and_key_files_verified": true,
+    "receipt_commit": null,
+    "receipt_commit_note": "This receipt is committed after creation; its containing commit is recorded by the subsequent final remote-readback record."
+  },
+  "workspace_persistence": {
+    "master_handoff": {
+      "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+      "file_name": "UCT_Hourly_Research_Master_Handoff.md",
+      "previous_version": 102,
+      "current_version": 103,
+      "size_bytes": 21299,
+      "sha256": "e0d5ee8e2dcdd043e4aef8b98f48b329ff08a940017b18d514a5d63ac528357b",
+      "same_identity_preserved": true,
+      "version_103_top_readback_verified": true
+    },
+    "increment": {
+      "library_file_id": "libfile_218b4cfc5da0819197c819d212dbb6d2",
+      "file_id": "file_00000000c88081fd9c6bf2812c88abe5",
+      "file_name": "UCT_A3X_Increment_6628f74_to_2ddf011.zip",
+      "version": 0,
+      "size_bytes": 146619,
+      "sha256": "897e0075bce65ff744ee5e00b3a3bc4ebf7cdabdf2f2ccaf5f7d698e76a5e9bf",
+      "file_count": 28,
+      "readback_sha256_verified": true,
+      "scope": "increment_only_not_full_backup"
+    },
+    "manifest": {
+      "library_file_id": "libfile_7b112296f7b481918760dcc5efb5309a",
+      "file_id": "file_00000000aa8481f7a44071c2f77e6282",
+      "file_name": "INCREMENT_MANIFEST.json",
+      "version": 0,
+      "size_bytes": 3837,
+      "sha256": "bb16ebfc2f4822b53dccad036f3ca2e06af17d92d86a6411e778e81143913cd3",
+      "readback_sha256_verified": true
+    }
+  },
+  "latest_completed_step": "A3X content-admissibility analysis, entry synchronization, formal-map structural audit, GitHub science/navigation save, master handoff v103 replacement, and increment/manifest readback are complete.",
+  "not_completed": [
+    "No participant S_H pilot.",
+    "No independent signed C_H calibration.",
+    "No same-episode actual O_H retained-route/use installation.",
+    "No full historical semantic proof audit.",
+    "No publication or external preservation action."
+  ],
+  "failures": [
+    {
+      "event": "ordinary git push",
+      "result": "HTTPS credential unavailable",
+      "recovery": "Used the configured GitHub connector with expected-SHA fast-forward updates; no force push, PR, CI, or deployment."
+    }
+  ],
+  "exact_restore": [
+    "Fetch branch uct-agent-consciousness-workspace and verify it contains commit 2ddf011533573c1ea3e9d8dcfe92ef177d4ebde0 or a descendant.",
+    "Read repository entry files in required order and all OPEN/ACKNOWLEDGED review items.",
+    "Read records/A3X20261010_Action_Familiarity_Content_Admissibility/HANDOFF_ZH.md, RESEARCH_NOTE.md, CLAIM_LEDGER.json, GAP_LEDGER.md, MAP_AUDIT.md, and RUN_RESULTS.json.",
+    "If repository access is unavailable, start from the A3X increment and its manifest only after obtaining base commit 6628f74b10c93e1a97f64507b99af15f012f3005; the ZIP is not a complete backup.",
+    "Read fixed master handoff library_file_id libfile_4175a81748fc819187fa8f5771f056fa at version 103 or later; reconcile by verified commit/version and never overwrite a newer concurrent version with an older copy.",
+    "Continue with the independent C_H question; never treat S_H PASS as calibration."
+  ]
+}
