@@ -1,27 +1,284 @@
 {
-  "schema": "uct-dual-save-receipt/1",
+  "schema": "uct-dual-save-receipt/2",
   "research_id": "DVC20261010",
-  "phase": "SCIENCE_PREPARED_AWAITING_GIT_AND_SPACE_READBACK",
-  "expected_research_parent": "afcafa88f457632cd29d4ca1c15cb840edc01781",
-  "concurrent_CBI_preserved": true,
-  "expected_main_handoff_version": 74,
-  "publication": {
-    "research_id": "SCU20261010",
-    "report": "SCU-PAPER",
-    "version": "1.0.1",
-    "status": "PUBLISHED_PREPRINT_PUBLIC_READBACK_AND_DOI_RESOLUTION_VERIFIED",
+  "phase": "GIT_SCIENCE_AND_SPACE_READBACK_VERIFIED",
+  "dual_save_verified": true,
+  "science_commit": "49bf3a53c96299290b86bbf127ef78b339eb9248",
+  "science_parent": "afcafa88f457632cd29d4ca1c15cb840edc01781",
+  "science_tree": "fe63a97adf58bb8f6ebf805ae0606aa5df034e54",
+  "github_branch": "uct-agent-consciousness-workspace",
+  "github_guard": "EXPECTED_SHA_FAST_FORWARD",
+  "github_readback": {
+    "schema": "uct-science-git-readback/1",
+    "verified": true,
+    "science_commit": "49bf3a53c96299290b86bbf127ef78b339eb9248",
+    "science_parent": "afcafa88f457632cd29d4ca1c15cb840edc01781",
+    "science_tree": "fe63a97adf58bb8f6ebf805ae0606aa5df034e54",
+    "branch": "uct-agent-consciousness-workspace",
+    "expected_sha_guard": true,
+    "fast_forward": true,
+    "changed_files": 334,
+    "all_changed_content_object_hashes_verified": true,
+    "individually_downloaded_and_byte_compared": [
+      {
+        "path": "research/uct-agent-consciousness-workspace/CURRENT_STATE.json",
+        "bytes": 9677,
+        "sha256": "28b536692ce3bf95a7302149a572ffbbe2d05eab16e0eb7c8a35724b45d296d3",
+        "git_blob_sha": "b362656e1d25524453a4f4eb209aa352778459ba",
+        "remote_content_byte_equal": true
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/PUBLICATION_COVERAGE.json",
+        "bytes": 5460,
+        "sha256": "4046436eb71720c43a9fa2f91c74404b2939cf54fec2f7c68cf2f264e527f2c3",
+        "git_blob_sha": "849e356db7b11aabb42382637f0c2970a0eafe71",
+        "remote_content_byte_equal": true
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/DVC20261010_Device_Consumer_Validation/EXACT_RESULTS.json",
+        "bytes": 1927,
+        "sha256": "a40ece2c4687636c6e6ca5958923020d063a767df1d9e27f776c30fdd693f37a",
+        "git_blob_sha": "fb4b9d63240c4443508726fea39a18dbdecfeb13",
+        "remote_content_byte_equal": true
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/DVC20261010_Device_Consumer_Validation/MAP_EXTENSION.json",
+        "bytes": 36774,
+        "sha256": "c35c38d5046dcf3aa30646e2fd27237f53a75505922be9ae1854c15e90e8db29",
+        "git_blob_sha": "a8ba3ca2a85279e363096513ba363cab3395ebb9",
+        "remote_content_byte_equal": true
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/DVC20261010_Device_Consumer_Validation/ARTIFACT_MANIFEST.json",
+        "bytes": 48968,
+        "sha256": "c3aea0a23de51b75a63500fab71229211e1fa9f1443847402423f36d56d91726",
+        "git_blob_sha": "743fb7580f72d9e9b6a87d19a98fc3903540afd7",
+        "remote_content_byte_equal": true
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/DVC20261010_Device_Consumer_Validation/FINAL_VALIDATION.json",
+        "bytes": 1430,
+        "sha256": "8e0d2de11ccd506020c8455f33bb04fa8375483caa586bb672909e13a93fe156",
+        "git_blob_sha": "c295dee02e8bd2b692fc76393cdd1279e0e9f608",
+        "remote_content_byte_equal": true
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/DVC20261010_Device_Consumer_Validation/MAP_AUDIT.md",
+        "bytes": 10332,
+        "sha256": "d9195cd9171db9b3d0c7bec65a0583c61ac18703cdcf87cdb30b38aa6c02255e",
+        "git_blob_sha": "d2e796dd75ead7c42ad93e4049a10e3e5da11f96",
+        "remote_content_byte_equal": true
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/DVC20261010_Device_Consumer_Validation/review/concurrent_eip/EIP_NORMALIZATION_QUALIFICATIONS.json",
+        "bytes": 10025,
+        "sha256": "04e7936ca25af2c643fcb4a782b85d25592da1cb2e9da01aaa8ea4c824b08bd3",
+        "git_blob_sha": "3134e76396b820e5f72b780787f3a7b35a516411",
+        "remote_content_byte_equal": true
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/SCUPUB20261010_DOI_Publication/FINAL_PUBLICATION_RECEIPT.json",
+        "bytes": 5278,
+        "sha256": "c47680350df514926d5d7aa180b0b3871a153d9611faf0156979c59dce570847",
+        "git_blob_sha": "e73c604d40c0881116681dcbaa036c6786680daa",
+        "remote_content_byte_equal": true
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/publication/UCT-PUB-v1.0.22/CLAIM_COVERAGE_DELTA.json",
+        "bytes": 47820,
+        "sha256": "3129227e45be9a9fdc14a3a87a1e551149014e7b1f25047bc56431824a2edaf4",
+        "git_blob_sha": "4c92691c588abd70feb020853ffcb484606057da",
+        "remote_content_byte_equal": true
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/publication/UCT-PUB-v1.0.22/COVERAGE_LEDGER.json",
+        "bytes": 22744,
+        "sha256": "5ce29d547a10900020f7f8656a5ece6a0686b54c4d0fad612f31e5c2ff37d07c",
+        "git_blob_sha": "d85d5250bc4893c6ca3bb54e0eb9109e3211b34d",
+        "remote_content_byte_equal": true
+      }
+    ],
+    "readback_scope": "Remote ref, parent and tree match the exact local tree. All changed content objects were hash-verified; the listed 11 current files were also fetched and byte-compared. This does not assert separate download of every changed file.",
+    "completed_map": "UCT-MAP-v1.1.2",
+    "publication_coverage": "UCT-PUB-v1.0.22",
     "doi": "10.5281/zenodo.23272690",
-    "doi_url": "https://doi.org/10.5281/zenodo.23272690",
-    "manuscript": "records/SCUPUB20261010_DOI_Publication/release/matched-behavior-and-source-use-v1.0.1.md",
-    "pdf": "records/SCUPUB20261010_DOI_Publication/release/matched-behavior-and-source-use-v1.0.1.pdf",
-    "receipt": "records/SCUPUB20261010_DOI_Publication/FINAL_PUBLICATION_RECEIPT.json",
-    "peer_reviewed": false,
-    "scientific_map_admission_changed": false,
-    "DVC_in_published_paper": false
+    "space_save_status": "PENDING",
+    "ots_or_arweave_executed": false
   },
-  "research_git_saved": false,
-  "space_saved": false,
-  "receipt_policy": "This initial phase is preserved in science commit and increment archive; a later receipt-only commit records actual dual readbacks. No receipt claims its own unknown commit hash.",
+  "space_readback": {
+    "schema": "uct-space-readback/1",
+    "verified": true,
+    "observed_at_utc": "2026-10-10T03:07:55.354685+00:00",
+    "artifacts": [
+      {
+        "name": "Matched_Behavior_and_Source_Use_v1.0.1.pdf",
+        "library_file_id": "libfile_a8a77bae5f508191ada31717d795ea8b",
+        "file_id": "file_000000008d9081f59bfd4a79198cc668",
+        "version": 0,
+        "bytes": 330909,
+        "sha256": "209677fb8eb84d20c400213f78808f0e8a7c7f71ec7c258fd9ca24ecdb170fcb",
+        "materialized_back": true,
+        "canonical_public_bytes": 279016,
+        "canonical_public_sha256": "7e6e8c181e98975b3ba3e665982a7dd206a2c8efcf543ce865b34d053290754b",
+        "exact_byte_equal_to_public_pdf": false,
+        "page_count": 15,
+        "all_pages_text_equal": true,
+        "all_pages_render_equal_at_72dpi": true,
+        "stored_pdf_contains_c2pa_marker": true,
+        "canonical_public_bytes_preserved_in_exact_increment_zip": true
+      },
+      {
+        "name": "UCT_DVC_SCU_DOI_Increment_20261010.zip",
+        "library_file_id": "libfile_454432235aec8191b6b21322c1439fcd",
+        "file_id": "file_0000000021dc81fba0c042ec2c2ec776",
+        "version": 0,
+        "bytes": 4216849,
+        "sha256": "1511940a587d69b1ad9cfc84cc67dbcd33403bc0529421d04c4c8efad59c7066",
+        "materialized_back": true,
+        "byte_equal_to_uploaded_file": true,
+        "zip_integrity": "PASS",
+        "zip_members": 361,
+        "inner_entries_hash_verified": 360
+      },
+      {
+        "name": "UCT_DVC_SCU_DOI_Handoff_ZH_20261010.md",
+        "library_file_id": "libfile_ba4f013bc97c81919441f80a45201af3",
+        "file_id": "file_000000004b5481fbafcf8300617f6f46",
+        "version": 0,
+        "bytes": 9135,
+        "sha256": "063993206e5b47ce76cc53b9efc7ab8391b81378bb7bba9faf8347a97d5ecf32",
+        "materialized_back": true,
+        "byte_equal_to_uploaded_file": true
+      },
+      {
+        "name": "UCT_Hourly_Research_Master_Handoff.md",
+        "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+        "file_id": "file_00000000b26481fbaebfb873ee5d1706",
+        "version": 75,
+        "bytes": 699881,
+        "sha256": "396623df3e345c09c6f2971b0d1e3727d5165f7b3551ebc3d4ed8eb52e1382cc",
+        "materialized_back": true,
+        "byte_equal_to_uploaded_file": true,
+        "previous_version": 74,
+        "previous_bytes": 690479,
+        "previous_sha256": "e1c11fe8b2ca8ec9b67fa86c5dcdbb02e17a1f454f167e3399afeb5aa4b859b7",
+        "previous_exact_suffix": true,
+        "new_prefix_bytes": 9402,
+        "expected_version_protection": true
+      }
+    ],
+    "pdf_page_comparison": [
+      {
+        "page": 1,
+        "text_equal": true,
+        "render_equal_at_72dpi": true,
+        "render_sha256": "7a34b43f35c0ef0b7ddd67e2c7063355d2cdcaa43dd51771b07fe46d69dea5ec"
+      },
+      {
+        "page": 2,
+        "text_equal": true,
+        "render_equal_at_72dpi": true,
+        "render_sha256": "8e0974a75b8f0bcfa9bf7dc175771f74b6fc55aa7ac82a1fd3107282bcf38e8b"
+      },
+      {
+        "page": 3,
+        "text_equal": true,
+        "render_equal_at_72dpi": true,
+        "render_sha256": "a680b00100e627b83398313108e2b0cd6e9c44c2fee7465068e847721c5f2a36"
+      },
+      {
+        "page": 4,
+        "text_equal": true,
+        "render_equal_at_72dpi": true,
+        "render_sha256": "6e132a4bed2f65547b8960343cfca5fb7fc4f3bc5cafe11431192fb4cf854e58"
+      },
+      {
+        "page": 5,
+        "text_equal": true,
+        "render_equal_at_72dpi": true,
+        "render_sha256": "b35cfcd43dc51c9c17689f2f717a8856415c35d53bd0cc76ee26e080b85eca93"
+      },
+      {
+        "page": 6,
+        "text_equal": true,
+        "render_equal_at_72dpi": true,
+        "render_sha256": "98b689f0d17b3bc4b1f645dd2c83991412e3323a11a606fbc30de8af888657d1"
+      },
+      {
+        "page": 7,
+        "text_equal": true,
+        "render_equal_at_72dpi": true,
+        "render_sha256": "4387565185d2cd0516533f878d966a2d6608f2e7c748beeb1b2d7ff33807475d"
+      },
+      {
+        "page": 8,
+        "text_equal": true,
+        "render_equal_at_72dpi": true,
+        "render_sha256": "37ec57d713efc1c9cda8cb359c44850e9e1073fe356cde2c603dc9610be0f34c"
+      },
+      {
+        "page": 9,
+        "text_equal": true,
+        "render_equal_at_72dpi": true,
+        "render_sha256": "dc4fb00f3fe36f4e6b3654bf69847109324a1e6e85c9e219999f461f2f3ba16b"
+      },
+      {
+        "page": 10,
+        "text_equal": true,
+        "render_equal_at_72dpi": true,
+        "render_sha256": "c88b0ab3dc6e1247c63e7b97132ff50aab3da99ce40963992e5b49ee6ae483fc"
+      },
+      {
+        "page": 11,
+        "text_equal": true,
+        "render_equal_at_72dpi": true,
+        "render_sha256": "a875705d3dc5f8ae50096daf529ec41c3b7ed8588ffc6521fba9e0a641f84b6b"
+      },
+      {
+        "page": 12,
+        "text_equal": true,
+        "render_equal_at_72dpi": true,
+        "render_sha256": "62480b70e5c4e9a4ebc5898cac4f6464bb298674f625e878949236764d6a7540"
+      },
+      {
+        "page": 13,
+        "text_equal": true,
+        "render_equal_at_72dpi": true,
+        "render_sha256": "6b5552997a9c20c3df25f642425bccf2274db295b6a0e26dbc66f5818c997922"
+      },
+      {
+        "page": 14,
+        "text_equal": true,
+        "render_equal_at_72dpi": true,
+        "render_sha256": "a3386338910612aea051bf600a20465ec9673734f1fa339f177c75b40fefdeab"
+      },
+      {
+        "page": 15,
+        "text_equal": true,
+        "render_equal_at_72dpi": true,
+        "render_sha256": "35e5ea58e7bc2273d5e06a8d312a2f565c19b4cc9100d9318bd1a44b473ca27f"
+      }
+    ],
+    "byte_exact_science_archive": true,
+    "pdf_variant_note": "The persisted display PDF contains added provenance/C2PA metadata. All 15 pages have identical extracted text and 72 dpi renders; the original canonical public PDF remains byte-exact in the verified increment and public DOI."
+  },
+  "main_handoff_version": 75,
+  "publication_doi": "10.5281/zenodo.23272690",
+  "publication_final_status_commit": "571d2b5c9564179edbf83a43dd6be1d801153766",
+  "current_map": "UCT-MAP-v1.1.2",
+  "publication_coverage": "UCT-PUB-v1.0.22",
+  "pending_disabled_count": 25,
+  "concurrent_EIP_preserved": true,
+  "EIP_normalization_open": [
+    "EIP-NQ1",
+    "EIP-NQ2",
+    "EIP-NQ3",
+    "EIP-NQ4"
+  ],
+  "actual_hardware_or_human_consumer_application_established": false,
+  "named_H_or_RetBind_validated": false,
+  "full_historical_semantic_reproof_complete": false,
   "ots_or_arweave_executed": false,
-  "concurrent_EIP_preserved": true
+  "receipt_self_commit_policy": "This receipt does not state its own future commit. The separate final closing receipt records the receipt-only Git commit and its readback. The initial phase in the science snapshot and ZIP is retained as history.",
+  "recovery": "Use the science commit and following receipt-only commit on the research branch. The verified increment is not a complete repository backup; its README names the required parent and reproducibility scope. Master handoff v75 preserves v74 verbatim."
 }
