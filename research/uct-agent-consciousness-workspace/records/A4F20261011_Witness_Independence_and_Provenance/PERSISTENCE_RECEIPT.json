@@ -1,0 +1,45 @@
+{
+  "schema": "uct-dual-persistence-receipt/1.0",
+  "round_id": "A4F20261011",
+  "baseline_remote_commit": "52158692e70d4d52048531133baf834569e9186a",
+  "github_checkpoints": {
+    "round_record": "ea5b0c4479ec0dc7d2f81f3f5031e33541db656e",
+    "science_result": "8fbd549c1f4193dce7b745abcf766f153be4a6db",
+    "science_and_navigation_integration": "cd4a7a2d3321eb18bf05a846a3f76ac66db22f30",
+    "final_receipt_successor": "RECORDED_BY_BRANCH_HEAD_AND_FIXED_MASTER_FINAL_CONFIRMATION",
+    "branch": "uct-agent-consciousness-workspace",
+    "expected_update_mode": "FAST_FORWARD_WITH_EXPECTED_SHA"
+  },
+  "workspace_master": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "filename": "UCT_Hourly_Research_Master_Handoff.md",
+    "verified_science_version": 118,
+    "verified_science_file_id": "file_00000000326c81f79555fb8a7eb6fed3",
+    "final_confirmation_version": 119,
+    "status": "VERSION_118_READ_BACK; VERSION_119_RESERVED_FOR_FINAL_BRANCH_HEAD_CONFIRMATION"
+  },
+  "workspace_increment": {
+    "scope": "INCREMENT_FROM_A4E_FINAL_REMOTE_TREE_TO_A4F_SCIENCE_AND_NAVIGATION_INTEGRATION_TREE",
+    "complete_repository_or_history": false,
+    "file_count": 23,
+    "archive_filename": "UCT_A4F_Increment_20261011_v1.zip",
+    "archive_size_bytes": 94200,
+    "archive_sha256": "4c223c0514958077a993c1534a1d1f9ea4a9613ad2e333644cfa76f4f0982b60",
+    "archive_library_id": "libfile_b3cc273bcc34819188bd5b6d7915797b",
+    "archive_file_id": "file_00000000442081f7895885836002f5cd",
+    "manifest_filename": "UCT_A4F_Increment_20261011_v1_MANIFEST.json",
+    "manifest_size_bytes": 5742,
+    "manifest_sha256": "36c18c3290c339b048da90f59b4b6a5bcb10f04e3f3cef9a1e4658fb3dc51bbc",
+    "manifest_library_id": "libfile_314310e65b9481919a8aef3e318b20c1",
+    "manifest_file_id": "file_0000000048d481f7ad0e9460b9c3c2c4",
+    "reverse_materialization_byte_compare": "PASS",
+    "reverse_materialization_sha256_compare": "PASS",
+    "excluded_successor_files": [
+      "records/A4F20261011_Witness_Independence_and_Provenance/PERSISTENCE_RECEIPT.json",
+      "records/A4F20261011_Witness_Independence_and_Provenance/RECOVERY_MANIFEST.json",
+      "final persistence-only edits made after the science integration tree"
+    ]
+  },
+  "self_reference_boundary": "A receipt cannot contain its own final commit SHA. The final fast-forward successor is therefore verified as the branch head and written to fixed-master version 119 after this file is committed.",
+  "result": "DUAL_PERSISTENCE_SCIENCE_COPY_VERIFIED; FINAL_METADATA_SUCCESSOR_PENDING_AT_RECEIPT_AUTHORING"
+}

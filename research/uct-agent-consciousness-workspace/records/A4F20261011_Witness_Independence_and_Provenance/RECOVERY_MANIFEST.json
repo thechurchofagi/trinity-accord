@@ -1,0 +1,27 @@
+{
+  "schema": "uct-recovery-manifest/1.0",
+  "round_id": "A4F20261011",
+  "authoritative_order": [
+    "Fetch branch uct-agent-consciousness-workspace and verify that its head is a descendant of cd4a7a2d3321eb18bf05a846a3f76ac66db22f30.",
+    "Read this receipt and HANDOFF_ZH.md from the branch-head tree.",
+    "Read fixed Library file libfile_4175a81748fc819187fa8f5771f056fa at its current version; version 119 records the exact final branch head.",
+    "If GitHub is unavailable, materialize archive libfile_b3cc273bcc34819188bd5b6d7915797b and manifest libfile_314310e65b9481919a8aef3e318b20c1, verify their SHA256 values, and apply the 23-file increment only to verified baseline 52158692e70d4d52048531133baf834569e9186a.",
+    "Recover persistence-only successor files from the verified final GitHub head or the fixed master; do not call the increment a complete repository, working set, or history backup.",
+    "Run records/A4F20261011_Witness_Independence_and_Provenance/run_witness_independence_audit.py and parse every JSON file before continuing research."
+  ],
+  "checkpoint_chain": [
+    "52158692e70d4d52048531133baf834569e9186a",
+    "ea5b0c4479ec0dc7d2f81f3f5031e33541db656e",
+    "8fbd549c1f4193dce7b745abcf766f153be4a6db",
+    "cd4a7a2d3321eb18bf05a846a3f76ac66db22f30",
+    "FINAL_RECEIPT_SUCCESSOR_RECORDED_EXTERNALLY"
+  ],
+  "last_completed_science_step": "A4F exact witness-set audit, bounded WIP contract, review response, formal audit and navigation integration",
+  "unfinished_research": "Enumerate actual post-arbitration command/energy paths and all common power/reset/clock/bus/DMA/logger/human-control ancestors for one accessible actuator; attempt a whole-vector alternative-writer replay.",
+  "known_failures": [
+    "Five of six witness schemes were nonidentifying in the admitted finite model.",
+    "An independent source-agnostic transition detector proved an event but not its source.",
+    "The sole separating scheme depends on unverified physical completeness and non-replay premises.",
+    "No actual installation, complete K, C1 admission, RetBind, B_fam, H_way, report, conceptual-I or unique-owner inference was established."
+  ]
+}

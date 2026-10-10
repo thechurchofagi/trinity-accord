@@ -25,5 +25,19 @@
     "completed_rules": 0,
     "completed_context_links": 0,
     "candidate_status": "DISABLED_APPLICATION"
+  },
+  "result_check": {
+    "status": "PASS_WITH_BOUNDED_NEGATIVE_RESULT",
+    "summary": "Five of six admitted witness architectures remained source-nonidentifying. Complete source-specific post-arbitration taps separated the target only under the full WIP contract; replay permission restored the observational twin."
+  },
+  "direction_check_before_save": {
+    "status": "PASS",
+    "reason": "The saved result strengthens the actual-organization evidence bridge without converting route provenance into experience, selfhood or report. C1/U1 remain unchanged and the formal delta is 0/0/0."
+  },
+  "completion": {
+    "science_integration_commit": "cd4a7a2d3321eb18bf05a846a3f76ac66db22f30",
+    "dual_persistence_receipt": "PERSISTENCE_RECEIPT.json",
+    "recovery_manifest": "RECOVERY_MANIFEST.json",
+    "status": "SCIENCE_AND_WORKSPACE_INCREMENT_VERIFIED; FINAL_RECEIPT_SUCCESSOR_PENDING_AT_RECORD_AUTHORING"
   }
 }

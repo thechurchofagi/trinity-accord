@@ -88,7 +88,7 @@
   ],
   "current_guide": "RESEARCH_MASTER_GUIDE.md v2.3",
   "complete_map_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
-  "review_ledger_sha256": "0513cb55cef94d82adcaea46af1974438a424aeba152f4c9d5655340f9271687",
+  "review_ledger_sha256": "5f270b70204b51d4b7b3b5eb8a2f98fd5f5ffd86dac821351afd579c6b6e47e1",
   "counts": {
     "nodes": 913,
     "active_conditional_rules": 424,
@@ -197,12 +197,16 @@
     "role": "Historical unresolved audit-debt record; old numbers are not newly measured current unread totals."
   },
   "latest_activity_persistence": {
-    "status": "A4E_GITHUB_SCIENCE_INTEGRATION_AND_WORKSPACE_MASTER_V116_INCREMENT_CONFIRMED; FINAL_METADATA_COMMIT_IS_BRANCH_HEAD_SUCCESSOR",
-    "receipt": "records/A4E20261011_Actuation_Event_vs_Held_State/PERSISTENCE_RECEIPT.json",
-    "github_science_integration_commit": "473025e7fe0c8dc1da9bc7ac26d25eb8bbdf0d52",
-    "library_master_version": 116,
-    "library_increment_id": "libfile_2a6868c370208191846388e22d3e0ca3",
-    "library_manifest_id": "libfile_763d0ceddedc81919558f861f5998809"
+    "status": "A4F_GITHUB_SCIENCE_INTEGRATION_AND_WORKSPACE_MASTER_V118_INCREMENT_CONFIRMED; FINAL_METADATA_COMMIT_IS_BRANCH_HEAD_SUCCESSOR_AND_MASTER_V119_CONFIRMATION",
+    "receipt": "records/A4F20261011_Witness_Independence_and_Provenance/PERSISTENCE_RECEIPT.json",
+    "recovery_manifest": "records/A4F20261011_Witness_Independence_and_Provenance/RECOVERY_MANIFEST.json",
+    "github_science_integration_commit": "cd4a7a2d3321eb18bf05a846a3f76ac66db22f30",
+    "library_master_version_at_science_save": 118,
+    "library_master_final_confirmation_version": 119,
+    "library_increment_id": "libfile_b3cc273bcc34819188bd5b6d7915797b",
+    "library_increment_sha256": "4c223c0514958077a993c1534a1d1f9ea4a9613ad2e333644cfa76f4f0982b60",
+    "library_manifest_id": "libfile_314310e65b9481919a8aef3e318b20c1",
+    "library_manifest_sha256": "36c18c3290c339b048da90f59b4b6a5bcb10f04e3f3cef9a1e4658fb3dc51bbc"
   },
   "concurrent_research_preserved": {
     "id": "EIP20261010",
@@ -224,7 +228,7 @@
     "map_replacement": false,
     "actual_application_established": false
   },
-  "latest_persistence_receipt": "records/A4E20261011_Actuation_Event_vs_Held_State/PERSISTENCE_RECEIPT.json",
+  "latest_persistence_receipt": "records/A4F20261011_Witness_Independence_and_Provenance/PERSISTENCE_RECEIPT.json",
   "previous_latest_research_before_CTD": {
     "id": "A3L20261010",
     "result_version": "A3L-RESULT-v0.1.0",
