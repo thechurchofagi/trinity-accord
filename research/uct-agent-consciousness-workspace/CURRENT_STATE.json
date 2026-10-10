@@ -197,11 +197,11 @@
     "role": "Historical unresolved audit-debt record; old numbers are not newly measured current unread totals."
   },
   "latest_activity_persistence": {
-    "status": "A4A_GITHUB_SCIENCE_RECEIPT_AND_LIBRARY_INCREMENT_CONFIRMED; FINAL_CONFIRMATION_COMMIT_SELF_RECORDS_RECEIPT_AND_FIXED_MASTER_V107_EXPECTED",
+    "status": "A4A_GITHUB_SCIENCE_RECEIPT_AND_LIBRARY_MASTER_V107_AND_INCREMENT_CONFIRMED; FINAL_CONFIRMATION_COMMIT_IS_BRANCH_HEAD_SUCCESSOR",
     "receipt": "records/A4A20261011_Formation_Intervention/PERSISTENCE_RECEIPT.json",
     "github_science_commit": "11f73b641610f490e5088039aaaae99c58f91182",
     "github_receipt_commit": "898df7ba104a71ff21232ef84b427aac84e335a9",
-    "library_master_expected_version": 107,
+    "library_master_version": 107,
     "library_increment_id": "libfile_35a02a48f4e48191a6e82b887ac8f1af",
     "library_manifest_id": "libfile_5744f60c958881918a2cf37cb4ad87c6"
   },

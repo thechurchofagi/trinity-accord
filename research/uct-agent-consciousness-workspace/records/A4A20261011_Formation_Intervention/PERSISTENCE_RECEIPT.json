@@ -15,7 +15,10 @@
     "master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
     "master_previous_version": 106,
     "master_expected_version": 107,
-    "master_readback_confirmed": false,
+    "master_version": 107,
+    "master_file_id": "file_00000000968481f7ac2133ee75884a14",
+    "master_sha256": "6ed10cd34c51ff977592a7dabfbd1fb19ea7fe977788981430280c0727817cba",
+    "master_readback_confirmed": true,
     "increment_library_file_id": "libfile_35a02a48f4e48191a6e82b887ac8f1af",
     "increment_manifest_library_file_id": "libfile_5744f60c958881918a2cf37cb4ad87c6",
     "increment_sha256": "d111a70e6c4ab750815a8d1f0d48d8c5862b23fd32a0e14ac7d25d458b53addb",
@@ -23,9 +26,9 @@
     "increment_size_bytes": 112008,
     "increment_file_count": 26,
     "classification": "INCREMENT_ONLY_NOT_FULL_REPOSITORY_BACKUP",
-    "status": "INCREMENT_AND_MANIFEST_CONFIRMED; FIXED_MASTER_V107_EXPECTED_AND_READBACK_PENDING"
+    "status": "INCREMENT_MANIFEST_AND_FIXED_MASTER_V107_CONFIRMED"
   },
-  "latest_completed_step": "A4A exact causal correction, formal/review audit, GitHub science readback, and Library increment plus manifest upload.",
+  "latest_completed_step": "A4A exact causal correction, formal/review audit, GitHub science and receipt readback, Library increment plus manifest upload, and fixed-master v107 readback.",
   "unfinished": [
     "No actual same-event RetBind trace-to-consumer route has been installed.",
     "No independent identity or polarity calibration for H_way has been established.",

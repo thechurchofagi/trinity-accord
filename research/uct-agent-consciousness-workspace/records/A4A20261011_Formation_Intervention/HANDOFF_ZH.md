@@ -39,4 +39,4 @@
 - GitHub 科学定稿：`11f73b641610f490e5088039aaaae99c58f91182`。
 - Library 增量包：`libfile_35a02a48f4e48191a6e82b887ac8f1af`，SHA256 `d111a70e6c4ab750815a8d1f0d48d8c5862b23fd32a0e14ac7d25d458b53addb`，112008 字节，26 个文件；它是从 `4e38e57f7e617ba6413e70125cbfdaef74675216` 到科学定稿的增量，不是完整仓库备份。
 - Library 清单：`libfile_5744f60c958881918a2cf37cb4ad87c6`，SHA256 `1cb6c9bebc1458b742790a7b9d06a70ed56b9e4f6d3a25604a46c79c532b74b2`。
-- 固定主交接目标：保持 `libfile_4175a81748fc819187fa8f5771f056fa` 同一身份，预期由 v106 更新为 v107；最终读回状态见持久化收据及该固定文件最新版本。
+- 固定主交接保持 `libfile_4175a81748fc819187fa8f5771f056fa` 同一身份，已由 v106 更新并读回 v107；文件 ID `file_00000000968481f7ac2133ee75884a14`，SHA256 `6ed10cd34c51ff977592a7dabfbd1fb19ea7fe977788981430280c0727817cba`。
