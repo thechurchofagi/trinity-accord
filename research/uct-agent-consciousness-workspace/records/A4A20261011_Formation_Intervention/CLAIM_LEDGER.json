@@ -1,0 +1,49 @@
+{
+  "schema": "UCT_A4A_CLAIMS/v1",
+  "claims": [
+    {
+      "id": "A4A-C1",
+      "type": "exact finite causal countermodel",
+      "statement": "A post-formation matching variable can induce a nonzero matched F-J contrast although the total causal effect of F on J is zero.",
+      "domain": "Finite binary SCMs in EXACT_RESULTS.json; not persons or phenomenal states.",
+      "all_premises": ["F independent of U before treatment", "M is a descendant/common effect", "J has no causal dependence on F", "the declared conditioning or target weighting is used"],
+      "proof_or_source": "Exact enumeration of OR and XOR models; established collider/selection theory credited in SOURCE_SCOPE.md.",
+      "counterexamples_and_limits": "Pre-treatment adjustment is not covered; natural equal XOR weights cancel. The claim is existential, not that every post-treatment match is biased.",
+      "status": "EXACT_FINITE_PASS",
+      "thought_experiment_role": "Shows how apparent formation sensitivity can be manufactured without a formation effect."
+    },
+    {
+      "id": "A4A-C2",
+      "type": "exact estimand-separation result",
+      "statement": "When the formation effect is fully mediated by a matched/clamped variable, the total effect can be nonzero while every controlled direct effect at fixed mediator value is zero; observational same-mediator overlap may also fail.",
+      "domain": "Binary SCM T=F, Z=T, J=Z.",
+      "all_premises": ["the equations define the admitted finite model", "total and controlled effects retain their intervention meanings"],
+      "proof_or_source": "Direct potential-outcome/intervention table in EXACT_RESULTS.json; direct/indirect-effect antecedents credited.",
+      "counterexamples_and_limits": "Does not say every ease or agency variable is a mediator; its causal role must be independently established.",
+      "status": "EXACT_FINITE_PASS",
+      "thought_experiment_role": "Blocks interpreting a zero matched residual as absence of formation-dependent organization."
+    },
+    {
+      "id": "A4A-C3",
+      "type": "prospective application contract",
+      "statement": "A residual formation claim must either target a randomized total effect with only pre-formation adjustment or satisfy every Route-C joint-intervention, positivity, route-preservation, same-event and endpoint premise.",
+      "domain": "Prospective bodily/action-familiarity judgment studies using the A3X/A3Z endpoint contract.",
+      "all_premises": ["fixed bearer/action/event/endpoint", "formation fidelity", "timestamped variable roles", "declared estimand", "positivity", "route preservation", "no direct endpoint setting"],
+      "proof_or_source": "Definition of the estimands plus A4A-C1/C2 failure witnesses and primary causal-inference sources.",
+      "counterexamples_and_limits": "No actual study presently discharges all Route-C premises; this is not a completed-graph rule.",
+      "status": "PROSPECTIVE_DISABLED_APPLICATION",
+      "thought_experiment_role": "Turns an underspecified five-way match into a falsifiable installability gate."
+    },
+    {
+      "id": "A4A-C4",
+      "type": "UCT interpretation boundary",
+      "statement": "A valid formation effect supports formation sensitivity of the installed judgment organization only; it does not identify H_way, validate C1, create a basal-experience gate, or select an exclusive owner.",
+      "domain": "The declared A4A application under inherited C1/R157/R173/A3Z distinctions.",
+      "all_premises": ["A4A-C3 valid application", "A3Z proxy residual retained", "C1 remains axiom", "B_fam remains independent"],
+      "proof_or_source": "A3Z proxy countermodel and R157/R173 semantic residual.",
+      "counterexamples_and_limits": "An independent phenomenal-identity bridge could add evidence but is not supplied here.",
+      "status": "MANUAL_SCOPE_BOUNDARY",
+      "thought_experiment_role": "Keeps organizational history inside experience without equating judgment, concept, report and feeling."
+    }
+  ]
+}

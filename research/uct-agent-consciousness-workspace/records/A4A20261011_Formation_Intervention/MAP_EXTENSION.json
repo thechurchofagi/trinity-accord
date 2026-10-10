@@ -1,0 +1,23 @@
+{
+  "schema": "uct-map-followup-application-v1",
+  "id": "A4A-FORMATION-v0.1.0",
+  "kind": "DISABLED_FOLLOWUP_APPLICATION",
+  "status": "SCOPED_APPLICATION_ONLY_NOT_LOADED_INTO_COMPLETED_GRAPH",
+  "added_completed_nodes": 0,
+  "added_completed_rules": 0,
+  "added_completed_context_links": 0,
+  "claims": ["A4A-C1", "A4A-C2", "A4A-C3", "A4A-C4"],
+  "relevant_existing_nodes": ["A:C1", "A:U1", "R157:COORDINATE_TRANSPORT", "R157:SEMANTIC_RESIDUAL", "R173:RETENTIVE_BINDING_RELATION", "R173:RETENTIVE_EXPERIENTIAL_COORDINATE", "R173:FAMILIAR_MINENESS_BOUNDARY"],
+  "prospective_total_effect_all_of_gate": {
+    "premises": ["fixed bearer/action/event/endpoint", "assigned formation", "formation fidelity", "pre-formation C0 only in primary adjustment", "same-event outcome", "selection audit"],
+    "connective": "AND",
+    "status": "APPLICATION_REQUIREMENT_NOT_FORMAL_GRAPH_RULE"
+  },
+  "prospective_controlled_direct_all_of_gate": {
+    "premises": ["all total-effect premises", "physical Z intervention", "joint positivity", "route preservation", "no direct endpoint setting", "declared direct-effect estimand"],
+    "connective": "AND",
+    "status": "NOT_JOINTLY_DISCHARGED"
+  },
+  "non_promotion_reason": "The finite causal models are exact but use established causal-inference mathematics; the actual five-way clamp, RetBind instance and H_way identity are unverified.",
+  "scientific_graph_counts_unchanged": {"nodes": 913, "rules": 424, "context_links": 261}
+}

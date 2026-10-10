@@ -1,0 +1,197 @@
+{
+  "all_checks_pass": true,
+  "interpretive_boundary": "The checks classify estimands and design failures. They do not establish an actual human intervention, a phenomenal measurand, C1, or H_way identity.",
+  "model_count": 4,
+  "models": [
+    {
+      "check": true,
+      "common_support_after_exact_matching": {
+        "F_values": [
+          0,
+          1
+        ],
+        "M": 1
+      },
+      "conditioned_means_in_common_support": {
+        "0": "1",
+        "1": "1/2"
+      },
+      "equations": [
+        "F independent fair bit",
+        "U independent fair bit",
+        "M = F OR U",
+        "J = U"
+      ],
+      "matched_contrast_F1_minus_F0": "-1/2",
+      "name": "post_treatment_collider_and_overlap_trimming",
+      "rows": [
+        {
+          "F": 0,
+          "J": 0,
+          "M": 0,
+          "U": 0,
+          "p": "1/4"
+        },
+        {
+          "F": 0,
+          "J": 1,
+          "M": 1,
+          "U": 1,
+          "p": "1/4"
+        },
+        {
+          "F": 1,
+          "J": 0,
+          "M": 1,
+          "U": 0,
+          "p": "1/4"
+        },
+        {
+          "F": 1,
+          "J": 1,
+          "M": 1,
+          "U": 1,
+          "p": "1/4"
+        }
+      ],
+      "total_do_means": {
+        "0": "1/2",
+        "1": "1/2"
+      },
+      "total_effect": "0"
+    },
+    {
+      "check": true,
+      "equations": [
+        "F independent fair bit",
+        "U independent fair bit",
+        "M = F XOR U",
+        "J = U"
+      ],
+      "example_target_weights": {
+        "0": "3/4",
+        "1": "1/4"
+      },
+      "name": "full_overlap_but_matcher_target_weight_dependence",
+      "positivity": "Both F values occur in both M strata.",
+      "rows": [
+        {
+          "F": 0,
+          "J": 0,
+          "M": 0,
+          "U": 0,
+          "p": "1/4"
+        },
+        {
+          "F": 0,
+          "J": 1,
+          "M": 1,
+          "U": 1,
+          "p": "1/4"
+        },
+        {
+          "F": 1,
+          "J": 0,
+          "M": 1,
+          "U": 0,
+          "p": "1/4"
+        },
+        {
+          "F": 1,
+          "J": 1,
+          "M": 0,
+          "U": 1,
+          "p": "1/4"
+        }
+      ],
+      "stratum_contrasts_F1_minus_F0": {
+        "0": "1",
+        "1": "-1"
+      },
+      "total_effect": "0",
+      "weighted_matched_contrast": "1/2"
+    },
+    {
+      "check": true,
+      "controlled_J_under_do_Z": {
+        "0": {
+          "0": 0,
+          "1": 0
+        },
+        "1": {
+          "0": 1,
+          "1": 1
+        }
+      },
+      "controlled_direct_effect_at_each_Z": {
+        "0": "0",
+        "1": "0"
+      },
+      "equations": [
+        "T = F",
+        "Z = T",
+        "J = Z"
+      ],
+      "name": "formation_path_overcontrol",
+      "observational_rows": [
+        {
+          "F": 0,
+          "J": 0,
+          "T": 0,
+          "Z": 0,
+          "p": "1/2"
+        },
+        {
+          "F": 1,
+          "J": 1,
+          "T": 1,
+          "Z": 1,
+          "p": "1/2"
+        }
+      ],
+      "same_Z_observational_overlap": false,
+      "total_effect": "1"
+    },
+    {
+      "check": true,
+      "equations": [
+        "C0 independent fair bit measured before F",
+        "F randomized fair bit",
+        "J = F"
+      ],
+      "name": "pre_treatment_stratification_preserves_randomized_contrast",
+      "rows": [
+        {
+          "C0": 0,
+          "F": 0,
+          "J": 0,
+          "p": "1/4"
+        },
+        {
+          "C0": 0,
+          "F": 1,
+          "J": 1,
+          "p": "1/4"
+        },
+        {
+          "C0": 1,
+          "F": 0,
+          "J": 0,
+          "p": "1/4"
+        },
+        {
+          "C0": 1,
+          "F": 1,
+          "J": 1,
+          "p": "1/4"
+        }
+      ],
+      "stratum_contrasts_F1_minus_F0": {
+        "0": "1",
+        "1": "1"
+      },
+      "total_effect": "1"
+    }
+  ],
+  "schema": "UCT_A4A_EXACT_MODELS/v1"
+}

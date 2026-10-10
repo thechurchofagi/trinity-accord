@@ -29,7 +29,7 @@
   "deliverable": "An English research note, intervention contract, exact finite checks, claim and gap ledgers, source scope, formal-map audit, Chinese handoff, and dual persistence receipts. The deliverable must include a clear stop rule and a next experiment-level question rather than a phenomenal-identity claim.",
   "direction_checks": {
     "after_selection": "PASS_WITH_OPEN_BRIDGE: the question directly tests whether formation/history is an actual organizational contributor to experience-internal familiarity without making formation a basal-experience gate.",
-    "after_result": "PENDING",
+    "after_result": "PASS_WITH_NEGATIVE_FEASIBILITY_RESULT: exact models show that post-formation matching can create a residual or remove the intended route. The result directly narrows evidence for experience-internal action familiarity rather than expanding generic causal machinery.",
     "before_save": "PENDING"
   }
 }
