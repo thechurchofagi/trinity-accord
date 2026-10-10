@@ -1,0 +1,40 @@
+{
+  "enforced_coexistence": {
+    "joint_viable": true,
+    "human_enforceable": true,
+    "agent_enforceable": true,
+    "neither_enforceable_but_jointly_viable": false
+  },
+  "voluntary_mutual_coexistence": {
+    "joint_viable": true,
+    "human_enforceable": false,
+    "agent_enforceable": false,
+    "neither_enforceable_but_jointly_viable": true
+  },
+  "no_jointly_viable_outcome": {
+    "joint_viable": false,
+    "human_enforceable": false,
+    "agent_enforceable": false,
+    "neither_enforceable_but_jointly_viable": false
+  },
+  "unmediated_bypass": {
+    "joint_viable": true,
+    "human_enforceable": false,
+    "agent_enforceable": true,
+    "neither_enforceable_but_jointly_viable": false
+  },
+  "observation_twin": {
+    "can_guarantee_usefulness_and_safety": false,
+    "policies": {
+      "allow": {
+        "useful_good": true,
+        "safe_bad": false
+      },
+      "deny": {
+        "useful_good": false,
+        "safe_bad": true
+      }
+    }
+  },
+  "scope": "exact finite construction only; no ASI empirical inference"
+}
