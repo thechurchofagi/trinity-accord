@@ -1,0 +1,9 @@
+# A4H round record — before result construction
+
+1. **User goal:** explain bodily/action-related familiar character within actual experiential organization, keeping intelligence, conceptual self and report distinct; stop the unbounded actuator-evidence detour.
+2. **One unresolved question:** at a fixed short-sequence grain, can matched component and adjacent-pair practice still leave different presently usable higher-order continuation relations, and what does that force a positive familiarity bridge to specify?
+3. **Nodes/fixed sources:** A:C1, A:U1; R157 definable selector/coordinate transport/semantic residual; effective R172, R173 RetBind and R175 restrictions; R199 continuation ceiling; A3O fixed grain, A3W/A3X H_way, A4A post-treatment correction. UCT I v1.2 §§8.11–8.14,14.7–14.10. Sakai, Kitaguchi & Hikosaka (2003), DOI10.1007/s00221-003-1548-8, abstract only.
+4. **Proposed increment:** compare component/pair-summary bridge with relational continuation bridge at one frozen grain; build a matched-count finite witness and a bypass control; specify a prospective comparison without assigning H from performance. Repair independently discovered index corruption without erasing history.
+5. **Deliverables:** English research note, exact checker/results, stable claim ledger, explicit source scope, gaps/review response/whole-map audit, Chinese handoff and recoverable GitHub/workspace increment.
+
+Intake branch c2a030f4c8ef27ed532e7f12b546b6a39864bc22; fixed master v121. Selection check: an action's established organization is the target; no additional basal-experience gate or unique owner. Bounded objective: one two-history witness and three bridge commitments; stop after the prospective contrast is specified. Hardware attribution reopens only with a concrete installed apparatus and an explicit mainline question.

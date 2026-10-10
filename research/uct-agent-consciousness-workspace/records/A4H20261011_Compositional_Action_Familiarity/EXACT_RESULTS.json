@@ -1,0 +1,415 @@
+{
+  "schema": "a4h-exact/1",
+  "histories": {
+    "A": "00110011",
+    "B": "00010111"
+  },
+  "count_convention": "cyclic words; wraparound events included",
+  "counts": {
+    "A": {
+      "1": {
+        "0": 4,
+        "1": 4
+      },
+      "2": {
+        "00": 2,
+        "01": 2,
+        "10": 2,
+        "11": 2
+      },
+      "3": {
+        "001": 2,
+        "011": 2,
+        "100": 2,
+        "110": 2
+      }
+    },
+    "B": {
+      "1": {
+        "0": 4,
+        "1": 4
+      },
+      "2": {
+        "00": 2,
+        "01": 2,
+        "10": 2,
+        "11": 2
+      },
+      "3": {
+        "000": 1,
+        "001": 1,
+        "010": 1,
+        "011": 1,
+        "100": 1,
+        "101": 1,
+        "110": 1,
+        "111": 1
+      }
+    }
+  },
+  "distinguishable_queries": [
+    "000",
+    "010",
+    "101",
+    "111"
+  ],
+  "rows": [
+    {
+      "query": "000",
+      "A": {
+        "query": "000",
+        "carrier_support": false,
+        "carrier_read": true,
+        "effective_support": false,
+        "stages": [
+          "read_context",
+          "generic_resolve",
+          "generic_dispatch",
+          "dispatch"
+        ],
+        "action": "0",
+        "success": true
+      },
+      "B": {
+        "query": "000",
+        "carrier_support": true,
+        "carrier_read": true,
+        "effective_support": true,
+        "stages": [
+          "read_context",
+          "read_retained_triple",
+          "dispatch"
+        ],
+        "action": "0",
+        "success": true
+      },
+      "B_bypassed": {
+        "query": "000",
+        "carrier_support": true,
+        "carrier_read": false,
+        "effective_support": false,
+        "stages": [
+          "read_context",
+          "generic_resolve",
+          "generic_dispatch",
+          "dispatch"
+        ],
+        "action": "0",
+        "success": true
+      }
+    },
+    {
+      "query": "001",
+      "A": {
+        "query": "001",
+        "carrier_support": true,
+        "carrier_read": true,
+        "effective_support": true,
+        "stages": [
+          "read_context",
+          "read_retained_triple",
+          "dispatch"
+        ],
+        "action": "1",
+        "success": true
+      },
+      "B": {
+        "query": "001",
+        "carrier_support": true,
+        "carrier_read": true,
+        "effective_support": true,
+        "stages": [
+          "read_context",
+          "read_retained_triple",
+          "dispatch"
+        ],
+        "action": "1",
+        "success": true
+      },
+      "B_bypassed": {
+        "query": "001",
+        "carrier_support": true,
+        "carrier_read": false,
+        "effective_support": false,
+        "stages": [
+          "read_context",
+          "generic_resolve",
+          "generic_dispatch",
+          "dispatch"
+        ],
+        "action": "1",
+        "success": true
+      }
+    },
+    {
+      "query": "010",
+      "A": {
+        "query": "010",
+        "carrier_support": false,
+        "carrier_read": true,
+        "effective_support": false,
+        "stages": [
+          "read_context",
+          "generic_resolve",
+          "generic_dispatch",
+          "dispatch"
+        ],
+        "action": "0",
+        "success": true
+      },
+      "B": {
+        "query": "010",
+        "carrier_support": true,
+        "carrier_read": true,
+        "effective_support": true,
+        "stages": [
+          "read_context",
+          "read_retained_triple",
+          "dispatch"
+        ],
+        "action": "0",
+        "success": true
+      },
+      "B_bypassed": {
+        "query": "010",
+        "carrier_support": true,
+        "carrier_read": false,
+        "effective_support": false,
+        "stages": [
+          "read_context",
+          "generic_resolve",
+          "generic_dispatch",
+          "dispatch"
+        ],
+        "action": "0",
+        "success": true
+      }
+    },
+    {
+      "query": "011",
+      "A": {
+        "query": "011",
+        "carrier_support": true,
+        "carrier_read": true,
+        "effective_support": true,
+        "stages": [
+          "read_context",
+          "read_retained_triple",
+          "dispatch"
+        ],
+        "action": "1",
+        "success": true
+      },
+      "B": {
+        "query": "011",
+        "carrier_support": true,
+        "carrier_read": true,
+        "effective_support": true,
+        "stages": [
+          "read_context",
+          "read_retained_triple",
+          "dispatch"
+        ],
+        "action": "1",
+        "success": true
+      },
+      "B_bypassed": {
+        "query": "011",
+        "carrier_support": true,
+        "carrier_read": false,
+        "effective_support": false,
+        "stages": [
+          "read_context",
+          "generic_resolve",
+          "generic_dispatch",
+          "dispatch"
+        ],
+        "action": "1",
+        "success": true
+      }
+    },
+    {
+      "query": "100",
+      "A": {
+        "query": "100",
+        "carrier_support": true,
+        "carrier_read": true,
+        "effective_support": true,
+        "stages": [
+          "read_context",
+          "read_retained_triple",
+          "dispatch"
+        ],
+        "action": "0",
+        "success": true
+      },
+      "B": {
+        "query": "100",
+        "carrier_support": true,
+        "carrier_read": true,
+        "effective_support": true,
+        "stages": [
+          "read_context",
+          "read_retained_triple",
+          "dispatch"
+        ],
+        "action": "0",
+        "success": true
+      },
+      "B_bypassed": {
+        "query": "100",
+        "carrier_support": true,
+        "carrier_read": false,
+        "effective_support": false,
+        "stages": [
+          "read_context",
+          "generic_resolve",
+          "generic_dispatch",
+          "dispatch"
+        ],
+        "action": "0",
+        "success": true
+      }
+    },
+    {
+      "query": "101",
+      "A": {
+        "query": "101",
+        "carrier_support": false,
+        "carrier_read": true,
+        "effective_support": false,
+        "stages": [
+          "read_context",
+          "generic_resolve",
+          "generic_dispatch",
+          "dispatch"
+        ],
+        "action": "1",
+        "success": true
+      },
+      "B": {
+        "query": "101",
+        "carrier_support": true,
+        "carrier_read": true,
+        "effective_support": true,
+        "stages": [
+          "read_context",
+          "read_retained_triple",
+          "dispatch"
+        ],
+        "action": "1",
+        "success": true
+      },
+      "B_bypassed": {
+        "query": "101",
+        "carrier_support": true,
+        "carrier_read": false,
+        "effective_support": false,
+        "stages": [
+          "read_context",
+          "generic_resolve",
+          "generic_dispatch",
+          "dispatch"
+        ],
+        "action": "1",
+        "success": true
+      }
+    },
+    {
+      "query": "110",
+      "A": {
+        "query": "110",
+        "carrier_support": true,
+        "carrier_read": true,
+        "effective_support": true,
+        "stages": [
+          "read_context",
+          "read_retained_triple",
+          "dispatch"
+        ],
+        "action": "0",
+        "success": true
+      },
+      "B": {
+        "query": "110",
+        "carrier_support": true,
+        "carrier_read": true,
+        "effective_support": true,
+        "stages": [
+          "read_context",
+          "read_retained_triple",
+          "dispatch"
+        ],
+        "action": "0",
+        "success": true
+      },
+      "B_bypassed": {
+        "query": "110",
+        "carrier_support": true,
+        "carrier_read": false,
+        "effective_support": false,
+        "stages": [
+          "read_context",
+          "generic_resolve",
+          "generic_dispatch",
+          "dispatch"
+        ],
+        "action": "0",
+        "success": true
+      }
+    },
+    {
+      "query": "111",
+      "A": {
+        "query": "111",
+        "carrier_support": false,
+        "carrier_read": true,
+        "effective_support": false,
+        "stages": [
+          "read_context",
+          "generic_resolve",
+          "generic_dispatch",
+          "dispatch"
+        ],
+        "action": "1",
+        "success": true
+      },
+      "B": {
+        "query": "111",
+        "carrier_support": true,
+        "carrier_read": true,
+        "effective_support": true,
+        "stages": [
+          "read_context",
+          "read_retained_triple",
+          "dispatch"
+        ],
+        "action": "1",
+        "success": true
+      },
+      "B_bypassed": {
+        "query": "111",
+        "carrier_support": true,
+        "carrier_read": false,
+        "effective_support": false,
+        "stages": [
+          "read_context",
+          "generic_resolve",
+          "generic_dispatch",
+          "dispatch"
+        ],
+        "action": "1",
+        "success": true
+      }
+    }
+  ],
+  "relabeling_checks": 16,
+  "query_checks": 8,
+  "semantic_assignments": 0,
+  "boundaries": [
+    "stipulated finite model, not a human or complete-K installation",
+    "support is binary occurrence support, not probability, familiarity or performance",
+    "bypass changes consumer use; same output does not imply same organization",
+    "no claims about physical timing or H_way"
+  ]
+}
