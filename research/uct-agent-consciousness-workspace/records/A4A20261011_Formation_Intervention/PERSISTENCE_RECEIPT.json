@@ -6,7 +6,7 @@
     "branch": "uct-agent-consciousness-workspace",
     "science_commit": "11f73b641610f490e5088039aaaae99c58f91182",
     "receipt_commit": "898df7ba104a71ff21232ef84b427aac84e335a9",
-    "validator_repair_commit": "5a4c71739cfb6a19bcf8858147302415d7a5fe3b",
+    "validator_repair_commit": "87388aec213791c060e045b1dd10b88e10ef43ba",
     "expected_parent": "f440ed310cb6c3d7766ce90b5a9111cb2f2f9e4c",
     "fast_forward_expected_sha_verified": true,
     "key_file_readback": "PERSISTENCE_RECEIPT.json at receipt commit; final confirmation commit is the branch-head successor",
@@ -14,29 +14,29 @@
   },
   "library": {
     "master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
-    "master_previous_version": 107,
-    "master_expected_version": 108,
-    "master_version": 108,
-    "master_file_id": "file_0000000006e481f7822f9c8770e70d0e",
-    "master_sha256": "ac8d98668d1f1444263040a77829b92c2cc7a970d4af2654b0afeb65807daf8b",
+    "master_previous_version": 108,
+    "master_expected_version": 109,
+    "master_version": 109,
+    "master_file_id": "file_00000000722481f590ff2f89583f1732",
+    "master_sha256": "4a5bd5a4c6eb49cec2ff85c1992a0a378990169215bfbc39fe6d8dd3244e2a7a",
     "master_readback_confirmed": true,
-    "increment_library_file_id": "libfile_9b87c5858e2c81918594e1ed8811ca77",
-    "increment_manifest_library_file_id": "libfile_8c536aa7e29c81918a3a3637709f733b",
-    "increment_sha256": "67556761068adb97ee97a76c3a936c82bc89ff449d203d6f8a5b885f714660a0",
-    "increment_manifest_sha256": "3e8d8e136d70a96183444cbe2f68a6216f2c31fab5e6445df47bf27b71e9cdc9",
-    "increment_size_bytes": 114564,
+    "increment_library_file_id": "libfile_7450fff042d08191abf52aa21051e25f",
+    "increment_manifest_library_file_id": "libfile_54e5580e74788191b870f90587b7778f",
+    "increment_sha256": "492fd9dde9a94b39d0ccb3275376d300b6e246e535e46b573cee2bf7d9956d59",
+    "increment_manifest_sha256": "5cb2b7975712001ddf38a309342b1a22e19783c9ac217fdb85fdaf805f797a52",
+    "increment_size_bytes": 115162,
     "increment_file_count": 27,
-    "superseded_increment_library_file_id": "libfile_35a02a48f4e48191a6e82b887ac8f1af",
-    "superseded_increment_manifest_library_file_id": "libfile_5744f60c958881918a2cf37cb4ad87c6",
+    "superseded_increment_library_file_ids": ["libfile_35a02a48f4e48191a6e82b887ac8f1af", "libfile_9b87c5858e2c81918594e1ed8811ca77"],
+    "superseded_increment_manifest_library_file_ids": ["libfile_5744f60c958881918a2cf37cb4ad87c6", "libfile_8c536aa7e29c81918a3a3637709f733b"],
     "classification": "INCREMENT_ONLY_NOT_FULL_REPOSITORY_BACKUP",
-    "status": "FINAL_INCREMENT_MANIFEST_AND_FIXED_MASTER_V108_CONFIRMED"
+    "status": "MODE_INDEPENDENT_FINAL_INCREMENT_MANIFEST_AND_FIXED_MASTER_V109_CONFIRMED"
   },
-  "latest_completed_step": "A4A exact causal correction, formal/review audit, GitHub science/receipt/validator-repair readback, final Library increment plus manifest upload, and fixed-master v108 readback.",
+  "latest_completed_step": "A4A exact causal correction, formal/review audit, GitHub science/receipt/mode-independent-validator readback, final Library increment plus manifest upload, and fixed-master v109 readback.",
   "unfinished": [
     "No actual same-event RetBind trace-to-consumer route has been installed.",
     "No independent identity or polarity calibration for H_way has been established.",
     "No route-preserving five-way physical clamp or joint positivity has been demonstrated.",
     "Open supervision items and full historical semantic audit remain unresolved."
   ],
-  "resume": "Read the fixed Library master v108; verify the live branch is validator-repair commit 5a4c717 or a fast-forward successor; verify final increment SHA256 67556761068adb97ee97a76c3a936c82bc89ff449d203d6f8a5b885f714660a0; then instantiate only one randomized longitudinal total-effect formation study plus an independently verified same-event retentive consumer route."
+  "resume": "Read the fixed Library master v109; verify the live branch is mode-independent validator commit 87388ae or a fast-forward successor; verify final increment SHA256 492fd9dde9a94b39d0ccb3275376d300b6e246e535e46b573cee2bf7d9956d59; then instantiate only one randomized longitudinal total-effect formation study plus an independently verified same-event retentive consumer route."
 }
