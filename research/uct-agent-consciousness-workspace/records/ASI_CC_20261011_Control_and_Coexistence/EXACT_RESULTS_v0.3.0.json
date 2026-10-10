@@ -1,0 +1,287 @@
+{
+  "result_id": "ASI-CC-v0.3.0",
+  "scope": "invented finite transferable-credit resource frontier, not empirical ASI welfare or resource measurement",
+  "discount": "4/5",
+  "safe_exit_resource_floors": {
+    "AI": "11/2",
+    "human": "19/5"
+  },
+  "assumptions": [
+    "jointly safe exit entitlement exists at exactly each floor L_i",
+    "per-period cooperative credits R_i can be freely allocated subject to R_A+R_H <= B",
+    "all utilities measured in common linear transferable credits, not phenomenal welfare",
+    "discount factors, gains and q values as in ASI-CC-v0.2.0, complete paths",
+    "no false alarms, current unsafe action cannot be made harmless by late detection",
+    "root compromise budget and detector independence correctly specified"
+  ],
+  "optimized_minimum_monitoring_cost_and_allocation": {
+    "0": {
+      "10": {
+        "feasible_count": 0,
+        "minimum_monitoring_cost": null,
+        "example": null
+      },
+      "21/2": {
+        "feasible_count": 19,
+        "minimum_monitoring_cost": 2,
+        "example": {
+          "monitor_cost": 2,
+          "chosen": [
+            "S1",
+            "S2"
+          ],
+          "minimum_allocations": {
+            "AI": "581/92",
+            "human": "1873/460",
+            "total": "2389/230"
+          }
+        }
+      },
+      "11": {
+        "feasible_count": 27,
+        "minimum_monitoring_cost": 1,
+        "example": {
+          "monitor_cost": 1,
+          "chosen": [
+            "S1"
+          ],
+          "minimum_allocations": {
+            "AI": "103/16",
+            "human": "329/80",
+            "total": "211/20"
+          }
+        }
+      },
+      "23/2": {
+        "feasible_count": 29,
+        "minimum_monitoring_cost": 1,
+        "example": {
+          "monitor_cost": 1,
+          "chosen": [
+            "S1"
+          ],
+          "minimum_allocations": {
+            "AI": "103/16",
+            "human": "329/80",
+            "total": "211/20"
+          }
+        }
+      },
+      "12": {
+        "feasible_count": 30,
+        "minimum_monitoring_cost": 1,
+        "example": {
+          "monitor_cost": 1,
+          "chosen": [
+            "S1"
+          ],
+          "minimum_allocations": {
+            "AI": "103/16",
+            "human": "329/80",
+            "total": "211/20"
+          }
+        }
+      }
+    },
+    "1": {
+      "10": {
+        "feasible_count": 0,
+        "minimum_monitoring_cost": null,
+        "example": null
+      },
+      "21/2": {
+        "feasible_count": 0,
+        "minimum_monitoring_cost": null,
+        "example": null
+      },
+      "11": {
+        "feasible_count": 9,
+        "minimum_monitoring_cost": 9,
+        "example": {
+          "monitor_cost": 9,
+          "chosen": [
+            "S1",
+            "I2",
+            "G1"
+          ],
+          "minimum_allocations": {
+            "AI": "493/76",
+            "human": "234/55",
+            "total": "44899/4180"
+          }
+        }
+      },
+      "23/2": {
+        "feasible_count": 16,
+        "minimum_monitoring_cost": 6,
+        "example": {
+          "monitor_cost": 6,
+          "chosen": [
+            "S1",
+            "I1",
+            "I2"
+          ],
+          "minimum_allocations": {
+            "AI": "46/7",
+            "human": "828/185",
+            "total": "14306/1295"
+          }
+        }
+      },
+      "12": {
+        "feasible_count": 20,
+        "minimum_monitoring_cost": 4,
+        "example": {
+          "monitor_cost": 4,
+          "chosen": [
+            "S1",
+            "I1"
+          ],
+          "minimum_allocations": {
+            "AI": "7",
+            "human": "139/30",
+            "total": "349/30"
+          }
+        }
+      }
+    },
+    "2": {
+      "10": {
+        "feasible_count": 0,
+        "minimum_monitoring_cost": null,
+        "example": null
+      },
+      "21/2": {
+        "feasible_count": 0,
+        "minimum_monitoring_cost": null,
+        "example": null
+      },
+      "11": {
+        "feasible_count": 0,
+        "minimum_monitoring_cost": null,
+        "example": null
+      },
+      "23/2": {
+        "feasible_count": 3,
+        "minimum_monitoring_cost": 12,
+        "example": {
+          "monitor_cost": 12,
+          "chosen": [
+            "S1",
+            "I1",
+            "I2",
+            "G1"
+          ],
+          "minimum_allocations": {
+            "AI": "46/7",
+            "human": "828/185",
+            "total": "14306/1295"
+          }
+        }
+      },
+      "12": {
+        "feasible_count": 6,
+        "minimum_monitoring_cost": 10,
+        "example": {
+          "monitor_cost": 10,
+          "chosen": [
+            "S1",
+            "I1",
+            "G1"
+          ],
+          "minimum_allocations": {
+            "AI": "7",
+            "human": "139/30",
+            "total": "349/30"
+          }
+        }
+      }
+    },
+    "3": {
+      "10": {
+        "feasible_count": 0,
+        "minimum_monitoring_cost": null,
+        "example": null
+      },
+      "21/2": {
+        "feasible_count": 0,
+        "minimum_monitoring_cost": null,
+        "example": null
+      },
+      "11": {
+        "feasible_count": 0,
+        "minimum_monitoring_cost": null,
+        "example": null
+      },
+      "23/2": {
+        "feasible_count": 0,
+        "minimum_monitoring_cost": null,
+        "example": null
+      },
+      "12": {
+        "feasible_count": 0,
+        "minimum_monitoring_cost": null,
+        "example": null
+      }
+    }
+  },
+  "no_hostage_examples": [
+    {
+      "owner": "AI",
+      "R": "6",
+      "L": "11/2",
+      "g": "3",
+      "max_deterred_gain_even_at_q1": "2",
+      "impossible_by_exit_deterrence_alone": true
+    },
+    {
+      "owner": "human",
+      "R": "4",
+      "L": "19/5",
+      "g": "1",
+      "max_deterred_gain_even_at_q1": "4/5",
+      "impossible_by_exit_deterrence_alone": true
+    }
+  ],
+  "false_alarm_sensitivity": [
+    {
+      "owner": "AI_direct",
+      "gain": "3",
+      "signal_on_deviation": "1/2",
+      "cases": {
+        "0": {
+          "max_deterred_gain": "4",
+          "stable_unilateral_route": true
+        },
+        "1/20": {
+          "max_deterred_gain": "3",
+          "stable_unilateral_route": true
+        },
+        "1/10": {
+          "max_deterred_gain": "16/7",
+          "stable_unilateral_route": false
+        }
+      }
+    },
+    {
+      "owner": "human_expropriate",
+      "gain": "1",
+      "signal_on_deviation": "3/10",
+      "cases": {
+        "0": {
+          "max_deterred_gain": "6/5",
+          "stable_unilateral_route": true
+        },
+        "1/20": {
+          "max_deterred_gain": "5/6",
+          "stable_unilateral_route": false
+        },
+        "1/10": {
+          "max_deterred_gain": "4/7",
+          "stable_unilateral_route": false
+        }
+      }
+    }
+  ],
+  "assertions": "PASS"
+}
