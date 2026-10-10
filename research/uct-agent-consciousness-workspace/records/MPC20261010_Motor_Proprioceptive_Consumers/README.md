@@ -10,6 +10,7 @@
 - `validate_map.py`, `MAP_COMPATIBILITY_AUDIT.json`, `WHOLE_MAP_COVERAGE.json.gz`, `MAP_AUDIT.md` — scoped map checks
 - `REVIEW_RESPONSE.md` — responses with stable review IDs
 - `ROUND_RECORD.md`, `WORK_LOG.md`, `HANDOFF_ZH.md` — selection, chronology and recovery
+- `DUAL_SAVE_RECEIPT.json` — verified remote/workspace persistence facts and exact recovery action
 
 Status: bounded research increment, not a released map or published paper.
 

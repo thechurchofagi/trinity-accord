@@ -1,0 +1,91 @@
+{
+  "schema": "uct-mpc-dual-save-receipt/1",
+  "research_id": "MPC20261010",
+  "result_version": "MPC-RESULT-v0.1.0",
+  "status": "SCIENTIFIC_CONTENT_AND_WORKSPACE_RECOVERY_BYTES_VERIFIED",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "preserved_parent_commit": "d847483f1b40e9366cfd01edb3a93defb81c1a58",
+    "science_commit": "fbd6e785aa4b008666b09319232a73006250d745",
+    "science_tree": "0a3dc97ab71fd7091edc5e651504b8b246ca0d92",
+    "expected_sha_guard_succeeded": true,
+    "changed_content_files": 31,
+    "verification": "Fetched the remote branch after the guarded update; remote and local science trees are identical. CURRENT_STATE, RESEARCH_NOTE, MAP_COMPATIBILITY_AUDIT and HANDOFF_ZH were read from the remote commit and hashed. This receipt is added by a later guarded fast-forward."
+  },
+  "master_handoff": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "previous_version": 71,
+    "verified_current_version": 72,
+    "file_id": "file_000000006c5c81f79caea46f832aee10",
+    "bytes": 681862,
+    "sha256": "f5e051af09b67b75bd409b2914b4adb08c296dd7d9ed958a56001071ab8b92da",
+    "previous_version_bytes_preserved_as_exact_suffix": true,
+    "verification": "Fresh materialization is byte-equal to the uploaded file and retains all 678409 bytes of verified version 71 as its suffix."
+  },
+  "increment_package": {
+    "library_file_id": "libfile_2ff1e27d23a8819193f2385a86d4c75f",
+    "file_id": "file_000000004f648230ac00ac739db60e35",
+    "file_name": "UCT_MPC20261010_Result_Increment.zip",
+    "current_version_number": 0,
+    "classification": "INCREMENT_NOT_COMPLETE_REPOSITORY_OR_HISTORY",
+    "bytes": 239636,
+    "sha256": "b9035e3fea312026a3094652980009fab1d77b57e716bb1cfb1e6406e468f704",
+    "manifested_files": 31,
+    "zip_members_including_directories": 35,
+    "verification": "Fresh materialization is byte-equal; ZIP integrity passed and every one of the 31 manifest file hashes and sizes matched."
+  },
+  "manifest": {
+    "library_file_id": "libfile_f67c0ad127408191aef6d07934a4f63a",
+    "file_id": "file_00000000b3d08230b6de5b1b785791e8",
+    "file_name": "UCT_MPC20261010_Result_Increment_MANIFEST.json",
+    "current_version_number": 0,
+    "bytes": 8148,
+    "sha256": "d22998ddb7ee1f89709b42b91860436d230b5b40489319d6c98f0b4e9b7cc2a1",
+    "verification": "Fresh materialization is byte-equal and its recorded archive hash matches the materialized ZIP."
+  },
+  "standalone_handoff": {
+    "library_file_id": "libfile_a2b2c546cb808191b8c789e39e2b39e8",
+    "file_id": "file_000000002b5082309f84462f72ae0bc7",
+    "stored_file_name": "HANDOFF_ZH(1).md",
+    "current_version_number": 0,
+    "bytes": 3387,
+    "sha256": "f00840cdeecf352935a099af867a923ea30e10613aa1047e9930eb05300c4a4f",
+    "verification": "Fresh materialization is byte-equal to the repository handoff. The service deduplicated the display name; the stable ID is authoritative."
+  },
+  "baseline_reference": {
+    "library_file_id": "libfile_f7d404c7734c8191b8257cd4fa6771f5",
+    "file_name": "UCT_R156_Working_Set_20261007.zip",
+    "bytes": 3493643,
+    "sha256": "95cc3ea1ec45eb273531c25525edcb7f8e6f2088c650a39b97d24817704ec40a",
+    "scope": "Complete recovered R156 working set, not the whole repository or Git history. The MPC package is an incremental result package and cannot by itself update R156 through every intervening round."
+  },
+  "completed_steps": [
+    "Five-item round record and review-ledger intake",
+    "Exact 16-function completion enumeration and endpoint-vector count",
+    "Eager/short-circuit full-table intake countermodel",
+    "Primary-source endpoint/context synthesis and five thought-experiment roles",
+    "Disabled 7/4/5 map candidate and 21-check scoped whole-map compatibility audit",
+    "Entry, priority, coverage, registry and open-review updates",
+    "Guarded GitHub science save and four persistent workspace readbacks"
+  ],
+  "unresolved": [
+    "Physical and ethical realizability of the motor-only consumer cell while preserving movement and touch",
+    "Actual carrier, intake-event, chronology, bypass and compensation evidence",
+    "Independent agency, ownership, intensity, precision and familiar-mineness endpoint bridges",
+    "Full historical contract/proof reconstruction and semantic map adoption",
+    "QC-20261008-10, IA-QC11, QC-20261008-12, QC-20261008-13, R191 normalization and SCU audit-depth reviewer disposition"
+  ],
+  "failures": "Direct CLI HTTPS push lacked credentials; authenticated guarded connector save succeeded. The three-cell mechanism inference, scalar-self aggregation, full-table use inference and motor-only-to-H interpretations were rejected and preserved in FAILURES.md/GAP_LEDGER.md.",
+  "map": {
+    "completed_release": "UCT-MAP-v1.1.2",
+    "completed_counts": "913 nodes / 424 active rules / 261 contexts / 10 suspended / 1608 review items",
+    "candidate": "7 nodes / 4 rules / 5 contexts, disabled",
+    "structural_checks": 21,
+    "semantic_promotion": "OPEN_NOT_COMPLETED"
+  },
+  "publication": "UCT-PUB-v1.0.19; CONTINUE_RESEARCH_HOLD_STANDALONE; no publication or DOI/OTS/Arweave action",
+  "restore": "First fetch and verify the latest research branch and this fixed master handoff. The result ZIP applies only as a 31-file increment over its declared parent-compatible tree; validate the separate manifest. Do not call the R156 baseline plus this increment a complete current backup because intervening rounds are absent. Obtain this post-save receipt from the final branch commit.",
+  "next_question": "Can one physically feasible, ethical motor-only consumer approximation preserve movement/touch while independently excluding proprioceptive/state intake and separately measure intensity, precision, agency and ownership; if not, what is the realizability boundary?",
+  "receipt_self_reference": "This post-save receipt records already verified science and workspace writes. Its own containing Git commit is verified externally after creation and is not recursively embedded in these bytes."
+}
