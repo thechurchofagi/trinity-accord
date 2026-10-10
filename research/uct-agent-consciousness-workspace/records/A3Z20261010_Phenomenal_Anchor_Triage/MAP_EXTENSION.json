@@ -1,0 +1,18 @@
+{
+  "schema": "uct-map-followup-application-v1",
+  "id": "A3Z-ANCHOR-v0.1.0",
+  "kind": "DISABLED_FOLLOWUP_APPLICATION",
+  "status": "SCOPED_APPLICATION_ONLY_NOT_LOADED_INTO_COMPLETED_GRAPH",
+  "added_completed_nodes": 0,
+  "added_completed_rules": 0,
+  "added_completed_context_links": 0,
+  "claims": ["A3Z-C1", "A3Z-C2", "A3Z-C3", "A3Z-C4"],
+  "relevant_existing_nodes": ["A:C1", "A:U1", "R157:SEMANTIC_RESIDUAL", "R157:MINENESS_BRIDGE_SCHEMA", "R157:REPORT_COVERAGE_LIMIT", "R173:FIXED_FAMILIAR_TARGET_CONTRACT", "R173:RETENTIVE_EXPERIENTIAL_COORDINATE", "R173:THREE_TARGET_SEPARATION", "R173:FAMILIAR_MINENESS_BOUNDARY"],
+  "prospective_all_of_gate": {
+    "premises": ["fixed H_way target", "registered implication", "manipulation fidelity", "positivity", "matching assumptions", "observed violation"],
+    "connective": "AND",
+    "status": "APPLICATION_REQUIREMENT_NOT_FORMAL_GRAPH_RULE"
+  },
+  "non_promotion_reason": "The Boolean results are exact but application-specific; joint premise satisfiability is unverified and success does not identify H_way.",
+  "scientific_graph_counts_unchanged": {"nodes": 913, "rules": 424, "context_links": 261}
+}

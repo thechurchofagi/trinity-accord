@@ -1,0 +1,45 @@
+{
+  "schema": "uct-a3z-claim-ledger-v1",
+  "claims": [
+    {
+      "id": "A3Z-C1",
+      "type": "EXHAUSTIVE_FINITE_RESULT",
+      "statement": "Among all Boolean judgments J(F,S,K), simultaneous corrected coding invariance, source-framing invariance, and formation sensitivity leave exactly the two polarity complements R=F and R=1-F.",
+      "domain": "Boolean F,S,K with R=J xor K and all three requirements universally quantified over the eight cells.",
+      "all_of": ["complete enumeration of 256 Boolean functions", "registered correction R=J xor K", "coding invariance", "source invariance", "formation sensitivity"],
+      "proof_or_source": "check_anchor_triage.py exhaustive enumeration",
+      "counterexample_role": "Removing any conjunct admits additional functions; the two survivors witness unresolved polarity.",
+      "status": "PROVED_FINITE_MODEL"
+    },
+    {
+      "id": "A3Z-C2",
+      "type": "NONIDENTIFICATION_COUNTERMODEL",
+      "statement": "Satisfaction of all three observable requirements does not identify H_way, because the same response law is compatible with H_way=F, H_way constant, and H_way=1-F while a nonphenomenal proxy W=F generates J.",
+      "domain": "The A3Z finite anchor model; no assumed gold-standard phenomenal observation.",
+      "all_of": ["A3Z-C1", "W is permitted to drive measured responses", "no independent identity premise W=H_way"],
+      "proof_or_source": "Explicit three-model witness in check_anchor_triage.py",
+      "counterexample_role": "The aligned/constant/opposed H assignments preserve all observables.",
+      "status": "PROVED_FINITE_MODEL"
+    },
+    {
+      "id": "A3Z-C3",
+      "type": "SCOPED_FALSIFICATION_RULE",
+      "statement": "A preregistered violation of a declared observable implication rejects the conjunctive candidate bridge package B_A on its declared domain, provided manipulation fidelity, positivity, target stability, and matching assumptions hold.",
+      "domain": "Actual installed application satisfying the listed fidelity and scope premises.",
+      "all_of": ["fixed target contract", "registered implication", "verified manipulation fidelity", "positivity", "declared matching", "observed violation"],
+      "proof_or_source": "Modus tollens for the explicitly conjunctive bridge package; empirical premises remain application-specific.",
+      "counterexample_role": "A failed manipulation or target swap blocks rejection rather than being counted as bridge evidence.",
+      "status": "CONDITIONAL_APPLICATION_RULE"
+    },
+    {
+      "id": "A3Z-C4",
+      "type": "SCOPE_BOUNDARY",
+      "statement": "The anchor contract neither adds a basal-experience threshold nor licenses inference from report, formation, skill, agency, or proxy stability to phenomenal identity.",
+      "domain": "UCT C1/U1 and the selected H_way application.",
+      "all_of": ["A:C1", "A:U1", "A3Z-C2", "typed distinction among organization, report, and selected experience"],
+      "proof_or_source": "UCT fixed sources plus the A3Z countermodel.",
+      "counterexample_role": "Abacus/calculator and copy/swap cases block substitution of competence or lineage for the selected feeling.",
+      "status": "INTERPRETIVE_BOUNDARY"
+    }
+  ]
+}

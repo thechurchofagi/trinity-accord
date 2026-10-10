@@ -1,0 +1,13 @@
+{
+  "schema": "uct-a3z-source-scope-v1",
+  "fixed_sources": [
+    {"path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md", "used_for": "C1/U1 status; finite bridge hypotheses; no extra basal thresholds"},
+    {"path": "records/R153_Complete_Formal_Map_20261007/sources/experience-intelligence-self-v1.0.md", "used_for": "experience/capability/report/self distinctions and selected-target audit"}
+  ],
+  "primary_adjacent_sources": [
+    {"citation": "Calvo-Merino et al. (2006), Current Biology 16:1905-1910", "doi": "10.1016/j.cub.2006.07.065", "scope": "motor versus visual familiarity in action observation; not a gold-standard H_way measure"},
+    {"citation": "Chambon et al. (2012), Cognition 125:441-451", "doi": "10.1016/j.cognition.2012.04.010", "scope": "action-selection fluency and sense of control; agency report is not H_way identity"},
+    {"citation": "Sidarus et al. (2017), Frontiers in Human Neuroscience 11:467", "doi": "10.3389/fnhum.2017.00467", "scope": "selection fluency and agency judgments; adjacent operational mechanism"}
+  ],
+  "novelty_boundary": "No claim that familiarity, agency, response recoding, factorial interventions, Boolean enumeration, or falsification logic originated here. The contribution is the scoped UCT anchor-triage contract following A3Y."
+}

@@ -1,0 +1,30 @@
+{
+  "all_rule_references_resolve": true,
+  "all_rules_treated_as_all_of": true,
+  "completed_graph_additions": {
+    "context_links": 0,
+    "nodes": 0,
+    "rules": 0
+  },
+  "effective_counts": {
+    "context_links": 261,
+    "nodes": 913,
+    "rules": 424
+  },
+  "exact_functions_enumerated": 256,
+  "exact_survivors": 2,
+  "files": {
+    "ANCHOR_CONTRACT.md": "1e1fa24ae918aeea1b4f08fe232b909cf8fbfedf29e1eb8b387b6b5b6386d8a8",
+    "CLAIM_LEDGER.json": "bf6f457132cb09735f1449bc1b58e11f4f298f8ba1c3c30329a50d18021c3a7d",
+    "EXACT_RESULTS.json": "448a441b18f118358c36f38db69e6df844c3fd18002849bdee02310582926958",
+    "GAP_LEDGER.md": "62cd83e78134184c1d01153a3e358a811e0b20d4b639670e2fff75412ec7c64e",
+    "MAP_EXTENSION.json": "d87f54c18c0281e35419a3da42c934d8dac942be960c7e4704edb2d732890b32",
+    "RESEARCH_NOTE.md": "ec8c2a605266bf16b47bace65394a4210c5c71844af5956ca5186432ece58b1a",
+    "ROUND_RECORD.json": "46602b51a0a01347bc517f505bf8e80a665506d395b5772e5a93ff8823be667f",
+    "SOURCE_SCOPE.json": "e6b1026e43f7f964bd92903e84040ba2e32c869238963c5988a27d3fed9036ed",
+    "check_anchor_triage.py": "412d2d52a2848b703c125e682cde73981af9b161f0b3eb7b43f93ed451aad274"
+  },
+  "schema": "uct-a3z-validation-v1",
+  "semantic_ceiling": "PASS does not establish bridge truth, H_way identity, manipulation fidelity, joint application satisfiability, or global theory truth.",
+  "status": "PASS_STRUCTURAL_WITH_DECLARED_SEMANTIC_CEILING"
+}

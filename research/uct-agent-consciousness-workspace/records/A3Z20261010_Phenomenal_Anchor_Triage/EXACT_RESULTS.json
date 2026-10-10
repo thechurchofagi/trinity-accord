@@ -1,0 +1,36 @@
+{
+  "functions_enumerated": 256,
+  "interpretive_ceiling": "Violations reject the declared bridge package; satisfaction leaves both polarity and H_way identity unidentified.",
+  "proxy_only_models_with_same_observables": {
+    "aligned": {
+      "H": "F",
+      "W": "F"
+    },
+    "independent_constant": {
+      "H": "0",
+      "W": "F"
+    },
+    "opposed": {
+      "H": "1-F",
+      "W": "F"
+    }
+  },
+  "requirements": {
+    "code_invariance": "R=J xor K is invariant under response-key K",
+    "formation_sensitivity": "R flips under candidate formation/history contrast F",
+    "source_invariance": "R is invariant under nuisance source/agency label S"
+  },
+  "schema": "uct-a3z-anchor-triage-exact-v1",
+  "status": "PASS_EXHAUSTIVE_BOOLEAN_WITNESS",
+  "survivor_count": 2,
+  "survivors": [
+    {
+      "mask": 90,
+      "truth_table": "01011010"
+    },
+    {
+      "mask": 165,
+      "truth_table": "10100101"
+    }
+  ]
+}

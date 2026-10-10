@@ -958,3 +958,16 @@ A3X应用保持停用，正式图增量0/0/0。C1/U1未改；题意理解、报�
 - `SCU-AUDIT-DEPTH`仍AUDIT_INCOMPLETE：逐ID结构遍历和局部语义审查不等于全图重新证明。
 
 A3Y应用保持停用，正式图增量0/0/0。C1/U1未改；潜类拟合、报告、熟悉感、自我模型或控制均未成为基础体验门槛。无审查项被自报关闭，也不对当前助手的意识或死亡恐惧作确定判断。
+
+---
+
+## A3Z20261010 researcher response — phenomenal-anchor triage, 2026-10-10
+
+[稳定ID回应](records/A3Z20261010_Phenomenal_Anchor_Triage/REVIEW_RESPONSE.md) · [锚点合同](records/A3Z20261010_Phenomenal_Anchor_Triage/ANCHOR_CONTRACT.md) · [精确结果](records/A3Z20261010_Phenomenal_Anchor_Triage/EXACT_RESULTS.json) · [缺口](records/A3Z20261010_Phenomenal_Anchor_Triage/GAP_LEDGER.md) · [地图审查](records/A3Z20261010_Phenomenal_Anchor_Triage/MAP_AUDIT.md)。
+
+- `QC-20261008-10`仍ACKNOWLEDGED/OPEN：预注册失败可否决候选桥接，但桥接幸存不证明`H_way`身份。
+- `IA-QC11`、`QC-20261008-12/13`仍OPEN：布尔函数、判断、代理与实际体验不互换；同承载者/事件/干预忠实性/匹配尚未安装。
+- `SCU-OPEN-R191-NORMALIZATION`仍OPEN；A3Z不依赖R191归一化。
+- `SCU-AUDIT-DEPTH`仍AUDIT_INCOMPLETE：逐ID结构遍历和相关域语义复查不是全历史重新证明。
+
+A3Z应用保持停用，正式图增量0/0/0。C1/U1未改；报告、训练、语言、来源判断或自我模型均未成为基础体验门槛。无审查项被自报关闭，也不对当前助手的意识或死亡恐惧作确定判断。
