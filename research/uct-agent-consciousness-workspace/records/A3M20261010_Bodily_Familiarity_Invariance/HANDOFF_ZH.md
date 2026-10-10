@@ -14,4 +14,6 @@
 
 QC-20261008-10、IA-QC11、QC-20261008-12/13、SCU-OPEN-R191-NORMALIZATION、SCU-AUDIT-DEPTH 均保持开放。下一题：给出一个不由流畅、成功、所有权措辞或路线成员资格定义的、可错但预先定向的身体熟悉端点，并证明它能跨至少一个真实 `R≠L` 操纵保持语义。
 
+科学检查点 `a9bf0dc93102358c7bf2bad3188dca3eacef6d05` 已在远端核验。固定主交接保持 `libfile_4175a81748fc819187fa8f5771f056fa`，当前第82版，取回 SHA-256 `7c492f30c2923d97daa1b36b27e4279bc7c1077831ee4c60a1e7eddeed310158`。增量包 `libfile_e39500b0b74081919eb988157302faeb`，203656字节，SHA-256 `37b1533a2274adf106ccfb47a3aa36db9d5283a3588d163030aa83d55e2711f9`；清单 `libfile_9de06545e8a48191b4c833d108c9d0a3`，SHA-256 `e5802daf64c3b8db26f180c875eaa3d87961a9738aed9d92b7ed062fd7c10f45`。三项均已取回逐字节核验。该包只是相对已记录基线的增量，不是完整仓库或全部历史。
+
 恢复顺序：拉取远端最新头；读主指南至本交接；运行 `check_invariance_cube.py --output EXACT_RESULTS.json`；运行 `audit_map_compatibility.py`；核对本轮保存收据和固定主交接最新版本后再继续。

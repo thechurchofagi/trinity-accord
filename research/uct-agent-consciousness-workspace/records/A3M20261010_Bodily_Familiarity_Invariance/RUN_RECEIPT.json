@@ -1,0 +1,13 @@
+{
+  "schema": "uct-run-receipt/1",
+  "round_id": "A3M20261010",
+  "science_checkpoint": "a9bf0dc93102358c7bf2bad3188dca3eacef6d05",
+  "exact_results_sha256": "9ccbcf632df7d16788c6e1e27c45f1281fa00036b369fa931f8c7863ddf6975e",
+  "map_structural_pass": true,
+  "map_semantic_status": "AUDIT_INCOMPLETE",
+  "completed_graph_changed": false,
+  "library_master_version": 82,
+  "library_increment_id": "libfile_e39500b0b74081919eb988157302faeb",
+  "all_open_review_items_preserved": true,
+  "final_receipt_commit": "TO_BE_RECORDED_BY_THE_COMMIT_CONTAINING_THIS_FILE"
+}

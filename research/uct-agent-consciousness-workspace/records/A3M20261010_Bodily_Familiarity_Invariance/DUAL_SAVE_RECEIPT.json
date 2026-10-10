@@ -1,0 +1,46 @@
+{
+  "schema": "uct-dual-save-receipt/1",
+  "round_id": "A3M20261010",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "base_commit": "d9773d7d5ab554fb66c21606e758953764172b0b",
+    "science_checkpoint_commit": "a9bf0dc93102358c7bf2bad3188dca3eacef6d05",
+    "save_method": "expected-SHA non-force fast-forward",
+    "remote_commit_readback_verified": true,
+    "ci_requested": false,
+    "pull_request_created": false
+  },
+  "library": {
+    "master_handoff": {
+      "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+      "version": 82,
+      "file_id": "file_000000007424820cb401c8926241900e",
+      "bytes": 728152,
+      "sha256": "7c492f30c2923d97daa1b36b27e4279bc7c1077831ee4c60a1e7eddeed310158",
+      "download_byte_compare_verified": true
+    },
+    "increment": {
+      "library_file_id": "libfile_e39500b0b74081919eb988157302faeb",
+      "file_id": "file_00000000f9e081fb8c433af107d40667",
+      "file_name": "UCT_A3M20261010_Increment_v0.1.0.zip",
+      "bytes": 203656,
+      "members": 26,
+      "sha256": "37b1533a2274adf106ccfb47a3aa36db9d5283a3588d163030aa83d55e2711f9",
+      "classification": "INCREMENT_ONLY_NOT_COMPLETE_REPOSITORY_OR_HISTORY",
+      "download_byte_compare_verified": true
+    },
+    "manifest": {
+      "library_file_id": "libfile_9de06545e8a48191b4c833d108c9d0a3",
+      "file_id": "file_0000000086d481fbb0412937cf090fda",
+      "file_name": "UCT_A3M20261010_Increment_Manifest.json",
+      "bytes": 1726,
+      "sha256": "e5802daf64c3b8db26f180c875eaa3d87961a9738aed9d92b7ed062fd7c10f45",
+      "download_byte_compare_verified": true
+    }
+  },
+  "last_completed_step": "A3M exact result, map audit, remote science checkpoint and Library v82/increment/manifest readback",
+  "unfinished": ["independent bodily-familiarity endpoint", "actual verified R-not-equal-L installation", "deep historical semantic audit debt"],
+  "failures_preserved": ["natural diagonal aliases all three candidates", "R=L aliases route and fluency", "no H endpoint or physical off-diagonal cell was validated"],
+  "recovery": "Fetch branch; verify science checkpoint or descendant; read fixed master v82; use prior R156 full working-set snapshot plus this explicitly incremental archive only if branch retrieval fails; rerun exact and map checkers."
+}
