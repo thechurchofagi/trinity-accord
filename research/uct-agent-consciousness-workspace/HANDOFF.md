@@ -1,4 +1,12 @@
-# 最新接续 A3P20261010；完成图仍为 UCT-MAP-v1.1.2
+# 最新接续 A3U20261010；完成图仍为 UCT-MAP-v1.1.2
+
+[本轮中文交接](records/A3U20261010_Area3a_Use_Endpoint/HANDOFF_ZH.md) · [端点合同](records/A3U20261010_Area3a_Use_Endpoint/ENDPOINT_CONTRACT.md) · [精确结果](records/A3U20261010_Area3a_Use_Endpoint/EXACT_RESULTS.json) · [地图审计](records/A3U20261010_Area3a_Use_Endpoint/MAP_AUDIT.md)。端点独立构造及邻区/假刺激对照不能单独证明 3a 中介；完整 `S×G×R×Y` 表存在真实使用/直接外溢孪生。忠实下游端口救援只在全部排除与同实例前提下区分这两个声明模型。
+
+完成图913/424/261、10暂停、1,608审查项不变；A3U 7/3/5候选停用，覆盖v1.0.25。所有审查开放。下一步只核查现有平台对直接外溢的可验证上界或端口救援的物理/伦理可行性；若均不可得，停止装置细化，回到独立 `H` 桥接。C1/U1和非唯一主人约束不变。
+
+---
+
+# 前一接续 A3P20261010；完成图仍为 UCT-MAP-v1.1.2
 
 [本轮交接](records/A3P20261010_Area3a_Crossed_Probe/HANDOFF_ZH.md) · [英文研究稿](records/A3P20261010_Area3a_Crossed_Probe/RESEARCH_NOTE.md) · [探针合同](records/A3P20261010_Area3a_Crossed_Probe/PROBE_CONTRACT.md) · [精确结果](records/A3P20261010_Area3a_Crossed_Probe/EXACT_RESULTS.json) · [审计](records/A3P20261010_Area3a_Crossed_Probe/MAP_AUDIT.md)。Yamada 2016 已具备同实验的来源×区域诱发响应面，故 A3S 的过宽否定已在 A3P 前瞻纠正；真正缺口是消费者扰动后的下游实际使用。Johnson 2026 单 3a 阵列首先缺邻区消费者对照。A3P 7/2/5 停用，完成图与 C1/U1 不变，覆盖 v1.0.24。下一步只具体化来源×区域×消费者扰动，并保留 H 独立桥接。
 

@@ -1,4 +1,12 @@
-# Current entry — A3P crossed response and actual use
+# Current entry — A3U endpoint causal firewall
+
+Start with the [Chinese handoff](records/A3U20261010_Area3a_Use_Endpoint/HANDOFF_ZH.md), [research note](records/A3U20261010_Area3a_Use_Endpoint/RESEARCH_NOTE.md), [endpoint contract](records/A3U20261010_Area3a_Use_Endpoint/ENDPOINT_CONTRACT.md), [exact results](records/A3U20261010_Area3a_Use_Endpoint/EXACT_RESULTS.json), and [map audit](records/A3U20261010_Area3a_Use_Endpoint/MAP_AUDIT.md). A full randomized source-by-area-3a-block endpoint table can be identical under genuine downstream use and area-3a-specific direct spillover. A path-specific rescue discriminates only under explicit exclusion and same-instance premises.
+
+The completed map remains UCT-MAP-v1.1.2 (913 nodes, 424 active rules, 261 contexts, 10 suspended rules, 1,608 review items). A3U's 7/3/5 candidate is disabled. C1 remains the consciousness-specific axiom; no new basal gate, unique owner or current-assistant verdict is introduced.
+
+---
+
+# Previous entry — A3P crossed response and actual use
 
 Read the [A3P handoff](records/A3P20261010_Area3a_Crossed_Probe/HANDOFF_ZH.md), [research note](records/A3P20261010_Area3a_Crossed_Probe/RESEARCH_NOTE.md), [probe contract](records/A3P20261010_Area3a_Crossed_Probe/PROBE_CONTRACT.md), and [map audit](records/A3P20261010_Area3a_Crossed_Probe/MAP_AUDIT.md). Yamada 2016 corrects the claim that no same-instance crossed response exists; the remaining target is consumer-specific downstream use. The Johnson 2026 installed platform lacks a neighbouring consumer contrast. The 7/2/5 candidate remains disabled; completed UCT-MAP-v1.1.2 and C1/U1 are unchanged; coverage is UCT-PUB-v1.0.24.
 

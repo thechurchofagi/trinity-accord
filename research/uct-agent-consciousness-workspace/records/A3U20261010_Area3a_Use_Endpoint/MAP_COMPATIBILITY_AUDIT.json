@@ -1,0 +1,47 @@
+{
+  "schema": "uct-a3u-map-audit/1",
+  "base_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
+  "ledger_sha256": "0513cb55cef94d82adcaea46af1974438a424aeba152f4c9d5655340f9271687",
+  "counts": {
+    "nodes": 913,
+    "rules": 424,
+    "contexts": 261,
+    "suspended": 10,
+    "review_items": 1608
+  },
+  "candidate_counts": {
+    "nodes": 7,
+    "rules": 3,
+    "contexts": 5
+  },
+  "checks": {
+    "base_release": true,
+    "base_counts": true,
+    "suspended_rules": true,
+    "review_count": true,
+    "base_hash": true,
+    "ledger_hash": true,
+    "candidate_disabled": true,
+    "completed_release_unchanged": true,
+    "candidate_counts": true,
+    "unique_new_nodes": true,
+    "no_node_collision": true,
+    "typed_scoped_nodes": true,
+    "all_rules_are_conjunctive": true,
+    "same_instance_guards": true,
+    "proof_and_alternative_fields": true,
+    "references_resolve": true,
+    "combined_dag_acyclic": true,
+    "c1_axiom_preserved": true,
+    "no_new_basal_gate": true,
+    "actual_use_evidence_separated": true,
+    "actual_application_open": true,
+    "assistant_verdict_absent": true
+  },
+  "all_structural_checks_pass": true,
+  "unresolved": [],
+  "semantic_adoption": "OPEN; FULL_NEW_SEMANTIC_REPROOF_NOT_COMPLETED",
+  "inherited_coverage": "Every completed node/rule/context has stable-ID content-hash coverage; frozen proofs are reused, not newly reproved.",
+  "affected_rederivation": "A3P's downstream-endpoint gate is narrowed: endpoint independence and region controls do not discharge causal exclusion. C1/U1, evidence/use separation and all open review items remain unchanged.",
+  "integration": "PENDING_CHECKPOINT_DISABLED"
+}

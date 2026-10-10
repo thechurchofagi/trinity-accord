@@ -1,0 +1,23 @@
+{
+  "schema": "uct-publication-coverage-update/1",
+  "version": "UCT-PUB-v1.0.25",
+  "parent": "UCT-PUB-v1.0.24",
+  "round": "A3U20261010",
+  "formal_publication_counts_unchanged": true,
+  "completed_map_changed": false,
+  "net_claims": [
+    {"id":"A3U-C1","classification":"KNOWN_CAUSAL_PATH_NONIDENTIFICATION_APPLIED","scope":"A complete source-by-block response/endpoint table can be shared by area-3a use and area-3a-specific direct spillover."},
+    {"id":"A3U-C2","classification":"EXACT_CONDITIONAL_PAIRWISE_DISCRIMINATION","scope":"A faithful path-specific rescue separates the two declared models under explicit exclusion premises."},
+    {"id":"A3U-C3","classification":"BOUNDED_METHOD_CORRECTION","scope":"Endpoint independence and neighbour/sham controls are necessary but insufficient; an exclusion witness is required."},
+    {"id":"A3U-C4","classification":"UCT_CONDITIONAL_INTERPRETATION","scope":"Grounded downstream use may be experience-internal under C1; H and basal experience remain separate."}
+  ],
+  "deductions": [
+    "Pearl/Robins-Greenland causal mediation and path-identification framework",
+    "Otchy et al. acute off-target neural manipulation result",
+    "A3P response/use correction and endpoint proposal",
+    "R166/R167/R169 evidence/use/route distinctions",
+    "UCT C1/U1"
+  ],
+  "decision": "HOLD_STANDALONE_INTEGRATE_AS_A3P_CAUSAL_FIREWALL_SECTION",
+  "world_priority_verified": false
+}

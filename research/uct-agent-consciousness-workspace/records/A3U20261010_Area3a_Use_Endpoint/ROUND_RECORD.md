@@ -1,0 +1,11 @@
+# ROUND_RECORD — A3U20261010 Area-3a Use Endpoint
+
+1. **User goal.** Continue the UCT experience–intelligence–self programme from the latest verified A3P state while preserving C1, actual-process grounding, and the separations among organization, finite evidence, abstract model, attribution, selected experience, conceptual self, and report.
+2. **One concrete unresolved question.** What is the smallest same-animal, same-clock endpoint-and-intervention package that can distinguish an area-3a signal actually used by a downstream consumer from a common-cause or perturbation-spillover process that produces the same recorded source, area-3a response, and endpoint contrast?
+3. **Relevant nodes and fixed sources.** A3P:EPISODE_CONTRACT, A3P:USE_TARGET, A3P:C1, A3P:STOP_RULE, A3P:UCT_CONDITIONAL; EIP:C1 and CBI branch/read distinctions; UCT I v1.2 C1/U1; *Experience, Intelligence, Self* D1–D5; the A3P fixed source set and any additional primary sources explicitly scoped this round.
+4. **Planned addition or correction.** Replace the underspecified phrase “predeclared downstream endpoint” with an endpoint causal firewall: an endpoint measured independently of the 3a analysis, source and clock controls, selective region perturbation, an explicit exclusion obligation for direct perturbation-to-endpoint paths, and a path-specific rescue or equivalent discriminating intervention. Construct an exact interventional twin showing why region/sham controls alone do not identify mediation.
+5. **Deliverable.** An English research note, endpoint contract, exact finite structural twins, source scope, gap and claim ledgers, review response, disabled formal-map candidate with whole-map compatibility audit, Chinese handoff, and verified dual-save increment.
+
+## Direction check at selection
+
+The bounded target is positive organization: an actual selected-source → area-3a → downstream-consumer relation that could, under C1 and separate actual-process premises, contribute an experience-internal body/action coordinate. The endpoint package is not a basal-experience gate, does not identify familiar mineness `H`, agency, ownership, conceptual self, or report, and does not make area 3a a unique owner. It makes no determination about the present assistant.

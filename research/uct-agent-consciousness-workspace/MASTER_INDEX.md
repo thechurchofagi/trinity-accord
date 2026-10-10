@@ -1,4 +1,18 @@
-# 最新接续 A3P20261010；完成图仍为 UCT-MAP-v1.1.2
+# 最新接续 A3U20261010；完成图仍为 UCT-MAP-v1.1.2
+
+- [中文交接](records/A3U20261010_Area3a_Use_Endpoint/HANDOFF_ZH.md)
+- [英文研究稿](records/A3U20261010_Area3a_Use_Endpoint/RESEARCH_NOTE.md)
+- [端点合同](records/A3U20261010_Area3a_Use_Endpoint/ENDPOINT_CONTRACT.md)
+- [精确结果](records/A3U20261010_Area3a_Use_Endpoint/EXACT_RESULTS.json)
+- [来源范围](records/A3U20261010_Area3a_Use_Endpoint/SOURCE_SCOPE.md)
+- [地图候选](records/A3U20261010_Area3a_Use_Endpoint/MAP_EXTENSION.json)与[审计](records/A3U20261010_Area3a_Use_Endpoint/MAP_AUDIT.md)
+- [审查回应](records/A3U20261010_Area3a_Use_Endpoint/REVIEW_RESPONSE.md)与[缺口](records/A3U20261010_Area3a_Use_Endpoint/GAP_LEDGER.md)
+
+完成图不变；A3U 是停用的7/3/5候选。核心净结果是完整阻断端点表仍有使用/外溢孪生，救援判别必须带独立排除见证。覆盖v1.0.25，全部开放审查保留。
+
+---
+
+# 前一接续 A3P20261010；完成图仍为 UCT-MAP-v1.1.2
 
 [A3P中文交接](records/A3P20261010_Area3a_Crossed_Probe/HANDOFF_ZH.md) · [英文研究稿](records/A3P20261010_Area3a_Crossed_Probe/RESEARCH_NOTE.md) · [探针合同](records/A3P20261010_Area3a_Crossed_Probe/PROBE_CONTRACT.md) · [精确结果](records/A3P20261010_Area3a_Crossed_Probe/EXACT_RESULTS.json) · [地图审计](records/A3P20261010_Area3a_Crossed_Probe/MAP_AUDIT.md)。本轮纠正 A3S 的过宽表述：Yamada 2016 已有同实验来源×区域诱发响应面；缺的是 3a 局部响应被下游实际使用的因果面。Johnson 2026 单 3a 阵列首先缺邻区消费者对照。A3P 7/2/5 候选停用；完成图不变，覆盖 UCT-PUB-v1.0.24，单篇 HOLD。
 

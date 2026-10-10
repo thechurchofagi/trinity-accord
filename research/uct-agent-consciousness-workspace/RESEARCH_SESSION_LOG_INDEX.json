@@ -1,8 +1,8 @@
 {
   "current_release": "UCT-MAP-v1.1.2",
-  "latest_research": "A3P20261010",
-  "latest_work_log": "records/A3P20261010_Area3a_Crossed_Probe/WORK_LOG.md",
-  "latest_handoff": "records/A3P20261010_Area3a_Crossed_Probe/HANDOFF_ZH.md",
+  "latest_research": "A3U20261010",
+  "latest_work_log": "records/A3U20261010_Area3a_Use_Endpoint/WORK_LOG.md",
+  "latest_handoff": "records/A3U20261010_Area3a_Use_Endpoint/HANDOFF_ZH.md",
   "guide": "RESEARCH_MASTER_GUIDE.md v2.3 sections 0.3–0.6 and 8A",
   "archive": "versions/UCT-MAP-v1.1.2/UCT_MAP_v1.1.2_Capsule.tar.xz",
   "readback": "persistence/UCT-MAP-v1.1.2_RECEIPT.json",
@@ -33,17 +33,18 @@
     "EIP20261010",
     "DVC20261010",
     "A3S20261010",
-    "A3P20261010"
+    "A3P20261010",
+    "A3U20261010"
   ],
   "previous_index": "records/PUB20261009_Publication_Coverage/history/RESEARCH_SESSION_LOG_INDEX.json",
-  "latest_activity": "A3P20261010",
-  "latest_pending_research": "A3P20261010",
+  "latest_activity": "A3U20261010",
+  "latest_pending_research": "A3U20261010",
   "publication_coverage": {
     "entry": "PUBLICATION_COVERAGE.json",
-    "version": "UCT-PUB-v1.0.24",
+    "version": "UCT-PUB-v1.0.25",
     "base_census_version": "UCT-PUB-v1.0.0",
-    "update": "records/A3P20261010_Area3a_Crossed_Probe/PUBLICATION_COVERAGE_UPDATE.json",
-    "report": "publication/UCT-PUB-v1.0.24/COVERAGE_REPORT_ZH.md",
+    "update": "records/A3U20261010_Area3a_Use_Endpoint/PUBLICATION_COVERAGE_UPDATE.json",
+    "report": "publication/UCT-PUB-v1.0.25/COVERAGE_REPORT_ZH.md",
     "nondeductive": true,
     "counting_scope": "Frozen verified corpus plus one independently verified SCU DOI; not a new worldwide census."
   },
@@ -63,5 +64,5 @@
     "scientific_map_admission_changed": false,
     "DVC_in_published_paper": false
   },
-  "latest_persistence_receipt": "records/A3P20261010_Area3a_Crossed_Probe/DUAL_SAVE_RECEIPT.json"
+  "latest_persistence_receipt": "records/A3U20261010_Area3a_Use_Endpoint/DUAL_SAVE_RECEIPT.json"
 }

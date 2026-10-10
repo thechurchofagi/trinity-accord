@@ -1,4 +1,12 @@
-# Current entry — A3P crossed-response correction and actual-use boundary
+# Current entry — A3U area-3a endpoint causal firewall
+
+Read [HANDOFF_ZH](records/A3U20261010_Area3a_Use_Endpoint/HANDOFF_ZH.md), [RESEARCH_NOTE](records/A3U20261010_Area3a_Use_Endpoint/RESEARCH_NOTE.md), [ENDPOINT_CONTRACT](records/A3U20261010_Area3a_Use_Endpoint/ENDPOINT_CONTRACT.md), [EXACT_RESULTS](records/A3U20261010_Area3a_Use_Endpoint/EXACT_RESULTS.json), and [MAP_AUDIT](records/A3U20261010_Area3a_Use_Endpoint/MAP_AUDIT.md). The main result is an exact use/spillover interventional twin and a conditional path-specific rescue boundary. It refines the positive body/action organization programme without identifying `H` or changing basal-experience conditions.
+
+Completed UCT-MAP-v1.1.2 and all six carried open review obligations remain unchanged. A3U is a disabled 7/3/5 candidate; publication coverage is nondeductive v1.0.25.
+
+---
+
+# Previous entry — A3P crossed-response correction and actual-use boundary
 
 Start with the [A3P handoff](records/A3P20261010_Area3a_Crossed_Probe/HANDOFF_ZH.md). Yamada 2016 already supplies a same-experiment source×region evoked-response face, correcting A3S's broader wording. The missing coordinate is a validated area-3a consumer perturbation and predeclared downstream endpoint. Johnson 2026's single area-3a array first fails the requested crossed probe at neighbouring-consumer contrast. The 7/2/5 candidate remains disabled; UCT-MAP-v1.1.2 and C1/U1 are unchanged; coverage is UCT-PUB-v1.0.24.
 

@@ -1,0 +1,14 @@
+{
+  "schema": "uct-publication-claim-delta/1",
+  "coverage_version": "UCT-PUB-v1.0.25",
+  "parent": "UCT-PUB-v1.0.24",
+  "round": "A3U20261010",
+  "claims": [
+    {"id":"A3U-C1","published_coverage":"NONE","status":"NEW_UNPUBLISHED_METHOD_RESULT"},
+    {"id":"A3U-C2","published_coverage":"NONE","status":"NEW_UNPUBLISHED_CONDITIONAL_RESULT"},
+    {"id":"A3U-C3","published_coverage":"NONE","status":"NEW_UNPUBLISHED_METHOD_CORRECTION"},
+    {"id":"A3U-C4","published_coverage":"UCT_FOUNDATIONAL_CONTEXT_ONLY","status":"NEW_APPLICATION_NOT_PUBLISHED"}
+  ],
+  "formal_publication_counts_unchanged": true,
+  "decision": "HOLD_STANDALONE_INTEGRATE_AS_A3P_CAUSAL_FIREWALL_SECTION"
+}

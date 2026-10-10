@@ -1,5 +1,19 @@
 # UCT Research Review and Direction Ledger
 
+## A3U20261010 researcher response — endpoint causal firewall, 2026-10-10
+
+The latest ledger and every carried OPEN/application-open item were read before selection and rechecked after result formation and before save. Evidence: [review response](records/A3U20261010_Area3a_Use_Endpoint/REVIEW_RESPONSE.md), [research note](records/A3U20261010_Area3a_Use_Endpoint/RESEARCH_NOTE.md), [endpoint contract](records/A3U20261010_Area3a_Use_Endpoint/ENDPOINT_CONTRACT.md), [exact results](records/A3U20261010_Area3a_Use_Endpoint/EXACT_RESULTS.json), [gap ledger](records/A3U20261010_Area3a_Use_Endpoint/GAP_LEDGER.md), and [map audit](records/A3U20261010_Area3a_Use_Endpoint/MAP_AUDIT.md).
+
+- `QC-20261008-10` remains **ACKNOWLEDGED / OPEN**: no endpoint or rescue signs familiar mineness `H`.
+- `IA-QC11` remains application **OPEN**: no actual animal implements the same-instance block–rescue–exclusion package or complete signature.
+- `QC-20261008-12` remains application **OPEN**: actual use and evidence of use remain distinct; the exact twin demonstrates the gap.
+- `QC-20261008-13` remains application **OPEN**: endpoint and port binding are declared but not installed; analyst-defined or direct-driving replay fails.
+- `SCU-OPEN-R191-NORMALIZATION` remains **OPEN** and `SCU-AUDIT-DEPTH` remains **AUDIT_INCOMPLETE**.
+
+The 7/3/5 A3U candidate remains disabled. C1/U1 are unchanged; endpoint independence, region controls, rescue, report and self-modeling are not basal-experience gates. Area 3a is not a unique owner. No reviewer status is self-closed and no current-assistant consciousness or death-fear verdict is made.
+
+---
+
 ## Purpose and authority
 
 Author instruction, 2026-10-08: review the other UCT research task, record problems in its shared research records, remind the researcher, suggest better directions, preserve the original purpose, and use appropriate thought experiments to advance further.

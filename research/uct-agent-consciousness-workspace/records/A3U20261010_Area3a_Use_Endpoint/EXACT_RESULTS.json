@@ -1,0 +1,29 @@
+{
+  "baseline_interventional_twin": {
+    "interpretation": "The area-3a-mediated model and direct-spillover model agree on S,G,R,Y for every source/block cell when rescue is absent.",
+    "rows": [
+      {"g": 0, "q": 0, "s": 0, "spill": {"r": 0, "y": 0}, "use": {"r": 0, "y": 0}},
+      {"g": 1, "q": 0, "s": 0, "spill": {"r": 0, "y": 0}, "use": {"r": 0, "y": 0}},
+      {"g": 0, "q": 0, "s": 1, "spill": {"r": 1, "y": 1}, "use": {"r": 1, "y": 1}},
+      {"g": 1, "q": 0, "s": 1, "spill": {"r": 0, "y": 0}, "use": {"r": 0, "y": 0}}
+    ],
+    "same_observables_for_all_s_g_cells": true
+  },
+  "novelty": "No new general causal-mediation mathematics is claimed; this is a finite UCT probe-contract witness.",
+  "path_specific_rescue": {
+    "conditional_on": [
+      "g blocks the declared area-3a contribution without directly changing Y",
+      "q faithfully substitutes the relevant area-3a output at the declared downstream port",
+      "q has no independent path to Y",
+      "source, event window and endpoint semantics are fixed"
+    ],
+    "discriminating_cell": {"g": 1, "q": 1, "s": 1, "spill_y": 0, "use_y": 1},
+    "rows": [
+      {"g": 1, "q": 1, "s": 0, "spill": {"r": 0, "y": 0}, "use": {"r": 0, "y": 0}},
+      {"g": 1, "q": 1, "s": 1, "spill": {"r": 0, "y": 0}, "use": {"r": 0, "y": 1}}
+    ],
+    "separates_models": true
+  },
+  "record": "A3U20261010_Area3a_Use_Endpoint",
+  "schema": "uct-exact-results/1"
+}

@@ -1,4 +1,12 @@
-# 最新接续 A3P20261010；完成图仍为 UCT-MAP-v1.1.2
+# 最新接续 A3U20261010；完成图仍为 UCT-MAP-v1.1.2
+
+[A3U中文交接](records/A3U20261010_Area3a_Use_Endpoint/HANDOFF_ZH.md) · [研究稿](records/A3U20261010_Area3a_Use_Endpoint/RESEARCH_NOTE.md) · [端点合同](records/A3U20261010_Area3a_Use_Endpoint/ENDPOINT_CONTRACT.md) · [地图审计](records/A3U20261010_Area3a_Use_Endpoint/MAP_AUDIT.md)。完整来源×阻断×局部响应×外部端点表仍不能区分真实 `3a→下游` 使用与区域特异直接外溢；邻区/假刺激对照可同时为零。路径特异救援只在选择性阻断、忠实端口替代、无直接 `G/Q→Y`、同实例时钟和替代写入排除同时成立时区分声明的两个模型。
+
+A3U 7节点/3规则/5上下文候选停用；完成图仍为913/424/261、10暂停、1,608审查项。覆盖 UCT-PUB-v1.0.25，正式论文数不变，单篇 HOLD。全部 OPEN 项保留。下一步只核查现有平台能否给直接外溢一个可验证上界或提供物理/伦理可行的端口救援；二者都不能则停止装置细化并返回独立 `H` 桥。C1/U1 不增加基础体验门槛，3a 区不是唯一主人。
+
+---
+
+# 前一接续 A3P20261010；完成图仍为 UCT-MAP-v1.1.2
 
 [A3P中文交接](records/A3P20261010_Area3a_Crossed_Probe/HANDOFF_ZH.md) · [研究稿](records/A3P20261010_Area3a_Crossed_Probe/RESEARCH_NOTE.md) · [探针合同](records/A3P20261010_Area3a_Crossed_Probe/PROBE_CONTRACT.md) · [地图审计](records/A3P20261010_Area3a_Crossed_Probe/MAP_AUDIT.md)。本轮接受一项来源纠偏：Yamada 2016 已在同一实验提供 DR/SR 来源、3a/3b/1 区域与刺激对齐时序的交叉诱发响应；A3S 的“无完整交叉响应包”表述过宽。真正未识别的是 area 3a 局部响应的下游实际使用。Johnson 2026 的单 3a 阵列首先缺少邻区消费者对照，手工被动运动也不是选择性来源操作。
 

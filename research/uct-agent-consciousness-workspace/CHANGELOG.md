@@ -1,3 +1,9 @@
+## A3U20261010 — endpoint causal firewall and path-specific rescue boundary
+
+Added an exact full-intervention twin: genuine area-3a-mediated use and an area-3a-specific direct perturbation-to-endpoint path agree on every source-by-block local-response/endpoint cell, even with null neighbour/sham controls. Added a conditional path-specific rescue discriminator with explicit block/replay exclusion premises, endpoint contract, gap/claim ledgers and disabled 7-node/3-rule/5-context candidate. Completed UCT-MAP-v1.1.2, C1/U1 and publication counts are unchanged; nondeductive coverage advances to UCT-PUB-v1.0.25. All OPEN reviews remain open.
+
+---
+
 ## A3P20261010 — crossed-response correction and actual-use boundary
 
 Corrected A3S's overbroad empirical wording: Yamada 2016 already supplies a same-experiment DR/SR by 3a/3b/1 evoked-response face with event alignment. The remaining open coordinate is consumer-specific downstream use. Audited the 2026 single-area-3a-array installation and located its first structural failure for the requested crossed probe at neighbouring-consumer contrast. Added an exact four-completion missing-use-face witness, probe contract, gap ledger and disabled 7-node/2-rule/5-context candidate. Completed UCT-MAP-v1.1.2, C1/U1 and publication counts are unchanged; coverage advances nondeductively to UCT-PUB-v1.0.24. All OPEN reviews remain open.

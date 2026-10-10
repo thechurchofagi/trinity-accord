@@ -1,0 +1,46 @@
+{
+  "schema": "uct-claim-ledger/1",
+  "record": "A3U20261010_Area3a_Use_Endpoint",
+  "claims": [
+    {
+      "id": "A3U-C1",
+      "type": "FINITE_NEGATIVE_RESULT",
+      "statement": "A complete randomized S-by-G table of local response and independently acquired endpoint does not identify area-3a mediation when an area-3a-specific direct perturbation-to-endpoint path is allowed.",
+      "domain": "declared binary use-versus-spill structural model class",
+      "premises": ["fixed S,G,R,Y semantics", "direct G-to-Y path allowed", "no path-specific rescue"],
+      "evidence": "RESEARCH_NOTE.md §2; EXACT_RESULTS.json; check_endpoint_twins.py",
+      "counterexample": "use and spill models have identical observables in all four S-by-G cells",
+      "status": "EXACT_CONDITIONAL"
+    },
+    {
+      "id": "A3U-C2",
+      "type": "FINITE_CONDITIONAL_DISCRIMINATION",
+      "statement": "A faithful path-specific rescue separates the two declared models at S=G=Q=1.",
+      "domain": "the same binary two-model class",
+      "premises": ["selective block", "faithful downstream-port replay", "no direct G/Q-to-Y path", "fixed source/clock/endpoint"],
+      "evidence": "RESEARCH_NOTE.md §3; EXACT_RESULTS.json; ENDPOINT_CONTRACT.md",
+      "counterexample": "a replay that directly drives Y invalidates the interpretation",
+      "status": "EXACT_CONDITIONAL_ACTUAL_PREMISES_OPEN"
+    },
+    {
+      "id": "A3U-C3",
+      "type": "METHOD_RESULT",
+      "statement": "Endpoint independence and neighbour/sham controls are necessary but not sufficient for an area-3a-mediated-use claim; an independently grounded exclusion witness is required.",
+      "domain": "the declared probe contract",
+      "premises": ["A3U-C1", "same-instance causal semantics"],
+      "evidence": "ENDPOINT_CONTRACT.md; RESEARCH_NOTE.md §§2–3",
+      "counterexample": "area-3a-specific off-target pathway",
+      "status": "BOUNDED_METHOD_CONCLUSION"
+    },
+    {
+      "id": "A3U-C4",
+      "type": "UCT_CONDITIONAL_INTERPRETATION",
+      "statement": "A grounded selected-source-to-area-3a-to-downstream-use relation may contribute an experience-internal organizational coordinate under C1 without becoming a basal gate or an identity with familiar mineness.",
+      "domain": "independently admitted actual process and complete signature",
+      "premises": ["A:C1", "actual bearer/interval/signature", "actual route membership", "separate target bridge"],
+      "evidence": "RESEARCH_NOTE.md §4",
+      "counterexample": "matched table with rewired or observer-only use",
+      "status": "ACTUAL_PREMISES_OPEN"
+    }
+  ]
+}
