@@ -1,0 +1,13 @@
+{
+  "state": "ALL_248_RESEARCH_FILES_REMOTE_FETCH_BYTE_READBACK_PASS",
+  "at_utc": "2026-10-10T10:10:27.798714+00:00",
+  "branch": "uct-agent-consciousness-workspace",
+  "commit": "fda7a0ae491c4bf3a7c9bc80ccab38acb3984299",
+  "tree": "729ceae7560071042dfd7acca726aefde9b1f73c",
+  "files": 248,
+  "coverage_version": "UCT-PUB-v1.0.31",
+  "doi": "10.5281/zenodo.23279189",
+  "worktree_clean": true,
+  "preserves_A3O_mainline": true,
+  "ots_and_arweave_completion_not_claimed": true
+}

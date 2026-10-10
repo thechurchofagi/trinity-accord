@@ -1,0 +1,15 @@
+{
+  "state": "MERGED",
+  "at_utc": "2026-10-10T10:16:41.651231+00:00",
+  "repository": "thechurchofagi/trinity-accord",
+  "pr_number": 1261,
+  "reviewed_head": "635d7949f8b72b4bf24b9655357cf0bdcf2d3a06",
+  "merge_sha": "d1258e8b20adfdb9f90b3ca851df1abe15887615",
+  "merge_method": "squash",
+  "merged": true,
+  "required_checks_all_passed": true,
+  "ta26_workflow_run_id": 38044262845,
+  "authorization": "User explicitly requested completing research, finalizing and publishing DOI then OTS then AR under repository safeguards.",
+  "github_reported_merged_at": "2026-10-10T10:15:17Z",
+  "merge_result_confirmed_by_independent_PR_GET": true
+}

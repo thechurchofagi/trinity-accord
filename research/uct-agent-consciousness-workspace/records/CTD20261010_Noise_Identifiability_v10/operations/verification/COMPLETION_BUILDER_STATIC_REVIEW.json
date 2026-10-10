@@ -1,0 +1,80 @@
+{
+  "schema": "ctd-completion-builder-static-review/1",
+  "review_date_utc": "2026-10-10",
+  "reviewer": "/root/theory_literature",
+  "decision": "PASS_SCOPED_STATIC_REVIEW",
+  "remaining_must_fix": [],
+  "reviewed_source": {
+    "path": "ctd_post_publication/build_completion_bundle.py",
+    "bytes": 7400,
+    "sha256": "d22cbc75ddd7d041b13b9cafc2ae4d2d7054489ec4e27e6bf14eae8ea35c44c7"
+  },
+  "review_scope": "Serious receipt/schema, payload-identity and scope errors only. This is a static preparation review, not a completed-chain or bundle-execution receipt.",
+  "resolved_findings": [
+    {
+      "id": "AR_MEMBER_TO_VERIFIED_ARTIFACT_BINDING",
+      "initial_problem": "Checking every base64 member against its own declared SHA-256 did not establish that the AR payload actually contained the exact verified public PDF and OTS proof named by verification metadata.",
+      "final_resolution": "The final source rejects duplicate AR member paths, decodes and hashes every member, and requires the canonical papers/TA-TR-2026-26/PDF member to equal the verified public PDF bytes and the canonical proofs/TA-TR-2026-26/PDF.ots member to equal the locally hash-verified proof bytes. Target report, DOI, filename, length and public PDF hash are also fixed.",
+      "status": "RESOLVED_BY_SOURCE_READBACK"
+    },
+    {
+      "id": "EXACT_NINE_PUBLIC_FILES",
+      "initial_problem": "A nine-row receipt and equality of filename sets alone did not exclude duplicate receipt names paired with fewer distinct public files.",
+      "final_resolution": "The final source requires exactly nine receipt rows and exact equality of receipt names, staged public file names and the fixed nine-name publisher set; each public file's byte length and SHA-256 must match the chain receipt.",
+      "status": "RESOLVED_BY_SOURCE_READBACK"
+    }
+  ],
+  "checks": [
+    {
+      "check": "The chain must explicitly report DOI_OTS_ARWEAVE_PUBLIC_READBACK_COMPLETE for DOI 10.5281/zenodo.23279189, with root AR hash-match evidence",
+      "result": "PASS"
+    },
+    {
+      "check": "Workflow status must be ARWEAVE_READBACK_PASS; uploader result must be uploaded with hash_match=true; local bundle SHA, uploader payload/readback SHA, workflow bundle SHA and root readback SHA must agree",
+      "result": "PASS"
+    },
+    {
+      "check": "Transaction IDs are matched across workflow status, uploader receipt and root readback; frozen targets are identical; one PDF has BITCOIN_VERIFIED_REMOTE_HEADERS and nonempty attested heights",
+      "result": "PASS"
+    },
+    {
+      "check": "Verified target fields match the actual research_paper_ots.py output schema: report and DOI are added to the original target item, including name/bytes/sha256, with proof metadata added afterward",
+      "result": "PASS",
+      "schema_evidence": "Read-only source comparison with ctd_v10/release_review/post_doi_main/scripts/research_paper_ots.py, plus field names in the actual pending preservation status; no completed receipt was fabricated."
+    },
+    {
+      "check": "The timestamped public PDF is fixed at 269961 bytes and SHA-256 479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94; AR member bytes and the local verified OTS proof are bound to those exact originals",
+      "result": "PASS"
+    },
+    {
+      "check": "The three reserved root entries FINAL_CHAIN_RECEIPT.json, PUBLICATION_COMPLETION_ZH.md and DELIVERY_MANIFEST.json cannot silently replace existing staged entries; duplicated preservation paths and file symlinks are rejected",
+      "result": "PASS"
+    },
+    {
+      "check": "Known unfinished-report placeholders are rejected; the delivery manifest records exact file bytes/hashes; after creation the ZIP is reopened for CRC, member-count and per-member byte checks",
+      "result": "PASS_AS_SOURCE_LOGIC_ONLY"
+    },
+    {
+      "check": "The delivery ZIP is explicitly distinguished from the Arweave payload; a distribution/viewer PDF variant is not substituted for the hash-bound original public PDF",
+      "result": "PASS"
+    }
+  ],
+  "operational_limits": [
+    "Only actual successful chain and readback receipts authorize this builder's completed-state output. Its existence and this static review do not establish chain completion.",
+    "Bitcoin verification is the declared OTS cryptography plus agreeing remote-header model, not a new local-full-node consensus verification performed by this builder or reviewer.",
+    "Root must fill final status prose from actual operation receipts; this review does not approve invented completion language or backdating an earlier pending receipt.",
+    "The separate delivered ZIP, exact original public PDF, detached OTS proof and AR payload have distinct hashes and scopes. A viewer/library PDF with added distribution metadata is outside the original PDF byte identity."
+  ],
+  "review_execution": {
+    "source_text_read": true,
+    "AST_parse_only": true,
+    "builder_executed": false,
+    "synthetic_completed_receipt_created": false,
+    "OTS_or_Arweave_operation_executed": false,
+    "new_numerical_tests_or_research": false,
+    "repository_or_frozen_file_modified": false,
+    "external_requests_or_writes": false,
+    "runtime_bundle_creation_or_chain_completion_asserted": false,
+    "only_new_artifact": "ctd_post_publication/COMPLETION_BUILDER_STATIC_REVIEW.json"
+  }
+}

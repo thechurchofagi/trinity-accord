@@ -1,0 +1,7 @@
+{
+  "state": "EXACT_PUBLIC_TARGETS_COMMITTED_AND_REMOTE_READBACK_PASS",
+  "commit": "20079ae38a190600a7d8dbef5d1340838ed5042a",
+  "targets_sha256": "70b025f376e56c6547bbcb64243707661c193074320333601b9e154d64051ae8",
+  "doi": "10.5281/zenodo.23279189",
+  "scheduler_pr": 1261
+}

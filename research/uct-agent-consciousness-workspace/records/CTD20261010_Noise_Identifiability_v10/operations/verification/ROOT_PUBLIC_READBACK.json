@@ -1,0 +1,12 @@
+{
+  "state": "ROOT_ANONYMOUS_RECORD_AND_PDF_READBACK_PASS",
+  "at_utc": "2026-10-10T09:59:05.274349+00:00",
+  "record_id": 23279189,
+  "doi": "10.5281/zenodo.23279189",
+  "record_url": "https://zenodo.org/records/23279189",
+  "record_json_sha256": "29d5bc3233ef113a95a739759b72ba27be1b44ed59fa5296f80f080ccceb375a",
+  "authenticated": false,
+  "public_files": 9,
+  "pdf_bytes": 269961,
+  "pdf_sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94"
+}

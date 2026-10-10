@@ -1,0 +1,9 @@
+{
+  "state": "IMMUTABLE_STAGED_TREE_ALL_248_ENTRIES_MATCH_PAYLOAD",
+  "at_utc": "2026-10-10T10:08:20.564744+00:00",
+  "head": "5f0c7a4f1cb417500f5fadc822dbec3a6f06c4d2",
+  "expected_tree": "729ceae7560071042dfd7acca726aefde9b1f73c",
+  "payload_sha256": "e634b80544ed0bb14e8390ea94e54539f2335fc88e5366f4293eeba332c8508d",
+  "file_count": 248,
+  "check_scope": "Root independent immutable tree check after the initial successful helper run; later helper source also incorporates this check. No claim that the earlier run used the later hardened source."
+}

@@ -1,0 +1,220 @@
+{
+  "schema": "ctd.ta26-bound-scheduler-review.v1",
+  "state": "PASS_STATIC_REVIEW_AFTER_GUARD_REMEDIATION",
+  "reviewed_at_utc": "2026-10-10T09:54:57.066097+00:00",
+  "reviewer": "/root/theory_breakthrough",
+  "scope": "Independent read-only binding, control-flow, helper-source and offline resolver-fixture review. No publication, timestamp, wallet access, upload, workflow dispatch, Git mutation, or repository edit was performed by this review.",
+  "publication_identity": {
+    "report": "TA-TR-2026-26",
+    "doi": "10.5281/zenodo.23279189",
+    "record_id": 23279189,
+    "publication_actions_run_provided_by_parent": 38042692735,
+    "publication_success_independently_verified_here": false
+  },
+  "actual_workflow": {
+    "path": "/workspace/scratch/5b73aae6b1e4/ctd_scheduler_repo/.github/workflows/research-paper-26-v100-ots-arweave-scheduler.yml",
+    "bytes": 10799,
+    "sha256": "eb768eaccff67d5830eb8b51de56d9f6883131e1e107e8ffcebc0e1aa6b16923",
+    "intended_main_path": ".github/workflows/research-paper-26-v100-ots-arweave-scheduler.yml",
+    "target_branch": "research/ctd-noise-identifiability-v100-20261010",
+    "installed_externally_by_this_review": false
+  },
+  "provenance": {
+    "template_path": "/workspace/scratch/5b73aae6b1e4/ctd_v10/release_review/TA26_PRESERVATION_TEMPLATE/research-paper-26-v100-ots-arweave-scheduler.yml.template",
+    "template_sha256": "c4af8a41ed74421f47e4ee792a1671e4ed43afde6875d341f4edfc762c2f813b",
+    "template_placeholder_occurrences_including_removed_comment": 7,
+    "actual_code_id_substitutions": 6,
+    "initial_bound_bytes": 10551,
+    "initial_bound_sha256": "d89a337565d71fadf4643d4bcf6b37b3efe74110d95b3f106e314b915e98c089",
+    "helper_git_commit": "a9ef8111bc9b9d909e143ab64cf7d676a06a0deb",
+    "scheduler_main_baseline_commit": "6cfb89f0b88605da9a44da9c97203729a6742894",
+    "reviewed_git_objects": [
+      {
+        "path": "scripts/research_paper_ots.py",
+        "bytes": 15537,
+        "sha256": "205075a17901ebb138fa7302f4c7036861649033fcae16145624dd01566c0022",
+        "same_in_scheduler_main_baseline": true
+      },
+      {
+        "path": "scripts/research_arweave_allowance.mjs",
+        "bytes": 2404,
+        "sha256": "aa955236127b437aa780facc7accddc51b08acc4f51e1b66c7d0a033b6c6cb05",
+        "same_in_scheduler_main_baseline": true
+      },
+      {
+        "path": "scripts/research_paper_budget.mjs",
+        "bytes": 2969,
+        "sha256": "fb238e0e391d871d904e3d21d9e6b6b728353efe22b08e9b5aafb106ec5a1d9b",
+        "same_in_scheduler_main_baseline": true
+      },
+      {
+        "path": "scripts/arweave_runtime_spend_guard.mjs",
+        "bytes": 6579,
+        "sha256": "53d6e8c6e2d4f4c3b6065c5a144aca6cda35f71503f20ec4228baaa1b89aa4cd",
+        "same_in_scheduler_main_baseline": true
+      },
+      {
+        "path": "scripts/arweave_upload_payload.mjs",
+        "bytes": 10888,
+        "sha256": "182be7301f19df56767a24ab61dfcb21953de7810b3d876344560e8dca59e9a7",
+        "same_in_scheduler_main_baseline": true
+      },
+      {
+        "path": "scripts/bitcoin_esplora_rpc_proxy.py",
+        "bytes": 11310,
+        "sha256": "e1a295a3ac01fab1e303277dbd858545f3926b9d6246aeced94ee4eb0b8d7405",
+        "same_in_scheduler_main_baseline": true
+      },
+      {
+        "path": "scripts/arweave_spend_budget_helpers.mjs",
+        "bytes": 4354,
+        "sha256": "f13ea6cf9249998f41893cc5c6de064a6e7f43aeb0d95191b5b4dd3ef6a485dc",
+        "same_in_scheduler_main_baseline": true
+      },
+      {
+        "path": "tests/test_research_paper_ots.py",
+        "bytes": 5725,
+        "sha256": "28a12f38f929e987c3867ec395e1cbddd20501a1301d491a63f943f8a4321b3a",
+        "same_in_scheduler_main_baseline": true
+      },
+      {
+        "path": "requirements-ots.txt",
+        "bytes": 29,
+        "sha256": "423c11ea9c31cde33ea7c0e16df6bc0df4b088c46f76bfcdda29783ce2398f6e",
+        "same_in_scheduler_main_baseline": true
+      },
+      {
+        "path": ".node-version",
+        "bytes": 8,
+        "sha256": "b2aec884ec0d77122defe641079e30dedc8ffbe11edd5ec299e768d1c6b0dadc",
+        "same_in_scheduler_main_baseline": true
+      },
+      {
+        "path": "record-chain/arweave-wallet-ledger.json",
+        "bytes": 84665,
+        "sha256": "2c4ee3092117f5aad9416b18997b3e7fcd13aa5d060a722b5c57f9f60d744579",
+        "same_in_scheduler_main_baseline": true
+      }
+    ]
+  },
+  "finding_and_remediation": {
+    "initial_finding": "The unmodified inherited template recorded DOI resolver failures but did not block OTS or paid work; its main restriction applied at the paid allowance, not at the whole job. It therefore did not satisfy the requested stronger sequencing gates.",
+    "reported_to_parent_before_installation": true,
+    "parent_remediation": "The parent added the explicit main-only job predicate and a nonzero exit after persisting any unsuccessful exact-record resolver result. No inherited preservation/payment mechanisms were altered.",
+    "independent_recheck": "The final byte-level diff contains only those two guard changes beyond the authorized ID binding and draft-comment removal. Both are present in the final reviewed hash.",
+    "resolved": true
+  },
+  "checks": [
+    {
+      "id": "BINDING",
+      "state": "PASS",
+      "detail": "The final actual file is exactly the inherited template with its draft-only first comment removed, six remaining ID placeholders replaced by 23279189, and the two documented guard additions. No inherited OTS, spending, intent, upload, or recovery code changed."
+    },
+    {
+      "id": "MAIN_EVENT_AND_CHECKOUT",
+      "state": "PASS",
+      "detail": "The preserve job explicitly requires github.ref == refs/heads/main. Push is restricted to main and this workflow path; hourly cron is 07 * * * *. The authenticated workflow_dispatch actor allowlist is retained. The pinned checkout selects research/ctd-noise-identifiability-v100-20261010. GITHUB_REF_NAME is not assigned or spoofed. The independent allowance also requires the actual GITHUB_REF_NAME to equal main before any paid path."
+    },
+    {
+      "id": "DOI_RESOLVER_GATE",
+      "state": "PASS_AFTER_REMEDIATION",
+      "detail": "Credential-free resolution must return HTTP 200 on zenodo.org with exact /records/23279189 or /record/23279189 landing path. The result is written before a nonzero exit unless RESOLVER_PASS and matches_record is exactly true. Normal later steps, including OTS and paid upload, are therefore blocked on failure. Six wholly offline control-flow fixtures passed; no real URL was requested."
+    },
+    {
+      "id": "EXACT_PUBLIC_PDF_GATE",
+      "state": "PASS_CONDITIONAL_ON_REGISTERED_TARGETS",
+      "detail": "Before lifecycle work, the exact single report and DOI are checked. With the mandatory integer bytes field preserved in targets, validate_config compares report, integer record ID, DOI, version, title, and exact PDF filename/bytes/SHA against the publisher public-readback receipt. The initial stamp and frozen bundle construction fetch the anonymous Zenodo PDF and verify its SHA256 and PDF signature; an existing proof is checked directly against the same frozen digest. A cached PDF is rehashed. Exact configured target and receipt registration must precede installation."
+    },
+    {
+      "id": "BITCOIN_BEFORE_PAYMENT",
+      "state": "PASS",
+      "detail": "Only ready=true enables the budget/paid sequence. New ready=true requires every exact target proof to pass SHA256 binding plus OTS verify with zero exit and Bitcoin-success output. The proxy requires agreement by Blockstream and mempool for target block hashes and 80-byte headers and locally rehashes each header. Pending calendar or merely embedded Bitcoin attestations are insufficient. A known paid transaction may resume only from the hash-bound frozen bundle whose prior per-target states were BITCOIN_VERIFIED_REMOTE_HEADERS. This is remote-header verification, not local full-node consensus."
+    },
+    {
+      "id": "STRICT_CUMULATIVE_PAPER_BUDGET",
+      "state": "PASS_CONDITIONAL_ON_TRUTHFUL_LEDGER",
+      "detail": "The live transaction-post hook derives report@doi keys from the payload and rejects prior paid total plus quoted reward >= 100000000000 winston (0.1 AR). It charges a shared bundle fully to each included paper. Unknown/duplicate/zero paper fees and unresolvable historical publication identities fail closed. A known existing transaction resumes readback without charging a new fee. Single transaction reward <= 0.099999999999 AR, remaining wallet reserve >= 0.25 AR, rolling 30-day spend <= 0.50 AR, and configured payload <= 4 MiB remain enforced. The target branch must retain all genuine relevant spending receipts and the current wallet ledger; this audit does not attest to a live balance or ledger freshness after the audited commit."
+    },
+    {
+      "id": "DURABLE_PAID_INTENT_AND_NO_BLIND_RETRY",
+      "state": "PASS",
+      "detail": "The payload SHA-bound intent is committed and pushed to the CTD branch before any new paid uploader call. Failure of that push blocks upload. Existing intent without a transaction ID aborts; changed payload or a transaction without its intent aborts. The uploader with a matching retained transaction ID uses only its readback path and does not call create/sign/post again. A first successful post records its transaction ID immediately, before later balance/readback work. If the runner dies between a possibly accepted post and receipt recovery, the persisted intent prevents a blind retry; manual recovery remains necessary."
+    },
+    {
+      "id": "DURABLE_FAILURE_CHECKPOINTS",
+      "state": "PASS",
+      "detail": "For an incomplete batch, artifact upload and state commit both use always(). A resolver failure occurs before the batch done output exists, so done != true still holds and the written resolver receipt/target directory are retained. The commit adds only this batch plus the existing wallet-ledger/status files, uses normal push and bounded fetch/rebase retry, and never force-pushes. Non-main events skip the entire job. Artifact retention is 90 days; durable Git receipt commits provide separate retention."
+    },
+    {
+      "id": "HOURLY_CONTINUATION_AND_COMPLETION",
+      "state": "PASS_WITH_STATED_LIMITS",
+      "detail": "The real main workflow schedules an attempt hourly at minute 07, serialized by main-write-lock with queue max and cancel-in-progress false. Pending OTS can mature across runs; a known paid transaction can resume readback. Completion requires ARWEAVE_READBACK_PASS and matching bundle/public readback SHA256. A completed batch does not stamp or upload again. Resolver outages, branch/budget failures, uncertain paid intents, runner cancellation, or missing artifacts may defer or require recovery; hourly scheduling is not a guarantee of completion."
+    },
+    {
+      "id": "PINNING_AND_FORMAT",
+      "state": "PASS",
+      "detail": "YAML parsed successfully using BaseLoader; all four external Actions uses are pinned to full 40-character commit hashes. Python uses requirements-ots.txt with opentimestamps-client==0.7.2; Node uses .node-version 22.22.1 and npm ci. A focused inherited OTS unittest command remains in the actual workflow. The audit did not execute that operational workflow.",
+      "pinned_action_count": 4
+    }
+  ],
+  "offline_resolver_fixtures": [
+    {
+      "case": "exact_record",
+      "halts_downstream": false,
+      "receipt_written_before_halt": true,
+      "state": "RESOLVER_PASS",
+      "pass": true
+    },
+    {
+      "case": "legacy_exact_record",
+      "halts_downstream": false,
+      "receipt_written_before_halt": true,
+      "state": "RESOLVER_PASS",
+      "pass": true
+    },
+    {
+      "case": "wrong_record",
+      "halts_downstream": true,
+      "receipt_written_before_halt": true,
+      "state": "RESOLVER_TARGET_MISMATCH",
+      "pass": true
+    },
+    {
+      "case": "wrong_host",
+      "halts_downstream": true,
+      "receipt_written_before_halt": true,
+      "state": "RESOLVER_TARGET_MISMATCH",
+      "pass": true
+    },
+    {
+      "case": "non_200",
+      "halts_downstream": true,
+      "receipt_written_before_halt": true,
+      "state": "RESOLVER_TARGET_MISMATCH",
+      "pass": true
+    },
+    {
+      "case": "request_exception",
+      "halts_downstream": true,
+      "receipt_written_before_halt": true,
+      "state": "RESOLVER_CHECK_PENDING",
+      "pass": true
+    }
+  ],
+  "installation_preconditions": [
+    "A successful actual publication receipt with exact public PDF readback must be committed at research/noise-identifiability-bodily-judgments/publication-record.json on the CTD target branch before installing this main workflow.",
+    "Bind research/paper-timestamps/2026-10-10-paper26-v100/targets.json using record 23279189, DOI 10.5281/zenodo.23279189, exact published filename, integer bytes, and full PDF SHA256 from that receipt; keep the bytes field so the strict validator applies.",
+    "The target branch checkout must contain the reviewed compatible helper scripts, pinned dependencies, exact targets/receipt, and truthful up-to-date relevant wallet spending ledger. Do not clear or weaken spending history.",
+    "Installing the workflow on main is a live push-trigger operation, not merely documentation registration. This static PASS alone does not establish that publication, DOI resolution, Bitcoin verification, or Arweave readback has occurred."
+  ],
+  "scope_limits": [
+    "The preservation bundle contains the released PDF, its OTS proof(s), and preservation manifest; it does not automatically include the full reproducibility ZIP.",
+    "Bitcoin verification uses the explicitly declared two-provider remote-header transport, not a locally synchronized consensus node.",
+    "No paid action was attempted and no live quote, balance, DOI landing page, Zenodo public byte readback, or GitHub execution result was independently queried by this review.",
+    "The final generic iteration log is not a completion receipt; use the durable ARWEAVE_READBACK_PASS state with exact readback hashes."
+  ],
+  "unresolved_blocking_findings": [],
+  "external_mutations": false,
+  "repository_files_modified": false,
+  "scientific_files_modified": false
+}

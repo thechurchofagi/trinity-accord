@@ -1,0 +1,22 @@
+{
+  "state": "PINNED_LIBRARY_BYTE_READBACK_PASS",
+  "master_version": 86,
+  "files": [
+    {
+      "name": "UCT_Hourly_Research_Master_Handoff.md",
+      "path": "/workspace/scratch/5b73aae6b1e4/library_readback_ctd/UCT_Hourly_Research_Master_Handoff.md",
+      "bytes": 739337,
+      "sha256": "96ba1397d547246adc01b596645260239cd6540ed69bce1f87aa311eb941d848",
+      "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+      "identity_xattr_verified": true
+    },
+    {
+      "name": "CTD_Noise_Identifiability_v1.0.0_Reproducibility.zip",
+      "path": "/workspace/scratch/5b73aae6b1e4/library_readback_ctd/CTD_Noise_Identifiability_v1.0.0_Reproducibility.zip",
+      "bytes": 3238582,
+      "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+      "library_file_id": "libfile_0e1f2a9d53808191aeed32283eec3ef4",
+      "identity_xattr_verified": true
+    }
+  ]
+}

@@ -1,0 +1,235 @@
+{
+  "schema": "ctd-exact-doi-bound-text-review/1",
+  "reviewed_utc": "2026-10-10T09:44:20.115126+00:00",
+  "reviewer": "theory_breakthrough; independent internal text and byte-identity review",
+  "status": "PASS",
+  "unresolved_findings": [],
+  "publication_state": {
+    "doi": "10.5281/zenodo.23279189",
+    "record_id": 23279189,
+    "state_supplied_by_preparation": "reserved; not yet published",
+    "live_publication_status_queried": false,
+    "publication_success_claimed": false
+  },
+  "scope": "Exact prepared files and their text/hash relationship to the reviewed scientific source. No external request/write, publication action, scientific rerun, or page-by-page visual QA is performed.",
+  "expected_manifest": {
+    "path": "/workspace/scratch/5b73aae6b1e4/ctd_release_repo/research/noise-identifiability-bodily-judgments/EXPECTED-PUBLICATION.json",
+    "sha256": "0c0d2fb0261c67c1b06819586aa3f1a6fe0eda4d5c15aeab0fbb3ae06af7685a",
+    "expected_hash_match": true,
+    "file_count": 9
+  },
+  "file_checks": [
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 1424,
+      "sha256": "23dff3138f77e15da819e44ea279613a28db0a0851a53954ab2bf4f86976d29f",
+      "manifest_match": true
+    },
+    {
+      "name": "REVIEW-AND-SOURCES.md",
+      "bytes": 8359,
+      "sha256": "472dad1ae8beb49fe0f31993ad698953cad787047c4a17e3b98797c8b3ccf0a9",
+      "manifest_match": true
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 739,
+      "sha256": "76d54b2580071308cb7ad572a4e6af5c810a106fdafb1d2fd1c185884d06c718",
+      "manifest_match": true
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 355,
+      "sha256": "e8a4e5c1f69e5394dcacb6d220e180b52af7e9a2b5f843191cd0fb66c457974b",
+      "manifest_match": true
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 498,
+      "sha256": "18e213dcd79bceb790b48bfe354fadc6fbe0baf5091135d79dce9ee91c11b1c0",
+      "manifest_match": true
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 289,
+      "sha256": "ed067583e9294147420e1b87ec133853fe5523f60c220d9fb7b5b672c4bfc8ed",
+      "manifest_match": true
+    },
+    {
+      "name": "noise-identifiability-bodily-judgments-v1.0.0.md",
+      "bytes": 61049,
+      "sha256": "031a5881915e32057816070b029ebac566b39d325ee4c8a68485c199d90a77f9",
+      "manifest_match": true
+    },
+    {
+      "name": "noise-identifiability-bodily-judgments-v1.0.0.pdf",
+      "bytes": 269961,
+      "sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94",
+      "manifest_match": true
+    },
+    {
+      "name": "reproducibility-v1.0.0.zip",
+      "bytes": 3238582,
+      "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+      "manifest_match": true
+    }
+  ],
+  "checksum_file": {
+    "path": "SHA256SUMS.txt",
+    "eight_other_files_verified": true,
+    "self_hash_covered_by_expected_manifest": true
+  },
+  "source_input_checks": [
+    {
+      "path": "source-main.md",
+      "bytes": 61053,
+      "sha256": "2d1add95023a7069b2e2d0a1a66de9505e78c0329ac599cc712356f3d23c1ba5",
+      "manifest_match": true
+    },
+    {
+      "path": "build_pdf.py",
+      "bytes": 1465,
+      "sha256": "1f7b348bbb493e8cc869a76bbdf68074c72707ce93ea7695c0303d425698eee1",
+      "manifest_match": true
+    },
+    {
+      "path": "reproducibility-v1.0.0.zip",
+      "bytes": 3238582,
+      "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+      "manifest_match": true
+    },
+    {
+      "path": "REVIEW-AND-SOURCES.md",
+      "bytes": 8359,
+      "sha256": "472dad1ae8beb49fe0f31993ad698953cad787047c4a17e3b98797c8b3ccf0a9",
+      "manifest_match": true
+    },
+    {
+      "path": "publication.py",
+      "bytes": 28750,
+      "sha256": "c55b188787dce0a3bd687d18ef1430e1dd3050b0629067157ef29064bae5e4ac",
+      "manifest_match": true
+    },
+    {
+      "path": "pdf_style.tex",
+      "bytes": 842,
+      "sha256": "30dcf54c2f9f5a8b44e2348c546d4a290077e2bce324a05449e78f2ca657b60f",
+      "manifest_match": true
+    },
+    {
+      "path": "figures/figure1_audit.pdf",
+      "bytes": 28752,
+      "sha256": "ac5d94025b6df6e77997dde6628fe7acf10811062cbf430633d7beff0cdb4781",
+      "manifest_match": true
+    },
+    {
+      "path": "figures/figure2_twins.pdf",
+      "bytes": 31170,
+      "sha256": "f50e2291da8e8d2445a6bfed3c2dbdb2efe1b4c4cfb5ea794d4c8f25df3d94f1",
+      "manifest_match": true
+    },
+    {
+      "path": "figures/figure3_identification.pdf",
+      "bytes": 34721,
+      "sha256": "8c6d2798802c7f847c00de4f20c8bce3f7bd938a9aded7ba98ad816b39c61108",
+      "manifest_match": true
+    },
+    {
+      "path": "figures/figure4_finite_sample.pdf",
+      "bytes": 29699,
+      "sha256": "64036c928d2a46e230696e7413e96ce43d68b014046e6f185a397aebcd9a1a2f",
+      "manifest_match": true
+    }
+  ],
+  "markdown_identity": {
+    "frozen_source_bytes": 61065,
+    "frozen_source_sha256": "6bc9dad5add7612735358236c9b7533cc8f54f6aa535443ee2d9e9f5d219c734",
+    "prepared_markdown_bytes": 61049,
+    "prepared_markdown_sha256": "031a5881915e32057816070b029ebac566b39d325ee4c8a68485c199d90a77f9",
+    "allowed_transformations": [
+      {
+        "old": "__DOI_RESERVED_AT_RELEASE__",
+        "new": "10.5281/zenodo.23279189",
+        "occurrences": 1,
+        "reason": "Real reserved DOI supplied by preparation."
+      },
+      {
+        "old": "../figures/",
+        "new": "figures/",
+        "occurrences": 4,
+        "reason": "Relative attachment paths from manuscript subdirectory to release-root Markdown; figure bytes unchanged."
+      }
+    ],
+    "no_other_byte_changes": true,
+    "inverse_transform_reproduces_frozen_source_exactly": true,
+    "author_title_and_body_claims_unchanged": true,
+    "reference_section_byte_identical": true,
+    "display_math_blocks_unchanged": 29,
+    "all_other_inline_math_and_prose_unchanged_by_whole_document_identity": true
+  },
+  "figures": [
+    {
+      "figure": 1,
+      "name": "figure1_audit.pdf",
+      "sha256": "ac5d94025b6df6e77997dde6628fe7acf10811062cbf430633d7beff0cdb4781",
+      "byte_identical_to_frozen_scientific_figure": true
+    },
+    {
+      "figure": 2,
+      "name": "figure2_twins.pdf",
+      "sha256": "f50e2291da8e8d2445a6bfed3c2dbdb2efe1b4c4cfb5ea794d4c8f25df3d94f1",
+      "byte_identical_to_frozen_scientific_figure": true
+    },
+    {
+      "figure": 3,
+      "name": "figure3_identification.pdf",
+      "sha256": "8c6d2798802c7f847c00de4f20c8bce3f7bd938a9aded7ba98ad816b39c61108",
+      "byte_identical_to_frozen_scientific_figure": true
+    },
+    {
+      "figure": 4,
+      "name": "figure4_finite_sample.pdf",
+      "sha256": "64036c928d2a46e230696e7413e96ce43d68b014046e6f185a397aebcd9a1a2f",
+      "byte_identical_to_frozen_scientific_figure": true
+    }
+  ],
+  "pdf_text_check": {
+    "bytes": 269961,
+    "sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94",
+    "pages": 21,
+    "extracted_text_characters": 60921,
+    "title": "Identifiability of Noise Sources in Bodily Judgments",
+    "author": "Hongju Liu",
+    "real_doi_in_text": true,
+    "reserved_doi_placeholder_present": false,
+    "all_reference_doi_strings_present": 13,
+    "theorem_and_numeric_text_anchors_present": [
+      "Proposition1",
+      "Theorem2",
+      "Theorem3",
+      "Theorem4",
+      "0.950235",
+      "0.950151",
+      "0.024862"
+    ],
+    "preprint_and_no_new_human_evidence_qualifications_present": true,
+    "qualification": "Source-byte identity proves unchanged formulas, citations and claims before typesetting. Extracted PDF text verifies identity and selected content anchors; it does not substitute for the separate per-page visual QA owned by root."
+  },
+  "citation_metadata": {
+    "bib_ris_csl_consistent": true,
+    "author": "Hongju Liu",
+    "title": "Identifiability of Noise Sources in Bodily Judgments",
+    "version": "1.0.0",
+    "doi": "10.5281/zenodo.23279189",
+    "date": "2026-10-10",
+    "preprint_not_peer_reviewed_note_retained": true
+  },
+  "frozen_reproduction_zip": {
+    "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+    "matches_independently_reviewed_archive": true
+  },
+  "scientific_analyses_rerun": 0,
+  "external_writes": 0,
+  "release_repo_files_modified": [],
+  "frozen_scientific_files_modified": []
+}

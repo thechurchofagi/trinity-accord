@@ -1,0 +1,14 @@
+{
+  "recorded_utc": "2026-10-10T09:37:08.351825+00:00",
+  "stage": "PREPARATION_WORKFLOW_RUNNING_NO_DOI_SUCCESS_CLAIM",
+  "branch": "research/ctd-noise-identifiability-v100-20261010",
+  "prepare_commit": "ea18a21ebd996beac6f87767f03be741a4dc2b88",
+  "prepare_tree": "9d11bcb4665ccdf76783e9483ea28b86e095ddf2",
+  "base_main": "6cfb89f0b88605da9a44da9c97203729a6742894",
+  "run_id": 38041923091,
+  "run_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/38041923091",
+  "nine_public_assets_not_yet_published": true,
+  "archive_sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+  "independent_package_review_sha256": "2cdc0eff9497015646d850f99cc30f310ad3f2b126648b0b99eed363bc509e1b",
+  "user_authorization": "Explicit same-session request to complete research and publish DOI then OTS then AR using repository constraints."
+}

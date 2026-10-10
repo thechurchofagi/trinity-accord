@@ -1,0 +1,10 @@
+{
+  "state": "PUBLISH_PUSH_TRIGGERED",
+  "at_utc": "2026-10-10T09:48:57.556919+00:00",
+  "branch": "research/ctd-noise-identifiability-v100-20261010",
+  "commit": "a9ef8111bc9b9d909e143ab64cf7d676a06a0deb",
+  "tree": "863f6aca1e32901e049177368551c2dd69fa1b72",
+  "record_id": 23279189,
+  "doi": "10.5281/zenodo.23279189",
+  "published_claimed": false
+}

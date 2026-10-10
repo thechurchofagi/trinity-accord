@@ -1,0 +1,15 @@
+{
+  "state": "EXACT_PUBLIC_TARGETS_VALIDATED_LOCALLY",
+  "release_base_commit": "347dc0ec4c7a400dfae7da290ef06a129b5ecae9",
+  "targets_path": "research/paper-timestamps/2026-10-10-paper26-v100/targets.json",
+  "targets_sha256": "70b025f376e56c6547bbcb64243707661c193074320333601b9e154d64051ae8",
+  "publication_receipt_sha256": "5d70164790670b0f4f2e684c8157ed3f02f860fde90e1e8aafec5774ca5347d3",
+  "record_id": 23279189,
+  "doi": "10.5281/zenodo.23279189",
+  "pdf": {
+    "name": "noise-identifiability-bodily-judgments-v1.0.0.pdf",
+    "bytes": 269961,
+    "sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94",
+    "public_url": "https://zenodo.org/api/records/23279189/files/noise-identifiability-bodily-judgments-v1.0.0.pdf/content"
+  }
+}

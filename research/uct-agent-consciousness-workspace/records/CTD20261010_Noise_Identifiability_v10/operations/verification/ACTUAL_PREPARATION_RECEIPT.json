@@ -1,0 +1,48 @@
+{
+  "schema": "ctd-actual-post-publication-preparation/1",
+  "state": "REAL_PUBLICATION_BOUND_OVERLAY_AND_DRY_RUN_PASS_NO_REPOSITORY_WRITES",
+  "expected_research_head": "5f0c7a4f1cb417500f5fadc822dbec3a6f06c4d2",
+  "doi": "10.5281/zenodo.23279189",
+  "coverage_version": "UCT-PUB-v1.0.31",
+  "source_publication_receipt_sha256": "5d70164790670b0f4f2e684c8157ed3f02f860fde90e1e8aafec5774ca5347d3",
+  "overlay_manifest_sha256": "9439a9ffa340bfb596ece25d30dceaa68d98e767c89c087e578cebcfbe22d4cf",
+  "file_count": 248,
+  "file_scopes": {
+    "new_record": 232,
+    "new_coverage": 5,
+    "existing_navigation": 11
+  },
+  "total_overlay_file_bytes": 17218090,
+  "counts": {
+    "distinct_research_works": 30,
+    "distinct_research_work_version_label_pairs": 40,
+    "distinct_published_research_doi_records": 41,
+    "separate_editorial_supplement_works": 1,
+    "separate_editorial_doi_records": 1,
+    "all_verified_publication_doi_records_including_editorial": 42,
+    "uninspected_live_account_drafts": "NOT_ENUMERATED",
+    "reserved_only_records_within_verified_publication_records": 0
+  },
+  "checks": {
+    "mainline_latest_research_exact": true,
+    "mainline_latest_activity_exact": true,
+    "mainline_latest_pending_exact": true,
+    "mainline_latest_scoped_review_exact": true,
+    "next_priority_exact": true,
+    "session_reconciled_to_current_A3O": true,
+    "original_workflow_receipt_immutable_pending_snapshot": true,
+    "latest_resolution_true_separate_receipt": true,
+    "exact_53_ctd_owned_ids_only": true,
+    "current_A3O_update_retained": true,
+    "OTS_not_claimed_complete": true,
+    "Arweave_not_claimed_complete": true,
+    "source_repository_still_clean": true,
+    "source_HEAD_unchanged": true
+  },
+  "dry_run_tool_state": "DRY_RUN_VALIDATED_NO_WRITES",
+  "apply_executed": false,
+  "commit_or_push_executed": false,
+  "network_request_executed_here": false,
+  "OTS_or_AR_executed_here": false,
+  "scientific_testing_executed": false
+}

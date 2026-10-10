@@ -1,0 +1,20 @@
+{
+  "state": "BASELINE_CI_RUNNER_PIN_MINIMAL_FIX",
+  "failing_checks": [
+    "current-system-integrity",
+    "current-tests",
+    "gateway-tests"
+  ],
+  "failing_jobs": [
+    114187448148,
+    114187448016,
+    114187447917
+  ],
+  "path": ".github/workflows/research-mgtd-v100-ots-arweave.yml",
+  "before_sha256": "b88c27720c8505f6faed1941011529a1f33326c0b3c666661b0b2d0553da0f6f",
+  "after_sha256": "80a054eb232d3d09edd111c0759d0e057b68b61827517463099577ac94cc12aa",
+  "change": "runs-on ubuntu-latest to ubuntu-24.04 only",
+  "existing_workflow_is_historical_dispatch_only": true,
+  "no_schedule_no_secrets_no_stamping_no_paid_posts_unchanged": true,
+  "author_disabled_v100_preservation_unchanged": true
+}

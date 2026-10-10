@@ -1,0 +1,122 @@
+{
+  "schema": "ctd-completion-report-scoped-review/1",
+  "review_date_utc": "2026-10-10",
+  "reviewer": "/root/theory_literature",
+  "decision": "PASS_SCIENTIFIC_AND_INTERPRETIVE_SCOPE",
+  "must_fix": [],
+  "reviewed_report": {
+    "path": "ctd_post_publication/COMPLETION_REPORT_DRAFT_ZH.md",
+    "bytes": 14508,
+    "sha256": "aeb6e162564ca32c8f12f89ca08c99add411f9f49f5ad46e912f1195ad4e73f6"
+  },
+  "frozen_source_binding": {
+    "root": "ctd_v10",
+    "formal_reproducibility_zip_sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+    "files": [
+      {
+        "path": "manuscript/noise-identifiability-bodily-judgments-v1.0.0.md",
+        "sha256": "6bc9dad5add7612735358236c9b7533cc8f54f6aa535443ee2d9e9f5d219c734"
+      },
+      {
+        "path": "literature/SOURCE_BCI_AUDIT.md",
+        "sha256": "2454251e417a3b30a20a310ec7d94a739d4e23265004a03b6a805d6cbacd57d2"
+      },
+      {
+        "path": "empirical/BCI_REPORT.md",
+        "sha256": "639a35f8764ba5a783e1e6b138f4f9204505d25e3dfbc842e90e2e4f9ab313e0"
+      },
+      {
+        "path": "finite_sample/OPERATING_CHARACTERISTICS_REPORT.md",
+        "sha256": "884675ca97652bfeaa46f7522afa8f807c11316b7ae9832fc095f372070f57a2"
+      },
+      {
+        "path": "finite_sample/PROOF.md",
+        "sha256": "f6ddb429350b44b133fed8318422443c2cf90bdb1979581eb33c0e6026cddc32"
+      },
+      {
+        "path": "finite_sample/operating_characteristics_summary.json",
+        "sha256": "0266493687d99691aaf0407a60d3d4f3735e41da5ea4d23aecb07fa277b431b9"
+      }
+    ]
+  },
+  "checks": [
+    {
+      "id": "SOURCE_SAMPLE",
+      "result": "PASS",
+      "finding": "37 recruited, 30 selected source participants, 1260 count cells and 12600 binary judgments match the frozen empirical report. Separate task blocks are not represented as same-internal-sample joint observations; no new human study is claimed."
+    },
+    {
+      "id": "AIC_DIRECTION",
+      "result": "PASS",
+      "finding": "Sigma-minus-Prior sums are correctly reported: AIC -112.140840 to -127.859160; BIC -354.556123 to -370.274442. The report explicitly preserves aggregate Sigma preference and does not infer that the original aggregate conclusion or stimulation effect was reversed."
+    },
+    {
+      "id": "SYMMETRY_SCOPE",
+      "result": "PASS",
+      "finding": "Deviance 984.304236, 19999 conditional draws and plus-one p=0.00005 agree with frozen results. Interpretation is restricted to the centered independent-binomial response family; missing chronology, dependence and nonstationarity remain possible explanations. No neural localization follows."
+    },
+    {
+      "id": "HELDOUT_AND_REPAIR",
+      "result": "PASS",
+      "finding": "Shifted-family held-out NLL 5238.549911 versus 5299.434505, difference -60.884595, mean -2.029486 and 21/30 participant directions match saved results. Five-fold partitions are explicitly artificial allocations of aggregate counts with 8 training and 2 held-out judgments per cell, conditional on exchangeability; not chronology recovery, new subjects or independent replication. The three initial Sigma_shift nesting failures and uniform same-fold-start repair are disclosed without a global-optimum claim."
+    },
+    {
+      "id": "DESCRIPTIVE_WIDTHS",
+      "result": "PASS",
+      "finding": "178/180 within 0.1 ms and two unresolved discrepancies match the width report. The free-baseline reconstruction is descriptive and can leave the probability range; it is not equated with a generative Bernoulli model or a neural integration window."
+    },
+    {
+      "id": "EXACT_TWIN_SCOPE",
+      "result": "PASS",
+      "finding": "The Gaussian variance identity v=a+b and fitted 1260-cell probability discrepancy about 2.22e-16 match the manuscript. The report retains condition-dependent threshold trajectories and does not claim that the decision-side implementation is the actual human mechanism."
+    },
+    {
+      "id": "JOINT_READOUT",
+      "result": "PASS",
+      "finding": "One additional probability means one population joint-response degree of freedom, not one physical trial. Shared internal sampling, Gaussian and independence assumptions, a calibrated common center, known marginal parameters and lapse/guess contracts are stated; sequential questions alone do not establish this contract."
+    },
+    {
+      "id": "SHARP",
+      "result": "PASS",
+      "finding": "Sharpness is correctly defined as exact compatibility in the stated model: no omitted feasible values and realizability of every retained value. The example r=0.6, kappa=0.2 gives [0.5, 2/3] at equal total variance. Neither this claim nor sharp projection of a chosen Clopper-Pearson interval implies a shortest confidence interval or an optimal finite-sample experiment."
+    },
+    {
+      "id": "FINITE_COVERAGE_PRECISION",
+      "result": "PASS",
+      "finding": "The 480 scenarios are 240 valid plus 240 deliberate contract violations, evaluated by finite binomial sums rather than Monte Carlo repetitions or added human observations. Minimum valid variance coverage 0.9502345621 and complete-set coverage 0.9501514695 match frozen output. All eight reported width entries round correctly from valid_grid_summaries; the report explains fixed-grid equal weights, normalized total variance, empty-set width zero and maximum valid empty probability about 0.0248613. Coverage is not mistaken for precision, posterior mechanism probability or a human sample-size recommendation."
+    },
+    {
+      "id": "NEGATIVE_CONTROL_TARGETS",
+      "result": "PASS",
+      "finding": "The wrong-independence and shared-lapse/guess minima are correctly approximately 0.69392 and 2.22e-12 for the generating shared variance. Independent sensory resampling's approximately 3.43e-21 inclusion concerns per-task sensory variance misinterpreted as shared; its actual shared sensory covariance is zero. The report explicitly refuses to call this a coverage failure for actual shared a. The binomial probability interval remains valid within these generating scenarios."
+    },
+    {
+      "id": "UNCERTAIN_CALIBRATION",
+      "result": "PASS",
+      "finding": "The calibration-region union guarantee is correctly at least 1-alpha-gamma; plug-in calibration is not assigned that guarantee. Implemented finite-calibration and correlation-bound-only continuous cases are distinguished from arbitrary multiparameter continuous calibration, whose reliable computation remains open."
+    },
+    {
+      "id": "NOVELTY_AND_UCT",
+      "result": "PASS",
+      "finding": "The report attributes source human data and classical mathematical ingredients, does not claim a new general noise-decomposition or interval theorem, and distinguishes internal AI-assisted checking from independent external peer review. It does not identify an anatomical mediator, validate C1, establish a UCT-exclusive prediction or prove AI consciousness. CTD follow-up requirements explicitly leave the current A3O mainline and next_priority unchanged."
+    }
+  ],
+  "publication_and_preservation_scope": {
+    "review_basis": "Parent-provided actual publication/Git-readback facts and the report's explicit operation references; no new network or preservation verification by this reviewer.",
+    "version_doi_in_report": "10.5281/zenodo.23279189",
+    "science_git_commit_in_report": "fda7a0ae491c4bf3a7c9bc80ccab38acb3984299",
+    "OTS_at_parent_instruction": "PENDING_BITCOIN; four calendar submissions do not establish Bitcoin validation",
+    "Arweave_at_parent_instruction": "Not yet paid",
+    "pending_report_slots": ["OTS", "Arweave", "final persistence receipt"],
+    "pending_slots_disposition": "Appropriate as explicit draft placeholders. Root must fill them from actual operation receipts or report the still-pending state; this scientific review does not certify their later content.",
+    "all_preservation_complete_asserted": false
+  },
+  "review_activity": {
+    "full_report_read": true,
+    "saved_scientific_results_and_explanations_compared": true,
+    "new_fit_simulation_or_numerical_research": false,
+    "external_requests_or_uploads": false,
+    "draft_or_frozen_files_modified": false,
+    "only_new_artifact": "ctd_post_publication/COMPLETION_REPORT_REVIEW.json"
+  }
+}

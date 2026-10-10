@@ -1,0 +1,63 @@
+{
+  "head": "da54da2f10367d04714d5c04c72e5d144088992b",
+  "identity": {
+    "record_id": 23279189,
+    "doi": "10.5281/zenodo.23279189",
+    "report_number": "TA-TR-2026-26",
+    "title": "Identifiability of Noise Sources in Bodily Judgments",
+    "version": "1.0.0",
+    "submitted": false,
+    "state": "RESERVED_SAME_RECORD_ONLY",
+    "prior_records_modified": false
+  },
+  "manifest_sha256": "0c0d2fb0261c67c1b06819586aa3f1a6fe0eda4d5c15aeab0fbb3ae06af7685a",
+  "files": [
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 1424,
+      "sha256": "23dff3138f77e15da819e44ea279613a28db0a0851a53954ab2bf4f86976d29f"
+    },
+    {
+      "name": "REVIEW-AND-SOURCES.md",
+      "bytes": 8359,
+      "sha256": "472dad1ae8beb49fe0f31993ad698953cad787047c4a17e3b98797c8b3ccf0a9"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 739,
+      "sha256": "76d54b2580071308cb7ad572a4e6af5c810a106fdafb1d2fd1c185884d06c718"
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 355,
+      "sha256": "e8a4e5c1f69e5394dcacb6d220e180b52af7e9a2b5f843191cd0fb66c457974b"
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 498,
+      "sha256": "18e213dcd79bceb790b48bfe354fadc6fbe0baf5091135d79dce9ee91c11b1c0"
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 289,
+      "sha256": "ed067583e9294147420e1b87ec133853fe5523f60c220d9fb7b5b672c4bfc8ed"
+    },
+    {
+      "name": "noise-identifiability-bodily-judgments-v1.0.0.md",
+      "bytes": 61049,
+      "sha256": "031a5881915e32057816070b029ebac566b39d325ee4c8a68485c199d90a77f9"
+    },
+    {
+      "name": "noise-identifiability-bodily-judgments-v1.0.0.pdf",
+      "bytes": 269961,
+      "sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94"
+    },
+    {
+      "name": "reproducibility-v1.0.0.zip",
+      "bytes": 3238582,
+      "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de"
+    }
+  ],
+  "source_commit": "7b70d23c4cebd59689d39bb43c62de5f7c26f0d5",
+  "trigger_commit": "ea18a21ebd996beac6f87767f03be741a4dc2b88"
+}

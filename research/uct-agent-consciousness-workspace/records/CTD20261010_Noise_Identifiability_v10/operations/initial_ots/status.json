@@ -1,0 +1,23 @@
+{
+  "batch": "2026-10-10-paper26-v100",
+  "files": [
+    {
+      "bitcoin_heights": [],
+      "bytes": 269961,
+      "doi": "10.5281/zenodo.23279189",
+      "name": "noise-identifiability-bodily-judgments-v1.0.0.pdf",
+      "pending_calendar_attestations": 4,
+      "proof": "research/paper-timestamps/2026-10-10-paper26-v100/proofs/TA-TR-2026-26/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "proof_sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+      "report": "TA-TR-2026-26",
+      "role": "Complete English methods and retrospective secondary-analysis preprint with finite-sample model calculations",
+      "sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94",
+      "state": "PENDING_BITCOIN"
+    }
+  ],
+  "paper_count": 1,
+  "pdf_count": 1,
+  "schema": "trinityaccord.paper-ots-status.v1",
+  "state": "WAITING",
+  "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
+}

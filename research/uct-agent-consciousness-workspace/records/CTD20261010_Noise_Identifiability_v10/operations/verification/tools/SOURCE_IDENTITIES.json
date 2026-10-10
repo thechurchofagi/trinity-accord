@@ -1,0 +1,47 @@
+{
+  "scope": "Operational sources retained for inspection; execution/version claims remain those of individual review and actual execution receipts. The final source of the reuse helper was completed after the initial transport run, followed by an independent immutable-tree check.",
+  "files": [
+    {
+      "file": "publication.py",
+      "bytes": 28750,
+      "sha256": "c55b188787dce0a3bd687d18ef1430e1dd3050b0629067157ef29064bae5e4ac",
+      "original_working_path": "ctd_release_repo/research/noise-identifiability-bodily-judgments/publication.py"
+    },
+    {
+      "file": "prepare_sync.py",
+      "bytes": 49820,
+      "sha256": "2de80f7457b082980622119b4e091cc7635b3fdbda51e07d5956b213c979665b",
+      "original_working_path": "ctd_post_publication/prepare_sync.py"
+    },
+    {
+      "file": "apply_overlay.py",
+      "bytes": 5811,
+      "sha256": "1fe39cc6834b36de241e7b0a90e07e34dec276531a6aecb313ac45e9f8ae5317",
+      "original_working_path": "ctd_post_publication/apply_overlay.py"
+    },
+    {
+      "file": "check_preparation_components.py",
+      "bytes": 6535,
+      "sha256": "ef7aecaf4871460fc4f596c1e7d7029c62abf7495020fdf4f5ad5ee410034eb1",
+      "original_working_path": "ctd_post_publication/check_preparation_components.py"
+    },
+    {
+      "file": "prepare_payload_reusing_blobs.py",
+      "bytes": 12448,
+      "sha256": "640dbebd3bb6f87c7e75f71c1ff7eb7d4b37e1d1c94467735769f4b8b44304ee",
+      "original_working_path": "ctd_post_publication/prepare_payload_reusing_blobs.py"
+    },
+    {
+      "file": "build_completion_bundle.py",
+      "bytes": 7400,
+      "sha256": "d22cbc75ddd7d041b13b9cafc2ae4d2d7054489ec4e27e6bf14eae8ea35c44c7",
+      "original_working_path": "ctd_post_publication/build_completion_bundle.py"
+    },
+    {
+      "file": "prepare_small_git_payload.py",
+      "bytes": 2324,
+      "sha256": "381d7422f31c595521b1d6063e75e537c736a178680557c9500a77ad948b73f6",
+      "original_working_path": "git_transport_ctd/prepare_payload.py"
+    }
+  ]
+}

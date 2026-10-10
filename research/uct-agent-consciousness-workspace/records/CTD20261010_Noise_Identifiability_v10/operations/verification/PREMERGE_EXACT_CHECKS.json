@@ -1,0 +1,105 @@
+{
+  "state": "ROOT_PREMERGE_EXACT_HEAD_REVIEW_AND_REQUIRED_CHECKS_PASS",
+  "reviewed_head": "635d7949f8b72b4bf24b9655357cf0bdcf2d3a06",
+  "pull_request": 1261,
+  "checks": [
+    {
+      "name": "refresh-repository-preservation-doi",
+      "head_sha": "635d7949f8b72b4bf24b9655357cf0bdcf2d3a06",
+      "status": "completed",
+      "conclusion": "skipped",
+      "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/38043775350/job/114189648346",
+      "started_at": "2026-10-10T10:10:16Z",
+      "completed_at": "2026-10-10T10:10:16Z"
+    },
+    {
+      "name": "gateway-tests",
+      "head_sha": "635d7949f8b72b4bf24b9655357cf0bdcf2d3a06",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/38043775353/job/114189077285",
+      "started_at": "2026-10-10T10:06:58Z",
+      "completed_at": "2026-10-10T10:10:06Z"
+    },
+    {
+      "name": "current-tests",
+      "head_sha": "635d7949f8b72b4bf24b9655357cf0bdcf2d3a06",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/38043775351/job/114189077182",
+      "started_at": "2026-10-10T10:06:58Z",
+      "completed_at": "2026-10-10T10:09:27Z"
+    },
+    {
+      "name": "gateway-python-312-compat",
+      "head_sha": "635d7949f8b72b4bf24b9655357cf0bdcf2d3a06",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/38043775353/job/114189077111",
+      "started_at": "2026-10-10T10:06:58Z",
+      "completed_at": "2026-10-10T10:07:34Z"
+    },
+    {
+      "name": "current-system-integrity",
+      "head_sha": "635d7949f8b72b4bf24b9655357cf0bdcf2d3a06",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/38043775350/job/114189077099",
+      "started_at": "2026-10-10T10:06:58Z",
+      "completed_at": "2026-10-10T10:10:16Z"
+    },
+    {
+      "name": "verify-record-chain",
+      "head_sha": "635d7949f8b72b4bf24b9655357cf0bdcf2d3a06",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/38043775344/job/114189076914",
+      "started_at": "2026-10-10T10:06:58Z",
+      "completed_at": "2026-10-10T10:07:19Z"
+    },
+    {
+      "name": "contract",
+      "head_sha": "635d7949f8b72b4bf24b9655357cf0bdcf2d3a06",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/38043775345/job/114189076861",
+      "started_at": "2026-10-10T10:06:58Z",
+      "completed_at": "2026-10-10T10:07:13Z"
+    }
+  ],
+  "files": [
+    {
+      "filename": ".github/workflows/research-mgtd-v100-ots-arweave.yml",
+      "sha": "7d68eb4ca05744c8124298b92bc4b14672a7f638",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2
+    },
+    {
+      "filename": ".github/workflows/research-mgtd-v101-ots-arweave.yml",
+      "sha": "3ca8b838b9f277df57cc92f9d4918c40525b0c49",
+      "status": "modified",
+      "additions": 4,
+      "deletions": 1,
+      "changes": 5
+    },
+    {
+      "filename": ".github/workflows/research-paper-26-v100-ots-arweave-scheduler.yml",
+      "sha": "0076f8f1ada45e274e9336f38555642791ce261b",
+      "status": "added",
+      "additions": 233,
+      "deletions": 0,
+      "changes": 233
+    },
+    {
+      "filename": ".github/workflows/research-rt-th-v100-ots-arweave.yml",
+      "sha": "f6ddeca58183fc2729c9ccd4f81694467481d483",
+      "status": "modified",
+      "additions": 4,
+      "deletions": 1,
+      "changes": 5
+    }
+  ],
+  "source": "Immutable snapshots fetched by root before actual guarded merge; normalized here without changing verdicts."
+}

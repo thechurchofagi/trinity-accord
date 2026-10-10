@@ -1,0 +1,84 @@
+{
+  "schema": "ctd-git-blob-reuse-static-review/1",
+  "review_date_utc": "2026-10-10",
+  "reviewer": "/root/theory_literature",
+  "decision": "PASS_SCOPED_STATIC_REVIEW",
+  "remaining_must_fix": [],
+  "source": {
+    "path": "ctd_post_publication/prepare_payload_reusing_blobs.py",
+    "bytes": 12448,
+    "sha256": "640dbebd3bb6f87c7e75f71c1ff7eb7d4b37e1d1c94467735769f4b8b44304ee"
+  },
+  "legacy_schema_read": "git_transport_ctd/prepare_payload.py",
+  "known_input_contract": {
+    "research_head_is_argument_and_must_match_overlay_manifest_and_actual_HEAD": true,
+    "research_head_expected_by_current_plan": "5f0c7a4f1cb417500f5fadc822dbec3a6f06c4d2",
+    "default_exact_release_commit": "20079ae38a190600a7d8dbef5d1340838ed5042a",
+    "remote_repository": "thechurchofagi/trinity-accord",
+    "remote_commit_availability_basis": "Root supplies commits after its actual fetch/readback. This helper checks local exact commit/tree objects and records provenance; this reviewer made no new remote verification."
+  },
+  "source_inspection_findings": [
+    {
+      "check": "Exact overlay schema, HEAD binding, unique canonical manifest paths, and per-file applied after-byte/hash checks",
+      "result": "PASS"
+    },
+    {
+      "check": "No pre-existing staged changes; git add is restricted to the exact literal manifest path list; staged names use NUL delimiters",
+      "result": "PASS"
+    },
+    {
+      "check": "Reuse set comes from exact SHA-1 commits in the research object store or pinned release fallback; tree inventories include sparse-unchecked-out paths",
+      "result": "PASS"
+    },
+    {
+      "check": "Git calls set NO_LAZY_FETCH, NO_REPLACE_OBJECTS and LITERAL_PATHSPECS; the helper has no direct fetch, commit, push or API call",
+      "result": "PASS"
+    },
+    {
+      "check": "Target mode is obtained from the staged index and limited to regular-file modes 100644/100755; source-file mode is never copied through blob reuse",
+      "result": "PASS"
+    },
+    {
+      "check": "Every staged index blob SHA must equal the SHA-1 of the exact working bytes already bound to the overlay SHA-256, detecting Git filter or newline transformations",
+      "result": "PASS"
+    },
+    {
+      "check": "After write-tree, the immutable tree's complete allowed path/mode/blob mapping must equal the payload rows; its diff from base_tree must have exactly the allowed paths",
+      "result": "PASS"
+    },
+    {
+      "check": "Non-reused files retain the legacy UTF-8-at-most-50000-bytes or base64 semantics; reused files omit content/inline/encoding and carry reuse=true with their git_sha",
+      "result": "PASS"
+    },
+    {
+      "check": "The complete JSON is serialized with ensure_ascii=true before 32000-character chunking; reassembly must equal the full ASCII payload; full and per-chunk SHA-256 hashes are recorded",
+      "result": "PASS"
+    },
+    {
+      "check": "Output must be a fresh directory outside both repositories; missing files, symlinks and resolved path escape are rejected",
+      "result": "PASS"
+    }
+  ],
+  "resolved_review_finding": {
+    "initial_source_sha256": "6a47237a1ae701f4f628c170a4ee4d9b52da875e7cf2b3696d38f75061e3fc7a",
+    "issue": "The initial source verified index blob SHA before write-tree but only path sets afterward. A concurrent change to the contents of the same allowed index paths could leave expected_tree inconsistent with payload rows.",
+    "resolution": "Final source reads the immutable expected_tree with git ls-tree and requires the exact per-path target mode and blob SHA to equal every payload row before creating any transport output."
+  },
+  "consumer_requirements_in_existing_payload_contract": [
+    "Check reuse before reading inline/encoding/content. For reuse=true, directly reference the verified git_sha.",
+    "Use the target mode in each row; do not hardcode mode from the reused source file.",
+    "Concatenate all ASCII chunks in manifest order and verify their hashes and full payload identity before JSON.parse; individual chunks can split an escape sequence.",
+    "The receiving transport must continue to honor the bound head, base_tree and expected_tree. This source review does not certify the receiving V8 implementation."
+  ],
+  "review_execution": {
+    "source_text_read": true,
+    "AST_parse_only": true,
+    "helper_or_main_executed": false,
+    "git_add_or_write_tree_executed_by_reviewer": false,
+    "repository_or_index_written_by_reviewer": false,
+    "network_requests_by_reviewer": false,
+    "external_writes_by_reviewer": false,
+    "runtime_payload_or_staging_success_asserted": false
+  },
+  "operational_scope": "This helper intentionally stages exact local files when root invokes it after the guarded overlay apply; it is not a dry-run tool. Failure after staging can leave the index staged and requires ordinary inspection. This receipt reports source review only, not that such an invocation or transport occurred."
+}

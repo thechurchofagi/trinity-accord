@@ -1,0 +1,44 @@
+{
+  "state": "REMOTE_COMMITTED_BATCH_READBACK_PASS",
+  "commit": "df37353d5153e981caae4017cae1fc12677e085d",
+  "workflow_run": 38044262845,
+  "job_id": 114190539375,
+  "attempt": 1,
+  "files": [
+    {
+      "git_path": "research/paper-timestamps/2026-10-10-paper26-v100/doi-resolution.json",
+      "bytes": 220,
+      "sha256": "af573d85d8430afa394d93678feb0df8865d2166cd8fc2e70758add05b475f4f"
+    },
+    {
+      "git_path": "research/paper-timestamps/2026-10-10-paper26-v100/proofs/TA-TR-2026-26/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "bytes": 770,
+      "sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7"
+    },
+    {
+      "git_path": "research/paper-timestamps/2026-10-10-paper26-v100/proofs/TA-TR-2026-26/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots.submitted",
+      "bytes": 770,
+      "sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7"
+    },
+    {
+      "git_path": "research/paper-timestamps/2026-10-10-paper26-v100/proofs/TA-TR-2026-26/noise-identifiability-bodily-judgments-v1.0.0.pdf.stamp.txt",
+      "bytes": 250,
+      "sha256": "e77211ce2eea184720e8a2974e44cabf1184a4c1367ad2000d2214af0143c4f2"
+    },
+    {
+      "git_path": "research/paper-timestamps/2026-10-10-paper26-v100/proofs/TA-TR-2026-26/noise-identifiability-bodily-judgments-v1.0.0.pdf.upgrade.txt",
+      "bytes": 409,
+      "sha256": "33d70e5bd6c1f8693a570683851289834f16457eb36453c999065540b183b96c"
+    },
+    {
+      "git_path": "research/paper-timestamps/2026-10-10-paper26-v100/status.json",
+      "bytes": 1007,
+      "sha256": "0290332010c5dbb56723de3d64768ba44d3eecf00a4dedd15c72691408e090e7"
+    },
+    {
+      "git_path": "research/paper-timestamps/2026-10-10-paper26-v100/targets.json",
+      "bytes": 797,
+      "sha256": "70b025f376e56c6547bbcb64243707661c193074320333601b9e154d64051ae8"
+    }
+  ]
+}

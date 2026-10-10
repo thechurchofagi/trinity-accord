@@ -1,0 +1,71 @@
+{
+  "schema": "ctd-operational-persistence-receipt/1",
+  "at_utc": "2026-10-10T10:36:47.092945+00:00",
+  "state": "SCIENCE_PUBLICATION_DELIVERABLES_AND_INITIAL_OTS_VERIFIED",
+  "doi": "10.5281/zenodo.23279189",
+  "version": "1.0.0",
+  "science_git": {
+    "state": "ALL_248_RESEARCH_FILES_REMOTE_FETCH_BYTE_READBACK_PASS",
+    "at_utc": "2026-10-10T10:10:27.798714+00:00",
+    "branch": "uct-agent-consciousness-workspace",
+    "commit": "fda7a0ae491c4bf3a7c9bc80ccab38acb3984299",
+    "tree": "729ceae7560071042dfd7acca726aefde9b1f73c",
+    "files": 248,
+    "coverage_version": "UCT-PUB-v1.0.31",
+    "doi": "10.5281/zenodo.23279189",
+    "worktree_clean": true,
+    "preserves_A3O_mainline": true,
+    "ots_and_arweave_completion_not_claimed": true
+  },
+  "delivery_copies": {
+    "reproduction": {
+      "state": "PINNED_LIBRARY_BYTE_READBACK_PASS",
+      "master_version": 86,
+      "files": [
+        {
+          "name": "UCT_Hourly_Research_Master_Handoff.md",
+          "path": "/workspace/scratch/5b73aae6b1e4/library_readback_ctd/UCT_Hourly_Research_Master_Handoff.md",
+          "bytes": 739337,
+          "sha256": "96ba1397d547246adc01b596645260239cd6540ed69bce1f87aa311eb941d848",
+          "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+          "identity_xattr_verified": true
+        },
+        {
+          "name": "CTD_Noise_Identifiability_v1.0.0_Reproducibility.zip",
+          "path": "/workspace/scratch/5b73aae6b1e4/library_readback_ctd/CTD_Noise_Identifiability_v1.0.0_Reproducibility.zip",
+          "bytes": 3238582,
+          "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+          "library_file_id": "libfile_0e1f2a9d53808191aeed32283eec3ef4",
+          "identity_xattr_verified": true
+        }
+      ]
+    },
+    "readable_pdf": {
+      "at_utc": "2026-10-10T10:21:22.383196+00:00",
+      "library_file_id": "libfile_30d48a32ddd88191be8098f4e18c24a9",
+      "file_id": "file_00000000b74881fd87100bc64fba52dd",
+      "version": 0,
+      "bytes": 334551,
+      "sha256": "da30669a2213540a49078b4f2c0124466dc08b86cfe805ff2b5a30436a67ff91",
+      "equals_public_doi_pdf": false
+    },
+    "pdf_content_review": "operations/verification/DELIVERED_PDF_CONTENT_COMPARISON.json"
+  },
+  "ots": {
+    "state": "PENDING_BITCOIN",
+    "release_commit": "df37353d5153e981caae4017cae1fc12677e085d",
+    "workflow_run_id": 38044262845,
+    "job_id": 114190539375,
+    "pending_calendar_attestations": 4,
+    "bitcoin_heights": [],
+    "proof_sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7"
+  },
+  "arweave": {
+    "state": "NOT_STARTED_WAITING_FOR_VERIFIED_OTS",
+    "paid_attempts": 0
+  },
+  "scope": "Records actual earlier successful operations. Its own later commit is not circularly claimed here. The complete-chain builder and completion report remain prepared, not completed.",
+  "scientific_status_changed": false,
+  "original_publication_receipt_unchanged": true,
+  "A3O_mainline_preserved": true
+}

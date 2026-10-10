@@ -1,0 +1,23 @@
+{
+  "schema": "trinityaccord.paper-ots-targets.v1",
+  "batch": "2026-10-10-paper26-v100",
+  "paper_count": 1,
+  "papers": [
+    {
+      "report": "TA-TR-2026-26",
+      "record_id": 23279189,
+      "doi": "10.5281/zenodo.23279189",
+      "version": "1.0.0",
+      "title": "Identifiability of Noise Sources in Bodily Judgments",
+      "receipt_path": "research/noise-identifiability-bodily-judgments/publication-record.json",
+      "pdfs": [
+        {
+          "name": "noise-identifiability-bodily-judgments-v1.0.0.pdf",
+          "bytes": 269961,
+          "sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94",
+          "role": "Complete English methods and retrospective secondary-analysis preprint with finite-sample model calculations"
+        }
+      ]
+    }
+  ]
+}

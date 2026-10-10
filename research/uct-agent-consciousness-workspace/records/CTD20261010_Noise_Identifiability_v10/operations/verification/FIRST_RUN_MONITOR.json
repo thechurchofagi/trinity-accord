@@ -1,0 +1,597 @@
+{
+  "schema": "ctd.ta26-preservation-monitor.v1",
+  "state": "FIRST_RUN_COMPLETED_PROOF_PENDING_BITCOIN_NO_PAID_STAGE",
+  "observed_at_utc": "2026-10-10T10:19:12.313Z",
+  "monitored_merge_sha": "d1258e8b20adfdb9f90b3ca851df1abe15887615",
+  "latest_release_commit_observed": "df37353d5153e981caae4017cae1fc12677e085d",
+  "release_branch": "research/ctd-noise-identifiability-v100-20261010",
+  "publication_doi": "10.5281/zenodo.23279189",
+  "ta26_run": {
+    "id": 38044262845,
+    "name": "Research Paper 26 v1.0.0 OTS and Arweave Scheduler",
+    "head_sha": "d1258e8b20adfdb9f90b3ca851df1abe15887615",
+    "head_branch": "main",
+    "event": "push",
+    "status": "completed",
+    "conclusion": "success",
+    "run_attempt": 1,
+    "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/38044262845",
+    "created_at": "2026-10-10T10:15:20Z",
+    "updated_at": "2026-10-10T10:16:42Z"
+  },
+  "ta26_jobs": [
+    {
+      "id": 114190539375,
+      "name": "preserve (2026-10-10-paper26-v100, TA-TR-2026-26, 10.5281/zenodo.23279189)",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 38044262845,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Authorize write workflow actor",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 2
+        },
+        {
+          "name": "Run actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Check public DOI resolver without credentials",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Record toolchain provenance",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Check exact follow-up batch completion",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Install the pinned OTS client and validate follow-up identity",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Upgrade and verify the exact v1.0.0 PDF proof",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 10
+        },
+        {
+          "name": "Check the independent paper publication budget and receipt",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 11
+        },
+        {
+          "name": "Install existing Arweave dependencies",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 12
+        },
+        {
+          "name": "Persist a payload-bound intent before a new paid attempt",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 13
+        },
+        {
+          "name": "Upload one guarded follow-up archive and verify public readback",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 14
+        },
+        {
+          "name": "Preserve exact proofs and remote-operation receipts",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15
+        },
+        {
+          "name": "Commit durable follow-up state without touching earlier batches",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16
+        },
+        {
+          "name": "Report only follow-up batch failures",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 17
+        },
+        {
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 33
+        },
+        {
+          "name": "Post Run actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 34
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 35
+        }
+      ]
+    }
+  ],
+  "doi_resolution": {
+    "doi": "10.5281/zenodo.23279189",
+    "record_id": 23279189,
+    "authenticated": false,
+    "state": "RESOLVER_PASS",
+    "matches_record": true,
+    "http_status": 200,
+    "final_url": "https://zenodo.org/records/23279189"
+  },
+  "batch_status": {
+    "batch": "2026-10-10-paper26-v100",
+    "files": [
+      {
+        "bitcoin_heights": [],
+        "bytes": 269961,
+        "doi": "10.5281/zenodo.23279189",
+        "name": "noise-identifiability-bodily-judgments-v1.0.0.pdf",
+        "pending_calendar_attestations": 4,
+        "proof": "research/paper-timestamps/2026-10-10-paper26-v100/proofs/TA-TR-2026-26/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+        "proof_sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+        "report": "TA-TR-2026-26",
+        "role": "Complete English methods and retrospective secondary-analysis preprint with finite-sample model calculations",
+        "sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94",
+        "state": "PENDING_BITCOIN"
+      }
+    ],
+    "paper_count": 1,
+    "pdf_count": 1,
+    "schema": "trinityaccord.paper-ots-status.v1",
+    "state": "WAITING",
+    "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
+  },
+  "batch_directory_at_fixed_commit": [
+    {
+      "name": "doi-resolution.json",
+      "path": "research/paper-timestamps/2026-10-10-paper26-v100/doi-resolution.json",
+      "size": 220,
+      "git_blob_or_tree_sha": "78c17ceb9c36dd6955414c237e0ab2650123052a",
+      "type": "file"
+    },
+    {
+      "name": "proofs",
+      "path": "research/paper-timestamps/2026-10-10-paper26-v100/proofs",
+      "size": 0,
+      "git_blob_or_tree_sha": "9e83f8e6255a0d45962fec7c670d560e1e659fe0",
+      "type": "dir"
+    },
+    {
+      "name": "status.json",
+      "path": "research/paper-timestamps/2026-10-10-paper26-v100/status.json",
+      "size": 1007,
+      "git_blob_or_tree_sha": "c1c9d058b4be7844e0cfa28a445c83de9cc6bfcb",
+      "type": "file"
+    },
+    {
+      "name": "targets.json",
+      "path": "research/paper-timestamps/2026-10-10-paper26-v100/targets.json",
+      "size": 797,
+      "git_blob_or_tree_sha": "2dfd0edecc0c6216b88af70ddd6d6fb90ae2a422",
+      "type": "file"
+    }
+  ],
+  "proof_directory_at_fixed_commit": [
+    {
+      "name": "noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "path": "research/paper-timestamps/2026-10-10-paper26-v100/proofs/TA-TR-2026-26/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "size": 770,
+      "git_blob_sha": "0cc78145f10bf4c842bdd7c8c0fc151790633bd1",
+      "type": "file"
+    },
+    {
+      "name": "noise-identifiability-bodily-judgments-v1.0.0.pdf.ots.submitted",
+      "path": "research/paper-timestamps/2026-10-10-paper26-v100/proofs/TA-TR-2026-26/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots.submitted",
+      "size": 770,
+      "git_blob_sha": "0cc78145f10bf4c842bdd7c8c0fc151790633bd1",
+      "type": "file"
+    },
+    {
+      "name": "noise-identifiability-bodily-judgments-v1.0.0.pdf.stamp.txt",
+      "path": "research/paper-timestamps/2026-10-10-paper26-v100/proofs/TA-TR-2026-26/noise-identifiability-bodily-judgments-v1.0.0.pdf.stamp.txt",
+      "size": 250,
+      "git_blob_sha": "ab4d5722b68b31aeed322f92d77fc426fc57554b",
+      "type": "file"
+    },
+    {
+      "name": "noise-identifiability-bodily-judgments-v1.0.0.pdf.upgrade.txt",
+      "path": "research/paper-timestamps/2026-10-10-paper26-v100/proofs/TA-TR-2026-26/noise-identifiability-bodily-judgments-v1.0.0.pdf.upgrade.txt",
+      "size": 409,
+      "git_blob_sha": "2bf7f94c3dc61d3c14f46fbf64a6d4dabf727359",
+      "type": "file"
+    }
+  ],
+  "payment_evidence": {
+    "budget_step": "skipped",
+    "paid_intent_step": "skipped",
+    "upload_step": "skipped",
+    "paid_intent_in_fixed_batch_directory": false,
+    "arweave_receipt_in_fixed_batch_directory": false,
+    "arweave_bundle_in_fixed_batch_directory": false,
+    "interpretation": "This run did not reach a paid operation. There is no Arweave transaction or readback receipt in the observed fixed batch. No wallet or external transaction history was queried."
+  },
+  "original_jobs_preserved": {
+    "mgtd_v101": {
+      "run": {
+        "id": 38044262824,
+        "name": "Research MGTD v1.0.1 OTS and Arweave",
+        "head_sha": "d1258e8b20adfdb9f90b3ca851df1abe15887615",
+        "head_branch": "main",
+        "event": "push",
+        "status": "completed",
+        "conclusion": "success",
+        "run_attempt": 1,
+        "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/38044262824",
+        "created_at": "2026-10-10T10:15:20Z",
+        "updated_at": "2026-10-10T10:15:37Z"
+      },
+      "jobs": [
+        {
+          "id": 114190494160,
+          "name": "preserve",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 38044262824,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Authorize workflow actor",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 2
+            },
+            {
+              "name": "Checkout only the DOI-published research branch",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Verify exact DOI publication and skip completed batches",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Record existing toolchain provenance",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 5
+            },
+            {
+              "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 6
+            },
+            {
+              "name": "Install pinned OTS client and test shared lifecycle contract",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 7
+            },
+            {
+              "name": "Upgrade, verify, or stamp only exact published PDF",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 8
+            },
+            {
+              "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 9
+            },
+            {
+              "name": "Confirm v1.0.1 remains the newest publicly resolved Zenodo version before AR",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 10
+            },
+            {
+              "name": "Check strictly-limited dedicated paper budget",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 11
+            },
+            {
+              "name": "Install existing Arweave uploader dependencies",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 12
+            },
+            {
+              "name": "Persist one payload-bound paid-intent checkpoint",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 13
+            },
+            {
+              "name": "Post one guarded Arweave transaction and verify public bytes",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 14
+            },
+            {
+              "name": "Retain exact proofs, pending proofs, budget, and paid outcomes",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 15
+            },
+            {
+              "name": "Commit actual stage receipts to the separate research branch",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 16
+            },
+            {
+              "name": "Signal only real failing stages",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 17
+            },
+            {
+              "name": "Post Checkout only the DOI-published research branch",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 34
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 35
+            }
+          ]
+        }
+      ],
+      "log_evidence": [
+        "2026-10-10T10:15:33.6908400Z DOI_RELEASE_VERIFIED; BATCH_COMPLETE= True",
+        "2026-10-10T10:15:33.7249196Z   OTS_OUTCOME: skipped",
+        "2026-10-10T10:15:33.7249484Z   UPLOAD_OUTCOME: skipped"
+      ],
+      "interpretation": "Existing completed batch recognized; OTS, intent, and paid upload skipped."
+    },
+    "rt_th_v100": {
+      "run": {
+        "id": 38044262896,
+        "name": "Research RT-TH v1.0.0 OTS and Arweave",
+        "head_sha": "d1258e8b20adfdb9f90b3ca851df1abe15887615",
+        "head_branch": "main",
+        "event": "push",
+        "status": "completed",
+        "conclusion": "success",
+        "run_attempt": 1,
+        "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/38044262896",
+        "created_at": "2026-10-10T10:15:20Z",
+        "updated_at": "2026-10-10T10:16:58Z"
+      },
+      "jobs": [
+        {
+          "id": 114190719756,
+          "name": "preserve",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 38044262896,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Authorize workflow actor",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 2
+            },
+            {
+              "name": "Checkout only the DOI-published research branch",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Verify exact DOI publication and skip completed batches",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Record existing toolchain provenance",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 5
+            },
+            {
+              "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 6
+            },
+            {
+              "name": "Install pinned OTS client and test shared lifecycle contract",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 7
+            },
+            {
+              "name": "Upgrade, verify, or stamp only exact published PDF",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 8
+            },
+            {
+              "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 9
+            },
+            {
+              "name": "Confirm DOI, latest-version pointer and published PDF identity before AR",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 10
+            },
+            {
+              "name": "Check strictly-limited dedicated paper budget",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 11
+            },
+            {
+              "name": "Install existing Arweave uploader dependencies",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 12
+            },
+            {
+              "name": "Persist one payload-bound paid-intent checkpoint",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 13
+            },
+            {
+              "name": "Post one guarded Arweave transaction and verify public bytes",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 14
+            },
+            {
+              "name": "Retain exact proofs, pending proofs, budget, and paid outcomes",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 15
+            },
+            {
+              "name": "Commit actual stage receipts to the separate research branch",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 16
+            },
+            {
+              "name": "Signal only real failing stages",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 17
+            },
+            {
+              "name": "Post Checkout only the DOI-published research branch",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 34
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 35
+            }
+          ]
+        }
+      ],
+      "log_evidence": [
+        "2026-10-10T10:16:54.1466962Z DOI_RELEASE_VERIFIED; BATCH_COMPLETE= True",
+        "2026-10-10T10:16:54.1816876Z   OTS_OUTCOME: skipped",
+        "2026-10-10T10:16:54.1817157Z   UPLOAD_OUTCOME: skipped"
+      ],
+      "interpretation": "Existing completed batch recognized; OTS, intent, and paid upload skipped."
+    }
+  },
+  "github_artifact": {
+    "id": 11667086642,
+    "name": "research-2026-10-10-paper26-v100-ots-38044262845",
+    "size_in_bytes": 5657,
+    "url": "https://api.github.com/repos/thechurchofagi/trinity-accord/actions/artifacts/11667086642",
+    "archive_download_url": "https://api.github.com/repos/thechurchofagi/trinity-accord/actions/artifacts/11667086642/zip",
+    "expired": false,
+    "created_at": "2026-10-10T10:16:36Z",
+    "expires_at": "2027-01-08T10:15:20Z",
+    "updated_at": "2026-10-10T10:16:36Z",
+    "digest": "sha256:93803b50b56960afb012f97423b6c3df7dce28059a7b9e6f289ba6ff0a6944b0",
+    "workflow_run": {
+      "id": 38044262845,
+      "repository_id": 1022959219,
+      "head_repository_id": 1022959219,
+      "head_branch": "main",
+      "head_sha": "d1258e8b20adfdb9f90b3ca851df1abe15887615"
+    }
+  },
+  "downloaded_proof": {
+    "filename": "noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+    "bytes": 770,
+    "sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+    "git_blob_sha": "0cc78145f10bf4c842bdd7c8c0fc151790633bd1",
+    "status": "PENDING_BITCOIN",
+    "same_blob_as_submitted_copy": true,
+    "provenance": "https://github.com/thechurchofagi/trinity-accord/blob/df37353d5153e981caae4017cae1fc12677e085d/research/paper-timestamps/2026-10-10-paper26-v100/proofs/TA-TR-2026-26/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots"
+  },
+  "continuation": {
+    "scheduler": "Existing hourly cron 07 * * * * on main",
+    "pending_action": "Await a future scheduled proof upgrade and Bitcoin remote-header verification. Paid archival remains gated until readiness and budget checks pass.",
+    "success_boundary": "A successful workflow iteration with WAITING/PENDING_BITCOIN is not completed Bitcoin timestamp verification and not ARWEAVE_READBACK_PASS.",
+    "next_scheduled_clock_slot_utc": "2026-10-10T11:07:00Z",
+    "scheduling_caveat": "The cron slot is a configured target, not a guarantee of exact GitHub execution time."
+  },
+  "actions_by_reviewer": {
+    "github_get_only": true,
+    "external_mutations": false,
+    "reruns": false,
+    "merges": false,
+    "stamps": false,
+    "wallet_access": false,
+    "payments": false,
+    "local_writes_only_under": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/monitor"
+  }
+}
+

@@ -161,5 +161,20 @@
   "latest_published_scientific_work_log": "records/CTD20261010_Noise_Identifiability_v10/WORK_LOG.md",
   "latest_publication_handoff": "records/CTD20261010_Noise_Identifiability_v10/HANDOFF_ZH.md",
   "current_manuscript_decision_scope": "Frozen scientific pre-release decision; actual publication state comes from latest_publication.receipt.",
-  "latest_publication_activity_persistence_status": "PENDING_ACTUAL_SAVE_RECEIPTS"
+  "latest_publication_activity_persistence_status": "SCIENCE_GIT_AND_DELIVERABLE_READBACK_PASS;OTS_PENDING_BITCOIN;ARWEAVE_NOT_STARTED",
+  "latest_publication_persistence_receipt": "records/CTD20261010_Noise_Identifiability_v10/PERSISTENCE_RECEIPT.json",
+  "latest_publication_preservation": {
+    "doi": "10.5281/zenodo.23279189",
+    "version": "1.0.0",
+    "ots_state": "PENDING_BITCOIN",
+    "arweave_state": "NOT_STARTED_WAITING_FOR_VERIFIED_OTS",
+    "batch": "2026-10-10-paper26-v100",
+    "release_branch": "research/ctd-noise-identifiability-v100-20261010",
+    "first_ots_commit": "df37353d5153e981caae4017cae1fc12677e085d",
+    "workflow_run_id": 38044262845,
+    "receipt": "records/CTD20261010_Noise_Identifiability_v10/PERSISTENCE_RECEIPT.json",
+    "workflow": "research-paper-26-v100-ots-arweave-scheduler.yml",
+    "schedule_utc": "07 * * * *",
+    "paid_attempts": 0
+  }
 }

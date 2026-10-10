@@ -486,5 +486,20 @@
     ]
   },
   "pending_note_before_CTD_v10_publication": "All listed pending checkpoints remain disabled. A3O adds no completed or candidate nodes/rules/contexts: it fixes route-grain dependence, supplies fixed-grain R by L_sel organizational witnesses and preserves the evidence firewall. A3N, CTD v0.2, A3M, A3L and all effective corrections are retained; no completed-graph count or actual-premise truth changes.",
-  "latest_publication_activity_persistence_status": "PENDING_ACTUAL_GIT_AND_LIBRARY_SAVE_RECEIPTS;PUBLICATION_RECEIPT_IS_NOT_A_SAVE_RECEIPT"
+  "latest_publication_activity_persistence_status": "SCIENCE_GIT_AND_DELIVERABLE_READBACK_PASS;OTS_PENDING_BITCOIN;ARWEAVE_NOT_STARTED",
+  "latest_publication_persistence_receipt": "records/CTD20261010_Noise_Identifiability_v10/PERSISTENCE_RECEIPT.json",
+  "latest_publication_preservation": {
+    "doi": "10.5281/zenodo.23279189",
+    "version": "1.0.0",
+    "ots_state": "PENDING_BITCOIN",
+    "arweave_state": "NOT_STARTED_WAITING_FOR_VERIFIED_OTS",
+    "batch": "2026-10-10-paper26-v100",
+    "release_branch": "research/ctd-noise-identifiability-v100-20261010",
+    "first_ots_commit": "df37353d5153e981caae4017cae1fc12677e085d",
+    "workflow_run_id": 38044262845,
+    "receipt": "records/CTD20261010_Noise_Identifiability_v10/PERSISTENCE_RECEIPT.json",
+    "workflow": "research-paper-26-v100-ots-arweave-scheduler.yml",
+    "schedule_utc": "07 * * * *",
+    "paid_attempts": 0
+  }
 }

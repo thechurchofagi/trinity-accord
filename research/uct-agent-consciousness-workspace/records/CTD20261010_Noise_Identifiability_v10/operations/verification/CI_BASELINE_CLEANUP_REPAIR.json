@@ -1,0 +1,23 @@
+{
+  "state": "BASELINE_CI_CLEANUP_REPAIR",
+  "failing_test": "scripts/test_workflow_warning_allowlist.py",
+  "failed_job": 114188181433,
+  "files": [
+    {
+      "path": ".github/workflows/research-mgtd-v101-ots-arweave.yml",
+      "before_sha256": "f93307c12bffcd2e99eedb0c57d7e3ae8641d4fff70b0736a812c79b7cf12793",
+      "after_sha256": "7d7c6f30539ac9481d358c623786b3300b89e6c666be07fbdbaf9e28fc9bfd5d",
+      "only_change": "Explicit liveness-checked proxy cleanup, replacing suppressed kill failure"
+    },
+    {
+      "path": ".github/workflows/research-rt-th-v100-ots-arweave.yml",
+      "before_sha256": "20b029c9949eda3df3da28e4e529c20c1b936627e1b8cc22a2188109ec8430e1",
+      "after_sha256": "b610a5b1da34f07ef6f3d31d76499a360604c597ed437ac711af7ffd919cef99",
+      "only_change": "Explicit liveness-checked proxy cleanup, replacing suppressed kill failure"
+    }
+  ],
+  "checks_or_allowlist_weakened": false,
+  "prior_paper_asset_proof_or_receipt_changes": false,
+  "both_prior_batches_remote_state": "ARWEAVE_READBACK_PASS",
+  "existing_terminal_skip_gates_unchanged": true
+}
