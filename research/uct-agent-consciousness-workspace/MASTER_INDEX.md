@@ -35,6 +35,8 @@
 
 - 最新应用A4E：[正文](records/A4E20261011_Actuation_Event_vs_Held_State/RESEARCH_NOTE.md) · [事件协议](records/A4E20261011_Actuation_Event_vs_Held_State/ACTUATION_EVENT_PROTOCOL.md) · [精确结果](records/A4E20261011_Actuation_Event_vs_Held_State/EXACT_RESULTS.json) · [形式化审查](records/A4E20261011_Actuation_Event_vs_Held_State/FORMAL_AUDIT.md) · [交接](records/A4E20261011_Actuation_Event_vs_Held_State/HANDOFF_ZH.md)；区分最终电平、当前提交事件与实际写入来源，物理安装/完整K/H层仍OPEN，0正式图增量，成稿HOLD。
 
+- 最新应用A4F：[正文](records/A4F20261011_Witness_Independence_and_Provenance/RESEARCH_NOTE.md) · [见证独立性协议](records/A4F20261011_Witness_Independence_and_Provenance/WITNESS_INDEPENDENCE_PROTOCOL.md) · [精确结果](records/A4F20261011_Witness_Independence_and_Provenance/EXACT_RESULTS.json) · [形式化审查](records/A4F20261011_Witness_Independence_and_Provenance/FORMAL_AUDIT.md) · [交接](records/A4F20261011_Witness_Independence_and_Provenance/HANDOFF_ZH.md)；区分事件独立、来源特异与完整向量控制独立性，物理安装/完整K/H层仍OPEN，0正式图增量，成稿HOLD。
+
 基础问题专线 TJR20261010：[交接](records/TJR20261010_Temporal_Joint_Realization/HANDOFF_ZH.md) · [正文](records/TJR20261010_Temporal_Joint_Realization/RESEARCH_NOTE.md) · [日志](records/TJR20261010_Temporal_Joint_Realization/WORK_LOG.md)。串行保留、联合读取与压缩的停用应用；原科学接续和身体熟悉感路线保留。原理多属继承，独立成稿HOLD，全图深审仍未完成。
 
 基础问题专线 REV20261010：[交接](records/REV20261010_Retained_Premise_Revision/HANDOFF_ZH.md) · [正文](records/REV20261010_Retained_Premise_Revision/RESEARCH_NOTE.md) · [日志](records/REV20261010_Retained_Premise_Revision/WORK_LOG.md)。承接 TJR，完成前提修改的精确信息条件与连续修改对照；0/0/0 停用应用，独立成稿 HOLD。原 A3V/A3Y 接续和全历史审查未完成状态保留。

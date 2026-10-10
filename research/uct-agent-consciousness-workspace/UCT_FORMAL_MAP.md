@@ -64,6 +64,10 @@ Test one independent current bodily/action-familiarity interpretation against or
 
 [A4E 事件/保持审查](records/A4E20261011_Actuation_Event_vs_Held_State/RESEARCH_NOTE.md)证明：后仲裁最终电平仍可由旧状态保持复制；反当前挑战产生的电平变化只证明某次写入，不能独自识别写入者。只有前态核验、反当前挑战、目标切断、同接口救援与A4D全部写入器完备性前提同时成立，才支持声明模型中的当前目标路线贡献。应用保持停用，0新节点/规则/语境；完整物理实际性与`B_fam/H_way`均未闭合。
 
+### 最新见证独立性应用
+
+[A4F 非循环来源见证](records/A4F20261011_Witness_Independence_and_Provenance/RESEARCH_NOTE.md)证明：当前提交与来源标签仍不足以识别实际写入者；自报标签、同根双日志及来源无关的独立事件探针都允许目标/隐藏来源观测重叠。声明双写入器模型内的来源专用探针只有在完整写入器清单、最终仲裁后布置与完整向量不可伪造/重放/压制/复位/改时序同时成立时才分离；恢复重放权限即恢复双胞胎。应用保持停用，0新节点/规则/语境；完整物理实际性与`B_fam/H_way`均未闭合。
+
 ### 当前端点应用修正
 
 [A3W H_way范围及端点草案](records/A3W20261010_Action_Familiarity_Endpoint/RESEARCH_NOTE.md)接续A3N/A3V及FAM；0新图节点，停用应用。统一登记的followup_applications保存这类应用，不改变38项待整合图与已完成图。
