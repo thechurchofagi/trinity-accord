@@ -1,0 +1,258 @@
+{
+  "research_id": "REV20261010",
+  "version": "REV-v0.1.0",
+  "scientific_commit": "e792283f086a914da0b289c1554b7c1342742820",
+  "scope": "Increment plus relevant internal source snapshots, not complete repository; final later receipt excluded.",
+  "files": [
+    {
+      "path": "AUDIT_RECEIPT.json",
+      "bytes": 487,
+      "sha256": "88eb1ee0d7750a10997471ab709aea9cd5d1ab212b06c4ec3990a8f503a37d76"
+    },
+    {
+      "path": "AUDIT_REPORT.md",
+      "bytes": 4624,
+      "sha256": "e01149ce5ffc92673b6f28424d69c055ce6fcd7cf3cbd4b901fa3ff4252f4eb0"
+    },
+    {
+      "path": "BASELINE_REFERENCE.json",
+      "bytes": 433,
+      "sha256": "3acf1430bf763b00f25b0abf06e683cc6ec38da2a9f6dcb84b8533d4e383adda"
+    },
+    {
+      "path": "CLAIM_LEDGER.json",
+      "bytes": 5273,
+      "sha256": "b69c59cd62036fa229e77a98b4e35f978c86936e0f3cfada7f87d3ff78277f09"
+    },
+    {
+      "path": "HANDOFF_ZH.md",
+      "bytes": 6183,
+      "sha256": "472818b41dda9417b75c59b977f6dd6e9df60ed1c0651b88308195a396ac8564"
+    },
+    {
+      "path": "MAP_EXTENSION.json",
+      "bytes": 1432,
+      "sha256": "e10b59e03adac4fec61b08e0274db7e1de5ac5047a221ee09c264fadfdc41304"
+    },
+    {
+      "path": "MODEL_RESULTS.json",
+      "bytes": 5079,
+      "sha256": "0161dbb19566c07dc64637ef29bfc5ea5baf69a94e4f208dbd1af809f039e8ca"
+    },
+    {
+      "path": "PERSISTENCE_RECEIPT.json",
+      "bytes": 1199,
+      "sha256": "1a86b4235222a2e5b71ab0b33a913e4b3a4c216691be74b0a8a1cc25d2fde39a"
+    },
+    {
+      "path": "PER_ID_AUDIT.tsv",
+      "bytes": 133628,
+      "sha256": "69b4cac7842003eb816bc7b8477fa4aecdc1a32412a990c3e99be9b6c8849852"
+    },
+    {
+      "path": "PRACTICAL_PROTOCOL.md",
+      "bytes": 8295,
+      "sha256": "7688d19cff87ca5b7d3dffadc29af5d69abacf101b987863c3033065cf5bd1cf"
+    },
+    {
+      "path": "PROTOCOL_EXAMPLES.jsonl",
+      "bytes": 35376,
+      "sha256": "25c51fb22b761a076dec8a4c966500b85dfb0a0a045816d8a982c2404e96ed04"
+    },
+    {
+      "path": "PUBLICATION_COVERAGE_UPDATE.json",
+      "bytes": 1111,
+      "sha256": "6b2b975a4702268ab256c5016ab259dd842915a0c2056c55f171a82440c6c760"
+    },
+    {
+      "path": "REMOTE_READBACK.json",
+      "bytes": 770,
+      "sha256": "366639565e54bbc1a2689df2bc263f763701d7eddb774655d9cebbd1a3493882"
+    },
+    {
+      "path": "RESEARCH_NOTE.md",
+      "bytes": 21792,
+      "sha256": "d4ec6ebf8167e3f3c3a8dc7b24b2acb09a9d4c57e025441f9c0b165e6dc98816"
+    },
+    {
+      "path": "RUN_RECEIPT.json",
+      "bytes": 592,
+      "sha256": "463bb8ba32c332776cb98f8364db647825605654fb783ee0c393914a5de1b213"
+    },
+    {
+      "path": "SCOPED_COMPATIBILITY.json",
+      "bytes": 67998,
+      "sha256": "2fa218d4ec79c13b201e661832c9d905d492e684f29cc2b3db056c2bfd23d95a"
+    },
+    {
+      "path": "SOURCE_LEDGER.json",
+      "bytes": 2944,
+      "sha256": "984bcdc80af44a9f22ae422cc692405b1a59395beac40c1d3ee54ce023c617d9"
+    },
+    {
+      "path": "VALIDATION.json",
+      "bytes": 618,
+      "sha256": "598bff5bf0a3dec5254452b5e5169772d94aa9afbe6033216aaf94a31fde3d29"
+    },
+    {
+      "path": "WORK_LOG.md",
+      "bytes": 5422,
+      "sha256": "8bdf70556d105326262f1862d9eb29b2b148f95b61de762a68284ffb61f671d8"
+    },
+    {
+      "path": "build_record.py",
+      "bytes": 12784,
+      "sha256": "3a7e0036d42440ea7596e30a73cc5c7a6ffecb7e81c0999bc3583cd1a683bc80"
+    },
+    {
+      "path": "check_revision.py",
+      "bytes": 10470,
+      "sha256": "9914d4ac9f909da5bf9ca12d4885647eaa9ed01d2fca270872298534c983923f"
+    },
+    {
+      "path": "inputs/R145.md",
+      "bytes": 30194,
+      "sha256": "b38d2e69c16fa5ba725042a0ae3ab4b711c9dc9b72a257631b48caff40c89f5b"
+    },
+    {
+      "path": "inputs/RESEARCH_MASTER_GUIDE.md",
+      "bytes": 29501,
+      "sha256": "b2cc18778621b1f4d8a0e3ac25755f126442bbfbd5b65398f05f16211a1fe0c3"
+    },
+    {
+      "path": "inputs/TA25.md",
+      "bytes": 42069,
+      "sha256": "b876dd6c82477fe2a73267af7df40ffc1f0c16c19109ea0c84ac3d9fe8288947"
+    },
+    {
+      "path": "inputs/UCT_I.md",
+      "bytes": 142625,
+      "sha256": "ec85194c0cb545bf55094a41291bf02cd12f85c1c3b8dd620939b2fc3909fec1"
+    },
+    {
+      "path": "inputs/UCT_II.md",
+      "bytes": 59958,
+      "sha256": "d8f3329f08cd7272b77945b780e94e87a2f43773aeb86ca41b907b558d59504b"
+    },
+    {
+      "path": "inputs/UCT_III.md",
+      "bytes": 94627,
+      "sha256": "35606b2b2545920a803489f4498e976daf175fd96274d2c41a44ce3b2cad2bc2"
+    },
+    {
+      "path": "inputs/UI_EFFECTIVE_SCOPE.json",
+      "bytes": 14940,
+      "sha256": "52c20b9f799ac88fd9837ef1ce5d5ac63cd0dd9e92bfdf0e049b999882299616"
+    },
+    {
+      "path": "inputs/UI_SOURCE.md",
+      "bytes": 20981,
+      "sha256": "dfc1d1ea5a798427a2f0d0c016f229e6c5a20645ded661228df82e32b5c18627"
+    },
+    {
+      "path": "inputs/root/CURRENT_STATE.json",
+      "bytes": 37698,
+      "sha256": "c7f817cbc784e70917dedc0c737643b5c67b3af67a3fba08a2cadb23b2ceef51"
+    },
+    {
+      "path": "inputs/root/FORMAL_MAP_EXTENSION_INDEX.json",
+      "bytes": 9817,
+      "sha256": "ae976dc9a00040871956ea02737675d7561317f8ea50824283c855e1859cacb8"
+    },
+    {
+      "path": "inputs/root/HANDOFF.md",
+      "bytes": 3330,
+      "sha256": "8f45b8c1c5adad7c34f42af3ea02cd5b0d43b2d9e24a37d4d9b52ec1587d0779"
+    },
+    {
+      "path": "inputs/root/MASTER_INDEX.md",
+      "bytes": 2818,
+      "sha256": "26c65110f5dff452c0d6fe517cdcd63de8e0cb4970d433aa9b0386fa7d158701"
+    },
+    {
+      "path": "inputs/root/PUBLICATION_COVERAGE.json",
+      "bytes": 12505,
+      "sha256": "4e5c78b58355832f143957c8e13175996efbc68653fdd06d15fb645f3ea38ce5"
+    },
+    {
+      "path": "inputs/root/RESEARCH_REGISTRY.json",
+      "bytes": 67666,
+      "sha256": "53feea613d742aaee38090d5957a3b4f63423d6ef3d235c1a7b59c10ff2d86ba"
+    },
+    {
+      "path": "inputs/root/RESEARCH_SESSION_LOG_INDEX.json",
+      "bytes": 16826,
+      "sha256": "f7f98cbb708b9efe77aac476d6efe679827eb69626d26f0c67ff96fb37f503af"
+    },
+    {
+      "path": "inputs/root/UCT_FORMAL_AUDIT.md",
+      "bytes": 2388,
+      "sha256": "2ca1cbaa00293b538fbf0e1031f726828a4632abb14d49ae9350afe59d05ebae"
+    },
+    {
+      "path": "inputs/root/UCT_FORMAL_GRAPH_MODULES.json",
+      "bytes": 66303,
+      "sha256": "f0a0259c6132cdb97507b8a9409dabbfc30e9183b19a95b881603fd0f323cb39"
+    },
+    {
+      "path": "inputs/root/UCT_FORMAL_MAP.md",
+      "bytes": 5952,
+      "sha256": "1f2fe88c3ca0fa391a1897f0efa7ede4a3aee62b2451b03a9da7b6bd17bd46a5"
+    },
+    {
+      "path": "inputs/root/UNIFIED_RESEARCH_INDEX.json",
+      "bytes": 150407,
+      "sha256": "65ad6c064d747327e42fbf5a1495f43a48efdb545b18a7d2c873ee94e2f43e22"
+    },
+    {
+      "path": "root_updates/CURRENT_STATE.json",
+      "bytes": 38825,
+      "sha256": "1762beae561c9d93d162bf2d0df3a3dd92a6ca2f4d23eda844a58800cabd3bbf"
+    },
+    {
+      "path": "root_updates/FORMAL_MAP_EXTENSION_INDEX.json",
+      "bytes": 10950,
+      "sha256": "711b465237e1f6d912b414663739c59041ac4413d67f613899401cd9bc6c05dc"
+    },
+    {
+      "path": "root_updates/HANDOFF.md",
+      "bytes": 3761,
+      "sha256": "3019f92a4c7a9bb106c782118e97d4c2ff615b1a3eb7b4717981ed6cdab548d2"
+    },
+    {
+      "path": "root_updates/MASTER_INDEX.md",
+      "bytes": 3249,
+      "sha256": "0530ae82d1aa104c48bb1d40f6a0a499d5ef2057e015d609d694ec136c81789a"
+    },
+    {
+      "path": "root_updates/RESEARCH_REGISTRY.json",
+      "bytes": 68799,
+      "sha256": "373df2dbad42d7e6b11e66e014e5c24c72a74b343dc979148840bdddd7a957eb"
+    },
+    {
+      "path": "root_updates/RESEARCH_SESSION_LOG_INDEX.json",
+      "bytes": 17958,
+      "sha256": "bae29dd3a56da371b3342be6c605a4792d314c70cb4f563ad943e069a9866ac5"
+    },
+    {
+      "path": "root_updates/UCT_FORMAL_AUDIT.md",
+      "bytes": 2616,
+      "sha256": "cd09f2252d7693beb5a91cb0d274c3e27fb8e8b8e61e7be1129fef3885a1e726"
+    },
+    {
+      "path": "root_updates/UCT_FORMAL_GRAPH_MODULES.json",
+      "bytes": 67436,
+      "sha256": "f60a4ba4ee2130ac42f5db1356d4c8fbae096dcd0ad5bfd983899941d3ee0b67"
+    },
+    {
+      "path": "root_updates/UCT_FORMAL_MAP.md",
+      "bytes": 6383,
+      "sha256": "f3acba3205cb0c49316e674d0e9f3a17a7e8d51ac1cf5bed68e6d15c089fdb8e"
+    },
+    {
+      "path": "root_updates/UNIFIED_RESEARCH_INDEX.json",
+      "bytes": 151540,
+      "sha256": "7cd3e8f4ad31e0d766c6777612b1c70f216ff0230a878ad79770afbb04939c55"
+    }
+  ]
+}

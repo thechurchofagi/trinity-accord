@@ -1,0 +1,16 @@
+{
+  "research_id": "REV20261010",
+  "commit": "e792283f086a914da0b289c1554b7c1342742820",
+  "tree": "87cbec375ea4198908f62832ec9eecfcd0c72f72",
+  "paths_checked": 49,
+  "git_blob_hashes_matched": true,
+  "core_text_paths": [
+    "research/uct-agent-consciousness-workspace/records/REV20261010_Retained_Premise_Revision/RESEARCH_NOTE.md",
+    "research/uct-agent-consciousness-workspace/records/REV20261010_Retained_Premise_Revision/PRACTICAL_PROTOCOL.md",
+    "research/uct-agent-consciousness-workspace/records/REV20261010_Retained_Premise_Revision/HANDOFF_ZH.md",
+    "research/uct-agent-consciousness-workspace/CURRENT_STATE.json"
+  ],
+  "core_text_exact_match": true,
+  "directory_trees_fetched": 7,
+  "verification_scope": "ALL_WRITTEN_BLOBS_AND_FOUR_CORE_TEXTS"
+}

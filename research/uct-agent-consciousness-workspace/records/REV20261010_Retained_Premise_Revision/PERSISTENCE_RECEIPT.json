@@ -1,7 +1,70 @@
 {
   "research_id": "REV20261010",
-  "status": "PREPARED_NOT_YET_REMOTE_VERIFIED",
-  "base_commit": "1f4002993a0f2bde15e12927686bf06ec8946c8d",
-  "record": "research/uct-agent-consciousness-workspace/records/REV20261010_Retained_Premise_Revision/",
-  "final_receipt_policy": "Written after remote verification and Library save; archive built before that final receipt does not contain later receipts."
+  "version": "REV-v0.1.0",
+  "status": "GITHUB_READBACK_VERIFIED_AND_LIBRARY_SAVED",
+  "scientific_commit": "e792283f086a914da0b289c1554b7c1342742820",
+  "git_readback": {
+    "research_id": "REV20261010",
+    "commit": "e792283f086a914da0b289c1554b7c1342742820",
+    "tree": "87cbec375ea4198908f62832ec9eecfcd0c72f72",
+    "paths_checked": 49,
+    "git_blob_hashes_matched": true,
+    "core_text_paths": [
+      "research/uct-agent-consciousness-workspace/records/REV20261010_Retained_Premise_Revision/RESEARCH_NOTE.md",
+      "research/uct-agent-consciousness-workspace/records/REV20261010_Retained_Premise_Revision/PRACTICAL_PROTOCOL.md",
+      "research/uct-agent-consciousness-workspace/records/REV20261010_Retained_Premise_Revision/HANDOFF_ZH.md",
+      "research/uct-agent-consciousness-workspace/CURRENT_STATE.json"
+    ],
+    "core_text_exact_match": true,
+    "directory_trees_fetched": 7,
+    "verification_scope": "ALL_WRITTEN_BLOBS_AND_FOUR_CORE_TEXTS"
+  },
+  "archive": {
+    "path": "/workspace/scratch/5dbc1723ee12/UCT_REV20261010_Research_v0.1.0.zip",
+    "bytes": 355109,
+    "sha256": "b8366fc82c6731237e4d350e9da667147fb15f098fdba58f42d2ce46a1816003",
+    "members": 51
+  },
+  "library_files": [
+    {
+      "file_name": "UCT_REV20261010_Research_v0.1.0.zip",
+      "library_file_id": "libfile_29e3e42fc09c8191bc60a26a28526069",
+      "file_id": "file_00000000696c81fdaaffd99a40f4bf91",
+      "current_version_number": 0,
+      "status": "succeeded",
+      "local_metadata_applied": true
+    },
+    {
+      "file_name": "UCT_REV20261010_Research_Handoff.md",
+      "library_file_id": "libfile_f7d16377f47c8191aab340156a393c44",
+      "file_id": "file_0000000040e08230b7521e1971390c27",
+      "current_version_number": 0,
+      "status": "succeeded",
+      "local_metadata_applied": true
+    },
+    {
+      "file_name": "UCT_Hourly_Research_Master_Handoff.md",
+      "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+      "file_id": "file_000000003b1881f78d3fb0378740b336",
+      "current_version_number": 105,
+      "status": "succeeded",
+      "local_metadata_applied": true
+    }
+  ],
+  "master_readback": {
+    "version": "105",
+    "exact_text_after_terminal_newline_normalization": true,
+    "bytes": 26651,
+    "full_prior_v104_preserved": true
+  },
+  "scope_limits": [
+    "Archive is a research increment, not a complete repository backup.",
+    "Archive and reading handoff were saved with provider-confirmed status; this record does not claim an independent binary download of the archive.",
+    "This final receipt and later WORK_LOG entry are not inside the earlier archive.",
+    "No neural or human experiment, new publication, formal scientific promotion or completed historical semantic audit."
+  ],
+  "completed_map": "UCT-MAP-v1.1.2",
+  "publication_coverage": "UCT-PUB-v1.0.33",
+  "pending_checkpoints_unchanged": 38,
+  "full_semantic_audit": "AUDIT_INCOMPLETE"
 }
