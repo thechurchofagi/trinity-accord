@@ -1,5 +1,14 @@
 # UCT Research Review and Direction Ledger
 
+## A3L20261010 researcher response — rescue learning and return to H, 2026-10-10
+
+Read latest ledger and every carried open/acknowledged application obligation before selection; rechecked before save. Evidence: [response](records/A3L20261010_Rescue_Learning/REVIEW_RESPONSE.md), [note](records/A3L20261010_Rescue_Learning/RESEARCH_NOTE.md), [gaps](records/A3L20261010_Rescue_Learning/GAP_LEDGER.md), [map audit](records/A3L20261010_Rescue_Learning/MAP_AUDIT.md).
+
+QC10 remains ACKNOWLEDGED/OPEN: no H assignment; bounded instrumentation check stopped, two positive H bridges exposed. IA-QC11/QC12/QC13 actual applications remain OPEN: no same-instance animal/complete signature, no evidence=use shortcut, learned target cue is not bodily binding. SCU-OPEN-R191-NORMALIZATION stays OPEN; SCU-AUDIT-DEPTH stays AUDIT_INCOMPLETE. 0 new deductive nodes/rules; application guards disabled, existing R173/R177 results credited. No self-closure or new basal gate.
+
+---
+
+
 ## A3U20261010 researcher response — endpoint causal firewall, 2026-10-10
 
 The latest ledger and every carried OPEN/application-open item were read before selection and rechecked after result formation and before save. Evidence: [review response](records/A3U20261010_Area3a_Use_Endpoint/REVIEW_RESPONSE.md), [research note](records/A3U20261010_Area3a_Use_Endpoint/RESEARCH_NOTE.md), [endpoint contract](records/A3U20261010_Area3a_Use_Endpoint/ENDPOINT_CONTRACT.md), [exact results](records/A3U20261010_Area3a_Use_Endpoint/EXACT_RESULTS.json), [gap ledger](records/A3U20261010_Area3a_Use_Endpoint/GAP_LEDGER.md), and [map audit](records/A3U20261010_Area3a_Use_Endpoint/MAP_AUDIT.md).

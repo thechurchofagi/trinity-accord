@@ -1,4 +1,12 @@
-# 最新接续 A3U20261010；完成图仍为 UCT-MAP-v1.1.2
+# 最新接续 A3L20261010；完成图仍为 UCT-MAP-v1.1.2
+
+[A3L中文交接](records/A3L20261010_Rescue_Learning/HANDOFF_ZH.md) · [研究稿](records/A3L20261010_Rescue_Learning/RESEARCH_NOTE.md) · [工作日志](records/A3L20261010_Rescue_Learning/WORK_LOG.md) · [地图审计](records/A3L20261010_Rescue_Learning/MAP_AUDIT.md)。本轮应用已有R177反码/补偿读出器结果，修正A3U的忠实救援应用：输入等价标准及相关读出器须事前固定或独立约束。London2008是学会左右提示，Ganguly–Carmena2009已有非仿生映射学习；不报重复首创。现有来源未提供同实例直接路径上界/忠实下游替代，也不证明不可行；到此停止装置细化。
+
+下一具体问题：独立区分熟悉身体H与提示熟悉、流畅，并给B_ret/B_fit一个未用于选定目标的差异后果。0新增节点/规则/上下文，6项稳定声明定位既有节点，停用应用修订；C1/U1不增门槛，完成图913/424/261与全部OPEN保留。结构核查不是全历史深层语义证明。覆盖UCT-PUB-v1.0.26，正式论文数不变，HOLD独立稿。最终双份凭证见本轮DUAL_SAVE_RECEIPT.json。
+
+---
+
+# 前一接续 A3U20261010；完成图仍为 UCT-MAP-v1.1.2
 
 - [中文交接](records/A3U20261010_Area3a_Use_Endpoint/HANDOFF_ZH.md)
 - [英文研究稿](records/A3U20261010_Area3a_Use_Endpoint/RESEARCH_NOTE.md)

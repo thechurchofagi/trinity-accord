@@ -1,0 +1,132 @@
+{
+  "schema": "uct-a3l-claims/1",
+  "result_version": "A3L-RESULT-v0.1.0",
+  "claims": [
+    {
+      "id": "A3L-C1",
+      "type": "INHERITED_THEOREM_APPLICATION",
+      "statement": "For every admitted c, dprime(g(e(c)))=c if d(e(c))=c, g is bijective, and the installed dprime=d composed with inverse(g). Successful output alone does not entail unchanged code or reader.",
+      "domain": "Declared finite feature/port/reader comparison, not complete biology.",
+      "all_premises": [
+        "fixed C,Z,Zprime and maps",
+        "d composed with e=id",
+        "bijective g",
+        "executed compensating dprime",
+        "same admitted source/use/feature binding"
+      ],
+      "proof": "R177-P1; note §2; EXACT_RESULTS.json eight binary cells",
+      "counterexample": "k=theta=1 gives correct output with both code and reader different from baseline; constant code destroys invertibility.",
+      "status": "INHERITED_CONDITIONAL; NO_NEW_THEOREM",
+      "thought_experiment_role": "copy/rewiring preserves task but changes implementation",
+      "existing_nodes": [
+        "R177:EXECUTED_FEATURE_DOMAIN",
+        "R177:COMPENSATED_FEATURE_PRESERVATION"
+      ]
+    },
+    {
+      "id": "A3L-C2",
+      "type": "APPLICATION_GUARD_CORRECTION",
+      "statement": "A3U rescue discrimination applies to faithful input replacement under a fixed or independently bounded reader; adaptation-supported recovery instead concerns the new channel-reader package.",
+      "domain": "A3U same-installation declared alternative class.",
+      "all_premises": [
+        "source/port/clock bound",
+        "active selective block",
+        "independent input equivalence criterion",
+        "fixed relevant reader/context or independent compensation bound",
+        "no direct G/Q to Y",
+        "alternative writer exclusion"
+      ],
+      "proof": "RESEARCH_NOTE.md §3; C1 witness defeats recovery-only shortcut",
+      "counterexample": "inverted port plus learned inverted decoder succeeds without original code restoration",
+      "status": "PENDING_APPLICATION_AMENDMENT; ACTUAL_PREMISES_OPEN",
+      "thought_experiment_role": "copy/rewiring reveals reader change",
+      "existing_nodes": [
+        "R177:COMPENSATED_FEATURE_PRESERVATION"
+      ],
+      "pending_node_refs": [
+        "A3U:PATH_SPECIFIC_RESCUE_CONTRACT"
+      ]
+    },
+    {
+      "id": "A3L-C3",
+      "type": "POSITIVE_ORGANIZATIONAL_APPLICATION",
+      "statement": "A learned artificial code may instantiate R173 RetBind through actual continued prior body-frame trace and present frame-consumer use; original physiological code identity is not itself a RetBind premise. Learning an instructive cue alone does not supply that bodily target binding.",
+      "domain": "A fixed admitted bearer/history-window/present-interval/signature, under effective R173/R175/R176 restrictions.",
+      "all_premises": [
+        "prior same-lineage body-frame occurrence",
+        "actual continuing trace",
+        "ordered executed present body-frame use",
+        "independent body target binding",
+        "common physical selector and transported parameters for C1 use"
+      ],
+      "proof": "R173 definition and effective transport; R177 compensation preserves selected feature only; London cue source constrains the application",
+      "counterexample": "trained left/right cue goes to target policy; a stored learned decoder can be idle; fresh state copy matches performance without prior lineage",
+      "status": "CONDITIONAL_APPLICATION; H_BRIDGE_OPEN",
+      "thought_experiment_role": "ancestor/formation plus copy and dormant-log comparisons",
+      "existing_nodes": [
+        "R173:RETENTIVE_BINDING_RELATION",
+        "R173:RETENTIVE_EXPERIENTIAL_COORDINATE",
+        "R173:FAMILIAR_MINENESS_BOUNDARY",
+        "R177:SOURCE_FEATURE_SEPARATION"
+      ]
+    },
+    {
+      "id": "A3L-C4",
+      "type": "BOUNDED_SOURCE_ASSESSMENT_AND_STOP",
+      "statement": "The inspected literature does not jointly discharge A3U direct-path exclusion/frozen-reader faithful downstream replacement; stop instrumentation refinement and return to H. This does not establish physical or ethical impossibility.",
+      "domain": "Named sources and retrieval sections in SOURCE_SCOPE.md as of 10 October 2026.",
+      "all_premises": [
+        "scope-limited primary evidence",
+        "no cross-study same-instance synthesis",
+        "no inference from silence to impossibility"
+      ],
+      "proof": "SOURCE_SCOPE.md and note §§1,4",
+      "counterexample": "a later concrete same-instance bound/replay demonstration could reopen this branch",
+      "status": "METHOD_DECISION_NOT_PHYSICAL_THEOREM",
+      "thought_experiment_role": "prevents learned cue success from replacing bodily H",
+      "existing_nodes": [
+        "R173:FAMILIAR_MINENESS_BOUNDARY"
+      ]
+    },
+    {
+      "id": "A3L-H1",
+      "type": "OPEN_CONTENT_BRIDGE_CANDIDATE",
+      "statement": "Within its explicitly sensitive domain, familiar bodily H tracks enacted retained body-frame organization across justified recoding.",
+      "domain": "One independently signed H calibration/application domain.",
+      "all_premises": [
+        "independent H semantics and fallible signed evidence",
+        "actual RetBind/body frame",
+        "declared recoding class",
+        "joint same-instance grounding"
+      ],
+      "proof": "PROPOSAL ONLY; note §5",
+      "counterexample": "stable independently warranted H under effective retained-use change pressures sensitivity",
+      "status": "OPEN_UNVALIDATED; NOT_ENABLED",
+      "thought_experiment_role": "formation/use and compensated recoding distinguish raw natural code from retained body organization",
+      "existing_nodes": [
+        "R173:FAMILIAR_MINENESS_BOUNDARY"
+      ]
+    },
+    {
+      "id": "A3L-H2",
+      "type": "OPEN_CONTENT_BRIDGE_RIVAL",
+      "statement": "Within its claimed domain, familiar bodily H tracks present bodily congruence/fluency; formation influences H through current fit.",
+      "domain": "Same H target as H1; selected current-fit view explicitly incomplete.",
+      "all_premises": [
+        "same independent H semantics/evidence",
+        "grounded bodily fit",
+        "fit cannot be renamed task score",
+        "no external biography cause without constitutive carrier"
+      ],
+      "proof": "RIVAL PROPOSAL ONLY; R199 complete-clone boundary inherited",
+      "counterexample": "H contrast within an adequately matched current-fit class pressures this factorization",
+      "status": "OPEN_UNVALIDATED; NOT_ENABLED",
+      "thought_experiment_role": "copied current state cannot be forced to differ phenomenally by biography alone",
+      "existing_nodes": [
+        "R173:FAMILIAR_MINENESS_BOUNDARY"
+      ]
+    }
+  ],
+  "new_mathematical_theorems": 0,
+  "actual_H_assignment": null
+}

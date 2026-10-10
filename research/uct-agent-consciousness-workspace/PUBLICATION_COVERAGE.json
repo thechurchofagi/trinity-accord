@@ -1,6 +1,6 @@
 {
   "schema": "uct-publication-coverage-entry/1.0",
-  "coverage_version": "UCT-PUB-v1.0.25",
+  "coverage_version": "UCT-PUB-v1.0.26",
   "base_census_version": "UCT-PUB-v1.0.0",
   "ledger": {
     "path": "publication/UCT-PUB-v1.0.22/COVERAGE_LEDGER.json",
@@ -9,9 +9,9 @@
   },
   "claim_id_index": "publication/UCT-PUB-v1.0.22/CLAIM_ID_INDEX.json",
   "published_works": "publication/UCT-PUB-v1.0.22/PUBLISHED_WORKS_AND_VERSIONS.json",
-  "readable_report": "publication/UCT-PUB-v1.0.25/COVERAGE_REPORT_ZH.md",
+  "readable_report": "publication/UCT-PUB-v1.0.26/COVERAGE_REPORT_ZH.md",
   "current_decision": "records/SCUPUB20261010_DOI_Publication/PUBLICATION_DECISION.json",
-  "latest_update": "records/A3U20261010_Area3a_Use_Endpoint/PUBLICATION_COVERAGE_UPDATE.json",
+  "latest_update": "records/A3L20261010_Rescue_Learning/PUBLICATION_COVERAGE_UPDATE.json",
   "current_scientific_map": "UCT-MAP-v1.1.2",
   "nondeductive": true,
   "unknown_is_unpublished": false,
@@ -48,11 +48,12 @@
     "records/DVC20261010_Device_Consumer_Validation/PUBLICATION_COVERAGE_UPDATE.json",
     "records/A3S20261010_Area3a_Selectivity/PUBLICATION_COVERAGE_UPDATE.json",
     "records/A3P20261010_Area3a_Crossed_Probe/PUBLICATION_COVERAGE_UPDATE.json",
-    "records/A3U20261010_Area3a_Use_Endpoint/PUBLICATION_COVERAGE_UPDATE.json"
+    "records/A3U20261010_Area3a_Use_Endpoint/PUBLICATION_COVERAGE_UPDATE.json",
+    "records/A3L20261010_Rescue_Learning/PUBLICATION_COVERAGE_UPDATE.json"
   ],
   "historical_census_decision": "publication/UCT-PUB-v1.0.0/MANUSCRIPT_DECISION.json",
   "latest_manuscript_status": "PUBLISHED_PREPRINT_PUBLIC_READBACK_AND_DOI_RESOLUTION_VERIFIED",
-  "formal_publication_counts_unchanged": false,
+  "formal_publication_counts_unchanged": true,
   "publication_counts": {
     "distinct_research_works": 29,
     "distinct_research_work_version_label_pairs": 39,
@@ -65,9 +66,9 @@
   },
   "counting_scope": "Frozen verified corpus plus one independently verified SCU DOI; not a new worldwide census.",
   "claim_delta": {
-    "path": "publication/UCT-PUB-v1.0.25/CLAIM_COVERAGE_DELTA.json",
-    "bytes": 679,
-    "sha256": "11759f28cea762308802c81c802ff135674189b19ea8be9f23a636ce5efe4bb9"
+    "path": "publication/UCT-PUB-v1.0.26/CLAIM_COVERAGE_DELTA.json",
+    "bytes": 894,
+    "sha256": "9bdd45e7835f6f5c76c13bdbf760beab1c4cdbc07cdbdc700ed39ead02c8d11c"
   },
   "latest_publication": {
     "research_id": "SCU20261010",
@@ -83,7 +84,7 @@
     "scientific_map_admission_changed": false,
     "DVC_in_published_paper": false
   },
-  "latest_pending_research_decision": "HOLD_STANDALONE_INTEGRATE_AS_A3P_CAUSAL_FIREWALL_SECTION",
+  "latest_pending_research_decision": "HOLD_STANDALONE_INTEGRATE_RESCUE_CORRECTION_AND_RETURN_TO_H",
   "coverage_review": "records/SCUPUB20261010_DOI_Publication/review/coverage_delta/PUBLICATION_COVERAGE_REVIEW.md",
   "prior_entry_snapshot": "records/DVC20261010_Device_Consumer_Validation/history/before_DVC_d8c94faa/PUBLICATION_COVERAGE.json",
   "concurrent_pending_coverage": "publication/UCT-PUB-v1.0.22/CONCURRENT_PENDING_COVERAGE.json"

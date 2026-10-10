@@ -1,6 +1,6 @@
 # UCT 最高研究指导：原理论优先、局部体验保留、每步全图复核
 
-**当前已核验补充接续（A3S20261010）：** 本轮把 S1 3a 区选作一个命名的本体感觉消费者。2026 年两只恒河猴的慢性深沟底阵列记录纠正了“该消费者不可访问”的旧印象；但现有一手研究仍未在同一实例联合满足来源选择性、消费者选择性和事件绑定。标准行空间判据与 16 状态穷举给出观测相同而 `S→3a` 相反的精确孪生，因此两个边际不能自动识别交互项。A3S 的 7 节点、3 规则、5 上下文候选保持停用；完成图 UCT-MAP-v1.1.2 及 C1/U1 均不变。入口见 [A3S 中文交接](records/A3S20261010_Area3a_Selectivity/HANDOFF_ZH.md) 与 [地图审计](records/A3S20261010_Area3a_Selectivity/MAP_AUDIT.md)。下一步仅核对慢性阵列平台能否支持一个交叉探针；失败就记录首先缺失的选择性或事件绑定。
+**当前已核验补充接续（A3L20261010）：** 已完成救援/重新学习有界核查，忠实替代须固定输入等价标准与读出器；未获同实例直接路径/救援包，停止装置细化并返回独立身体H。见[A3L交接](records/A3L20261010_Rescue_Learning/HANDOFF_ZH.md)与[审计](records/A3L20261010_Rescue_Learning/MAP_AUDIT.md)。完成图v1.1.2、C1/U1不变，覆盖v1.0.26，深语义审计与全部OPEN保留。原A3S说明保留在历史入口与Git历史。
 
 **政策 ID：POLICY-20261008-WHOLE-MAP-PERSISTENCE；版本 2.3；修订日期：2026-10-09。**
 
@@ -8,7 +8,7 @@
 
 **一句话原则：先盘点全部成果及已发表主张的覆盖，判断剩余净增量；不足就选择具体缺口突破，足够就完成可引用论文；每一步实质增量须接入地图，逐项复核全图并重推受影响结论，日志、地图和发表覆盖台账同步更新，保存且向作者反馈后继续。**
 
-**当前已核验接续：** SCU v1.0.1已公开（[DOI 10.5281/zenodo.23272690](https://doi.org/10.5281/zenodo.23272690)）；DVC20261010已完成18人公开数据重算、装置消费者采样/commit合同和有限模型，候选停用，尚无新硬件或人体干预。保留并发MPC/CBI/EIP；完成图v1.1.2不变，覆盖v1.0.21。下一步只接入一个可访问的实际载体—事件—消费者—时序装置并独立核验所选端点，失败即停止对应推断；人体结论另需一个命名消费者的可行选择性差异探针。入口见 [MASTER_INDEX.md](MASTER_INDEX.md)、[CURRENT_STATE.json](CURRENT_STATE.json)及[records/DVC20261010_Device_Consumer_Validation/MAP_AUDIT.md](records/DVC20261010_Device_Consumer_Validation/MAP_AUDIT.md)。
+**前一已核验接续（历史）：** SCU v1.0.1已公开（[DOI 10.5281/zenodo.23272690](https://doi.org/10.5281/zenodo.23272690)）；DVC20261010已完成18人公开数据重算、装置消费者采样/commit合同和有限模型，候选停用，尚无新硬件或人体干预。保留并发MPC/CBI/EIP；完成图v1.1.2不变，覆盖v1.0.21。下一步只接入一个可访问的实际载体—事件—消费者—时序装置并独立核验所选端点，失败即停止对应推断；人体结论另需一个命名消费者的可行选择性差异探针。入口见 [MASTER_INDEX.md](MASTER_INDEX.md)、[CURRENT_STATE.json](CURRENT_STATE.json)及[records/DVC20261010_Device_Consumer_Validation/MAP_AUDIT.md](records/DVC20261010_Device_Consumer_Validation/MAP_AUDIT.md)。
 
 原总指南的全部字节保存在同目录 [RESEARCH_MASTER_GUIDE_BEFORE_POLICY20261008.md](RESEARCH_MASTER_GUIDE_BEFORE_POLICY20261008.md)，其相对链接仍有效；其中详细流程、历史成果、失败、有效修订和存储要求按与本指南相容的部分继续适用。现行科研进展以最新版 [HANDOFF.md](HANDOFF.md)、[MASTER_INDEX.md](MASTER_INDEX.md)、[REVIEW_SUPERVISION.md](REVIEW_SUPERVISION.md) 和真实提交为准，不以本文件冻结轮次。请勿再次将大量轮次摘要堆到本政策之前而掩盖最高原则。
 

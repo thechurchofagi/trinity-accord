@@ -1,0 +1,121 @@
+{
+  "schema": "uct-pending-application-amendment/1",
+  "id": "A3L20261010",
+  "base_release": "UCT-MAP-v1.1.2",
+  "integration_status": "PENDING_CHECKPOINT_DISABLED",
+  "enabled": false,
+  "enabled_as_established_premise": false,
+  "release_effect": "NONE; frozen completed graph unchanged",
+  "foundation_effect": "NONE",
+  "nodes": [],
+  "rules": [],
+  "context_links": [],
+  "applications": [
+    {
+      "claim_id": "A3L-C1",
+      "completed_node_refs": [
+        "R177:EXECUTED_FEATURE_DOMAIN",
+        "R177:COMPENSATED_FEATURE_PRESERVATION"
+      ],
+      "pending_node_refs": [],
+      "all_simultaneous_premises": [
+        "fixed C,Z,Zprime and maps",
+        "d composed with e=id",
+        "bijective g",
+        "executed compensating dprime",
+        "same admitted source/use/feature binding"
+      ],
+      "status": "INHERITED_CONDITIONAL; NO_NEW_THEOREM",
+      "actual_premises_discharged": false,
+      "source": "RESEARCH_NOTE.md"
+    },
+    {
+      "claim_id": "A3L-C2",
+      "completed_node_refs": [
+        "R177:COMPENSATED_FEATURE_PRESERVATION"
+      ],
+      "pending_node_refs": [
+        "A3U:PATH_SPECIFIC_RESCUE_CONTRACT"
+      ],
+      "all_simultaneous_premises": [
+        "source/port/clock bound",
+        "active selective block",
+        "independent input equivalence criterion",
+        "fixed relevant reader/context or independent compensation bound",
+        "no direct G/Q to Y",
+        "alternative writer exclusion"
+      ],
+      "status": "PENDING_APPLICATION_AMENDMENT; ACTUAL_PREMISES_OPEN",
+      "actual_premises_discharged": false,
+      "source": "RESEARCH_NOTE.md"
+    },
+    {
+      "claim_id": "A3L-C3",
+      "completed_node_refs": [
+        "R173:RETENTIVE_BINDING_RELATION",
+        "R173:RETENTIVE_EXPERIENTIAL_COORDINATE",
+        "R173:FAMILIAR_MINENESS_BOUNDARY",
+        "R177:SOURCE_FEATURE_SEPARATION"
+      ],
+      "pending_node_refs": [],
+      "all_simultaneous_premises": [
+        "prior same-lineage body-frame occurrence",
+        "actual continuing trace",
+        "ordered executed present body-frame use",
+        "independent body target binding",
+        "common physical selector and transported parameters for C1 use"
+      ],
+      "status": "CONDITIONAL_APPLICATION; H_BRIDGE_OPEN",
+      "actual_premises_discharged": false,
+      "source": "RESEARCH_NOTE.md"
+    },
+    {
+      "claim_id": "A3L-C4",
+      "completed_node_refs": [
+        "R173:FAMILIAR_MINENESS_BOUNDARY"
+      ],
+      "pending_node_refs": [],
+      "all_simultaneous_premises": [
+        "scope-limited primary evidence",
+        "no cross-study same-instance synthesis",
+        "no inference from silence to impossibility"
+      ],
+      "status": "METHOD_DECISION_NOT_PHYSICAL_THEOREM",
+      "actual_premises_discharged": false,
+      "source": "RESEARCH_NOTE.md"
+    },
+    {
+      "claim_id": "A3L-H1",
+      "completed_node_refs": [
+        "R173:FAMILIAR_MINENESS_BOUNDARY"
+      ],
+      "pending_node_refs": [],
+      "all_simultaneous_premises": [
+        "independent H semantics and fallible signed evidence",
+        "actual RetBind/body frame",
+        "declared recoding class",
+        "joint same-instance grounding"
+      ],
+      "status": "OPEN_UNVALIDATED; NOT_ENABLED",
+      "actual_premises_discharged": false,
+      "source": "RESEARCH_NOTE.md"
+    },
+    {
+      "claim_id": "A3L-H2",
+      "completed_node_refs": [
+        "R173:FAMILIAR_MINENESS_BOUNDARY"
+      ],
+      "pending_node_refs": [],
+      "all_simultaneous_premises": [
+        "same independent H semantics/evidence",
+        "grounded bodily fit",
+        "fit cannot be renamed task score",
+        "no external biography cause without constitutive carrier"
+      ],
+      "status": "OPEN_UNVALIDATED; NOT_ENABLED",
+      "actual_premises_discharged": false,
+      "source": "RESEARCH_NOTE.md"
+    }
+  ],
+  "reason_no_new_nodes": "Inherited mathematics/retention results fully covered by cited existing nodes; source correction and open application guards are not manufactured theorems."
+}

@@ -507,6 +507,24 @@
       "compatibility_audit": "records/SCU20261010_Source_Consumer_Protocols/MAP_AUDIT.md",
       "handoff": "records/SCU20261010_Source_Consumer_Protocols/HANDOFF_ZH.md",
       "instruction": "Full typed SCU contract locally reviewed. All base statements/premises/relationships were read, but exact deeper unread scope remains open. No candidate, correction or actual premise is promoted."
+    },
+    {
+      "id": "A3L20261010",
+      "result_version": "A3L-RESULT-v0.1.0",
+      "base_release": "UCT-MAP-v1.1.2",
+      "path": "records/A3L20261010_Rescue_Learning/MAP_EXTENSION.json",
+      "sha256": "4bf6dad21c18b367abc82b6462a2253208ecc74d50d41430f6949f38074fd081",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "candidate_counts": {
+        "nodes": 0,
+        "active_conditional_rules": 0,
+        "nondeductive_context_links": 0
+      },
+      "publication_coverage_version": "UCT-PUB-v1.0.26",
+      "compatibility_audit": "records/A3L20261010_Rescue_Learning/MAP_AUDIT.md",
+      "handoff": "records/A3L20261010_Rescue_Learning/HANDOFF_ZH.md",
+      "instruction": "Application guards and open H candidates map to existing nodes; no new deductions; full deep semantic proof remains incomplete."
     }
   ],
   "pending_rebase_target": "UCT-MAP-v1.1.2; prior pending instructions and candidate version labels remain historical source metadata.",
@@ -517,11 +535,12 @@
   "on_source_change": "Fail closed; compare exact current bytes, repeat applicable semantic compatibility review and affected rederivation, then create a new immutable completed version.",
   "publication_coverage": {
     "entry": "PUBLICATION_COVERAGE.json",
-    "version": "UCT-PUB-v1.0.18",
+    "version": "UCT-PUB-v1.0.26",
     "base_census_version": "UCT-PUB-v1.0.0",
-    "update": "records/SCU20261010_Source_Consumer_Protocols/PUBLICATION_COVERAGE_UPDATE.json",
-    "report": "records/PUB20261009_Publication_Coverage/PUBLICATION_COVERAGE_REPORT_ZH.md",
-    "nondeductive": true
+    "update": "records/A3L20261010_Rescue_Learning/PUBLICATION_COVERAGE_UPDATE.json",
+    "report": "publication/UCT-PUB-v1.0.26/COVERAGE_REPORT_ZH.md",
+    "nondeductive": true,
+    "counting_scope": "Frozen verified corpus plus one independently verified SCU DOI; not a new worldwide census."
   },
   "publication_coverage_changes_scientific_graph": false,
   "full_review_status_scope": "The historical completed review flag applies only to UCT-MAP-v1.1.2. Fresh SCU review is complete at the 1,608 statement/premise/relation layer and explicitly incomplete for the recorded deeper fields/proofs. All pending records remain disabled.",

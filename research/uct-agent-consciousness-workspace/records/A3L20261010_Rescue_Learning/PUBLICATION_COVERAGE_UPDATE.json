@@ -1,0 +1,44 @@
+{
+  "schema": "uct-publication-claim-delta/1",
+  "coverage_version": "UCT-PUB-v1.0.26",
+  "parent": "UCT-PUB-v1.0.25",
+  "round": "A3L20261010",
+  "claims": [
+    {
+      "id": "A3L-C1",
+      "coverage": "INHERITED_R177_R188_STANDARD_COMPOSITION_NOT_NEW"
+    },
+    {
+      "id": "A3L-C2",
+      "coverage": "A3U_APPLICATION_GUARD_AMENDMENT_NOT_IN_PUBLISHED_SCU"
+    },
+    {
+      "id": "A3L-C3",
+      "coverage": "R173_R177_R199_R200_CONTEXT_INHERITED; SOURCE_SPECIFIC_APPLICATION_UNPUBLISHED_IN_INSPECTED_CORPUS"
+    },
+    {
+      "id": "A3L-C4",
+      "coverage": "SCOPED_METHOD_DECISION_NOT_A_THEOREM"
+    },
+    {
+      "id": "A3L-H1/H2",
+      "coverage": "OPEN_HYPOTHESES_NOT_VALIDATED_OR_PUBLISHED_AS_RESULTS"
+    }
+  ],
+  "formal_publication_counts_unchanged": true,
+  "decision": "HOLD_STANDALONE_INTEGRATE_RESCUE_CORRECTION_AND_RETURN_TO_H",
+  "world_priority_verified": false,
+  "deducted_antecedents": [
+    "R177 recoding",
+    "R188 recovery/compensation",
+    "R173 effective retention",
+    "R199 clone invariance",
+    "R200 signed H calibration",
+    "SCU-PAPER v1.0.1 success/source-use",
+    "London2008",
+    "Ganguly-Carmena2009",
+    "Dadarlat2015"
+  ],
+  "net_increment": "A3U fixed-reader application guard; source-specific learned instruction/body-frame distinction; bounded stop and return to H",
+  "completed_map_changed": false
+}

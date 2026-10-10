@@ -1,0 +1,38 @@
+{
+  "schema": "uct-a3l-compatibility-audit/1",
+  "checks": {
+    "base_counts": true,
+    "suspended": true,
+    "review_count": true,
+    "base_hash": true,
+    "ledger_hash": true,
+    "no_new_deductions": true,
+    "disabled": true,
+    "refs_resolve": true,
+    "dag": true,
+    "c1_u1_preserved": true,
+    "application_not_premise_truth": true
+  },
+  "all_structural_checks_pass": true,
+  "base_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
+  "ledger_sha256": "0513cb55cef94d82adcaea46af1974438a424aeba152f4c9d5655340f9271687",
+  "covered_objects": 1598,
+  "review_items": 1608,
+  "candidate_counts": {
+    "nodes": 0,
+    "rules": 0,
+    "contexts": 0
+  },
+  "unresolved": [],
+  "semantic_status": "AUDIT_INCOMPLETE: inherited deep contracts/source proofs not freshly reconstructed",
+  "manually_reviewed_affected_contracts": [
+    "r173_retentive_coordinate_transport",
+    "r175_r173_target_boundary_effective",
+    "r176_present_slice_effective",
+    "r177_compensated_feature",
+    "r177_joint_binding",
+    "A3U:PATH_SPECIFIC_RESCUE_CONTRACT (disabled candidate)"
+  ],
+  "inference_effect": "Reader-state fidelity is an application guard; no H assignment follows.",
+  "foundation_changed": false
+}

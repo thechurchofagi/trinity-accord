@@ -1,0 +1,13 @@
+{
+  "research_id": "A3L20261010",
+  "model_run": "python check_rescue_recoding.py",
+  "actual_execution_status": "PASSED",
+  "cells": 8,
+  "supervised_updates": 2,
+  "neural_learning_simulation": false,
+  "actual_H_measurement": false,
+  "checkpoint_commit": "21424961e9265d68b15bc3516ff5eed2044615f6",
+  "checkpoint_library_id": "libfile_9e344d4687d48191a2fdf2c6963c5f83",
+  "checkpoint_zip_sha256": "ca74be5789def39f2d28e803c8929b79b3cbefce3f52ef19f191521157bbf221",
+  "initial_wrong_path_launch_preserved": "FAILURES.md"
+}
