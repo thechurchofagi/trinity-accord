@@ -1,3 +1,17 @@
+# 最新接续 SCU20261010：已完成一篇英文理论方法论文
+
+[完整论文 PDF](records/SCU20261010_Source_Consumer_Protocols/Matched_Behavior_and_Source_Use_v1.0.0.pdf) · [英文源稿](records/SCU20261010_Source_Consumer_Protocols/Matched_Behavior_and_Source_Use_v1.0.0.md) · [中文交接](records/SCU20261010_Source_Consumer_Protocols/HANDOFF_ZH.md) · [工作日志](records/SCU20261010_Source_Consumer_Protocols/WORK_LOG.md) · [审计与精确未读范围](records/SCU20261010_Source_Consumer_Protocols/MAP_AUDIT.md) · [成稿决定](records/SCU20261010_Source_Consumer_Protocols/MANUSCRIPT_DECISION.json)。
+
+在核验并保留并发 R205（最终凭据提交 `7dd9564c50f08a9f78dd8e35a5b960f4f0d30edc`）后，以独立稳定 ID `SCU20261010` 接续。结果 `SCU-RESULT-v0.2.0`；论文 *Matched Behavior and Source Use*，`SCU-PAPER-v1.0.0`。累计 R204/R205/SCU 的来源判别协议足以形成一篇边界明确的理论方法/应用论文；经典分离系统数学、已发表 UCT 覆盖及 R205 贡献已扣除。这是完整工作稿，尚未 DOI/OTS/Arweave 发布。
+
+完成地图仍为 **UCT-MAP-v1.1.2**（913节点/424活跃条件规则/261上下文/10暂停规则，共1608项）。本轮1608项声明、前提和关系逐项审读；901个ID的1101个raw契约字段，以及另列的495个ID/727个补充语义字段未完整重读；两者并集为1034个ID/1828字段，历史证明保留来源复用。集合可重叠，不能直接相加。全深度审计仍 `AUDIT_INCOMPLETE`，SCU 23/8/16候选停用，既有待定模块仍停用，QC10/IA-QC11/QC12/QC13仍开放。
+
+**必须应用的待定记录纠错**：[索引](records/SCU20261010_Source_Consumer_Protocols/corrections/EFFECTIVE_CORRECTION_INDEX.json)。R194需同时满足边约束与全部锚点一致；R201原反例不满足共同概率律，已换为可行有理数见证且保留原充分定理；R202点反演要求零共同协方差残差，非零残差使用修正公式/可行集合。原始研究记录与已发表文件不改写。纠错新增6节点/2规则并覆盖8条待定记录，仍停用，不计入完成图。
+
+发表覆盖 **UCT-PUB-v1.0.18**；正式发表计数不变。下一步是选定具体运动命令/本体感觉消费者与独立体验端点，核验真实干预、载体及时序，而非扩大来源枚举。保存成功事实及最终提交见本轮 `DUAL_SAVE_RECEIPT.json`；没有凭据不得推定双保存完成。以下内容为原样保留的历史导航。
+
+---
+
 # 最新接续 R205 / ASC-RESULT-v0.1.0
 
 [本轮交接](records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/HANDOFF_ZH.md) · [工作日志](records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/WORK_LOG.md) · [研究稿](records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/RESEARCH_NOTE.md) · [审计](records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/MAP_AUDIT.md)。最新优先级：比较运动命令/本体感觉实际消费者的组织差异，分离agency、ownership与触觉指标；不要重跑来源枚举。UCT-MAP-v1.1.2不变，R205候选停用；发表覆盖v1.0.17，HOLD_STANDALONE。QC10/IA-QC11/QC12/QC13仍开放。以下旧标题属于保留历史，按已核验提交与CURRENT_STATE接续。

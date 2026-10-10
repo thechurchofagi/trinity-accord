@@ -254,7 +254,8 @@
       "publication_coverage_version": "UCT-PUB-v1.0.6",
       "novelty": "UCT_SPECIFIC_RELATIVE_VERSUS_SEMANTIC_ANCHOR_APPLICATION_PRIORITY_UNVERIFIED",
       "compatibility_audit": "records/R194_Cross_Population_Polarity_20261009/MAP_COMPATIBILITY_AUDIT.json",
-      "handoff": "records/R194_Cross_Population_Polarity_20261009/HANDOFF_ZH.md"
+      "handoff": "records/R194_Cross_Population_Polarity_20261009/HANDOFF_ZH.md",
+      "effective_correction_index": "records/SCU20261010_Source_Consumer_Protocols/corrections/EFFECTIVE_CORRECTION_INDEX.json"
     },
     {
       "research_id": "R195-IPA-20261009",
@@ -331,16 +332,100 @@
       "novelty": "UCT_SPECIFIC_SEMANTIC_CALIBRATION_FIREWALL_PRIORITY_UNVERIFIED",
       "compatibility_audit": "records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/MAP_COMPATIBILITY_AUDIT.json",
       "handoff": "records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/HANDOFF_ZH.md"
+    },
+    {
+      "research_id": "R201-ROTM-20261010",
+      "result_version": "ROTM-RESULT-v0.1.0",
+      "source": "records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "actual_application": "OPEN",
+      "publication_coverage_version": "UCT-PUB-v1.0.13",
+      "compatibility_audit": "records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/MAP_COMPATIBILITY_AUDIT.json",
+      "handoff": "records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/HANDOFF_ZH.md",
+      "navigation_added_by": "SCU20261010",
+      "effective_correction_index": "records/SCU20261010_Source_Consumer_Protocols/corrections/EFFECTIVE_CORRECTION_INDEX.json"
+    },
+    {
+      "research_id": "R202-TMAB-20261010",
+      "result_version": "TMAB-RESULT-v0.1.0",
+      "source": "records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "actual_application": "OPEN",
+      "publication_coverage_version": "UCT-PUB-v1.0.14",
+      "compatibility_audit": "records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/MAP_COMPATIBILITY_AUDIT.json",
+      "handoff": "records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/HANDOFF_ZH.md",
+      "navigation_added_by": "SCU20261010",
+      "effective_correction_index": "records/SCU20261010_Source_Consumer_Protocols/corrections/EFFECTIVE_CORRECTION_INDEX.json"
+    },
+    {
+      "research_id": "R203-ACD-20261010",
+      "result_version": "ACD-RESULT-v0.2.0",
+      "source": "records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "actual_application": "OPEN",
+      "publication_coverage_version": "UCT-PUB-v1.0.15",
+      "compatibility_audit": "records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/MAP_COMPATIBILITY_AUDIT.json",
+      "handoff": "records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/HANDOFF_ZH.md",
+      "navigation_added_by": "SCU20261010"
+    },
+    {
+      "research_id": "R204-SAU-20261010",
+      "result_version": "SAU-RESULT-v0.2.0",
+      "source": "records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "actual_application": "OPEN",
+      "publication_coverage_version": "UCT-PUB-v1.0.16",
+      "compatibility_audit": "records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/MAP_COMPATIBILITY_AUDIT.json",
+      "handoff": "records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/HANDOFF_ZH.md",
+      "navigation_added_by": "SCU20261010"
+    },
+    {
+      "research_id": "R205-ASC-20261010",
+      "result_version": "ASC-RESULT-v0.1.0",
+      "source": "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "actual_application": "OPEN",
+      "publication_coverage_version": "UCT-PUB-v1.0.17",
+      "compatibility_audit": "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/MAP_COMPATIBILITY_AUDIT.json",
+      "handoff": "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/HANDOFF_ZH.md",
+      "navigation_added_by": "SCU20261010"
+    },
+    {
+      "research_id": "SCU20261010",
+      "result_version": "SCU-RESULT-v0.2.0",
+      "title": "Matched Behavior and Source Use",
+      "source": "records/SCU20261010_Source_Consumer_Protocols/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "actual_application": "OPEN",
+      "publication_coverage_version": "UCT-PUB-v1.0.18",
+      "compatibility_audit": "records/SCU20261010_Source_Consumer_Protocols/MAP_AUDIT.md",
+      "handoff": "records/SCU20261010_Source_Consumer_Protocols/HANDOFF_ZH.md",
+      "manuscript": "records/SCU20261010_Source_Consumer_Protocols/Matched_Behavior_and_Source_Use_v1.0.0.md",
+      "manuscript_status": "COMPLETE_SCOPED_WORKING_MANUSCRIPT_NOT_FORMALLY_PUBLISHED"
     }
   ],
   "preservation": "Exact previous registry remains preserved. The full research manuscript/module and saved per-item review decisions are in the version capsule; expanded artifacts are also in the offline downloadable archive.",
   "publication_coverage": {
     "entry": "PUBLICATION_COVERAGE.json",
-    "version": "UCT-PUB-v1.0.12",
+    "version": "UCT-PUB-v1.0.18",
     "base_census_version": "UCT-PUB-v1.0.0",
-    "update": "records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/PUBLICATION_COVERAGE_UPDATE.json",
+    "update": "records/SCU20261010_Source_Consumer_Protocols/PUBLICATION_COVERAGE_UPDATE.json",
     "report": "records/PUB20261009_Publication_Coverage/PUBLICATION_COVERAGE_REPORT_ZH.md",
     "nondeductive": true
   },
-  "registry_scope": "Recent navigation register; complete fixed-source inventories are in the current publication coverage ledger."
+  "registry_scope": "Recent navigation register; complete fixed-source inventories are in the current publication coverage ledger.",
+  "effective_pending_corrections": {
+    "index": "records/SCU20261010_Source_Consumer_Protocols/corrections/EFFECTIVE_CORRECTION_INDEX.json",
+    "disabled": true,
+    "new_nodes": 6,
+    "new_rules": 2,
+    "overridden_historical_pending_records": 8,
+    "completed_graph_changed": false
+  }
 }

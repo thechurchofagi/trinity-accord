@@ -1,0 +1,144 @@
+{
+  "schema": "uct-disabled-effective-correction-overlay/1",
+  "overlay_id": "SCU20261010-CORR-R194-v0.1.0",
+  "base_completed_release": "UCT-MAP-v1.1.2",
+  "review_snapshot_sha": "a22ad487b2a072293de2ecb55b4f2cc2a2c0dafc",
+  "historical_source_version": "CPP-RESULT-v0.1.0",
+  "sources": [
+    {
+      "path": "records/R194_Cross_Population_Polarity_20261009/MAP_EXTENSION.json",
+      "sha256": "2827d07d0a279e9d86b0bf7044dc414702043ec0cb366ebca6c5b23119273c1b"
+    },
+    {
+      "path": "records/R194_Cross_Population_Polarity_20261009/RESEARCH_NOTE.md",
+      "sha256": "ec5d60f23202b9be51c5f584f375caca870b75ce7afda3099a907189a0f87194"
+    }
+  ],
+  "status": "PENDING_CHECKPOINT_DISABLED",
+  "enabled_as_established_premise": false,
+  "actual_premises_discharged": false,
+  "phenomenal_validation": false,
+  "completed_map_changed": false,
+  "historical_files_changed": false,
+  "proof_code": "verify_effective_corrections.py",
+  "exact_results": "EFFECTIVE_CORRECTION_EXACT_RESULTS.json",
+  "effective_overrides": [
+    {
+      "target_id": "R194:COMPONENT_COUNT",
+      "expected_original_record_sha256": "265f726569c15158b04c32eeec0ca2c6d94af8cb4e85c45c2a9020fff4b1b629",
+      "hash_serialization": "UTF-8 JSON; sorted keys; ensure_ascii=false; separators comma/colon",
+      "operation": "OVERLAY_FIELDS_WITHOUT_MODIFYING_HISTORICAL_SOURCE",
+      "replacement_fields": {
+        "statement": "For a finite signed graph with a fixed partial binary anchor map, the compatible-labelling count is zero if an XOR-parity cycle is inconsistent or two anchors in one component disagree with path parity. Otherwise it is exactly 2^c, where c is the number of unanchored connected components. In particular one anchor per component gives a unique numeric labelling when all cycle constraints are consistent.",
+        "scope": "All finite XOR graphs with fixed partial anchor assignments; consistency covers edges AND anchors on that same graph.",
+        "quantifier": "For every fixed graph, parity assignment and partial anchor map in the declared domain.",
+        "enabled_as_established_premise": false,
+        "actual_premises_discharged": false,
+        "proof_location": "EFFECTIVE_CORRECTIONS.md; EFFECTIVE_CORRECTION_EXACT_RESULTS.json; verify_effective_corrections.py",
+        "effective_correction_status": "CANDIDATE_DISABLED"
+      },
+      "rationale": "The old cycle-only premise is insufficient when multiple anchors are allowed. The two-vertex core embeds in the original seven-vertex domain; old one-anchor checks remain valid."
+    },
+    {
+      "target_id": "R194:r_component_count",
+      "expected_original_record_sha256": "4f837e7a74da5ee611e2fd72e27581cfb90eb96c2763106d2eb5cd0aa2e2bdae",
+      "hash_serialization": "UTF-8 JSON; sorted keys; ensure_ascii=false; separators comma/colon",
+      "operation": "OVERLAY_FIELDS_WITHOUT_MODIFYING_HISTORICAL_SOURCE",
+      "replacement_fields": {
+        "all_of": [
+          "R194:DOMAIN",
+          "R194:SIGNED_GRAPH",
+          "SCU20261010:CORR_R194_ANCHORED_GRAPH_DOMAIN",
+          "R149:COMPATIBILITY",
+          "R157:COORDINATE_TRANSPORT"
+        ],
+        "statement": "Propagate parity from one root per component; reject cycle or anchor/path conflicts. Each remaining unanchored component has two root values and each compatible anchored component one.",
+        "binding": "One V,E,edge-parity map, partial anchor map eta and coordinate interpretation are retained. The theorem evaluates all constraints jointly; an anchor from another graph or target cannot be pasted into this instance.",
+        "alternative_route_semantics": "Conflicting cycles and conflicting anchors are two failure cases, not alternative positive proofs. The 2^c branch requires joint consistency.",
+        "enabled_as_established_premise": false,
+        "actual_premises_discharged": false,
+        "proof_location": "EFFECTIVE_CORRECTIONS.md; EFFECTIVE_CORRECTION_EXACT_RESULTS.json; verify_effective_corrections.py",
+        "effective_correction_status": "CANDIDATE_DISABLED"
+      },
+      "rationale": "Adds the omitted anchor interface while keeping the theorem conditional rather than asserting that all graphs are consistent."
+    },
+    {
+      "target_id": "R194:RELATIVE_ALIGNMENT",
+      "expected_original_record_sha256": "ee7d93c062f4e002c6ea6d084c0c8ad603e0af6a39161a76f3ddd71d5efb8e3c",
+      "hash_serialization": "UTF-8 JSON; sorted keys; ensure_ascii=false; separators comma/colon",
+      "operation": "OVERLAY_FIELDS_WITHOUT_MODIFYING_HISTORICAL_SOURCE",
+      "replacement_fields": {
+        "statement": "Multiple populations, markers and known reversal relations can identify relative channel polarity and connect components when all edge constraints and any supplied anchors are jointly consistent.",
+        "scope": "One fixed signed comparison design; same-target transport, edge truth and anchor/path compatibility remain simultaneous premises.",
+        "enabled_as_established_premise": false,
+        "actual_premises_discharged": false,
+        "proof_location": "EFFECTIVE_CORRECTIONS.md; EFFECTIVE_CORRECTION_EXACT_RESULTS.json; verify_effective_corrections.py",
+        "effective_correction_status": "CANDIDATE_DISABLED"
+      },
+      "rationale": "A contradiction among anchored assignments is not a positive relative-alignment instance."
+    }
+  ],
+  "nodes": [
+    {
+      "id": "SCU20261010:CORR_R194_ANCHORED_GRAPH_DOMAIN",
+      "kind": "CONDITIONAL_DECLARATION",
+      "statement": "Fix one finite vertex set V, one undirected XOR-parity edge set E, and one partial anchor function eta:V->{0,1}. For vertices in one component, anchor values must agree with the parity of a connecting path for joint satisfiability. Multiple anchors are permitted and tested, not silently assumed compatible.",
+      "scope": "Finite Boolean graphs; the original seven-vertex design is a subcase. This defines a mathematical family and does not assert any empirical anchor or phenomenal orientation.",
+      "status": "CANDIDATE_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false,
+      "node_presence_is_premise_truth": false
+    }
+  ],
+  "rules": [],
+  "context_links": [],
+  "manual_affected_rederivation": [
+    "R194:r_component_count: choose a root, propagate relative signs, test each cycle and each anchor against the same root. A conflict gives no labelling; otherwise multiply two choices over unanchored components.",
+    "R194:r_relative_alignment: the repaired count leaves relative path parity intact within a jointly consistent component. Inconsistent anchored designs have no admitted positive alignment case.",
+    "R194:r_global_complement: on each UNANCHORED consistent component, simultaneous complement still preserves every edge and evidence constraint. Added anchor checking does not orient an unanchored component.",
+    "R194:r_anchor_taxonomy and R194:r_protocol: a conventional numeric anchor still does not warrant a familiar-mineness name. The correction adds consistency checking, not target evidence.",
+    "R193's four-cell one-anchor construction remains unchanged. Its broader graph-language generalization should use the same joint edge/anchor consistency definition."
+  ],
+  "affected_closure": {
+    "seed_ids": [
+      "R194:COMPONENT_COUNT",
+      "R194:RELATIVE_ALIGNMENT",
+      "R194:r_component_count"
+    ],
+    "syntactic_forward_dependency_ids": [
+      "R194:ANCHOR_TAXONOMY",
+      "R194:COMPONENT_COUNT",
+      "R194:GLOBAL_COMPLEMENT",
+      "R194:RELATIVE_ALIGNMENT",
+      "R194:RESEARCH_PROTOCOL",
+      "R194:r_anchor_taxonomy",
+      "R194:r_component_count",
+      "R194:r_global_complement",
+      "R194:r_protocol",
+      "R194:r_relative_alignment"
+    ],
+    "affected_node_ids": [
+      "R194:ANCHOR_TAXONOMY",
+      "R194:COMPONENT_COUNT",
+      "R194:GLOBAL_COMPLEMENT",
+      "R194:RELATIVE_ALIGNMENT",
+      "R194:RESEARCH_PROTOCOL"
+    ],
+    "affected_rule_ids": [
+      "R194:r_anchor_taxonomy",
+      "R194:r_component_count",
+      "R194:r_global_complement",
+      "R194:r_protocol",
+      "R194:r_relative_alignment"
+    ],
+    "adjacent_nondeductive_context_ids": [
+      "R194:ctx_C1",
+      "R194:ctx_R149",
+      "R194:ctx_R157",
+      "R194:ctx_U1"
+    ],
+    "warning": "This is a syntactic over-approximation for review routing, not proof reconstruction or actual premise discharge. Context links never propagate deduction.",
+    "completed_map_ids_requiring_replacement": [],
+    "completed_map_forward_dependents": []
+  }
+}

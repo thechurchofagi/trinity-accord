@@ -1,0 +1,30 @@
+{
+  "current_release": "UCT-MAP-v1.1.2",
+  "latest_research": "R194-CPP-20261009",
+  "latest_work_log": "records/R194_Cross_Population_Polarity_20261009/WORK_LOG.md",
+  "latest_handoff": "records/R194_Cross_Population_Polarity_20261009/HANDOFF_ZH.md",
+  "guide": "RESEARCH_MASTER_GUIDE.md v2.3 sections 0.3–0.6 and 8A",
+  "archive": "versions/UCT-MAP-v1.1.2/UCT_MAP_v1.1.2_Capsule.tar.xz",
+  "readback": "persistence/UCT-MAP-v1.1.2_RECEIPT.json",
+  "pending_checkpoints": [
+    "AC20261009",
+    "IL20261009",
+    "ONLINE-AC-PROBE-20261009",
+    "R189-HACA-20261009",
+    "R190-PCBC-20261009",
+    "R191-OCCA-20261009",
+    "R192-CTBI-20261009",
+    "R193-NCI-20261009",
+    "R194-CPP-20261009"
+  ],
+  "previous_index": "records/PUB20261009_Publication_Coverage/history/RESEARCH_SESSION_LOG_INDEX.json",
+  "latest_activity": "PUB20261009",
+  "latest_pending_research": "ONLINE-AC-PROBE-20261009",
+  "publication_coverage": {
+    "entry": "PUBLICATION_COVERAGE.json",
+    "version": "UCT-PUB-v1.0.6",
+    "update": "records/R194_Cross_Population_Polarity_20261009/PUBLICATION_COVERAGE_UPDATE.json",
+    "report": "records/PUB20261009_Publication_Coverage/PUBLICATION_COVERAGE_REPORT_ZH.md",
+    "nondeductive": true
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "module_id": "SCU20261010",
+  "supplied_base_sha": "90a542d697d923aa484f2bd5a4484a438125325a",
+  "sources": [
+    {
+      "path": "RESEARCH_MASTER_GUIDE.md",
+      "sha256": "17790bd935323f0e2d168d55d2c766a11fdc555e23f005361295405cfb18c2a7",
+      "bytes": 29165,
+      "read_scope": "full"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "be362c25dbd260574b7252b1cfe8b82984bf1734279ed699de9a386e2522dfff",
+      "bytes": 96902,
+      "read_scope": "full, all 549 lines"
+    },
+    {
+      "path": "records/R147_Self_Reference_Rewiring_20261007/SELF_REFERENCE_REWIRING.md",
+      "sha256": "43937115dd1bc4ce88e8efcbe48a6dab36da3484a8c7fa40f1640214fe81eb77",
+      "bytes": 17616,
+      "read_scope": "full"
+    },
+    {
+      "path": "records/R174_Shared_Temporal_Coordinate_20261008/Shared_Temporal_Coordinate_and_Intervention_Signature_v0_1.md",
+      "sha256": "77cf0238b063f52ae57521b3bc25e63279deedfce86ffff9d3d4428876502429",
+      "bytes": 15840,
+      "read_scope": "full"
+    },
+    {
+      "path": "records/R182_Action_Reference_Trace_20261008/Action_Reference_Trace_and_Blocked_Attempt_v0_1.md",
+      "sha256": "e2548dff374b9bbe9271c8d2231e8d338f580d963ec36b3a17d6a2061214e2b0",
+      "bytes": 13767,
+      "read_scope": "full"
+    },
+    {
+      "path": "records/R190_Practical_Centering_Bearer_Coupling_20261009/RESEARCH_NOTE.md",
+      "sha256": "90256ba8eb6daba9ad2f1dfb09ed991960efdf8fefc26814553bf1ecd7c3d88e",
+      "bytes": 15933,
+      "read_scope": "full"
+    },
+    {
+      "path": "records/R191_Conflict_Conditioned_Authorization_20261009/RESEARCH_NOTE.md",
+      "sha256": "77b823448257e3537c03cccbc3a3e1930d1730105c7e9329e648a17907fa1ceb",
+      "bytes": 9109,
+      "read_scope": "full"
+    },
+    {
+      "path": "records/R192_Complete_Twin_Bridge_Invariance_20261009/RESEARCH_NOTE.md",
+      "sha256": "f06bf3d4e5ba36aa43aa58c522d8cd4756f5181d9351e3925d3704f5ecb8a2c8",
+      "bytes": 16291,
+      "read_scope": "full"
+    },
+    {
+      "path": "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/RESEARCH_NOTE.md",
+      "sha256": "0c1d6af3e8b68f8424097251ee4e0f41607d7b9c73800da3a4dd2eae0106d31f",
+      "bytes": 14041,
+      "read_scope": "full"
+    },
+    {
+      "path": "records/IA20261008_Blind_Target_Identity/Blind_Target_Identity_and_Temporal_Content_v0_1.md",
+      "sha256": "025f6abd832f7bb2f9066207a9f469fd7d199458d81b17e7ff5c2d8861ade5f9",
+      "bytes": 19264,
+      "read_scope": "section 10: IA-4 and IA-5 only"
+    },
+    {
+      "path": "records/R167_Operational_Mediator_and_Redundancy_20261008/Operational_Mediator_Redundancy_and_Compensation_v0_1.md",
+      "sha256": "ca1e07fea8805a893ee521040986cc46152db848bbef32a352040ad1cca14c47",
+      "bytes": 12859,
+      "read_scope": "sections 1-6 only"
+    },
+    {
+      "path": "records/R168_Stochastic_Continuous_Redundancy_20261008/Stochastic_Continuous_and_Partially_Observed_Redundancy_v0_1.md",
+      "sha256": "6e0341efb69880632e08dd52909a0098e43af7e2627693f2f3c400f00a00f56a",
+      "bytes": 11557,
+      "read_scope": "sections 1-4 only"
+    },
+    {
+      "path": "records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/RESEARCH_NOTE.md",
+      "sha256": "4f86be11aaf5b7eb487f637aa76e22dd6c8921b22a5289d7038eeb05e96e1f64",
+      "bytes": 11604,
+      "read_scope": "full"
+    },
+    {
+      "path": "records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/PROBE_PROTOCOL.md",
+      "sha256": "83c32c0d369b358711c50ec31b45e206d0e217e4558f918a4e44d5cb2a6340a6",
+      "bytes": 1853,
+      "read_scope": "full"
+    },
+    {
+      "path": "records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/FAILURES.md",
+      "sha256": "d4bd8aabaefeca054e45e4df243825479f431f52d1a6240020a840be557d5597",
+      "bytes": 1809,
+      "read_scope": "full"
+    },
+    {
+      "path": "records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/check_alignment_and_use.py",
+      "sha256": "08e0556cb81055da7f78320f637358e83e366750df148430aa3a6a1c42ada99c",
+      "bytes": 4221,
+      "read_scope": "full"
+    },
+    {
+      "path": "records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/EXACT_RESULTS.json",
+      "sha256": "3017d46e6647e6f299ee798688267ae31236979bb1644c3129414c73f7fb3adc",
+      "bytes": 4443,
+      "read_scope": "full"
+    },
+    {
+      "path": "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/RESEARCH_NOTE.md",
+      "sha256": "288c4358f402e40d20d40fc0e7ea145b41c320b94f61517068419b2ee2e349dd",
+      "bytes": 12248,
+      "read_scope": "full; concurrent R205 source reviewed after parent detected a22ad487b2a072293de2ecb55b4f2cc2a2c0dafc"
+    },
+    {
+      "path": "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/exact_probe.py",
+      "sha256": "1dc78420dee7066fa285cf5461cd4931628ba6dfa6afaf1ec73a9065d42f60d2",
+      "bytes": 4016,
+      "read_scope": "full; concurrent R205 source reviewed after parent detected a22ad487b2a072293de2ecb55b4f2cc2a2c0dafc"
+    }
+  ],
+  "external_sources": [
+    {
+      "title": "On separating systems",
+      "authors": "Bollobas and Scott",
+      "url": "https://people.maths.ox.ac.uk/scott/Papers/separating.pdf",
+      "scope": "all six pages retrieved; classical logarithmic bound attribution in section 1",
+      "web_ref": "turn13view0"
+    },
+    {
+      "title": "A match does not make a sense",
+      "doi": "10.1093/nc/niz006",
+      "scope": "primary abstract and selected original text via search; publisher failed and PMC interstitial; fuller independent source read by coverage worker",
+      "web_ref": "turn14search12"
+    },
+    {
+      "title": "Learning Causal Graphs with Small Interventions",
+      "authors": "Shanmugam, Kocaoglu, Dimakis, Vishwanath",
+      "url": "https://arxiv.org/pdf/1511.00041",
+      "scope": "Direct metadata/abstract, separating-system definition, Theorem 2 and complete Appendix 6.3 proof; not full paper",
+      "web_refs": [
+        "turn30view0",
+        "turn32view0"
+      ]
+    },
+    {
+      "title": "Superimposed Codes and Threshold Group Testing",
+      "authors": "D’yachkov, Rykov, Deppe, Lebedev",
+      "url": "https://arxiv.org/pdf/1401.7485",
+      "scope": "Direct metadata and section 2 Definition 1/Proposition 1; not full paper",
+      "web_refs": [
+        "turn31view0",
+        "turn31view2"
+      ]
+    }
+  ],
+  "not_claimed": [
+    "full four-paper source reread by this worker",
+    "current remote version verified by this worker",
+    "full canonical map semantic review",
+    "worldwide novelty proof"
+  ]
+}

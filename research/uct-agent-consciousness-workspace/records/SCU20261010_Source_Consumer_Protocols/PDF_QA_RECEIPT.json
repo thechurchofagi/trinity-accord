@@ -1,0 +1,20 @@
+{
+  "renderer": "Poppler pdftoppm, 100 dpi; PyMuPDF text-bound check",
+  "pages": 15,
+  "pdf_sha256": "5c4afbe1c5d5b51994f3fc5a60fb49e75f5114b6831fcba4ab470295cd0d62bb",
+  "markdown_sha256": "8e5bdfd1d4e5adc537a20424c5648350c6c6f6e4d9181a9d78bdd2aec73aed4c",
+  "out_of_page_text_blocks": [],
+  "visual_review": "ROOT_VISUALLY_REVIEWED_ALL_15_PAGES_IN_CONTACT_SHEETS_AND_PAGES_9_10_INDIVIDUALLY",
+  "table_pages": [
+    7,
+    9,
+    11
+  ],
+  "findings": [
+    "All pages readable; no clipped body text or equations.",
+    "Protocol cost table is wholly on page 9 after a deliberate page break.",
+    "Source/carrier figure on page 10 has legible labels, arrows and write conditions.",
+    "No out-of-page text blocks."
+  ],
+  "preview_scope": "15-page final PDF, Poppler-rendered. Preview images are reproducible QA intermediates, not research data."
+}

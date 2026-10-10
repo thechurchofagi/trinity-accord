@@ -1,0 +1,170 @@
+{
+  "version": "R201-COHERENCE-CORRECTION-v0.1.0",
+  "source_commit": "90a542d697d923aa484f2bd5a4484a438125325a",
+  "source_claim": "R201-C2",
+  "scope": "Exact rational coherent joint probability witnesses; sufficient margin theorem unchanged; original rho=1,b>0 witnesses invalid; no general sharp identified-set claim.",
+  "witnesses": [
+    {
+      "name": "equality_collapse",
+      "joint_law": [
+        {
+          "H": 0,
+          "J": 0,
+          "M": 0,
+          "p": "1/5"
+        },
+        {
+          "H": 0,
+          "J": 0,
+          "M": 1,
+          "p": "7/40"
+        },
+        {
+          "H": 0,
+          "J": 1,
+          "M": 0,
+          "p": "1/20"
+        },
+        {
+          "H": 0,
+          "J": 1,
+          "M": 1,
+          "p": "3/40"
+        },
+        {
+          "H": 1,
+          "J": 0,
+          "M": 0,
+          "p": "3/40"
+        },
+        {
+          "H": 1,
+          "J": 0,
+          "M": 1,
+          "p": "1/20"
+        },
+        {
+          "H": 1,
+          "J": 1,
+          "M": 0,
+          "p": "7/40"
+        },
+        {
+          "H": 1,
+          "J": 1,
+          "M": 1,
+          "p": "1/5"
+        }
+      ],
+      "H_given_J": [
+        "1/4",
+        "3/4"
+      ],
+      "M_given_J": [
+        "9/20",
+        "11/20"
+      ],
+      "qC": [
+        "1/2",
+        "1/2"
+      ],
+      "qT": [
+        "1/2",
+        "1/2"
+      ],
+      "rho": "1/2",
+      "delta": "1/10",
+      "DeltaC": "0",
+      "residual_b": "1/10",
+      "beta": "1/10",
+      "epsilon": [
+        "0",
+        "0"
+      ],
+      "threshold": "1/10",
+      "DeltaT": "0",
+      "all_probability_premises_verified": true
+    },
+    {
+      "name": "below_threshold_reversal",
+      "joint_law": [
+        {
+          "H": 0,
+          "J": 0,
+          "M": 0,
+          "p": "7/32"
+        },
+        {
+          "H": 0,
+          "J": 0,
+          "M": 1,
+          "p": "5/32"
+        },
+        {
+          "H": 0,
+          "J": 1,
+          "M": 0,
+          "p": "9/160"
+        },
+        {
+          "H": 0,
+          "J": 1,
+          "M": 1,
+          "p": "11/160"
+        },
+        {
+          "H": 1,
+          "J": 0,
+          "M": 0,
+          "p": "11/160"
+        },
+        {
+          "H": 1,
+          "J": 0,
+          "M": 1,
+          "p": "9/160"
+        },
+        {
+          "H": 1,
+          "J": 1,
+          "M": 0,
+          "p": "5/32"
+        },
+        {
+          "H": 1,
+          "J": 1,
+          "M": 1,
+          "p": "7/32"
+        }
+      ],
+      "H_given_J": [
+        "1/4",
+        "3/4"
+      ],
+      "M_given_J": [
+        "17/40",
+        "23/40"
+      ],
+      "qC": [
+        "9/20",
+        "11/20"
+      ],
+      "qT": [
+        "11/20",
+        "9/20"
+      ],
+      "rho": "1/2",
+      "delta": "3/20",
+      "DeltaC": "1/10",
+      "residual_b": "1/10",
+      "beta": "1/10",
+      "epsilon": [
+        "1/10",
+        "1/10"
+      ],
+      "threshold": "3/10",
+      "DeltaT": "-1/10",
+      "all_probability_premises_verified": true
+    }
+  ]
+}

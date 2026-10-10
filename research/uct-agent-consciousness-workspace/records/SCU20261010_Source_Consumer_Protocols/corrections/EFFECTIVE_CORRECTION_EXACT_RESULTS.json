@@ -1,0 +1,311 @@
+{
+  "version": "SCU-CORRECTIONS-CHECK-v0.1.0",
+  "base_completed_map": "UCT-MAP-v1.1.2",
+  "status": "EXACT_FINITE_CORRECTION_CHECKS_COMPLETED",
+  "actual_premises_discharged": false,
+  "phenomenal_validation": false,
+  "R194": {
+    "target": "R194:COMPONENT_COUNT / R194:r_component_count / R194-C1",
+    "counterexample": {
+      "n": 2,
+      "edges": [
+        [
+          0,
+          1,
+          0
+        ]
+      ],
+      "anchors": {
+        "0": 0,
+        "1": 1
+      },
+      "cycle_consistent": true,
+      "unanchored_components": 0,
+      "old_unqualified_formula": 1,
+      "actual_solution_count": 0,
+      "reason": "The two anchors disagree with the equality path; no cycle is needed."
+    },
+    "embedding_in_original_seven_vertex_domain": {
+      "n": 7,
+      "edges": [
+        [
+          0,
+          1,
+          0
+        ]
+      ],
+      "anchors": {
+        "0": 0,
+        "1": 1
+      },
+      "cycle_consistent": true,
+      "unanchored_components": 5,
+      "old_unqualified_formula": 32,
+      "actual_solution_count": 0
+    },
+    "repair": "Zero solutions if a parity cycle or an anchor/path constraint is inconsistent; otherwise 2^c for the unanchored components.",
+    "finite_check": {
+      "vertices": "0..4",
+      "simple_signed_graphs_and_partial_binary_anchor_maps": 59809,
+      "method": "independent assignment enumeration versus parity propagation",
+      "violations": 0
+    },
+    "limits": "The enumeration is finite. The all-finite-graph result follows by root parity propagation. Original one-anchor examples remain valid."
+  },
+  "R201": {
+    "targets": [
+      "R201:STRICTNESS_COUNTERMODELS",
+      "R201:r_strictness_witnesses",
+      "R201-C2"
+    ],
+    "withdrawn_witness_reason": "rho=1 and supported J strata force H=J almost surely, so delta=Delta_C and b=0. The original b=1/10 tuple cannot arise from the defined joint law.",
+    "coherent_replacements": [
+      {
+        "name": "equality_collapse",
+        "joint_law": [
+          {
+            "H": 0,
+            "J": 0,
+            "M": 0,
+            "p": "1/5"
+          },
+          {
+            "H": 0,
+            "J": 0,
+            "M": 1,
+            "p": "7/40"
+          },
+          {
+            "H": 0,
+            "J": 1,
+            "M": 0,
+            "p": "1/20"
+          },
+          {
+            "H": 0,
+            "J": 1,
+            "M": 1,
+            "p": "3/40"
+          },
+          {
+            "H": 1,
+            "J": 0,
+            "M": 0,
+            "p": "3/40"
+          },
+          {
+            "H": 1,
+            "J": 0,
+            "M": 1,
+            "p": "1/20"
+          },
+          {
+            "H": 1,
+            "J": 1,
+            "M": 0,
+            "p": "7/40"
+          },
+          {
+            "H": 1,
+            "J": 1,
+            "M": 1,
+            "p": "1/5"
+          }
+        ],
+        "q_C": [
+          "1/2",
+          "1/2"
+        ],
+        "q_T": [
+          "1/2",
+          "1/2"
+        ],
+        "rho": "1/2",
+        "delta": "1/10",
+        "Delta_C": "0",
+        "b": "1/10",
+        "beta": "1/10",
+        "epsilon": [
+          "0",
+          "0"
+        ],
+        "threshold": "1/10",
+        "Delta_T": "0"
+      },
+      {
+        "name": "below_threshold_reversal",
+        "joint_law": [
+          {
+            "H": 0,
+            "J": 0,
+            "M": 0,
+            "p": "7/32"
+          },
+          {
+            "H": 0,
+            "J": 0,
+            "M": 1,
+            "p": "5/32"
+          },
+          {
+            "H": 0,
+            "J": 1,
+            "M": 0,
+            "p": "9/160"
+          },
+          {
+            "H": 0,
+            "J": 1,
+            "M": 1,
+            "p": "11/160"
+          },
+          {
+            "H": 1,
+            "J": 0,
+            "M": 0,
+            "p": "11/160"
+          },
+          {
+            "H": 1,
+            "J": 0,
+            "M": 1,
+            "p": "9/160"
+          },
+          {
+            "H": 1,
+            "J": 1,
+            "M": 0,
+            "p": "5/32"
+          },
+          {
+            "H": 1,
+            "J": 1,
+            "M": 1,
+            "p": "7/32"
+          }
+        ],
+        "q_C": [
+          "9/20",
+          "11/20"
+        ],
+        "q_T": [
+          "11/20",
+          "9/20"
+        ],
+        "rho": "1/2",
+        "delta": "3/20",
+        "Delta_C": "1/10",
+        "b": "1/10",
+        "beta": "1/10",
+        "epsilon": [
+          "1/10",
+          "1/10"
+        ],
+        "threshold": "3/10",
+        "Delta_T": "-1/10"
+      }
+    ],
+    "unsigned_endpoint_witness": {
+      "joint_law": [
+        {
+          "H": 0,
+          "J": 1,
+          "M": 1,
+          "p": "1/2"
+        },
+        {
+          "H": 1,
+          "J": 0,
+          "M": 0,
+          "p": "1/2"
+        }
+      ],
+      "rho": "-1",
+      "delta": "1",
+      "Delta_C": "-1"
+    },
+    "sufficient_theorem": "Unchanged: positive rho, bounded residual and both class drifts plus strict delta>beta+epsilon0+epsilon1 imply Delta_T>=delta-beta-epsilon0-epsilon1>0.",
+    "limits": "The equality example has zero total drift; it defeats global non-strict replacement but is not arbitrary-positive-budget sharpness. The three examples are separate coherent worlds, not one strict-margin world."
+  },
+  "R202": {
+    "targets": [
+      "R202:CONDITIONAL_NONDIFFERENTIALITY",
+      "R202:AUDIT_INVERSION_RESULT",
+      "R202:r_audit_inversion"
+    ],
+    "counterexample_source": "R203-C2 dependent twin, independently reconstructed here",
+    "joint_law": [
+      {
+        "H": 0,
+        "J": 0,
+        "M": 0,
+        "p": "19/100"
+      },
+      {
+        "H": 0,
+        "J": 0,
+        "M": 1,
+        "p": "21/100"
+      },
+      {
+        "H": 0,
+        "J": 1,
+        "M": 0,
+        "p": "1/100"
+      },
+      {
+        "H": 0,
+        "J": 1,
+        "M": 1,
+        "p": "9/100"
+      },
+      {
+        "H": 1,
+        "J": 0,
+        "M": 0,
+        "p": "9/100"
+      },
+      {
+        "H": 1,
+        "J": 0,
+        "M": 1,
+        "p": "1/100"
+      },
+      {
+        "H": 1,
+        "J": 1,
+        "M": 0,
+        "p": "21/100"
+      },
+      {
+        "H": 1,
+        "J": 1,
+        "M": 1,
+        "p": "19/100"
+      }
+    ],
+    "pi": "1/2",
+    "a": "4/5",
+    "c": "1/5",
+    "observed": {
+      "m": "1/2",
+      "j": "1/2",
+      "r": "7/25"
+    },
+    "common_residual_R": "3/50",
+    "true_q0_q1": [
+      "3/5",
+      "2/5"
+    ],
+    "invalid_zero_residual_inversion": [
+      "2/5",
+      "3/5"
+    ],
+    "corrected_inversion": [
+      "3/5",
+      "2/5"
+    ],
+    "repair": "Conditional independence suffices for R=0. A bound |R|<=kappa yields one common-residual coherent feasible set, not exact point values.",
+    "limits": "This is an exact abstract binary law. Endpoint calibration, audit ignorability, positivity, same-target transport and actual U=1 remain independent application premises."
+  }
+}

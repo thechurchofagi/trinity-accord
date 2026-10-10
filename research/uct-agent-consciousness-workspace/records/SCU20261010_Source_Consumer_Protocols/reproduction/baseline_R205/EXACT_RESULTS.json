@@ -1,0 +1,158 @@
+{
+  "schema": "uct-r205-exact/1",
+  "result_version": "ASC-RESULT-v0.1.0",
+  "status": "FINITE_MODEL_CLAIMS_VERIFIED_NOT_EMPIRICAL",
+  "counts": {
+    "single_read_installations": 608,
+    "matched_episodes": 2872,
+    "source_probe_episodes": 5744,
+    "identified_installations": 608,
+    "recoded_episodes": 38224,
+    "cancellation_source_probes": 139,
+    "cancellation_branch_probes": 1288
+  },
+  "profiles": [
+    [
+      false,
+      false
+    ],
+    [
+      false,
+      true
+    ],
+    [
+      true,
+      false
+    ],
+    [
+      true,
+      true
+    ]
+  ],
+  "matched_square": [
+    {
+      "actuator_source": 0,
+      "predictor_source": 0,
+      "local_driver": true,
+      "same_source": true,
+      "y": 0,
+      "z": 0
+    },
+    {
+      "actuator_source": 0,
+      "predictor_source": 1,
+      "local_driver": true,
+      "same_source": false,
+      "y": 0,
+      "z": 0
+    },
+    {
+      "actuator_source": 1,
+      "predictor_source": 0,
+      "local_driver": false,
+      "same_source": false,
+      "y": 0,
+      "z": 0
+    },
+    {
+      "actuator_source": 1,
+      "predictor_source": 1,
+      "local_driver": false,
+      "same_source": true,
+      "y": 0,
+      "z": 0
+    }
+  ],
+  "cancellation_witnesses": [
+    {
+      "n": 2,
+      "direct_z": "R",
+      "cancellation_z": "(R+e1-e2) mod n",
+      "unperturbed_edges": "e1=e2=B",
+      "all_source_assignments_equal": true,
+      "branch_probe": {
+        "B": 0,
+        "R": 0,
+        "delta": 1,
+        "direct_z": 0,
+        "cancellation_z": 1
+      }
+    },
+    {
+      "n": 3,
+      "direct_z": "R",
+      "cancellation_z": "(R+e1-e2) mod n",
+      "unperturbed_edges": "e1=e2=B",
+      "all_source_assignments_equal": true,
+      "branch_probe": {
+        "B": 0,
+        "R": 0,
+        "delta": 1,
+        "direct_z": 0,
+        "cancellation_z": 1
+      }
+    },
+    {
+      "n": 4,
+      "direct_z": "R",
+      "cancellation_z": "(R+e1-e2) mod n",
+      "unperturbed_edges": "e1=e2=B",
+      "all_source_assignments_equal": true,
+      "branch_probe": {
+        "B": 0,
+        "R": 0,
+        "delta": 1,
+        "direct_z": 0,
+        "cancellation_z": 1
+      }
+    },
+    {
+      "n": 5,
+      "direct_z": "R",
+      "cancellation_z": "(R+e1-e2) mod n",
+      "unperturbed_edges": "e1=e2=B",
+      "all_source_assignments_equal": true,
+      "branch_probe": {
+        "B": 0,
+        "R": 0,
+        "delta": 1,
+        "direct_z": 0,
+        "cancellation_z": 1
+      }
+    },
+    {
+      "n": 6,
+      "direct_z": "R",
+      "cancellation_z": "(R+e1-e2) mod n",
+      "unperturbed_edges": "e1=e2=B",
+      "all_source_assignments_equal": true,
+      "branch_probe": {
+        "B": 0,
+        "R": 0,
+        "delta": 1,
+        "direct_z": 0,
+        "cancellation_z": 1
+      }
+    },
+    {
+      "n": 7,
+      "direct_z": "R",
+      "cancellation_z": "(R+e1-e2) mod n",
+      "unperturbed_edges": "e1=e2=B",
+      "all_source_assignments_equal": true,
+      "branch_probe": {
+        "B": 0,
+        "R": 0,
+        "delta": 1,
+        "direct_z": 0,
+        "cancellation_z": 1
+      }
+    }
+  ],
+  "violations": 0,
+  "limitations": [
+    "single-read source identification requires injectivity and valid isolated probes",
+    "cancellation defeats unrestricted identification of branch consumption",
+    "no actual human installation, H, phenomenal polarity, subject count or consciousness detector"
+  ]
+}

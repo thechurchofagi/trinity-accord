@@ -1,0 +1,88 @@
+{
+  "version": "R202-RESIDUAL-CORRECTION-v0.1.0",
+  "source_claim": "R202-C2",
+  "counterexample_lineage": "R203-C2 dependent twin; inherited correction witness",
+  "joint_law": [
+    {
+      "H": 0,
+      "M": 0,
+      "J": 0,
+      "p": "19/100"
+    },
+    {
+      "H": 0,
+      "M": 0,
+      "J": 1,
+      "p": "1/100"
+    },
+    {
+      "H": 0,
+      "M": 1,
+      "J": 0,
+      "p": "21/100"
+    },
+    {
+      "H": 0,
+      "M": 1,
+      "J": 1,
+      "p": "9/100"
+    },
+    {
+      "H": 1,
+      "M": 0,
+      "J": 0,
+      "p": "9/100"
+    },
+    {
+      "H": 1,
+      "M": 0,
+      "J": 1,
+      "p": "21/100"
+    },
+    {
+      "H": 1,
+      "M": 1,
+      "J": 0,
+      "p": "1/100"
+    },
+    {
+      "H": 1,
+      "M": 1,
+      "J": 1,
+      "p": "19/100"
+    }
+  ],
+  "quantities": {
+    "pi": "1/2",
+    "m": "1/2",
+    "j": "1/2",
+    "r": "7/25",
+    "a": "4/5",
+    "c": "1/5",
+    "R": "3/50"
+  },
+  "true_q0_q1": [
+    "3/5",
+    "2/5"
+  ],
+  "invalid_exact_formula_q0_q1": [
+    "2/5",
+    "3/5"
+  ],
+  "corrected_q0_q1": [
+    "3/5",
+    "2/5"
+  ],
+  "residual_correction": {
+    "pi": "(j-c)/(a-c)",
+    "q1": "(r-c*m-R)/(j-c)",
+    "q0": "(a*m-r+R)/(a-j)",
+    "R": "(1-pi)*Cov(M,J|H=0)+pi*Cov(M,J|H=1)"
+  },
+  "conditions": "Exact original inversion requires R=0; J independent of M given H is sufficient. Merely bounded nonzero R produces a set, not exact point ID. Same common R must be retained across both coordinates.",
+  "bounded_outer_intervals": {
+    "q1": "[qhat1-kappa/(j-c), qhat1+kappa/(j-c)] intersect [0,1]",
+    "q0": "[qhat0-kappa/(a-j), qhat0+kappa/(a-j)] intersect [0,1]",
+    "warning": "Conservative marginal outer intervals; combine only using one common residual R and coherent binary-law feasibility; no sharp identified-set claim."
+  }
+}

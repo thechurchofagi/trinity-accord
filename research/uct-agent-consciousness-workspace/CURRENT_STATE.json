@@ -15,13 +15,18 @@
   "version_policy": "VERSIONING_POLICY.md",
   "changelog": "CHANGELOG.md",
   "latest_research": {
-    "id": "R205-ASC-20261010",
-    "result_version": "ASC-RESULT-v0.1.0",
+    "id": "SCU20261010",
+    "result_version": "SCU-RESULT-v0.2.0",
     "status": "PENDING_CHECKPOINT_DISABLED",
-    "source": "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/RESEARCH_NOTE.md",
-    "handoff": "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/HANDOFF_ZH.md",
-    "work_log": "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/WORK_LOG.md",
-    "enabled_as_established_premises": false
+    "source": "records/SCU20261010_Source_Consumer_Protocols/RESEARCH_NOTE.md",
+    "handoff": "records/SCU20261010_Source_Consumer_Protocols/HANDOFF_ZH.md",
+    "work_log": "records/SCU20261010_Source_Consumer_Protocols/WORK_LOG.md",
+    "enabled_as_established_premises": false,
+    "paper_version": "SCU-PAPER-v1.0.0",
+    "paper": "records/SCU20261010_Source_Consumer_Protocols/Matched_Behavior_and_Source_Use_v1.0.0.md",
+    "paper_pdf": "records/SCU20261010_Source_Consumer_Protocols/Matched_Behavior_and_Source_Use_v1.0.0.pdf",
+    "paper_status": "COMPLETE_SCOPED_WORKING_MANUSCRIPT_NOT_FORMALLY_PUBLISHED",
+    "decision_record": "records/SCU20261010_Source_Consumer_Protocols/MANUSCRIPT_DECISION.json"
   },
   "latest_integrated_research": {
     "id": "R188-CER-20261009",
@@ -64,7 +69,8 @@
     "R202-TMAB-20261010",
     "R203-ACD-20261010",
     "R204-SAU-20261010",
-    "R205-ASC-20261010"
+    "R205-ASC-20261010",
+    "SCU20261010"
   ],
   "current_guide": "RESEARCH_MASTER_GUIDE.md v2.3",
   "complete_map_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
@@ -76,31 +82,60 @@
     "nondeductive_context_links": 261,
     "total_review_items": 1608
   },
-  "pending_note": "AC, IL, ONLINE-AC and R189-R205 remain disabled; structural compatibility is not semantic promotion.",
+  "pending_note": "AC, IL, ONLINE-AC, R189–R205 and SCU20261010 remain disabled. Six additional correction nodes and two rules override eight pending records only; neither candidate nor correction counts enter the completed graph.",
   "publication_coverage": {
     "entry": "PUBLICATION_COVERAGE.json",
-    "version": "UCT-PUB-v1.0.17",
+    "version": "UCT-PUB-v1.0.18",
     "base_census_version": "UCT-PUB-v1.0.0",
-    "update": "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/PUBLICATION_COVERAGE_UPDATE.json",
+    "update": "records/SCU20261010_Source_Consumer_Protocols/PUBLICATION_COVERAGE_UPDATE.json",
     "report": "records/PUB20261009_Publication_Coverage/PUBLICATION_COVERAGE_REPORT_ZH.md",
     "nondeductive": true
   },
   "latest_activity": {
-    "id": "PUB20261009",
-    "kind": "publication_census_residual_reassessment_and_pending_research",
-    "work_log": "records/PUB20261009_Publication_Coverage/WORK_LOG.md",
-    "handoff": "records/PUB20261009_Publication_Coverage/HANDOFF_ZH.md"
+    "id": "SCU20261010",
+    "kind": "source_consumer_protocol_manuscript_and_scoped_semantic_audit",
+    "work_log": "records/SCU20261010_Source_Consumer_Protocols/WORK_LOG.md",
+    "handoff": "records/SCU20261010_Source_Consumer_Protocols/HANDOFF_ZH.md"
   },
   "latest_pending_research": {
-    "id": "ONLINE-AC-PROBE-20261009",
-    "result_version": "0.2.0",
-    "status": "PENDING_MAP",
-    "source": "records/ONLINE_AC_20261009_Dynamic_Calibration/RESEARCH_CHECKPOINT.md",
+    "id": "SCU20261010",
+    "result_version": "SCU-RESULT-v0.2.0",
+    "status": "PENDING_CHECKPOINT_DISABLED",
+    "source": "records/SCU20261010_Source_Consumer_Protocols/RESEARCH_NOTE.md",
+    "handoff": "records/SCU20261010_Source_Consumer_Protocols/HANDOFF_ZH.md",
+    "work_log": "records/SCU20261010_Source_Consumer_Protocols/WORK_LOG.md",
     "enabled_as_established_premises": false,
-    "paper_version": "ONLINE-AC-PAPER-v0.1.0",
-    "paper": "records/ONLINE_AC_20261009_Dynamic_Calibration/PAPER.md",
-    "paper_status": "COMPLETE_SCOPED_WORKING_MANUSCRIPT_NOT_FORMALLY_PUBLISHED"
+    "paper_version": "SCU-PAPER-v1.0.0",
+    "paper": "records/SCU20261010_Source_Consumer_Protocols/Matched_Behavior_and_Source_Use_v1.0.0.md",
+    "paper_pdf": "records/SCU20261010_Source_Consumer_Protocols/Matched_Behavior_and_Source_Use_v1.0.0.pdf",
+    "paper_status": "COMPLETE_SCOPED_WORKING_MANUSCRIPT_NOT_FORMALLY_PUBLISHED",
+    "decision_record": "records/SCU20261010_Source_Consumer_Protocols/MANUSCRIPT_DECISION.json"
   },
-  "review_status_scope": "Completed release UCT-MAP-v1.1.2 only; R205 remains disabled with actual/H and fresh semantic adoption OPEN.",
-  "next_priority": "Compare motor-command and proprioceptive consumer organizations under matched consequences, with distinct agency/ownership/intensity/sensitivity targets; do not extend source enumeration."
+  "review_status_scope": "Completed release UCT-MAP-v1.1.2 only. SCU20261010 completed statement/premise/relation review of all 1,608 items, but full raw contracts, supplementary fields and historical proof reconstruction remain explicitly incomplete; no new completed map release or actual premise discharge.",
+  "next_priority": "Ground one motor-command versus proprioceptive consumer comparison in a concrete implementation, with independently selected agency/ownership/intensity/sensitivity endpoints, intervention access, carrier identity and timing. Do not enlarge generic source enumeration. Complete the exact remaining raw-contract/proof obligations before map promotion.",
+  "latest_scoped_review": {
+    "audit": "records/SCU20261010_Source_Consumer_Protocols/MAP_AUDIT.md",
+    "exact_unread_scope": "records/SCU20261010_Source_Consumer_Protocols/review/EXACT_UNREAD_SCOPE.json",
+    "status": "AUDIT_INCOMPLETE_AT_FULL_RAW_CONTRACT_AND_HISTORICAL_PROOF_DEPTH",
+    "statement_premise_relationship_items_read": 1608,
+    "unread_statement_premise_relationship_ids": [],
+    "raw_contract_item_ids_not_fully_reread": 901,
+    "raw_contract_fields_not_fully_reread": 1101,
+    "supplementary_semantic_field_item_ids_not_fully_reread": 495,
+    "counts_overlap_do_not_sum": true,
+    "supplementary_semantic_fields_not_fully_reread": 727,
+    "distinct_item_ids_with_unreviewed_nested_or_supplementary_fields": 1034,
+    "distinct_unreviewed_nested_or_supplementary_fields": 1828,
+    "historical_source_proof_ids_not_fully_independently_reconstructed": 1347
+  },
+  "effective_pending_corrections": {
+    "index": "records/SCU20261010_Source_Consumer_Protocols/corrections/EFFECTIVE_CORRECTION_INDEX.json",
+    "original_records_preserved": true,
+    "enabled_as_established_premises": false,
+    "affected_rounds": [
+      "R194",
+      "R201",
+      "R202"
+    ]
+  }
 }

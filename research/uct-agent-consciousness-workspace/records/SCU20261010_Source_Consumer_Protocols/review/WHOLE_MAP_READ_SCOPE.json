@@ -1,0 +1,40 @@
+{
+  "schema": "uct-scu-full-map-read-scope-entry/1",
+  "audit_id": "SCU20261010-MAP-AUDIT-v0.1.0",
+  "full_report": "MAP_SEMANTIC_AUDIT_REPORT.md",
+  "exact_unread_scope": "EXACT_UNREAD_SCOPE.json",
+  "per_item_ledger": "PER_ITEM_SEMANTIC_REVIEW.json.gz",
+  "per_item_ledger_uncompressed_sha256": "ca0f78d5694650a2663d98bdfb100dffe4f65374a9e0d1f767bada49468c384d",
+  "source_read_scope": "SOURCE_READ_SCOPE_MANIFEST.json",
+  "source_resolution": "FROZEN_SOURCE_RESOLUTION.json",
+  "review_scope": {
+    "completed_statement_premise_relation_counts": {
+      "node": 913,
+      "rule": 424,
+      "context": 261,
+      "suspended_historical_rule": 10
+    },
+    "statement_level_unread_ids": [],
+    "unreviewed_full_raw_contract_items": 901,
+    "unreviewed_full_raw_contract_fields": 1101,
+    "unreviewed_full_supplementary_semantic_items": 495,
+    "unreviewed_full_supplementary_semantic_fields": 727,
+    "unreviewed_union_items": 1034,
+    "unreviewed_union_fields": 1828,
+    "full_historical_source_proofs_independently_reconstructed": false,
+    "overall_status": "AUDIT_INCOMPLETE",
+    "R190_R205_candidate_counts": {
+      "node": 153,
+      "rule": 81,
+      "context": 79
+    },
+    "SCU_candidate_counts": {
+      "node": 23,
+      "rule": 8,
+      "context": 16
+    }
+  },
+  "actual_premises_discharged": false,
+  "completed_map_changed": false,
+  "root_copied_all_manifest_files_with_hash_match": true
+}

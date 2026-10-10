@@ -1,0 +1,280 @@
+{
+  "schema": "uct-audit-source-read-scope/1",
+  "scope_is_auditor_specific": true,
+  "not_a_claim_about_other_agents_reading": true,
+  "frozen_map": {
+    "version": "UCT-MAP-v1.1.2",
+    "graph_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
+    "review_ledger_sha256": "0513cb55cef94d82adcaea46af1974438a424aeba152f4c9d5655340f9271687",
+    "source_location_index_sha256": "4a8407f630147a4f9227088931fa90128cb8277d09e03bfede141410bff14abd",
+    "read_scope": "All 1608 semantic cards; full nested-contract and historical-proof exceptions are enumerated in EXACT_UNREAD_SCOPE.json."
+  },
+  "governance_and_foundation_sources": [
+    {
+      "repository_path": "research/AGENTS.md",
+      "revision": "90a542d697d923aa484f2bd5a4484a438125325a",
+      "sha256": "68dbcac80bcfa7e5769c8d0c7398003ff456f8f2c819f0ed1e9a4c9c6a5c19cf",
+      "actual_read_scope": "Full file."
+    },
+    {
+      "repository_path": "research/uct-agent-consciousness-workspace/RESEARCH_MASTER_GUIDE.md",
+      "revision": "90a542d697d923aa484f2bd5a4484a438125325a",
+      "sha256": "17790bd935323f0e2d168d55d2c766a11fdc555e23f005361295405cfb18c2a7",
+      "actual_read_scope": "Full guide, including both initial and remainder batches."
+    },
+    {
+      "repository_path": "research/uct-agent-consciousness-workspace/AGENTS.md",
+      "revision": "90a542d697d923aa484f2bd5a4484a438125325a",
+      "sha256": "6a03d15463176d9296e0d164d2a829ba36f9fa6876be76befc8c670a8be520c4",
+      "actual_read_scope": "Header/current instructions lines 1-100 and lines 485-end; intervening historical body not fully read by this auditor."
+    },
+    {
+      "repository_path": "research/uct-agent-consciousness-workspace/CURRENT_STATE.json",
+      "revision": "90a542d697d923aa484f2bd5a4484a438125325a",
+      "sha256": "2701c0f34e5ffc278949d5b741d5296cbd02d725ce1c08d0365133d314525f8c",
+      "actual_read_scope": "Full initial current-state snapshot; later root-managed navigation updates are not the same source."
+    },
+    {
+      "repository_path": "research/uct-agent-consciousness-workspace/FORMAL_MAP_REVIEW_POLICY.json",
+      "revision": "90a542d697d923aa484f2bd5a4484a438125325a",
+      "sha256": "5e743007e31f1ee37241e932f8358d3cdc72b0ee88bfb51d5156b5c782e939c2",
+      "actual_read_scope": "Full v2.4 policy."
+    },
+    {
+      "repository_path": "research/uct-agent-consciousness-workspace/REVIEW_SUPERVISION.md",
+      "revision": "90a542d697d923aa484f2bd5a4484a438125325a",
+      "sha256": "db723b64174b982543ec072e337ddbf11cc95c4641294cde0b62fbb4761636d7",
+      "actual_read_scope": "Lines 1-34, 264-306, 330-405, 477-506 and heading inventory; remaining historical review body not fully read."
+    },
+    {
+      "repository_path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_MAP.md",
+      "revision": "90a542d697d923aa484f2bd5a4484a438125325a",
+      "sha256": "69a94c7b77f61dd988c1c9214d2aef966a8b21758f16bd6b7bd29f83ec29681c",
+      "actual_read_scope": "Full descriptor overview; restored v1.1.2 capsule used for exact item audit."
+    },
+    {
+      "repository_path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_GRAPH_MODULES.json",
+      "revision": "90a542d697d923aa484f2bd5a4484a438125325a",
+      "sha256": "471e535f2e3c618e6854a0c7554f7ac7274d494394c0cab1b595a5916e63757c",
+      "actual_read_scope": "Descriptor/navigation fields inspected; whole initial output had a small truncated tail, so full-file reading is not claimed."
+    },
+    {
+      "repository_path": "research/uct-agent-consciousness-workspace/records/R153_Complete_Formal_Map_20261007/FORMAL_FOUNDATION.md",
+      "revision": "90a542d697d923aa484f2bd5a4484a438125325a",
+      "sha256": "a59f7f703b2e371e2fa58cefb7e9411a59b02fd7a13493b72fcb17996c2ecbaa",
+      "actual_read_scope": "Lines 1-79 and 101-138. P01-P05 and P10-P12 proof sections were read; P06-P09 full sections at lines 80-100 were not read."
+    },
+    {
+      "repository_path": "research/uct-agent-consciousness-workspace/records/R154_All_Rule_Proof_Review_20261007/RULE_REVIEW.md",
+      "revision": "90a542d697d923aa484f2bd5a4484a438125325a",
+      "sha256": "8c2eeac487e60d657b10b48780542b2f10a3243b6606217e765daf9e4f2f227e",
+      "actual_read_scope": "Headings and proof locators only; the full historical proof corpus was not reread."
+    },
+    {
+      "repository_path": "research/uct-agent-consciousness-workspace/records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md",
+      "revision": "90a542d697d923aa484f2bd5a4484a438125325a",
+      "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+      "actual_read_scope": "Lines 81-204 (actual-token criteria) and 357-427 (C1/C1-OI/C1-W/U1). Full paper not claimed by this auditor."
+    }
+  ],
+  "pending_note_and_map_sources": [
+    {
+      "module": "R190",
+      "map_path": "records/R190_Practical_Centering_Bearer_Coupling_20261009/MAP_EXTENSION.json",
+      "map_sha256": "6f14a9ff44f8402f29348196bd3aa308a4cc6a71786dc194f5ab4d8817e0dcfa",
+      "note_path": "records/R190_Practical_Centering_Bearer_Coupling_20261009/RESEARCH_NOTE.md",
+      "note_sha256": "90256ba8eb6daba9ad2f1dfb09ed991960efdf8fefc26814553bf1ecd7c3d88e",
+      "source_note_read_scope": "Full RESEARCH_NOTE.md body, including model, proofs/arguments, scope and limits.",
+      "map_read_scope": "All node statements/scopes/quantifiers, all rule premises/conclusions/bindings and all context relationship texts. Historical checker source not fully reread or rerun by this auditor.",
+      "assessment": "The four PC/BDCC profiles are witnessed alternatives under one selected target, not universal physiological independence. Deliberate/reflex label swaps retain the modeled routes and therefore cannot identify a feeling. Actual bearer/endpoint/consumer/timing grounding is not supplied by the finite rows."
+    },
+    {
+      "module": "R191",
+      "map_path": "records/R191_Conflict_Conditioned_Authorization_20261009/MAP_EXTENSION.json",
+      "map_sha256": "e5803dc71b56c3c594d6f34b699b7ad3fae425e3e418d841060f55c1bc22b0d6",
+      "note_path": "records/R191_Conflict_Conditioned_Authorization_20261009/RESEARCH_NOTE.md",
+      "note_sha256": "77b823448257e3537c03cccbc3a3e1930d1730105c7e9329e648a17907fa1ceb",
+      "source_note_read_scope": "Full RESEARCH_NOTE.md body, including model, proofs/arguments, scope and limits.",
+      "map_read_scope": "All node statements/scopes/quantifiers, all rule premises/conclusions/bindings and all context relationship texts. Historical checker source not fully reread or rerun by this auditor.",
+      "assessment": "The precommit consumer separates post-hoc use from authorization, and generic formation history does not exclude an adaptive reflex. Definition availability must not be read as actual PCBDCC implying OCCA, or generic RetBind plus OCCA implying a specific conflict-driven revision. The latter graph typing remains an OPEN normalization obligation, not a new source theorem."
+    },
+    {
+      "module": "R192",
+      "map_path": "records/R192_Complete_Twin_Bridge_Invariance_20261009/MAP_EXTENSION.json",
+      "map_sha256": "a546ebd83ddae5125411241a8cd5b074579df00cb6b98ecfab98b24e134047b6",
+      "note_path": "records/R192_Complete_Twin_Bridge_Invariance_20261009/RESEARCH_NOTE.md",
+      "note_sha256": "f06bf3d4e5ba36aa43aa58c522d8cd4756f5181d9351e3925d3704f5ecb8a2c8",
+      "source_note_read_scope": "Full RESEARCH_NOTE.md body, including model, proofs/arguments, scope and limits.",
+      "map_read_scope": "All node statements/scopes/quantifiers, all rule premises/conclusions/bindings and all context relationship texts. Historical checker source not fully reread or rerun by this auditor.",
+      "assessment": "Complete K* twins preserve every isomorphism-invariant grounded predicate and, under C1, complete experiential type. A selected projection twin defeats only bridges factoring through that projection. Actual historical expansion can split that projection but does not orient familiar mineness."
+    },
+    {
+      "module": "R193",
+      "map_path": "records/R193_Nonreport_Contrast_Identifiability_20261009/MAP_EXTENSION.json",
+      "map_sha256": "977e423d80c54bff29c9f45c1402fffaf0b559b3b4d819ff78bb750587f54001",
+      "note_path": "records/R193_Nonreport_Contrast_Identifiability_20261009/RESEARCH_NOTE.md",
+      "note_sha256": "cbe5ab10eb01fc46e005e9f339ae6f8a5167e81c702ceeeadc387143d50b0c06",
+      "source_note_read_scope": "Full RESEARCH_NOTE.md body, including model, proofs/arguments, scope and limits.",
+      "map_read_scope": "All node statements/scopes/quantifiers, all rule premises/conclusions/bindings and all context relationship texts. Historical checker source not fully reread or rerun by this auditor.",
+      "assessment": "The finite H_hist/U/E/R contrast package reduces 65536 Boolean tables to an unoriented conjunction/complement pair. One independent positive anchor selects its numerical pole; target naming remains open. Here H means actual retained history and must not be identified by letter with later H_fam."
+    },
+    {
+      "module": "R194",
+      "map_path": "records/R194_Cross_Population_Polarity_20261009/MAP_EXTENSION.json",
+      "map_sha256": "2827d07d0a279e9d86b0bf7044dc414702043ec0cb366ebca6c5b23119273c1b",
+      "note_path": "records/R194_Cross_Population_Polarity_20261009/RESEARCH_NOTE.md",
+      "note_sha256": "ec5d60f23202b9be51c5f584f375caca870b75ce7afda3099a907189a0f87194",
+      "source_note_read_scope": "Full RESEARCH_NOTE.md body, including model, proofs/arguments, scope and limits.",
+      "map_read_scope": "All node statements/scopes/quantifiers, all rule premises/conclusions/bindings and all context relationship texts. Historical checker source not fully reread or rerun by this auditor.",
+      "assessment": "The unanchored global-complement symmetry remains valid. The displayed general component count must additionally handle contradictory anchors in one component; the correction overlay returns zero for cycle OR anchor/path inconsistency. The seven-vertex single-anchor examples are unaffected."
+    },
+    {
+      "module": "R195",
+      "map_path": "records/R195_Interventional_Polarity_Anchor_20261009/MAP_EXTENSION.json",
+      "map_sha256": "a8e8185ef922e353de9e7384842238ceb3777d15a224743a51f5c0dc67ec56c5",
+      "note_path": "records/R195_Interventional_Polarity_Anchor_20261009/RESEARCH_NOTE.md",
+      "note_sha256": "2f15441e2463c1ab9f3747f40552293243bae07067dcd728d5173e2bb39c9c33",
+      "source_note_read_scope": "Full RESEARCH_NOTE.md body, including model, proofs/arguments, scope and limits.",
+      "map_read_scope": "All node statements/scopes/quantifiers, all rule premises/conclusions/bindings and all context relationship texts. Historical checker source not fully reread or rerun by this auditor.",
+      "assessment": "The latent complement simultaneously changes Z, marker signs and the consequence kernel, retaining every declared do(Q) law. Functional Y ordering can orient a structural pole only by adding its full-table bridge; it is not independently familiar-mineness direction. No sensorimotor protocol supplies that semantic bridge."
+    },
+    {
+      "module": "R196",
+      "map_path": "records/R196_Two_Axis_Phenomenal_Calibration_20261009/MAP_EXTENSION.json",
+      "map_sha256": "c76edc4aeb640419ab4b0badbd2daa81c6c0cb876cf728a183ef17cf34c93f38",
+      "note_path": "records/R196_Two_Axis_Phenomenal_Calibration_20261009/RESEARCH_NOTE.md",
+      "note_sha256": "a70f4026e4ba210ca3be62e71bdf7effda1d4669cd7629c8b56074cfab09947b",
+      "source_note_read_scope": "Full RESEARCH_NOTE.md body, including model, proofs/arguments, scope and limits.",
+      "map_read_scope": "All node statements/scopes/quantifiers, all rule premises/conclusions/bindings and all context relationship texts. Historical checker source not fully reread or rerun by this auditor.",
+      "assessment": "A-sensitive/V-invariant Boolean markers leave exactly two complements, while two-axis-sensitive outcomes give XOR/XNOR. The structural and outcome dissociation removes a value confound but does not choose a phenomenal pole. Any historical requirement that an endpoint be nonverbal is superseded by R197's modality-neutral correction."
+    },
+    {
+      "module": "R197",
+      "map_path": "records/R197_Fallible_Endpoint_Orientation_20261010/MAP_EXTENSION.json",
+      "map_sha256": "a686e03922a8c2cf5d175dcec53a49df5e5b01f5652c3693ebd35642817d47a6",
+      "note_path": "records/R197_Fallible_Endpoint_Orientation_20261010/RESEARCH_NOTE.md",
+      "note_sha256": "628b0ed40083eb7976e151228b355b8b9e41d3221d400c467625a156a51cba06",
+      "source_note_read_scope": "Full RESEARCH_NOTE.md body, including model, proofs/arguments, scope and limits.",
+      "map_read_scope": "All node statements/scopes/quantifiers, all rule premises/conclusions/bindings and all context relationship texts. Historical checker source not fully reread or rerun by this auditor.",
+      "assessment": "Signed fallible reliability orients an independently fixed target by a contrast sign; modality alone is irrelevant. Equal marginals do not preserve class-conditional direction across domains. Reports can be evidence without defining the target, and no endpoint premise is needed for U1."
+    },
+    {
+      "module": "R198",
+      "map_path": "records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/MAP_EXTENSION.json",
+      "map_sha256": "4870660b8de3bfa8c4f8db15c75002dcb614d517c3fc415a35f28ad980653440",
+      "note_path": "records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/RESEARCH_NOTE.md",
+      "note_sha256": "3b169b4fbb733e20a9984fbc24c257f841369e8664779743f684ec216d3768eb",
+      "source_note_read_scope": "Full RESEARCH_NOTE.md body, including model, proofs/arguments, scope and limits.",
+      "map_read_scope": "All node statements/scopes/quantifiers, all rule premises/conclusions/bindings and all context relationship texts. Historical checker source not fully reread or rerun by this auditor.",
+      "assessment": "The 166 monotone endpoint-fixed four-bit functions show an underdetermined aggregate within the stated Boolean profile family. O/G/H_fam target coordinates remain separate from organizational C; the profile is not an exhaustive ontology. Orientation cannot select the coordinate it is meant to orient."
+    },
+    {
+      "module": "R199",
+      "map_path": "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/MAP_EXTENSION.json",
+      "map_sha256": "975bdd0a502d725425d48763a6f0955ab545b63ccf3765c2d422a2b0a1cee2b5",
+      "note_path": "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/RESEARCH_NOTE.md",
+      "note_sha256": "0c1d6af3e8b68f8424097251ee4e0f41607d7b9c73800da3a4dd2eae0106d31f",
+      "source_note_read_scope": "Full RESEARCH_NOTE.md body, including model, proofs/arguments, scope and limits.",
+      "map_read_scope": "All node statements/scopes/quantifiers, all rule premises/conclusions/bindings and all context relationship texts. Historical checker source not fully reread or rerun by this auditor.",
+      "assessment": "Identical current controlled state/kernel/readout/exogenous coupling yields identical future trace laws by induction. A difference rejects the clone package but does not uniquely identify RetBind or lineage. Complete operational equality is not silently equated with complete historical organization."
+    },
+    {
+      "module": "R200",
+      "map_path": "records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/MAP_EXTENSION.json",
+      "map_sha256": "a7cda22b0f3efa292fb9bbaa826039cb7c43ea14bf70851a9ee51825b6463272",
+      "note_path": "records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/RESEARCH_NOTE.md",
+      "note_sha256": "65d2aea894d4f01a0111827e7c3887ba345598bc5ce49571d8c957e5d4a94bc9",
+      "source_note_read_scope": "Full RESEARCH_NOTE.md body, including model, proofs/arguments, scope and limits.",
+      "map_read_scope": "All node statements/scopes/quantifiers, all rule premises/conclusions/bindings and all context relationship texts. Historical checker source not fully reread or rerun by this auditor.",
+      "assessment": "Unsigned proxy batteries remain invariant under a latent complement and conditional-law swap. Signed calibration and class-specific transport are distinct premises; formation-by-use interactions can remain positive with fixed H_fam through confounding. Actual use and use evidence remain separate."
+    },
+    {
+      "module": "R201",
+      "map_path": "records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/MAP_EXTENSION.json",
+      "map_sha256": "279c2761ff8755784e1007cd3d641eb26fc909d86f2f2f8a3b882488efe98788",
+      "note_path": "records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/RESEARCH_NOTE.md",
+      "note_sha256": "e419f79283ffc2e58fba08cd8723096055fbe8c30831730dd3b5541d96b4cf87",
+      "source_note_read_scope": "Full RESEARCH_NOTE.md body, including model, proofs/arguments, scope and limits.",
+      "map_read_scope": "All node statements/scopes/quantifiers, all rule premises/conclusions/bindings and all context relationship texts. Historical checker source not fully reread or rerun by this auditor.",
+      "assessment": "The sufficient strict-margin theorem survives under one coherent calibration/transport law. The rho=1,b>0 witnesses are impossible and withdrawn; coherent rho=1/2 examples replace them without arbitrary-budget sharpness. The strict-margin all_of premise must be removed from the equality/below-threshold witness rule."
+    },
+    {
+      "module": "R202",
+      "map_path": "records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/MAP_EXTENSION.json",
+      "map_sha256": "d417239cce217badaf099801d03ff064152d211c44f6b8d98d4aaa63d91fbd74",
+      "note_path": "records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/RESEARCH_NOTE.md",
+      "note_sha256": "8b0cb6460abb79c5d3a701c5c411207743f82ad777b8a6ef2a9893c5219ff9b8",
+      "source_note_read_scope": "Full RESEARCH_NOTE.md body, including model, proofs/arguments, scope and limits.",
+      "map_read_scope": "All node statements/scopes/quantifiers, all rule premises/conclusions/bindings and all context relationship texts. Historical checker source not fully reread or rerun by this auditor.",
+      "assessment": "The exact mixture inversion survives under conditional independence or independently zero aggregate residual. A bound on nonzero conditional dependence yields one shared residual feasible set, not point identification. The coherent R203 twin reverses the naive inferred direction. Reporting-domain recovery still does not transport itself to nonreporting T."
+    },
+    {
+      "module": "R203",
+      "map_path": "records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/MAP_EXTENSION.json",
+      "map_sha256": "43510d7cc5c4595a355cd0e15d008d50efa9a6872f33bc9c9bc18a070e36fa8e",
+      "note_path": "records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/RESEARCH_NOTE.md",
+      "note_sha256": "7f520f46a9e8153f05767ff2e6eab75618f4dff9c00f3ae8176d12e19176c0d9",
+      "source_note_read_scope": "Full RESEARCH_NOTE.md body, including model, proofs/arguments, scope and limits.",
+      "map_read_scope": "All node statements/scopes/quantifiers, all rule premises/conclusions/bindings and all context relationship texts. Historical checker source not fully reread or rerun by this auditor.",
+      "assessment": "The total-covariance identity retains the prevalence, signed endpoint, residual and actual-use contract in one law. A defended residual budget can orient Delta when K exceeds it; a trivial universal covariance cap is uninformative. Fixed-sample concentration does not make audit missingness ignorable or validate H_fam."
+    },
+    {
+      "module": "R204",
+      "map_path": "records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/MAP_EXTENSION.json",
+      "map_sha256": "c5c0b0cf669b089855509384bb2b8ee9e9d61be64afb6765cd4d5718e4c0b388",
+      "note_path": "records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/RESEARCH_NOTE.md",
+      "note_sha256": "4f86be11aaf5b7eb487f637aa76e22dd6c8921b22a5289d7038eeb05e96e1f64",
+      "source_note_read_scope": "Full RESEARCH_NOTE.md body, including model, proofs/arguments, scope and limits.",
+      "map_read_scope": "All node statements/scopes/quantifiers, all rule premises/conclusions/bindings and all context relationship texts. Historical checker source not fully reread or rerun by this auditor.",
+      "assessment": "S, prediction agreement K and actual writer gate U can vary independently for n>=2. State change is U AND mismatch in the stated update model; a matched feedback result is not evidence of no use. Error-gated and unconditional writers can share every prediction-state trace while write events differ. No RetBind/H_fam follows."
+    },
+    {
+      "module": "R205",
+      "map_path": "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/MAP_EXTENSION.json",
+      "map_sha256": "fd34ee26a7ef861b4037d30bd07c609445700c1e50c57cf7521b3e1181b63cea",
+      "note_path": "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/RESEARCH_NOTE.md",
+      "note_sha256": "288c4358f402e40d20d40fc0e7ea145b41c320b94f61517068419b2ee2e349dd",
+      "source_note_read_scope": "Full RESEARCH_NOTE.md body, including model, proofs/arguments, scope and limits.",
+      "map_read_scope": "All node statements/scopes/quantifiers, all rule premises/conclusions/bindings and all context relationship texts. Historical checker source not fully reread or rerun by this auditor.",
+      "assessment": "The concurrent two-source location/correspondence square preserves nominal success/alignment, and isolated probes recover selectors only in the fixed injective single-read class. The modular cancellation model consumes two branches while every whole-source assignment has the direct predictor's output. It attacks extension beyond that class, not its conditional theorem. The two-probe construction is sufficient, not a minimum-query result."
+    }
+  ],
+  "current_SCU_sources": [
+    {
+      "path": "/workspace/scratch/465328c0080c/workbench/model/RESEARCH_NOTE.md",
+      "sha256": "5f9249a9fbe6ea96342b6b004e34332a5dbd86fbea5c8261816aac983f212fa7",
+      "actual_read_scope": "Full main note read; final scope corrections on 5045 zero-fiber checks, concurrent R205 and node/edge semantics inspected separately."
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/workbench/model/CLAIM_LEDGER.json",
+      "sha256": "85a09d387f36b6134a9dd79933e8bf79925e73a0638885eb06b2c9857cc5e0be",
+      "actual_read_scope": "All 8 claims, quantifiers, all_of, proof locators, predecessors and limits."
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/workbench/model/MAP_EXTENSION.json",
+      "sha256": "64768a5dcd3fa1f90eaf4f9b19b0ea58afdcf96a821f025216ef9ebaa67ff257",
+      "actual_read_scope": "All 23 nodes, 8 rules and 16 nondeductive contexts; corrected nontrivial node-write guard reread."
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/Matched_Behavior_and_Source_Use_v1.0.0.md",
+      "sha256": "8e5bdfd1d4e5adc537a20424c5648350c6c6f6e4d9181a9d78bdd2aec73aed4c",
+      "actual_read_scope": "Final sections 2, 7, 9-10 reread, including corrected predictor/process notation, carrier timing, complete clones and all three older corrections. Abstract/introduction/conclusion/references were read in the first review version. This is not a full independent manuscript proof/citation review."
+    }
+  ],
+  "other_exact_prior_reasoning_consulted": [
+    {
+      "module": "R147",
+      "scope": "Source locator/headings and route algebra from the frozen graph and R153 P11; full original source note not independently reread."
+    },
+    {
+      "module": "R174",
+      "scope": "Declared S/C/H source-and-mediator equations, separating table and finite-context counterextension as retained in the graph; no claim of full empirical-source review."
+    },
+    {
+      "module": "IA20261008",
+      "scope": "Actual source/consumer trace-DAG definitions and relay/retiming invariance from the retained source section and graph; broader adaptive-observer proof corpus reused."
+    }
+  ],
+  "full_historical_source_proof_reconstruction": false,
+  "actual_application_or_H_validation": false
+}

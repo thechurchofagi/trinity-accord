@@ -1,0 +1,2147 @@
+{
+  "schema": "scu-source-coverage-audit/1.0",
+  "audit_id": "SCU20261010-COVERAGE-AUDIT-v0.2.0",
+  "scientific_scope": "One cumulative R204/R205/SCU mechanism/protocol paper; not a full historical priority search or all-map semantic proof.",
+  "original_research_base": "90a542d697d923aa484f2bd5a4484a438125325a",
+  "concurrent_research_base": "a22ad487b2a072293de2ecb55b4f2cc2a2c0dafc",
+  "concurrent_R205_status": "ASC-RESULT-v0.1.0; unpublished disabled checkpoint; whole note, claim ledger and coverage update directly read; must preserve and cite.",
+  "publication_coverage_current": "UCT-PUB-v1.0.17",
+  "main_current": "6cfb89f0b88605da9a44da9c97203729a6742894",
+  "frozen_census_main": "fc568e8718e82b3cda6ede0e628aa3342179bebc",
+  "main_research_changed_paths": [],
+  "publication_counts_from_frozen_census": {
+    "distinct_research_works": 28,
+    "distinct_research_work_version_label_pairs": 38,
+    "distinct_published_research_doi_records": 39,
+    "separate_editorial_supplement_works": 1,
+    "separate_editorial_doi_records": 1,
+    "all_verified_publication_doi_records_including_editorial": 40,
+    "reserved_only_records_within_the_40_verified_publication_records": 0,
+    "uninspected_live_account_drafts": "NOT_ENUMERATED"
+  },
+  "inherited_semantic_coverage": [
+    {
+      "coverage_id": "A_FOUNDATION",
+      "work_id": "TA-TR-2026-20",
+      "doi": "10.5281/zenodo.23131575",
+      "paper_locators": [
+        "§§2–5",
+        "§7",
+        "§9.2",
+        "§12.3"
+      ],
+      "argument_coverage": "PUBLISHED_FOUNDATIONAL_PREDECESSOR",
+      "scope": "Actual process tokens, full ontic organization versus views, C1/U1/U2 foundations, symmetry obstruction, causal-retention regimes, behaviorally matched rewiring.",
+      "coverage_limit": "A map node does not acquire a discharged actual-instance premise merely by being linked to this paper.",
+      "related_current_families": [
+        "A"
+      ],
+      "read_scope": "Receipt-backed complete MD retrieved; stated thematic passages reviewed. Not a claim to rederive every result."
+    },
+    {
+      "coverage_id": "B_ORGANIZATION",
+      "work_id": "TA-TR-2026-21",
+      "doi": "10.5281/zenodo.23030320",
+      "paper_locators": [
+        "§2.2",
+        "§4.2",
+        "§5",
+        "§§19–20"
+      ],
+      "argument_coverage": "PUBLISHED_FOUNDATIONAL_PREDECESSOR",
+      "scope": "Identified output sets, admissible mechanism representation, effective organization descriptions, two quantitative shared-law examples.",
+      "coverage_limit": "No blanket assertion that all later map formulations are verbatim in this edition.",
+      "related_current_families": [
+        "B"
+      ],
+      "read_scope": "Receipt-backed complete MD retrieved; stated thematic passages reviewed. Not a claim to rederive every result."
+    },
+    {
+      "coverage_id": "C_MATCHED_ACCESS",
+      "work_id": "TA-TR-2026-23",
+      "doi": "10.5281/zenodo.23137088",
+      "paper_locators": [
+        "§7.2; Eqs.21–22",
+        "§7.3 Proposition 7; Eqs.23–27"
+      ],
+      "argument_coverage": "EXACT_PUBLISHED_PREDECESSOR_FOR_THE_UMBRELLA",
+      "scope": "Equal one-bit storage and identical current output can conceal different gains from the same readout change: 1 versus 1/2. The value-of-information theorem explicitly assumes no coupling across observations and warns that constrained policy classes invalidate pointwise formulas.",
+      "coverage_limit": "This example has different target mutual information; it does not supply R188's matched pair-posteriors or weighted Max-(K^L)-Cut surface.",
+      "related_current_families": [
+        "C",
+        "R188"
+      ],
+      "read_scope": "Receipt-backed complete MD retrieved; stated thematic passages reviewed. Not a claim to rederive every result."
+    },
+    {
+      "coverage_id": "D_SELF_CONTINUATION",
+      "work_id": "TA-TR-2026-24",
+      "doi": "10.5281/zenodo.23176685",
+      "paper_locators": [
+        "§3",
+        "§4",
+        "§§6–9",
+        "FORMAL-MAP-AND-AUDIT.md"
+      ],
+      "argument_coverage": "PUBLISHED_MAIN_TEXT_AND_FORMAL_ATTACHMENT",
+      "scope": "Bundled shutdown nonidentifiability, path blocking, insufficiency of matching consequence marginals for nonadditive payoff, flexible-learner underspecification, intervention-domain evidence ladder. Formal release map explicitly binds R96, R96D, R95, R97, R98, R99, R101.",
+      "coverage_limit": "D is TA24, not a fourth UCT-numbered paper; evidence levels do not establish valence, fear, or terminal self-value.",
+      "related_current_families": [
+        "D",
+        "R95",
+        "R96",
+        "R96D",
+        "R97",
+        "R98",
+        "R99",
+        "R101"
+      ],
+      "read_scope": "Receipt-backed complete MD retrieved; stated thematic passages reviewed. Not a claim to rederive every result."
+    },
+    {
+      "coverage_id": "TA15_TRANSPORT",
+      "work_id": "TA-TR-2026-15",
+      "doi": "10.5281/zenodo.22934654",
+      "paper_locators": [
+        "§§3–5",
+        "§5.2 fiber criterion",
+        "§5.3 guarded composition",
+        "Appendices B–C"
+      ],
+      "argument_coverage": "PUBLISHED_PREDECESSOR",
+      "scope": "Typed transport certificates, target-preserving fibers, guarded composition, and exact finite calibration/held-out transformation example.",
+      "coverage_limit": "Target-fiber mathematics and guarded reuse must be attributed; later concrete architectures are not automatically covered.",
+      "related_current_families": [],
+      "read_scope": "Receipt-backed complete MD retrieved; stated thematic passages reviewed. Not a claim to rederive every result."
+    },
+    {
+      "coverage_id": "TA16_COMMON_WITNESS",
+      "work_id": "TA-TR-2026-16",
+      "doi": "10.5281/zenodo.22939808",
+      "paper_locators": [
+        "§14.4",
+        "§§15–18",
+        "Appendix G.1–G.5"
+      ],
+      "argument_coverage": "EXACT_PUBLISHED_PREDECESSOR_FOR_COMMON_ORGANIZATION_REQUIREMENT",
+      "scope": "A common physical witness must bind support, regime, temporal scope, intervention semantics and calibration. Incompatible regimes cannot donate separate maxima to an impossible organization. Redundancy, recoding and retained-capacity counterexamples already appear.",
+      "coverage_limit": "No worldwide priority claim and no identification of R188's specific constrained encoder score with this broad condition.",
+      "related_current_families": [],
+      "read_scope": "Receipt-backed complete MD retrieved; stated thematic passages reviewed. Not a claim to rederive every result."
+    },
+    {
+      "coverage_id": "TA17_JOINT_INHERITANCE",
+      "work_id": "TA-TR-2026-17",
+      "doi": "10.5281/zenodo.22950904",
+      "paper_locators": [
+        "§§4–7",
+        "formal supplement v1.0"
+      ],
+      "argument_coverage": "PUBLISHED_PREDECESSOR_AND_FORMAL_SUPPLEMENT",
+      "scope": "Set-valued causal inheritance, representation impossibility and exact cost of an independent-successor model; a large formal/executable supplement is itself in the deposited file manifest.",
+      "coverage_limit": "Selected passage review, not full revalidation of all agent benchmarks or every supplementary result.",
+      "related_current_families": [],
+      "read_scope": "Receipt-backed complete MD retrieved; stated thematic passages reviewed. Not a claim to rederive every result."
+    },
+    {
+      "coverage_id": "TA18_ACTUAL_PARTICIPATION",
+      "work_id": "TA-TR-2026-18",
+      "doi": "10.5281/zenodo.22991126",
+      "paper_locators": [
+        "§§3–6",
+        "§7",
+        "supplement v1.0"
+      ],
+      "argument_coverage": "PUBLISHED_PREDECESSOR",
+      "scope": "Actual participation hypergraph, token episode support, participation-restricted dispositionality, trajectory insufficiency, idle-support invariance, participation-preserving abstraction and symmetry obstruction.",
+      "coverage_limit": "Counterfactual policy-family ability is not automatically token participation; no particular physical source count or named experience follows.",
+      "related_current_families": [],
+      "read_scope": "Receipt-backed complete MD retrieved; stated thematic passages reviewed. Not a claim to rederive every result."
+    },
+    {
+      "coverage_id": "TA19_SELECTION",
+      "work_id": "TA-TR-2026-19",
+      "doi": "10.5281/zenodo.23002980",
+      "paper_locators": [
+        "main MD §§3–5",
+        "Supplement S1–S4",
+        "Supplement Methods S2–S6 / Tables S1–S3"
+      ],
+      "argument_coverage": "PUBLISHED_MAIN_TEXT_AND_DISTINCT_FORMAL_SUPPLEMENT",
+      "scope": "Local fixed-point/orbit selection and monodromy obstruction are in the main MD. The supplement formally discloses probability/set-valued repairs, exact IIT parameters, sweeps, precision/relabeling checks, 1000 perturbation sets and landscape continuity.",
+      "coverage_limit": "Exact receipt-bound MD ends in §5's double-cover example. This audit did not inspect PDF bytes and does not assume unobserved later body sections. Numerical results remain model/formalism-specific.",
+      "related_current_families": [],
+      "read_scope": "Receipt-backed complete MD retrieved; stated thematic passages reviewed. Not a claim to rederive every result."
+    },
+    {
+      "coverage_id": "TA25_FACTORIZATION_AND_ATTACHMENT",
+      "work_id": "TA-TR-2026-25",
+      "doi": "10.5281/zenodo.23206492",
+      "paper_locators": [
+        "§5 T1/T2",
+        "§6 T3",
+        "§8"
+      ],
+      "argument_coverage": "EXACT_PUBLISHED_PREDECESSOR_FOR_THE_UMBRELLA",
+      "scope": "Complete-target compatibility, selected-target factorization and abstract-versus-installed decoder distinction; identical complete sensor response law can leave independently fixed assembly attachment unsettled; joint-premise/source/research-direction audits.",
+      "coverage_limit": "R188 cannot claim these general programmatic points as new. T3 has no extra delays or couplings; its interface-relative limits must survive reuse.",
+      "related_current_families": [
+        "R188",
+        "CM",
+        "R187",
+        "R185"
+      ],
+      "read_scope": "Receipt-backed complete MD retrieved; stated thematic passages reviewed. Not a claim to rederive every result."
+    },
+    {
+      "coverage_id": "MGTD_METHOD",
+      "work_id": "METHOD20261008",
+      "doi": "10.5281/zenodo.23241982",
+      "paper_locators": [
+        "Research state and a minimal semantic contract",
+        "Making the map guide the next research step; Propositions 1–3",
+        "A worked theory-development cycle",
+        "Retrospective case",
+        "Appendices A–B"
+      ],
+      "argument_coverage": "PUBLISHED_MAIN_TEXT_PLUS_EXACT_FROZEN_GRAPH_DISCLOSURE",
+      "scope": "Versioned research contract; conjunctive bindings versus alternative routes; frontier/soundness guarantees; local/pairwise checking limits; elementary target-fiber example and repair; retrospective frozen v1.0.0 graph.",
+      "coverage_limit": "Methods synthesis does not prove every archived consciousness claim or disclose later graph releases. v1.0.0 and v1.0.1 are two versions of one methods work.",
+      "related_current_families": [
+        "BASE",
+        "CORE",
+        "EI",
+        "R183",
+        "OO",
+        "RU",
+        "R184",
+        "RC",
+        "IE"
+      ],
+      "read_scope": "Receipt-backed complete MD retrieved; stated thematic passages reviewed. Not a claim to rederive every result."
+    },
+    {
+      "coverage_id": "RT_EARLY_TH",
+      "work_id": "RTTH20261009",
+      "doi": "10.5281/zenodo.23251651",
+      "paper_locators": [
+        "§2.1–2.3; Eq.1, Proposition H1/Eq.2",
+        "supplement PAPER_CLAIMS C01–C04",
+        "TH_MAP_EXTENSION_REVIEWED.json"
+      ],
+      "argument_coverage": "EXACT_MAIN_TEXT_AND_FORMAL_TH_MODULE",
+      "scope": "Changing minimal carrier support, 1/0/1/2 installed-reader dissociation versus 1/1/1/2 best readout, correlated-noise law, exact finite-field whole-target recovery, hidden/reused-mask countercontrol.",
+      "coverage_limit": "This covers early TH, not the later omitted-input recovery-budget extension. Some TH module records are explicit OPEN application obligations.",
+      "related_current_families": [
+        "TH"
+      ],
+      "read_scope": "Receipt-backed complete MD retrieved; stated thematic passages reviewed. Not a claim to rederive every result."
+    },
+    {
+      "coverage_id": "RT_ROUTE_RESULTS",
+      "work_id": "RTTH20261009",
+      "doi": "10.5281/zenodo.23251651",
+      "paper_locators": [
+        "§4 R1/R2",
+        "§5 R3",
+        "§6 R4/R5",
+        "§7",
+        "§8",
+        "supplement RT_MAP_EXTENSION.json / PAPER_CLAIMS C05–C20"
+      ],
+      "argument_coverage": "EXACT_MAIN_TEXT_AND_FORMAL_RT_MODULE",
+      "scope": "Common route-blind decoder iff target invariant under relative-route group; orbit quotient; exact route-only tag alphabet; pair-route and full-group Bayes laws; three-position noncommuting-swap benchmark; interface and endpoint-continuity controls.",
+      "coverage_limit": "Finite full-domain bijections and specified priors; route-only tags are not source-dependent or interactive encoders. No entire live v1.1.x map was deposited in this ZIP.",
+      "related_current_families": [
+        "RT",
+        "UI"
+      ],
+      "read_scope": "Receipt-backed complete MD retrieved; stated thematic passages reviewed. Not a claim to rederive every result."
+    },
+    {
+      "coverage_id": "RB_CITED_ONLY",
+      "work_id": "RTTH20261009",
+      "doi": "10.5281/zenodo.23251651",
+      "paper_locators": [
+        "§9",
+        "§10",
+        "Reference 6"
+      ],
+      "argument_coverage": "CITED_ANTECEDENT_ONLY",
+      "scope": "The later Temporal Handoff and Omitted-Input Recovery Budget v0.2.0 / map v1.1.0 is explicitly acknowledged and linked.",
+      "coverage_limit": "Paper explicitly says not republished as fresh result; neither a full v1.1.0 graph nor RB module is present in the exact deposited ZIP.",
+      "related_current_families": [
+        "RB"
+      ],
+      "read_scope": "Receipt-backed complete MD retrieved; stated thematic passages reviewed. Not a claim to rederive every result."
+    },
+    {
+      "coverage_id": "AC_CITED_ONLY",
+      "work_id": "RTTH20261009",
+      "doi": "10.5281/zenodo.23251651",
+      "paper_locators": [
+        "§5",
+        "Reference 5"
+      ],
+      "argument_coverage": "CITED_ANTECEDENT_ONLY",
+      "scope": "Action Calibration and Task-Relative Self-Models AC20261009 checkpoint is an acknowledged antecedent for route-tag and target-reading distinctions.",
+      "coverage_limit": "A repository citation is discoverability evidence, not a standalone DOI edition or promotion of all checkpoint premises.",
+      "related_current_families": [
+        "AC"
+      ],
+      "read_scope": "Receipt-backed complete MD retrieved; stated thematic passages reviewed. Not a claim to rederive every result."
+    }
+  ],
+  "local_sources": [
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/AGENTS.md",
+      "bytes": 1594,
+      "sha256": "68dbcac80bcfa7e5769c8d0c7398003ff456f8f2c819f0ed1e9a4c9c6a5c19cf",
+      "reading_scope": "Complete 11-line instruction file.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/RESEARCH_MASTER_GUIDE.md",
+      "bytes": 29165,
+      "sha256": "17790bd935323f0e2d168d55d2c766a11fdc555e23f005361295405cfb18c2a7",
+      "reading_scope": "Complete 218-line v2.3 guide, including article criterion section 0.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/AGENTS.md",
+      "bytes": 96902,
+      "sha256": "be362c25dbd260574b7252b1cfe8b82984bf1734279ed699de9a386e2522dfff",
+      "reading_scope": "Effective current/top and mandatory instructions read; historical middle not claimed as newly fully reread.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/PUBLICATION_COVERAGE.json",
+      "bytes": 2945,
+      "sha256": "531f49d02cb5ae3602c1af7e713a56924a8ab0f78eac2fb13747011c7f7575a2",
+      "reading_scope": "Current structured entry and update chain; latest version 1.0.17 after concurrent R205.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R190_Practical_Centering_Bearer_Coupling_20261009/RESEARCH_NOTE.md",
+      "bytes": 15933,
+      "sha256": "90256ba8eb6daba9ad2f1dfb09ed991960efdf8fefc26814553bf1ecd7c3d88e",
+      "reading_scope": "Complete research note, including proof and scope sections.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R190_Practical_Centering_Bearer_Coupling_20261009/CLAIM_LEDGER.json",
+      "bytes": 4770,
+      "sha256": "654c6763a86b996a60cbe3f75dedbfaff4c6670dabe3c917ec5d731cbcbf2c76",
+      "reading_scope": "Claim-ID and exact-scope extraction; checked against the complete round note.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R190_Practical_Centering_Bearer_Coupling_20261009/PUBLICATION_COVERAGE_UPDATE.json",
+      "bytes": 3751,
+      "sha256": "9283356586e1b27eaaad591042fe877d02fc8af3dcdbb4bfc40d847ebc70ce6c",
+      "reading_scope": "Structured coverage decision and predecessor extraction; historical HOLD is not automatically endorsed.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R191_Conflict_Conditioned_Authorization_20261009/RESEARCH_NOTE.md",
+      "bytes": 9109,
+      "sha256": "77b823448257e3537c03cccbc3a3e1930d1730105c7e9329e648a17907fa1ceb",
+      "reading_scope": "Complete research note, including proof and scope sections.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R191_Conflict_Conditioned_Authorization_20261009/CLAIM_LEDGER.json",
+      "bytes": 2311,
+      "sha256": "f0bf823e542bedb6c82ab67ff561d6f272826d683b39ecfe92d8b77526659f5b",
+      "reading_scope": "Claim-ID and exact-scope extraction; checked against the complete round note.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R191_Conflict_Conditioned_Authorization_20261009/PUBLICATION_COVERAGE_UPDATE.json",
+      "bytes": 2657,
+      "sha256": "e8b91203248517fba15ffbb21d513436feb32bcaabdb75c918fa9db979b012b0",
+      "reading_scope": "Structured coverage decision and predecessor extraction; historical HOLD is not automatically endorsed.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R192_Complete_Twin_Bridge_Invariance_20261009/RESEARCH_NOTE.md",
+      "bytes": 16291,
+      "sha256": "f06bf3d4e5ba36aa43aa58c522d8cd4756f5181d9351e3925d3704f5ecb8a2c8",
+      "reading_scope": "Complete research note, including proof and scope sections.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R192_Complete_Twin_Bridge_Invariance_20261009/CLAIM_LEDGER.json",
+      "bytes": 5309,
+      "sha256": "0a35040ac2140e0d68f9a40a3893eac5466d9417afa75b950f8c147ffe190c59",
+      "reading_scope": "Claim-ID and exact-scope extraction; checked against the complete round note.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R192_Complete_Twin_Bridge_Invariance_20261009/PUBLICATION_COVERAGE_UPDATE.json",
+      "bytes": 3354,
+      "sha256": "3d1a734327036bfc0a47bbb809c66acceecb028399efb7d6ab8266ec7477a06b",
+      "reading_scope": "Structured coverage decision and predecessor extraction; historical HOLD is not automatically endorsed.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R193_Nonreport_Contrast_Identifiability_20261009/RESEARCH_NOTE.md",
+      "bytes": 14259,
+      "sha256": "cbe5ab10eb01fc46e005e9f339ae6f8a5167e81c702ceeeadc387143d50b0c06",
+      "reading_scope": "Complete research note, including proof and scope sections.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R193_Nonreport_Contrast_Identifiability_20261009/CLAIM_LEDGER.json",
+      "bytes": 3273,
+      "sha256": "289f32e13e4164dba462c8f45565fe1e579f4465726775a7c7e42df48c8fe756",
+      "reading_scope": "Claim-ID and exact-scope extraction; checked against the complete round note.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R193_Nonreport_Contrast_Identifiability_20261009/PUBLICATION_COVERAGE_UPDATE.json",
+      "bytes": 3031,
+      "sha256": "280d3afe2ecbe2b7afd0939c311a8ed11b9a6b8875001e026b26ba808054476f",
+      "reading_scope": "Structured coverage decision and predecessor extraction; historical HOLD is not automatically endorsed.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R194_Cross_Population_Polarity_20261009/RESEARCH_NOTE.md",
+      "bytes": 11312,
+      "sha256": "ec5d60f23202b9be51c5f584f375caca870b75ce7afda3099a907189a0f87194",
+      "reading_scope": "Complete research note, including proof and scope sections.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R194_Cross_Population_Polarity_20261009/CLAIM_LEDGER.md",
+      "bytes": 4679,
+      "sha256": "3646e3257469b58a067038389d85274e47c381895e9151e2eab1a2455b21c372",
+      "reading_scope": "Claim-ID and exact-scope extraction; checked against the complete round note.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R194_Cross_Population_Polarity_20261009/PUBLICATION_COVERAGE_UPDATE.json",
+      "bytes": 3412,
+      "sha256": "d822554a390b9d795a98d5707b142fb2e5dd4caf24a8ebba5068e0a41896265b",
+      "reading_scope": "Structured coverage decision and predecessor extraction; historical HOLD is not automatically endorsed.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R195_Interventional_Polarity_Anchor_20261009/RESEARCH_NOTE.md",
+      "bytes": 13529,
+      "sha256": "2f15441e2463c1ab9f3747f40552293243bae07067dcd728d5173e2bb39c9c33",
+      "reading_scope": "Complete research note, including proof and scope sections.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R195_Interventional_Polarity_Anchor_20261009/CLAIM_LEDGER.md",
+      "bytes": 4863,
+      "sha256": "36f715d02ce8538521bf78fc1350ec36d892c333610d3f5671020ee8a7ad30b7",
+      "reading_scope": "Claim-ID and exact-scope extraction; checked against the complete round note.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R195_Interventional_Polarity_Anchor_20261009/PUBLICATION_COVERAGE_UPDATE.json",
+      "bytes": 3257,
+      "sha256": "83f8f49d5e28b19abe80b2a40a76c0f1c9eaf30639e4b49552dcf2f93f86c335",
+      "reading_scope": "Structured coverage decision and predecessor extraction; historical HOLD is not automatically endorsed.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R196_Two_Axis_Phenomenal_Calibration_20261009/RESEARCH_NOTE.md",
+      "bytes": 11894,
+      "sha256": "a70f4026e4ba210ca3be62e71bdf7effda1d4669cd7629c8b56074cfab09947b",
+      "reading_scope": "Complete research note, including proof and scope sections.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R196_Two_Axis_Phenomenal_Calibration_20261009/CLAIM_LEDGER.md",
+      "bytes": 3329,
+      "sha256": "9da92aa9ab86baa9e6f65ee9b38da2e697549f4ac7cd5b6bb54443f5efd0402c",
+      "reading_scope": "Claim-ID and exact-scope extraction; checked against the complete round note.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R196_Two_Axis_Phenomenal_Calibration_20261009/PUBLICATION_COVERAGE_UPDATE.json",
+      "bytes": 3296,
+      "sha256": "0d64cbe54e14bd43ee89d4adab15bd7505118efb0882b0a5b969396da313b11e",
+      "reading_scope": "Structured coverage decision and predecessor extraction; historical HOLD is not automatically endorsed.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R197_Fallible_Endpoint_Orientation_20261010/RESEARCH_NOTE.md",
+      "bytes": 7458,
+      "sha256": "628b0ed40083eb7976e151228b355b8b9e41d3221d400c467625a156a51cba06",
+      "reading_scope": "Complete research note, including proof and scope sections.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R197_Fallible_Endpoint_Orientation_20261010/CLAIM_LEDGER.md",
+      "bytes": 3081,
+      "sha256": "ee9184e5c3c6f8592cb0d25d801b20b98a9408f730e68873b89cea2e55aab962",
+      "reading_scope": "Claim-ID and exact-scope extraction; checked against the complete round note.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R197_Fallible_Endpoint_Orientation_20261010/PUBLICATION_COVERAGE_UPDATE.json",
+      "bytes": 2305,
+      "sha256": "585a404a27614c27d206a46cb47943eb4749e1dda66e5da7982ddc4e40f259c0",
+      "reading_scope": "Structured coverage decision and predecessor extraction; historical HOLD is not automatically endorsed.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/RESEARCH_NOTE.md",
+      "bytes": 11162,
+      "sha256": "3b169b4fbb733e20a9984fbc24c257f841369e8664779743f684ec216d3768eb",
+      "reading_scope": "Complete research note, including proof and scope sections.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/CLAIM_LEDGER.md",
+      "bytes": 3356,
+      "sha256": "6ed534ec1105ef30296a6e76ccc372284505cefa1ff613736c65d629b7088e16",
+      "reading_scope": "Claim-ID and exact-scope extraction; checked against the complete round note.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/PUBLICATION_COVERAGE_UPDATE.json",
+      "bytes": 2327,
+      "sha256": "d8400b63fcb1ab8ec59d498ef0e7144fe4cdac0f686960ef453306399b1cabea",
+      "reading_scope": "Structured coverage decision and predecessor extraction; historical HOLD is not automatically endorsed.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/RESEARCH_NOTE.md",
+      "bytes": 14041,
+      "sha256": "0c1d6af3e8b68f8424097251ee4e0f41607d7b9c73800da3a4dd2eae0106d31f",
+      "reading_scope": "Complete research note, including proof and scope sections.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/CLAIM_LEDGER.md",
+      "bytes": 2759,
+      "sha256": "27bba9e2ad4c0674cb729add472df96e62ce7a794312c129fff71ef69b3d587a",
+      "reading_scope": "Claim-ID and exact-scope extraction; checked against the complete round note.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/PUBLICATION_COVERAGE_UPDATE.json",
+      "bytes": 2548,
+      "sha256": "73dd7f656dff68b6b75d71600c1ddbebf38ef291c40254b959ab81f9cb75338b",
+      "reading_scope": "Structured coverage decision and predecessor extraction; historical HOLD is not automatically endorsed.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/RESEARCH_NOTE.md",
+      "bytes": 15270,
+      "sha256": "65d2aea894d4f01a0111827e7c3887ba345598bc5ce49571d8c957e5d4a94bc9",
+      "reading_scope": "Complete research note, including proof and scope sections.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/CLAIM_LEDGER.md",
+      "bytes": 2205,
+      "sha256": "7b680258c695baf4f3e086b59146d599758ed449b5dd98b9fadab0bedef35e49",
+      "reading_scope": "Claim-ID and exact-scope extraction; checked against the complete round note.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/PUBLICATION_COVERAGE_UPDATE.json",
+      "bytes": 2618,
+      "sha256": "f1088d854564446ab1681460b68054319aefa53e30172b6a489694d5c2f30daf",
+      "reading_scope": "Structured coverage decision and predecessor extraction; historical HOLD is not automatically endorsed.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/RESEARCH_NOTE.md",
+      "bytes": 11431,
+      "sha256": "e419f79283ffc2e58fba08cd8723096055fbe8c30831730dd3b5541d96b4cf87",
+      "reading_scope": "Complete research note, including proof and scope sections.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/CLAIM_LEDGER.md",
+      "bytes": 1410,
+      "sha256": "27f3312373085ada944b32af261f5c4091fcc0792d6cbb33ca615ffc2f2885a6",
+      "reading_scope": "Claim-ID and exact-scope extraction; checked against the complete round note.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/PUBLICATION_COVERAGE_UPDATE.json",
+      "bytes": 2489,
+      "sha256": "12653ea1624666484dad79fd5e43e3c70bfb4c00d4264753382c0c69c6a9924d",
+      "reading_scope": "Structured coverage decision and predecessor extraction; historical HOLD is not automatically endorsed.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/RESEARCH_NOTE.md",
+      "bytes": 10033,
+      "sha256": "8b0cb6460abb79c5d3a701c5c411207743f82ad777b8a6ef2a9893c5219ff9b8",
+      "reading_scope": "Complete research note, including proof and scope sections.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/CLAIM_LEDGER.md",
+      "bytes": 2366,
+      "sha256": "90988998facf51cb5570e07fe9bf2d1dd2cb802d45251b39f86acb8d57c9cc16",
+      "reading_scope": "Claim-ID and exact-scope extraction; checked against the complete round note.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/PUBLICATION_COVERAGE_UPDATE.json",
+      "bytes": 712,
+      "sha256": "439c7493dd4c4ac6deb6df1a6b272229f44c31dc5cffa595cce0d8d869f1366a",
+      "reading_scope": "Structured coverage decision and predecessor extraction; historical HOLD is not automatically endorsed.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/RESEARCH_NOTE.md",
+      "bytes": 9529,
+      "sha256": "7f520f46a9e8153f05767ff2e6eab75618f4dff9c00f3ae8176d12e19176c0d9",
+      "reading_scope": "Complete research note, including proof and scope sections.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/CLAIM_LEDGER.md",
+      "bytes": 958,
+      "sha256": "206c0243f105768d5323e00e2c57db291293fcfd467be0395eaf399fe0876cc5",
+      "reading_scope": "Claim-ID and exact-scope extraction; checked against the complete round note.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/PUBLICATION_COVERAGE_UPDATE.json",
+      "bytes": 590,
+      "sha256": "f85032b50d15a82fabfcf0ca502baa3ff1786fe7d422482764a717e83124f275",
+      "reading_scope": "Structured coverage decision and predecessor extraction; historical HOLD is not automatically endorsed.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/RESEARCH_NOTE.md",
+      "bytes": 11604,
+      "sha256": "4f86be11aaf5b7eb487f637aa76e22dd6c8921b22a5289d7038eeb05e96e1f64",
+      "reading_scope": "Complete research note, including proof and scope sections.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/CLAIM_LEDGER.md",
+      "bytes": 1056,
+      "sha256": "1d21230e7df8c30dd95d4fb0cfe3623783b58ec91c64468977a6146a3956c1dd",
+      "reading_scope": "Claim-ID and exact-scope extraction; checked against the complete round note.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/PUBLICATION_COVERAGE_UPDATE.json",
+      "bytes": 718,
+      "sha256": "4a866b38e693ae021efc730f990f913c210e2512af38f3ae5961487fbd4be095",
+      "reading_scope": "Structured coverage decision and predecessor extraction; historical HOLD is not automatically endorsed.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/RESEARCH_NOTE.md",
+      "bytes": 12248,
+      "sha256": "288c4358f402e40d20d40fc0e7ea145b41c320b94f61517068419b2ee2e349dd",
+      "reading_scope": "Complete research note, including proof and scope sections.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/CLAIM_LEDGER.json",
+      "bytes": 5885,
+      "sha256": "7919920988483027a75a866da53dd68258d716e9f92761e73a61fa3fb88c3056",
+      "reading_scope": "Claim-ID and exact-scope extraction; checked against the complete round note.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/PUBLICATION_COVERAGE_UPDATE.json",
+      "bytes": 2098,
+      "sha256": "01a9a6b8d713b646baf3e1bb1af07a31a3985236e23ec74611257ec0dfb6db18",
+      "reading_scope": "Structured coverage decision and predecessor extraction; historical HOLD is not automatically endorsed.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/workbench/coverage/capsule/publication_audit_work/sources/fulltext/ta25/experience-intelligence-self-v1.0.md",
+      "bytes": 42068,
+      "sha256": "694856862f75834024cd3e71ffdba95a6be4601c2832285902f7905907e3039c",
+      "reading_scope": "Complete manuscript read, including D4/D5, T1/T2, and T3 source/sensing/action attachment proof.",
+      "access_status": "DIRECT_READING",
+      "coverage_id": "TA25_FACTORIZATION_AND_ATTACHMENT"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/workbench/coverage/capsule/publication_audit_work/sources/fulltext/ta18/actual-participation-before-counterfactual-capacity-v1.0.md",
+      "bytes": 52233,
+      "sha256": "22ef09cb373a7f364ee2a12c503be8768057684d78eb0e2593d8398b5fe7ae13",
+      "reading_scope": "Selected sections 2.1-2.4, 3.1-3.3, 4.1-4.4, and 6; trajectory insufficiency, preemption, static enablers, redundancy and bridge invariance. Not every supplementary proof rerun.",
+      "access_status": "DIRECT_READING",
+      "coverage_id": "TA18_ACTUAL_PARTICIPATION"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/workbench/coverage/capsule/publication_audit_work/sources/branches/rt_th_v100/research/rt-th-paper/published/Task_Relative_Continuity_v1.0.0.md",
+      "bytes": 37131,
+      "sha256": "e368150bee05f7501021f826970f358521da685c3eddcd48ff7fbefd69bc7a62",
+      "reading_scope": "Abstract and sections 3-9, including R1-R5 full proofs and interpretation/source-domain limits. Early TH source scope retained from frozen census.",
+      "access_status": "DIRECT_READING",
+      "coverage_id": "RT_ROUTE_RESULTS"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/workbench/coverage/capsule/publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/MGTD_Method_Paper_v1.0.1.md",
+      "bytes": 51242,
+      "sha256": "0a4b8b47e835f2d0b6c5c584009ed6a9e862ea57a59cd88585ac56aaf9f83515",
+      "reading_scope": "Abstract, indexed substantive headings/claims and exact frozen-case disclosure section; not a new full semantic audit of 1278 case records.",
+      "access_status": "DIRECT_READING",
+      "coverage_id": "MGTD_METHOD"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/publication/UCT-PUB-v1.0.0/PUBLISHED_WORKS_AND_VERSIONS.json",
+      "bytes": 412824,
+      "sha256": "a442b3c6fc437c16d264efb4958cd914c812f82335babe88570335317fbfa5a9",
+      "reading_scope": "Counts, work/version identities, receipt-bound artifacts, semantic coverage and supplement boundaries inspected. Foundation scope inherited from this frozen census.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/workbench/coverage/capsule/publication_audit_work/sources/fulltext/uct_i/A_UCT_I_v1_2.md",
+      "bytes": 142624,
+      "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+      "reading_scope": "Complete receipt-backed artifact present; this reviewer uses frozen census selected-passage coverage and parent foundation reading, not a new complete reproof.",
+      "access_status": "AVAILABLE_CENSUS_SCOPE_INHERITED"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/workbench/coverage/capsule/publication_audit_work/sources/fulltext/uct_ii/B_UCT_II_v1_1.md",
+      "bytes": 59958,
+      "sha256": "d8f3329f08cd7272b77945b780e94e87a2f43773aeb86ca41b907b558d59504b",
+      "reading_scope": "Complete receipt-backed artifact present; this reviewer uses frozen census selected-passage coverage and parent foundation reading, not a new complete reproof.",
+      "access_status": "AVAILABLE_CENSUS_SCOPE_INHERITED"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/workbench/coverage/capsule/publication_audit_work/sources/fulltext/uct_iii/C_UCT_III_v1_0.md",
+      "bytes": 94626,
+      "sha256": "2721672485b055c26ec83a64d36fd5713e349cabe0494edd52b626aa7b9903e2",
+      "reading_scope": "Complete receipt-backed artifact present; this reviewer uses frozen census selected-passage coverage and parent foundation reading, not a new complete reproof.",
+      "access_status": "AVAILABLE_CENSUS_SCOPE_INHERITED"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/workbench/coverage/capsule/publication_audit_work/sources/fulltext/ta24/from-shutdown-resistance-to-self-continuation-control-v1.0.md",
+      "bytes": 36208,
+      "sha256": "af0eb63cca099b3d913218f503bc978c705f0fb9f065cca9ed472e5161d67490",
+      "reading_scope": "Complete receipt-backed artifact present; this reviewer uses frozen census selected-passage coverage and parent foundation reading, not a new complete reproof.",
+      "access_status": "AVAILABLE_CENSUS_SCOPE_INHERITED"
+    }
+  ],
+  "round_claims_and_historical_coverage": [
+    {
+      "round": 190,
+      "directory": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R190_Practical_Centering_Bearer_Coupling_20261009",
+      "claim_ids_literal": [
+        "R190-C1",
+        "R190-C2",
+        "R190-C3",
+        "R190-C4",
+        "R190-C5"
+      ],
+      "note_sha256": "90256ba8eb6daba9ad2f1dfb09ed991960efdf8fefc26814553bf1ecd7c3d88e",
+      "coverage_update": {
+        "record_id": "R190-PUB-COVERAGE-20261009-v1",
+        "date_utc": "2026-10-09T09:46:33Z",
+        "base_research_commit": "2ed44e238b7402293c884616202cee4d9cff4e7c",
+        "base_completed_map_version": "UCT-MAP-v1.1.2",
+        "publication_coverage_entry": "PUBLICATION_COVERAGE.json",
+        "previous_coverage_version": "UCT-PUB-v1.0.1",
+        "new_coverage_version": "UCT-PUB-v1.0.2",
+        "checked_publication_sources": [
+          {
+            "work_id": "UCT-PUB-v1.0.0-VERIFIED-CORPUS",
+            "version": "UCT-PUB-v1.0.0",
+            "source_commit": "2eaf7d357437205d9be66d620caf3aea2425786f",
+            "manuscript_sha256": "e976c3c5a65dddb284aaebc5a7a12330285979f1f8c7e848a41b1e0324fdadbb",
+            "release_evidence": "publication/UCT-PUB-v1.0.0/COVERAGE_LEDGER.json",
+            "read_scope": "Existing verified 28-work/39-research-DOI census and claim index; R190 postdates this frozen corpus."
+          }
+        ],
+        "changed_claim_ids": [
+          "R190-C1",
+          "R190-C2",
+          "R190-C3",
+          "R190-C4",
+          "R190-C5"
+        ],
+        "newly_covered_claim_ids": [],
+        "partially_covered_claims": [],
+        "uncovered_candidates_within_verified_corpus": [
+          "R190-C1",
+          "R190-C2",
+          "R190-C3",
+          "R190-C4",
+          "R190-C5"
+        ],
+        "unverified_scope": [
+          "Worldwide priority beyond the primary empirical sources and internal predecessors checked in PRIOR_ART_AND_EVIDENCE.md",
+          "Any public work or version created after the UCT-PUB-v1.0.0 frozen corpus"
+        ],
+        "residual_assessment": {
+          "precise_problem": "Can a target-specific bodily consequence relation combine with practical centering to distinguish enacted action from imagery/passive impact without defining a desired feeling, and can it exclude a reflex twin?",
+          "net_increment_after_subtraction": "A four-cell PC/BDCC witness, bounded five-mode discrimination, explicit remote-action repair of the initially missing (1,0) case, and a reflex-invariance counterexample.",
+          "closest_internal_and_external_predecessors": [
+            "R158 typed coupling/efficacy and ownership-agency ablation",
+            "R159 body-frame/reference distinction",
+            "R181 target-relative practical centering",
+            "R182–R185 route, obstruction, and overlap controls",
+            "Matamala-Gomez et al. 2025 virtual body continuity",
+            "Critchley et al. 2021 autonomic null in rubber-hand illusion",
+            "Hong et al. 2026 divergent prosthesis embodiment measures"
+          ],
+          "reusable_knowledge": "Future work can keep practical policy organization and selected endpoint-to-bearer coupling as separate coordinates, reject generic physiology/report/substrate shortcuts, and use the reflex twin as a mandatory sufficiency control.",
+          "evidence_and_limits": "Written case proof plus 160-row/13-check finite witness and scoped primary evidence; no actual installation, independently measured familiar-mineness target, global priority verification, or complete organization.",
+          "decision": "CONTINUE_RESEARCH",
+          "next_specific_action": "Specify one independently grounded online conflict/endorsement transformation on a fixed PC+BDCC episode and test whether a reflex-table duplicate preserves it; do not add a deliberateness label as the answer."
+        },
+        "map_semantics_changed": false,
+        "whole_map_audit_if_required": "records/R190_Practical_Centering_Bearer_Coupling_20261009/MAP_COMPATIBILITY_AUDIT.json",
+        "work_log_path": "records/R190_Practical_Centering_Bearer_Coupling_20261009/WORK_LOG.md",
+        "handoff_path": "records/R190_Practical_Centering_Bearer_Coupling_20261009/HANDOFF_ZH.md",
+        "persistence_receipt_path": "records/R190_Practical_Centering_Bearer_Coupling_20261009/DUAL_SAVE_RECEIPT.json",
+        "warning": "Not found in the frozen verified corpus is not a claim of worldwide nonpublication or priority. UCT-PUB-v1.0.2 is a nondeductive incremental coverage entry, not a science-map release."
+      }
+    },
+    {
+      "round": 191,
+      "directory": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R191_Conflict_Conditioned_Authorization_20261009",
+      "claim_ids_literal": [
+        "R191-C1",
+        "R191-C2",
+        "R191-C3",
+        "R191-C4",
+        "R191-C5"
+      ],
+      "note_sha256": "77b823448257e3537c03cccbc3a3e1930d1730105c7e9329e648a17907fa1ceb",
+      "coverage_update": {
+        "record_id": "R191-PUB-COVERAGE-20261009-v1",
+        "base_completed_map_version": "UCT-MAP-v1.1.2",
+        "publication_coverage_entry": "PUBLICATION_COVERAGE.json",
+        "previous_coverage_version": "UCT-PUB-v1.0.2",
+        "new_coverage_version": "UCT-PUB-v1.0.3",
+        "checked_publication_sources": [
+          {
+            "work_id": "UCT-PUB-v1.0.0-VERIFIED-CORPUS",
+            "version": "UCT-PUB-v1.0.0",
+            "release_evidence": "publication/UCT-PUB-v1.0.0/COVERAGE_LEDGER.json",
+            "read_scope": "Existing frozen 28-work/39-research-DOI census; R191 postdates it."
+          },
+          {
+            "work_id": "CHAMBON-HAGGARD-2012",
+            "doi": "10.1016/j.cognition.2012.07.011",
+            "scope": "Action-selection fluency and sense of control."
+          },
+          {
+            "work_id": "SIDARUS-ET-AL-2017",
+            "doi": "10.3389/fpsyg.2017.00545",
+            "scope": "Prospective fluency/conflict cues versus retrospective discrepancy."
+          },
+          {
+            "work_id": "BERBERIAN-ET-AL-2012",
+            "doi": "10.1371/journal.pone.0034075",
+            "scope": "Automation/involvement effects on control measures."
+          }
+        ],
+        "changed_claim_ids": [
+          "R191-C1",
+          "R191-C2",
+          "R191-C3",
+          "R191-C4",
+          "R191-C5"
+        ],
+        "newly_covered_claim_ids": [],
+        "uncovered_candidates_within_verified_corpus": [
+          "R191-C1",
+          "R191-C2",
+          "R191-C3",
+          "R191-C4",
+          "R191-C5"
+        ],
+        "residual_assessment": {
+          "precise_problem": "Can actual online conflict-conditioned authorization add positive bodily/action self-organization at fixed PC+BDCC without identifying deliberateness or familiar mineness?",
+          "net_increment_after_subtraction": "A typed precommit authorization-use relation, exact post-hoc timing failure and repair, and explicit present-signature/history-signature fork with frozen and adaptive reflex limits.",
+          "closest_internal_predecessors": [
+            "R173 retained-history interface",
+            "R184 reflex-twin limit",
+            "R190 PC+BDCC background"
+          ],
+          "reusable_knowledge": "Future work must distinguish real precommit authorization use from post-hoc narration, current organization from formation history, and copied values from actual occurrences.",
+          "evidence_and_limits": "112-row/15-check finite witness, primary agency literature, and full structural map audit; no actual installation, familiar-mineness bridge, worldwide priority, or independent closure.",
+          "decision": "CONTINUE_RESEARCH",
+          "next_specific_action": "Seek a noncircular transformation that distinguishes adaptive reflex revision from experienced endorsement while preserving the basal-experience non-gate."
+        },
+        "map_semantics_changed": false,
+        "whole_map_audit_if_required": "records/R191_Conflict_Conditioned_Authorization_20261009/MAP_COMPATIBILITY_AUDIT.json",
+        "warning": "Absence from the frozen corpus is not a worldwide novelty claim. UCT-PUB-v1.0.3 is nondeductive and not a science-map release."
+      }
+    },
+    {
+      "round": 192,
+      "directory": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R192_Complete_Twin_Bridge_Invariance_20261009",
+      "claim_ids_literal": [
+        "R192-C1",
+        "R192-C2",
+        "R192-C3",
+        "R192-C4",
+        "R192-C5",
+        "R192-C6"
+      ],
+      "note_sha256": "f06bf3d4e5ba36aa43aa58c522d8cd4756f5181d9351e3925d3704f5ecb8a2c8",
+      "coverage_update": {
+        "record_id": "R192-PUB-COVERAGE-20261009-v1",
+        "base_completed_map_version": "UCT-MAP-v1.1.2",
+        "publication_coverage_entry": "PUBLICATION_COVERAGE.json",
+        "previous_coverage_version": "UCT-PUB-v1.0.3",
+        "new_coverage_version": "UCT-PUB-v1.0.4",
+        "checked_publication_sources": [
+          {
+            "work_id": "UCT-PUB-v1.0.0-VERIFIED-CORPUS",
+            "version": "UCT-PUB-v1.0.0",
+            "release_evidence": "publication/UCT-PUB-v1.0.0/COVERAGE_LEDGER.json",
+            "read_scope": "Existing frozen 28-work/39-research-DOI census; R192 postdates it."
+          },
+          {
+            "work_id": "CHALMERS-1995-ORGANIZATIONAL-INVARIANCE",
+            "url": "https://www.consc.net/papers/qualia.html",
+            "scope": "Fine-grained functional isomorphism, organizational invariance and gradual replacement."
+          },
+          {
+            "work_id": "DOERIG-ET-AL-2019",
+            "doi": "10.1016/j.concog.2019.04.002",
+            "scope": "Unfolding argument and behavioral equivalence versus causal-structure predictions."
+          },
+          {
+            "work_id": "KLEINER-HOEL-2021",
+            "doi": "10.1093/nc/niab001",
+            "scope": "Prediction/inference distinction and falsification underdetermination."
+          },
+          {
+            "work_id": "ELLIA-TSUCHIYA-2025",
+            "doi": "10.1093/nc/niaf014",
+            "scope": "Structural approaches and prediction versus post-hoc accommodation."
+          }
+        ],
+        "changed_claim_ids": [
+          "R192-C1",
+          "R192-C2",
+          "R192-C3",
+          "R192-C4",
+          "R192-C5",
+          "R192-C6"
+        ],
+        "newly_covered_claim_ids": [],
+        "uncovered_candidates_within_verified_corpus": [
+          "R192-C1",
+          "R192-C2",
+          "R192-C3",
+          "R192-C4",
+          "R192-C5",
+          "R192-C6"
+        ],
+        "residual_assessment": {
+          "precise_problem": "How should UCT treat a reflex/endorsement twin when equality may refer to a selected projection, history-expanded organization or declared complete actual organization?",
+          "net_increment_after_subtraction": "A UCT-specific signature-ladder repair, complete-twin stopping rule, target-identification obstruction and explicit use/test direction discipline; no claim of new isomorphism or factorization mathematics.",
+          "closest_internal_predecessors": [
+            "R149 representation-fiber compatibility",
+            "R157 selector transport and semantic residual",
+            "R173 familiar-mineness boundary",
+            "R178 strict-match evidence limit",
+            "R191 adaptive-reflex countermodel"
+          ],
+          "reusable_knowledge": "A projected twin refutes only projection-factorized bridges; a complete twin cannot be internally discriminated and, under C1, cannot differ in complete experiential type. Structural difference and phenomenal naming remain separate obligations.",
+          "evidence_and_limits": "65,536-predicate/256-projection exact enumeration, 16,384 compatible sparse-label bridges, primary-source comparison and full structural-map audit; no actual installation, B_fam, reviewer closure or worldwide priority.",
+          "decision": "CONTINUE_RESEARCH",
+          "next_specific_action": "Predeclare a nonreport contrast class for B_fam and determine whether independent target constraints reduce the bridge set without selecting the target from the same outcomes."
+        },
+        "map_semantics_changed": false,
+        "whole_map_audit_if_required": "records/R192_Complete_Twin_Bridge_Invariance_20261009/MAP_COMPATIBILITY_AUDIT.json",
+        "warning": "Absence from the frozen corpus is not a worldwide novelty claim. UCT-PUB-v1.0.4 is nondeductive and not a science-map release."
+      }
+    },
+    {
+      "round": 193,
+      "directory": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R193_Nonreport_Contrast_Identifiability_20261009",
+      "claim_ids_literal": [
+        "R193-C1",
+        "R193-C2",
+        "R193-C3",
+        "R193-C4",
+        "R193-C5",
+        "R193-C6"
+      ],
+      "note_sha256": "cbe5ab10eb01fc46e005e9f339ae6f8a5167e81c702ceeeadc387143d50b0c06",
+      "coverage_update": {
+        "record_id": "R193-PUB-COVERAGE-20261009-v1",
+        "base_completed_map_version": "UCT-MAP-v1.1.2",
+        "publication_coverage_entry": "PUBLICATION_COVERAGE.json",
+        "previous_coverage_version": "UCT-PUB-v1.0.4",
+        "new_coverage_version": "UCT-PUB-v1.0.5",
+        "checked_publication_sources": [
+          {
+            "work_id": "UCT-PUB-v1.0.0-VERIFIED-CORPUS",
+            "version": "UCT-PUB-v1.0.0",
+            "release_evidence": "publication/UCT-PUB-v1.0.0/COVERAGE_LEDGER.json",
+            "read_scope": "Existing frozen 28-work/39-research-DOI census; R193 postdates it."
+          },
+          {
+            "work_id": "STEPHENS-2000-LABEL-SWITCHING",
+            "doi": "10.1111/1467-9868.00265",
+            "scope": "General likelihood symmetry, label switching and identifiability-constraint warning; no UCT or familiar-mineness claim."
+          },
+          {
+            "work_id": "ZHU-ET-AL-2024-NO-REPORT-SWS",
+            "doi": "10.1523/JNEUROSCI.0145-23.2023",
+            "scope": "Primary no-report design separating task relevance from conscious speech contrast; phase interpretation still supported by training and awareness assessments."
+          }
+        ],
+        "changed_claim_ids": [
+          "R193-C1",
+          "R193-C2",
+          "R193-C3",
+          "R193-C4",
+          "R193-C5",
+          "R193-C6"
+        ],
+        "newly_covered_claim_ids": [],
+        "uncovered_candidates_within_verified_corpus": [
+          "R193-C1",
+          "R193-C2",
+          "R193-C3",
+          "R193-C4",
+          "R193-C5",
+          "R193-C6"
+        ],
+        "residual_assessment": {
+          "precise_problem": "How far can predeclared nonreport equality/difference contrasts identify a familiar-mineness bridge without outcome-selected labels?",
+          "net_increment_after_subtraction": "An exact UCT-specific constraint ladder from 65,536 bridges to one complementary pair, and a four-part separation of compression, polarity, semantic naming and actual measurement; no claim of new parity-graph mathematics or first no-report method.",
+          "closest_internal_predecessors": [
+            "R149 representation-fiber compatibility",
+            "R157 coordinate transport and semantic residual",
+            "R173 actual retentive binding and B_fam boundary",
+            "R192 signature ladder and sparse-label obstruction"
+          ],
+          "reusable_knowledge": "Name-free contrasts can identify an unoriented organizational partition. A complement-symmetric evidence class cannot choose its positive experiential pole; marker orientation needs an independent bridge.",
+          "evidence_and_limits": "Exhaustive 65,536-bridge enumeration; signed-constraint component proof; reversed-marker and adaptive-reflex counterexamples; primary no-report design comparison; full v1.1.2 map traversal. No actual instance, valid B_fam anchor, reviewer closure or worldwide priority.",
+          "decision": "CONTINUE_RESEARCH",
+          "next_specific_action": "Predeclare a cross-population or interventionally reversed-marker polarity anchor and test whether its phenomenal interpretation is independent of report and of the marker chosen to measure it."
+        },
+        "map_semantics_changed": false,
+        "whole_map_audit_if_required": "records/R193_Nonreport_Contrast_Identifiability_20261009/MAP_COMPATIBILITY_AUDIT.json",
+        "warning": "Absence from the frozen corpus is not a worldwide novelty claim. UCT-PUB-v1.0.5 is nondeductive and not a science-map release."
+      }
+    },
+    {
+      "round": 194,
+      "directory": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R194_Cross_Population_Polarity_20261009",
+      "claim_ids_literal": [
+        "R194-C1",
+        "R194-C2",
+        "R194-C3",
+        "R194-C4",
+        "R194-C5",
+        "R194-C6"
+      ],
+      "note_sha256": "ec5d60f23202b9be51c5f584f375caca870b75ce7afda3099a907189a0f87194",
+      "coverage_update": {
+        "record_id": "R194-PUB-COVERAGE-20261009-v1",
+        "base_completed_map_version": "UCT-MAP-v1.1.2",
+        "publication_coverage_entry": "PUBLICATION_COVERAGE.json",
+        "previous_coverage_version": "UCT-PUB-v1.0.5",
+        "new_coverage_version": "UCT-PUB-v1.0.6",
+        "checked_publication_sources": [
+          {
+            "work_id": "UCT-PUB-v1.0.0-VERIFIED-CORPUS",
+            "version": "UCT-PUB-v1.0.0",
+            "release_evidence": "publication/UCT-PUB-v1.0.0/COVERAGE_LEDGER.json",
+            "read_scope": "Existing frozen 28-work/39-research-DOI census; R194 postdates it."
+          },
+          {
+            "work_id": "KUNKEL-PERUGGIA-2020-ANCHORED-MIXTURES",
+            "doi": "10.1214/20-EJS1769",
+            "scope": "Mixture labels are arbitrary under exchangeability; anchors add membership assumptions. No phenomenal interpretation."
+          },
+          {
+            "work_id": "POHL-SCHULZE-STETS-2021-PARTIAL-INVARIANCE",
+            "doi": "10.1177/01466216211042809",
+            "scope": "Cross-group scale indeterminacy and substantive anchor choice; no claim that invariance measures experience."
+          },
+          {
+            "work_id": "ALLMAN-MATIAS-RHODES-2009-LATENT-IDENTIFIABILITY",
+            "doi": "10.1214/09-AOS689",
+            "scope": "Latent-structure identifiability up to class permutation."
+          },
+          {
+            "work_id": "CHEN-LI-OUYANG-XU-2023-DIF-NO-KNOWN-ANCHORS",
+            "url": "https://arxiv.org/abs/2110.11112",
+            "scope": "Anchor-free inference still uses an explicit identifying condition; no phenomenal polarity result."
+          }
+        ],
+        "changed_claim_ids": [
+          "R194-C1",
+          "R194-C2",
+          "R194-C3",
+          "R194-C4",
+          "R194-C5",
+          "R194-C6"
+        ],
+        "newly_covered_claim_ids": [],
+        "uncovered_candidates_within_verified_corpus": [
+          "R194-C1",
+          "R194-C2",
+          "R194-C3",
+          "R194-C4",
+          "R194-C5",
+          "R194-C6"
+        ],
+        "residual_assessment": {
+          "precise_problem": "Can cross-population agreement and prospectively reversed nonreport markers orient the R193 structural partition as familiar mineness without defining the target from the proxy?",
+          "net_increment_after_subtraction": "A UCT-specific relative-versus-semantic anchor taxonomy, exact 2^c polarity accounting and a proof that connected multi-population/reversal evidence still leaves one global complement pair; no claim of new signed-graph or label-switching mathematics.",
+          "closest_internal_predecessors": [
+            "R157 coordinate transport and semantic residual",
+            "R173 actual retentive binding and B_fam boundary",
+            "R192 signature ladder",
+            "R193 complement-pair bridge compression"
+          ],
+          "reusable_knowledge": "Cross-population alignment can reduce independent sign freedoms to one but cannot supply phenomenal polarity. Conventional coding, substantive target direction and actual token measurement must be separately justified.",
+          "evidence_and_limits": "Exact 128-state enumeration, exhaustive 64 signed-tree parity instances, graph proof, eight thought experiments, primary-source comparison and full v1.1.2 traversal. Binary complement-invariant scope only; no actual instance or valid B_fam anchor.",
+          "decision": "CONTINUE_RESEARCH",
+          "next_specific_action": "Specify one prospective substantive polarity anchor whose target direction is independent of report, marker convention and fitted class; state a defeating observation and test it against the common-calibration and adaptive-reflex twins."
+        },
+        "map_semantics_changed": false,
+        "whole_map_audit_if_required": "records/R194_Cross_Population_Polarity_20261009/MAP_COMPATIBILITY_AUDIT.json",
+        "warning": "Absence from the frozen corpus is not a worldwide novelty claim. UCT-PUB-v1.0.6 is nondeductive and not a science-map release."
+      }
+    },
+    {
+      "round": 195,
+      "directory": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R195_Interventional_Polarity_Anchor_20261009",
+      "claim_ids_literal": [
+        "R195-C1",
+        "R195-C2",
+        "R195-C3",
+        "R195-C4",
+        "R195-C5",
+        "R195-C6"
+      ],
+      "note_sha256": "2f15441e2463c1ab9f3747f40552293243bae07067dcd728d5173e2bb39c9c33",
+      "coverage_update": {
+        "record_id": "R195-PUB-COVERAGE-20261009-v1",
+        "base_completed_map_version": "UCT-MAP-v1.1.2",
+        "publication_coverage_entry": "PUBLICATION_COVERAGE.json",
+        "previous_coverage_version": "UCT-PUB-v1.0.6",
+        "new_coverage_version": "UCT-PUB-v1.0.7",
+        "checked_publication_sources": [
+          {
+            "work_id": "UCT-PUB-v1.0.0-VERIFIED-CORPUS",
+            "version": "UCT-PUB-v1.0.0",
+            "release_evidence": "publication/UCT-PUB-v1.0.0/COVERAGE_LEDGER.json",
+            "read_scope": "Existing frozen 28-work/39-research-DOI census; R195 postdates it."
+          },
+          {
+            "work_id": "AHUJA-ET-AL-2023-ICRL",
+            "url": "https://proceedings.mlr.press/v202/ahuja23a.html",
+            "scope": "Perfect-intervention latent identification up to permutation and scaling under stated assumptions; no phenomenal interpretation."
+          },
+          {
+            "work_id": "PENAUD-ET-AL-2023-BSC",
+            "doi": "10.1038/s41598-023-43823-2",
+            "scope": "Visuomotor/body-visibility manipulation with questionnaire-defined bodily-self measures; no report-independent B_fam."
+          },
+          {
+            "work_id": "BUCHHOLZ-ET-AL-2019-AGENCY",
+            "doi": "10.1038/s41598-018-37912-w",
+            "scope": "Agency-belief manipulation under matched sensorimotor contingencies; no complete-organization or familiar-mineness identification."
+          }
+        ],
+        "changed_claim_ids": [
+          "R195-C1",
+          "R195-C2",
+          "R195-C3",
+          "R195-C4",
+          "R195-C5",
+          "R195-C6"
+        ],
+        "newly_covered_claim_ids": [],
+        "uncovered_candidates_within_verified_corpus": [
+          "R195-C1",
+          "R195-C2",
+          "R195-C3",
+          "R195-C4",
+          "R195-C5",
+          "R195-C6"
+        ],
+        "residual_assessment": {
+          "precise_problem": "Can intervention on a bodily/action route orient an unoriented structural partition as familiar mineness without letting outcome value, marker coding or report define the target?",
+          "net_increment_after_subtraction": "A UCT-specific functional-versus-phenomenal direction boundary, exact 256-model interventional complement witness and an eight-field anchor adequacy contract; no claim of new causal-representation or latent-relabeling mathematics.",
+          "closest_internal_predecessors": [
+            "R157 coordinate transport and semantic residual",
+            "R173 actual retentive binding and B_fam boundary",
+            "R193 complement-pair bridge compression",
+            "R194 relative-versus-substantive anchor taxonomy"
+          ],
+          "reusable_knowledge": "Interventions can orient a latent coordinate only relative to independently ordered consequences. Transfer to a named experiential direction requires its own same-instance premise, measurement warrant and defeater.",
+          "evidence_and_limits": "Exact deterministic-binary enumeration, eight thought experiments, primary-source comparison and full v1.1.2 traversal. No actual instance, complete organization, valid phenomenal calibration or discharged B_dir.",
+          "decision": "CONTINUE_RESEARCH_HOLD_STANDALONE",
+          "next_specific_action": "Formalize one independently phenomenological direction-transfer candidate and preregister an outcome-reversal/stable-target defeater; abandon the candidate if its target direction is inherited only from task value or marker choice."
+        },
+        "map_semantics_changed": false,
+        "whole_map_audit_if_required": "records/R195_Interventional_Polarity_Anchor_20261009/MAP_COMPATIBILITY_AUDIT.json",
+        "warning": "Absence from the frozen corpus is not a worldwide novelty claim. UCT-PUB-v1.0.7 is nondeductive and not a science-map release."
+      }
+    },
+    {
+      "round": 196,
+      "directory": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R196_Two_Axis_Phenomenal_Calibration_20261009",
+      "claim_ids_literal": [
+        "R196-C1",
+        "R196-C2",
+        "R196-C3",
+        "R196-C4",
+        "R196-C5"
+      ],
+      "note_sha256": "a70f4026e4ba210ca3be62e71bdf7effda1d4669cd7629c8b56074cfab09947b",
+      "coverage_update": {
+        "record_id": "R196-PUB-COVERAGE-20261009-v1",
+        "base_completed_map_version": "UCT-MAP-v1.1.2",
+        "publication_coverage_entry": "PUBLICATION_COVERAGE.json",
+        "previous_coverage_version": "UCT-PUB-v1.0.7",
+        "new_coverage_version": "UCT-PUB-v1.0.8",
+        "checked_publication_sources": [
+          {
+            "work_id": "UCT-PUB-v1.0.0-VERIFIED-CORPUS",
+            "version": "UCT-PUB-v1.0.0",
+            "release_evidence": "publication/UCT-PUB-v1.0.0/COVERAGE_LEDGER.json",
+            "read_scope": "Existing frozen 28-work/39-research-DOI census; R196 postdates it and was compared with prior R157/R173/R193-R195 claims."
+          },
+          {
+            "work_id": "YOSHIE-HAGGARD-2017",
+            "doi": "10.1038/s41598-017-08803-3",
+            "scope": "Outcome valence and predictability in intentional binding; evidence that value can contaminate agency measures, not a familiar-mineness calibration."
+          },
+          {
+            "work_id": "DE-JONG-ET-AL-2017",
+            "doi": "10.1007/s00221-017-4912-9",
+            "scope": "Affective touch crossed with visuotactile synchrony in a full-body illusion; mixed subjective ownership/agency effects, no report-independent F target."
+          },
+          {
+            "work_id": "HOMMEL-ET-AL-2020",
+            "doi": "10.1038/s41598-020-60385-9",
+            "scope": "Response effectiveness distinguished from monetary value across six experiments; supports factorial separation, not UCT or phenomenal orientation."
+          }
+        ],
+        "changed_claim_ids": [
+          "R196-C1",
+          "R196-C2",
+          "R196-C3",
+          "R196-C4"
+        ],
+        "newly_covered_claim_ids": [],
+        "uncovered_candidates_within_verified_corpus": [
+          "R196-C1",
+          "R196-C2",
+          "R196-C3",
+          "R196-C4"
+        ],
+        "residual_assessment": {
+          "precise_problem": "Can a structural bodily/action axis be separated from reward, success and affective value strongly enough to orient familiar mineness?",
+          "net_increment_after_subtraction": "An exact UCT-specific two-axis stopping rule: outcome reversal can falsify value-bound markers and identify structural tracking up to complement, but a positive familiar-mineness direction still requires one independent endpoint.",
+          "closest_internal_predecessors": [
+            "R157 coordinate transport and semantic residual",
+            "R173 retentive binding and familiar-mineness boundary",
+            "R193 one-axis complement pair",
+            "R195 functional-versus-phenomenal direction transfer"
+          ],
+          "reusable_knowledge": "Use a complete structural-by-value factorial design to reject simple value inheritance; retain the global phenomenal complement unless a same-token endpoint is warranted independently of report, marker code and outcome value.",
+          "evidence_and_limits": "Exact enumeration of 4,096 marker/outcome/target triples, eight thought-experiment families, three primary experimental comparisons and complete v1.1.2 traversal. No actual token, complete organization or independent phenomenal endpoint.",
+          "decision": "CONTINUE_RESEARCH_HOLD_STANDALONE",
+          "next_specific_action": "Define and attack one nonverbal predeclared positive F endpoint under formation-history and copy/switch controls; if it depends on report, pleasantness, success or marker coding, reject it."
+        },
+        "map_semantics_changed": false,
+        "whole_map_audit_if_required": "records/R196_Two_Axis_Phenomenal_Calibration_20261009/MAP_COMPATIBILITY_AUDIT.json",
+        "warning": "Absence from the frozen corpus is not a worldwide novelty claim. The Boolean classification is elementary. UCT-PUB-v1.0.8 is nondeductive and not a science-map release."
+      }
+    },
+    {
+      "round": 197,
+      "directory": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R197_Fallible_Endpoint_Orientation_20261010",
+      "claim_ids_literal": [
+        "R197-C1",
+        "R197-C2",
+        "R197-C3",
+        "R197-C4",
+        "R197-C5"
+      ],
+      "note_sha256": "628b0ed40083eb7976e151228b355b8b9e41d3221d400c467625a156a51cba06",
+      "coverage_update": {
+        "record_id": "R197-PUB-COVERAGE-20261010-v1",
+        "base_completed_map_version": "UCT-MAP-v1.1.2",
+        "previous_coverage_version": "UCT-PUB-v1.0.8",
+        "new_coverage_version": "UCT-PUB-v1.0.9",
+        "checked_publication_sources": [
+          {
+            "work_id": "UCT-PUB-v1.0.0-VERIFIED-CORPUS",
+            "scope": "Frozen internal census plus TA15, TA19 and R193-R196 overlap comparison."
+          },
+          {
+            "work_id": "LEE-MARTIN-SUI-2021",
+            "doi": "10.1016/j.actpsy.2021.103362",
+            "scope": "Arbitrary learned self association without familiar labels; behavioral effect, not phenomenal endpoint."
+          },
+          {
+            "work_id": "KOREKI-ET-AL-2022",
+            "scope": "Exploratory interoception/intentional-binding relation; implicit index remains interpretively limited."
+          },
+          {
+            "work_id": "FILIPPETTI-ET-AL-2015",
+            "doi": "10.1093/cercor/bhu261",
+            "scope": "Nonverbal infant visual-proprioceptive contingency; no positive phenomenal orientation."
+          },
+          {
+            "work_id": "PATANE-ET-AL-2026",
+            "doi": "10.1016/j.cortex.2025.12.008",
+            "scope": "Implicit/explicit self-movement recognition dissociation; no UCT endpoint validation."
+          }
+        ],
+        "changed_claim_ids": [
+          "R197-C1",
+          "R197-C2",
+          "R197-C3",
+          "R197-C4",
+          "R197-C5"
+        ],
+        "newly_covered_claim_ids": [],
+        "uncovered_candidates_within_verified_corpus": [
+          "R197-C1",
+          "R197-C2",
+          "R197-C4",
+          "R197-C5"
+        ],
+        "residual_assessment": {
+          "precise_problem": "What evidence can orient R196's phenomenal complement without defining the target by report or marker modality?",
+          "net_increment_after_subtraction": "A corrected UCT-specific endpoint contract: independent signed reliability, not nonverbality, conditionally orients the complement; cross-domain use additionally requires class-conditional invariance, and equal marginals can reverse direction.",
+          "closest_predecessors": [
+            "TA15 measurement and typed transport",
+            "TA19 equivariant selector obstruction",
+            "R193-R196 complement and two-axis results"
+          ],
+          "decision": "CONTINUE_RESEARCH_HOLD_STANDALONE",
+          "next_specific_action": "Predeclare one actual endpoint candidate with independent positive semantics, signed-reliability evidence, and copy/switch plus transport falsifiers; reject it if those cannot be supplied."
+        },
+        "map_semantics_changed": false,
+        "warning": "Standard latent-label and measurement-transport mathematics is not claimed as new; absence from the checked sources is not worldwide priority."
+      }
+    },
+    {
+      "round": 198,
+      "directory": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10",
+      "claim_ids_literal": [
+        "R198-C1",
+        "R198-C2",
+        "R198-C3",
+        "R198-C4",
+        "R198-C5"
+      ],
+      "note_sha256": "3b169b4fbb733e20a9984fbc24c257f841369e8664779743f684ec216d3768eb",
+      "coverage_update": {
+        "record_id": "R198-PUB-COVERAGE-20261010-v1",
+        "base_completed_map_version": "UCT-MAP-v1.1.2",
+        "previous_coverage_version": "UCT-PUB-v1.0.9",
+        "new_coverage_version": "UCT-PUB-v1.0.10",
+        "checked_publication_sources": [
+          {
+            "work_id": "UCT-PUB-v1.0.0-VERIFIED-CORPUS",
+            "scope": "Frozen internal census plus TA15, TA19 and R193-R197 overlap comparison."
+          },
+          {
+            "work_id": "KALCKERT-EHRSSON-2012",
+            "doi": "10.3389/fnhum.2012.00040",
+            "scope": "Primary ownership/agency double dissociation; no UCT retentive-familiarity scalarization result."
+          },
+          {
+            "work_id": "LONGO-ET-AL-2008",
+            "doi": "10.1016/j.cognition.2007.12.004",
+            "scope": "Primary multidimensional psychometric embodiment result; factor structure is not a UCT ontology."
+          },
+          {
+            "work_id": "ABDULKARIM-ET-AL-2023",
+            "pmcid": "PMC10072298",
+            "scope": "Primary behavioral/neural ownership-agency study; convergence only."
+          },
+          {
+            "work_id": "CRONE-KALLEN-2024",
+            "pii": "S2451958824000551",
+            "scope": "Recent multidimensional virtual-embodiment psychometrics; no UCT scalarization theorem."
+          }
+        ],
+        "changed_claim_ids": [
+          "R198-C1",
+          "R198-C2",
+          "R198-C3",
+          "R198-C4",
+          "R198-C5"
+        ],
+        "newly_covered_claim_ids": [],
+        "uncovered_candidates_within_verified_corpus": [
+          "R198-C1",
+          "R198-C4"
+        ],
+        "residual_assessment": {
+          "precise_problem": "Does the endpoint-orientation program presuppose a unique global familiar-mineness scalar despite dissociable typed self-relations?",
+          "net_increment_after_subtraction": "A UCT interface correction and exact finite witness: target selection precedes complement orientation; endpoint-fixed monotonicity admits 166 four-coordinate scalarizations, so retentive familiarity must be studied as a typed coordinate rather than an inferred global aggregate.",
+          "closest_predecessors": [
+            "multidimensional bodily-self literature",
+            "standard Dedekind-number combinatorics",
+            "TA15",
+            "TA19",
+            "R193-R197"
+          ],
+          "decision": "CONTINUE_RESEARCH_HOLD_STANDALONE",
+          "next_specific_action": "Design a habitual-versus-novel perturbation that targets H while measuring O, G and actual C separately, with copy/switch and demand-matching falsifiers."
+        },
+        "map_semantics_changed": false,
+        "warning": "Multidimensional embodiment and monotone Boolean counts are prior work; absence of this exact UCT interface statement from checked sources is not worldwide priority."
+      }
+    },
+    {
+      "round": 199,
+      "directory": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10",
+      "claim_ids_literal": [
+        "R199-C1",
+        "R199-C2",
+        "R199-C3",
+        "R199-C4",
+        "R199-C5"
+      ],
+      "note_sha256": "0c1d6af3e8b68f8424097251ee4e0f41607d7b9c73800da3a4dd2eae0106d31f",
+      "coverage_update": {
+        "record_id": "R199-PUB-COVERAGE-20261010-v1",
+        "base_completed_map_version": "UCT-MAP-v1.1.2",
+        "previous_coverage_version": "UCT-PUB-v1.0.10",
+        "new_coverage_version": "UCT-PUB-v1.0.11",
+        "checked_publication_sources": [
+          {
+            "work_id": "UCT-PUB-v1.0.0-VERIFIED-CORPUS",
+            "scope": "Frozen internal census plus UCT I, TA25, R173, R192 and R197-R198 overlap comparison."
+          },
+          {
+            "work_id": "MOREHEAD-ET-AL-2015",
+            "doi": "10.1523/JNEUROSCI.1046-15.2015",
+            "scope": "Primary savings/re-aiming evidence; no lineage or phenomenal-familiarity identification."
+          },
+          {
+            "work_id": "LEOW-ET-AL-2016",
+            "doi": "10.1152/jn.01055.2015",
+            "scope": "Primary error-history savings evidence; no UCT bridge."
+          },
+          {
+            "work_id": "GRACZYK-ET-AL-2018",
+            "doi": "10.1038/s41598-018-26952-x",
+            "scope": "Primary home-use sensory prosthesis study; function and psychosocial evidence, not complete organization."
+          },
+          {
+            "work_id": "CUBEROVIC-ET-AL-2019",
+            "doi": "10.3389/fnins.2019.00853",
+            "scope": "Single-participant 115-day sensory learning and embodiment study; selected evidence only."
+          },
+          {
+            "work_id": "KUMAR-ET-AL-2022",
+            "doi": "10.1038/s41598-022-07032-7",
+            "scope": "Primary decay/consolidation and inter-effector transfer evidence; motivates multiple retained components."
+          }
+        ],
+        "changed_claim_ids": [
+          "R199-C1",
+          "R199-C2",
+          "R199-C3",
+          "R199-C4",
+          "R199-C5"
+        ],
+        "newly_covered_claim_ids": [],
+        "uncovered_candidates_within_verified_corpus": [
+          "R199-C3",
+          "R199-C5"
+        ],
+        "residual_assessment": {
+          "precise_problem": "What can a habitual-versus-novel continuation probe identify about current retention, lineage and phenomenal familiarity H?",
+          "net_increment_after_subtraction": "A UCT-specific evidential ceiling and corrected experiment contract: continuation probes factor through current causal state/kernel, so they can refute a clone or support a currently efficacious difference under exclusions, but cannot alone identify numerical lineage or H.",
+          "closest_predecessors": [
+            "standard Markov/state-sufficiency reasoning",
+            "motor-learning savings literature",
+            "prosthesis-learning literature",
+            "UCT I",
+            "TA25",
+            "R173",
+            "R192",
+            "R197",
+            "R198"
+          ],
+          "decision": "CONTINUE_RESEARCH_HOLD_STANDALONE",
+          "next_specific_action": "Predeclare one signed H marker and cross it with an instrumented retained-route use/bypass intervention, specifying bridge-falsifying result patterns."
+        },
+        "map_semantics_changed": false,
+        "warning": "The mathematical core and empirical mechanisms are prior work; absence of the exact UCT synthesis from checked sources is not worldwide priority."
+      }
+    },
+    {
+      "round": 200,
+      "directory": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010",
+      "claim_ids_literal": [
+        "R200-C1",
+        "R200-C2",
+        "R200-C3",
+        "R200-C4",
+        "R200-C5"
+      ],
+      "note_sha256": "65d2aea894d4f01a0111827e7c3887ba345598bc5ce49571d8c957e5d4a94bc9",
+      "coverage_update": {
+        "record_id": "R200-PUB-COVERAGE-20261010-v1",
+        "base_completed_map_version": "UCT-MAP-v1.1.2",
+        "previous_coverage_version": "UCT-PUB-v1.0.11",
+        "new_coverage_version": "UCT-PUB-v1.0.12",
+        "checked_publication_sources": [
+          {
+            "work_id": "UCT-PUB-v1.0.0-VERIFIED-CORPUS",
+            "scope": "Frozen internal census plus UCT I, TA25, R173 and R197-R199 overlap comparison."
+          },
+          {
+            "work_id": "WHITTLESEA-WILLIAMS-2000",
+            "doi": "10.1037/0278-7393.26.3.547",
+            "scope": "Primary discrepancy-attribution familiarity evidence; warns against fluency identity."
+          },
+          {
+            "work_id": "SIDARUS-ET-AL-2017",
+            "doi": "10.3389/fpsyg.2017.00545",
+            "scope": "Primary prospective agency study; action-selection fluency is one cue among stronger feedback cues."
+          },
+          {
+            "work_id": "WESER-PROFFITT-2019",
+            "doi": "10.3389/fnhum.2018.00537",
+            "scope": "Primary tool-embodiment study; proprioceptive drift depends on input-output matching."
+          },
+          {
+            "work_id": "R199-PROSTHESIS-AND-MOTOR-SOURCES",
+            "scope": "Previously scoped longitudinal use and motor-retention evidence; motivates design but does not validate H."
+          }
+        ],
+        "changed_claim_ids": [
+          "R200-C1",
+          "R200-C2",
+          "R200-C3",
+          "R200-C4",
+          "R200-C5"
+        ],
+        "newly_covered_claim_ids": [],
+        "uncovered_candidates_within_verified_corpus": [
+          "R200-C4",
+          "R200-C5"
+        ],
+        "residual_assessment": {
+          "precise_problem": "How can a signed but fallible human H endpoint calibrate an objective marker without defining H by report, success, fluency or route telemetry, and under what premise can it be used in a no-report domain?",
+          "net_increment_after_subtraction": "A UCT-specific semantic calibration firewall: arbitrary unsigned proxy batteries retain H-complement symmetry; an independent signed endpoint orients only its calibration domain; class-conditional transport and actual-use grounding are separately required; a formation-by-use interaction is a falsifiable bridge test but not identification.",
+          "closest_predecessors": [
+            "latent-label switching and measurement invariance",
+            "difference-in-differences confounding",
+            "familiarity attribution literature",
+            "UCT I",
+            "TA25",
+            "R173",
+            "R197",
+            "R198",
+            "R199"
+          ],
+          "decision": "CONTINUE_RESEARCH_HOLD_STANDALONE",
+          "next_specific_action": "Run or design a reporting-adult pilot with predeclared comparative H judgment, response-key reversal, success/fluency control, actual route bypass and held-out signed-marker validation."
+        },
+        "map_semantics_changed": false,
+        "warning": "Label symmetry, measurement invariance and factorial-confounding mathematics are prior work; absence of the exact UCT interface synthesis from checked sources is not worldwide priority."
+      }
+    },
+    {
+      "round": 201,
+      "directory": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010",
+      "claim_ids_literal": [
+        "R201-C1",
+        "R201-C2",
+        "R201-C3",
+        "R201-C4"
+      ],
+      "note_sha256": "e419f79283ffc2e58fba08cd8723096055fbe8c30831730dd3b5541d96b4cf87",
+      "coverage_update": {
+        "record_id": "R201-PUB-COVERAGE-20261010-v1",
+        "base_completed_map_version": "UCT-MAP-v1.1.2",
+        "previous_coverage_version": "UCT-PUB-v1.0.12",
+        "new_coverage_version": "UCT-PUB-v1.0.13",
+        "checked_publication_sources": [
+          {
+            "work_id": "UCT-PUB-v1.0.0-VERIFIED-CORPUS",
+            "scope": "Frozen internal census plus UCT I, TA25, R173, R197 and R200 overlap comparison."
+          },
+          {
+            "work_id": "WHITTLESEA-WILLIAMS-2000",
+            "doi": "10.1037/0278-7393.26.3.547",
+            "scope": "Primary discrepancy-attribution evidence; familiarity is not fluency identity."
+          },
+          {
+            "work_id": "DEWEY-KNOBLICH-2014",
+            "doi": "10.1371/journal.pone.0110118",
+            "scope": "Primary implicit/explicit agency-measure comparison."
+          },
+          {
+            "work_id": "KONG-ET-AL-2024",
+            "doi": "10.1037/xhp0001204",
+            "scope": "Primary matched-predictability intentional-binding challenge."
+          },
+          {
+            "work_id": "SEGHEZZI-ET-AL-2026",
+            "doi": "10.1177/17470218251349521",
+            "scope": "Primary learning-dependent intentional-binding evidence."
+          },
+          {
+            "work_id": "DRAXLER-KURZ-2025",
+            "doi": "10.3758/s13428-024-02551-9",
+            "scope": "Primary measurement-invariance methods antecedent."
+          }
+        ],
+        "changed_claim_ids": [
+          "R201-C1",
+          "R201-C2",
+          "R201-C3",
+          "R201-C4"
+        ],
+        "newly_covered_claim_ids": [],
+        "uncovered_candidates_within_verified_corpus": [
+          "R201-C1",
+          "R201-C3"
+        ],
+        "residual_assessment": {
+          "precise_problem": "Under endpoint fallibility, residual marker bias and class-specific cross-domain drift, what strict quantitative margin preserves the direction of a candidate familiar-continuity marker?",
+          "net_increment_after_subtraction": "A UCT-typed conservative sign certificate and sharp boundary witnesses that keep selected experience, report, objective marker, actual route use, use evidence and empirical transport separate.",
+          "closest_predecessors": [
+            "robust classification and sensitivity analysis",
+            "measurement invariance and differential item functioning",
+            "UCT I",
+            "TA25",
+            "R173",
+            "R197",
+            "R200"
+          ],
+          "decision": "CONTINUE_RESEARCH_HOLD_STANDALONE",
+          "next_specific_action": "Preregister an adult pilot that estimates a simultaneous lower bound for delta_C and independent upper bounds for beta, epsilon_0 and epsilon_1, with response-key reversal, fluency controls, physical bypass and held-out validation."
+        },
+        "map_semantics_changed": false,
+        "warning": "The inequality is elementary and sensitivity/invariance methods are prior work; the project contribution is the typed UCT interface, not a worldwide mathematical priority or an empirical H finding."
+      }
+    },
+    {
+      "round": 202,
+      "directory": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010",
+      "claim_ids_literal": [
+        "R202-C1",
+        "R202-C2",
+        "R202-C3",
+        "R202-C4"
+      ],
+      "note_sha256": "8b0cb6460abb79c5d3a701c5c411207743f82ad777b8a6ef2a9893c5219ff9b8",
+      "coverage_update": {
+        "schema": "uct-publication-coverage-update/1.0",
+        "coverage_version": "UCT-PUB-v1.0.14",
+        "round": "R202",
+        "research_id": "R202-TMAB-20261010",
+        "newly_covered_published_claims": [],
+        "new_pending_claims": [
+          "R202-C1",
+          "R202-C2",
+          "R202-C3",
+          "R202-C4"
+        ],
+        "decision": "CONTINUE_RESEARCH_HOLD_STANDALONE",
+        "recommended_home": "R192-R202 familiar-mineness identifiability and calibration methods family",
+        "reason": "The nonidentifiability result and audit bridge are substantive and reusable, but no actual endpoint, audit cohort, target transport or token is validated; a standalone empirical paper would overstate the evidence.",
+        "nondeductive": true,
+        "map_release_unchanged": "UCT-MAP-v1.1.2"
+      }
+    },
+    {
+      "round": 203,
+      "directory": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R203_AUDITED_COVARIANCE_DIRECTION_20261010",
+      "claim_ids_literal": [
+        "R203-C1",
+        "R203-C2",
+        "R203-C3",
+        "R203-C4",
+        "R203-C5"
+      ],
+      "note_sha256": "7f520f46a9e8153f05767ff2e6eab75618f4dff9c00f3ae8176d12e19176c0d9",
+      "coverage_update": {
+        "schema": "uct-publication-coverage-update/1.0",
+        "coverage_version": "UCT-PUB-v1.0.15",
+        "round": "R203",
+        "research_id": "R203-ACD-20261010",
+        "newly_covered_published_claims": [],
+        "new_pending_claims": [
+          "R203-C1",
+          "R203-C2",
+          "R203-C3",
+          "R203-C4",
+          "R203-C5"
+        ],
+        "decision": "CONTINUE_RESEARCH_HOLD_STANDALONE",
+        "recommended_home": "R192-R203 methods family",
+        "reason": "Conditional direction certificate and correction; no independent H endpoint, residual budget or adult data.",
+        "nondeductive": true,
+        "map_release_unchanged": "UCT-MAP-v1.1.2"
+      }
+    },
+    {
+      "round": 204,
+      "directory": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010",
+      "claim_ids_literal": [
+        "R204-C1",
+        "R204-C2",
+        "R204-C3",
+        "R204-C4",
+        "R204-C5"
+      ],
+      "note_sha256": "4f86be11aaf5b7eb487f637aa76e22dd6c8921b22a5289d7038eeb05e96e1f64",
+      "coverage_update": {
+        "schema": "uct-publication-coverage-update/1.0",
+        "coverage_version": "UCT-PUB-v1.0.16",
+        "round": "R204",
+        "research_id": "R204-SAU-20261010",
+        "newly_covered_published_claims": [],
+        "new_pending_claims": [
+          "R204-C1",
+          "R204-C2",
+          "R204-C3",
+          "R204-C4",
+          "R204-C5"
+        ],
+        "decision": "CONTINUE_RESEARCH_HOLD_STANDALONE",
+        "reason": "Concrete mechanism/probe application with known forward-model precedents; no independently established H or actual biological carrier. Comparator/reflex interpretation narrowed explicitly.",
+        "recommended_home": "Combined sensorimotor organization / familiar-continuity methods family",
+        "nondeductive": true,
+        "map_release_unchanged": "UCT-MAP-v1.1.2"
+      }
+    },
+    {
+      "round": 205,
+      "directory": "/workspace/scratch/465328c0080c/uct_repo/research/uct-agent-consciousness-workspace/records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010",
+      "claim_ids_literal": [
+        "R205:C1",
+        "R205:C2",
+        "R205:C3",
+        "R205:C4",
+        "R205:C5"
+      ],
+      "note_sha256": "288c4358f402e40d20d40fc0e7ea145b41c320b94f61517068419b2ee2e349dd",
+      "coverage_update": {
+        "schema": "uct-r205-publication-coverage/1",
+        "coverage_version": "UCT-PUB-v1.0.17",
+        "parent": "UCT-PUB-v1.0.16",
+        "main_head": "6cfb89f0b88605da9a44da9c97203729a6742894",
+        "prior_census_main": "fc568e8718e82b3cda6ede0e628aa3342179bebc",
+        "main_diff_scope": "41 changed paths, record-chain/api/heartbeat and root index operational counters; no research source/published paper file changes in git diff. Not a fresh global DOI search.",
+        "claims": [
+          {
+            "id": "R205-C1",
+            "status": "PENDING_UNPUBLISHED_MODEL_APPLICATION",
+            "already_covered": "TA25 §6 / R182 / R204 general boundaries; narrow recovery/cancellation application only"
+          },
+          {
+            "id": "R205-C2",
+            "status": "PENDING_UNPUBLISHED_MODEL_APPLICATION",
+            "already_covered": "TA25 §6 / R182 / R204 general boundaries; narrow recovery/cancellation application only"
+          },
+          {
+            "id": "R205-C3",
+            "status": "PENDING_UNPUBLISHED_MODEL_APPLICATION",
+            "already_covered": "TA25 §6 / R182 / R204 general boundaries; narrow recovery/cancellation application only"
+          },
+          {
+            "id": "R205-C4",
+            "status": "INHERITED_INTERPRETATION_OR_COVARIANCE",
+            "already_covered": "TA25 §6 / R182 / R204 general boundaries; narrow recovery/cancellation application only"
+          },
+          {
+            "id": "R205-C5",
+            "status": "INHERITED_INTERPRETATION_OR_COVARIANCE",
+            "already_covered": "TA25 §6 / R182 / R204 general boundaries; narrow recovery/cancellation application only"
+          }
+        ],
+        "reuse_boundary": "Prediction/attachment separation, shared carriers, C1/U1 and known causal/efference-copy reasoning must be cited, not republished as fresh general results.",
+        "net_increment": "Specific two-source recovery contract and exact internal-cancellation failure; explanatory application within UCT, no validated named phenomenal bridge.",
+        "decision": "CONTINUE_RESEARCH_HOLD_STANDALONE",
+        "reason": "No distinct complete phenomenal bridge or UCT-exclusive empirical consequence; elementary conditional supplement is insufficient by itself for the proposed new paper."
+      }
+    }
+  ],
+  "external_sources": [
+    {
+      "id": "EXT-COMPARATOR-2019",
+      "authors": "Zaadnoordijk, Besold, Hunnius",
+      "year": 2019,
+      "title": "A match does not make a sense: on the sufficiency of the comparator model for explaining the sense of agency",
+      "doi": "10.1093/nc/niz006",
+      "urls": [
+        "https://academic.oup.com/nc/article/2019/1/niz006/5488527",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC6511607/"
+      ],
+      "refs": [
+        "turn2view1"
+      ],
+      "reading_scope": "Publisher abstract, introduction, comparator-history and explanatory-value analysis, infant/robot application discussion through beginning of future directions. Publisher response redirected to silverchair-cdn article-minimal text.",
+      "overlap": "Comparator matching and self/other labeling are insufficient for explanatory agency claims; generic insufficiency not new.",
+      "unverified": "No reanalysis of cited empirical studies or independent full robot replication."
+    },
+    {
+      "id": "EXT-SEPARATING-SYSTEMS",
+      "authors": "Bollobas, Scott",
+      "year": 2007,
+      "title": "On separating systems",
+      "doi": "10.1016/j.ejc.2006.04.003",
+      "urls": [
+        "https://people.maths.ox.ac.uk/scott/Papers/separating.pdf",
+        "https://digitalcommons.memphis.edu/facpubs/5309/"
+      ],
+      "refs": [
+        "turn8view0",
+        "turn25search0"
+      ],
+      "reading_scope": "Complete six-page author manuscript dated 18 April 2006. Introduction explicitly states s(n)=ceil(log2 n), credits Renyi 1961.",
+      "overlap": "Distinct binary columns and logarithmic pair-separation minimum are classical mathematics.",
+      "unverified": "This audit does not independently retrieve Renyi 1961 original."
+    },
+    {
+      "id": "EXT-ADAPTIVE-CAUSAL-2015",
+      "authors": "Shanmugam, Kocaoglu, Dimakis, Vishwanath",
+      "year": 2015,
+      "title": "Learning Causal Graphs with Small Interventions",
+      "arxiv": "1511.00041",
+      "urls": [
+        "https://arxiv.org/pdf/1511.00041",
+        "https://arxiv.org/abs/1511.00041"
+      ],
+      "refs": [
+        "turn10view1",
+        "turn11view0"
+      ],
+      "reading_scope": "Abstract, sections 1-3.2 through Theorems 2 and 3; complete Appendix 6.3 proof of deterministic adaptive separating-system necessity.",
+      "overlap": "Adaptive intervention lower-bound principle through indistinguishable intervention-membership tags.",
+      "difference": "Full causal DAG orientation with a specified causal learner, versus fixed two-consumer source equality under a discrepancy oracle."
+    },
+    {
+      "id": "EXT-SUPERIMPOSED-2013",
+      "authors": "D'yachkov, Rykov, Deppe, Lebedev",
+      "year": 2013,
+      "title": "Superimposed Codes and Threshold Group Testing",
+      "arxiv": "1401.7485",
+      "urls": [
+        "https://arxiv.org/pdf/1401.7485"
+      ],
+      "refs": [
+        "turn19view5",
+        "turn20view2",
+        "turn20view3",
+        "turn21view1"
+      ],
+      "reading_scope": "Abstract/introduction, notation, section 2 Definition 1 and Proposition 1; selected threshold-design proof and references. Not all rate theorems.",
+      "overlap": "Cover-free row condition, including singleton positive column versus all other negative columns; framework for OR contrast.",
+      "difference": "SCU application targets equality of two unknown source sets using pairwise discrepancy only."
+    },
+    {
+      "id": "EXT-KAUTZ-SINGLETON-1964",
+      "authors": "Kautz, Singleton",
+      "year": 1964,
+      "title": "Nonrandom Binary Superimposed Codes",
+      "doi": "10.1109/TIT.1964.1053689",
+      "urls": [
+        "https://archive.computerhistory.org/resources/access/text/2019/11/102780478-05-08-acc.pdf",
+        "https://www.dragonwins.com/domains/getteched/bbc/literature/KS64.pdf"
+      ],
+      "refs": [
+        "turn4search36",
+        "turn8view2",
+        "turn12view0"
+      ],
+      "reading_scope": "Bibliographic record and search excerpt only; 35 MB scan exceeded tool limit; mirror timed out.",
+      "overlap": "Classical original named as antecedent through directly inspected later primary paper.",
+      "unverified": "Original full text not read; must not claim otherwise."
+    },
+    {
+      "id": "EXT-WOLPERT-1995",
+      "authors": "Wolpert, Ghahramani, Jordan",
+      "year": 1995,
+      "title": "An Internal Model for Sensorimotor Integration",
+      "doi": "10.1126/science.7569931",
+      "urls": [
+        "https://mlg.eng.cam.ac.uk/zoubin/zoubin/kalman.abstract.html",
+        "https://pubmed.ncbi.nlm.nih.gov/7569931/"
+      ],
+      "refs": [
+        "turn19view0",
+        "turn18search1"
+      ],
+      "reading_scope": "Complete author-hosted abstract and primary bibliographic metadata; linked full manuscript inaccessible.",
+      "overlap": "Forward/internal state-estimation models and motor/sensory integration antecedent.",
+      "unverified": "No complete methods or data reanalysis."
+    },
+    {
+      "id": "EXT-MAZZONI-KRAKAUER-2006",
+      "authors": "Mazzoni, Krakauer",
+      "year": 2006,
+      "title": "An Implicit Plan Overrides an Explicit Strategy during Visuomotor Adaptation",
+      "doi": "10.1523/JNEUROSCI.5317-05.2006",
+      "urls": [
+        "https://www.jneurosci.org/content/26/14/3642",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC6674132/",
+        "https://pubmed.ncbi.nlm.nih.gov/16597717/"
+      ],
+      "refs": [
+        "turn17search1",
+        "turn17search4",
+        "turn20search0",
+        "turn21view0",
+        "turn22view0",
+        "turn24view0"
+      ],
+      "reading_scope": "Primary abstract/search excerpts including discussion; publisher 403, PMC initially resolved to fulltext reference then captcha on content retrieval, PubMed open returned footer.",
+      "overlap": "Task/strategy success and prediction-driven adaptation can dissociate.",
+      "unverified": "Full manuscript not read in this audit; must not claim full experimental review."
+    },
+    {
+      "id": "EXT-TSENG-2007",
+      "authors": "Tseng, Diedrichsen, Krakauer, Shadmehr, Bastian",
+      "year": 2007,
+      "title": "Sensory Prediction Errors Drive Cerebellum-Dependent Adaptation of Reaching",
+      "doi": "10.1152/jn.00266.2007",
+      "urls": [
+        "https://journals.physiology.org/doi/full/10.1152/jn.00266.2007",
+        "https://pubmed.ncbi.nlm.nih.gov/17507504/"
+      ],
+      "refs": [
+        "turn17search2",
+        "turn17search5",
+        "turn19view3",
+        "turn24search0"
+      ],
+      "reading_scope": "Primary abstract/search excerpts and author-list metadata; publisher 403, PubMed open empty/footer.",
+      "overlap": "Prediction errors versus online motor correction in reaching adaptation.",
+      "unverified": "Full methods and raw data not read."
+    },
+    {
+      "id": "EXT-KILTENI-2020",
+      "authors": "Kilteni, Engeler, Ehrsson",
+      "year": 2020,
+      "title": "Efference Copy Is Necessary for the Attenuation of Self-Generated Touch",
+      "doi": "10.1016/j.isci.2020.100843",
+      "urls": [
+        "https://www.sciencedirect.com/science/article/pii/S2589004220300262",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC6997587/",
+        "https://pubmed.ncbi.nlm.nih.gov/32058957/"
+      ],
+      "refs": [
+        "turn0search1",
+        "turn0search5",
+        "turn1search0",
+        "turn2view0",
+        "turn10view2"
+      ],
+      "reading_scope": "Primary abstract and retrieved article excerpts; PMC captcha and PubMed empty on open. Not complete text.",
+      "overlap": "Active/passive/external consequence comparison is established empirically in the study conditions.",
+      "unverified": "No universal efference-copy necessity, H criterion or SCU application validation."
+    },
+    {
+      "id": "EXT-GANESH-2018",
+      "authors": "Ganesh et al.",
+      "year": 2018,
+      "title": "Utilizing sensory prediction errors for movement intention decoding: A new methodology",
+      "doi": "10.1126/sciadv.aaq0183",
+      "urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/29750195/",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC5942911/"
+      ],
+      "refs": [
+        "turn24search9"
+      ],
+      "reading_scope": "Complete primary abstract and displayed experimental-description excerpt.",
+      "overlap": "Perturb expected sensations and decode mismatch for movement-intention diagnosis already proposed/tested.",
+      "difference": "SCU concerns physical source-set equality under finite exact contracts, not EEG intention decoding."
+    }
+  ],
+  "net_claims": [
+    {
+      "audit_claim_id": "CP-SAU-01",
+      "canonical_claim_ids": [
+        "R204-C1",
+        "R204-C2",
+        "R204-C5"
+      ],
+      "classification": "EXISTING_WORKSPACE_APPLICATION_INTEGRATED",
+      "scope": "Success/alignment/use and reflex state-trajectory separation."
+    },
+    {
+      "audit_claim_id": "CP-ASC-01",
+      "canonical_claim_ids": [
+        "R205-C1",
+        "R205-C2",
+        "R205:C1",
+        "R205:C2"
+      ],
+      "classification": "CONCURRENT_R205_ALREADY_DISCLOSED",
+      "scope": "Local-source/correspondence square and two-source full-readout selector recovery."
+    },
+    {
+      "audit_claim_id": "CP-ASC-02",
+      "canonical_claim_ids": [
+        "R205-C3",
+        "R205:C3"
+      ],
+      "classification": "CONCURRENT_R205_ALREADY_DISCLOSED",
+      "scope": "Modular cancellation distinguishes net source influence from internal consumed branches."
+    },
+    {
+      "audit_claim_id": "CP-SRC-01",
+      "canonical_claim_ids": [
+        "SCU20261010-C2"
+      ],
+      "classification": "CLASSICAL_MATH_SPECIFIC_PROTOCOL_APPLICATION",
+      "scope": "Exact separate-readout and discrepancy-only source-allocation fibers."
+    },
+    {
+      "audit_claim_id": "CP-SRC-02",
+      "canonical_claim_ids": [
+        "SCU20261010-C3"
+      ],
+      "classification": "CLASSICAL_SEPARATION_BOUND_APPLICATION",
+      "scope": "Unknown pure-source pair equality takes ceil(log2 n) binary probes in worst case."
+    },
+    {
+      "audit_claim_id": "CP-SRC-03",
+      "canonical_claim_ids": [
+        "SCU20261010-C4"
+      ],
+      "classification": "SCOPED_APPLICATION_SPECIAL_CASE",
+      "scope": "Independently known single execution root permits one complement probe, including nonempty OR predictor alternatives."
+    },
+    {
+      "audit_claim_id": "CP-SRC-04",
+      "canonical_claim_ids": [
+        "SCU20261010-C5"
+      ],
+      "classification": "CLASSICAL_COVER_FREE_LOGIC_APPLICATION",
+      "scope": "Both arbitrary nonempty OR sets require n unit probes for equality, n>=2."
+    },
+    {
+      "audit_claim_id": "CP-SRC-05",
+      "canonical_claim_ids": [
+        "SCU20261010-C6",
+        "SCU20261010-C7"
+      ],
+      "classification": "INHERITED_BOUNDARY_SPECIFIC_COUNTERMODELS",
+      "scope": "All source interventions do not identify relay occurrence or predictive chronology."
+    },
+    {
+      "audit_claim_id": "CP-UCT-01",
+      "canonical_claim_ids": [
+        "SCU20261010-C8",
+        "R204-C4",
+        "R205-C5"
+      ],
+      "classification": "INHERITED_CONDITIONAL_INTERPRETATION",
+      "scope": "Selected source facts are not complete type, H, RetBind, conceptual self or report truth."
+    }
+  ],
+  "correction_artifacts": [
+    {
+      "path": "/workspace/scratch/465328c0080c/workbench/coverage/R201_R202_CORRECTIONS.md",
+      "bytes": 5146,
+      "sha256": "e1d158de251e9999a1e9322c8b9e8ab5bb5e714a2cedd95dbf1ae8b48387cbf5",
+      "reading_scope": "Authored and checked in this audit; exact witnesses generated with Fraction arithmetic.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/workbench/coverage/check_r201_coherent_witnesses.py",
+      "bytes": 2365,
+      "sha256": "61016b93e306f70c7ce697a7d4adf221cf07b7e4c86b2f2311e8f795685ad84d",
+      "reading_scope": "Authored and checked in this audit; exact witnesses generated with Fraction arithmetic.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/workbench/coverage/R201_COHERENT_WITNESSES.json",
+      "bytes": 3059,
+      "sha256": "c938155825fb385e86259285ee3c3fd9619b4007dd9ec4a10367623f133b77d5",
+      "reading_scope": "Authored and checked in this audit; exact witnesses generated with Fraction arithmetic.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/workbench/coverage/check_r202_residual_correction.py",
+      "bytes": 2467,
+      "sha256": "b872ca1e015d2ea55aaf1c1078326549f0a5603e929d72696b3eb3589b0a64b7",
+      "reading_scope": "Authored and checked in this audit; exact witnesses generated with Fraction arithmetic.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/workbench/coverage/R202_RESIDUAL_CORRECTION.json",
+      "bytes": 1788,
+      "sha256": "ce26b4c3d5f7ff7f742f120cb888cc9ade4a72d8dbd7ac0ecbec54602ddbd5c5",
+      "reading_scope": "Authored and checked in this audit; exact witnesses generated with Fraction arithmetic.",
+      "access_status": "DIRECT_READING"
+    }
+  ],
+  "additional_semantic_findings": [
+    {
+      "id": "R194_ANCHOR_CONSISTENCY",
+      "source": "Map semantic auditor; direct complete R194 note also read by this reviewer.",
+      "counterexample": "One edge x=y, anchors x=0 and y=1; cycle consistency alone does not imply 2^c solutions.",
+      "correction": "If all edge and anchor constraints are jointly consistent, count is 2^c unanchored components; otherwise zero.",
+      "scope": "General multi-anchor statement corrected; unanchored and executed single-anchor examples survive."
+    }
+  ],
+  "model_workbench_snapshot": [
+    {
+      "path": "/workspace/scratch/465328c0080c/workbench/model/RESEARCH_NOTE.md",
+      "bytes": 28872,
+      "sha256": "e3c5165b3a7a46517edc047efc8352289baf4c61ee26c1f1267a1cdfa9297a75",
+      "reading_scope": "Parallel-agent workbench snapshot. Proof note and code inspected; final model agent may revise bytes after this inventory. Final release must refresh hashes.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/workbench/model/check_source_consumers.py",
+      "bytes": 20209,
+      "sha256": "8643c0b7fa63cf78b0aa4c5f8a558480e8108e29a8a7eb6b6895c0930b7690cb",
+      "reading_scope": "Parallel-agent workbench snapshot. Proof note and code inspected; final model agent may revise bytes after this inventory. Final release must refresh hashes.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/workbench/model/EXACT_RESULTS.json",
+      "bytes": 9742,
+      "sha256": "ef545c13518f1ff1292d8214dc455b2cf05239c497879550a525004372692300",
+      "reading_scope": "Parallel-agent workbench snapshot. Proof note and code inspected; final model agent may revise bytes after this inventory. Final release must refresh hashes.",
+      "access_status": "DIRECT_READING"
+    },
+    {
+      "path": "/workspace/scratch/465328c0080c/workbench/model/RUN_RECEIPT.json",
+      "bytes": 460,
+      "sha256": "6e49075a76a8960671f711657233e1c90ffe4618e41efc1c76a6f281e76722b5",
+      "reading_scope": "Parallel-agent workbench snapshot. Proof note and code inspected; final model agent may revise bytes after this inventory. Final release must refresh hashes.",
+      "access_status": "DIRECT_READING"
+    }
+  ],
+  "recommendation": "WRITE_ONE_SCOPED_METHODS_APPLICATION_SYNTHESIS_AFTER_MODEL_REVIEW",
+  "reason": "Exact intervention target, minimal schedules, pure/OR class contrast, concurrent cancellation failure and occurrence/timing limits form a coherent reusable result; guide section 0 does not require new general mathematics or a positive phenomenal bridge.",
+  "must_not_claim": [
+    "Historical priority for separating codes, adaptive separation or perturbation-based diagnosis.",
+    "New general proof that comparator match is insufficient for agency.",
+    "Nominal performance matching persists during every diagnostic perturbation.",
+    "Mismatch-only data identify the ordered source pair or numerical relay identity.",
+    "SCU originated concurrently saved R205 cancellation countermodel.",
+    "Positive H evidence, actual neural installation, complete clone discrimination under C1, or a new basal-experience gate.",
+    "Structural code PASS completes all 1608 semantic map obligations."
+  ],
+  "open_review_ids": [
+    "QC-20261008-10",
+    "IA-QC11",
+    "QC-20261008-12",
+    "QC-20261008-13"
+  ],
+  "remote_mutations_by_this_reviewer": false,
+  "external_release_authorized": false
+}

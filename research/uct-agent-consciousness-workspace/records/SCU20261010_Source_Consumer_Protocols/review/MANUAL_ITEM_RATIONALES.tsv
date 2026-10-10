@@ -1,0 +1,161 @@
+id	rationale
+A:TOKEN_CRITERIA	Admission requires physically instantiated support, inherited relations, continuity, boundaries and lineage; an action-source label or successful test cannot supply these clauses.
+A:ACTUAL_TOKEN	The quantifier domain excludes arbitrary mathematical groupings; R204 can construct models without asserting they are actual admitted tokens.
+A:NONEMPTY_CARRIER	Nonempty physical support is an admission consequence; feedback accuracy or report is absent from the premise.
+A:P3	Persistence and embedding must both hold; changing a consumer route does not by itself prove local cessation or unchanged local content.
+A:P6	Occurrence identity, type and lineage remain different; a copied predictor or route can preserve type without preserving the numerical source occurrence.
+A:D_ONTIC	Completeness concerns constitutive organization of the frozen token, not all substrate microfacts and not a chosen finite readout.
+A:K	Action/source/consumer distinctions survive only if the common signature actually retains their typed relations and transported parameters.
+A:QSPACE	Type quotient identifies isomorphic structures rather than numerical occurrences; a set-sized comparison universe is explicitly required.
+A:GEOMETRY	The same predeclared pseudometric is used on both type presentations; the choice is not learned from performance and has no unique calibration claim.
+A:VIEW	A projected state trace can erase source and writer-event distinctions; R204 is an instance of this existing view boundary.
+A:ESTIMATE	Equal estimates, equal views and equal complete organization are successively stronger claims; no step follows merely from matching outputs.
+A:SUBJECT_FIREWALL	A body/action consumer may be studied without first finding an exclusive owner; a new self-source predicate must remain target-relative.
+A:C1	Universal tokenwise experiential identity is an axiom with existential commitment; none of the new finite models independently establishes it.
+A:C1_OI	Composition of the two tokenwise isomorphisms gives the type biconditional only in one common complete signature.
+A:C1_W	The forward direction preserves full experiential type under complete equivalence; it does not assert particular target labels are measured.
+A:U1	A sort-preserving image of the nonempty distinguished carrier is nonempty; no alignment, use, retention or reporting gate enters.
+A:U2	Physical and experiential quotient maps coincide under the fixed geometry; existence of a smooth physical path is not derived.
+A:SELF_WITNESS	The nonconceptual-self witness must be an actual member of the same domain; absence of conceptual self is not absence of familiar mineness.
+A:U3	Applying U1 to the supplied witness refutes conceptual-self necessity only on that witnessed domain.
+A:U0	This is dependency bookkeeping about the axiom decomposition, not additional empirical evidence for C1.
+A:NONUNIV_WITNESS	A proposed gate can be rejected only with an actual witness inside its claimed domain and with the same target meaning.
+A:ORG_GATE	Universal basal existence and a same-domain missing gate conflict at the witness; selected human agency is not substituted for basal existence.
+A:COMPLETE_EQ	A source change outside the selected projection is compatible with complete equality only when every constitutive current consequence is genuinely screened.
+A:PROBE_ONLY	An actual perturbation changing a writer or consumer fails the description-only premise; measurement choice is not physical intervention by name.
+A:FUTURE_ONLY	Present dispositions are included in the equality requirement; an altered transition law cannot be called merely future divergence.
+A:HISTORY_DIFF	Different numerical lineage may be screened from current complete organization, but an actually constitutive retained history relation prevents that screening.
+A:LABEL_ONLY	Changing an analyst label differs from changing a physically encoded and consumed label; the latter can change complete organization.
+A:NO_HIDDEN	At fixed complete organization C1 allows no extra full-type difference; this does not erase differences omitted from a finite view.
+A:PROBE_INV	The invariant is experiential type under a non-disturbing description change, not invariance to a physically executed probe.
+A:NO_FUTURE	The present equality premise carries the result; later evidence cannot retrospectively create a present constitutive difference.
+A:GHOST_EQ	The screened-history conclusion is conditional and does not conflict with R173 history-expanded signatures or R199 operational-clone limits.
+A:GHOST_TOKEN_NOTE	Equal present types leave numerical occurrences and lineages distinct, exactly the distinction needed by source/carrier clones.
+A:REWARD_NONID	External reward annotation alone does not change intrinsic organization; installed reward or control circuitry is outside that premise.
+A:PRODUCT_DEF	The same constituent slots, ports and product construction must transport each isomorphism; arbitrary repartitioning is not allowed.
+A:ACTUAL_WHOLE_PARTS	Whole and parts must each be actually admitted with compatible signatures; a whole's admission does not prove a part is a separate autonomous subject.
+A:PHYS_NONPRODUCT	A drawn coupling edge is not itself the required complete nonproduct witness; the premise remains independently supplied.
+A:NONSUM	The contradiction proof uses strong tokenwise C1 and product compatibility; it does not compute subject number or a scalar sum of experience.
+A:MACRO_EQ	Macro equivalence is a claim about independently admitted complete macro tokens; lower distinctions must be nonconstitutive for that macro comparison.
+A:MICRO_NONISO	The lower-scale comparison has its own tokens and common signature; it cannot silently replace the macro bearer.
+A:MACRO_EXP_EQ	Complete macro equivalence transports through C1-W without requiring lower types to be identical.
+A:MICRO_EXP_DIFF	Contraposition of the type biconditional gives only the lower-token complete-type difference.
+A:SYM_PREM	The candidate set is invariant under the actual automorphism group; external labels or grounded centers change the setup.
+A:EQUIV_SELECTOR	Deterministic equivariance is the selector premise; randomized seeds and added distinguished points are additional structure.
+A:OVERLAP_NONEMPTY_EXCL	The obstruction needs the entire candidate domain to be one overlapping orbit and a nonempty disjoint output.
+A:ORBIT_LEMMA	Automorphisms preserve an invariant selected set as a set, so selecting one member selects its orbit; this is ordinary symmetry mathematics.
+A:SELECTION_OBSTRUCTION	One overlapping orbit cannot be both wholly selected and disjoint; the result does not prohibit centered relations on another input domain.
+A:ALL_ANC_ACTUAL	Actuality of each ancestor/formation comparison is a supposition, separate from historical observation and continuity.
+A:E1	Memberwise U1 gives universal basal nonemptiness on the admitted family without invoking an evolutionary continuity argument.
+A:EPS_CHAIN	The same physically justified chain and geometry must be used; experiential smoothness is not inferred from visual resemblance of organisms.
+A:E2	The epsilon-chain transfers pointwise through equal quotient maps; no monotone richness or universal biological chain is established.
+A:PHYS_CONT_PATH	Physical continuity is an independent modeling premise and remains separate from binary experience-existence continuity.
+A:U2_APP	This specializes U2 to a supplied continuous physical path; it cannot establish the path itself.
+A:CONNECTED_LAMBDA	Connectedness is topological, not a loose similarity between a finite list of examples.
+A:CONT_BINARY_E	Continuity into a discrete two-point space is an additional strong premise; physical continuity alone does not supply it.
+A:HUMAN_ENDPOINT	The endpoint value must be independently supplied in the same domain; naming a human endpoint is not a derivation.
+A:E3	A continuous image of a connected space in the discrete binary space is a singleton; the supplied endpoint fixes its value.
+A:EVOL_SYNTH	Fine-chain and continuous-path routes remain alternatives; their physical premises must not be conjoined or erased.
+A:PHYS_TRANSFORM_NONISO	Numerical parameter change and recoding are not automatically complete nonisomorphism; a retained invariant is required.
+A:STRUCT_TRANSFORM	The type biconditional transfers a grounded complete nonisomorphism; no specified feeling or experiential magnitude follows.
+A:TOY_MATH	The three-register construction freezes clock, clamps, input and constituent slots; different protocols must not inherit its counts.
+A:TOY_WHOLE_DIFF	Image sizes 2,4,4,8 distinguish unequal ranks only; the two single-link cases require another retained invariant.
+A:TOY_SUB_EQ	The buffered s update is independent of the pair mechanism; this is the selected subprocess law, not whole equivalence.
+A:ACTUAL_COMPLETE_TOY	The finite structures are not automatically actual complete realizations, and whole completeness does not transfer to a different subprocess boundary.
+A:TOY_EXP_WHOLE	The conditional type application is restricted to pairs actually separated by the stated invariant, leaving the equal-rank pair unresolved by this route.
+A:TOY_EXP_SUB	The sub-process type application is separate from the whole comparison and requires its own complete realization premise.
+A:PHEN_TARGET	A finite selected target and its measurement interpretation are separately fixed; no-report and report proxies do not define full Phi.
+A:BRIDGE_FWD	Equal selected views imply equal targets only under the supplied fiber-constancy bridge; C1 alone does not supply this finite implication.
+A:BRIDGE_REV	Reflection is a separate implication and can fail under a lossy target projection even when the forward bridge holds.
+A:MEAS	Nonrejection is not equivalence; exact or bounded claims require the same predeclared errors, distances and sampling law.
+A:OSC_FWD	The bridge package contains an independent forward premise; packaging cannot turn it into a C1 consequence.
+A:OSC_TWO	The two-way package additionally imports reflection; a new source/consumer projection cannot assume that reverse direction.
+A:PTVSP	Changing token, view, target or bridge after observing outcomes makes a new hypothesis rather than rescuing the original one.
+A:FAIL_ONE	A same-view/different-target witness refutes the frozen forward bridge; it need not isolate or falsify the complete C1 axiom.
+A:FAIL_TWO	A different-view/same-target witness refutes reflection, not forward sufficiency or basal existence.
+A:BAC_TFR	Bridge admissibility and target fidelity must apply jointly to the same source claim and version, not separate favorable examples.
+A:UCTII_RECON	Typed operational reconstruction can omit C1 while retaining its own physical inputs and bridge commitments.
+A:UCTII_GATE	Gate relocation requires U1 plus the rival's same-domain witness; the target cannot silently change to a specific sensory content.
+A:UCTII_EXP	A finite translation receives structural experiential interpretation only after its relations are grounded in actual constitutive organization.
+A:ACTUAL_PERSISTING_PARTS	A copied description or remembered part does not satisfy continuing support and lineage of the actual constituent.
+A:COEXISTENCE	P3 retains each continuing actual part and U1 gives its experience; this does not freeze local contents under coupling.
+A:FINITE_COARSE_SETUP	The quotient is total and required for every state and named operation, with fixed timing and boundaries.
+A:COARSE_CLOSURE	Representative independence of successor summaries is both necessary and sufficient for the declared deterministic quotient.
+A:FORWARD_MISMATCH	The purported mismatch must use true views/targets or the sound frozen error model; inconsistent estimates alone are insufficient.
+A:REVERSE_MISMATCH	Equal targets and unequal views attack reflection only after both sides are established on the frozen comparison.
+A:FROZEN_SCOPE	A single tuple of domain, bearer, time, boundary, signature, view, target and errors prevents scope-switching between twin cases.
+R146:DEFINITION_CONTRACT	Definitions distinguish full organization, views, capability and several self targets; they do not introduce an experience gate or a self detector.
+R146:SELF_CONTRACT	An installed predictor with grounded own-target law differs from a merely accurate abstract decoder; common legal plans are essential.
+R146:SYMMETRY_SETUP	No fixed candidate rules out only an uncentered deterministic singleton selector; adding a center changes the domain.
+R146:CENTERED_REFERENCE	The identity family is equivariant given its center; this neither discovers a unique owner nor installs a physical self-model.
+R146:DUPLICATE_SETUP	The local sensor/predictor protocol and independent external-label protocol use different information; no contradiction arises from differing accuracies.
+R146:DUPLICATE_SEPARATION	Exact local prediction coexists with chance external-label guessing; this already limits prediction-to-identity claims relevant to R204/R205.
+R146:SELF_TARGET_SUFFICIENCY	Fiber constancy and TV radius concern unrestricted decoder existence; half diameter is only a bound and installed resources remain separate.
+R147:ROUTING_MODEL	Containing assembly beta, sensed body sigma and acted-on body tau are distinct frozen relations; this is the central internal predecessor for source/consumer rewiring.
+R147:ROUTING_LIMIT	The observable law identifies tau-inverse sigma while simultaneous physical postcomposition preserves it and can change beta-relative attachment.
+R147:MEMORY_ISOLATION	Record registers are explicitly absent from current control; general autobiographical memory cannot inherit this isolation.
+R147:MEMORY_LIMIT	An isolated record copy changes report/provenance without changing attachment; active memory in R155 and R173 lies outside this premise.
+R147:ACTUAL_BRIDGE	Complete isomorphisms must retain genuinely constitutive beta/sigma/tau; an analyst's own-body label does not supply the bridge.
+R147:TYPE_LIMIT	The beta-retaining nonisomorphism transfers through C1 only conditionally and identifies no named ownership feeling.
+R157:DEFINABLE_SELECTOR_SETUP	Only grounded internal K-formulas and transported parameters are eligible; a selected path description does not establish its physical truth.
+R157:COORDINATE_TRANSPORT	Formula induction preserves grounded relations tokenwise; the image is a selected relation, not automatically an autonomous process or named feeling.
+R157:SEMANTIC_VOCABULARY_SETUP	External L-name assignments may vary while D,Phi,h stay fixed; this is metalinguistic ambiguity, not inverted qualia at fixed complete organization.
+R157:SEMANTIC_RESIDUAL	Structural transport alone does not choose the familiar-mineness name; actual independent semantic evidence can still constrain the name.
+R157:REPORT_DOMAIN_SETUP	A report protocol is a partial measure on reporters, while report-presence can be a total structural predicate; these must not be conflated.
+R157:REPORT_COVERAGE_LIMIT	A measure undefined for nonreporters requires additional extension assumptions; neither zero filling nor universal no-mineness follows.
+R157:MINENESS_BRIDGE_SCHEMA	Body-frame/use and semantic/measurement obligations remain jointly open; no conjunction is established as universal necessary or sufficient mineness.
+R167:CONTEXTUAL_USE_CRITERION	Existential counterfactual contribution is different from actual episode consumption and from universal indispensability; R204's writer-use bit must not be substituted directly.
+R167:SINGLE_CUT_REDUNDANCY_OBSTRUCTION	The OR witness shows why a null contextual output contrast does not establish absence of a potentially effective route.
+R167:COMPENSATION_TIMING_OBSTRUCTION	A late restored output cannot erase evidence of earlier immediate dependence; the pre-compensation interval must remain explicit.
+R168:STOCHASTIC_CONTEXTUAL_EFFECT	The metric and intervention family define a disposition relative to declared contexts; weak discriminators and omitted contexts preserve uncertainty about actual use.
+R172:LOCAL_COMPONENT_CERTIFICATE_INSTANCE	This is an assumed actual instance, not the availability of a local theorem schema; the induced connector inputs must remain in scope.
+R172:INTERFACE_COMPATIBILITY_CONTRACT	Joint synchronization, admitted inputs, refinement and agreement are explicit AND premises for one connected producer-consumer pair.
+R172:INTERFACE_COMPOSITION_THEOREM	The theorem record cannot be inverted to infer the actual compatibility package; dependent uses must retain local and interface witnesses.
+R172:FAILED_CONNECTION_COUNTERMODEL	The complement connector induces input1 outside both standalone input0 contracts; this refutes the unrestricted composition shortcut.
+R172:ONLINE_ACTION_USE_RELATION	The effective statement retypes archived LiveUse as evidence, while OnticUse_path is independent; historical proof prose must not reintroduce the old certificate selector.
+R172:LIVE_REPLAY_NONENTAILMENT	Baseline tuples match, but the mediator intervention distinguishes the declared laws; evidence is conditional on its actual fidelity.
+R172:WITNESSED_ONLINE_ACTION_USE	This is a support record with explicit role bridge and compatibility, not itself an ontic K-relation to transport.
+R172:EXPERIENCE_INTERNAL_ACTION_COORDINATE	Only the corrected grounded phi_path is transported; stale theta_EBA proof wording is governed by the effective replacement rule.
+R172:BIO_AI_APPLICATION_BOUNDARY	Each bearer must satisfy its own corrected application; shared selected coordinates neither equate full experience nor rank richness.
+R173:FIXED_FAMILIAR_TARGET_CONTRACT	Ownership, agency and familiar retention are partial possibly overlapping selected targets; the finite coordinate choices do not identify them empirically.
+R173:EFFECTIVE_R172_PATH_INSTANCE	The complete corrected path premises, including role bridge and parameter transport, are assumed for one actual application rather than inferred from a map node.
+R173:CURRENT_ACTION_AVAILABILITY	Availability is relative to admitted operations; an action outside that family cannot witness it.
+R173:CURRENT_AGENCY_LOOP	Actual same-episode production/monitoring is distinct from option availability; under baseline admission it does imply availability.
+R173:RETENTIVE_BINDING_RELATION	RetBind needs an earlier same-lineage occurrence, continued actual trace and present consumer use; current predictor equality or an external biography cannot replace these.
+R173:SAME_PRESENT_DIFFERENT_HISTORY_WITNESS	Historical witness prose is not fresh evidence of semantic realizability; effective use proceeds through R175's explicit admitted twin-domain premise.
+R173:PRESENT_SLICE_NONENTAILMENT	The effective incoming rule requires the admitted matched-present/different-RetBind pair; equal-input logic then gives only organizational nonidentification.
+R173:RETENTIVE_EXPERIENTIAL_COORDINATE	Grounded history witnesses must belong to the same signature and be transported; a present-only complete state cannot silently include an excluded past occurrence.
+R173:THREE_TARGET_SEPARATION	The effective correction withdraws all-eight organizational realizability and retains only the G-implies-A six-valuation upper bound, with all-six realizability open.
+R173:FAMILIAR_MINENESS_BOUNDARY	No amount of matched performance, state-update evidence or route refinement supplies the independent B_fam interpretation.
+R175:BASELINE_ADMITTED_ACTION_DOMAIN	The G-implies-A implication depends on admitting the actual baseline action in the availability family, not on all conceivable availability definitions.
+R175:SIX_ROW_EVENT_MODELS	The name still says models, but effective statement gives only an upper bound; a manuscript must not resurrect all-six realized witnesses.
+R175:EXPLICIT_TWIN_DOMAIN	The domain's two histories are a supplied application premise; definitions or one positive history cannot prove their coexistence.
+R175:ADMITTED_HISTORY_TWIN	Admission follows conditionally from the explicit pair premise and does not assign a phenomenal difference.
+R175:R173_EFFECTIVE_TARGET_SEPARATION	Target distinction does not require statistical/organizational independence, exclusive partitioning or totality.
+R175:R174_FIBER_DIRECTION_CORRECTION	Equal selector with different target attacks sufficiency; the reverse pattern attacks injectivity and must remain distinct.
+R175:PHYSICAL_TEMPORAL_CHAIN	An actual grounded chain is required; ordered labels or a model chain alone do not establish it.
+R175:INDEPENDENT_EXPERIENTIAL_ORDER	The experiential relata/order are independently admitted rather than copied from the physical chain, which would make prediction circular.
+R175:BETWEENNESS_CORRESPONDENCE_CLASS	A common finite-chain betweenness map leaves two orientations; this is correspondence mathematics, not a measured content prediction.
+R175:ORIENTATION_ANCHOR_PACKAGE	Both endpoints must constrain the same map on the same fixed target identities; separate fitting maps do not combine.
+R175:HELD_OUT_ORDER_PREDICTION	The effective meaning is orientation completion of supplied full chains; the positive-content kind label must not override the explicit withdrawal.
+R175:B_ORDER_NARROWED_BOUNDARY	The empirical burden still includes target identity and relation admission; it was not reduced to an orientation bit.
+R176:PARTIAL_NAMED_ORDER_DOMAIN	Neutral middle labels and endpoint facts deliberately leave the named middle order open; full rank-based identity would leak it.
+R176:NAMED_ORDER_NOT_IDENTIFIED	Two middle permutations satisfy the data while changing the fixed target, despite each having an increasing map from the physical chain.
+R176:CAUSAL_DELAY_SETUP	Actual producer/use occurrences, nonnegative delays and one consumer are fixed; timestamps alone do not establish executed use.
+R176:DELAY_ORDER_CONTRAST	Subtracting use times gives dB-dC-g and the reversal witness; no experienced order is observed by this algebra.
+R177:EXECUTED_FEATURE_DOMAIN	The compensated decoder is stipulated as actually executed within the finite model; analyst recoding alone does not preserve executed content.
+R177:COMPENSATED_FEATURE_PRESERVATION	Inverse composition preserves the feature; a missing compensator or noninjective channel can destroy it even with source identity fixed.
+R177:JOINT_SOURCE_FEATURE_DOMAIN	Singleton sources and one nominated use per source are real restrictions; multiple-source or repeated-use cases require a refined binding.
+R177:SOURCE_FEATURE_SEPARATION	Provenance and decoded feature jointly form only a functional identity; they do not select familiar mineness or a named quality.
+R185:EPISODE_OCCURRENCE	An explicit occurrence sort is needed to preserve multiplicity; equal values or equal relation tuples do not identify numerical events.
+R185:TOKEN_MEMBERSHIP	Membership includes full constitutive support and accountable boundaries of the frozen actual token, not an arbitrary coarse view.
+R185:SAME_OCCURRENCE	Grounded inclusion maps on event and occurrence sorts establish shared occurrence; value matching alone supplies no identity map.
+R185:INCIDENCE_PROFILE	Multi-token membership of one occurrence differs from multiple copied occurrences; neither count is an experience measure.
+R185:ACTUAL_MEMBERSHIP_PACKAGE	All selected scales require jointly grounded identities and faithful inclusions; source, consumer and whole memberships cannot be assembled from unrelated cases.
+R185:SHARED_MEMBERSHIP	One identified occurrence can belong to several actual tokens without numerical duplication of that occurrence.
+R185:COPIED_COUNTERMODEL	Matched local values and report can coexist with different occurrence multiplicity; this directly constrains R205 source-copy interpretations.
+R185:SYNCHRONIZER_BOUNDARY	A synchronizer is an additional whole relation; transmitting a change between two copies does not merge their identities.
+R185:COHERENT_OVERLAP_PACKAGE	The imported gluing result requires grounded overlap and interaction-complete signatures; arbitrary local maps are insufficient.
+R185:EXPERIENTIAL_COUNTERPART	C1 transports each token-relative occurrence image and coherent structure, not cross-token numerical phenomenal-event identity.
+R185:CROSS_TOKEN_IDENTITY_LIMIT	Tokenwise isomorphisms leave cross-token phenomenal individuation and unique subject partitioning unresolved.
+R185:ACTION_CENTERING_NEXT	This remains an open grounding/identification question and does not serve as a premise that action centering has been established.

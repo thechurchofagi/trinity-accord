@@ -222,7 +222,8 @@
       },
       "compatibility_audit": "records/R191_Conflict_Conditioned_Authorization_20261009/MAP_COMPATIBILITY_AUDIT.json",
       "handoff": "records/R191_Conflict_Conditioned_Authorization_20261009/HANDOFF_ZH.md",
-      "instruction": "Structural compatibility with v1.1.2 passed. OCCA/LGRU actual installation, named phenomenal interpretation, semantic adoption and reviewer disposition remain open; do not count this module in completed totals."
+      "instruction": "Structural compatibility with v1.1.2 passed. OCCA/LGRU actual installation, named phenomenal interpretation, semantic adoption and reviewer disposition remain open; do not count this module in completed totals.",
+      "additional_open_normalization_obligation": "r_occa and r_history require a later exact actual-instance guard review; definition/schema availability is not actual premise truth."
     },
     {
       "id": "R192-CTBI-20261009",
@@ -257,6 +258,255 @@
       "compatibility_audit": "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/MAP_COMPATIBILITY_AUDIT.json",
       "handoff": "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/HANDOFF_ZH.md",
       "instruction": "Single-read recovery and cancellation counterexample are scoped model results. Do not turn structural coverage into actual/H admission or completed-map promotion."
+    },
+    {
+      "id": "R193-NCI-20261009",
+      "result_version": "NCI-RESULT-v0.1.0",
+      "base_release": "UCT-MAP-v1.1.2",
+      "path": "records/R193_Nonreport_Contrast_Identifiability_20261009/MAP_EXTENSION.json",
+      "sha256": "977e423d80c54bff29c9f45c1402fffaf0b559b3b4d819ff78bb750587f54001",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "publication_coverage_version": "UCT-PUB-v1.0.5",
+      "candidate_counts": {
+        "nodes": 9,
+        "active_conditional_rules": 6,
+        "nondeductive_context_links": 5
+      },
+      "compatibility_audit": "records/R193_Nonreport_Contrast_Identifiability_20261009/MAP_COMPATIBILITY_AUDIT.json",
+      "handoff": "records/R193_Nonreport_Contrast_Identifiability_20261009/HANDOFF_ZH.md",
+      "navigation_added_by": "SCU20261010",
+      "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present."
+    },
+    {
+      "id": "R194-CPP-20261009",
+      "result_version": "CPP-RESULT-v0.1.0",
+      "base_release": "UCT-MAP-v1.1.2",
+      "path": "records/R194_Cross_Population_Polarity_20261009/MAP_EXTENSION.json",
+      "sha256": "2827d07d0a279e9d86b0bf7044dc414702043ec0cb366ebca6c5b23119273c1b",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "publication_coverage_version": "UCT-PUB-v1.0.6",
+      "candidate_counts": {
+        "nodes": 9,
+        "active_conditional_rules": 6,
+        "nondeductive_context_links": 5
+      },
+      "compatibility_audit": "records/R194_Cross_Population_Polarity_20261009/MAP_COMPATIBILITY_AUDIT.json",
+      "handoff": "records/R194_Cross_Population_Polarity_20261009/HANDOFF_ZH.md",
+      "navigation_added_by": "SCU20261010",
+      "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present.",
+      "effective_correction_index": "records/SCU20261010_Source_Consumer_Protocols/corrections/EFFECTIVE_CORRECTION_INDEX.json"
+    },
+    {
+      "id": "R195-IPA-20261009",
+      "result_version": "IPA-RESULT-v0.1.0",
+      "base_release": "UCT-MAP-v1.1.2",
+      "path": "records/R195_Interventional_Polarity_Anchor_20261009/MAP_EXTENSION.json",
+      "sha256": "a8e8185ef922e353de9e7384842238ceb3777d15a224743a51f5c0dc67ec56c5",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "publication_coverage_version": "UCT-PUB-v1.0.7",
+      "candidate_counts": {
+        "nodes": 9,
+        "active_conditional_rules": 6,
+        "nondeductive_context_links": 5
+      },
+      "compatibility_audit": "records/R195_Interventional_Polarity_Anchor_20261009/MAP_COMPATIBILITY_AUDIT.json",
+      "handoff": "records/R195_Interventional_Polarity_Anchor_20261009/HANDOFF_ZH.md",
+      "navigation_added_by": "SCU20261010",
+      "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present."
+    },
+    {
+      "id": "R196-TPD-20261009",
+      "result_version": "TPD-RESULT-v0.1.0",
+      "base_release": "UCT-MAP-v1.1.2",
+      "path": "records/R196_Two_Axis_Phenomenal_Calibration_20261009/MAP_EXTENSION.json",
+      "sha256": "c76edc4aeb640419ab4b0badbd2daa81c6c0cb876cf728a183ef17cf34c93f38",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "publication_coverage_version": "UCT-PUB-v1.0.8",
+      "candidate_counts": {
+        "nodes": 9,
+        "active_conditional_rules": 6,
+        "nondeductive_context_links": 5
+      },
+      "compatibility_audit": "records/R196_Two_Axis_Phenomenal_Calibration_20261009/MAP_COMPATIBILITY_AUDIT.json",
+      "handoff": "records/R196_Two_Axis_Phenomenal_Calibration_20261009/HANDOFF_ZH.md",
+      "navigation_added_by": "SCU20261010",
+      "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present."
+    },
+    {
+      "id": "R197-FEO-20261010",
+      "result_version": "FEO-RESULT-v0.1.0",
+      "base_release": "UCT-MAP-v1.1.2",
+      "path": "records/R197_Fallible_Endpoint_Orientation_20261010/MAP_EXTENSION.json",
+      "sha256": "a686e03922a8c2cf5d175dcec53a49df5e5b01f5652c3693ebd35642817d47a6",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "publication_coverage_version": "UCT-PUB-v1.0.9",
+      "candidate_counts": {
+        "nodes": 9,
+        "active_conditional_rules": 5,
+        "nondeductive_context_links": 5
+      },
+      "compatibility_audit": "records/R197_Fallible_Endpoint_Orientation_20261010/MAP_COMPATIBILITY_AUDIT.json",
+      "handoff": "records/R197_Fallible_Endpoint_Orientation_20261010/HANDOFF_ZH.md",
+      "navigation_added_by": "SCU20261010",
+      "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present."
+    },
+    {
+      "id": "R198-SPNS-20261010",
+      "result_version": "SPNS-RESULT-v0.1.0",
+      "base_release": "UCT-MAP-v1.1.2",
+      "path": "records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/MAP_EXTENSION.json",
+      "sha256": "4870660b8de3bfa8c4f8db15c75002dcb614d517c3fc415a35f28ad980653440",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "publication_coverage_version": "UCT-PUB-v1.0.10",
+      "candidate_counts": {
+        "nodes": 8,
+        "active_conditional_rules": 5,
+        "nondeductive_context_links": 5
+      },
+      "compatibility_audit": "records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/MAP_COMPATIBILITY_AUDIT.json",
+      "handoff": "records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/HANDOFF_ZH.md",
+      "navigation_added_by": "SCU20261010",
+      "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present."
+    },
+    {
+      "id": "R199-CPC-20261010",
+      "result_version": "CPC-RESULT-v0.1.0",
+      "base_release": "UCT-MAP-v1.1.2",
+      "path": "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/MAP_EXTENSION.json",
+      "sha256": "975bdd0a502d725425d48763a6f0955ab545b63ccf3765c2d422a2b0a1cee2b5",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "publication_coverage_version": "UCT-PUB-v1.0.11",
+      "candidate_counts": {
+        "nodes": 8,
+        "active_conditional_rules": 5,
+        "nondeductive_context_links": 5
+      },
+      "compatibility_audit": "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/MAP_COMPATIBILITY_AUDIT.json",
+      "handoff": "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/HANDOFF_ZH.md",
+      "navigation_added_by": "SCU20261010",
+      "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present."
+    },
+    {
+      "id": "R200-SCF-20261010",
+      "result_version": "SCF-RESULT-v0.1.0",
+      "base_release": "UCT-MAP-v1.1.2",
+      "path": "records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/MAP_EXTENSION.json",
+      "sha256": "a7cda22b0f3efa292fb9bbaa826039cb7c43ea14bf70851a9ee51825b6463272",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "publication_coverage_version": "UCT-PUB-v1.0.12",
+      "candidate_counts": {
+        "nodes": 9,
+        "active_conditional_rules": 5,
+        "nondeductive_context_links": 5
+      },
+      "compatibility_audit": "records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/MAP_COMPATIBILITY_AUDIT.json",
+      "handoff": "records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/HANDOFF_ZH.md",
+      "navigation_added_by": "SCU20261010",
+      "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present."
+    },
+    {
+      "id": "R201-ROTM-20261010",
+      "result_version": "ROTM-RESULT-v0.1.0",
+      "base_release": "UCT-MAP-v1.1.2",
+      "path": "records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/MAP_EXTENSION.json",
+      "sha256": "279c2761ff8755784e1007cd3d641eb26fc909d86f2f2f8a3b882488efe98788",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "publication_coverage_version": "UCT-PUB-v1.0.13",
+      "candidate_counts": {
+        "nodes": 9,
+        "active_conditional_rules": 3,
+        "nondeductive_context_links": 5
+      },
+      "compatibility_audit": "records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/MAP_COMPATIBILITY_AUDIT.json",
+      "handoff": "records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/HANDOFF_ZH.md",
+      "navigation_added_by": "SCU20261010",
+      "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present.",
+      "effective_correction_index": "records/SCU20261010_Source_Consumer_Protocols/corrections/EFFECTIVE_CORRECTION_INDEX.json"
+    },
+    {
+      "id": "R202-TMAB-20261010",
+      "result_version": "TMAB-RESULT-v0.1.0",
+      "base_release": "UCT-MAP-v1.1.2",
+      "path": "records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/MAP_EXTENSION.json",
+      "sha256": "d417239cce217badaf099801d03ff064152d211c44f6b8d98d4aaa63d91fbd74",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "publication_coverage_version": "UCT-PUB-v1.0.14",
+      "candidate_counts": {
+        "nodes": 10,
+        "active_conditional_rules": 4,
+        "nondeductive_context_links": 5
+      },
+      "compatibility_audit": "records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/MAP_COMPATIBILITY_AUDIT.json",
+      "handoff": "records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/HANDOFF_ZH.md",
+      "navigation_added_by": "SCU20261010",
+      "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present.",
+      "effective_correction_index": "records/SCU20261010_Source_Consumer_Protocols/corrections/EFFECTIVE_CORRECTION_INDEX.json"
+    },
+    {
+      "id": "R203-ACD-20261010",
+      "result_version": "ACD-RESULT-v0.2.0",
+      "base_release": "UCT-MAP-v1.1.2",
+      "path": "records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/MAP_EXTENSION.json",
+      "sha256": "43510d7cc5c4595a355cd0e15d008d50efa9a6872f33bc9c9bc18a070e36fa8e",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "publication_coverage_version": "UCT-PUB-v1.0.15",
+      "candidate_counts": {
+        "nodes": 10,
+        "active_conditional_rules": 4,
+        "nondeductive_context_links": 5
+      },
+      "compatibility_audit": "records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/MAP_COMPATIBILITY_AUDIT.json",
+      "handoff": "records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/HANDOFF_ZH.md",
+      "navigation_added_by": "SCU20261010",
+      "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present."
+    },
+    {
+      "id": "R204-SAU-20261010",
+      "result_version": "SAU-RESULT-v0.2.0",
+      "base_release": "UCT-MAP-v1.1.2",
+      "path": "records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/MAP_EXTENSION.json",
+      "sha256": "c5c0b0cf669b089855509384bb2b8ee9e9d61be64afb6765cd4d5718e4c0b388",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "publication_coverage_version": "UCT-PUB-v1.0.16",
+      "candidate_counts": {
+        "nodes": 11,
+        "active_conditional_rules": 5,
+        "nondeductive_context_links": 5
+      },
+      "compatibility_audit": "records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/MAP_COMPATIBILITY_AUDIT.json",
+      "handoff": "records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/HANDOFF_ZH.md",
+      "navigation_added_by": "SCU20261010",
+      "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present."
+    },
+    {
+      "id": "SCU20261010",
+      "result_version": "SCU-RESULT-v0.2.0",
+      "base_release": "UCT-MAP-v1.1.2",
+      "path": "records/SCU20261010_Source_Consumer_Protocols/MAP_EXTENSION.json",
+      "sha256": "64768a5dcd3fa1f90eaf4f9b19b0ea58afdcf96a821f025216ef9ebaa67ff257",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "publication_coverage_version": "UCT-PUB-v1.0.18",
+      "candidate_counts": {
+        "nodes": 23,
+        "active_conditional_rules": 8,
+        "nondeductive_context_links": 16
+      },
+      "compatibility_audit": "records/SCU20261010_Source_Consumer_Protocols/MAP_AUDIT.md",
+      "handoff": "records/SCU20261010_Source_Consumer_Protocols/HANDOFF_ZH.md",
+      "instruction": "Full typed SCU contract locally reviewed. All base statements/premises/relationships were read, but exact deeper unread scope remains open. No candidate, correction or actual premise is promoted."
     }
   ],
   "pending_rebase_target": "UCT-MAP-v1.1.2; prior pending instructions and candidate version labels remain historical source metadata.",
@@ -267,12 +517,35 @@
   "on_source_change": "Fail closed; compare exact current bytes, repeat applicable semantic compatibility review and affected rederivation, then create a new immutable completed version.",
   "publication_coverage": {
     "entry": "PUBLICATION_COVERAGE.json",
-    "version": "UCT-PUB-v1.0.4",
+    "version": "UCT-PUB-v1.0.18",
     "base_census_version": "UCT-PUB-v1.0.0",
-    "update": "records/R192_Complete_Twin_Bridge_Invariance_20261009/PUBLICATION_COVERAGE_UPDATE.json",
+    "update": "records/SCU20261010_Source_Consumer_Protocols/PUBLICATION_COVERAGE_UPDATE.json",
     "report": "records/PUB20261009_Publication_Coverage/PUBLICATION_COVERAGE_REPORT_ZH.md",
     "nondeductive": true
   },
   "publication_coverage_changes_scientific_graph": false,
-  "full_review_status_scope": "The completed compatibility review applies to UCT-MAP-v1.1.2 only, not to pending checkpoints including R192."
+  "full_review_status_scope": "The historical completed review flag applies only to UCT-MAP-v1.1.2. Fresh SCU review is complete at the 1,608 statement/premise/relation layer and explicitly incomplete for the recorded deeper fields/proofs. All pending records remain disabled.",
+  "effective_pending_corrections": {
+    "index": "records/SCU20261010_Source_Consumer_Protocols/corrections/EFFECTIVE_CORRECTION_INDEX.json",
+    "disabled": true,
+    "new_nodes": 6,
+    "new_rules": 2,
+    "overridden_historical_pending_records": 8,
+    "completed_graph_changed": false
+  },
+  "latest_scoped_review": {
+    "audit": "records/SCU20261010_Source_Consumer_Protocols/MAP_AUDIT.md",
+    "exact_unread_scope": "records/SCU20261010_Source_Consumer_Protocols/review/EXACT_UNREAD_SCOPE.json",
+    "status": "AUDIT_INCOMPLETE_AT_FULL_RAW_CONTRACT_AND_HISTORICAL_PROOF_DEPTH",
+    "statement_premise_relationship_items_read": 1608,
+    "unread_statement_premise_relationship_ids": [],
+    "raw_contract_item_ids_not_fully_reread": 901,
+    "raw_contract_fields_not_fully_reread": 1101,
+    "supplementary_semantic_field_item_ids_not_fully_reread": 495,
+    "counts_overlap_do_not_sum": true,
+    "supplementary_semantic_fields_not_fully_reread": 727,
+    "distinct_item_ids_with_unreviewed_nested_or_supplementary_fields": 1034,
+    "distinct_unreviewed_nested_or_supplementary_fields": 1828,
+    "historical_source_proof_ids_not_fully_independently_reconstructed": 1347
+  }
 }

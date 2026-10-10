@@ -1,0 +1,12 @@
+{
+  "result_id": "SCU-RESULT-v0.2.0",
+  "command": "python check_source_consumers.py",
+  "python": "3.12.14",
+  "elapsed_seconds": 0.347918,
+  "code_sha256": "8643c0b7fa63cf78b0aa4c5f8a558480e8108e29a8a7eb6b6895c0930b7690cb",
+  "result_sha256": "ef545c13518f1ff1292d8214dc455b2cf05239c497879550a525004372692300",
+  "status": "PASS",
+  "empirical_participants": 0,
+  "actual_device_or_neural_experiment": false,
+  "remote_save_verified_by_this_worker": false
+}

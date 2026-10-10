@@ -1,0 +1,10 @@
+motor_root,predictor_root,baseline_success,baseline_alignment,same_root,probe_1_mismatch,probe_2_mismatch
+0,0,1,1,1,0,0
+0,1,1,1,0,1,0
+0,2,1,1,0,0,1
+1,0,1,1,0,1,0
+1,1,1,1,1,0,0
+1,2,1,1,0,1,1
+2,0,1,1,0,0,1
+2,1,1,1,0,1,1
+2,2,1,1,1,0,0

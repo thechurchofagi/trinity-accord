@@ -1,0 +1,47 @@
+{
+  "schema": "uct-scoped-manuscript-decision/1",
+  "decision_id": "SCU20261010-MD-v1.0.0",
+  "decision": "COMPLETE_SCOPED_WORKING_MANUSCRIPT",
+  "scope": "One cumulative R204/R205/SCU theoretical methods/application paper",
+  "guide": "RESEARCH_MASTER_GUIDE.md v2.3 §0",
+  "title": "Matched Behavior and Source Use",
+  "subtitle": "Exact intervention protocols, consumer classes, and limits of sensorimotor interpretation",
+  "author": "Hongju Liu",
+  "date": "2026-10-10",
+  "manuscript_version": "SCU-PAPER-v1.0.0",
+  "result_version": "SCU-RESULT-v0.2.0",
+  "manuscript": "Matched_Behavior_and_Source_Use_v1.0.0.md",
+  "pdf": "Matched_Behavior_and_Source_Use_v1.0.0.pdf",
+  "grounds": [
+    "A single precise diagnostic question, explicit assumptions and proved exact bounds for three distinct mechanism/prior-information classes.",
+    "Executable countermodels locate failures under redundancy, cancellation, carrier splitting and incorrect predictive chronology.",
+    "Claim-level subtraction of published UCT material, concurrent R205 and direct primary literature leaves a modest reusable application synthesis.",
+    "Internal independent review identified and resolved narrow manuscript defects; exact computations were rerun in separate directories."
+  ],
+  "not_required_for_this_manuscript": [
+    "A new mathematical field",
+    "A positive H bridge or human dataset"
+  ],
+  "not_established": [
+    "Worldwide priority",
+    "Journal acceptance",
+    "Actual system instantiation",
+    "A completed new UCT map release",
+    "A named phenomenal endpoint"
+  ],
+  "historical_hold_decisions": "Retained unchanged, including R204/R205 and the frozen census decision. This current decision concerns the cumulative manuscript and does not rewrite their earlier standalone assessments.",
+  "internal_review": "AI-assisted parallel model, coverage and semantic review; not external peer review",
+  "effective_map": "UCT-MAP-v1.1.2",
+  "candidate_enabled": false,
+  "full_new_map_semantic_audit": "AUDIT_INCOMPLETE",
+  "publication_coverage_version": "UCT-PUB-v1.0.18",
+  "release_status": "COMPLETE_WORKING_MANUSCRIPT_NOT_FORMALLY_PUBLISHED",
+  "external_release_authorized": false,
+  "supporting_records": [
+    "REVIEW_RESPONSE.md",
+    "MAP_AUDIT.md",
+    "PUBLICATION_COVERAGE_UPDATE.json",
+    "REPRODUCTION_RECEIPT.json",
+    "PDF_QA_RECEIPT.json"
+  ]
+}

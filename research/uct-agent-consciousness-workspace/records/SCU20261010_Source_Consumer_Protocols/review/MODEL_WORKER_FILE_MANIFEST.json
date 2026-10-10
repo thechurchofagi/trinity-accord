@@ -1,0 +1,106 @@
+{
+  "module_id": "SCU20261010",
+  "result_version": "SCU-RESULT-v0.2.0",
+  "status": "FROZEN_FOR_PARENT_FINAL_SYNC",
+  "files": [
+    {
+      "name": "CLAIM_LEDGER.json",
+      "bytes": 15990,
+      "sha256": "85a09d387f36b6134a9dd79933e8bf79925e73a0638885eb06b2c9857cc5e0be"
+    },
+    {
+      "name": "EXACT_RESULTS.json",
+      "bytes": 9742,
+      "sha256": "ef545c13518f1ff1292d8214dc455b2cf05239c497879550a525004372692300"
+    },
+    {
+      "name": "FAILURES.md",
+      "bytes": 5777,
+      "sha256": "586a95f8678794a87f8851e66c5ad929bac30a1f453f0493ef8bb41e9cc768cf"
+    },
+    {
+      "name": "GAP_LEDGER.md",
+      "bytes": 1898,
+      "sha256": "161d168d83a3cf2b842e219e89c1dd498200822c052ff261ed29ae208b8a2cb5"
+    },
+    {
+      "name": "HANDOFF_ZH.md",
+      "bytes": 6397,
+      "sha256": "5f732d4d1ab1e76f610a99645e1fde920773535adc1e61b4c4d1f675b1b031e6"
+    },
+    {
+      "name": "MANUSCRIPT_REVIEW.md",
+      "bytes": 8263,
+      "sha256": "f9339715590fc94229dafcd12b464ef3dabbe884006d223ebdd54e4a82b34ee5"
+    },
+    {
+      "name": "MAP_AUDIT.md",
+      "bytes": 4997,
+      "sha256": "4d6f1d37fba76c11843a2b8a22291734e1bc5b7fb25e0a0dcef52d16b9a5c938"
+    },
+    {
+      "name": "MAP_EXTENSION.json",
+      "bytes": 41215,
+      "sha256": "64768a5dcd3fa1f90eaf4f9b19b0ea58afdcf96a821f025216ef9ebaa67ff257"
+    },
+    {
+      "name": "MODEL_CLAIM_CONTRACTS.json",
+      "bytes": 16133,
+      "sha256": "2fd7a42632cae3fbf91ec9b1e0304d643c4c9fd53c3abc703191f52e91c84ddb"
+    },
+    {
+      "name": "PROBE_PROTOCOL.md",
+      "bytes": 5611,
+      "sha256": "b89888177a5fa8d38c8038ceff8f1906c837e536341480bda28a73108129ed5c"
+    },
+    {
+      "name": "PUBLICATION_COVERAGE_UPDATE.json",
+      "bytes": 2071,
+      "sha256": "76b3afe265d6243b82c10c7b76f73dd4b5f075fe2d0bb712197a44e106fa89fd"
+    },
+    {
+      "name": "RESEARCH_NOTE.md",
+      "bytes": 31169,
+      "sha256": "5f9249a9fbe6ea96342b6b004e34332a5dbd86fbea5c8261816aac983f212fa7"
+    },
+    {
+      "name": "REVIEW_RESPONSE.md",
+      "bytes": 3773,
+      "sha256": "81c0920aaaeb65497e5b853631e5e090e944c6bc889d2569fcc3e0051b2d4652"
+    },
+    {
+      "name": "RUN_RECEIPT.json",
+      "bytes": 460,
+      "sha256": "6e49075a76a8960671f711657233e1c90ffe4618e41efc1c76a6f281e76722b5"
+    },
+    {
+      "name": "SOURCE_SCOPE.json",
+      "bytes": 6474,
+      "sha256": "3bc8813d9f85a297989c7d74191a99da0332a7d2f172cf5bc7b5f993b7c0626e"
+    },
+    {
+      "name": "THREE_SOURCE_ROUTE_TABLE.csv",
+      "bytes": 242,
+      "sha256": "672c44580db31bf2fc1b1c5ea8cca9bcf304adee843223dbd935ae8333161aa0"
+    },
+    {
+      "name": "WORK_LOG.md",
+      "bytes": 10352,
+      "sha256": "9794ecd1ee7f100d3cc96c473969c3799f12338631fba291924c903a2a563d9f"
+    },
+    {
+      "name": "check_source_consumers.py",
+      "bytes": 20209,
+      "sha256": "8643c0b7fa63cf78b0aa4c5f8a558480e8108e29a8a7eb6b6895c0930b7690cb"
+    }
+  ],
+  "code_and_result_receipt_match": true,
+  "canonical_or_remote_write_by_this_worker": false,
+  "whole_map_semantic_certification_by_this_worker": false,
+  "final_typed_module_counts": {
+    "nodes": 23,
+    "rules": 8,
+    "nondeductive_contexts": 16
+  },
+  "manifest_self_hash_excluded": true
+}

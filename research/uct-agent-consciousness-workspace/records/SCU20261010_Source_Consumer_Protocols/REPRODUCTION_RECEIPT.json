@@ -1,0 +1,33 @@
+{
+  "schema": "uct-scu-independent-rerun/1",
+  "executed_at_utc": "2026-10-09T23:59:09Z",
+  "executor": "root independent directory",
+  "runs": [
+    {
+      "result": "SCU",
+      "code_sha256": "8643c0b7fa63cf78b0aa4c5f8a558480e8108e29a8a7eb6b6895c0930b7690cb",
+      "output_sha256": "ef545c13518f1ff1292d8214dc455b2cf05239c497879550a525004372692300",
+      "frozen_output_sha256": "ef545c13518f1ff1292d8214dc455b2cf05239c497879550a525004372692300",
+      "byte_equal": true,
+      "elapsed_seconds": 0.4891356869993615,
+      "stdout": "{\"status\": \"PASS\", \"counts\": {\"baseline_episodes\": 406, \"coded_pure_route_episodes\": 576, \"all_matrix_fiber_pairs\": 5045, \"known_root_episodes\": 203, \"relay_source_comparisons\": 256, \"transported_source_coordinate_comparisons\": 256, \"nominal_forward_state_word_comparisons\": 1116, \"OR_unit_probe_pairs\": 1244}, \"minimum_probes\": [{\"n\": 2, \"class\": \"single_source\", \"minimum\": 1}, {\"n\": 2, \"class\": \"nonempty_OR_subsets\", \"minimum\": 2}, {\"n\": 3, \"class\": \"single_source\", \"minimum\": 2}, {\"n\": 3, \"class\": \"nonempty_OR_subsets\", \"minimum\": 3}, {\"n\": 4, \"class\": \"single_source\", \"minimum\": 2}, {\"n\": 4, \"class\": \"nonempty_OR_subsets\", \"minimum\": 4}, {\"n\": 5, \"class\": \"single_source\", \"minimum\": 3}, {\"n\": 5, \"class\": \"nonempty_OR_subsets\", \"minimum\": 5}], \"elapsed_seconds\": 0.425285}"
+    },
+    {
+      "result": "R205",
+      "code_sha256": "1dc78420dee7066fa285cf5461cd4931628ba6dfa6afaf1ec73a9065d42f60d2",
+      "output_sha256": "4fe583d4bb6d8b37ea71d98ee226097f107e65c117831cfe497ec1a0efe0216e",
+      "frozen_output_sha256": "4fe583d4bb6d8b37ea71d98ee226097f107e65c117831cfe497ec1a0efe0216e",
+      "byte_equal": true,
+      "elapsed_seconds": 0.06502751399966655,
+      "stdout": "{\"status\": \"FINITE_MODEL_CLAIMS_VERIFIED_NOT_EMPIRICAL\", \"counts\": {\"single_read_installations\": 608, \"matched_episodes\": 2872, \"source_probe_episodes\": 5744, \"identified_installations\": 608, \"recoded_episodes\": 38224, \"cancellation_source_probes\": 139, \"cancellation_branch_probes\": 1288}, \"violations\": 0}"
+    }
+  ],
+  "r204": {
+    "source_code_sha256": "08e0556cb81055da7f78320f637358e83e366750df148430aa3a6a1c42ada99c",
+    "output_sha256": "3017d46e6647e6f299ee798688267ae31236979bb1644c3129414c73f7fb3adc",
+    "byte_equal": true,
+    "model_instances": 28096,
+    "violations": 0
+  },
+  "scope": "Model execution and exact output reproduction only; not actual installation, all-map semantics or phenomenal verification."
+}

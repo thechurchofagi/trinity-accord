@@ -1,0 +1,204 @@
+{
+  "schema": "uct-disabled-effective-correction-overlay/1",
+  "overlay_id": "SCU20261010-CORR-R202-v0.1.0",
+  "base_completed_release": "UCT-MAP-v1.1.2",
+  "review_snapshot_sha": "a22ad487b2a072293de2ecb55b4f2cc2a2c0dafc",
+  "historical_source_version": "TMAB-RESULT-v0.1.0",
+  "sources": [
+    {
+      "path": "records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/MAP_EXTENSION.json",
+      "sha256": "d417239cce217badaf099801d03ff064152d211c44f6b8d98d4aaa63d91fbd74"
+    },
+    {
+      "path": "records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/RESEARCH_NOTE.md",
+      "sha256": "8b0cb6460abb79c5d3a701c5c411207743f82ad777b8a6ef2a9893c5219ff9b8"
+    }
+  ],
+  "status": "PENDING_CHECKPOINT_DISABLED",
+  "enabled_as_established_premise": false,
+  "actual_premises_discharged": false,
+  "phenomenal_validation": false,
+  "completed_map_changed": false,
+  "historical_files_changed": false,
+  "proof_code": "verify_effective_corrections.py",
+  "exact_results": "EFFECTIVE_CORRECTION_EXACT_RESULTS.json",
+  "effective_overrides": [
+    {
+      "target_id": "R202:CONDITIONAL_NONDIFFERENTIALITY",
+      "expected_original_record_sha256": "ddfd64d9823b968613e376ceed11a17528a362623ed3375c1841223398008b95",
+      "hash_serialization": "UTF-8 JSON; sorted keys; ensure_ascii=false; separators comma/colon",
+      "operation": "OVERLAY_FIELDS_WITHOUT_MODIFYING_HISTORICAL_SOURCE",
+      "replacement_fields": {
+        "statement": "Within the same validation domain V and actual U=1, endpoint J is conditionally independent of marker M given H in both supported H classes. Bounded departures are a separate residual-sensitivity route and do not satisfy this exact-inversion premise.",
+        "scope": "Exact nondifferential-error route only. Aggregate R=0 is an alternative sufficient premise in a separate rule.",
+        "enabled_as_established_premise": false,
+        "actual_premises_discharged": false,
+        "proof_location": "EFFECTIVE_CORRECTIONS.md; EFFECTIVE_CORRECTION_EXACT_RESULTS.json; verify_effective_corrections.py",
+        "effective_correction_status": "CANDIDATE_DISABLED"
+      },
+      "rationale": "Separates exact point identification from merely bounded dependence; the original OR weakened its own exact premise."
+    },
+    {
+      "target_id": "R202:AUDIT_INVERSION_RESULT",
+      "expected_original_record_sha256": "e98fdfd5d1d782b362af54213421665fe2c69f4e0a5d9144cbacad7b68f39e4e",
+      "hash_serialization": "UTF-8 JSON; sorted keys; ensure_ascii=false; separators comma/colon",
+      "operation": "OVERLAY_FIELDS_WITHOUT_MODIFYING_HISTORICAL_SOURCE",
+      "replacement_fields": {
+        "statement": "Under the fixed coherent audit/endpoint/actual-use contract, positivity c<j<a, and zero aggregate residual R, recover pi=(j-c)/(a-c), q1=(r-c*m)/(j-c), q0=(a*m-r)/(a-j). Conditional independence is sufficient for R=0. A nonzero residual bound alone gives the separately defined common-residual feasible set, not these exact values.",
+        "scope": "Only the same V,H,M,J,A,U=1 law and calibrated endpoint matrix; no V-to-T transport inference is included.",
+        "enabled_as_established_premise": false,
+        "actual_premises_discharged": false,
+        "proof_location": "EFFECTIVE_CORRECTIONS.md; EFFECTIVE_CORRECTION_EXACT_RESULTS.json; verify_effective_corrections.py",
+        "effective_correction_status": "CANDIDATE_DISABLED"
+      },
+      "rationale": "Makes the exact inversion's sufficient condition and its scope explicit."
+    },
+    {
+      "target_id": "R202:r_audit_inversion",
+      "expected_original_record_sha256": "a2c290dbed5e5f4688560af3adb02e7adc270864dcdc4a3124e32694b4a2b639",
+      "hash_serialization": "UTF-8 JSON; sorted keys; ensure_ascii=false; separators comma/colon",
+      "operation": "OVERLAY_FIELDS_WITHOUT_MODIFYING_HISTORICAL_SOURCE",
+      "replacement_fields": {
+        "all_of": [
+          "R202:FIXED_THREE_DOMAIN_CONTRACT",
+          "R202:PROSPECTIVE_IGNORABLE_AUDIT",
+          "R202:INFORMATIVE_SIGNED_ENDPOINT",
+          "R202:CONDITIONAL_NONDIFFERENTIALITY",
+          "R202:ACTUAL_USE_EVIDENCE_FIREWALL",
+          "SCU20261010:CORR_R202_JOINT_AUDIT_LAW"
+        ],
+        "statement": "Conditional independence makes R=0; invert the same two-by-two mixture law at c<j<a to recover pi,q0,q1 exactly.",
+        "binding": "One V,H,M,J,A,U=1 joint law, endpoint-error calibration, audit-selection contract, observed M/J law and positive-support condition are retained. A different dependence model cannot be substituted while keeping the zero-residual answer.",
+        "alternative_route_semantics": "Use the separately guarded zero-aggregate-residual route if independence is absent; a nonzero bound invokes the sensitivity-set rule instead.",
+        "enabled_as_established_premise": false,
+        "actual_premises_discharged": false,
+        "proof_location": "EFFECTIVE_CORRECTIONS.md; EFFECTIVE_CORRECTION_EXACT_RESULTS.json; verify_effective_corrections.py",
+        "effective_correction_status": "CANDIDATE_DISABLED"
+      },
+      "rationale": "Adds explicit joint probability/positivity binding and retains the exact independence route."
+    }
+  ],
+  "nodes": [
+    {
+      "id": "SCU20261010:CORR_R202_JOINT_AUDIT_LAW",
+      "kind": "JOINT_PROBABILITY_AND_POSITIVITY_PREMISE",
+      "statement": "Use one coherent binary joint law of H,M,J in V conditional on actual U=1, with the independently calibrated endpoint rates a=P(J=1|H=1), c=P(J=1|H=0), a>c, and c<j=P(J=1)<a. The audited m=P(M=1),j,r=P(M=1,J=1) must concern that same validation law after justified sampling correction.",
+      "scope": "One frozen V,H,M,J,A,U=1 endpoint and audit interface; both H classes have positive mass. Probability coherence, calibration and sampling are simultaneous, not separate adjustable scalar inputs.",
+      "status": "CANDIDATE_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false,
+      "node_presence_is_premise_truth": false
+    },
+    {
+      "id": "SCU20261010:CORR_R202_ZERO_RESIDUAL",
+      "kind": "OPEN_ZERO_RESIDUAL_PREMISE",
+      "statement": "The aggregate conditional covariance R=(1-pi)Cov(M,J|H=0)+pi Cov(M,J|H=1) is zero in the same validation law. Conditional independence J independent of M given H is sufficient; an asserted cancellation requires independent justification.",
+      "scope": "One common residual in the fixed joint audit law. The observed fit does not establish R=0.",
+      "status": "CANDIDATE_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false,
+      "node_presence_is_premise_truth": false
+    },
+    {
+      "id": "SCU20261010:CORR_R202_COMMON_RESIDUAL_BOUND",
+      "kind": "OPEN_RESIDUAL_BOUND_PREMISE",
+      "statement": "An independently justified kappa>=0 bounds the one common aggregate residual |R|<=kappa in the fixed validation law. H-specific component covariances obey a coherent binary joint law.",
+      "scope": "One V,H,M,J,A,U=1 instance; nuisance uncertainty is shared by both recovered marker rates.",
+      "status": "CANDIDATE_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false,
+      "node_presence_is_premise_truth": false
+    },
+    {
+      "id": "SCU20261010:CORR_R202_COMMON_RESIDUAL_SET",
+      "kind": "CONDITIONAL_SENSITIVITY_RESULT",
+      "statement": "pi=(j-c)/(a-c), q1=(r-c*m-R)/(j-c), q0=(a*m-r+R)/(a-j), with the SAME R. Under |R|<=kappa retain all jointly coherent candidate laws and their rate pairs satisfying those equations. Marginal intervals qhat1 plus/minus kappa/(j-c) and qhat0 plus/minus kappa/(a-j), clipped to [0,1], are conservative outer intervals, not independent choices or a claim of arbitrary-budget sharpness.",
+      "scope": "Fixed positive-support validation law and declared residual budget; no automatic transport from V to nonreporting T.",
+      "status": "CANDIDATE_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false,
+      "node_presence_is_premise_truth": false
+    }
+  ],
+  "rules": [
+    {
+      "id": "SCU20261010:corr_r202_zero_residual_inversion",
+      "all_of": [
+        "R202:FIXED_THREE_DOMAIN_CONTRACT",
+        "R202:PROSPECTIVE_IGNORABLE_AUDIT",
+        "R202:INFORMATIVE_SIGNED_ENDPOINT",
+        "R202:ACTUAL_USE_EVIDENCE_FIREWALL",
+        "SCU20261010:CORR_R202_JOINT_AUDIT_LAW",
+        "SCU20261010:CORR_R202_ZERO_RESIDUAL"
+      ],
+      "conclusion": "R202:AUDIT_INVERSION_RESULT",
+      "statement": "Invert the mixture equations with the independently supplied common R=0; conditional independence is not necessary if the aggregate zero is otherwise justified.",
+      "binding": "All rates, audit inclusion, actual U=1, target meaning, endpoint calibration and nuisance terms concern the SAME V/H/M/J law. No residual is independently chosen for q0 and q1; transport to T remains a separate premise.",
+      "same_instance_required": true,
+      "kind": "CONDITIONAL_CORRECTION_RULE",
+      "status": "CANDIDATE_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false,
+      "proof_location": "EFFECTIVE_CORRECTIONS.md; EFFECTIVE_CORRECTION_EXACT_RESULTS.json"
+    },
+    {
+      "id": "SCU20261010:corr_r202_bounded_residual_set",
+      "all_of": [
+        "R202:FIXED_THREE_DOMAIN_CONTRACT",
+        "R202:PROSPECTIVE_IGNORABLE_AUDIT",
+        "R202:INFORMATIVE_SIGNED_ENDPOINT",
+        "R202:ACTUAL_USE_EVIDENCE_FIREWALL",
+        "SCU20261010:CORR_R202_JOINT_AUDIT_LAW",
+        "SCU20261010:CORR_R202_COMMON_RESIDUAL_BOUND"
+      ],
+      "conclusion": "SCU20261010:CORR_R202_COMMON_RESIDUAL_SET",
+      "statement": "Retain the common-residual formulas and probability-coherent feasible laws; derive clipped marginal outer intervals by |R|<=kappa. Do not report unique rates from the bound alone.",
+      "binding": "All rates, audit inclusion, actual U=1, target meaning, endpoint calibration and nuisance terms concern the SAME V/H/M/J law. No residual is independently chosen for q0 and q1; transport to T remains a separate premise.",
+      "same_instance_required": true,
+      "kind": "CONDITIONAL_CORRECTION_RULE",
+      "status": "CANDIDATE_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false,
+      "proof_location": "EFFECTIVE_CORRECTIONS.md; EFFECTIVE_CORRECTION_EXACT_RESULTS.json"
+    }
+  ],
+  "context_links": [],
+  "manual_affected_rederivation": [
+    "E[J]=c+(a-c)pi identifies pi when a>c; positivity c<j<a keeps both class denominators nonzero.",
+    "E[MJ]=a*pi*q1+c*(1-pi)*q0+R and E[M]=pi*q1+(1-pi)*q0 give q1=(r-cm-R)/(j-c) and q0=(am-r+R)/(a-j). The same R enters with opposite signs.",
+    "R202:r_audit_inversion recovers its original point result only on the independence/zero-R branch. The coherent R203 dependent twin reverses the naive direction and is excluded only by this additional premise.",
+    "R202:r_three_domain_stop remains a stopping rule: even exact V recovery does not provide V-to-T class-conditional transport. A residual set yields an even weaker V conclusion, never a stronger T conclusion.",
+    "R203's covariance identity K=pi(1-pi)(a-c)Delta+R agrees algebraically with the repaired inversion and needs no correction to its core theorem."
+  ],
+  "affected_closure": {
+    "seed_ids": [
+      "R202:AUDIT_INVERSION_RESULT",
+      "R202:CONDITIONAL_NONDIFFERENTIALITY",
+      "R202:r_audit_inversion"
+    ],
+    "syntactic_forward_dependency_ids": [
+      "R202:AUDIT_INVERSION_RESULT",
+      "R202:CONDITIONAL_NONDIFFERENTIALITY",
+      "R202:THREE_DOMAIN_STOP_RULE",
+      "R202:r_audit_inversion",
+      "R202:r_three_domain_stop"
+    ],
+    "affected_node_ids": [
+      "R202:AUDIT_INVERSION_RESULT",
+      "R202:CONDITIONAL_NONDIFFERENTIALITY",
+      "R202:THREE_DOMAIN_STOP_RULE"
+    ],
+    "affected_rule_ids": [
+      "R202:r_audit_inversion",
+      "R202:r_three_domain_stop"
+    ],
+    "adjacent_nondeductive_context_ids": [
+      "R202:ctx_C1",
+      "R202:ctx_R157",
+      "R202:ctx_U1"
+    ],
+    "warning": "This is a syntactic over-approximation for review routing, not proof reconstruction or actual premise discharge. Context links never propagate deduction.",
+    "completed_map_ids_requiring_replacement": [],
+    "completed_map_forward_dependents": []
+  }
+}

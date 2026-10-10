@@ -1,0 +1,103 @@
+{
+  "schema": "uct-disabled-effective-correction-overlay/1",
+  "overlay_id": "SCU20261010-CORR-R201-v0.1.0",
+  "base_completed_release": "UCT-MAP-v1.1.2",
+  "review_snapshot_sha": "a22ad487b2a072293de2ecb55b4f2cc2a2c0dafc",
+  "historical_source_version": "ROTM-RESULT-v0.1.0",
+  "sources": [
+    {
+      "path": "records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/MAP_EXTENSION.json",
+      "sha256": "279c2761ff8755784e1007cd3d641eb26fc909d86f2f2f8a3b882488efe98788"
+    },
+    {
+      "path": "records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/RESEARCH_NOTE.md",
+      "sha256": "e419f79283ffc2e58fba08cd8723096055fbe8c30831730dd3b5541d96b4cf87"
+    }
+  ],
+  "status": "PENDING_CHECKPOINT_DISABLED",
+  "enabled_as_established_premise": false,
+  "actual_premises_discharged": false,
+  "phenomenal_validation": false,
+  "completed_map_changed": false,
+  "historical_files_changed": false,
+  "proof_code": "verify_effective_corrections.py",
+  "exact_results": "EFFECTIVE_CORRECTION_EXACT_RESULTS.json",
+  "effective_overrides": [
+    {
+      "target_id": "R201:STRICTNESS_COUNTERMODELS",
+      "expected_original_record_sha256": "ab8441e6e3f4f0752436dde8f3dbb2b4b116d67cf11e8a56716f6eceeaeba741",
+      "hash_serialization": "UTF-8 JSON; sorted keys; ensure_ascii=false; separators comma/colon",
+      "operation": "OVERLAY_FIELDS_WITHOUT_MODIFYING_HISTORICAL_SOURCE",
+      "replacement_fields": {
+        "statement": "There exists a coherent equality example with rho=1/2, b=beta=1/10 and epsilon0=epsilon1=0 in which delta=1/10 and Delta_T=0. There exists a separate coherent below-threshold example with rho=1/2, b=beta=1/10, epsilon0=epsilon1=1/10, delta=3/20 and Delta_T=-1/10. Without independently positive endpoint sign, a separate reversed-endpoint example has delta=1 and Delta_C=-1. These witness failure of a general non-strict replacement and of unconstrained endpoint orientation; they do not prove sharpness at every nuisance-budget tuple.",
+        "scope": "Coherent binary probability laws; original rho=1,b=1/10 scalar tuples are withdrawn as unrealizable probability witnesses.",
+        "quantifier": "Existential: one coherent witness per displayed failure mode, with separate world and budget binding.",
+        "enabled_as_established_premise": false,
+        "actual_premises_discharged": false,
+        "proof_location": "EFFECTIVE_CORRECTIONS.md; EFFECTIVE_CORRECTION_EXACT_RESULTS.json; verify_effective_corrections.py",
+        "effective_correction_status": "CANDIDATE_DISABLED"
+      },
+      "rationale": "rho=1 on supported J strata forces H=J almost surely and hence b=0. Replace impossible scalar tuples with actual joint laws."
+    },
+    {
+      "target_id": "R201:r_strictness_witnesses",
+      "expected_original_record_sha256": "8bed0049051d00c62cd0d7db94cf0d6645b9d82c3d8659df4fcc7c7950e97d0b",
+      "hash_serialization": "UTF-8 JSON; sorted keys; ensure_ascii=false; separators comma/colon",
+      "operation": "OVERLAY_FIELDS_WITHOUT_MODIFYING_HISTORICAL_SOURCE",
+      "replacement_fields": {
+        "all_of": [
+          "R201:FIXED_CALIBRATION_TRANSPORT_DOMAIN",
+          "SCU20261010:CORR_R201_COHERENT_WITNESS_DOMAIN"
+        ],
+        "statement": "Evaluate the three explicitly coherent rational probability witnesses under their own retained premises. Equality and below-threshold worlds are not required to satisfy the strict-margin certificate premise.",
+        "binding": "Fix target meaning and variable sorts at schema level. Bind C,T,H,J,M,U=1, a single coherent joint calibration law, target conditionals and budgets separately inside each existential witness. Never combine a strict-margin instance with a different equality or reversal instance.",
+        "alternative_route_semantics": "The three failure modes are alternative witnesses. Positive endpoint sign is retained in the first two and deliberately dropped in the third.",
+        "enabled_as_established_premise": false,
+        "actual_premises_discharged": false,
+        "proof_location": "EFFECTIVE_CORRECTIONS.md; EFFECTIVE_CORRECTION_EXACT_RESULTS.json; verify_effective_corrections.py",
+        "effective_correction_status": "CANDIDATE_DISABLED"
+      },
+      "rationale": "Removes the invalid all_of ROBUST_MARGIN_PREMISE from the counterexample route; same_instance_required remains true within each witness."
+    }
+  ],
+  "nodes": [
+    {
+      "id": "SCU20261010:CORR_R201_COHERENT_WITNESS_DOMAIN",
+      "kind": "CONDITIONAL_DECLARATION",
+      "statement": "Fix a mathematical family of coherent binary calibration and target probability laws with supported H/J strata and explicit nuisance budgets. Each displayed equality, below-threshold, or unsigned-endpoint counterexample is a SEPARATE joint law satisfying its own retained premises. The strict positive-margin premise is deliberately not imposed on equality or below-threshold witnesses.",
+      "scope": "Exactly the three rational witnesses in EFFECTIVE_CORRECTION_EXACT_RESULTS.json and their explicitly proved interpretation; no arbitrary-positive-budget sharpness claim and no actual endpoint validation.",
+      "status": "CANDIDATE_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false,
+      "node_presence_is_premise_truth": false
+    }
+  ],
+  "rules": [],
+  "context_links": [],
+  "manual_affected_rederivation": [
+    "R201:r_source_lower_bound remains valid: delta=rho Delta_C+b, 0<rho<=1 and delta-beta>0 imply Delta_C=(delta-b)/rho>=delta-beta.",
+    "R201:r_target_sign_certificate remains valid: apply both class-specific drift bounds in the same C-to-T instance to obtain Delta_T>=delta-beta-epsilon0-epsilon1>0.",
+    "R201:r_strictness_witnesses is replaced by three coherent existential worlds. The original strict-margin premise cannot be used in the equality or below-threshold worlds.",
+    "R202 marginal nonidentification and R203 total covariance do not use the rejected R201 witness as a deductive premise. Their own defects or scope conditions are reviewed separately."
+  ],
+  "affected_closure": {
+    "seed_ids": [
+      "R201:STRICTNESS_COUNTERMODELS",
+      "R201:r_strictness_witnesses"
+    ],
+    "syntactic_forward_dependency_ids": [
+      "R201:STRICTNESS_COUNTERMODELS",
+      "R201:r_strictness_witnesses"
+    ],
+    "affected_node_ids": [
+      "R201:STRICTNESS_COUNTERMODELS"
+    ],
+    "affected_rule_ids": [
+      "R201:r_strictness_witnesses"
+    ],
+    "adjacent_nondeductive_context_ids": [],
+    "warning": "This is a syntactic over-approximation for review routing, not proof reconstruction or actual premise discharge. Context links never propagate deduction.",
+    "completed_map_ids_requiring_replacement": [],
+    "completed_map_forward_dependents": []
+  }
+}

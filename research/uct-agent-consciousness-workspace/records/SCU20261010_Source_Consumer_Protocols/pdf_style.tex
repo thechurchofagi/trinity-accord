@@ -1,0 +1,17 @@
+\definecolor{NavyBlue}{HTML}{20394F}
+\usepackage{microtype}
+\usepackage{fancyhdr}
+\usepackage{etoolbox}
+\usepackage{needspace}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Matched Behavior and Source Use}
+\fancyhead[R]{\small Liu · v1.0.0}
+\fancyfoot[C]{\thepage}
+\setlength{\headheight}{15pt}
+\setlength{\emergencystretch}{3em}
+\widowpenalty=10000
+\clubpenalty=10000
+\displaywidowpenalty=10000
+\AtBeginEnvironment{longtable}{\small}
+\renewcommand{\arraystretch}{1.15}

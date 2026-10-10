@@ -1,0 +1,528 @@
+{
+  "result_id": "SCU-RESULT-v0.2.0",
+  "status": "PASS",
+  "violations": 0,
+  "scope": "Finite controlled source/consumer event models only",
+  "phenomenal_variables_generated": false,
+  "counts": {
+    "baseline_episodes": 406,
+    "coded_pure_route_episodes": 576,
+    "all_matrix_fiber_pairs": 5045,
+    "known_root_episodes": 203,
+    "relay_source_comparisons": 256,
+    "transported_source_coordinate_comparisons": 256,
+    "nominal_forward_state_word_comparisons": 1116,
+    "OR_unit_probe_pairs": 1244
+  },
+  "n3_unknown_source_schedule": [
+    [
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      1
+    ]
+  ],
+  "n3_all_route_allocations": [
+    {
+      "motor_root": 0,
+      "predictor_root": 0,
+      "baseline_success": 1,
+      "baseline_alignment": 1,
+      "same_root": 1,
+      "probe_1_mismatch": 0,
+      "probe_2_mismatch": 0
+    },
+    {
+      "motor_root": 0,
+      "predictor_root": 1,
+      "baseline_success": 1,
+      "baseline_alignment": 1,
+      "same_root": 0,
+      "probe_1_mismatch": 1,
+      "probe_2_mismatch": 0
+    },
+    {
+      "motor_root": 0,
+      "predictor_root": 2,
+      "baseline_success": 1,
+      "baseline_alignment": 1,
+      "same_root": 0,
+      "probe_1_mismatch": 0,
+      "probe_2_mismatch": 1
+    },
+    {
+      "motor_root": 1,
+      "predictor_root": 0,
+      "baseline_success": 1,
+      "baseline_alignment": 1,
+      "same_root": 0,
+      "probe_1_mismatch": 1,
+      "probe_2_mismatch": 0
+    },
+    {
+      "motor_root": 1,
+      "predictor_root": 1,
+      "baseline_success": 1,
+      "baseline_alignment": 1,
+      "same_root": 1,
+      "probe_1_mismatch": 0,
+      "probe_2_mismatch": 0
+    },
+    {
+      "motor_root": 1,
+      "predictor_root": 2,
+      "baseline_success": 1,
+      "baseline_alignment": 1,
+      "same_root": 0,
+      "probe_1_mismatch": 1,
+      "probe_2_mismatch": 1
+    },
+    {
+      "motor_root": 2,
+      "predictor_root": 0,
+      "baseline_success": 1,
+      "baseline_alignment": 1,
+      "same_root": 0,
+      "probe_1_mismatch": 0,
+      "probe_2_mismatch": 1
+    },
+    {
+      "motor_root": 2,
+      "predictor_root": 1,
+      "baseline_success": 1,
+      "baseline_alignment": 1,
+      "same_root": 0,
+      "probe_1_mismatch": 1,
+      "probe_2_mismatch": 1
+    },
+    {
+      "motor_root": 2,
+      "predictor_root": 2,
+      "baseline_success": 1,
+      "baseline_alignment": 1,
+      "same_root": 1,
+      "probe_1_mismatch": 0,
+      "probe_2_mismatch": 0
+    }
+  ],
+  "exhaustive_minimum_probe_results": [
+    {
+      "n": 2,
+      "consumer_class": "single_source",
+      "minimum_probes": 1,
+      "candidate_source_sets": 2,
+      "distinct_pairs_to_separate": 1,
+      "all_schedules_checked_through_minimum": 3,
+      "optimal_schedule_count": 2,
+      "one_optimum": [
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "n": 2,
+      "consumer_class": "nonempty_OR_subsets",
+      "minimum_probes": 2,
+      "candidate_source_sets": 3,
+      "distinct_pairs_to_separate": 3,
+      "all_schedules_checked_through_minimum": 4,
+      "optimal_schedule_count": 1,
+      "one_optimum": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ]
+    },
+    {
+      "n": 3,
+      "consumer_class": "single_source",
+      "minimum_probes": 2,
+      "candidate_source_sets": 3,
+      "distinct_pairs_to_separate": 3,
+      "all_schedules_checked_through_minimum": 22,
+      "optimal_schedule_count": 12,
+      "one_optimum": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          0
+        ]
+      ]
+    },
+    {
+      "n": 3,
+      "consumer_class": "nonempty_OR_subsets",
+      "minimum_probes": 3,
+      "candidate_source_sets": 7,
+      "distinct_pairs_to_separate": 21,
+      "all_schedules_checked_through_minimum": 42,
+      "optimal_schedule_count": 1,
+      "one_optimum": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "n": 4,
+      "consumer_class": "single_source",
+      "minimum_probes": 2,
+      "candidate_source_sets": 4,
+      "distinct_pairs_to_separate": 6,
+      "all_schedules_checked_through_minimum": 106,
+      "optimal_schedule_count": 12,
+      "one_optimum": [
+        [
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          1,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "n": 4,
+      "consumer_class": "nonempty_OR_subsets",
+      "minimum_probes": 4,
+      "candidate_source_sets": 15,
+      "distinct_pairs_to_separate": 105,
+      "all_schedules_checked_through_minimum": 1471,
+      "optimal_schedule_count": 1,
+      "one_optimum": [
+        [
+          0,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "n": 5,
+      "consumer_class": "single_source",
+      "minimum_probes": 3,
+      "candidate_source_sets": 5,
+      "distinct_pairs_to_separate": 10,
+      "all_schedules_checked_through_minimum": 4526,
+      "optimal_schedule_count": 1120,
+      "one_optimum": [
+        [
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1,
+          1,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          1,
+          0
+        ]
+      ]
+    },
+    {
+      "n": 5,
+      "consumer_class": "nonempty_OR_subsets",
+      "minimum_probes": 5,
+      "candidate_source_sets": 31,
+      "distinct_pairs_to_separate": 465,
+      "all_schedules_checked_through_minimum": 174437,
+      "optimal_schedule_count": 1,
+      "one_optimum": [
+        [
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          0
+        ]
+      ]
+    }
+  ],
+  "relay_node_edge_controls": [
+    {
+      "realization": "shared_relay",
+      "node_clamp": [
+        1,
+        1
+      ],
+      "edge_clamp": [
+        0,
+        1
+      ],
+      "node_clamp_actual_origins": [
+        [
+          "node_injection"
+        ],
+        [
+          "node_injection"
+        ]
+      ],
+      "edge_clamp_actual_origins": [
+        [
+          "s0"
+        ],
+        [
+          "edge_injection"
+        ]
+      ]
+    },
+    {
+      "realization": "separate_relays",
+      "node_clamp": [
+        0,
+        1
+      ],
+      "edge_clamp": [
+        0,
+        1
+      ],
+      "node_clamp_actual_origins": [
+        [
+          "s0"
+        ],
+        [
+          "node_injection"
+        ]
+      ],
+      "edge_clamp_actual_origins": [
+        [
+          "s0"
+        ],
+        [
+          "edge_injection"
+        ]
+      ]
+    }
+  ],
+  "postconsequence_bypass_counterexample": [
+    {
+      "input": [
+        0,
+        0,
+        0
+      ],
+      "readouts": [
+        0,
+        0
+      ],
+      "valid_predictive_chronology": false
+    },
+    {
+      "input": [
+        0,
+        0,
+        1
+      ],
+      "readouts": [
+        0,
+        0
+      ],
+      "valid_predictive_chronology": false
+    },
+    {
+      "input": [
+        0,
+        1,
+        0
+      ],
+      "readouts": [
+        0,
+        0
+      ],
+      "valid_predictive_chronology": false
+    },
+    {
+      "input": [
+        0,
+        1,
+        1
+      ],
+      "readouts": [
+        0,
+        0
+      ],
+      "valid_predictive_chronology": false
+    },
+    {
+      "input": [
+        1,
+        0,
+        0
+      ],
+      "readouts": [
+        1,
+        1
+      ],
+      "valid_predictive_chronology": false
+    },
+    {
+      "input": [
+        1,
+        0,
+        1
+      ],
+      "readouts": [
+        1,
+        1
+      ],
+      "valid_predictive_chronology": false
+    },
+    {
+      "input": [
+        1,
+        1,
+        0
+      ],
+      "readouts": [
+        1,
+        1
+      ],
+      "valid_predictive_chronology": false
+    },
+    {
+      "input": [
+        1,
+        1,
+        1
+      ],
+      "readouts": [
+        1,
+        1
+      ],
+      "valid_predictive_chronology": false
+    }
+  ],
+  "OR_redundancy_counterexample": {
+    "motor_sources": [
+      3
+    ],
+    "predictor_sources": [
+      1,
+      2
+    ],
+    "binary_source_code": [
+      [
+        0,
+        1,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        1,
+        1
+      ]
+    ],
+    "binary_code_mismatch_trace": [
+      0,
+      0
+    ],
+    "unit_probe_mismatch_trace": [
+      0,
+      1,
+      1,
+      1
+    ],
+    "baseline_0_and_1_both_successful_calibrated": true,
+    "source_sets_disjoint": true
+  },
+  "key_boundaries": [
+    "Unknown pair, fixed pure routes, independent binary source addressing: ceil(log2 n).",
+    "Independently known single motor root: one complement probe for n>=2.",
+    "Arbitrary nonempty OR root sets at both consumers: n probes for uniform equality decision.",
+    "Source signatures identify source-ancestry fibers, not relay factorization or intake occurrence identity.",
+    "Actual retrospective token use, RetBind, local membership, felt agency and H are not inferred.",
+    "Nominal success/alignment are fixed; diagnostic interventions deliberately change inputs."
+  ]
+}

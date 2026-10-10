@@ -1,0 +1,652 @@
+{
+  "schema": "uct-disabled-checkpoint-extension/1",
+  "research_id": "SCU20261010",
+  "result_version": "SCU-RESULT-v0.2.0",
+  "base_release": "UCT-MAP-v1.1.2",
+  "initial_snapshot_sha": "90a542d697d923aa484f2bd5a4484a438125325a",
+  "concurrent_R205_read_at": "a22ad487b2a072293de2ecb55b4f2cc2a2c0dafc",
+  "source_note": "records/SCU20261010_Source_Consumer_Protocols/RESEARCH_NOTE.md",
+  "claim_contracts": "MODEL_CLAIM_CONTRACTS.json",
+  "claim_ledger": "CLAIM_LEDGER.json",
+  "integration_status": "PENDING_CHECKPOINT_DISABLED",
+  "enabled_as_established_premise": false,
+  "release_effect": "NONE; completed release unchanged; parent must validate current canonical graph and concurrent revisions.",
+  "nodes": [
+    {
+      "id": "SCU20261010:DOMAIN",
+      "kind": "TYPED_MODEL",
+      "statement": "Fix n>=2 source carrier sites, a target alphabet {0,1}, two specified consumer readout roles, plant ports, and an event-parent/time signature; installed routing and actual executed intake events are distinct coordinates.",
+      "scope": "One finite installation and its explicitly bound episode family. A numerical readout is a prediction only with separately grounded preconsequence timing.",
+      "quantifier": "For every single declared model instance satisfying all stated joint premises; actual application remains independently open.",
+      "status": "DECLARATION_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "SCU20261010:PURE_DOMAIN",
+      "kind": "RESPONSE_CLASS_PREMISE",
+      "statement": "Both numerical consumers copy one fixed source each: y=x_a, yhat=x_b for a,b in {0,...,n-1}. Calibrated identity plant and pure route law are declared; routes are stable across the specified reset probe family.",
+      "scope": "All ordered route pairs within the pure fixed-route class; no undeclared aggregation, bypass, writer or route switching.",
+      "quantifier": "For every single declared model instance satisfying all stated joint premises; actual application remains independently open.",
+      "status": "DECLARATION_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "SCU20261010:MATCHED_BASELINE",
+      "kind": "NOMINAL_INPUT_PREMISE",
+      "statement": "At every step of the arbitrary finite target word all source values equal target t; action and prediction use the calibrated pure-route law. If the R204 forward state is appended, initialize identity F and use precisely its error-gated or unconditional row replacement with veridical matched feedback.",
+      "scope": "Nominal episode words only. Diagnostic probes may deliberately destroy success or alignment; actual write events may differ although state traces agree.",
+      "quantifier": "For every single declared model instance satisfying all stated joint premises; actual application remains independently open.",
+      "status": "DECLARATION_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "SCU20261010:VALID_PROBES",
+      "kind": "INTERVENTION_AND_OBSERVATION_PREMISE",
+      "statement": "Declare the admissible binary source-input family, exact intervention sites and times, fixed response law, faithful stated consumer/mismatch readouts, and route/reset stability. Each probe is jointly bound to these same physical or modeled ports, consumers and episode ordering.",
+      "scope": "A schedule W may be restricted; full source-control permission is a separate premise. Installed sources are not post-injection actual ancestry. Probe results alone do not certify a past episode.",
+      "quantifier": "For every single declared model instance satisfying all stated joint premises; actual application remains independently open.",
+      "status": "DECLARATION_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "SCU20261010:FULL_BINARY_CONTROL",
+      "kind": "INTERVENTION_CAPABILITY_PREMISE",
+      "statement": "Every x in {0,1}^n can be independently imposed on the declared source sites within the same valid probe contract.",
+      "scope": "Source interventions only; this does not grant node writes, branch replacements, chronology readouts, or access to all possible hidden contexts.",
+      "quantifier": "For every single declared model instance satisfying all stated joint premises; actual application remains independently open.",
+      "status": "DECLARATION_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "SCU20261010:EXACT_UNKNOWN_PAIR",
+      "kind": "DECISION_PROBLEM_PREMISE",
+      "statement": "The protocol is deterministic, exact and uniform over all unknown fixed ordered pure-route pairs; it receives mismatch bits only and is scored by its worst-case number of source probes.",
+      "scope": "Zero-error equality decision a=b, including adaptive schedules. Does not identify the ordered roots, local source, history or intake occurrence.",
+      "quantifier": "For every single declared model instance satisfying all stated joint premises; actual application remains independently open.",
+      "status": "DECLARATION_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "SCU20261010:KNOWN_ROOT",
+      "kind": "INDEPENDENT_INFORMATION_PREMISE",
+      "statement": "The motor consumer has a single independently known root a. The predictor copies one unknown root or OR-aggregates one unknown nonempty source subset B. The declared model class is fixed independently of the classification outcome.",
+      "scope": "n>=2; alternatives are explicit model classes. For the OR alternative the target is B={a}; empty constant-zero predictors are excluded.",
+      "quantifier": "For every single declared model instance satisfying all stated joint premises; actual application remains independently open.",
+      "status": "DECLARATION_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "SCU20261010:OR_DOMAIN",
+      "kind": "RESPONSE_CLASS_PREMISE",
+      "statement": "Both consumers independently OR-aggregate arbitrary nonempty source subsets A and B of the n source sites: y=OR_{i in A} x_i and yhat=OR_{i in B} x_i. Routes and subset memberships are fixed across probes.",
+      "scope": "This response class replaces the pure-route promise. Individual input reads need not make an unmasked difference in the present input context.",
+      "quantifier": "For every single declared model instance satisfying all stated joint premises; actual application remains independently open.",
+      "status": "DECLARATION_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "SCU20261010:EXACT_OR_EQUALITY",
+      "kind": "DECISION_PROBLEM_PREMISE",
+      "statement": "The protocol is deterministic and exact uniformly over every ordered pair of nonempty source subsets A,B, with mismatch-only readouts and worst-case probe cost; adaptive schedules are allowed.",
+      "scope": "Decide equality A=B, not overlap, same current effect, or common carrier intake. n>=2 is essential to the displayed lower-bound witnesses.",
+      "quantifier": "For every single declared model instance satisfying all stated joint premises; actual application remains independently open.",
+      "status": "DECLARATION_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "SCU20261010:RELAY_DOMAIN",
+      "kind": "FAITHFUL_COPY_MODEL_PREMISE",
+      "statement": "Compare finite acyclic faithful-copy networks sharing the same composite source-to-consumer map. The specified negative-control pair uses either one common relay intake carrier or two separate equal copied relay carriers.",
+      "scope": "Source input/readout equivalence is universal over the declared binary source cube; relay factorization and actual intake occurrence may differ.",
+      "quantifier": "For every single declared model instance satisfying all stated joint premises; actual application remains independently open.",
+      "status": "DECLARATION_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "SCU20261010:VALID_INTERNAL_TARGETING",
+      "kind": "NODE_AND_EDGE_PROBE_PREMISE",
+      "statement": "For the displayed relay pair, set every source input to 0 and independently identify the predictor intake carrier, initially carrying 0. The node probe writes 1 before both relevant consumer reads with no intervening overwrite or compensation; the edge probe independently replaces only the predictor intake branch by 1. The nontrivial value change is part of the probe contract.",
+      "scope": "Exact specified node/edge probes and fixed paths. Source-level intervention permissions alone do not supply this stronger capability.",
+      "quantifier": "For every single declared model instance satisfying all stated joint premises; actual application remains independently open.",
+      "status": "DECLARATION_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "SCU20261010:CHRONOLOGY_PAIR",
+      "kind": "TIME_ORDER_COUNTERMODEL_PREMISE",
+      "statement": "Compare a preconsequence pure-root predictive readout and a postconsequence sensory copy of the resulting action, with the same root source law and all numerical readouts retained. The actual read/consequence order differs and must be independently observed to assign a prediction role.",
+      "scope": "The full numerical source/readout cube is available; chronological evidence is a separate coordinate, not inferred from value match.",
+      "quantifier": "For every single declared model instance satisfying all stated joint premises; actual application remains independently open.",
+      "status": "DECLARATION_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "SCU20261010:ACTUAL_BINDING",
+      "kind": "OPEN_ACTUAL_PREMISE",
+      "statement": "Independently admit the actual bearer/process, interval and complete P/I/K signature; ground the actual source/intake/consumer/time and relevant context relations in that same instance. Do not discharge these premises with model enumeration or report labels.",
+      "scope": "An actual episode or independently admitted overlapping actual processes; all coordinates must coexist in the same relevant complete organization.",
+      "quantifier": "For every single declared model instance satisfying all stated joint premises; actual application remains independently open.",
+      "status": "OPEN_PREMISE_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "SCU20261010:TRANSPORT_CONTRACT",
+      "kind": "OPEN_TRANSPORT_PREMISE",
+      "statement": "Use C1 only with the complete actual signature and grounded role formulas, transporting all relevant physical parameters and bindings. Selecting a subrelation as a formula is distinct from claiming a separately actual experiential substructure.",
+      "scope": "Preserves complete actual organizational twins under transported naming; does not choose a subject owner or a named phenomenological endpoint.",
+      "quantifier": "For every single declared model instance satisfying all stated joint premises; actual application remains independently open.",
+      "status": "OPEN_PREMISE_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "SCU20261010:H_BRIDGE",
+      "kind": "OPEN_SEMANTIC_PREMISE",
+      "statement": "No result here grounds familiar-me H, conceptual self, report validity, local membership, RetBind, or numerical personal identity. Any such endpoint needs its own appropriate actual and semantic premises.",
+      "scope": "No basal-experience existence threshold is introduced. Absence of alignment, performance, use, or source confluence does not negate basal experience.",
+      "quantifier": "For every single declared model instance satisfying all stated joint premises; actual application remains independently open.",
+      "status": "OPEN_PREMISE_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "SCU20261010:C1",
+      "kind": "CONDITIONAL_MODEL_THEOREM",
+      "statement": "For every n>=2, route pair (a,b) and finite target word, setting all source values to each target yields correct action and prediction with zero discrepancy at every step; an appended calibrated R204 row-replacement predictor retains the same forward-state trace.",
+      "scope": "n>=2; arbitrary finite nominal target words; pure fixed routes with a calibrated identity plant/predictor",
+      "quantifier": "For every single declared model instance satisfying all stated joint premises; actual application remains independently open.",
+      "status": "CONDITIONAL_RESULT_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false,
+      "claim_id": "SCU20261010-C1",
+      "proof_location": "RESEARCH_NOTE.md §3",
+      "limits": [
+        "Nominal equality is not equality under arbitrary diagnostic probes.",
+        "Actual writes can differ while register states match."
+      ]
+    },
+    {
+      "id": "SCU20261010:C2",
+      "kind": "CONDITIONAL_MODEL_THEOREM",
+      "statement": "For schedule W with source columns c_i, full consumer readouts yield product fibers of equal columns; mismatch-only observation yields {(i,j):c_i XOR c_j=d}. Under a restricted intervention family sources equivalent on every admissible input remain indistinguishable.",
+      "scope": "fixed nonadaptive schedule; finite source sites and pure route consumers",
+      "quantifier": "For every single declared model instance satisfying all stated joint premises; actual application remains independently open.",
+      "status": "CONDITIONAL_RESULT_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false,
+      "claim_id": "SCU20261010-C2",
+      "proof_location": "RESEARCH_NOTE.md §4",
+      "limits": [
+        "Mismatch-only data generally do not identify an ordered route pair.",
+        "A source-code collision is not absence of actual use."
+      ]
+    },
+    {
+      "id": "SCU20261010:C3",
+      "kind": "CONDITIONAL_PROTOCOL_THEOREM",
+      "statement": "For n>=2 unknown pure-route roots, uniform exact decision of their equality using binary source interventions and mismatch-only observations has worst-case minimum ceil(log2 n), including deterministic adaptive protocols.",
+      "scope": "n>=2; all unknown ordered route pairs; deterministic exact worst-case protocols",
+      "quantifier": "For every single declared model instance satisfying all stated joint premises; actual application remains independently open.",
+      "status": "CONDITIONAL_RESULT_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false,
+      "claim_id": "SCU20261010-C3",
+      "proof_location": "RESEARCH_NOTE.md §5",
+      "limits": [
+        "Not a noisy/Bayesian/probabilistic-error/known-root bound.",
+        "Does not identify which shared root or local production."
+      ]
+    },
+    {
+      "id": "SCU20261010:C4",
+      "kind": "CONDITIONAL_PROTOCOL_THEOREM",
+      "statement": "For n>=2 and an independently known motor root a, setting a to zero and all other roots to one decides equality with an unknown predictor root in one probe. It also identifies B={a} for a predictor OR of a nonempty subset B.",
+      "scope": "n>=2; independently known single motor source; pure or nonempty-OR predictor",
+      "quantifier": "For every single declared model instance satisfying all stated joint premises; actual application remains independently open.",
+      "status": "CONDITIONAL_RESULT_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false,
+      "claim_id": "SCU20261010-C4",
+      "proof_location": "RESEARCH_NOTE.md §6",
+      "limits": [
+        "A report of authorship is not independently known source identity.",
+        "Empty constant-zero predictor is outside the OR extension."
+      ]
+    },
+    {
+      "id": "SCU20261010:C5",
+      "kind": "CONDITIONAL_PROTOCOL_THEOREM_AND_COUNTEREXAMPLE",
+      "statement": "For n>=2, exact uniform equality decision between arbitrary nonempty OR source subsets requires exactly n probes in the worst case, even adaptively. Along the zero-discrepancy branch each unit input e_i is necessary; all unit inputs suffice. A four-source disjoint-set construction defeats the two-bit pure-route code.",
+      "scope": "n>=2; both consumers OR arbitrary nonempty subsets of the n sources; all pairs of subsets; exact worst-case mismatch-only protocol",
+      "quantifier": "For every single declared model instance satisfying all stated joint premises; actual application remains independently open.",
+      "status": "CONDITIONAL_RESULT_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false,
+      "claim_id": "SCU20261010-C5",
+      "proof_location": "RESEARCH_NOTE.md §7",
+      "limits": [
+        "Target is equality of root sets, not nonempty intersection or intake identity.",
+        "No claim that biological prediction implements OR."
+      ]
+    },
+    {
+      "id": "SCU20261010:C6",
+      "kind": "CONDITIONAL_MODEL_THEOREM_AND_COUNTEREXAMPLE",
+      "statement": "Faithful copy networks with the same composite root-to-consumer map yield identical readouts for all source inputs, while immediate intake carrier identity can differ. A node write and a branch-edge replacement can have distinct cross-consumer effects; only the former separates the displayed shared/separate relay pair under additional targeting premises.",
+      "scope": "finite faithful-copy feedforward networks; common composite source map; specific shared/separate relay alternative for clamp comparison",
+      "quantifier": "For every single declared model instance satisfying all stated joint premises; actual application remains independently open.",
+      "status": "CONDITIONAL_RESULT_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false,
+      "claim_id": "SCU20261010-C6",
+      "proof_location": "RESEARCH_NOTE.md §8",
+      "limits": [
+        "Does not recover actual prior-episode occurrence, RetBind or numerical personal identity.",
+        "Edge effect does not establish shared carrier occurrence."
+      ]
+    },
+    {
+      "id": "SCU20261010:C7",
+      "kind": "COUNTEREXAMPLE_AND_ROLE_REPAIR",
+      "statement": "A postconsequence copy can match all source/readout values of a preconsequence predictor; values alone do not establish the prediction role. The event model distinguishes the implementations by independently recorded chronology.",
+      "scope": "one pure-root source/actuation response; pre- versus post-consequence readout alternatives; complete source input cube",
+      "quantifier": "For every single declared model instance satisfying all stated joint premises; actual application remains independently open.",
+      "status": "CONDITIONAL_RESULT_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false,
+      "claim_id": "SCU20261010-C7",
+      "proof_location": "RESEARCH_NOTE.md §9",
+      "limits": [
+        "Numerical agreement is not executed prediction or executed comparator evidence.",
+        "Timing measurement and interpretation require actual validation."
+      ]
+    },
+    {
+      "id": "SCU20261010:C8",
+      "kind": "INHERITED_UCT_CONDITIONAL_APPLICATION",
+      "statement": "Only under actual-process admission, one complete P/I/K binding, grounded role/trace/time relations, transported physical parameters and C1 do the actual source-consumer relations have experiential structural counterparts. No source confluence, calibration, use, history, language or report threshold is added; H, local membership and conceptual self are not inferred.",
+      "scope": "one admitted actual process or independently admitted overlapping processes; common complete signature; all relevant parameters transported",
+      "quantifier": "For every single declared model instance satisfying all stated joint premises; actual application remains independently open.",
+      "status": "CONDITIONAL_RESULT_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false,
+      "claim_id": "SCU20261010-C8",
+      "proof_location": "RESEARCH_NOTE.md §11",
+      "limits": [
+        "No actual human/AI H evidence.",
+        "No unique owner or current-assistant consciousness claim.",
+        "Complete-organizational twins are not a free phenomenal-difference counterexample inside C1."
+      ]
+    }
+  ],
+  "rules": [
+    {
+      "id": "SCU20261010:r_C1",
+      "all_of": [
+        "SCU20261010:DOMAIN",
+        "SCU20261010:PURE_DOMAIN",
+        "SCU20261010:MATCHED_BASELINE"
+      ],
+      "conclusion": "SCU20261010:C1",
+      "claim_id": "SCU20261010-C1",
+      "kind": "CONDITIONAL_RULE",
+      "statement": "Substitute x_i=t at each step; the matched R204 row update leaves the calibrated F-state unchanged for every finite word. This is baseline equality, not invariance under diagnostic source interventions.",
+      "same_instance_required": true,
+      "binding": "Fix one installation M, n source sites, two named consumer roles, source/readout support and event-order contract. Universal protocol claims range over a declared model family, but every tested instance keeps its own route/subset parameters and joint premises fixed across its probe episodes. Never assemble actual application premises from unrelated systems or times.",
+      "proof_location": "RESEARCH_NOTE.md section 3; check_source_consumers.py nominal and forward-state suites",
+      "alternative_route_semantics": "Only the explicitly declared response class and observation contract apply; different mechanisms, timing or hidden contexts require a separate model and independent actual premises.",
+      "status": "CANDIDATE_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "SCU20261010:r_C2",
+      "all_of": [
+        "SCU20261010:DOMAIN",
+        "SCU20261010:PURE_DOMAIN",
+        "SCU20261010:VALID_PROBES"
+      ],
+      "conclusion": "SCU20261010:C2",
+      "claim_id": "SCU20261010-C2",
+      "kind": "CONDITIONAL_RULE",
+      "statement": "For any fixed schedule W, readouts are source columns c_a,c_b and mismatch c_a XOR c_b. Exact fibers and restricted-family indistinguishability follow; injective columns do not in general identify ordered roots from mismatch alone.",
+      "same_instance_required": true,
+      "binding": "Fix one installation M, n source sites, two named consumer roles, source/readout support and event-order contract. Universal protocol claims range over a declared model family, but every tested instance keeps its own route/subset parameters and joint premises fixed across its probe episodes. Never assemble actual application premises from unrelated systems or times.",
+      "proof_location": "RESEARCH_NOTE.md section 4; all-small-matrix fiber enumeration",
+      "alternative_route_semantics": "Only the explicitly declared response class and observation contract apply; different mechanisms, timing or hidden contexts require a separate model and independent actual premises.",
+      "status": "CANDIDATE_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "SCU20261010:r_C3",
+      "all_of": [
+        "SCU20261010:DOMAIN",
+        "SCU20261010:PURE_DOMAIN",
+        "SCU20261010:VALID_PROBES",
+        "SCU20261010:FULL_BINARY_CONTROL",
+        "SCU20261010:EXACT_UNKNOWN_PAIR",
+        "SCU20261010:C2"
+      ],
+      "conclusion": "SCU20261010:C3",
+      "claim_id": "SCU20261010-C3",
+      "kind": "CONDITIONAL_RULE",
+      "statement": "Use injective binary source codes for the upper bound; on a deterministic adaptive all-zero branch, fewer than ceil(log2 n) probes leave a repeated source column and an indistinguishable unequal pair. The numerical separating-system bound is inherited mathematics.",
+      "same_instance_required": true,
+      "binding": "Fix one installation M, n source sites, two named consumer roles, source/readout support and event-order contract. Universal protocol claims range over a declared model family, but every tested instance keeps its own route/subset parameters and joint premises fixed across its probe episodes. Never assemble actual application premises from unrelated systems or times.",
+      "proof_location": "RESEARCH_NOTE.md section 5; finite independent nonadaptive optimum search",
+      "alternative_route_semantics": "Only the explicitly declared response class and observation contract apply; different mechanisms, timing or hidden contexts require a separate model and independent actual premises.",
+      "status": "CANDIDATE_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "SCU20261010:r_C4",
+      "all_of": [
+        "SCU20261010:DOMAIN",
+        "SCU20261010:KNOWN_ROOT",
+        "SCU20261010:VALID_PROBES",
+        "SCU20261010:FULL_BINARY_CONTROL"
+      ],
+      "conclusion": "SCU20261010:C4",
+      "claim_id": "SCU20261010-C4",
+      "kind": "CONDITIONAL_RULE",
+      "statement": "The complement probe x_a=0, x_j=1 for j!=a gives zero discrepancy exactly for the singleton predictor root a; with a nonempty OR predictor it gives zero exactly for B={a}. Zero probes cannot uniformly distinguish the possible equality states for n>=2.",
+      "same_instance_required": true,
+      "binding": "Fix one installation M, n source sites, two named consumer roles, source/readout support and event-order contract. Universal protocol claims range over a declared model family, but every tested instance keeps its own route/subset parameters and joint premises fixed across its probe episodes. Never assemble actual application premises from unrelated systems or times.",
+      "proof_location": "RESEARCH_NOTE.md section 6; known-root controls",
+      "alternative_route_semantics": "Only the explicitly declared response class and observation contract apply; different mechanisms, timing or hidden contexts require a separate model and independent actual premises.",
+      "status": "CANDIDATE_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "SCU20261010:r_C5",
+      "all_of": [
+        "SCU20261010:DOMAIN",
+        "SCU20261010:OR_DOMAIN",
+        "SCU20261010:VALID_PROBES",
+        "SCU20261010:FULL_BINARY_CONTROL",
+        "SCU20261010:EXACT_OR_EQUALITY"
+      ],
+      "conclusion": "SCU20261010:C5",
+      "claim_id": "SCU20261010-C5",
+      "kind": "CONDITIONAL_RULE",
+      "statement": "Unit inputs detect the symmetric difference of A,B. Along an all-zero adaptive branch, (N,N) versus (N,N minus {i}) can differ only on unit e_i, so all n units are necessary. The four-source alias shows why the pure-route code is not valid for this replacement class.",
+      "same_instance_required": true,
+      "binding": "Fix one installation M, n source sites, two named consumer roles, source/readout support and event-order contract. Universal protocol claims range over a declared model family, but every tested instance keeps its own route/subset parameters and joint premises fixed across its probe episodes. Never assemble actual application premises from unrelated systems or times.",
+      "proof_location": "RESEARCH_NOTE.md section 7; OR equality enumeration and independent optimum search",
+      "alternative_route_semantics": "Only the explicitly declared response class and observation contract apply; different mechanisms, timing or hidden contexts require a separate model and independent actual premises.",
+      "status": "CANDIDATE_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "SCU20261010:r_C6",
+      "all_of": [
+        "SCU20261010:DOMAIN",
+        "SCU20261010:RELAY_DOMAIN",
+        "SCU20261010:VALID_PROBES",
+        "SCU20261010:FULL_BINARY_CONTROL",
+        "SCU20261010:VALID_INTERNAL_TARGETING"
+      ],
+      "conclusion": "SCU20261010:C6",
+      "claim_id": "SCU20261010-C6",
+      "kind": "CONDITIONAL_RULE",
+      "statement": "Source readouts identify only the composite source map in the faithful-copy family. In the displayed shared/separate pair on all-zero source input, a correctly timed 0-to-1 node write produces (1,1) only in the shared case and (0,1) in the separate case; replacing the predictor edge by 1 produces (0,1) in both. A value-preserving write is not the discriminator.",
+      "same_instance_required": true,
+      "binding": "Fix one installation M, n source sites, two named consumer roles, source/readout support and event-order contract. Universal protocol claims range over a declared model family, but every tested instance keeps its own route/subset parameters and joint premises fixed across its probe episodes. Never assemble actual application premises from unrelated systems or times.",
+      "proof_location": "RESEARCH_NOTE.md section 8; shared/separate relay and node/edge event-origin controls",
+      "alternative_route_semantics": "Only the explicitly declared response class and observation contract apply; different mechanisms, timing or hidden contexts require a separate model and independent actual premises.",
+      "status": "CANDIDATE_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "SCU20261010:r_C7",
+      "all_of": [
+        "SCU20261010:DOMAIN",
+        "SCU20261010:CHRONOLOGY_PAIR",
+        "SCU20261010:VALID_PROBES",
+        "SCU20261010:FULL_BINARY_CONTROL"
+      ],
+      "conclusion": "SCU20261010:C7",
+      "claim_id": "SCU20261010-C7",
+      "kind": "CONDITIONAL_RULE",
+      "statement": "The late copy equals the pure-root predictor numerically on every source input yet occurs after the consequence; a value-only signature cannot assign preconsequence prediction role.",
+      "same_instance_required": true,
+      "binding": "Fix one installation M, n source sites, two named consumer roles, source/readout support and event-order contract. Universal protocol claims range over a declared model family, but every tested instance keeps its own route/subset parameters and joint premises fixed across its probe episodes. Never assemble actual application premises from unrelated systems or times.",
+      "proof_location": "RESEARCH_NOTE.md section 9; late-echo full-cube controls",
+      "alternative_route_semantics": "Only the explicitly declared response class and observation contract apply; different mechanisms, timing or hidden contexts require a separate model and independent actual premises.",
+      "status": "CANDIDATE_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "SCU20261010:r_C8",
+      "all_of": [
+        "A:C1",
+        "SCU20261010:ACTUAL_BINDING",
+        "SCU20261010:TRANSPORT_CONTRACT"
+      ],
+      "conclusion": "SCU20261010:C8",
+      "claim_id": "SCU20261010-C8",
+      "kind": "GUARDED_UCT_APPLICATION",
+      "statement": "Given, not established by this module, complete actual organization and correct role-formula transport, C1 supplies the corresponding experiential structural relations. No C1-C7 result, program PASS or report discharges actual grounding, chooses H, or becomes a basal experience gate.",
+      "same_instance_required": true,
+      "binding": "One admitted actual process (or independently admitted overlapping actual processes) with a complete jointly grounded P/I/K signature, interval, roles, source/intake events and transported parameters. C1 is applied to that complete actual organization; no physical property is inferred backward from a chosen phenomenological label.",
+      "proof_location": "RESEARCH_NOTE.md section 11; inherited C1 conditional, not an empirical result",
+      "alternative_route_semantics": "Only the explicitly declared response class and observation contract apply; different mechanisms, timing or hidden contexts require a separate model and independent actual premises.",
+      "status": "CANDIDATE_DISABLED",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    }
+  ],
+  "context_links": [
+    {
+      "id": "SCU20261010:ctx_C1",
+      "type": "INHERITED_AXIOM_CONTEXT",
+      "from": "SCU20261010:ACTUAL_BINDING",
+      "to": "A:C1",
+      "statement": "C1 is inherited; the model does not empirically prove it or substitute a selected output relation for a complete actual signature.",
+      "deductive": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "SCU20261010:ctx_U1",
+      "type": "NON_GATE_CONTEXT",
+      "from": "SCU20261010:C8",
+      "to": "A:U1",
+      "statement": "No source, alignment, performance, use, agency, language or report condition is added as a basal-experience gate.",
+      "deductive": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "SCU20261010:ctx_H",
+      "type": "SEMANTIC_LIMIT_CONTEXT",
+      "from": "SCU20261010:H_BRIDGE",
+      "to": "R157:REPORT_COVERAGE_LIMIT",
+      "statement": "No named H endpoint, conceptual-self inference or report validity is supplied.",
+      "deductive": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "SCU20261010:ctx_transport",
+      "type": "INHERITED_TRANSPORT_CONTEXT",
+      "from": "SCU20261010:C8",
+      "to": "R157:COORDINATE_TRANSPORT",
+      "statement": "Correct complete-instance parameter transport is inherited and remains distinct from naming a feeling.",
+      "deductive": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "SCU20261010:ctx_selection",
+      "type": "SELECTION_LIMIT_CONTEXT",
+      "from": "SCU20261010:TRANSPORT_CONTRACT",
+      "to": "R158:SELECTION_CLOSURE_LIMIT",
+      "statement": "Grounded relation formulas do not automatically select separately actual experiential substructures.",
+      "deductive": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "SCU20261010:ctx_RetBind",
+      "type": "ACTUAL_HISTORY_LIMIT_CONTEXT",
+      "from": "SCU20261010:C6",
+      "to": "R173:RETENTIVE_BINDING_RELATION",
+      "statement": "Common source ancestry or an observed probe effect does not establish same-lineage actual retention.",
+      "deductive": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "SCU20261010:ctx_routing",
+      "type": "INHERITED_ROUTING_CONTEXT",
+      "from": "SCU20261010:C1",
+      "to": "R147:ROUTING_MODEL",
+      "statement": "Matched prediction with different physical action/source allocation is prior-covered; the new application concerns scoped protocol synthesis and resolution.",
+      "deductive": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "SCU20261010:ctx_route_limit",
+      "type": "INHERITED_IDENTIFIABILITY_CONTEXT",
+      "from": "SCU20261010:C2",
+      "to": "R147:ROUTING_LIMIT",
+      "statement": "The earlier relative-routing observation limit is retained; exact source-column fibers are a specified source-probe application.",
+      "deductive": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "SCU20261010:ctx_mediator",
+      "type": "INHERITED_INTERIOR_PROBE_CONTEXT",
+      "from": "SCU20261010:C6",
+      "to": "R174:MEDIATOR_CLAMP_SIGNATURE",
+      "statement": "Source versus mediator/branch probes require different actual intervention capabilities; general path logic is inherited.",
+      "deductive": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "SCU20261010:ctx_copy",
+      "type": "INHERITED_OCCURRENCE_CONTEXT",
+      "from": "SCU20261010:C6",
+      "to": "R185:COPIED_COUNTERMODEL",
+      "statement": "Equal source root and equal copy values do not establish shared intake-carrier occurrence.",
+      "deductive": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "SCU20261010:ctx_fidelity",
+      "type": "INHERITED_PORT_GUARD_CONTEXT",
+      "from": "SCU20261010:C6",
+      "to": "R187:PORT_FIDELITY",
+      "statement": "A claimed physical node target needs independent fidelity and timing grounds; an API label alone does not discharge them.",
+      "deductive": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "SCU20261010:ctx_edge",
+      "type": "INHERITED_EDGE_BOUNDARY_CONTEXT",
+      "from": "SCU20261010:C6",
+      "to": "R187:EDGE_MIMIC",
+      "statement": "A branch-edge intervention can mimic one-sided influence without establishing the candidate carrier identity.",
+      "deductive": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "SCU20261010:ctx_lineage",
+      "type": "INHERITED_HISTORY_GUARD_CONTEXT",
+      "from": "SCU20261010:C6",
+      "to": "R187:LINEAGE_GUARD",
+      "statement": "Probe-family stability does not by itself recover a previous episode’s actual lineage.",
+      "deductive": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "SCU20261010:ctx_duplicate",
+      "type": "DISTINCT_MODEL_CLASS_CONTEXT",
+      "from": "SCU20261010:C5",
+      "to": "TH20261009:DUPLICATE_CANCEL",
+      "statement": "Redundant-source comparison has inherited duplicate/cancellation background, but OR, XOR and modular subtraction are distinct response classes and their identification bounds cannot be merged.",
+      "deductive": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "SCU20261010:ctx_context_use",
+      "type": "EFFECT_VERSUS_OCCURRENCE_CONTEXT",
+      "from": "SCU20261010:C5",
+      "to": "R167:CONTEXTUAL_USE_CRITERION",
+      "statement": "Potential contribution under some backup context is distinct from current unmasked effect, actual intake occurrence, and diagnostic evidence.",
+      "deductive": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "SCU20261010:ctx_timing",
+      "type": "INHERITED_TIME_ROLE_CONTEXT",
+      "from": "SCU20261010:C7",
+      "to": "R174:SHARED_TEMPORAL_COORDINATE",
+      "statement": "Prediction versus sensory copying depends on actual chronology; numerical readout labels do not supply that chronology.",
+      "deductive": false,
+      "enabled_as_established_premise": false
+    }
+  ],
+  "source_references": [
+    {
+      "type": "source_reference",
+      "reference": "R204-C1 and R204-C5, records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/RESEARCH_NOTE.md",
+      "role": "Inherited performance/alignment/use distinction and comparator/reflex all-state equivalence."
+    },
+    {
+      "type": "source_reference",
+      "reference": "Concurrent R205-C1/C2/C3, source-consumer note at a22ad487b2a072293de2ecb55b4f2cc2a2c0dafc",
+      "role": "Inherited two-source locality/correspondence square, isolated-source recovery and modular cancellation countermodel; no new minimum bound attributed to those results."
+    },
+    {
+      "type": "source_reference",
+      "reference": "R182-C2, R199-C2, R192-C1",
+      "role": "Prior shared/copy, retention and complete-twin results; locators are not graph IDs."
+    },
+    {
+      "type": "source_reference",
+      "reference": "Bollobas and Scott (2007); Shanmugam et al. (2015); D’yachkov et al. (2014)",
+      "role": "Classical separating-system, adaptive and OR/superimposed-code ancestors; no general mathematical priority claim."
+    }
+  ],
+  "canonical_graph_changed": false,
+  "whole_canonical_semantic_review_performed_by_this_worker": false,
+  "local_structural_check": {
+    "nodes": 23,
+    "rules": 8,
+    "nondeductive_context_links": 16,
+    "external_graph_references_requiring_parent_current-map_verification": [
+      "A:C1",
+      "A:U1",
+      "R147:ROUTING_LIMIT",
+      "R147:ROUTING_MODEL",
+      "R157:COORDINATE_TRANSPORT",
+      "R157:REPORT_COVERAGE_LIMIT",
+      "R158:SELECTION_CLOSURE_LIMIT",
+      "R167:CONTEXTUAL_USE_CRITERION",
+      "R173:RETENTIVE_BINDING_RELATION",
+      "R174:MEDIATOR_CLAMP_SIGNATURE",
+      "R174:SHARED_TEMPORAL_COORDINATE",
+      "R185:COPIED_COUNTERMODEL",
+      "R187:EDGE_MIMIC",
+      "R187:LINEAGE_GUARD",
+      "R187:PORT_FIDELITY",
+      "TH20261009:DUPLICATE_CANCEL"
+    ],
+    "semantic_certification": false
+  }
+}

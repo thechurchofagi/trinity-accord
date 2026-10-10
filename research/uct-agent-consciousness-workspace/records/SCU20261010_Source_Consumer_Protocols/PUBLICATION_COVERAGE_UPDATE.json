@@ -1,0 +1,138 @@
+{
+  "schema": "uct-publication-coverage-update/1.2",
+  "research_id": "SCU20261010",
+  "parent_coverage_version": "UCT-PUB-v1.0.17",
+  "coverage_version": "UCT-PUB-v1.0.18",
+  "status": "SCOPED_COVERAGE_REVIEW_COMPLETE_NOT_EXHAUSTIVE_PRIORITY_CERTIFICATION",
+  "nondeductive": true,
+  "changes_scientific_graph": false,
+  "research_baseline": "7dd9564c50f08a9f78dd8e35a5b960f4f0d30edc",
+  "preserved_concurrent_research": "R205-ASC-20261010",
+  "main_checked": "6cfb89f0b88605da9a44da9c97203729a6742894",
+  "frozen_census_main": "fc568e8718e82b3cda6ede0e628aa3342179bebc",
+  "main_research_changed_paths": [],
+  "publication_counts_unchanged": {
+    "distinct_research_works": 28,
+    "distinct_research_work_version_label_pairs": 38,
+    "distinct_published_research_doi_records": 39,
+    "separate_editorial_supplement_works": 1,
+    "separate_editorial_doi_records": 1,
+    "all_verified_publication_doi_records_including_editorial": 40,
+    "reserved_only_records_within_the_40_verified_publication_records": 0,
+    "uninspected_live_account_drafts": "NOT_ENUMERATED"
+  },
+  "net_claims": [
+    {
+      "audit_claim_id": "CP-SAU-01",
+      "canonical_claim_ids": [
+        "R204-C1",
+        "R204-C2",
+        "R204-C5"
+      ],
+      "classification": "EXISTING_WORKSPACE_APPLICATION_INTEGRATED",
+      "scope": "Success/alignment/use and reflex state-trajectory separation."
+    },
+    {
+      "audit_claim_id": "CP-ASC-01",
+      "canonical_claim_ids": [
+        "R205-C1",
+        "R205-C2",
+        "R205:C1",
+        "R205:C2"
+      ],
+      "classification": "CONCURRENT_R205_ALREADY_DISCLOSED",
+      "scope": "Local-source/correspondence square and two-source full-readout selector recovery."
+    },
+    {
+      "audit_claim_id": "CP-ASC-02",
+      "canonical_claim_ids": [
+        "R205-C3",
+        "R205:C3"
+      ],
+      "classification": "CONCURRENT_R205_ALREADY_DISCLOSED",
+      "scope": "Modular cancellation distinguishes net source influence from internal consumed branches."
+    },
+    {
+      "audit_claim_id": "CP-SRC-01",
+      "canonical_claim_ids": [
+        "SCU20261010-C2"
+      ],
+      "classification": "CLASSICAL_MATH_SPECIFIC_PROTOCOL_APPLICATION",
+      "scope": "Exact separate-readout and discrepancy-only source-allocation fibers."
+    },
+    {
+      "audit_claim_id": "CP-SRC-02",
+      "canonical_claim_ids": [
+        "SCU20261010-C3"
+      ],
+      "classification": "CLASSICAL_SEPARATION_BOUND_APPLICATION",
+      "scope": "Unknown pure-source pair equality takes ceil(log2 n) binary probes in worst case."
+    },
+    {
+      "audit_claim_id": "CP-SRC-03",
+      "canonical_claim_ids": [
+        "SCU20261010-C4"
+      ],
+      "classification": "SCOPED_APPLICATION_SPECIAL_CASE",
+      "scope": "Independently known single execution root permits one complement probe, including nonempty OR predictor alternatives."
+    },
+    {
+      "audit_claim_id": "CP-SRC-04",
+      "canonical_claim_ids": [
+        "SCU20261010-C5"
+      ],
+      "classification": "CLASSICAL_COVER_FREE_LOGIC_APPLICATION",
+      "scope": "Both arbitrary nonempty OR sets require n unit probes for equality, n>=2."
+    },
+    {
+      "audit_claim_id": "CP-SRC-05",
+      "canonical_claim_ids": [
+        "SCU20261010-C6",
+        "SCU20261010-C7"
+      ],
+      "classification": "INHERITED_BOUNDARY_SPECIFIC_COUNTERMODELS",
+      "scope": "All source interventions do not identify relay occurrence or predictive chronology."
+    },
+    {
+      "audit_claim_id": "CP-UCT-01",
+      "canonical_claim_ids": [
+        "SCU20261010-C8",
+        "R204-C4",
+        "R205-C5"
+      ],
+      "classification": "INHERITED_CONDITIONAL_INTERPRETATION",
+      "scope": "Selected source facts are not complete type, H, RetBind, conceptual self or report truth."
+    }
+  ],
+  "decision": "COMPLETE_ONE_SCOPED_THEORETICAL_METHODS_APPLICATION_MANUSCRIPT",
+  "manuscript_decision": "MANUSCRIPT_DECISION.json",
+  "manuscript_version": "SCU-PAPER-v1.0.0",
+  "manuscript": "Matched_Behavior_and_Source_Use_v1.0.0.md",
+  "pdf": "Matched_Behavior_and_Source_Use_v1.0.0.pdf",
+  "formal_publication_status": "NOT_PUBLISHED_NO_NEW_DOI_DEPOSIT",
+  "scoped_net_increment": "An exact physically addressed sensorimotor source-equality protocol with separate observation fibers, pure/known-root/OR query budgets and occurrence/chronology failure boundaries, integrating R204 and concurrently preserved R205.",
+  "deductions": [
+    "Comparator match insufficiency and prediction-error diagnostic strategies have primary-source predecessors.",
+    "TA25 already treats relative routes under independent commands; RTTH already treats supplied route-tag alphabets.",
+    "The logarithmic separating-system and singleton-row cover-free arguments are classical mathematics.",
+    "R204 success/match/use separation and R205 cancellation were already disclosed in the research workspace.",
+    "UCT C1/U1, actual-participation, complete-twin and same-instance requirements are inherited."
+  ],
+  "correction_effect": "R194 anchor consistency, R201 coherent strictness witnesses, and R202 covariance-residual scope repaired through disabled effective overlays; these are ancillary and not premises of SCU source theorems.",
+  "correction_index": "corrections/EFFECTIVE_CORRECTION_INDEX.json",
+  "coverage_report": "review/COVERAGE_AND_PRIOR_ART_REPORT.md",
+  "source_inventory": "review/SOURCE_AND_COVERAGE_INVENTORY.json",
+  "reading_receipt": "SOURCE_READING_RECEIPT.json",
+  "unverified_scope": [
+    "Exhaustive worldwide priority for every combined application formulation",
+    "Other private drafts or uninspected branches and every live DOI endpoint",
+    "Actual physical installation and independent H or other phenomenal calibration"
+  ],
+  "open_review_ids": [
+    "QC-20261008-10",
+    "IA-QC11",
+    "QC-20261008-12",
+    "QC-20261008-13"
+  ],
+  "doi_ots_arweave_release_authorized": false
+}

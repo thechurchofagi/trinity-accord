@@ -1,0 +1,393 @@
+{
+  "module_id": "SCU20261010",
+  "version": "SCU-RESULT-v0.2.0",
+  "provisional_old_label": "R205 renamed after concurrent remote R205 observed by parent",
+  "claims": [
+    {
+      "id": "SCU20261010-C1",
+      "title": "Nominal all-word equivalence",
+      "statement": "For every n>=2, route pair (a,b) and finite target word, setting all source values to each target yields correct action and prediction with zero discrepancy at every step; an appended calibrated R204 row-replacement predictor retains the same forward-state trace.",
+      "type": "CONDITIONAL_MODEL_THEOREM",
+      "scope": [
+        "n>=2",
+        "arbitrary finite nominal target words",
+        "pure fixed routes with a calibrated identity plant/predictor"
+      ],
+      "all_of": [
+        "nominal sources yoked to target",
+        "R204 update law for forward-state clause"
+      ],
+      "proof": "RESEARCH_NOTE.md §3",
+      "predecessors": [
+        "R147:ROUTING_MODEL",
+        "R204-C1",
+        "R204-C5",
+        "R199-C1"
+      ],
+      "novelty": "NEW_APPLICATION_WITH_INHERITED_REASONING",
+      "limits": [
+        "Nominal equality is not equality under arbitrary diagnostic probes.",
+        "Actual writes can differ while register states match."
+      ],
+      "status": "CONDITIONAL_RESULT_REVIEWED_CANDIDATE_DISABLED_FULL_MAP_ADOPTION_INCOMPLETE",
+      "code": "check_source_consumers.py",
+      "result": "EXACT_RESULTS.json",
+      "whole_map_review_by_this_worker": false,
+      "predecessor_references": [
+        {
+          "reference": "R147:ROUTING_MODEL",
+          "type": "canonical_node_reference"
+        },
+        {
+          "reference": "R204-C1",
+          "type": "source_reference"
+        },
+        {
+          "reference": "R204-C5",
+          "type": "source_reference"
+        },
+        {
+          "reference": "R199-C1",
+          "type": "source_reference"
+        }
+      ]
+    },
+    {
+      "id": "SCU20261010-C2",
+      "title": "Exact source-observation fibers",
+      "statement": "For schedule W with source columns c_i, full consumer readouts yield product fibers of equal columns; mismatch-only observation yields {(i,j):c_i XOR c_j=d}. Under a restricted intervention family sources equivalent on every admissible input remain indistinguishable.",
+      "type": "CONDITIONAL_MODEL_THEOREM",
+      "scope": [
+        "fixed nonadaptive schedule",
+        "finite source sites and pure route consumers"
+      ],
+      "all_of": [
+        "same declared installation, source carrier sites, consumers, plant and episode/readout binding",
+        "independently addressed valid binary source interventions",
+        "fixed stated response class and stable route/reset conditions",
+        "faithful specified observations; no omitted route, writer, timing or context change"
+      ],
+      "proof": "RESEARCH_NOTE.md §4",
+      "predecessors": [
+        "R147:ROUTING_LIMIT",
+        "IA20261008:TRACE_DOMAIN"
+      ],
+      "novelty": "NEW_APPLICATION_OF_ELEMENTARY_FIBER_REASONING",
+      "limits": [
+        "Mismatch-only data generally do not identify an ordered route pair.",
+        "A source-code collision is not absence of actual use."
+      ],
+      "status": "CONDITIONAL_RESULT_REVIEWED_CANDIDATE_DISABLED_FULL_MAP_ADOPTION_INCOMPLETE",
+      "code": "check_source_consumers.py",
+      "result": "EXACT_RESULTS.json",
+      "whole_map_review_by_this_worker": false,
+      "predecessor_references": [
+        {
+          "reference": "R147:ROUTING_LIMIT",
+          "type": "canonical_node_reference"
+        },
+        {
+          "reference": "IA20261008:TRACE_DOMAIN",
+          "type": "canonical_node_reference"
+        }
+      ]
+    },
+    {
+      "id": "SCU20261010-C3",
+      "title": "Unknown pure-route minimum",
+      "statement": "For n>=2 unknown pure-route roots, uniform exact decision of their equality using binary source interventions and mismatch-only observations has worst-case minimum ceil(log2 n), including deterministic adaptive protocols.",
+      "type": "CONDITIONAL_PROTOCOL_THEOREM",
+      "scope": [
+        "n>=2",
+        "all unknown ordered route pairs",
+        "deterministic exact worst-case protocols"
+      ],
+      "all_of": [
+        "same declared installation, source carrier sites, consumers, plant and episode/readout binding",
+        "independently addressed valid binary source interventions",
+        "fixed stated response class and stable route/reset conditions",
+        "faithful specified observations; no omitted route, writer, timing or context change"
+      ],
+      "proof": "RESEARCH_NOTE.md §5",
+      "predecessors": [
+        "R147:ROUTING_MODEL",
+        "R174:MEDIATOR_CLAMP_SIGNATURE",
+        "BollobasScott_separating_systems"
+      ],
+      "novelty": "NEW_SENSORIMOTOR_APPLICATION_CLASSICAL_NUMERICAL_BOUND",
+      "limits": [
+        "Not a noisy/Bayesian/probabilistic-error/known-root bound.",
+        "Does not identify which shared root or local production."
+      ],
+      "status": "CONDITIONAL_RESULT_REVIEWED_CANDIDATE_DISABLED_FULL_MAP_ADOPTION_INCOMPLETE",
+      "code": "check_source_consumers.py",
+      "result": "EXACT_RESULTS.json",
+      "whole_map_review_by_this_worker": false,
+      "predecessor_references": [
+        {
+          "reference": "R147:ROUTING_MODEL",
+          "type": "canonical_node_reference"
+        },
+        {
+          "reference": "R174:MEDIATOR_CLAMP_SIGNATURE",
+          "type": "canonical_node_reference"
+        },
+        {
+          "reference": "BollobasScott_separating_systems",
+          "type": "source_reference"
+        },
+        {
+          "reference": "Shanmugam et al. (2015), Theorem 2 and Appendix 6.3",
+          "type": "source_reference",
+          "scope": "Classical adaptive separating-system ancestor; read by coverage worker."
+        }
+      ]
+    },
+    {
+      "id": "SCU20261010-C4",
+      "title": "Known motor-root minimum",
+      "statement": "For n>=2 and an independently known motor root a, setting a to zero and all other roots to one decides equality with an unknown predictor root in one probe. It also identifies B={a} for a predictor OR of a nonempty subset B.",
+      "type": "CONDITIONAL_PROTOCOL_THEOREM",
+      "scope": [
+        "n>=2",
+        "independently known single motor source",
+        "pure or nonempty-OR predictor"
+      ],
+      "all_of": [
+        "same declared installation, source carrier sites, consumers, plant and episode/readout binding",
+        "independently addressed valid binary source interventions",
+        "fixed stated response class and stable route/reset conditions",
+        "faithful specified observations; no omitted route, writer, timing or context change",
+        "known source does not come from the same classification outcome"
+      ],
+      "proof": "RESEARCH_NOTE.md §6",
+      "predecessors": [
+        "SCU20261010-C3"
+      ],
+      "novelty": "CORRECTION_AND_NEW_APPLICATION",
+      "limits": [
+        "A report of authorship is not independently known source identity.",
+        "Empty constant-zero predictor is outside the OR extension."
+      ],
+      "status": "CONDITIONAL_RESULT_REVIEWED_CANDIDATE_DISABLED_FULL_MAP_ADOPTION_INCOMPLETE",
+      "code": "check_source_consumers.py",
+      "result": "EXACT_RESULTS.json",
+      "whole_map_review_by_this_worker": false,
+      "predecessor_references": [
+        {
+          "reference": "SCU20261010-C3",
+          "type": "source_reference"
+        }
+      ]
+    },
+    {
+      "id": "SCU20261010-C5",
+      "title": "Redundant OR-set minimum and alias",
+      "statement": "For n>=2, exact uniform equality decision between arbitrary nonempty OR source subsets requires exactly n probes in the worst case, even adaptively. Along the zero-discrepancy branch each unit input e_i is necessary; all unit inputs suffice. A four-source disjoint-set construction defeats the two-bit pure-route code.",
+      "type": "CONDITIONAL_PROTOCOL_THEOREM_AND_COUNTEREXAMPLE",
+      "scope": [
+        "n>=2",
+        "both consumers OR arbitrary nonempty subsets of the n sources",
+        "all pairs of subsets",
+        "exact worst-case mismatch-only protocol"
+      ],
+      "all_of": [
+        "same declared installation, source carrier sites, consumers, plant and episode/readout binding",
+        "independently addressed valid binary source interventions",
+        "fixed stated response class and stable route/reset conditions",
+        "faithful specified observations; no omitted route, writer, timing or context change",
+        "OR response class replaces, rather than inherits, pure-route promise"
+      ],
+      "proof": "RESEARCH_NOTE.md §7",
+      "predecessors": [
+        "R167:CONTEXTUAL_USE_CRITERION",
+        "SCU20261010-C3"
+      ],
+      "novelty": "MODEL_CLASS_PROTOCOL_APPLICATION_CLASSICAL_CODING_ANCESTORS",
+      "limits": [
+        "Target is equality of root sets, not nonempty intersection or intake identity.",
+        "No claim that biological prediction implements OR."
+      ],
+      "status": "CONDITIONAL_RESULT_REVIEWED_CANDIDATE_DISABLED_FULL_MAP_ADOPTION_INCOMPLETE",
+      "code": "check_source_consumers.py",
+      "result": "EXACT_RESULTS.json",
+      "whole_map_review_by_this_worker": false,
+      "predecessor_references": [
+        {
+          "reference": "R167:CONTEXTUAL_USE_CRITERION",
+          "type": "canonical_node_reference"
+        },
+        {
+          "reference": "SCU20261010-C3",
+          "type": "source_reference"
+        },
+        {
+          "reference": "D’yachkov et al. (2014), section 2, Definition 1 and Proposition 1",
+          "type": "source_reference",
+          "scope": "OR/superimposed-code ancestor; read by coverage worker."
+        }
+      ]
+    },
+    {
+      "id": "SCU20261010-C6",
+      "title": "Source-to-intake resolution boundary",
+      "statement": "Faithful copy networks with the same composite root-to-consumer map yield identical readouts for all source inputs, while immediate intake carrier identity can differ. A node write and a branch-edge replacement can have distinct cross-consumer effects; only the former separates the displayed shared/separate relay pair under additional targeting premises.",
+      "type": "CONDITIONAL_MODEL_THEOREM_AND_COUNTEREXAMPLE",
+      "scope": [
+        "finite faithful-copy feedforward networks",
+        "common composite source map",
+        "specific shared/separate relay alternative for clamp comparison"
+      ],
+      "all_of": [
+        "same source input/readout model",
+        "faithful copies for factorization result",
+        "independently targeted physical carrier for node-write contrast",
+        "fixed paths; no intervening overwrite/compensation"
+      ],
+      "proof": "RESEARCH_NOTE.md §8",
+      "predecessors": [
+        "IA20261008:TRACE_DOMAIN",
+        "IA20261008:TRACE_COUNTERPART",
+        "R174:MEDIATOR_CLAMP_SIGNATURE",
+        "R182-C2",
+        "R199-C2"
+      ],
+      "novelty": "NEW_PROTOCOL_BOUNDARY_APPLICATION_INHERITED_PATH_LOGIC",
+      "limits": [
+        "Does not recover actual prior-episode occurrence, RetBind or numerical personal identity.",
+        "Edge effect does not establish shared carrier occurrence."
+      ],
+      "status": "CONDITIONAL_RESULT_REVIEWED_CANDIDATE_DISABLED_FULL_MAP_ADOPTION_INCOMPLETE",
+      "code": "check_source_consumers.py",
+      "result": "EXACT_RESULTS.json",
+      "whole_map_review_by_this_worker": false,
+      "predecessor_references": [
+        {
+          "reference": "IA20261008:TRACE_DOMAIN",
+          "type": "canonical_node_reference"
+        },
+        {
+          "reference": "IA20261008:TRACE_COUNTERPART",
+          "type": "canonical_node_reference"
+        },
+        {
+          "reference": "R174:MEDIATOR_CLAMP_SIGNATURE",
+          "type": "canonical_node_reference"
+        },
+        {
+          "reference": "R182-C2",
+          "type": "source_reference"
+        },
+        {
+          "reference": "R199-C2",
+          "type": "source_reference"
+        }
+      ]
+    },
+    {
+      "id": "SCU20261010-C7",
+      "title": "Prediction chronology counterexample",
+      "statement": "A postconsequence copy can match all source/readout values of a preconsequence predictor; values alone do not establish the prediction role. The event model distinguishes the implementations by independently recorded chronology.",
+      "type": "COUNTEREXAMPLE_AND_ROLE_REPAIR",
+      "scope": [
+        "one pure-root source/actuation response",
+        "pre- versus post-consequence readout alternatives",
+        "complete source input cube"
+      ],
+      "all_of": [
+        "same output values",
+        "different actual time order"
+      ],
+      "proof": "RESEARCH_NOTE.md §9",
+      "predecessors": [
+        "R204-C5",
+        "R174:SHARED_TEMPORAL_COORDINATE"
+      ],
+      "novelty": "NEW_SOURCE_PROTOCOL_NEGATIVE_CONTROL",
+      "limits": [
+        "Numerical agreement is not executed prediction or executed comparator evidence.",
+        "Timing measurement and interpretation require actual validation."
+      ],
+      "status": "CONDITIONAL_RESULT_REVIEWED_CANDIDATE_DISABLED_FULL_MAP_ADOPTION_INCOMPLETE",
+      "code": "check_source_consumers.py",
+      "result": "EXACT_RESULTS.json",
+      "whole_map_review_by_this_worker": false,
+      "predecessor_references": [
+        {
+          "reference": "R204-C5",
+          "type": "source_reference"
+        },
+        {
+          "reference": "R174:SHARED_TEMPORAL_COORDINATE",
+          "type": "canonical_node_reference"
+        }
+      ]
+    },
+    {
+      "id": "SCU20261010-C8",
+      "title": "Conditional UCT counterpart and preserved semantic gap",
+      "statement": "Only under actual-process admission, one complete P/I/K binding, grounded role/trace/time relations, transported physical parameters and C1 do the actual source-consumer relations have experiential structural counterparts. No source confluence, calibration, use, history, language or report threshold is added; H, local membership and conceptual self are not inferred.",
+      "type": "INHERITED_UCT_CONDITIONAL_APPLICATION",
+      "scope": [
+        "one admitted actual process or independently admitted overlapping processes",
+        "common complete signature",
+        "all relevant parameters transported"
+      ],
+      "all_of": [
+        "A:C1",
+        "actual independent physical role grounding",
+        "same-instance joint binding",
+        "correct formula transport rather than automatic substructure selection"
+      ],
+      "proof": "RESEARCH_NOTE.md §11",
+      "predecessors": [
+        "A:C1",
+        "A:U1",
+        "R157:COORDINATE_TRANSPORT",
+        "R158:SELECTION_CLOSURE_LIMIT",
+        "R172 effective use/evidence correction",
+        "R192-C1"
+      ],
+      "novelty": "INHERITED",
+      "limits": [
+        "No actual human/AI H evidence.",
+        "No unique owner or current-assistant consciousness claim.",
+        "Complete-organizational twins are not a free phenomenal-difference counterexample inside C1."
+      ],
+      "status": "CONDITIONAL_RESULT_REVIEWED_CANDIDATE_DISABLED_FULL_MAP_ADOPTION_INCOMPLETE",
+      "code": "check_source_consumers.py",
+      "result": "EXACT_RESULTS.json",
+      "whole_map_review_by_this_worker": false,
+      "predecessor_references": [
+        {
+          "reference": "A:C1",
+          "type": "canonical_node_reference"
+        },
+        {
+          "reference": "A:U1",
+          "type": "canonical_node_reference"
+        },
+        {
+          "reference": "R157:COORDINATE_TRANSPORT",
+          "type": "canonical_node_reference"
+        },
+        {
+          "reference": "R158:SELECTION_CLOSURE_LIMIT",
+          "type": "canonical_node_reference"
+        },
+        {
+          "reference": "R172 effective use/evidence correction",
+          "type": "source_reference"
+        },
+        {
+          "reference": "R192-C1",
+          "type": "source_reference"
+        }
+      ]
+    }
+  ],
+  "actual_instantiation": false,
+  "phenomenal_target_validated": false,
+  "reference_policy": "Only predecessor_references explicitly typed canonical_node_reference may be considered graph references; textual source_reference entries are bibliographic locators, not nodes.",
+  "parent_review": "MAP_AUDIT.md and REVIEW_RESPONSE.md; local typed contract reviewed, whole-map deep audit remains incomplete"
+}

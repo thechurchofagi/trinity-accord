@@ -1,0 +1,28 @@
+{
+  "schema": "uct-disabled-correction-index/1",
+  "status": "PENDING_CHECKPOINT_DISABLED",
+  "overlays": [
+    {
+      "path": "R194_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "sha256": "f89ffb70c535d877926ebfc8a8bc7bc418f0486923fab95f9ab20e7ee3747da6"
+    },
+    {
+      "path": "R201_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "sha256": "037ec7c2abb08fbe108b5aec62e512f979003155d136b79728c4571971580e15"
+    },
+    {
+      "path": "R202_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "sha256": "fdfdbb681ae59dbc0a0fc324a71bb9c697731fae9030b917bbffaebff9a6ddec"
+    }
+  ],
+  "exact_results_sha256": "ec959982e7fb2b76f218dd7d4e0574d82819037698d50330d0f8a227b071a8cf",
+  "proof_code_sha256": "69572b7dfc7b6d61e10a0ac9a34e0453bd22058c7893517c18cf8e00e097a1b0",
+  "completed_map_changed": false,
+  "actual_premises_discharged": false,
+  "open_reviews_preserved": [
+    "QC10",
+    "IA-QC11",
+    "QC12",
+    "QC13"
+  ]
+}

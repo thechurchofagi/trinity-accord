@@ -1,0 +1,679 @@
+{
+  "schema": "uct-scu-mechanical-integrity/1",
+  "status": "PASS_MECHANICAL_INTEGRITY_ONLY",
+  "checks": [
+    {
+      "check": "auditor file hash: MAP_SEMANTIC_AUDIT_REPORT.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "auditor file hash: EFFECTIVE_CORRECTIONS.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "auditor file hash: HANDOFF_ZH.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "auditor file hash: WORK_LOG.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "auditor file hash: PER_ITEM_SEMANTIC_REVIEW.json.gz",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "auditor file hash: PER_ITEM_REVIEW_INDEX.csv",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "auditor file hash: EXACT_UNREAD_SCOPE.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "auditor file hash: FAMILY_REVIEW_NOTES.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "auditor file hash: MANUAL_ITEM_RATIONALES.tsv",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "auditor file hash: CUMULATIVE_CANDIDATE_REVIEW.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "auditor file hash: SOURCE_READ_SCOPE_MANIFEST.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "auditor file hash: READ_SCOPE_PROGRESS.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "auditor file hash: R194_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "auditor file hash: R201_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "auditor file hash: R202_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "auditor file hash: EFFECTIVE_CORRECTION_INDEX.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "auditor file hash: verify_effective_corrections.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "auditor file hash: EFFECTIVE_CORRECTION_EXACT_RESULTS.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "auditor file hash: check_r202_residual_witness.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "auditor file hash: R202_RESIDUAL_COUNTEREXAMPLE.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "auditor file hash: FROZEN_SOURCE_RESOLUTION.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "auditor file hash: build_correction_overlays.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "auditor file hash: build_review_ledger.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "auditor file hash: build_candidate_audit.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "auditor file hash: read_cards.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "compressed ledger exact logical bytes",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "base item uniqueness/count",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "statement unread set empty",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "deeper audit not promoted",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "frozen base provenance",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "actual restored completed graph bytes",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "actual restored completed ledger bytes",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "SCU candidate counts",
+      "passed": true,
+      "detail": {
+        "nodes": 23,
+        "rules": 8,
+        "context_links": 16
+      }
+    },
+    {
+      "check": "SCU unique IDs and no base overwrite",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "SCU disabled",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "SCU references/binding: SCU20261010:r_C1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "SCU references/binding: SCU20261010:r_C2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "SCU references/binding: SCU20261010:r_C3",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "SCU references/binding: SCU20261010:r_C4",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "SCU references/binding: SCU20261010:r_C5",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "SCU references/binding: SCU20261010:r_C6",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "SCU references/binding: SCU20261010:r_C7",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "SCU references/binding: SCU20261010:r_C8",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "SCU nondeductive references: SCU20261010:ctx_C1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "SCU nondeductive references: SCU20261010:ctx_U1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "SCU nondeductive references: SCU20261010:ctx_H",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "SCU nondeductive references: SCU20261010:ctx_transport",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "SCU nondeductive references: SCU20261010:ctx_selection",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "SCU nondeductive references: SCU20261010:ctx_RetBind",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "SCU nondeductive references: SCU20261010:ctx_routing",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "SCU nondeductive references: SCU20261010:ctx_route_limit",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "SCU nondeductive references: SCU20261010:ctx_mediator",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "SCU nondeductive references: SCU20261010:ctx_copy",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "SCU nondeductive references: SCU20261010:ctx_fidelity",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "SCU nondeductive references: SCU20261010:ctx_edge",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "SCU nondeductive references: SCU20261010:ctx_lineage",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "SCU nondeductive references: SCU20261010:ctx_duplicate",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "SCU nondeductive references: SCU20261010:ctx_context_use",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "SCU nondeductive references: SCU20261010:ctx_timing",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "correction index hash: R194_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "historical source preserved: records/R194_Cross_Population_Polarity_20261009/MAP_EXTENSION.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "historical source preserved: records/R194_Cross_Population_Polarity_20261009/RESEARCH_NOTE.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "overlay disabled: SCU20261010-CORR-R194-v0.1.0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "original record hash: R194:COMPONENT_COUNT",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "override not completed record: R194:COMPONENT_COUNT",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "original record hash: R194:r_component_count",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "override not completed record: R194:r_component_count",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "original record hash: R194:RELATIVE_ALIGNMENT",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "override not completed record: R194:RELATIVE_ALIGNMENT",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "correction index hash: R201_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "historical source preserved: records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/MAP_EXTENSION.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "historical source preserved: records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/RESEARCH_NOTE.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "overlay disabled: SCU20261010-CORR-R201-v0.1.0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "original record hash: R201:STRICTNESS_COUNTERMODELS",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "override not completed record: R201:STRICTNESS_COUNTERMODELS",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "original record hash: R201:r_strictness_witnesses",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "override not completed record: R201:r_strictness_witnesses",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "correction index hash: R202_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "historical source preserved: records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/MAP_EXTENSION.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "historical source preserved: records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/RESEARCH_NOTE.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "overlay disabled: SCU20261010-CORR-R202-v0.1.0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "original record hash: R202:CONDITIONAL_NONDIFFERENTIALITY",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "override not completed record: R202:CONDITIONAL_NONDIFFERENTIALITY",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "original record hash: R202:AUDIT_INVERSION_RESULT",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "override not completed record: R202:AUDIT_INVERSION_RESULT",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "original record hash: R202:r_audit_inversion",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "override not completed record: R202:r_audit_inversion",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "correction counts",
+      "passed": true,
+      "detail": {
+        "overrides": 8,
+        "nodes": 6,
+        "rules": 2
+      }
+    },
+    {
+      "check": "completed status/counts preserved",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending navigation consistent",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "all pending remain disabled",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map exists: AC20261009",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map exists: IL20261009",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map exists: ONLINE-AC-PROBE-20261009",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map hash: ONLINE-AC-PROBE-20261009",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map exists: R189-HACA-20261009",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map exists: R190-PCBC-20261009",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map exists: R191-OCCA-20261009",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map exists: R192-CTBI-20261009",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map exists: R205-ASC-20261010",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map exists: R193-NCI-20261009",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map hash: R193-NCI-20261009",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map exists: R194-CPP-20261009",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map hash: R194-CPP-20261009",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map exists: R195-IPA-20261009",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map hash: R195-IPA-20261009",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map exists: R196-TPD-20261009",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map hash: R196-TPD-20261009",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map exists: R197-FEO-20261010",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map hash: R197-FEO-20261010",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map exists: R198-SPNS-20261010",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map hash: R198-SPNS-20261010",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map exists: R199-CPC-20261010",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map hash: R199-CPC-20261010",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map exists: R200-SCF-20261010",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map hash: R200-SCF-20261010",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map exists: R201-ROTM-20261010",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map hash: R201-ROTM-20261010",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map exists: R202-TMAB-20261010",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map hash: R202-TMAB-20261010",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map exists: R203-ACD-20261010",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map hash: R203-ACD-20261010",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map exists: R204-SAU-20261010",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map hash: R204-SAU-20261010",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map exists: SCU20261010",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "pending map hash: SCU20261010",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "current coverage consistent",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "QC obligations unchanged",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "final PDF/source reviewed hashes",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "complete earlier navigation preserved: HANDOFF.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "complete earlier navigation preserved: MEMORY.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "complete earlier navigation preserved: MASTER_INDEX.md",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "check_count": 132,
+  "semantic_certification": false,
+  "actual_premise_discharge": false,
+  "new_completed_map_release": false,
+  "separate_semantic_review": "MAP_AUDIT.md"
+}

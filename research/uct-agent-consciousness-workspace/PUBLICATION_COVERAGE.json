@@ -1,6 +1,6 @@
 {
   "schema": "uct-publication-coverage-entry/1.0",
-  "coverage_version": "UCT-PUB-v1.0.17",
+  "coverage_version": "UCT-PUB-v1.0.18",
   "base_census_version": "UCT-PUB-v1.0.0",
   "ledger": {
     "path": "publication/UCT-PUB-v1.0.0/COVERAGE_LEDGER.json",
@@ -10,8 +10,8 @@
   "claim_id_index": "publication/UCT-PUB-v1.0.0/CLAIM_ID_INDEX.json",
   "published_works": "publication/UCT-PUB-v1.0.0/PUBLISHED_WORKS_AND_VERSIONS.json",
   "readable_report": "records/PUB20261009_Publication_Coverage/PUBLICATION_COVERAGE_REPORT_ZH.md",
-  "current_decision": "publication/UCT-PUB-v1.0.0/MANUSCRIPT_DECISION.json",
-  "latest_update": "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/PUBLICATION_COVERAGE_UPDATE.json",
+  "current_decision": "records/SCU20261010_Source_Consumer_Protocols/MANUSCRIPT_DECISION.json",
+  "latest_update": "records/SCU20261010_Source_Consumer_Protocols/PUBLICATION_COVERAGE_UPDATE.json",
   "current_scientific_map": "UCT-MAP-v1.1.2",
   "nondeductive": true,
   "unknown_is_unpublished": false,
@@ -40,6 +40,10 @@
     "records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/PUBLICATION_COVERAGE_UPDATE.json",
     "records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/PUBLICATION_COVERAGE_UPDATE.json",
     "records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/PUBLICATION_COVERAGE_UPDATE.json",
-    "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/PUBLICATION_COVERAGE_UPDATE.json"
-  ]
+    "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/PUBLICATION_COVERAGE_UPDATE.json",
+    "records/SCU20261010_Source_Consumer_Protocols/PUBLICATION_COVERAGE_UPDATE.json"
+  ],
+  "historical_census_decision": "publication/UCT-PUB-v1.0.0/MANUSCRIPT_DECISION.json",
+  "latest_manuscript_status": "COMPLETE_SCOPED_WORKING_MANUSCRIPT_NOT_FORMALLY_PUBLISHED",
+  "formal_publication_counts_unchanged": true
 }

@@ -1,0 +1,185 @@
+{
+  "schema": "uct-auditor-deliverable-manifest/1",
+  "audit_id": "SCU20261010-MAP-AUDIT-v0.1.0",
+  "finalized_utc": "2026-10-10T00:18:21.398716+00:00",
+  "local_source_directory": "/workspace/scratch/465328c0080c/workbench/audit",
+  "copy_policy": "Copy recommended_files plus this manifest into the parent record audit folder. The .json.gz expands to the exact logical .json referenced by the reports. The raw 8 MB JSON and restored full baseline need not be copied again. Optional tooling records original workbench generation assumptions; only verify_effective_corrections.py is needed to regenerate the primary correction results.",
+  "recommended_files": [
+    {
+      "path": "MAP_SEMANTIC_AUDIT_REPORT.md",
+      "bytes": 17110,
+      "sha256": "3b0198d2e9d52cf79b2f975c73252a3961e407b048a51a17cea749c1021c0102"
+    },
+    {
+      "path": "EFFECTIVE_CORRECTIONS.md",
+      "bytes": 8552,
+      "sha256": "5bff1424d7467d22c58dd9cd7cb92ddc8927db3a9cb9c9bea70231d43a72b371"
+    },
+    {
+      "path": "HANDOFF_ZH.md",
+      "bytes": 3898,
+      "sha256": "7c138480e1ebb4a4564ae56e64624db613c532587ce8fb92bcb6772318e589fd"
+    },
+    {
+      "path": "WORK_LOG.md",
+      "bytes": 4061,
+      "sha256": "373ff8ba900ffa433938238efc23a63327ead87b7796cb5c8ed60fa642b6f745"
+    },
+    {
+      "path": "PER_ITEM_SEMANTIC_REVIEW.json.gz",
+      "bytes": 693915,
+      "sha256": "a1757456fbf8472eba7a9393fce7fcd6b55a982d5be0206855ec3e5ffe306dc0"
+    },
+    {
+      "path": "PER_ITEM_REVIEW_INDEX.csv",
+      "bytes": 254129,
+      "sha256": "bb39ad1d0c1443a20fc515832bb10b0f3fad176b1fb69f84ab33e65fe414f92b"
+    },
+    {
+      "path": "EXACT_UNREAD_SCOPE.json",
+      "bytes": 289794,
+      "sha256": "d16e33539c98c1e25df6a105d61d93010df4a3bd672fd0f86d9aa7500731b979"
+    },
+    {
+      "path": "FAMILY_REVIEW_NOTES.json",
+      "bytes": 21951,
+      "sha256": "810b43aae9b35498a377fae457fecb22202676ac12d7307050a4f5e96786fb84"
+    },
+    {
+      "path": "MANUAL_ITEM_RATIONALES.tsv",
+      "bytes": 24494,
+      "sha256": "2a6e6def49c97925d1a8e3bc2ac58e8a2a5b9411ae6994c82118e0a5e9eeda04"
+    },
+    {
+      "path": "CUMULATIVE_CANDIDATE_REVIEW.json",
+      "bytes": 501513,
+      "sha256": "f99bf1ba1c1b34f2297d429963c299d144d5d094ae8c1174fa644fc4bab492c6"
+    },
+    {
+      "path": "SOURCE_READ_SCOPE_MANIFEST.json",
+      "bytes": 24353,
+      "sha256": "a3b79f236cc073491865c44926e7ef786635d94c67032ef50de2b2827c6bd1cd"
+    },
+    {
+      "path": "READ_SCOPE_PROGRESS.json",
+      "bytes": 42971,
+      "sha256": "eef52803494762663b8e37983b6e4e0a4149218c436077e6eb41a441bf2bbb1a"
+    },
+    {
+      "path": "R194_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "bytes": 8549,
+      "sha256": "f89ffb70c535d877926ebfc8a8bc7bc418f0486923fab95f9ab20e7ee3747da6"
+    },
+    {
+      "path": "R201_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "bytes": 6755,
+      "sha256": "037ec7c2abb08fbe108b5aec62e512f979003155d136b79728c4571971580e15"
+    },
+    {
+      "path": "R202_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "bytes": 12361,
+      "sha256": "fdfdbb681ae59dbc0a0fc324a71bb9c697731fae9030b917bbffaebff9a6ddec"
+    },
+    {
+      "path": "EFFECTIVE_CORRECTION_INDEX.json",
+      "bytes": 912,
+      "sha256": "736535021ed005dfe4b3c456e3af8ed5b610c760a2e9f43e7abac57cb73b2ade"
+    },
+    {
+      "path": "verify_effective_corrections.py",
+      "bytes": 10328,
+      "sha256": "69572b7dfc7b6d61e10a0ac9a34e0453bd22058c7893517c18cf8e00e097a1b0"
+    },
+    {
+      "path": "EFFECTIVE_CORRECTION_EXACT_RESULTS.json",
+      "bytes": 6966,
+      "sha256": "ec959982e7fb2b76f218dd7d4e0574d82819037698d50330d0f8a227b071a8cf"
+    },
+    {
+      "path": "check_r202_residual_witness.py",
+      "bytes": 2063,
+      "sha256": "4d4029d10cbdc655c0c1ed7667f336aecc8a925e001a6763c321527a8d93c848"
+    },
+    {
+      "path": "R202_RESIDUAL_COUNTEREXAMPLE.json",
+      "bytes": 944,
+      "sha256": "5b438b20cf98600399952f2a93ea259138ad79c9bbee5dbc348a245036fddf56"
+    },
+    {
+      "path": "FROZEN_SOURCE_RESOLUTION.json",
+      "bytes": 1814,
+      "sha256": "3ccacfdb58a95f18977e7ecc160ffd432909242bcb7d1cb0f008b2655113f7be"
+    }
+  ],
+  "optional_audit_serialization_tooling": [
+    {
+      "path": "build_correction_overlays.py",
+      "bytes": 20975,
+      "sha256": "913ac89c6c5610ca83c9e73e664b519528be126f10991e77c435c9dc5d9ca0f6"
+    },
+    {
+      "path": "build_review_ledger.py",
+      "bytes": 35928,
+      "sha256": "efc0857007396f41135f9c6c1318ddf6d15f575fbecf893ccbdf95ea1ecad868"
+    },
+    {
+      "path": "build_candidate_audit.py",
+      "bytes": 21314,
+      "sha256": "40cf74820fbbaa8f426fe0cae0978714c0a7e1db669274a532e9cae734d9efec"
+    },
+    {
+      "path": "read_cards.py",
+      "bytes": 1588,
+      "sha256": "2fe92fa10f3f1cec240d455ef16cc66f8c45ee98066e75f7e48a2b1f18dbddfe"
+    }
+  ],
+  "compressed_ledger": {
+    "logical_path": "PER_ITEM_SEMANTIC_REVIEW.json",
+    "logical_bytes": 8327306,
+    "logical_sha256": "ca0f78d5694650a2663d98bdfb100dffe4f65374a9e0d1f767bada49468c384d",
+    "transport_path": "PER_ITEM_SEMANTIC_REVIEW.json.gz",
+    "transport_bytes": 693915,
+    "transport_sha256": "a1757456fbf8472eba7a9393fce7fcd6b55a982d5be0206855ec3e5ffe306dc0",
+    "decompressed_exact_byte_equality_verified": true,
+    "gzip_mtime": 0
+  },
+  "review_scope": {
+    "completed_statement_premise_relation_counts": {
+      "node": 913,
+      "rule": 424,
+      "context": 261,
+      "suspended_historical_rule": 10
+    },
+    "statement_level_unread_ids": [],
+    "unreviewed_full_raw_contract_items": 901,
+    "unreviewed_full_raw_contract_fields": 1101,
+    "unreviewed_full_supplementary_semantic_items": 495,
+    "unreviewed_full_supplementary_semantic_fields": 727,
+    "unreviewed_union_items": 1034,
+    "unreviewed_union_fields": 1828,
+    "full_historical_source_proofs_independently_reconstructed": false,
+    "overall_status": "AUDIT_INCOMPLETE",
+    "R190_R205_candidate_counts": {
+      "node": 153,
+      "rule": 81,
+      "context": 79
+    },
+    "SCU_candidate_counts": {
+      "node": 23,
+      "rule": 8,
+      "context": 16
+    }
+  },
+  "integrity_checks_are_semantic_certification": false,
+  "actual_premises_discharged": false,
+  "phenomenal_validation": false,
+  "completed_map_changed": false,
+  "canonical_repo_changed_by_this_auditor": false,
+  "remote_save_performed_by_this_auditor": false,
+  "open_reviews_preserved": [
+    "QC10",
+    "IA-QC11",
+    "QC12",
+    "QC13"
+  ]
+}

@@ -741,3 +741,17 @@ QC10 remains OPEN: concrete organization and its probes do not establish familia
 # R205 review response
 
 QC-20261008-10 remains OPEN: no independent familiar self-related target. IA-QC11 remains application-OPEN: model occurrence/chronology and recoding are explicit, actual installation is absent. QC-20261008-12 remains application-OPEN: source net influence differs from internal route consumption; cancellation defeats unrestricted probes. QC-20261008-13 remains OPEN: named carriers and branch probes are model-level, no actual bearer or complete signature admitted. Evidence: records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/REVIEW_RESPONSE.md, RESEARCH_NOTE.md, EXACT_RESULTS.json and GAP_LEDGER.json. No reviewer status is self-closed.
+
+
+## SCU20261010 — bounded manuscript review and effective corrections, 2026-10-10
+
+Inspected parent `7dd9564c50f08a9f78dd8e35a5b960f4f0d30edc`, preserving concurrent R205 and master handoff v70. See [records/SCU20261010_Source_Consumer_Protocols/REVIEW_RESPONSE.md](records/SCU20261010_Source_Consumer_Protocols/REVIEW_RESPONSE.md), [map audit](records/SCU20261010_Source_Consumer_Protocols/MAP_AUDIT.md), and [effective correction index](records/SCU20261010_Source_Consumer_Protocols/corrections/EFFECTIVE_CORRECTION_INDEX.json).
+
+- SCU-MR01–06: narrow manuscript scope/attribution/clarity findings resolved in the complete SCU-PAPER-v1.0.0 manuscript. This is internal AI-assisted review, not external peer review.
+- SCU-CORR-R194: anchor-consistency omission repaired through a disabled effective overlay; original source unchanged.
+- SCU-CORR-R201: infeasible original strictness tuples and incompatible counterexample premise repaired through coherent joint-law witnesses and a disabled overlay; sufficient strict margin retained.
+- SCU-CORR-R202: zero-residual point inversion separated from residual-adjusted/set-valued analysis through a disabled overlay.
+- SCU-OPEN-R191-NORMALIZATION: r_occa/r_history actual-instance guards remain OPEN; no silent source rewrite.
+- SCU-AUDIT-DEPTH: statement/premise/relation review completed for 1,608 items; exact raw-contract, supplementary-field and source-proof gaps are listed. Global adoption remains AUDIT_INCOMPLETE.
+
+The corrections rederive their exact affected pending closures, not a global proof of all historical claims. No completed-map counts or foundation axioms changed. QC-20261008-10, IA-QC11, QC-20261008-12 and QC-20261008-13 remain OPEN/application-open; this manuscript does not supply actual H calibration or a fully validated physical instance.

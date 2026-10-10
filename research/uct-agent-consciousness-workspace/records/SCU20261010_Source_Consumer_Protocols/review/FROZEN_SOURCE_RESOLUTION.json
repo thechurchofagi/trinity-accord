@@ -1,0 +1,41 @@
+{
+  "schema": "uct-frozen-source-resolution/1",
+  "completed_release": "UCT-MAP-v1.1.2",
+  "repository_capsule": "versions/UCT-MAP-v1.1.2/UCT_MAP_v1.1.2_Capsule.tar.xz",
+  "capsule_sha256": "fa4b43e5d9a69e8c249ccd26161c28dbafcb8e7447e24bff33a811bcbe94dd8d",
+  "source_snapshot": "a22ad487b2a072293de2ecb55b4f2cc2a2c0dafc",
+  "mappings": [
+    {
+      "logical_auditor_path": "baseline/UCT_EFFECTIVE_GRAPH.json",
+      "capsule_member": [
+        "UCT_EFFECTIVE_GRAPH.json",
+        "inputs/baseline/UCT_EFFECTIVE_GRAPH.json"
+      ],
+      "sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612"
+    },
+    {
+      "logical_auditor_path": "baseline/REVIEW_LEDGER.json",
+      "capsule_member": [
+        "REVIEW_LEDGER.json",
+        "inputs/baseline/REVIEW_LEDGER.json"
+      ],
+      "sha256": "0513cb55cef94d82adcaea46af1974438a424aeba152f4c9d5655340f9271687"
+    },
+    {
+      "logical_auditor_path": "baseline/SOURCE_LOCATIONS.json",
+      "capsule_member": "SOURCE_LOCATIONS.json",
+      "sha256": "4a8407f630147a4f9227088931fa90128cb8277d09e03bfede141410bff14abd"
+    },
+    {
+      "logical_auditor_path": "baseline/audit/BASELINE_PER_ID_SEMANTIC_REVIEW.json",
+      "capsule_member": "audit/BASELINE_PER_ID_SEMANTIC_REVIEW.json",
+      "sha256": "092e97142d07d15242a48ced5e641b920b36cdac57978cafb69bd314937b4df4"
+    },
+    {
+      "logical_auditor_path": "baseline/audit/FAMILY_COMPATIBILITY_ASSESSMENTS.json",
+      "capsule_member": "audit/FAMILY_COMPATIBILITY_ASSESSMENTS.json",
+      "sha256": "2093aba0fc810e19bee28567196186d795d8b022a10d5ed49b42e68a51467895"
+    }
+  ],
+  "note": "baseline paths in the audit are logical frozen-source locators; these exact files are already stored in the versioned capsule. The increment is not a second full historical repository backup."
+}
