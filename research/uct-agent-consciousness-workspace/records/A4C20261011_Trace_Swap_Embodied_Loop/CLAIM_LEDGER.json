@@ -1,0 +1,60 @@
+{
+  "round": "A4C20261011",
+  "claims": [
+    {
+      "id": "A4C-C1",
+      "type": "EXECUTED_FINITE_APPLICATION",
+      "statement": "In the declared A4C embodied simulation, a same-bearer opposite-context formation-trace swap changes the time-resolved action trajectory and final organizational endpoint in the predeclared direction while bearer and current consumer remain fixed.",
+      "domain": "the A4C Python/JSON one-dimensional embodied simulation with two calibrated disturbance contexts",
+      "premises": ["formation and test are separate executed processes", "both traces are digest-valid products of earlier calibration events in one bearer", "the named consumer uses the selected trace value in every action", "plant, gain, horizon and endpoint rule are fixed", "action replay is exact"],
+      "proof_or_source": "run_trace_swap_study.py and EXACT_RESULTS.json; balanced mode means are intact=0, block=1.99951171875, swap=3.9990234375, rescue=0.",
+      "counterexample_boundary": "The result is model-relative and does not establish an unrepresented physical route, a human/robot route or familiar mineness.",
+      "status": "EXECUTED_VERIFIED_SIMULATION_SCOPE",
+      "thought_experiment_role": "Copy/switch/memory varies trace content while bearer and consumer stay fixed."
+    },
+    {
+      "id": "A4C-C2",
+      "type": "EXACT_NEGATIVE_RESULT",
+      "statement": "Endpoint equality or endpoint direction alone does not establish trace-route fidelity.",
+      "domain": "the declared action-ledger/endpoint model",
+      "premises": ["the direct-write twin copies a swap endpoint", "the twin retains an intact action ledger", "the plant law and replay rule remain fixed"],
+      "proof_or_source": "The copied endpoint matches the swap value while replay of the action ledger yields the intact value; see endpoint_only_counterexample in EXACT_RESULTS.json.",
+      "counterexample_boundary": "The argument targets endpoint-only evidence; it does not show that every route audit is sufficient.",
+      "status": "PROVED_EXACT_IN_DECLARED_MODEL",
+      "thought_experiment_role": "Abacus/calculator holds the displayed answer while changing the generating route."
+    },
+    {
+      "id": "A4C-C3",
+      "type": "APPLICATION_CONTRACT",
+      "statement": "A trace-content sensitivity claim requires, jointly, earlier formation, same declared bearer, named current consumer, actual consumer-level use, a content-specific intervention, fixed plant/endpoint semantics, no direct endpoint write and replayable intermediate actions.",
+      "domain": "bounded organizational body/action-loop studies",
+      "premises": ["all clauses bind one comparison domain and event chronology", "separate rules or endpoint contrasts do not substitute for the conjunction"],
+      "proof_or_source": "TRACE_SWAP_PROTOCOL.md and the failure of the endpoint-only twin.",
+      "counterexample_boundary": "A source-code audit cannot exclude unrepresented channels in a physical implementation.",
+      "status": "SUPPORTED_METHOD_CONTRACT",
+      "thought_experiment_role": "All four families specify fixed, varied and exclusion variables."
+    },
+    {
+      "id": "A4C-C4",
+      "type": "UCT_BOUNDARY",
+      "statement": "A4C strengthens only the organization-level retentive-use explanans and does not establish R173's complete same-token application, familiar mineness, H_way, C1's empirical truth, a unique subject or a basal-experience gate.",
+      "domain": "UCT interpretation of A4C",
+      "premises": ["A:C1 is a fixed interpretive axiom", "R173 transport requires all-of premises for one admitted actual token and complete K", "B_fam and phenomenal measurement remain open"],
+      "proof_or_source": "Type and scope audit in RESEARCH_NOTE.md and FORMAL_AUDIT.md.",
+      "counterexample_boundary": "No software score, action trace or report can by itself repair missing complete-physical and phenomenal bindings.",
+      "status": "BOUNDARY_ENFORCED",
+      "thought_experiment_role": "The human-realized-agent case blocks promotion from the software view to complete physical constitution."
+    },
+    {
+      "id": "A4C-C5",
+      "type": "PROSPECTIVE_TRANSLATION",
+      "statement": "The next admissible translation is a trace-specific physical robot or human intervention with the same bearer/current consumer and an independently fixed organizational endpoint, not another software endpoint computation.",
+      "domain": "future embodied installation",
+      "premises": ["native trace access can be blocked or swapped without an independent endpoint route", "event-level actions and endpoint can be replayed", "complete physical-signature and phenomenal claims remain separately gated"],
+      "proof_or_source": "A4C stop rule and remaining gaps.",
+      "counterexample_boundary": "No qualifying physical intervention was executed in A4C.",
+      "status": "PROSPECTIVE_NOT_EXECUTED",
+      "thought_experiment_role": "Ancestor/formation fixes the mature task and varies the installed history route."
+    }
+  ]
+}

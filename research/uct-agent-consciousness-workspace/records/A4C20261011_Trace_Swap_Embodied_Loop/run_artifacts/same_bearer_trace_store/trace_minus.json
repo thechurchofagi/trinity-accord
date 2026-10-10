@@ -1,0 +1,38 @@
+{
+  "payload": {
+    "bearer_id": "A4C-embodied-simulation-bearer-v1",
+    "carrier_id": "A4C-embodied-simulation-bearer-v1:retained-trace-store",
+    "formation_context": "minus",
+    "formation_event_id": "c0562cd8-4956-4c40-a381-69783714f207",
+    "formation_observations": [
+      {
+        "after": -1.0,
+        "before": 0.0,
+        "calibration_event_id": "fcffdf0a-0be5-4b53-a48e-de5a91f06dff",
+        "observed_delta": -1.0
+      },
+      {
+        "after": -0.9,
+        "before": 0.1,
+        "calibration_event_id": "9c54fb0b-e0dd-4374-b54b-1b28930412c2",
+        "observed_delta": -1.0
+      },
+      {
+        "after": -0.8,
+        "before": 0.2,
+        "calibration_event_id": "5fbab058-542b-4f1c-9bde-33eaa333b993",
+        "observed_delta": -1.0
+      },
+      {
+        "after": -0.7,
+        "before": 0.3,
+        "calibration_event_id": "6c6229d2-460a-4ecb-8ed9-52374b6a82a6",
+        "observed_delta": -1.0
+      }
+    ],
+    "formed_at_utc": "2026-10-10T18:51:48.079283+00:00",
+    "retained_bias_estimate": -1.0,
+    "schema": "A4C-FORMATION-TRACE-v1"
+  },
+  "payload_sha256": "8397e0cf64e21508d30568181be1e3b9a73078d33960490b90576f25ea382b72"
+}

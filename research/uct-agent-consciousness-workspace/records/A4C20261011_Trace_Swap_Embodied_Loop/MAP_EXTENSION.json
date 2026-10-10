@@ -1,0 +1,11 @@
+{
+  "id": "A4C20261011",
+  "status": "DISABLED_SCOPED_SIMULATION_APPLICATION",
+  "enabled_as_established_premises": false,
+  "base_release": "UCT-MAP-v1.1.2",
+  "scientific_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+  "reason": "The executed same-bearer trace swap is a bounded embodied simulation and does not discharge actual-token, complete physical-signature or phenomenal-endpoint premises.",
+  "formal_audit": "FORMAL_AUDIT.md",
+  "claim_ledger": "CLAIM_LEDGER.json",
+  "gap_ledger": "GAP_LEDGER.md"
+}

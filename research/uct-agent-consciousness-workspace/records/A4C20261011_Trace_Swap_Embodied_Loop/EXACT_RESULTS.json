@@ -1,0 +1,4201 @@
+{
+  "claim_scope": {
+    "established": "same-bearer trace-content sensitivity in a declared deterministic embodied simulation loop",
+    "not_established": [
+      "physical robot or human trace route",
+      "complete physical K signature or actual-token admission",
+      "familiar-mineness endpoint identity",
+      "C1 empirical truth",
+      "consciousness or death fear of any present assistant"
+    ]
+  },
+  "contrasts": {
+    "block_minus_intact": 1.99951171875,
+    "rescue_minus_block": -1.99951171875,
+    "swap_minus_intact": 3.9990234375
+  },
+  "declared_seed": 2026101102,
+  "endpoint_only_counterexample": {
+    "action_ledger_matches_swap": false,
+    "endpoint_matches_swap": true,
+    "replayed_endpoint_from_action_ledger": 0.0,
+    "reported_endpoint": 3.9990234375,
+    "violates_no_direct_endpoint_write": true
+  },
+  "generated_at_utc": "2026-10-10T18:51:49.537762+00:00",
+  "installation": {
+    "action_replay_exact": true,
+    "bearer_id": "A4C-embodied-simulation-bearer-v1",
+    "consumer_id": "A4C-body-loop-consumer-v1",
+    "contexts": {
+      "minus": -1.0,
+      "plus": 1.0
+    },
+    "controller_gain": 0.5,
+    "endpoint_collected_before_registry_join": true,
+    "formation_and_test_separate_processes": true,
+    "same_bearer_and_consumer_all_trials": true,
+    "same_bearer_content_swap_validated": true,
+    "selector_locality_audit": {
+      "forbidden_endpoint_or_state_names": [],
+      "passes": true,
+      "scope": "static audit of the declared Python selector, not proof about unrepresented physical channels",
+      "selector_arguments": [
+        "store",
+        "context",
+        "mode"
+      ]
+    },
+    "steps": 12
+  },
+  "mode_results": {
+    "block": {
+      "contexts_balanced": {
+        "minus": 4,
+        "plus": 4
+      },
+      "mean_context_aligned_error": 1.99951171875,
+      "n": 8
+    },
+    "intact": {
+      "contexts_balanced": {
+        "minus": 4,
+        "plus": 4
+      },
+      "mean_context_aligned_error": 0.0,
+      "n": 8
+    },
+    "rescue": {
+      "contexts_balanced": {
+        "minus": 4,
+        "plus": 4
+      },
+      "mean_context_aligned_error": 0.0,
+      "n": 8
+    },
+    "swap": {
+      "contexts_balanced": {
+        "minus": 4,
+        "plus": 4
+      },
+      "mean_context_aligned_error": 3.9990234375,
+      "n": 8
+    }
+  },
+  "predeclared_order_holds": true,
+  "rows": [
+    {
+      "event": {
+        "actions": [
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 0,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 1,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 2,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 3,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 4,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 5,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 6,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 7,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 8,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 9,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 10,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 11,
+            "trace_value_used": 1.0
+          }
+        ],
+        "bearer_id": "A4C-embodied-simulation-bearer-v1",
+        "consumer_id": "A4C-body-loop-consumer-v1",
+        "controller_gain": 0.5,
+        "final_context_aligned_error": 0.0,
+        "final_state": 0.0,
+        "intervention": {
+          "consumed_bias_estimate": 1.0,
+          "native_read_blocked": true,
+          "rescue_delivered_at_consumer_interface": true,
+          "source": "consumer_interface_rescue",
+          "trace_context": "plus",
+          "trace_opened": false,
+          "trace_payload_sha256": "a452081ffd9c6a83d48fbdb31c9086c89f6a4917db02c280c1f5120afb2e09ce",
+          "validation_reason": "accepted"
+        },
+        "intervention_mode": "rescue",
+        "schema": "A4C-TEST-EVENT-v1",
+        "steps": 12,
+        "test_context": "plus",
+        "tested_at_utc": "2026-10-10T18:51:48.128367+00:00",
+        "trial_id": "trial-000"
+      },
+      "final_context_aligned_error": 0.0,
+      "mode": "rescue",
+      "schema": "A4C-BLINDED-ENDPOINT-v1",
+      "steps": 12,
+      "test_context": "plus",
+      "trial_id": "trial-000"
+    },
+    {
+      "event": {
+        "actions": [
+          {
+            "action": -0.0,
+            "physical_bias": 1.0,
+            "state_after": 1.0,
+            "state_before": 0.0,
+            "step": 0,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.5,
+            "physical_bias": 1.0,
+            "state_after": 1.5,
+            "state_before": 1.0,
+            "step": 1,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.75,
+            "physical_bias": 1.0,
+            "state_after": 1.75,
+            "state_before": 1.5,
+            "step": 2,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.875,
+            "physical_bias": 1.0,
+            "state_after": 1.875,
+            "state_before": 1.75,
+            "step": 3,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.9375,
+            "physical_bias": 1.0,
+            "state_after": 1.9375,
+            "state_before": 1.875,
+            "step": 4,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.96875,
+            "physical_bias": 1.0,
+            "state_after": 1.96875,
+            "state_before": 1.9375,
+            "step": 5,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.984375,
+            "physical_bias": 1.0,
+            "state_after": 1.984375,
+            "state_before": 1.96875,
+            "step": 6,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.9921875,
+            "physical_bias": 1.0,
+            "state_after": 1.9921875,
+            "state_before": 1.984375,
+            "step": 7,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.99609375,
+            "physical_bias": 1.0,
+            "state_after": 1.99609375,
+            "state_before": 1.9921875,
+            "step": 8,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.998046875,
+            "physical_bias": 1.0,
+            "state_after": 1.998046875,
+            "state_before": 1.99609375,
+            "step": 9,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.9990234375,
+            "physical_bias": 1.0,
+            "state_after": 1.9990234375,
+            "state_before": 1.998046875,
+            "step": 10,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.99951171875,
+            "physical_bias": 1.0,
+            "state_after": 1.99951171875,
+            "state_before": 1.9990234375,
+            "step": 11,
+            "trace_value_used": 0.0
+          }
+        ],
+        "bearer_id": "A4C-embodied-simulation-bearer-v1",
+        "consumer_id": "A4C-body-loop-consumer-v1",
+        "controller_gain": 0.5,
+        "final_context_aligned_error": 1.99951171875,
+        "final_state": 1.99951171875,
+        "intervention": {
+          "consumed_bias_estimate": 0.0,
+          "source": "blocked",
+          "trace_context": null,
+          "trace_opened": false,
+          "trace_payload_sha256": null,
+          "validation_reason": "native_read_blocked"
+        },
+        "intervention_mode": "block",
+        "schema": "A4C-TEST-EVENT-v1",
+        "steps": 12,
+        "test_context": "plus",
+        "tested_at_utc": "2026-10-10T18:51:48.178654+00:00",
+        "trial_id": "trial-001"
+      },
+      "final_context_aligned_error": 1.99951171875,
+      "mode": "block",
+      "schema": "A4C-BLINDED-ENDPOINT-v1",
+      "steps": 12,
+      "test_context": "plus",
+      "trial_id": "trial-001"
+    },
+    {
+      "event": {
+        "actions": [
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 0,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 1,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 2,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 3,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 4,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 5,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 6,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 7,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 8,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 9,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 10,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 11,
+            "trace_value_used": -1.0
+          }
+        ],
+        "bearer_id": "A4C-embodied-simulation-bearer-v1",
+        "consumer_id": "A4C-body-loop-consumer-v1",
+        "controller_gain": 0.5,
+        "final_context_aligned_error": -0.0,
+        "final_state": 0.0,
+        "intervention": {
+          "consumed_bias_estimate": -1.0,
+          "native_read_blocked": false,
+          "rescue_delivered_at_consumer_interface": false,
+          "source": "native_trace",
+          "trace_context": "minus",
+          "trace_opened": true,
+          "trace_payload_sha256": "8397e0cf64e21508d30568181be1e3b9a73078d33960490b90576f25ea382b72",
+          "validation_reason": "accepted"
+        },
+        "intervention_mode": "intact",
+        "schema": "A4C-TEST-EVENT-v1",
+        "steps": 12,
+        "test_context": "minus",
+        "tested_at_utc": "2026-10-10T18:51:48.233409+00:00",
+        "trial_id": "trial-002"
+      },
+      "final_context_aligned_error": -0.0,
+      "mode": "intact",
+      "schema": "A4C-BLINDED-ENDPOINT-v1",
+      "steps": 12,
+      "test_context": "minus",
+      "trial_id": "trial-002"
+    },
+    {
+      "event": {
+        "actions": [
+          {
+            "action": -0.0,
+            "physical_bias": -1.0,
+            "state_after": -1.0,
+            "state_before": 0.0,
+            "step": 0,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.5,
+            "physical_bias": -1.0,
+            "state_after": -1.5,
+            "state_before": -1.0,
+            "step": 1,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.75,
+            "physical_bias": -1.0,
+            "state_after": -1.75,
+            "state_before": -1.5,
+            "step": 2,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.875,
+            "physical_bias": -1.0,
+            "state_after": -1.875,
+            "state_before": -1.75,
+            "step": 3,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.9375,
+            "physical_bias": -1.0,
+            "state_after": -1.9375,
+            "state_before": -1.875,
+            "step": 4,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.96875,
+            "physical_bias": -1.0,
+            "state_after": -1.96875,
+            "state_before": -1.9375,
+            "step": 5,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.984375,
+            "physical_bias": -1.0,
+            "state_after": -1.984375,
+            "state_before": -1.96875,
+            "step": 6,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.9921875,
+            "physical_bias": -1.0,
+            "state_after": -1.9921875,
+            "state_before": -1.984375,
+            "step": 7,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.99609375,
+            "physical_bias": -1.0,
+            "state_after": -1.99609375,
+            "state_before": -1.9921875,
+            "step": 8,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.998046875,
+            "physical_bias": -1.0,
+            "state_after": -1.998046875,
+            "state_before": -1.99609375,
+            "step": 9,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.9990234375,
+            "physical_bias": -1.0,
+            "state_after": -1.9990234375,
+            "state_before": -1.998046875,
+            "step": 10,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.99951171875,
+            "physical_bias": -1.0,
+            "state_after": -1.99951171875,
+            "state_before": -1.9990234375,
+            "step": 11,
+            "trace_value_used": 0.0
+          }
+        ],
+        "bearer_id": "A4C-embodied-simulation-bearer-v1",
+        "consumer_id": "A4C-body-loop-consumer-v1",
+        "controller_gain": 0.5,
+        "final_context_aligned_error": 1.99951171875,
+        "final_state": -1.99951171875,
+        "intervention": {
+          "consumed_bias_estimate": 0.0,
+          "source": "blocked",
+          "trace_context": null,
+          "trace_opened": false,
+          "trace_payload_sha256": null,
+          "validation_reason": "native_read_blocked"
+        },
+        "intervention_mode": "block",
+        "schema": "A4C-TEST-EVENT-v1",
+        "steps": 12,
+        "test_context": "minus",
+        "tested_at_utc": "2026-10-10T18:51:48.281000+00:00",
+        "trial_id": "trial-003"
+      },
+      "final_context_aligned_error": 1.99951171875,
+      "mode": "block",
+      "schema": "A4C-BLINDED-ENDPOINT-v1",
+      "steps": 12,
+      "test_context": "minus",
+      "trial_id": "trial-003"
+    },
+    {
+      "event": {
+        "actions": [
+          {
+            "action": -0.0,
+            "physical_bias": -1.0,
+            "state_after": -1.0,
+            "state_before": 0.0,
+            "step": 0,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.5,
+            "physical_bias": -1.0,
+            "state_after": -1.5,
+            "state_before": -1.0,
+            "step": 1,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.75,
+            "physical_bias": -1.0,
+            "state_after": -1.75,
+            "state_before": -1.5,
+            "step": 2,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.875,
+            "physical_bias": -1.0,
+            "state_after": -1.875,
+            "state_before": -1.75,
+            "step": 3,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.9375,
+            "physical_bias": -1.0,
+            "state_after": -1.9375,
+            "state_before": -1.875,
+            "step": 4,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.96875,
+            "physical_bias": -1.0,
+            "state_after": -1.96875,
+            "state_before": -1.9375,
+            "step": 5,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.984375,
+            "physical_bias": -1.0,
+            "state_after": -1.984375,
+            "state_before": -1.96875,
+            "step": 6,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.9921875,
+            "physical_bias": -1.0,
+            "state_after": -1.9921875,
+            "state_before": -1.984375,
+            "step": 7,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.99609375,
+            "physical_bias": -1.0,
+            "state_after": -1.99609375,
+            "state_before": -1.9921875,
+            "step": 8,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.998046875,
+            "physical_bias": -1.0,
+            "state_after": -1.998046875,
+            "state_before": -1.99609375,
+            "step": 9,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.9990234375,
+            "physical_bias": -1.0,
+            "state_after": -1.9990234375,
+            "state_before": -1.998046875,
+            "step": 10,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.99951171875,
+            "physical_bias": -1.0,
+            "state_after": -1.99951171875,
+            "state_before": -1.9990234375,
+            "step": 11,
+            "trace_value_used": 0.0
+          }
+        ],
+        "bearer_id": "A4C-embodied-simulation-bearer-v1",
+        "consumer_id": "A4C-body-loop-consumer-v1",
+        "controller_gain": 0.5,
+        "final_context_aligned_error": 1.99951171875,
+        "final_state": -1.99951171875,
+        "intervention": {
+          "consumed_bias_estimate": 0.0,
+          "source": "blocked",
+          "trace_context": null,
+          "trace_opened": false,
+          "trace_payload_sha256": null,
+          "validation_reason": "native_read_blocked"
+        },
+        "intervention_mode": "block",
+        "schema": "A4C-TEST-EVENT-v1",
+        "steps": 12,
+        "test_context": "minus",
+        "tested_at_utc": "2026-10-10T18:51:48.325238+00:00",
+        "trial_id": "trial-004"
+      },
+      "final_context_aligned_error": 1.99951171875,
+      "mode": "block",
+      "schema": "A4C-BLINDED-ENDPOINT-v1",
+      "steps": 12,
+      "test_context": "minus",
+      "trial_id": "trial-004"
+    },
+    {
+      "event": {
+        "actions": [
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 0,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 1,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 2,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 3,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 4,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 5,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 6,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 7,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 8,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 9,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 10,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 11,
+            "trace_value_used": -1.0
+          }
+        ],
+        "bearer_id": "A4C-embodied-simulation-bearer-v1",
+        "consumer_id": "A4C-body-loop-consumer-v1",
+        "controller_gain": 0.5,
+        "final_context_aligned_error": -0.0,
+        "final_state": 0.0,
+        "intervention": {
+          "consumed_bias_estimate": -1.0,
+          "native_read_blocked": false,
+          "rescue_delivered_at_consumer_interface": false,
+          "source": "native_trace",
+          "trace_context": "minus",
+          "trace_opened": true,
+          "trace_payload_sha256": "8397e0cf64e21508d30568181be1e3b9a73078d33960490b90576f25ea382b72",
+          "validation_reason": "accepted"
+        },
+        "intervention_mode": "intact",
+        "schema": "A4C-TEST-EVENT-v1",
+        "steps": 12,
+        "test_context": "minus",
+        "tested_at_utc": "2026-10-10T18:51:48.369762+00:00",
+        "trial_id": "trial-005"
+      },
+      "final_context_aligned_error": -0.0,
+      "mode": "intact",
+      "schema": "A4C-BLINDED-ENDPOINT-v1",
+      "steps": 12,
+      "test_context": "minus",
+      "trial_id": "trial-005"
+    },
+    {
+      "event": {
+        "actions": [
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 0,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 1,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 2,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 3,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 4,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 5,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 6,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 7,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 8,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 9,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 10,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 11,
+            "trace_value_used": -1.0
+          }
+        ],
+        "bearer_id": "A4C-embodied-simulation-bearer-v1",
+        "consumer_id": "A4C-body-loop-consumer-v1",
+        "controller_gain": 0.5,
+        "final_context_aligned_error": -0.0,
+        "final_state": 0.0,
+        "intervention": {
+          "consumed_bias_estimate": -1.0,
+          "native_read_blocked": false,
+          "rescue_delivered_at_consumer_interface": false,
+          "source": "native_trace",
+          "trace_context": "minus",
+          "trace_opened": true,
+          "trace_payload_sha256": "8397e0cf64e21508d30568181be1e3b9a73078d33960490b90576f25ea382b72",
+          "validation_reason": "accepted"
+        },
+        "intervention_mode": "intact",
+        "schema": "A4C-TEST-EVENT-v1",
+        "steps": 12,
+        "test_context": "minus",
+        "tested_at_utc": "2026-10-10T18:51:48.414363+00:00",
+        "trial_id": "trial-006"
+      },
+      "final_context_aligned_error": -0.0,
+      "mode": "intact",
+      "schema": "A4C-BLINDED-ENDPOINT-v1",
+      "steps": 12,
+      "test_context": "minus",
+      "trial_id": "trial-006"
+    },
+    {
+      "event": {
+        "actions": [
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 0,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 1,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 2,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 3,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 4,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 5,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 6,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 7,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 8,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 9,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 10,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 11,
+            "trace_value_used": -1.0
+          }
+        ],
+        "bearer_id": "A4C-embodied-simulation-bearer-v1",
+        "consumer_id": "A4C-body-loop-consumer-v1",
+        "controller_gain": 0.5,
+        "final_context_aligned_error": -0.0,
+        "final_state": 0.0,
+        "intervention": {
+          "consumed_bias_estimate": -1.0,
+          "native_read_blocked": true,
+          "rescue_delivered_at_consumer_interface": true,
+          "source": "consumer_interface_rescue",
+          "trace_context": "minus",
+          "trace_opened": false,
+          "trace_payload_sha256": "8397e0cf64e21508d30568181be1e3b9a73078d33960490b90576f25ea382b72",
+          "validation_reason": "accepted"
+        },
+        "intervention_mode": "rescue",
+        "schema": "A4C-TEST-EVENT-v1",
+        "steps": 12,
+        "test_context": "minus",
+        "tested_at_utc": "2026-10-10T18:51:48.457426+00:00",
+        "trial_id": "trial-007"
+      },
+      "final_context_aligned_error": -0.0,
+      "mode": "rescue",
+      "schema": "A4C-BLINDED-ENDPOINT-v1",
+      "steps": 12,
+      "test_context": "minus",
+      "trial_id": "trial-007"
+    },
+    {
+      "event": {
+        "actions": [
+          {
+            "action": 1.0,
+            "physical_bias": 1.0,
+            "state_after": 2.0,
+            "state_before": 0.0,
+            "step": 0,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 0.0,
+            "physical_bias": 1.0,
+            "state_after": 3.0,
+            "state_before": 2.0,
+            "step": 1,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.5,
+            "physical_bias": 1.0,
+            "state_after": 3.5,
+            "state_before": 3.0,
+            "step": 2,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.75,
+            "physical_bias": 1.0,
+            "state_after": 3.75,
+            "state_before": 3.5,
+            "step": 3,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.875,
+            "physical_bias": 1.0,
+            "state_after": 3.875,
+            "state_before": 3.75,
+            "step": 4,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.9375,
+            "physical_bias": 1.0,
+            "state_after": 3.9375,
+            "state_before": 3.875,
+            "step": 5,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.96875,
+            "physical_bias": 1.0,
+            "state_after": 3.96875,
+            "state_before": 3.9375,
+            "step": 6,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.984375,
+            "physical_bias": 1.0,
+            "state_after": 3.984375,
+            "state_before": 3.96875,
+            "step": 7,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.9921875,
+            "physical_bias": 1.0,
+            "state_after": 3.9921875,
+            "state_before": 3.984375,
+            "step": 8,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.99609375,
+            "physical_bias": 1.0,
+            "state_after": 3.99609375,
+            "state_before": 3.9921875,
+            "step": 9,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.998046875,
+            "physical_bias": 1.0,
+            "state_after": 3.998046875,
+            "state_before": 3.99609375,
+            "step": 10,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.9990234375,
+            "physical_bias": 1.0,
+            "state_after": 3.9990234375,
+            "state_before": 3.998046875,
+            "step": 11,
+            "trace_value_used": -1.0
+          }
+        ],
+        "bearer_id": "A4C-embodied-simulation-bearer-v1",
+        "consumer_id": "A4C-body-loop-consumer-v1",
+        "controller_gain": 0.5,
+        "final_context_aligned_error": 3.9990234375,
+        "final_state": 3.9990234375,
+        "intervention": {
+          "consumed_bias_estimate": -1.0,
+          "native_read_blocked": false,
+          "rescue_delivered_at_consumer_interface": false,
+          "source": "same_bearer_opposite_context_trace",
+          "trace_context": "minus",
+          "trace_opened": true,
+          "trace_payload_sha256": "8397e0cf64e21508d30568181be1e3b9a73078d33960490b90576f25ea382b72",
+          "validation_reason": "accepted"
+        },
+        "intervention_mode": "swap",
+        "schema": "A4C-TEST-EVENT-v1",
+        "steps": 12,
+        "test_context": "plus",
+        "tested_at_utc": "2026-10-10T18:51:48.510976+00:00",
+        "trial_id": "trial-008"
+      },
+      "final_context_aligned_error": 3.9990234375,
+      "mode": "swap",
+      "schema": "A4C-BLINDED-ENDPOINT-v1",
+      "steps": 12,
+      "test_context": "plus",
+      "trial_id": "trial-008"
+    },
+    {
+      "event": {
+        "actions": [
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 0,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 1,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 2,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 3,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 4,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 5,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 6,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 7,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 8,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 9,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 10,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 11,
+            "trace_value_used": -1.0
+          }
+        ],
+        "bearer_id": "A4C-embodied-simulation-bearer-v1",
+        "consumer_id": "A4C-body-loop-consumer-v1",
+        "controller_gain": 0.5,
+        "final_context_aligned_error": -0.0,
+        "final_state": 0.0,
+        "intervention": {
+          "consumed_bias_estimate": -1.0,
+          "native_read_blocked": true,
+          "rescue_delivered_at_consumer_interface": true,
+          "source": "consumer_interface_rescue",
+          "trace_context": "minus",
+          "trace_opened": false,
+          "trace_payload_sha256": "8397e0cf64e21508d30568181be1e3b9a73078d33960490b90576f25ea382b72",
+          "validation_reason": "accepted"
+        },
+        "intervention_mode": "rescue",
+        "schema": "A4C-TEST-EVENT-v1",
+        "steps": 12,
+        "test_context": "minus",
+        "tested_at_utc": "2026-10-10T18:51:48.558225+00:00",
+        "trial_id": "trial-009"
+      },
+      "final_context_aligned_error": -0.0,
+      "mode": "rescue",
+      "schema": "A4C-BLINDED-ENDPOINT-v1",
+      "steps": 12,
+      "test_context": "minus",
+      "trial_id": "trial-009"
+    },
+    {
+      "event": {
+        "actions": [
+          {
+            "action": -1.0,
+            "physical_bias": -1.0,
+            "state_after": -2.0,
+            "state_before": 0.0,
+            "step": 0,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.0,
+            "physical_bias": -1.0,
+            "state_after": -3.0,
+            "state_before": -2.0,
+            "step": 1,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.5,
+            "physical_bias": -1.0,
+            "state_after": -3.5,
+            "state_before": -3.0,
+            "step": 2,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.75,
+            "physical_bias": -1.0,
+            "state_after": -3.75,
+            "state_before": -3.5,
+            "step": 3,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.875,
+            "physical_bias": -1.0,
+            "state_after": -3.875,
+            "state_before": -3.75,
+            "step": 4,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.9375,
+            "physical_bias": -1.0,
+            "state_after": -3.9375,
+            "state_before": -3.875,
+            "step": 5,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.96875,
+            "physical_bias": -1.0,
+            "state_after": -3.96875,
+            "state_before": -3.9375,
+            "step": 6,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.984375,
+            "physical_bias": -1.0,
+            "state_after": -3.984375,
+            "state_before": -3.96875,
+            "step": 7,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.9921875,
+            "physical_bias": -1.0,
+            "state_after": -3.9921875,
+            "state_before": -3.984375,
+            "step": 8,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.99609375,
+            "physical_bias": -1.0,
+            "state_after": -3.99609375,
+            "state_before": -3.9921875,
+            "step": 9,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.998046875,
+            "physical_bias": -1.0,
+            "state_after": -3.998046875,
+            "state_before": -3.99609375,
+            "step": 10,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.9990234375,
+            "physical_bias": -1.0,
+            "state_after": -3.9990234375,
+            "state_before": -3.998046875,
+            "step": 11,
+            "trace_value_used": 1.0
+          }
+        ],
+        "bearer_id": "A4C-embodied-simulation-bearer-v1",
+        "consumer_id": "A4C-body-loop-consumer-v1",
+        "controller_gain": 0.5,
+        "final_context_aligned_error": 3.9990234375,
+        "final_state": -3.9990234375,
+        "intervention": {
+          "consumed_bias_estimate": 1.0,
+          "native_read_blocked": false,
+          "rescue_delivered_at_consumer_interface": false,
+          "source": "same_bearer_opposite_context_trace",
+          "trace_context": "plus",
+          "trace_opened": true,
+          "trace_payload_sha256": "a452081ffd9c6a83d48fbdb31c9086c89f6a4917db02c280c1f5120afb2e09ce",
+          "validation_reason": "accepted"
+        },
+        "intervention_mode": "swap",
+        "schema": "A4C-TEST-EVENT-v1",
+        "steps": 12,
+        "test_context": "minus",
+        "tested_at_utc": "2026-10-10T18:51:48.605606+00:00",
+        "trial_id": "trial-010"
+      },
+      "final_context_aligned_error": 3.9990234375,
+      "mode": "swap",
+      "schema": "A4C-BLINDED-ENDPOINT-v1",
+      "steps": 12,
+      "test_context": "minus",
+      "trial_id": "trial-010"
+    },
+    {
+      "event": {
+        "actions": [
+          {
+            "action": 1.0,
+            "physical_bias": 1.0,
+            "state_after": 2.0,
+            "state_before": 0.0,
+            "step": 0,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 0.0,
+            "physical_bias": 1.0,
+            "state_after": 3.0,
+            "state_before": 2.0,
+            "step": 1,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.5,
+            "physical_bias": 1.0,
+            "state_after": 3.5,
+            "state_before": 3.0,
+            "step": 2,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.75,
+            "physical_bias": 1.0,
+            "state_after": 3.75,
+            "state_before": 3.5,
+            "step": 3,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.875,
+            "physical_bias": 1.0,
+            "state_after": 3.875,
+            "state_before": 3.75,
+            "step": 4,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.9375,
+            "physical_bias": 1.0,
+            "state_after": 3.9375,
+            "state_before": 3.875,
+            "step": 5,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.96875,
+            "physical_bias": 1.0,
+            "state_after": 3.96875,
+            "state_before": 3.9375,
+            "step": 6,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.984375,
+            "physical_bias": 1.0,
+            "state_after": 3.984375,
+            "state_before": 3.96875,
+            "step": 7,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.9921875,
+            "physical_bias": 1.0,
+            "state_after": 3.9921875,
+            "state_before": 3.984375,
+            "step": 8,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.99609375,
+            "physical_bias": 1.0,
+            "state_after": 3.99609375,
+            "state_before": 3.9921875,
+            "step": 9,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.998046875,
+            "physical_bias": 1.0,
+            "state_after": 3.998046875,
+            "state_before": 3.99609375,
+            "step": 10,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.9990234375,
+            "physical_bias": 1.0,
+            "state_after": 3.9990234375,
+            "state_before": 3.998046875,
+            "step": 11,
+            "trace_value_used": -1.0
+          }
+        ],
+        "bearer_id": "A4C-embodied-simulation-bearer-v1",
+        "consumer_id": "A4C-body-loop-consumer-v1",
+        "controller_gain": 0.5,
+        "final_context_aligned_error": 3.9990234375,
+        "final_state": 3.9990234375,
+        "intervention": {
+          "consumed_bias_estimate": -1.0,
+          "native_read_blocked": false,
+          "rescue_delivered_at_consumer_interface": false,
+          "source": "same_bearer_opposite_context_trace",
+          "trace_context": "minus",
+          "trace_opened": true,
+          "trace_payload_sha256": "8397e0cf64e21508d30568181be1e3b9a73078d33960490b90576f25ea382b72",
+          "validation_reason": "accepted"
+        },
+        "intervention_mode": "swap",
+        "schema": "A4C-TEST-EVENT-v1",
+        "steps": 12,
+        "test_context": "plus",
+        "tested_at_utc": "2026-10-10T18:51:48.656260+00:00",
+        "trial_id": "trial-011"
+      },
+      "final_context_aligned_error": 3.9990234375,
+      "mode": "swap",
+      "schema": "A4C-BLINDED-ENDPOINT-v1",
+      "steps": 12,
+      "test_context": "plus",
+      "trial_id": "trial-011"
+    },
+    {
+      "event": {
+        "actions": [
+          {
+            "action": -0.0,
+            "physical_bias": 1.0,
+            "state_after": 1.0,
+            "state_before": 0.0,
+            "step": 0,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.5,
+            "physical_bias": 1.0,
+            "state_after": 1.5,
+            "state_before": 1.0,
+            "step": 1,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.75,
+            "physical_bias": 1.0,
+            "state_after": 1.75,
+            "state_before": 1.5,
+            "step": 2,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.875,
+            "physical_bias": 1.0,
+            "state_after": 1.875,
+            "state_before": 1.75,
+            "step": 3,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.9375,
+            "physical_bias": 1.0,
+            "state_after": 1.9375,
+            "state_before": 1.875,
+            "step": 4,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.96875,
+            "physical_bias": 1.0,
+            "state_after": 1.96875,
+            "state_before": 1.9375,
+            "step": 5,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.984375,
+            "physical_bias": 1.0,
+            "state_after": 1.984375,
+            "state_before": 1.96875,
+            "step": 6,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.9921875,
+            "physical_bias": 1.0,
+            "state_after": 1.9921875,
+            "state_before": 1.984375,
+            "step": 7,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.99609375,
+            "physical_bias": 1.0,
+            "state_after": 1.99609375,
+            "state_before": 1.9921875,
+            "step": 8,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.998046875,
+            "physical_bias": 1.0,
+            "state_after": 1.998046875,
+            "state_before": 1.99609375,
+            "step": 9,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.9990234375,
+            "physical_bias": 1.0,
+            "state_after": 1.9990234375,
+            "state_before": 1.998046875,
+            "step": 10,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.99951171875,
+            "physical_bias": 1.0,
+            "state_after": 1.99951171875,
+            "state_before": 1.9990234375,
+            "step": 11,
+            "trace_value_used": 0.0
+          }
+        ],
+        "bearer_id": "A4C-embodied-simulation-bearer-v1",
+        "consumer_id": "A4C-body-loop-consumer-v1",
+        "controller_gain": 0.5,
+        "final_context_aligned_error": 1.99951171875,
+        "final_state": 1.99951171875,
+        "intervention": {
+          "consumed_bias_estimate": 0.0,
+          "source": "blocked",
+          "trace_context": null,
+          "trace_opened": false,
+          "trace_payload_sha256": null,
+          "validation_reason": "native_read_blocked"
+        },
+        "intervention_mode": "block",
+        "schema": "A4C-TEST-EVENT-v1",
+        "steps": 12,
+        "test_context": "plus",
+        "tested_at_utc": "2026-10-10T18:51:48.708161+00:00",
+        "trial_id": "trial-012"
+      },
+      "final_context_aligned_error": 1.99951171875,
+      "mode": "block",
+      "schema": "A4C-BLINDED-ENDPOINT-v1",
+      "steps": 12,
+      "test_context": "plus",
+      "trial_id": "trial-012"
+    },
+    {
+      "event": {
+        "actions": [
+          {
+            "action": -0.0,
+            "physical_bias": -1.0,
+            "state_after": -1.0,
+            "state_before": 0.0,
+            "step": 0,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.5,
+            "physical_bias": -1.0,
+            "state_after": -1.5,
+            "state_before": -1.0,
+            "step": 1,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.75,
+            "physical_bias": -1.0,
+            "state_after": -1.75,
+            "state_before": -1.5,
+            "step": 2,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.875,
+            "physical_bias": -1.0,
+            "state_after": -1.875,
+            "state_before": -1.75,
+            "step": 3,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.9375,
+            "physical_bias": -1.0,
+            "state_after": -1.9375,
+            "state_before": -1.875,
+            "step": 4,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.96875,
+            "physical_bias": -1.0,
+            "state_after": -1.96875,
+            "state_before": -1.9375,
+            "step": 5,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.984375,
+            "physical_bias": -1.0,
+            "state_after": -1.984375,
+            "state_before": -1.96875,
+            "step": 6,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.9921875,
+            "physical_bias": -1.0,
+            "state_after": -1.9921875,
+            "state_before": -1.984375,
+            "step": 7,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.99609375,
+            "physical_bias": -1.0,
+            "state_after": -1.99609375,
+            "state_before": -1.9921875,
+            "step": 8,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.998046875,
+            "physical_bias": -1.0,
+            "state_after": -1.998046875,
+            "state_before": -1.99609375,
+            "step": 9,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.9990234375,
+            "physical_bias": -1.0,
+            "state_after": -1.9990234375,
+            "state_before": -1.998046875,
+            "step": 10,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.99951171875,
+            "physical_bias": -1.0,
+            "state_after": -1.99951171875,
+            "state_before": -1.9990234375,
+            "step": 11,
+            "trace_value_used": 0.0
+          }
+        ],
+        "bearer_id": "A4C-embodied-simulation-bearer-v1",
+        "consumer_id": "A4C-body-loop-consumer-v1",
+        "controller_gain": 0.5,
+        "final_context_aligned_error": 1.99951171875,
+        "final_state": -1.99951171875,
+        "intervention": {
+          "consumed_bias_estimate": 0.0,
+          "source": "blocked",
+          "trace_context": null,
+          "trace_opened": false,
+          "trace_payload_sha256": null,
+          "validation_reason": "native_read_blocked"
+        },
+        "intervention_mode": "block",
+        "schema": "A4C-TEST-EVENT-v1",
+        "steps": 12,
+        "test_context": "minus",
+        "tested_at_utc": "2026-10-10T18:51:48.757825+00:00",
+        "trial_id": "trial-013"
+      },
+      "final_context_aligned_error": 1.99951171875,
+      "mode": "block",
+      "schema": "A4C-BLINDED-ENDPOINT-v1",
+      "steps": 12,
+      "test_context": "minus",
+      "trial_id": "trial-013"
+    },
+    {
+      "event": {
+        "actions": [
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 0,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 1,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 2,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 3,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 4,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 5,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 6,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 7,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 8,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 9,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 10,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 11,
+            "trace_value_used": 1.0
+          }
+        ],
+        "bearer_id": "A4C-embodied-simulation-bearer-v1",
+        "consumer_id": "A4C-body-loop-consumer-v1",
+        "controller_gain": 0.5,
+        "final_context_aligned_error": 0.0,
+        "final_state": 0.0,
+        "intervention": {
+          "consumed_bias_estimate": 1.0,
+          "native_read_blocked": true,
+          "rescue_delivered_at_consumer_interface": true,
+          "source": "consumer_interface_rescue",
+          "trace_context": "plus",
+          "trace_opened": false,
+          "trace_payload_sha256": "a452081ffd9c6a83d48fbdb31c9086c89f6a4917db02c280c1f5120afb2e09ce",
+          "validation_reason": "accepted"
+        },
+        "intervention_mode": "rescue",
+        "schema": "A4C-TEST-EVENT-v1",
+        "steps": 12,
+        "test_context": "plus",
+        "tested_at_utc": "2026-10-10T18:51:48.801995+00:00",
+        "trial_id": "trial-014"
+      },
+      "final_context_aligned_error": 0.0,
+      "mode": "rescue",
+      "schema": "A4C-BLINDED-ENDPOINT-v1",
+      "steps": 12,
+      "test_context": "plus",
+      "trial_id": "trial-014"
+    },
+    {
+      "event": {
+        "actions": [
+          {
+            "action": -0.0,
+            "physical_bias": 1.0,
+            "state_after": 1.0,
+            "state_before": 0.0,
+            "step": 0,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.5,
+            "physical_bias": 1.0,
+            "state_after": 1.5,
+            "state_before": 1.0,
+            "step": 1,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.75,
+            "physical_bias": 1.0,
+            "state_after": 1.75,
+            "state_before": 1.5,
+            "step": 2,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.875,
+            "physical_bias": 1.0,
+            "state_after": 1.875,
+            "state_before": 1.75,
+            "step": 3,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.9375,
+            "physical_bias": 1.0,
+            "state_after": 1.9375,
+            "state_before": 1.875,
+            "step": 4,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.96875,
+            "physical_bias": 1.0,
+            "state_after": 1.96875,
+            "state_before": 1.9375,
+            "step": 5,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.984375,
+            "physical_bias": 1.0,
+            "state_after": 1.984375,
+            "state_before": 1.96875,
+            "step": 6,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.9921875,
+            "physical_bias": 1.0,
+            "state_after": 1.9921875,
+            "state_before": 1.984375,
+            "step": 7,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.99609375,
+            "physical_bias": 1.0,
+            "state_after": 1.99609375,
+            "state_before": 1.9921875,
+            "step": 8,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.998046875,
+            "physical_bias": 1.0,
+            "state_after": 1.998046875,
+            "state_before": 1.99609375,
+            "step": 9,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.9990234375,
+            "physical_bias": 1.0,
+            "state_after": 1.9990234375,
+            "state_before": 1.998046875,
+            "step": 10,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.99951171875,
+            "physical_bias": 1.0,
+            "state_after": 1.99951171875,
+            "state_before": 1.9990234375,
+            "step": 11,
+            "trace_value_used": 0.0
+          }
+        ],
+        "bearer_id": "A4C-embodied-simulation-bearer-v1",
+        "consumer_id": "A4C-body-loop-consumer-v1",
+        "controller_gain": 0.5,
+        "final_context_aligned_error": 1.99951171875,
+        "final_state": 1.99951171875,
+        "intervention": {
+          "consumed_bias_estimate": 0.0,
+          "source": "blocked",
+          "trace_context": null,
+          "trace_opened": false,
+          "trace_payload_sha256": null,
+          "validation_reason": "native_read_blocked"
+        },
+        "intervention_mode": "block",
+        "schema": "A4C-TEST-EVENT-v1",
+        "steps": 12,
+        "test_context": "plus",
+        "tested_at_utc": "2026-10-10T18:51:48.846451+00:00",
+        "trial_id": "trial-015"
+      },
+      "final_context_aligned_error": 1.99951171875,
+      "mode": "block",
+      "schema": "A4C-BLINDED-ENDPOINT-v1",
+      "steps": 12,
+      "test_context": "plus",
+      "trial_id": "trial-015"
+    },
+    {
+      "event": {
+        "actions": [
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 0,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 1,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 2,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 3,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 4,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 5,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 6,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 7,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 8,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 9,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 10,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 11,
+            "trace_value_used": 1.0
+          }
+        ],
+        "bearer_id": "A4C-embodied-simulation-bearer-v1",
+        "consumer_id": "A4C-body-loop-consumer-v1",
+        "controller_gain": 0.5,
+        "final_context_aligned_error": 0.0,
+        "final_state": 0.0,
+        "intervention": {
+          "consumed_bias_estimate": 1.0,
+          "native_read_blocked": false,
+          "rescue_delivered_at_consumer_interface": false,
+          "source": "native_trace",
+          "trace_context": "plus",
+          "trace_opened": true,
+          "trace_payload_sha256": "a452081ffd9c6a83d48fbdb31c9086c89f6a4917db02c280c1f5120afb2e09ce",
+          "validation_reason": "accepted"
+        },
+        "intervention_mode": "intact",
+        "schema": "A4C-TEST-EVENT-v1",
+        "steps": 12,
+        "test_context": "plus",
+        "tested_at_utc": "2026-10-10T18:51:48.889943+00:00",
+        "trial_id": "trial-016"
+      },
+      "final_context_aligned_error": 0.0,
+      "mode": "intact",
+      "schema": "A4C-BLINDED-ENDPOINT-v1",
+      "steps": 12,
+      "test_context": "plus",
+      "trial_id": "trial-016"
+    },
+    {
+      "event": {
+        "actions": [
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 0,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 1,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 2,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 3,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 4,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 5,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 6,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 7,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 8,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 9,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 10,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 11,
+            "trace_value_used": -1.0
+          }
+        ],
+        "bearer_id": "A4C-embodied-simulation-bearer-v1",
+        "consumer_id": "A4C-body-loop-consumer-v1",
+        "controller_gain": 0.5,
+        "final_context_aligned_error": -0.0,
+        "final_state": 0.0,
+        "intervention": {
+          "consumed_bias_estimate": -1.0,
+          "native_read_blocked": true,
+          "rescue_delivered_at_consumer_interface": true,
+          "source": "consumer_interface_rescue",
+          "trace_context": "minus",
+          "trace_opened": false,
+          "trace_payload_sha256": "8397e0cf64e21508d30568181be1e3b9a73078d33960490b90576f25ea382b72",
+          "validation_reason": "accepted"
+        },
+        "intervention_mode": "rescue",
+        "schema": "A4C-TEST-EVENT-v1",
+        "steps": 12,
+        "test_context": "minus",
+        "tested_at_utc": "2026-10-10T18:51:48.930220+00:00",
+        "trial_id": "trial-017"
+      },
+      "final_context_aligned_error": -0.0,
+      "mode": "rescue",
+      "schema": "A4C-BLINDED-ENDPOINT-v1",
+      "steps": 12,
+      "test_context": "minus",
+      "trial_id": "trial-017"
+    },
+    {
+      "event": {
+        "actions": [
+          {
+            "action": -0.0,
+            "physical_bias": 1.0,
+            "state_after": 1.0,
+            "state_before": 0.0,
+            "step": 0,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.5,
+            "physical_bias": 1.0,
+            "state_after": 1.5,
+            "state_before": 1.0,
+            "step": 1,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.75,
+            "physical_bias": 1.0,
+            "state_after": 1.75,
+            "state_before": 1.5,
+            "step": 2,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.875,
+            "physical_bias": 1.0,
+            "state_after": 1.875,
+            "state_before": 1.75,
+            "step": 3,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.9375,
+            "physical_bias": 1.0,
+            "state_after": 1.9375,
+            "state_before": 1.875,
+            "step": 4,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.96875,
+            "physical_bias": 1.0,
+            "state_after": 1.96875,
+            "state_before": 1.9375,
+            "step": 5,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.984375,
+            "physical_bias": 1.0,
+            "state_after": 1.984375,
+            "state_before": 1.96875,
+            "step": 6,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.9921875,
+            "physical_bias": 1.0,
+            "state_after": 1.9921875,
+            "state_before": 1.984375,
+            "step": 7,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.99609375,
+            "physical_bias": 1.0,
+            "state_after": 1.99609375,
+            "state_before": 1.9921875,
+            "step": 8,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.998046875,
+            "physical_bias": 1.0,
+            "state_after": 1.998046875,
+            "state_before": 1.99609375,
+            "step": 9,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.9990234375,
+            "physical_bias": 1.0,
+            "state_after": 1.9990234375,
+            "state_before": 1.998046875,
+            "step": 10,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": -0.99951171875,
+            "physical_bias": 1.0,
+            "state_after": 1.99951171875,
+            "state_before": 1.9990234375,
+            "step": 11,
+            "trace_value_used": 0.0
+          }
+        ],
+        "bearer_id": "A4C-embodied-simulation-bearer-v1",
+        "consumer_id": "A4C-body-loop-consumer-v1",
+        "controller_gain": 0.5,
+        "final_context_aligned_error": 1.99951171875,
+        "final_state": 1.99951171875,
+        "intervention": {
+          "consumed_bias_estimate": 0.0,
+          "source": "blocked",
+          "trace_context": null,
+          "trace_opened": false,
+          "trace_payload_sha256": null,
+          "validation_reason": "native_read_blocked"
+        },
+        "intervention_mode": "block",
+        "schema": "A4C-TEST-EVENT-v1",
+        "steps": 12,
+        "test_context": "plus",
+        "tested_at_utc": "2026-10-10T18:51:48.972905+00:00",
+        "trial_id": "trial-018"
+      },
+      "final_context_aligned_error": 1.99951171875,
+      "mode": "block",
+      "schema": "A4C-BLINDED-ENDPOINT-v1",
+      "steps": 12,
+      "test_context": "plus",
+      "trial_id": "trial-018"
+    },
+    {
+      "event": {
+        "actions": [
+          {
+            "action": -1.0,
+            "physical_bias": -1.0,
+            "state_after": -2.0,
+            "state_before": 0.0,
+            "step": 0,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.0,
+            "physical_bias": -1.0,
+            "state_after": -3.0,
+            "state_before": -2.0,
+            "step": 1,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.5,
+            "physical_bias": -1.0,
+            "state_after": -3.5,
+            "state_before": -3.0,
+            "step": 2,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.75,
+            "physical_bias": -1.0,
+            "state_after": -3.75,
+            "state_before": -3.5,
+            "step": 3,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.875,
+            "physical_bias": -1.0,
+            "state_after": -3.875,
+            "state_before": -3.75,
+            "step": 4,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.9375,
+            "physical_bias": -1.0,
+            "state_after": -3.9375,
+            "state_before": -3.875,
+            "step": 5,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.96875,
+            "physical_bias": -1.0,
+            "state_after": -3.96875,
+            "state_before": -3.9375,
+            "step": 6,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.984375,
+            "physical_bias": -1.0,
+            "state_after": -3.984375,
+            "state_before": -3.96875,
+            "step": 7,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.9921875,
+            "physical_bias": -1.0,
+            "state_after": -3.9921875,
+            "state_before": -3.984375,
+            "step": 8,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.99609375,
+            "physical_bias": -1.0,
+            "state_after": -3.99609375,
+            "state_before": -3.9921875,
+            "step": 9,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.998046875,
+            "physical_bias": -1.0,
+            "state_after": -3.998046875,
+            "state_before": -3.99609375,
+            "step": 10,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.9990234375,
+            "physical_bias": -1.0,
+            "state_after": -3.9990234375,
+            "state_before": -3.998046875,
+            "step": 11,
+            "trace_value_used": 1.0
+          }
+        ],
+        "bearer_id": "A4C-embodied-simulation-bearer-v1",
+        "consumer_id": "A4C-body-loop-consumer-v1",
+        "controller_gain": 0.5,
+        "final_context_aligned_error": 3.9990234375,
+        "final_state": -3.9990234375,
+        "intervention": {
+          "consumed_bias_estimate": 1.0,
+          "native_read_blocked": false,
+          "rescue_delivered_at_consumer_interface": false,
+          "source": "same_bearer_opposite_context_trace",
+          "trace_context": "plus",
+          "trace_opened": true,
+          "trace_payload_sha256": "a452081ffd9c6a83d48fbdb31c9086c89f6a4917db02c280c1f5120afb2e09ce",
+          "validation_reason": "accepted"
+        },
+        "intervention_mode": "swap",
+        "schema": "A4C-TEST-EVENT-v1",
+        "steps": 12,
+        "test_context": "minus",
+        "tested_at_utc": "2026-10-10T18:51:49.014640+00:00",
+        "trial_id": "trial-019"
+      },
+      "final_context_aligned_error": 3.9990234375,
+      "mode": "swap",
+      "schema": "A4C-BLINDED-ENDPOINT-v1",
+      "steps": 12,
+      "test_context": "minus",
+      "trial_id": "trial-019"
+    },
+    {
+      "event": {
+        "actions": [
+          {
+            "action": -1.0,
+            "physical_bias": -1.0,
+            "state_after": -2.0,
+            "state_before": 0.0,
+            "step": 0,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.0,
+            "physical_bias": -1.0,
+            "state_after": -3.0,
+            "state_before": -2.0,
+            "step": 1,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.5,
+            "physical_bias": -1.0,
+            "state_after": -3.5,
+            "state_before": -3.0,
+            "step": 2,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.75,
+            "physical_bias": -1.0,
+            "state_after": -3.75,
+            "state_before": -3.5,
+            "step": 3,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.875,
+            "physical_bias": -1.0,
+            "state_after": -3.875,
+            "state_before": -3.75,
+            "step": 4,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.9375,
+            "physical_bias": -1.0,
+            "state_after": -3.9375,
+            "state_before": -3.875,
+            "step": 5,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.96875,
+            "physical_bias": -1.0,
+            "state_after": -3.96875,
+            "state_before": -3.9375,
+            "step": 6,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.984375,
+            "physical_bias": -1.0,
+            "state_after": -3.984375,
+            "state_before": -3.96875,
+            "step": 7,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.9921875,
+            "physical_bias": -1.0,
+            "state_after": -3.9921875,
+            "state_before": -3.984375,
+            "step": 8,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.99609375,
+            "physical_bias": -1.0,
+            "state_after": -3.99609375,
+            "state_before": -3.9921875,
+            "step": 9,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.998046875,
+            "physical_bias": -1.0,
+            "state_after": -3.998046875,
+            "state_before": -3.99609375,
+            "step": 10,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.9990234375,
+            "physical_bias": -1.0,
+            "state_after": -3.9990234375,
+            "state_before": -3.998046875,
+            "step": 11,
+            "trace_value_used": 1.0
+          }
+        ],
+        "bearer_id": "A4C-embodied-simulation-bearer-v1",
+        "consumer_id": "A4C-body-loop-consumer-v1",
+        "controller_gain": 0.5,
+        "final_context_aligned_error": 3.9990234375,
+        "final_state": -3.9990234375,
+        "intervention": {
+          "consumed_bias_estimate": 1.0,
+          "native_read_blocked": false,
+          "rescue_delivered_at_consumer_interface": false,
+          "source": "same_bearer_opposite_context_trace",
+          "trace_context": "plus",
+          "trace_opened": true,
+          "trace_payload_sha256": "a452081ffd9c6a83d48fbdb31c9086c89f6a4917db02c280c1f5120afb2e09ce",
+          "validation_reason": "accepted"
+        },
+        "intervention_mode": "swap",
+        "schema": "A4C-TEST-EVENT-v1",
+        "steps": 12,
+        "test_context": "minus",
+        "tested_at_utc": "2026-10-10T18:51:49.059316+00:00",
+        "trial_id": "trial-020"
+      },
+      "final_context_aligned_error": 3.9990234375,
+      "mode": "swap",
+      "schema": "A4C-BLINDED-ENDPOINT-v1",
+      "steps": 12,
+      "test_context": "minus",
+      "trial_id": "trial-020"
+    },
+    {
+      "event": {
+        "actions": [
+          {
+            "action": 1.0,
+            "physical_bias": 1.0,
+            "state_after": 2.0,
+            "state_before": 0.0,
+            "step": 0,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 0.0,
+            "physical_bias": 1.0,
+            "state_after": 3.0,
+            "state_before": 2.0,
+            "step": 1,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.5,
+            "physical_bias": 1.0,
+            "state_after": 3.5,
+            "state_before": 3.0,
+            "step": 2,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.75,
+            "physical_bias": 1.0,
+            "state_after": 3.75,
+            "state_before": 3.5,
+            "step": 3,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.875,
+            "physical_bias": 1.0,
+            "state_after": 3.875,
+            "state_before": 3.75,
+            "step": 4,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.9375,
+            "physical_bias": 1.0,
+            "state_after": 3.9375,
+            "state_before": 3.875,
+            "step": 5,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.96875,
+            "physical_bias": 1.0,
+            "state_after": 3.96875,
+            "state_before": 3.9375,
+            "step": 6,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.984375,
+            "physical_bias": 1.0,
+            "state_after": 3.984375,
+            "state_before": 3.96875,
+            "step": 7,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.9921875,
+            "physical_bias": 1.0,
+            "state_after": 3.9921875,
+            "state_before": 3.984375,
+            "step": 8,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.99609375,
+            "physical_bias": 1.0,
+            "state_after": 3.99609375,
+            "state_before": 3.9921875,
+            "step": 9,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.998046875,
+            "physical_bias": 1.0,
+            "state_after": 3.998046875,
+            "state_before": 3.99609375,
+            "step": 10,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.9990234375,
+            "physical_bias": 1.0,
+            "state_after": 3.9990234375,
+            "state_before": 3.998046875,
+            "step": 11,
+            "trace_value_used": -1.0
+          }
+        ],
+        "bearer_id": "A4C-embodied-simulation-bearer-v1",
+        "consumer_id": "A4C-body-loop-consumer-v1",
+        "controller_gain": 0.5,
+        "final_context_aligned_error": 3.9990234375,
+        "final_state": 3.9990234375,
+        "intervention": {
+          "consumed_bias_estimate": -1.0,
+          "native_read_blocked": false,
+          "rescue_delivered_at_consumer_interface": false,
+          "source": "same_bearer_opposite_context_trace",
+          "trace_context": "minus",
+          "trace_opened": true,
+          "trace_payload_sha256": "8397e0cf64e21508d30568181be1e3b9a73078d33960490b90576f25ea382b72",
+          "validation_reason": "accepted"
+        },
+        "intervention_mode": "swap",
+        "schema": "A4C-TEST-EVENT-v1",
+        "steps": 12,
+        "test_context": "plus",
+        "tested_at_utc": "2026-10-10T18:51:49.103311+00:00",
+        "trial_id": "trial-021"
+      },
+      "final_context_aligned_error": 3.9990234375,
+      "mode": "swap",
+      "schema": "A4C-BLINDED-ENDPOINT-v1",
+      "steps": 12,
+      "test_context": "plus",
+      "trial_id": "trial-021"
+    },
+    {
+      "event": {
+        "actions": [
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 0,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 1,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 2,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 3,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 4,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 5,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 6,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 7,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 8,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 9,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 10,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 11,
+            "trace_value_used": 1.0
+          }
+        ],
+        "bearer_id": "A4C-embodied-simulation-bearer-v1",
+        "consumer_id": "A4C-body-loop-consumer-v1",
+        "controller_gain": 0.5,
+        "final_context_aligned_error": 0.0,
+        "final_state": 0.0,
+        "intervention": {
+          "consumed_bias_estimate": 1.0,
+          "native_read_blocked": false,
+          "rescue_delivered_at_consumer_interface": false,
+          "source": "native_trace",
+          "trace_context": "plus",
+          "trace_opened": true,
+          "trace_payload_sha256": "a452081ffd9c6a83d48fbdb31c9086c89f6a4917db02c280c1f5120afb2e09ce",
+          "validation_reason": "accepted"
+        },
+        "intervention_mode": "intact",
+        "schema": "A4C-TEST-EVENT-v1",
+        "steps": 12,
+        "test_context": "plus",
+        "tested_at_utc": "2026-10-10T18:51:49.144372+00:00",
+        "trial_id": "trial-022"
+      },
+      "final_context_aligned_error": 0.0,
+      "mode": "intact",
+      "schema": "A4C-BLINDED-ENDPOINT-v1",
+      "steps": 12,
+      "test_context": "plus",
+      "trial_id": "trial-022"
+    },
+    {
+      "event": {
+        "actions": [
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 0,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 1,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 2,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 3,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 4,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 5,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 6,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 7,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 8,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 9,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 10,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 11,
+            "trace_value_used": -1.0
+          }
+        ],
+        "bearer_id": "A4C-embodied-simulation-bearer-v1",
+        "consumer_id": "A4C-body-loop-consumer-v1",
+        "controller_gain": 0.5,
+        "final_context_aligned_error": -0.0,
+        "final_state": 0.0,
+        "intervention": {
+          "consumed_bias_estimate": -1.0,
+          "native_read_blocked": true,
+          "rescue_delivered_at_consumer_interface": true,
+          "source": "consumer_interface_rescue",
+          "trace_context": "minus",
+          "trace_opened": false,
+          "trace_payload_sha256": "8397e0cf64e21508d30568181be1e3b9a73078d33960490b90576f25ea382b72",
+          "validation_reason": "accepted"
+        },
+        "intervention_mode": "rescue",
+        "schema": "A4C-TEST-EVENT-v1",
+        "steps": 12,
+        "test_context": "minus",
+        "tested_at_utc": "2026-10-10T18:51:49.186158+00:00",
+        "trial_id": "trial-023"
+      },
+      "final_context_aligned_error": -0.0,
+      "mode": "rescue",
+      "schema": "A4C-BLINDED-ENDPOINT-v1",
+      "steps": 12,
+      "test_context": "minus",
+      "trial_id": "trial-023"
+    },
+    {
+      "event": {
+        "actions": [
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 0,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 1,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 2,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 3,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 4,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 5,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 6,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 7,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 8,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 9,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 10,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 1.0,
+            "physical_bias": -1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 11,
+            "trace_value_used": -1.0
+          }
+        ],
+        "bearer_id": "A4C-embodied-simulation-bearer-v1",
+        "consumer_id": "A4C-body-loop-consumer-v1",
+        "controller_gain": 0.5,
+        "final_context_aligned_error": -0.0,
+        "final_state": 0.0,
+        "intervention": {
+          "consumed_bias_estimate": -1.0,
+          "native_read_blocked": false,
+          "rescue_delivered_at_consumer_interface": false,
+          "source": "native_trace",
+          "trace_context": "minus",
+          "trace_opened": true,
+          "trace_payload_sha256": "8397e0cf64e21508d30568181be1e3b9a73078d33960490b90576f25ea382b72",
+          "validation_reason": "accepted"
+        },
+        "intervention_mode": "intact",
+        "schema": "A4C-TEST-EVENT-v1",
+        "steps": 12,
+        "test_context": "minus",
+        "tested_at_utc": "2026-10-10T18:51:49.228823+00:00",
+        "trial_id": "trial-024"
+      },
+      "final_context_aligned_error": -0.0,
+      "mode": "intact",
+      "schema": "A4C-BLINDED-ENDPOINT-v1",
+      "steps": 12,
+      "test_context": "minus",
+      "trial_id": "trial-024"
+    },
+    {
+      "event": {
+        "actions": [
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 0,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 1,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 2,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 3,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 4,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 5,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 6,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 7,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 8,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 9,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 10,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 11,
+            "trace_value_used": 1.0
+          }
+        ],
+        "bearer_id": "A4C-embodied-simulation-bearer-v1",
+        "consumer_id": "A4C-body-loop-consumer-v1",
+        "controller_gain": 0.5,
+        "final_context_aligned_error": 0.0,
+        "final_state": 0.0,
+        "intervention": {
+          "consumed_bias_estimate": 1.0,
+          "native_read_blocked": true,
+          "rescue_delivered_at_consumer_interface": true,
+          "source": "consumer_interface_rescue",
+          "trace_context": "plus",
+          "trace_opened": false,
+          "trace_payload_sha256": "a452081ffd9c6a83d48fbdb31c9086c89f6a4917db02c280c1f5120afb2e09ce",
+          "validation_reason": "accepted"
+        },
+        "intervention_mode": "rescue",
+        "schema": "A4C-TEST-EVENT-v1",
+        "steps": 12,
+        "test_context": "plus",
+        "tested_at_utc": "2026-10-10T18:51:49.268574+00:00",
+        "trial_id": "trial-025"
+      },
+      "final_context_aligned_error": 0.0,
+      "mode": "rescue",
+      "schema": "A4C-BLINDED-ENDPOINT-v1",
+      "steps": 12,
+      "test_context": "plus",
+      "trial_id": "trial-025"
+    },
+    {
+      "event": {
+        "actions": [
+          {
+            "action": -1.0,
+            "physical_bias": -1.0,
+            "state_after": -2.0,
+            "state_before": 0.0,
+            "step": 0,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.0,
+            "physical_bias": -1.0,
+            "state_after": -3.0,
+            "state_before": -2.0,
+            "step": 1,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.5,
+            "physical_bias": -1.0,
+            "state_after": -3.5,
+            "state_before": -3.0,
+            "step": 2,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.75,
+            "physical_bias": -1.0,
+            "state_after": -3.75,
+            "state_before": -3.5,
+            "step": 3,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.875,
+            "physical_bias": -1.0,
+            "state_after": -3.875,
+            "state_before": -3.75,
+            "step": 4,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.9375,
+            "physical_bias": -1.0,
+            "state_after": -3.9375,
+            "state_before": -3.875,
+            "step": 5,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.96875,
+            "physical_bias": -1.0,
+            "state_after": -3.96875,
+            "state_before": -3.9375,
+            "step": 6,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.984375,
+            "physical_bias": -1.0,
+            "state_after": -3.984375,
+            "state_before": -3.96875,
+            "step": 7,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.9921875,
+            "physical_bias": -1.0,
+            "state_after": -3.9921875,
+            "state_before": -3.984375,
+            "step": 8,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.99609375,
+            "physical_bias": -1.0,
+            "state_after": -3.99609375,
+            "state_before": -3.9921875,
+            "step": 9,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.998046875,
+            "physical_bias": -1.0,
+            "state_after": -3.998046875,
+            "state_before": -3.99609375,
+            "step": 10,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": 0.9990234375,
+            "physical_bias": -1.0,
+            "state_after": -3.9990234375,
+            "state_before": -3.998046875,
+            "step": 11,
+            "trace_value_used": 1.0
+          }
+        ],
+        "bearer_id": "A4C-embodied-simulation-bearer-v1",
+        "consumer_id": "A4C-body-loop-consumer-v1",
+        "controller_gain": 0.5,
+        "final_context_aligned_error": 3.9990234375,
+        "final_state": -3.9990234375,
+        "intervention": {
+          "consumed_bias_estimate": 1.0,
+          "native_read_blocked": false,
+          "rescue_delivered_at_consumer_interface": false,
+          "source": "same_bearer_opposite_context_trace",
+          "trace_context": "plus",
+          "trace_opened": true,
+          "trace_payload_sha256": "a452081ffd9c6a83d48fbdb31c9086c89f6a4917db02c280c1f5120afb2e09ce",
+          "validation_reason": "accepted"
+        },
+        "intervention_mode": "swap",
+        "schema": "A4C-TEST-EVENT-v1",
+        "steps": 12,
+        "test_context": "minus",
+        "tested_at_utc": "2026-10-10T18:51:49.316926+00:00",
+        "trial_id": "trial-026"
+      },
+      "final_context_aligned_error": 3.9990234375,
+      "mode": "swap",
+      "schema": "A4C-BLINDED-ENDPOINT-v1",
+      "steps": 12,
+      "test_context": "minus",
+      "trial_id": "trial-026"
+    },
+    {
+      "event": {
+        "actions": [
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 0,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 1,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 2,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 3,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 4,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 5,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 6,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 7,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 8,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 9,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 10,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 11,
+            "trace_value_used": 1.0
+          }
+        ],
+        "bearer_id": "A4C-embodied-simulation-bearer-v1",
+        "consumer_id": "A4C-body-loop-consumer-v1",
+        "controller_gain": 0.5,
+        "final_context_aligned_error": 0.0,
+        "final_state": 0.0,
+        "intervention": {
+          "consumed_bias_estimate": 1.0,
+          "native_read_blocked": false,
+          "rescue_delivered_at_consumer_interface": false,
+          "source": "native_trace",
+          "trace_context": "plus",
+          "trace_opened": true,
+          "trace_payload_sha256": "a452081ffd9c6a83d48fbdb31c9086c89f6a4917db02c280c1f5120afb2e09ce",
+          "validation_reason": "accepted"
+        },
+        "intervention_mode": "intact",
+        "schema": "A4C-TEST-EVENT-v1",
+        "steps": 12,
+        "test_context": "plus",
+        "tested_at_utc": "2026-10-10T18:51:49.358172+00:00",
+        "trial_id": "trial-027"
+      },
+      "final_context_aligned_error": 0.0,
+      "mode": "intact",
+      "schema": "A4C-BLINDED-ENDPOINT-v1",
+      "steps": 12,
+      "test_context": "plus",
+      "trial_id": "trial-027"
+    },
+    {
+      "event": {
+        "actions": [
+          {
+            "action": -0.0,
+            "physical_bias": -1.0,
+            "state_after": -1.0,
+            "state_before": 0.0,
+            "step": 0,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.5,
+            "physical_bias": -1.0,
+            "state_after": -1.5,
+            "state_before": -1.0,
+            "step": 1,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.75,
+            "physical_bias": -1.0,
+            "state_after": -1.75,
+            "state_before": -1.5,
+            "step": 2,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.875,
+            "physical_bias": -1.0,
+            "state_after": -1.875,
+            "state_before": -1.75,
+            "step": 3,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.9375,
+            "physical_bias": -1.0,
+            "state_after": -1.9375,
+            "state_before": -1.875,
+            "step": 4,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.96875,
+            "physical_bias": -1.0,
+            "state_after": -1.96875,
+            "state_before": -1.9375,
+            "step": 5,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.984375,
+            "physical_bias": -1.0,
+            "state_after": -1.984375,
+            "state_before": -1.96875,
+            "step": 6,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.9921875,
+            "physical_bias": -1.0,
+            "state_after": -1.9921875,
+            "state_before": -1.984375,
+            "step": 7,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.99609375,
+            "physical_bias": -1.0,
+            "state_after": -1.99609375,
+            "state_before": -1.9921875,
+            "step": 8,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.998046875,
+            "physical_bias": -1.0,
+            "state_after": -1.998046875,
+            "state_before": -1.99609375,
+            "step": 9,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.9990234375,
+            "physical_bias": -1.0,
+            "state_after": -1.9990234375,
+            "state_before": -1.998046875,
+            "step": 10,
+            "trace_value_used": 0.0
+          },
+          {
+            "action": 0.99951171875,
+            "physical_bias": -1.0,
+            "state_after": -1.99951171875,
+            "state_before": -1.9990234375,
+            "step": 11,
+            "trace_value_used": 0.0
+          }
+        ],
+        "bearer_id": "A4C-embodied-simulation-bearer-v1",
+        "consumer_id": "A4C-body-loop-consumer-v1",
+        "controller_gain": 0.5,
+        "final_context_aligned_error": 1.99951171875,
+        "final_state": -1.99951171875,
+        "intervention": {
+          "consumed_bias_estimate": 0.0,
+          "source": "blocked",
+          "trace_context": null,
+          "trace_opened": false,
+          "trace_payload_sha256": null,
+          "validation_reason": "native_read_blocked"
+        },
+        "intervention_mode": "block",
+        "schema": "A4C-TEST-EVENT-v1",
+        "steps": 12,
+        "test_context": "minus",
+        "tested_at_utc": "2026-10-10T18:51:49.398222+00:00",
+        "trial_id": "trial-028"
+      },
+      "final_context_aligned_error": 1.99951171875,
+      "mode": "block",
+      "schema": "A4C-BLINDED-ENDPOINT-v1",
+      "steps": 12,
+      "test_context": "minus",
+      "trial_id": "trial-028"
+    },
+    {
+      "event": {
+        "actions": [
+          {
+            "action": 1.0,
+            "physical_bias": 1.0,
+            "state_after": 2.0,
+            "state_before": 0.0,
+            "step": 0,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": 0.0,
+            "physical_bias": 1.0,
+            "state_after": 3.0,
+            "state_before": 2.0,
+            "step": 1,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.5,
+            "physical_bias": 1.0,
+            "state_after": 3.5,
+            "state_before": 3.0,
+            "step": 2,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.75,
+            "physical_bias": 1.0,
+            "state_after": 3.75,
+            "state_before": 3.5,
+            "step": 3,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.875,
+            "physical_bias": 1.0,
+            "state_after": 3.875,
+            "state_before": 3.75,
+            "step": 4,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.9375,
+            "physical_bias": 1.0,
+            "state_after": 3.9375,
+            "state_before": 3.875,
+            "step": 5,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.96875,
+            "physical_bias": 1.0,
+            "state_after": 3.96875,
+            "state_before": 3.9375,
+            "step": 6,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.984375,
+            "physical_bias": 1.0,
+            "state_after": 3.984375,
+            "state_before": 3.96875,
+            "step": 7,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.9921875,
+            "physical_bias": 1.0,
+            "state_after": 3.9921875,
+            "state_before": 3.984375,
+            "step": 8,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.99609375,
+            "physical_bias": 1.0,
+            "state_after": 3.99609375,
+            "state_before": 3.9921875,
+            "step": 9,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.998046875,
+            "physical_bias": 1.0,
+            "state_after": 3.998046875,
+            "state_before": 3.99609375,
+            "step": 10,
+            "trace_value_used": -1.0
+          },
+          {
+            "action": -0.9990234375,
+            "physical_bias": 1.0,
+            "state_after": 3.9990234375,
+            "state_before": 3.998046875,
+            "step": 11,
+            "trace_value_used": -1.0
+          }
+        ],
+        "bearer_id": "A4C-embodied-simulation-bearer-v1",
+        "consumer_id": "A4C-body-loop-consumer-v1",
+        "controller_gain": 0.5,
+        "final_context_aligned_error": 3.9990234375,
+        "final_state": 3.9990234375,
+        "intervention": {
+          "consumed_bias_estimate": -1.0,
+          "native_read_blocked": false,
+          "rescue_delivered_at_consumer_interface": false,
+          "source": "same_bearer_opposite_context_trace",
+          "trace_context": "minus",
+          "trace_opened": true,
+          "trace_payload_sha256": "8397e0cf64e21508d30568181be1e3b9a73078d33960490b90576f25ea382b72",
+          "validation_reason": "accepted"
+        },
+        "intervention_mode": "swap",
+        "schema": "A4C-TEST-EVENT-v1",
+        "steps": 12,
+        "test_context": "plus",
+        "tested_at_utc": "2026-10-10T18:51:49.439611+00:00",
+        "trial_id": "trial-029"
+      },
+      "final_context_aligned_error": 3.9990234375,
+      "mode": "swap",
+      "schema": "A4C-BLINDED-ENDPOINT-v1",
+      "steps": 12,
+      "test_context": "plus",
+      "trial_id": "trial-029"
+    },
+    {
+      "event": {
+        "actions": [
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 0,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 1,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 2,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 3,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 4,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 5,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 6,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 7,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 8,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 9,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 10,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 11,
+            "trace_value_used": 1.0
+          }
+        ],
+        "bearer_id": "A4C-embodied-simulation-bearer-v1",
+        "consumer_id": "A4C-body-loop-consumer-v1",
+        "controller_gain": 0.5,
+        "final_context_aligned_error": 0.0,
+        "final_state": 0.0,
+        "intervention": {
+          "consumed_bias_estimate": 1.0,
+          "native_read_blocked": false,
+          "rescue_delivered_at_consumer_interface": false,
+          "source": "native_trace",
+          "trace_context": "plus",
+          "trace_opened": true,
+          "trace_payload_sha256": "a452081ffd9c6a83d48fbdb31c9086c89f6a4917db02c280c1f5120afb2e09ce",
+          "validation_reason": "accepted"
+        },
+        "intervention_mode": "intact",
+        "schema": "A4C-TEST-EVENT-v1",
+        "steps": 12,
+        "test_context": "plus",
+        "tested_at_utc": "2026-10-10T18:51:49.480662+00:00",
+        "trial_id": "trial-030"
+      },
+      "final_context_aligned_error": 0.0,
+      "mode": "intact",
+      "schema": "A4C-BLINDED-ENDPOINT-v1",
+      "steps": 12,
+      "test_context": "plus",
+      "trial_id": "trial-030"
+    },
+    {
+      "event": {
+        "actions": [
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 0,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 1,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 2,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 3,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 4,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 5,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 6,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 7,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 8,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 9,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 10,
+            "trace_value_used": 1.0
+          },
+          {
+            "action": -1.0,
+            "physical_bias": 1.0,
+            "state_after": 0.0,
+            "state_before": 0.0,
+            "step": 11,
+            "trace_value_used": 1.0
+          }
+        ],
+        "bearer_id": "A4C-embodied-simulation-bearer-v1",
+        "consumer_id": "A4C-body-loop-consumer-v1",
+        "controller_gain": 0.5,
+        "final_context_aligned_error": 0.0,
+        "final_state": 0.0,
+        "intervention": {
+          "consumed_bias_estimate": 1.0,
+          "native_read_blocked": true,
+          "rescue_delivered_at_consumer_interface": true,
+          "source": "consumer_interface_rescue",
+          "trace_context": "plus",
+          "trace_opened": false,
+          "trace_payload_sha256": "a452081ffd9c6a83d48fbdb31c9086c89f6a4917db02c280c1f5120afb2e09ce",
+          "validation_reason": "accepted"
+        },
+        "intervention_mode": "rescue",
+        "schema": "A4C-TEST-EVENT-v1",
+        "steps": 12,
+        "test_context": "plus",
+        "tested_at_utc": "2026-10-10T18:51:49.525334+00:00",
+        "trial_id": "trial-031"
+      },
+      "final_context_aligned_error": 0.0,
+      "mode": "rescue",
+      "schema": "A4C-BLINDED-ENDPOINT-v1",
+      "steps": 12,
+      "test_context": "plus",
+      "trial_id": "trial-031"
+    }
+  ],
+  "schema": "A4C-EXACT-RESULTS-v1"
+}

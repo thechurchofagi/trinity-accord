@@ -1,0 +1,19 @@
+{
+  "bearer_id": "A4C-embodied-simulation-bearer-v1",
+  "consumer_id": "A4C-body-loop-consumer-v1",
+  "events": [
+    {
+      "context": "plus",
+      "estimate": 1.0,
+      "payload_sha256": "a452081ffd9c6a83d48fbdb31c9086c89f6a4917db02c280c1f5120afb2e09ce",
+      "trace_path": "trace_plus.json"
+    },
+    {
+      "context": "minus",
+      "estimate": -1.0,
+      "payload_sha256": "8397e0cf64e21508d30568181be1e3b9a73078d33960490b90576f25ea382b72",
+      "trace_path": "trace_minus.json"
+    }
+  ],
+  "schema": "A4C-FORMATION-MANIFEST-v1"
+}

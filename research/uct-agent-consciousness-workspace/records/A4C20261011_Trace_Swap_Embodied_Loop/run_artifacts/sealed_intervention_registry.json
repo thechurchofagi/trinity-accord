@@ -1,0 +1,162 @@
+[
+  {
+    "mode": "rescue",
+    "test_context": "plus",
+    "trial_id": "trial-000"
+  },
+  {
+    "mode": "block",
+    "test_context": "plus",
+    "trial_id": "trial-001"
+  },
+  {
+    "mode": "intact",
+    "test_context": "minus",
+    "trial_id": "trial-002"
+  },
+  {
+    "mode": "block",
+    "test_context": "minus",
+    "trial_id": "trial-003"
+  },
+  {
+    "mode": "block",
+    "test_context": "minus",
+    "trial_id": "trial-004"
+  },
+  {
+    "mode": "intact",
+    "test_context": "minus",
+    "trial_id": "trial-005"
+  },
+  {
+    "mode": "intact",
+    "test_context": "minus",
+    "trial_id": "trial-006"
+  },
+  {
+    "mode": "rescue",
+    "test_context": "minus",
+    "trial_id": "trial-007"
+  },
+  {
+    "mode": "swap",
+    "test_context": "plus",
+    "trial_id": "trial-008"
+  },
+  {
+    "mode": "rescue",
+    "test_context": "minus",
+    "trial_id": "trial-009"
+  },
+  {
+    "mode": "swap",
+    "test_context": "minus",
+    "trial_id": "trial-010"
+  },
+  {
+    "mode": "swap",
+    "test_context": "plus",
+    "trial_id": "trial-011"
+  },
+  {
+    "mode": "block",
+    "test_context": "plus",
+    "trial_id": "trial-012"
+  },
+  {
+    "mode": "block",
+    "test_context": "minus",
+    "trial_id": "trial-013"
+  },
+  {
+    "mode": "rescue",
+    "test_context": "plus",
+    "trial_id": "trial-014"
+  },
+  {
+    "mode": "block",
+    "test_context": "plus",
+    "trial_id": "trial-015"
+  },
+  {
+    "mode": "intact",
+    "test_context": "plus",
+    "trial_id": "trial-016"
+  },
+  {
+    "mode": "rescue",
+    "test_context": "minus",
+    "trial_id": "trial-017"
+  },
+  {
+    "mode": "block",
+    "test_context": "plus",
+    "trial_id": "trial-018"
+  },
+  {
+    "mode": "swap",
+    "test_context": "minus",
+    "trial_id": "trial-019"
+  },
+  {
+    "mode": "swap",
+    "test_context": "minus",
+    "trial_id": "trial-020"
+  },
+  {
+    "mode": "swap",
+    "test_context": "plus",
+    "trial_id": "trial-021"
+  },
+  {
+    "mode": "intact",
+    "test_context": "plus",
+    "trial_id": "trial-022"
+  },
+  {
+    "mode": "rescue",
+    "test_context": "minus",
+    "trial_id": "trial-023"
+  },
+  {
+    "mode": "intact",
+    "test_context": "minus",
+    "trial_id": "trial-024"
+  },
+  {
+    "mode": "rescue",
+    "test_context": "plus",
+    "trial_id": "trial-025"
+  },
+  {
+    "mode": "swap",
+    "test_context": "minus",
+    "trial_id": "trial-026"
+  },
+  {
+    "mode": "intact",
+    "test_context": "plus",
+    "trial_id": "trial-027"
+  },
+  {
+    "mode": "block",
+    "test_context": "minus",
+    "trial_id": "trial-028"
+  },
+  {
+    "mode": "swap",
+    "test_context": "plus",
+    "trial_id": "trial-029"
+  },
+  {
+    "mode": "intact",
+    "test_context": "plus",
+    "trial_id": "trial-030"
+  },
+  {
+    "mode": "rescue",
+    "test_context": "plus",
+    "trial_id": "trial-031"
+  }
+]

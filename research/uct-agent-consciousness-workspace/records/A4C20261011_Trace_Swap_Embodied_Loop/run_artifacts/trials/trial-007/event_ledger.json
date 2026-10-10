@@ -1,0 +1,121 @@
+{
+  "actions": [
+    {
+      "action": 1.0,
+      "physical_bias": -1.0,
+      "state_after": 0.0,
+      "state_before": 0.0,
+      "step": 0,
+      "trace_value_used": -1.0
+    },
+    {
+      "action": 1.0,
+      "physical_bias": -1.0,
+      "state_after": 0.0,
+      "state_before": 0.0,
+      "step": 1,
+      "trace_value_used": -1.0
+    },
+    {
+      "action": 1.0,
+      "physical_bias": -1.0,
+      "state_after": 0.0,
+      "state_before": 0.0,
+      "step": 2,
+      "trace_value_used": -1.0
+    },
+    {
+      "action": 1.0,
+      "physical_bias": -1.0,
+      "state_after": 0.0,
+      "state_before": 0.0,
+      "step": 3,
+      "trace_value_used": -1.0
+    },
+    {
+      "action": 1.0,
+      "physical_bias": -1.0,
+      "state_after": 0.0,
+      "state_before": 0.0,
+      "step": 4,
+      "trace_value_used": -1.0
+    },
+    {
+      "action": 1.0,
+      "physical_bias": -1.0,
+      "state_after": 0.0,
+      "state_before": 0.0,
+      "step": 5,
+      "trace_value_used": -1.0
+    },
+    {
+      "action": 1.0,
+      "physical_bias": -1.0,
+      "state_after": 0.0,
+      "state_before": 0.0,
+      "step": 6,
+      "trace_value_used": -1.0
+    },
+    {
+      "action": 1.0,
+      "physical_bias": -1.0,
+      "state_after": 0.0,
+      "state_before": 0.0,
+      "step": 7,
+      "trace_value_used": -1.0
+    },
+    {
+      "action": 1.0,
+      "physical_bias": -1.0,
+      "state_after": 0.0,
+      "state_before": 0.0,
+      "step": 8,
+      "trace_value_used": -1.0
+    },
+    {
+      "action": 1.0,
+      "physical_bias": -1.0,
+      "state_after": 0.0,
+      "state_before": 0.0,
+      "step": 9,
+      "trace_value_used": -1.0
+    },
+    {
+      "action": 1.0,
+      "physical_bias": -1.0,
+      "state_after": 0.0,
+      "state_before": 0.0,
+      "step": 10,
+      "trace_value_used": -1.0
+    },
+    {
+      "action": 1.0,
+      "physical_bias": -1.0,
+      "state_after": 0.0,
+      "state_before": 0.0,
+      "step": 11,
+      "trace_value_used": -1.0
+    }
+  ],
+  "bearer_id": "A4C-embodied-simulation-bearer-v1",
+  "consumer_id": "A4C-body-loop-consumer-v1",
+  "controller_gain": 0.5,
+  "final_context_aligned_error": -0.0,
+  "final_state": 0.0,
+  "intervention": {
+    "consumed_bias_estimate": -1.0,
+    "native_read_blocked": true,
+    "rescue_delivered_at_consumer_interface": true,
+    "source": "consumer_interface_rescue",
+    "trace_context": "minus",
+    "trace_opened": false,
+    "trace_payload_sha256": "8397e0cf64e21508d30568181be1e3b9a73078d33960490b90576f25ea382b72",
+    "validation_reason": "accepted"
+  },
+  "intervention_mode": "rescue",
+  "schema": "A4C-TEST-EVENT-v1",
+  "steps": 12,
+  "test_context": "minus",
+  "tested_at_utc": "2026-10-10T18:51:48.457426+00:00",
+  "trial_id": "trial-007"
+}

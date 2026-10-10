@@ -1,0 +1,119 @@
+{
+  "actions": [
+    {
+      "action": -0.0,
+      "physical_bias": 1.0,
+      "state_after": 1.0,
+      "state_before": 0.0,
+      "step": 0,
+      "trace_value_used": 0.0
+    },
+    {
+      "action": -0.5,
+      "physical_bias": 1.0,
+      "state_after": 1.5,
+      "state_before": 1.0,
+      "step": 1,
+      "trace_value_used": 0.0
+    },
+    {
+      "action": -0.75,
+      "physical_bias": 1.0,
+      "state_after": 1.75,
+      "state_before": 1.5,
+      "step": 2,
+      "trace_value_used": 0.0
+    },
+    {
+      "action": -0.875,
+      "physical_bias": 1.0,
+      "state_after": 1.875,
+      "state_before": 1.75,
+      "step": 3,
+      "trace_value_used": 0.0
+    },
+    {
+      "action": -0.9375,
+      "physical_bias": 1.0,
+      "state_after": 1.9375,
+      "state_before": 1.875,
+      "step": 4,
+      "trace_value_used": 0.0
+    },
+    {
+      "action": -0.96875,
+      "physical_bias": 1.0,
+      "state_after": 1.96875,
+      "state_before": 1.9375,
+      "step": 5,
+      "trace_value_used": 0.0
+    },
+    {
+      "action": -0.984375,
+      "physical_bias": 1.0,
+      "state_after": 1.984375,
+      "state_before": 1.96875,
+      "step": 6,
+      "trace_value_used": 0.0
+    },
+    {
+      "action": -0.9921875,
+      "physical_bias": 1.0,
+      "state_after": 1.9921875,
+      "state_before": 1.984375,
+      "step": 7,
+      "trace_value_used": 0.0
+    },
+    {
+      "action": -0.99609375,
+      "physical_bias": 1.0,
+      "state_after": 1.99609375,
+      "state_before": 1.9921875,
+      "step": 8,
+      "trace_value_used": 0.0
+    },
+    {
+      "action": -0.998046875,
+      "physical_bias": 1.0,
+      "state_after": 1.998046875,
+      "state_before": 1.99609375,
+      "step": 9,
+      "trace_value_used": 0.0
+    },
+    {
+      "action": -0.9990234375,
+      "physical_bias": 1.0,
+      "state_after": 1.9990234375,
+      "state_before": 1.998046875,
+      "step": 10,
+      "trace_value_used": 0.0
+    },
+    {
+      "action": -0.99951171875,
+      "physical_bias": 1.0,
+      "state_after": 1.99951171875,
+      "state_before": 1.9990234375,
+      "step": 11,
+      "trace_value_used": 0.0
+    }
+  ],
+  "bearer_id": "A4C-embodied-simulation-bearer-v1",
+  "consumer_id": "A4C-body-loop-consumer-v1",
+  "controller_gain": 0.5,
+  "final_context_aligned_error": 1.99951171875,
+  "final_state": 1.99951171875,
+  "intervention": {
+    "consumed_bias_estimate": 0.0,
+    "source": "blocked",
+    "trace_context": null,
+    "trace_opened": false,
+    "trace_payload_sha256": null,
+    "validation_reason": "native_read_blocked"
+  },
+  "intervention_mode": "block",
+  "schema": "A4C-TEST-EVENT-v1",
+  "steps": 12,
+  "test_context": "plus",
+  "tested_at_utc": "2026-10-10T18:51:48.972905+00:00",
+  "trial_id": "trial-018"
+}
