@@ -1,10 +1,50 @@
 {
   "research_id": "TJR20261010",
   "version": "TJR-v0.1.0",
-  "status": "PREPARED_NOT_YET_REMOTE_VERIFIED",
+  "status": "SCIENCE_GITHUB_READBACK_PASS_AND_LIBRARY_WRITES_SUCCEEDED",
   "repository": "thechurchofagi/trinity-accord",
   "branch": "uct-agent-consciousness-workspace",
+  "science_commit": "4019bda0d802fb2bd7f72fafa31777fbe2ea9127",
+  "verified_science_paths": 46,
+  "full_text_readbacks": 4,
   "scientific_map": "UCT-MAP-v1.1.2",
   "scientific_promotion": false,
-  "note": "Replaced with concrete commit/tree readback and file-save results after successful persistence. This initial receipt makes no remote completion claim."
+  "readback": "REMOTE_READBACK.json",
+  "archive_scope": "Versioned increment and source snapshots; not a full repository backup.",
+  "final_receipt_location": "research/uct-agent-consciousness-workspace/records/TJR20261010_Temporal_Joint_Realization/PERSISTENCE_RECEIPT.json",
+  "library_results": [
+    {
+      "local_path": "/workspace/scratch/5dbc1723ee12/UCT_TJR20261010_Research_v0.1.0.zip",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_0000000039e88230a72702faec92c23d",
+      "library_file_id": "libfile_68b10e6f0b008191a2e7c9a7dba1706f",
+      "file_name": "UCT_TJR20261010_Research_v0.1.0.zip",
+      "local_metadata_applied": true,
+      "path": "/UCT_TJR20261010_Research_v0.1.0.zip",
+      "current_version_number": 0
+    },
+    {
+      "local_path": "/workspace/scratch/5dbc1723ee12/temporal_realization/UCT_Hourly_Research_Master_Handoff.md",
+      "purpose": "replace_library_file",
+      "status": "succeeded",
+      "file_id": "file_00000000899c81fda7d0b7bf547e8817",
+      "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+      "file_name": "UCT_Hourly_Research_Master_Handoff.md",
+      "local_metadata_applied": true,
+      "path": "/UCT_Hourly_Research_Master_Handoff.md",
+      "current_version_number": 102
+    }
+  ],
+  "master_readback": {
+    "version": 102,
+    "content_match": "PASS_IGNORING_TRANSPORT_FINAL_NEWLINE",
+    "sha256_local": "6e481ed8cd033eebdfa93228e2f9fcaea3f8d779800402b2bf7f082b30dcdf41"
+  },
+  "archive": {
+    "path": "/workspace/scratch/5dbc1723ee12/UCT_TJR20261010_Research_v0.1.0.zip",
+    "bytes": 359311,
+    "sha256": "e90d13d8bfc3e86cbf8c6e8ac4c677a56def8525abc15578af90e8cb572d6638"
+  },
+  "final_receipt_note": "This receipt and the updated work log are saved after the earlier science archive; no self-containing archive hash is claimed."
 }

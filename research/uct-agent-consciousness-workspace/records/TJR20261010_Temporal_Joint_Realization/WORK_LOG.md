@@ -38,3 +38,9 @@ No empirical AI or human consciousness result is claimed. A small finite model i
 Run `python check_models.py` in this record directory. To reconstruct ledgers, supply the restored authoritative graph explicitly: `python build_record.py --baseline /absolute/path/UCT_EFFECTIVE_GRAPH.json`. Source root snapshots are included for provenance; reconstruction of their historical proposals must not overwrite a newer live repository.
 
 Next: construct a physically grounded, task-matched comparison of compressed retention and independently reusable components. First subtract IE/OL/SCU coverage. Seek an invariant that complete organization must preserve, or a positive independent experiential bridge; do not rename a proxy and declare a breakthrough. Persistence results are recorded separately in PERSISTENCE_RECEIPT.json.
+
+## Persistence progress
+
+The initial attempt to load the entire 1.39 MB tree payload through one tool response was truncated and failed JSON parsing before any remote mutation. Thirteen bounded chunks were then read and assembled successfully. The science commit 4019bda0d802fb2bd7f72fafa31777fbe2ea9127 was fast-forwarded with an expected-head guard. All 46 paths matched remote Git blob hashes; RESEARCH_NOTE, RUN_RECEIPT, MAP_EXTENSION and HANDOFF texts also matched exact file readbacks. Remaining save stages are recorded in PERSISTENCE_RECEIPT.json.
+
+Research archive creation and guarded master replacement both succeeded; identity metadata was applied by the transfer helper. Master v102 was read back with matching content (ignoring transport-only final newline). The archive CRC check passed. Concrete identities and archive hash are in PERSISTENCE_RECEIPT.json. Final receipts are later than the packaged science snapshot by design.
