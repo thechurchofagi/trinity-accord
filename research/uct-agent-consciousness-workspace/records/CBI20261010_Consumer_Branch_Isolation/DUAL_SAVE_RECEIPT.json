@@ -1,0 +1,57 @@
+{
+  "schema": "uct-dual-save-receipt/1",
+  "research_id": "CBI20261010",
+  "science_commit": "bd66a621949948d49788243e7fa8313f1256dfbb",
+  "science_parent": "8bac31cc0b9fb4c70d87f688dabbadeb6166addb",
+  "science_tree": "58768d3cd11c9ae52b945a858a40ca36c49f33b5",
+  "github_branch": "uct-agent-consciousness-workspace",
+  "github_guard": "EXPECTED_SHA_FAST_FORWARD",
+  "github_readback": {
+    "commit_equal": true,
+    "tree_equal": true,
+    "exact_results_checks_all_true": true,
+    "current_state_latest_research": "CBI20261010",
+    "publication_coverage": "UCT-PUB-v1.0.20"
+  },
+  "library_master": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "file_id": "file_00000000990481fd9f1e6ae9667db17f",
+    "version": 73,
+    "bytes": 685815,
+    "sha256": "e39617af5a4979a50f2fefc436662f376317583016561c9df3ab9d681f031ef1",
+    "previous_version": 72,
+    "previous_bytes_preserved_as_exact_suffix": true,
+    "readback_byte_equal": true
+  },
+  "library_increment": {
+    "library_file_id": "libfile_821bc7495e2c81919bffb2ba639c46a8",
+    "file_id": "file_000000002680823099e61813496a098e",
+    "file_name": "UCT_CBI20261010_Increment.zip",
+    "bytes": 229717,
+    "sha256": "c2cbbe46d230503adf2b61d41249bffa7971b4841f95e64d9dab113af5334a42",
+    "file_count": 32,
+    "scope": "Increment from science tree only; not a full repository or history backup.",
+    "zip_integrity": "PASS",
+    "readback_byte_equal": true
+  },
+  "library_manifest": {
+    "library_file_id": "libfile_8851fa86f2688191a83f3feca34c491d",
+    "file_id": "file_0000000036a88230bbbaa1880ea8d746",
+    "file_name": "UCT_CBI20261010_INCREMENT_MANIFEST.txt",
+    "bytes": 5595,
+    "sha256": "73a7e615f08bb78a86ae15168281bcff46f0aef6b87d9e52a91efa8a0fcf1273",
+    "readback_byte_equal": true
+  },
+  "library_handoff": {
+    "library_file_id": "libfile_bfa218afcc648191b48a976b3ed2c2e8",
+    "file_id": "file_00000000d6c082309100c129c7864d34",
+    "file_name": "UCT_CBI20261010_HANDOFF_ZH.md",
+    "bytes": 2884,
+    "sha256": "d303923bbe98818eb3d8e70488f534acd6c45d8dbdc9faf1a69e2355655a7f12",
+    "readback_byte_equal": true
+  },
+  "latest_completed_step": "Science tree and all four Library artifacts were materialized and byte-hash verified.",
+  "unfinished_work": "Actual carrier-event-consumer-timing instrumentation and a named phenomenal bridge remain open; all reviewer-controlled OPEN statuses are retained.",
+  "recovery_action": "Fetch the recorded branch commit; if repository access is unavailable, restore the 32-file increment ZIP over parent 8bac31cc and verify every path against the manifest. Read master handoff v73 for continuity. Do not treat the increment as a full clone.",
+  "dual_save_verified": true
+}
