@@ -197,16 +197,16 @@
     "role": "Historical unresolved audit-debt record; old numbers are not newly measured current unread totals."
   },
   "latest_activity_persistence": {
-    "status": "A4F_GITHUB_SCIENCE_INTEGRATION_AND_WORKSPACE_MASTER_V118_INCREMENT_CONFIRMED; FINAL_METADATA_COMMIT_IS_BRANCH_HEAD_SUCCESSOR_AND_MASTER_V119_CONFIRMATION",
-    "receipt": "records/A4F20261011_Witness_Independence_and_Provenance/PERSISTENCE_RECEIPT.json",
-    "recovery_manifest": "records/A4F20261011_Witness_Independence_and_Provenance/RECOVERY_MANIFEST.json",
-    "github_science_integration_commit": "cd4a7a2d3321eb18bf05a846a3f76ac66db22f30",
-    "library_master_version_at_science_save": 118,
-    "library_master_final_confirmation_version": 119,
-    "library_increment_id": "libfile_b3cc273bcc34819188bd5b6d7915797b",
-    "library_increment_sha256": "4c223c0514958077a993c1534a1d1f9ea4a9613ad2e333644cfa76f4f0982b60",
-    "library_manifest_id": "libfile_314310e65b9481919a8aef3e318b20c1",
-    "library_manifest_sha256": "36c18c3290c339b048da90f59b4b6a5bcb10f04e3f3cef9a1e4658fb3dc51bbc"
+    "status": "A4G_GITHUB_SCIENCE_INTEGRATION_AND_WORKSPACE_MASTER_V120_INCREMENT_CONFIRMED; FINAL_METADATA_COMMIT_IS_EXPECTED_SHA_SUCCESSOR_AND_MASTER_V121_CONFIRMATION",
+    "receipt": "records/A4G20261011_Common_Control_Cuts/PERSISTENCE_RECEIPT.json",
+    "recovery_manifest": "records/A4G20261011_Common_Control_Cuts/RECOVERY_MANIFEST.json",
+    "github_science_integration_commit": "4f2a62e3553ac9dde8809841535f88cfaefedd41",
+    "library_master_version_at_science_save": 120,
+    "library_master_final_confirmation_version": 121,
+    "library_increment_id": "libfile_50d453d4dda88191a7d6ac3a9fc7fba6",
+    "library_increment_sha256": "b5e5ace46e63aa28f2c1feb804718e7d4de86a2230b961d7b9604412732b5921",
+    "library_manifest_id": "libfile_2567b5e396b081919f77a14ddc745da3",
+    "library_manifest_sha256": "1af3a7bf6302b273fa319d7b71879781aeea928ae602ee380e5e465902c7d1b2"
   },
   "concurrent_research_preserved": {
     "id": "EIP20261010",
@@ -228,7 +228,7 @@
     "map_replacement": false,
     "actual_application_established": false
   },
-  "latest_persistence_receipt": "records/A4F20261011_Witness_Independence_and_Provenance/PERSISTENCE_RECEIPT.json",
+  "latest_persistence_receipt": "records/A4G20261011_Common_Control_Cuts/PERSISTENCE_RECEIPT.json",
   "previous_latest_research_before_CTD": {
     "id": "A3L20261010",
     "result_version": "A3L-RESULT-v0.1.0",

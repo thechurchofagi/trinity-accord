@@ -1,0 +1,31 @@
+{
+  "schema": "a4g-recovery-manifest/1.0",
+  "round_id": "A4G20261011",
+  "baseline_commit": "b013ae7fbed74065949fd1e5e2a4b9bac17d1a96",
+  "science_commit": "4f2a62e3553ac9dde8809841535f88cfaefedd41",
+  "science_tree_sha": "1fd54d2b9d30dde478d1b85194e011db9d06157d",
+  "increment_file_count": 23,
+  "increment_library_file_id": "libfile_50d453d4dda88191a7d6ac3a9fc7fba6",
+  "increment_sha256": "b5e5ace46e63aa28f2c1feb804718e7d4de86a2230b961d7b9604412732b5921",
+  "manifest_library_file_id": "libfile_2567b5e396b081919f77a14ddc745da3",
+  "manifest_sha256": "1af3a7bf6302b273fa319d7b71879781aeea928ae602ee380e5e465902c7d1b2",
+  "fixed_master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+  "fixed_master_science_version": 120,
+  "fixed_master_final_version": 121,
+  "not_in_increment": [
+    "PERSISTENCE_RECEIPT.json",
+    "RECOVERY_MANIFEST.json",
+    "finalized ROUND_RECORD.json",
+    "finalized HANDOFF_ZH.md and WORK_LOG.md",
+    "CURRENT_STATE final persistence pointer",
+    "the final expected-SHA receipt commit"
+  ],
+  "recovery_order": [
+    "Read fixed master v121 or later and obtain the actual remote branch head.",
+    "Prefer any verified fast-forward successor; never overwrite it with the increment.",
+    "Verify the science commit is an ancestor and verify both Library SHA256 values.",
+    "Use the branch for final receipt metadata. Use the increment only to restore missing A4G science files.",
+    "Re-run run_common_control_cut_audit.py and require counts 16, 5, 1, 0, 1.",
+    "Verify REVIEW_SUPERVISION.md is UTF-8 and has the hash recorded by CURRENT_STATE at that head."
+  ]
+}

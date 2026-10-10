@@ -9,4 +9,6 @@
 7. Drafted the bounded common-control-cut protocol, claims, gaps, review response, source scope and formal audit.
 8. Re-ran the whole-map validator against `integration/UCT-INTEGRATION-v1.0.0/UNIFIED_MAP.json.gz`. After retaining an initial command-shape failure, the corrected run passed all declared checks at 913/424/261 with 727 disabled objects and 10 suspended historical rules; its deterministic per-ID gzip hash matched A4D exactly.
 9. Integrated the bounded result into the current entry points without promoting a node, rule or context link, and rechecked all open review items.
-10. Pending at this line: final persistence receipts and dual-save verification.
+10. Saved and remotely re-read expected-SHA science commit `4f2a62e3553ac9dde8809841535f88cfaefedd41`; the restored review ledger is now UTF-8 at the recorded hash.
+11. Created a 23-file incremental recovery ZIP and manifest, saved both persistently, reverse-materialized them, and passed byte-for-byte plus SHA256 verification.
+12. Updated the fixed master handoff in place to v120, then staged the final receipt successor and v121 confirmation.

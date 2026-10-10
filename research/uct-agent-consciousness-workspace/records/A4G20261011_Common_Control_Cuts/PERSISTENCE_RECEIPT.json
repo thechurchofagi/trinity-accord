@@ -1,0 +1,51 @@
+{
+  "schema": "a4g-dual-persistence-receipt/1.0",
+  "round_id": "A4G20261011",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "baseline_commit": "b013ae7fbed74065949fd1e5e2a4b9bac17d1a96",
+    "round_record_checkpoint": "1ea7fb7eb943cb2008c0e88e45aa5b519de3f790",
+    "science_integration_commit": "4f2a62e3553ac9dde8809841535f88cfaefedd41",
+    "science_tree_sha": "1fd54d2b9d30dde478d1b85194e011db9d06157d",
+    "final_receipt_commit": "the expected-SHA fast-forward successor of science_integration_commit; exact SHA is recorded in fixed master handoff v121",
+    "save_method": "expected-SHA fast-forward; no PR, CI, deployment or publication",
+    "remote_science_verification": {
+      "branch_commit_read": true,
+      "current_state_read": true,
+      "exact_results_read": true,
+      "review_ledger_utf8_read": true
+    }
+  },
+  "library": {
+    "fixed_master_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "science_save_version": 120,
+    "final_confirmation_version": 121,
+    "increment": {
+      "library_file_id": "libfile_50d453d4dda88191a7d6ac3a9fc7fba6",
+      "file_id": "file_00000000bc2481f5ab8ffff30d6f3dc7",
+      "file_name": "UCT_A4G_Increment_20261011.zip",
+      "bytes": 91550,
+      "sha256": "b5e5ace46e63aa28f2c1feb804718e7d4de86a2230b961d7b9604412732b5921",
+      "classification": "23-file increment; not a complete repository, complete working set, or Git history"
+    },
+    "manifest": {
+      "library_file_id": "libfile_2567b5e396b081919f77a14ddc745da3",
+      "file_id": "file_00000000383481f59f6f633c13fbc71d",
+      "file_name": "UCT_A4G_Increment_Manifest.md",
+      "bytes": 4671,
+      "sha256": "1af3a7bf6302b273fa319d7b71879781aeea928ae602ee380e5e465902c7d1b2"
+    },
+    "reverse_materialization_verified": true,
+    "byte_comparison_verified": true,
+    "sha256_reverified": true
+  },
+  "repair": {
+    "gap_id": "A4G-G00",
+    "remote_corrupt_baseline_review_sha256": "63a99840114704b2792594533e8fb6d11e4a1510dba581c7e3152ce39313e5a7",
+    "recovered_prior_utf8_sha256": "5f270b70204b51d4b7b3b5eb8a2f98fd5f5ffd86dac821351afd579c6b6e47e1",
+    "a4g_review_ledger_sha256": "55da83ea3cd3c6aeee2bd6fd2e52cd3504f063f80bddd17f9d2992539a2fa916",
+    "cause": "OPEN"
+  },
+  "scope_limit": "The final receipt successor is intentionally outside the previously generated 23-file increment. Recover it from the branch or fixed master v121."
+}
