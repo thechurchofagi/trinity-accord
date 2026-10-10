@@ -1,0 +1,71 @@
+{
+  "sources": [
+    {
+      "file": "inputs/Experiment_3.xlsx",
+      "source_url": "https://osf.io/download/p5un6/",
+      "source_existing_local_path": "/workspace/scratch/5b73aae6b1e4/empirical/Experiment_3.xlsx",
+      "bytes": 22409,
+      "sha256": "d3b2fef22f077788e5299dedb68737d453c09b005d9360bab8dfbe6c35852bc9",
+      "original_bytes_unchanged": true,
+      "attribution": "D\u2019Angelo, Lanfranco, Chancel and Ehrsson (2026), Nature Communications 17:53, DOI 10.1038/s41467-025-67657-w"
+    },
+    {
+      "file": "inputs/NatComm2026_SourceData.xlsx",
+      "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41467-025-67657-w/MediaObjects/41467_2025_67657_MOESM4_ESM.xlsx",
+      "source_existing_local_path": "/workspace/scratch/5b73aae6b1e4/empirical/NatComm2026_SourceData.xlsx",
+      "bytes": 97514,
+      "sha256": "3202d68439ad502ff95e7a4d59535a4e8ff9072d5c6a76b5aebf7dde90228a82",
+      "original_bytes_unchanged": true,
+      "attribution": "D\u2019Angelo, Lanfranco, Chancel and Ehrsson (2026), Nature Communications 17:53, DOI 10.1038/s41467-025-67657-w"
+    },
+    {
+      "source_context_file": "/workspace/scratch/5b73aae6b1e4/empirical/PMC12796323.xml",
+      "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12796323/fullTextXML",
+      "bytes": 203923,
+      "sha256": "2a1997518ca2fdd3b0e959caa95eb4ad67303e1cf8da83f797de5af18744d587",
+      "redistributed_in_reconstruction_core": false
+    },
+    {
+      "source_context_file": "/workspace/scratch/5b73aae6b1e4/empirical/NatComm2026_supplement.pdf",
+      "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41467-025-67657-w/MediaObjects/41467_2025_67657_MOESM1_ESM.pdf",
+      "bytes": 1251404,
+      "sha256": "51eee35ada6e4d421996ee342a04d83dca484e0e8b98943418519ec5484d6c3e",
+      "redistributed_in_reconstruction_core": false
+    },
+    {
+      "source_context_file": "/workspace/scratch/5b73aae6b1e4/empirical/Master_BCI.m",
+      "source_url": "https://osf.io/download/pnmsx/",
+      "bytes": 11332,
+      "sha256": "06e5122cbe1ed7852eb3b3a429ab984125244f76edc503ed32ac33dc3195bb9d",
+      "redistributed_in_reconstruction_core": false
+    },
+    {
+      "source_context_file": "/workspace/scratch/5b73aae6b1e4/empirical/modelprediction_log_BCI.m",
+      "source_url": "https://osf.io/download/uk2en/",
+      "bytes": 517,
+      "sha256": "fd06e42e6e61882475d6d6b4ff10321bd812d7e6c4038b7467dff89f6e8ff814",
+      "redistributed_in_reconstruction_core": false
+    }
+  ],
+  "runtime": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "pandas": "2.2.3"
+  },
+  "rights": "The primary article is CC BY 4.0. Publisher Source Data attribution is preserved. On 2026-10-10 the BCI code project s5p4v explicitly links CC BY 4.0 in the OSF node metadata; the separate data project ytga5 has no node license in its metadata. See author_inventory/LICENSE_METADATA_CHECK.json. Original source bytes are not relicensed. Author MATLAB code and EEG archives are context material and are not required in the reconstruction core.",
+  "source_search_receipts": [
+    "author_inventory/inventory_receipt.json",
+    "author_inventory/archives_receipt.json",
+    "author_inventory/LICENSE_METADATA_CHECK.json"
+  ],
+  "freeze": "v0.1 research files and scientific record have not been modified.",
+  "additional_BCI_source_parameters": {
+    "file": "inputs/Experiment_3_Computational_modelling.xlsx",
+    "source_url": "https://osf.io/download/yc4k2/",
+    "bytes": 26022,
+    "sha256": "32e58a814b7d33f52f3dc994a753715d4ddfa21c8ec7424b80ebef43c6d560e4",
+    "role": "Full-data initialization and source-fit provenance only; excluded from all CV initialization and fitting",
+    "original_bytes_unchanged": true
+  }
+}

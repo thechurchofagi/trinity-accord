@@ -1,0 +1,12 @@
+# Unsuccessful results, repairs and limits
+
+1. **Gaussian reconstruction:** 178/180 widths are within 0.1 ms, but P1 synchrony at 8 Hz and P24 ownership at 13 Hz remain discordant. Additional starts and checks did not justify replacing their source values. The source fitting implementation was not found in the inspected inventories; absence from those inventories does not establish nonexistence. The free-baseline curves often leave the probability domain.
+2. **Source arithmetic:** the IC sign discrepancy does not reverse the aggregate preference. Published bootstrap intervals and the group VBA output were not reproduced; the paper does not claim otherwise.
+3. **First CV run:** convergence flags failed to expose three inferior nested training fits. Those scores are preserved in empirical/results/pre_nested_cv_repair/ and are superseded by the uniform training-only repair. The final runner contains this repair from the outset.
+4. **Optimization scope:** the bounded Prior refit is slightly worse than source saved parameters; a source prior outside the declared box explains part of the difference. Multiple starts and nesting checks are not proofs of global optimization.
+5. **Model adequacy:** the centered independent-binomial family fails the conditional symmetry diagnostic. Adding task centers improves predictions but does not establish all other modeling assumptions. The families were specified retrospectively after inspecting the public dataset.
+6. **Weak discrimination:** source-calibrated candidate joint differences can be extremely small. Known-simple-pair Hellinger bounds are not a prospective sample-size recommendation; marginal calibration, criterion dependence, lapses and shared internal draws remain unverified in humans.
+7. **Document layout:** a freely floating trial left the Section 4 heading at a page end. Controlled figure placement fixed it; the final 18-page edition was rendered and inspected.
+8. **Access and packaging:** some primary webpages were blocked or redirected; accessible primary copies, public XML, source files and exact retrieval records were used within the stated reading scope. Large contextual papers and EEG archives are not redistributed. Input paths originally tied to the session were repaired with original source snapshots and explicit provenance.
+
+No unfavorable result above is erased by a PASS receipt. A receipt states what was checked; it is not a proof of empirical source identification, UCT validation or external peer review.

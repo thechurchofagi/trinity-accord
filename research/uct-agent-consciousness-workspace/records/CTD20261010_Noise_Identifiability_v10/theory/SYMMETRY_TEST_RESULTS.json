@@ -1,0 +1,96 @@
+{
+  "completed_utc": "2026-10-10T07:43:35.748068+00:00",
+  "input_sha256": "c289edabfb45bc62fa0498e17a36da6f3f9bd6dec469a7968d4d245013f50c00",
+  "plan_sha256": "876e8e05fb88e403ffcbd7f50ce8f63b65f253ceb5f599d5f21180538667c17f",
+  "python_version": "3.12.14",
+  "numpy_version": "2.3.5",
+  "scipy_version": "1.17.0",
+  "count_mapping_matches_canonical_npz_exactly": true,
+  "n_participants": 30,
+  "n_pairs": 540,
+  "n_count_cells_tested": 1080,
+  "nominal_judgments_tested": 10800,
+  "all_pairs_equal_probability_restrictions": 540,
+  "pairs_with_nonconstant_conditional_null": 439,
+  "observed_deviance": 984.30423637609,
+  "conditional_null_exact_mean": 531.4224102726788,
+  "conditional_null_exact_sd": 31.747721472274744,
+  "conditional_simulated_mean": 531.0978692233524,
+  "conditional_simulated_sd": 31.846348628710324,
+  "B": 19999,
+  "seed": 202610100742,
+  "exceedances": 0,
+  "plus_one_p": 5e-05,
+  "conditional_tail_MC_ci95": [
+    0.0,
+    0.00018443618492232166
+  ],
+  "conditional_quantiles": {
+    "min": 404.5642106258125,
+    "2.5%": 470.7340644685744,
+    "50%": 530.2076367776858,
+    "95%": 585.026020751205,
+    "97.5%": 596.261735842016,
+    "max": 662.369092892024
+  },
+  "task_summaries_descriptive_only": [
+    {
+      "task": "ownership",
+      "n_pairs": 270,
+      "deviance_contribution": 364.9259297282795,
+      "mean_signed_rate_difference": 0.06814814814814814
+    },
+    {
+      "task": "simultaneity",
+      "n_pairs": 270,
+      "deviance_contribution": 619.3783066478104,
+      "mean_signed_rate_difference": 0.07518518518518519
+    }
+  ],
+  "task_by_stimulation_summaries_descriptive_only": [
+    {
+      "task": "ownership",
+      "stimulation": "8Hz",
+      "n_pairs": 90,
+      "deviance_contribution": 133.7374210779542,
+      "mean_signed_rate_difference": 0.09333333333333332
+    },
+    {
+      "task": "ownership",
+      "stimulation": "sham",
+      "n_pairs": 90,
+      "deviance_contribution": 153.01706391518312,
+      "mean_signed_rate_difference": 0.07222222222222223
+    },
+    {
+      "task": "ownership",
+      "stimulation": "13Hz",
+      "n_pairs": 90,
+      "deviance_contribution": 78.17144473514222,
+      "mean_signed_rate_difference": 0.038888888888888896
+    },
+    {
+      "task": "simultaneity",
+      "stimulation": "8Hz",
+      "n_pairs": 90,
+      "deviance_contribution": 168.70008132034602,
+      "mean_signed_rate_difference": 0.09000000000000001
+    },
+    {
+      "task": "simultaneity",
+      "stimulation": "sham",
+      "n_pairs": 90,
+      "deviance_contribution": 227.17213639281462,
+      "mean_signed_rate_difference": 0.05444444444444445
+    },
+    {
+      "task": "simultaneity",
+      "stimulation": "13Hz",
+      "n_pairs": 90,
+      "deviance_contribution": 223.50608893464982,
+      "mean_signed_rate_difference": 0.0811111111111111
+    }
+  ],
+  "inference": "One global conditional independent-binomial symmetry-family test. Subsidiary summaries are descriptive; no subsidiary p values.",
+  "limitations": "A global test of centered symmetry under the conditional independent-binomial model; not a test of UCT, neural mediation, or the number of mechanisms. Rejection need not refute Bayesian causal inference generally. Dependence, trial-varying probabilities, or nonzero centers can violate the tested model."
+}

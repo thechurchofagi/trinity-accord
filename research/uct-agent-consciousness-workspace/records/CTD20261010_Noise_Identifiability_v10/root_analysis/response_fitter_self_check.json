@@ -1,0 +1,48 @@
+{
+  "checks": [
+    {
+      "model": "sigma",
+      "max_scaled_gradient_error": 6.178209950291245e-09
+    },
+    {
+      "model": "prior",
+      "max_scaled_gradient_error": 4.381585909150325e-07
+    },
+    {
+      "model": "sigma_shift",
+      "max_scaled_gradient_error": 5.25484715709814e-09
+    },
+    {
+      "model": "prior_shift",
+      "max_scaled_gradient_error": 3.394056288552055e-08
+    },
+    {
+      "source_model": "sigma",
+      "saved_nll": 209.86896018416,
+      "independent_nll": 209.86896018415965,
+      "difference": -3.410605131648481e-13
+    },
+    {
+      "source_model": "prior",
+      "saved_nll": 212.36230855789,
+      "independent_nll": 212.36230855789017,
+      "difference": 1.7053025658242404e-13
+    }
+  ],
+  "probability_clipping": false,
+  "lapse_floor_is_explicit_parameter_bound": 1e-08,
+  "prospective_cv_policy": "generic starts only; never source saved full-data estimates",
+  "center_bounds_ms": [
+    -800,
+    800
+  ],
+  "sigma_log_bounds": [
+    -10,
+    10
+  ],
+  "prior_logit_bounds": [
+    -16,
+    16
+  ],
+  "source_fixed_stimulus_variance": 84000.0
+}

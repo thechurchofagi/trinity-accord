@@ -1,0 +1,393 @@
+[
+  {
+    "id": "A:TOKEN_CRITERIA",
+    "kind": "ONTO_DEF",
+    "label": "Actual-token criteria",
+    "source": "A Appendix C",
+    "status": "DECLARED_CONTEXT_OR_METHOD",
+    "statement": "For a specified physical subhistory P over interval I, admission to P_actual requires actual nonempty event/state support, fidelity to induced physical relations, traceable causal continuity, representation of materially relevant boundary influences, traceable lineage, and invariance under invertible descriptions. These are domain requirements; no effective universally sufficient physical admission algorithm is supplied.",
+    "scope": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+    "formal_contract_R153": {
+      "object_domain": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+      "quantifier_convention": "The displayed statement and each separate premise route are read together. Model parameters are fixed throughout one instance; universal state/action clauses apply only to that instance. Existential witnesses and alternative routes are not universally asserted.",
+      "source_anchor": {
+        "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md",
+        "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+        "original_locator": "A Appendix C"
+      },
+      "premise_routes": [],
+      "root_premise_routes": [
+        [
+          "A:TOKEN_CRITERIA"
+        ]
+      ],
+      "proof_or_evidence": [
+        {
+          "role": "ROOT_DECLARATION_OR_RECORDED_EVIDENCE",
+          "status": "DECLARED_CONTEXT_OR_METHOD",
+          "note": "No graph derivation. Definition/assumption/model/evidence status is retained; a terminal dependency is not automatically a proven truth."
+        }
+      ],
+      "open_obligations": [
+        "F153-09",
+        "F153-15",
+        "F153-16"
+      ],
+      "finite_boundary": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+      "purpose": "Trace this precise target and its dependencies without promoting mathematical representation to actual constitution or experience measurement.",
+      "machine_formalized": false
+    },
+    "origin_module": "BASE",
+    "source_record_sha256": "fbef2c8018b8218b9139bf1c5b4f045f48374330277b40239deedd03dfc33354",
+    "origin_file": "UCT_FORMAL_GRAPH.json",
+    "map_version": "UCT-MAP-v1.0.0",
+    "audit_id": "FA20261008"
+  },
+  {
+    "id": "A:ACTUAL_TOKEN",
+    "kind": "ONTO_DOMAIN",
+    "label": "Actual valid process token",
+    "source": "A Appendix C",
+    "status": "DECLARED_CONTEXT_OR_METHOD",
+    "scope": "Admitted actual valid P, specified interval and boundary; A §2 actual-support/inherited-relations/continuity/accountability/traceability criteria. No claim that an arbitrary variable satisfies them.",
+    "statement": "P_actual denotes the declared domain of actual valid physical process occurrences satisfying TOKEN_CRITERIA at their specified intervals and boundaries. Quantification over P_actual is not quantification over all mathematical state tables or all coarse features.",
+    "formal_contract_R153": {
+      "object_domain": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+      "quantifier_convention": "The displayed statement and each separate premise route are read together. Model parameters are fixed throughout one instance; universal state/action clauses apply only to that instance. Existential witnesses and alternative routes are not universally asserted.",
+      "source_anchor": {
+        "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md",
+        "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+        "original_locator": "A Appendix C"
+      },
+      "premise_routes": [],
+      "root_premise_routes": [
+        [
+          "A:ACTUAL_TOKEN"
+        ]
+      ],
+      "proof_or_evidence": [
+        {
+          "role": "ROOT_DECLARATION_OR_RECORDED_EVIDENCE",
+          "status": "DECLARED_CONTEXT_OR_METHOD",
+          "note": "No graph derivation. Definition/assumption/model/evidence status is retained; a terminal dependency is not automatically a proven truth."
+        }
+      ],
+      "open_obligations": [
+        "F153-09",
+        "F153-15",
+        "F153-16"
+      ],
+      "finite_boundary": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+      "purpose": "Trace this precise target and its dependencies without promoting mathematical representation to actual constitution or experience measurement.",
+      "machine_formalized": false
+    },
+    "origin_module": "BASE",
+    "source_record_sha256": "1ae0e2a2e052bd4444e00c855c6183e4784576c6fa3a1065c043a463eebce98d",
+    "origin_file": "UCT_FORMAL_GRAPH.json",
+    "map_version": "UCT-MAP-v1.0.0",
+    "audit_id": "FA20261008"
+  },
+  {
+    "id": "A:C1",
+    "kind": "AX_C",
+    "label": "Structural-Experiential Identity",
+    "source": "A §4",
+    "status": "FIXED_AXIOM",
+    "statement": "For every P in P_actual in the fixed signature K, there exist an experiential K-structure Phi_K(P) and a sort-preserving isomorphism h_P:D_ontic_K(P)->Phi_K(P). This is the stipulated tokenwise structural-experiential identity axiom, including its experiential interpretation and existential commitment; it is not an empirically derived bijection or a scalar measure.",
+    "scope": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+    "formal_contract_R153": {
+      "object_domain": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+      "quantifier_convention": "The displayed statement and each separate premise route are read together. Model parameters are fixed throughout one instance; universal state/action clauses apply only to that instance. Existential witnesses and alternative routes are not universally asserted.",
+      "source_anchor": {
+        "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md",
+        "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+        "original_locator": "A §4"
+      },
+      "premise_routes": [],
+      "root_premise_routes": [
+        [
+          "A:C1"
+        ]
+      ],
+      "proof_or_evidence": [
+        {
+          "role": "ROOT_DECLARATION_OR_RECORDED_EVIDENCE",
+          "status": "FIXED_AXIOM",
+          "note": "No graph derivation. Definition/assumption/model/evidence status is retained; a terminal dependency is not automatically a proven truth."
+        }
+      ],
+      "open_obligations": [
+        "F153-15",
+        "F153-16",
+        "F153-17"
+      ],
+      "finite_boundary": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+      "purpose": "Trace this precise target and its dependencies without promoting mathematical representation to actual constitution or experience measurement.",
+      "machine_formalized": false
+    },
+    "origin_module": "BASE",
+    "source_record_sha256": "2d0c196b8b189b985929d85eec4009988e113142b90f5bbbf80d2925043b225e",
+    "origin_file": "UCT_FORMAL_GRAPH.json",
+    "map_version": "UCT-MAP-v1.0.0",
+    "audit_id": "FA20261008"
+  },
+  {
+    "id": "A:U1",
+    "kind": "THM",
+    "label": "Universal Nonempty Experience",
+    "source": "A §4",
+    "status": "MANUAL_CONDITIONAL_PASS",
+    "statement": "Every actual token has a nonempty distinguished experiential carrier",
+    "scope": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+    "formal_contract_R153": {
+      "object_domain": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+      "quantifier_convention": "The displayed statement and each separate premise route are read together. Model parameters are fixed throughout one instance; universal state/action clauses apply only to that instance. Existential witnesses and alternative routes are not universally asserted.",
+      "source_anchor": {
+        "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md",
+        "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+        "original_locator": "A §4"
+      },
+      "premise_routes": [
+        {
+          "rule": "a03",
+          "all_of": [
+            "A:C1",
+            "A:NONEMPTY_CARRIER"
+          ]
+        }
+      ],
+      "root_premise_routes": [
+        [
+          "A:ACTUAL_TOKEN",
+          "A:C1"
+        ]
+      ],
+      "proof_or_evidence": [
+        {
+          "rule": "a03",
+          "argument": "Sort-preserving bijection preserves nonemptiness.",
+          "review": "R153_EXPANDED_ARGUMENT_AND_BOUNDARY_REVIEW"
+        }
+      ],
+      "open_obligations": [
+        "F153-09",
+        "F153-15",
+        "F153-16",
+        "F153-17"
+      ],
+      "finite_boundary": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+      "purpose": "Trace this precise target and its dependencies without promoting mathematical representation to actual constitution or experience measurement.",
+      "machine_formalized": false
+    },
+    "origin_module": "BASE",
+    "source_record_sha256": "2f544cb9ea125a2723f30e99d7a59dcac5b87acd9b554aacdfbc8417ae207257",
+    "origin_file": "UCT_FORMAL_GRAPH.json",
+    "map_version": "UCT-MAP-v1.0.0",
+    "audit_id": "FA20261008"
+  },
+  {
+    "id": "R168:PARTIAL_VIEW_NONENTAILMENT",
+    "kind": "EXACT_HIDDEN_FIBER_COUNTEREXAMPLE",
+    "label": "Observed Context Label Does Not Bound a Hidden Fiber",
+    "statement": "If q(a)=q(b) and only actual context a is tested with e(a)=0, the compatible models e0(a)=e0(b)=0 and e1(a)=0,e1(b)=M agree on the observed label and tested law but differ maximally at b. Partial observation alone therefore yields no nontrivial hidden-fiber amplitude bound.",
+    "domain": "A two-point hidden context space, one coarse observed label, one tested representative and effect range [0,M].",
+    "scope": "A two-point hidden context space, one coarse observed label, one tested representative and effect range [0,M].",
+    "source": "records/R168_Stochastic_Continuous_Redundancy_20261008/Stochastic_Continuous_and_Partially_Observed_Redundancy_v0_1.md §5",
+    "source_lineage": "Elementary partial-identification counterexample specialized to R167 hidden redundancy.",
+    "status": "PROVED_EXACTLY",
+    "proof": "Direct construction; observed/tested objects are equal while hidden maxima are zero and M.",
+    "counterexamples_and_limits": "A physically certified within-fiber regularity/lift premise can add a bound; the counterexample denies inference without it.",
+    "formal_contract_R168": {
+      "object_domain": "one coarse observation fiber with two actual hidden contexts",
+      "quantifiers": "there exist two compatible models with maximal hidden-effect separation",
+      "bearer_time_signature": "same observed label is not identity of actual physical context",
+      "source_anchor": {
+        "path": "records/R168_Stochastic_Continuous_Redundancy_20261008/Stochastic_Continuous_and_Partially_Observed_Redundancy_v0_1.md",
+        "sha256": "6e0341efb69880632e08dd52909a0098e43af7e2627693f2f3c400f00a00f56a",
+        "locator": "§5"
+      },
+      "purpose": "Block observed-label equality from masquerading as route closure",
+      "thought_experiments": "§9",
+      "open_obligations": [
+        "R168-G4",
+        "R168-G5"
+      ],
+      "machine_formalized": true,
+      "premise_routes": []
+    },
+    "origin_module": "BASE",
+    "source_record_sha256": "426d022bbb00e58ed869a32bdbd756a8c8c357b313b1d7a222dc94bdd6e142f6",
+    "origin_file": "UCT_FORMAL_GRAPH.json",
+    "map_version": "UCT-MAP-v1.0.0",
+    "audit_id": "FA20261008"
+  },
+  {
+    "id": "R169:METRIC_SCALE_GAUGE_NONENTAILMENT",
+    "kind": "EXACT_SCALE_NONIDENTIFICATION_RESULT",
+    "label": "Envelope Evidence Does Not Identify d and L Separately",
+    "statement": "For every c>0, d'=c d and L'=L/c leave every Ld product and the full R168 cone envelope unchanged; envelope data therefore do not separately identify metric scale and Lipschitz constant, while route budgets record their operational product directly in d_F units.",
+    "domain": "Any R168 metric-envelope application and positive scalar rescaling.",
+    "scope": "Any R168 metric-envelope application and positive scalar rescaling.",
+    "source": "records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md §4",
+    "source_lineage": "Elementary scale invariance applied to R168's metric envelope.",
+    "status": "PROVED_EXACTLY",
+    "proof": "(L/c)(c d)=Ld pointwise; all cone terms and their infimum/cap are unchanged.",
+    "counterexamples_and_limits": "A unit convention can choose one representative but adds no physical evidence; the discriminator class F remains scientifically substantive.",
+    "formal_contract_R169": {
+      "object_domain": "metric and regularity representations of the same envelope",
+      "quantifiers": "every positive rescaling c",
+      "bearer_time_signature": "representation-level statement; no new actual bearer inferred",
+      "source_anchor": {
+        "path": "records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md",
+        "sha256": "a825a6fbb325dd7d313584b2201d27bfc662de250a95ab75cabdb26b16c3e8a1",
+        "locator": "§4"
+      },
+      "purpose": "Prevent a small reported L from masquerading as stronger evidence",
+      "thought_experiments": "§8.5",
+      "open_obligations": [
+        "R169-G4"
+      ],
+      "machine_formalized": true,
+      "premise_routes": []
+    },
+    "origin_module": "BASE",
+    "source_record_sha256": "e4553fbb8b68373f21f7b5788f2629177e7d678a6de86aa0bab6b5e023d2de4b",
+    "origin_file": "UCT_FORMAL_GRAPH.json",
+    "map_version": "UCT-MAP-v1.0.0",
+    "audit_id": "FA20261008"
+  },
+  {
+    "id": "R169:HELDOUT_CALIBRATION_FALSIFIER",
+    "kind": "PROSPECTIVE_CERTIFICATE_FALSIFIER",
+    "label": "Valid Held-Out Lower Evidence Can Refute an Edge or Path Budget",
+    "statement": "If an independently challenged actual edge/path has a valid consumer-law lower bound larger than its declared upper budget, the calibration certificate is refuted; this is distinct from a valid mediator-effect envelope refuting effects above tau.",
+    "domain": "One frozen route certificate and an independent actual challenge under the same K0/F/consumer/time contract.",
+    "scope": "One frozen route certificate and an independent actual challenge under the same K0/F/consumer/time contract.",
+    "source": "records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md §6",
+    "source_lineage": "Prospective falsification discipline from R161-R168, applied to local route upper budgets.",
+    "status": "DECLARED_FALSIFIER_NOT_EXECUTED",
+    "proof": "A simultaneously valid lower bound above a claimed upper bound makes the certificate conjunction false.",
+    "counterexamples_and_limits": "Invalid challenge delivery or a post-hoc discriminator cannot refute the certificate; passing finitely many challenges does not prove omitted-route completeness.",
+    "formal_contract_R169": {
+      "object_domain": "one frozen local/path upper certificate and independent lower-bound challenge",
+      "quantifiers": "existential valid violation refutes the certificate; no converse completeness inference",
+      "bearer_time_signature": "same actual route variables, consumer and pre-compensation timing",
+      "source_anchor": {
+        "path": "records/R169_Compositional_Route_Calibration_20261008/Compositional_Route_Calibration_and_Falsification_v0_1.md",
+        "sha256": "a825a6fbb325dd7d313584b2201d27bfc662de250a95ab75cabdb26b16c3e8a1",
+        "locator": "§6"
+      },
+      "purpose": "Make physical calibration rejectable rather than decorative",
+      "thought_experiments": "§8",
+      "open_obligations": [
+        "R169-G2",
+        "R169-G6"
+      ],
+      "machine_formalized": true,
+      "premise_routes": []
+    },
+    "origin_module": "BASE",
+    "source_record_sha256": "e45fb5f0f21c5b58ade1bb917f8fb823129bf1adb5f46faca6adf99865d9bc42",
+    "origin_file": "UCT_FORMAL_GRAPH.json",
+    "map_version": "UCT-MAP-v1.0.0",
+    "audit_id": "FA20261008"
+  },
+  {
+    "id": "R177:JOINT_SOURCE_FEATURE_DOMAIN",
+    "kind": "APPLICATION_AND_COMPARISON_CONTRACT",
+    "statement": "In the IA singleton-source trace convention, bind one selected use per nominated source per episode and J(u)=(s(u),c(u)). Freeze source values and stateless encoder/transmission/decoder operations under legal retiming. For recoding comparisons admit the finite feature contract and the same source/use role mapping.",
+    "domain": "Declared abstract trace/transducer comparisons. Multiple-source use or repeated descendants require refined binding; no phenomenal identity supplied.",
+    "premises": [
+      "IA trace domain interpreted on the same source/use binding",
+      "Singleton source for each nominated use",
+      "One nominated use per source",
+      "Executed time-independent feature operations",
+      "Fixed source-state and role correspondence"
+    ],
+    "proof": "Explicit product of provenance and decoded feature definitions; §2–4.",
+    "status": "DECLARED_COMPARISON_DOMAIN",
+    "source": "records/R177_Provenance_and_Content_Identity_20261008/Provenance_Feature_and_Experiential_Identity_v0_1.md",
+    "source_sha256": "8ff003ae128eac001ec8eeba9e65e88c368bbdefb05f905c84a4ba711b004605",
+    "quantifiers": "Only the explicit finite-domain/all-admitted-input and legal-retiming quantifiers in the statement; no universal psychophysical claim.",
+    "limits": "No biological instance, empirical quality correspondence, full K-isomorphism, basal gate, unique owner or assistant-consciousness verdict.",
+    "thought_experiment_role": "Tests same-source/different-feature, different-source/same-feature, faithful recoding and delayed use; §8 connects four inherited families.",
+    "origin_module": "BASE",
+    "source_record_sha256": "2d6b88b36a69948816cb35c3b8605b99e2af6a26f72c26ef408128cce1a356c7",
+    "origin_file": "UCT_FORMAL_GRAPH.json",
+    "scope": "Declared abstract trace/transducer comparisons. Multiple-source use or repeated descendants require refined binding; no phenomenal identity supplied.; Only the explicit finite-domain/all-admitted-input and legal-retiming quantifiers in the statement; no universal psychophysical claim.; No biological instance, empirical quality correspondence, full K-isomorphism, basal gate, unique owner or assistant-consciousness verdict.",
+    "map_version": "UCT-MAP-v1.0.0",
+    "audit_id": "FA20261008"
+  },
+  {
+    "id": "R177:SOURCE_FEATURE_SEPARATION",
+    "kind": "CONDITIONAL_CONSTRUCTION_AND_BOUNDARY",
+    "statement": "On JOINT_SOURCE_FEATURE_DOMAIN legal retiming preserves J while incomparable use order may reverse; compensated recoding preserves J; uncorrected bit inversion preserves s but changes c and J. Distinct sources may have equal c. This fixes only a selected functional identity and entails no named-quality or felt-mineness identity.",
+    "domain": "All legal retimings satisfying the fixed stateless contract; recoding clause under P1; counterexamples in explicit four-case binary domain, not universal biological independence.",
+    "premises": [
+      "R177:JOINT_SOURCE_FEATURE_DOMAIN",
+      "IA20261008:TRACE_IDENTITY_INVARIANT",
+      "R177:COMPENSATED_FEATURE_PRESERVATION"
+    ],
+    "proof": "IA reachability invariance plus time-free executed interpretation; P1; explicit cross-source and inversion witnesses §3–4.",
+    "status": "MANUAL_ARGUMENT_AND_EXACT_WITNESSES",
+    "source": "records/R177_Provenance_and_Content_Identity_20261008/Provenance_Feature_and_Experiential_Identity_v0_1.md",
+    "source_sha256": "8ff003ae128eac001ec8eeba9e65e88c368bbdefb05f905c84a4ba711b004605",
+    "quantifiers": "Only the explicit finite-domain/all-admitted-input and legal-retiming quantifiers in the statement; no universal psychophysical claim.",
+    "limits": "No biological instance, empirical quality correspondence, full K-isomorphism, basal gate, unique owner or assistant-consciousness verdict.",
+    "thought_experiment_role": "Tests same-source/different-feature, different-source/same-feature, faithful recoding and delayed use; §8 connects four inherited families.",
+    "origin_module": "BASE",
+    "source_record_sha256": "278a8112838cca3015dc266a7c055a11ed9ce5afd0f7fea9fc5185e562654494",
+    "origin_file": "UCT_FORMAL_GRAPH.json",
+    "scope": "All legal retimings satisfying the fixed stateless contract; recoding clause under P1; counterexamples in explicit four-case binary domain, not universal biological independence.; Only the explicit finite-domain/all-admitted-input and legal-retiming quantifiers in the statement; no universal psychophysical claim.; No biological instance, empirical quality correspondence, full K-isomorphism, basal gate, unique owner or assistant-consciousness verdict.",
+    "map_version": "UCT-MAP-v1.0.0",
+    "audit_id": "FA20261008"
+  },
+  {
+    "id": "R188:COMMON_STIMULUS",
+    "kind": "FINITE_MODEL_DEFINITION",
+    "statement": "For both K3,3 and the triangular prism use the same uniform external (T,J) in [6]x[3]. A fixed internal router returns the incident edge e={T,neighbor_G(T,J)} to the reader, while source receives only T.",
+    "scope": "One finite classical trial with a fixed positive endpoint-context law; source initially sees T only, reader sees two-candidate X; one at-most-L-label feedback before one at-most-K-label reply; no other usable current-input dependence; independent random tapes; fixed target, scoring, deadline and boundary. K,L are alphabet cardinalities and at least one. Average success is distinct from worst-case success or experience.",
+    "proof_location": "RESEARCH_NOTE.md §5.1",
+    "novelty": "NEW_APPLICATION",
+    "limits": "The internally induced full joint laws P(T,X) differ; do not claim all information is matched.",
+    "status": "CONDITIONAL_OR_DECLARED",
+    "actual_premises_discharged": false,
+    "source_research_id": "R188-CER-20261009",
+    "original_source_record_sha256": "00623c8113fcc4f02e9352e49f1365133cf8a7da6e91713db79c074223517ebc",
+    "source_status_preserved": "CONDITIONAL_OR_DECLARED",
+    "registry_review_status": "CONDITIONAL_CONTRACT_REVIEWED_NOT_PREMISE_TRUTH",
+    "enabled_as_established_premise": false
+  },
+  {
+    "id": "R188:IDEAL_NOT_INSTALLED",
+    "kind": "NONENTAILMENT_COUNTEREXAMPLE",
+    "statement": "On the matched six-state pair-context laws, the RB top-two quantity G_2=1 is a valid upper bound. Its general sharpness theorem assumes the RB:HELPER access class and does not guarantee attainment for the smaller source-only class; some laws such as K3,3 do attain it source-blind. The prism is an exact counterexample to unconditional achievability transfer.",
+    "scope": "One finite classical trial with a fixed positive endpoint-context law; source initially sees T only, reader sees two-candidate X; one at-most-L-label feedback before one at-most-K-label reply; no other usable current-input dependence; independent random tapes; fixed target, scoring, deadline and boundary. K,L are alphabet cardinalities and at least one. Average success is distinct from worst-case success or experience.",
+    "proof_location": "RESEARCH_NOTE.md §6.1",
+    "novelty": "CORRECTION_OF_POTENTIAL_APPLICATION_NOT_OLD_THEOREM",
+    "limits": "R133 already has a general action-cover theorem. This connects that inherited condition to RB sharpness without retracting RB.",
+    "status": "CONDITIONAL_OR_DECLARED",
+    "actual_premises_discharged": false,
+    "source_research_id": "R188-CER-20261009",
+    "original_source_record_sha256": "33351bc582d9c3bc2133f1c031d3f518904cdcfd8e85155d35bfd61adc953f32",
+    "source_status_preserved": "CONDITIONAL_OR_DECLARED",
+    "registry_review_status": "CONDITIONAL_CONTRACT_REVIEWED_NOT_PREMISE_TRUTH",
+    "enabled_as_established_premise": false
+  },
+  {
+    "id": "R188:INFERENCE_CONTRACT",
+    "kind": "METHODOLOGICAL_SYNTHESIS",
+    "statement": "A score inconsistent with the bound rejects the combined target-law/access/alphabet/timing/protocol/measurement contract. It does not uniquely locate a hidden wire, identify source-event multiplicity, or establish experience; source-shared remote reads also consume causal access.",
+    "scope": "One finite classical trial with a fixed positive endpoint-context law; source initially sees T only, reader sees two-candidate X; one at-most-L-label feedback before one at-most-K-label reply; no other usable current-input dependence; independent random tapes; fixed target, scoring, deadline and boundary. K,L are alphabet cardinalities and at least one. Average success is distinct from worst-case success or experience.",
+    "proof_location": "RESEARCH_NOTE.md §6.2 and §8",
+    "novelty": "NEW_APPLICATION_SYNTHESIS",
+    "limits": "The role of feedback and sharing must be independently grounded rather than defined by the desired result.",
+    "status": "CONDITIONAL_OR_DECLARED",
+    "actual_premises_discharged": false,
+    "source_research_id": "R188-CER-20261009",
+    "original_source_record_sha256": "b11b9ba18ef38f5bab6d8408d938238d5f733ff6861f061cd134aad5d801b770",
+    "source_status_preserved": "CONDITIONAL_OR_DECLARED",
+    "registry_review_status": "CONDITIONAL_CONTRACT_REVIEWED_NOT_PREMISE_TRUTH",
+    "enabled_as_established_premise": false
+  }
+]

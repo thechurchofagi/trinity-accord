@@ -1,0 +1,67 @@
+{
+  "created_utc": "2026-10-10T09:30:54.567985+00:00",
+  "base_commit": "53d569b2969acf50a34e4e84bd92c3d6dbc6f77e",
+  "baseline_visited": 1608,
+  "baseline_changed": 0,
+  "unresolved_structural_references": [],
+  "candidate_counts": {
+    "nodes": 5,
+    "rules": 2,
+    "contexts": 6,
+    "total": 13
+  },
+  "all_candidates_disabled": true,
+  "full_historical_semantic_reproof": false,
+  "historical_audit_status": "AUDIT_INCOMPLETE",
+  "directly_compared_baseline_ids": [
+    "A:TOKEN_CRITERIA",
+    "A:ACTUAL_TOKEN",
+    "A:C1",
+    "A:U1",
+    "R168:PARTIAL_VIEW_NONENTAILMENT",
+    "R169:METRIC_SCALE_GAUGE_NONENTAILMENT",
+    "R169:HELDOUT_CALIBRATION_FALSIFIER",
+    "R177:JOINT_SOURCE_FEATURE_DOMAIN",
+    "R177:SOURCE_FEATURE_SEPARATION",
+    "R188:COMMON_STIMULUS",
+    "R188:IDEAL_NOT_INSTALLED",
+    "R188:INFERENCE_CONTRACT"
+  ],
+  "affected_dependency_rederivation": "Binomial coverage implies full preimage coverage; conjunction of honest probability and calibration events gives union-bound coverage. No inference from empirical grid, report law or calibration to actual organization or C1 is added.",
+  "evidence": {
+    "finite_sample/confidence_sets.py": {
+      "bytes": 19257,
+      "sha256": "cefe69f6fec5b26fb8935e2fa1e0c9db7e9b47ac003b4c16a9412ccae02f4272"
+    },
+    "finite_sample/PROOF.md": {
+      "bytes": 23236,
+      "sha256": "f6ddb429350b44b133fed8318422443c2cf90bdb1979581eb33c0e6026cddc32"
+    },
+    "manuscript/noise-identifiability-bodily-judgments-v1.0.0.md": {
+      "bytes": 61065,
+      "sha256": "6bc9dad5add7612735358236c9b7533cc8f54f6aa535443ee2d9e9f5d219c734"
+    },
+    "finite_sample/ANALYSIS_PLAN.json": {
+      "bytes": 7475,
+      "sha256": "7d2450ca98bf07de5732ad7c6b7c1327920619279204a0b1574d9984cefda1d3"
+    },
+    "finite_sample/operating_characteristics.csv": {
+      "bytes": 283963,
+      "sha256": "152489db0e528ca74b74b71a12acd3d91a4b1491395e2828c1cb60c22bca7f82"
+    },
+    "finite_sample/operating_characteristics_summary.json": {
+      "bytes": 61695,
+      "sha256": "0266493687d99691aaf0407a60d3d4f3735e41da5ea4d23aecb07fa277b431b9"
+    },
+    "finite_sample/EXECUTION_PROVENANCE.json": {
+      "bytes": 1324,
+      "sha256": "7547032e22ad32561567a85ce1c54d8c30c128314ec7fdfb0d1c141c811cc0bb"
+    }
+  },
+  "protected_open_debt": {
+    "ids": 1034,
+    "fields": 1828,
+    "proof_ids": 1347,
+    "role": "Historical inherited counts, not recomputed or reduced by this structural pass."
+  }
+}

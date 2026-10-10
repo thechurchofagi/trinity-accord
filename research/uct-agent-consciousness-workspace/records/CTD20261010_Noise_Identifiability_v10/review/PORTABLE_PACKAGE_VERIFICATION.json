@@ -1,0 +1,117 @@
+{
+  "state": "PORTABLE_RUNTIME_PATH_REVIEW_PASS",
+  "scope": "Runtime scripts at the scientific directory roots have no hardcoded /workspace/, /root/, or /tmp/ paths. Historical execution copies are retained unchanged. Governance builders intentionally require the preserved research repository. This is a path review, not a new run of the old fits or simulations.",
+  "prior_portable_verification": "history/v0.2_release_metadata/review/PORTABLE_PACKAGE_VERIFICATION.json",
+  "prior_verification_sha256": "6bea0464826aa6140bee41ecc32b65edafb0543de6d178df1d6cb713cbe258f0",
+  "runtime_scripts": [
+    {
+      "path": "finite_sample/check_confidence_sets.py",
+      "sha256": "48ec993aea2737c69594a0f2c675e4a7bea98bcd7a35abf1c00dd55ea315a813",
+      "hardcoded_runtime_workspace_path": false
+    },
+    {
+      "path": "finite_sample/confidence_sets.py",
+      "sha256": "cefe69f6fec5b26fb8935e2fa1e0c9db7e9b47ac003b4c16a9412ccae02f4272",
+      "hardcoded_runtime_workspace_path": false
+    },
+    {
+      "path": "finite_sample/make_finite_sample_figure.py",
+      "sha256": "f461516e758c5ba4fbbd8b5b850b12ec0ab49d6d92837ba928deba8f29fcbf5b",
+      "hardcoded_runtime_workspace_path": false
+    },
+    {
+      "path": "finite_sample/run_operating_characteristics.py",
+      "sha256": "2046392018d89bd8449a31ad673ea94441e1b60b5944d4ac2c1294f41bbe1fad",
+      "hardcoded_runtime_workspace_path": false
+    },
+    {
+      "path": "root_analysis/build_paper.py",
+      "sha256": "41085d9953fd4bacf092d57106f417e4f3eab2626c77002b655da5579270610d",
+      "hardcoded_runtime_workspace_path": false
+    },
+    {
+      "path": "root_analysis/build_reproducibility.py",
+      "sha256": "f52f8399639929affaa44bed02a2172f26bc39ee046e7e46ada04e77feba2a60",
+      "hardcoded_runtime_workspace_path": false
+    },
+    {
+      "path": "root_analysis/fit_response_models.py",
+      "sha256": "397aaf7711160314176a8703340844c55ab58becdf02a2de94d337b734bc46f4",
+      "hardcoded_runtime_workspace_path": false
+    },
+    {
+      "path": "root_analysis/instantiate_response_twins.py",
+      "sha256": "2751d74fa4465b1e75f13aa3cf45bd0312f57ba7f78e411ea765ea27b0809232",
+      "hardcoded_runtime_workspace_path": false
+    },
+    {
+      "path": "root_analysis/make_figures.py",
+      "sha256": "3ed7566dcda6beb5c962eac9c66c923eb7708f43653440a7e934f544be416def",
+      "hardcoded_runtime_workspace_path": false
+    },
+    {
+      "path": "root_analysis/verify_execution_source.py",
+      "sha256": "1b139d2cca7e3d658da23093a5fe417db7237a912195b7850f1e73e7e92fc202",
+      "hardcoded_runtime_workspace_path": false
+    },
+    {
+      "path": "empirical/audit_bci_execution.py",
+      "sha256": "07923acb16e94835b300cad5d57ba11a45b459fc7237defa8eb0501116b46ffd",
+      "hardcoded_runtime_workspace_path": false
+    },
+    {
+      "path": "empirical/audit_reconstruction_residuals.py",
+      "sha256": "0bb81c8c2c85090679b2c024f1fd3e3f7df8e8d4953b19f860e3573508bb2014",
+      "hardcoded_runtime_workspace_path": false
+    },
+    {
+      "path": "empirical/audit_two_case_metrics.py",
+      "sha256": "706d61f1857e62c3db793e3c6f25fe891cc170f66f3be2cfadac17c3bb3a5ba3",
+      "hardcoded_runtime_workspace_path": false
+    },
+    {
+      "path": "empirical/reconstruct_gaussian_widths.py",
+      "sha256": "9c6fbe5cac9d36599eb1ab7473949763740b0883e041023a5d9e139b3ee9080a",
+      "hardcoded_runtime_workspace_path": false
+    },
+    {
+      "path": "empirical/repair_cv_nesting.py",
+      "sha256": "eacd7fbee92886c6ab24ff8e9c7ceaf4e6a892f0c7041e08e3f8fdda923cefbe",
+      "hardcoded_runtime_workspace_path": false
+    },
+    {
+      "path": "empirical/run_bci_response_comparison.py",
+      "sha256": "8dfd23faa940f3430679d998cc6d0d7a0704e6d38ba80a90f3afee4aefbe2d68",
+      "hardcoded_runtime_workspace_path": false
+    },
+    {
+      "path": "theory/audit_response_comparison.py",
+      "sha256": "00d0cf0f86505fb2e838659ab8e37dce50e024fe6f00e93735a4b98d330e72d0",
+      "hardcoded_runtime_workspace_path": false
+    },
+    {
+      "path": "theory/bci_identification.py",
+      "sha256": "88bf1d98258de78bdc3c09db7155ce31dd737d7a8b61debee36559a91cc9c2d0",
+      "hardcoded_runtime_workspace_path": false
+    },
+    {
+      "path": "theory/check_bci_identification.py",
+      "sha256": "691f89ecee6c0ca762d7ea67f5030237b55acffccb3576562e33c5dfc6c2ee05",
+      "hardcoded_runtime_workspace_path": false
+    },
+    {
+      "path": "theory/test_source_symmetry.py",
+      "sha256": "8c1173fa0eb4ca650da459dc17b9f0117772fdce5dbc2a95edc8be0f55d0add7",
+      "hardcoded_runtime_workspace_path": false
+    },
+    {
+      "path": "literature/reconcile_source_bci.py",
+      "sha256": "33bdf5fcff39b0b92f7b7c78b3b03ec5cefaba727d71cfe90efab88e4dac7478",
+      "hardcoded_runtime_workspace_path": false
+    }
+  ],
+  "new_finite_sample_execution": "finite_sample/EXECUTION_PROVENANCE.json",
+  "new_finite_sample_correction_reexecution": "finite_sample/CORRECTION_REEXECUTION_RECEIPT.json",
+  "release_builder_preflight": "release_review/RELEASE_BUILDER_PREFLIGHT.json",
+  "archive_member_byte_readback": "Provided by root_analysis/build_reproducibility.py when the ZIP is frozen; no whole-record or remote persistence claim is made here."
+}

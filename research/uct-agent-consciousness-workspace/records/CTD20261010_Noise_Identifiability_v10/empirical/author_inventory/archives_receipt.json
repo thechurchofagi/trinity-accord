@@ -1,0 +1,320 @@
+[
+  {
+    "source_name": "1 data_preparation.zip",
+    "url": "https://osf.io/download/cr6wq/",
+    "path": "/workspace/scratch/5b73aae6b1e4/ctd_v02/empirical/author_archives/cr6wq.zip",
+    "bytes": 9286,
+    "sha256": "d2936fcc03ca73bffb9f782bf1bcb32e63cbc6c3d5b915d4d782ef6c1ad67cb8",
+    "hash_match": true,
+    "status": 200,
+    "members": [
+      "/",
+      "relabel_events.m",
+      "merge_dataset_per_subj.m"
+    ],
+    "candidate_matches": [
+      {
+        "member": "relabel_events.m",
+        "matches": [
+          [
+            3,
+            "% experiment: ownership or synchronicity. Each cell relabels the events in"
+          ],
+          [
+            12,
+            "input_own_eeg_dataset_folder = [baseFolder_path 'bdf/ownership_raw_data/'];"
+          ],
+          [
+            14,
+            "output_own_eeg_dataset_folder = [baseFolder_path 'bdf/ownership_relabelled/'];"
+          ],
+          [
+            35,
+            "% Relabelling event names for OWNERSHIP condition.........................."
+          ]
+        ]
+      },
+      {
+        "member": "merge_dataset_per_subj.m",
+        "matches": [
+          [
+            2,
+            "% This script loads and merges each ownership and synchronicity file that "
+          ],
+          [
+            11,
+            "input_own_eeg_relab_dataset_folder = [baseFolder_path 'bdf/ownership_relabelled/'];"
+          ],
+          [
+            13,
+            "output_own_merged_folder = [baseFolder_path 'bdf/ownership_relabelled_merged/'];"
+          ],
+          [
+            19,
+            "% 1. OWNERSHIP CONDITION..................................................."
+          ],
+          [
+            21,
+            "% Get a list of all BDF files in ownership folder.........................."
+          ],
+          [
+            93,
+            "% Get a list of all BDF files in ownership folder.........................."
+          ],
+          [
+            101,
+            "    % Load the EEG dataset from OWNERSHIP folder..........................."
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "source_name": "2 preprocessing.zip",
+    "url": "https://osf.io/download/mbx7q/",
+    "path": "/workspace/scratch/5b73aae6b1e4/ctd_v02/empirical/author_archives/mbx7q.zip",
+    "bytes": 41210881,
+    "sha256": "baaa3c33e08ab9cbfa5fe73332aab08f09669b6aa8428b0058bece8a9bdbd0a1",
+    "hash_match": true,
+    "status": 200,
+    "members": [
+      "/",
+      "runICA.m",
+      "batchrun.m",
+      "pipeline.m",
+      "rerefave.m",
+      "loadpath.m",
+      "loadsubj.m",
+      "epochdata.m",
+      "importset.m",
+      "savebadchan.m",
+      "rejectepochs.m",
+      "markartifacts.m",
+      "rejectICLabel.m",
+      "interpolateBadChan.m",
+      "markartifacts_mac.fig",
+      "markartifacts_win.fig",
+      "manage_badTrials-master/",
+      "manage_badTrials-master/docs/",
+      "manage_badTrials-master/demo.fdt",
+      "manage_badTrials-master/demo.set",
+      "manage_badTrials-master/plotting/",
+      "manage_badTrials-master/.gitattributes",
+      "manage_badTrials-master/docs/Hierarchy.xml",
+      "manage_badTrials-master/slope_rejection_2.png",
+      "manage_badTrials-master/demo_manageBadTrials.m",
+      "manage_badTrials-master/thresh_rejection_1.png",
+      "manage_badTrials-master/plotting/priv_eegplot.m",
+      "manage_badTrials-master/thresh_reconstruction_3.png",
+      "manage_badTrials-master/preprocess_detectBadTrials.m",
+      "manage_badTrials-master/preprocess_manageBadTrials.m",
+      "manage_badTrials-master/docs/demo_managebadTrials.mlx",
+      "manage_badTrials-master/plotting/priv_eegplot2trial.m",
+      "manage_badTrials-master/docs/demo_managebadTrials.html"
+    ],
+    "candidate_matches": []
+  },
+  {
+    "source_name": "3 PSD & FOOOF_Specparam.zip",
+    "url": "https://osf.io/download/yxfhv/",
+    "path": "/workspace/scratch/5b73aae6b1e4/ctd_v02/empirical/author_archives/yxfhv.zip",
+    "bytes": 22774,
+    "sha256": "a9fff4e9b148bb447d3b88ccaeb71dbf7750c6ebe95341edd683f4b6d05ba6ff",
+    "hash_match": true,
+    "status": 200,
+    "members": [
+      "/",
+      "normPSD_IAF_analysis.m",
+      "normFOOOF_IAF_analysis.m",
+      "PSD_FOOOF_brainstorm_parameters.m"
+    ],
+    "candidate_matches": [
+      {
+        "member": "normPSD_IAF_analysis.m",
+        "matches": [
+          [
+            21,
+            "%% OWNERSHIP CONDITION"
+          ],
+          [
+            23,
+            "% Create empty structure for ownership IAF results........................."
+          ],
+          [
+            35,
+            "    % Create ownership results for each participant file..................."
+          ],
+          [
+            37,
+            "    ownership_results = struct('File', own_filenames{iFile_own}, ..."
+          ],
+          [
+            52,
+            "            ownership_results.MaxFreq_A05 = maxFreq;"
+          ],
+          [
+            54,
+            "            ownership_results.MaxFreq_A06 = maxFreq;"
+          ],
+          [
+            56,
+            "            ownership_results.MaxFreq_A07 = maxFreq;"
+          ],
+          [
+            58,
+            "            ownership_results.MaxFreq_A08 = maxFreq;"
+          ],
+          [
+            60,
+            "            ownership_results.MaxFreq_A17 = maxFreq;"
+          ],
+          [
+            62,
+            "            ownership_results.MaxFreq_A18 = maxFreq;"
+          ],
+          [
+            64,
+            "            ownership_results.MaxFreq_B03 = maxFreq;"
+          ],
+          [
+            66,
+            "            ownership_results.MaxFreq_B04 = maxFreq;"
+          ],
+          [
+            68,
+            "            ownership_results.MaxFreq_B05 = maxFreq;"
+          ],
+          [
+            70,
+            "            ownership_results.MaxFreq_A30 = maxFreq;"
+          ],
+          [
+            72,
+            "            ownership_results.MaxFreq_A31 = maxFreq;"
+          ],
+          [
+            74,
+            "            ownership_results.MaxFreq_A32 = maxFreq;"
+          ],
+          [
+            83,
+            "    ownership_results.Left_ROI = mean([ownership_results.MaxFreq_A05, ownership_results.MaxFreq_A06, ..."
+          ],
+          [
+            84,
+            "        ownership_results.MaxFreq_A07, ownership_results.MaxFreq_A08, ownership_results.MaxFreq_A17, ownership_results.MaxFreq_A18]);"
+          ],
+          [
+            86,
+            "    ownership_results.Right_ROI = mean([ownership_results.MaxFreq_B03, ownership_results.MaxFreq_B04, ..."
+          ],
+          [
+            87,
+            "        ownership_results.MaxFreq_B05, ownership_results.MaxFreq_A30, ownership_results.MaxFreq_A31, ownership_results.MaxFreq_A32]);"
+          ],
+          [
+            91,
+            "    IAF_results_table = struct2table(ownership_results);"
+          ],
+          [
+            115,
+            "    % Create ownership results for each participant file..................."
+          ]
+        ]
+      },
+      {
+        "member": "normFOOOF_IAF_analysis.m",
+        "matches": [
+          [
+            20,
+            "%% OWNERSHIP CONDITION"
+          ],
+          [
+            22,
+            "% Create empty structure for ownership IAF results........................."
+          ],
+          [
+            34,
+            "    % Create ownership results for each participant file..................."
+          ],
+          [
+            36,
+            "    ownership_results = struct('File', own_filenames{iFile_sync}, ..."
+          ],
+          [
+            51,
+            "            ownership_results.MaxFreq_A05 = maxFreq;"
+          ],
+          [
+            53,
+            "            ownership_results.MaxFreq_A06 = maxFreq;"
+          ],
+          [
+            55,
+            "            ownership_results.MaxFreq_A07 = maxFreq;"
+          ],
+          [
+            57,
+            "            ownership_results.MaxFreq_A08 = maxFreq;"
+          ],
+          [
+            59,
+            "            ownership_results.MaxFreq_A17 = maxFreq;"
+          ],
+          [
+            61,
+            "            ownership_results.MaxFreq_A18 = maxFreq;"
+          ],
+          [
+            63,
+            "            ownership_results.MaxFreq_B03 = maxFreq;"
+          ],
+          [
+            65,
+            "            ownership_results.MaxFreq_B04 = maxFreq;"
+          ],
+          [
+            67,
+            "            ownership_results.MaxFreq_B05 = maxFreq;"
+          ],
+          [
+            69,
+            "            ownership_results.MaxFreq_A30 = maxFreq;"
+          ],
+          [
+            71,
+            "            ownership_results.MaxFreq_A31 = maxFreq;"
+          ],
+          [
+            73,
+            "            ownership_results.MaxFreq_A32 = maxFreq;"
+          ],
+          [
+            82,
+            "    ownership_results.Left_ROI = mean([ownership_results.MaxFreq_A05, ownership_results.MaxFreq_A06, ..."
+          ],
+          [
+            83,
+            "        ownership_results.MaxFreq_A07, ownership_results.MaxFreq_A08, ownership_results.MaxFreq_A17, ownership_results.MaxFreq_A18]);"
+          ],
+          [
+            85,
+            "    ownership_results.Right_ROI = mean([ownership_results.MaxFreq_B03, ownership_results.MaxFreq_B04, ..."
+          ],
+          [
+            86,
+            "        ownership_results.MaxFreq_B05, ownership_results.MaxFreq_A30, ownership_results.MaxFreq_A31, ownership_results.MaxFreq_A32]);"
+          ],
+          [
+            90,
+            "    IAF_results_table = struct2table(ownership_results);"
+          ],
+          [
+            114,
+            "    % Create ownership results for each participant file..................."
+          ]
+        ]
+      }
+    ]
+  }
+]

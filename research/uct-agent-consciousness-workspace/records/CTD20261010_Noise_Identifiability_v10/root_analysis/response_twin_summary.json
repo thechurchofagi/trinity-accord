@@ -1,0 +1,44 @@
+{
+  "n_participants": 30,
+  "response_cells": 1260,
+  "prospective_joint_profiles": 90,
+  "construction": "a_i = 0.5 min_f sigma_if^2; criterion jitter variance = sigma_if^2-a_i; effective thresholds unchanged",
+  "max_response_probability_discrepancy": 2.220446049250313e-16,
+  "max_nll_discrepancy": 2.842170943040401e-14,
+  "max_saved_nll_discrepancy": 6.536993168992922e-13,
+  "sum_nll_a": 5138.960411207295,
+  "sum_nll_b": 5138.960411207295,
+  "paired_yes_yes_gap": {
+    "minimum": 3.682995020071189e-10,
+    "median": 0.01762015326058325,
+    "maximum": 0.13478026610627292
+  },
+  "known_simple_pair_error_05_bound": {
+    "finite_profiles": 90,
+    "minimum": 15,
+    "median": 389.0,
+    "maximum": 2053499228045503232
+  },
+  "affinity_numerical_note": "Use h2=.5 sum(sqrt(P)-sqrt(Q))^2 and log1p(-h2). Direct affinity summation rounded three weakly separated profiles to one; that did not mean mathematical nonidentification.",
+  "calibration_required": [
+    "marginal effective widths and thresholds known",
+    "lapse known",
+    "one shared sensory sample on a paired trial",
+    "independent Gaussian criterion jitters across tasks and from sensory noise",
+    "independent lapse and fair guesses",
+    "fixed zero-SOA centers"
+  ],
+  "not_observed_data": "Joint probabilities and count bounds are model-derived prospective diagnostics, not actual joint judgments, trial-level data or a validated experimental power calculation.",
+  "known_model_bound": "For two fully specified categorical joint distributions with equal prior odds, optimal average error after m independent paired trials is <= affinity^m/2. Estimated parameters, composite alternatives and calibration error invalidate interpreting this number as actual required sample size.",
+  "not_a_new_general_noise_decomposition": "Credit Gaussian criterion-noise and multipass literature; this script instantiates the equivalence at the released intervention parameters.",
+  "sources": [
+    {
+      "file": "Experiment_3_Computational_modelling.xlsx",
+      "sha256": "32e58a814b7d33f52f3dc994a753715d4ddfa21c8ec7424b80ebef43c6d560e4"
+    },
+    {
+      "file": "Experiment_3.xlsx",
+      "sha256": "d3b2fef22f077788e5299dedb68737d453c09b005d9360bab8dfbe6c35852bc9"
+    }
+  ]
+}

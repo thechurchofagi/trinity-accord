@@ -1,0 +1,30 @@
+{
+  "reason": "Preserve original fixed-grid execution before rerun against full-domain endpoint guard in confidence_sets.py version 1.0.1. No design change.",
+  "files": [
+    {
+      "path": "operating_characteristics.csv",
+      "bytes": 283963,
+      "sha256": "152489db0e528ca74b74b71a12acd3d91a4b1491395e2828c1cb60c22bca7f82"
+    },
+    {
+      "path": "operating_characteristics_summary.json",
+      "bytes": 61695,
+      "sha256": "0d06a4a3834e6ce6ea6f3123993f188b8ecb1e43e1876d16b409f3a236fa30e9"
+    },
+    {
+      "path": "confidence_set_tables.npz",
+      "bytes": 195867,
+      "sha256": "56f3cf1578a7d7e2d01a5370b4e47f14c75681c6847b6e21b5b609b03cbf0adf"
+    },
+    {
+      "path": "EXECUTION_PROVENANCE.json",
+      "bytes": 1324,
+      "sha256": "62d7c3a1320e6c3b4f87153973b0ac51d48cb21da3c7e26727fca0768231f99e"
+    },
+    {
+      "path": "FIGURE4_PROVENANCE.json",
+      "bytes": 7359,
+      "sha256": "420705ad7b09b7cb672bb255274d48d555a78bbd09ba05acc1541a6189cc793c"
+    }
+  ]
+}

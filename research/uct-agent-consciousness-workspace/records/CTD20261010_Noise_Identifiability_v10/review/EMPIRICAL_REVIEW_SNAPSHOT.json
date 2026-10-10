@@ -1,0 +1,57 @@
+{
+  "checked_utc": "2026-10-10T08:14:02.544377+00:00",
+  "review": "review/EMPIRICAL_MANUSCRIPT_REVIEW.md",
+  "status": "PASS empirical manuscript and scoped portability checks; no refitting",
+  "inputs": [
+    {
+      "path": "manuscript/noise-identifiability-bodily-judgments-v0.2.0.md",
+      "bytes": 52198,
+      "sha256": "33736a01e3b84e0d8f70b9c853b64df39051e45d1cac9572e145495c367fd8cd"
+    },
+    {
+      "path": "empirical/BCI_REPORT.md",
+      "bytes": 21351,
+      "sha256": "639a35f8764ba5a783e1e6b138f4f9204505d25e3dfbc842e90e2e4f9ab313e0"
+    },
+    {
+      "path": "empirical/results/bci_response/response_comparison_summary.json",
+      "bytes": 10366,
+      "sha256": "95b37c9c258284ef7d6ab72f77961cb7375eb643b9f3b794654258a0806df0aa"
+    },
+    {
+      "path": "empirical/results/bci_response/execution_integrity_audit.json",
+      "bytes": 6072,
+      "sha256": "f4014800bce9ceea5e69e5508c5598ab9a089270fad0bc545881d2d3af77d42e"
+    },
+    {
+      "path": "theory/RESPONSE_COMPARISON_AUDIT.json",
+      "bytes": 3537,
+      "sha256": "24e160d6b7db281162a20a0b519a6e13ea74be3b5db5d7ba28dfe6106dfff764"
+    },
+    {
+      "path": "empirical/author_inventory/LICENSE_METADATA_CHECK.json",
+      "bytes": 14661,
+      "sha256": "754587165cac873844af5bbb847761fd4aedf83819030b4740dadae11cea24de"
+    },
+    {
+      "path": "RELOCATION_PROVENANCE.json",
+      "bytes": 3027,
+      "sha256": "a2ced2c1bacd5ea457392b1fa48e98dc2d53fba3b66b2920b3788fde614b3e46"
+    },
+    {
+      "path": "root_analysis/verify_execution_source.py",
+      "bytes": 2242,
+      "sha256": "1b139d2cca7e3d658da23093a5fe417db7237a912195b7850f1e73e7e92fc202"
+    },
+    {
+      "path": "root_analysis/response_fitter_self_check.json",
+      "bytes": 1103,
+      "sha256": "0cf2ba834ce31098a11621e80e0d63fd1dc2208faa375fc1369757dbf635a2c8"
+    },
+    {
+      "path": "review/EMPIRICAL_MANUSCRIPT_REVIEW.md",
+      "bytes": 11983,
+      "sha256": "d6baa61a8f050e5b4c70e05ea3fda3b1b944d1373dd315bb98a75432f462ebb9"
+    }
+  ]
+}

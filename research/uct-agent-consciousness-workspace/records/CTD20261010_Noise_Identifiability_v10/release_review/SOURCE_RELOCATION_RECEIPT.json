@@ -1,0 +1,9 @@
+{
+  "source_sha256": "6bc9dad5add7612735358236c9b7533cc8f54f6aa535443ee2d9e9f5d219c734",
+  "release_source_sha256": "2d1add95023a7069b2e2d0a1a66de9505e78c0329ac599cc712356f3d23c1ba5",
+  "source_bytes": 61065,
+  "release_source_bytes": 61053,
+  "only_change": "Four figure links ../figures/ -> figures/ for the release builder resource root. No substantive text changes.",
+  "doi_placeholder_count": 1,
+  "all_other_bytes_preserved": true
+}

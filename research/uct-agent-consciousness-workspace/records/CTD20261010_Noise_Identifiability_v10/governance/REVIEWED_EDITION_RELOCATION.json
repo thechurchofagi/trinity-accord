@@ -1,0 +1,16 @@
+{
+  "created_utc": "2026-10-10T08:29:11.609999+00:00",
+  "scope": "Preserve the exact reviewed source edition; a loader-only change does not rewrite prior source hashes or rerun Monte Carlo.",
+  "unchanged_reviewed_evidence_files": 33,
+  "relocated_sources": [
+    {
+      "path": "theory/test_source_symmetry.py",
+      "reviewed_sha256": "58d0d2601f9b671f627211c115cdd802a66c51fea2e7d2b9882ecfb4c1156a92",
+      "preserved_reviewed_path": "history/pre_relocation/theory/test_source_symmetry.py",
+      "portable_sha256": "8c1173fa0eb4ca650da459dc17b9f0117772fdce5dbc2a95edc8be0f55d0add7",
+      "verification": "THEORY_INPUT_RELOCATION_PROVENANCE.json"
+    }
+  ],
+  "scientific_results_changed": false,
+  "review_receipt_sha256": "b60eceb512187ce464276dead644bd999805ff486dd8cc3bd3a19095184479ed"
+}

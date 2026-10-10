@@ -1,0 +1,186 @@
+{
+  "schema": "uct-manuscript-decision/1",
+  "research_id": "CTD20261010",
+  "result_version": "CTD-RESULT-v0.2.0",
+  "manuscript_version": "CTD-PAPER-v0.2.0",
+  "candidate_id": "CTD2-20261010",
+  "created_utc": "2026-10-10T08:26:11.742420+00:00",
+  "title": "Identifiability of Noise Sources in Bodily Judgments",
+  "subtitle": "A computational audit of parietal stimulation and a conditional paired-readout design",
+  "author": "Hongju Liu",
+  "decision": "WORTH_EXTERNAL_REVIEW_AS_METHODS_AND_SECONDARY_ANALYSIS_MANUSCRIPT",
+  "decision_scope": "A substantive scientific and editorial judgment after internal AI-assisted reviews; not external peer review, acceptance, author approval or a DOI-backed preprint release.",
+  "paper_pdf": "manuscript/noise-identifiability-bodily-judgments-v0.2.0.pdf",
+  "paper_pdf_sha256": "f1441d6e945e5208e2616976975ce1599e60daf7c484bb49a1c069ae4a3f3d29",
+  "pages": 18,
+  "revision_relation": "Deepens the unpublished CTD v0.1 paper; preserves v0.1 in its separate record. Does not amend the published SCU preprint.",
+  "net_contribution": [
+    {
+      "id": "CTD2-N003",
+      "classification": "CORRECTION",
+      "claim": "The released information-criterion rows match a second negation of positive NLL. The corrected aggregate still favors Sigma."
+    },
+    {
+      "id": "CTD2-N005",
+      "classification": "NEW_APPLICATION",
+      "claim": "A conditional signed-SOA symmetry diagnostic rejects the centered independent-binomial family without fitting its parameters."
+    },
+    {
+      "id": "CTD2-N006",
+      "classification": "NEW_APPLICATION",
+      "claim": "A corrected fixed within-cell five-fold comparison favors Sigma plus task-specific centers over Prior plus task-specific centers, conditional on these retrospective families."
+    },
+    {
+      "id": "CTD2-N008",
+      "classification": "NEW_APPLICATION",
+      "claim": "An explicit fixed-sensory, variable-criterion implementation preserves all 1,260 source marginal probabilities while retaining the source threshold policy."
+    },
+    {
+      "id": "CTD2-N011",
+      "classification": "PROPOSED_NEW_RESULT_WITH_CLASSICAL_INGREDIENTS",
+      "claim": "One additional population joint probability identifies shared Gaussian variance under calibrated centers and independent criteria/lapses; bounded criterion correlation yields a sharp set and central weak identification is quantified.",
+      "related_ids": [
+        "CTD2-N013",
+        "CTD2-N014",
+        "CTD2-N015",
+        "CTD2-N016"
+      ]
+    }
+  ],
+  "inherited_material": [
+    "Gaussian addition of independent variances and sensory/criterion ambiguity (including Yarrow et al.).",
+    "Bias and decision strategy in simultaneity judgments (Cabrera et al.; Yarrow et al.).",
+    "BCI accounts of ownership and sensory uncertainty (Chancel et al.; D’Angelo et al.).",
+    "Bivariate normal derivative identities (Plackett) and the general principle that extra measurements can aid noise identification.",
+    "The SCU distinction between matching behavior and verified source use; CTD v0.1 descriptive width results."
+  ],
+  "priority_status": "No universal first-discovery claim. The exact combined audit and bounded paired-readout result are proposed contributions; exhaustive priority is not established.",
+  "seven_questions": {
+    "precise_problem": "When does evidence for a condition-dependent response width identify a sensory source rather than an observationally equivalent decision implementation?",
+    "citable_increment": "Concrete auditable arithmetic correction, response-family failure, final refit comparison, exact source-calibrated twin and conditional joint measurement boundary.",
+    "nearest_prior_art": "literature/V02_NOVELTY_AND_PUBLICATION_AUDIT.md and manuscript Section 8 explicitly credit the closest sources and qualify priority.",
+    "testable_scope": "Finite released response cells; declared independent-binomial and Gaussian models. Proofs state same-sample, center, threshold, independence and lapse premises; actual human realization remains open.",
+    "reproduction": "Three unchanged workbooks, original model-code snapshot, full saved fits/partitions, exact mathematical checks, independent likelihood audits, superseded failures and all repairs are retained.",
+    "future_reuse": "A researcher can audit a fitted response family, construct an equivalent implementation, then check whether a proposed joint measurement actually separates the relevant source hypotheses under independently justified exclusions.",
+    "position_and_preservation": "One revised methods and secondary-analysis paper with English manuscript and Chinese handoff; CTD2 stays a disabled map candidate. Persistence is recorded separately after successful readback."
+  },
+  "review_records": [
+    "review/THEORY_MANUSCRIPT_REVIEW.md",
+    "review/LITERATURE_MANUSCRIPT_REVIEW.md",
+    "review/EMPIRICAL_MANUSCRIPT_REVIEW.md",
+    "review/PDF_QA.json"
+  ],
+  "not_established": [
+    "A sensory locus of the stimulation effect",
+    "A human shared-internal-sample paired-readout implementation",
+    "A directly measured experience or UCT-specific prediction",
+    "External replication or prospective validation",
+    "External peer review or journal acceptance"
+  ],
+  "publication_action": "NONE",
+  "new_doi": null,
+  "next_empirical_question": "Can one build and independently calibrate two readouts of the same internal sample, with criterion-dependence and correlated lapses bounded independently, before using the proposed inverse?",
+  "parallel_main_line_preserved": "A3M selected bodily/action familiarity H and its physically credible R≠L manipulation remain a separate open objective.",
+  "graph_claim_mapping": [
+    {
+      "id": "CTD2-N001",
+      "label": "Effective Gaussian interval response domain",
+      "kind": "MODEL_CLASS_DEFINITION"
+    },
+    {
+      "id": "CTD2-N002",
+      "label": "Released likelihood and data provenance",
+      "kind": "SECONDARY_EVIDENCE"
+    },
+    {
+      "id": "CTD2-N003",
+      "label": "Source information-criterion sign correction",
+      "kind": "ARITHMETIC_CORRECTION"
+    },
+    {
+      "id": "CTD2-N004",
+      "label": "Centered symmetry and conditional test law",
+      "kind": "CONDITIONAL_MATHEMATICAL_RESULT"
+    },
+    {
+      "id": "CTD2-N005",
+      "label": "Conditional source-symmetry rejection",
+      "kind": "NEGATIVE_SECONDARY_EVIDENCE"
+    },
+    {
+      "id": "CTD2-N006",
+      "label": "Corrected fixed-partition response comparison",
+      "kind": "SECONDARY_EVIDENCE"
+    },
+    {
+      "id": "CTD2-N007",
+      "label": "Additive Gaussian sensory and criterion domain",
+      "kind": "MODEL_CLASS_DEFINITION"
+    },
+    {
+      "id": "CTD2-N008",
+      "label": "Exact constant-sensory intervention counterpart",
+      "kind": "CONDITIONAL_MATHEMATICAL_RESULT"
+    },
+    {
+      "id": "CTD2-N009",
+      "label": "Prior and posterior-criterion alias",
+      "kind": "CONDITIONAL_MATHEMATICAL_RESULT"
+    },
+    {
+      "id": "CTD2-N010",
+      "label": "Calibrated shared-sample Gaussian pair",
+      "kind": "CONDITIONAL_MODEL_CONTRACT"
+    },
+    {
+      "id": "CTD2-N011",
+      "label": "Centered paired inverse under independent criteria",
+      "kind": "CONDITIONAL_MATHEMATICAL_RESULT"
+    },
+    {
+      "id": "CTD2-N012",
+      "label": "Externally bounded criterion correlation",
+      "kind": "CONDITIONAL_MODEL_CONTRACT"
+    },
+    {
+      "id": "CTD2-N013",
+      "label": "Sharp correlated-criterion identification set",
+      "kind": "CONDITIONAL_MATHEMATICAL_RESULT"
+    },
+    {
+      "id": "CTD2-N014",
+      "label": "Weak central identification near zero shared variance",
+      "kind": "CONDITIONAL_MATHEMATICAL_RESULT"
+    },
+    {
+      "id": "CTD2-N015",
+      "label": "Off-center local information",
+      "kind": "CONDITIONAL_MATHEMATICAL_RESULT"
+    },
+    {
+      "id": "CTD2-N016",
+      "label": "Countermodels to uncalibrated pairing",
+      "kind": "EXPLICIT_COUNTEREXAMPLES"
+    },
+    {
+      "id": "CTD2-N017",
+      "label": "No automatic mechanism or experience inference",
+      "kind": "SCOPED_INFERENCE_BOUNDARY"
+    },
+    {
+      "id": "CTD2-N018",
+      "label": "Prospective calibration and implementation obligations",
+      "kind": "PROPOSED_EMPIRICAL_CONTRACT"
+    },
+    {
+      "id": "CTD2-N019",
+      "label": "Descriptive-width reconstruction and remaining mismatch",
+      "kind": "SECONDARY_EVIDENCE"
+    },
+    {
+      "id": "CTD2-N020",
+      "label": "Independent-criterion subfamily",
+      "kind": "CONDITIONAL_MODEL_CONTRACT"
+    }
+  ]
+}

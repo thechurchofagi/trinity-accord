@@ -1,0 +1,42 @@
+{
+  "completed_utc": "2026-10-10T09:12:19.432557+00:00",
+  "analysis_plan_sha256": "7d2450ca98bf07de5732ad7c6b7c1327920619279204a0b1574d9984cefda1d3",
+  "runner": {
+    "path": "run_operating_characteristics.py",
+    "sha256": "2046392018d89bd8449a31ad673ea94441e1b60b5944d4ac2c1294f41bbe1fad"
+  },
+  "confidence_module": {
+    "path": "confidence_sets.py",
+    "sha256": "cefe69f6fec5b26fb8935e2fa1e0c9db7e9b47ac003b4c16a9412ccae02f4272"
+  },
+  "plan_and_code_unchanged_during_execution": true,
+  "runtime": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "pandas": "2.2.3"
+  },
+  "input_data_files": [],
+  "source_parameter_examples": 0,
+  "Monte_Carlo_draws": 0,
+  "human_observations_added": 0,
+  "prior_response_fits_rerun": 0,
+  "prior_symmetry_simulations_rerun": 0,
+  "outputs": [
+    {
+      "path": "operating_characteristics.csv",
+      "sha256": "152489db0e528ca74b74b71a12acd3d91a4b1491395e2828c1cb60c22bca7f82",
+      "bytes": 283963
+    },
+    {
+      "path": "operating_characteristics_summary.json",
+      "sha256": "0266493687d99691aaf0407a60d3d4f3735e41da5ea4d23aecb07fa277b431b9",
+      "bytes": 61695
+    },
+    {
+      "path": "confidence_set_tables.npz",
+      "sha256": "56f3cf1578a7d7e2d01a5370b4e47f14c75681c6847b6e21b5b609b03cbf0adf",
+      "bytes": 195867
+    }
+  ]
+}

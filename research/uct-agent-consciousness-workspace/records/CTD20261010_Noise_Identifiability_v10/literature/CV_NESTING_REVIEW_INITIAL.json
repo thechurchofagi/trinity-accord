@@ -1,0 +1,44 @@
+{
+  "created_utc": "2026-10-10T07:57:18.862430+00:00",
+  "analysis": "Independent model-nesting audit of initial 600 CV fits; read-only, no fits or held-out based selection",
+  "input_digests": {
+    "cv_fits": "19c9af3f139eee48e916b0f9644474a6ba56eaf96dfbdab3aa9ba0b31db095ab",
+    "full_fits": "4b0c6e8366f6ac0cd4e4dd79bcc05c176d9bd3498cb4215f4bd010559c1b2a26",
+    "response_comparison_summary": "689cb7983e15c02ab015355a8354a0ef517efbab8a35163cfa511e09774425ef"
+  },
+  "training_nesting_tolerance": 1e-06,
+  "violations": [
+    {
+      "participant": 16,
+      "fold": 3,
+      "base": "sigma",
+      "base_training_nll": 178.2960351960332,
+      "shift_training_nll": 230.00820926772712,
+      "violation": 51.71217407169394,
+      "base_quality_flag": false,
+      "shift_quality_flag": false
+    },
+    {
+      "participant": 21,
+      "fold": 4,
+      "base": "sigma",
+      "base_training_nll": 158.32945442089425,
+      "shift_training_nll": 208.84261086946896,
+      "violation": 50.513156448574705,
+      "base_quality_flag": false,
+      "shift_quality_flag": false
+    },
+    {
+      "participant": 22,
+      "fold": 2,
+      "base": "sigma",
+      "base_training_nll": 86.95508419755035,
+      "shift_training_nll": 186.62148942987184,
+      "violation": 99.6664052323215,
+      "base_quality_flag": false,
+      "shift_quality_flag": false
+    }
+  ],
+  "mandatory_repair": "Append each shifted fit with the same training fold's unshifted parameters plus zero centers; apply to all shifted fits under the same rule. Do not use full-data or test-fold parameters. Preserve initial run as history.",
+  "status": "Initial shifted CV scores are numerically unreliable pending repair. Status and projected gradients alone did not detect these local solutions."
+}

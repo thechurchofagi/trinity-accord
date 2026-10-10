@@ -1,0 +1,98 @@
+[
+  {
+    "participant": 1,
+    "task": 1,
+    "condition": 0,
+    "model": "LS_fixed_peak_1.0",
+    "sd_ms": 158.20675960259072,
+    "source_ms": 169.55807,
+    "sse": 0.030589178627147617
+  },
+  {
+    "participant": 1,
+    "task": 1,
+    "condition": 0,
+    "model": "LS_fixed_peak_0.9",
+    "sd_ms": 210.01354695207556,
+    "source_ms": 169.55807,
+    "sse": 0.020851833738727593
+  },
+  {
+    "participant": 1,
+    "task": 1,
+    "condition": 0,
+    "model": "Poisson_observed",
+    "sd_ms": 292.9051864313487,
+    "source_ms": 169.55807,
+    "weighted_objective": 0.042130912101301765
+  },
+  {
+    "participant": 1,
+    "task": 1,
+    "condition": 0,
+    "model": "binomial_observed_padded",
+    "sd_ms": 217.02687686298538,
+    "source_ms": 169.55807,
+    "weighted_objective": 0.09991073702676256
+  },
+  {
+    "participant": 1,
+    "task": 1,
+    "condition": 0,
+    "model": "binomial_floor_peak_free_center",
+    "sd_ms": 206.12861794267155,
+    "source_ms": 169.55807,
+    "nll": 37.212453649157624,
+    "converged": true,
+    "floor": 0.16961083274660502,
+    "peak": 0.9148941711632789
+  },
+  {
+    "participant": 24,
+    "task": 0,
+    "condition": 2,
+    "model": "LS_fixed_peak_1.0",
+    "sd_ms": 124.5019492739067,
+    "source_ms": 127.66943,
+    "sse": 0.008356943565496681
+  },
+  {
+    "participant": 24,
+    "task": 0,
+    "condition": 2,
+    "model": "LS_fixed_peak_1.0",
+    "sd_ms": 124.5019492739067,
+    "source_ms": 127.66943,
+    "sse": 0.008356943565496681
+  },
+  {
+    "participant": 24,
+    "task": 0,
+    "condition": 2,
+    "model": "Poisson_observed",
+    "sd_ms": 115.92151978041396,
+    "source_ms": 127.66943,
+    "weighted_objective": 0.008725782335709068
+  },
+  {
+    "participant": 24,
+    "task": 0,
+    "condition": 2,
+    "model": "binomial_observed_padded",
+    "sd_ms": 123.63816528914595,
+    "source_ms": 127.66943,
+    "weighted_objective": 0.04367782091563191
+  },
+  {
+    "participant": 24,
+    "task": 0,
+    "condition": 2,
+    "model": "binomial_floor_peak_free_center",
+    "sd_ms": 124.61404137333913,
+    "source_ms": 127.66943,
+    "nll": 28.948787881684108,
+    "converged": true,
+    "floor": 0.0897584345287463,
+    "peak": 0.9999999999
+  }
+]

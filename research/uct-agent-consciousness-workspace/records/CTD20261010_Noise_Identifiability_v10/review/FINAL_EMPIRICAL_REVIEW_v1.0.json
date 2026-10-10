@@ -1,0 +1,106 @@
+{
+  "date_UTC": "2026-10-10",
+  "review_scope": "Read-only comparison of current manuscript to stored results and complete fixed finite-sample tables. No empirical refit or old conditional Monte Carlo rerun. Internal AI-assisted technical review, not external peer review.",
+  "checks": {
+    "source_parameter_vectors": 60,
+    "gaussian_width_count": 180,
+    "gaussian_widths_within_0_01ms": 176,
+    "gaussian_widths_within_0_1ms": 178,
+    "gaussian_median_error_ms": 0.0001443449523321,
+    "full_fit_records": 120,
+    "cv_fit_records": 600,
+    "full_nesting_violations": 0,
+    "cv_nesting_violations": 0,
+    "finite_scenarios": 480,
+    "valid_scenarios": 240,
+    "minimum_point_coverage": 0.9502345620800364,
+    "minimum_whole_identified_set_coverage": 0.9501514694716467,
+    "maximum_valid_empty_probability": 0.0248612881721758,
+    "figure_all_three_profiles_every_aggregate": true,
+    "figure_png_visual_qa": "PASS: data, axes, separate legend row and two notes are fully visible without overlap or crop.",
+    "all_three_source_input_hashes_match_execution_receipts": true,
+    "nominal_CI_claim_for_negative_cases": false
+  },
+  "source_snapshots": [
+    {
+      "path": "manuscript/noise-identifiability-bodily-judgments-v1.0.0.md",
+      "sha256": "6bc9dad5add7612735358236c9b7533cc8f54f6aa535443ee2d9e9f5d219c734",
+      "bytes": 61065
+    },
+    {
+      "path": "literature/source_bci_reconciliation.json",
+      "sha256": "31c04b6bdcd85316c47124c2d87ca9f632bfd70a63948ee2f83615db582b0856",
+      "bytes": 1869
+    },
+    {
+      "path": "empirical/results/bci_response/response_comparison_summary.json",
+      "sha256": "95b37c9c258284ef7d6ab72f77961cb7375eb643b9f3b794654258a0806df0aa",
+      "bytes": 10366
+    },
+    {
+      "path": "empirical/results/all_gaussian_candidate_fits.csv",
+      "sha256": "042be84e92b7f93a6d1dad6a8de4767ca43de5f818d19e4fefa45406a9422be5",
+      "bytes": 206193
+    },
+    {
+      "path": "empirical/results/reconstruction_residual_audit.json",
+      "sha256": "e1e2f0ba400219bc0c283ebe45a885e146e78afd061c4664587c79fc10d6b206",
+      "bytes": 5959
+    },
+    {
+      "path": "theory/SYMMETRY_TEST_RESULTS.json",
+      "sha256": "9e40fb55aac6595e46338f82214331ce4a3bcae14077e1271982ccffdf91d383",
+      "bytes": 3300
+    },
+    {
+      "path": "root_analysis/response_twin_summary.json",
+      "sha256": "5822124b66b5e714d9bdcdc9524019bd1aa3ad209de4039ce8c8639a2e7125a2",
+      "bytes": 2254
+    },
+    {
+      "path": "finite_sample/ANALYSIS_PLAN.json",
+      "sha256": "7d2450ca98bf07de5732ad7c6b7c1327920619279204a0b1574d9984cefda1d3",
+      "bytes": 7475
+    },
+    {
+      "path": "finite_sample/confidence_sets.py",
+      "sha256": "cefe69f6fec5b26fb8935e2fa1e0c9db7e9b47ac003b4c16a9412ccae02f4272",
+      "bytes": 19257
+    },
+    {
+      "path": "finite_sample/PROOF.md",
+      "sha256": "f6ddb429350b44b133fed8318422443c2cf90bdb1979581eb33c0e6026cddc32",
+      "bytes": 23236
+    },
+    {
+      "path": "finite_sample/operating_characteristics.csv",
+      "sha256": "152489db0e528ca74b74b71a12acd3d91a4b1491395e2828c1cb60c22bca7f82",
+      "bytes": 283963
+    },
+    {
+      "path": "finite_sample/OPERATING_CHARACTERISTICS_REPORT.md",
+      "sha256": "884675ca97652bfeaa46f7522afa8f807c11316b7ae9832fc095f372070f57a2",
+      "bytes": 18890
+    },
+    {
+      "path": "finite_sample/CORRECTION_REEXECUTION_RECEIPT.json",
+      "sha256": "c3e46094f986dd6eac671cf91b3add19dd94eef791c2a95e26e0a74752b14306",
+      "bytes": 883
+    },
+    {
+      "path": "finite_sample/FIGURE4_PROVENANCE.json",
+      "sha256": "916c67e1184b6f8c2dc373c838b516bd996b16567a48f8eadff47f07864bcc82",
+      "bytes": 7365
+    },
+    {
+      "path": "figures/figure4_finite_sample.pdf",
+      "sha256": "64036c928d2a46e230696e7413e96ce43d68b014046e6f185a397aebcd9a1a2f",
+      "bytes": 29699
+    },
+    {
+      "path": "figures/figure4_finite_sample.png",
+      "sha256": "c43c409e3ae42b577c88401d5792de8b8b53a3bab5f7d762f05cbad426d38139",
+      "bytes": 229040
+    }
+  ]
+}

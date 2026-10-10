@@ -1,0 +1,49 @@
+# CTD v1.0.0: final source, novelty, and declaration review
+
+Date: 10 October 2026. Reviewer role: AI-assisted internal literature and publication-claims review. This is not independent external peer review or final human line-by-line approval.
+
+## Reviewed snapshot and decision
+
+The complete manuscript reviewed is `manuscript/noise-identifiability-bodily-judgments-v1.0.0.md`, 61,065 bytes, SHA256 `6bc9dad5add7612735358236c9b7533cc8f54f6aa535443ee2d9e9f5d219c734`. The accompanying `THIRD_PARTY_NOTICES.md` has SHA256 `8f4ff4f45ff53120445aaa170b572c248810cfea83a0c58b118fd40a1e258bc0`. The release metadata was also checked against these declarations.
+
+Review history: the immediately preceding reviewed snapshot had SHA256 `5dca835b8e39078cc2f1d1a038fd6cf77d2885cc8677b757d6569aef41ad2785`. Reversing only the Figure 4 caption change from “is less than 0.024862” to “is 0.024862” in the present source exactly recovers that earlier hash. The final inequality is a rounding clarification and does not change the source, novelty, or causal-language assessment. The clarified abstract reference to zero total correlation and explicit normalized set at kappa = 1 were also read back and are consistent with the corresponding assumptions.
+
+**Decision: no remaining mandatory source-attribution, novelty-scope, or causal-language correction found in this snapshot.** It is defensible as a methods and retrospective secondary-analysis preprint after the separate numerical, proof, portability, and exact-PDF gates. This decision does not certify all mathematics or rerun the scientific analyses; those tasks have distinct technical reviews. The publication case rests on the linked source audit, precise implementation counterexample, conditional repair, and finite-sample operating characteristics, not on a claim to have invented general noise decomposition or confidence-set theory.
+
+## Source treatment and novelty boundaries
+
+| Topic | Assessment of final wording |
+| --- | --- |
+| Original human experiment | D'Angelo et al. receive explicit credit for the intervention, participant observations, computational comparison, and open materials. No new human participants or neural interventions are claimed. The selected 30-participant sample and unavailable original response order are disclosed. |
+| Information-criterion discrepancy | The manuscript connects the public helper code, saved objectives, and all source-data rows. It repeatedly states that correcting the sign preserves the aggregate Sigma preference. It does not turn a code discrepancy into an unsupported claim that the original overall result reverses. Saved-fit reconciliation remains distinct from new optimization. |
+| Centering test and predictive refits | Rejection is scoped to the centered independent-binomial response family. The text expressly permits location, dependence, or nonstationarity as explanations and does not assign an anatomical or experiential cause. The fixed artificial count partition, retrospective model choice, bounded fits, retained failed run, and training-only nesting repair are disclosed. |
+| Sensory/criterion equivalence | Yarrow et al. (2011, 2023, with 2025 correction) are recognized as direct precedents. The source-specific construction preserves the entire threshold trajectory as well as total variance. It explicitly avoids claiming a fixed-threshold criterion-only manipulation or a new normative Bayesian observer whose likelihood uses only the constant sensory variance. |
+| Shared-response repair | Cabrera, Lu, and Dosher (2015) are credited for separating encoding and decision noise through joint behavior in a different paradigm. The theorem is limited to the declared same-internal-draw, independent-criterion/lapse, known-calibration observation contract. One additional population probability is not equated with one trial. |
+| Location extension | The BCIbias precedent in Chancel, Ehrsson, and Ma (2022) is explicitly credited. Adding a response center is described as standard, and its better score does not establish complete adequacy or a sensory locus. |
+| External-noise limitation | Hahn, Wang, and Wei (2026) is used fairly: the counterexample is restricted to the additive interval family with the matching threshold policy permitted. The manuscript does not deny identifiability results based on stronger restrictions or different response observations. |
+| Gaussian derivative and covariance bound | Plackett (1954) is credited for the probability derivative. The sharp variance set is presented as observer-specific Gaussian covariance algebra, with a construction proving realizability. No new general multivariate-normal principle is claimed. |
+| Finite-sample addition | Clopper–Pearson is named and cited, and the projection principle is explicitly described as inherited. The added result is the observer-specific set map, its calibration contract, complete finite-law enumeration, and assumption-violation controls. Numerical enumeration is distinguished from a Monte Carlo experiment and from human data. |
+| UCT and prior CTD work | UCT I/II/III and SCU retain their actual preprint identities. CTD v0.1 is an unpublished archived working manuscript, not external validation. Physical organization, response-model estimates, reports, and experiential endpoints are not identified with one another. No unique UCT prediction or consciousness-theory adjudication is claimed. |
+
+The final title and abstract are compatible with this scope. The term “identifiability” is supported by exact probability equality and a stated identification map, not by predictive performance alone. The paper can reasonably claim an explicit source-family audit and repair contract. It should not subsequently be promoted as the first sensory/decision-noise model, the first joint-response noise measurement, a new general confidence-set method, or a demonstrated mechanism of body ownership.
+
+## Primary-source attribution checks
+
+The v0.2 literature and source-code audits supply the previously verified primary references and their exact locations. This review does not present another broad novelty search as proof that no similar application exists. The final reference list retains the published DOI for Yarrow et al. (2023), `10.1037/xhp0001154`, and the separate 2025 correction, `10.1037/xhp0001226`. Its note makes clear that the paper's lapse convention and Gaussian-CDF proof are independently defined; it does not silently reuse an uncorrected lapse formula.
+
+For the new finite-sample section, the primary attribution is Clopper, C. J., and Pearson, E. S. (1934), *The use of confidence or fiducial limits illustrated in the case of the binomial*, **Biometrika 26**, 404–413, DOI `10.1093/biomet/26.4.404`. The original article's pp. 406–407 give binomial-tail inversion; the discussion of discreteness is consistent with the manuscript's coverage inequality rather than an assertion of exactly nominal coverage. The public source PDF is identified in `release_review/PUBLICATION_WORKFLOW_AUDIT.md`.
+
+The general mapping of a confidence region through a function is standard. Dufour and Taamouti (2005), *Econometrica* 73, 1351–1365, DOI `10.1111/j.1468-0262.2005.00618.x`, §5, p. 1359, equation (5.2), is a precise primary example if an additional projection citation is wanted. It should not be described as the first discovery of that general set principle. The present manuscript already acknowledges inheritance and proves its coverage inclusion directly; the absence of this optional additional example does not create a first-principle novelty claim.
+
+## Rights, data, and preparation declarations
+
+The source-data distinctions remain intact. The publisher's source-data workbook is attributed to the source article. The additional OSF data project `ytga5` is described as publicly accessible with `node_license: null` in the inspected metadata; neither the manuscript record nor `THIRD_PARTY_NOTICES.md` converts this into an explicit CC BY grant. The separate code project `s5p4v` has its own recorded CC BY 4.0 metadata. The preserved MATLAB source remains attributed to its authors, with the independent Python analysis clearly distinguished.
+
+The release publisher's landing-page description and bundled license statement now expressly limit the new CC BY 4.0 declaration to newly authored material to the extent rights are held. Included third-party materials retain their own terms. This is consistent with the reproduction record and avoids implying that an article license automatically applies to a separately unlicensed data node. This review verifies the accuracy and consistency of the declaration; it does not create additional third-party rights.
+
+The final manuscript states that all joint-response figures and finite-sample scenarios are model calculations, the analysis is retrospective, and internal reviews were AI-assisted technical checks. It discloses substantial ChatGPT assistance and does not imply an external peer review, original authors' endorsement, journal acceptance, a new ethics approval, or final human line-by-line checking. These are appropriate statements for the authorized preprint release.
+
+## What this approval does not change
+
+The known limits remain scientifically material: no observed paired reports; a failed source zero-centering restriction under the stated observation law; possible unobserved serial dependence; two unresolved descriptive widths; bounded and imperfect numerical optimization; strong calibration and shared-sample premises; weak centered sensitivity near zero variance; and potentially wide or empty finite-sample sets. The manuscript presents them as limitations of what can be inferred. Publication and preservation will establish the identity and availability of this version, not remove those limits or establish its truth.
+

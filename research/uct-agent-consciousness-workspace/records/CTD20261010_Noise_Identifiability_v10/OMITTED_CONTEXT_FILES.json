@@ -1,0 +1,108 @@
+{
+  "scope": "This scientific record is not the full research workspace. Primary retrieval receipts retain URLs and source provenance; no original research article is republished in full.",
+  "files": [
+    {
+      "analysis_session_path": "empirical/author_archives/cr6wq.zip",
+      "bytes": 9286,
+      "sha256": "d2936fcc03ca73bffb9f782bf1bcb32e63cbc6c3d5b915d4d782ef6c1ad67cb8",
+      "reason": "Background source or large contextual archive; provenance retained, not needed to reproduce the response analyses."
+    },
+    {
+      "analysis_session_path": "empirical/author_archives/mbx7q.zip",
+      "bytes": 41210881,
+      "sha256": "baaa3c33e08ab9cbfa5fe73332aab08f09669b6aa8428b0058bece8a9bdbd0a1",
+      "reason": "Background source or large contextual archive; provenance retained, not needed to reproduce the response analyses."
+    },
+    {
+      "analysis_session_path": "empirical/author_archives/yxfhv.zip",
+      "bytes": 22774,
+      "sha256": "a9fff4e9b148bb447d3b88ccaeb71dbf7750c6ebe95341edd683f4b6d05ba6ff",
+      "reason": "Background source or large contextual archive; provenance retained, not needed to reproduce the response analyses."
+    },
+    {
+      "analysis_session_path": "literature/NatComm2026_supplement.txt",
+      "bytes": 45648,
+      "sha256": "677bf3ecd7a5d8846f507fe3576eddd5968a78d3e6874ce976d90aa96be5639a",
+      "reason": "Background source or large contextual archive; provenance retained, not needed to reproduce the response analyses."
+    },
+    {
+      "analysis_session_path": "literature/primary_sources/Cabrera2015.pdf",
+      "bytes": 2909606,
+      "sha256": "ecd3b0cdbfcb96300ee43d5adc50acf2cef62afc75e0462f4cf1dfcd776716a8",
+      "reason": "Background source or large contextual archive; provenance retained, not needed to reproduce the response analyses."
+    },
+    {
+      "analysis_session_path": "literature/primary_sources/Cabrera2015.txt",
+      "bytes": 255440,
+      "sha256": "5d63f45860b312d2deff6c21ee80ebc31181a94bb08fbf8c2ed554c9602c208f",
+      "reason": "Background source or large contextual archive; provenance retained, not needed to reproduce the response analyses."
+    },
+    {
+      "analysis_session_path": "literature/primary_sources/PMC4805589.txt",
+      "bytes": 95462,
+      "sha256": "a48ded56a4cf1babc6a2a8e1aa7a706c55fe71f33da313431cbcad70ef9a3121",
+      "reason": "Background source or large contextual archive; provenance retained, not needed to reproduce the response analyses."
+    },
+    {
+      "analysis_session_path": "literature/primary_sources/PMC4805589.xml",
+      "bytes": 170989,
+      "sha256": "7da2ce0bc582dd87807e19b124e42d131b13803b3ee13cc4dca1aa9f3828c5ab",
+      "reason": "Background source or large contextual archive; provenance retained, not needed to reproduce the response analyses."
+    },
+    {
+      "analysis_session_path": "literature/primary_sources/PMC9555868.txt",
+      "bytes": 285547,
+      "sha256": "a1c4259fc3c9b3507d6ea54cac69b4893820073ec5cb61f12e1c3212801bb862",
+      "reason": "Background source or large contextual archive; provenance retained, not needed to reproduce the response analyses."
+    },
+    {
+      "analysis_session_path": "literature/primary_sources/PMC9555868.xml",
+      "bytes": 554192,
+      "sha256": "90b68c9c69f55d05c713c18a1e4684ff3fc46b4c285460a520eda6f1fe8cf22c",
+      "reason": "Background source or large contextual archive; provenance retained, not needed to reproduce the response analyses."
+    },
+    {
+      "analysis_session_path": "literature/primary_sources/Yarrow2011.pdf",
+      "bytes": 660410,
+      "sha256": "81ff1728be507b75dd8aebf5469413013f7201aaf1ac26ec0175684cdb8e1daa",
+      "reason": "Background source or large contextual archive; provenance retained, not needed to reproduce the response analyses."
+    },
+    {
+      "analysis_session_path": "literature/primary_sources/Yarrow2011.txt",
+      "bytes": 91969,
+      "sha256": "1008cd3d5e5ed8f6b46ded17a2e1ff09b32439f186ad1a9f65f1626f8313d3a6",
+      "reason": "Background source or large contextual archive; provenance retained, not needed to reproduce the response analyses."
+    },
+    {
+      "analysis_session_path": "literature/primary_sources/Yarrow2022.pdf",
+      "bytes": 1236795,
+      "sha256": "00391eb724e8453c21dcc0c78cc67ef9d549cd62cb9d7856617417b69795c923",
+      "reason": "Background source or large contextual archive; provenance retained, not needed to reproduce the response analyses."
+    },
+    {
+      "analysis_session_path": "literature/primary_sources/Yarrow2022.txt",
+      "bytes": 77330,
+      "sha256": "339c56730de012e741b3909d8f4eb787047511b55173514a03955871ac5ced4a",
+      "reason": "Background source or large contextual archive; provenance retained, not needed to reproduce the response analyses."
+    },
+    {
+      "analysis_session_path": "literature/primary_sources/Yarrow2023.pdf",
+      "bytes": 2805014,
+      "sha256": "b1fb85538e79366685a2946ca85d6006c3fc8dcb48b8ff810a225cccf8504beb",
+      "reason": "Background source or large contextual archive; provenance retained, not needed to reproduce the response analyses."
+    },
+    {
+      "analysis_session_path": "literature/primary_sources/Yarrow2023.txt",
+      "bytes": 179139,
+      "sha256": "3af017b13d0fec2d51994cc664db31013d3f353ac8a74e2fa328687aa3c87894",
+      "reason": "Background source or large contextual archive; provenance retained, not needed to reproduce the response analyses."
+    },
+    {
+      "analysis_session_path": "empirical/supplement.txt",
+      "bytes": 45648,
+      "sha256": "677bf3ecd7a5d8846f507fe3576eddd5968a78d3e6874ce976d90aa96be5639a",
+      "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41467-025-67657-w/MediaObjects/41467_2025_67657_MOESM1_ESM.pdf",
+      "reason": "Duplicate full third-party supplement text found in the v0.2 working copy; omitted from the v1.0 public reproducibility ZIP. Existing archived v0.2 bytes are not changed. No executable scientific reproduction depends on this text."
+    }
+  ]
+}

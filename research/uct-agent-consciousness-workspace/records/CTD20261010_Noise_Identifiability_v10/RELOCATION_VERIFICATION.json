@@ -1,0 +1,17 @@
+{
+  "checked_utc": "2026-10-10T08:14:02.546819+00:00",
+  "self_check_exit_code": 0,
+  "empirical_stored_score_audit_exit_code": 0,
+  "independent_stored_score_audit_exit_code": 0,
+  "original_execution_receipt_unchanged": true,
+  "original_execution_receipt_sha256": "95b37c9c258284ef7d6ab72f77961cb7375eb643b9f3b794654258a0806df0aa",
+  "fits_regenerated": 0,
+  "cv_partitions_regenerated": 0,
+  "empirical_maximum_score_difference": 0.0,
+  "independent_maximum_probability_difference": 5.551115123125783e-16,
+  "independent_maximum_nll_difference": 3.552713678800501e-13,
+  "fit_records_audited": 720,
+  "full_nesting_checks": 60,
+  "cv_nesting_checks": 300,
+  "summary": "All scoped relocation and stored-score checks passed; scientific results unchanged."
+}

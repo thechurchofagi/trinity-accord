@@ -1,0 +1,393 @@
+{
+  "schema": "uct-pending-extension/1",
+  "id": "CTD3-20261010",
+  "result_version": "CTD-RESULT-v1.0.0",
+  "candidate_version": "CTD3-MAP-CANDIDATE-v0.1.0",
+  "base_release": "UCT-MAP-v1.1.2",
+  "status": "PENDING_MAP",
+  "enabled": false,
+  "enabled_as_established_premise": false,
+  "global_semantic_audit_status": "AUDIT_INCOMPLETE",
+  "release_effect": "No completed-map or active-premise change; DOI publication is orthogonal to scientific premise admission.",
+  "base_commit": "53d569b2969acf50a34e4e84bd92c3d6dbc6f77e",
+  "baseline_graph_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
+  "baseline_counts": {
+    "nodes": 913,
+    "rules": 424,
+    "contexts": 261,
+    "suspended": 10,
+    "total": 1608
+  },
+  "preserved_ctd2_candidate_sha256": "f00d9af53cca8935f08b6dd979e0f4d28cf5754bc7e9ffb696eb8d7be6095a2f",
+  "preserved_a3n_candidate_sha256": "5e0ddccb483a3b2262bc968ff5f9e8c8358d25a74f90fb202ca452591498e014",
+  "inherited_open_obligations": [
+    "CTD-OPEN-ESTIMATOR-RECONSTRUCTION",
+    "CTD-OPEN-INDEPENDENT-CALIBRATION",
+    "CTD-OPEN-ACTUAL-CONSUMER-INTERVENTION",
+    "CTD-OPEN-EXTERNAL-REPLICATION",
+    "QC-20261008-10",
+    "IA-QC11",
+    "QC-20261008-12",
+    "QC-20261008-13",
+    "SCU-OPEN-R191-NORMALIZATION",
+    "SCU-AUDIT-DEPTH",
+    "CTD2-OPEN-SAME-INTERNAL-SAMPLE",
+    "CTD2-OPEN-COMMON-CENTER",
+    "CTD2-OPEN-INDEPENDENT-LAPSE",
+    "CTD2-OPEN-CRITERION-CORRELATION-CALIBRATION",
+    "CTD2-OPEN-ACTUAL-NEURAL-MEDIATOR",
+    "CTD2-OPEN-PHENOMENAL-BRIDGE",
+    "CTD2-OPEN-PROSPECTIVE-REPLICATION",
+    "CTD2-OPEN-FULL-SEMANTIC-INTEGRATION"
+  ],
+  "inherited_open_debt": {
+    "ids": 1034,
+    "fields": 1828,
+    "proof_ids": 1347,
+    "role": "Historical inherited counts, not recomputed or reduced by this structural pass."
+  },
+  "new_open_obligations": [
+    "CTD3-OPEN-ACTUAL-CALIBRATION",
+    "CTD3-OPEN-CERTIFIED-CONTINUOUS-PROJECTION"
+  ],
+  "nodes": [
+    {
+      "id": "CTD3-N001",
+      "label": "Fixed-calibration paired binomial experiment",
+      "kind": "MODEL_CONTRACT",
+      "statement": "For n independent identically distributed paired responses from one same internal Gaussian sensory draw, count joint-yes outcomes K~Binomial(n,p11). Marginal variances, finite halfwidths, lapses, centered criteria and criterion-correlation bound are fixed known parameters; the complete CTD2 joint observation contract applies.",
+      "all_premises": [
+        "One same internal sensory draw per pair, not merely the same external stimulus.",
+        "Gaussian sensory variable independent of the jointly Gaussian criteria.",
+        "Independent lapse indicators and fair guesses across reports and variables.",
+        "Calibrated common center; positive marginal variances; finite nonnegative halfwidths; legal lapse and kappa bounds.",
+        "Independent identically distributed trials and fixed n; no optional stopping claim."
+      ],
+      "domain": "One explicitly calibrated paired-response law.",
+      "quantifier": "All n>=0 integer counts under this fixed law.",
+      "counterexamples_and_limits": [
+        "Blockwise human counts do not instantiate the paired experiment.",
+        "Unknown calibration and correlated lapses are not covered by treating fitted values as known."
+      ],
+      "novelty_status": [
+        "INHERITED_STATISTICAL_PRINCIPLE",
+        "NEW_APPLICATION",
+        "PRIORITY_UNVERIFIED"
+      ],
+      "source_lineage": [
+        "Clopper and Pearson 1934, DOI 10.1093/biomet/26.4.404",
+        "CTD2-N010 through CTD2-N016",
+        "Classical confidence-set projection and union bound"
+      ],
+      "evidence_paths": [
+        "finite_sample/confidence_sets.py",
+        "finite_sample/PROOF.md"
+      ],
+      "proof_locations": [
+        {
+          "path": "finite_sample/PROOF.md",
+          "section": "Finite-sample projection and calibration uncertainty"
+        },
+        {
+          "path": "manuscript/noise-identifiability-bodily-judgments-v1.0.0.md",
+          "section": "6.4 and Appendix B.5"
+        }
+      ],
+      "status": "PENDING_MAP_CONDITIONAL_OR_RECORDED_CALCULATION",
+      "enabled": false,
+      "enabled_as_established_premise": false,
+      "actual_application_premises_discharged": false,
+      "experience_inference": "NONE"
+    },
+    {
+      "id": "CTD3-N002",
+      "label": "Exact binomial confidence-set projection",
+      "kind": "CONDITIONAL_MATHEMATICAL_RESULT",
+      "statement": "The preimage of an equal-tailed (1-alpha) Clopper-Pearson probability interval through the complete attainable observation model contains the entire sharp population variance set with probability at least 1-alpha. Equal-v nonempty endpoints are v*max(0,(rL-kappa)/(1-kappa)) and v*(rU+kappa)/(1+kappa) for kappa<1, and [0,v*(1+rU)/2] for kappa=1.",
+      "all_premises": [
+        "All CTD3-N001 premises for the same experiment.",
+        "0<alpha<1 and the classical binomial tail coverage guarantee.",
+        "Project the whole probability interval intersected with the attainable law, including both covariance signs and all allowed criterion covariances.",
+        "Use the sharp feasibility result CTD2-N013; it remains a conditional premise, not empirical installation."
+      ],
+      "domain": "Variance confidence sets in the centered Gaussian paired-interval observation family.",
+      "quantifier": "For every admitted fixed calibration and parameter value; coverage is over repeated binomial samples.",
+      "counterexamples_and_limits": [
+        "Empty intersection returns empty set; degenerate constant readout returns full domain only when its probability lies in the binomial interval.",
+        "Real-arithmetic coverage theorem; double-precision evaluation is not certified interval arithmetic.",
+        "Nonempty sets do not establish the mechanism assumptions, physical consumer, anatomical locus or experience."
+      ],
+      "novelty_status": [
+        "INHERITED_STATISTICAL_PRINCIPLE",
+        "NEW_APPLICATION",
+        "PRIORITY_UNVERIFIED"
+      ],
+      "source_lineage": [
+        "Clopper and Pearson 1934, DOI 10.1093/biomet/26.4.404",
+        "CTD2-N010 through CTD2-N016",
+        "Classical confidence-set projection and union bound"
+      ],
+      "evidence_paths": [
+        "finite_sample/confidence_sets.py",
+        "finite_sample/PROOF.md"
+      ],
+      "proof_locations": [
+        {
+          "path": "finite_sample/PROOF.md",
+          "section": "Finite-sample projection and calibration uncertainty"
+        },
+        {
+          "path": "manuscript/noise-identifiability-bodily-judgments-v1.0.0.md",
+          "section": "6.4 and Appendix B.5"
+        }
+      ],
+      "status": "PENDING_MAP_CONDITIONAL_OR_RECORDED_CALCULATION",
+      "enabled": false,
+      "enabled_as_established_premise": false,
+      "actual_application_premises_discharged": false,
+      "experience_inference": "NONE"
+    },
+    {
+      "id": "CTD3-N003",
+      "label": "Honest nuisance-calibration region",
+      "kind": "CALIBRATION_COVERAGE_CONTRACT",
+      "statement": "A random calibration region K_gamma covers the true nuisance vector with probability at least 1-gamma, and the binomial probability interval separately retains its own guarantee for the same law.",
+      "all_premises": [
+        "A valid simultaneous region for the complete nuisance vector; marginal individual error bars do not automatically provide it.",
+        "0<=gamma<1 and alpha+gamma<1.",
+        "Calibration and main observation contracts refer to the same parameters and response mechanism."
+      ],
+      "domain": "One specified calibration procedure and paired observation model.",
+      "quantifier": "Repeated sampling under the joint experiment; independence of the two coverage events is not required.",
+      "counterexamples_and_limits": [
+        "No actual human calibration procedure is validated here.",
+        "A grid sampled from a continuous nuisance region is not its complete representation."
+      ],
+      "novelty_status": [
+        "INHERITED_STATISTICAL_PRINCIPLE",
+        "NEW_APPLICATION",
+        "PRIORITY_UNVERIFIED"
+      ],
+      "source_lineage": [
+        "Clopper and Pearson 1934, DOI 10.1093/biomet/26.4.404",
+        "CTD2-N010 through CTD2-N016",
+        "Classical confidence-set projection and union bound"
+      ],
+      "evidence_paths": [
+        "finite_sample/PROOF.md",
+        "finite_sample/confidence_sets.py"
+      ],
+      "proof_locations": [
+        {
+          "path": "finite_sample/PROOF.md",
+          "section": "Finite-sample projection and calibration uncertainty"
+        },
+        {
+          "path": "manuscript/noise-identifiability-bodily-judgments-v1.0.0.md",
+          "section": "6.4 and Appendix B.5"
+        }
+      ],
+      "status": "PENDING_MAP_CONDITIONAL_OR_RECORDED_CALCULATION",
+      "enabled": false,
+      "enabled_as_established_premise": false,
+      "actual_application_premises_discharged": false,
+      "experience_inference": "NONE"
+    },
+    {
+      "id": "CTD3-N004",
+      "label": "Calibration-union confidence set",
+      "kind": "CONDITIONAL_MATHEMATICAL_RESULT",
+      "statement": "Union of the complete variance projections over an honest calibration region has true-variance coverage at least 1-alpha-gamma by event intersection and the union bound. A genuinely finite region can be enumerated exactly; if only kappa is uncertain over an interval, nesting makes its upper endpoint sufficient for the continuous union.",
+      "all_premises": [
+        "CTD3-N001 and CTD3-N003 contracts bind the same experiment and true nuisance vector.",
+        "Take the complete set union, or a certified outer superset; never replace a continuous region by unqualified point sampling.",
+        "The binomial interval and nuisance region each have their stated coverage."
+      ],
+      "domain": "Joint sampling uncertainty in a specified paired law and honest calibration region.",
+      "quantifier": "Every admitted true nuisance vector covered by the stated calibration contract.",
+      "counterexamples_and_limits": [
+        "No efficiency or shortest-interval optimality is asserted.",
+        "General continuous multi-parameter numerical projection is not implemented or certified."
+      ],
+      "novelty_status": [
+        "INHERITED_STATISTICAL_PRINCIPLE",
+        "NEW_APPLICATION",
+        "PRIORITY_UNVERIFIED"
+      ],
+      "source_lineage": [
+        "Clopper and Pearson 1934, DOI 10.1093/biomet/26.4.404",
+        "CTD2-N010 through CTD2-N016",
+        "Classical confidence-set projection and union bound"
+      ],
+      "evidence_paths": [
+        "finite_sample/PROOF.md",
+        "finite_sample/confidence_sets.py"
+      ],
+      "proof_locations": [
+        {
+          "path": "finite_sample/PROOF.md",
+          "section": "Finite-sample projection and calibration uncertainty"
+        },
+        {
+          "path": "manuscript/noise-identifiability-bodily-judgments-v1.0.0.md",
+          "section": "6.4 and Appendix B.5"
+        }
+      ],
+      "status": "PENDING_MAP_CONDITIONAL_OR_RECORDED_CALCULATION",
+      "enabled": false,
+      "enabled_as_established_premise": false,
+      "actual_application_premises_discharged": false,
+      "experience_inference": "NONE"
+    },
+    {
+      "id": "CTD3-N005",
+      "label": "Prespecified finite probability-law operating characteristics",
+      "kind": "SYNTHETIC_NUMERICAL_EVIDENCE",
+      "statement": "All 240 valid cases among 480 prespecified synthetic scenarios have true-variance coverage at least 0.95023456 and complete-set coverage at least 0.95015146 at nominal 95%. Wide sets remain at n=4096; wrong criterion bounds, sensory resampling and shared lapses expose contract failures despite valid binomial probability coverage.",
+      "all_premises": [
+        "Fixed ANALYSIS_PLAN.json before these calculations.",
+        "Enumerate every possible count and sum its binomial probability; no Monte Carlo or new human observations.",
+        "All three response profiles, four n values and five generating variances retained.",
+        "Resampled per-task variance is not relabeled as actual shared variance.",
+        "Empty-set probability is reported separately from width-zero convention."
+      ],
+      "domain": "The 480 fixed dimensionless model scenarios and archived code/tables.",
+      "quantifier": "Only these finite cases; not a proof of the general theorem or recommended human sample size.",
+      "counterexamples_and_limits": [
+        "Known-calibration grid does not validate estimated-nuisance coverage.",
+        "Numerical coverage is evidence about the implementation, not empirical realization."
+      ],
+      "novelty_status": [
+        "NEW_APPLICATION",
+        "SYNTHETIC_CHECK_NOT_EMPIRICAL_DISCOVERY"
+      ],
+      "source_lineage": [
+        "Clopper and Pearson 1934, DOI 10.1093/biomet/26.4.404",
+        "CTD2-N010 through CTD2-N016",
+        "Classical confidence-set projection and union bound"
+      ],
+      "evidence_paths": [
+        "finite_sample/ANALYSIS_PLAN.json",
+        "finite_sample/operating_characteristics.csv",
+        "finite_sample/operating_characteristics_summary.json",
+        "finite_sample/EXECUTION_PROVENANCE.json"
+      ],
+      "proof_locations": [
+        {
+          "path": "finite_sample/PROOF.md",
+          "section": "Finite-sample projection and calibration uncertainty"
+        },
+        {
+          "path": "manuscript/noise-identifiability-bodily-judgments-v1.0.0.md",
+          "section": "6.4 and Appendix B.5"
+        }
+      ],
+      "status": "PENDING_MAP_CONDITIONAL_OR_RECORDED_CALCULATION",
+      "enabled": false,
+      "enabled_as_established_premise": false,
+      "actual_application_premises_discharged": false,
+      "experience_inference": "NONE"
+    }
+  ],
+  "rules": [
+    {
+      "id": "CTD3-R001",
+      "kind": "CONDITIONAL_MATHEMATICAL_RULE",
+      "all_of": [
+        "CTD3-N001",
+        "CTD2-N013"
+      ],
+      "conclusion": "CTD3-N002",
+      "same_instance_required": true,
+      "binding": "All complete contracts refer to the same population law, calibration vector, confidence procedure and variance target.",
+      "premise_semantics": "AND inside this route; separately named routes remain alternatives, never pooled evidence.",
+      "proof_locations": [
+        {
+          "path": "finite_sample/PROOF.md",
+          "section": "Coverage and calibration union"
+        }
+      ],
+      "actual_premises_discharged": false,
+      "enabled": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "CTD3-R002",
+      "kind": "CONDITIONAL_MATHEMATICAL_RULE",
+      "all_of": [
+        "CTD3-N001",
+        "CTD3-N003",
+        "CTD2-N013"
+      ],
+      "conclusion": "CTD3-N004",
+      "same_instance_required": true,
+      "binding": "All complete contracts refer to the same population law, calibration vector, confidence procedure and variance target.",
+      "premise_semantics": "AND inside this route; separately named routes remain alternatives, never pooled evidence.",
+      "proof_locations": [
+        {
+          "path": "finite_sample/PROOF.md",
+          "section": "Coverage and calibration union"
+        }
+      ],
+      "actual_premises_discharged": false,
+      "enabled": false,
+      "enabled_as_established_premise": false
+    }
+  ],
+  "context_links": [
+    {
+      "id": "CTD3-C001",
+      "from": "CTD2-N014",
+      "to": "CTD3-N002",
+      "type": "WEAK_IDENTIFICATION_PRECISION_MOTIVATION",
+      "deductive": false,
+      "enabled": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "CTD3-C002",
+      "from": "CTD2-N016",
+      "to": "CTD3-N005",
+      "type": "ASSUMPTION_VIOLATION_COMPARISON",
+      "deductive": false,
+      "enabled": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "CTD3-C003",
+      "from": "CTD3-N002",
+      "to": "CTD3-N005",
+      "type": "NUMERICAL_CHECK_NOT_PROOF",
+      "deductive": false,
+      "enabled": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "CTD3-C004",
+      "from": "CTD3-N004",
+      "to": "CTD2-N018",
+      "type": "CALIBRATION_OBLIGATIONS",
+      "deductive": false,
+      "enabled": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "CTD3-C005",
+      "from": "CTD3-N002",
+      "to": "R188:INFERENCE_CONTRACT",
+      "type": "MODEL_REJECTION_SCOPE",
+      "deductive": false,
+      "enabled": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "CTD3-C006",
+      "from": "CTD3-N002",
+      "to": "R169:HELDOUT_CALIBRATION_FALSIFIER",
+      "type": "NONDEDUCTIVE_FAILURE_ANALOGY",
+      "deductive": false,
+      "enabled": false,
+      "enabled_as_established_premise": false
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "created_utc": "2026-10-10 08:57:56 UTC",
+  "status": "Fixed before any operating-characteristic calculation. Retrospective methods development, not an external preregistration or a new human experiment.",
+  "purpose": "Numerically implement finite-sample confidence-set guarantees and show their scope under explicit violations, without extending the scientific model beyond the stated paired-readout contract.",
+  "primary_method": "For every integer K from 0 through N, compute the two-sided equal-tailed 95% Clopper-Pearson interval for the population paired-yes probability. Map that interval into the full compatible shared-sensory-variance set under independently calibrated marginal variances, thresholds, lapses and a supplied criterion-correlation bound. Sum each operating metric against the exact Binomial(N,p11) mass over all K.",
+  "confidence_level": 0.95,
+  "alpha": 0.05,
+  "number_of_random_simulations": 0,
+  "source_parameter_examples": 0,
+  "fixed_model": {
+    "marginal_variances": [1.0, 1.0],
+    "response_centers": [0.0, 0.0],
+    "interval_rule": "Y_t = 1 if |Z_t| <= k_t before lapses.",
+    "valid_common_draw": "E~N(0,a), (C_O,C_S) jointly Gaussian with both variances 1-a and covariance c, independent of E; Z_t=E-C_t.",
+    "valid_total_covariance": "R=a+c, which can be negative at the admissible negative criterion-covariance boundary. The confidence-set implementation must account for centered rectangles depending on |R|.",
+    "valid_lapses": "Known equal lapse probability lambda in both tasks; independent lapse indicators and independent unbiased guesses across reports and from Gaussian variables. All paired trials are independent.",
+    "units": "Dimensionless units with each effective marginal variance fixed to one."
+  },
+  "profiles": [
+    {"profile_id": "asymmetric_low_lapse", "k_ownership": 0.8, "k_simultaneity": 1.3, "lapse": 0.05},
+    {"profile_id": "unequal_window_low_lapse", "k_ownership": 1.5, "k_simultaneity": 0.6, "lapse": 0.05},
+    {"profile_id": "asymmetric_high_lapse", "k_ownership": 0.8, "k_simultaneity": 1.3, "lapse": 0.20}
+  ],
+  "sample_sizes_paired_trials": [64, 256, 1024, 4096],
+  "generating_sensory_variances": [0.0, 0.1, 0.3, 0.6, 0.9],
+  "candidate_variances_for_exclusion": [0.0, 0.1, 0.3, 0.6, 0.9],
+  "valid_scenarios": [
+    {"assumed_kappa": 0.0, "criterion_covariance_rule": "c=0"},
+    {"assumed_kappa": 0.2, "criterion_covariance_rule": "c=-0.2*(1-a)"},
+    {"assumed_kappa": 0.2, "criterion_covariance_rule": "c=0"},
+    {"assumed_kappa": 0.2, "criterion_covariance_rule": "c=+0.2*(1-a)"}
+  ],
+  "negative_controls": [
+    {
+      "family": "wrong_independence_bound",
+      "assumed_kappa": 0.0,
+      "actual_covariance_rules": ["c=-0.2*(1-a)", "c=+0.2*(1-a)"],
+      "violation": "The declared independent-criterion bound excludes the actual criterion covariance.",
+      "evaluated_target_role": "Actual shared sensory variance; nominal coverage is not guaranteed under this wrong bound."
+    },
+    {
+      "family": "independent_sensory_resampling",
+      "assumed_kappa": 0.0,
+      "actual_covariance_rules": ["c=0"],
+      "violation": "The two reports use independent sensory draws, each of variance a, rather than one same internal sensory draw.",
+      "evaluated_target_role": "Stipulated per-task sensory variance a, not a shared variance. Actual shared sensory covariance is zero. Target inclusion is a misattribution diagnostic and must not be called valid shared-variance coverage."
+    },
+    {
+      "family": "shared_lapse_and_guess",
+      "assumed_kappa": 0.0,
+      "actual_covariance_rules": ["c=0"],
+      "violation": "One shared lapse indicator is used, and a shared unbiased guess determines both reports on lapse trials. Marginal lapse rates remain the known lambda. P11=(1-lambda)*J(a)+lambda/2.",
+      "evaluated_target_role": "Actual shared sensory variance; nominal coverage is not guaranteed under correlated lapses."
+    }
+  ],
+  "scenario_counts": {
+    "valid": 240,
+    "wrong_independence_bound": 120,
+    "independent_sensory_resampling": 60,
+    "shared_lapse_and_guess": 60,
+    "total": 480
+  },
+  "fixed_metrics": [
+    "Exact binomial coverage of the Clopper-Pearson interval for true P11, for all scenarios.",
+    "Probability that the mapped confidence set contains the evaluated generating target. Call this nominal shared-variance coverage only in valid scenarios.",
+    "Probability of containing the complete population identified set, in valid scenarios only.",
+    "Probability of an empty confidence set.",
+    "Unconditional expected set width, assigning width zero to an empty set and always reporting emptiness separately.",
+    "Expected set width conditional on the confidence set being nonempty.",
+    "Expected lower and upper endpoints conditional on nonemptiness.",
+    "Probability of excluding each prespecified candidate variance.",
+    "Population identified-set endpoints and width under the assumed model, when feasible."
+  ],
+  "reporting_rules": {
+    "validity_summary": "Report minima and ranges across the entire fixed valid grid, then fixed tables by N and kappa. Do not select profiles based on favorable coverage or width.",
+    "negative_controls": "Present all three violation families separately, including cases where a mapped set is empty or a wrong target remains included. An empty set can diagnose incompatibility with the assumed package; it is not a new estimate.",
+    "finite_sample_language": "Exact refers to enumeration of every binomial count using the finite probability law, evaluated in floating-point arithmetic. There is no Monte Carlo error and no new human evidence.",
+    "uncertainty_scope": "The analysis assumes independently known marginal calibration and kappa. It does not include uncertainty in fitted marginal parameters, trial dependence, temporal drift, or uncertainty in a physiological mapping.",
+    "no_power_claim": "No recommended human sample size, source-study power, anatomical mediator, or consciousness-theory validation is inferred."
+  },
+  "numerical_rules": {
+    "binomial_mass": "Use all K=0,...,N with scipy binomial probabilities. Record the mass-sum error; normalize only for floating-point mass drift below 1e-10.",
+    "probability_boundary_tolerance": 1e-12,
+    "variance_endpoint_tolerance": 1e-10,
+    "confidence_set_inversion": "Use theory-owned confidence_sets.py with deterministic probability inversion and its documented endpoint handling. Preserve its version hash.",
+    "cache": "Precompute interval endpoints for every K separately for each fixed profile, N, and assumed kappa; re-use them across generating scenarios.",
+    "verification": "Check mapped-set inclusion against direct probability-range intersection for fixed target candidates and verify all positive-weight outcomes, if needed to resolve a concrete numerical inconsistency. Do not fit or tune models to operating-characteristic results."
+  },
+  "stop_rule": "Stop after the fixed 480 cases, code/provenance checks, and reports. Any implementation correction must be recorded with its reason and must preserve this scenario grid. Do not rerun the prior 720 response fits or the original 19999 symmetry simulations.",
+  "outputs": [
+    "run_operating_characteristics.py",
+    "operating_characteristics.csv",
+    "operating_characteristics_summary.json",
+    "confidence_set_tables.npz",
+    "OPERATING_CHARACTERISTICS_REPORT.md",
+    "EXECUTION_PROVENANCE.json"
+  ]
+}

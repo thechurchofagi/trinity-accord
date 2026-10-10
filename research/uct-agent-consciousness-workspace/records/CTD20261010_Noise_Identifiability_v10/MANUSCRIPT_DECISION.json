@@ -1,0 +1,371 @@
+{
+  "schema": "uct-manuscript-decision/2",
+  "research_id": "CTD20261010",
+  "result_version": "CTD-RESULT-v1.0.0",
+  "manuscript_version": "CTD-PAPER-v1.0.0",
+  "created_utc": "2026-10-10T09:31:38.192637+00:00",
+  "title": "Identifiability of Noise Sources in Bodily Judgments",
+  "subtitle": "A computational audit of parietal stimulation and a conditional paired-readout design",
+  "author": "Hongju Liu",
+  "decision": "READY_FOR_AUTHORIZED_PREPRINT_RELEASE_AS_METHODS_AND_RETROSPECTIVE_SECONDARY_ANALYSIS",
+  "decision_scope": "Internal scientific/editorial readiness after AI-assisted technical reviews and the user's explicit instruction to complete and release this paper. This is not external peer review, journal acceptance, final human line-by-line review, empirical protocol validation, or evidence that any external release operation has succeeded.",
+  "paper_pdf": "manuscript/noise-identifiability-bodily-judgments-v1.0.0.pdf",
+  "paper_pdf_sha256": "1615049d4f359f08dbb3df8ff95ad04b5a63680e6b05b388f607ab4e578e7966",
+  "pages": 21,
+  "revision_relation": "Prepares the first public CTD edition from the archived unpublished v0.1 and v0.2 research records. Their original metadata and numerical evidence remain unchanged. Does not amend the published SCU preprint.",
+  "net_contribution": [
+    {
+      "id": "CTD2-N003",
+      "classification": "CORRECTION",
+      "claim": "The released information-criterion rows match a second negation of positive NLL. The corrected aggregate still favors Sigma."
+    },
+    {
+      "id": "CTD2-N005",
+      "classification": "NEW_APPLICATION",
+      "claim": "A conditional signed-SOA symmetry diagnostic rejects the centered independent-binomial family without fitting its parameters."
+    },
+    {
+      "id": "CTD2-N006",
+      "classification": "NEW_APPLICATION",
+      "claim": "A corrected fixed within-cell five-fold comparison favors Sigma plus task-specific centers over Prior plus task-specific centers, conditional on these retrospective families."
+    },
+    {
+      "id": "CTD2-N008",
+      "classification": "NEW_APPLICATION",
+      "claim": "An explicit fixed-sensory, variable-criterion implementation preserves all 1,260 source marginal probabilities while retaining the source threshold policy."
+    },
+    {
+      "id": "CTD2-N011",
+      "classification": "NEW_APPLICATION_WITH_CLASSICAL_INGREDIENTS",
+      "claim": "One additional population joint probability identifies shared Gaussian variance under calibrated centers and independent criteria/lapses; bounded criterion correlation yields a sharp set and central weak identification is quantified.",
+      "related_ids": [
+        "CTD2-N013",
+        "CTD2-N014",
+        "CTD2-N015",
+        "CTD2-N016"
+      ]
+    },
+    {
+      "id": "CTD3-N002",
+      "classification": "MODEL_SPECIFIC_APPLICATION_OF_CLASSICAL_CONFIDENCE_PROJECTION",
+      "claim": "A CP probability interval is projected through the complete calibrated paired Gaussian model, covering the whole population variance set at nominal finite-sample probability; sharp endpoints, empty/full-domain cases and unequal variances are explicit.",
+      "related_ids": [
+        "CTD3-N001",
+        "CTD2-N013"
+      ]
+    },
+    {
+      "id": "CTD3-N004",
+      "classification": "CONDITIONAL_CALIBRATION_EXTENSION_WITH_CLASSICAL_UNION_BOUND",
+      "claim": "An honest complete nuisance-calibration union yields at least 1-alpha-gamma coverage; exact finite unions and continuous kappa-only uncertainty are implemented without pretending to solve arbitrary continuous multi-parameter regions.",
+      "related_ids": [
+        "CTD3-N003"
+      ]
+    },
+    {
+      "id": "CTD3-N005",
+      "classification": "PRESPECIFIED_SYNTHETIC_OPERATING_CHARACTERISTICS",
+      "claim": "Exact finite-binomial sums over 480 fixed scenarios retain every profile. All 240 valid cases meet nominal 95% coverage, with often-wide sets; controls expose incorrect physical attribution and explicit target-role changes. No new human data or Monte Carlo draws."
+    }
+  ],
+  "inherited_material": [
+    "Gaussian addition of independent variances and sensory/criterion ambiguity (including Yarrow et al.).",
+    "Bias and decision strategy in simultaneity judgments (Cabrera et al.; Yarrow et al.).",
+    "BCI accounts of ownership and sensory uncertainty (Chancel et al.; D’Angelo et al.).",
+    "Bivariate normal derivative identities (Plackett) and the general principle that extra measurements can aid noise identification.",
+    "The SCU distinction between matching behavior and verified source use; CTD v0.1 descriptive width results.",
+    "Clopper and Pearson (1934), DOI 10.1093/biomet/26.4.404: inherited exact binomial confidence interval.",
+    "Classical confidence-set projection, event intersection and the union bound; these are proved for the explicit observer rather than claimed as new general principles."
+  ],
+  "priority_status": "No claim of a new general confidence-interval framework, Gaussian decomposition principle, shortest confidence set or universally first discovery. The auditable source-specific combination and conditional finite-sample application are proposed contributions; exhaustive priority is unverified.",
+  "seven_questions": {
+    "precise_problem": "When can a condition-dependent response curve identify a sensory source, and what additional calibrated paired measurement and finite-sample uncertainty are needed when marginally equivalent decision implementations exist?",
+    "citable_increment": "Source-specific IC reconciliation, centering failure, transparent restricted predictive comparison, exact source-family counterpart, conditional paired inverse and sharp correlation bound, with an executable finite-sample confidence procedure and fixed operating-characteristic study.",
+    "nearest_prior_art": "The manuscript credits D'Angelo et al., Chancel et al., Yarrow et al., Cabrera et al., Plackett and Clopper-Pearson. Final source/novelty review qualifies priority. Gaussian noise addition, joint-response inference and confidence projection are inherited.",
+    "testable_scope": "Released aggregate count cells and explicitly declared independent-binomial/Gaussian families. Prospective paired inference requires actual common-sample routing, calibrated centers, joint Gaussian criteria independent of sensory noise, known independent lapse processes, a justified covariance bound and iid fixed-n pairs.",
+    "reproduction": "Three unchanged public workbooks, licensed source-code snapshots, full fits/partitions, source audits, exact population proofs, fixed finite-sample plan, confidence tables, operating-characteristic outputs, independent internal checks, superseded failures and correction receipts are retained.",
+    "future_reuse": "An investigator can audit a fitted response family, construct a marginal counterpart, identify missing joint information, quantify its calibrated confidence set and expose how violated consumer/lapse assumptions invalidate physical attribution.",
+    "position_and_preservation": "One methods and retrospective secondary-analysis preprint is ready for authorized release. v0.1/v0.2 evidence remains historical and unchanged; CTD2/CTD3 candidates stay disabled. External publication and persistence are separate coordinator-verified steps."
+  },
+  "review_records": [
+    "review/FINAL_EMPIRICAL_REVIEW_v1.0.md",
+    "review/FINAL_EMPIRICAL_REVIEW_v1.0.json",
+    "review/FINAL_EMPIRICAL_REVIEW_ADDENDUM_v1.0.json",
+    "review/FINAL_THEORY_REVIEW_v1.0.md",
+    "review/FINAL_SOURCE_AND_NOVELTY_REVIEW_v1.0.md",
+    "finite_sample/INDEPENDENT_CONFIDENCE_SET_REVIEW.md",
+    "review/PREFLIGHT_TEXT_BOUNDS.json"
+  ],
+  "not_established": [
+    "A sensory or anatomical locus of the original stimulation effect",
+    "Exact reconstruction of all 180 released Gaussian widths; two remain unresolved",
+    "Original trial chronology, global optimization or complete source bootstrap/VBA execution history",
+    "External replication or selection-adjusted generalization from the retrospective artificial CV split",
+    "A human implementation in which both reports read one same internal sensory sample",
+    "Common-center, marginal, lapse and criterion-correlation calibration in actual human paired data",
+    "Coverage after naive plug-in estimation of nuisance parameters",
+    "Certified numerical projection of arbitrary continuous multi-parameter calibration regions",
+    "Optimal use of all joint-response cells, shortest confidence intervals or a human sample-size recommendation",
+    "An independently measured experience, a UCT-specific quantitative prediction or evidence of AI consciousness",
+    "External peer review, final human line-by-line review or journal acceptance"
+  ],
+  "publication_action": "NONE",
+  "new_doi": null,
+  "next_empirical_question": "Can an actual paired-readout implementation independently establish same-internal-sample routing, common centers, marginal/lapse calibration and a justified bound on shared decision variability, before using this confidence map?",
+  "parallel_main_line_preserved": "The separate bodily-familiarity H and physically grounded R-not-equal-L intervention objective remain open; this manuscript does not replace or close concurrent main-line work.",
+  "graph_claim_mapping": [
+    {
+      "id": "CTD2-N001",
+      "label": "Effective Gaussian interval response domain",
+      "kind": "MODEL_CLASS_DEFINITION",
+      "enabled": false
+    },
+    {
+      "id": "CTD2-N002",
+      "label": "Released likelihood and data provenance",
+      "kind": "SECONDARY_EVIDENCE",
+      "enabled": false
+    },
+    {
+      "id": "CTD2-N003",
+      "label": "Source information-criterion sign correction",
+      "kind": "ARITHMETIC_CORRECTION",
+      "enabled": false
+    },
+    {
+      "id": "CTD2-N004",
+      "label": "Centered symmetry and conditional test law",
+      "kind": "CONDITIONAL_MATHEMATICAL_RESULT",
+      "enabled": false
+    },
+    {
+      "id": "CTD2-N005",
+      "label": "Conditional source-symmetry rejection",
+      "kind": "NEGATIVE_SECONDARY_EVIDENCE",
+      "enabled": false
+    },
+    {
+      "id": "CTD2-N006",
+      "label": "Corrected fixed-partition response comparison",
+      "kind": "SECONDARY_EVIDENCE",
+      "enabled": false
+    },
+    {
+      "id": "CTD2-N007",
+      "label": "Additive Gaussian sensory and criterion domain",
+      "kind": "MODEL_CLASS_DEFINITION",
+      "enabled": false
+    },
+    {
+      "id": "CTD2-N008",
+      "label": "Exact constant-sensory intervention counterpart",
+      "kind": "CONDITIONAL_MATHEMATICAL_RESULT",
+      "enabled": false
+    },
+    {
+      "id": "CTD2-N009",
+      "label": "Prior and posterior-criterion alias",
+      "kind": "CONDITIONAL_MATHEMATICAL_RESULT",
+      "enabled": false
+    },
+    {
+      "id": "CTD2-N010",
+      "label": "Calibrated shared-sample Gaussian pair",
+      "kind": "CONDITIONAL_MODEL_CONTRACT",
+      "enabled": false
+    },
+    {
+      "id": "CTD2-N011",
+      "label": "Centered paired inverse under independent criteria",
+      "kind": "CONDITIONAL_MATHEMATICAL_RESULT",
+      "enabled": false
+    },
+    {
+      "id": "CTD2-N012",
+      "label": "Externally bounded criterion correlation",
+      "kind": "CONDITIONAL_MODEL_CONTRACT",
+      "enabled": false
+    },
+    {
+      "id": "CTD2-N013",
+      "label": "Sharp correlated-criterion identification set",
+      "kind": "CONDITIONAL_MATHEMATICAL_RESULT",
+      "enabled": false
+    },
+    {
+      "id": "CTD2-N014",
+      "label": "Weak central identification near zero shared variance",
+      "kind": "CONDITIONAL_MATHEMATICAL_RESULT",
+      "enabled": false
+    },
+    {
+      "id": "CTD2-N015",
+      "label": "Off-center local information",
+      "kind": "CONDITIONAL_MATHEMATICAL_RESULT",
+      "enabled": false
+    },
+    {
+      "id": "CTD2-N016",
+      "label": "Countermodels to uncalibrated pairing",
+      "kind": "EXPLICIT_COUNTEREXAMPLES",
+      "enabled": false
+    },
+    {
+      "id": "CTD2-N017",
+      "label": "No automatic mechanism or experience inference",
+      "kind": "SCOPED_INFERENCE_BOUNDARY",
+      "enabled": false
+    },
+    {
+      "id": "CTD2-N018",
+      "label": "Prospective calibration and implementation obligations",
+      "kind": "PROPOSED_EMPIRICAL_CONTRACT",
+      "enabled": false
+    },
+    {
+      "id": "CTD2-N019",
+      "label": "Descriptive-width reconstruction and remaining mismatch",
+      "kind": "SECONDARY_EVIDENCE",
+      "enabled": false
+    },
+    {
+      "id": "CTD2-N020",
+      "label": "Independent-criterion subfamily",
+      "kind": "CONDITIONAL_MODEL_CONTRACT",
+      "enabled": false
+    },
+    {
+      "id": "CTD3-N001",
+      "label": "Fixed-calibration paired binomial experiment",
+      "kind": "MODEL_CONTRACT",
+      "enabled": false
+    },
+    {
+      "id": "CTD3-N002",
+      "label": "Exact binomial confidence-set projection",
+      "kind": "CONDITIONAL_MATHEMATICAL_RESULT",
+      "enabled": false
+    },
+    {
+      "id": "CTD3-N003",
+      "label": "Honest nuisance-calibration region",
+      "kind": "CALIBRATION_COVERAGE_CONTRACT",
+      "enabled": false
+    },
+    {
+      "id": "CTD3-N004",
+      "label": "Calibration-union confidence set",
+      "kind": "CONDITIONAL_MATHEMATICAL_RESULT",
+      "enabled": false
+    },
+    {
+      "id": "CTD3-N005",
+      "label": "Prespecified finite probability-law operating characteristics",
+      "kind": "SYNTHETIC_NUMERICAL_EVIDENCE",
+      "enabled": false
+    }
+  ],
+  "candidate_ids": [
+    "CTD2-20261010",
+    "CTD3-20261010"
+  ],
+  "supersedes_metadata": "history/v0.2_release_metadata/MANUSCRIPT_DECISION.json",
+  "report_number": "TA-TR-2026-26",
+  "article_type": "METHODS_AND_RETROSPECTIVE_SECONDARY_ANALYSIS",
+  "authorization_scope": "The current user direction authorizes completion and a later coordinator-managed DOI, timestamp and archive workflow. The earlier ANALYSIS_INTENT.json is preserved unchanged as history of its own research turn.",
+  "paper_markdown": "manuscript/noise-identifiability-bodily-judgments-v1.0.0.md",
+  "artifact_hash_scope": "Pre-release local artifacts before insertion of external identifiers; later publication and persistence outcomes require their own receipts.",
+  "pre_release_source_snapshot": {
+    "path": "manuscript/noise-identifiability-bodily-judgments-v1.0.0.md",
+    "sha256": "6bc9dad5add7612735358236c9b7533cc8f54f6aa535443ee2d9e9f5d219c734",
+    "bytes": 61065
+  },
+  "external_execution_boundary": "No DOI, OpenTimestamps, archival or current persistence success is asserted or updated here. Old release/persistence receipts are historical and cannot certify this version. The coordinator records actual current outcomes separately after verification.",
+  "original_analysis_intent": {
+    "path": "ANALYSIS_INTENT.json",
+    "sha256": "e3164f4769b9aee7b8f0fbf625ab8f8f81095cb16df41bc81426079380932414",
+    "unchanged": true,
+    "role": "Historical v0.2 analysis intent, not rewritten to change earlier authorization or execution."
+  },
+  "archived_root_metadata": [
+    {
+      "path": "history/v0.2_release_metadata/CHANGELOG.md",
+      "sha256": "83e910dd8b7497e8cf4d3b34cc5926aebad629d361c65c2c72174c2a3aa924d6",
+      "bytes": 2258
+    },
+    {
+      "path": "history/v0.2_release_metadata/CLAIM_LEDGER.json",
+      "sha256": "fc611104b72dbe26a6936e89c10d6ea85a3660788e9097fd5e0a9f34cd6ad6c6",
+      "bytes": 48172
+    },
+    {
+      "path": "history/v0.2_release_metadata/FAILURES.md",
+      "sha256": "f421f21777afbce60f2739f3c41c10d0f0c266c36aa39f4e67ba419d51e14a15",
+      "bytes": 2506
+    },
+    {
+      "path": "history/v0.2_release_metadata/MANUSCRIPT_DECISION.json",
+      "sha256": "4e1b62870dfdea198db573309c7d83a94e3f71d19a775d48877359fb32eae4c7",
+      "bytes": 8589
+    },
+    {
+      "path": "history/v0.2_release_metadata/RESEARCH_NOTE.md",
+      "sha256": "7e0b7f31e0bd42811577016d36023e3bea8b7fa85e1eab7ff30e462f43f688bb",
+      "bytes": 2337
+    },
+    {
+      "path": "history/v0.2_release_metadata/WORK_LOG.md",
+      "sha256": "69b8a94454d50c724faadd45715ec84f46f568661d7d1bf40a3d69e887f857d6",
+      "bytes": 5841
+    }
+  ],
+  "governance_scope": {
+    "completed_map": "UCT-MAP-v1.1.2",
+    "completed_map_changed": false,
+    "ctd2_counts": {
+      "nodes": 20,
+      "rules": 7,
+      "contexts": 13,
+      "total": 40
+    },
+    "ctd3_counts": {
+      "nodes": 5,
+      "rules": 2,
+      "contexts": 6,
+      "total": 13
+    },
+    "all_candidate_items_disabled": true,
+    "actual_application_premises_discharged": false,
+    "inherited_open_obligations": [
+      "CTD-OPEN-ESTIMATOR-RECONSTRUCTION",
+      "CTD-OPEN-INDEPENDENT-CALIBRATION",
+      "CTD-OPEN-ACTUAL-CONSUMER-INTERVENTION",
+      "CTD-OPEN-EXTERNAL-REPLICATION",
+      "QC-20261008-10",
+      "IA-QC11",
+      "QC-20261008-12",
+      "QC-20261008-13",
+      "SCU-OPEN-R191-NORMALIZATION",
+      "SCU-AUDIT-DEPTH",
+      "CTD2-OPEN-SAME-INTERNAL-SAMPLE",
+      "CTD2-OPEN-COMMON-CENTER",
+      "CTD2-OPEN-INDEPENDENT-LAPSE",
+      "CTD2-OPEN-CRITERION-CORRELATION-CALIBRATION",
+      "CTD2-OPEN-ACTUAL-NEURAL-MEDIATOR",
+      "CTD2-OPEN-PHENOMENAL-BRIDGE",
+      "CTD2-OPEN-PROSPECTIVE-REPLICATION",
+      "CTD2-OPEN-FULL-SEMANTIC-INTEGRATION"
+    ],
+    "new_open_obligations": [
+      "CTD3-OPEN-ACTUAL-CALIBRATION",
+      "CTD3-OPEN-CERTIFIED-CONTINUOUS-PROJECTION"
+    ],
+    "inherited_open_debt": {
+      "ids": 1034,
+      "fields": 1828,
+      "proof_ids": 1347,
+      "role": "Historical inherited counts, not recomputed or reduced by this structural pass."
+    },
+    "global_semantic_audit_status": "AUDIT_INCOMPLETE"
+  }
+}

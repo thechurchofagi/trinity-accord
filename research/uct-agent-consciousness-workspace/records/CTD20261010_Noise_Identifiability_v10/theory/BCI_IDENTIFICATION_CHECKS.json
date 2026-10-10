@@ -1,0 +1,168 @@
+{
+  "scope": "Finite numerical checks of proved finite-model claims; no new human observations and no parameter fits.",
+  "prior_criterion_alias": {
+    "parameter_cases": 27,
+    "max_probability_error": 4.440892098500626e-16
+  },
+  "two_probability_recovery": {
+    "parameter_cases": 36,
+    "max_relative_error": 2.9976021664879227e-14
+  },
+  "unknown_lapse_trajectory": [
+    {
+      "lapse_assumed": 0.0,
+      "effective_sigma": 129.7225753726306,
+      "interval_halfwidth": 181.0019704195873,
+      "max_two_anchor_error": 5.551115123125783e-16,
+      "discrepancy_at_200": 0.0017242874197329616,
+      "discrepancy_at_400": -0.025023380325161486
+    },
+    {
+      "lapse_assumed": 0.04,
+      "effective_sigma": 125.09180014150978,
+      "interval_halfwidth": 180.56965950750978,
+      "max_two_anchor_error": 6.661338147750939e-16,
+      "discrepancy_at_200": 0.0012214551335068546,
+      "discrepancy_at_400": -0.012593492190634145
+    },
+    {
+      "lapse_assumed": 0.08,
+      "effective_sigma": 119.99999999999967,
+      "interval_halfwidth": 179.99999999999946,
+      "max_two_anchor_error": 7.771561172376096e-16,
+      "discrepancy_at_200": -1.8318679906315083e-15,
+      "discrepancy_at_400": -6.38378239159465e-16
+    },
+    {
+      "lapse_assumed": 0.12,
+      "effective_sigma": 114.3068657065118,
+      "interval_halfwidth": 179.1942960415355,
+      "max_two_anchor_error": 9.992007221626409e-16,
+      "discrepancy_at_200": -0.0023506433510240843,
+      "discrepancy_at_400": 0.012788945427808993
+    },
+    {
+      "lapse_assumed": 0.2,
+      "effective_sigma": 100.10848479990828,
+      "interval_halfwidth": 176.04425006176595,
+      "max_two_anchor_error": 1.0547118733938987e-14,
+      "discrepancy_at_200": -0.014120688780036805,
+      "discrepancy_at_400": 0.03940535061018906
+    }
+  ],
+  "source_marginal_convolution_check": {
+    "checked_rows": 37,
+    "max_probability_error": 2.220446049250313e-16,
+    "max_quadrature_error_estimate": 9.882475401511734e-13
+  },
+  "prospective_joint_formula_audit": {
+    "profiles": 90,
+    "max_joint_probability_error": 2.220446049250313e-16
+  },
+  "stable_affinity_audit": {
+    "positive_Hellinger_profiles": 90,
+    "smallest_squared_Hellinger_distance": 1.1212982806970095e-18,
+    "largest_sufficient_known_simple_m": 2053499173799443456,
+    "warning": "Fully specified iid simple-hypothesis diagnostic, not a recommended trial count, empirical power estimate, or calibrated source-parameter uncertainty."
+  },
+  "paired_identification": {
+    "central_threshold_pairs": 12,
+    "positive_derivative_checks": 48,
+    "max_derivative_absolute_error": 1.2242874491974476e-09,
+    "one_probability_recovery_cases": 36,
+    "max_shared_variance_recovery_error": 9.759970609479751e-13
+  },
+  "weak_identification_expansion": [
+    {
+      "rho": 0.1,
+      "excess_joint_probability": 0.0010352586380211193,
+      "excess_over_rho_squared": 0.10352586380211191,
+      "limiting_coefficient": 0.10325958973174706
+    },
+    {
+      "rho": 0.03,
+      "excess_joint_probability": 9.295518107804712e-05,
+      "excess_over_rho_squared": 0.10328353453116347,
+      "limiting_coefficient": 0.10325958973174706
+    },
+    {
+      "rho": 0.01,
+      "excess_joint_probability": 1.032622500679592e-05,
+      "excess_over_rho_squared": 0.1032622500679592,
+      "limiting_coefficient": 0.10325958973174706
+    },
+    {
+      "rho": 0.003,
+      "excess_joint_probability": 9.293384624631251e-07,
+      "excess_over_rho_squared": 0.10325982916256946,
+      "limiting_coefficient": 0.10325958973174706
+    }
+  ],
+  "offcenter_local_slope": [
+    {
+      "soa": 0.2,
+      "analytic_slope_rho_zero": 0.006735431763223979,
+      "numerical_slope": 0.006735431767879162
+    },
+    {
+      "soa": 0.5,
+      "analytic_slope_rho_zero": 0.037522044557132046,
+      "numerical_slope": 0.03752204456031194
+    },
+    {
+      "soa": 1.0,
+      "analytic_slope_rho_zero": 0.09886972096187549,
+      "numerical_slope": 0.09886972096306844
+    }
+  ],
+  "correlated_criterion_counterexample": {
+    "parameter_tuples": [
+      {
+        "sensory": 0.2,
+        "criterion_variance": 0.8,
+        "criterion_covariance": 0.3
+      },
+      {
+        "sensory": 0.4,
+        "criterion_variance": 0.6,
+        "criterion_covariance": 0.1
+      }
+    ],
+    "max_joint_probability_discrepancy": 0.0
+  },
+  "correlated_lapse_counterexample": {
+    "actual_sensory_variance": 0.0,
+    "marginal_yes_probabilities": [
+      0.5,
+      0.5
+    ],
+    "known_marginal_lapse_rate": 0.2,
+    "joint_yes_probability": 0.30000000000000004,
+    "apparent_shared_sensory_variance_if_independent_lapses_assumed": 0.7601828532442795
+  },
+  "variance_budget_boundary": {
+    "effective_variances": [
+      1.0,
+      2.0,
+      3.0
+    ],
+    "minimum_uniform_jitter_variance_budget": 2.0,
+    "sensory_interval_if_B_1_9": [
+      1.1,
+      1.0
+    ],
+    "sensory_interval_if_B_2": [
+      1.0,
+      1.0
+    ]
+  },
+  "bounded_criterion_correlation": {
+    "parameter_cases": 60,
+    "grid_membership_checks": 60060,
+    "example_r_0_6_kappa_0_2_variance_fraction_interval": [
+      0.4999999999999999,
+      0.6666666666666667
+    ],
+    "negative_covariance_branch_containment": "For a,R>=0, |R-a|<=R+a, so any feasible negative total covariance implies feasible positive total covariance at the same a."
+  }
+}

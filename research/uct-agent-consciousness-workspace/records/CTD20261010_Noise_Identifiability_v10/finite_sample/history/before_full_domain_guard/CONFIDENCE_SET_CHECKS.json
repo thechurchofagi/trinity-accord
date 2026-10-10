@@ -1,0 +1,66 @@
+{
+  "created_utc": "2026-10-10T09:10:16.094170+00:00",
+  "runtime": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0"
+  },
+  "scope": "Deterministic numerical checks, not a machine-certified proof or a continuous-calibration grid envelope.",
+  "gaussian_rectangle": {
+    "cases": 336,
+    "max_absolute_difference": 4.440892098500626e-16,
+    "comparison": "Direct deterministic conditional-normal quadrature."
+  },
+  "clopper_pearson": {
+    "scipy_root_inversion_comparisons": 228,
+    "max_endpoint_difference": 4.977129819394577e-13,
+    "finite_binomial_coverage_checks": 279,
+    "minimum_coverage_minus_nominal": 0.001853097771301604
+  },
+  "unequal_variance_projection": {
+    "calibrations": 42,
+    "global_max_comparison": "Analytic formula versus bounded scalar maximization plus both domain endpoints.",
+    "max_global_rho_difference": 1.4033219031261979e-13,
+    "direct_candidate_membership_checks": 75990,
+    "numerically_ambiguous_boundary_checks_not_counted": 366,
+    "max_off_boundary_rho_inverse_error": 3.5013658639115874e-14,
+    "note": "Finite implementation checks; continuity and sharpness are proved analytically in PROOF.md."
+  },
+  "degenerate_readouts": {
+    "cases": 7,
+    "all_passed": true,
+    "n_zero_contract_checked_for": 42
+  },
+  "calibration_unions": {
+    "finite_union_preserves_two_disjoint_intervals": [
+      [
+        0.7353447366942256,
+        1.0
+      ],
+      [
+        18.383618417355642,
+        25.0
+      ]
+    ],
+    "continuous_kappa_result": [
+      [
+        0.0,
+        0.8425202807062547
+      ]
+    ],
+    "nominal_joint_lower_bound": 0.95,
+    "continuous_multivariate_grid_envelope_claimed": false
+  },
+  "signed_covariance": {
+    "negative_total_covariance": -0.08,
+    "positive_total_covariance": 0.08,
+    "joint_probability_difference": 0.0,
+    "true_a_retained_in_population_union": true
+  },
+  "sha256": {
+    "confidence_sets.py": "826bec475e989fa9e64f392c49ddfea7e8c4ebd8e511651807048a916499d53a",
+    "check_confidence_sets.py": "5f206da98467bea1c670db47590c58fa40c1f040b8f14878a2914660a22a3379",
+    "PROOF.md": "f6ddb429350b44b133fed8318422443c2cf90bdb1979581eb33c0e6026cddc32"
+  },
+  "status": "PASS"
+}

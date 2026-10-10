@@ -1,0 +1,45 @@
+{
+  "refits": 300,
+  "changed_training_objectives_beyond_1e-6": [
+    {
+      "participant": 6,
+      "fold": 4,
+      "model": "sigma_shift",
+      "training_nll_change": -0.348466805089771,
+      "heldout_nll_change": -0.4683478440498874
+    },
+    {
+      "participant": 6,
+      "fold": 5,
+      "model": "sigma_shift",
+      "training_nll_change": -2.781104880358555,
+      "heldout_nll_change": -0.9172967280855318
+    },
+    {
+      "participant": 16,
+      "fold": 3,
+      "model": "sigma_shift",
+      "training_nll_change": -52.00180666283856,
+      "heldout_nll_change": -12.526886803427757
+    },
+    {
+      "participant": 21,
+      "fold": 4,
+      "model": "sigma_shift",
+      "training_nll_change": -51.50754629657973,
+      "heldout_nll_change": -18.313222413052273
+    },
+    {
+      "participant": 22,
+      "fold": 2,
+      "model": "sigma_shift",
+      "training_nll_change": -100.87678128050987,
+      "heldout_nll_change": -25.16430123437636
+    }
+  ],
+  "remaining_nesting_violations": [],
+  "unshifted_cv_fits_unchanged": true,
+  "full_fits_unchanged": true,
+  "heldout_scores_not_used_to_select_or_trigger_individual_refits": true,
+  "elapsed_seconds": 6.528512010001577
+}

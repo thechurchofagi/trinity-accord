@@ -1,0 +1,34 @@
+[
+  {
+    "model": "sigma",
+    "seconds": 0.27020623800490284,
+    "nll": 209.86896015940522,
+    "success": true,
+    "projected_gradient_max": 2.96898252560851e-06,
+    "starts": 17
+  },
+  {
+    "model": "prior",
+    "seconds": 1.0086108420000528,
+    "nll": 212.34377558544844,
+    "success": true,
+    "projected_gradient_max": 4.568594775822277e-05,
+    "starts": 17
+  },
+  {
+    "model": "sigma_shift",
+    "seconds": 0.1657735449989559,
+    "nll": 207.51608193658825,
+    "success": true,
+    "projected_gradient_max": 5.121437158805975e-06,
+    "starts": 17
+  },
+  {
+    "model": "prior_shift",
+    "seconds": 0.7764066910021938,
+    "nll": 209.78849840958742,
+    "success": true,
+    "projected_gradient_max": 3.0169012947389717e-05,
+    "starts": 17
+  }
+]

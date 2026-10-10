@@ -1,0 +1,269 @@
+{
+  "schema": "uct-current-state/1.4",
+  "release_id": "UCT-MAP-v1.1.2",
+  "release_seq": 4,
+  "parent_release": "UCT-MAP-v1.1.1",
+  "audit_id": "R188-ALLMAP-COMPAT-20261009-v1",
+  "review_status": "COMPATIBILITY_REVIEW_AND_ASSEMBLY_COMPLETE_WITH_OPEN_APPLICATIONS",
+  "source_commit": "f72f99d60c391c4b15f5c9334b49d09e13abaac8",
+  "source_commit_role": "parent revision containing purpose-policy adoption; final science commit in persistence receipt",
+  "version_directory": "versions/UCT-MAP-v1.1.2",
+  "report": "versions/UCT-MAP-v1.1.2/AUDIT_REPORT.md",
+  "release_manifest": "versions/UCT-MAP-v1.1.2/RELEASE.json",
+  "map_descriptor": "UCT_FORMAL_GRAPH_MODULES.json",
+  "research_registry": "RESEARCH_REGISTRY.json",
+  "version_policy": "VERSIONING_POLICY.md",
+  "changelog": "CHANGELOG.md",
+  "latest_research": {
+    "id": "A3O20261010",
+    "result_version": "A3O-EXACT-v0.1.0",
+    "status": "PENDING_CHECKPOINT_DISABLED",
+    "source": "records/A3O20261010_Route_Grain_Selection_Crossing/RESEARCH_NOTE.md",
+    "handoff": "records/A3O20261010_Route_Grain_Selection_Crossing/HANDOFF_ZH.md",
+    "work_log": "records/A3O20261010_Route_Grain_Selection_Crossing/WORK_LOG.md",
+    "enabled_as_established_premises": false,
+    "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
+    "evidence_status": "EXACT_ROUTE_GRAIN_DEPENDENCE_AND_FIXED_GRAIN_R_NOT_EQUAL_L_SEL_ORGANIZATIONAL_WITNESSES; NO_ACTUAL_SELECTOR_INSTALLATION_OR_H_IDENTIFICATION"
+  },
+  "latest_integrated_research": {
+    "id": "R188-CER-20261009",
+    "result_version": "CER-RESULT-v0.1.0",
+    "work_log": "records/R188_Encoder_Access_and_Recovery_20261009/WORK_LOG.md",
+    "handoff": "records/R188_Encoder_Access_and_Recovery_20261009/HANDOFF_ZH.md",
+    "paper": "records/R188_Encoder_Access_and_Recovery_20261009/RESEARCH_NOTE.md",
+    "paper_pdf": "records/R188_Encoder_Access_and_Recovery_20261009/When_Behavioral_Recovery_Conceals_Organizational_Change_v0.1.0.pdf",
+    "current_manuscript_decision": "HOLD_STANDALONE_PRESERVE_TECHNICAL_SUPPLEMENT_CANDIDATE",
+    "decision_record": "records/PUB20261009_Publication_Coverage/RESIDUAL_RESEARCH_ASSESSMENT.md",
+    "map_release": "UCT-MAP-v1.1.2"
+  },
+  "persistence_receipt": "persistence/UCT-MAP-v1.1.2_RECEIPT.json",
+  "next_ordinary_completed_version": "UCT-MAP-v1.1.3",
+  "actual_premise_discharge": false,
+  "qc_open": [
+    "QC-20261008-10",
+    "IA-QC11",
+    "QC-20261008-12",
+    "QC-20261008-13"
+  ],
+  "publication_status": "CLAIM_LEVEL_CURRENT_COVERAGE_IN_PUBLICATION_COVERAGE_JSON",
+  "pending_checkpoints_not_promoted": [
+    "AC20261009",
+    "IL20261009",
+    "ONLINE-AC-PROBE-20261009",
+    "R189-HACA-20261009",
+    "R190-PCBC-20261009",
+    "R191-OCCA-20261009",
+    "R192-CTBI-20261009",
+    "R193-NCI-20261009",
+    "R194-CPP-20261009",
+    "R195-IPA-20261009",
+    "R196-TPD-20261009",
+    "R197-FEO-20261010",
+    "R198-SPNS-20261010",
+    "R199-CPC-20261010",
+    "R200-SCF-20261010",
+    "R201-ROTM-20261010",
+    "R202-TMAB-20261010",
+    "R203-ACD-20261010",
+    "R204-SAU-20261010",
+    "R205-ASC-20261010",
+    "SCU20261010",
+    "MPC20261010",
+    "CBI20261010",
+    "EIP20261010",
+    "DVC20261010",
+    "A3S20261010",
+    "A3P20261010",
+    "A3U20261010",
+    "A3L20261010",
+    "CTD20261010",
+    "A3M20261010",
+    "CTD2-20261010",
+    "A3N20261010",
+    "A3O20261010"
+  ],
+  "current_guide": "RESEARCH_MASTER_GUIDE.md v2.3",
+  "complete_map_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
+  "review_ledger_sha256": "0513cb55cef94d82adcaea46af1974438a424aeba152f4c9d5655340f9271687",
+  "counts": {
+    "nodes": 913,
+    "active_conditional_rules": 424,
+    "suspended_historical_rules": 10,
+    "nondeductive_context_links": 261,
+    "total_review_items": 1608
+  },
+  "pending_note": "All listed pending checkpoints remain disabled. A3O adds no completed or candidate nodes/rules/contexts: it fixes route-grain dependence, supplies fixed-grain R by L_sel organizational witnesses and preserves the evidence firewall. A3N, CTD v0.2, A3M, A3L and all effective corrections are retained; no completed-graph count or actual-premise truth changes.",
+  "publication_coverage": {
+    "version": "UCT-PUB-v1.0.30",
+    "entry": "PUBLICATION_COVERAGE.json",
+    "update": "records/A3O20261010_Route_Grain_Selection_Crossing/PUBLICATION_COVERAGE_UPDATE.json",
+    "nondeductive": true
+  },
+  "latest_activity": {
+    "id": "A3O20261010",
+    "result_version": "A3O-EXACT-v0.1.0",
+    "status": "PENDING_CHECKPOINT_DISABLED",
+    "source": "records/A3O20261010_Route_Grain_Selection_Crossing/RESEARCH_NOTE.md",
+    "handoff": "records/A3O20261010_Route_Grain_Selection_Crossing/HANDOFF_ZH.md",
+    "work_log": "records/A3O20261010_Route_Grain_Selection_Crossing/WORK_LOG.md",
+    "enabled_as_established_premises": false,
+    "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
+    "evidence_status": "ROUTE-GRAIN DEPENDENCE AND TWO-FAMILY FIXED-GRAIN SELECTION CROSSING; PHYSICAL SELECTOR AND PHENOMENAL BRIDGE PREMISES OPEN"
+  },
+  "latest_pending_research": {
+    "id": "A3O20261010",
+    "result_version": "A3O-EXACT-v0.1.0",
+    "status": "PENDING_CHECKPOINT_DISABLED",
+    "source": "records/A3O20261010_Route_Grain_Selection_Crossing/RESEARCH_NOTE.md",
+    "handoff": "records/A3O20261010_Route_Grain_Selection_Crossing/HANDOFF_ZH.md",
+    "work_log": "records/A3O20261010_Route_Grain_Selection_Crossing/WORK_LOG.md",
+    "enabled_as_established_premises": false,
+    "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
+    "evidence_status": "EXACT AUXILIARY-SIGNATURE LIMIT AND PARTIAL PHYSICAL CROSSING; SELECTION-FLUENCY AND PHENOMENAL BRIDGE PREMISES OPEN"
+  },
+  "review_status_scope": "Completed UCT-MAP-v1.1.2 remains unchanged. A3N repeated the 1608-item programmatic structural check and manually compared the affected R173/R175/R177 plus disabled R197/R200/A3M contracts. No fresh full-depth proof review is claimed; all inherited OPEN obligations remain.",
+  "next_priority": "Attempt one fixed-granularity actual R-not-equal-L_sel crossing using congruent first-use versus retained conflict conditions, with two distinct mechanism families and the signed J_H endpoint. Keep cue, kinematics, effort, success, agency and ownership separate; stop if actual route use cannot be verified.",
+  "latest_scoped_review": {
+    "audit": "records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_AUDIT.md",
+    "per_id_structure": "records/CTD20261010_Cross_Task_Intervention_v02/governance/BASELINE_PER_ID_STRUCTURE.json.gz",
+    "summary": "records/CTD20261010_Cross_Task_Intervention_v02/governance/BASELINE_STRUCTURE_SUMMARY.json",
+    "receipt": "records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_REVIEW_RECEIPT.json",
+    "internal_candidate_reviews": [
+      "records/CTD20261010_Cross_Task_Intervention_v02/review/THEORY_MANUSCRIPT_REVIEW.md",
+      "records/CTD20261010_Cross_Task_Intervention_v02/review/EMPIRICAL_MANUSCRIPT_REVIEW.md",
+      "records/CTD20261010_Cross_Task_Intervention_v02/review/LITERATURE_MANUSCRIPT_REVIEW.md"
+    ],
+    "status": "SCOPED_DISABLED_CANDIDATE_REVIEW_COMPLETE; FULL_HISTORICAL_DEPTH_OPEN",
+    "core_layer_item_ids_structurally_visited": 1608,
+    "candidate_items_locally_reviewed": 40,
+    "full_map_semantic_completion": false,
+    "inherited_unclosed_depth_ledger": {
+      "ids": 1034,
+      "fields": 1828,
+      "proof_ids": 1347,
+      "role": "Historical inherited counts, not recomputed or reduced by this structural pass."
+    },
+    "qc_open": [
+      "CTD-OPEN-ESTIMATOR-RECONSTRUCTION",
+      "CTD-OPEN-INDEPENDENT-CALIBRATION",
+      "CTD-OPEN-ACTUAL-CONSUMER-INTERVENTION",
+      "CTD-OPEN-EXTERNAL-REPLICATION",
+      "QC-20261008-10",
+      "IA-QC11",
+      "QC-20261008-12",
+      "QC-20261008-13",
+      "SCU-OPEN-R191-NORMALIZATION",
+      "SCU-AUDIT-DEPTH"
+    ]
+  },
+  "effective_pending_corrections": {
+    "index": "records/SCU20261010_Source_Consumer_Protocols/corrections/EFFECTIVE_CORRECTION_INDEX.json",
+    "original_records_preserved": true,
+    "enabled_as_established_premises": false,
+    "affected_rounds": [
+      "R194",
+      "R201",
+      "R202"
+    ]
+  },
+  "latest_publication": {
+    "research_id": "SCU20261010",
+    "report": "SCU-PAPER",
+    "version": "1.0.1",
+    "status": "PUBLISHED_PREPRINT_PUBLIC_READBACK_AND_DOI_RESOLUTION_VERIFIED",
+    "doi": "10.5281/zenodo.23272690",
+    "doi_url": "https://doi.org/10.5281/zenodo.23272690",
+    "manuscript": "records/SCUPUB20261010_DOI_Publication/release/matched-behavior-and-source-use-v1.0.1.md",
+    "pdf": "records/SCUPUB20261010_DOI_Publication/release/matched-behavior-and-source-use-v1.0.1.pdf",
+    "receipt": "records/SCUPUB20261010_DOI_Publication/FINAL_PUBLICATION_RECEIPT.json",
+    "peer_reviewed": false,
+    "scientific_map_admission_changed": false,
+    "DVC_in_published_paper": false
+  },
+  "prior_scoped_review_snapshot": {
+    "source": "records/DVC20261010_Device_Consumer_Validation/history/before_DVC_bd66a621/CURRENT_STATE.json",
+    "field": "latest_scoped_review",
+    "role": "Historical unresolved audit-debt record; old numbers are not newly measured current unread totals."
+  },
+  "latest_activity_persistence": {
+    "status": "GITHUB_SCIENCE_COMMIT_AND_LIBRARY_V84_ROUNDTRIP_VERIFIED; RECEIPT_COMMIT_SELF_RECORDED_BY_BRANCH_HEAD",
+    "receipt": "records/A3N20261010_Route_Fluency_Crossing/DUAL_SAVE_RECEIPT.json",
+    "github_science_commit": "53d569b2969acf50a34e4e84bd92c3d6dbc6f77e",
+    "library_master_version": 84,
+    "library_increment_id": "libfile_1b26c664c4648191b8d2d0c12e640b6e"
+  },
+  "concurrent_research_preserved": {
+    "id": "EIP20261010",
+    "commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+    "source": "records/EIP20261010_Exoskeleton_Instrumentation/RESEARCH_NOTE.md",
+    "handoff": "records/EIP20261010_Exoskeleton_Instrumentation/HANDOFF_ZH.md",
+    "status": "PENDING_CHECKPOINT_DISABLED",
+    "snapshot": "records/DVC20261010_Device_Consumer_Validation/history/before_DVC_d8c94faa/CURRENT_STATE.json"
+  },
+  "additional_candidate_normalization_open": {
+    "source": "records/DVC20261010_Device_Consumer_Validation/review/concurrent_eip/EIP_NORMALIZATION_QUALIFICATIONS.json",
+    "ids": [
+      "EIP-NQ1",
+      "EIP-NQ2",
+      "EIP-NQ3",
+      "EIP-NQ4"
+    ],
+    "nondeductive": true,
+    "map_replacement": false,
+    "actual_application_established": false
+  },
+  "latest_persistence_receipt": "records/A3N20261010_Route_Fluency_Crossing/DUAL_SAVE_RECEIPT.json",
+  "previous_latest_research_before_CTD": {
+    "id": "A3L20261010",
+    "result_version": "A3L-RESULT-v0.1.0",
+    "status": "PENDING_CHECKPOINT_DISABLED",
+    "source": "records/A3L20261010_Rescue_Learning/RESEARCH_NOTE.md",
+    "handoff": "records/A3L20261010_Rescue_Learning/HANDOFF_ZH.md",
+    "work_log": "records/A3L20261010_Rescue_Learning/WORK_LOG.md",
+    "enabled_as_established_premises": false,
+    "manuscript_status": "HOLD_STANDALONE_INTEGRATE_RESCUE_CORRECTION_AND_RETURN_TO_H",
+    "evidence_status": "INHERITED_ALGEBRA_APPLICATION_AND_PRIMARY_SOURCE_CORRECTION; NO_NEW_NEURAL_OR_H_EXPERIMENT"
+  },
+  "previous_next_priority_before_CTD": "Return to familiar bodily H: independently distinguish retained body/action familiarity from learned-cue recognition and fluency in one fixed domain, compare B_ret/B_fit with a held-out consequence. Reopen area-3a instrumentation only on new concrete same-instance direct-path/replay evidence.",
+  "previous_latest_research_before_CTD_v02": {
+    "id": "A3M20261010",
+    "result_version": "A3M-EXACT-v0.1.0",
+    "status": "PENDING_CHECKPOINT_DISABLED",
+    "source": "records/A3M20261010_Bodily_Familiarity_Invariance/RESEARCH_NOTE.md",
+    "handoff": "records/A3M20261010_Bodily_Familiarity_Invariance/HANDOFF_ZH.md",
+    "work_log": "records/A3M20261010_Bodily_Familiarity_Invariance/WORK_LOG.md",
+    "enabled_as_established_premises": false,
+    "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
+    "evidence_status": "EXACT_FINITE_SUPPORT_RESULT; NO_INDEPENDENT_H_ENDPOINT_OR_ACTUAL_OFF_DIAGONAL_INSTALLATION"
+  },
+  "previous_next_priority_before_CTD_v02": "Propose and criticize one independently oriented fallible endpoint for selected bodily/action familiarity and one physically credible R-not-equal-L manipulation. Do not continue generic cube statistics, area-3a classification or publication work without this new bridge evidence.",
+  "previous_scoped_review_before_CTD_v02": {
+    "audit": "records/CTD20261010_Cross_Task_Intervention/MAP_AUDIT.md",
+    "per_id_structure": "records/CTD20261010_Cross_Task_Intervention/review/BASELINE_PER_ID_STRUCTURE.json.gz",
+    "summary": "records/CTD20261010_Cross_Task_Intervention/review/BASELINE_STRUCTURE_SUMMARY.json",
+    "independent_candidate_review": "records/CTD20261010_Cross_Task_Intervention/literature/REVIEW_REPORT.md",
+    "status": "SCOPED_DISABLED_CANDIDATE_REVIEW_COMPLETE; FULL_HISTORICAL_DEPTH_OPEN",
+    "core_layer_item_ids_structurally_visited": 1608,
+    "candidate_items_independently_reviewed": 24,
+    "full_map_semantic_completion": false,
+    "inherited_unclosed_depth_ledger": {
+      "ids": 1034,
+      "fields": 1828,
+      "proof_ids": 1347,
+      "counting_warning": "Inherited historical debt, not reduced or recomputed by structural visit."
+    },
+    "qc_open": [
+      "QC-20261008-10",
+      "IA-QC11",
+      "QC-20261008-12",
+      "QC-20261008-13",
+      "SCU-OPEN-R191-NORMALIZATION",
+      "SCU-AUDIT-DEPTH"
+    ]
+  },
+  "concurrent_A3M_preserved_at_CTD_v02": {
+    "head": "2faccb45147435b67d901e64f8045cd0e31a8d2a",
+    "path": "records/A3M20261010_Bodily_Familiarity_Invariance",
+    "status": "UNCHANGED"
+  }
+}

@@ -562,6 +562,45 @@
       "compatibility_audit": "records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_AUDIT.md",
       "handoff": "records/CTD20261010_Cross_Task_Intervention_v02/HANDOFF_ZH.md",
       "instruction": "Source-audit observations are nondeductive; Gaussian identification requires its complete paired-sample contract. No experience bridge is admitted."
+    },
+    {
+      "id": "CTD3-20261010",
+      "research_id": "CTD20261010",
+      "result_version": "CTD-RESULT-v1.0.0",
+      "base_release": "UCT-MAP-v1.1.2",
+      "path": "records/CTD20261010_Noise_Identifiability_v10/governance/CTD3_MAP_EXTENSION.json",
+      "sha256": "71789380a7f5c4c8a9bc1b04099efb602a1d9fc39dc793e92d4e62105dd70ecd",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "candidate_counts": {
+        "nodes": 5,
+        "active_conditional_rules": 2,
+        "nondeductive_context_links": 6
+      },
+      "publication_coverage_version": "UCT-PUB-v1.0.31",
+      "compatibility_audit": "records/CTD20261010_Noise_Identifiability_v10/governance/CTD3_MAP_AUDIT.md",
+      "handoff": "records/CTD20261010_Noise_Identifiability_v10/HANDOFF_ZH.md",
+      "instruction": "Finite-sample projection is conditional on the full paired-binomial and calibration contracts. Public disclosure does not enable a premise or establish an actual experiment.",
+      "publication": {
+        "research_id": "CTD20261010",
+        "report": "TA-TR-2026-26",
+        "version": "1.0.0",
+        "status": "PUBLISHED_PREPRINT_PUBLIC_READBACK_AND_DOI_RESOLUTION_VERIFIED",
+        "doi": "10.5281/zenodo.23279189",
+        "doi_url": "https://doi.org/10.5281/zenodo.23279189",
+        "record_url": "https://zenodo.org/records/23279189",
+        "manuscript": "records/CTD20261010_Noise_Identifiability_v10/release/noise-identifiability-bodily-judgments-v1.0.0.md",
+        "pdf": "records/CTD20261010_Noise_Identifiability_v10/release/noise-identifiability-bodily-judgments-v1.0.0.pdf",
+        "reproduction": "records/CTD20261010_Noise_Identifiability_v10/release/reproducibility-v1.0.0.zip",
+        "receipt": "records/CTD20261010_Noise_Identifiability_v10/publication-record.json",
+        "peer_reviewed": false,
+        "scientific_map_admission_changed": false,
+        "new_human_data": false,
+        "doi_resolution_pass": true,
+        "doi_resolution_source": "records/CTD20261010_Noise_Identifiability_v10/DOI_RESOLUTION.json",
+        "publication_workflow_snapshot_unmodified": true
+      },
+      "actual_application_status": "OPEN"
     }
   ],
   "pending_rebase_target": "UCT-MAP-v1.1.2; prior pending instructions and candidate version labels remain historical source metadata.",
@@ -571,7 +610,7 @@
   "unmodified_root_graph_is_only_historical_base": true,
   "on_source_change": "Fail closed; compare exact current bytes, repeat applicable semantic compatibility review and affected rederivation, then create a new immutable completed version.",
   "publication_coverage": {
-    "version": "UCT-PUB-v1.0.28",
+    "version": "UCT-PUB-v1.0.31",
     "entry": "PUBLICATION_COVERAGE.json",
     "nondeductive": true
   },
@@ -586,6 +625,43 @@
     "completed_graph_changed": false
   },
   "latest_scoped_review": {
+    "audit": "records/CTD20261010_Noise_Identifiability_v10/governance/CTD3_MAP_AUDIT.md",
+    "per_id_structure": "records/CTD20261010_Noise_Identifiability_v10/governance/CTD3_BASELINE_PER_ID_REVIEW.json.gz",
+    "receipt": "records/CTD20261010_Noise_Identifiability_v10/governance/CTD3_MAP_REVIEW_RECEIPT.json",
+    "status": "SCOPED_DISABLED_CANDIDATE_REVIEW;FULL_HISTORICAL_DEPTH_OPEN",
+    "core_layer_item_ids_structurally_visited": 1608,
+    "candidate_items_locally_reviewed": 13,
+    "full_map_semantic_completion": false,
+    "inherited_unclosed_depth_ledger": {
+      "ids": 1034,
+      "fields": 1828,
+      "proof_ids": 1347,
+      "role": "Historical inherited counts, not recomputed or reduced by this structural pass."
+    },
+    "qc_open": [
+      "CTD-OPEN-ESTIMATOR-RECONSTRUCTION",
+      "CTD-OPEN-INDEPENDENT-CALIBRATION",
+      "CTD-OPEN-ACTUAL-CONSUMER-INTERVENTION",
+      "CTD-OPEN-EXTERNAL-REPLICATION",
+      "QC-20261008-10",
+      "IA-QC11",
+      "QC-20261008-12",
+      "QC-20261008-13",
+      "SCU-OPEN-R191-NORMALIZATION",
+      "SCU-AUDIT-DEPTH",
+      "CTD2-OPEN-SAME-INTERNAL-SAMPLE",
+      "CTD2-OPEN-COMMON-CENTER",
+      "CTD2-OPEN-INDEPENDENT-LAPSE",
+      "CTD2-OPEN-CRITERION-CORRELATION-CALIBRATION",
+      "CTD2-OPEN-ACTUAL-NEURAL-MEDIATOR",
+      "CTD2-OPEN-PHENOMENAL-BRIDGE",
+      "CTD2-OPEN-PROSPECTIVE-REPLICATION",
+      "CTD2-OPEN-FULL-SEMANTIC-INTEGRATION",
+      "CTD3-OPEN-ACTUAL-CALIBRATION",
+      "CTD3-OPEN-CERTIFIED-CONTINUOUS-PROJECTION"
+    ]
+  },
+  "previous_scoped_review_before_CTD_v10_publication": {
     "audit": "records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_AUDIT.md",
     "per_id_structure": "records/CTD20261010_Cross_Task_Intervention_v02/governance/BASELINE_PER_ID_STRUCTURE.json.gz",
     "summary": "records/CTD20261010_Cross_Task_Intervention_v02/governance/BASELINE_STRUCTURE_SUMMARY.json",

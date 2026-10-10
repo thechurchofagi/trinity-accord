@@ -1,0 +1,29 @@
+{
+  "scope": "All1608 structural checks plus local CTD2 semantics; not full-map semantic reproof.",
+  "source_graph_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
+  "counts": {
+    "nodes": 913,
+    "active_conditional_rules": 424,
+    "contexts": 261,
+    "suspended": 10,
+    "total": 1608
+  },
+  "unresolved_active_rule_references": 0,
+  "new_complete_semantic_review": false,
+  "completed_graph_changes": 0,
+  "inherited_open_debt": {
+    "ids": 1034,
+    "fields": 1828,
+    "proof_ids": 1347,
+    "role": "Historical inherited counts, not recomputed or reduced by this structural pass."
+  },
+  "candidate_items": {
+    "nodes": 20,
+    "rules": 7,
+    "contexts": 13,
+    "total": 40
+  },
+  "all_candidate_items_disabled": true,
+  "v01_disabled_candidate_unchanged": true,
+  "concurrent_A3M_preserved": true
+}

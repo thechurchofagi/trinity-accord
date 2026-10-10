@@ -179,6 +179,43 @@
       "novelty": "SPECIFIC_CLASSICAL_METHODS_APPLICATION_AND_REAL_DATA_SECONDARY_ANALYSIS_PRIORITY_UNVERIFIED",
       "scientific_delta": "Explicit proportional/ordinal cross-task constraints, sharp correction budgets, released-width and direct-count non-rejection results, source-estimator reconstruction boundary.",
       "enabled_as_established_premises": false
+    },
+    {
+      "research_id": "CTD20261010",
+      "result_version": "1.0.0",
+      "base_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "title": "Identifiability of Noise Sources in Bodily Judgments",
+      "source": "records/CTD20261010_Noise_Identifiability_v10/release/noise-identifiability-bodily-judgments-v1.0.0.md",
+      "pdf": "records/CTD20261010_Noise_Identifiability_v10/release/noise-identifiability-bodily-judgments-v1.0.0.pdf",
+      "work_log": "records/CTD20261010_Noise_Identifiability_v10/WORK_LOG.md",
+      "handoff": "records/CTD20261010_Noise_Identifiability_v10/HANDOFF_ZH.md",
+      "module": "records/CTD20261010_Noise_Identifiability_v10/governance/CTD3_MAP_EXTENSION.json",
+      "claim_ledger": "records/CTD20261010_Noise_Identifiability_v10/CLAIM_LEDGER.json",
+      "review": "records/CTD20261010_Noise_Identifiability_v10/governance/CTD3_MAP_AUDIT.md",
+      "status": "PUBLISHED_PREPRINT_CANDIDATES_DISABLED",
+      "publication": {
+        "research_id": "CTD20261010",
+        "report": "TA-TR-2026-26",
+        "version": "1.0.0",
+        "status": "PUBLISHED_PREPRINT_PUBLIC_READBACK_AND_DOI_RESOLUTION_VERIFIED",
+        "doi": "10.5281/zenodo.23279189",
+        "doi_url": "https://doi.org/10.5281/zenodo.23279189",
+        "record_url": "https://zenodo.org/records/23279189",
+        "manuscript": "records/CTD20261010_Noise_Identifiability_v10/release/noise-identifiability-bodily-judgments-v1.0.0.md",
+        "pdf": "records/CTD20261010_Noise_Identifiability_v10/release/noise-identifiability-bodily-judgments-v1.0.0.pdf",
+        "reproduction": "records/CTD20261010_Noise_Identifiability_v10/release/reproducibility-v1.0.0.zip",
+        "receipt": "records/CTD20261010_Noise_Identifiability_v10/publication-record.json",
+        "peer_reviewed": false,
+        "scientific_map_admission_changed": false,
+        "new_human_data": false,
+        "doi_resolution_pass": true,
+        "doi_resolution_source": "records/CTD20261010_Noise_Identifiability_v10/DOI_RESOLUTION.json",
+        "publication_workflow_snapshot_unmodified": true
+      },
+      "enabled_as_established_premises": false,
+      "actual_application_status": "OPEN",
+      "publication_coverage_version": "UCT-PUB-v1.0.31"
     }
   ],
   "pending_checkpoints": [
@@ -576,7 +613,11 @@
       "compatibility_audit": "records/A3M20261010_Bodily_Familiarity_Invariance/MAP_AUDIT.md",
       "handoff": "records/A3M20261010_Bodily_Familiarity_Invariance/HANDOFF_ZH.md",
       "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
-      "candidate_counts": {"nodes": 0, "rules": 0, "contexts": 0},
+      "candidate_counts": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0
+      },
       "claim_ledger": "records/A3M20261010_Bodily_Familiarity_Invariance/CLAIM_LEDGER.json"
     },
     {
@@ -615,13 +656,75 @@
       "compatibility_audit": "records/A3N20261010_Route_Fluency_Crossing/MAP_AUDIT.md",
       "handoff": "records/A3N20261010_Route_Fluency_Crossing/HANDOFF_ZH.md",
       "manuscript_status": "HOLD_STANDALONE_USE_AS_METHOD_AND_GAP_MODULE",
-      "candidate_counts": {"nodes": 0, "rules": 0, "contexts": 0},
+      "candidate_counts": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0
+      },
       "claim_ledger": "records/A3N20261010_Route_Fluency_Crossing/CLAIM_LEDGER.json"
+    },
+    {
+      "research_id": "A3O20261010",
+      "result_version": "A3O-EXACT-v0.1.0",
+      "source": "records/A3O20261010_Route_Grain_Selection_Crossing/MAP_EXTENSION.json",
+      "sha256": "6b0b3a282841291712956a7b1157f644a9d1502ed34a5ef58ac609616b767b9b",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "actual_application": "OPEN",
+      "publication_coverage_version": "UCT-PUB-v1.0.30",
+      "compatibility_audit": "records/A3O20261010_Route_Grain_Selection_Crossing/MAP_AUDIT.md",
+      "handoff": "records/A3O20261010_Route_Grain_Selection_Crossing/HANDOFF_ZH.md",
+      "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
+      "candidate_counts": {
+        "nodes": 0,
+        "rules": 0,
+        "context_links": 0
+      },
+      "preservation_scope": "Execution-time concurrent research navigation; not republished as a CTD claim."
+    },
+    {
+      "id": "CTD3-20261010",
+      "research_id": "CTD20261010",
+      "result_version": "CTD-RESULT-v1.0.0",
+      "base_release": "UCT-MAP-v1.1.2",
+      "path": "records/CTD20261010_Noise_Identifiability_v10/governance/CTD3_MAP_EXTENSION.json",
+      "sha256": "71789380a7f5c4c8a9bc1b04099efb602a1d9fc39dc793e92d4e62105dd70ecd",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "candidate_counts": {
+        "nodes": 5,
+        "active_conditional_rules": 2,
+        "nondeductive_context_links": 6
+      },
+      "publication_coverage_version": "UCT-PUB-v1.0.31",
+      "compatibility_audit": "records/CTD20261010_Noise_Identifiability_v10/governance/CTD3_MAP_AUDIT.md",
+      "handoff": "records/CTD20261010_Noise_Identifiability_v10/HANDOFF_ZH.md",
+      "instruction": "Finite-sample projection is conditional on the full paired-binomial and calibration contracts. Public disclosure does not enable a premise or establish an actual experiment.",
+      "publication": {
+        "research_id": "CTD20261010",
+        "report": "TA-TR-2026-26",
+        "version": "1.0.0",
+        "status": "PUBLISHED_PREPRINT_PUBLIC_READBACK_AND_DOI_RESOLUTION_VERIFIED",
+        "doi": "10.5281/zenodo.23279189",
+        "doi_url": "https://doi.org/10.5281/zenodo.23279189",
+        "record_url": "https://zenodo.org/records/23279189",
+        "manuscript": "records/CTD20261010_Noise_Identifiability_v10/release/noise-identifiability-bodily-judgments-v1.0.0.md",
+        "pdf": "records/CTD20261010_Noise_Identifiability_v10/release/noise-identifiability-bodily-judgments-v1.0.0.pdf",
+        "reproduction": "records/CTD20261010_Noise_Identifiability_v10/release/reproducibility-v1.0.0.zip",
+        "receipt": "records/CTD20261010_Noise_Identifiability_v10/publication-record.json",
+        "peer_reviewed": false,
+        "scientific_map_admission_changed": false,
+        "new_human_data": false,
+        "doi_resolution_pass": true,
+        "doi_resolution_source": "records/CTD20261010_Noise_Identifiability_v10/DOI_RESOLUTION.json",
+        "publication_workflow_snapshot_unmodified": true
+      },
+      "actual_application_status": "OPEN"
     }
   ],
   "preservation": "Exact previous registry remains preserved. The full research manuscript/module and saved per-item review decisions are in the version capsule; expanded artifacts are also in the offline downloadable archive.",
   "publication_coverage": {
-    "version": "UCT-PUB-v1.0.29",
+    "version": "UCT-PUB-v1.0.31",
     "entry": "PUBLICATION_COVERAGE.json",
     "nondeductive": true
   },

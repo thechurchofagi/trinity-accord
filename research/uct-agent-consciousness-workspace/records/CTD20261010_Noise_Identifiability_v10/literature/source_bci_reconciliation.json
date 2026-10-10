@@ -1,0 +1,48 @@
+{
+  "inputs": [
+    {
+      "path": "/workspace/scratch/5b73aae6b1e4/ctd_v02/empirical/inputs/Experiment_3_Computational_modelling.xlsx",
+      "sha256": "32e58a814b7d33f52f3dc994a753715d4ddfa21c8ec7424b80ebef43c6d560e4"
+    },
+    {
+      "path": "/workspace/scratch/5b73aae6b1e4/ctd_v02/empirical/inputs/Experiment_3.xlsx",
+      "sha256": "d3b2fef22f077788e5299dedb68737d453c09b005d9360bab8dfbe6c35852bc9"
+    },
+    {
+      "path": "/workspace/scratch/5b73aae6b1e4/ctd_v02/empirical/inputs/NatComm2026_SourceData.xlsx",
+      "sha256": "3202d68439ad502ff95e7a4d59535a4e8ff9072d5c6a76b5aebf7dde90228a82"
+    }
+  ],
+  "n": 30,
+  "delta_convention": "BCI_sigma minus BCI_psame; negative favors sigma",
+  "free_parameter_difference": -2,
+  "trials_per_person": 420,
+  "no_optimization_performed": true,
+  "no_participant_permutation": true,
+  "max_abs_saved_parameter_nll_error": {
+    "sigma": 6.536993168992922e-13,
+    "psame": 1.993925025089993e-09
+  },
+  "max_abs_publisher_minus_script": {
+    "aic": 2.4868995751603507e-14,
+    "bic": 4.796163466380676e-14
+  },
+  "max_abs_publisher_minus_correct": {
+    "aic": 29.821049106427974,
+    "bic": 29.82104910642795
+  },
+  "sums": {
+    "saved_nll_sigma": 5138.960411207294,
+    "saved_nll_psame": 5142.889991070781,
+    "correct_delta_aic": -127.85915972697424,
+    "public_script_delta_aic": -112.14084027302576,
+    "publisher_delta_aic": -112.1408402730258,
+    "correct_delta_bic": -370.274442403619,
+    "public_script_delta_bic": -354.5561229496706,
+    "publisher_delta_bic": -354.5561229496702
+  },
+  "raw_nll_favor_sigma_n": 14,
+  "correct_aic_favor_sigma_n": 29,
+  "correct_bic_favor_sigma_n": 29,
+  "interpretation": "The information-criterion sign discrepancy changes reported values, not the aggregate preferred model. These are saved-fit evaluations, not guaranteed global optima or new model fits."
+}

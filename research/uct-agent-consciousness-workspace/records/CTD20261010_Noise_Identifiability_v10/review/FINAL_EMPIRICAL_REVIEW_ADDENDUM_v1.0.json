@@ -1,0 +1,25 @@
+{
+  "date_UTC": "2026-10-10",
+  "scope": "Read-only final wording check: normalized kappa-one intervals, conservative empty-probability bound, and restricted second-order claim. No numerical result or analysis setting changed.",
+  "actual_current_manuscript": {
+    "path": "manuscript/noise-identifiability-bodily-judgments-v1.0.0.md",
+    "bytes": 61065,
+    "sha256": "6bc9dad5add7612735358236c9b7533cc8f54f6aa535443ee2d9e9f5d219c734"
+  },
+  "initial_review_snapshot": {
+    "path": "manuscript/noise-identifiability-bodily-judgments-v1.0.0.md",
+    "sha256": "6bc9dad5add7612735358236c9b7533cc8f54f6aa535443ee2d9e9f5d219c734",
+    "bytes": 61065
+  },
+  "current_matches_initial_snapshot": true,
+  "wording_checks": {
+    "empty_probability_stated_as_upper_bound": true,
+    "population_kappa_one_explicitly_normalized": true,
+    "confidence_kappa_one_explicitly_normalized": true,
+    "abstract_second_order_scoped_to_total_correlation": true,
+    "section_6_3_criterion_independence_explicit": true
+  },
+  "original_review_json_preserved": true,
+  "no_numerical_runs": true,
+  "status": "PASS"
+}

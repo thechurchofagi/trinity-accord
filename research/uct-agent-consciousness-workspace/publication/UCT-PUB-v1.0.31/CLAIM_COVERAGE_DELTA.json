@@ -1,0 +1,1599 @@
+{
+  "schema": "uct-claim-coverage-delta/1",
+  "coverage_version": "UCT-PUB-v1.0.31",
+  "parent_coverage_version": "UCT-PUB-v1.0.30",
+  "research_id": "CTD20261010",
+  "result_version": "CTD-RESULT-v1.0.0",
+  "publication_evidence": {
+    "research_id": "CTD20261010",
+    "report": "TA-TR-2026-26",
+    "version": "1.0.0",
+    "status": "PUBLISHED_PREPRINT_PUBLIC_READBACK_AND_DOI_RESOLUTION_VERIFIED",
+    "doi": "10.5281/zenodo.23279189",
+    "doi_url": "https://doi.org/10.5281/zenodo.23279189",
+    "record_url": "https://zenodo.org/records/23279189",
+    "manuscript": "records/CTD20261010_Noise_Identifiability_v10/release/noise-identifiability-bodily-judgments-v1.0.0.md",
+    "pdf": "records/CTD20261010_Noise_Identifiability_v10/release/noise-identifiability-bodily-judgments-v1.0.0.pdf",
+    "reproduction": "records/CTD20261010_Noise_Identifiability_v10/release/reproducibility-v1.0.0.zip",
+    "receipt": "records/CTD20261010_Noise_Identifiability_v10/publication-record.json",
+    "peer_reviewed": false,
+    "scientific_map_admission_changed": false,
+    "new_human_data": false,
+    "doi_resolution_pass": true,
+    "doi_resolution_source": "records/CTD20261010_Noise_Identifiability_v10/DOI_RESOLUTION.json",
+    "publication_workflow_snapshot_unmodified": true
+  },
+  "scientific_map": "UCT-MAP-v1.1.2",
+  "nondeductive": true,
+  "publication_implies_validity": false,
+  "unknown_is_unpublished": false,
+  "claims": [
+    {
+      "id": "CTD2-N001",
+      "role": "disabled_scientific_candidate_node",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "coverage_axis": "Formal disclosure in the official archive; body scope remains separately stated.",
+      "independent_scope_review": {
+        "id": "CTD2-N001",
+        "label": "Effective Gaussian interval response domain",
+        "kind": "MODEL_CLASS_DEFINITION",
+        "original_statement": "One fixed participant and declared task/condition family has p_tf(s)=lambda/2+(1-lambda)[Phi((k_tf-(s-mu_t))/sigma_f)-Phi((-k_tf-(s-mu_t))/sigma_f)]. Source k^2 is the positive part of 2v(v+S^2)/S^2 times [logit(pi)+0.5log(1+S^2/v)], with v=sigma^2 and S^2=84000 ms^2. This is an observation-model definition, not an anatomical interpretation.",
+        "statement_sha256": "5a2f334339d91ee17c37b8248ffe840195c0d217b38a1cf78e6af5e97bebfebb",
+        "coverage_category": "A",
+        "manuscript_sections": "2.2; 4.1; Eqs. (1)–(3)",
+        "manuscript_support": "响应族、source阈值、84000刺激方差及两个任务中心扩展均明示；观察模型不等于解剖解释。",
+        "package_only_details_or_explicit_limits": "完整实现、MATLAB原式与逐参数执行记录在ZIP；正文已陈述主要数值边界。",
+        "verified_package_support_paths": [
+          "root_analysis/fit_response_models.py",
+          "literature/code_archive/modelprediction_log_BCI.m",
+          "RELOCATION_PROVENANCE.json",
+          "theory/RESPONSE_IDENTIFIABILITY_RESULTS.md"
+        ],
+        "inherited_novelty_status": [
+          "INHERITED",
+          "NEW_APPLICATION"
+        ],
+        "core_claim_fully_covered_in_paper": true,
+        "equivalent_hypothesis_in_main": false,
+        "composite_claim_has_package_only_components": false,
+        "only_citation_to_other_work_is_not_coverage": true,
+        "candidate_enabled_in_source_ledger": false,
+        "actual_application_premises_discharged_in_source_ledger": false
+      },
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "candidate_statement": "CLAIM_LEDGER.json",
+        "all_listed_evidence_paths_present": true
+      },
+      "enabled_as_established_premise": false,
+      "actual_application": "OPEN",
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-N002",
+      "role": "disabled_scientific_candidate_node",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "coverage_axis": "Formal disclosure in the official archive; body scope remains separately stated.",
+      "independent_scope_review": {
+        "id": "CTD2-N002",
+        "label": "Released likelihood and data provenance",
+        "kind": "SECONDARY_EVIDENCE",
+        "original_statement": "The released Experiment 3 aggregate table has 30 selected participants, 2 tasks, 3 stimulation conditions and 7 SOAs with 10 judgments per cell. Evaluating the declared source likelihood at all 60 saved parameter vectors reproduces saved NLLs within 2e-9 and fixes the task/condition mapping.",
+        "statement_sha256": "75a722d1e5735e63f64144d8fc9bad4aed51ce70390d1e88a7d8db538a9fa09d",
+        "coverage_category": "A",
+        "manuscript_sections": "2.1; 3.1; Appendix A.1",
+        "manuscript_support": "30×2×3×7×10数据域、60组保存参数likelihood复现、聚合与缺失顺序限制完整陈述。",
+        "package_only_details_or_explicit_limits": "全部工作簿、60向量逐项结果、完整SHA与CSV映射是附件证据；不是新参与者数据。",
+        "verified_package_support_paths": [
+          "empirical/inputs/Experiment_3.xlsx",
+          "empirical/inputs/Experiment_3_Computational_modelling.xlsx",
+          "literature/source_bci_reconciliation.json",
+          "literature/source_bci_reconciliation.csv"
+        ],
+        "inherited_novelty_status": [
+          "NEW_APPLICATION"
+        ],
+        "core_claim_fully_covered_in_paper": true,
+        "equivalent_hypothesis_in_main": false,
+        "composite_claim_has_package_only_components": false,
+        "only_citation_to_other_work_is_not_coverage": true,
+        "candidate_enabled_in_source_ledger": false,
+        "actual_application_premises_discharged_in_source_ledger": false
+      },
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "candidate_statement": "CLAIM_LEDGER.json",
+        "all_listed_evidence_paths_present": true
+      },
+      "enabled_as_established_premise": false,
+      "actual_application": "OPEN",
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-N003",
+      "role": "disabled_scientific_candidate_node",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "coverage_axis": "Formal disclosure in the official archive; body scope remains separately stated.",
+      "independent_scope_review": {
+        "id": "CTD2-N003",
+        "label": "Source information-criterion sign correction",
+        "kind": "ARITHMETIC_CORRECTION",
+        "original_statement": "For d_i=NLL_Sigma,i-NLL_Prior,i the correct saved-fit differences are DeltaAIC_i=-4+2d_i and DeltaBIC_i=-2log(420)+2d_i. The source calculation instead used -2d_i. Reconciliation covers all 30 reported source-data rows. Correcting it preserves the aggregate Sigma preference; summed corrected DeltaAIC is approximately -127.8592.",
+        "statement_sha256": "c5c1b3e169b843b8817e13a841450b8264a4018a7201fb6972d10048639ba7d8",
+        "coverage_category": "A",
+        "manuscript_sections": "3.1; Eq. (4); Appendix A.1",
+        "manuscript_support": "符号纠正、全部30行核对、总体Sigma偏好保留、bootstrap历史不可恢复均明确。",
+        "package_only_details_or_explicit_limits": "原MATLAB具体执行路径、每人未舍入差值和审计CSV在ZIP。",
+        "verified_package_support_paths": [
+          "literature/SOURCE_BCI_AUDIT.md",
+          "literature/source_bci_reconciliation.json",
+          "literature/source_bci_reconciliation.csv"
+        ],
+        "inherited_novelty_status": [
+          "CORRECTION",
+          "NEW_APPLICATION"
+        ],
+        "core_claim_fully_covered_in_paper": true,
+        "equivalent_hypothesis_in_main": false,
+        "composite_claim_has_package_only_components": false,
+        "only_citation_to_other_work_is_not_coverage": true,
+        "candidate_enabled_in_source_ledger": false,
+        "actual_application_premises_discharged_in_source_ledger": false
+      },
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "candidate_statement": "CLAIM_LEDGER.json",
+        "all_listed_evidence_paths_present": true
+      },
+      "enabled_as_established_premise": false,
+      "actual_application": "OPEN",
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-N004",
+      "role": "disabled_scientific_candidate_node",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "coverage_axis": "Formal disclosure in the official archive; body scope remains separately stated.",
+      "independent_scope_review": {
+        "id": "CTD2-N004",
+        "label": "Centered symmetry and conditional test law",
+        "kind": "CONDITIONAL_MATHEMATICAL_RESULT",
+        "original_statement": "Every zero-centered curve in CTD2-N001 satisfies p(s)=p(-s). For independent Binomial(10,p) signed-pair counts, conditioning on total K gives Y_plus|K~Hypergeometric(20,K,10). The pooled-pair deviance against cell saturation is a lower bound on every centered BCI model's count-table deviance.",
+        "statement_sha256": "fa465df2c3b74c1d672c8347a66cf7aa3f5ab41bf939e1eb7265471b9617f541",
+        "coverage_category": "A",
+        "manuscript_sections": "3.3; Appendix A.2; Eqs. (6)–(7), (A1)",
+        "manuscript_support": "对称性、条件超几何律、独立性前提及模型包含给出的deviance下界有正文论证。",
+        "package_only_details_or_explicit_limits": "可执行统计量、规划记录、每对总数和核验实现是ZIP细节。",
+        "verified_package_support_paths": [
+          "theory/test_source_symmetry.py",
+          "theory/SYMMETRY_ANALYSIS_PLAN.json",
+          "theory/SYMMETRY_TEST_REPORT.md"
+        ],
+        "inherited_novelty_status": [
+          "INHERITED",
+          "NEW_APPLICATION"
+        ],
+        "core_claim_fully_covered_in_paper": true,
+        "equivalent_hypothesis_in_main": false,
+        "composite_claim_has_package_only_components": false,
+        "only_citation_to_other_work_is_not_coverage": true,
+        "candidate_enabled_in_source_ledger": false,
+        "actual_application_premises_discharged_in_source_ledger": false
+      },
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "candidate_statement": "CLAIM_LEDGER.json",
+        "all_listed_evidence_paths_present": true
+      },
+      "enabled_as_established_premise": false,
+      "actual_application": "OPEN",
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-N005",
+      "role": "disabled_scientific_candidate_node",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "coverage_axis": "Formal disclosure in the official archive; body scope remains separately stated.",
+      "independent_scope_review": {
+        "id": "CTD2-N005",
+        "label": "Conditional source-symmetry rejection",
+        "kind": "NEGATIVE_SECONDARY_EVIDENCE",
+        "original_statement": "The fixed global 540-pair test gives T=984.30423637609. Zero of 19999 conditional simulations exceeds or equals T, yielding plus-one p=0.00005 and a 95% binomial Monte Carlo tail interval [0,0.0001844362]. This rejects the centered independent-binomial family under the stated observation law.",
+        "statement_sha256": "ae578928539e15740fe7df134ddd9d3ac128f367c5df1e90aa642ec08518f700",
+        "coverage_category": "A",
+        "manuscript_sections": "3.3; Appendix A.2; Figure 1",
+        "manuscript_support": "全局540对统计量、19999次、plus-one p、Monte Carlo尾区间及拒绝范围均陈述。",
+        "package_only_details_or_explicit_limits": "完整精度、seed 202610100742、全部模拟数组与pair/subgroup诊断仅附件记录。",
+        "verified_package_support_paths": [
+          "theory/SYMMETRY_TEST_RESULTS.json",
+          "theory/symmetry_conditional_simulations.npz",
+          "theory/symmetry_pair_diagnostics.csv",
+          "theory/SYMMETRY_ANALYSIS_PLAN.json",
+          "theory/SYMMETRY_TEST_REPORT.md"
+        ],
+        "inherited_novelty_status": [
+          "NEGATIVE_RESULT",
+          "NEW_APPLICATION"
+        ],
+        "core_claim_fully_covered_in_paper": true,
+        "equivalent_hypothesis_in_main": false,
+        "composite_claim_has_package_only_components": false,
+        "only_citation_to_other_work_is_not_coverage": true,
+        "candidate_enabled_in_source_ledger": false,
+        "actual_application_premises_discharged_in_source_ledger": false
+      },
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "candidate_statement": "CLAIM_LEDGER.json",
+        "all_listed_evidence_paths_present": true
+      },
+      "enabled_as_established_premise": false,
+      "actual_application": "OPEN",
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-N006",
+      "role": "disabled_scientific_candidate_node",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "coverage_axis": "Formal disclosure in the official archive; body scope remains separately stated.",
+      "independent_scope_review": {
+        "id": "CTD2-N006",
+        "label": "Corrected fixed-partition response comparison",
+        "kind": "SECONDARY_EVIDENCE",
+        "original_statement": "In the final bounded four-model pipeline, the task-center Sigma model has 60.8845945270 lower held-out binary NLL than the task-center Prior model; mean participant difference is -2.0294864842 and its descriptive paired t interval is [-3.2676238033,-0.7913491652]. All shifted training fits satisfy nesting after uniform training-only repair.",
+        "statement_sha256": "4e58c544a542689bf943a24ff60fb7c1dfbd9fa965dbf87a4dc21c9c96d94df8",
+        "coverage_category": "A",
+        "manuscript_sections": "4.1–4.2; Appendix A.3; Figure 1",
+        "manuscript_support": "四族比较、固定人工分割、nested-start统一修复、60.885差值及区间和解释边界完整陈述。",
+        "package_only_details_or_explicit_limits": "120个全数据fit与600个训练fit、partition、全部梯度/嵌套结果及废弃首轮输出在ZIP。",
+        "verified_package_support_paths": [
+          "empirical/results/bci_response/response_comparison_summary.json",
+          "empirical/results/bci_response/cv_fits.json",
+          "empirical/results/bci_response/cv_partition_counts.npz",
+          "empirical/results/bci_response/cv_nesting_repair_summary.json",
+          "theory/RESPONSE_COMPARISON_AUDIT.json",
+          "theory/RESPONSE_COMPARISON_AUDIT.md"
+        ],
+        "inherited_novelty_status": [
+          "NEW_APPLICATION",
+          "CORRECTION"
+        ],
+        "core_claim_fully_covered_in_paper": true,
+        "equivalent_hypothesis_in_main": false,
+        "composite_claim_has_package_only_components": false,
+        "only_citation_to_other_work_is_not_coverage": true,
+        "candidate_enabled_in_source_ledger": false,
+        "actual_application_premises_discharged_in_source_ledger": false
+      },
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "candidate_statement": "CLAIM_LEDGER.json",
+        "all_listed_evidence_paths_present": true
+      },
+      "enabled_as_established_premise": false,
+      "actual_application": "OPEN",
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-N007",
+      "role": "disabled_scientific_candidate_node",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "coverage_axis": "Formal disclosure in the official archive; body scope remains separately stated.",
+      "independent_scope_review": {
+        "id": "CTD2-N007",
+        "label": "Additive Gaussian sensory and criterion domain",
+        "kind": "MODEL_CLASS_DEFINITION",
+        "original_statement": "A sensory sample X=s+E with E~N(0,a) and an independent criterion center C~N(mu,b) gives response 1{|X-C|<=k}; its effective variance is v=a+b. Lower and upper criteria C-k and C+k move together and do not cross.",
+        "statement_sha256": "07a68d449ff3ceb862851b944c4fe16c3646270a074a1052d1e058bfa926fce6",
+        "coverage_category": "A",
+        "manuscript_sections": "5.1; Eq. (8)",
+        "manuscript_support": "Gaussian感觉误差与同向移动criterion center、v=a+b及界限不交叉均明确；既有归属明确。",
+        "package_only_details_or_explicit_limits": "积分核验与代码是附件；一般分解不标为本稿首次发现。",
+        "verified_package_support_paths": [
+          "theory/bci_identification.py",
+          "theory/check_bci_identification.py",
+          "literature/V02_NOVELTY_AND_PUBLICATION_AUDIT.md",
+          "theory/RESPONSE_IDENTIFIABILITY_RESULTS.md"
+        ],
+        "inherited_novelty_status": [
+          "INHERITED"
+        ],
+        "core_claim_fully_covered_in_paper": true,
+        "equivalent_hypothesis_in_main": false,
+        "composite_claim_has_package_only_components": false,
+        "only_citation_to_other_work_is_not_coverage": true,
+        "candidate_enabled_in_source_ledger": false,
+        "actual_application_premises_discharged_in_source_ledger": false
+      },
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "candidate_statement": "CLAIM_LEDGER.json",
+        "all_listed_evidence_paths_present": true
+      },
+      "enabled_as_established_premise": false,
+      "actual_application": "OPEN",
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-N008",
+      "role": "disabled_scientific_candidate_node",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "coverage_axis": "Formal disclosure in the official archive; body scope remains separately stated.",
+      "independent_scope_review": {
+        "id": "CTD2-N008",
+        "label": "Exact constant-sensory intervention counterpart",
+        "kind": "CONDITIONAL_MATHEMATICAL_RESULT",
+        "original_statement": "For each participant with source variances v_f>0, choose a fixed a in (0,min_f v_f] and set b_f=v_f-a. Retaining every k_tf, center and lapse gives the same marginal response at every SOA and the same likelihood for every possible marginal count table. The fixed construction a=0.5 min_f v_f adds no fitted prediction parameter.",
+        "statement_sha256": "77ec6ce045669dc80534edcbb7f0b4b14375dad6623bb97d99196f16dfd957d7",
+        "coverage_category": "A",
+        "manuscript_sections": "5.1 Proposition 1; Figure 2",
+        "manuscript_support": "固定a、全部SOA/可能边际数据等价证明、保留阈值轨迹及无新拟合参数均完整。",
+        "package_only_details_or_explicit_limits": "1260单元逐项双实现概率、各人NLL及独立积分检查在ZIP。",
+        "verified_package_support_paths": [
+          "root_analysis/instantiate_response_twins.py",
+          "root_analysis/response_twin_summary.json",
+          "root_analysis/response_twin_probabilities.csv",
+          "theory/BCI_IDENTIFICATION_CHECKS.json",
+          "theory/RESPONSE_IDENTIFIABILITY_RESULTS.md"
+        ],
+        "inherited_novelty_status": [
+          "NEW_APPLICATION",
+          "PRIORITY_UNVERIFIED"
+        ],
+        "core_claim_fully_covered_in_paper": true,
+        "equivalent_hypothesis_in_main": false,
+        "composite_claim_has_package_only_components": false,
+        "only_citation_to_other_work_is_not_coverage": true,
+        "candidate_enabled_in_source_ledger": false,
+        "actual_application_premises_discharged_in_source_ledger": false
+      },
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "candidate_statement": "CLAIM_LEDGER.json",
+        "all_listed_evidence_paths_present": true
+      },
+      "enabled_as_established_premise": false,
+      "actual_application": "OPEN",
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-N009",
+      "role": "disabled_scientific_candidate_node",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "coverage_axis": "Formal disclosure in the official archive; body scope remains separately stated.",
+      "independent_scope_review": {
+        "id": "CTD2-N009",
+        "label": "Prior and posterior-criterion alias",
+        "kind": "CONDITIONAL_MATHEMATICAL_RESULT",
+        "original_statement": "With posterior report threshold gamma in (0,1), the source interval depends on pi and gamma only through logit(pi)-logit(gamma). Equal shifts of both logits preserve every response probability; a fitted prior under gamma=1/2 is conditional on that report convention.",
+        "statement_sha256": "32d437e92dd5ef19d5f0f1c1248939fba6cbdf819f4ce07c096557b4df47328e",
+        "coverage_category": "A",
+        "manuscript_sections": "5.2; Appendix B.1",
+        "manuscript_support": "logit prior减logit posterior criterion的别名关系与证明及其范围限制完整。",
+        "package_only_details_or_explicit_limits": "27组数值核验及函数实现仅ZIP；这是标准posterior-odds应用。",
+        "verified_package_support_paths": [
+          "theory/BCI_IDENTIFICATION_CHECKS.json",
+          "theory/bci_identification.py",
+          "theory/RESPONSE_IDENTIFIABILITY_RESULTS.md"
+        ],
+        "inherited_novelty_status": [
+          "INHERITED",
+          "NEW_APPLICATION"
+        ],
+        "core_claim_fully_covered_in_paper": true,
+        "equivalent_hypothesis_in_main": false,
+        "composite_claim_has_package_only_components": false,
+        "only_citation_to_other_work_is_not_coverage": true,
+        "candidate_enabled_in_source_ledger": false,
+        "actual_application_premises_discharged_in_source_ledger": false
+      },
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "candidate_statement": "CLAIM_LEDGER.json",
+        "all_listed_evidence_paths_present": true
+      },
+      "enabled_as_established_premise": false,
+      "actual_application": "OPEN",
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-N010",
+      "role": "disabled_scientific_candidate_node",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "coverage_axis": "Formal disclosure in the official archive; body scope remains separately stated.",
+      "independent_scope_review": {
+        "id": "CTD2-N010",
+        "label": "Calibrated shared-sample Gaussian pair",
+        "kind": "CONDITIONAL_MODEL_CONTRACT",
+        "original_statement": "One same internal sensory draw E~N(0,a) reaches two consumers Z_t=s+E-C_t. The criterion vector is jointly Gaussian, independent of E, with zero means after a common center calibration. Effective variances v_t>0, finite positive k_t, and marginal lapses below one are known. Lapse indicators and fair guesses are independent across reports and from the Gaussian variables.",
+        "statement_sha256": "4d02c0a0b836e0c8d49a3e1847d2ed35fecc2fef48edd02ea2b337ca97fc7801",
+        "coverage_category": "A",
+        "manuscript_sections": "6.1–6.2; Appendix B.2; Eqs. (9), (B1)–(B2)",
+        "manuscript_support": "同一内部draw、共同中心、固定边际、joint Gaussian/感觉独立、跨报告独立lapse契约明确。",
+        "package_only_details_or_explicit_limits": "候选绑定字段与joint-Gaussian必要性的copula反例在ZIP；主稿未展开该额外反例。",
+        "verified_package_support_paths": [
+          "theory/bci_identification.py",
+          "theory/BCI_IDENTIFICATION_CHECKS.json",
+          "review/THEORY_MANUSCRIPT_REVIEW.md",
+          "theory/RESPONSE_IDENTIFIABILITY_RESULTS.md"
+        ],
+        "inherited_novelty_status": [
+          "PROPOSED_NEW_RESULT",
+          "PRIORITY_UNVERIFIED"
+        ],
+        "core_claim_fully_covered_in_paper": true,
+        "equivalent_hypothesis_in_main": false,
+        "composite_claim_has_package_only_components": false,
+        "only_citation_to_other_work_is_not_coverage": true,
+        "candidate_enabled_in_source_ledger": false,
+        "actual_application_premises_discharged_in_source_ledger": false
+      },
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "candidate_statement": "CLAIM_LEDGER.json",
+        "all_listed_evidence_paths_present": true
+      },
+      "enabled_as_established_premise": false,
+      "actual_application": "OPEN",
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-N011",
+      "role": "disabled_scientific_candidate_node",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "coverage_axis": "Formal disclosure in the official archive; body scope remains separately stated.",
+      "independent_scope_review": {
+        "id": "CTD2-N011",
+        "label": "Centered paired inverse under independent criteria",
+        "kind": "CONDITIONAL_MATHEMATICAL_RESULT",
+        "original_statement": "Under CTD2-N010 and CTD2-N020, a valid central population P11 uniquely identifies shared variance a. With radii r_t=k_t/sqrt(v_t) and rho=a/sqrt(v_O v_S)>=0, J'(rho)=2[phi2(r_O,r_S;rho)-phi2(r_O,-r_S;rho)]>0 for 0<rho<1. Known independent lapses transform J affinely with positive slope.",
+        "statement_sha256": "5c169d9f6a7444c036a5f23153585590b6dcdaf68631ec525cc4ef9cce7d6694",
+        "coverage_category": "A",
+        "manuscript_sections": "6.1 Theorem 2; Appendix B.2; Eqs. (10), (B1)–(B2)",
+        "manuscript_support": "严格单调逆、端点、正lapse仿射项与一个概率自由度的最小性有完整证明。",
+        "package_only_details_or_explicit_limits": "36个逆解测试与90组源参数前瞻profile表在ZIP；没有人体paired数据。",
+        "verified_package_support_paths": [
+          "theory/BCI_IDENTIFICATION_CHECKS.json",
+          "root_analysis/paired_readout_predictions.csv",
+          "theory/RESPONSE_IDENTIFIABILITY_RESULTS.md"
+        ],
+        "inherited_novelty_status": [
+          "NEW_APPLICATION",
+          "PROPOSED_NEW_RESULT",
+          "PRIORITY_UNVERIFIED"
+        ],
+        "core_claim_fully_covered_in_paper": true,
+        "equivalent_hypothesis_in_main": false,
+        "composite_claim_has_package_only_components": false,
+        "only_citation_to_other_work_is_not_coverage": true,
+        "candidate_enabled_in_source_ledger": false,
+        "actual_application_premises_discharged_in_source_ledger": false
+      },
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "candidate_statement": "CLAIM_LEDGER.json",
+        "all_listed_evidence_paths_present": true
+      },
+      "enabled_as_established_premise": false,
+      "actual_application": "OPEN",
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-N012",
+      "role": "disabled_scientific_candidate_node",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "coverage_axis": "Formal disclosure in the official archive; body scope remains separately stated.",
+      "independent_scope_review": {
+        "id": "CTD2-N012",
+        "label": "Externally bounded criterion correlation",
+        "kind": "CONDITIONAL_MODEL_CONTRACT",
+        "original_statement": "Retaining CTD2-N010, allow criterion covariance c subject to |c|<=kappa sqrt((v_O-a)(v_S-a)), for an externally justified kappa in [0,1]. The covariance form includes zero criterion variance. Do not conjoin this alternative with CTD2-N020 as a compulsory assumption.",
+        "statement_sha256": "575227b7053d894f9a028db5456ce1d7f36339e13d1ed195c1f01a7df780a508",
+        "coverage_category": "A",
+        "manuscript_sections": "6.2; Appendix B.3",
+        "manuscript_support": "外部给定κ、criterion covariance界及不能用同一P11自由估κ和识别a均明确。",
+        "package_only_details_or_explicit_limits": "候选图将它作为N020替代分支的正式连接在ZIP。",
+        "verified_package_support_paths": [
+          "theory/bci_identification.py",
+          "theory/BCI_IDENTIFICATION_CHECKS.json",
+          "theory/RESPONSE_IDENTIFIABILITY_RESULTS.md"
+        ],
+        "inherited_novelty_status": [
+          "NEW_APPLICATION"
+        ],
+        "core_claim_fully_covered_in_paper": true,
+        "equivalent_hypothesis_in_main": false,
+        "composite_claim_has_package_only_components": false,
+        "only_citation_to_other_work_is_not_coverage": true,
+        "candidate_enabled_in_source_ledger": false,
+        "actual_application_premises_discharged_in_source_ledger": false
+      },
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "candidate_statement": "CLAIM_LEDGER.json",
+        "all_listed_evidence_paths_present": true
+      },
+      "enabled_as_established_premise": false,
+      "actual_application": "OPEN",
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-N013",
+      "role": "disabled_scientific_candidate_node",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "coverage_axis": "Formal disclosure in the official archive; body scope remains separately stated.",
+      "independent_scope_review": {
+        "id": "CTD2-N013",
+        "label": "Sharp correlated-criterion identification set",
+        "kind": "CONDITIONAL_MATHEMATICAL_RESULT",
+        "original_statement": "Let r be the absolute total correlation identified by a calibrated central P11 and R=r sqrt(v_O v_S). Under CTD2-N010 and CTD2-N012, the sharp set is {a in [0,min(v_O,v_S)] : (R-a)^2<=kappa^2(v_O-a)(v_S-a)}. For v_O=v_S=v and kappa<1, max(0,(r-kappa)/(1-kappa))<=a/v<=(r+kappa)/(1+kappa); for kappa=1 the fraction lies in [0,(1+r)/2].",
+        "statement_sha256": "16a5970fdce987c12b81247a8e71d73a2d75f4294e4d4558e0a9775e415e2195",
+        "coverage_category": "A",
+        "manuscript_sections": "6.2 Theorem 3; Appendix B.3; Eqs. (11)–(12), (B5)",
+        "manuscript_support": "一般点识别集、协方差两符号分支、PSD实现、等方差端点及不等方差quadratic边界均给出。",
+        "package_only_details_or_explicit_limits": "60060个membership核验在ZIP；CTD3连续区间投影详见finite_sample/PROOF.md。",
+        "verified_package_support_paths": [
+          "theory/BCI_IDENTIFICATION_CHECKS.json",
+          "theory/bci_identification.py",
+          "theory/RESPONSE_IDENTIFIABILITY_RESULTS.md"
+        ],
+        "inherited_novelty_status": [
+          "NEW_APPLICATION",
+          "PROPOSED_NEW_RESULT",
+          "PRIORITY_UNVERIFIED"
+        ],
+        "core_claim_fully_covered_in_paper": true,
+        "equivalent_hypothesis_in_main": false,
+        "composite_claim_has_package_only_components": false,
+        "only_citation_to_other_work_is_not_coverage": true,
+        "candidate_enabled_in_source_ledger": false,
+        "actual_application_premises_discharged_in_source_ledger": false
+      },
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "candidate_statement": "CLAIM_LEDGER.json",
+        "all_listed_evidence_paths_present": true
+      },
+      "enabled_as_established_premise": false,
+      "actual_application": "OPEN",
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-N014",
+      "role": "disabled_scientific_candidate_node",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "coverage_axis": "Formal disclosure in the official archive; body scope remains separately stated.",
+      "independent_scope_review": {
+        "id": "CTD2-N014",
+        "label": "Weak central identification near zero shared variance",
+        "kind": "CONDITIONAL_MATHEMATICAL_RESULT",
+        "original_statement": "For positive finite radii, J(rho)-J(0)=2r_O r_S phi(r_O)phi(r_S)rho^2+O(rho^4). Under known fixed marginals and independent criteria/lapses, observed excess d(a)=C a^2+O(a^4), C>0; categorical KL is O(a^4). Thus n a^4->0 gives vanishing total-variation separation while sqrt(n)a^2->infinity permits separation by a joint proportion.",
+        "statement_sha256": "cc1214cbdf741c66f9585ae48757ca575c279565843384fa26839c7411e7b451",
+        "coverage_category": "A",
+        "manuscript_sections": "6.3; Appendix B.2; Eqs. (13), (B3)",
+        "manuscript_support": "二阶展开、variance参数a的KL/局部分离尺度及固定校准前提完整。",
+        "package_only_details_or_explicit_limits": "数值展开检查在ZIP；不是人体样本量建议。",
+        "verified_package_support_paths": [
+          "theory/BCI_IDENTIFICATION_CHECKS.json",
+          "theory/check_bci_identification.py",
+          "theory/RESPONSE_IDENTIFIABILITY_RESULTS.md"
+        ],
+        "inherited_novelty_status": [
+          "NEW_APPLICATION",
+          "PROPOSED_NEW_RESULT",
+          "PRIORITY_UNVERIFIED"
+        ],
+        "core_claim_fully_covered_in_paper": true,
+        "equivalent_hypothesis_in_main": false,
+        "composite_claim_has_package_only_components": false,
+        "only_citation_to_other_work_is_not_coverage": true,
+        "candidate_enabled_in_source_ledger": false,
+        "actual_application_premises_discharged_in_source_ledger": false
+      },
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "candidate_statement": "CLAIM_LEDGER.json",
+        "all_listed_evidence_paths_present": true
+      },
+      "enabled_as_established_premise": false,
+      "actual_application": "OPEN",
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-N015",
+      "role": "disabled_scientific_candidate_node",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "coverage_axis": "Formal disclosure in the official archive; body scope remains separately stated.",
+      "independent_scope_review": {
+        "id": "CTD2-N015",
+        "label": "Off-center local information",
+        "kind": "CONDITIONAL_MATHEMATICAL_RESULT",
+        "original_statement": "For the same calibrated nonzero offset s in both consumers, with L_t=(-k_t-s)/sqrt(v_t) and U_t=(k_t-s)/sqrt(v_t), the joint derivative at rho=0 equals [phi(L_O)-phi(U_O)][phi(L_S)-phi(U_S)]>0. A second offset can therefore add first-order local sensitivity.",
+        "statement_sha256": "ac58b33b971d82a44ad1948f6e500676e33a0198bd31ab4199d08a93eff8cfe1",
+        "coverage_category": "A",
+        "manuscript_sections": "6.3; Appendix B.2; Eq. (B4)",
+        "manuscript_support": "同一已校准非零offset的正导数与只保证局部信息的限制明确。",
+        "package_only_details_or_explicit_limits": "off-center导数检查在ZIP；假设不是实际校准证据。",
+        "verified_package_support_paths": [
+          "theory/BCI_IDENTIFICATION_CHECKS.json",
+          "theory/RESPONSE_IDENTIFIABILITY_RESULTS.md"
+        ],
+        "inherited_novelty_status": [
+          "NEW_APPLICATION",
+          "PROPOSED_NEW_RESULT",
+          "PRIORITY_UNVERIFIED"
+        ],
+        "core_claim_fully_covered_in_paper": true,
+        "equivalent_hypothesis_in_main": false,
+        "composite_claim_has_package_only_components": false,
+        "only_citation_to_other_work_is_not_coverage": true,
+        "candidate_enabled_in_source_ledger": false,
+        "actual_application_premises_discharged_in_source_ledger": false
+      },
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "candidate_statement": "CLAIM_LEDGER.json",
+        "all_listed_evidence_paths_present": true
+      },
+      "enabled_as_established_premise": false,
+      "actual_application": "OPEN",
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-N016",
+      "role": "disabled_scientific_candidate_node",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "coverage_axis": "Formal disclosure in the official archive; body scope remains separately stated.",
+      "independent_scope_review": {
+        "id": "CTD2-N016",
+        "label": "Countermodels to uncalibrated pairing",
+        "kind": "EXPLICIT_COUNTEREXAMPLES",
+        "original_statement": "Correlated criteria can preserve all marginal and joint curves while changing shared sensory variance: (a,b_O,b_S,c)=(0.2,0.8,0.8,0.3) and (0.4,0.6,0.6,0.1) have the same total variances and covariance. Independently resampled sensory draws give product marginals; correlated lapses can produce apparent shared variance. Marginally Gaussian but non-joint-Gaussian criteria also invalidate the Gaussian rectangle inverse.",
+        "statement_sha256": "3f55d4e84090b1d9644a83cc2d64112cd6dc6ba34ee89884163ca6af3769d373",
+        "coverage_category": "P",
+        "manuscript_sections": "6.3; Appendix B.3",
+        "manuscript_support": "正文展开correlated-criterion Gaussian对、resampling、shared-lapse三类反例；第四copula witness未展开。",
+        "package_only_details_or_explicit_limits": "第四反例仅在review/THEORY_MANUSCRIPT_REVIEW.md第3项修正：C_O=G、C_S=DG，Gaussian边际且零协方差，等宽中心joint概率为q而非q²。主稿只声明joint Gaussian前提，不能标完整四反例条目FULL_IN_MAIN。",
+        "verified_package_support_paths": [
+          "theory/BCI_IDENTIFICATION_CHECKS.json",
+          "review/THEORY_MANUSCRIPT_REVIEW.md",
+          "theory/RESPONSE_IDENTIFIABILITY_RESULTS.md"
+        ],
+        "inherited_novelty_status": [
+          "INHERITED",
+          "NEW_APPLICATION"
+        ],
+        "core_claim_fully_covered_in_paper": false,
+        "equivalent_hypothesis_in_main": false,
+        "composite_claim_has_package_only_components": true,
+        "only_citation_to_other_work_is_not_coverage": true,
+        "candidate_enabled_in_source_ledger": false,
+        "actual_application_premises_discharged_in_source_ledger": false
+      },
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "candidate_statement": "CLAIM_LEDGER.json",
+        "all_listed_evidence_paths_present": true
+      },
+      "enabled_as_established_premise": false,
+      "actual_application": "OPEN",
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-N017",
+      "role": "disabled_scientific_candidate_node",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "coverage_axis": "Formal disclosure in the official archive; body scope remains separately stated.",
+      "independent_scope_review": {
+        "id": "CTD2-N017",
+        "label": "No automatic mechanism or experience inference",
+        "kind": "SCOPED_INFERENCE_BOUNDARY",
+        "original_statement": "The audited count-law parameters, widths, scores and latent covariances are neither complete actual organization nor named phenomenal endpoints. No candidate rule derives an anatomical mediator, ownership experience, agency, mineness or a UCT-specific prediction from those quantities. C1/U1 remain inherited with their original domains; no report, fit, calibration or complexity threshold is added for basal experience.",
+        "statement_sha256": "2f30403e75d4846ecb12f177353b0083e65a44933fb331666b55fb4688334c96",
+        "coverage_category": "P",
+        "manuscript_sections": "1; 7; 8; References [9]–[11]",
+        "manuscript_support": "正文披露不从报告/估计/latent variance自动推出解剖、体验或UCT专有结论；未展开全部formal C1/U1条款。",
+        "package_only_details_or_explicit_limits": "C1/U1域、basal/nonempty experience、actual-token sort和disabled候选约束在governance/MAP_EXTENSION.json及CTD3_MAP_AUDIT.md。它们是继承与治理限定，不能把引用UCT当作本次重发表UCT公设或全论证。",
+        "verified_package_support_paths": [
+          "review/THEORY_MANUSCRIPT_REVIEW.md",
+          "literature/V02_NOVELTY_AND_PUBLICATION_AUDIT.md",
+          "governance/MAP_EXTENSION.json",
+          "governance/CTD3_MAP_AUDIT.md",
+          "governance/CTD3_AFFECTED_BASELINE_NODES.json",
+          "theory/RESPONSE_IDENTIFIABILITY_RESULTS.md"
+        ],
+        "inherited_novelty_status": [
+          "INHERITED",
+          "NEW_APPLICATION"
+        ],
+        "core_claim_fully_covered_in_paper": false,
+        "equivalent_hypothesis_in_main": false,
+        "composite_claim_has_package_only_components": true,
+        "only_citation_to_other_work_is_not_coverage": true,
+        "candidate_enabled_in_source_ledger": false,
+        "actual_application_premises_discharged_in_source_ledger": false
+      },
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "candidate_statement": "CLAIM_LEDGER.json",
+        "all_listed_evidence_paths_present": true
+      },
+      "enabled_as_established_premise": false,
+      "actual_application": "OPEN",
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-N018",
+      "role": "disabled_scientific_candidate_node",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "coverage_axis": "Formal disclosure in the official archive; body scope remains separately stated.",
+      "independent_scope_review": {
+        "id": "CTD2-N018",
+        "label": "Prospective calibration and implementation obligations",
+        "kind": "PROPOSED_EMPIRICAL_CONTRACT",
+        "original_statement": "A future discriminating implementation must validate common-center calibration, marginal parameter/lapse estimates, same-internal-sample routing, report stability and an independent bound on shared decision variability. Its implementation packages need explicit separated prediction sets. The exact counterparts above match marginals and differ only in eligible joint predictions under the stated exclusions.",
+        "statement_sha256": "30d2154cfa67dc241e77d84be9d95d884d36f9912e62ae52e27927a7c24ca058",
+        "coverage_category": "A",
+        "manuscript_sections": "6.1–6.4; 7",
+        "manuscript_support": "共同中心、边际/lapse、同内部draw、稳定报告、独立criterion界及分离预测集前瞻要求明确。",
+        "package_only_details_or_explicit_limits": "候选逐输入绑定、OPEN债务ID与实际装置/人体待验证状态在ZIP；发表不解除它们。",
+        "verified_package_support_paths": [
+          "theory/SYMMETRY_TEST_REPORT.md",
+          "review/THEORY_MANUSCRIPT_REVIEW.md",
+          "theory/RESPONSE_IDENTIFIABILITY_RESULTS.md"
+        ],
+        "inherited_novelty_status": [
+          "NEW_APPLICATION",
+          "PRIORITY_UNVERIFIED"
+        ],
+        "core_claim_fully_covered_in_paper": true,
+        "equivalent_hypothesis_in_main": false,
+        "composite_claim_has_package_only_components": false,
+        "only_citation_to_other_work_is_not_coverage": true,
+        "candidate_enabled_in_source_ledger": false,
+        "actual_application_premises_discharged_in_source_ledger": false
+      },
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "candidate_statement": "CLAIM_LEDGER.json",
+        "all_listed_evidence_paths_present": true
+      },
+      "enabled_as_established_premise": false,
+      "actual_application": "OPEN",
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-N019",
+      "role": "disabled_scientific_candidate_node",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "coverage_axis": "Formal disclosure in the official archive; body scope remains separately stated.",
+      "independent_scope_review": {
+        "id": "CTD2-N019",
+        "label": "Descriptive-width reconstruction and remaining mismatch",
+        "kind": "SECONDARY_EVIDENCE",
+        "original_statement": "A free-baseline unweighted Gaussian reconstruction matches 176 of 180 released descriptive widths within 0.01 ms and 178 within 0.1 ms; two material mismatches remain. Many reconstructed curves leave the probability range. These descriptive widths are not the effective sigma of the released interval observer.",
+        "statement_sha256": "aeda81261242430808e996dee1eb0a04bbe21872bfb2128ee12e4d9f2f062e18",
+        "coverage_category": "A",
+        "manuscript_sections": "3.2; Appendix A.1; Figure 1; 7",
+        "manuscript_support": "176/180与178/180、两个未解case、概率域问题、描述宽度不等σ及不拼接估计器明确。",
+        "package_only_details_or_explicit_limits": "180行重建、nuisance参数及域检查CSV在ZIP；引用的CTD v0.1仍是另一个归档工作。",
+        "verified_package_support_paths": [
+          "empirical/WIDTH_RECONSTRUCTION_REPORT.md",
+          "empirical/results/gaussian_reconstruction_summary.json",
+          "empirical/results/gaussian_probability_domain_diagnostics.csv"
+        ],
+        "inherited_novelty_status": [
+          "NEW_APPLICATION",
+          "NEGATIVE_RESULT"
+        ],
+        "core_claim_fully_covered_in_paper": true,
+        "equivalent_hypothesis_in_main": false,
+        "composite_claim_has_package_only_components": false,
+        "only_citation_to_other_work_is_not_coverage": true,
+        "candidate_enabled_in_source_ledger": false,
+        "actual_application_premises_discharged_in_source_ledger": false
+      },
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "candidate_statement": "CLAIM_LEDGER.json",
+        "all_listed_evidence_paths_present": true
+      },
+      "enabled_as_established_premise": false,
+      "actual_application": "OPEN",
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-N020",
+      "role": "disabled_scientific_candidate_node",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "coverage_axis": "Formal disclosure in the official archive; body scope remains separately stated.",
+      "independent_scope_review": {
+        "id": "CTD2-N020",
+        "label": "Independent-criterion subfamily",
+        "kind": "CONDITIONAL_MODEL_CONTRACT",
+        "original_statement": "Within CTD2-N010, impose c=Cov(C_O,C_S)=0. Because the criterion vector is jointly Gaussian, its components are independent; total covariance is a and total correlation is nonnegative. This is one explicit hypothesis subfamily, not a demonstrated property of the source study.",
+        "statement_sha256": "e8e89ee0f1bf6007b697419e06d9e45a92bba29a0735877731d887119056c142",
+        "coverage_category": "E",
+        "manuscript_sections": "6.1; 6.2; Appendix B.2",
+        "manuscript_support": "正文直接规定criteria独立并给出covariance=a与非负ρ，等价于joint-Gaussian下covariance零子族。",
+        "package_only_details_or_explicit_limits": "独立列出N020及joint Gaussian+c=0 ⇒ independence的正式前提组织在governance/MAP_EXTENSION.json；正文未单列zero-covariance命题。",
+        "verified_package_support_paths": [
+          "theory/bci_identification.py",
+          "theory/BCI_IDENTIFICATION_CHECKS.json",
+          "governance/MAP_EXTENSION.json",
+          "theory/RESPONSE_IDENTIFIABILITY_RESULTS.md"
+        ],
+        "inherited_novelty_status": [
+          "INHERITED",
+          "NEW_APPLICATION"
+        ],
+        "core_claim_fully_covered_in_paper": false,
+        "equivalent_hypothesis_in_main": true,
+        "composite_claim_has_package_only_components": false,
+        "only_citation_to_other_work_is_not_coverage": true,
+        "candidate_enabled_in_source_ledger": false,
+        "actual_application_premises_discharged_in_source_ledger": false
+      },
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "candidate_statement": "CLAIM_LEDGER.json",
+        "all_listed_evidence_paths_present": true
+      },
+      "enabled_as_established_premise": false,
+      "actual_application": "OPEN",
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD3-N001",
+      "role": "disabled_scientific_candidate_node",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "coverage_axis": "Formal disclosure in the official archive; body scope remains separately stated.",
+      "independent_scope_review": {
+        "id": "CTD3-N001",
+        "label": "Fixed-calibration paired binomial experiment",
+        "kind": "MODEL_CONTRACT",
+        "original_statement": "For n independent identically distributed paired responses from one same internal Gaussian sensory draw, count joint-yes outcomes K~Binomial(n,p11). Marginal variances, finite halfwidths, lapses, centered criteria and criterion-correlation bound are fixed known parameters; the complete CTD2 joint observation contract applies.",
+        "statement_sha256": "b0deafb1a866f1dab9ec23375d0bf8644a158a000380161966cd232f882cfcf1",
+        "coverage_category": "A",
+        "manuscript_sections": "6.4; Appendix B.5; combined with 6.1–6.2",
+        "manuscript_support": "已知校准、n个iid paired判断、Binomial K及零/constant边界作为契约明确。",
+        "package_only_details_or_explicit_limits": "PROOF.md §1更明确固定n独立于结果、无optional-stopping覆盖与完整nuisance域；不等于人体校准验证。",
+        "verified_package_support_paths": [
+          "finite_sample/confidence_sets.py",
+          "finite_sample/PROOF.md",
+          "manuscript/noise-identifiability-bodily-judgments-v1.0.0.md"
+        ],
+        "inherited_novelty_status": [
+          "INHERITED_STATISTICAL_PRINCIPLE",
+          "NEW_APPLICATION",
+          "PRIORITY_UNVERIFIED"
+        ],
+        "core_claim_fully_covered_in_paper": true,
+        "equivalent_hypothesis_in_main": false,
+        "composite_claim_has_package_only_components": false,
+        "only_citation_to_other_work_is_not_coverage": true,
+        "candidate_enabled_in_source_ledger": false,
+        "actual_application_premises_discharged_in_source_ledger": false
+      },
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "candidate_statement": "CLAIM_LEDGER.json",
+        "all_listed_evidence_paths_present": true
+      },
+      "enabled_as_established_premise": false,
+      "actual_application": "OPEN",
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD3-N002",
+      "role": "disabled_scientific_candidate_node",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "coverage_axis": "Formal disclosure in the official archive; body scope remains separately stated.",
+      "independent_scope_review": {
+        "id": "CTD3-N002",
+        "label": "Exact binomial confidence-set projection",
+        "kind": "CONDITIONAL_MATHEMATICAL_RESULT",
+        "original_statement": "The preimage of an equal-tailed (1-alpha) Clopper-Pearson probability interval through the complete attainable observation model contains the entire sharp population variance set with probability at least 1-alpha. Equal-v nonempty endpoints are v*max(0,(rL-kappa)/(1-kappa)) and v*(rU+kappa)/(1+kappa) for kappa<1, and [0,v*(1+rU)/2] for kappa=1.",
+        "statement_sha256": "4420e540930957e1b8ef12d2dd4ed154d99a5e846fb316e7422ec8165d8e5b95",
+        "coverage_category": "A",
+        "manuscript_sections": "6.4 Theorem 4; Appendix B.5; Eqs. (14)–(16)",
+        "manuscript_support": "一般集合前像覆盖整个sharp set的证明、等方差端点、空集/退化规则完整；一般定理在论文内。",
+        "package_only_details_or_explicit_limits": "不等方差r_max分段公式/证明仅在finite_sample/PROOF.md §2 Eqs. (6)–(8)；continuous-union解析投影在§5 Eqs. (17)–(20)。主稿B.5转引该文件，完整推导并未印在主论文中。",
+        "verified_package_support_paths": [
+          "finite_sample/confidence_sets.py",
+          "finite_sample/PROOF.md",
+          "manuscript/noise-identifiability-bodily-judgments-v1.0.0.md"
+        ],
+        "inherited_novelty_status": [
+          "INHERITED_STATISTICAL_PRINCIPLE",
+          "NEW_APPLICATION",
+          "PRIORITY_UNVERIFIED"
+        ],
+        "core_claim_fully_covered_in_paper": true,
+        "equivalent_hypothesis_in_main": false,
+        "composite_claim_has_package_only_components": false,
+        "only_citation_to_other_work_is_not_coverage": true,
+        "candidate_enabled_in_source_ledger": false,
+        "actual_application_premises_discharged_in_source_ledger": false
+      },
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "candidate_statement": "CLAIM_LEDGER.json",
+        "all_listed_evidence_paths_present": true
+      },
+      "enabled_as_established_premise": false,
+      "actual_application": "OPEN",
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD3-N003",
+      "role": "disabled_scientific_candidate_node",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "coverage_axis": "Formal disclosure in the official archive; body scope remains separately stated.",
+      "independent_scope_review": {
+        "id": "CTD3-N003",
+        "label": "Honest nuisance-calibration region",
+        "kind": "CALIBRATION_COVERAGE_CONTRACT",
+        "original_statement": "A random calibration region K_gamma covers the true nuisance vector with probability at least 1-gamma, and the binomial probability interval separately retains its own guarantee for the same law.",
+        "statement_sha256": "85c75197bc74301095c85a459024df4726df1e8cb365af476214556a66e9845a",
+        "coverage_category": "A",
+        "manuscript_sections": "Appendix B.5",
+        "manuscript_support": "诚实校准region、两coverage分别有效、同一机制/参数及无需事件独立均明确。",
+        "package_only_details_or_explicit_limits": "七维校准向量、有限输入契约与错误预算检查在PROOF §§7–8及confidence_sets.py；无已验证人体估计程序。",
+        "verified_package_support_paths": [
+          "finite_sample/PROOF.md",
+          "finite_sample/confidence_sets.py",
+          "manuscript/noise-identifiability-bodily-judgments-v1.0.0.md"
+        ],
+        "inherited_novelty_status": [
+          "INHERITED_STATISTICAL_PRINCIPLE",
+          "NEW_APPLICATION",
+          "PRIORITY_UNVERIFIED"
+        ],
+        "core_claim_fully_covered_in_paper": true,
+        "equivalent_hypothesis_in_main": false,
+        "composite_claim_has_package_only_components": false,
+        "only_citation_to_other_work_is_not_coverage": true,
+        "candidate_enabled_in_source_ledger": false,
+        "actual_application_premises_discharged_in_source_ledger": false
+      },
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "candidate_statement": "CLAIM_LEDGER.json",
+        "all_listed_evidence_paths_present": true
+      },
+      "enabled_as_established_premise": false,
+      "actual_application": "OPEN",
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD3-N004",
+      "role": "disabled_scientific_candidate_node",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "coverage_axis": "Formal disclosure in the official archive; body scope remains separately stated.",
+      "independent_scope_review": {
+        "id": "CTD3-N004",
+        "label": "Calibration-union confidence set",
+        "kind": "CONDITIONAL_MATHEMATICAL_RESULT",
+        "original_statement": "Union of the complete variance projections over an honest calibration region has true-variance coverage at least 1-alpha-gamma by event intersection and the union bound. A genuinely finite region can be enumerated exactly; if only kappa is uncertain over an interval, nesting makes its upper endpoint sufficient for the continuous union.",
+        "statement_sha256": "a2f809ae407442da9ae4c5854deedd70a0d4ca3779671c48a463dd6c28ad7a72",
+        "coverage_category": "A",
+        "manuscript_sections": "Appendix B.5",
+        "manuscript_support": "1−α−γ证明、完整集合并、有限域限制、连续κ上端点规则及不可用网格替连续域均说明。",
+        "package_only_details_or_explicit_limits": "finite_calibration_union、kappa_calibration_interval及多区间精确合并代码仅在confidence_sets.py；PROOF §§7–8说明接口。一般连续多参数certified projection未实现。",
+        "verified_package_support_paths": [
+          "finite_sample/PROOF.md",
+          "finite_sample/confidence_sets.py",
+          "manuscript/noise-identifiability-bodily-judgments-v1.0.0.md"
+        ],
+        "inherited_novelty_status": [
+          "INHERITED_STATISTICAL_PRINCIPLE",
+          "NEW_APPLICATION",
+          "PRIORITY_UNVERIFIED"
+        ],
+        "core_claim_fully_covered_in_paper": true,
+        "equivalent_hypothesis_in_main": false,
+        "composite_claim_has_package_only_components": false,
+        "only_citation_to_other_work_is_not_coverage": true,
+        "candidate_enabled_in_source_ledger": false,
+        "actual_application_premises_discharged_in_source_ledger": false
+      },
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "candidate_statement": "CLAIM_LEDGER.json",
+        "all_listed_evidence_paths_present": true
+      },
+      "enabled_as_established_premise": false,
+      "actual_application": "OPEN",
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD3-N005",
+      "role": "disabled_scientific_candidate_node",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "coverage_axis": "Formal disclosure in the official archive; body scope remains separately stated.",
+      "independent_scope_review": {
+        "id": "CTD3-N005",
+        "label": "Prespecified finite probability-law operating characteristics",
+        "kind": "SYNTHETIC_NUMERICAL_EVIDENCE",
+        "original_statement": "All 240 valid cases among 480 prespecified synthetic scenarios have true-variance coverage at least 0.95023456 and complete-set coverage at least 0.95015146 at nominal 95%. Wide sets remain at n=4096; wrong criterion bounds, sensory resampling and shared lapses expose contract failures despite valid binomial probability coverage.",
+        "statement_sha256": "5a4aec2b053f45167b59a48881337aa3f4c340032cb4c2b7bd2c50f4aae799f0",
+        "coverage_category": "A",
+        "manuscript_sections": "6.4; Figure 4; Appendix B.5",
+        "manuscript_support": "480情景/240 valid、最低coverage、宽区间/违约对照、浮点枚举而非MC/人体及空集约定明确。",
+        "package_only_details_or_explicit_limits": "全部480行、240/120/60/60细分类、精确未舍入值、计划/重执行/数值修正记录只在ZIP；known-calibration grid不验证未知校准coverage。",
+        "verified_package_support_paths": [
+          "finite_sample/ANALYSIS_PLAN.json",
+          "finite_sample/operating_characteristics.csv",
+          "finite_sample/operating_characteristics_summary.json",
+          "finite_sample/EXECUTION_PROVENANCE.json",
+          "finite_sample/OPERATING_CHARACTERISTICS_REPORT.md",
+          "finite_sample/CORRECTION_REEXECUTION_RECEIPT.json",
+          "finite_sample/FIGURE4_PROVENANCE.json",
+          "finite_sample/PROOF.md",
+          "finite_sample/confidence_sets.py",
+          "manuscript/noise-identifiability-bodily-judgments-v1.0.0.md"
+        ],
+        "inherited_novelty_status": [
+          "NEW_APPLICATION",
+          "SYNTHETIC_CHECK_NOT_EMPIRICAL_DISCOVERY"
+        ],
+        "core_claim_fully_covered_in_paper": true,
+        "equivalent_hypothesis_in_main": false,
+        "composite_claim_has_package_only_components": false,
+        "only_citation_to_other_work_is_not_coverage": true,
+        "candidate_enabled_in_source_ledger": false,
+        "actual_application_premises_discharged_in_source_ledger": false
+      },
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "candidate_statement": "CLAIM_LEDGER.json",
+        "all_listed_evidence_paths_present": true
+      },
+      "enabled_as_established_premise": false,
+      "actual_application": "OPEN",
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-R001",
+      "role": "disabled_rules",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "main_text_coverage": "NOT_ASSERTED_AS_COMPLETE_FORMAL_RULE_OR_CONTEXT_RECORD",
+      "formal_attachment_coverage": "EXACT_DISABLED_RECORD_IN_OFFICIAL_ZIP",
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "member": "governance/MAP_EXTENSION.json"
+      },
+      "enabled_as_established_premise": false,
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-R002",
+      "role": "disabled_rules",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "main_text_coverage": "NOT_ASSERTED_AS_COMPLETE_FORMAL_RULE_OR_CONTEXT_RECORD",
+      "formal_attachment_coverage": "EXACT_DISABLED_RECORD_IN_OFFICIAL_ZIP",
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "member": "governance/MAP_EXTENSION.json"
+      },
+      "enabled_as_established_premise": false,
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-R003",
+      "role": "disabled_rules",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "main_text_coverage": "NOT_ASSERTED_AS_COMPLETE_FORMAL_RULE_OR_CONTEXT_RECORD",
+      "formal_attachment_coverage": "EXACT_DISABLED_RECORD_IN_OFFICIAL_ZIP",
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "member": "governance/MAP_EXTENSION.json"
+      },
+      "enabled_as_established_premise": false,
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-R004",
+      "role": "disabled_rules",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "main_text_coverage": "NOT_ASSERTED_AS_COMPLETE_FORMAL_RULE_OR_CONTEXT_RECORD",
+      "formal_attachment_coverage": "EXACT_DISABLED_RECORD_IN_OFFICIAL_ZIP",
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "member": "governance/MAP_EXTENSION.json"
+      },
+      "enabled_as_established_premise": false,
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-R005",
+      "role": "disabled_rules",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "main_text_coverage": "NOT_ASSERTED_AS_COMPLETE_FORMAL_RULE_OR_CONTEXT_RECORD",
+      "formal_attachment_coverage": "EXACT_DISABLED_RECORD_IN_OFFICIAL_ZIP",
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "member": "governance/MAP_EXTENSION.json"
+      },
+      "enabled_as_established_premise": false,
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-R006",
+      "role": "disabled_rules",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "main_text_coverage": "NOT_ASSERTED_AS_COMPLETE_FORMAL_RULE_OR_CONTEXT_RECORD",
+      "formal_attachment_coverage": "EXACT_DISABLED_RECORD_IN_OFFICIAL_ZIP",
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "member": "governance/MAP_EXTENSION.json"
+      },
+      "enabled_as_established_premise": false,
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-R007",
+      "role": "disabled_rules",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "main_text_coverage": "NOT_ASSERTED_AS_COMPLETE_FORMAL_RULE_OR_CONTEXT_RECORD",
+      "formal_attachment_coverage": "EXACT_DISABLED_RECORD_IN_OFFICIAL_ZIP",
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "member": "governance/MAP_EXTENSION.json"
+      },
+      "enabled_as_established_premise": false,
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-C001",
+      "role": "disabled_context_links",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "main_text_coverage": "NOT_ASSERTED_AS_COMPLETE_FORMAL_RULE_OR_CONTEXT_RECORD",
+      "formal_attachment_coverage": "EXACT_DISABLED_RECORD_IN_OFFICIAL_ZIP",
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "member": "governance/MAP_EXTENSION.json"
+      },
+      "enabled_as_established_premise": false,
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-C002",
+      "role": "disabled_context_links",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "main_text_coverage": "NOT_ASSERTED_AS_COMPLETE_FORMAL_RULE_OR_CONTEXT_RECORD",
+      "formal_attachment_coverage": "EXACT_DISABLED_RECORD_IN_OFFICIAL_ZIP",
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "member": "governance/MAP_EXTENSION.json"
+      },
+      "enabled_as_established_premise": false,
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-C003",
+      "role": "disabled_context_links",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "main_text_coverage": "NOT_ASSERTED_AS_COMPLETE_FORMAL_RULE_OR_CONTEXT_RECORD",
+      "formal_attachment_coverage": "EXACT_DISABLED_RECORD_IN_OFFICIAL_ZIP",
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "member": "governance/MAP_EXTENSION.json"
+      },
+      "enabled_as_established_premise": false,
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-C004",
+      "role": "disabled_context_links",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "main_text_coverage": "NOT_ASSERTED_AS_COMPLETE_FORMAL_RULE_OR_CONTEXT_RECORD",
+      "formal_attachment_coverage": "EXACT_DISABLED_RECORD_IN_OFFICIAL_ZIP",
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "member": "governance/MAP_EXTENSION.json"
+      },
+      "enabled_as_established_premise": false,
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-C005",
+      "role": "disabled_context_links",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "main_text_coverage": "NOT_ASSERTED_AS_COMPLETE_FORMAL_RULE_OR_CONTEXT_RECORD",
+      "formal_attachment_coverage": "EXACT_DISABLED_RECORD_IN_OFFICIAL_ZIP",
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "member": "governance/MAP_EXTENSION.json"
+      },
+      "enabled_as_established_premise": false,
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-C006",
+      "role": "disabled_context_links",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "main_text_coverage": "NOT_ASSERTED_AS_COMPLETE_FORMAL_RULE_OR_CONTEXT_RECORD",
+      "formal_attachment_coverage": "EXACT_DISABLED_RECORD_IN_OFFICIAL_ZIP",
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "member": "governance/MAP_EXTENSION.json"
+      },
+      "enabled_as_established_premise": false,
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-C007",
+      "role": "disabled_context_links",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "main_text_coverage": "NOT_ASSERTED_AS_COMPLETE_FORMAL_RULE_OR_CONTEXT_RECORD",
+      "formal_attachment_coverage": "EXACT_DISABLED_RECORD_IN_OFFICIAL_ZIP",
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "member": "governance/MAP_EXTENSION.json"
+      },
+      "enabled_as_established_premise": false,
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-C008",
+      "role": "disabled_context_links",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "main_text_coverage": "NOT_ASSERTED_AS_COMPLETE_FORMAL_RULE_OR_CONTEXT_RECORD",
+      "formal_attachment_coverage": "EXACT_DISABLED_RECORD_IN_OFFICIAL_ZIP",
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "member": "governance/MAP_EXTENSION.json"
+      },
+      "enabled_as_established_premise": false,
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-C009",
+      "role": "disabled_context_links",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "main_text_coverage": "NOT_ASSERTED_AS_COMPLETE_FORMAL_RULE_OR_CONTEXT_RECORD",
+      "formal_attachment_coverage": "EXACT_DISABLED_RECORD_IN_OFFICIAL_ZIP",
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "member": "governance/MAP_EXTENSION.json"
+      },
+      "enabled_as_established_premise": false,
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-C010",
+      "role": "disabled_context_links",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "main_text_coverage": "NOT_ASSERTED_AS_COMPLETE_FORMAL_RULE_OR_CONTEXT_RECORD",
+      "formal_attachment_coverage": "EXACT_DISABLED_RECORD_IN_OFFICIAL_ZIP",
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "member": "governance/MAP_EXTENSION.json"
+      },
+      "enabled_as_established_premise": false,
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-C011",
+      "role": "disabled_context_links",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "main_text_coverage": "NOT_ASSERTED_AS_COMPLETE_FORMAL_RULE_OR_CONTEXT_RECORD",
+      "formal_attachment_coverage": "EXACT_DISABLED_RECORD_IN_OFFICIAL_ZIP",
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "member": "governance/MAP_EXTENSION.json"
+      },
+      "enabled_as_established_premise": false,
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-C012",
+      "role": "disabled_context_links",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "main_text_coverage": "NOT_ASSERTED_AS_COMPLETE_FORMAL_RULE_OR_CONTEXT_RECORD",
+      "formal_attachment_coverage": "EXACT_DISABLED_RECORD_IN_OFFICIAL_ZIP",
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "member": "governance/MAP_EXTENSION.json"
+      },
+      "enabled_as_established_premise": false,
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD2-C013",
+      "role": "disabled_context_links",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "main_text_coverage": "NOT_ASSERTED_AS_COMPLETE_FORMAL_RULE_OR_CONTEXT_RECORD",
+      "formal_attachment_coverage": "EXACT_DISABLED_RECORD_IN_OFFICIAL_ZIP",
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "member": "governance/MAP_EXTENSION.json"
+      },
+      "enabled_as_established_premise": false,
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD3-R001",
+      "role": "disabled_rules",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "main_text_coverage": "NOT_ASSERTED_AS_COMPLETE_FORMAL_RULE_OR_CONTEXT_RECORD",
+      "formal_attachment_coverage": "EXACT_DISABLED_RECORD_IN_OFFICIAL_ZIP",
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "member": "governance/CTD3_MAP_EXTENSION.json"
+      },
+      "enabled_as_established_premise": false,
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD3-R002",
+      "role": "disabled_rules",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "main_text_coverage": "NOT_ASSERTED_AS_COMPLETE_FORMAL_RULE_OR_CONTEXT_RECORD",
+      "formal_attachment_coverage": "EXACT_DISABLED_RECORD_IN_OFFICIAL_ZIP",
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "member": "governance/CTD3_MAP_EXTENSION.json"
+      },
+      "enabled_as_established_premise": false,
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD3-C001",
+      "role": "disabled_context_links",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "main_text_coverage": "NOT_ASSERTED_AS_COMPLETE_FORMAL_RULE_OR_CONTEXT_RECORD",
+      "formal_attachment_coverage": "EXACT_DISABLED_RECORD_IN_OFFICIAL_ZIP",
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "member": "governance/CTD3_MAP_EXTENSION.json"
+      },
+      "enabled_as_established_premise": false,
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD3-C002",
+      "role": "disabled_context_links",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "main_text_coverage": "NOT_ASSERTED_AS_COMPLETE_FORMAL_RULE_OR_CONTEXT_RECORD",
+      "formal_attachment_coverage": "EXACT_DISABLED_RECORD_IN_OFFICIAL_ZIP",
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "member": "governance/CTD3_MAP_EXTENSION.json"
+      },
+      "enabled_as_established_premise": false,
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD3-C003",
+      "role": "disabled_context_links",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "main_text_coverage": "NOT_ASSERTED_AS_COMPLETE_FORMAL_RULE_OR_CONTEXT_RECORD",
+      "formal_attachment_coverage": "EXACT_DISABLED_RECORD_IN_OFFICIAL_ZIP",
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "member": "governance/CTD3_MAP_EXTENSION.json"
+      },
+      "enabled_as_established_premise": false,
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD3-C004",
+      "role": "disabled_context_links",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "main_text_coverage": "NOT_ASSERTED_AS_COMPLETE_FORMAL_RULE_OR_CONTEXT_RECORD",
+      "formal_attachment_coverage": "EXACT_DISABLED_RECORD_IN_OFFICIAL_ZIP",
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "member": "governance/CTD3_MAP_EXTENSION.json"
+      },
+      "enabled_as_established_premise": false,
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD3-C005",
+      "role": "disabled_context_links",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "main_text_coverage": "NOT_ASSERTED_AS_COMPLETE_FORMAL_RULE_OR_CONTEXT_RECORD",
+      "formal_attachment_coverage": "EXACT_DISABLED_RECORD_IN_OFFICIAL_ZIP",
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "member": "governance/CTD3_MAP_EXTENSION.json"
+      },
+      "enabled_as_established_premise": false,
+      "publication_implies_validity": false
+    },
+    {
+      "id": "CTD3-C006",
+      "role": "disabled_context_links",
+      "published": true,
+      "doi": "10.5281/zenodo.23279189",
+      "coverage_status": "covered_exact",
+      "main_text_coverage": "NOT_ASSERTED_AS_COMPLETE_FORMAL_RULE_OR_CONTEXT_RECORD",
+      "formal_attachment_coverage": "EXACT_DISABLED_RECORD_IN_OFFICIAL_ZIP",
+      "formal_attachment": {
+        "file": "reproducibility-v1.0.0.zip",
+        "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+        "member": "governance/CTD3_MAP_EXTENSION.json"
+      },
+      "enabled_as_established_premise": false,
+      "publication_implies_validity": false
+    }
+  ],
+  "counts": {
+    "scientific_claim_nodes": 25,
+    "disabled_rules": 9,
+    "disabled_contexts": 19,
+    "total": 53
+  },
+  "cited_other_research_is_not_automatically_disclosed": true,
+  "formal_publication_counts_changed": true,
+  "publication_counts": {
+    "distinct_research_works": 30,
+    "distinct_research_work_version_label_pairs": 40,
+    "distinct_published_research_doi_records": 41,
+    "separate_editorial_supplement_works": 1,
+    "separate_editorial_doi_records": 1,
+    "all_verified_publication_doi_records_including_editorial": 42,
+    "uninspected_live_account_drafts": "NOT_ENUMERATED",
+    "reserved_only_records_within_verified_publication_records": 0
+  }
+}

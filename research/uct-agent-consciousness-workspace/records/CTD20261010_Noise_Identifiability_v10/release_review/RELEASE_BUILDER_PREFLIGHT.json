@@ -1,0 +1,9 @@
+{
+  "state": "RELEASE_BUILDER_PATH_PREFLIGHT_PASS",
+  "pages": 21,
+  "page_text_matches_reviewed_local_preflight": true,
+  "warnings": [],
+  "pdf_sha256": "7bf9e7aaeed7abda5a4f64ab478600ba7af11c964bb527805790b326f38b92e8",
+  "pdf_is_published_or_timestamp_target": false,
+  "source_relocation_receipt": "SOURCE_RELOCATION_RECEIPT.json"
+}

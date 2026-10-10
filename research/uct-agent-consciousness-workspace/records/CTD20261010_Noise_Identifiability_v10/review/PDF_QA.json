@@ -1,0 +1,11 @@
+{
+  "state": "SCIENTIFIC_SOURCE_PREFLIGHT_PASS_EXACT_DOI_BOUND_REVIEW_PENDING",
+  "scope": "Local typesetting preflight only; this placeholder PDF is not a release asset or OTS target. The exact DOI-bound PDF will be independently reviewed after reservation.",
+  "source_sha256": "6bc9dad5add7612735358236c9b7533cc8f54f6aa535443ee2d9e9f5d219c734",
+  "pdf_sha256": "1615049d4f359f08dbb3df8ff95ad04b5a63680e6b05b388f607ab4e578e7966",
+  "pages": 21,
+  "all_pages_visually_inspected_before_title_layout_refinement": true,
+  "final_title_page_visually_inspected": true,
+  "title_refinement": "Preamble titling droptitle -2em moves the complete abstract/keywords onto page 1; body unchanged.",
+  "independent_external_peer_review": false
+}

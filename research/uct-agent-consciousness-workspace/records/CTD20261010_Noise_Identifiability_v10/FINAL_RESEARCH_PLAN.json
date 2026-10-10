@@ -1,0 +1,21 @@
+{
+  "version": "1.0.0",
+  "created_utc": "2026-10-10T09:02:58.660948+00:00",
+  "prior_science_commit": "883bf023031e59434cc768e0d4cd4bb2bbaa12e2",
+  "research_head": "53d569b2969acf50a34e4e84bd92c3d6dbc6f77e",
+  "authorization": "User explicitly instructs complete research, finalize, publish DOI then OTS then AR under repository constraints.",
+  "new_increment": "Exact binomial confidence-set projection under calibrated marginal parameters and bounded criterion correlation; pre-fixed operating characteristics and assumption-violation controls.",
+  "no_new_human_data": true,
+  "unchanged_historical_results": "Original v0.2 empirical fits, failed runs, source audit, theorem checks, and provenance are retained.",
+  "publication_sequence": [
+    "scientific review",
+    "reserve DOI once",
+    "embed reserved DOI and freeze package",
+    "review exact PDF and authorize exact hashes",
+    "publish once and anonymous readback",
+    "OTS stamp and Bitcoin verify",
+    "Arweave guarded paid archive and anonymous SHA256 readback"
+  ],
+  "ar_total_cost_strictly_below": 0.1,
+  "publication_complete": false
+}

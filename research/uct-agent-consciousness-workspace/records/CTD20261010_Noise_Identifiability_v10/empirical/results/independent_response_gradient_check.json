@@ -1,0 +1,31 @@
+{
+  "seed": 61219,
+  "participant_selection": "cyclic independent released count rows",
+  "method": "3-point central finite differences at 13 generic points per model, away from intentional branch kink except chance coverage",
+  "checks": [
+    {
+      "model": "sigma",
+      "points": 13,
+      "max_scaled_error": 3.4498848810603696e-08,
+      "max_absolute_error": 0.00018355242991674459
+    },
+    {
+      "model": "prior",
+      "points": 13,
+      "max_scaled_error": 5.437386302124539e-07,
+      "max_absolute_error": 7.728067487278167e-06
+    },
+    {
+      "model": "sigma_shift",
+      "points": 13,
+      "max_scaled_error": 1.668287805249658e-08,
+      "max_absolute_error": 6.118745204730658e-06
+    },
+    {
+      "model": "prior_shift",
+      "points": 13,
+      "max_scaled_error": 3.598940713371238e-06,
+      "max_absolute_error": 0.005770448183739063
+    }
+  ]
+}

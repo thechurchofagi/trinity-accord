@@ -1,0 +1,22 @@
+{
+  "figure1": "Released widths and reconstruction; fixed conditional null simulations; FINAL repaired fixed-CV scores",
+  "figure2": "First participant fixed by row order, sham marginal illustration; ALL 90 prospective profiles. Not new joint data or power calculation.",
+  "figure3": {
+    "synthetic": true,
+    "variances": [
+      1,
+      1
+    ],
+    "halfwidths": [
+      1,
+      1.5
+    ],
+    "lapse": 0,
+    "offsets": [
+      0,
+      1
+    ],
+    "total_correlation_for_bounds": 0.6
+  },
+  "no_fitting_or_subset_selection_in_figure_code": true
+}

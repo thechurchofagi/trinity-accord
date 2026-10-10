@@ -1,0 +1,221 @@
+{
+  "source_csv": "finite_sample/operating_characteristics.csv",
+  "source_sha256": "152489db0e528ca74b74b71a12acd3d91a4b1491395e2828c1cb60c22bca7f82",
+  "script_sha256": "f461516e758c5ba4fbbd8b5b850b12ec0ab49d6d92837ba928deba8f29fcbf5b",
+  "profiles_included": [
+    "asymmetric_high_lapse",
+    "asymmetric_low_lapse",
+    "unequal_window_low_lapse"
+  ],
+  "left_panel": [
+    {
+      "assumed_kappa": 0.0,
+      "N_pairs": 64,
+      "mean_width": 0.9273405424041453,
+      "min_width": 0.8576008374559432,
+      "max_width": 0.9535718293293264,
+      "max_empty": 0.0181704255566164,
+      "cases": 15,
+      "profiles": 3
+    },
+    {
+      "assumed_kappa": 0.0,
+      "N_pairs": 256,
+      "mean_width": 0.8046305210206728,
+      "min_width": 0.5520586795429687,
+      "max_width": 0.9125421189577424,
+      "max_empty": 0.0239554196192238,
+      "cases": 15,
+      "profiles": 3
+    },
+    {
+      "assumed_kappa": 0.0,
+      "N_pairs": 1024,
+      "mean_width": 0.5763652145947863,
+      "min_width": 0.2625726840546297,
+      "max_width": 0.7650618021673647,
+      "max_empty": 0.0247288089344312,
+      "cases": 15,
+      "profiles": 3
+    },
+    {
+      "assumed_kappa": 0.0,
+      "N_pairs": 4096,
+      "mean_width": 0.3772276756614778,
+      "min_width": 0.1580677121800976,
+      "max_width": 0.5110121684719291,
+      "max_empty": 0.0248612881721758,
+      "cases": 15,
+      "profiles": 3
+    },
+    {
+      "assumed_kappa": 0.2,
+      "N_pairs": 64,
+      "mean_width": 0.9395266213679145,
+      "min_width": 0.8729697826274437,
+      "max_width": 0.9631608375869594,
+      "max_empty": 0.0186715301107781,
+      "cases": 45,
+      "profiles": 3
+    },
+    {
+      "assumed_kappa": 0.2,
+      "N_pairs": 256,
+      "mean_width": 0.8437758208515226,
+      "min_width": 0.6036930024057714,
+      "max_width": 0.9350753235730036,
+      "max_empty": 0.0239554196192238,
+      "cases": 45,
+      "profiles": 3
+    },
+    {
+      "assumed_kappa": 0.2,
+      "N_pairs": 1024,
+      "mean_width": 0.6566804273729407,
+      "min_width": 0.3051040518527253,
+      "max_width": 0.838591024302718,
+      "max_empty": 0.0247288089344312,
+      "cases": 45,
+      "profiles": 3
+    },
+    {
+      "assumed_kappa": 0.2,
+      "N_pairs": 4096,
+      "mean_width": 0.4903616413837092,
+      "min_width": 0.1897348684322172,
+      "max_width": 0.6445867496904492,
+      "max_empty": 0.0248612881721758,
+      "cases": 45,
+      "profiles": 3
+    }
+  ],
+  "right_panel": [
+    {
+      "family": "independent_sensory_resampling",
+      "N_pairs": 64,
+      "min_inclusion": 0.7322923387985757,
+      "max_inclusion": 0.9694063274064486,
+      "max_empty": 0.017664695630914,
+      "cases": 15,
+      "profiles": 3
+    },
+    {
+      "family": "independent_sensory_resampling",
+      "N_pairs": 256,
+      "min_inclusion": 0.2047446870530096,
+      "max_inclusion": 0.9619173629917086,
+      "max_empty": 0.0239554196192238,
+      "cases": 15,
+      "profiles": 3
+    },
+    {
+      "family": "independent_sensory_resampling",
+      "N_pairs": 1024,
+      "min_inclusion": 0.0001165197772407,
+      "max_inclusion": 0.9567364421284392,
+      "max_empty": 0.0247288089344312,
+      "cases": 15,
+      "profiles": 3
+    },
+    {
+      "family": "independent_sensory_resampling",
+      "N_pairs": 4096,
+      "min_inclusion": 3.4250402161743265e-21,
+      "max_inclusion": 0.9522904183733932,
+      "max_empty": 0.0248612881721758,
+      "cases": 15,
+      "profiles": 3
+    },
+    {
+      "family": "shared_lapse_and_guess",
+      "N_pairs": 64,
+      "min_inclusion": 0.853191496895434,
+      "max_inclusion": 0.963381728070568,
+      "max_empty": 0.1403651262498084,
+      "cases": 15,
+      "profiles": 3
+    },
+    {
+      "family": "shared_lapse_and_guess",
+      "N_pairs": 256,
+      "min_inclusion": 0.4322732821466439,
+      "max_inclusion": 0.9457018542494032,
+      "max_empty": 0.467890809934302,
+      "cases": 15,
+      "profiles": 3
+    },
+    {
+      "family": "shared_lapse_and_guess",
+      "N_pairs": 1024,
+      "min_inclusion": 0.007398293901541,
+      "max_inclusion": 0.8919561425889184,
+      "max_empty": 0.9695292126698984,
+      "cases": 15,
+      "profiles": 3
+    },
+    {
+      "family": "shared_lapse_and_guess",
+      "N_pairs": 4096,
+      "min_inclusion": 2.2219674751997106e-12,
+      "max_inclusion": 0.6725649100463655,
+      "max_empty": 0.9999999971887846,
+      "cases": 15,
+      "profiles": 3
+    },
+    {
+      "family": "wrong_independence_bound",
+      "N_pairs": 64,
+      "min_inclusion": 0.9513386846775572,
+      "max_inclusion": 0.969481890580888,
+      "max_empty": 0.0186715301107781,
+      "cases": 30,
+      "profiles": 3
+    },
+    {
+      "family": "wrong_independence_bound",
+      "N_pairs": 256,
+      "min_inclusion": 0.9416559797128732,
+      "max_inclusion": 0.9606065845839266,
+      "max_empty": 0.0231970975527347,
+      "cases": 30,
+      "profiles": 3
+    },
+    {
+      "family": "wrong_independence_bound",
+      "N_pairs": 1024,
+      "min_inclusion": 0.8960449878378429,
+      "max_inclusion": 0.956903149440171,
+      "max_empty": 0.0225912831176207,
+      "cases": 30,
+      "profiles": 3
+    },
+    {
+      "family": "wrong_independence_bound",
+      "N_pairs": 4096,
+      "min_inclusion": 0.6939185211865826,
+      "max_inclusion": 0.9521640908419092,
+      "max_empty": 0.0211749225862553,
+      "cases": 30,
+      "profiles": 3
+    }
+  ],
+  "right_panel_statistic": "Minimum over every prespecified case within family and N; not valid coverage under the violated contract.",
+  "annotation_exact_probabilities": {
+    "independent_sensory_resampling": 3.4250402161743265e-21,
+    "shared_lapse_and_guess": 2.2219674751997106e-12
+  },
+  "caption": "Finite-sample operating characteristics from exact binomial enumeration, not human data. A: lines show the equal-case-weight mean expected confidence-set width across all three prespecified threshold/lapse profiles and all five generating variances; shading shows the complete fixed-grid minimum\u2013maximum range at each N. The kappa=0 curves use c=0, whereas kappa=0.2 includes c=-0.2(1-a), 0, and +0.2(1-a). Width is in units with both effective marginal variances equal to one; empty sets contribute width zero. Maximum empty-set probability over valid cases is below 0.024862. B: each line is the minimum target-inclusion probability over the complete grid for one deliberately violated assumption, with all three profiles included. These are not valid-model coverage guarantees. In the independent-sampling control the evaluated target is per-task sensory variance, while actual shared sensory covariance is zero. The shared-lapse control shares both a lapse indicator and a fair guess. All N pairs are independent. Known calibration is assumed throughout; the grid averages and extrema are not population power estimates or human sample-size recommendations. The extremely small endpoint probabilities in B are annotated on the linear scale.",
+  "new_model_calculations": false,
+  "outputs": [
+    {
+      "path": "figures/figure4_finite_sample.pdf",
+      "sha256": "64036c928d2a46e230696e7413e96ce43d68b014046e6f185a397aebcd9a1a2f",
+      "bytes": 29699
+    },
+    {
+      "path": "figures/figure4_finite_sample.png",
+      "sha256": "c43c409e3ae42b577c88401d5792de8b8b53a3bab5f7d762f05cbad426d38139",
+      "bytes": 229040
+    }
+  ]
+}

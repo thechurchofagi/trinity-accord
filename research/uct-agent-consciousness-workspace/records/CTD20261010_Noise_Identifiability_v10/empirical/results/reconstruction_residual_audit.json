@@ -1,0 +1,198 @@
+{
+  "negative_offsets": 100,
+  "observed_grid_curves_with_probability_violations": 96,
+  "observed_grid_cells_below_zero": 125,
+  "observed_grid_cells_above_one": 75,
+  "whole_real_line_curves_with_probability_violations": 129,
+  "best_global_published_column_permutation": [
+    785.6739611271108,
+    [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  ],
+  "second_best_global_published_column_permutation": [
+    56400.90225308444,
+    [
+      0,
+      1,
+      2,
+      3,
+      5,
+      4
+    ]
+  ],
+  "column_order": [
+    "Own8",
+    "OwnSham",
+    "Own13",
+    "Sim8",
+    "SimSham",
+    "Sim13"
+  ],
+  "column_permutation_applied": false,
+  "material_discrepancies": [
+    {
+      "participant": 1,
+      "task": "simultaneity",
+      "condition": "8Hz",
+      "counts": [
+        4,
+        6,
+        9,
+        9,
+        8,
+        6,
+        2
+      ],
+      "published_sd_ms": 169.55807,
+      "baseline_center_conventions": [
+        {
+          "model": "zero_baseline_free_center",
+          "sd_ms": 261.0758336181587,
+          "abs_error_ms": 91.51776361815872,
+          "sse": 0.0228131197390744
+        },
+        {
+          "model": "zero_baseline_zero_center",
+          "sd_ms": 259.6888893728742,
+          "abs_error_ms": 90.1308193728742,
+          "sse": 0.0352910992989622
+        },
+        {
+          "model": "free_baseline_free_center",
+          "sd_ms": 196.65135913615836,
+          "abs_error_ms": 27.093289136158347,
+          "sse": 0.020499691721702
+        },
+        {
+          "model": "free_baseline_zero_center",
+          "sd_ms": 179.22638826217482,
+          "abs_error_ms": 9.668318262174836,
+          "sse": 0.0268587533758166
+        },
+        {
+          "model": "nonnegative_baseline_free_center",
+          "sd_ms": 196.6513656229382,
+          "abs_error_ms": 27.0932956229382,
+          "sse": 0.0204996917217024
+        },
+        {
+          "model": "nonnegative_baseline_zero_center",
+          "sd_ms": 179.22638802527058,
+          "abs_error_ms": 9.668318025270594,
+          "sse": 0.0268587533758166
+        }
+      ],
+      "multistart_n": 60,
+      "multistart_best": {
+        "offset": 0.19880673475027963,
+        "amplitude": 0.7172321871668359,
+        "center_ms": -20.72455805496094,
+        "sd_ms": 196.65135765168515,
+        "sse": 0.02049969172170199,
+        "converged": true
+      },
+      "multistart_sigma_range_ms": [
+        196.65132416537446,
+        196.65136698200564
+      ],
+      "multistart_sse_range": [
+        0.02049969172170199,
+        0.020499691721702518
+      ],
+      "all_multistarts_converged": true,
+      "source_sd_profile_best_sse": 0.022116755019195876,
+      "source_sd_profile_center_ms": -16.409929783444078,
+      "source_sd_profile_offset": 0.26102872923289633,
+      "source_sd_profile_amplitude": 0.677649509117341,
+      "source_sd_profile_derivative_per_ms": -0.00015157888269616787,
+      "source_sd_profile_sse_excess": 0.0016170632974938856,
+      "interpretation": "Diagnostic under explicit unweighted four-parameter Gaussian LS only. No substitution or source-data repair is made."
+    },
+    {
+      "participant": 24,
+      "task": "ownership",
+      "condition": "13Hz",
+      "counts": [
+        1,
+        3,
+        8,
+        10,
+        8,
+        3,
+        1
+      ],
+      "published_sd_ms": 127.66943,
+      "baseline_center_conventions": [
+        {
+          "model": "zero_baseline_free_center",
+          "sd_ms": 132.4649151866344,
+          "abs_error_ms": 4.79548518663438,
+          "sse": 0.0198126243458473
+        },
+        {
+          "model": "zero_baseline_zero_center",
+          "sd_ms": 132.4649151866344,
+          "abs_error_ms": 4.79548518663438,
+          "sse": 0.0198126243458473
+        },
+        {
+          "model": "free_baseline_free_center",
+          "sd_ms": 120.4844376759036,
+          "abs_error_ms": 7.184992324096413,
+          "sse": 0.0060977118889627
+        },
+        {
+          "model": "free_baseline_zero_center",
+          "sd_ms": 120.4844376759036,
+          "abs_error_ms": 7.184992324096413,
+          "sse": 0.0060977118889627
+        },
+        {
+          "model": "nonnegative_baseline_free_center",
+          "sd_ms": 120.48443749643954,
+          "abs_error_ms": 7.184992503560466,
+          "sse": 0.0060977118889627
+        },
+        {
+          "model": "nonnegative_baseline_zero_center",
+          "sd_ms": 120.48443775734354,
+          "abs_error_ms": 7.184992242656463,
+          "sse": 0.0060977118889627
+        }
+      ],
+      "multistart_n": 60,
+      "multistart_best": {
+        "offset": 0.08681896251739371,
+        "amplitude": 0.9531162131599684,
+        "center_ms": -5.568843784328247e-15,
+        "sd_ms": 120.48443782087269,
+        "sse": 0.006097711888962757,
+        "converged": true
+      },
+      "multistart_sigma_range_ms": [
+        120.48443735685443,
+        120.48443829832958
+      ],
+      "multistart_sse_range": [
+        0.006097711888962757,
+        0.006097711888962811
+      ],
+      "all_multistarts_converged": true,
+      "source_sd_profile_best_sse": 0.00806469924985152,
+      "source_sd_profile_center_ms": -5.88265547385447e-13,
+      "source_sd_profile_offset": 0.06798639051195632,
+      "source_sd_profile_amplitude": 0.951621003971445,
+      "source_sd_profile_derivative_per_ms": 0.0005255835930854687,
+      "source_sd_profile_sse_excess": 0.0019669873608887624,
+      "interpretation": "Diagnostic under explicit unweighted four-parameter Gaussian LS only. No substitution or source-data repair is made."
+    }
+  ],
+  "denominator_invariance": "Scaling every ordinate by the same constant scales the free offset and height, but not least-squares optimal center or sigma. All source cells have n=10.",
+  "area_height_invariance": "A free Gaussian area is A_height*sigma*sqrt(2*pi); for positive sigma it is a one-to-one nuisance reparameterization and leaves fitted sigma unchanged."
+}

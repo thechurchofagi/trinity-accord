@@ -1,0 +1,30 @@
+{
+  "created_utc": "2026-10-10T08:01:08.455288+00:00",
+  "review_scope": "Independent read-only post-repair probability and score evaluation, no optimization",
+  "input_sha256": {
+    "cv_fits": "3c89b2a34460b481a88ed40fe6c2d494b5514aba16d9647eb7423cfe8eb7e83f",
+    "full_fits": "4b0c6e8366f6ac0cd4e4dd79bcc05c176d9bd3498cb4215f4bd010559c1b2a26",
+    "response_comparison_summary": "95b37c9c258284ef7d6ab72f77961cb7375eb643b9f3b794654258a0806df0aa"
+  },
+  "source_direct_signed_cdf_implementation": "Direct Phi((k-d)/sigma)-Phi((-k-d)/sigma), separately derived from source scalar formula, no root fitter import",
+  "max_probability_error": 5.551115123125783e-16,
+  "max_heldout_nll_error": 3.552713678800501e-13,
+  "all_600_training_plus_test_counts_match_original": true,
+  "unshifted_cv_records_unchanged": true,
+  "full_fit_file_unchanged": true,
+  "remaining_training_nesting_violations": [],
+  "heldout_nll_sums": {
+    "sigma": 5465.166345874241,
+    "prior": 5427.816041420822,
+    "sigma_shift": 5238.5499106946045,
+    "prior_shift": 5299.434505221635
+  },
+  "shift_sigma_minus_prior_total": -60.88459452703219,
+  "shift_sigma_minus_prior_mean": -2.0294864842344063,
+  "shift_sigma_minus_prior_t95_mean": [
+    -3.2676238032763347,
+    -0.791349165192478
+  ],
+  "participants_favoring_sigma_shift": 21,
+  "interpretation": "Numerical invariants inspected here pass. Corrected split-wise relative prediction favors SigmaShift. Exact variance-component ambiguity, finite-bound optimization limits, and conditional exchangeability caveats remain."
+}

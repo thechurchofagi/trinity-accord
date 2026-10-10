@@ -1,0 +1,9 @@
+# Closed numerical correction: full physical domain
+
+The extended unequal-variance check found a floating-point endpoint issue before release. With `v_o=.5`, `v_s=.6`, `kappa=1`, and a probability interval `[0,1]`, the quadratic projection returned `[0,.4999999999999996]` and status `informative`. The exact result is the complete physical domain `[0,.5]`. The discrepancy was below one unit in the last displayed decimal places, but an exactly known full-domain case should not depend on a quadratic-root rounding error or be mislabeled.
+
+Module version 1.0.1 therefore uses the analytic implication that any probability interval containing the entire attainable model range has preimage equal to the entire physical domain. It returns `calibration.a_domain` directly, with status `full_domain`. This also makes the no-observation case exact in the returned floating-point input units. No statistical model, error budget, calibration bound, or scenario was changed.
+
+The original module and the first expanded check receipt are preserved under `history/before_full_domain_guard/`. The first strict test of exact full-domain equality exposed the issue; a diagnostic pass with a declared endpoint tolerance confirmed the remaining cases before the production correction. The final check again requires exact full-domain equality for all 42 equal- and unequal-variance calibrations. The empirical owner reruns only the fixed, short 480-case finite-binomial enumeration against the corrected module to keep its execution hash current. No original model fit or conditional simulation is rerun.
+
+The general numerical receipt separately reports checks too close to a probability boundary to adjudicate at the declared floating-point tolerance. Those are not promoted into a machine-certified proof. The analytic sharpness and coverage arguments remain in `PROOF.md`.

@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Cabrera2015.pdf",
+    "url": "https://escholarship.org/content/qt2dd1q6w9/qt2dd1q6w9.pdf",
+    "sha256": "ecd3b0cdbfcb96300ee43d5adc50acf2cef62afc75e0462f4cf1dfcd776716a8",
+    "bytes": 2909606
+  },
+  {
+    "name": "Yarrow2023.pdf",
+    "url": "https://kielanyarrow.github.io/MyPage/papers/StrategyAffectsSJWidth.pdf",
+    "sha256": "b1fb85538e79366685a2946ca85d6006c3fc8dcb48b8ff810a225cccf8504beb",
+    "bytes": 2805014
+  },
+  {
+    "name": "Yarrow2011.pdf",
+    "url": "https://www.psy.uq.edu.au/~uqdarnol/Derek_CV_files/Motor_Sensory_Recal_2011.pdf",
+    "sha256": "81ff1728be507b75dd8aebf5469413013f7201aaf1ac26ec0175684cdb8e1daa",
+    "bytes": 660410
+  },
+  {
+    "name": "Yarrow2022.pdf",
+    "url": "https://openaccess.city.ac.uk/27352/1/EEG_SJ%20Cognition%20R_2_clean.pdf",
+    "sha256": "00391eb724e8453c21dcc0c78cc67ef9d549cd62cb9d7856617417b69795c923",
+    "bytes": 1236795
+  }
+]

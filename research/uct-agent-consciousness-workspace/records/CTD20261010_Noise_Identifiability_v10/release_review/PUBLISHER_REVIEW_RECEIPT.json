@@ -1,0 +1,101 @@
+{
+  "schema": "ctd.publisher-review-receipt.v1",
+  "created_utc": "2026-10-10T09:13:41.855662+00:00",
+  "status": "PASS_LOCAL_OFFLINE_PUBLICATION_GATE_REVIEW",
+  "release_identity": {
+    "report": "TA-TR-2026-26",
+    "version": "1.0.0",
+    "title": "Identifiability of Noise Sources in Bodily Judgments",
+    "branch": "research/ctd-noise-identifiability-v100-20261010"
+  },
+  "scope": "Local publisher adaptation and inherited offline safety gates; not release authorization, visual proof approval, or evidence of a live remote operation.",
+  "worktree": "/workspace/scratch/5b73aae6b1e4/ctd_release_repo",
+  "baseline": {
+    "main_commit": "6cfb89f0b88605da9a44da9c97203729a6742894",
+    "scu_publication_source_commit": "2d7fc42d859fada3a316478ac6c0b4b33f1c542d",
+    "scu_publication_py_sha256": "657d7662e7b4151f8939d750a398c15d536954e2abc3d5b6ccab7159aff62c2d"
+  },
+  "ast_comparison": {
+    "normalization": "Only literal SCU -> CTD and scu -> ctd labels in baseline source before AST comparison; no ignored nodes.",
+    "guard_count": 22,
+    "guard_results": {
+      "sha": true,
+      "load": true,
+      "save": true,
+      "input_hashes": true,
+      "checked_out_commit": true,
+      "normalized_title": true,
+      "same_work_candidate": true,
+      "list_account_depositions": true,
+      "validate_id": true,
+      "check_url": true,
+      "NoRedirect": true,
+      "client": true,
+      "read": true,
+      "persist": true,
+      "check_deposit": true,
+      "validate_local_package": true,
+      "validate_authorization": true,
+      "prepare": true,
+      "remote_files": true,
+      "download_public": true,
+      "publish": true,
+      "verify": true
+    }
+  },
+  "offline_tests": {
+    "test_count": 17,
+    "exit_code": 0,
+    "network_guard": "socket.create_connection and socket.socket.connect raise OfflineViolation; tests use synthetic remote mocks.",
+    "transcript": "CTD_PUBLISHER_OFFLINE_TESTS.log",
+    "transcript_sha256": "b6ec9f6fa0be252e489dee047c35f13afb4a1c620ce5f520606f392a5490b5c2",
+    "python": "3.12.14"
+  },
+  "files_sha256": {
+    "research/noise-identifiability-bodily-judgments/publication.py": "c55b188787dce0a3bd687d18ef1430e1dd3050b0629067157ef29064bae5e4ac",
+    "research/noise-identifiability-bodily-judgments/test_publication.py": "2db56d7d4d9150d9642f822b126e07ec690ef3365101b62f8a78a3339c9c5987",
+    "research/noise-identifiability-bodily-judgments/build_pdf.py": "1f7b348bbb493e8cc869a76bbdf68074c72707ce93ea7695c0303d425698eee1",
+    ".github/workflows/prepare-ctd-noise-identifiability-v100.yml": "12511a360d06831c89ee44386fda1c4c83d8446fe8dccfbf8b55ba519f52ae0e",
+    ".github/workflows/publish-ctd-noise-identifiability-v100.yml": "04a7ec4394f0848d849204a22eaeed8f5f6c8fab831bf9d08f0659973b9c9156"
+  },
+  "legacy_zenodo_client": {
+    "path": "research/reading-trinity-accord/publish_zenodo.py",
+    "verified_from_git_object_at": "6cfb89f0b88605da9a44da9c97203729a6742894",
+    "expected_git_blob": "a0cbc84cc5fd826c06d16456c4adbaa40dabc788",
+    "sha256": "92e94028b8e05c9502c2266223856e1a706cd270e61e6c51739476d9d618b0d3",
+    "present_in_sparse_worktree": false,
+    "handling": "No checkout or legacy modification; ordinary Actions checkout obtains tracked dependency. Inherited blob pin retained."
+  },
+  "scientific_assets_pending": {
+    "frozen_input_count": 10,
+    "missing_at_review": [
+      "source-main.md",
+      "reproducibility-v1.0.0.zip",
+      "pdf_style.tex",
+      "figures/figure1_audit.pdf",
+      "figures/figure2_twins.pdf",
+      "figures/figure3_identification.pdf",
+      "figures/figure4_finite_sample.pdf"
+    ],
+    "pdf_validation": "DOI-bound final PDF and visual review are subsequent gates, not exercised with incomplete assets."
+  },
+  "side_effects": {
+    "changed_existing_repository_files": false,
+    "committed_or_pushed": false,
+    "external_write_or_workflow_trigger": false,
+    "created_live_deposition": false,
+    "executed_paid_or_wallet_operation": false,
+    "five_authored_files_unchanged_by_tests": true
+  },
+  "limitations": [
+    "Main-branch OTS/Arweave scheduler is a separate integration task; no preservation operation was run.",
+    "Same-work online all-version scan still required to exclude concurrent TA26/title occupation.",
+    "These tests establish inherited fail-closed behavior under mocks, not availability of live credentials, remote services, or GitHub Actions."
+  ],
+  "review_history": [
+    {
+      "prior_receipt_sha256": "883a207fe57bf7d7838ed07bef97c613b847f5efd77224960d24dc30e0adb75b",
+      "reason_for_refresh": "Metadata landing-page description explicitly repeats the already-declared third-party rights exception; no gate body changed. Network-blocked 17-test suite repeated on final reviewed publisher."
+    }
+  ]
+}

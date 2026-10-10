@@ -1,0 +1,16 @@
+{
+  "reason": "One deterministic fixed-plan rerun after a full-domain endpoint guard in confidence_sets.py, preserving first execution receipt. No scenario or statistical method was changed.",
+  "old_module_sha256": "826bec475e989fa9e64f392c49ddfea7e8c4ebd8e511651807048a916499d53a",
+  "new_module_sha256": "cefe69f6fec5b26fb8935e2fa1e0c9db7e9b47ac003b4c16a9412ccae02f4272",
+  "old_receipt_path": "history/pre_module_1_0_1_rerun/EXECUTION_PROVENANCE.json",
+  "new_receipt_path": "EXECUTION_PROVENANCE.json",
+  "csv_byte_identical": true,
+  "csv_sha256": "152489db0e528ca74b74b71a12acd3d91a4b1491395e2828c1cb60c22bca7f82",
+  "summary_identical_except_completed_utc_and_elapsed_seconds": true,
+  "npz_array_count": 124,
+  "all_npz_arrays_exactly_identical_including_nan": true,
+  "first_run_preserved": true,
+  "old_fits_rerun": 0,
+  "old_MC_rerun": 0,
+  "new_human_observations": 0
+}
