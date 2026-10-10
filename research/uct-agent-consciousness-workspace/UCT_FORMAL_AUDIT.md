@@ -1,4 +1,10 @@
-# 最新接续 CBI20261010 / CBI-RESULT-v0.1.0
+# 最新接续 EIP20261010 / EIP-RESULT-v0.1.0
+
+[本轮地图审计](records/EIP20261010_Exoskeleton_Instrumentation/MAP_AUDIT.md) · [机器结果](records/EIP20261010_Exoskeleton_Instrumentation/MAP_COMPATIBILITY_AUDIT.json) · [缺口](records/EIP20261010_Exoskeleton_Instrumentation/GAP_LEDGER.md)。恢复并核验82成员完成图，遍历913节点、424规则、261上下文、10暂停规则及1608审查项；纠正一条初始失效引用后，EIP 20项结构检查通过，6/3/5候选停用。该PASS不表示人体选择性探针可行、全图语义重证、实际消费者安装、命名体验桥或审查关闭。
+
+---
+
+# 前一接续 CBI20261010 / CBI-RESULT-v0.1.0
 
 [本轮地图审计](records/CBI20261010_Consumer_Branch_Isolation/MAP_AUDIT.md) · [机器结果](records/CBI20261010_Consumer_Branch_Isolation/MAP_COMPATIBILITY_AUDIT.json) · [缺口](records/CBI20261010_Consumer_Branch_Isolation/GAP_LEDGER.md)。恢复并核验82成员完成图，遍历913节点、424规则、261上下文、10暂停规则及1608审查项；CBI 20项结构检查通过，7/4/5候选停用。该 PASS 不表示生物可行性、全图语义重证、实际消费者安装、命名体验桥或审查关闭。
 

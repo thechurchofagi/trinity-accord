@@ -1,4 +1,10 @@
-# 最新接续 CBI20261010：消费者相对的运动—本体分支隔离
+# 最新接续 EIP20261010：外骨骼仪器包与消费者实际读取
+
+[中文交接](records/EIP20261010_Exoskeleton_Instrumentation/HANDOFF_ZH.md) · [英文研究稿](records/EIP20261010_Exoskeleton_Instrumentation/RESEARCH_NOTE.md) · [仪器合同](records/EIP20261010_Exoskeleton_Instrumentation/INSTRUMENT_CONTRACT.md) · [精确结果](records/EIP20261010_Exoskeleton_Instrumentation/EXACT_RESULTS.json) · [思想实验](records/EIP20261010_Exoskeleton_Instrumentation/THOUGHT_EXPERIMENT_MATRIX.md) · [地图审计](records/EIP20261010_Exoskeleton_Instrumentation/MAP_AUDIT.md)。远端运动可部分匹配，但传入/到达/输出不能在冗余写入下识别指定消费者实际读取；完整组织也不可能在读取对比中保持相同。完成图不变；EIP 6/3/5候选停用；覆盖v1.0.21，单篇HOLD并并入现有论文方法段。下一步只评估一个命名消费者的选择性差异探针。全部审查项继续开放。
+
+---
+
+# 前一接续 CBI20261010：消费者相对的运动—本体分支隔离
 
 [中文交接](records/CBI20261010_Consumer_Branch_Isolation/HANDOFF_ZH.md) · [英文研究稿](records/CBI20261010_Consumer_Branch_Isolation/RESEARCH_NOTE.md) · [精确结果](records/CBI20261010_Consumer_Branch_Isolation/EXACT_RESULTS.json) · [思想实验](records/CBI20261010_Consumer_Branch_Isolation/THOUGHT_EXPERIMENT_MATRIX.md) · [地图审计](records/CBI20261010_Consumer_Branch_Isolation/MAP_AUDIT.md)。本轮证明消费者相对的动作存在/本体读入缺席必须有真实分支切断；现有人类证据只完成部分坐标，外骨骼近似只保持选定输出。完成图仍为 UCT-MAP-v1.1.2；CBI 7/4/5候选停用；覆盖 UCT-PUB-v1.0.20，单篇 HOLD。下一步写出一个真实载体—事件—消费者—时序仪器包或不可避免干扰。所有审查项继续开放。
 

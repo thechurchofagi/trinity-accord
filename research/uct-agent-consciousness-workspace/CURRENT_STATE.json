@@ -15,14 +15,14 @@
   "version_policy": "VERSIONING_POLICY.md",
   "changelog": "CHANGELOG.md",
   "latest_research": {
-    "id": "CBI20261010",
-    "result_version": "CBI-RESULT-v0.1.0",
+    "id": "EIP20261010",
+    "result_version": "EIP-RESULT-v0.1.0",
     "status": "PENDING_CHECKPOINT_DISABLED",
-    "source": "records/CBI20261010_Consumer_Branch_Isolation/RESEARCH_NOTE.md",
-    "handoff": "records/CBI20261010_Consumer_Branch_Isolation/HANDOFF_ZH.md",
-    "work_log": "records/CBI20261010_Consumer_Branch_Isolation/WORK_LOG.md",
+    "source": "records/EIP20261010_Exoskeleton_Instrumentation/RESEARCH_NOTE.md",
+    "handoff": "records/EIP20261010_Exoskeleton_Instrumentation/HANDOFF_ZH.md",
+    "work_log": "records/EIP20261010_Exoskeleton_Instrumentation/WORK_LOG.md",
     "enabled_as_established_premises": false,
-    "manuscript_status": "HOLD_STANDALONE_TECHNICAL_SECTION_FOR_SCU_MPC_FAMILY"
+    "manuscript_status": "HOLD_STANDALONE_INTEGRATE_AS_SCU_MPC_METHODS_SECTION"
   },
   "latest_integrated_research": {
     "id": "R188-CER-20261009",
@@ -68,7 +68,8 @@
     "R205-ASC-20261010",
     "SCU20261010",
     "MPC20261010",
-    "CBI20261010"
+    "CBI20261010",
+    "EIP20261010"
   ],
   "current_guide": "RESEARCH_MASTER_GUIDE.md v2.3",
   "complete_map_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
@@ -80,33 +81,33 @@
     "nondeductive_context_links": 261,
     "total_review_items": 1608
   },
-  "pending_note": "AC, IL, ONLINE-AC, R189–R205, SCU20261010, MPC20261010 and CBI20261010 remain disabled. Six additional correction nodes and two rules override eight pending records only; neither candidate nor correction counts enter the completed graph.",
+  "pending_note": "AC, IL, ONLINE-AC, R189–R205, SCU20261010, MPC20261010, CBI20261010 and EIP20261010 remain disabled. Six additional correction nodes and two rules override eight pending records only; neither candidate nor correction counts enter the completed graph.",
   "publication_coverage": {
     "entry": "PUBLICATION_COVERAGE.json",
-    "version": "UCT-PUB-v1.0.20",
+    "version": "UCT-PUB-v1.0.21",
     "base_census_version": "UCT-PUB-v1.0.0",
-    "update": "records/CBI20261010_Consumer_Branch_Isolation/PUBLICATION_COVERAGE_UPDATE.json",
+    "update": "records/EIP20261010_Exoskeleton_Instrumentation/PUBLICATION_COVERAGE_UPDATE.json",
     "report": "records/PUB20261009_Publication_Coverage/PUBLICATION_COVERAGE_REPORT_ZH.md",
     "nondeductive": true
   },
   "latest_activity": {
-    "id": "CBI20261010",
-    "kind": "consumer_relative_motor_proprioceptive_branch_isolation_boundary",
-    "work_log": "records/CBI20261010_Consumer_Branch_Isolation/WORK_LOG.md",
-    "handoff": "records/CBI20261010_Consumer_Branch_Isolation/HANDOFF_ZH.md"
+    "id": "EIP20261010",
+    "kind": "exoskeleton_instrumentation_and_consumer_read_nonidentification",
+    "work_log": "records/EIP20261010_Exoskeleton_Instrumentation/WORK_LOG.md",
+    "handoff": "records/EIP20261010_Exoskeleton_Instrumentation/HANDOFF_ZH.md"
   },
   "latest_pending_research": {
-    "id": "CBI20261010",
-    "result_version": "CBI-RESULT-v0.1.0",
+    "id": "EIP20261010",
+    "result_version": "EIP-RESULT-v0.1.0",
     "status": "PENDING_CHECKPOINT_DISABLED",
-    "source": "records/CBI20261010_Consumer_Branch_Isolation/RESEARCH_NOTE.md",
-    "handoff": "records/CBI20261010_Consumer_Branch_Isolation/HANDOFF_ZH.md",
-    "work_log": "records/CBI20261010_Consumer_Branch_Isolation/WORK_LOG.md",
+    "source": "records/EIP20261010_Exoskeleton_Instrumentation/RESEARCH_NOTE.md",
+    "handoff": "records/EIP20261010_Exoskeleton_Instrumentation/HANDOFF_ZH.md",
+    "work_log": "records/EIP20261010_Exoskeleton_Instrumentation/WORK_LOG.md",
     "enabled_as_established_premises": false,
-    "manuscript_status": "HOLD_STANDALONE_TECHNICAL_SECTION_FOR_SCU_MPC_FAMILY"
+    "manuscript_status": "HOLD_STANDALONE_INTEGRATE_AS_SCU_MPC_METHODS_SECTION"
   },
-  "review_status_scope": "Completed release UCT-MAP-v1.1.2 only. CBI20261010 traversed every completed node/rule/context and the 1,608-item ledger for scoped compatibility, but inherited raw-contract/schema variation and historical proof reconstruction remain explicitly incomplete; no new completed map release, actual branch-isolation installation, named phenomenal bridge or reviewer closure.",
-  "next_priority": "Specify one physically and ethically feasible carrier-event-consumer-timing instrument package for the matched-world-output exoskeleton approximation, or identify the unavoidable nuisance coordinate that prevents the frozen contract. Keep intensity, precision, agency and ownership separate; do not resume generic source enumeration.",
+  "review_status_scope": "Completed release UCT-MAP-v1.1.2 only. EIP20261010 traversed every completed node/rule/context and the 1,608-item ledger for scoped compatibility, but inherited raw-contract/schema variation and historical proof reconstruction remain explicitly incomplete; no new completed map release, actual selective-read installation, named phenomenal bridge or reviewer closure.",
+  "next_priority": "Select one named central consumer and assess whether a physically and ethically credible selective discrepancy probe can satisfy carrier, timing, alternative-writer exclusion and faithful-readout premises; otherwise identify the first premise that fails. Do not resume generic source or control enumeration.",
   "latest_scoped_review": {
     "audit": "records/SCU20261010_Source_Consumer_Protocols/MAP_AUDIT.md",
     "exact_unread_scope": "records/SCU20261010_Source_Consumer_Protocols/review/EXACT_UNREAD_SCOPE.json",

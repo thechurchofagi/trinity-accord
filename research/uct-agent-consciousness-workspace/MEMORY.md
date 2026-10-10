@@ -1,4 +1,10 @@
-# 最新接续 CBI20261010：消费者相对的运动—本体分支隔离
+# 最新接续 EIP20261010：外骨骼仪器包与消费者实际读取
+
+[中文交接](records/EIP20261010_Exoskeleton_Instrumentation/HANDOFF_ZH.md) · [英文研究稿](records/EIP20261010_Exoskeleton_Instrumentation/RESEARCH_NOTE.md) · [仪器合同](records/EIP20261010_Exoskeleton_Instrumentation/INSTRUMENT_CONTRACT.md) · [精确结果](records/EIP20261010_Exoskeleton_Instrumentation/EXACT_RESULTS.json) · [地图审计](records/EIP20261010_Exoskeleton_Instrumentation/MAP_AUDIT.md)。两层合同分开传入/到达证据和指定消费者实际读取；8行模型用替代写入者证明前者加匹配输出仍不识别读取。专属探针只在 `S=1`、唯一写入、选择性、时序和读出前提下条件成立。完整图不变，EIP 6/3/5停用，覆盖v1.0.21并入SCU/MPC方法段。下一步只查一个命名消费者的可行探针。
+
+---
+
+# 前一接续 CBI20261010：消费者相对的运动—本体分支隔离
 
 [中文交接](records/CBI20261010_Consumer_Branch_Isolation/HANDOFF_ZH.md) · [英文研究稿](records/CBI20261010_Consumer_Branch_Isolation/RESEARCH_NOTE.md) · [精确结果](records/CBI20261010_Consumer_Branch_Isolation/EXACT_RESULTS.json) · [地图审计](records/CBI20261010_Consumer_Branch_Isolation/MAP_AUDIT.md)。`P=0` 不再泛指整个人体无本体信息，而是一个消费者/事件/时间窗的实际读入缺席；保持动作/接触时必切断转导、传递或读取/时序之一。现有来源未完成全冻结人类合同；外骨骼只能匹配选定世界输出，不能保持完整组织。UCT-MAP-v1.1.2不变，CBI 7/4/5停用，UCT-PUB-v1.0.20且不另成稿。下一步只做具体仪器包或不可避免干扰分析。
 

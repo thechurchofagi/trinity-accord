@@ -1,0 +1,50 @@
+{
+  "schema": "uct-eip-claim-ledger/1",
+  "result_version": "EIP-RESULT-v0.1.0",
+  "claims": [
+    {
+      "id": "EIP-C1",
+      "type": "EXACT_NONIDENTIFICATION_THEOREM",
+      "statement": "Peripheral delivery, central arrival, aggregate consumer update and matched output do not identify actual read by a named consumer while an alternative writer is uncontrolled.",
+      "domain": "The eight-row Boolean mechanism S,G,X with U=(S AND G) OR X.",
+      "all_premises": ["fixed carrier-consumer-window tuple", "declared observation map", "alternative writer X may be active"],
+      "proof_or_source": "model.py; EXACT_RESULTS.json; RESEARCH_NOTE.md §3",
+      "counterexamples": "S=1,X=1,G=0 and S=1,X=1,G=1 have the same ordinary evidence.",
+      "status": "EXACT_FINITE_RESULT_PENDING_ADOPTION",
+      "thought_experiment_role": "Redundant-writer twin varies read while fixing delivery, arrival and output."
+    },
+    {
+      "id": "EIP-C2",
+      "type": "CONDITIONAL_IDENTIFICATION_THEOREM",
+      "statement": "With S=1 and X=0, G is identified by U only if the stipulated interface, selectivity, sole-writer, timing and faithful-readout premises hold.",
+      "domain": "Exclusive-probe rows with delivered selected carrier.",
+      "all_premises": ["S=1", "X=0", "U=(S AND G) OR X", "faithful consumer readout", "selective intervention and fixed window"],
+      "proof_or_source": "model.py; EXACT_RESULTS.json; INSTRUMENT_CONTRACT.md",
+      "counterexamples": "Any hidden writer, off-target effect, consumer mismatch or unfaithful readout defeats the inference.",
+      "status": "CONDITIONAL_METHOD_RESULT_PENDING_ADOPTION",
+      "thought_experiment_role": "Exclusive probe states the minimum condition that defeats the redundant-writer twin."
+    },
+    {
+      "id": "EIP-C3",
+      "type": "ORGANIZATIONAL_SCOPE_CONSTRAINT",
+      "statement": "A genuine read-versus-no-read contrast necessarily changes the selected consumer-carrier relation even if a declared distal envelope is matched; other biological co-changes are not entailed by the finite logic.",
+      "domain": "Same declared episode contract and partial distal-output match.",
+      "all_premises": ["actual G differs", "same declared carrier and consumer", "complete organization includes the selected relation"],
+      "proof_or_source": "RESEARCH_NOTE.md §5; INSTRUMENT_CONTRACT.md",
+      "counterexamples": "A compensating hypothetical device can hold effort, EMG or attention fixed while G changes, so those changes are not logical consequences.",
+      "status": "CONDITIONAL_ORGANIZATIONAL_RESULT_PENDING_ADOPTION",
+      "thought_experiment_role": "Matched-output exoskeleton separates partial consequence equality from organizational equality."
+    },
+    {
+      "id": "EIP-C4",
+      "type": "SOURCE_BOUNDED_EMPIRICAL_ASSESSMENT",
+      "statement": "The inspected primary studies establish components of the two-level package but not a complete same-episode selective consumer-read installation.",
+      "domain": "SOURCE_SCOPE.md, sources inspected through 2026-10-10.",
+      "all_premises": ["bounded source table", "fixed EIP contract", "no extrapolation from component feasibility"],
+      "proof_or_source": "SOURCE_SCOPE.md; RESEARCH_NOTE.md §4",
+      "counterexamples": "An uninspected or future integrated experiment may satisfy the contract.",
+      "status": "NOT_ESTABLISHED_IN_INSPECTED_SET",
+      "thought_experiment_role": "Closest regimes show which coordinate remains unverified."
+    }
+  ]
+}

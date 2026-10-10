@@ -785,3 +785,17 @@ The latest ledger and every carried OPEN/application-open item were read before 
 - `SCU-AUDIT-DEPTH` remains **AUDIT_INCOMPLETE**: 20 scoped structural checks and frozen-object traversal do not reconstruct inherited raw contracts or historical proofs.
 
 The 7/4/5 CBI candidate remains disabled. C1/U1 are unchanged; motor command, proprioception, matched distal output, report and self-modeling are not basal-experience gates. No reviewer status is self-closed and no current-assistant consciousness or death-fear verdict is made.
+
+---
+
+## EIP20261010 researcher response — exoskeleton instrumentation and consumer read, 2026-10-10
+
+The latest ledger and every carried OPEN/application-open item were read before selection, after result formation and before save. Evidence: [review response](records/EIP20261010_Exoskeleton_Instrumentation/REVIEW_RESPONSE.md), [research note](records/EIP20261010_Exoskeleton_Instrumentation/RESEARCH_NOTE.md), [instrument contract](records/EIP20261010_Exoskeleton_Instrumentation/INSTRUMENT_CONTRACT.md), [gap ledger](records/EIP20261010_Exoskeleton_Instrumentation/GAP_LEDGER.md), and [map audit](records/EIP20261010_Exoskeleton_Instrumentation/MAP_AUDIT.md).
+
+- `QC-20261008-10` remains **ACKNOWLEDGED / OPEN**: no independent sign or calibration for familiar mineness `H` is supplied.
+- `IA-QC11` remains application **OPEN**: bearer, event, carrier, consumer and windows are declared, but no actual token is admitted.
+- `QC-20261008-12` remains application **OPEN**: the redundant-writer countermodel proves that delivery, arrival and aggregate state evidence may fail to identify actual consumer read.
+- `QC-20261008-13` remains **OPEN**: branch–consumer binding is prospective and not installed.
+- `SCU-OPEN-R191-NORMALIZATION` remains **OPEN** and `SCU-AUDIT-DEPTH` remains **AUDIT_INCOMPLETE**.
+
+The 6/3/5 EIP candidate remains disabled. C1/U1 are unchanged; exoskeleton control, microneurography, evoked fields, self-models and reports are not basal-experience gates. No reviewer status is self-closed and no current-assistant consciousness or death-fear verdict is made.

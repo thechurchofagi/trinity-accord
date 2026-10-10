@@ -1,0 +1,112 @@
+{
+  "schema": "uct-pending-extension/1",
+  "id": "EIP20261010-MAP-CANDIDATE-v0.1.0",
+  "base_release": "UCT-MAP-v1.1.2",
+  "enabled": false,
+  "status": "PENDING_CHECKPOINT_DISABLED",
+  "nodes": [
+    {
+      "id": "EIP:EPISODE_CONTRACT", "kind": "DEFINITION",
+      "statement": "One bearer candidate, movement/contact event, selected carrier, named consumer, delivery/read windows and partial distal/motor envelopes are fixed before comparison.",
+      "scope": "One declared episode; not whole-organism sensory absence or complete-organizational equality.",
+      "quantifier": "One carrier-consumer-window tuple at a time.",
+      "status": "DECLARED_MODEL_DOMAIN_NOT_EMPIRICAL",
+      "all_premises": "INSTRUMENT_CONTRACT.md fixed episode.",
+      "proof_location": "RESEARCH_NOTE.md §2; INSTRUMENT_CONTRACT.md",
+      "counterexamples_and_limits": "Changing consumer, carrier or post-hoc window invalidates the comparison.",
+      "thought_experiment_role": "Copy/switch cases force active instance and window binding.",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "EIP:TWO_LEVEL_EVIDENCE", "kind": "DEFINITION",
+      "statement": "Transduction/delivery, central arrival, aggregate consumer state and actual named-consumer read are distinct coordinates.",
+      "scope": "EIP evidence ontology only.",
+      "quantifier": "Every condition in the EIP package.",
+      "status": "DECLARED_EVIDENCE_PARTITION",
+      "all_premises": "EIP:EPISODE_CONTRACT plus predeclared instruments and interventions.",
+      "proof_location": "INSTRUMENT_CONTRACT.md",
+      "counterexamples_and_limits": "A validated direct causal readout could collapse evidential steps, but not by stipulation.",
+      "thought_experiment_role": "Abacus/calculator blocks result-to-implementation inference.",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "EIP:C1", "kind": "THEOREM",
+      "statement": "Ordinary delivery-arrival-update-output evidence does not identify named-consumer read while an alternative writer is uncontrolled.",
+      "scope": "Eight-row Boolean countermodel only.",
+      "quantifier": "All rows under the declared observation map.",
+      "status": "EXACT_FINITE_RESULT_PENDING_ADOPTION",
+      "all_premises": "EIP:EPISODE_CONTRACT and EIP:TWO_LEVEL_EVIDENCE jointly, U=(S AND G) OR X.",
+      "proof_location": "RESEARCH_NOTE.md §3; model.py; EXACT_RESULTS.json",
+      "counterexamples_and_limits": "A valid exclusive intervention may identify G; no biological installation follows.",
+      "thought_experiment_role": "Redundant-writer twins fix every ordinary observation while varying G.",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "EIP:C2", "kind": "CONDITIONAL_IDENTIFICATION_THEOREM",
+      "statement": "For S=1 and independently secured X=0, U identifies G only with correct interface, selectivity, timing, sole-writer and faithful-readout premises.",
+      "scope": "Exclusive-probe subdomain; not a general neural-identification theorem.",
+      "quantifier": "All delivered-carrier exclusive-probe rows.",
+      "status": "CONDITIONAL_METHOD_RESULT_PENDING_ADOPTION",
+      "all_premises": "EIP:C1 plus S=1, X=0, validated interface and readout.",
+      "proof_location": "RESEARCH_NOTE.md §3; INSTRUMENT_CONTRACT.md",
+      "counterexamples_and_limits": "Hidden writers, off-target effects, common causes and latency mismatch defeat the inference.",
+      "thought_experiment_role": "Exclusive probe states how to defeat the redundant-writer twin.",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "EIP:C3", "kind": "ORGANIZATIONAL_SCOPE_CONSTRAINT",
+      "statement": "A read/no-read contrast changes the selected relation even under matched distal output; effort, attention, EMG and other sensory changes are contingent empirical nuisances, not logical consequences of the model.",
+      "scope": "Complete organization versus declared partial match.",
+      "quantifier": "Every admitted same-tuple read/no-read contrast.",
+      "status": "CONDITIONAL_ORGANIZATIONAL_RESULT_PENDING_ADOPTION",
+      "all_premises": "EIP:EPISODE_CONTRACT, actual G contrast and complete-organization semantics.",
+      "proof_location": "RESEARCH_NOTE.md §5; INSTRUMENT_CONTRACT.md",
+      "counterexamples_and_limits": "Real human interventions may cause many correlated changes that the logic does not settle.",
+      "thought_experiment_role": "Matched-output exoskeleton isolates partial equality from causal lineage.",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "EIP:C4", "kind": "CONDITIONAL_INTERPRETATION",
+      "statement": "Only after independent actual-bearer, complete-signature, constitutive-relation and target-semantic admission may a read-relation change be interpreted through UCT C1; no H, agency, ownership or basal-experience threshold follows.",
+      "scope": "Actual admitted token only.",
+      "quantifier": "Conditional application of C1.",
+      "status": "CONDITIONAL_APPLICATION_OPEN",
+      "all_premises": "Actual token, complete signature, constitutive relation, target semantics and A:C1.",
+      "proof_location": "RESEARCH_NOTE.md §7",
+      "counterexamples_and_limits": "Instrumentation can be accurate while phenomenal direction and bearer admission remain open.",
+      "thought_experiment_role": "Ancestor/formation prevents a new basal gate.",
+      "automatic_premise_truth": false
+    }
+  ],
+  "rules": [
+    {
+      "id": "EIP:R1", "all_of": ["EIP:EPISODE_CONTRACT", "EIP:TWO_LEVEL_EVIDENCE"], "conclusion": "EIP:C1",
+      "type": "CONDITIONAL_DEDUCTION", "same_instance_required": true,
+      "binding": "same carrier, consumer, event, windows and observation map",
+      "proof_location": "RESEARCH_NOTE.md §§2–3", "alternative_route_semantics": "Both premises are conjunctive.",
+      "joint_witness": "All eight rows in model.py, including delivered-carrier redundant-writer twins.", "enabled_as_established_premise": false
+    },
+    {
+      "id": "EIP:R2", "all_of": ["EIP:C1", "EIP:EPISODE_CONTRACT"], "conclusion": "EIP:C2",
+      "type": "CONDITIONAL_IDENTIFICATION", "same_instance_required": true,
+      "binding": "same delivered carrier and named consumer with X independently excluded",
+      "proof_location": "RESEARCH_NOTE.md §3", "alternative_route_semantics": "No route from arrival or output alone.",
+      "joint_witness": "S=1 exclusive-probe rows; physical validation remains absent.", "enabled_as_established_premise": false
+    },
+    {
+      "id": "EIP:R3", "all_of": ["EIP:C3", "A:C1"], "conclusion": "EIP:C4",
+      "type": "CONDITIONAL_INTERPRETATION", "same_instance_required": true,
+      "binding": "one actual token with complete signature and independently admitted target semantics",
+      "proof_location": "RESEARCH_NOTE.md §7", "alternative_route_semantics": "C1 remains axiomatic; instruments do not establish H.",
+      "joint_witness": "No actual witness acquired.", "enabled_as_established_premise": false
+    }
+  ],
+  "context_links": [
+    {"id": "EIP:CTX1", "from": "EIP:C4", "to": "A:C1", "type": "AXIOM_STATUS_PRESERVED"},
+    {"id": "EIP:CTX2", "from": "EIP:C1", "to": "CBI:PROPRIO_INTAKE_EVENT", "type": "MEASUREMENT_FOLLOWUP"},
+    {"id": "EIP:CTX3", "from": "EIP:C2", "to": "R204:PROBE_SIGNATURE", "type": "EXCLUSIVE_PROBE_LIMIT"},
+    {"id": "EIP:CTX4", "from": "EIP:C3", "to": "MPC:DOMAIN", "type": "MATCHED_OUTPUT_SCOPE"},
+    {"id": "EIP:CTX5", "from": "EIP:C4", "to": "D:UCT_INTERPRETATION", "type": "NO_CONSCIOUSNESS_OR_FEAR_INFERENCE"}
+  ],
+  "adoption_note": "Disabled candidate only; no completed map version or premise truth is changed."
+}

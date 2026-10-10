@@ -1,0 +1,15 @@
+{
+  "schema": "uct-eip-run-receipt/1",
+  "round": "EIP20261010",
+  "result_version": "EIP-RESULT-v0.1.0",
+  "verified_parent_commit": "79ec03184ce66ac2c1e44d0dc6ba88c3f774d33a",
+  "completed_map_release": "UCT-MAP-v1.1.2",
+  "completed_map_counts": {"nodes": 913, "rules": 424, "contexts": 261, "suspended": 10, "review_items": 1608},
+  "model": {"rows": 8, "ordinary_gate_ambiguous_groups": 3, "exclusive_probe_gate_ambiguities_for_S1": 0},
+  "map_audit": {"checks": 20, "all_structural_checks_pass": true, "covered_completed_objects": 1598, "candidate_counts": {"nodes": 6, "rules": 3, "contexts": 5}},
+  "candidate_enabled": false,
+  "initial_failed_check_retained": "EIP:CTX3 initially named nonexistent R204:C4; corrected to disabled R204:PROBE_SIGNATURE before final validation.",
+  "semantic_limits": ["no actual installation", "no global semantic reproof", "no H calibration", "no phenomenal bridge", "no reviewer closure"],
+  "science_commit": "TO_BE_RECORDED_IN_DUAL_SAVE_RECEIPT",
+  "library_master_expected_version_before_update": 73
+}

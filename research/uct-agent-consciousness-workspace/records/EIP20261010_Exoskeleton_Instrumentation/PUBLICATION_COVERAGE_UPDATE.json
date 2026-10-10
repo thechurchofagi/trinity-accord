@@ -1,0 +1,11 @@
+{
+  "schema": "uct-publication-coverage-update/1",
+  "version": "UCT-PUB-v1.0.21",
+  "base": "UCT-PUB-v1.0.20",
+  "round": "EIP20261010",
+  "claims": ["EIP-C1", "EIP-C2", "EIP-C3", "EIP-C4"],
+  "decision": "HOLD_STANDALONE_INTEGRATE_AS_SCU_MPC_METHODS_SECTION",
+  "reason": "The exact non-identification result and instrument contract are substantive but too narrow for a non-overlapping standalone paper; they strengthen the source-consumer/motor-proprioceptive manuscript family without duplicating prior UCT foundations.",
+  "nondeductive": true,
+  "map_promotion": false
+}

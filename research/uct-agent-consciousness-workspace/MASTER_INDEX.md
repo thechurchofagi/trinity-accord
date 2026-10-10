@@ -1,4 +1,10 @@
-# 最新接续 CBI20261010：消费者相对的运动—本体分支隔离
+# 最新接续 EIP20261010：外骨骼仪器包与消费者实际读取
+
+[中文交接](records/EIP20261010_Exoskeleton_Instrumentation/HANDOFF_ZH.md) · [英文研究稿](records/EIP20261010_Exoskeleton_Instrumentation/RESEARCH_NOTE.md) · [仪器合同](records/EIP20261010_Exoskeleton_Instrumentation/INSTRUMENT_CONTRACT.md) · [精确结果](records/EIP20261010_Exoskeleton_Instrumentation/EXACT_RESULTS.json) · [来源范围](records/EIP20261010_Exoskeleton_Instrumentation/SOURCE_SCOPE.md) · [地图审计](records/EIP20261010_Exoskeleton_Instrumentation/MAP_AUDIT.md) · [审查回应](records/EIP20261010_Exoskeleton_Instrumentation/REVIEW_RESPONSE.md)。净增量是两层仪器合同、冗余写入不可识别性定理、专属探针的最小前提以及必然目标变化/偶然生物共变的区分。完成图不变；候选停用；覆盖 UCT-PUB-v1.0.21，单篇HOLD并并入SCU/MPC方法段。
+
+---
+
+# 前一接续 CBI20261010：消费者相对的运动—本体分支隔离
 
 [中文交接](records/CBI20261010_Consumer_Branch_Isolation/HANDOFF_ZH.md) · [英文研究稿](records/CBI20261010_Consumer_Branch_Isolation/RESEARCH_NOTE.md) · [精确结果](records/CBI20261010_Consumer_Branch_Isolation/EXACT_RESULTS.json) · [来源范围](records/CBI20261010_Consumer_Branch_Isolation/SOURCE_SCOPE.md) · [地图审计](records/CBI20261010_Consumer_Branch_Isolation/MAP_AUDIT.md) · [审查回应](records/CBI20261010_Consumer_Branch_Isolation/REVIEW_RESPONSE.md)。净增量是消费者相对的分支切断边界、三种最小切口、现有证据近似表和匹配世界输出的外骨骼思想实验。完成图不变；候选停用；覆盖 UCT-PUB-v1.0.20，单篇 HOLD。
 

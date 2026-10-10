@@ -1,0 +1,42 @@
+{
+  "schema": "uct-eip-map-audit/1",
+  "base_counts": {
+    "nodes": 913,
+    "rules": 424,
+    "contexts": 261,
+    "suspended": 10,
+    "review_items": 1608
+  },
+  "candidate_counts": {
+    "nodes": 6,
+    "rules": 3,
+    "contexts": 5
+  },
+  "checks": {
+    "base_identity": true,
+    "base_counts": true,
+    "suspended_count": true,
+    "review_count": true,
+    "base_hash": true,
+    "ledger_hash": true,
+    "candidate_disabled": true,
+    "candidate_counts": true,
+    "candidate_ids_unique": true,
+    "no_base_collision": true,
+    "contracts_complete": true,
+    "rule_refs_resolve": true,
+    "context_refs_resolve": true,
+    "all_of_conjunctive_nonempty": true,
+    "same_instance_and_binding_explicit": true,
+    "proof_route_explicit": true,
+    "combined_dag_acyclic": true,
+    "c1_axiom_status_preserved": true,
+    "no_agent_verdict": true,
+    "actual_application_open": true
+  },
+  "all_structural_checks_pass": true,
+  "unresolved_rule_refs": [],
+  "unresolved_context_refs": [],
+  "semantic_limit": "No global theory proof, actual installation, phenomenal bridge, H calibration or reviewer closure.",
+  "integration": "PENDING_CHECKPOINT_DISABLED"
+}

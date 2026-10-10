@@ -1,4 +1,10 @@
-# 最新接续 CBI20261010 / CBI-RESULT-v0.1.0
+# 最新接续 EIP20261010 / EIP-RESULT-v0.1.0
+
+[本轮交接](records/EIP20261010_Exoskeleton_Instrumentation/HANDOFF_ZH.md) · [候选图](records/EIP20261010_Exoskeleton_Instrumentation/MAP_EXTENSION.json) · [全图范围审计](records/EIP20261010_Exoskeleton_Instrumentation/MAP_AUDIT.md)。完成地图仍为 UCT-MAP-v1.1.2（913/424/261，10暂停，1608审查项）；EIP 6/3/5候选停用。读取不可识别性只在声明的消费者/载体/窗口模型中成立，专属探针的识别依赖全部选择性、唯一写入和读出前提；不晋升为实际安装或命名体验证据。覆盖v1.0.21；开放审查全部保留。
+
+---
+
+# 前一接续 CBI20261010 / CBI-RESULT-v0.1.0
 
 [本轮交接](records/CBI20261010_Consumer_Branch_Isolation/HANDOFF_ZH.md) · [候选图](records/CBI20261010_Consumer_Branch_Isolation/MAP_EXTENSION.json) · [全图范围审计](records/CBI20261010_Consumer_Branch_Isolation/MAP_AUDIT.md)。完成地图仍为 UCT-MAP-v1.1.2（913/424/261，10暂停，1608审查项）；CBI 7/4/5候选停用。分支切断定理只在一个消费者/事件/时间窗合同中成立，不晋升为实际安装、完整组织等同或命名体验证据。覆盖v1.0.20；全部开放审查保留。
 

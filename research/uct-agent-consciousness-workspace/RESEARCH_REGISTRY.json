@@ -434,14 +434,27 @@
       "compatibility_audit": "records/CBI20261010_Consumer_Branch_Isolation/MAP_COMPATIBILITY_AUDIT.json",
       "handoff": "records/CBI20261010_Consumer_Branch_Isolation/HANDOFF_ZH.md",
       "manuscript_status": "HOLD_STANDALONE_TECHNICAL_SECTION_FOR_SCU_MPC_FAMILY"
+    },
+    {
+      "research_id": "EIP20261010",
+      "result_version": "EIP-RESULT-v0.1.0",
+      "title": "Exoskeleton Instrumentation Package",
+      "source": "records/EIP20261010_Exoskeleton_Instrumentation/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "actual_application": "OPEN",
+      "publication_coverage_version": "UCT-PUB-v1.0.21",
+      "compatibility_audit": "records/EIP20261010_Exoskeleton_Instrumentation/MAP_COMPATIBILITY_AUDIT.json",
+      "handoff": "records/EIP20261010_Exoskeleton_Instrumentation/HANDOFF_ZH.md",
+      "manuscript_status": "HOLD_STANDALONE_INTEGRATE_AS_SCU_MPC_METHODS_SECTION"
     }
   ],
   "preservation": "Exact previous registry remains preserved. The full research manuscript/module and saved per-item review decisions are in the version capsule; expanded artifacts are also in the offline downloadable archive.",
   "publication_coverage": {
     "entry": "PUBLICATION_COVERAGE.json",
-    "version": "UCT-PUB-v1.0.20",
+    "version": "UCT-PUB-v1.0.21",
     "base_census_version": "UCT-PUB-v1.0.0",
-    "update": "records/CBI20261010_Consumer_Branch_Isolation/PUBLICATION_COVERAGE_UPDATE.json",
+    "update": "records/EIP20261010_Exoskeleton_Instrumentation/PUBLICATION_COVERAGE_UPDATE.json",
     "report": "records/PUB20261009_Publication_Coverage/PUBLICATION_COVERAGE_REPORT_ZH.md",
     "nondeductive": true
   },

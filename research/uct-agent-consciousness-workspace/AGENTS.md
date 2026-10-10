@@ -1,4 +1,10 @@
-# 最新接续 CBI20261010 / CBI-RESULT-v0.1.0
+# 最新接续 EIP20261010 / EIP-RESULT-v0.1.0
+
+[本轮交接](records/EIP20261010_Exoskeleton_Instrumentation/HANDOFF_ZH.md) · [仪器合同](records/EIP20261010_Exoskeleton_Instrumentation/INSTRUMENT_CONTRACT.md) · [研究稿](records/EIP20261010_Exoskeleton_Instrumentation/RESEARCH_NOTE.md) · [精确结果](records/EIP20261010_Exoskeleton_Instrumentation/EXACT_RESULTS.json) · [审计](records/EIP20261010_Exoskeleton_Instrumentation/MAP_AUDIT.md)。本轮证明外周传入、中央到达、聚合状态和匹配输出仍不能在冗余写入存在时识别指定消费者的实际读取；专属探针只在 `S=1` 及选择性/唯一写入等前提下条件识别。完成图不变，EIP 6/3/5候选停用；覆盖v1.0.21，单篇HOLD并并入SCU/MPC方法段。下一步只评估一个命名消费者的物理/伦理可行差异探针。QC10/IA-QC11/QC12/QC13等仍开放。以下旧标题均为历史。
+
+---
+
+# 前一接续 CBI20261010 / CBI-RESULT-v0.1.0
 
 [本轮交接](records/CBI20261010_Consumer_Branch_Isolation/HANDOFF_ZH.md) · [工作日志](records/CBI20261010_Consumer_Branch_Isolation/WORK_LOG.md) · [研究稿](records/CBI20261010_Consumer_Branch_Isolation/RESEARCH_NOTE.md) · [审计](records/CBI20261010_Consumer_Branch_Isolation/MAP_AUDIT.md)。本轮把 `P=0` 精确限定为一个消费者/事件/时间窗的实际读入缺席，证明保持动作时至少切断转导、传递或读取/时序之一；现有证据未完成全部冻结合同。UCT-MAP-v1.1.2 不变，CBI 7/4/5候选停用；发表覆盖v1.0.20，HOLD_STANDALONE。下一步具体化一个外骨骼近似的载体—事件—消费者—时序仪器包或其不可避免干扰；QC10/IA-QC11/QC12/QC13等仍开放。以下旧标题均为历史。
 
