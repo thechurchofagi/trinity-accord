@@ -94,3 +94,10 @@ Test one independent current bodily/action-familiarity interpretation against or
 作者新增专题：区分超级智能的可控性、共同安全可强制性、可协调共存及持续互利。定义联合存续核 J、人类强制核 C、AI 强制核 M，有限系统中有条件证明 C⊆J、M⊆J，并构造自愿共存与隐藏旁路的反例。核方法、屏蔽及观测等价论证有明确外部前例；本专题**尚无经确认原创的广义 ASI 定理**，所有结论仅对所声明的模型成立。下一步研究共同控制切割、激励稳定性、资源及双方自主权的同一实例可行证书。
 
 **导航-only，无科学晋级：** 这个独立专题不纳入原来的38个待整合检查点，不改变913/424/261、正式版本UCT-MAP-v1.1.2、当前科学收束点、PUBLICATION_COVERAGE.json 或未闭合QC。未经全图语义审查及真实前提核验，不得将候选结论当作已建立公设或真实超级智能的预测。
+
+
+### ASI-CC-v0.3.0 — 双方安全退出权、资源边界与误报（仅候选）
+
+[英文形式化增量](./records/ASI_CC_20261011_Control_and_Coexistence/RESEARCH_NOTE_v0.3.0.md) · [中文交接](./records/ASI_CC_20261011_Control_and_Coexistence/HANDOFF_v0.3.0_ZH.md) · [v0.2有理数根审计程序](./records/ASI_CC_20261011_Control_and_Coexistence/verify_coexistence.py) · [v0.3安全退出与资源前沿程序](./records/ASI_CC_20261011_Control_and_Coexistence/verify_surplus_frontier.py) · [v0.3精确结果](./records/ASI_CC_20261011_Control_and_Coexistence/EXACT_RESULTS_v0.3.0.json)。
+
+提出有界R09–R11：安全退出待遇底线限制只靠终止合作的威慑能力；共同可行收益前沿须与双方激励下界相交；审计误报会侵蚀真实合作续期。在完全虚构的有限有理数模型中运行32个监测组合/信任根攻击、资源约束和误报反例。**这是标准博弈论及来源审计方法的跨层候选应用，不是对真实ASI的普遍定理、实际安全评估或体验测量。** 当前研究分支原A3V科学接续不变；0正式节点/规则/背景晋级，未执行完整全图语义复核，UCT-MAP-v1.1.2与发表覆盖台账保持原值。
