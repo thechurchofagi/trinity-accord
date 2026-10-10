@@ -11,7 +11,7 @@
   "published_works": "publication/UCT-PUB-v1.0.31/PUBLISHED_WORKS_AND_VERSIONS.json",
   "readable_report": "publication/UCT-PUB-v1.0.31/COVERAGE_REPORT_ZH.md",
   "current_decision": "records/CTD20261010_Noise_Identifiability_v10/PUBLICATION_COVERAGE_UPDATE.json",
-  "latest_update": "records/A3R20261010_Selector_Participation_Contract/PUBLICATION_COVERAGE_UPDATE.json",
+  "latest_update": "records/A3V20261010_Concurrent_Liveness_and_Familiarity/PUBLICATION_COVERAGE_UPDATE.json",
   "current_scientific_map": "UCT-MAP-v1.1.2",
   "nondeductive": true,
   "unknown_is_unpublished": false,
@@ -57,7 +57,8 @@
     "records/A3O20261010_Route_Grain_Selection_Crossing/PUBLICATION_COVERAGE_UPDATE.json",
     "records/CTD20261010_Noise_Identifiability_v10/PUBLICATION_COVERAGE_UPDATE.json",
     "records/A3Q20261010_Selector_Ancestry_Dominance/PUBLICATION_COVERAGE_UPDATE.json",
-    "records/A3R20261010_Selector_Participation_Contract/PUBLICATION_COVERAGE_UPDATE.json"
+    "records/A3R20261010_Selector_Participation_Contract/PUBLICATION_COVERAGE_UPDATE.json",
+    "records/A3V20261010_Concurrent_Liveness_and_Familiarity/PUBLICATION_COVERAGE_UPDATE.json"
   ],
   "historical_census_decision": "publication/UCT-PUB-v1.0.0/MANUSCRIPT_DECISION.json",
   "latest_manuscript_status": "PUBLISHED_PREPRINT_PUBLIC_READBACK_AND_DOI_RESOLUTION_VERIFIED",
@@ -93,7 +94,7 @@
     "doi_resolution_source": "records/CTD20261010_Noise_Identifiability_v10/DOI_RESOLUTION.json",
     "publication_workflow_snapshot_unmodified": true
   },
-  "latest_pending_research_decision": "HOLD_STANDALONE_USE_AS_A3Q_APPLICATION_CONTRACT; ACTUAL_SELECTOR_INSTALLATION_LOCAL_PORT_VALIDATION_AND_SIGNED_H_ENDPOINT_RELIABILITY_OPEN",
+  "latest_pending_research_decision": "HOLD_STANDALONE_RETURN_TO_POSITIVE_BODILY_FAMILIARITY_BRIDGE",
   "coverage_review": "records/CTD20261010_Noise_Identifiability_v10/publication_review/COVERAGE_REVIEW.md",
   "prior_entry_snapshot": "records/DVC20261010_Device_Consumer_Validation/history/before_DVC_d8c94faa/PUBLICATION_COVERAGE.json",
   "concurrent_pending_coverage": "publication/UCT-PUB-v1.0.22/CONCURRENT_PENDING_COVERAGE.json",

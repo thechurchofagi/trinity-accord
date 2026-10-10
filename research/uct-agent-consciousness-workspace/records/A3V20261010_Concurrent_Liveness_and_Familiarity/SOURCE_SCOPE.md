@@ -22,3 +22,5 @@ PMd delayed reaches, immediate human reaches with peripheral EMG, and delayed gr
 Journal of Neuroscience pages returned errors/403; PMC presented a verification page. Author PDF fallback succeeded. ScienceDirect full page returned 403; repository PDF fallback succeeded. A guessed 2005 author-PDF link failed. These access failures are not evidence of missing experiments. No raw data were downloaded/reanalyzed, no consent/animal or hardware intervention was performed, and no instrument safety/feasibility certification was established.
 
 Known trial averaging, neural-state decoding, motor averaging and preparatory-state models are credited to their authors. The small rational witness is an illustration of these inherited limits, not a new general theorem. Worldwide priority remains unverified.
+
+Additional fixed scope check: R199 RESEARCH_NOTE sections1–5 read for the complete-current-state/law clone ceiling. It is an unpromoted conditional result; no new actual premise admission follows. Source hashes refer to pre-entry-update bytes.

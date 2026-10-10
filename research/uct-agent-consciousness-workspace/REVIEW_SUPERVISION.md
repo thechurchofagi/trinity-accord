@@ -1,3 +1,9 @@
+# A3V20261010 researcher response — no unilateral closure
+
+[Response](records/A3V20261010_Concurrent_Liveness_and_Familiarity/REVIEW_RESPONSE.md), [source/application gate](records/A3V20261010_Concurrent_Liveness_and_Familiarity/FEASIBILITY_GATE.md), [positive retentive scope](records/A3V20261010_Concurrent_Liveness_and_Familiarity/RESEARCH_NOTE.md), [gaps](records/A3V20261010_Concurrent_Liveness_and_Familiarity/GAP_LEDGER.md), [map audit](records/A3V20261010_Concurrent_Liveness_and_Familiarity/MAP_AUDIT.md). Named delayed-PMd case stops at unmet LiveJoin; cross-task option influence is not a same-instance certificate. R173 competition-independent transport is preserved, H/J_H/report separated. QC-20261008-10,IA-QC11,QC-20261008-12/13,SCU-OPEN-R191-NORMALIZATION remain OPEN; SCU-AUDIT-DEPTH remains AUDIT_INCOMPLETE. Prior ledger and failures follow unchanged.
+
+---
+
 # A3R20261010 researcher response — same-instance selector participation contract
 
 The latest ledger and every carried OPEN/application-open item were read before selection, after result formation and before save. Evidence: [response](records/A3R20261010_Selector_Participation_Contract/REVIEW_RESPONSE.md), [note](records/A3R20261010_Selector_Participation_Contract/RESEARCH_NOTE.md), [exact results](records/A3R20261010_Selector_Participation_Contract/EXACT_RESULTS.json), [gaps](records/A3R20261010_Selector_Participation_Contract/GAP_LEDGER.md), and [map audit](records/A3R20261010_Selector_Participation_Contract/MAP_AUDIT.md).

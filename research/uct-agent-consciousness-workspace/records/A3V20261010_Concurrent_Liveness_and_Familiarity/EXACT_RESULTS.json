@@ -1,0 +1,54 @@
+{
+  "schema": "uct-a3v-finite-witness/1",
+  "rows": [
+    {
+      "a": 0,
+      "b": 0,
+      "joint_output": 0,
+      "integrated_output": 0
+    },
+    {
+      "a": 0,
+      "b": 1,
+      "joint_output": 1,
+      "integrated_output": 1
+    },
+    {
+      "a": 1,
+      "b": 0,
+      "joint_output": 1,
+      "integrated_output": 1
+    },
+    {
+      "a": 1,
+      "b": 1,
+      "joint_output": 2,
+      "integrated_output": 2
+    }
+  ],
+  "trial_mixture_mean": [
+    0.5,
+    0.5
+  ],
+  "joint_live_policy_count": 2,
+  "integrated_distinct_policy_input_count": 1,
+  "output_and_displayed_input_perturbations_equal": true,
+  "retained_singleton": {
+    "events": [
+      "earlier_frame",
+      "continued_trace",
+      "current_frame_consumer",
+      "route_execution"
+    ],
+    "ordered": true,
+    "same_bearer_lineage_stipulated": true,
+    "trace_tolerance_stipulated": true,
+    "current_use_stipulated": true,
+    "live_policy_count": 1,
+    "dual_conflict": false,
+    "actual_installation_verified": false,
+    "C1_transport_verified": false,
+    "H_identified": false
+  },
+  "scope": "STIPULATED_ARCHITECTURES_AND_LISTED_READOUTS_ONLY; NOT A TOKEN DECOMPOSITION THEOREM"
+}

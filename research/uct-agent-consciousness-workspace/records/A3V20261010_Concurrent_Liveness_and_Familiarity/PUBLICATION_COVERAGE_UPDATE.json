@@ -1,0 +1,19 @@
+{
+  "research_id": "A3V20261010",
+  "coverage_version": "UCT-PUB-v1.0.31",
+  "status": "PENDING_DISABLED_APPLICATION_SCOPE_NOTE",
+  "decision": "HOLD_STANDALONE_RETURN_TO_POSITIVE_BODILY_FAMILIARITY_BRIDGE",
+  "new_publication": false,
+  "published_bytes_modified": false,
+  "completed_map_modified": false,
+  "publication_counts_modified": false,
+  "claims": [
+    "A3V-C1",
+    "A3V-C2",
+    "A3V-C3",
+    "A3V-C4",
+    "A3V-C5"
+  ],
+  "priority_verified": false,
+  "prior_methods_credited": true
+}

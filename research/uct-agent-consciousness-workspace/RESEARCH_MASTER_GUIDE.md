@@ -1,5 +1,13 @@
 # UCT 最高研究指导：原理论优先、局部体验保留、每步全图复核
 
+# 当前科学接续 A3V20261010：并行选项影响与活跃政策证据分开，返回身体熟悉感
+
+[研究稿](records/A3V20261010_Concurrent_Liveness_and_Familiarity/RESEARCH_NOTE.md) · [中文交接](records/A3V20261010_Concurrent_Liveness_and_Familiarity/HANDOFF_ZH.md) · [地图审计](records/A3V20261010_Concurrent_Liveness_and_Familiarity/MAP_AUDIT.md) · [审查回应](records/A3V20261010_Concurrent_Liveness_and_Familiarity/REVIEW_RESPONSE.md)。指定PMd延迟到达案例首先缺实际LiveJoin；后续人类肌电证据限制普遍单计划推论，但不同系统不能拼成SPC联合前提。有效R173保留历史坐标规则不含SPC，熟悉单路线可继续正面解释；特定H桥接仍OPEN。完成图v1.1.2、C1/U1及全部审查OPEN不变，0/0/0停用应用，无新发表。
+
+下一题：在固定实际身体路线粒度与消费关系下，独立签定可错的身体熟悉感端点，比较保留历史B_ret与当下协调B_fit；分开线索熟悉、反应流畅、归属报告、能动性判断。不能分离就保留未决，不延长选择器证书支线。保存事实以本轮PERSISTENCE_RECEIPT.json为准；以下历史不删改。
+
+---
+
 **当前科学接续（A3R20261010）：** A3R完成A3Q所留的同实例活跃输家—分辨—调度合同：`LiveJoin AND LocalRead AND Mediate`必须同时成立；调度、时延和未验证公共日志不能替代局部读入及调度中介。256配置/512回合有限模型给出旁路记录器观测双胞胎；证书有界充分而非普遍必要。无实际安装、H识别或新完成图前提。下一题只做一个具体动作系统的分辨端口验证与保活切断/重放可实现性。见[A3R交接](records/A3R20261010_Selector_Participation_Contract/HANDOFF_ZH.md)。本提示仅同步接续，不修改本指南政策正文。
 
 **当前科学接续（A3Q20261010）：** A3Q将A3O的实际选择消费收窄为实际事件祖先链，并把它与已安装图的支配关系分开；有限模型给出双向非蕴含。无实际安装、H识别或新完成图前提。下一题只做同实例活跃输家—分辨—调度的干预读出合同。见[A3Q交接](records/A3Q20261010_Selector_Ancestry_Dominance/HANDOFF_ZH.md)。本提示仅同步接续，不修改本指南政策正文。

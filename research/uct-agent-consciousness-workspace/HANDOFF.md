@@ -1,3 +1,11 @@
+# 当前科学接续 A3V20261010：并行选项影响与活跃政策证据分开，返回身体熟悉感
+
+[研究稿](records/A3V20261010_Concurrent_Liveness_and_Familiarity/RESEARCH_NOTE.md) · [中文交接](records/A3V20261010_Concurrent_Liveness_and_Familiarity/HANDOFF_ZH.md) · [地图审计](records/A3V20261010_Concurrent_Liveness_and_Familiarity/MAP_AUDIT.md) · [审查回应](records/A3V20261010_Concurrent_Liveness_and_Familiarity/REVIEW_RESPONSE.md)。指定PMd延迟到达案例首先缺实际LiveJoin；后续人类肌电证据限制普遍单计划推论，但不同系统不能拼成SPC联合前提。有效R173保留历史坐标规则不含SPC，熟悉单路线可继续正面解释；特定H桥接仍OPEN。完成图v1.1.2、C1/U1及全部审查OPEN不变，0/0/0停用应用，无新发表。
+
+下一题：在固定实际身体路线粒度与消费关系下，独立签定可错的身体熟悉感端点，比较保留历史B_ret与当下协调B_fit；分开线索熟悉、反应流畅、归属报告、能动性判断。不能分离就保留未决，不延长选择器证书支线。保存事实以本轮PERSISTENCE_RECEIPT.json为准；以下历史不删改。
+
+---
+
 # 当前科学接续 A3R20261010；完成图仍为 UCT-MAP-v1.1.2
 
 [中文交接](records/A3R20261010_Selector_Participation_Contract/HANDOFF_ZH.md) · [研究稿](records/A3R20261010_Selector_Participation_Contract/RESEARCH_NOTE.md) · [精确结果](records/A3R20261010_Selector_Participation_Contract/EXACT_RESULTS.json) · [地图审计](records/A3R20261010_Selector_Participation_Contract/MAP_AUDIT.md)。A3R给出`LiveJoin AND LocalRead AND Mediate`联合合同，并构造“真实分辨读入”与“旁路记录器+直达调度”在调度/公共日志上相同的精确双胞胎。256配置/512回合中完整证书0假阳性，但不冒称普遍必要。没有实际安装、端口验证或H识别，0新增节点/规则/上下文，全部审查OPEN保留。

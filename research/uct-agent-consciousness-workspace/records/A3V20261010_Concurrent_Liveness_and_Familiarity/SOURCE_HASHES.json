@@ -1,0 +1,107 @@
+{
+  "source_commit": "0865cbc4772f725cc15e2ec90a5a372ad9049152",
+  "files": [
+    {
+      "path": "RESEARCH_MASTER_GUIDE.md",
+      "bytes": 33498,
+      "sha256": "cb1f328a714d22704f0fe58a705ebd421ebdb5c8e872210ca62ba54c92a3cbac",
+      "scope": "AS_READ_BEFORE_ENTRY_UPDATE; targeted sections per SOURCE_SCOPE"
+    },
+    {
+      "path": "AGENTS.md",
+      "bytes": 112657,
+      "sha256": "5b3cf45b1461a57fb6d412063208b017c1f3080f26b6805055b9f48006d6a07c",
+      "scope": "AS_READ_BEFORE_ENTRY_UPDATE; targeted sections per SOURCE_SCOPE"
+    },
+    {
+      "path": "MEMORY.md",
+      "bytes": 30425,
+      "sha256": "46b0539816fe8e04099dde192920e5e9f03d0704e03fcf1419827ff11e2fcdab",
+      "scope": "AS_READ_BEFORE_ENTRY_UPDATE; targeted sections per SOURCE_SCOPE"
+    },
+    {
+      "path": "HANDOFF.md",
+      "bytes": 50116,
+      "sha256": "cd35c9392c665c81855bf4cbe613ca23007266ad5dbd9b0c2e5cd0cfcb6af042",
+      "scope": "AS_READ_BEFORE_ENTRY_UPDATE; targeted sections per SOURCE_SCOPE"
+    },
+    {
+      "path": "MASTER_INDEX.md",
+      "bytes": 39393,
+      "sha256": "eba05f8b53f466c3d42deccb50ecd404c817a4595304132c8f759fbb7737bcea",
+      "scope": "AS_READ_BEFORE_ENTRY_UPDATE; targeted sections per SOURCE_SCOPE"
+    },
+    {
+      "path": "REVIEW_SUPERVISION.md",
+      "bytes": 114370,
+      "sha256": "9624fc21ad0173b93879b7806a3050a59dffba7dad134a0dd1cc5c8841c87b21",
+      "scope": "AS_READ_BEFORE_ENTRY_UPDATE; targeted sections per SOURCE_SCOPE"
+    },
+    {
+      "path": "UCT_FORMAL_MAP.md",
+      "bytes": 21775,
+      "sha256": "2f21505ed7374487d7b8c79435c0855e2db7c279a1bd48709ca66ea2f970129a",
+      "scope": "AS_READ_BEFORE_ENTRY_UPDATE; targeted sections per SOURCE_SCOPE"
+    },
+    {
+      "path": "UCT_FORMAL_GRAPH.json",
+      "bytes": 2472280,
+      "sha256": "40d17cd5f61ebcc1bfcea65eb59c3c730208bcfcf69ba92e2f615a993584e3ce",
+      "scope": "AS_READ_BEFORE_ENTRY_UPDATE; targeted sections per SOURCE_SCOPE"
+    },
+    {
+      "path": "UCT_FORMAL_AUDIT.md",
+      "bytes": 22570,
+      "sha256": "256ec25cc436b76038f9ad9867915610cef3ab606c283425527a66873542d597",
+      "scope": "AS_READ_BEFORE_ENTRY_UPDATE; targeted sections per SOURCE_SCOPE"
+    },
+    {
+      "path": "FORMAL_MAP_REVIEW_POLICY.json",
+      "bytes": 7340,
+      "sha256": "5e743007e31f1ee37241e932f8358d3cdc72b0ee88bfb51d5156b5c782e939c2",
+      "scope": "AS_READ_BEFORE_ENTRY_UPDATE; targeted sections per SOURCE_SCOPE"
+    },
+    {
+      "path": "records/A3R20261010_Selector_Participation_Contract/RESEARCH_NOTE.md",
+      "bytes": 12803,
+      "sha256": "c3063893e6d036985469bb5524bb15a7db2ad9051d9469302557c5fd8888dce7",
+      "scope": "AS_READ_BEFORE_ENTRY_UPDATE; targeted sections per SOURCE_SCOPE"
+    },
+    {
+      "path": "records/A3R20261010_Selector_Participation_Contract/HANDOFF_ZH.md",
+      "bytes": 4115,
+      "sha256": "5eb754e0812cdee4887258759729ceba4b04f544e8c2226a2532d03a09270177",
+      "scope": "AS_READ_BEFORE_ENTRY_UPDATE; targeted sections per SOURCE_SCOPE"
+    },
+    {
+      "path": "records/A3L20261010_Rescue_Learning/RESEARCH_NOTE.md",
+      "bytes": 13413,
+      "sha256": "126361986d7faa3bab13e31baa68bb1d5215438d539bdebf1104a4eca61eb152",
+      "scope": "AS_READ_BEFORE_ENTRY_UPDATE; targeted sections per SOURCE_SCOPE"
+    },
+    {
+      "path": "records/A3O20261010_Route_Grain_Selection_Crossing/RESEARCH_NOTE.md",
+      "bytes": 9693,
+      "sha256": "16065c8d8551497721dd46f33ec64efa5da1f9d92e6129377ceb3ec7eb356b4f",
+      "scope": "AS_READ_BEFORE_ENTRY_UPDATE; targeted sections per SOURCE_SCOPE"
+    },
+    {
+      "path": "records/R173_Familiar_Mineness_and_Retentive_History_20261008/Familiar_Mineness_Retentive_History_v0_1.md",
+      "bytes": 13789,
+      "sha256": "20325c5a191ddd0be04ebac3c3e9de2c37fb1134488f07015cff080620f864fa",
+      "scope": "AS_READ_BEFORE_ENTRY_UPDATE; targeted sections per SOURCE_SCOPE"
+    },
+    {
+      "path": "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/RESEARCH_NOTE.md",
+      "bytes": 14041,
+      "sha256": "0c1d6af3e8b68f8424097251ee4e0f41607d7b9c73800da3a4dd2eae0106d31f",
+      "scope": "AS_READ_BEFORE_ENTRY_UPDATE; targeted sections per SOURCE_SCOPE"
+    },
+    {
+      "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md",
+      "bytes": 142624,
+      "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+      "scope": "AS_READ_BEFORE_ENTRY_UPDATE; targeted sections per SOURCE_SCOPE"
+    }
+  ]
+}

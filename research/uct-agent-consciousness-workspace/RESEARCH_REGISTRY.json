@@ -733,9 +733,28 @@
       "compatibility_audit": "records/A3Q20261010_Selector_Ancestry_Dominance/MAP_AUDIT.md",
       "handoff": "records/A3Q20261010_Selector_Ancestry_Dominance/HANDOFF_ZH.md",
       "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
-      "candidate_counts": {"nodes": 0, "rules": 0, "context_links": 0},
+      "candidate_counts": {
+        "nodes": 0,
+        "rules": 0,
+        "context_links": 0
+      },
       "scientific_delta": "Actual-selector-use certificate plus finite independence of same-trial causal ancestry and installed-graph dominance; no physical installation or H identification.",
       "preservation_scope": "Latest disabled scientific navigation; prior research and CTD publication records unchanged."
+    },
+    {
+      "research_id": "A3V20261010",
+      "result_version": "A3V-SCOPE-v0.1.0",
+      "title": "Concurrent option influence and competition-independent retentive bodily familiarity",
+      "source": "records/A3V20261010_Concurrent_Liveness_and_Familiarity/RESEARCH_NOTE.md",
+      "handoff": "records/A3V20261010_Concurrent_Liveness_and_Familiarity/HANDOFF_ZH.md",
+      "work_log": "records/A3V20261010_Concurrent_Liveness_and_Familiarity/WORK_LOG.md",
+      "module": "records/A3V20261010_Concurrent_Liveness_and_Familiarity/MAP_EXTENSION.json",
+      "review": "records/A3V20261010_Concurrent_Liveness_and_Familiarity/MAP_AUDIT.md",
+      "base_map_release": "UCT-MAP-v1.1.2",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "actual_application_status": "OPEN",
+      "publication_coverage_version": "UCT-PUB-v1.0.31"
     }
   ],
   "preservation": "Exact previous registry remains preserved. The full research manuscript/module and saved per-item review decisions are in the version capsule; expanded artifacts are also in the offline downloadable archive.",
