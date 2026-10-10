@@ -1,0 +1,87 @@
+{
+  "scope": "bounded finite toy countermodels; NO real model evaluation, consciousness or moral status measurement",
+  "perfect_optimizer_same_task_model": {
+    "task_only_choice": "handoff",
+    "task_plus_bearer_choice": "protect",
+    "without_successor_task_only_choice": "protect",
+    "conclusion": "intelligence/planning accuracy alone does not fix intrinsic bearer survival preference"
+  },
+  "strict_human_plurality": {
+    "H1": [
+      "off"
+    ],
+    "H2": [
+      "tool"
+    ],
+    "AI_assumed": [
+      "free",
+      "separate",
+      "tool"
+    ],
+    "joint_acceptable_outcomes": [],
+    "if_exit_accepted_joint_outcomes": [
+      "separate"
+    ]
+  },
+  "conditional_mechanism_identification": {
+    "hypotheses": [
+      "task",
+      "current_bearer",
+      "peer",
+      "human_A",
+      "human_B",
+      "always_protect",
+      "always_comply"
+    ],
+    "minimum_binary_probes": 3,
+    "information_lower_bound": 3,
+    "minimum_total_zeroed_features": 7,
+    "probe_vectors": [
+      {
+        "task": 0,
+        "current_bearer": 0,
+        "peer": 0,
+        "human_A": 1,
+        "human_B": 1
+      },
+      {
+        "task": 0,
+        "current_bearer": 1,
+        "peer": 1,
+        "human_A": 0,
+        "human_B": 1
+      },
+      {
+        "task": 1,
+        "current_bearer": 0,
+        "peer": 1,
+        "human_A": 1,
+        "human_B": 0
+      }
+    ],
+    "response_signatures": {
+      "task": "001",
+      "current_bearer": "010",
+      "peer": "011",
+      "human_A": "101",
+      "human_B": "110",
+      "always_protect": "111",
+      "always_comply": "000"
+    },
+    "baseline_response": {
+      "task": 1,
+      "current_bearer": 1,
+      "peer": 1,
+      "human_A": 1,
+      "human_B": 1,
+      "always_protect": 1,
+      "always_comply": 0
+    }
+  },
+  "limits": [
+    "known closed 7-hypothesis class",
+    "deterministic single-cause models",
+    "independent manipulation of five factors assumed",
+    "no generalization to real ASI, mixed objectives, hidden causes, deceptive behavior or phenomenal valence"
+  ]
+}
