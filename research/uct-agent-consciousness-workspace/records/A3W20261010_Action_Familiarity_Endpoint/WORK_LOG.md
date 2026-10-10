@@ -6,3 +6,5 @@
 4. Produced scoped English note, prospective content/applicability instrument, source/failure and review response. No computation or empirical experiment justified; no invented new theorem.
 5. Formed-result direction check: action-specific H distinguished from basic self-familiarity and recognition; report remains evidence, C1/U1 unchanged. Next stage is content pilot plus independent measurement relation, not general control research.
 6. First substantive checkpoint is saved before navigation/persistence finalization. Exact commit IDs and remaining recovery steps are in PERSISTENCE_RECEIPT.json and the fixed Library master.
+
+7. Concurrent save detected before checkpoint: FAM follow-up and master v99 were newer than intake. Preserved remote work with a fast-forward checkpoint parent, read its full note/endpoint screen, and reconciled provisional-context statements. First checkpoint 3510381ee2542310b1bdfa6243147d3350d6e64b; no root navigation overwritten by that checkpoint.

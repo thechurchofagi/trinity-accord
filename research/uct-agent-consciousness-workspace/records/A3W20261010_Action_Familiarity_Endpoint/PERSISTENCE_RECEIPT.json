@@ -1,0 +1,20 @@
+{
+  "research_id": "A3W20261010",
+  "status": "CHECKPOINT_VERIFIED_FINALIZATION_IN_PROGRESS",
+  "intake_head": "4f85dac95df1fc14ea49d5f772d8df9b1f6d422c",
+  "concurrent_parent_preserved": "3d1a33ce0c8d8f301eb2a049a5bd71449e7f36e5",
+  "checkpoint_commit": "3510381ee2542310b1bdfa6243147d3350d6e64b",
+  "checkpoint_note_git_blob": "833d8e05a6084ad7e7de1868a69ee22fd149cec0",
+  "checkpoint_remote_verified": true,
+  "github_final_science_commit": "PENDING_NEXT_COMMIT",
+  "library_input_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+  "library_input_version": 99,
+  "library_output_status": "PENDING",
+  "remaining": [
+    "final Git commit and readback",
+    "increment manifest/package upload and exact Library byte round-trip",
+    "guarded same-identity master update",
+    "post-save receipt commit"
+  ],
+  "recovery": "Fetch current branch and master version; preserve FAM concurrent record. If later receipt exists it supersedes this in-progress state. Restore delta on the named Git base; never call this a complete repository backup."
+}

@@ -51,3 +51,7 @@ Test one independent current bodily/action-familiarity interpretation against or
 - [整理前地图](integration/UCT-INTEGRATION-v1.0.0/history/UCT_FORMAL_MAP.md)、[历史目录](integration/UCT-INTEGRATION-v1.0.0/HISTORY_INDEX.md)。
 
 所有新分组与导航边为非演绎元数据。目录整合完成不表示全历史证明重证、实际前提满足或体验端点得到验证。
+
+### 当前端点应用修正
+
+[A3W H_way范围及端点草案](records/A3W20261010_Action_Familiarity_Endpoint/RESEARCH_NOTE.md)接续A3N/A3V及FAM；0新图节点，停用应用。统一登记的followup_applications保存这类应用，不改变38项待整合图与已完成图。

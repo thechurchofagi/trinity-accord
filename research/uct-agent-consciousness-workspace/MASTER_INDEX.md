@@ -16,3 +16,5 @@
 原创性复核：[NOV20261010](records/NOV20261010_Prior_Art_and_Bodily_Familiarity/HANDOFF_ZH.md)，仅前例/范围元数据，独立成稿HOLD；科学接续仍A3V。
 
 身体熟悉感应用接续：[FAM20261010](records/FAM20261010_Memory_Matching/HANDOFF_ZH.md)，匹配控制可行性与端点筛查；停用应用，未新增图前提，独立成稿HOLD。
+
+- 最新应用A3W：[正文](records/A3W20261010_Action_Familiarity_Endpoint/RESEARCH_NOTE.md) · [端点草案](records/A3W20261010_Action_Familiarity_Endpoint/ENDPOINT_PROTOCOL.md) · [交接](records/A3W20261010_Action_Familiarity_Endpoint/HANDOFF_ZH.md) · [工作日志](records/A3W20261010_Action_Familiarity_Endpoint/WORK_LOG.md)；成稿HOLD，发表覆盖不变。

@@ -1,0 +1,36 @@
+{
+  "research_id": "A3W20261010",
+  "date": "2026-10-10",
+  "checks": [
+    {
+      "command": "python3 records/NAV20261010_Map_Integration/validate_current_map.py --root .",
+      "status": "PASS_NAVIGATION_AND_DISABLED_ASSEMBLY",
+      "pending": 38,
+      "families": 7,
+      "nodes": 913,
+      "rules": 424,
+      "current_scientific_pointer_match": true
+    },
+    {
+      "command": "python3 records/A3W20261010_Action_Familiarity_Endpoint/validate_application.py",
+      "status": "PASS_SCOPED_NAVIGATION_AND_ADMISSION",
+      "followups": [
+        "FAM20261010",
+        "A3W20261010"
+      ],
+      "coverage": "UCT-PUB-v1.0.33"
+    }
+  ],
+  "per_id_structure_objects": 1598,
+  "unresolved_all_of_references": 0,
+  "empirical_runs": 0,
+  "new_math_runs": 0,
+  "no_new_test_of_phenomenal_truth": true,
+  "formal_global_reproof": false,
+  "failures": [
+    "Initial proposed wording/crossing novelty withdrawn after A3N/A3M source reread",
+    "Initial context treated as provisional until concurrent FAM persistence was verified",
+    "Primary-source access failures recorded in SOURCE_SCOPE; no full-method claims imported",
+    "H signed reliability and actual route/fit installation unresolved"
+  ]
+}

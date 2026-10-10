@@ -1,0 +1,33 @@
+{
+  "research_id": "A3W20261010",
+  "version": "A3W-ENDPOINT-v0.1.0",
+  "claims": [
+    {
+      "id": "A3W-C1",
+      "type": "CONCEPTUAL_APPLICATION_CONSTRAINT",
+      "status": "PROPOSED_SCOPED_INTERPRETATION",
+      "source": "RESEARCH_NOTE.md §6",
+      "novelty": "PROJECT_TARGET_SCOPE_REPAIR; NOT_FIRST_PHENOMENOLOGICAL_DISTINCTION"
+    },
+    {
+      "id": "A3W-C2",
+      "type": "INSTRUMENT_DESIGN_CONSTRAINT",
+      "status": "PROSPECTIVE_CONTENT_GUARD",
+      "source": "RESEARCH_NOTE.md §6; ENDPOINT_PROTOCOL.md",
+      "novelty": "APPLICATION_REFINEMENT_OF_A3N_AND_FAM; NOT_VALIDATED_MARKER"
+    },
+    {
+      "id": "A3W-C3",
+      "type": "EVIDENTIAL_LIMITATION",
+      "status": "OPEN_MEASUREMENT_RELATION",
+      "source": "RESEARCH_NOTE.md §6",
+      "novelty": "EXPLICIT_APPLICATION_CEILING; NO_NEW_GENERAL_MATH"
+    }
+  ],
+  "completed_graph_delta": {
+    "nodes": 0,
+    "rules": 0,
+    "contexts": 0
+  },
+  "all_actual_and_phenomenal_premises_open": true
+}

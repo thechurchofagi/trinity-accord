@@ -64,6 +64,21 @@
       "path": "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/RESEARCH_NOTE.md",
       "sha256": "0c1d6af3e8b68f8424097251ee4e0f41607d7b9c73800da3a4dd2eae0106d31f",
       "read_scope": "Affected target, conditional scope and limits; original historical withdrawal read with effective correction."
+    },
+    {
+      "path": "records/R153_Complete_Formal_Map_20261007/sources/experience-intelligence-self-v1.0.md",
+      "sha256": "694856862f75834024cd3e71ffdba95a6be4601c2832285902f7905907e3039c",
+      "read_scope": "TA25 §4 D4/D5; FAM full note and endpoint screen; inherited record does not imply fresh reading of its external papers."
+    },
+    {
+      "path": "records/FAM20261010_Memory_Matching/RESEARCH_NOTE.md",
+      "sha256": "450bda6ce603283733692fcfb5ee86738686dbb2dc6b836032d0ee6b62140c6f",
+      "read_scope": "TA25 §4 D4/D5; FAM full note and endpoint screen; inherited record does not imply fresh reading of its external papers."
+    },
+    {
+      "path": "records/FAM20261010_Memory_Matching/ENDPOINT_SCREEN.md",
+      "sha256": "05b79b26a735621ce3bcd978fc584da0c69ae7f9bbbdf91c6f202e95eb4f374b",
+      "read_scope": "TA25 §4 D4/D5; FAM full note and endpoint screen; inherited record does not imply fresh reading of its external papers."
     }
   ],
   "prior_art_boundary": "A3N question and controls, A3M crossing/support results, A3V conditional scope and R199 ceiling are inherited; no new math, empirical dissociation or worldwide originality claim."

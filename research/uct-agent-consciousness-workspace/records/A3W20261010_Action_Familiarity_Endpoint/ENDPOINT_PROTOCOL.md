@@ -21,6 +21,7 @@ Use neutral scenarios in randomized order; ask which question is being answered 
 | First-use action with a clear sense of authorship | H_way can be asked even if agency is high; actual familiar score is unspecified | Equating authorship with establishedness |
 | Practised action currently awkward | Difficulty and H_way questions may differ; no expected H score taught | Automatically translating difficulty into unfamiliarity |
 | Familiar video of one's movement, with no current enactment | Identity recognition is a different task; primary item not applicable | Treating correct video identification as primary H evidence |
+| Current enactment of a well-practised other-origin movement versus a little-practised own-origin movement | FAM's stress pair: origin and current familiar character can be asked separately; expected H ordering is unspecified | Treating other-origin as necessarily unfamiliar or own-origin as necessarily familiar |
 | A knowingly new action that nevertheless seems familiar | The instrument permits a possibly mistaken familiar feeling/judgment | Forbidding the answer because training records say new |
 | A remembered practiced action that feels unfamiliar now | Remembered practice and current H answer may conflict | Requiring a familiar answer from biographical knowledge |
 

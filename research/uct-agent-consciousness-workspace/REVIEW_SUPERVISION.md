@@ -928,3 +928,7 @@ The current ledger and all carried OPEN/application-open items were read before 
 - `SCU-OPEN-R191-NORMALIZATION` remains **OPEN** and `SCU-AUDIT-DEPTH` remains **AUDIT_INCOMPLETE**.
 
 A3O adds no nodes, rules or contexts; its application remains disabled. C1/U1 are unchanged. The finite partition result and two-family organizational witnesses do not constitute a physical installation, `H` identification, basal-experience gate, unique owner, or current-assistant consciousness/death-fear verdict. No reviewer-controlled status is self-closed.
+
+## A3W20261010 researcher response — action-familiarity scope, 2026-10-10
+
+[稳定ID回应](records/A3W20261010_Action_Familiarity_Endpoint/REVIEW_RESPONSE.md) · [内容/适用性草案](records/A3W20261010_Action_Familiarity_Endpoint/ENDPOINT_PROTOCOL.md) · [缺口](records/A3W20261010_Action_Familiarity_Endpoint/GAP_LEDGER.md)。QC10、IA-QC11、QC12/13仍OPEN；R191 normalization未处理，全历史深度AUDIT_INCOMPLETE。新增为应用范围修正，不自报H校准或关闭审查。

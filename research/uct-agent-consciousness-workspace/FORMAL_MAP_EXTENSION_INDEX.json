@@ -105,5 +105,68 @@
       "reason": "Older extension index stopped at R190; this index now includes already recorded later checkpoints and DVC without promoting them.",
       "previous_exact_bytes": "records/DVC20261010_Device_Consumer_Validation/history/before_DVC_bd66a621/FORMAL_MAP_EXTENSION_INDEX.json"
     }
-  }
+  },
+  "latest_followup_application": {
+    "id": "A3W20261010",
+    "version": "A3W-ENDPOINT-v0.1.0",
+    "status": "DISABLED_OPEN_APPLICATION",
+    "enabled_as_established_premises": false,
+    "source": "records/A3W20261010_Action_Familiarity_Endpoint/RESEARCH_NOTE.md",
+    "handoff": "records/A3W20261010_Action_Familiarity_Endpoint/HANDOFF_ZH.md",
+    "work_log": "records/A3W20261010_Action_Familiarity_Endpoint/WORK_LOG.md",
+    "claim_ledger": "records/A3W20261010_Action_Familiarity_Endpoint/CLAIM_LEDGER.json",
+    "map_extension": "records/A3W20261010_Action_Familiarity_Endpoint/MAP_EXTENSION.json",
+    "parent_science": "A3V20261010",
+    "parent_followup": "FAM20261010",
+    "completed_map": "UCT-MAP-v1.1.2",
+    "scientific_delta": {
+      "nodes": 0,
+      "rules": 0,
+      "contexts": 0
+    },
+    "independent_h_validation": false,
+    "standalone_manuscript": "HOLD"
+  },
+  "followup_applications": [
+    {
+      "id": "FAM20261010",
+      "version": "FAM-APPLICATION-v0.1.0",
+      "parent_scientific_checkpoint": "A3V20261010",
+      "status": "DISABLED_SCOPED_APPLICATION; ENDPOINT_CONSTRUCT_UNRESOLVED",
+      "source": "records/FAM20261010_Memory_Matching/RESEARCH_NOTE.md",
+      "handoff": "records/FAM20261010_Memory_Matching/HANDOFF_ZH.md",
+      "work_log": "records/FAM20261010_Memory_Matching/WORK_LOG.md",
+      "claim_ledger": "records/FAM20261010_Memory_Matching/CLAIM_LEDGER.json",
+      "map_extension": "records/FAM20261010_Memory_Matching/MAP_EXTENSION.json",
+      "enabled_as_established_premises": false,
+      "scientific_delta": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0
+      },
+      "coverage_version": "UCT-PUB-v1.0.33",
+      "manuscript_status": "HOLD_STANDALONE; PRIORITY_UNVERIFIED"
+    },
+    {
+      "id": "A3W20261010",
+      "version": "A3W-ENDPOINT-v0.1.0",
+      "status": "DISABLED_OPEN_APPLICATION",
+      "enabled_as_established_premises": false,
+      "source": "records/A3W20261010_Action_Familiarity_Endpoint/RESEARCH_NOTE.md",
+      "handoff": "records/A3W20261010_Action_Familiarity_Endpoint/HANDOFF_ZH.md",
+      "work_log": "records/A3W20261010_Action_Familiarity_Endpoint/WORK_LOG.md",
+      "claim_ledger": "records/A3W20261010_Action_Familiarity_Endpoint/CLAIM_LEDGER.json",
+      "map_extension": "records/A3W20261010_Action_Familiarity_Endpoint/MAP_EXTENSION.json",
+      "parent_science": "A3V20261010",
+      "parent_followup": "FAM20261010",
+      "completed_map": "UCT-MAP-v1.1.2",
+      "scientific_delta": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0
+      },
+      "independent_h_validation": false,
+      "standalone_manuscript": "HOLD"
+    }
+  ]
 }
