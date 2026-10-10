@@ -1,0 +1,44 @@
+{
+  "schema": "a4d-persistence-receipt/1.0",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "verified_parent": "403ef4a1bc829c521d660d183afc2eeb1317d699",
+    "round_record_checkpoint": "eb4e42e345246ec586e64d4b98b0db3ac5bd240c",
+    "science_checkpoint": "886a3a0a5ad481d54a6464f22c44e5594943457e",
+    "science_integration_commit": "b64e36016cd03588ed446a6b9eb8b6738ffb74b3",
+    "science_integration_tree": "2d9e25f19efd5a452f50ac41a771fc04fa562abc",
+    "fast_forward_expected_sha_verified": true,
+    "remote_head_and_key_file_readback": true,
+    "status": "SCIENCE_AND_INTEGRATION_CONFIRMED"
+  },
+  "workspace": {
+    "fixed_master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "fixed_master_previous_version": 113,
+    "fixed_master_version": 114,
+    "fixed_master_file_id": "file_00000000174881f5b48d69f99b237c95",
+    "fixed_master_sha256": "00f3ae32347e1dfddb218847136e3b6c4c808d0fe280e0af7a8ed4c6c258b37a",
+    "fixed_master_size_bytes": 47942,
+    "fixed_master_readback_confirmed": true,
+    "increment_library_file_id": "libfile_626a843db20481919b6dc139d85ae4e6",
+    "increment_manifest_library_file_id": "libfile_31dcf2db98448191a80249c84664dba3",
+    "increment_sha256": "5e3a5801bf629b8a778815104369a9283e1a24f53ac198c47b1f80df0b3d1322",
+    "increment_manifest_sha256": "940409d43eeb3da3bf2214485fed2340f653040128c7bda6bbde4a55e6acd0b4",
+    "increment_size_bytes": 135885,
+    "increment_manifest_size_bytes": 2258,
+    "increment_file_count": 25,
+    "increment_and_manifest_byte_readback_confirmed": true,
+    "classification": "INCREMENT_ONLY_NOT_FULL_REPOSITORY_OR_HISTORY_BACKUP",
+    "status": "INCREMENT_MANIFEST_AND_FIXED_MASTER_V114_CONFIRMED"
+  },
+  "scope_note": "The increment freezes the A4D science/integration tree. This receipt and its final metadata successor are intentionally post-package and are recovered from the remote branch or fixed master.",
+  "latest_completed_step": "A4D hidden-writer countermodel, exact paired-challenge enumeration, eight-clause prospective AWC contract, whole-map structural audit, review-status preservation, GitHub fast-forward checkpoints and readback, recovery increment plus manifest byte readback, and fixed-master v114 readback.",
+  "unfinished": [
+    "No physical robot, hardware arbitration boundary, or post-arbitration probe has been installed.",
+    "No complete physical K-signature or actual route-use token has been established.",
+    "No independent identity or polarity calibration for H_way has been established.",
+    "Open supervision items and the full historical semantic audit remain unresolved."
+  ],
+  "failures": "FAILURES.md",
+  "resume": "Read fixed master v114 or a verified successor; verify the branch is b64e360 or a fast-forward successor; verify increment and manifest hashes; read REVIEW_SUPERVISION and the A4D ledgers; rerun both A4D scripts; then attempt only one bounded physical-robot writer-inventory challenge and retain the H-level stop."
+}

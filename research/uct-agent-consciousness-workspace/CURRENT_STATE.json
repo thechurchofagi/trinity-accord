@@ -197,12 +197,12 @@
     "role": "Historical unresolved audit-debt record; old numbers are not newly measured current unread totals."
   },
   "latest_activity_persistence": {
-    "status": "A4C_GITHUB_SCIENCE_INTEGRATION_AND_WORKSPACE_MASTER_V112_INCREMENT_CONFIRMED; FINAL_METADATA_COMMIT_IS_BRANCH_HEAD_SUCCESSOR",
-    "receipt": "records/A4C20261011_Trace_Swap_Embodied_Loop/PERSISTENCE_RECEIPT.json",
-    "github_science_integration_commit": "428e49944b503a43b9e79d057b676a4f9f4918a7",
-    "library_master_version": 112,
-    "library_increment_id": "libfile_8aa2bbbde78881919f6ae24cb5fcd1c0",
-    "library_manifest_id": "libfile_8b236e18ad6481918ab2525ca1444063"
+    "status": "A4D_GITHUB_SCIENCE_INTEGRATION_AND_WORKSPACE_MASTER_V114_INCREMENT_CONFIRMED; FINAL_METADATA_COMMIT_IS_BRANCH_HEAD_SUCCESSOR",
+    "receipt": "records/A4D20261011_Actuator_Writer_Completeness/PERSISTENCE_RECEIPT.json",
+    "github_science_integration_commit": "b64e36016cd03588ed446a6b9eb8b6738ffb74b3",
+    "library_master_version": 114,
+    "library_increment_id": "libfile_626a843db20481919b6dc139d85ae4e6",
+    "library_manifest_id": "libfile_31dcf2db98448191a80249c84664dba3"
   },
   "concurrent_research_preserved": {
     "id": "EIP20261010",
@@ -224,7 +224,7 @@
     "map_replacement": false,
     "actual_application_established": false
   },
-  "latest_persistence_receipt": "records/A4C20261011_Trace_Swap_Embodied_Loop/PERSISTENCE_RECEIPT.json",
+  "latest_persistence_receipt": "records/A4D20261011_Actuator_Writer_Completeness/PERSISTENCE_RECEIPT.json",
   "previous_latest_research_before_CTD": {
     "id": "A3L20261010",
     "result_version": "A3L-RESULT-v0.1.0",
@@ -551,6 +551,7 @@
     "claim_ledger": "records/A4D20261011_Actuator_Writer_Completeness/CLAIM_LEDGER.json",
     "map_extension": "records/A4D20261011_Actuator_Writer_Completeness/MAP_EXTENSION.json",
     "exact_results": "records/A4D20261011_Actuator_Writer_Completeness/EXACT_RESULTS.json",
+    "persistence_receipt": "records/A4D20261011_Actuator_Writer_Completeness/PERSISTENCE_RECEIPT.json",
     "parent_science": "A3V20261010",
     "parent_followup": "A4C20261011",
     "completed_map": "UCT-MAP-v1.1.2",
@@ -756,6 +757,7 @@
       "claim_ledger": "records/A4D20261011_Actuator_Writer_Completeness/CLAIM_LEDGER.json",
       "map_extension": "records/A4D20261011_Actuator_Writer_Completeness/MAP_EXTENSION.json",
       "exact_results": "records/A4D20261011_Actuator_Writer_Completeness/EXACT_RESULTS.json",
+      "persistence_receipt": "records/A4D20261011_Actuator_Writer_Completeness/PERSISTENCE_RECEIPT.json",
       "parent_science": "A3V20261010",
       "parent_followup": "A4C20261011",
       "completed_map": "UCT-MAP-v1.1.2",
