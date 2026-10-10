@@ -1,0 +1,29 @@
+{
+  "id": "FAM20261010",
+  "exact_model_checks": {
+    "matched_total_correction": true,
+    "unequal_next_correction": true,
+    "two_samples_recover_declared_states": true,
+    "matched_output_does_not_match_agency_surrogate": true,
+    "full_rank_controls_are_injective_on_grid": true,
+    "equal_retention_rate_time_series_remains_aliased": true,
+    "zero_total_not_empty_memory": true,
+    "third_coordinate_can_vary_but_is_only_assumed": true,
+    "same_learning_law_reaches_witness_with_unbounded_prescribed_errors": true
+  },
+  "count": 9,
+  "previous_run_output": "EXACT_RESULTS.json",
+  "grid_is_illustration_not_general_proof": true,
+  "fresh_capsule_members_verified": 82,
+  "structural_audit": "MAP_COMPATIBILITY_AUDIT.json",
+  "new_data": false,
+  "no_all_history_semantic_reproof": true,
+  "before_after_unchanged_fields": {
+    "CURRENT_STATE.json": true,
+    "RESEARCH_REGISTRY.json": true,
+    "RESEARCH_SESSION_LOG_INDEX.json": true,
+    "UCT_FORMAL_GRAPH_MODULES.json": true,
+    "UNIFIED_RESEARCH_INDEX.json": true,
+    "PUBLICATION_COVERAGE.json": true
+  }
+}

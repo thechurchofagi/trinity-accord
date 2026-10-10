@@ -2,7 +2,7 @@
 
 [总览](UCT_FORMAL_MAP.md) · [全部候选](PENDING_RESEARCH.md) · [当前状态](CURRENT_STATE.json) · [统一登记](UNIFIED_RESEARCH_INDEX.json) · [审查](UCT_FORMAL_AUDIT.md)
 
-整合版本 **UCT-INTEGRATION-v1.0.0**。正式科学图 **UCT-MAP-v1.1.2**；最新科学研究 **A3V20261010**；发表覆盖 **UCT-PUB-v1.0.32**。
+整合版本 **UCT-INTEGRATION-v1.0.0**。正式科学图 **UCT-MAP-v1.1.2**；最新科学研究 **A3V20261010**；发表覆盖 **UCT-PUB-v1.0.33**。
 
 ## 三层结构
 
@@ -36,7 +36,7 @@
 
 ## 当前收束点
 
-Independent signed fallible bodily-familiarity endpoint comparing familiar singleton retained route versus unfamiliar presently congruent route at fixed actual frame consumer/grain; separate cue familiarity, response fluency, ownership report and agency judgment. No more SPC expansion after named PMd feasibility stop.
+Test one independent current bodily/action-familiarity interpretation against origin-recognition and agency countercases; establish a remaining actual retentive relation and realizable matched controls before claiming a pure familiarity contrast. Do not add an assumed coordinate or expand SPC.
 
 通俗地说：固定实际身体路线，区分“保留历史带来的熟悉”与“当下协调、提示熟悉或动作流畅”。最新 A3V 保留 R173 无需双政策竞争的适用路线；不能把选择器证书失败变成无体验或无熟悉感。
 

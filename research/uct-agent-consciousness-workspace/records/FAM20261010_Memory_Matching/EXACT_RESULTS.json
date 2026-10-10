@@ -1,0 +1,143 @@
+{
+  "id": "FAM20261010",
+  "result_version": "FAM-APPLICATION-v0.1.0",
+  "scope": "EXACT_RATIONAL_ILLUSTRATION_OF_INHERITED_TWO_RATE_MODEL_AND_ELEMENTARY_RANK_ARGUMENT",
+  "parameters_illustrative_not_fitted": {
+    "fast_retention": {
+      "fraction": "1/2",
+      "decimal": 0.5
+    },
+    "slow_retention": {
+      "fraction": "99/100",
+      "decimal": 0.99
+    }
+  },
+  "witness": {
+    "x": [
+      {
+        "fraction": "2/5",
+        "decimal": 0.4
+      },
+      {
+        "fraction": "1/10",
+        "decimal": 0.1
+      }
+    ],
+    "y": [
+      {
+        "fraction": "1/10",
+        "decimal": 0.1
+      },
+      {
+        "fraction": "2/5",
+        "decimal": 0.4
+      }
+    ],
+    "present_motor": [
+      {
+        "fraction": "1/2",
+        "decimal": 0.5
+      },
+      {
+        "fraction": "1/2",
+        "decimal": 0.5
+      }
+    ],
+    "next_motor": [
+      {
+        "fraction": "299/1000",
+        "decimal": 0.299
+      },
+      {
+        "fraction": "223/500",
+        "decimal": 0.446
+      }
+    ],
+    "agency_surrogate": [
+      {
+        "fraction": "3/5",
+        "decimal": 0.6
+      },
+      {
+        "fraction": "9/10",
+        "decimal": 0.9
+      }
+    ]
+  },
+  "cancellation": {
+    "state": [
+      {
+        "fraction": "-2/5",
+        "decimal": -0.4
+      },
+      {
+        "fraction": "2/5",
+        "decimal": 0.4
+      }
+    ],
+    "present_motor": {
+      "fraction": "0",
+      "decimal": 0.0
+    },
+    "next_motor": {
+      "fraction": "49/250",
+      "decimal": 0.196
+    }
+  },
+  "model_recovery_formula": "f=(a_s*u0-u1)/(a_s-a_f); s=(u1-a_f*u0)/(a_s-a_f), only declared zero-input known-parameter model",
+  "matched_control_argument": "det [[1,1],[c_f,c_s]]=c_s-c_f; when nonzero, matching motor and modeled agency fixes both states, so any state-only target is fixed",
+  "grid_states": 441,
+  "checks": {
+    "matched_total_correction": true,
+    "unequal_next_correction": true,
+    "two_samples_recover_declared_states": true,
+    "matched_output_does_not_match_agency_surrogate": true,
+    "full_rank_controls_are_injective_on_grid": true,
+    "equal_retention_rate_time_series_remains_aliased": true,
+    "zero_total_not_empty_memory": true,
+    "third_coordinate_can_vary_but_is_only_assumed": true,
+    "same_learning_law_reaches_witness_with_unbounded_prescribed_errors": true
+  },
+  "passed": true,
+  "new_human_data": false,
+  "physical_ports_identified": false,
+  "phenomenal_endpoint_validated": false,
+  "extra_coordinate_instantiated": false,
+  "new_general_math_claim": false,
+  "originality": "INHERITED_MODEL_AND_MATH; SCOPED_APPLICATION_AND_STOP_RULE; PRIORITY_UNVERIFIED",
+  "formation_witness": {
+    "learning_rates": [
+      {
+        "fraction": "1/5",
+        "decimal": 0.2
+      },
+      {
+        "fraction": "1/20",
+        "decimal": 0.05
+      }
+    ],
+    "x_errors": [
+      {
+        "fraction": "0",
+        "decimal": 0.0
+      },
+      {
+        "fraction": "2",
+        "decimal": 2.0
+      }
+    ],
+    "y_errors": [
+      {
+        "fraction": "750/49",
+        "decimal": 15.306122448979592
+      },
+      {
+        "fraction": "-701/98",
+        "decimal": -7.153061224489796
+      }
+    ],
+    "input_domain": "UNBOUNDED_PRESCRIBED_RATIONAL_ERRORS_IN_THE_ABSTRACT_MODEL",
+    "physical_feasibility": false,
+    "note": "No bounded-error human protocol or actual route/lineage binding follows."
+  }
+}

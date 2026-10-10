@@ -1,0 +1,55 @@
+{
+  "id": "FAM20261010",
+  "retrieval_date": "2026-10-10",
+  "primary_sources": [
+    {
+      "id": "FAM-S1",
+      "authors": "Smith, Ghazizadeh and Shadmehr",
+      "year": 2006,
+      "doi": "10.1371/journal.pbio.0040179",
+      "url": "https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.0040179",
+      "version_read": "Publisher article",
+      "scope_read": "Selected model, methods and error-clamp results passages, including rival-model qualification; not a full supplement review.",
+      "role": "INHERITED_TWO_RATE_MODEL_AND_RECOVERY_PHENOMENON"
+    },
+    {
+      "id": "FAM-S2",
+      "authors": "Ishikawa, Ayabe-Kanamura and Izawa",
+      "year": 2021,
+      "doi": "10.1016/j.isci.2021.103511",
+      "url": "https://www.researchgate.net/publication/356561041_The_Role_of_Motor_Memory_Dynamics_in_Structuring_Bodily_Self-Consciousness",
+      "version_read": "Author-deposited published article, uploader identity inspected",
+      "scope_read": "Selected state model, ownership/agency model results and limitations; full supplements not checked. Detailed results prevent an agency=slow-only simplification.",
+      "role": "CLOSE_BODY_SELF_AND_MOTOR_MEMORY_ANTECEDENT"
+    },
+    {
+      "id": "FAM-S3",
+      "authors": "Kadambi et al.",
+      "year": 2025,
+      "doi": "10.1523/JNEUROSCI.0478-24.2024",
+      "url": "https://cvl.psych.ucla.edu/wp-content/uploads/sites/162/2024/11/A146.Kadamib-et-al.-JN.2024.pdf",
+      "version_read": "Public author-lab accepted manuscript dated 2024; final published 2025 bytes not inspected",
+      "scope_read": "Selected point-light recognition methods and theoretical motor-familiarity RDM/RSA passages. Final proofs and full supplement not reviewed.",
+      "role": "CLOSE_RECOGNITION_AND_MOTOR_FAMILIARITY_ANTECEDENT"
+    },
+    {
+      "id": "FAM-S4",
+      "authors": "Patané et al.",
+      "year": 2026,
+      "doi": "10.1016/j.cortex.2025.12.008",
+      "url": "https://www.researchgate.net/publication/399733022_The_role_of_vision_and_proprioception_in_implicit_and_explicit_self-movement_recognition",
+      "version_read": "Author-uploaded journal pre-proof, 16 January 2026; final typeset bytes not inspected",
+      "scope_read": "Abstract, section 2.3 task instructions and selected discussion of modality differences. No dataset reanalysis.",
+      "role": "ACTUAL_ITEM_SCREEN_FOR_RECOGNITION_CONTROL"
+    }
+  ],
+  "search_status": "BOUNDED_NOT_EXHAUSTIVE",
+  "priority_status": "UNVERIFIED",
+  "access_failures": [
+    "PMC/PubMed challenge",
+    "iScience/JNeurosci publisher access denied",
+    "EuropePMC unavailable",
+    "Incorrect ResearchGate candidate URL rejected"
+  ],
+  "read_scope_limits": "Key excerpts retrieved separately after truncated combined displays; unseen contents are not marked read. No new source corpus or external data audit claimed."
+}

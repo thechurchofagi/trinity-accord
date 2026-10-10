@@ -1,0 +1,28 @@
+{
+  "id": "FAM20261010",
+  "version": "FAM-APPLICATION-v0.1.0",
+  "parent_scientific_checkpoint": "A3V20261010",
+  "status": "DISABLED_SCOPED_APPLICATION; ENDPOINT_CONSTRUCT_UNRESOLVED",
+  "source": "records/FAM20261010_Memory_Matching/RESEARCH_NOTE.md",
+  "handoff": "records/FAM20261010_Memory_Matching/HANDOFF_ZH.md",
+  "work_log": "records/FAM20261010_Memory_Matching/WORK_LOG.md",
+  "claim_ledger": "records/FAM20261010_Memory_Matching/CLAIM_LEDGER.json",
+  "map_extension": "records/FAM20261010_Memory_Matching/MAP_EXTENSION.json",
+  "enabled_as_established_premises": false,
+  "scientific_delta": {
+    "nodes": 0,
+    "rules": 0,
+    "contexts": 0
+  },
+  "coverage_version": "UCT-PUB-v1.0.33",
+  "manuscript_status": "HOLD_STANDALONE; PRIORITY_UNVERIFIED",
+  "author_authorization": "Continue this bodily-familiarity route after prior-art comparison",
+  "base_commit": "4f85dac95df1fc14ea49d5f772d8df9b1f6d422c",
+  "main_observed": "7b6634f67c38caa2726c64d7f70e32ff35dc8353",
+  "next": "Test one independent current bodily/action-familiarity interpretation against origin-recognition and agency countercases; establish a remaining actual retentive relation and realizable matched controls before claiming a pure familiarity contrast. Do not add an assumed coordinate or expand SPC.",
+  "completed_map": "UCT-MAP-v1.1.2",
+  "audit_status": "AUDIT_INCOMPLETE",
+  "publication_action": "NONE",
+  "new_general_math": false,
+  "new_human_data": false
+}

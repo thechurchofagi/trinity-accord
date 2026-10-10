@@ -1,0 +1,58 @@
+{
+  "id": "FAM20261010",
+  "claims": [
+    {
+      "id": "FAM-C1",
+      "claim": "Equal present sum can hide unequal two-rate states and unequal zero-input continuation.",
+      "status": "INHERITED_MODEL_EXACT_ILLUSTRATION",
+      "evidence": "FAM-S1",
+      "enabled_as_established_map_premise": false,
+      "worldwide_priority": "UNVERIFIED"
+    },
+    {
+      "id": "FAM-C2",
+      "claim": "For fixed readouts m=f+s and q=c_f*f+c_s*s with c_f!=c_s, matching both fixes f/s and every deterministic state-only target.",
+      "status": "ELEMENTARY_RANK_PROOF; NEW_SCOPED_DESIGN_APPLICATION",
+      "evidence": "RESEARCH_NOTE.md: restricted proof",
+      "enabled_as_established_map_premise": false,
+      "worldwide_priority": "UNVERIFIED"
+    },
+    {
+      "id": "FAM-C3",
+      "claim": "The selected same-m witness is not matched on the declared agency surrogate.",
+      "status": "EXACT_MODEL_RESULT_NOT_REAL_AGENCY",
+      "evidence": "EXACT_RESULTS.json",
+      "enabled_as_established_map_premise": false,
+      "worldwide_priority": "UNVERIFIED"
+    },
+    {
+      "id": "FAM-C4",
+      "claim": "An assumed third coordinate permits a contrast but identifies no actual RetBind or H.",
+      "status": "HYPOTHETICAL_WITNESS_AND_SCOPE_LIMIT",
+      "evidence": "RESEARCH_NOTE.md: additional coordinate",
+      "enabled_as_established_map_premise": false,
+      "worldwide_priority": "UNVERIFIED"
+    },
+    {
+      "id": "FAM-C5",
+      "claim": "Inspected recognition task items do not independently measure current felt bodily familiarity.",
+      "status": "ITEM_SCREEN_NOT_ABSENCE_OF_EXPERIENCE",
+      "evidence": "FAM-S3/FAM-S4; ENDPOINT_SCREEN.md",
+      "enabled_as_established_map_premise": false,
+      "worldwide_priority": "UNVERIFIED"
+    },
+    {
+      "id": "FAM-C6",
+      "claim": "No actual path/RetBind/C1 transport premise is discharged; target separation does not imply an independent factor cube.",
+      "status": "INHERITED_CONDITIONAL_MAP_APPLICATION",
+      "evidence": "R173/R175; MAP_AUDIT.md",
+      "enabled_as_established_map_premise": false,
+      "worldwide_priority": "UNVERIFIED"
+    }
+  ],
+  "standalone_decision": "HOLD",
+  "no_new_general_theorem": true,
+  "no_new_human_data": true,
+  "signed_H_obtained": false,
+  "physical_extra_relation_obtained": false
+}

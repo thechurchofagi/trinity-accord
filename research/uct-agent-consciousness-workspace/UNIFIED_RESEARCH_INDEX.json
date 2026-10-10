@@ -3,7 +3,7 @@
   "version": "UCT-INTEGRATION-v1.0.0",
   "source_commit": "0ef07e2e92d4b7279b1c324abc31fd76650bbcd1",
   "completed_map": "UCT-MAP-v1.1.2",
-  "publication_coverage": "UCT-PUB-v1.0.32",
+  "publication_coverage": "UCT-PUB-v1.0.33",
   "latest_scientific_research": {
     "id": "A3V20261010",
     "result_version": "A3V-SCOPE-v0.1.0",
@@ -2585,6 +2585,46 @@
         "rules": 0,
         "contexts": 0
       }
+    }
+  ],
+  "latest_followup_application": {
+    "id": "FAM20261010",
+    "version": "FAM-APPLICATION-v0.1.0",
+    "parent_scientific_checkpoint": "A3V20261010",
+    "status": "DISABLED_SCOPED_APPLICATION; ENDPOINT_CONSTRUCT_UNRESOLVED",
+    "source": "records/FAM20261010_Memory_Matching/RESEARCH_NOTE.md",
+    "handoff": "records/FAM20261010_Memory_Matching/HANDOFF_ZH.md",
+    "work_log": "records/FAM20261010_Memory_Matching/WORK_LOG.md",
+    "claim_ledger": "records/FAM20261010_Memory_Matching/CLAIM_LEDGER.json",
+    "map_extension": "records/FAM20261010_Memory_Matching/MAP_EXTENSION.json",
+    "enabled_as_established_premises": false,
+    "scientific_delta": {
+      "nodes": 0,
+      "rules": 0,
+      "contexts": 0
+    },
+    "coverage_version": "UCT-PUB-v1.0.33",
+    "manuscript_status": "HOLD_STANDALONE; PRIORITY_UNVERIFIED"
+  },
+  "followup_applications": [
+    {
+      "id": "FAM20261010",
+      "version": "FAM-APPLICATION-v0.1.0",
+      "parent_scientific_checkpoint": "A3V20261010",
+      "status": "DISABLED_SCOPED_APPLICATION; ENDPOINT_CONSTRUCT_UNRESOLVED",
+      "source": "records/FAM20261010_Memory_Matching/RESEARCH_NOTE.md",
+      "handoff": "records/FAM20261010_Memory_Matching/HANDOFF_ZH.md",
+      "work_log": "records/FAM20261010_Memory_Matching/WORK_LOG.md",
+      "claim_ledger": "records/FAM20261010_Memory_Matching/CLAIM_LEDGER.json",
+      "map_extension": "records/FAM20261010_Memory_Matching/MAP_EXTENSION.json",
+      "enabled_as_established_premises": false,
+      "scientific_delta": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0
+      },
+      "coverage_version": "UCT-PUB-v1.0.33",
+      "manuscript_status": "HOLD_STANDALONE; PRIORITY_UNVERIFIED"
     }
   ]
 }

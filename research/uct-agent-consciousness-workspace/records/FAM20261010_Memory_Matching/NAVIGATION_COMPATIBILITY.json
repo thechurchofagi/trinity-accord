@@ -1,0 +1,15 @@
+{
+  "preservation_checks": {
+    "CURRENT_STATE.json": true,
+    "RESEARCH_REGISTRY.json": true,
+    "RESEARCH_SESSION_LOG_INDEX.json": true,
+    "UCT_FORMAL_GRAPH_MODULES.json": true,
+    "UNIFIED_RESEARCH_INDEX.json": true,
+    "PUBLICATION_COVERAGE.json": true
+  },
+  "science_pointer": "A3V20261010",
+  "followup_application": "FAM20261010",
+  "pending_count": 38,
+  "publication_counts_unchanged": true,
+  "full_semantic_reproof": false
+}

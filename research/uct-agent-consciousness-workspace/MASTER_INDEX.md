@@ -14,3 +14,5 @@
 研究按问题家族阅读；轮次编号用于追溯。精确主张和论文覆盖仍以各自台账为准。
 
 原创性复核：[NOV20261010](records/NOV20261010_Prior_Art_and_Bodily_Familiarity/HANDOFF_ZH.md)，仅前例/范围元数据，独立成稿HOLD；科学接续仍A3V。
+
+身体熟悉感应用接续：[FAM20261010](records/FAM20261010_Memory_Matching/HANDOFF_ZH.md)，匹配控制可行性与端点筛查；停用应用，未新增图前提，独立成稿HOLD。

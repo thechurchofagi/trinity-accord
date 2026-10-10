@@ -1,0 +1,182 @@
+{
+  "id": "FAM20261010",
+  "base_commit": "4f85dac95df1fc14ea49d5f772d8df9b1f6d422c",
+  "files": [
+    {
+      "path": "research/uct-agent-consciousness-workspace/CURRENT_STATE.json",
+      "bytes": 29821,
+      "sha256": "08596e39f5a68f00dba0e5c1ab977ccddc3fd0a6771de81950a4c6b76964b2ac",
+      "git_blob_sha1": "cd5107cdf71ab6912ed70d14fe4ce516b64a2a28"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/HANDOFF.md",
+      "bytes": 1474,
+      "sha256": "8af3d254742c76f9f5709fa189f46017d0955df255fbd61d4dae6cd567068865",
+      "git_blob_sha1": "0edc64046bd0a059c25e8a55a02fb08c083b561a"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/MASTER_INDEX.md",
+      "bytes": 1065,
+      "sha256": "9a4f0bcd5fe6a73900444965849fed841c9f1de66514004bb5d18ec5a0b50a6b",
+      "git_blob_sha1": "67e0bd9304abf19f8e83d2e18a0a1d67c5a5b93f"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/PUBLICATION_COVERAGE.json",
+      "bytes": 12505,
+      "sha256": "4e5c78b58355832f143957c8e13175996efbc68653fdd06d15fb645f3ea38ce5",
+      "git_blob_sha1": "de3fabc46292321974870228fce08af3e34b8418"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/RESEARCH_REGISTRY.json",
+      "bytes": 63092,
+      "sha256": "4c2e3bc2baa43561d00b2bbbafa6917a09f9e5b48df1d4117c5500f89d8c214e",
+      "git_blob_sha1": "54e549151ab144fba340e502006b0eeb161600ec"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/RESEARCH_SESSION_LOG_INDEX.json",
+      "bytes": 11046,
+      "sha256": "376546963e5ae3f5a52c74a37deea4577802804ea4b1d199ea9aa490b67c4035",
+      "git_blob_sha1": "307e8ca5a695734c7f54d0c415160ca5e04c9333"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_GRAPH_MODULES.json",
+      "bytes": 60853,
+      "sha256": "59cdc90c9c902952b70fab4c0a9cbfc32516fd1c71e720b1a141eded8cb45c1a",
+      "git_blob_sha1": "a2065590699b65bed773e1ab7baeb4abf1eee7f7"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_MAP.md",
+      "bytes": 4607,
+      "sha256": "1edc263b364a4f091a3cafc6bd9d549c73ae81c7a03877ba86d9599f0340bf8e",
+      "git_blob_sha1": "a51632da39e9c3214a0cab0373bda32a65b47e01"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UNIFIED_RESEARCH_INDEX.json",
+      "bytes": 145833,
+      "sha256": "6017a4f719b7af00e29093282e59b0fccbc0cecfff3c5c450c25b98b2455490e",
+      "git_blob_sha1": "c0e885e3010403c00161844fe0236a03671bfc8d"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/FAM20261010_Memory_Matching/CLAIM_LEDGER.json",
+      "bytes": 2311,
+      "sha256": "c21474b7c2f4cba614cee4c98e1c811c63765c0265e0c3985ac36880674b6855",
+      "git_blob_sha1": "9540582d1e83ae60c5f8121fb78c5bfad237fc8f"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/FAM20261010_Memory_Matching/COVERAGE_ENTRY_BEFORE.json",
+      "bytes": 10810,
+      "sha256": "9b8e138bb1f4885549b7070e47f806b55cd9a7961f7ed5355fd8e6a2aadd6b29",
+      "git_blob_sha1": "1bd533ba239d4480edee9a51756df157787978b8"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/FAM20261010_Memory_Matching/ENDPOINT_SCREEN.md",
+      "bytes": 2298,
+      "sha256": "05b79b26a735621ce3bcd978fc584da0c69ae7f9bbbdf91c6f202e95eb4f374b",
+      "git_blob_sha1": "63e7af716247c013cae25baea89a833ea1626de8"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/FAM20261010_Memory_Matching/EXACT_RESULTS.json",
+      "bytes": 3398,
+      "sha256": "0e78a79e3e8343e4f6508adef5b0ecea4f45decaa19ea27f4b721bcb5ef1c48c",
+      "git_blob_sha1": "db3116b30c468f3ec0a4f66e425e2ebaecd5d879"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/FAM20261010_Memory_Matching/HANDOFF_ZH.md",
+      "bytes": 2574,
+      "sha256": "9971e38b570421ae99f98d03904ae80e6d1b273e359b4d9c58aab5a858a08ff1",
+      "git_blob_sha1": "e3166f3b72a10cd1d4c7d3f9371a91c7607ca4a1"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/FAM20261010_Memory_Matching/MAP_AUDIT.md",
+      "bytes": 1741,
+      "sha256": "67eda644eb4ad480a5a8ac3ceba290e4b94201ce3593999e40535562145fefb2",
+      "git_blob_sha1": "a98d8e6ad294d6c351b7e5877a61800915e37715"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/FAM20261010_Memory_Matching/MAP_COMPATIBILITY_AUDIT.json",
+      "bytes": 1234,
+      "sha256": "970a8e17b530def00007d620ce4ea7ea682ddc352110af8d3340ec50c8913797",
+      "git_blob_sha1": "35284befbcb632adcbae77a97b12e34bb3040254"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/FAM20261010_Memory_Matching/MAP_EXTENSION.json",
+      "bytes": 1410,
+      "sha256": "8a531becfffafa4681b02da5c6ccad9303f41c435bfd756f06db8ad376a60fc7",
+      "git_blob_sha1": "d9a64a2ff7471b883878abc0536392608e0667c2"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/FAM20261010_Memory_Matching/NAVIGATION_BASE_SNAPSHOT.json.gz",
+      "bytes": 47263,
+      "sha256": "0661797756e36af77851d165083d180b98519f83be10567924d7c2707f36998e",
+      "git_blob_sha1": "a1dc224198e5f1b8064665e97cc0c03955ac35ae"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/FAM20261010_Memory_Matching/NAVIGATION_COMPATIBILITY.json",
+      "bytes": 444,
+      "sha256": "641a3445041e10fd2748fab861e5f8f032c7e7ef8adf61f61f20a90e9e335eee",
+      "git_blob_sha1": "ee7355300eb485d4a2af6f2be45127ae68c95a58"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/FAM20261010_Memory_Matching/PUBLICATION_COVERAGE_UPDATE.json",
+      "bytes": 1109,
+      "sha256": "cfe81d391c12f46cc171a8ac08fefebd61be9d97673de3ec23018c194630d065",
+      "git_blob_sha1": "d38e421e8bf6f8f82c7632a4538d9d37eaeb2ea3"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/FAM20261010_Memory_Matching/RESEARCH_NOTE.md",
+      "bytes": 9075,
+      "sha256": "450bda6ce603283733692fcfb5ee86738686dbb2dc6b836032d0ee6b62140c6f",
+      "git_blob_sha1": "968daab23595a689f651b7cbb0907d118d3304a4"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/FAM20261010_Memory_Matching/REVIEW_RESPONSE.md",
+      "bytes": 1399,
+      "sha256": "f037266d4594baa67d898eedcef08a3b0e07b6ae1821e017f37d5a7b69652cf4",
+      "git_blob_sha1": "93dc14587d3511f5e0ad90b540458f85d9d37a33"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/FAM20261010_Memory_Matching/ROUND_RECORD.json",
+      "bytes": 1456,
+      "sha256": "17f81b276f0aa7bff4a8253b61718cf3bfe2e57d99f5d2cdbc75a90f79784929",
+      "git_blob_sha1": "75bd82eb731cf881daf4fb96cfdacb7784fb2d8d"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/FAM20261010_Memory_Matching/RUN_RECEIPT.json",
+      "bytes": 1082,
+      "sha256": "11a5ab43499e389003dabe590768cfe8cf784d18ca1ca4ba13a2d7eaa3bdb71c",
+      "git_blob_sha1": "43bb8d59720205532368ea43b2ab2a1fb9f58567"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/FAM20261010_Memory_Matching/SOURCE_LEDGER.json",
+      "bytes": 2859,
+      "sha256": "e03f9106a4f622d6bc2b37f70f93e549bb4012faa73b98246cafa240078a4d80",
+      "git_blob_sha1": "f0dc0aea734da58efd2d2a84071437c80cc1b49b"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/FAM20261010_Memory_Matching/WHOLE_MAP_COVERAGE.json.gz",
+      "bytes": 89597,
+      "sha256": "60de71dd43e4652c3384bc52509d7dbe6d4478a6a8878b8bae77f30dd34b65b8",
+      "git_blob_sha1": "0329ce67a58349660cd2de2448e2b7b3155d96df"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/FAM20261010_Memory_Matching/WORK_LOG.md",
+      "bytes": 4070,
+      "sha256": "7ac2f3bab12e41b09039c31da4a89aedf3723d51e78dc7432758c5cf7c0798c7",
+      "git_blob_sha1": "a0411142cbed7e4a9b774d4238dbe483a9d4e16d"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/FAM20261010_Memory_Matching/audit_map.py",
+      "bytes": 4546,
+      "sha256": "9f6399e90b29249f7e5ada51d16265afc910f44f8586812543761bb688a4ad05",
+      "git_blob_sha1": "0404a76d081471cfeaa3c4fc26c70cb8313224a3"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/FAM20261010_Memory_Matching/check_memory_matching.py",
+      "bytes": 3615,
+      "sha256": "67c5d2227d497ac6557535f30ddba8287566005cceb937e9c0e97261e8948d26",
+      "git_blob_sha1": "ecfa2d4d7d65673b25b1327a39f4b8649f132949"
+    }
+  ],
+  "manifest_self_excluded": true,
+  "post_save_receipt_excluded": true
+}

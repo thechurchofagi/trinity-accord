@@ -1183,10 +1183,11 @@
   ],
   "preservation": "Exact previous registry remains preserved. The full research manuscript/module and saved per-item review decisions are in the version capsule; expanded artifacts are also in the offline downloadable archive.",
   "publication_coverage": {
-    "version": "UCT-PUB-v1.0.32",
+    "version": "UCT-PUB-v1.0.33",
     "entry": "PUBLICATION_COVERAGE.json",
     "nondeductive": true,
-    "latest_originality_review": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/PUBLICATION_COVERAGE_UPDATE.json"
+    "latest_originality_review": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/PUBLICATION_COVERAGE_UPDATE.json",
+    "latest_followup_application": "records/FAM20261010_Memory_Matching/PUBLICATION_COVERAGE_UPDATE.json"
   },
   "registry_scope": "Recent navigation register; complete fixed-source inventories are in the current publication coverage ledger.",
   "effective_pending_corrections": {
@@ -1237,6 +1238,46 @@
         "rules": 0,
         "contexts": 0
       }
+    }
+  ],
+  "latest_followup_application": {
+    "id": "FAM20261010",
+    "version": "FAM-APPLICATION-v0.1.0",
+    "parent_scientific_checkpoint": "A3V20261010",
+    "status": "DISABLED_SCOPED_APPLICATION; ENDPOINT_CONSTRUCT_UNRESOLVED",
+    "source": "records/FAM20261010_Memory_Matching/RESEARCH_NOTE.md",
+    "handoff": "records/FAM20261010_Memory_Matching/HANDOFF_ZH.md",
+    "work_log": "records/FAM20261010_Memory_Matching/WORK_LOG.md",
+    "claim_ledger": "records/FAM20261010_Memory_Matching/CLAIM_LEDGER.json",
+    "map_extension": "records/FAM20261010_Memory_Matching/MAP_EXTENSION.json",
+    "enabled_as_established_premises": false,
+    "scientific_delta": {
+      "nodes": 0,
+      "rules": 0,
+      "contexts": 0
+    },
+    "coverage_version": "UCT-PUB-v1.0.33",
+    "manuscript_status": "HOLD_STANDALONE; PRIORITY_UNVERIFIED"
+  },
+  "followup_applications": [
+    {
+      "id": "FAM20261010",
+      "version": "FAM-APPLICATION-v0.1.0",
+      "parent_scientific_checkpoint": "A3V20261010",
+      "status": "DISABLED_SCOPED_APPLICATION; ENDPOINT_CONSTRUCT_UNRESOLVED",
+      "source": "records/FAM20261010_Memory_Matching/RESEARCH_NOTE.md",
+      "handoff": "records/FAM20261010_Memory_Matching/HANDOFF_ZH.md",
+      "work_log": "records/FAM20261010_Memory_Matching/WORK_LOG.md",
+      "claim_ledger": "records/FAM20261010_Memory_Matching/CLAIM_LEDGER.json",
+      "map_extension": "records/FAM20261010_Memory_Matching/MAP_EXTENSION.json",
+      "enabled_as_established_premises": false,
+      "scientific_delta": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0
+      },
+      "coverage_version": "UCT-PUB-v1.0.33",
+      "manuscript_status": "HOLD_STANDALONE; PRIORITY_UNVERIFIED"
     }
   ]
 }
