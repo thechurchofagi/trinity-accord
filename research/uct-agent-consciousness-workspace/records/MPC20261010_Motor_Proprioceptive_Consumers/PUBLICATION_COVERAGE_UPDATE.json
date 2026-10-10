@@ -1,0 +1,41 @@
+{
+  "schema": "uct-publication-coverage-update/1.2",
+  "research_id": "MPC20261010",
+  "parent_coverage_version": "UCT-PUB-v1.0.18",
+  "coverage_version": "UCT-PUB-v1.0.19",
+  "status": "SCOPED_COVERAGE_REVIEW_COMPLETE_NOT_EXHAUSTIVE_PRIORITY_CERTIFICATION",
+  "nondeductive": true,
+  "changes_scientific_graph": false,
+  "publication_counts_unchanged": true,
+  "net_claims": [
+    {
+      "audit_claim_id": "CP-MPC-01",
+      "canonical_claim_ids": ["MPC20261010-C1", "MPC20261010-C2"],
+      "classification": "CLASSICAL_FINITE_MATH_SPECIFIC_PROTOCOL_APPLICATION",
+      "scope": "Three-corner Boolean completion and its endpoint-vector multiplication for a motor/proprioceptive consumer contract."
+    },
+    {
+      "audit_claim_id": "CP-MPC-02",
+      "canonical_claim_ids": ["MPC20261010-C3", "MPC20261010-C4"],
+      "classification": "SCOPED_COUNTERMODEL_AND_PROTOCOL_CORRECTION",
+      "scope": "Full response tables do not identify read occurrence; factorial effects remain endpoint- and context-indexed."
+    },
+    {
+      "audit_claim_id": "CP-MPC-03",
+      "canonical_claim_ids": ["MPC20261010-C5", "MPC20261010-C6"],
+      "classification": "SOURCE_BOUNDED_SYNTHESIS_AND_CONDITIONAL_UCT_INTERPRETATION",
+      "scope": "Current primary evidence supports an endpoint tensor, while the inside-experience interpretation remains conditional on actual organization and C1."
+    }
+  ],
+  "deductions": [
+    "Boolean completion counts, factorial contrasts and short-circuit semantics are known mathematics/computation.",
+    "R204, R205 and SCU already distinguish success, alignment, availability, use and source identity.",
+    "Motor prediction, sensory attenuation, agency and ownership mechanisms have primary-source predecessors.",
+    "UCT C1/U1 and actual-token/signature requirements are inherited."
+  ],
+  "decision": "CONTINUE_RESEARCH_HOLD_STANDALONE",
+  "reason": "The exact missing-counterfactual and endpoint-vector correction is reusable, but it is a compact follow-up to the completed SCU methods manuscript and lacks a realized motor-only consumer intervention or named phenomenal bridge.",
+  "formal_publication_status": "NOT_PUBLISHED_NO_NEW_DOI_DEPOSIT",
+  "current_scientific_map": "UCT-MAP-v1.1.2",
+  "candidate_status": "PENDING_CHECKPOINT_DISABLED"
+}

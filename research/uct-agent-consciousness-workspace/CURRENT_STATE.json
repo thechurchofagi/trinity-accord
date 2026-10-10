@@ -15,18 +15,14 @@
   "version_policy": "VERSIONING_POLICY.md",
   "changelog": "CHANGELOG.md",
   "latest_research": {
-    "id": "SCU20261010",
-    "result_version": "SCU-RESULT-v0.2.0",
+    "id": "MPC20261010",
+    "result_version": "MPC-RESULT-v0.1.0",
     "status": "PENDING_CHECKPOINT_DISABLED",
-    "source": "records/SCU20261010_Source_Consumer_Protocols/RESEARCH_NOTE.md",
-    "handoff": "records/SCU20261010_Source_Consumer_Protocols/HANDOFF_ZH.md",
-    "work_log": "records/SCU20261010_Source_Consumer_Protocols/WORK_LOG.md",
+    "source": "records/MPC20261010_Motor_Proprioceptive_Consumers/RESEARCH_NOTE.md",
+    "handoff": "records/MPC20261010_Motor_Proprioceptive_Consumers/HANDOFF_ZH.md",
+    "work_log": "records/MPC20261010_Motor_Proprioceptive_Consumers/WORK_LOG.md",
     "enabled_as_established_premises": false,
-    "paper_version": "SCU-PAPER-v1.0.0",
-    "paper": "records/SCU20261010_Source_Consumer_Protocols/Matched_Behavior_and_Source_Use_v1.0.0.md",
-    "paper_pdf": "records/SCU20261010_Source_Consumer_Protocols/Matched_Behavior_and_Source_Use_v1.0.0.pdf",
-    "paper_status": "COMPLETE_SCOPED_WORKING_MANUSCRIPT_NOT_FORMALLY_PUBLISHED",
-    "decision_record": "records/SCU20261010_Source_Consumer_Protocols/MANUSCRIPT_DECISION.json"
+    "manuscript_status": "HOLD_STANDALONE_COMPACT_FOLLOWUP_TO_SCU"
   },
   "latest_integrated_research": {
     "id": "R188-CER-20261009",
@@ -70,7 +66,8 @@
     "R203-ACD-20261010",
     "R204-SAU-20261010",
     "R205-ASC-20261010",
-    "SCU20261010"
+    "SCU20261010",
+    "MPC20261010"
   ],
   "current_guide": "RESEARCH_MASTER_GUIDE.md v2.3",
   "complete_map_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
@@ -82,37 +79,33 @@
     "nondeductive_context_links": 261,
     "total_review_items": 1608
   },
-  "pending_note": "AC, IL, ONLINE-AC, R189–R205 and SCU20261010 remain disabled. Six additional correction nodes and two rules override eight pending records only; neither candidate nor correction counts enter the completed graph.",
+  "pending_note": "AC, IL, ONLINE-AC, R189–R205, SCU20261010 and MPC20261010 remain disabled. Six additional correction nodes and two rules override eight pending records only; neither candidate nor correction counts enter the completed graph.",
   "publication_coverage": {
     "entry": "PUBLICATION_COVERAGE.json",
-    "version": "UCT-PUB-v1.0.18",
+    "version": "UCT-PUB-v1.0.19",
     "base_census_version": "UCT-PUB-v1.0.0",
-    "update": "records/SCU20261010_Source_Consumer_Protocols/PUBLICATION_COVERAGE_UPDATE.json",
+    "update": "records/MPC20261010_Motor_Proprioceptive_Consumers/PUBLICATION_COVERAGE_UPDATE.json",
     "report": "records/PUB20261009_Publication_Coverage/PUBLICATION_COVERAGE_REPORT_ZH.md",
     "nondeductive": true
   },
   "latest_activity": {
-    "id": "SCU20261010",
-    "kind": "source_consumer_protocol_manuscript_and_scoped_semantic_audit",
-    "work_log": "records/SCU20261010_Source_Consumer_Protocols/WORK_LOG.md",
-    "handoff": "records/SCU20261010_Source_Consumer_Protocols/HANDOFF_ZH.md"
+    "id": "MPC20261010",
+    "kind": "motor_proprioceptive_missing_counterfactual_and_endpoint_tensor",
+    "work_log": "records/MPC20261010_Motor_Proprioceptive_Consumers/WORK_LOG.md",
+    "handoff": "records/MPC20261010_Motor_Proprioceptive_Consumers/HANDOFF_ZH.md"
   },
   "latest_pending_research": {
-    "id": "SCU20261010",
-    "result_version": "SCU-RESULT-v0.2.0",
+    "id": "MPC20261010",
+    "result_version": "MPC-RESULT-v0.1.0",
     "status": "PENDING_CHECKPOINT_DISABLED",
-    "source": "records/SCU20261010_Source_Consumer_Protocols/RESEARCH_NOTE.md",
-    "handoff": "records/SCU20261010_Source_Consumer_Protocols/HANDOFF_ZH.md",
-    "work_log": "records/SCU20261010_Source_Consumer_Protocols/WORK_LOG.md",
+    "source": "records/MPC20261010_Motor_Proprioceptive_Consumers/RESEARCH_NOTE.md",
+    "handoff": "records/MPC20261010_Motor_Proprioceptive_Consumers/HANDOFF_ZH.md",
+    "work_log": "records/MPC20261010_Motor_Proprioceptive_Consumers/WORK_LOG.md",
     "enabled_as_established_premises": false,
-    "paper_version": "SCU-PAPER-v1.0.0",
-    "paper": "records/SCU20261010_Source_Consumer_Protocols/Matched_Behavior_and_Source_Use_v1.0.0.md",
-    "paper_pdf": "records/SCU20261010_Source_Consumer_Protocols/Matched_Behavior_and_Source_Use_v1.0.0.pdf",
-    "paper_status": "COMPLETE_SCOPED_WORKING_MANUSCRIPT_NOT_FORMALLY_PUBLISHED",
-    "decision_record": "records/SCU20261010_Source_Consumer_Protocols/MANUSCRIPT_DECISION.json"
+    "manuscript_status": "HOLD_STANDALONE_COMPACT_FOLLOWUP_TO_SCU"
   },
-  "review_status_scope": "Completed release UCT-MAP-v1.1.2 only. SCU20261010 completed statement/premise/relation review of all 1,608 items, but full raw contracts, supplementary fields and historical proof reconstruction remain explicitly incomplete; no new completed map release or actual premise discharge.",
-  "next_priority": "Ground one motor-command versus proprioceptive consumer comparison in a concrete implementation, with independently selected agency/ownership/intensity/sensitivity endpoints, intervention access, carrier identity and timing. Do not enlarge generic source enumeration. Complete the exact remaining raw-contract/proof obligations before map promotion.",
+  "review_status_scope": "Completed release UCT-MAP-v1.1.2 only. MPC20261010 traversed every completed node/rule/context and the 1,608-item ledger for scoped compatibility, but inherited raw-contract/schema variation and historical proof reconstruction remain explicitly incomplete; no new completed map release, actual consumer installation, named phenomenal bridge or reviewer closure.",
+  "next_priority": "Test whether one physically feasible and ethical approximation to the motor-only consumer cell can preserve movement/tactile consequence while independently blocking proprioceptive/state input, with carrier/event/timing validation and separately typed intensity, precision, agency and ownership endpoints. If no such human intervention exists, state the realizability boundary and retain it as an engineering thought experiment. Do not resume generic source enumeration.",
   "latest_scoped_review": {
     "audit": "records/SCU20261010_Source_Consumer_Protocols/MAP_AUDIT.md",
     "exact_unread_scope": "records/SCU20261010_Source_Consumer_Protocols/review/EXACT_UNREAD_SCOPE.json",

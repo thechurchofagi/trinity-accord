@@ -6,6 +6,8 @@
 
 **一句话原则：先盘点全部成果及已发表主张的覆盖，判断剩余净增量；不足就选择具体缺口突破，足够就完成可引用论文；每一步实质增量须接入地图，逐项复核全图并重推受影响结论，日志、地图和发表覆盖台账同步更新，保存且向作者反馈后继续。**
 
+**当前已核验接续：** MPC20261010 将主动/被动/静止比较收窄为运动命令—本体/状态消费者的缺失 `10` 反事实；四格输出仍不识别实际读入，命名体验桥保持开放。入口见 [MASTER_INDEX.md](MASTER_INDEX.md) 和 [CURRENT_STATE.json](CURRENT_STATE.json)。下一步仅审查一个物理可行的 branch-isolation 近似或其不可实现边界，不再扩展通用来源枚举。
+
 原总指南的全部字节保存在同目录 [RESEARCH_MASTER_GUIDE_BEFORE_POLICY20261008.md](RESEARCH_MASTER_GUIDE_BEFORE_POLICY20261008.md)，其相对链接仍有效；其中详细流程、历史成果、失败、有效修订和存储要求按与本指南相容的部分继续适用。现行科研进展以最新版 [HANDOFF.md](HANDOFF.md)、[MASTER_INDEX.md](MASTER_INDEX.md)、[REVIEW_SUPERVISION.md](REVIEW_SUPERVISION.md) 和真实提交为准，不以本文件冻结轮次。请勿再次将大量轮次摘要堆到本政策之前而掩盖最高原则。
 
 ## 0. 论文的根本目的：为未来 AI 与研究者留下可继承、可引用的原创知识（v2.2 重申并落实）

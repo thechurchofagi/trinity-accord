@@ -1,0 +1,74 @@
+{
+  "schema": "uct-claim-ledger/1",
+  "research_id": "MPC20261010",
+  "result_version": "MPC-RESULT-v0.1.0",
+  "claims": [
+    {
+      "id": "MPC20261010-C1",
+      "type": "EXACT_FINITE_IDENTIFIABILITY_RESULT",
+      "statement": "For a deterministic Boolean endpoint on two fixed consumer inputs, observation of cells 00, 01 and 11 leaves exactly two compatible response functions; they differ only at 10.",
+      "domain": "All functions from {0,1}^2 to {0,1}, with fixed input semantics and one frozen context.",
+      "all_premises": ["fixed M meaning", "fixed P meaning", "fixed endpoint", "fixed context", "determinism within the displayed model", "observed cells 00,01,11"],
+      "proof": "One of four truth-table bits remains free; exhaustive enumeration in model.py verifies all 16 functions and eight fibers of size two.",
+      "counterexamples_and_limits": "Does not identify biological mechanisms, real-valued curves, stochastic laws, actual intake, or experience. Monotonicity does not resolve the two named profiles.",
+      "status": "PROVED_IN_DECLARED_FINITE_CLASS",
+      "thought_experiment_role": "Motor-only missing-corner thought experiment fixes consequence and varies consumer input."
+    },
+    {
+      "id": "MPC20261010-C2",
+      "type": "EXACT_FINITE_COROLLARY",
+      "statement": "For k unrelated endpoint functions observed on the same three cells, 2^k joint Boolean completions remain.",
+      "domain": "k finite Boolean endpoints without cross-endpoint constraints.",
+      "all_premises": ["MPC20261010-C1", "independent admissibility of each endpoint completion", "no cross-endpoint bridge"],
+      "proof": "Cartesian product of k two-element completion fibers; executable checks for k=1 through 6.",
+      "counterexamples_and_limits": "Known equality, factorization, monotonic cross-target or mechanistic constraints can reduce the count but must be independently warranted.",
+      "status": "PROVED_IN_DECLARED_FINITE_CLASS",
+      "thought_experiment_role": "Endpoint vector keeps intensity, precision, agency, ownership and report distinct."
+    },
+    {
+      "id": "MPC20261010-C3",
+      "type": "EXACT_COUNTERMODEL",
+      "statement": "A complete four-cell endpoint table does not identify actual input-read occurrences.",
+      "domain": "Eager and short-circuit implementations of Boolean OR.",
+      "all_premises": ["same four endpoint outputs", "declared eager and lazy execution semantics"],
+      "proof": "Both implementations compute OR; on M=1 cells eager reads P and lazy does not. model.py records the event traces.",
+      "counterexamples_and_limits": "A validated intake-event instrument or stronger sole-route/no-cancellation contract can separate the implementations.",
+      "status": "EXACT_FINITE_COUNTERMODEL",
+      "thought_experiment_role": "Copy/switch case holds output law fixed while changing actual consumption."
+    },
+    {
+      "id": "MPC20261010-C4",
+      "type": "ALGEBRAIC_PROTOCOL_IDENTITY",
+      "statement": "A full real-valued two-by-two table defines endpoint- and context-indexed controlled effects and an interaction; the active/passive contrast alone supplies only the P=1 motor contrast under intervention fidelity.",
+      "domain": "Four fixed-context endpoint means mu_00, mu_01, mu_10, mu_11.",
+      "all_premises": ["same bearer/interval/context", "valid branch interventions", "same endpoint instrument", "comparable means"],
+      "proof": "Direct difference and difference-in-differences definitions in RESEARCH_NOTE.md C4.",
+      "counterexamples_and_limits": "Inferring mu_10 from three cells assumes additivity/no interaction. Active/passive labels do not guarantee P or context is fixed.",
+      "status": "CONDITIONAL_PROTOCOL_IDENTITY",
+      "thought_experiment_role": "The missing 10 cell is the precise functional discriminator."
+    },
+    {
+      "id": "MPC20261010-C5",
+      "type": "SOURCE_BOUNDED_EMPIRICAL_CONSTRAINT",
+      "statement": "Current primary studies require perceived intensity/bias, discrimination precision, agency and ownership to remain distinct endpoints and expose attention/body-state context as additional variables.",
+      "domain": "Only the cited protocols and inspected source scopes in SOURCE_SCOPE.md.",
+      "all_premises": ["source descriptions are accurate", "no raw-data reanalysis claimed", "qualitative thresholding is explicitly interpretive"],
+      "proof": "Source comparison in RESEARCH_NOTE.md C5 and SOURCE_SCOPE.md.",
+      "counterexamples_and_limits": "Does not prove a universal anatomical gate, exact OR computation, complete phenomenology or C1.",
+      "status": "EMPIRICAL_DESIGN_CONSTRAINT_NOT_ACTUAL_UCT_VALIDATION",
+      "thought_experiment_role": "Passive goal-cue substitution is a rival to motor-only interpretation."
+    },
+    {
+      "id": "MPC20261010-C6",
+      "type": "CONDITIONAL_UCT_INTERPRETATION",
+      "statement": "For one independently admitted actual same-instance token, grounded consumer relations are parts of actual organization and have experience-internal structural counterparts under C1, without thereby becoming agency, ownership, intensity, sensitivity, report or conceptual I.",
+      "domain": "One actual token, interval, complete common signature and independently grounded carriers/consumers/interventions/endpoints.",
+      "all_premises": ["actual valid token", "complete declared signature", "actual carrier and intake occurrence", "intervention fidelity", "C1"],
+      "proof": "Direct same-instance application of UCT I v1.2 C1; no new causal or phenomenal variable is introduced.",
+      "counterexamples_and_limits": "No actual token or named endpoint bridge is admitted here. QC10, IA-QC11, QC12 and QC13 remain open.",
+      "status": "CONDITIONAL_INTERPRETATION_APPLICATION_OPEN",
+      "thought_experiment_role": "Ancestors/formation case prevents a consumer comparison from becoming an experience-existence gate."
+    }
+  ]
+}
+

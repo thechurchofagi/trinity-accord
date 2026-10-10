@@ -1,0 +1,159 @@
+{
+  "schema": "uct-pending-extension/1",
+  "id": "MPC20261010-MAP-CANDIDATE-v0.1.0",
+  "base_release": "UCT-MAP-v1.1.2",
+  "enabled": false,
+  "status": "PENDING_CHECKPOINT_DISABLED",
+  "nodes": [
+    {
+      "id": "MPC:DOMAIN",
+      "kind": "DEFINITION",
+      "statement": "One selected consumer receives fixed motor input M and proprioceptive/state input P on a same-bearer, same-interval, same-context two-by-two intervention domain; output endpoint and actual intake events remain distinct.",
+      "scope": "Frozen finite model; actual application requires bearer, interval, complete signature, plant/branch separation, carriers, consumer, endpoint, context and intervention fidelity.",
+      "quantifier": "Universal over the displayed finite function class; conditional for actual applications.",
+      "status": "DECLARED_MODEL_DOMAIN_NOT_EMPIRICAL",
+      "all_premises": "RESEARCH_NOTE.md §2 and PROTOCOL.md",
+      "proof_location": "RESEARCH_NOTE.md §2",
+      "counterexamples_and_limits": "Active/passive labels do not instantiate this domain; context changes require enlargement.",
+      "thought_experiment_role": "Motor-only missing corner fixes plant consequence while varying consumer inputs.",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "MPC:THREE_CORNER_OBSERVATION",
+      "kind": "EVIDENCE_CONTRACT",
+      "statement": "The common triangle observes endpoint values at 00, 01 and 11 but not 10.",
+      "scope": "One endpoint and the frozen MPC:DOMAIN only.",
+      "quantifier": "One declared observation protocol.",
+      "status": "DECLARED_PROTOCOL",
+      "all_premises": "Fixed cell meanings and endpoint comparability.",
+      "proof_location": "RESEARCH_NOTE.md §3 C1",
+      "counterexamples_and_limits": "A different physical protocol may not preserve these cell meanings.",
+      "thought_experiment_role": "Names the missing motor-only counterfactual.",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "MPC:C1",
+      "kind": "THEOREM",
+      "statement": "Every Boolean three-corner profile has exactly two completions, differing only at 10.",
+      "scope": "All deterministic Boolean endpoint functions in MPC:DOMAIN.",
+      "quantifier": "For every function and every observed profile in the displayed class.",
+      "status": "EXACT_FINITE_RESULT_PENDING_ADOPTION",
+      "all_premises": "MPC:DOMAIN and MPC:THREE_CORNER_OBSERVATION jointly.",
+      "proof_location": "RESEARCH_NOTE.md C1 / model.py / EXACT_RESULTS.json",
+      "counterexamples_and_limits": "Stochastic, real-valued and context-varying cases need separate contracts.",
+      "thought_experiment_role": "Separates M from M AND P, and P from M OR P.",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "MPC:C2",
+      "kind": "COROLLARY",
+      "statement": "k unconstrained endpoint coordinates leave 2^k three-corner completions.",
+      "scope": "Finite independent endpoint-vector class.",
+      "quantifier": "For every positive integer k in the declared class.",
+      "status": "EXACT_FINITE_RESULT_PENDING_ADOPTION",
+      "all_premises": "MPC:C1 for every endpoint and no cross-endpoint restriction.",
+      "proof_location": "RESEARCH_NOTE.md C2 / model.py / EXACT_RESULTS.json",
+      "counterexamples_and_limits": "Independent cross-endpoint premises can reduce the count.",
+      "thought_experiment_role": "Blocks scalarization of intensity, precision, agency, ownership and report.",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "MPC:C3",
+      "kind": "COUNTERMODEL",
+      "statement": "Full endpoint-response equality does not entail equality of actual input-read occurrences.",
+      "scope": "Eager versus short-circuit OR implementations.",
+      "quantifier": "Existential counterexample to unrestricted response-to-intake inference.",
+      "status": "EXACT_COUNTERMODEL_PENDING_ADOPTION",
+      "all_premises": "Declared eager/lazy execution traces and same OR table.",
+      "proof_location": "RESEARCH_NOTE.md C3 / model.py / EXACT_RESULTS.json",
+      "counterexamples_and_limits": "Validated event instruments or additional sole-route premises can separate the pair.",
+      "thought_experiment_role": "Copy/switch fixes table and varies intake occurrence.",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "MPC:ENDPOINT_TENSOR",
+      "kind": "EMPIRICAL_SCOPE_CONSTRAINT",
+      "statement": "Perceived intensity/bias, discrimination precision, agency, ownership and report are separate endpoints; attention and body-state context can alter different coordinates.",
+      "scope": "Cited primary protocols only; no raw-data reanalysis or universal biology.",
+      "quantifier": "Source-bounded existential dissociations and protocol constraints.",
+      "status": "EMPIRICAL_CONTEXT_NOT_FOUNDATION",
+      "all_premises": "SOURCE_SCOPE.md and inspected source records.",
+      "proof_location": "RESEARCH_NOTE.md C5 / SOURCE_SCOPE.md",
+      "counterexamples_and_limits": "Does not identify a universal endpoint tensor or anatomical gate.",
+      "thought_experiment_role": "Passive goal-cue rival defeats motor-only reading of precision.",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "MPC:C6",
+      "kind": "CONDITIONAL_INTERPRETATION",
+      "statement": "An independently grounded actual consumer relation has an experience-internal structural counterpart under C1; no named endpoint or basal gate follows.",
+      "scope": "One actual same-instance token with complete declared signature and every application premise discharged.",
+      "quantifier": "Conditional universal application of C1 to admitted actual tokens.",
+      "status": "CONDITIONAL_APPLICATION_OPEN",
+      "all_premises": "Actual token, complete signature, actual consumer events, intervention fidelity and A:C1.",
+      "proof_location": "RESEARCH_NOTE.md C6",
+      "counterexamples_and_limits": "No actual token, H, agency, ownership, intensity, sensitivity or report mapping is supplied.",
+      "thought_experiment_role": "Ancestors/formation prevents a new consciousness threshold.",
+      "automatic_premise_truth": false
+    }
+  ],
+  "rules": [
+    {
+      "id": "MPC:R1",
+      "all_of": ["MPC:DOMAIN", "MPC:THREE_CORNER_OBSERVATION"],
+      "conclusion": "MPC:C1",
+      "type": "CONDITIONAL_DEDUCTION",
+      "same_instance_required": true,
+      "binding": "one frozen M/P domain, endpoint and context",
+      "proof_location": "RESEARCH_NOTE.md C1",
+      "alternative_route_semantics": "No disjunctive route; both premises are simultaneous.",
+      "joint_witness": "All 16 Boolean functions in model.py.",
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "MPC:R2",
+      "all_of": ["MPC:C1", "MPC:ENDPOINT_TENSOR"],
+      "conclusion": "MPC:C2",
+      "type": "CONDITIONAL_COROLLARY",
+      "same_instance_required": true,
+      "binding": "same intervention cells across k separately typed endpoints; no cross-endpoint bridge",
+      "proof_location": "RESEARCH_NOTE.md C2",
+      "alternative_route_semantics": "Endpoint tensor supplies typing, not independence; no-cross-endpoint restriction is explicit in C2 scope.",
+      "joint_witness": "k=1 through 6 in EXACT_RESULTS.json.",
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "MPC:R3",
+      "all_of": ["MPC:DOMAIN"],
+      "conclusion": "MPC:C3",
+      "type": "EXISTENTIAL_COUNTERMODEL",
+      "same_instance_required": false,
+      "binding": "two distinct implementations compared under one response table",
+      "proof_location": "RESEARCH_NOTE.md C3",
+      "alternative_route_semantics": "Countermodel blocks unrestricted inference; it does not deny stronger instrumented routes.",
+      "joint_witness": "Eager and short-circuit OR event traces in EXACT_RESULTS.json.",
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "MPC:R4",
+      "all_of": ["MPC:DOMAIN", "MPC:C3", "A:C1"],
+      "conclusion": "MPC:C6",
+      "type": "CONDITIONAL_INTERPRETATION",
+      "same_instance_required": true,
+      "binding": "one independently admitted actual token, complete signature and actual intake relation; evidence is not substituted for use",
+      "proof_location": "RESEARCH_NOTE.md C6",
+      "alternative_route_semantics": "No phenomenal endpoint is inferred; C1 is axiomatic and every actual-instance premise remains conjunctive.",
+      "joint_witness": "No actual witness acquired; rule remains disabled/application-open.",
+      "enabled_as_established_premise": false
+    }
+  ],
+  "context_links": [
+    {"id": "MPC:CTX1", "from": "MPC:C6", "to": "A:C1", "type": "AXIOM_STATUS_PRESERVED"},
+    {"id": "MPC:CTX2", "from": "MPC:C3", "to": "R205:C3", "type": "CONCRETE_APPLICATION_OF_USE_RESPONSE_LIMIT"},
+    {"id": "MPC:CTX3", "from": "MPC:ENDPOINT_TENSOR", "to": "R198:TYPED_TARGET_PRECONDITION", "type": "ENDPOINT_TYPING_CONTEXT"},
+    {"id": "MPC:CTX4", "from": "MPC:C1", "to": "SCU20261010:C8", "type": "SOURCE_PROTOCOL_FOLLOWUP"},
+    {"id": "MPC:CTX5", "from": "MPC:C6", "to": "D:UCT_INTERPRETATION", "type": "NO_CONSCIOUSNESS_OR_FEAR_INFERENCE"}
+  ],
+  "adoption_note": "Disabled candidate only. Context target IDs must be resolved against the completed graph plus disabled ledgers during audit; any absent alias will be corrected before save."
+}
+

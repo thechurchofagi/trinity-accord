@@ -1,0 +1,142 @@
+{
+  "active_and_passive_profile_011": {
+    "completions": [
+      "0101",
+      "0111"
+    ],
+    "interpretations": [
+      "P",
+      "M_OR_P"
+    ]
+  },
+  "active_only_profile_001": {
+    "completions": [
+      "0001",
+      "0011"
+    ],
+    "interpretations": [
+      "M_AND_P",
+      "M"
+    ]
+  },
+  "boolean_function_count": 16,
+  "cell_order": [
+    "00",
+    "01",
+    "10",
+    "11"
+  ],
+  "checks": {
+    "active_and_passive_leaves_P_vs_M_OR_P": true,
+    "active_only_leaves_M_vs_M_AND_P": true,
+    "all_three_corner_fibers_have_size_two": true,
+    "full_output_table_does_not_identify_read_occurrence": true,
+    "k_independent_endpoints_leave_2_power_k_completions": true,
+    "the_two_completions_differ_only_at_10": true
+  },
+  "completion_count_per_profile": [
+    2
+  ],
+  "fibers": {
+    "000": [
+      "0000",
+      "0010"
+    ],
+    "001": [
+      "0001",
+      "0011"
+    ],
+    "010": [
+      "0100",
+      "0110"
+    ],
+    "011": [
+      "0101",
+      "0111"
+    ],
+    "100": [
+      "1000",
+      "1010"
+    ],
+    "101": [
+      "1001",
+      "1011"
+    ],
+    "110": [
+      "1100",
+      "1110"
+    ],
+    "111": [
+      "1101",
+      "1111"
+    ]
+  },
+  "full_or_table_output_equivalent_read_countermodel": [
+    {
+      "cell_MP": "00",
+      "eager_reads": [
+        "M",
+        "P"
+      ],
+      "lazy_reads": [
+        "M",
+        "P"
+      ],
+      "output": 0,
+      "same_output_different_read_occurrence": false
+    },
+    {
+      "cell_MP": "01",
+      "eager_reads": [
+        "M",
+        "P"
+      ],
+      "lazy_reads": [
+        "M",
+        "P"
+      ],
+      "output": 1,
+      "same_output_different_read_occurrence": false
+    },
+    {
+      "cell_MP": "10",
+      "eager_reads": [
+        "M",
+        "P"
+      ],
+      "lazy_reads": [
+        "M"
+      ],
+      "output": 1,
+      "same_output_different_read_occurrence": true
+    },
+    {
+      "cell_MP": "11",
+      "eager_reads": [
+        "M",
+        "P"
+      ],
+      "lazy_reads": [
+        "M"
+      ],
+      "output": 1,
+      "same_output_different_read_occurrence": true
+    }
+  ],
+  "id": "MPC-RESULT-v0.1.0",
+  "independent_k_endpoint_completion_counts": {
+    "1": 2,
+    "2": 4,
+    "3": 8,
+    "4": 16,
+    "5": 32,
+    "6": 64
+  },
+  "missing_cell": "10",
+  "observed_cells": [
+    "00",
+    "01",
+    "11"
+  ],
+  "observed_profile_count": 8
+}

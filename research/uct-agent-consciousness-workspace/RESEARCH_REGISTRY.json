@@ -408,14 +408,27 @@
       "handoff": "records/SCU20261010_Source_Consumer_Protocols/HANDOFF_ZH.md",
       "manuscript": "records/SCU20261010_Source_Consumer_Protocols/Matched_Behavior_and_Source_Use_v1.0.0.md",
       "manuscript_status": "COMPLETE_SCOPED_WORKING_MANUSCRIPT_NOT_FORMALLY_PUBLISHED"
+    },
+    {
+      "research_id": "MPC20261010",
+      "result_version": "MPC-RESULT-v0.1.0",
+      "title": "Motor and Proprioceptive Consumers",
+      "source": "records/MPC20261010_Motor_Proprioceptive_Consumers/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "actual_application": "OPEN",
+      "publication_coverage_version": "UCT-PUB-v1.0.19",
+      "compatibility_audit": "records/MPC20261010_Motor_Proprioceptive_Consumers/MAP_COMPATIBILITY_AUDIT.json",
+      "handoff": "records/MPC20261010_Motor_Proprioceptive_Consumers/HANDOFF_ZH.md",
+      "manuscript_status": "HOLD_STANDALONE_COMPACT_FOLLOWUP_TO_SCU"
     }
   ],
   "preservation": "Exact previous registry remains preserved. The full research manuscript/module and saved per-item review decisions are in the version capsule; expanded artifacts are also in the offline downloadable archive.",
   "publication_coverage": {
     "entry": "PUBLICATION_COVERAGE.json",
-    "version": "UCT-PUB-v1.0.18",
+    "version": "UCT-PUB-v1.0.19",
     "base_census_version": "UCT-PUB-v1.0.0",
-    "update": "records/SCU20261010_Source_Consumer_Protocols/PUBLICATION_COVERAGE_UPDATE.json",
+    "update": "records/MPC20261010_Motor_Proprioceptive_Consumers/PUBLICATION_COVERAGE_UPDATE.json",
     "report": "records/PUB20261009_Publication_Coverage/PUBLICATION_COVERAGE_REPORT_ZH.md",
     "nondeductive": true
   },

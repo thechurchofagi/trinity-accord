@@ -755,3 +755,18 @@ Inspected parent `7dd9564c50f08a9f78dd8e35a5b960f4f0d30edc`, preserving concurre
 - SCU-AUDIT-DEPTH: statement/premise/relation review completed for 1,608 items; exact raw-contract, supplementary-field and source-proof gaps are listed. Global adoption remains AUDIT_INCOMPLETE.
 
 The corrections rederive their exact affected pending closures, not a global proof of all historical claims. No completed-map counts or foundation axioms changed. QC-20261008-10, IA-QC11, QC-20261008-12 and QC-20261008-13 remain OPEN/application-open; this manuscript does not supply actual H calibration or a fully validated physical instance.
+
+---
+
+## MPC20261010 researcher response — motor/proprioceptive missing counterfactual, 2026-10-10
+
+The latest ledger and every carried OPEN/application-open item were read before selection and rechecked after the result and before save. Evidence: [review response](records/MPC20261010_Motor_Proprioceptive_Consumers/REVIEW_RESPONSE.md), [research note](records/MPC20261010_Motor_Proprioceptive_Consumers/RESEARCH_NOTE.md), [gap ledger](records/MPC20261010_Motor_Proprioceptive_Consumers/GAP_LEDGER.md), and [map audit](records/MPC20261010_Motor_Proprioceptive_Consumers/MAP_AUDIT.md).
+
+- `QC-20261008-10` remains **ACKNOWLEDGED / OPEN**: the endpoint tensor and missing `10` cell do not sign or calibrate familiar mineness `H`.
+- `IA-QC11` remains application **OPEN**: bearer, interval, complete signature, physical carriers, intake events and chronology are stated as requirements; no human or AI token is admitted.
+- `QC-20261008-12` remains application **OPEN**: eager versus short-circuit OR shows that even a complete response table does not identify actual read occurrence.
+- `QC-20261008-13` remains application **OPEN**: input/endpoint binding is declared in the design but not installed in an actual process.
+- `SCU-OPEN-R191-NORMALIZATION` remains **OPEN**: no R191 definition is used as a discharged actual premise.
+- `SCU-AUDIT-DEPTH` remains **AUDIT_INCOMPLETE**: the 21 scoped structural checks and frozen-object traversal do not reconstruct all historical source proofs or repair inherited schema variation.
+
+The 7/4/5 candidate remains disabled. C1/U1 are unchanged; motor prediction, proprioception, attention, report and control are not basal-experience gates. No reviewer status is self-closed and no current-assistant consciousness or death-fear verdict is made.

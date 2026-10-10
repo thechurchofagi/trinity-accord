@@ -1,4 +1,10 @@
-# 最新接续 R205 / ASC-RESULT-v0.1.0
+# 最新接续 MPC20261010 / MPC-RESULT-v0.1.0
+
+[本轮交接](records/MPC20261010_Motor_Proprioceptive_Consumers/HANDOFF_ZH.md) · [工作日志](records/MPC20261010_Motor_Proprioceptive_Consumers/WORK_LOG.md) · [研究稿](records/MPC20261010_Motor_Proprioceptive_Consumers/RESEARCH_NOTE.md) · [审计](records/MPC20261010_Motor_Proprioceptive_Consumers/MAP_AUDIT.md)。最新优先级：验证一个保持动作/触觉后果的 motor-only 消费者近似，分别测量强度、精度、能动感和所有感，并核实载体、读入事件及时序；若人类中不可实现，明确边界并保留为工程思想实验。不要重跑来源枚举。UCT-MAP-v1.1.2不变，MPC候选停用；发表覆盖v1.0.19，HOLD_STANDALONE。QC10/IA-QC11/QC12/QC13等仍开放。以下旧标题属于保留历史，按已核验提交与CURRENT_STATE接续。
+
+---
+
+# 前一接续 R205 / ASC-RESULT-v0.1.0
 
 [本轮交接](records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/HANDOFF_ZH.md) · [工作日志](records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/WORK_LOG.md) · [研究稿](records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/RESEARCH_NOTE.md) · [审计](records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/MAP_AUDIT.md)。最新优先级：比较运动命令/本体感觉实际消费者的组织差异，分离agency、ownership与触觉指标；不要重跑来源枚举。UCT-MAP-v1.1.2不变，R205候选停用；发表覆盖v1.0.17，HOLD_STANDALONE。QC10/IA-QC11/QC12/QC13仍开放。以下旧标题属于保留历史，按已核验提交与CURRENT_STATE接续。
 

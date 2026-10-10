@@ -1,4 +1,10 @@
-# 最新接续 R205 / ASC-RESULT-v0.1.0
+# 最新接续 MPC20261010 / MPC-RESULT-v0.1.0
+
+[本轮交接](records/MPC20261010_Motor_Proprioceptive_Consumers/HANDOFF_ZH.md) · [候选图](records/MPC20261010_Motor_Proprioceptive_Consumers/MAP_EXTENSION.json) · [全图范围审计](records/MPC20261010_Motor_Proprioceptive_Consumers/MAP_AUDIT.md)。完成地图仍为 UCT-MAP-v1.1.2（913/424/261，10暂停，1608审查项）；MPC 7/4/5候选停用。三格消费者设计的缺失 `10` 定理和全表/读入反例均不晋升为实际安装或命名体验证据。覆盖v1.0.19；全部开放审查保留。
+
+---
+
+# 前一接续 R205 / ASC-RESULT-v0.1.0
 
 [本轮交接](records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/HANDOFF_ZH.md) · [工作日志](records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/WORK_LOG.md) · [研究稿](records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/RESEARCH_NOTE.md) · [审计](records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/MAP_AUDIT.md)。最新优先级：比较运动命令/本体感觉实际消费者的组织差异，分离agency、ownership与触觉指标；不要重跑来源枚举。UCT-MAP-v1.1.2不变，R205候选停用；发表覆盖v1.0.17，HOLD_STANDALONE。QC10/IA-QC11/QC12/QC13仍开放。以下旧标题属于保留历史，按已核验提交与CURRENT_STATE接续。
 

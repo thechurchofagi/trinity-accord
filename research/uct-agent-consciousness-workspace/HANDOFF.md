@@ -1,4 +1,10 @@
-# 最新接续 SCU20261010：已完成一篇英文理论方法论文
+# 最新接续 MPC20261010：运动命令—本体消费者的缺失反事实
+
+[中文交接](records/MPC20261010_Motor_Proprioceptive_Consumers/HANDOFF_ZH.md) · [英文研究稿](records/MPC20261010_Motor_Proprioceptive_Consumers/RESEARCH_NOTE.md) · [精确结果](records/MPC20261010_Motor_Proprioceptive_Consumers/EXACT_RESULTS.json) · [协议](records/MPC20261010_Motor_Proprioceptive_Consumers/PROTOCOL.md) · [地图审计](records/MPC20261010_Motor_Proprioceptive_Consumers/MAP_AUDIT.md)。三格 `00,01,11` 对每个二元端点恰留两个补全，差在缺失 `10`；对 k 个独立端点留 `2^k` 补全。补齐响应表仍不能识别实际读入（贪婪/短路 OR 反例）。完成图仍为 UCT-MAP-v1.1.2；MPC 7/4/5 候选停用；覆盖 UCT-PUB-v1.0.19，单篇 HOLD。下一步只检查一个物理可行的 `10` 近似及载体/事件/时序/分端点证据，找不到则明确不可实现边界。QC10/IA-QC11/QC12/QC13等继续开放。
+
+---
+
+# 前一接续 SCU20261010：已完成一篇英文理论方法论文
 
 [完整论文 PDF](records/SCU20261010_Source_Consumer_Protocols/Matched_Behavior_and_Source_Use_v1.0.0.pdf) · [英文源稿](records/SCU20261010_Source_Consumer_Protocols/Matched_Behavior_and_Source_Use_v1.0.0.md) · [中文交接](records/SCU20261010_Source_Consumer_Protocols/HANDOFF_ZH.md) · [工作日志](records/SCU20261010_Source_Consumer_Protocols/WORK_LOG.md) · [审计与精确未读范围](records/SCU20261010_Source_Consumer_Protocols/MAP_AUDIT.md) · [成稿决定](records/SCU20261010_Source_Consumer_Protocols/MANUSCRIPT_DECISION.json)。
 

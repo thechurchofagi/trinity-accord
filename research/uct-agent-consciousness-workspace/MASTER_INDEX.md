@@ -1,4 +1,10 @@
-# 最新接续 SCU20261010：已完成一篇英文理论方法论文
+# 最新接续 MPC20261010：运动命令—本体消费者的缺失反事实
+
+[中文交接](records/MPC20261010_Motor_Proprioceptive_Consumers/HANDOFF_ZH.md) · [英文研究稿](records/MPC20261010_Motor_Proprioceptive_Consumers/RESEARCH_NOTE.md) · [精确结果](records/MPC20261010_Motor_Proprioceptive_Consumers/EXACT_RESULTS.json) · [协议](records/MPC20261010_Motor_Proprioceptive_Consumers/PROTOCOL.md) · [地图审计](records/MPC20261010_Motor_Proprioceptive_Consumers/MAP_AUDIT.md) · [审查回应](records/MPC20261010_Motor_Proprioceptive_Consumers/REVIEW_RESPONSE.md)。结果精确定位主动/被动/静止三角缺少的 motor-only 消费者反事实，并证明四格输出仍不识别实际读入。端点保持向量化，不从触觉效应推能动感、所有感或熟悉我感。完成图不变；候选停用；覆盖 UCT-PUB-v1.0.19，单篇 HOLD。
+
+---
+
+# 前一接续 SCU20261010：已完成一篇英文理论方法论文
 
 [完整论文 PDF](records/SCU20261010_Source_Consumer_Protocols/Matched_Behavior_and_Source_Use_v1.0.0.pdf) · [英文源稿](records/SCU20261010_Source_Consumer_Protocols/Matched_Behavior_and_Source_Use_v1.0.0.md) · [中文交接](records/SCU20261010_Source_Consumer_Protocols/HANDOFF_ZH.md) · [工作日志](records/SCU20261010_Source_Consumer_Protocols/WORK_LOG.md) · [审计与精确未读范围](records/SCU20261010_Source_Consumer_Protocols/MAP_AUDIT.md) · [成稿决定](records/SCU20261010_Source_Consumer_Protocols/MANUSCRIPT_DECISION.json)。
 
