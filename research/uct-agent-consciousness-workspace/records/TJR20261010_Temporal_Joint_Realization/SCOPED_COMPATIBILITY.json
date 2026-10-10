@@ -1,0 +1,651 @@
+{
+  "baseline": "UCT-MAP-v1.1.2",
+  "scope": "LOCAL_COMPATIBILITY_NOT_FULL_ORIGINAL_PROOF_REVIEW",
+  "items": [
+    {
+      "id": "A:TOKEN_CRITERIA",
+      "rationale": "Models are abstract; actual process admission is not asserted.",
+      "source_record": {
+        "id": "A:TOKEN_CRITERIA",
+        "kind": "ONTO_DEF",
+        "label": "Actual-token criteria",
+        "source": "A Appendix C",
+        "status": "DECLARED_CONTEXT_OR_METHOD",
+        "statement": "For a specified physical subhistory P over interval I, admission to P_actual requires actual nonempty event/state support, fidelity to induced physical relations, traceable causal continuity, representation of materially relevant boundary influences, traceable lineage, and invariance under invertible descriptions. These are domain requirements; no effective universally sufficient physical admission algorithm is supplied.",
+        "scope": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+        "formal_contract_R153": {
+          "object_domain": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+          "quantifier_convention": "The displayed statement and each separate premise route are read together. Model parameters are fixed throughout one instance; universal state/action clauses apply only to that instance. Existential witnesses and alternative routes are not universally asserted.",
+          "source_anchor": {
+            "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md",
+            "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+            "original_locator": "A Appendix C"
+          },
+          "premise_routes": [],
+          "root_premise_routes": [
+            [
+              "A:TOKEN_CRITERIA"
+            ]
+          ],
+          "proof_or_evidence": [
+            {
+              "role": "ROOT_DECLARATION_OR_RECORDED_EVIDENCE",
+              "status": "DECLARED_CONTEXT_OR_METHOD",
+              "note": "No graph derivation. Definition/assumption/model/evidence status is retained; a terminal dependency is not automatically a proven truth."
+            }
+          ],
+          "open_obligations": [
+            "F153-09",
+            "F153-15",
+            "F153-16"
+          ],
+          "finite_boundary": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+          "purpose": "Trace this precise target and its dependencies without promoting mathematical representation to actual constitution or experience measurement.",
+          "machine_formalized": false
+        },
+        "origin_module": "BASE",
+        "source_record_sha256": "fbef2c8018b8218b9139bf1c5b4f045f48374330277b40239deedd03dfc33354",
+        "origin_file": "UCT_FORMAL_GRAPH.json",
+        "map_version": "UCT-MAP-v1.0.0",
+        "audit_id": "FA20261008"
+      }
+    },
+    {
+      "id": "A:P3",
+      "rationale": "No persisting local experience is deleted by macro-level discussion.",
+      "source_record": {
+        "id": "A:P3",
+        "kind": "ONTO_RULE",
+        "label": "Persistence / cessation / embedding",
+        "source": "A Appendix C",
+        "status": "DECLARED_CONTEXT_OR_METHOD",
+        "statement": "For every P,Q and interval I in the declared physical comparison, Persist(P,I) AND Embed(P,Q,I) implies that P remains in P_actual throughout I. Persist requires continuing constitutive support/dynamics/boundary and lineage; embedding alone neither establishes persistence nor establishes cessation.",
+        "scope": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+        "formal_contract_R153": {
+          "object_domain": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+          "quantifier_convention": "The displayed statement and each separate premise route are read together. Model parameters are fixed throughout one instance; universal state/action clauses apply only to that instance. Existential witnesses and alternative routes are not universally asserted.",
+          "source_anchor": {
+            "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md",
+            "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+            "original_locator": "A Appendix C"
+          },
+          "premise_routes": [],
+          "root_premise_routes": [
+            [
+              "A:P3"
+            ]
+          ],
+          "proof_or_evidence": [
+            {
+              "role": "ROOT_DECLARATION_OR_RECORDED_EVIDENCE",
+              "status": "DECLARED_CONTEXT_OR_METHOD",
+              "note": "No graph derivation. Definition/assumption/model/evidence status is retained; a terminal dependency is not automatically a proven truth."
+            }
+          ],
+          "open_obligations": [
+            "F153-15",
+            "F153-16"
+          ],
+          "finite_boundary": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+          "purpose": "Trace this precise target and its dependencies without promoting mathematical representation to actual constitution or experience measurement.",
+          "machine_formalized": false
+        },
+        "origin_module": "BASE",
+        "source_record_sha256": "c1a13239f2ae17d31f28ed0be7b673aa8a2d23fbcc01497c1f153b5ea2a0986f",
+        "origin_file": "UCT_FORMAL_GRAPH.json",
+        "map_version": "UCT-MAP-v1.0.0",
+        "audit_id": "FA20261008"
+      }
+    },
+    {
+      "id": "A:P6",
+      "rationale": "Token identity, complete type and lineage are not identified.",
+      "source_record": {
+        "id": "A:P6",
+        "kind": "ONTO_DEF",
+        "label": "Token / type / lineage",
+        "source": "A Appendix C",
+        "status": "DECLARED_CONTEXT_OR_METHOD",
+        "statement": "Numerical token equality P=Q, complete-type equivalence D(P) isomorphic to D(Q), and directed causal-lineage relation P leads_to Q are distinct relations. Type equivalence need not imply token equality; lineage may branch or merge and is not an equivalence relation or a subject-count function.",
+        "scope": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+        "formal_contract_R153": {
+          "object_domain": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+          "quantifier_convention": "The displayed statement and each separate premise route are read together. Model parameters are fixed throughout one instance; universal state/action clauses apply only to that instance. Existential witnesses and alternative routes are not universally asserted.",
+          "source_anchor": {
+            "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md",
+            "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+            "original_locator": "A Appendix C"
+          },
+          "premise_routes": [],
+          "root_premise_routes": [
+            [
+              "A:P6"
+            ]
+          ],
+          "proof_or_evidence": [
+            {
+              "role": "ROOT_DECLARATION_OR_RECORDED_EVIDENCE",
+              "status": "DECLARED_CONTEXT_OR_METHOD",
+              "note": "No graph derivation. Definition/assumption/model/evidence status is retained; a terminal dependency is not automatically a proven truth."
+            }
+          ],
+          "open_obligations": [
+            "F153-15",
+            "F153-16"
+          ],
+          "finite_boundary": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+          "purpose": "Trace this precise target and its dependencies without promoting mathematical representation to actual constitution or experience measurement.",
+          "machine_formalized": false
+        },
+        "origin_module": "BASE",
+        "source_record_sha256": "7f3916ebf11c08e7bb6a2d65a1197f722aff89f3c350b8be575a28cc1ee6d726",
+        "origin_file": "UCT_FORMAL_GRAPH.json",
+        "map_version": "UCT-MAP-v1.0.0",
+        "audit_id": "FA20261008"
+      }
+    },
+    {
+      "id": "A:K",
+      "rationale": "Ports, time, boundary and operations must be fixed for any ontic transfer.",
+      "source_record": {
+        "id": "A:K",
+        "kind": "DEF",
+        "label": "Common structural signature K",
+        "source": "A Appendix C",
+        "status": "DECLARED_CONTEXT_OR_METHOD",
+        "statement": "Fix one many-sorted comparison signature K, including distinguished constitutive carrier, current-state pointing, time orientation, state/update/port/readout and constituent relations wherever claimed. Isomorphisms are sortwise bijections preserving and reflecting all K relations and commuting with its operations; only declared port symmetries are allowed. Physical and experiential structures use this SAME K.",
+        "scope": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+        "formal_contract_R153": {
+          "object_domain": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+          "quantifier_convention": "The displayed statement and each separate premise route are read together. Model parameters are fixed throughout one instance; universal state/action clauses apply only to that instance. Existential witnesses and alternative routes are not universally asserted.",
+          "source_anchor": {
+            "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md",
+            "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+            "original_locator": "A Appendix C"
+          },
+          "premise_routes": [],
+          "root_premise_routes": [
+            [
+              "A:K"
+            ]
+          ],
+          "proof_or_evidence": [
+            {
+              "role": "ROOT_DECLARATION_OR_RECORDED_EVIDENCE",
+              "status": "DECLARED_CONTEXT_OR_METHOD",
+              "note": "No graph derivation. Definition/assumption/model/evidence status is retained; a terminal dependency is not automatically a proven truth."
+            }
+          ],
+          "open_obligations": [
+            "F153-15",
+            "F153-16"
+          ],
+          "finite_boundary": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+          "purpose": "Trace this precise target and its dependencies without promoting mathematical representation to actual constitution or experience measurement.",
+          "machine_formalized": false
+        },
+        "origin_module": "BASE",
+        "source_record_sha256": "2730a3c7ec9be64f3a5b46aa7e92e0d74a2cd51ef19c00a984a47e7d79071e5d",
+        "origin_file": "UCT_FORMAL_GRAPH.json",
+        "map_version": "UCT-MAP-v1.0.0",
+        "audit_id": "FA20261008"
+      }
+    },
+    {
+      "id": "A:C1",
+      "rationale": "Retained as a stipulated identity axiom, not empirically proved.",
+      "source_record": {
+        "id": "A:C1",
+        "kind": "AX_C",
+        "label": "Structural-Experiential Identity",
+        "source": "A §4",
+        "status": "FIXED_AXIOM",
+        "statement": "For every P in P_actual in the fixed signature K, there exist an experiential K-structure Phi_K(P) and a sort-preserving isomorphism h_P:D_ontic_K(P)->Phi_K(P). This is the stipulated tokenwise structural-experiential identity axiom, including its experiential interpretation and existential commitment; it is not an empirically derived bijection or a scalar measure.",
+        "scope": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+        "formal_contract_R153": {
+          "object_domain": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+          "quantifier_convention": "The displayed statement and each separate premise route are read together. Model parameters are fixed throughout one instance; universal state/action clauses apply only to that instance. Existential witnesses and alternative routes are not universally asserted.",
+          "source_anchor": {
+            "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md",
+            "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+            "original_locator": "A §4"
+          },
+          "premise_routes": [],
+          "root_premise_routes": [
+            [
+              "A:C1"
+            ]
+          ],
+          "proof_or_evidence": [
+            {
+              "role": "ROOT_DECLARATION_OR_RECORDED_EVIDENCE",
+              "status": "FIXED_AXIOM",
+              "note": "No graph derivation. Definition/assumption/model/evidence status is retained; a terminal dependency is not automatically a proven truth."
+            }
+          ],
+          "open_obligations": [
+            "F153-15",
+            "F153-16",
+            "F153-17"
+          ],
+          "finite_boundary": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+          "purpose": "Trace this precise target and its dependencies without promoting mathematical representation to actual constitution or experience measurement.",
+          "machine_formalized": false
+        },
+        "origin_module": "BASE",
+        "source_record_sha256": "2d0c196b8b189b985929d85eec4009988e113142b90f5bbbf80d2925043b225e",
+        "origin_file": "UCT_FORMAL_GRAPH.json",
+        "map_version": "UCT-MAP-v1.0.0",
+        "audit_id": "FA20261008"
+      }
+    },
+    {
+      "id": "A:C1_OI",
+      "rationale": "Finite endpoint equality is not complete-type equivalence.",
+      "source_record": {
+        "id": "A:C1_OI",
+        "kind": "LEMMA",
+        "label": "Pairwise type equivalence",
+        "source": "A §4",
+        "status": "MANUAL_CONDITIONAL_PASS",
+        "statement": "D(P)≅D(Q) iff Φ(P)≅Φ(Q) in the same complete signature",
+        "scope": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+        "formal_contract_R153": {
+          "object_domain": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+          "quantifier_convention": "The displayed statement and each separate premise route are read together. Model parameters are fixed throughout one instance; universal state/action clauses apply only to that instance. Existential witnesses and alternative routes are not universally asserted.",
+          "source_anchor": {
+            "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md",
+            "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+            "original_locator": "A §4"
+          },
+          "premise_routes": [
+            {
+              "rule": "a01",
+              "all_of": [
+                "A:C1"
+              ]
+            }
+          ],
+          "root_premise_routes": [
+            [
+              "A:C1"
+            ]
+          ],
+          "proof_or_evidence": [
+            {
+              "rule": "a01",
+              "argument": "Compose tokenwise isomorphisms and their inverses in either direction.",
+              "review": "R153_EXPANDED_ARGUMENT_AND_BOUNDARY_REVIEW"
+            }
+          ],
+          "open_obligations": [
+            "F153-15",
+            "F153-16",
+            "F153-17"
+          ],
+          "finite_boundary": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+          "purpose": "Trace this precise target and its dependencies without promoting mathematical representation to actual constitution or experience measurement.",
+          "machine_formalized": false
+        },
+        "origin_module": "BASE",
+        "source_record_sha256": "c26aa476382a5eff045c58f1b7fa1059f67fc2e1ea072b11ae8c3304d2f7c0e6",
+        "origin_file": "UCT_FORMAL_GRAPH.json",
+        "map_version": "UCT-MAP-v1.0.0",
+        "audit_id": "FA20261008"
+      }
+    },
+    {
+      "id": "A:U1",
+      "rationale": "No memory, concurrency or correctness gate for basic experience.",
+      "source_record": {
+        "id": "A:U1",
+        "kind": "THM",
+        "label": "Universal Nonempty Experience",
+        "source": "A §4",
+        "status": "MANUAL_CONDITIONAL_PASS",
+        "statement": "Every actual token has a nonempty distinguished experiential carrier",
+        "scope": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+        "formal_contract_R153": {
+          "object_domain": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+          "quantifier_convention": "The displayed statement and each separate premise route are read together. Model parameters are fixed throughout one instance; universal state/action clauses apply only to that instance. Existential witnesses and alternative routes are not universally asserted.",
+          "source_anchor": {
+            "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md",
+            "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+            "original_locator": "A §4"
+          },
+          "premise_routes": [
+            {
+              "rule": "a03",
+              "all_of": [
+                "A:C1",
+                "A:NONEMPTY_CARRIER"
+              ]
+            }
+          ],
+          "root_premise_routes": [
+            [
+              "A:ACTUAL_TOKEN",
+              "A:C1"
+            ]
+          ],
+          "proof_or_evidence": [
+            {
+              "rule": "a03",
+              "argument": "Sort-preserving bijection preserves nonemptiness.",
+              "review": "R153_EXPANDED_ARGUMENT_AND_BOUNDARY_REVIEW"
+            }
+          ],
+          "open_obligations": [
+            "F153-09",
+            "F153-15",
+            "F153-16",
+            "F153-17"
+          ],
+          "finite_boundary": "Typed actual occurrences at specified intervals/boundaries and common complete K for ontic claims; finite models/views and externally declared bridge targets remain separate sorts. Pure symmetry/topology/quotient claims use their explicit abstract domains, not an unstated actual realization.",
+          "purpose": "Trace this precise target and its dependencies without promoting mathematical representation to actual constitution or experience measurement.",
+          "machine_formalized": false
+        },
+        "origin_module": "BASE",
+        "source_record_sha256": "2f544cb9ea125a2723f30e99d7a59dcac5b87acd9b554aacdfbc8417ae207257",
+        "origin_file": "UCT_FORMAL_GRAPH.json",
+        "map_version": "UCT-MAP-v1.0.0",
+        "audit_id": "FA20261008"
+      }
+    },
+    {
+      "id": "C:P2_COORD",
+      "rationale": "The residual-function proof applies existing fiber factorization.",
+      "source_record": {
+        "id": "C:P2_COORD",
+        "kind": "CLAIM",
+        "label": "Coordinate identification iff constancy on fibers",
+        "source": "C §5.2",
+        "status": "MANUAL_CONDITIONAL_PASS",
+        "statement": "C factors through J iff J(s)=J(t) implies C(s)=C(t)",
+        "scope": "One fixed realized complete-type set and capability contract for type claims; separately specified finite probability/selection/decision models or local smooth charts for mathematical claims. Parameters and laws cannot migrate between these submodels.",
+        "formal_contract_R153": {
+          "object_domain": "One fixed realized complete-type set and capability contract for type claims; separately specified finite probability/selection/decision models or local smooth charts for mathematical claims. Parameters and laws cannot migrate between these submodels.",
+          "quantifier_convention": "The displayed statement and each separate premise route are read together. Model parameters are fixed throughout one instance; universal state/action clauses apply only to that instance. Existential witnesses and alternative routes are not universally asserted.",
+          "source_anchor": {
+            "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/C_UCT_III_v1_0.md",
+            "sha256": "2721672485b055c26ec83a64d36fd5713e349cabe0494edd52b626aa7b9903e2",
+            "original_locator": "C §5.2"
+          },
+          "premise_routes": [
+            {
+              "rule": "c02",
+              "all_of": [
+                "C:SET_MAPS"
+              ]
+            }
+          ],
+          "root_premise_routes": [
+            [
+              "C:SET_MAPS"
+            ]
+          ],
+          "proof_or_evidence": [
+            {
+              "rule": "c02",
+              "argument": "Define recovered value on each fiber; it is representative-independent exactly under the stated condition.",
+              "review": "R153_EXPANDED_ARGUMENT_AND_BOUNDARY_REVIEW"
+            }
+          ],
+          "open_obligations": [
+            "F153-15",
+            "F153-16"
+          ],
+          "finite_boundary": "One fixed realized complete-type set and capability contract for type claims; separately specified finite probability/selection/decision models or local smooth charts for mathematical claims. Parameters and laws cannot migrate between these submodels.",
+          "purpose": "Trace this precise target and its dependencies without promoting mathematical representation to actual constitution or experience measurement.",
+          "machine_formalized": false
+        },
+        "origin_module": "BASE",
+        "source_record_sha256": "a17aad253b75ea064060a5afe99b0683f6b78a963c9cbce656b94e52d9edb34c",
+        "origin_file": "UCT_FORMAL_GRAPH.json",
+        "map_version": "UCT-MAP-v1.0.0",
+        "audit_id": "FA20261008"
+      }
+    },
+    {
+      "id": "TA17:QUOTIENT",
+      "rationale": "Task-relative equivalence need not preserve other consumers.",
+      "source_record": {
+        "id": "TA17:QUOTIENT",
+        "kind": "CONDITIONAL_RESULT",
+        "label": "Task-relative endogenous quotient and representation invariance",
+        "statement": "Histories equivalent under every declared future intervention/output law define a quotient. Bijective recoding transporting those laws induces a quotient bijection; behaviorally null nuisance dimensions collapse. No noninjective abstraction preserves every conceivable consumer.",
+        "domain": "For the last clause the consumer class must contain a discriminator for each collapsed pair.",
+        "scope": "For the last clause the consumer class must contain a discriminator for each collapsed pair.",
+        "source": "records/R148_Publication_Census_20261007/sources/TA17_v1_0.md §§4.2,5.3–5.5; Proposition 12",
+        "source_lineage": "records/R148_Publication_Census_20261007/sources/TA17_v1_0.md §§4.2,5.3–5.5; Proposition 12",
+        "status": "MANUAL_CONDITIONAL_PASS_PUBLISHED_RESULT",
+        "proof": "Relabeling preserves equality of all declared response laws, hence classes correspond. The nuisance premise makes all same-Z histories equivalent. A consumer with different rewards for a collapsed pair cannot be evaluated from their shared code.",
+        "counterexamples_and_limits": "Does not identify complete physical organization. Intervention-limited learning nonidentification needs two admissible full-model completions with identical observed laws and different unobserved query, not just the word unobserved.",
+        "formal_contract_R153": {
+          "object_domain": "Finite interventional variables with H(U)>0; internal attribution, functional quotient, inheritance, successor-set law and motivational stake are different objects. Transported recodings preserve experimental semantics; marginal posterior data are not a joint set law.",
+          "quantifier_convention": "The displayed statement and each separate premise route are read together. Model parameters are fixed throughout one instance; universal state/action clauses apply only to that instance. Existential witnesses and alternative routes are not universally asserted.",
+          "source_anchor": {
+            "path": "records/R148_Publication_Census_20261007/sources/TA17_v1_0.md",
+            "sha256": "bec4944db161db725648a18962b8a6c069aacf7512a259483f9d81e646e36a78",
+            "original_locator": "records/R148_Publication_Census_20261007/sources/TA17_v1_0.md §§4.2,5.3–5.5; Proposition 12"
+          },
+          "premise_routes": [
+            {
+              "rule": "r149_ta17_quotient",
+              "all_of": [
+                "TA17:FUNCTIONAL_CONTRACT"
+              ]
+            }
+          ],
+          "root_premise_routes": [
+            [
+              "TA17:FUNCTIONAL_CONTRACT"
+            ]
+          ],
+          "proof_or_evidence": [
+            {
+              "rule": "r149_ta17_quotient",
+              "argument": "Relabeling preserves equality of all declared response laws, hence classes correspond. The nuisance premise makes all same-Z histories equivalent. A consumer with different rewards for a collapsed pair cannot be evaluated from their shared code.",
+              "review": "INHERITED_ARGUMENT_WITH_R153_DEPENDENCY_AND_CONTRACT_CHECK"
+            }
+          ],
+          "open_obligations": [
+            "F153-15",
+            "F153-16"
+          ],
+          "finite_boundary": "Finite interventional variables with H(U)>0; internal attribution, functional quotient, inheritance, successor-set law and motivational stake are different objects. Transported recodings preserve experimental semantics; marginal posterior data are not a joint set law.",
+          "purpose": "Trace this precise target and its dependencies without promoting mathematical representation to actual constitution or experience measurement.",
+          "machine_formalized": false
+        },
+        "origin_module": "BASE",
+        "source_record_sha256": "c1039c1258ddfc1c7497916326cda1c8a9a78107dda9e46c5a13c0ca3a60bbed",
+        "origin_file": "UCT_FORMAL_GRAPH.json",
+        "map_version": "UCT-MAP-v1.0.0",
+        "audit_id": "FA20261008"
+      }
+    },
+    {
+      "id": "R173:RETENTIVE_BINDING_RELATION",
+      "rationale": "General retention example does not establish the grounded frame/history contract.",
+      "source_record": {
+        "id": "R173:RETENTIVE_BINDING_RELATION",
+        "kind": "DECLARED_HISTORY_INDEXED_ACTUAL_RELATION",
+        "label": "Retentive Same-Lineage Frame Binding",
+        "statement": "RetBind holds only when an earlier same-lineage frame occurrence has an actual continued trace that is executed by a present frame consumer, with grounded parameters and temporal order.",
+        "domain": "One fixed admitted P, present I0, declared earlier physical history-window token H0, complete K/D/Phi/h, body candidate b, representation k and action a unless stated abstract-only.",
+        "scope": "History-sensitive actual relation; idle logs, copied values and external archives do not suffice.",
+        "source": "records/R173_Familiar_Mineness_and_Retentive_History_20261008/Familiar_Mineness_Retentive_History_v0_1.md",
+        "source_lineage": "A §§8.11–8.14/14.7; R150; R156; R157; R159; effective R172 QC-06/07 overlay.",
+        "status": "DECLARED_RELATION_NOT_EMPIRICALLY_INSTANTIATED",
+        "proof": "Explicit existential predicate in note §3.3.",
+        "counterexamples_and_limits": "Trace identity, tolerance, current use and K-grounding require independent evidence.",
+        "formal_contract_R173": {
+          "object_domain": "Actual bearer/interval/history occurrences and separately typed selected targets; abstract finite witnesses are not actual installations.",
+          "quantifiers": "All positive premises share one binding; alternative histories and target assignments are compared, not conjoined.",
+          "bearer_time_signature": "P/I0/H0/K/D/Phi/h and all physical parameters fixed per application.",
+          "source_anchor": {
+            "path": "records/R173_Familiar_Mineness_and_Retentive_History_20261008/Familiar_Mineness_Retentive_History_v0_1.md",
+            "sha256": "20325c5a191ddd0be04ebac3c3e9de2c37fb1134488f07015cff080620f864fa"
+          },
+          "purpose": "Separate present action, agency, actual retentive history and familiar-mineness interpretation.",
+          "open_obligations": [
+            "R173-G2",
+            "R173-G3"
+          ],
+          "machine_formalized": false,
+          "premise_routes": []
+        },
+        "origin_module": "BASE",
+        "source_record_sha256": "666cef0eb8aa5c3d345b558599cd2ea8c4dc37a7ad66d0f0eeff766079ea611f",
+        "origin_file": "UCT_FORMAL_GRAPH.json",
+        "map_version": "UCT-MAP-v1.0.0",
+        "audit_id": "FA20261008"
+      }
+    },
+    {
+      "id": "IE:QUERY_SUFFICIENCY",
+      "rationale": "Minimum residual-code states specialize joint-query sufficiency.",
+      "source_record": {
+        "id": "IE:QUERY_SUFFICIENCY",
+        "kind": "CLASSICAL_APPLICATION",
+        "statement": "Perfect decoder exists iff each e-fiber has a constant joint answer vector T; minimum encoder alphabet is |im T|.",
+        "scope": "Under IE:QUERY_SPEC; unconstrained decoder table. Does not guarantee actual installation.",
+        "quantifiers": "See explicit general or finite statement in RESEARCH_NOTE.md section 4.2",
+        "source": {
+          "path": "RESEARCH_NOTE.md",
+          "section": "4.2"
+        },
+        "proof_location": "RESEARCH_NOTE.md section 4.2",
+        "status": "PENDING_MAP_FULL_REVIEW",
+        "math_status": "DEFINITION_OR_CONDITIONAL_ARGUMENT_CHECKED_LOCALLY",
+        "novelty": "INHERITED_MATH_NEW_APPLICATION",
+        "caveats": [
+          "No new basal gate",
+          "No deletion of persisting local experience",
+          "No named-phenomenal variable or subject count computed",
+          "Full-map semantic audit unfinished"
+        ],
+        "origin_module": "IE20261008",
+        "source_record_sha256": "8725283143362b269c5e2be4a923d59d0795f0754099c32916cb9e1e6660d683",
+        "origin_file": "/mnt/data/preserved_originals/UCT_Intelligence_Experience_20261008/MAP_EXTENSION_PENDING.json",
+        "map_version": "UCT-MAP-v1.0.0",
+        "audit_id": "FA20261008"
+      }
+    },
+    {
+      "id": "OL20261009:C1_APPLICATION",
+      "rationale": "Any nonisomorphism transfer still requires PHYSICAL_REDUCT, not code-level difference alone.",
+      "source_record": {
+        "id": "OL20261009:C1_APPLICATION",
+        "kind": "CONDITIONAL_UCT_APPLICATION",
+        "statement": "If PHYSICAL_REDUCT is independently discharged for two actual tokens, their complete K-isomorphisms must preserve grounded local-write structures. Nonisomorphism of those reducts excludes full isomorphism; inherited A:C1_OI then implies distinct COMPLETE phenomenal structural types, not named qualia or scalar intensity.",
+        "scope": "Two separately admitted actual process tokens, common complete K, same comparison scale and physically grounded reduct.",
+        "quantifiers": "For one complete jointly instantiated comparison of the stated state, ports, future inputs, horizon and observation metric; no cross-model premise splicing.",
+        "status": "REVIEWED_CONDITIONAL_OR_DECLARED",
+        "review_status": "AUTHOR_COMPATIBILITY_REVIEW_WITH_LIMITS",
+        "proof_or_definition": "RESEARCH_NOTE.md",
+        "limits": "C1 truth not independently proved, actual bearer/ports and named phenomenal quality still OPEN.",
+        "actual_premises_discharged": false,
+        "source_research_id": "OL20261009"
+      }
+    },
+    {
+      "id": "UI20261009:FUTURE_QUOTIENT",
+      "rationale": "Endpoint relation is weaker than equality of every admitted future word.",
+      "source_record": {
+        "id": "UI20261009:FUTURE_QUOTIENT",
+        "kind": "CONDITIONAL_THEOREM",
+        "statement": "On FUTURE_DOMAIN, future-readout equality is the coarsest update-stable refinement of current-readout equality. Every admitted F_u descends to S/~; for admitted A,B, their quotient maps commute iff no common future word distinguishes the two orders from any initial state.",
+        "scope": "Finite fixed sufficient state/clock, fixed total update operations and one fixed endpoint readout, same initial preparation and two legal orders; no direct order-label leak.",
+        "quantifiers": "Exactly the finite domains, preparations, operations, noises and observer class stated here; all premises share the same instance.",
+        "proof_locator": "RESEARCH_NOTE.md section 6",
+        "limits": "A standard behavioral quotient, not a subject selector.",
+        "research_status": "CONDITIONAL_MATHEMATICS_OR_EXPLICIT_PREMISE",
+        "map_status": "PENDING_MAP",
+        "actual_physical_application": "NOT_ESTABLISHED",
+        "source_provenance": {
+          "module": "UI20261009",
+          "source_file": "/workspace/scratch/328b6dbb55c2/effective_v111/pending_UI/MAP_EXTENSION.json",
+          "source_file_sha256": "9660da2f8e3bee14e1ebd2804fbdf2b2fced019ed1053125d3a4898ae0f5b628",
+          "source_record_sha256": "7157e4a2d022fc73892cc175805e4cb108a9ac18807b0fdcca55220e288d2105",
+          "source_record_hash_scheme": "SHA256 of UTF-8 json.dumps(record,sort_keys=True,ensure_ascii=False,separators=(comma,colon)); normalized records contain no self-hash.",
+          "source_record": {
+            "id": "UI20261009:FUTURE_QUOTIENT",
+            "kind": "CONDITIONAL_THEOREM",
+            "statement": "~ is the coarsest update-stable refinement of current-readout equality; A,B commute on S/~ iff no shared continuation distinguishes AB from BA on any state.",
+            "scope": "Finite fixed sufficient state/clock, fixed total update operations and one fixed endpoint readout, same initial preparation and two legal orders; no direct order-label leak.",
+            "quantifiers": "Exactly the finite domains, preparations, operations, noises and observer class stated here; all premises share the same instance.",
+            "proof_locator": "RESEARCH_NOTE.md section 6",
+            "limits": "A standard behavioral quotient, not a subject selector.",
+            "research_status": "CONDITIONAL_MATHEMATICS_OR_EXPLICIT_PREMISE",
+            "map_status": "PENDING_MAP",
+            "actual_physical_application": "NOT_ESTABLISHED"
+          },
+          "source_inherited_defaults": {},
+          "source_status": "PENDING_MAP",
+          "source_note_path": "/workspace/scratch/328b6dbb55c2/effective_v111/pending_UI/RESEARCH_NOTE.md",
+          "source_note_sha256": "dfc1d1ea5a798427a2f0d0c016f229e6c5a20645ded661228df82e32b5c18627"
+        },
+        "declaration_role": "CONDITIONAL_THEOREM_SCHEMA",
+        "conditional_declaration_available": true,
+        "mathematical_registry_availability": true,
+        "registry_status": "REVIEWED_CONDITIONAL_DECLARATION_ONLY",
+        "enabled_as_established_premise": false,
+        "enabled_as_established_premises": false,
+        "automatic_premise_truth": false,
+        "node_presence_is_premise_truth": false,
+        "actual_application_status": "OPEN",
+        "phenomenal_application_status": "OPEN",
+        "scientific_promotion": false,
+        "same_instance_required": true,
+        "source_review_rationale": "Prefixing an allowed action preserves future equality, so each allowed action descends and the coarsest stable refinement proof is sound. The A/B commutation iff clause requires A,B among those allowed actions; no stochastic-bisimulation extension follows.",
+        "proof_review_rationale": "With A,B now explicitly in the finite action alphabet, prefixing an admitted action preserves future equality and all named actions descend. The coarsest stable-refinement and quotient-commutation iff argument is valid in this deterministic selected-view domain.",
+        "normalization_contract_updates_applied": [
+          "GLOBAL-C1",
+          "GLOBAL-C2",
+          "UI-C2"
+        ],
+        "originality_status": "INHERITED_CONDITIONAL_APPLICATION_OR_NEW_APPLICATION; PRIORITY_UNVERIFIED",
+        "formal_contract": {
+          "declaration_role": "CONDITIONAL_THEOREM_SCHEMA",
+          "complete_inline_domain": {
+            "deterministic_future_readout": {
+              "domain": "Finite nonempty S and finite alphabet U of deterministic total maps F_u:S->S, with fixed readout r:S->Y.",
+              "words": "Every finite common action word w in U*, including the empty word, is allowed. F_w denotes sequential execution of that word.",
+              "equivalence": "s~t iff r(F_w(s))=r(F_w(t)) for every w in U*.",
+              "named_actions": "A and B in the quotient-commutation statement are among the admitted F_u. An additional action outside U may be used only after separately proving it preserves ~.",
+              "sizes": "n=|S| and c=|r(S)|. Proper partition refinement increases the number of classes and gives the bound n-c.",
+              "limits": "This deterministic behavioral quotient and action menu is a selected view. No probabilistic-bisimulation extension or experiential equivalence is asserted."
+            }
+          },
+          "quantifiers": "Definitions/model hypotheses are declared schemas. A theorem quantifies only over instances satisfying its full same-submodel assumptions; an open physical bridge is not discharged by declaration.",
+          "mathematical_and_actual_instances_are_distinct": true,
+          "instance_binding": "Use this exact declared model/paired comparison with its fixed target, time, ports, observer and units. Separate alternatives or observer instances are identified explicitly.",
+          "proof_or_evidence": "With A,B now explicitly in the finite action alphabet, prefixing an admitted action preserves future equality and all named actions descend. The coarsest stable-refinement and quotient-commutation iff argument is valid in this deterministic selected-view domain.",
+          "proof_source": {
+            "path": "/workspace/scratch/328b6dbb55c2/effective_v111/pending_UI/RESEARCH_NOTE.md",
+            "sha256": "dfc1d1ea5a798427a2f0d0c016f229e6c5a20645ded661228df82e32b5c18627",
+            "section": "RESEARCH_NOTE.md section 6"
+          },
+          "actual_application_obligations": {
+            "actual_pair": "Independently admit the nominated actual process tokens, interval, boundaries, constitutive support and source/event provenance.",
+            "signature": "Use one physically justified complete A:K. Actual full isomorphisms must preserve the corresponding installed operations, state/preparation, readouts, ports, time and noise structure used by the invariant.",
+            "pair_binding": "For type transfer, one member of the paired actual comparison has the commuting pair and the other a justified positive order contrast. Never assign these incompatible properties to one member.",
+            "persistence": "For local nonerasure, the same nominated actual local process must continue under original A:P3; embedding or task success alone does not establish persistence.",
+            "status": "All actual realization, constitutive-invariant and persistence instance obligations remain OPEN; C1/U1 are inherited conditional theory commitments."
+          },
+          "no_inference_to": [
+            "named_quality",
+            "phenomenal_intensity",
+            "unique_subject",
+            "subject_count",
+            "basal_experience_threshold",
+            "actual_source_occurrence_without_evidence"
+          ],
+          "machine_proof": false,
+          "new_scientific_execution": false
+        }
+      }
+    }
+  ]
+}

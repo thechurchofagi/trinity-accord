@@ -1,0 +1,91 @@
+{
+  "retrieval_date": "2026-10-10",
+  "sources": [
+    {
+      "id": "Bennett2026",
+      "url": "https://arxiv.org/html/2601.11620v2",
+      "version": "v2",
+      "scope": "Sections 4–8, definitions 10–19, Theorems 3–4, Remark 3; separate supplement not fully recovered",
+      "use": "Occurrence/co-instantiation distinction and conditional capacity argument; persistence is acknowledged."
+    },
+    {
+      "id": "KanaiMa2026",
+      "url": "https://arxiv.org/html/2606.15348v1",
+      "version": "v1",
+      "scope": "Abstract; sections 4–6 including definitions and recurrent toy model; sections 7 and 9 limitations",
+      "use": "Mechanism-enriched realization precedes this study; conditional invariance and grain remain separate."
+    },
+    {
+      "id": "Chalmers1996",
+      "url": "https://consc.net/papers/rock.html",
+      "scope": "Implementation argument, especially sections 5–6",
+      "use": "Structured state components and local/global dependencies; not merely arbitrary trajectory labeling."
+    },
+    {
+      "id": "Aaronson2005",
+      "url": "https://theoryofcomputing.org/articles/v001a001/v001a001.pdf",
+      "scope": "Section 3, Proposition 3.1; quantum portions not used",
+      "use": "Classical deterministic one-way distinct-row bound; no new mathematical priority."
+    },
+    {
+      "id": "AfekEtAl1990_1993",
+      "url": "https://groups.csail.mit.edu/tds/papers/Shavit/TM-429.pdf",
+      "scope": "Author technical report introduction and snapshot definition; full algorithms not re-proved",
+      "use": "Classical atomic snapshot problem; our finite example is a diagnostic application."
+    },
+    {
+      "id": "CommunicationLecture",
+      "url": "https://www.cs.toronto.edu/~toni/Courses/CommComplexity/Lectures/lecture1.pdf",
+      "scope": "Parity/equality examples and deterministic model",
+      "use": "Additional background only; primary research attribution uses Aaronson."
+    },
+    {
+      "id": "UCT_I",
+      "local_snapshot": "inputs/UCT_I.md",
+      "sha256": "ec85194c0cb545bf55094a41291bf02cd12f85c1c3b8dd620939b2fc3909fec1",
+      "role": "Author/repository source snapshot; published and pending versions distinguished in the note."
+    },
+    {
+      "id": "UCT_II",
+      "local_snapshot": "inputs/UCT_II.md",
+      "sha256": "d8f3329f08cd7272b77945b780e94e87a2f43773aeb86ca41b907b558d59504b",
+      "role": "Author/repository source snapshot; published and pending versions distinguished in the note."
+    },
+    {
+      "id": "UCT_III",
+      "local_snapshot": "inputs/UCT_III.md",
+      "sha256": "35606b2b2545920a803489f4498e976daf175fd96274d2c41a44ce3b2cad2bc2",
+      "role": "Author/repository source snapshot; published and pending versions distinguished in the note."
+    },
+    {
+      "id": "TA25",
+      "local_snapshot": "inputs/TA25.md",
+      "sha256": "b876dd6c82477fe2a73267af7df40ffc1f0c16c19109ea0c84ac3d9fe8288947",
+      "role": "Author/repository source snapshot; published and pending versions distinguished in the note."
+    },
+    {
+      "id": "SCU",
+      "local_snapshot": "inputs/SCU.md",
+      "sha256": "2c4ca58c267705d014e9e7f50e69986ce0046c39cadcd8101b744a1d91a324a5",
+      "role": "Author/repository source snapshot; published and pending versions distinguished in the note."
+    },
+    {
+      "id": "RTTH",
+      "local_snapshot": "inputs/RTTH.md",
+      "sha256": "b5bac52d33f7e0fd43e2fd967ae39f4558956d76f9aad9afdafbe324334c6b29",
+      "role": "Author/repository source snapshot; published and pending versions distinguished in the note."
+    },
+    {
+      "id": "A3R",
+      "local_snapshot": "inputs/A3R.md",
+      "sha256": "7b2483756a54e145b99a4f08eaf653bb200549799905a739b8347499cf27611e",
+      "role": "Author/repository source snapshot; published and pending versions distinguished in the note."
+    }
+  ],
+  "limitations": [
+    "Supplement retrieval incomplete; no exhaustive literature census.",
+    "One initial RTTH fetch failed with 404 due to omitted published/ directory; recovered from exact receipt-bound path and commit.",
+    "Search result dates are not used as paper publication dates."
+  ],
+  "external_full_text_redistribution": false
+}

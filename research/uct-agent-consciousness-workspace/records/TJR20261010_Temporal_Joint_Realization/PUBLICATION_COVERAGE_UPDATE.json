@@ -1,0 +1,38 @@
+{
+  "research_id": "TJR20261010",
+  "coverage_version_before": "UCT-PUB-v1.0.33",
+  "coverage_version_after": "UCT-PUB-v1.0.33",
+  "status": "RELEVANT_CLAIMS_REVIEWED_NO_CHANGE",
+  "published_sources_compared": [
+    "UCT I v1.2",
+    "UCT II v1.1 sections 2,4,12",
+    "UCT III v1.0",
+    "TA25 v1.0",
+    "SCU v1.0.1",
+    "RTTH v1.0.0"
+  ],
+  "map_source_only_overlap": [
+    "TA17:QUOTIENT",
+    "IE:QUERY_SUFFICIENCY",
+    "UI20261009:FUTURE_QUOTIENT",
+    "R173:RETENTIVE_BINDING_RELATION"
+  ],
+  "pending_overlap": [
+    "A3R"
+  ],
+  "claim_ids": [
+    "TJR-C1",
+    "TJR-C2",
+    "TJR-C3",
+    "TJR-C4",
+    "TJR-C5",
+    "TJR-C6",
+    "TJR-C7"
+  ],
+  "new_publications": 0,
+  "new_published_versions": 0,
+  "published_source_bytes_modified": false,
+  "uncertainty": "Not an exhaustive census or global priority proof. Map-only overlaps are not presented as fresh full-source proof reviews.",
+  "standalone_manuscript": "HOLD",
+  "claim_ledger": "CLAIM_LEDGER.json"
+}

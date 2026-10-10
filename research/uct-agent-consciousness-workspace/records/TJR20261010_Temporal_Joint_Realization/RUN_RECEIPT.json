@@ -1,0 +1,78 @@
+{
+  "research_id": "TJR20261010",
+  "version": "TJR-v0.1.0",
+  "executed_at_utc": "2026-10-10T12:57:38.143108+00:00",
+  "python": "3.12.14",
+  "command": "python check_models.py",
+  "code_sha256": "5d3ae83ec04224113fa0de8e4c16dc984349d66d9596ea8a6bfb3e581df7c896",
+  "status": "PASS",
+  "tests": [
+    {
+      "name": "residual_factorization",
+      "cases": 2304,
+      "status": "PASS"
+    },
+    {
+      "name": "minimal_reachable_memory_states",
+      "relations": 64,
+      "status": "PASS"
+    },
+    {
+      "name": "parity_equality_memory_contrast",
+      "n_values": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "four_architectures_and_retention_port_interventions",
+      "nominal": 4,
+      "perturbed": 4,
+      "status": "PASS"
+    },
+    {
+      "name": "two_read_single_atomic_world_update",
+      "schedules": 6,
+      "mixed_time_pairs": 2,
+      "version_rejections": 2,
+      "status": "PASS"
+    },
+    {
+      "name": "task_equivalence_without_prefix_reconstruction",
+      "prefixes": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "suffixes": 4,
+      "status": "PASS"
+    },
+    {
+      "name": "output_sensitivity_not_necessary_for_internal_read",
+      "cases": 2,
+      "status": "PASS"
+    },
+    {
+      "name": "buffered_vs_in_place_serialization",
+      "function_pairs": 256,
+      "pair_state_cases": 1024,
+      "in_place_mismatch_cases": {
+        "AB": 256,
+        "BA": 256
+      },
+      "buffered_mismatch_cases": 0,
+      "status": "PASS"
+    }
+  ],
+  "interpretation": "Finite mathematical checks only; no empirical realization or phenomenal inference."
+}

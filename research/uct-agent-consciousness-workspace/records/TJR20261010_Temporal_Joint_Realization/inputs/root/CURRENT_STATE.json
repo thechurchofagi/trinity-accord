@@ -605,55 +605,6 @@
       "standalone_manuscript": "HOLD"
     }
   ],
-  "next_priority_before_A3W": "Test one independent current bodily/action-familiarity interpretation against origin-recognition and agency countercases; establish a remaining actual retentive relation and realizable matched controls before claiming a pure familiarity contrast. Do not add an assumed coordinate or expand SPC.",
-  "scoped_foundational_reviews": [
-    {
-      "id": "TJR20261010",
-      "version": "TJR-v0.1.0",
-      "title": "Temporal retention and joint realization",
-      "status": "DISABLED_SCOPED_FOUNDATIONAL_APPLICATION",
-      "enabled_as_established_premises": false,
-      "source": "records/TJR20261010_Temporal_Joint_Realization/RESEARCH_NOTE.md",
-      "handoff": "records/TJR20261010_Temporal_Joint_Realization/HANDOFF_ZH.md",
-      "work_log": "records/TJR20261010_Temporal_Joint_Realization/WORK_LOG.md",
-      "claim_ledger": "records/TJR20261010_Temporal_Joint_Realization/CLAIM_LEDGER.json",
-      "map_extension": "records/TJR20261010_Temporal_Joint_Realization/MAP_EXTENSION.json",
-      "audit": "records/TJR20261010_Temporal_Joint_Realization/AUDIT_REPORT.md",
-      "source_sha256": "1888b7c776efff019e0d3be2ed24855109b14b9696a22879627a4de28c298933",
-      "completed_map": "UCT-MAP-v1.1.2",
-      "coverage_version": "UCT-PUB-v1.0.33",
-      "scientific_delta": {
-        "nodes": 0,
-        "rules": 0,
-        "contexts": 0
-      },
-      "application_records": 1,
-      "manuscript_status": "HOLD",
-      "actual_and_named_phenomenal_status": "OPEN"
-    }
-  ],
-  "latest_foundational_review": {
-    "id": "TJR20261010",
-    "version": "TJR-v0.1.0",
-    "title": "Temporal retention and joint realization",
-    "status": "DISABLED_SCOPED_FOUNDATIONAL_APPLICATION",
-    "enabled_as_established_premises": false,
-    "source": "records/TJR20261010_Temporal_Joint_Realization/RESEARCH_NOTE.md",
-    "handoff": "records/TJR20261010_Temporal_Joint_Realization/HANDOFF_ZH.md",
-    "work_log": "records/TJR20261010_Temporal_Joint_Realization/WORK_LOG.md",
-    "claim_ledger": "records/TJR20261010_Temporal_Joint_Realization/CLAIM_LEDGER.json",
-    "map_extension": "records/TJR20261010_Temporal_Joint_Realization/MAP_EXTENSION.json",
-    "audit": "records/TJR20261010_Temporal_Joint_Realization/AUDIT_REPORT.md",
-    "source_sha256": "1888b7c776efff019e0d3be2ed24855109b14b9696a22879627a4de28c298933",
-    "completed_map": "UCT-MAP-v1.1.2",
-    "coverage_version": "UCT-PUB-v1.0.33",
-    "scientific_delta": {
-      "nodes": 0,
-      "rules": 0,
-      "contexts": 0
-    },
-    "application_records": 1,
-    "manuscript_status": "HOLD",
-    "actual_and_named_phenomenal_status": "OPEN"
-  }
+  "next_priority_before_A3W": "Test one independent current bodily/action-familiarity interpretation against origin-recognition and agency countercases; establish a remaining actual retentive relation and realizable matched controls before claiming a pure familiarity contrast. Do not add an assumed coordinate or expand SPC."
 }
+

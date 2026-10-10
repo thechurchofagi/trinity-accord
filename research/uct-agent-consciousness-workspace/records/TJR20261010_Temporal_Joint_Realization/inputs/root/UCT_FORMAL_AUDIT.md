@@ -14,4 +14,3 @@
 
 保留 QC-20261008-10、IA-QC11、QC-20261008-12、QC-20261008-13、SCU-OPEN-R191-NORMALIZATION 与 SCU-AUDIT-DEPTH，及各候选的其他 OPEN。结构遍历不等于语义证明，候选登记不等于实际前提成立。
 
-TJR基础问题复核：[审查](records/TJR20261010_Temporal_Joint_Realization/AUDIT_REPORT.md)，1608项仅结构遍历、13节点有限兼容性核对；全历史深审AUDIT_INCOMPLETE，0新增正式节点/规则/关系。

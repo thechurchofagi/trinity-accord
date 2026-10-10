@@ -1,0 +1,117 @@
+{
+  "research_id": "TJR20261010",
+  "version": "TJR-v0.1.0",
+  "claims": [
+    {
+      "id": "TJR-C1",
+      "classification": "NEW_APPLICATION",
+      "statement": "Same boundary truth table does not identify use of a nominated record.",
+      "existing_anchors": [
+        "TA18:JOINT_WITNESS",
+        "R173:RETENTIVE_BINDING_RELATION"
+      ],
+      "prior_coverage": "SCU v1.0.1 and A3R; no new general source-use theorem",
+      "evidence": "RESEARCH_NOTE.md section 3",
+      "enabled_as_established_premises": false,
+      "physical_instance_status": "OPEN",
+      "phenomenal_bridge_status": "OPEN",
+      "global_priority": "NOT_CLAIMED"
+    },
+    {
+      "id": "TJR-C2",
+      "classification": "NEW_APPLICATION",
+      "statement": "Buffered serial writes preserve the stipulated block-endpoint update; in-place writes need extra identities.",
+      "existing_anchors": [
+        "A:K",
+        "UI20261009:FUTURE_QUOTIENT"
+      ],
+      "prior_coverage": "Classical update semantics; UCT I Appendix D",
+      "evidence": "RESEARCH_NOTE.md section 4",
+      "enabled_as_established_premises": false,
+      "physical_instance_status": "OPEN",
+      "phenomenal_bridge_status": "OPEN",
+      "global_priority": "NOT_CLAIMED"
+    },
+    {
+      "id": "TJR-C3",
+      "classification": "INHERITED",
+      "statement": "Exact serial retention iff its fibers refine residual-answer classes; minimum states equal distinct rows.",
+      "existing_anchors": [
+        "C:P2_COORD",
+        "IE:QUERY_SUFFICIENCY"
+      ],
+      "prior_coverage": "Aaronson 2005 Proposition 3.1; existing project factorization",
+      "evidence": "RESEARCH_NOTE.md section 5",
+      "enabled_as_established_premises": false,
+      "physical_instance_status": "OPEN",
+      "phenomenal_bridge_status": "OPEN",
+      "global_priority": "NOT_CLAIMED"
+    },
+    {
+      "id": "TJR-C4",
+      "classification": "INHERITED",
+      "statement": "A task-sufficient code may discard distinctions required by other consumers.",
+      "existing_anchors": [
+        "TA17:QUOTIENT",
+        "IE:QUERY_SUFFICIENCY"
+      ],
+      "prior_coverage": "TA17; RTTH; no new quotient theorem",
+      "evidence": "RESEARCH_NOTE.md section 5",
+      "enabled_as_established_premises": false,
+      "physical_instance_status": "OPEN",
+      "phenomenal_bridge_status": "OPEN",
+      "global_priority": "NOT_CLAIMED"
+    },
+    {
+      "id": "TJR-C5",
+      "classification": "NEW_APPLICATION",
+      "statement": "Actual present joint use does not entail that its retained values were a synchronous world snapshot.",
+      "existing_anchors": [
+        "A:TOKEN_CRITERIA",
+        "A:K"
+      ],
+      "prior_coverage": "Classical snapshot problem plus inherited UCT actuality/content distinction",
+      "evidence": "RESEARCH_NOTE.md section 6",
+      "enabled_as_established_premises": false,
+      "physical_instance_status": "OPEN",
+      "phenomenal_bridge_status": "OPEN",
+      "global_priority": "NOT_CLAIMED"
+    },
+    {
+      "id": "TJR-C6",
+      "classification": "CORRECTION",
+      "statement": "Task preservation alone does not establish complete experiential equivalence; grounded nonisomorphism requires the full constitutive contract.",
+      "existing_anchors": [
+        "A:C1",
+        "A:C1_OI",
+        "A:U1",
+        "OL20261009:C1_APPLICATION"
+      ],
+      "prior_coverage": "UCT I/III and existing OL rule; no AI phenomenality verdict",
+      "evidence": "RESEARCH_NOTE.md section 7",
+      "enabled_as_established_premises": false,
+      "physical_instance_status": "OPEN",
+      "phenomenal_bridge_status": "OPEN",
+      "global_priority": "NOT_CLAIMED"
+    },
+    {
+      "id": "TJR-C7",
+      "classification": "NEGATIVE_RESULT",
+      "statement": "This bounded comparison does not establish a new standalone theoretical contribution.",
+      "existing_anchors": [
+        "TA17:QUOTIENT",
+        "IE:QUERY_SUFFICIENCY"
+      ],
+      "prior_coverage": "Source-based novelty assessment, not a deductive scientific rule",
+      "evidence": "RESEARCH_NOTE.md section 9",
+      "enabled_as_established_premises": false,
+      "physical_instance_status": "OPEN",
+      "phenomenal_bridge_status": "OPEN",
+      "global_priority": "NOT_CLAIMED"
+    }
+  ],
+  "manuscript_decision": "HOLD",
+  "reason": "Inherited mathematics, internal overlap and a useful scoped comparison; no sufficient independent new theory.",
+  "coverage_version": "UCT-PUB-v1.0.33",
+  "coverage_change": "NO_CHANGE_AFTER_RELEVANT_CLAIM_REVIEW"
+}
