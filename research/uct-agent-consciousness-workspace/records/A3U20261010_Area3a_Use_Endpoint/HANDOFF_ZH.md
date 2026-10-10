@@ -21,3 +21,7 @@
 ## 恢复
 
 研究目录：`records/A3U20261010_Area3a_Use_Endpoint/`。先读 `RESEARCH_NOTE.md`、`ENDPOINT_CONTRACT.md`、`EXACT_RESULTS.json`、`MAP_AUDIT.md`、`REVIEW_RESPONSE.md`、`GAP_LEDGER.md`。最终远端提交、固定主交接版本、增量包和哈希以本轮保存后的 `DUAL_SAVE_RECEIPT.json` 为准。
+
+## 已核验保存
+
+科学提交 `811b0a6489d78b5963d952ed94f6e9987ae8dd63` 已通过 expected-SHA 快进并回读。固定主交接保持同一 Library ID `libfile_4175a81748fc819187fa8f5771f056fa`，由第77版更新为已回读的第78版。34文件增量包和清单分别保存为 `libfile_32ec6b81433c819196555ecce38614ac` 与 `libfile_f52c56ea56508191affb5a4196012792`；逐字节回读和压缩包测试通过。增量不是完整仓库或全部历史备份。

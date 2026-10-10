@@ -1,0 +1,93 @@
+{
+  "schema": "uct-dual-save-receipt/1",
+  "research_id": "A3U20261010",
+  "save_status": "GITHUB_AND_LIBRARY_VERIFIED",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "starting_remote_commit": "f8fd2b3f20e66765d1e5b299c1c11e6fd1431c72",
+    "science_commit": "811b0a6489d78b5963d952ed94f6e9987ae8dd63",
+    "science_tree": "db1020313a2cc5ebe7155691f840978854aa1f87",
+    "update_mode": "expected-SHA non-forced fast-forward",
+    "science_commit_readback": true,
+    "research_note_readback": true,
+    "receipt_commit": "SELF_CONTAINING_COMMIT_CANNOT_ENCODE_ITS_OWN_SHA; verify current branch head and this file",
+    "local_checkpoints": [
+      "8f7f843e4",
+      "8ca1838c1",
+      "0e2e5f97d650782276f5fd025d5c97c43a9d7caa"
+    ]
+  },
+  "library": {
+    "fixed_master": {
+      "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+      "file_id": "file_000000001b6881f787da47cba1aa4859",
+      "filename": "UCT_Hourly_Research_Master_Handoff.md",
+      "previous_version": 77,
+      "version": 78,
+      "bytes": 714110,
+      "sha256": "94afbb855cb0bfb837a5d57bedcb959ea5175ee9f40563025f0ec92df5806903",
+      "top_section_readback": true,
+      "byte_readback_equal": true
+    },
+    "increment_archive": {
+      "library_file_id": "libfile_32ec6b81433c819196555ecce38614ac",
+      "file_id": "file_00000000ceb881f79001eb013a6ecb08",
+      "filename": "UCT_A3U20261010_Increment.zip",
+      "version": 0,
+      "bytes": 257592,
+      "sha256": "5dce46d9ce711e076df006a9225e1ef108c2cad6cd0f8ad7cc965ef5b25bf517",
+      "classification": "incremental_not_full_backup",
+      "file_count": 34,
+      "byte_readback_equal": true,
+      "archive_test": "PASS"
+    },
+    "increment_manifest": {
+      "library_file_id": "libfile_f52c56ea56508191affb5a4196012792",
+      "file_id": "file_000000005b1081f7bd44f6aa8e598a53",
+      "filename": "UCT_A3U20261010_Increment_MANIFEST.json",
+      "version": 0,
+      "bytes": 8654,
+      "sha256": "02d3a273b5281844cdfbe18111c28ebe298e15dd43f74720d23ab32582cd7dee",
+      "file_count": 34,
+      "byte_readback_equal": true
+    },
+    "recovery_base": {
+      "library_file_id": "libfile_f7d404c7734c8191b8257cd4fa6771f5",
+      "filename": "UCT_R156_Working_Set_20261007.zip",
+      "sha256": "95cc3ea1ec45eb273531c25525edcb7f8e6f2088c650a39b97d24817704ec40a",
+      "classification": "complete_R156_working_set_snapshot_not_repository_or_history"
+    }
+  },
+  "formal_status": {
+    "completed_map": "UCT-MAP-v1.1.2",
+    "completed_counts": {
+      "nodes": 913,
+      "active_rules": 424,
+      "contexts": 261,
+      "suspended_rules": 10,
+      "review_items": 1608
+    },
+    "candidate_counts": {
+      "nodes": 7,
+      "rules": 3,
+      "contexts": 5
+    },
+    "candidate_enabled": false,
+    "structural_checks": "22/22",
+    "semantic_adoption": "OPEN",
+    "actual_application": "OPEN"
+  },
+  "open_review_items": [
+    "QC-20261008-10",
+    "IA-QC11",
+    "QC-20261008-12",
+    "QC-20261008-13",
+    "SCU-OPEN-R191-NORMALIZATION",
+    "SCU-AUDIT-DEPTH"
+  ],
+  "latest_completed_step": "Exact use/spillover twin, conditional port rescue, C1-scoped positive interpretation and formal compatibility audit saved and read back in both persistence locations.",
+  "unfinished_work": "Determine whether an existing or published area-3a platform can independently bound the direct perturbation-to-endpoint path or support a physically and ethically feasible named-port rescue. If neither exists, stop instrumentation refinement and return to the independent H bridge.",
+  "recovery_action": "Fetch the latest branch head; verify science commit 811b0a6489d78b5963d952ed94f6e9987ae8dd63 as an ancestor; read root entry files and records/A3U20261010_Area3a_Use_Endpoint/HANDOFF_ZH.md. If GitHub is unavailable, verify the Library archive and manifest hashes, then overlay the 34-file increment on a known baseline such as the R156 working-set snapshot; never treat the increment as a full repository or history backup.",
+  "scientific_failure_preserved": "External endpoint plus area-3a/neighbor/sham perturbation does not identify actual downstream use when a region-specific direct perturbation-to-endpoint path is allowed. No reviewed study supplies the full same-instance block-rescue-exclusion package."
+}
