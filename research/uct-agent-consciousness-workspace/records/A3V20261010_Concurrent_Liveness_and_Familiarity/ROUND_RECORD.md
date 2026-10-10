@@ -1,0 +1,9 @@
+# A3V round record — 2026-10-10
+
+1. **User goal:** explain experience, intelligence and bodily/action familiar mineness from actual organization, with readable distinctions and reusable evidence; preserve C1/U1 and overlapping processes.
+2. **One unresolved question:** does a concrete published reaching system establish same-episode losing-policy liveness and resolver use, and if not, which positive retentive bodily-familiarity claim survives without requiring simultaneous competition?
+3. **Related nodes/fixed sources:** corrected R172 path, R173 RetBind, R175/R176 feasibility, R177 feature/source, R199 operational clone limit; A3O fixed rho, A3Q ancestry and A3R SPC; UCT I v1.2 §§8.11–8.14/14.7, R150, A3L; latest supervision QC10/IA-QC11/QC12/QC13 and SCU open items. Verified starting head: 0865cbc4772f725cc15e2ec90a5a372ad9049152. Fixed master: v93, same identity.
+4. **Intended increment/correction:** bounded PMd/peripheral single-trial evidence review; separate across-trial mixtures, concurrent policy tokens and one integrated preparatory state; restrict SPC to the conflict-dependent L_sel application; return to two explicitly conditional H bridges if physical joint verification fails.
+5. **Deliverables:** English research note, source evidence/reading ledger, small exact witness only if needed, stable claims/gaps, four-family thought experiments, whole-map structural traversal plus affected semantic review, Chinese handoff, Git checkpoints, fixed master and clearly incremental backup with verified hashes.
+
+Selection direction check: only one named reaching-system question is allowed. No broad new instrumentation classification or general statistics. Failure of the earliest jointly warranted physical premise ends the SPC application; it does not end H theory, imply no experience or license another certificate chain.
