@@ -1,0 +1,130 @@
+{
+  "checked_utc": "2026-10-10T08:25:42.755004+00:00",
+  "status": "PASS: loader-only relocation check; no conditional simulation or fit executed",
+  "changed_script": {
+    "path": "theory/test_source_symmetry.py",
+    "before": {
+      "bytes": 7373,
+      "sha256": "58d0d2601f9b671f627211c115cdd802a66c51fea2e7d2b9882ecfb4c1156a92"
+    },
+    "after": {
+      "bytes": 8339,
+      "sha256": "8c1173fa0eb4ca650da459dc17b9f0117772fdce5dbc2a95edc8be0f55d0add7"
+    },
+    "snapshot": "history/pre_relocation/theory/test_source_symmetry.py"
+  },
+  "source_change": "Read first worksheet B4:AQ33 of record-local Experiment_3.xlsx through a pure loader; remove former external tidy CSV and alignment NPZ runtime dependencies. Future generated metadata names the workbook check.",
+  "new_input": {
+    "path": "empirical/inputs/Experiment_3.xlsx",
+    "bytes": 22409,
+    "sha256": "d3b2fef22f077788e5299dedb68737d453c09b005d9360bab8dfbe6c35852bc9",
+    "cell_mapping": "First worksheet B4:AQ33; reshape30x2x3x7; ownership/simultaneity, 8Hz/sham/13Hz, SOAs[-400,-200,-100,0,100,200,400]; n=10"
+  },
+  "historical_inputs_checked_read_only": [
+    {
+      "path": "/workspace/scratch/5b73aae6b1e4/empirical/results/aggregate_counts_tidy.csv",
+      "bytes": 35504,
+      "sha256": "c289edabfb45bc62fa0498e17a36da6f3f9bd6dec469a7968d4d245013f50c00",
+      "matches_original_run_input_sha256": true
+    },
+    {
+      "path": "/workspace/scratch/5b73aae6b1e4/empirical/alignment_diagnostic.npz",
+      "bytes": 14024,
+      "sha256": "05ac14219f76982ae4cbc51bdd51d1d16bf2c45917a8491d9c693df1f312a891"
+    }
+  ],
+  "loader_equivalence": {
+    "count_cells": 1260,
+    "cube_shape": [
+      30,
+      2,
+      3,
+      7
+    ],
+    "exactly_equals_historical_tidy_counts": true,
+    "exactly_equals_historical_alignment_npz": true,
+    "labels_and_denominators_equal": true,
+    "all_540_saved_positive_negative_pairs_equal": true,
+    "all_540_saved_MC_totals_equal": true,
+    "canonical_int64_cube_sha256": "a65dc5a4fad628089655476ae757d87ae7224e4e93a9fc88f57dbd0aefc6e3fe"
+  },
+  "unchanged_computation": {
+    "gain_function_AST_identical": true,
+    "conditional_law_MC_and_subgroup_block_byte_identical": true,
+    "conditional_block_sha256": "3439c083eb3e4960109b5f15cb7c90c39783aec5e5ea9499c0e7df45aed6cae7"
+  },
+  "existing_run_preserved": {
+    "files": {
+      "SYMMETRY_TEST_RESULTS.json": {
+        "bytes": 3300,
+        "sha256": "9e40fb55aac6595e46338f82214331ce4a3bcae14077e1271982ccffdf91d383",
+        "unchanged": true
+      },
+      "SYMMETRY_ANALYSIS_PLAN.json": {
+        "bytes": 2477,
+        "sha256": "876e8e05fb88e403ffcbd7f50ce8f63b65f253ceb5f599d5f21180538667c17f",
+        "unchanged": true
+      },
+      "symmetry_conditional_simulations.npz": {
+        "bytes": 165084,
+        "sha256": "eec07532caefe82f3dd588a33d02c4d25b8287e1e1fefe8d67781b4bc9964fd7",
+        "unchanged": true
+      },
+      "symmetry_pair_diagnostics.csv": {
+        "bytes": 25894,
+        "sha256": "893a2557a3d32bd410af42284f9ac5eb08669a4a003833537d76eccda021e0c2",
+        "unchanged": true
+      },
+      "symmetry_task_summaries.csv": {
+        "bytes": 170,
+        "sha256": "87cf024d74fecbc541ae89e172cf52966be0f6a6f30fa0147204b3b27cb2ed8b",
+        "unchanged": true
+      },
+      "symmetry_task_condition_summaries.csv": {
+        "bytes": 422,
+        "sha256": "e4fa82efbf2eceb12876aae7655dcceb9f0c9d85e8c84eb5139c15f922ea16d8",
+        "unchanged": true
+      }
+    },
+    "original_input_sha256_preserved": "c289edabfb45bc62fa0498e17a36da6f3f9bd6dec469a7968d4d245013f50c00",
+    "original_plan_sha256_preserved": "876e8e05fb88e403ffcbd7f50ce8f63b65f253ceb5f599d5f21180538667c17f",
+    "replicates": 19999,
+    "stored_observed_deviance": 984.30423637609,
+    "stored_exceedances": 0,
+    "stored_plus_one_p": 5e-05
+  },
+  "check_bci_identification_static_audit": {
+    "path": "theory/check_bci_identification.py",
+    "bytes": 12404,
+    "sha256": "691f89ecee6c0ca762d7ea67f5030237b55acffccb3576562e33c5dfc6c2ee05",
+    "edited": false,
+    "external_runtime_file_dependencies_found": false,
+    "record_local_inputs": [
+      {
+        "path": "root_analysis/response_twin_probabilities.csv",
+        "bytes": 229131,
+        "sha256": "895778dbb4a566adee06fd48be73c8fa659c27ee3aede0557484833cd05fffe3"
+      },
+      {
+        "path": "root_analysis/paired_readout_predictions.csv",
+        "bytes": 36835,
+        "sha256": "89e56aee5fa148fb0e6765837ac2675f31bc78c12c2f480bbd33a88126c953cd"
+      }
+    ],
+    "local_implementation": {
+      "path": "theory/bci_identification.py",
+      "bytes": 7008,
+      "sha256": "88bf1d98258de78bdc3c09db7155ce31dd737d7a8b61debee36559a91cc9c2d0"
+    },
+    "outputs": "theory/two_anchor_lapse_trajectory.csv, theory/paired_affinity_stable_audit.csv, theory/BCI_IDENTIFICATION_CHECKS.json",
+    "executed": false
+  },
+  "scope": {
+    "main_called": false,
+    "gain_called": false,
+    "MC_replicates_generated": 0,
+    "fits_generated": 0,
+    "original_results_rewritten": false,
+    "old_source_and_plan_paths": "Retained as historical receipts only; current live script does not load them."
+  }
+}

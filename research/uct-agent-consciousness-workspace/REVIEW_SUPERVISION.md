@@ -1,3 +1,9 @@
+# 当前接续：CTD v0.2 已成稿；完成地图仍为 UCT-MAP-v1.1.2
+
+继续遵循[最高研究指导](RESEARCH_MASTER_GUIDE.md)。本轮按用户要求深入修订未发表CTD论文，现形成18页[英文稿](records/CTD20261010_Cross_Task_Intervention_v02/manuscript/noise-identifiability-bodily-judgments-v0.2.0.pdf)、[中文交接](records/CTD20261010_Cross_Task_Intervention_v02/HANDOFF_ZH.md)、[工作日志](records/CTD20261010_Cross_Task_Intervention_v02/WORK_LOG.md)和[成稿决定](records/CTD20261010_Cross_Task_Intervention_v02/MANUSCRIPT_DECISION.json)。公开数据审计与条件识别结果达到值得外部方法评议的程度；没有新配对人体数据、UCT实证确认、新DOI或投稿。
+
+[地图审计](records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_AUDIT.md)记录20/7/13共40项候选全停用，1,608项基线结构核对与历史深语义欠账分开。发表覆盖UCT-PUB-v1.0.28，正式发表计数不变。[保存收据](records/CTD20261010_Cross_Task_Intervention_v02/PERSISTENCE_RECEIPT.json)在成功保存后记录实际提交和回读。并发[A3M主线](records/A3M20261010_Bodily_Familiarity_Invariance/HANDOFF_ZH.md)和v0.1全部保留。以下旧“当前”标签在冲突处均为历史记录。
+
 # CTD20261010 新增审查接续
 
 全部24项候选已逐项审查、数值实现缺陷已修复并独立复验。基线1608项仅结构访问及相关核心语义对照；深层历史证明与全部OPEN保留。见[records/CTD20261010_Cross_Task_Intervention/MAP_AUDIT.md](records/CTD20261010_Cross_Task_Intervention/MAP_AUDIT.md)。完成图不变，候选disabled，无经验节点进入新规则前提。

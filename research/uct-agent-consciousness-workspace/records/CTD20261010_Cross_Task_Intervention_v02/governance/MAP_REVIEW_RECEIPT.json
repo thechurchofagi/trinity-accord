@@ -1,0 +1,667 @@
+{
+  "schema": "uct-map-review-receipt/1",
+  "id": "CTD2-MAP-REVIEW-20261010-v1",
+  "created_at_utc": "2026-10-10T08:21:30.808497+00:00",
+  "status": "PASS_SCOPED_DISABLED_CANDIDATE; AUDIT_INCOMPLETE_FOR_FULL_HISTORICAL_SEMANTIC_PROMOTION",
+  "candidate_sha256": "f00d9af53cca8935f08b6dd979e0f4d28cf5754bc7e9ffb696eb8d7be6095a2f",
+  "candidate_counts": {
+    "nodes": 20,
+    "rules": 7,
+    "contexts": 13,
+    "total": 40
+  },
+  "all_candidate_items_disabled": true,
+  "duplicate_candidate_ids": 0,
+  "collisions_with_completed_or_v01_ids": 0,
+  "unresolved_candidate_references": 0,
+  "empirical_deductive_premise_uses": 0,
+  "C1_U1_deductive_premise_uses": 0,
+  "independent_and_correlated_criterion_routes_not_conjoined": true,
+  "conditional_dependency_cycle": false,
+  "baseline_before": {
+    "nodes": 913,
+    "active_conditional_rules": 424,
+    "contexts": 261,
+    "suspended": 10,
+    "total": 1608
+  },
+  "baseline_after": {
+    "nodes": 913,
+    "active_conditional_rules": 424,
+    "contexts": 261,
+    "suspended": 10,
+    "total": 1608
+  },
+  "active_rule_change": 0,
+  "completed_map_version_change": false,
+  "baseline_effective_graph_sha256_before": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
+  "baseline_effective_graph_sha256_after": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
+  "baseline_per_id_count": 1608,
+  "baseline_per_id_structural_record": "BASELINE_PER_ID_STRUCTURE.json.gz",
+  "baseline_structural_reference_notes": [],
+  "preserved_external_context_references": [
+    {
+      "id": "EI20261008:CTX:001",
+      "source": "EI20261008:IMPORT_C5",
+      "declared_type": "source_reference",
+      "role": "Preserved source/module context, not a dangling deductive node premise."
+    },
+    {
+      "id": "RU20261008:CTX:002",
+      "source": "OO20261008",
+      "declared_type": "module_reference",
+      "role": "Preserved source/module context, not a dangling deductive node premise."
+    },
+    {
+      "id": "TH20261009:ctx1",
+      "source": "CORE20261008",
+      "declared_type": "external_reference",
+      "role": "Preserved source/module context, not a dangling deductive node premise."
+    },
+    {
+      "id": "TH20261009:ctx6",
+      "source": "R185:ACTION_CENTERING_NEXT",
+      "declared_type": "external_reference",
+      "role": "Preserved source/module context, not a dangling deductive node premise."
+    },
+    {
+      "id": "RB20261009:ctx8",
+      "source": "EXTERNAL:Dodis2008Lemma2.2b",
+      "declared_type": "external_reference",
+      "role": "Preserved source/module context, not a dangling deductive node premise."
+    },
+    {
+      "id": "RB20261009:ctx9",
+      "source": "EXTERNAL:Wolff2017",
+      "declared_type": "external_reference",
+      "role": "Preserved source/module context, not a dangling deductive node premise."
+    },
+    {
+      "id": "RB20261009:ctx10",
+      "source": "PENDING:AC20261009",
+      "declared_type": "external_reference",
+      "role": "Preserved source/module context, not a dangling deductive node premise."
+    },
+    {
+      "id": "R187:ctx_r186",
+      "source": "R186-HOM-20261009",
+      "declared_type": "module",
+      "role": "Preserved source/module context, not a dangling deductive node premise."
+    },
+    {
+      "id": "R187:ctx_ol",
+      "source": "OL20261009",
+      "declared_type": "module",
+      "role": "Preserved source/module context, not a dangling deductive node premise."
+    }
+  ],
+  "prior_v01_sha256_before": "27f5ee9afbab13f8652b6eded67745c2b0a5ab2272c79ece92f18c9f6b1bdedc",
+  "prior_v01_sha256_after": "27f5ee9afbab13f8652b6eded67745c2b0a5ab2272c79ece92f18c9f6b1bdedc",
+  "prior_v01_13_4_7_disabled_unchanged": true,
+  "inherited_open_obligations": [
+    "CTD-OPEN-ESTIMATOR-RECONSTRUCTION",
+    "CTD-OPEN-INDEPENDENT-CALIBRATION",
+    "CTD-OPEN-ACTUAL-CONSUMER-INTERVENTION",
+    "CTD-OPEN-EXTERNAL-REPLICATION",
+    "QC-20261008-10",
+    "IA-QC11",
+    "QC-20261008-12",
+    "QC-20261008-13",
+    "SCU-OPEN-R191-NORMALIZATION",
+    "SCU-AUDIT-DEPTH"
+  ],
+  "inherited_open_debt": {
+    "ids": 1034,
+    "fields": 1828,
+    "proof_ids": 1347,
+    "role": "Historical inherited counts, not recomputed or reduced by this structural pass."
+  },
+  "inherited_open_status_changes": 0,
+  "local_semantic_reviewed_candidate_items": [
+    {
+      "id": "CTD2-N001",
+      "kind": "MODEL_CLASS_DEFINITION",
+      "record_sha256": "85fcfae4401f1ee99d8b93269b0db794559fac5b7e166215660e84f1aa1bef2a",
+      "local_semantic_review": "Full statement, object/quantifier, complete premises, proof/evidence location and limits reviewed in the CTD2 response-model scope.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-N002",
+      "kind": "SECONDARY_EVIDENCE",
+      "record_sha256": "7beadffa7a90cb8a46aa4c5d812f2b8b79302ca5bf448da16619b6db02b9a7f4",
+      "local_semantic_review": "Full statement, object/quantifier, complete premises, proof/evidence location and limits reviewed in the CTD2 response-model scope.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-N003",
+      "kind": "ARITHMETIC_CORRECTION",
+      "record_sha256": "ba843abfd350b1417668c17e258483b4db5bc9e9c732dd1165da98bd23ae0d85",
+      "local_semantic_review": "Full statement, object/quantifier, complete premises, proof/evidence location and limits reviewed in the CTD2 response-model scope.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-N004",
+      "kind": "CONDITIONAL_MATHEMATICAL_RESULT",
+      "record_sha256": "acacb87b0d4c014b025c0658676f5fe07b2f6e735e73358e6bbc95239cda634f",
+      "local_semantic_review": "Full statement, object/quantifier, complete premises, proof/evidence location and limits reviewed in the CTD2 response-model scope.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-N005",
+      "kind": "NEGATIVE_SECONDARY_EVIDENCE",
+      "record_sha256": "3b06dfea0fe208ea64c43ad7f7c88950fdd4a0bf77da78a2df21b5ee71e377e1",
+      "local_semantic_review": "Full statement, object/quantifier, complete premises, proof/evidence location and limits reviewed in the CTD2 response-model scope.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-N006",
+      "kind": "SECONDARY_EVIDENCE",
+      "record_sha256": "fb715eabb59fcf57583fdd70ba280144334fce207744c4d7936df593dfe0212e",
+      "local_semantic_review": "Full statement, object/quantifier, complete premises, proof/evidence location and limits reviewed in the CTD2 response-model scope.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-N007",
+      "kind": "MODEL_CLASS_DEFINITION",
+      "record_sha256": "e3e5bdc7b31006ba1fcf996896acf0c61c8e186017f43754b27bc0b57433fac1",
+      "local_semantic_review": "Full statement, object/quantifier, complete premises, proof/evidence location and limits reviewed in the CTD2 response-model scope.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-N008",
+      "kind": "CONDITIONAL_MATHEMATICAL_RESULT",
+      "record_sha256": "f97a061a76dd49f2f8dea231032c6879131bf78526fa0f83f2f3f4396dfce4fb",
+      "local_semantic_review": "Full statement, object/quantifier, complete premises, proof/evidence location and limits reviewed in the CTD2 response-model scope.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-N009",
+      "kind": "CONDITIONAL_MATHEMATICAL_RESULT",
+      "record_sha256": "07cd28fed6de571a704cce139e31560cb6e471db259261b26fbb910279fd0126",
+      "local_semantic_review": "Full statement, object/quantifier, complete premises, proof/evidence location and limits reviewed in the CTD2 response-model scope.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-N010",
+      "kind": "CONDITIONAL_MODEL_CONTRACT",
+      "record_sha256": "bd6e54915639285da11cf0909e9be9555b74dc520ba8f64b00c520c7d0d13ab8",
+      "local_semantic_review": "Full statement, object/quantifier, complete premises, proof/evidence location and limits reviewed in the CTD2 response-model scope.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-N011",
+      "kind": "CONDITIONAL_MATHEMATICAL_RESULT",
+      "record_sha256": "6103a09c26b53511210b49d7e2a308dc4afa501316684a4a8163b8e179432712",
+      "local_semantic_review": "Full statement, object/quantifier, complete premises, proof/evidence location and limits reviewed in the CTD2 response-model scope.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-N012",
+      "kind": "CONDITIONAL_MODEL_CONTRACT",
+      "record_sha256": "0a42043d5c4a7255f2f7a8d2d0dc494d135c8f62d1e26d4db7c1b6c23cdf586e",
+      "local_semantic_review": "Full statement, object/quantifier, complete premises, proof/evidence location and limits reviewed in the CTD2 response-model scope.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-N013",
+      "kind": "CONDITIONAL_MATHEMATICAL_RESULT",
+      "record_sha256": "24dc6216617c91fce40c58ea99172755cdfc0134ad06ac4c9f6241d1a47dcfe8",
+      "local_semantic_review": "Full statement, object/quantifier, complete premises, proof/evidence location and limits reviewed in the CTD2 response-model scope.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-N014",
+      "kind": "CONDITIONAL_MATHEMATICAL_RESULT",
+      "record_sha256": "993e664854c27097b6bf9458252cf67b83c0a7f6c1fce86bd5205b422c94c8ea",
+      "local_semantic_review": "Full statement, object/quantifier, complete premises, proof/evidence location and limits reviewed in the CTD2 response-model scope.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-N015",
+      "kind": "CONDITIONAL_MATHEMATICAL_RESULT",
+      "record_sha256": "142ea5a23427a785a93f1fbf8dd23bab15ec306e102c7273651e87a7fdb25204",
+      "local_semantic_review": "Full statement, object/quantifier, complete premises, proof/evidence location and limits reviewed in the CTD2 response-model scope.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-N016",
+      "kind": "EXPLICIT_COUNTEREXAMPLES",
+      "record_sha256": "1d2ac954d9ca39205235926e203c87b9deb4084e5fab72d3cf93585bb6078ea7",
+      "local_semantic_review": "Full statement, object/quantifier, complete premises, proof/evidence location and limits reviewed in the CTD2 response-model scope.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-N017",
+      "kind": "SCOPED_INFERENCE_BOUNDARY",
+      "record_sha256": "556442a1677a3e9f1c1ee0a32c339bb64f4897260de30c6424c64707a96a33b7",
+      "local_semantic_review": "Full statement, object/quantifier, complete premises, proof/evidence location and limits reviewed in the CTD2 response-model scope.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-N018",
+      "kind": "PROPOSED_EMPIRICAL_CONTRACT",
+      "record_sha256": "fb7adaefe6f4f419832d32f284ce71bdd8605119a6b268c9629d192a581604eb",
+      "local_semantic_review": "Full statement, object/quantifier, complete premises, proof/evidence location and limits reviewed in the CTD2 response-model scope.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-N019",
+      "kind": "SECONDARY_EVIDENCE",
+      "record_sha256": "d008dd0274b29e2bd32a5080a4557bcf6b2e1080f92221237ed0c17e3ed629aa",
+      "local_semantic_review": "Full statement, object/quantifier, complete premises, proof/evidence location and limits reviewed in the CTD2 response-model scope.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-N020",
+      "kind": "CONDITIONAL_MODEL_CONTRACT",
+      "record_sha256": "d083727756b6fd1727c5516b8966ad95f4cfc0f9ba42c30ddb135d682dfab497",
+      "local_semantic_review": "Full statement, object/quantifier, complete premises, proof/evidence location and limits reviewed in the CTD2 response-model scope.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-R001",
+      "kind": "conditional_rule",
+      "record_sha256": "55b81dd309942e2eb25deaf02794a395c16b2ec4a9062c32cb8781d19e046a29",
+      "local_semantic_review": "Conjunction, same-instance binding, mathematical domain and conclusion checked; alternatives preserved.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-R002",
+      "kind": "conditional_rule",
+      "record_sha256": "f9d8f5964501485c17bd406e70b4afa634fcd0935fee24216014233df4d93727",
+      "local_semantic_review": "Conjunction, same-instance binding, mathematical domain and conclusion checked; alternatives preserved.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-R003",
+      "kind": "conditional_rule",
+      "record_sha256": "8b2f9139054f91621b85f11288f25054d29e4074629c27835c8195a431062614",
+      "local_semantic_review": "Conjunction, same-instance binding, mathematical domain and conclusion checked; alternatives preserved.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-R004",
+      "kind": "conditional_rule",
+      "record_sha256": "79468cd637cb9e97dbe2fc8f15468caa03b50ff61b4788d92f533e1cbd3ba612",
+      "local_semantic_review": "Conjunction, same-instance binding, mathematical domain and conclusion checked; alternatives preserved.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-R005",
+      "kind": "conditional_rule",
+      "record_sha256": "9004068f18a0dab32b2a5cf46d34e282bd062dc80c945cdbaa6d7d57f7bee7c7",
+      "local_semantic_review": "Conjunction, same-instance binding, mathematical domain and conclusion checked; alternatives preserved.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-R006",
+      "kind": "conditional_rule",
+      "record_sha256": "95336ade195ee5356fcc50b85bcf1531f2a127b6e8313084cf5b13febff08135",
+      "local_semantic_review": "Conjunction, same-instance binding, mathematical domain and conclusion checked; alternatives preserved.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-R007",
+      "kind": "conditional_rule",
+      "record_sha256": "ef39140abe42497b13dd613b01cc780e545523c619455bce5583bfd808c0995e",
+      "local_semantic_review": "Conjunction, same-instance binding, mathematical domain and conclusion checked; alternatives preserved.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-C001",
+      "kind": "nondeductive_context",
+      "record_sha256": "44e2066b581a43216b15f30ad51d2abbf9965ae870037ea9a559b9c7188208ad",
+      "local_semantic_review": "Typed as evidence, motivation or compatibility only; no C1 bridge or premise promotion.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-C002",
+      "kind": "nondeductive_context",
+      "record_sha256": "f5e5ea2ced1ec8682e90492c78ac0099e007b010babae85714916652b37d9626",
+      "local_semantic_review": "Typed as evidence, motivation or compatibility only; no C1 bridge or premise promotion.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-C003",
+      "kind": "nondeductive_context",
+      "record_sha256": "14d8530094f606047837d1d6f47668aa09f06443fa7460b862f46cab8dcb6647",
+      "local_semantic_review": "Typed as evidence, motivation or compatibility only; no C1 bridge or premise promotion.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-C004",
+      "kind": "nondeductive_context",
+      "record_sha256": "ed6526eaf1202e010072824dcfa605ff052ae25c8d64e9bea6637d93e7f77aaf",
+      "local_semantic_review": "Typed as evidence, motivation or compatibility only; no C1 bridge or premise promotion.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-C005",
+      "kind": "nondeductive_context",
+      "record_sha256": "c97dd31f7286aeba9ea5500c4959daa43018fcb58375a167fb4d71cd4a18c0e7",
+      "local_semantic_review": "Typed as evidence, motivation or compatibility only; no C1 bridge or premise promotion.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-C006",
+      "kind": "nondeductive_context",
+      "record_sha256": "a18b327cc73c6767440eadf6ecca2e6227f36735256208495646cdaa1ac4d94b",
+      "local_semantic_review": "Typed as evidence, motivation or compatibility only; no C1 bridge or premise promotion.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-C007",
+      "kind": "nondeductive_context",
+      "record_sha256": "44b932eab2c1870ad0b532b52723b52ce4fe5cc541d4c814469c11c10cbf607d",
+      "local_semantic_review": "Typed as evidence, motivation or compatibility only; no C1 bridge or premise promotion.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-C008",
+      "kind": "nondeductive_context",
+      "record_sha256": "6b9e295776000b68fadf795c50fc0089a0fd5ff581a6de607d5ace553d3626e0",
+      "local_semantic_review": "Typed as evidence, motivation or compatibility only; no C1 bridge or premise promotion.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-C009",
+      "kind": "nondeductive_context",
+      "record_sha256": "ad4b3772099ab0bb07b1e6a56ce7f8101ea61dae9ce5b369f4eefacf16c0fc2d",
+      "local_semantic_review": "Typed as evidence, motivation or compatibility only; no C1 bridge or premise promotion.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-C010",
+      "kind": "nondeductive_context",
+      "record_sha256": "8c680ab749c3f12c0499c3762e77ac04e118efd7432bcb8d49f48cfa14c2f864",
+      "local_semantic_review": "Typed as evidence, motivation or compatibility only; no C1 bridge or premise promotion.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-C011",
+      "kind": "nondeductive_context",
+      "record_sha256": "dff04478fc664da4649ff139f79578319047b65ba8f77a8b93cc53de26b2175f",
+      "local_semantic_review": "Typed as evidence, motivation or compatibility only; no C1 bridge or premise promotion.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-C012",
+      "kind": "nondeductive_context",
+      "record_sha256": "34eafbec96b118d74c843cf7916d01724a92795adc33a10ad4a42e88f61b2d0b",
+      "local_semantic_review": "Typed as evidence, motivation or compatibility only; no C1 bridge or premise promotion.",
+      "enabled": false,
+      "actual_application_established": false
+    },
+    {
+      "id": "CTD2-C013",
+      "kind": "nondeductive_context",
+      "record_sha256": "a87b33178aa474221cc77a54d9d52b6bbdbc86bb1d5114db355f11a3fe0c6e42",
+      "local_semantic_review": "Typed as evidence, motivation or compatibility only; no C1 bridge or premise promotion.",
+      "enabled": false,
+      "actual_application_established": false
+    }
+  ],
+  "selected_baseline_core_semantic_comparisons": [
+    "A:TOKEN_CRITERIA",
+    "A:ACTUAL_TOKEN",
+    "A:C1",
+    "A:U1",
+    "R168:PARTIAL_VIEW_NONENTAILMENT",
+    "R169:METRIC_SCALE_GAUGE_NONENTAILMENT",
+    "R169:HELDOUT_CALIBRATION_FALSIFIER",
+    "R177:JOINT_SOURCE_FEATURE_DOMAIN",
+    "R177:SOURCE_FEATURE_SEPARATION",
+    "R188:COMMON_STIMULUS",
+    "R188:IDEAL_NOT_INSTALLED",
+    "R188:INFERENCE_CONTRACT"
+  ],
+  "new_full_semantic_reproof_of_all_1608": false,
+  "fresh_all_historical_source_depth_review": false,
+  "unreviewed_scope": "Full historical proof/source-depth semantics; independent empirical truth of physical/phenomenal contracts; A3M substantive arguments; worldwide novelty priority.",
+  "root_navigation_edits_by_this_script": false,
+  "map_increment_completed": false,
+  "concurrent_checkpoint": {
+    "repository_head": "2faccb45147435b67d901e64f8045cd0e31a8d2a",
+    "id": "A3M20261010",
+    "source_path": "research/uct-agent-consciousness-workspace/records/A3M20261010_Bodily_Familiarity_Invariance/MAP_EXTENSION.json",
+    "source_sha256": "53c2707f43367569da9752c7de18832081a6d1d750beb2ee8be70b122b1da8f1",
+    "nodes": 0,
+    "rules": 0,
+    "contexts": 0,
+    "applications": 5,
+    "enabled": false,
+    "preservation": "No A3M record, claim, OPEN status or argument changed or semantically re-reviewed here."
+  },
+  "publication_coverage": {
+    "inherited_entry_version": "UCT-PUB-v1.0.27",
+    "intended_v02_metadata_version": "UCT-PUB-v1.0.28",
+    "status": "Parent-managed metadata update; no formal publication or scientific premise effect.",
+    "formal_publication_counts_unchanged": true,
+    "new_doi_assigned": false
+  },
+  "evidence_files": [
+    {
+      "path": "RELOCATION_PROVENANCE.json",
+      "sha256": "a2ced2c1bacd5ea457392b1fa48e98dc2d53fba3b66b2920b3788fde614b3e46",
+      "bytes": 3027
+    },
+    {
+      "path": "empirical/WIDTH_RECONSTRUCTION_REPORT.md",
+      "sha256": "40aed07e04f7080f654fd1767f8d925bb875e355208b9525483d1a5728caf9cc",
+      "bytes": 12546
+    },
+    {
+      "path": "empirical/inputs/Experiment_3.xlsx",
+      "sha256": "d3b2fef22f077788e5299dedb68737d453c09b005d9360bab8dfbe6c35852bc9",
+      "bytes": 22409
+    },
+    {
+      "path": "empirical/inputs/Experiment_3_Computational_modelling.xlsx",
+      "sha256": "32e58a814b7d33f52f3dc994a753715d4ddfa21c8ec7424b80ebef43c6d560e4",
+      "bytes": 26022
+    },
+    {
+      "path": "empirical/results/bci_response/cv_fits.json",
+      "sha256": "3c89b2a34460b481a88ed40fe6c2d494b5514aba16d9647eb7423cfe8eb7e83f",
+      "bytes": 3194214
+    },
+    {
+      "path": "empirical/results/bci_response/cv_nesting_repair_summary.json",
+      "sha256": "678985e965e2917bb577b4ee1fca075aa2ae09161704645c2681e3423e859e25",
+      "bytes": 1201
+    },
+    {
+      "path": "empirical/results/bci_response/cv_partition_counts.npz",
+      "sha256": "37a48969f1921095d0a826fc3a83bcdf4b9af8581fab7be6d5ed0394da4374b7",
+      "bytes": 111914
+    },
+    {
+      "path": "empirical/results/bci_response/response_comparison_summary.json",
+      "sha256": "95b37c9c258284ef7d6ab72f77961cb7375eb643b9f3b794654258a0806df0aa",
+      "bytes": 10366
+    },
+    {
+      "path": "empirical/results/gaussian_probability_domain_diagnostics.csv",
+      "sha256": "592759670eceb3708598e589473dccac40d3ca4db6586050f67643deee6a14e2",
+      "bytes": 19329
+    },
+    {
+      "path": "empirical/results/gaussian_reconstruction_summary.json",
+      "sha256": "f644cb0a94916031a98814efedb5a7d0544df525e7b7a29d23fe7d38f7c48826",
+      "bytes": 2175
+    },
+    {
+      "path": "literature/SOURCE_BCI_AUDIT.md",
+      "sha256": "2454251e417a3b30a20a310ec7d94a739d4e23265004a03b6a805d6cbacd57d2",
+      "bytes": 13767
+    },
+    {
+      "path": "literature/V02_NOVELTY_AND_PUBLICATION_AUDIT.md",
+      "sha256": "4046b7ef745065f7cfd93a93fd911a0d4cbc3b60076e8345262d8f27de8f3b60",
+      "bytes": 27097
+    },
+    {
+      "path": "literature/code_archive/modelprediction_log_BCI.m",
+      "sha256": "fd06e42e6e61882475d6d6b4ff10321bd812d7e6c4038b7467dff89f6e8ff814",
+      "bytes": 517
+    },
+    {
+      "path": "literature/source_bci_reconciliation.csv",
+      "sha256": "ed77dc0b97e5e36abf844f31a851335779f98cd701ecc1f1fa0efc93ca39cfe1",
+      "bytes": 7224
+    },
+    {
+      "path": "literature/source_bci_reconciliation.json",
+      "sha256": "31c04b6bdcd85316c47124c2d87ca9f632bfd70a63948ee2f83615db582b0856",
+      "bytes": 1869
+    },
+    {
+      "path": "manuscript/noise-identifiability-bodily-judgments-v0.2.0.md",
+      "sha256": "8c15f9718a2c0daadb3cf85a0b537c71b4595fc46c5b1eb06d0e55db646dfac3",
+      "bytes": 52198
+    },
+    {
+      "path": "review/THEORY_MANUSCRIPT_REVIEW.md",
+      "sha256": "7865ce49b4426883843ddd8052b0bf8dd8790282385ac335c83e53452e681ba9",
+      "bytes": 10115
+    },
+    {
+      "path": "root_analysis/fit_response_models.py",
+      "sha256": "397aaf7711160314176a8703340844c55ab58becdf02a2de94d337b734bc46f4",
+      "bytes": 8821
+    },
+    {
+      "path": "root_analysis/instantiate_response_twins.py",
+      "sha256": "2751d74fa4465b1e75f13aa3cf45bd0312f57ba7f78e411ea765ea27b0809232",
+      "bytes": 10162
+    },
+    {
+      "path": "root_analysis/paired_readout_predictions.csv",
+      "sha256": "89e56aee5fa148fb0e6765837ac2675f31bc78c12c2f480bbd33a88126c953cd",
+      "bytes": 36835
+    },
+    {
+      "path": "root_analysis/response_twin_probabilities.csv",
+      "sha256": "895778dbb4a566adee06fd48be73c8fa659c27ee3aede0557484833cd05fffe3",
+      "bytes": 229131
+    },
+    {
+      "path": "root_analysis/response_twin_summary.json",
+      "sha256": "5822124b66b5e714d9bdcdc9524019bd1aa3ad209de4039ce8c8639a2e7125a2",
+      "bytes": 2254
+    },
+    {
+      "path": "theory/BCI_IDENTIFICATION_CHECKS.json",
+      "sha256": "98c5994fe2a13f39cb3651c5c840096098ca50171b1b7e1c7a75bd04625c6ffe",
+      "bytes": 5351
+    },
+    {
+      "path": "theory/RESPONSE_COMPARISON_AUDIT.json",
+      "sha256": "24e160d6b7db281162a20a0b519a6e13ea74be3b5db5d7ba28dfe6106dfff764",
+      "bytes": 3537
+    },
+    {
+      "path": "theory/RESPONSE_COMPARISON_AUDIT.md",
+      "sha256": "49101fc5c891ea75f6753f5b2f976d6d03279a4d8ff990c96d92ce55928bdb9a",
+      "bytes": 6381
+    },
+    {
+      "path": "theory/RESPONSE_IDENTIFIABILITY_RESULTS.md",
+      "sha256": "a4c7588b47082dbe860a39ab133b04bbd4052bd2a77e507bc2d51c8dd31dbca8",
+      "bytes": 23891
+    },
+    {
+      "path": "theory/SYMMETRY_ANALYSIS_PLAN.json",
+      "sha256": "876e8e05fb88e403ffcbd7f50ce8f63b65f253ceb5f599d5f21180538667c17f",
+      "bytes": 2477
+    },
+    {
+      "path": "theory/SYMMETRY_TEST_REPORT.md",
+      "sha256": "a6164a6c87462f8aa6e36a3cf3fcd72c3f7bf6dfa2f4cdef0377dc822e0b9c03",
+      "bytes": 8774
+    },
+    {
+      "path": "theory/SYMMETRY_TEST_RESULTS.json",
+      "sha256": "9e40fb55aac6595e46338f82214331ce4a3bcae14077e1271982ccffdf91d383",
+      "bytes": 3300
+    },
+    {
+      "path": "theory/bci_identification.py",
+      "sha256": "88bf1d98258de78bdc3c09db7155ce31dd737d7a8b61debee36559a91cc9c2d0",
+      "bytes": 7008
+    },
+    {
+      "path": "theory/check_bci_identification.py",
+      "sha256": "691f89ecee6c0ca762d7ea67f5030237b55acffccb3576562e33c5dfc6c2ee05",
+      "bytes": 12404
+    },
+    {
+      "path": "theory/symmetry_conditional_simulations.npz",
+      "sha256": "eec07532caefe82f3dd588a33d02c4d25b8287e1e1fefe8d67781b4bc9964fd7",
+      "bytes": 165084
+    },
+    {
+      "path": "theory/symmetry_pair_diagnostics.csv",
+      "sha256": "893a2557a3d32bd410af42284f9ac5eb08669a4a003833537d76eccda021e0c2",
+      "bytes": 25894
+    },
+    {
+      "path": "theory/test_source_symmetry.py",
+      "sha256": "58d0d2601f9b671f627211c115cdd802a66c51fea2e7d2b9882ecfb4c1156a92",
+      "bytes": 7373
+    }
+  ],
+  "policy_sources": [
+    {
+      "path": "RESEARCH_MASTER_GUIDE.md",
+      "sha256": "a4b8d7c91a2be0f00817497888c801eae94b92eb14a8342719a7d83334839f2c"
+    },
+    {
+      "path": "FORMAL_MAP_REVIEW_POLICY.json",
+      "sha256": "5e743007e31f1ee37241e932f8358d3cdc72b0ee88bfb51d5156b5c782e939c2"
+    },
+    {
+      "path": "PUBLICATION_COVERAGE.json",
+      "sha256": "c21dac134f7f4e4acbc3da4cd3681e487e8d3c48fd578c67187fe820b164a89e"
+    }
+  ],
+  "reading_scope": "Current master-guide core policy read; governance policy and baseline/candidate records read. Historical AGENTS/review ledgers were sampled by relevant core/current sections, not claimed complete. Completed graph fully parsed structurally from the v1.1.2 capsule, not substituted by the smaller root historical graph."
+}

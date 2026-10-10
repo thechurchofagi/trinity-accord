@@ -1,0 +1,50 @@
+[
+  {
+    "name": "NLL_BCI_EEG.m",
+    "url": "https://osf.io/download/32k54/",
+    "final_url": "https://storage.googleapis.com/cos-osf-prod-files-de-1/43bd2c6df3c7c860496efeb35cd4666178b06ee9eb251ccaee13110bce8532fa?response-content-disposition=attachment%3B%20filename%3D%22NLL_BCI_EEG.m%22%3B%20filename%2A%3DUTF-8%27%27NLL_BCI_EEG.m&GoogleAccessId=files-de-1%40cos-osf-prod.iam.gserviceaccount.com&Expires=1791617994&Signature=o%2FvTZh6WJPLQQC7mD3oWXb8FJR1rIwUnuRXmwAL1rSHP2Nx3q6JCoaQxr9M7aYu%2FeZjFXLT732I8Lfi7luzb%2FTv7TyW7DFlthVCGUvQ3PtUZ1WOMpW16TGCQndRVLIuz4vWCRR36K5qcV2RZEeYr690pwD3Gck9MjoyEmL%2FK9b5rq4xfP6QEU4D0%2FOlZKdDGVGNFS9d2662S4XXUwyTqH4vgvlwPHBk56ZPF3DEJbfASCoz0oQ18h0a1Gvnz0dZAAQmt9LhvrgSISsce0FY8e8egfd%2BsmyqEjhAphxIfHGRbyP5DcfZ9TAI5HcByCrDFSr3sX7ez6eYmHg7iu1Z50Q%3D%3D",
+    "status": 200,
+    "bytes": 803,
+    "sha256": "43bd2c6df3c7c860496efeb35cd4666178b06ee9eb251ccaee13110bce8532fa",
+    "retrieved_utc": "2026-10-10T07:38:57.543735+00:00"
+  },
+  {
+    "name": "NLL_BCI_tACS_Psame.m",
+    "url": "https://osf.io/download/bgxn6/",
+    "final_url": "https://storage.googleapis.com/cos-osf-prod-files-de-1/21d8f3880d97e1b1e5b60d67d4f2febb2f7fe05cb681e6a24f5e952bf4a0fa9b?response-content-disposition=attachment%3B%20filename%3D%22NLL_BCI_tACS_Psame.m%22%3B%20filename%2A%3DUTF-8%27%27NLL_BCI_tACS_Psame.m&GoogleAccessId=files-de-1%40cos-osf-prod.iam.gserviceaccount.com&Expires=1791617993&Signature=CEaL0MATBsaR2I2eH8aZU9uos6mN6%2F6dmZS%2FE0%2FYGcs53jVLxcNljuOMqtpXcQpsQIipJAbhqePouKnf9jzcI5lsboOzLup2LDva2l5N79xVk89umfayBLHXcwt1doNuWqR%2F%2Blem4Prj6pI%2B5nBxdxar0FsHW%2FZwpwWBgn83W5aCArldKxmYx3KfBq6NnxUk21%2FC1ROFYKrCkYYUrWEYgA243kpBQYNSoIGWCUG6na2gczU%2BgtDBvacAE4BL0LGEhrAxqKqY7xe4ttXG8Ro4EWp2DzRWjoi1FxU9Gt5eRiRc5xMoqazALSOchXAhKNoTBBBLmWg1cBzot8ZuuvByQQ%3D%3D",
+    "status": 200,
+    "bytes": 1437,
+    "sha256": "21d8f3880d97e1b1e5b60d67d4f2febb2f7fe05cb681e6a24f5e952bf4a0fa9b",
+    "retrieved_utc": "2026-10-10T07:38:58.140409+00:00"
+  },
+  {
+    "name": "NLL_BCI_tACS_Sigma.m",
+    "url": "https://osf.io/download/vnfbx/",
+    "final_url": "https://storage.googleapis.com/cos-osf-prod-files-de-1/76f00bd51c4f880a03ae024597cafa9bcff4c5b64a9086bde4d0510a7435edc9?response-content-disposition=attachment%3B%20filename%3D%22NLL_BCI_tACS_Sigma.m%22%3B%20filename%2A%3DUTF-8%27%27NLL_BCI_tACS_Sigma.m&GoogleAccessId=files-de-1%40cos-osf-prod.iam.gserviceaccount.com&Expires=1791617993&Signature=TZsAR2t06U9F3tzJzl8JtEnqDIYfN6idAFhxZk7vXg643DTSjhgQbXEordofh6yCVTFPc6Hao7eKOUIZ%2Fy8C%2BVGse3EjVAPqxD4u%2Bh5uvhoYC3XS4adiQ6tnclPxK2LS%2FGUlQOFf7LBsEoLLt%2F%2Be9vOVe0ZC91apF2VUED4z0WnkyLFOsXiJrhCxeg0Bh%2B30SlfCoStwwjBbN04gyH4G5fXV%2FBRC53F63MmpAh%2B5w7hr1zDi1dxRsgMLRKEfDxqHa7pi0N%2FDkPrCDTMlNUTGKWV3E4WD2al%2BSquvbd8fi%2BvECbWowREkRuG994N8qcb5FEOMsie%2BNYpx%2BSBAeiAWoQ%3D%3D",
+    "status": 200,
+    "bytes": 1372,
+    "sha256": "76f00bd51c4f880a03ae024597cafa9bcff4c5b64a9086bde4d0510a7435edc9",
+    "retrieved_utc": "2026-10-10T07:38:58.224934+00:00"
+  },
+  {
+    "name": "Master_BCI.m",
+    "url": "https://osf.io/download/pnmsx/",
+    "sha256": "06e5122cbe1ed7852eb3b3a429ab984125244f76edc503ed32ac33dc3195bb9d",
+    "bytes": 11332,
+    "copied_from_existing_verified_download": "/workspace/scratch/5b73aae6b1e4/empirical/Master_BCI.m"
+  },
+  {
+    "name": "modelprediction_log_BCI.m",
+    "url": "https://osf.io/download/uk2en/",
+    "sha256": "fd06e42e6e61882475d6d6b4ff10321bd812d7e6c4038b7467dff89f6e8ff814",
+    "bytes": 517,
+    "copied_from_existing_verified_download": "/workspace/scratch/5b73aae6b1e4/empirical/modelprediction_log_BCI.m"
+  },
+  {
+    "name": "ReadMe_BCI.txt",
+    "url": "https://osf.io/download/u5anz/",
+    "sha256": "442b5cf7e81545edab00e7680af8a2a23ca3a28fa2b4a2881d16c77f8a3a921e",
+    "bytes": 1201,
+    "copied_from_existing_verified_download": "/workspace/scratch/5b73aae6b1e4/empirical/ReadMe_BCI.txt"
+  }
+]

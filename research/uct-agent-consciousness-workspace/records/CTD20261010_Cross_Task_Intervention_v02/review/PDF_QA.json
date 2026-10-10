@@ -1,0 +1,26 @@
+{
+  "pdf_sha256": "f1441d6e945e5208e2616976975ce1599e60daf7c484bb49a1c069ae4a3f3d29",
+  "pdf_bytes": 220000,
+  "pages": 18,
+  "figure_caption_pages": [
+    6,
+    9,
+    11
+  ],
+  "text_spans_crossing_35pt_margin": [],
+  "rendered_all_pages": true,
+  "visual_review_status": "PASS_FINAL_ALL_18_PAGE_CONTACT_READBACK",
+  "contact_sheets_inspected": "all 18 pages in three six-page sheets",
+  "selected_full_pages_inspected": [
+    1,
+    7,
+    10,
+    16
+  ],
+  "all_three_figure_pngs_inspected": true,
+  "findings": "Readable text, tables, figures and equations; no clipped spans, overlapping labels or blank pages. Remaining end-of-main and end-of-references whitespace is intentional.",
+  "scope": "Visual document QA, not external peer review or new scientific tests.",
+  "manuscript_sha256": "8c15f9718a2c0daadb3cf85a0b537c71b4595fc46c5b1eb06d0e55db646dfac3",
+  "layout_correction": "A trial with freely floating figures left section 4 heading at a page end. Restored controlled figure placement; moved Figure2 after both Section5 subsections to reduce blank space.",
+  "final_review_completed_utc": "2026-10-10T08:26:11.742420+00:00"
+}

@@ -1,0 +1,665 @@
+           Parietal alpha frequency shapes own-body
+perception by modulating the temporal integration of
+                               bodily signals
+
+
+ Mariano D’Angelo* 1, Renzo C. Lanfranco 1, Marie Chancel 2, H. Henrik Ehrsson 1
+
+
+         1. Department of Neuroscience, Karolinska Institutet, Stockholm, Sweden
+2. Aix Marseille Univ, CNRS, CRPN (Centre de Recherche en Psychologie et Neurosciences -
+                               UMR 7077), Marseille, France
+
+
+                     *correspondence: mariano.dangelo@ki.se
+
+
+
+
+                                          1
+Supplementary Methods
+Participants inclusion test
+       Participants who do not experience a clear reliable rubber hand illusion are not able to make
+ownership discrimination in the body ownership judgment task. Therefore, participants underwent
+first an inclusion test to ensure that they could experience the illusion and be able to perform body
+ownership judgments in the main experiment. In the inclusion test, the visuo-tactile stimulation to
+induce the rubber hand illusion was identical to the one used in synchronous condition of the main
+experiment. The robots applied six synchronous touches to the index finger of the rubber hand and to
+the participant’s hidden real index finger for 12 seconds. At the end of the stimulation, participants
+were asked to complete a 9-items questionnaire to assess the ownership sensed over the rubber hand
+(Attachment 1). Participants were asked to indicate the extent of their agreement or disagreement
+with six statements using a seven-point Likert scale, ranging from −3 (“I completely disagree”) to +3
+(“I completely agree”), with a response of 0 indicating “neither agreed nor disagreed”. Three of the
+statements examined the perception of the illusion (Q1–Q3) and the remaining two statements were
+designed to control suggestibility and task compliance (Q4-Q9). Our inclusion criteria for a rubber
+hand illusion strong enough for participation in the main psychophysics experiment were as follows:
+(i) a mean score for the illusion statements (Q1, Q2, and Q3) of greater than 1 and (ii) a difference
+between the mean score for the illusion items and the mean score for the control items of greater than
+1.
+
+
+
+
+                                                  2
+Supplementary figures and table
+Experiment 2: correlations between resting-state IAFs and perceptual performance
+
+
+
+
+Fig. S1. | Correlations between resting-state Individual Alpha Frequency (IAF) in the left parietal lobe and
+perceptual performance in Experiment 2. a, c, Correlation between resting-state IAF measured in the left posterior
+parietal cortex and body ownership (Pearson’s r = -0.536; p < 0.001; N = 46) and simultaneity TBWs (Pearson’s r = -
+0.519; p < 0.001; N = 46). b, d, Correlation between resting-state IAF in the left posterior parietal cortex and body
+ownership sensitivity (Pearson’s r = 0.471, p = 0.001; N = 46) and simultaneity sensitivity (Pearson’s r = 0.420; p = 0.004;
+N = 46). In all graphs, the solid line represents the best-fitting regression. The shaded region reflects the 95% confidence
+interval. Source data are provided as a Source Data file.
+
+
+
+
+                                                             3
+Experiment 3: results of the Bayesian computational model
+
+
+
+
+Fig. S2 | Results of the computational modelling in Experiment 3. a,b, Raw difference in AIC (a) and BIC (b) for each
+participant (N =30) between the BCI_Sigma and the BCI_Psame models. A negative value means that the first model
+outperforms the latter. Source data are provided as a Source Data file.
+
+
+
+
+Experiment 3: Confidence intervals for the AIC and BIC differences between the two models
+
+
+
+Table S1: Bootstrapped confidence intervals (95% CI) for the AIC and BIC differences between a model that assumes a
+change in the level of sensory uncertainty and a model assuming a change in the a priori probability for a common source
+for the visual and tactile inputs. A negative value means that the first model is a better fit the data observed in the tACS
+Experiment
+
+ Model comparison                      AIC (95 % CI)                                 BIC (95 % CI)
+
+                         lower bound     raw sum       higher bound   lower bound      raw sum       higher bound
+   BCISigma-BCIPsame
+                             -165          -112            -61             -407          -355           -304
+
+
+
+
+                                                             4
+Supplementary Results
+Experiment 2: no correlation between alpha power and body ownership and simultaneity TBW
+       We found no relationship between body ownership TBW and resting-state alpha power in
+either the left (Pearson’s r = -.004; p =.981; Spearman’s ρ = .114; p = .451) or right hemispheres
+(Pearson’s r = = -.026; p =.864; Spearman’s ρ = .066; p = .663). No significant correlation was found
+between body ownership TBW and task related alpha power measured during body ownership
+judgments (left parietal lobe: Pearson’s r = -.067, p = .659; Spearman’s ρ = -.005; p = .976; right
+parietal lobe: Pearson’s r = -.100, p = .507; Spearman’s ρ = -.039, p =.797).
+       Similarly, no relationship emerged between visuotactile simultaneity TBW and resting-state
+alpha power (left hemisphere: Pearson’s r = .131, p = .385; Spearman’s ρ = .170, p = .259; right
+hemisphere: Pearson’s r = .212, p = .157; Spearman’s ρ = .193, p = .199). No relationship emerged
+between simultaneity TBW and task-related alpha power measured during simultaneity judgments in
+either hemisphere (left: Pearson’s r = .129; p =.393; Spearman’s ρ = .089; p = .555; right: Pearson’s r
+= .173; p = .249; Spearman’s ρ = .201; p = .180).
+
+
+Experiment 2: no correlation between alpha power and body ownership and simultaneity
+sensitivities
+       There was no correlation between sensitivity to body ownership and task-related alpha power,
+in either the left (Pearson’s r = -.083, p =.584; Spearman’s ρ = .022; p = .885) or right parietal lobes
+(Pearson r = .024, p =.874; Spearman’s ρ = .093; p = .537), nor was there any correlation between
+body ownership sensitivity and resting-state alpha power in the left (Pearson’s r = -.060, p = .692;
+Spearman’s ρ = -.055, p = .717) and right (Pearson’s r: -.024; p = .874; Spearman’s ρ = .011, p = .941)
+parietal lobe. Similarly, no correlation emerged between sensitivity to visuotactile simultaneity and
+task-related alpha power in either the left (Pearson’s r = -.185, p = .218; Spearman’s ρ = -.112, p =
+.457) or right (Pearson’s r = -.177, p = .238; Spearman’s ρ = -.147, p = .329) parietal cortex, nor with
+left (Pearson’s r = -.106, p = .482; Spearman’s ρ = -.104, p = .493) and right (Pearson’s r = -.223, p =
+.137; Spearman’s ρ = -.138, p = .359) resting-state alpha power.
+
+
+Experiment 2: alpha power is reduced during body ownership and simultaneity judgments.
+       Bodily illusions are typically associated with a reduction in alpha power. To examine whether
+this was also the case in our data, we conducted a 3 × 2 ANOVA on alpha power, with Condition
+(Ownership judgments, Simultaneity judgments, resting state) and Hemisphere (Left, Right) as
+factors. This analysis aimed to test whether alpha power was reduced during the perceptual tasks
+compared to the resting state. We indeed found a main effect of condition (F2,90 = 13.879; p < 0.001;
+                                                    5
+ηp2 = 0.236) such that the alpha power was lower during body ownership (t = -3.792; p <.001) and
+simultaneity judgments (t = -3.753; p <.001) as compared to the resting state. This result supports
+previous findings showing that bodily illusions and active multisensory processing are associated
+with alpha desynchronization, likely reflecting increased cortical excitability and engagement of
+multisensory areas.
+
+
+Experiment 2: no correlation between IAF and bias in body ownership and simultaneity
+judgments
+       As a further control analysis, we also searched for possible associations between IAF and bias
+in body ownership and simultaneity judgments. The bias in body ownership does not correlate with
+task-related IAF measured during body ownership judgments, neither in the left (Pearson’s r = .041,
+p = .788; Spearman’s ρ = .030 p = .844) nor right parietal cortex (Pearson’s r = .046, p = .764;
+Spearman’s ρ = .052, p = .732). Similarly, no relationship emerged between the bias in body
+ownership judgments and parietal resting-state IAF (left: Pearson’s r = .121, p = .423; Spearman’ s ρ
+= .025, p =.867; right: Pearson’s r = -.006, p = .969; Spearman’ s ρ = -.029, p = .846). Moreover, no
+significant relationship emerged between bias in simultaneity judgments and parietal task-related IAF,
+either in the left (Pearson’s r = .119, p = .432; Spearman’s ρ = .153, p = .310) or right lobes (Pearson’s
+r = .129, p = .391; Spearman’s ρ = .109, p = .471). Similarly, no relationship emerged between bias
+in simultaneity task and resting-state IAF in the parietal left (Pearson’s r = -.116, p = .441; Spearman’
+s ρ = -.075, p = .619) or right (Pearson’s r = .053, p = .727; Spearman’s ρ = -.023, p = .879) lobes.
+Therefore, our results suggest that IAF determines body ownership and simultaneity sensitivity, rather
+than being related to body ownership and simultaneity bias (e.g., more liberal or conservative
+responses).
+
+
+Experiment 2: correlation between body ownership and simultaneity TBWs and their
+perceptual sensitivities
+       Experiment 2 successfully replicated the behavioural findings of Experiment 1. Body
+ownership and visuotactile simultaneity TBWs positively correlated (Pearson’s r = .563; p < .001;
+Spearman’s ρ = .590; p < .001; Fig S3a). Similarly, body ownership sensitivity correlated with
+simultaneity sensitivity (Pearson’s r = .652; p < .001; Spearman’s ρ = .662; p < .001; Fig. S3b). Using
+a paired t-test, we ascertain that body ownership TBW was significantly wider than that of
+simultaneity TBW (t = 5,912; p < .001). Two ANOVAs conducted on body ownership and
+simultaneity sensitivities with asynchronies as factors revealed that both body ownership sensitivity
+(F 3,135 = 586,953; p < .001; ηp2 = .929) and simultaneity sensitivity (F 3,135 = 529.727; p < .001; ηp2 =
+
+                                                    6
+.922) increased with the increasing of the asynchronies. Moreover, sensitivity to body ownership
+(AUC d’) was lower as compared to sensitivity to simultaneity (t = -6,793; p < .001).
+
+
+
+
+Fig. S3 | Behavioural correlations in Experiment 2. a, Behavioural correlation (Pearson’s r = 0.536; p < 0.001; N = 46)
+between body ownership and visuo-tactile temporal binding windows (TBW). b, Behavioural correlation (Pearson’s r =
+.652; p < .001; N = 46) between sensitivity to simultaneity and sensitivity to body ownership. In both graphs, the solid
+line represents the best-fitting regression. The shaded region reflects the 95% confidence interval. AUC denote the area
+under the curve of d’ scores measured for each asynchrony. Source data are provided as a Source Data file.
+
+
+Experiment 2: IAF modulation between the two tasks
+        Next, we examined whether task-related changes in individual alpha frequency (IAF) reflect
+the different temporal demands of body ownership and simultaneity judgments. We hypothesized that
+alpha frequency would speed up during simultaneity judgments, as these require temporal segregation
+of visual and tactile input signals, i.e., higher temporal precision, to detect small delays. Previous
+studies have shown that alpha rates slow during tasks involving sensory integration and speed up
+when temporal segregation is required1,2. Therefore, we anticipate shorter alpha frequencies in the
+simultaneity task, reflecting the demand for precise timing in detecting simultaneity. In contrast, the
+body-ownership task lacks this temporal precision requirement and instead reflects a bodily illusion
+that builds over time through multisensory integration.
+        To this aim, we run an ANOVA with task (body ownership and simultaneity judgments) and
+laterality (left and right parietal lobes) as factors. We found that the IAF was slower when participants
+performed body ownership as compared to simultaneity judgments (F 1,45 = 6,32; p = .016; ηp2 = .123).
+Additionally, IAF was faster in the right as compared to left parietal lobe (F1,45 = 12,566; p = .001;
+ηp2 = .218), with no significant interaction between hemisphere and task observed. In contrast, alpha
+
+                                                           7
+power was not modulated by the task (F1, 45 = 0.241; p =.626; ηp2 = 0.005), but it was lower in the left
+as compared to the right hemisphere (F1, 45 = 5.849; p = 0.020; ηp2 = 0.115).
+       We reasoned that modulation of IAF between simultaneity and body ownership judgments
+could be associated with variations in TBW and sensitivity across the two tasks. To test this
+hypothesis, we calculated the difference between the TBW (Δ TBW) in body ownership and
+simultaneity judgments as a proxy for task-related TBW modulation, along with the difference in
+sensitivity (Δ d’) as a measure of sensitivity modulation. Similarly, we averaged the alpha frequency
+peak measured in the two parietal ROIs for each task. Then, the difference between the alpha peak
+measured in the body ownership and simultaneity judgments (Δ IAF) was taken as the measure of the
+degree to which each participant regulates the IAF in the two tasks. We found a positive correlation
+between Δ IAF and Δ TBW (Pearson’s r = .355; p = .016; Spearman’s ρ = .435, p = .003), as well as
+Δ IAF and Δ sensitivity (Pearson’s r = .306; p = .039; Spearman’ s ρ = .375, p = .010). Indeed, a larger
+difference in IAF between the two tasks was associated with a more pronounced task-related change
+in both TBW and sensitivity. This indicates that some of the differences in TBW and sensitivity
+between the two tasks are probably related to the shift in alpha frequency during task performance.
+This probably reflects a narrowing of the TBW and speeding up of alpha in the simultaneity task,
+which maximizes the demands on the temporal segregation of the visual and tactile signals, compared
+to the body ownership task that is not a ‘temporal task’ but a task about the illusory feeling of the
+rubber hand as one’s own or not. However, when we calculated FOOOF-IAF, we did not find any
+significant differences in the alpha peak between the two tasks. Therefore, we cannot exclude the
+possibility that the modulation of the alpha peak by the perceptual task demand may be driven by the
+aperiodic component of alpha frequencies. Thus, our findings about task-related modulations of IAF
+should be interpreted with caution. (see FOOOF Results).
+
+
+Experiment 2: no correlation between alpha power and sensory uncertainty
+       We found no significant relationship between sensory uncertainty and alpha power measured
+during the body ownership judgments both in the left (Pearson’s r = .011; p = .940, Spearman’ ρ: -
+.031; p = .837) and right parietal lobes (Pearson’s r = .020; p = .895; Spearman’s ρ: -.024; p = .877).
+Similarly, there was no correlation between alpha power measured during the simultaneity judgments
+and sensory uncertainty () in the left (Pearson’s r = -.010; p = .947; Spearman’s ρ = -115; p = .446)
+and right parietal cortex (Pearson’s r = -.023 p = .878; Spearman’s ρ = -117; p = .441) Resting-state
+alpha power also did not correlate with sensory uncertainty (left: Pearson’s r = -.119; p = .430;
+Spearman’s ρ = -.055; p = .717; right: Pearson’s r = -.045; p = .768; Spearman’s ρ = -.058; p = .704).
+
+
+                                                   8
+Experiment 2: no correlation between IAF and prior probability of a common cause between
+vision and touch
+       The prior probability for a common cause between visual and tactile stimuli in the body
+ownership task did not show any correlation with neither task-related IAF (left parietal lobe: Pearson
+r = .031; p = .851; Spearman’s ρ = -.033; p = .845; right parietal lobe: Pearson r = .055; p = .742;
+Spearman’s ρ = -.008; p = .960) and resting-state IAF (left parietal lobe: Pearson r = .187; p = .262;
+Spearman’s ρ = -.167; p = .315; right parietal lobe: Pearson r = .221; p = .183; Spearman’s ρ = .195;
+p = .240). Similarly, the prior probability for a common cause in the visuotatcile simultaneity
+judgments did not show any correlation with neither task-related IAF (left parietal lobe: Pearson r =
+-.043, p = .797; Spearman’s ρ = .-.052, p = .756; right parietal lobe: Pearson r = -.083; p = .618;
+Spearman’s ρ = -.105, p = .529) and resting-state IAF (left parietal lobe: Pearson r = .240; p = .146;
+Spearman’s ρ = .307, p = .060; right parietal lobe: Pearson r = .180; p = .280; Spearman’s ρ = .204;
+p = .218).
+
+
+
+Experiment 2: FOOOF analysis
+The local maximum power method used in the main manuscript to calculate the IAF has some
+limitations. First, not all the participants might show a clear peak in the alpha band. Indeed, during
+task engagement alpha activity is suppressed, and the identification of a frequency band’s peak
+becomes more challenging and less reliable. Secondly, EEG signal reflects not only the periodic (i.e.,
+oscillatory) component, but also additional background aperiodic activity. This aperiodic activity is
+present across all frequencies and follows a 1/f power distribution, whereby spectral power decreases
+as frequency increases3-6. Recent works highlight the risk that correlations with the aperiodic
+component could be erroneously interpreted as relationships with oscillations, especially when
+focusing on a narrow band of interest4,6. To account for these limitations, we implemented the recent
+"Fitting Oscillations and One Over F" (FOOOF) algorithm to increase the precision of periodic
+estimates by modeling brain oscillations after excluding the aperiodic component3. To address the
+limitations of the local maximum method in estimating the individual alpha peak, we also
+implemented the FOOOF algorithm. This allowed us to increase the precision of the oscillation
+estimates by excluding the aperiodic component of the EEG spectrum. We applied the FOOOF
+algorithm3 to Welch’s power spectral density (PSD) data using the FOOOF/Specparam function in
+Brainstorm7 for MATLAB. This algorithm was implemented separately on each electrode for the
+alpha frequency range (8–13 Hz) with a sliding time window with 50% overlap to fit spectral peaks,
+using default parameters: a Gaussian distribution, a minimum number of peaks of 3, a minimum peak
+
+                                                  9
+height of 2 dB, and a proximity threshold of two standard deviations from the largest peak. To assess
+the FOOOF model’s performance, we quantified the goodness of fit (R²) for the body ownership,
+simultaneity judgment, and resting-state conditions across all electrodes of interest. We then extracted
+peak parameters from the periodic component and calculated the IAF.
+
+
+
+Experiment 2: FOOOF results
+       In the resting state condition, FOOOF algorithm successfully identified an alpha peak (8-13
+Hz) in most of the 12 electrodes of our ROIs (mean electrodes with a peak: 11,282; range: 0-12; mean
+fitted peak R2 = 0,968; SD = 0,015). In the body ownership judgments, the FOOOF algorithm found
+a peak on 9,369 electrodes on average (range: 0-12; mean fitted peak R2 = 0,973; SD = 0,025) while
+in the simultaneity judgments the algorithm identified a peak in 9,500 electrodes (range: 0-12; mean
+fitted peak R2 = 0,976; SD = 0,016). Alpha oscillations might be suppressed during perceptual task
+and peak identification become more challenging, this is probably why we found a greater number of
+fitted peaks in the resting state as compared to body ownership and simultaneity judgments. Since the
+FOOOF algorithm identified more peaks in the resting state compared to the perceptual tasks, we
+conducted two analyses: one focusing on the resting state IAF, including all participants who had at
+least one alpha peak identified in each ROI (N = 43; mean electrodes with a peak: 11,906 range: 9-
+12); and another focusing on task-related IAF, which included only participants with at least one alpha
+peak identified in each ROI for both the body ownership and simultaneity judgment tasks (N = 35;
+mean electrodes with a peak: 11,319; range: 4-12)
+
+
+Experiment 2: correlation between FOOOF-IAF and TBWs
+       We observed a negative correlation between parietal resting state FOOOF-IAF and body
+ownership TBW in both the left (Pearson’s r = -.459; p = .002; Spearman’s ρ = -.561; p < .001 N =
+43) and right (Pearson’s r = -.469; p = .002; Spearman’s ρ = -.512; p < .001; N = 43) lobules. Similarly,
+resting state FOOOF-IAF correlated with simultaneity TBW in the left (Pearson r = -.598; p < .001;
+Spearman’s ρ = -.656; p < .001; N = 43) and right hemispheres (Pearson’s r = -.540; p < .001,
+Spearman’s ρ = -.576; p < .001; N = 43). We also found significant correlations when considering
+task-related FOOOF-IAF in participants whose alpha peak was successfully fitted during the
+perceptual judgments. Specifically, IAF correlated with body ownership TBW in both left (Pearson’s
+r = -.556; p =.001, Spearman’s ρ = -.551; p = .001; N = 35; Fig S4a) and right parietal cortex
+(Pearson’s r = -.569; p < .001, Spearman’s ρ = -.562 < .001; N = 35). Similarly, task related IAF
+correlated with simultaneity TBW in both left (Pearson’s r = -.646; p < .001, Spearman’s ρ = -.617 <
+
+                                                   10
+.001; N = 35; Fig S4c) and right hemispheres (Pearson’s r = -.648; p < .001, Spearman’s ρ = -.631; p
+< .001; N = 35)
+
+
+Experiment 2: correlation between FOOOF-IAF and sensitivity
+       We found a positive and significant correlation between resting-state FOOOF-IAF and
+sensitivity to body ownership in both hemisphere (left: Pearson’s r = .405, p = .007; Spearman’s r =
+.439, p = .003; right: Pearson’s r: .426, p = .004; Spearman’s ρ = .435, p = .004; N = 43). Resting state
+IAF correlated also with sensitivity to visuotactile simultaneity in both left (Pearson’s r = .589, p <
+.001; Spearman’s ρ = .638, p < .001; N = 43) and right hemisphere (Pearson’s r = .569, p < .001;
+Spearman’s ρ = .598, p < .001; N = 43). We also found positive correlations when considering task-
+related FOOOF-IAF. Specifically, task related IAF correlated with body ownership sensitivity in both
+left (Pearson’s r = .614, p < .001; Spearman’s ρ = .581, p < .001; N = 35; Fig S4b) and right
+hemispheres (Pearson’s r = .580, p < .001; Spearman’s ρ = .565, p < .001; N = 35). Task related
+FOOOF-IAF also significantly correlated with visuotactile simultaneity sensitivity in both left
+(Pearson’s r = .715, p < .001; Spearman’s ρ = .664, p < .001; N = 35; Fig S4d) and right parietal
+lobules (Pearson’s r = .644, p < .001; Spearman’s ρ = .629, p < .001; N = 35)
+
+
+
+
+                                                   11
+Fig S4 | Correlations between task-related FOOOF-Individual Alpha Frequency in the left parietal lobe and
+perceptual performance in Experiment 2. a, c, Correlation between task-related FOOOF-IAF measured in the left
+posterior parietal cortex and body ownership (Pearson’s r = -.556; p =.001; N = 35) and visuotactile simultaneity TBWs
+(Pearson’s r = -.646; p < .001; N = 35). b, d, Correlation between task-related FOOOF-IAF in the left posterior parietal
+cortex and sensitivity to body ownership (Pearson’s r = .614, p < .001; N = 35) and to visuotactile simultaneity (Pearson’s
+r = .715, p < .001; N = 35). In all graphs, the solid line represents the best-fitting regression. The shaded region reflects
+the 95%. Source data are provided as a Source Data file.
+
+
+Experiment 2: correlation between FOOOF-IAF and sensory uncertainty
+         When considering the relationship between resting state FOOOF-IAF and sensory uncertainty
+we found a significant correlation in the left hemisphere (Pearson’s r = -.319, p = .037; Spearman’ ρ
+= -.416; p = .006; N = 43) and a close to significant correlation in the right hemisphere (Pearson’s r
+= -.299, p = .051; Spearman’ ρ = -.352; p = .021; N = 43). Task evoked FOOOF-IAF measured during
+body ownership judgments, significantly correlated with the level of sensory uncertainty in both left
+
+                                                            12
+(Pearson’s r = -.549, p = .001; Spearman’ ρ = -.571, p < .001; N = 35; Fig S5a) and right (Pearson’s
+r = -.471, p = .004; Spearman’ ρ = -.482, p = .003; N = 35) parietal lobes. Similarly, FOOOF-IAF
+measured during simultaneity judgments correlated with the level of sensory uncertainty in both left
+(Pearson’s r = -.541, p = .001; Spearman’ ρ = -.526, p = .001; N = 35; Fig. S5b) and right (Pearson’s
+r = -.537, p = .001; Spearman’ ρ = -.492, p = .003; N = 35) hemisphere.
+
+
+
+
+Fig. S5 | Correlations between task-related FOOOF-Individual Alpha Frequency (IAF) in the left parietal lobe and
+the level of sensory uncertainty () in Experiment 2. a, b, Correlation between sensory uncertainty () and task-related
+IAF measured during body ownership (Pearson’s r = -.549, p = .001; N = 35) and simultaneity judgments (Pearson’s r =
+-.541, p = .001; N = 35). In both graphs, the solid lines represent the best-fitting regression. The shaded regions reflect
+the 95% confidence interval. Source data are provided as a Source Data file.
+
+
+
+Experiment 2: IAF modulation between body ownership and simultaneity judgments.
+         When computing the IAF using the local maximum method, we found that IAF measured
+during body ownership judgments was slower as compared to the IAF measured during simultaneity
+judgments. However, when controlling for the aperiodic component we found no significant
+differences in the FOOOF-IAF between body ownership and simultaneity judgments (F1,34 = 0.671,
+p = .418, ηp² = .019). Moreover, we found no significant differences between left and right parietal
+lobes (F1,34 = 3.398, p = .074, ηp² = .091).
+
+
+Experiment 2: relationship between FOOOF-derived premotor IAF and body ownership and
+visuotactile simultaneity TBWs and sensitivities.
+                                                            13
+       We conducted an exploratory post-hoc analysis to examine whether FOOOF derived IAF
+extracted from electrodes corresponding to the premotor cortex would show a similar pattern of
+correlations as observed for parietal IAF. This analysis was motivated by evidence implicating the
+premotor cortex, particularly its ventral portion, in the experience of body ownership9,10. To this end,
+we selected two frontal ROIs corresponding to electrodes over the premotor cortex, including its
+ventral regions: D7, D6, D5, D4, D3, C24, C32, C26, C25 (left hemisphere) and C11, C3, C4, C5,
+C6, C7, C12, C13, C10 (right hemisphere). FOOOF successfully identified IAF for the majority of
+the 18 selected electrodes during the resting state (mean = 17.087; range = 10–18), as well as during
+the body ownership task (mean = 15.391; range = 2–18) and the visuotactile simultaneity judgments
+(mean = 15.652; range = 4–18). However, the algorithm failed to detect a reliable alpha peak in the
+left hemisphere of one participant during both task conditions. Consequently, this participant’s data
+were excluded from the task-related IAF analyses.
+       We found that task-related IAF over the premotor cortex was significantly correlated with
+body ownership TBW, both in the left hemisphere (Pearson’s r = –.475, p = .001; Spearman’s ρ = –
+.468, p = .001; N = 45; Fig. S6a) and the right hemisphere (Pearson’s r = –.469, p = .001; Spearman’s
+ρ = –.421, p = .004 ; N = 45). A similar pattern was observed for body ownership sensitivity, with
+significant correlations in both the left (Pearson’s r = .606, p < .001; Spearman’s ρ = .624, p < .001;
+N = 45; Fig S6b) and right hemisphere (Pearson’s r = .652, p < .001; Spearman’s ρ = .648, p < .001;
+N = 45). In contrast, no significant correlations were found between task-related IAF and visuotactile
+simultaneity TBW, either in the left hemisphere (Pearson’s r = –.182, p = .233; Spearman’s ρ = –.106,
+p = .487; N = 45) or the right hemisphere (Pearson’s r = –.269, p = .074; Spearman’s ρ = –.203, p =
+.181; N = 45). This absence of correlation was further confirmed when considering simultaneity
+sensitivity, which showed no significant association with IAF in either the left (Pearson’s r = .121, p
+= .427; Spearman’s ρ = .090, p = .555; N = 45) or right hemisphere (Pearson’s r = .237, p = .116;
+Spearman’s ρ = .210, p = .166; N = 45).
+
+
+
+
+                                                  14
+Fig. S6 | Correlations between task-related and resting state FOOOF-Individual Alpha Frequency (IAF) in the left
+premotor cortex (PMC) and body ownership. a, Correlation between task-related IAF over the left PMC (i.e., the
+hemisphere contralateral to the visuotatcile stimulation) and body ownership TBW (Pearson’s r = –.475, p = .001; N =
+45). b, Correlation between task-related IAF over the left PMC and body ownership sensitivity (Pearson’s r = .606, p <
+.001; N = 45). c, Correlation between resting state IAF over the left PMC and body ownership TBW (Pearson’s r = –.408,
+p = .005; N = 46) d, Correlation between resting state IAF over the left PMC and body ownership sensitivity (Pearson’s
+r = .434, p = .003; N = 46). In all graphs, the solid lines represent the best-fitting regression. The shaded region reflects
+the 95% confidence interval. Source data are provided as a Source Data file.
+
+
+
+         When examining resting-state IAF over the premotor cortex, we again found significant
+correlations with body ownership TBW, in both the left (Pearson’s r = –.408, p = .005; Spearman’s ρ
+= –.431, p = .003; N = 46) and right hemispheres (Pearson’s r = –.487, p = .001; Spearman’s ρ = –
+.521, p < .001; N = 46). The same pattern held for body ownership sensitivity, with significant
+correlations in the left (Pearson’s r = .434, p = .003; Spearman’s ρ = .429, p = .003; N = 46) and right
+hemispheres (Pearson’s r = .462, p = .001; Spearman’s ρ = .516, p < .001; N = 46). As for visuotactile
+simultaneity, results were mixed. We observed a trend toward significance in the left premotor cortex
+                                                            15
+(Pearson’s r = –.290, p = .050; Spearman’s ρ = –.237, p = .112; N = 46), and a significant correlation
+in the right hemisphere (Pearson’s r = –.303, p = .041; Spearman’s ρ = –.297, p = .049; N = 46).
+       Taken together, these findings suggest that premotor IAF is involved in the temporal
+integration of visuotactile signals related to the sense of body ownership. In contrast, no such
+relationship was observed for visuotactile simultaneity and task-related IAF, and the relationship
+between resting-state IAF and simultaneity was inconsistent. Thus, PPC IAF does not have a unique
+role in temporal multisensory perception, as IAF can modulate temporal multisensory perception in
+different brain regions in a task-relevant manner. Specifically, premotor IAF appears to have a more
+selective role in body ownership temporal perception than PPC IAF.
+
+
+Experiment 3: tACS effect in body ownership correlates with tACS effect in simultaneity
+judgements
+       Because alpha tACS modulated both body ownership and simultaneity judgments, we
+examined whether participants whose simultaneity judgments were more affected by tACS were also
+those whose body ownership judgments were most influenced by the brain stimulation. To test this,
+we subtracted the TBW in the low alpha tACS condition from the TBW in the sham tACS in both
+ownership and simultaneity judgments to obtain a measure of each participant's low tACS effect. The
+same procedure was repeated for the high alpha tACS condition, subtracting the TBW obtained in the
+sham from the TBW obtained in the high alpha tACS condition in both body ownership and
+simultaneity judgments. Thus, greater differences indicated larger alpha tACS effects in each
+condition (low and high). We found positive correlations between the tACS effects in the body
+ownership TBW and the simultaneity TBW, respectively. That is, participants whose body ownership
+judgments were more affected by tACS also had their simultaneity judgments that were more
+influenced by the brain stimulation. This was true for both low alpha-tACS (Pearson’s r = .728, p
+<.001; Spearman’s ρ = .702, p < .001; Fig. S7 a), and high alpha-tACS conditions (Pearson’s r = .547,
+p = .002; Spearman’s ρ = .545, p = .002; Fig. S7 b).
+
+
+
+
+                                                 16
+Fig. S7 | correlation between tACS effects in body ownership and simultaneity judgments a, Correlation between
+low alpha tACS effect in body ownership and low alpha tACS effect in visuotactile simultaneity (Pearson’s r = .728, p
+<.001; N = 30). b, Correlation between high alpha tACS effect in body ownership and high alpha tACS effect in
+visuotactile simultaneity (Pearson’s r = .547, p = .002; N = 30). In all graphs, the solid lines represent the best-fitting
+regression. The shaded regions reflect the 95% confidence interval. Source data are provided as a Source Data file.
+
+
+
+Experiment 3: no tACS effect on bias
+         In contrast, there was no significant tACS effect on bias in either body ownership (F2,58 =
+0.528; p = .593; η2p = 0.018) or simultaneity judgments (F2,58 = 0.945; p = 0.395; η2p = 0.032). The
+bias changed only as a function of the asynchrony, as participants tended to be more liberal to report
+body ownership (F2, 58 = 352.733; p < .001; η2p = 0.924) or the simultaneity (F6,174 = 407,642; p <
+.001; η2p = 0.934) at smaller asynchronies.
+
+
+
+Experiment 3: correlation between body ownership and simultaneity TBWs and their
+perceptual sensitivities
+         Experiment 3 successfully replicated the correlations between body ownership and
+simultaneity TBWs found in the previous experiments. Body ownership TBW correlated with
+simultaneity TBW in low alpha (Pearson’s r = .845; p < .001; Spearman’s ρ = .752; p < .001; Fig
+S8a), high alpha tACS conditions (Pearson’s r = .670; p < .001; Spearman’s ρ = .609; p < .001; Fig
+S8c) and sham tACS condition (Pearson’s r = .748; p < .001; Spearman’s ρ = .781; p < .001; Fig
+S8e). Moreover, body ownership sensitivity correlated with simultaneity sensitivity in low alpha
+(Pearson’s r = .525; p = .003; Spearman’s ρ = .494; p = .006; Fig S 8b), high alpha (Pearson’s r =
+.556; p = .001; Spearman’s ρ = .552; p = .002; Fig S 8d) and sham condition (Pearson’s r = .681; p <
+                                                           17
+.001; Spearman’s ρ = .625; p < .001; Fig. S8f). Similarly to previous experiment, paired t-tests
+revealed that body ownership TBW was wider than simultaneity TBW in sham (t = 6.206; p < .001;
+d = 1.133), low alpha (t = 6.805; p < .001; d = 1.242) and high alpha (t = 5.683; p < .001; d = 1.037)
+tACS conditions. The ANOVAs conducted with stimulation types and asynchronies as factors on
+body ownership and simultaneity sensitivity indices revealed that, beyond the main effect of
+stimulation highlighted in the main text, both body ownership sensitivity (F2, 58 = 353.612, p < .001,
+η²ₚ = .924) and simultaneity sensitivity (F2, 58 = 407.642, p < .001, η²ₚ = .934) significantly increased
+with larger asynchronies. Moreover, paired t-tests on the AUC d’ revealed that sensitivity to body
+ownership was lower than sensitivity to visuotactile simultaneity in sham (t = -8.186; p < .001; d = -
+1.495), low alpha (t = -5.089; p < .001; d = -0.929) and high alpha (t = -6.603 p < .001; d = -1.206)
+tACS conditions.
+
+
+
+
+                                                   18
+Fig. S8 | Behavioural correlations in Experiment 3 a, c, e, Correlations between body ownership and simultaneity
+judgements’ TBWs as measured in the low alpha (Pearson’s r = .845; p < .001; N = 30), high alpha (Pearson’s r = .670;
+p < .001; N = 30) and sham (Pearson’s r = .748; p < .001; N = 30) tACS conditions. b, d, f, Correlations between sensitivity
+to body ownership and simultaneity in low alpha (Pearson’s r = .525; p = .003; N = 30), high alpha (Pearson’s r = .556;
+p = .001; N = 30) and sham (Pearson’s r = .681; p < .001; N = 30) tACS conditions. In all graphs, the solid lines represent
+                                                            19
+the best-fitting regression. The shaded regions reflect the 95% confidence interval. Source data are provided as a Source
+Data file.
+
+
+Experiment 3: survey of sensations related to transcranial Alternating Current Stimulation
+         To investigate the effectiveness of participants’ blindness relative to the brain stimulation
+conditions, we tested for any difference in participants’ self-reported physical sensations between
+tACS conditions and sham. To this aim, participants completed a validated questionnaire8 assessing
+tACS-related sensations at the end of each experimental session (Attachment 2). An initial question
+evaluated if participants believed that they had received real or sham stimulation. The next questions
+assessed seven specific physical sensations usually associated with electrical brain stimulation (i.e.,
+itchiness, pain, burning, warmth, iron taste and fatigue). The final question examined participants’
+view that the sensations related to tACS may have changed their performance in the tasks.
+         Each answer was scored on a value ranging from 1 (‘I definitely did not receive real brain
+stimulation / I felt no sensations / performance did not change at all’) to 5 (‘I definitely received real
+brain stimulation / I strongly felt one or more sensations / performance changed a lot’). To assess if
+participants believed if they received real or sham stimulations, we compared the score of the first
+question with a one-way ANOVA with brain stimulation (low alpha, high alpha and sham tACS) as
+main factor. The ANOVA showed no main effect of brain stimulation (F2,58 = .585; p = 0.585; ηp2 =
+0.018), indicating that participants could not reliably distinguish between real or sham stimulation
+conditions.
+         Next, differences in perceived physical sensations across tACS conditions were examined in
+a repeated measure ANOVA with brain stimulation (low alpha, high alpha, sham-tACS) and physical
+sensations (itchiness, pain, burning, warmth, pinching, iron taste and fatigue) as factors. The analysis
+revealed a main effect of physical sensations (F6, 174 = 8.304; p < 0.001; ηp2 = 0.223) because
+participants reported in general significantly stronger itchiness as compared to other sensations, i.e.,
+pain, burning and iron taste (p < 0.010 for all comparisons) and stronger fatigue as compared to pain,
+burning, warmth, iron taste (p < 0.003 for all comparisons). However, neither the stimulation
+condition (F2,58 = 0.151; p = 0.860; ηp2 = 0.005) neither its interaction with physical sensations were
+significant (F12, 348 = 0.928; p = 0.518; ηp2 = 0.031), indicating that there were no differences in the
+perceived physical sensations between the three tACS conditions. Moreover, no participants reported
+other physical sensations, such as phosphenes or flickering sensations. Finally, participants’ view on
+whether performance may have been changed following stimulation did not differ across conditions
+(one-way ANOVA, F2,58 = 0.473; p = 0.625; ηp2 = 0.016). Overall, these results clearly indicate that
+participants could not distinguish between real and sham stimulation conditions. Specifically, real
+
+                                                           20
+stimulation did not differ from sham in terms of reported physical sensations and participants’
+perceived change in performance.
+
+
+Supplementary references
+
+
+   1. Wutz, A., Melcher, D., & Samaha, J. Frequency modulation of neural oscillations according
+       to visual task demands. Proc. Natl Acad. Sci. 115, 1346-1351 (2018).
+
+
+   2. Sharp, P., Gutteling, T., Melcher, D., & Hickey, C. Spatial attention tunes temporal processing
+       in early visual cortex by speeding and slowing alpha oscillations. J. Neurosci. 42, 7824-7832
+       (2022).
+
+   3. Donoghue, T., Haller, M., Peterson, E. J., Varma, P., Sebastian, P., Gao, R., ... & Voytek, B.
+       Parameterizing neural power spectra into periodic and aperiodic components. Nature
+       Neurosci. 23, 1655-1665 (2020).
+
+   4. Hill, A. T., Clark, G. M., Bigelow, F. J., Lum, J. A., & Enticott, P. G. Periodic and aperiodic
+       neural activity displays age-dependent changes across early-to-middle childhood. Dev. Cogn.
+       Neurosci. 54, 101076 (2022).
+
+   5. Barry, R. J., & De Blasio, F. M. Characterizing pink and white noise in the human
+       electroencephalogram. J. Neural Eng. 18, 034001 (2021).
+
+   6. Deodato, M., & Melcher, D. Correlations between visual temporal resolution and individual
+       alpha peak frequency: Evidence that internal and measurement noise drive null findings. J.
+       Cogn. Neurosci. 36, 590-601 (2024).
+
+   7. Tadel, F., Baillet, S., Mosher, J. C., Pantazis, D., & Leahy, R. M. Brainstorm: A user‐friendly
+       application for MEG/EEG analysis. Comput. Intell. Neurosci. 2011, 879716 (2011).
+
+   8. Borghini, G., Candini, M., Filannino, C., Hussain, M., Walsh, V., Romei, V., ... & Cappelletti,
+       M. Alpha oscillations are causally linked to inhibitory abilities in ageing. J. Neurosci. 38,
+       4418-4429 (2018).
+
+  9. Ehrsson, H. H., Spence, C., & Passingham, R. E. That's my hand! Activity in premotor cortex
+      reflects feeling of ownership of a limb. Science. 305, 875-877 (2004).
+
+                                                21
+10. Gentile, G., Guterstam, A., Brozzoli, C., & Ehrsson, H. H. Disintegration of multisensory
+   signals from the real hand reduces default limb self-attribution: an fMRI study. J. Neurosci. 33,
+   13350-13366 (2013).
+
+
+
+
+                                              22
+ Attachment 1
+
+
+Q1   It seemed as if I were feeling the touch in the location where I saw the rubber hand touched
+
+Q2   It seemed as though the touch I felt was caused by the stick touching the rubber hand
+Q3   I felt as if the rubber hand were my hand
+Q4   It felt as if my (real) hand were drifting up (towards the rubber hand)
+Q5   It seemed as if I might have more than one right hand or arm
+     It seemed as if the touch I was feeling came from somewhere between my own hand and the rubber
+Q6
+     hand
+Q7   It felt as if my (real) hand was turning ‘rubbery’.
+Q8   It appeared (visually) as if the rubber hand were drifting towards my hand.
+     The rubber hand began to resemble my own (real) hand, in terms of shape, skin tone, freckles or some
+Q9
+     other visual feature.
+
+
+
+
+                                                 23
+Attachment 2
+
+Survey of sensations related to transcranial Alternate Current Stimulation
+
+In your opinion, have you received real brain stimulation during today’s experimental session?
+Please answer accordingly to the following scale
+
+   •    1= I DEFINITELY received real brain stimulation
+   •    2= I PROBABLY received real brain stimulation
+   •    3= I’m NOT ABLE TO DETERMINE if I have received real brain stimulation
+   •    4= I PROBABLY did NOT receive real brain stimulation
+   •    5= I DEFINITELY did NOT receive real brain stimulation
+
+   □1       □2   □3   □4      □5
+
+   Have you experienced any discomfort or annoyance during the stimulation?
+   Please answer to the following questions regarding the different sensations, indicating the
+   degree of intensity of your discomfort according to the following scale:
+
+        •   None = I have not felt the described sensations
+        •   Mild = I have mildly felt the described sensations
+        •   Moderate= I have felt the described sensations
+        •   Considerable= I have felt the described sensations to a considerable degree
+        •   Strong= I have strongly felt the described sensations
+
+Itchiness:   □ None        □ Mild    □Moderate      □Considerable    □Strong
+Pain:        □ None        □ Mild    □Moderate      □Considerable    □Strong
+Burning:     □ None        □ Mild    □Moderate      □Considerable    □Strong
+Warmth/Heat: □ None        □ Mild    □Moderate      □Considerable    □Strong
+Pinching:    □ None        □ Mild    □Moderate      □Considerable    □Strong
+Iron taste:  □ None        □ Mild    □Moderate      □Considerable    □Strong
+Fatigue:     □ None        □ Mild    □Moderate      □Considerable    □Strong
+
+Other:_____________: □ None        □ Mild   □Moderate    □Considerable      □Strong
+
+When did the discomfort begin?
+□ At the beginning of the experiment □About the middle of the experiment □Towards the end
+of the experiment
+
+How long did it last?
+□It stopped soon □It stopped in the middle of the block □It stopped at the end of the block
+
+How much these sensations affect your performance in the tas
+□ Not at all □ A little □ Considerably □ Much □ Very much
+
+
+
+                                               24
+

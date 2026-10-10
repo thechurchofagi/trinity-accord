@@ -563,17 +563,37 @@
         "contexts": 0
       },
       "claim_ledger": "records/A3L20261010_Rescue_Learning/CLAIM_LEDGER.json"
+    },
+    {
+      "id": "CTD2-20261010",
+      "research_id": "CTD20261010",
+      "result_version": "CTD-RESULT-v0.2.0",
+      "base_release": "UCT-MAP-v1.1.2",
+      "path": "records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_EXTENSION.json",
+      "sha256": "f00d9af53cca8935f08b6dd979e0f4d28cf5754bc7e9ffb696eb8d7be6095a2f",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "candidate_counts": {
+        "nodes": 20,
+        "active_conditional_rules": 7,
+        "nondeductive_context_links": 13
+      },
+      "publication_coverage_version": "UCT-PUB-v1.0.28",
+      "compatibility_audit": "records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_AUDIT.md",
+      "handoff": "records/CTD20261010_Cross_Task_Intervention_v02/HANDOFF_ZH.md",
+      "instruction": "Source-audit observations are nondeductive; Gaussian identification requires its complete paired-sample contract. No experience bridge is admitted.",
+      "title": "Identifiability of Noise Sources in Bodily Judgments",
+      "source": "records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_EXTENSION.json",
+      "actual_application": "OPEN",
+      "manuscript_status": "WORTH_EXTERNAL_REVIEW_AS_METHODS_AND_SECONDARY_ANALYSIS_MANUSCRIPT",
+      "claim_ledger": "records/CTD20261010_Cross_Task_Intervention_v02/CLAIM_LEDGER.json"
     }
   ],
   "preservation": "Exact previous registry remains preserved. The full research manuscript/module and saved per-item review decisions are in the version capsule; expanded artifacts are also in the offline downloadable archive.",
   "publication_coverage": {
+    "version": "UCT-PUB-v1.0.28",
     "entry": "PUBLICATION_COVERAGE.json",
-    "version": "UCT-PUB-v1.0.26",
-    "base_census_version": "UCT-PUB-v1.0.0",
-    "update": "records/A3L20261010_Rescue_Learning/PUBLICATION_COVERAGE_UPDATE.json",
-    "report": "publication/UCT-PUB-v1.0.26/COVERAGE_REPORT_ZH.md",
-    "nondeductive": true,
-    "counting_scope": "Frozen verified corpus plus one independently verified SCU DOI; not a new worldwide census."
+    "nondeductive": true
   },
   "registry_scope": "Recent navigation register; complete fixed-source inventories are in the current publication coverage ledger.",
   "effective_pending_corrections": {

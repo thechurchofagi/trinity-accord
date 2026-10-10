@@ -1,0 +1,25 @@
+{
+  "checkpoint": "CTD-RESULT-v0.2.0-development",
+  "user_request": "Continue and deepen the unpublished CTD paper until it is worth publication.",
+  "base_commit": "d9773d7d5ab554fb66c21606e758953764172b0b",
+  "frozen_v01_unchanged": true,
+  "started_utc": "2026-10-10T07:39:02.513363+00:00",
+  "specific_questions": [
+    "Can all released Gaussian widths be reconstructed without selecting methods by significance?",
+    "Are the original BCI noise and prior model evidence calculations reproducible from positive binomial negative log likelihood?",
+    "What is identifiable from response shape when sensory noise, prior odds, decision criterion and lapse may differ?"
+  ],
+  "new_scope_authorization": "Latest explicit user instruction prioritizes substantive deepening of this paper over previous suggestion to switch from the completed width branch to A3L. C1/U1 and the independent H objective remain unchanged.",
+  "source_models": {
+    "BCI_sigma": "two task priors, three condition sigmas, common lapse; fixed stimulus prior scale",
+    "BCI_prior": "six task-condition priors, common sigma, common lapse; fixed stimulus prior scale"
+  },
+  "commitments": [
+    "Retain unfavorable and null findings.",
+    "Do not call code discrepancy proof that the published result is wrong.",
+    "Do not claim newly fitted widths equal experiential or neural time constants.",
+    "Separate reproduced prior comparisons from new tests of identifiability, model adequacy and predictive separation.",
+    "Use fixed seeds and declared methods; track all deviations.",
+    "No publication/DOI/submission action in this research turn."
+  ]
+}

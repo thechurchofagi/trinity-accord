@@ -1,0 +1,31 @@
+{
+  "timestamp_utc": "2026-10-10T07:58:34.643418+00:00",
+  "trigger": "Independent literature-agent audit of training-model nesting, confirmed from saved training objectives. Three shifted fits were worse than their own same-fold unshifted submodels despite acceptable optimizer status/gradient.",
+  "violations": [
+    {
+      "participant": 16,
+      "fold": 3,
+      "shifted_model": "sigma_shift",
+      "training_nll_excess": 51.71217407169394
+    },
+    {
+      "participant": 21,
+      "fold": 4,
+      "shifted_model": "sigma_shift",
+      "training_nll_excess": 50.513156448574705
+    },
+    {
+      "participant": 22,
+      "fold": 2,
+      "shifted_model": "sigma_shift",
+      "training_nll_excess": 99.6664052323215
+    }
+  ],
+  "rule": "Uniformly refit every shifted CV model for every participant/fold with the original eight Sobol starts, canonical start and the corresponding same-training-fold unshifted theta plus zero task centers. No full-data fit, published source fit, or held-out score selects starts or reruns.",
+  "scope": "300 shifted training fits; retain all full-data and unshifted CV fits unchanged.",
+  "old_results": "results/pre_nested_cv_repair",
+  "new_results": "results/bci_response",
+  "old_scores_status": "Provisional and superseded following numerical nesting failure; not final scientific results.",
+  "must_verify": "All full-data and CV shifted objectives must be no worse than corresponding unshifted training objectives, allowing 1e-6 numerical tolerance.",
+  "original_execution_plan_sha256": "60e6b1e3c5302f72bc9d60a78bed747976ebd82eeb1049fe38b4b62daf023ce1"
+}

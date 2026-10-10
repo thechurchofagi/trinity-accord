@@ -1,0 +1,25 @@
+\usepackage{microtype}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage{needspace}
+\floatplacement{figure}{H}
+\renewcommand{\topfraction}{0.95}
+\renewcommand{\bottomfraction}{0.85}
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\floatpagefraction}{0.8}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily Noise sources in bodily judgments}
+\fancyhead[R]{\small\sffamily CTD v0.2.0}
+\fancyfoot[C]{\small\thepage}
+\setlength{\headheight}{14pt}
+\renewcommand{\headrulewidth}{0.3pt}
+\setlength{\emergencystretch}{3em}
+\widowpenalty=10000
+\clubpenalty=10000
+\makeatletter
+\let\ctdoldsection\section
+\renewcommand{\section}{\Needspace{8\baselineskip}\ctdoldsection}
+\let\ctdoldsubsection\subsection
+\renewcommand{\subsection}{\Needspace{6\baselineskip}\ctdoldsubsection}
+\makeatother

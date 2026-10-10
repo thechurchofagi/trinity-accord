@@ -1,0 +1,200 @@
+[
+  {
+    "name": "author_data_root",
+    "url": "https://api.osf.io/v2/nodes/ytga5/files/osfstorage/",
+    "status": 200,
+    "bytes": 6927,
+    "sha256": "f6887b88f2cd2259873ceaa90bccd109bb6aa8b375a11ee46f4eb20c101c6dac",
+    "files": [
+      {
+        "id": "676182e11e206cbcf9484c99",
+        "name": "Experiment 1",
+        "kind": "folder",
+        "download": null,
+        "children": {
+          "href": "https://api.osf.io/v2/nodes/ytga5/files/osfstorage/676182e11e206cbcf9484c99/",
+          "meta": {}
+        }
+      },
+      {
+        "id": "677e742e7b4d529233fb0e2d",
+        "name": "Experiment 2",
+        "kind": "folder",
+        "download": null,
+        "children": {
+          "href": "https://api.osf.io/v2/nodes/ytga5/files/osfstorage/677e742e7b4d529233fb0e2d/",
+          "meta": {}
+        }
+      },
+      {
+        "id": "677e89a37ebb117a46088d5e",
+        "name": "Experiment 3",
+        "kind": "folder",
+        "download": null,
+        "children": {
+          "href": "https://api.osf.io/v2/nodes/ytga5/files/osfstorage/677e89a37ebb117a46088d5e/",
+          "meta": {}
+        }
+      },
+      {
+        "id": "67b4bca3885a2cc5b80c76e4",
+        "name": "EEG Analysis Scripts",
+        "kind": "folder",
+        "download": null,
+        "children": {
+          "href": "https://api.osf.io/v2/nodes/ytga5/files/osfstorage/67b4bca3885a2cc5b80c76e4/",
+          "meta": {}
+        }
+      }
+    ],
+    "next_page": null
+  },
+  {
+    "name": "author_code_root",
+    "url": "https://api.osf.io/v2/nodes/s5p4v/files/osfstorage/",
+    "status": 200,
+    "bytes": 12896,
+    "sha256": "78a1bd6d2bb750e23302901027384364ffaf3472505722db807655f357c017a6",
+    "files": [
+      {
+        "id": "67b30d969b01d45180c35230",
+        "name": "Master_BCI.m",
+        "kind": "file",
+        "download": "https://osf.io/download/pnmsx/",
+        "children": null
+      },
+      {
+        "id": "67b30d9642fe9d7949313bc4",
+        "name": "modelprediction_log_BCI.m",
+        "kind": "file",
+        "download": "https://osf.io/download/uk2en/",
+        "children": null
+      },
+      {
+        "id": "67b30d998a1413815ec34eec",
+        "name": "NLL_BCI_EEG.m",
+        "kind": "file",
+        "download": "https://osf.io/download/32k54/",
+        "children": null
+      },
+      {
+        "id": "67b30d99b95ced98c80dcd1f",
+        "name": "NLL_BCI_tACS_Psame.m",
+        "kind": "file",
+        "download": "https://osf.io/download/bgxn6/",
+        "children": null
+      },
+      {
+        "id": "67b30d9b8a1413815ec34eee",
+        "name": "NLL_BCI_tACS_Sigma.m",
+        "kind": "file",
+        "download": "https://osf.io/download/vnfbx/",
+        "children": null
+      },
+      {
+        "id": "67b30d9ca1e3d3bfbb19f723",
+        "name": "ReadMe.txt",
+        "kind": "file",
+        "download": "https://osf.io/download/u5anz/",
+        "children": null
+      }
+    ],
+    "next_page": null
+  },
+  {
+    "name": "experiment1",
+    "url": "https://api.osf.io/v2/nodes/ytga5/files/osfstorage/676182e11e206cbcf9484c99/",
+    "status": 200,
+    "bytes": 2249,
+    "sha256": "0efd3889d1b9cc116765773bb7116b0e9f855e3597238897d19810f7d0390a38",
+    "files": [
+      {
+        "id": "677e739797b4cf165ed106c0",
+        "name": "Experiment1.xlsx",
+        "kind": "file",
+        "download": "https://osf.io/download/xkquy/",
+        "children": null
+      }
+    ],
+    "next_page": null
+  },
+  {
+    "name": "experiment2",
+    "url": "https://api.osf.io/v2/nodes/ytga5/files/osfstorage/677e742e7b4d529233fb0e2d/",
+    "status": 200,
+    "bytes": 4422,
+    "sha256": "4cc2269d3ed5ac94d71979752906a0112da2a3a97b367cfbf666757233cb1f97",
+    "files": [
+      {
+        "id": "677e743d5b2ebccb43fb09d2",
+        "name": "Experiment 2.xlsx",
+        "kind": "file",
+        "download": "https://osf.io/download/nt2wd/",
+        "children": null
+      },
+      {
+        "id": "677e9b5e352c877ff52b5a3c",
+        "name": "Experiment 2 Computational modelling.xlsx",
+        "kind": "file",
+        "download": "https://osf.io/download/b3nw6/",
+        "children": null
+      }
+    ],
+    "next_page": null
+  },
+  {
+    "name": "experiment3",
+    "url": "https://api.osf.io/v2/nodes/ytga5/files/osfstorage/677e89a37ebb117a46088d5e/",
+    "status": 200,
+    "bytes": 4423,
+    "sha256": "1b92c9051f56ad431cef8c9b1f9503e003529a12a9148805ca6b3fd82b9904fd",
+    "files": [
+      {
+        "id": "677e89b554c79a31cfd1019a",
+        "name": "Experiment 3.xlsx",
+        "kind": "file",
+        "download": "https://osf.io/download/p5un6/",
+        "children": null
+      },
+      {
+        "id": "677e9b6d280080509b0880ff",
+        "name": "Experiment 3 Computational modelling.xlsx",
+        "kind": "file",
+        "download": "https://osf.io/download/yc4k2/",
+        "children": null
+      }
+    ],
+    "next_page": null
+  },
+  {
+    "name": "eeg_scripts",
+    "url": "https://api.osf.io/v2/nodes/ytga5/files/osfstorage/67b4bca3885a2cc5b80c76e4/",
+    "status": 200,
+    "bytes": 6556,
+    "sha256": "c6c584b68e61f5c2ce94ce1e074e5de83f9a255e160980334e3f1f6660c104a2",
+    "files": [
+      {
+        "id": "67b4bcf1ef74d863cea54f35",
+        "name": "1 data_preparation.zip",
+        "kind": "file",
+        "download": "https://osf.io/download/cr6wq/",
+        "children": null
+      },
+      {
+        "id": "67b4bd07cfeebe149da54e70",
+        "name": "2 preprocessing.zip",
+        "kind": "file",
+        "download": "https://osf.io/download/mbx7q/",
+        "children": null
+      },
+      {
+        "id": "67b4bd0d3a1d3c55fc19f0ff",
+        "name": "3 PSD & FOOOF_Specparam.zip",
+        "kind": "file",
+        "download": "https://osf.io/download/yxfhv/",
+        "children": null
+      }
+    ],
+    "next_page": null
+  }
+]

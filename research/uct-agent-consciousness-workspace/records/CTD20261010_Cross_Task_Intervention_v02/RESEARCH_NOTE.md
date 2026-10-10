@@ -1,0 +1,11 @@
+# CTD v0.2 research note
+
+The complete research argument is the 18-page manuscript in manuscript/noise-identifiability-bodily-judgments-v0.2.0.pdf and its editable Markdown source. This note fixes the scientific role of the record: a reproducible public-data audit and conditional measurement-identification paper, rather than an empirical localization or consciousness result.
+
+The released likelihood and information-criterion arithmetic are traced in literature/SOURCE_BCI_AUDIT.md. Correcting the information-criterion sign leaves the aggregate Sigma preference intact. The centered independent-binomial response family fails the conditional symmetry check in theory/SYMMETRY_TEST_REPORT.md. The final four-family score comparison is empirical/BCI_REPORT.md; the repaired Sigma-shift model has lower held-out NLL than Prior-shift by 60.884594527. Archived failures are part of the evidence.
+
+The model preference does not identify its physical source. The exact construction in root_analysis/response_twin_summary.json preserves all 1,260 original marginal probabilities with constant sensory variance and changing criterion variance while retaining the original threshold trajectory. The Gaussian principle has established antecedents; this source-calibrated application and the failure of overinterpretation are the concrete contribution.
+
+The positive design result is conditional. A second readout of the same internal Gaussian sample, with independently calibrated centered marginals, independent criterion fluctuations and independent known lapse processes, supplies a population joint probability that identifies the shared variance. If criterion correlation is merely bounded externally and jointly Gaussian, the answer is a sharp set. Complete proofs, the weak-inverse expansion and countermodels are in theory/RESPONSE_IDENTIFIABILITY_RESULTS.md and the paper appendices. Separate task blocks in the source study do not meet the paired-sample premise.
+
+MANUSCRIPT_DECISION.json records why the combined contribution is now worth external review and what is inherited. governance/MAP_AUDIT.md records the much narrower formal-map status: forty disabled candidate items, unchanged completed graph and inherited OPEN obligations. The actual human implementation, experiential endpoint and UCT-specific comparison remain open.

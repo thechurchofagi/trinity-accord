@@ -1,0 +1,18 @@
+[
+  {
+    "id": "PMC4757432",
+    "error": "HTTP Error 500: "
+  },
+  {
+    "id": "PMC9555868",
+    "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9555868/fullTextXML",
+    "bytes": 554192,
+    "sha256": "90b68c9c69f55d05c713c18a1e4684ff3fc46b4c285460a520eda6f1fe8cf22c"
+  },
+  {
+    "id": "PMC4805589",
+    "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC4805589/fullTextXML",
+    "bytes": 170989,
+    "sha256": "7da2ce0bc582dd87807e19b124e42d131b13803b3ee13cc4dca1aa9f3828c5ab"
+  }
+]

@@ -1,6 +1,6 @@
 # UCT 最高研究指导：原理论优先、局部体验保留、每步全图复核
 
-**当前已核验补充接续（CTD20261010）：** 已完成30人公开干预数据的严格比例／单调次序桥接检验及完整英文工作论文，未获得共同机制或UCT胜出的证据。见[CTD交接](records/CTD20261010_Cross_Task_Intervention/HANDOFF_ZH.md)与[审计](records/CTD20261010_Cross_Task_Intervention/MAP_AUDIT.md)。完成图v1.1.2、C1/U1不变，覆盖UCT-PUB-v1.0.27，候选停用、无新DOI。保留[A3L的独立身体H主目标](records/A3L20261010_Rescue_Learning/HANDOFF_ZH.md)，宽度不替代H；已完成数值分支停止无新增数据的扩展。
+**当前核验接续（CTD v0.2）：** 用户要求继续深入后，已完成18页噪声来源识别论文、公开数据审计及条件联合读数定理。见[交接](records/CTD20261010_Cross_Task_Intervention_v02/HANDOFF_ZH.md)、[成稿决定](records/CTD20261010_Cross_Task_Intervention_v02/MANUSCRIPT_DECISION.json)及[审计](records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_AUDIT.md)。候选40项全停用；完成图v1.1.2、C1/U1、全部OPEN不变；覆盖UCT-PUB-v1.0.28，无新DOI。原v0.1与并发A3M的独立身体H主问题继续保留。以下最高指导正文的优先级不变。
 
 **政策 ID：POLICY-20261008-WHOLE-MAP-PERSISTENCE；版本 2.3；修订日期：2026-10-09。**
 

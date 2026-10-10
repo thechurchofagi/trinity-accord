@@ -1,0 +1,52 @@
+{
+  "timestamp_utc": "2026-10-10T08:13:07.787618+00:00",
+  "purpose": "Portable self-check input path with exact original execution bytes preserved; no refitting",
+  "execution_source": {
+    "path": "history/execution_source/fit_response_models.py",
+    "sha256": "6f616f9065b9641df92eb6d50288474a3cf3b88a9212520374cde8119d1696b6",
+    "bytes": 8812
+  },
+  "portable_source": {
+    "path": "root_analysis/fit_response_models.py",
+    "sha256": "397aaf7711160314176a8703340844c55ab58becdf02a2de94d337b734bc46f4",
+    "bytes": 8821
+  },
+  "only_source_change": {
+    "function": "self_check",
+    "old_input_directory": "Path(__file__).resolve().parents[2]/'empirical'",
+    "new_input_directory": "Path(__file__).resolve().parents[1]/'empirical'/'inputs'"
+  },
+  "core_ast_identical_excluding_self_check": true,
+  "core_ast_sha256_excluding_self_check": "4ba84172ab78492d21094d6fdb7bff2c63be374c3ea40ac4d2f07ab999fd148d",
+  "unchanged_functions_ast_sha256": {
+    "structure": "39850deed7985ea95a6f3de2c7b52984b968da40d58202682db9e83915734952",
+    "bounds": "9570c858d5e6c15da1e0b5376a6a8e246e47e83b3e5b5c593d4f57e80e897099",
+    "probabilities_and_derivatives": "d34e280d0419af132fc3bec22167329154ddcb91f2f9db82e3575190dbbcd2b3",
+    "nll_and_gradient": "76b2842ad656c984ec20d9b44e7e7fe02ab52411e1edccad48d683dc513b35ea",
+    "generic_starts": "d09909e48a06c6095592e5636e31c4dd6a5ea973640bef48d5783f0b7846e8c8",
+    "source_initial": "75beac1a165ad35bf302a094e8b68774d173cefc0aa955ad7707c0f4b99ff724",
+    "projected_gradient": "2f5255d3e24c145893ceae085dbd5c58e99526457f71243726a96e82202e41cf",
+    "fit_one": "d1f265e94dcb1b3559c33eb571ee62aac61bbee85dbae9d5bd12d0a74f0760d4",
+    "fit_summary": "9138038f83ecde1e5d765b8359a9f0233546357c0d1f1b914e65c3345b18d1dc"
+  },
+  "original_execution_receipt": {
+    "path": "empirical/results/bci_response/response_comparison_summary.json",
+    "sha256": "95b37c9c258284ef7d6ab72f77961cb7375eb643b9f3b794654258a0806df0aa",
+    "source_model_sha256": "6f616f9065b9641df92eb6d50288474a3cf3b88a9212520374cde8119d1696b6",
+    "not_modified": true
+  },
+  "audit_updates": [
+    {
+      "path": "empirical/audit_bci_execution.py",
+      "change": "Verify current plus preserved execution source through relocation provenance and core AST equality; report both hashes."
+    },
+    {
+      "path": "theory/audit_response_comparison.py",
+      "change": "Replace current-file-equals-execution-file assertion with preserved-source plus core-AST check; replace former external tidy-count CSV with the record-local original workbook fixed cell mapping."
+    }
+  ],
+  "previous_audit_scripts_and_receipts": "history/pre_relocation/",
+  "verification_helper": "root_analysis/verify_execution_source.py",
+  "no_fitting_functions_or_optimizer_settings_changed": true,
+  "self_check_scope": "Its existing prospective_cv_policy field is historical self-check wording, not the final runner protocol; BCI_EXECUTION_PLAN plus BCI_CV_NESTING_REPAIR_DECISION define the final training-only nested rule."
+}

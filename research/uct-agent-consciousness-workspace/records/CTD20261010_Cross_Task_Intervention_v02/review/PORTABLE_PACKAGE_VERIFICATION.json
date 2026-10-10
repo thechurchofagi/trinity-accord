@@ -1,0 +1,812 @@
+{
+  "status": "passed",
+  "started_utc": "2026-10-10T08:32:31.436356+00:00",
+  "completed_utc": "2026-10-10T08:32:38.893600+00:00",
+  "record": "/workspace/scratch/5b73aae6b1e4/uct_repo/research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02",
+  "temporary_copy": "/workspace/scratch/5b73aae6b1e4/ctd_v02_portable_check",
+  "python_executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+  "python_version": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "scope": "Only four README lightweight checks and import/load_source_counts; no fitting, refitting, Monte Carlo, partition regeneration, figure/PDF rebuilding or governance builder.",
+  "copied_regular_file_count": 146,
+  "copy_initially_byte_identical": true,
+  "source_existing_files_unchanged": true,
+  "source_manifest_sha256_before_receipt": "e3255eddf90854ddb1a59bf41dc47f49fd148eed43159c9db3db2f744405b93c",
+  "source_manifest": {
+    "ANALYSIS_INTENT.json": "e3164f4769b9aee7b8f0fbf625ab8f8f81095cb16df41bc81426079380932414",
+    "CHANGELOG.md": "07565394d74d843dc85fde5f5548c93240ff5ce86b4b8e91ea5beaa542f63161",
+    "CLAIM_LEDGER.json": "fc611104b72dbe26a6936e89c10d6ea85a3660788e9097fd5e0a9f34cd6ad6c6",
+    "FAILURES.md": "f421f21777afbce60f2739f3c41c10d0f0c266c36aa39f4e67ba419d51e14a15",
+    "HANDOFF_ZH.md": "20a236aa68c859b27f837507de557fcd9fb8626a29837392982565097af87156",
+    "MANUSCRIPT_DECISION.json": "531d4e8b4582568f6037f2ded245fda785bfd5e982a91ac2109cf646a184dc72",
+    "OMITTED_CONTEXT_FILES.json": "562e3df2358025639748b7c0b3b109fc8cd6f73105b1c5fc938ab6e5efb8c37f",
+    "PUBLICATION_COVERAGE_UPDATE.json": "95e37e703fc8d58876f5be323578538db12b25845b07f06e02ac6300f96e94b3",
+    "README.md": "65c2dbb5b44c3a3d618d8c98f07df4cbdcbdd3926f713b196f809c1efffd0fde",
+    "RELOCATION_PROVENANCE.json": "a2ced2c1bacd5ea457392b1fa48e98dc2d53fba3b66b2920b3788fde614b3e46",
+    "RELOCATION_VERIFICATION.json": "0c21a7937e71e05e35eada8add82d6830d9714e87588e7c40fc0effb6dac0c49",
+    "RESEARCH_NOTE.md": "7e0b7f31e0bd42811577016d36023e3bea8b7fa85e1eab7ff30e462f43f688bb",
+    "RUNTIME.json": "ee4d61ae694b80b3165691007e486d3d990612973e91abb334cc25aa32de4d66",
+    "THEORY_INPUT_RELOCATION_PROVENANCE.json": "68226dd23c15c761ffb2a69f5d3d8d0c2bb448018bad64282831df32745109ea",
+    "THIRD_PARTY_NOTICES.md": "8f4ff4f45ff53120445aaa170b572c248810cfea83a0c58b118fd40a1e258bc0",
+    "WORK_LOG.md": "69b8a94454d50c724faadd45715ec84f46f568661d7d1bf40a3d69e887f857d6",
+    "empirical/BCI_CV_NESTING_REPAIR_DECISION.json": "39e0a506356d413b2780989f222a47c415fe47faef2ffa331ff1400d05c52ee9",
+    "empirical/BCI_EXECUTION_PLAN.json": "60e6b1e3c5302f72bc9d60a78bed747976ebd82eeb1049fe38b4b62daf023ce1",
+    "empirical/BCI_REPORT.md": "639a35f8764ba5a783e1e6b138f4f9204505d25e3dfbc842e90e2e4f9ab313e0",
+    "empirical/RECONSTRUCTION_PLAN.json": "4ac28e8c9f444b9a6fa0eafb72e1c7bca37b3c6c7af1ff9fbb7d3c76deaee3d2",
+    "empirical/RECONSTRUCTION_PROVENANCE.json": "65b2c6c91c1a37d7581f8566184fbabb240dd380446a68fb5d00443c377dab0d",
+    "empirical/WIDTH_RECONSTRUCTION_REPORT.md": "40aed07e04f7080f654fd1767f8d925bb875e355208b9525483d1a5728caf9cc",
+    "empirical/audit_bci_execution.py": "07923acb16e94835b300cad5d57ba11a45b459fc7237defa8eb0501116b46ffd",
+    "empirical/audit_reconstruction_residuals.py": "0bb81c8c2c85090679b2c024f1fd3e3f7df8e8d4953b19f860e3573508bb2014",
+    "empirical/audit_two_case_metrics.py": "706d61f1857e62c3db793e3c6f25fe891cc170f66f3be2cfadac17c3bb3a5ba3",
+    "empirical/author_inventory/LICENSE_METADATA_CHECK.json": "754587165cac873844af5bbb847761fd4aedf83819030b4740dadae11cea24de",
+    "empirical/author_inventory/archives_receipt.json": "3ee74ca4c22ba10da751fbe89b67a4fa6e6d6e6a22fb78346cca32165205d8f7",
+    "empirical/author_inventory/author_code_root.json": "78a1bd6d2bb750e23302901027384364ffaf3472505722db807655f357c017a6",
+    "empirical/author_inventory/author_data_root.json": "f6887b88f2cd2259873ceaa90bccd109bb6aa8b375a11ee46f4eb20c101c6dac",
+    "empirical/author_inventory/eeg_scripts.json": "c6c584b68e61f5c2ce94ce1e074e5de83f9a255e160980334e3f1f6660c104a2",
+    "empirical/author_inventory/experiment1.json": "0efd3889d1b9cc116765773bb7116b0e9f855e3597238897d19810f7d0390a38",
+    "empirical/author_inventory/experiment2.json": "4cc2269d3ed5ac94d71979752906a0112da2a3a97b367cfbf666757233cb1f97",
+    "empirical/author_inventory/experiment3.json": "1b92c9051f56ad431cef8c9b1f9503e003529a12a9148805ca6b3fd82b9904fd",
+    "empirical/author_inventory/inventory_receipt.json": "d30f644bc82cbf509ab126b79f2325742cbbfdd42604b944c096cd4f97842380",
+    "empirical/author_inventory/s5p4v_license.json": "32fb3d7b32be0843803f96424fe7739f69574481211a2d323e16f8da8536c635",
+    "empirical/author_inventory/s5p4v_node_metadata.json": "24f258097f9d3112a9aa2745b9a8debdee90ffe254ab19c814e3a377ec5aa665",
+    "empirical/author_inventory/ytga5_node_metadata.json": "6454a737c68eeb789eb1318076c4576f5055b1c8ee41e77debc2afccec42e532",
+    "empirical/inputs/Experiment_3.xlsx": "d3b2fef22f077788e5299dedb68737d453c09b005d9360bab8dfbe6c35852bc9",
+    "empirical/inputs/Experiment_3_Computational_modelling.xlsx": "32e58a814b7d33f52f3dc994a753715d4ddfa21c8ec7424b80ebef43c6d560e4",
+    "empirical/inputs/NatComm2026_SourceData.xlsx": "3202d68439ad502ff95e7a4d59535a4e8ff9072d5c6a76b5aebf7dde90228a82",
+    "empirical/reconstruct_gaussian_widths.py": "9c6fbe5cac9d36599eb1ab7473949763740b0883e041023a5d9e139b3ee9080a",
+    "empirical/repair_cv_nesting.py": "eacd7fbee92886c6ab24ff8e9c7ceaf4e6a892f0c7041e08e3f8fdda923cefbe",
+    "empirical/results/all_gaussian_candidate_fits.csv": "042be84e92b7f93a6d1dad6a8de4767ca43de5f818d19e4fefa45406a9422be5",
+    "empirical/results/bci_response/cv_fits.json": "3c89b2a34460b481a88ed40fe6c2d494b5514aba16d9647eb7423cfe8eb7e83f",
+    "empirical/results/bci_response/cv_nesting_repair_summary.json": "678985e965e2917bb577b4ee1fca075aa2ae09161704645c2681e3423e859e25",
+    "empirical/results/bci_response/cv_partition_counts.npz": "37a48969f1921095d0a826fc3a83bcdf4b9af8581fab7be6d5ed0394da4374b7",
+    "empirical/results/bci_response/execution_integrity_audit.json": "f4014800bce9ceea5e69e5508c5598ab9a089270fad0bc545881d2d3af77d42e",
+    "empirical/results/bci_response/full_fits.json": "4b0c6e8366f6ac0cd4e4dd79bcc05c176d9bd3498cb4215f4bd010559c1b2a26",
+    "empirical/results/bci_response/participant_scores.csv": "aa3aca6da1a66e4cc2ede037018ef6ce46fcc2ed0f7803e57adfdcb9fdf473e3",
+    "empirical/results/bci_response/proof_facing_model_comparison.csv": "bca84870870231bf6cb90ad9508b9e4011c6804fcefee6509334742e5d7c2328",
+    "empirical/results/bci_response/response_comparison_summary.json": "95b37c9c258284ef7d6ab72f77961cb7375eb643b9f3b794654258a0806df0aa",
+    "empirical/results/gaussian_probability_domain_diagnostics.csv": "592759670eceb3708598e589473dccac40d3ca4db6586050f67643deee6a14e2",
+    "empirical/results/gaussian_reconstruction_summary.json": "f644cb0a94916031a98814efedb5a7d0544df525e7b7a29d23fe7d38f7c48826",
+    "empirical/results/gaussian_width_convention_checks.csv": "63651cc787d072d3b1dff9e3006cace1d96485d2e964d963ff67877f66d5c3de",
+    "empirical/results/independent_response_gradient_check.json": "d76434d5763ffddb9953bfe0bb1e627703745fdf4e1bd8afb8dc2f95c2e2b403",
+    "empirical/results/pre_nested_cv_repair/audit_bci_execution.pre_repair.py": "95b539cb41769e1c80d10cde7353bcf12fd17a72abc045cd46d99abe908eefa9",
+    "empirical/results/pre_nested_cv_repair/cv_fits.json": "19c9af3f139eee48e916b0f9644474a6ba56eaf96dfbdab3aa9ba0b31db095ab",
+    "empirical/results/pre_nested_cv_repair/cv_partition_counts.npz": "37a48969f1921095d0a826fc3a83bcdf4b9af8581fab7be6d5ed0394da4374b7",
+    "empirical/results/pre_nested_cv_repair/execution_integrity_audit.json": "9c97abd0ed95a2986f066491068f76db2b966695c37b6ac569e2505923602f75",
+    "empirical/results/pre_nested_cv_repair/full_fits.json": "4b0c6e8366f6ac0cd4e4dd79bcc05c176d9bd3498cb4215f4bd010559c1b2a26",
+    "empirical/results/pre_nested_cv_repair/participant_scores.csv": "fa23bf809537f8e87f2e0d4431c91286d0c8aff4ea1a4673f8a1e2d1d861b3ff",
+    "empirical/results/pre_nested_cv_repair/response_comparison_summary.json": "689cb7983e15c02ab015355a8354a0ef517efbab8a35163cfa511e09774425ef",
+    "empirical/results/pre_nested_cv_repair/run_bci_response_comparison.pre_repair.py": "986f77d40aedffe8710601fc9b4702c0f71310162e4b6b6adb9520efd1df3b57",
+    "empirical/results/reconstruction_residual_audit.json": "e1e2f0ba400219bc0c283ebe45a885e146e78afd061c4664587c79fc10d6b206",
+    "empirical/results/response_runtime_benchmark.json": "79006a4a89588f74d178d82fee0029d8eecfa334c34a436ac1f5b04f9df4bf17",
+    "empirical/results/two_case_alternative_metrics.json": "e386a8ece69fec8df87d90c0e629ffdcfb8a664ae2b27e28db971fbdc4862561",
+    "empirical/run_bci_response_comparison.py": "8dfd23faa940f3430679d998cc6d0d7a0704e6d38ba80a90f3afee4aefbe2d68",
+    "empirical/supplement.txt": "677bf3ecd7a5d8846f507fe3576eddd5968a78d3e6874ce976d90aa96be5639a",
+    "figures/FIGURE_PROVENANCE.json": "2864c312f2c6465dc988f987a357213d86ecff588f6df944c42ae164f1cec7fe",
+    "figures/figure1_audit.pdf": "ac5d94025b6df6e77997dde6628fe7acf10811062cbf430633d7beff0cdb4781",
+    "figures/figure1_audit.png": "0d340a43514806d9115a9f6021692a87d0d1b2a0fd80ced42020c9eaa10895cb",
+    "figures/figure2_twins.pdf": "f50e2291da8e8d2445a6bfed3c2dbdb2efe1b4c4cfb5ea794d4c8f25df3d94f1",
+    "figures/figure2_twins.png": "6944622c4abe73ae499349b3e36bcde5b083ebb0696fae647346638f992e9a15",
+    "figures/figure3_identification.pdf": "8c6d2798802c7f847c00de4f20c8bce3f7bd938a9aded7ba98ad816b39c61108",
+    "figures/figure3_identification.png": "5a2118f1f708bcc506ebb0697bba6df5f31c86e910baf3fd8aeedda535331ee5",
+    "governance/BASELINE_PER_ID_STRUCTURE.json.gz": "7cc2ba2fc7f48d68d2e15e1d7d5ef1b0c5360e2c4bd3dc29fd98caf782c504b3",
+    "governance/BASELINE_STRUCTURE_SUMMARY.json": "d5febcc479f87f5a5eaa1adbbb48e6665719a438a17da606cb60d9c0407dba9a",
+    "governance/COVERAGE_REPORT_ZH.md": "640917a27f46c5029c7ca0bc1b613cc22e642e921c213a47d9871bc8f543fa94",
+    "governance/MAP_AUDIT.md": "eead748ac210996a5e36e70a7c863bfd4a2b95a6f86c94899bca563a1f5d0887",
+    "governance/MAP_EXTENSION.json": "f00d9af53cca8935f08b6dd979e0f4d28cf5754bc7e9ffb696eb8d7be6095a2f",
+    "governance/MAP_REVIEW_RECEIPT.json": "b60eceb512187ce464276dead644bd999805ff486dd8cc3bd3a19095184479ed",
+    "governance/NAVIGATION_UPDATE_RECEIPT.json": "cabba0382ac831b0809096fddf28407ffd7ca5939fd09162bfb70030a5b5a007",
+    "governance/REVIEWED_EDITION_RELOCATION.json": "b18922cada728313bc9516833b64772cef91bd394bef00f7e86feb021df03cbf",
+    "governance/build_map_candidate.py": "137ef13f70f09aea69f9837677004359a570a8c0ff8c1a11713537428a29163b",
+    "history/execution_source/fit_response_models.py": "6f616f9065b9641df92eb6d50288474a3cf3b88a9212520374cde8119d1696b6",
+    "history/pre_relocation/empirical/audit_bci_execution.py": "cdaf4ea65e7ea04f23207914bd871ed60835bf9c3840c8838462566978c995c3",
+    "history/pre_relocation/empirical/results/bci_response/execution_integrity_audit.json": "e087689d79937d9f46df75e2c7c1d9ded16ff3457a6833cb4f404f5fc593adbe",
+    "history/pre_relocation/root_analysis/response_fitter_self_check.json": "0cf2ba834ce31098a11621e80e0d63fd1dc2208faa375fc1369757dbf635a2c8",
+    "history/pre_relocation/theory/RESPONSE_COMPARISON_AUDIT.json": "2e76d3869756fe1f3587f51c0c228b26e89865fc97341b441c437160701b12b9",
+    "history/pre_relocation/theory/audit_response_comparison.py": "196a916b63c97e1c2016dc0d0098a1344649ccce18828a4c47de9d4581d8c621",
+    "history/pre_relocation/theory/test_source_symmetry.py": "58d0d2601f9b671f627211c115cdd802a66c51fea2e7d2b9882ecfb4c1156a92",
+    "literature/CV_NESTING_REVIEW_FINAL.json": "49a8e7e3cfe406b4f29b8ccdbd72f93b26abe664ecb03897f22ef1fffed7f776",
+    "literature/CV_NESTING_REVIEW_INITIAL.json": "93979944b2cec962e0ccc3fe39aafe3ba52bb75658e162a635d69694be07e5f1",
+    "literature/SOURCE_BCI_AUDIT.md": "2454251e417a3b30a20a310ec7d94a739d4e23265004a03b6a805d6cbacd57d2",
+    "literature/TITLE_ABSTRACT_RECOMMENDATION.md": "35a22dd6df72ccc4b5942613d3a92a4392dbebb81bbaf51378a6a0fa83a2dacf",
+    "literature/V02_NOVELTY_AND_PUBLICATION_AUDIT.md": "4046b7ef745065f7cfd93a93fd911a0d4cbc3b60076e8345262d8f27de8f3b60",
+    "literature/code_archive/Master_BCI.m": "06e5122cbe1ed7852eb3b3a429ab984125244f76edc503ed32ac33dc3195bb9d",
+    "literature/code_archive/NLL_BCI_EEG.m": "43bd2c6df3c7c860496efeb35cd4666178b06ee9eb251ccaee13110bce8532fa",
+    "literature/code_archive/NLL_BCI_tACS_Psame.m": "21d8f3880d97e1b1e5b60d67d4f2febb2f7fe05cb681e6a24f5e952bf4a0fa9b",
+    "literature/code_archive/NLL_BCI_tACS_Sigma.m": "76f00bd51c4f880a03ae024597cafa9bcff4c5b64a9086bde4d0510a7435edc9",
+    "literature/code_archive/ReadMe_BCI.txt": "442b5cf7e81545edab00e7680af8a2a23ca3a28fa2b4a2881d16c77f8a3a921e",
+    "literature/code_archive/modelprediction_log_BCI.m": "fd06e42e6e61882475d6d6b4ff10321bd812d7e6c4038b7467dff89f6e8ff814",
+    "literature/code_archive/retrieval.json": "8420f345a18cb7f22307f6559d8943a6a803cd23368234eb355ee21f25f95ced",
+    "literature/primary_sources/pdf_retrieval.json": "36faad68071f221c68716c41512bcedecbb298825558c91b1c64fb131866e568",
+    "literature/primary_sources/retrieval.json": "786609d358cc997277f9f96e0a14acb3b518853f048bb57f5dcf583af6daa2c2",
+    "literature/reconcile_source_bci.py": "33bdf5fcff39b0b92f7b7c78b3b03ec5cefaba727d71cfe90efab88e4dac7478",
+    "literature/source_bci_reconciliation.csv": "ed77dc0b97e5e36abf844f31a851335779f98cd701ecc1f1fa0efc93ca39cfe1",
+    "literature/source_bci_reconciliation.json": "31c04b6bdcd85316c47124c2d87ca9f632bfd70a63948ee2f83615db582b0856",
+    "manuscript/noise-identifiability-bodily-judgments-v0.2.0.md": "8c15f9718a2c0daadb3cf85a0b537c71b4595fc46c5b1eb06d0e55db646dfac3",
+    "manuscript/noise-identifiability-bodily-judgments-v0.2.0.pdf": "f1441d6e945e5208e2616976975ce1599e60daf7c484bb49a1c069ae4a3f3d29",
+    "manuscript/noise-identifiability-bodily-judgments-v0.2.0.tex": "35e200089b95f898774d373051968072bea212ee7f2912cd91c747510b3d5b2f",
+    "manuscript/preamble.tex": "2e5c113617548eeddbf7a210a8602034778e2ceb7a0dfaf0a50516b2275de62d",
+    "requirements.txt": "a2828a88cdd6ee997f751394b79a6b1f3ec572c7f8378f0428bb709e5e8a36e3",
+    "review/EMPIRICAL_MANUSCRIPT_REVIEW.md": "d6baa61a8f050e5b4c70e05ea3fda3b1b944d1373dd315bb98a75432f462ebb9",
+    "review/EMPIRICAL_REVIEW_SNAPSHOT.json": "41a01fb8ff156ba13b6d716b7a8fabfca4758f2638a20445ec6c5163a478b32d",
+    "review/LITERATURE_MANUSCRIPT_REVIEW.md": "5d02b9d938b7d42141318634b532b28b6b8501e8eebe1a81f7fa8c473d027cae",
+    "review/PDF_QA.json": "b5f76b38fe21eb2eb7f822cddc8855516547feed3f981e3e25b7c8c988bf39be",
+    "review/THEORY_MANUSCRIPT_REVIEW.md": "7865ce49b4426883843ddd8052b0bf8dd8790282385ac335c83e53452e681ba9",
+    "root_analysis/build_paper.py": "73cb66e62e2507c731cd51884daa29a9cd8aa0812ae90ab339688792296065bb",
+    "root_analysis/fit_response_models.py": "397aaf7711160314176a8703340844c55ab58becdf02a2de94d337b734bc46f4",
+    "root_analysis/instantiate_response_twins.py": "2751d74fa4465b1e75f13aa3cf45bd0312f57ba7f78e411ea765ea27b0809232",
+    "root_analysis/make_figures.py": "3ed7566dcda6beb5c962eac9c66c923eb7708f43653440a7e934f544be416def",
+    "root_analysis/paired_readout_predictions.csv": "89e56aee5fa148fb0e6765837ac2675f31bc78c12c2f480bbd33a88126c953cd",
+    "root_analysis/response_fitter_self_check.json": "0cf2ba834ce31098a11621e80e0d63fd1dc2208faa375fc1369757dbf635a2c8",
+    "root_analysis/response_twin_people.csv": "c5e6f7a8fa30dd61ffb6faaca396542b5a2faddd0a2f3c15186d5fdc8fff38b8",
+    "root_analysis/response_twin_probabilities.csv": "895778dbb4a566adee06fd48be73c8fa659c27ee3aede0557484833cd05fffe3",
+    "root_analysis/response_twin_summary.json": "5822124b66b5e714d9bdcdc9524019bd1aa3ad209de4039ce8c8639a2e7125a2",
+    "root_analysis/verify_execution_source.py": "1b139d2cca7e3d658da23093a5fe417db7237a912195b7850f1e73e7e92fc202",
+    "theory/BCI_IDENTIFICATION_CHECKS.json": "98c5994fe2a13f39cb3651c5c840096098ca50171b1b7e1c7a75bd04625c6ffe",
+    "theory/RESPONSE_COMPARISON_AUDIT.json": "24e160d6b7db281162a20a0b519a6e13ea74be3b5db5d7ba28dfe6106dfff764",
+    "theory/RESPONSE_COMPARISON_AUDIT.md": "49101fc5c891ea75f6753f5b2f976d6d03279a4d8ff990c96d92ce55928bdb9a",
+    "theory/RESPONSE_IDENTIFIABILITY_RESULTS.md": "a4c7588b47082dbe860a39ab133b04bbd4052bd2a77e507bc2d51c8dd31dbca8",
+    "theory/SYMMETRY_ANALYSIS_PLAN.json": "876e8e05fb88e403ffcbd7f50ce8f63b65f253ceb5f599d5f21180538667c17f",
+    "theory/SYMMETRY_TEST_REPORT.md": "a6164a6c87462f8aa6e36a3cf3fcd72c3f7bf6dfa2f4cdef0377dc822e0b9c03",
+    "theory/SYMMETRY_TEST_RESULTS.json": "9e40fb55aac6595e46338f82214331ce4a3bcae14077e1271982ccffdf91d383",
+    "theory/THEORY_MAIN_TEXT.md": "3be55e63de8012a466182c4a5ff5fb0c4e7512b6f60903b32b40d08dc875048d",
+    "theory/audit_response_comparison.py": "00d0cf0f86505fb2e838659ab8e37dce50e024fe6f00e93735a4b98d330e72d0",
+    "theory/bci_identification.py": "88bf1d98258de78bdc3c09db7155ce31dd737d7a8b61debee36559a91cc9c2d0",
+    "theory/check_bci_identification.py": "691f89ecee6c0ca762d7ea67f5030237b55acffccb3576562e33c5dfc6c2ee05",
+    "theory/paired_affinity_stable_audit.csv": "3a6896966ee39f307cc5f20a9fe771e7ce31013b49994c55d4f58961316544b1",
+    "theory/symmetry_conditional_simulations.npz": "eec07532caefe82f3dd588a33d02c4d25b8287e1e1fefe8d67781b4bc9964fd7",
+    "theory/symmetry_pair_diagnostics.csv": "893a2557a3d32bd410af42284f9ac5eb08669a4a003833537d76eccda021e0c2",
+    "theory/symmetry_task_condition_summaries.csv": "e4fa82efbf2eceb12876aae7655dcceb9f0c9d85e8c84eb5139c15f922ea16d8",
+    "theory/symmetry_task_summaries.csv": "87cf024d74fecbc541ae89e172cf52966be0f6a6f30fa0147204b3b27cb2ed8b",
+    "theory/test_source_symmetry.py": "8c1173fa0eb4ca650da459dc17b9f0117772fdce5dbc2a95edc8be0f55d0add7",
+    "theory/two_anchor_lapse_trajectory.csv": "3fd79a0cf92508830ac50fa06467de8c21abbadf339c2ce78b70ec5fd9c84a08"
+  },
+  "temporary_copy_modified_existing_files": [
+    "literature/source_bci_reconciliation.json"
+  ],
+  "temporary_copy_added_files": [],
+  "temporary_copy_missing_files": [],
+  "audit_output_updates": "Any refreshed derived audit files or audit times occurred only in the temporary copy; all existing R2 scientific files were read only.",
+  "dependency_guard": "Each exact Python command used an audit hook installed only in a temporary verification directory. Every Python open of a workspace file outside the copied record raised an exception. File-open traces were also recorded; installed Python runtime dependencies were allowed. No original workspace scientific dependency could be read.",
+  "governance_exception": "governance/build_map_candidate.py was not run; README explicitly requires the preserved full research repository for it. The exception does not apply to the five scientific checks.",
+  "verification_logs": "/tmp/ctd_r2_portability_fvrqppbp",
+  "checks": [
+    {
+      "check": "root_analysis/fit_response_models.py --self-check",
+      "exit_code": 0,
+      "elapsed_seconds": 1.3217022870012443,
+      "local_file_open_paths": [
+        "empirical/inputs/Experiment_3.xlsx",
+        "empirical/inputs/Experiment_3_Computational_modelling.xlsx",
+        "root_analysis/fit_response_models.py",
+        "root_analysis/response_fitter_self_check.json"
+      ],
+      "outside_record_nonruntime_file_open_paths": [
+        "/etc/mime.types"
+      ],
+      "forbidden_workspace_accesses": [],
+      "stdout_sha256": "0cf2ba834ce31098a11621e80e0d63fd1dc2208faa375fc1369757dbf635a2c8",
+      "stderr": "",
+      "result": {
+        "checks": [
+          {
+            "model": "sigma",
+            "max_scaled_gradient_error": 6.178209950291245e-09
+          },
+          {
+            "model": "prior",
+            "max_scaled_gradient_error": 4.381585909150325e-07
+          },
+          {
+            "model": "sigma_shift",
+            "max_scaled_gradient_error": 5.25484715709814e-09
+          },
+          {
+            "model": "prior_shift",
+            "max_scaled_gradient_error": 3.394056288552055e-08
+          },
+          {
+            "source_model": "sigma",
+            "saved_nll": 209.86896018416,
+            "independent_nll": 209.86896018415965,
+            "difference": -3.410605131648481e-13
+          },
+          {
+            "source_model": "prior",
+            "saved_nll": 212.36230855789,
+            "independent_nll": 212.36230855789017,
+            "difference": 1.7053025658242404e-13
+          }
+        ],
+        "probability_clipping": false,
+        "lapse_floor_is_explicit_parameter_bound": 1e-08,
+        "prospective_cv_policy": "generic starts only; never source saved full-data estimates",
+        "center_bounds_ms": [
+          -800,
+          800
+        ],
+        "sigma_log_bounds": [
+          -10,
+          10
+        ],
+        "prior_logit_bounds": [
+          -16,
+          16
+        ],
+        "source_fixed_stimulus_variance": 84000.0
+      }
+    },
+    {
+      "check": "literature/reconcile_source_bci.py",
+      "exit_code": 0,
+      "elapsed_seconds": 1.219273005001014,
+      "local_file_open_paths": [
+        "empirical/inputs/Experiment_3.xlsx",
+        "empirical/inputs/Experiment_3_Computational_modelling.xlsx",
+        "empirical/inputs/NatComm2026_SourceData.xlsx",
+        "literature/reconcile_source_bci.py",
+        "literature/source_bci_reconciliation.csv",
+        "literature/source_bci_reconciliation.json"
+      ],
+      "outside_record_nonruntime_file_open_paths": [
+        "/etc/mime.types"
+      ],
+      "forbidden_workspace_accesses": [],
+      "stdout_sha256": "73af1abab5920f399abb3caae828f85436e81d12316f3c9bde66db419be4290c",
+      "stderr": "",
+      "result": {
+        "inputs": [
+          {
+            "path": "/workspace/scratch/5b73aae6b1e4/ctd_v02_portable_check/empirical/inputs/Experiment_3_Computational_modelling.xlsx",
+            "sha256": "32e58a814b7d33f52f3dc994a753715d4ddfa21c8ec7424b80ebef43c6d560e4"
+          },
+          {
+            "path": "/workspace/scratch/5b73aae6b1e4/ctd_v02_portable_check/empirical/inputs/Experiment_3.xlsx",
+            "sha256": "d3b2fef22f077788e5299dedb68737d453c09b005d9360bab8dfbe6c35852bc9"
+          },
+          {
+            "path": "/workspace/scratch/5b73aae6b1e4/ctd_v02_portable_check/empirical/inputs/NatComm2026_SourceData.xlsx",
+            "sha256": "3202d68439ad502ff95e7a4d59535a4e8ff9072d5c6a76b5aebf7dde90228a82"
+          }
+        ],
+        "n": 30,
+        "delta_convention": "BCI_sigma minus BCI_psame; negative favors sigma",
+        "free_parameter_difference": -2,
+        "trials_per_person": 420,
+        "no_optimization_performed": true,
+        "no_participant_permutation": true,
+        "max_abs_saved_parameter_nll_error": {
+          "sigma": 6.536993168992922e-13,
+          "psame": 1.993925025089993e-09
+        },
+        "max_abs_publisher_minus_script": {
+          "aic": 2.4868995751603507e-14,
+          "bic": 4.796163466380676e-14
+        },
+        "max_abs_publisher_minus_correct": {
+          "aic": 29.821049106427974,
+          "bic": 29.82104910642795
+        },
+        "sums": {
+          "saved_nll_sigma": 5138.960411207294,
+          "saved_nll_psame": 5142.889991070781,
+          "correct_delta_aic": -127.85915972697424,
+          "public_script_delta_aic": -112.14084027302576,
+          "publisher_delta_aic": -112.1408402730258,
+          "correct_delta_bic": -370.274442403619,
+          "public_script_delta_bic": -354.5561229496706,
+          "publisher_delta_bic": -354.5561229496702
+        },
+        "raw_nll_favor_sigma_n": 14,
+        "correct_aic_favor_sigma_n": 29,
+        "correct_bic_favor_sigma_n": 29,
+        "interpretation": "The information-criterion sign discrepancy changes reported values, not the aggregate preferred model. These are saved-fit evaluations, not guaranteed global optima or new model fits."
+      }
+    },
+    {
+      "check": "empirical/audit_bci_execution.py",
+      "exit_code": 0,
+      "elapsed_seconds": 1.346741501998622,
+      "local_file_open_paths": [
+        "RELOCATION_PROVENANCE.json",
+        "empirical/audit_bci_execution.py",
+        "empirical/results/bci_response/cv_fits.json",
+        "empirical/results/bci_response/cv_partition_counts.npz",
+        "empirical/results/bci_response/execution_integrity_audit.json",
+        "empirical/results/bci_response/full_fits.json",
+        "empirical/results/bci_response/response_comparison_summary.json",
+        "history/execution_source/fit_response_models.py",
+        "root_analysis/__pycache__/fit_response_models.cpython-312.pyc",
+        "root_analysis/__pycache__/verify_execution_source.cpython-312.pyc",
+        "root_analysis/fit_response_models.py",
+        "root_analysis/verify_execution_source.py"
+      ],
+      "outside_record_nonruntime_file_open_paths": [],
+      "forbidden_workspace_accesses": [],
+      "stdout_sha256": "f4014800bce9ceea5e69e5508c5598ab9a089270fad0bc545881d2d3af77d42e",
+      "stderr": "",
+      "result": {
+        "partition_checks_passed": true,
+        "all_600_cv_records_have_training_only_initialization": true,
+        "all_300_shifted_cv_fits_contain_same_training_fold_unshifted_start": true,
+        "all_300_shifted_cv_objectives_pass_training_nesting_check": true,
+        "all_training_and_heldout_counts_match_saved_partition": true,
+        "maximum_recomputed_score_discrepancy": 0.0,
+        "total_fit_records": 720,
+        "best_status_success_count": 720,
+        "max_projected_gradient": 0.00039565228678295483,
+        "number_quality_flags": 0,
+        "boundaries_and_centers": {
+          "full": {
+            "sigma": {
+              "fit_count": 30,
+              "fits_with_each_boundary_type": {
+                "prior_logit": 1,
+                "log_sigma": 0,
+                "lapse": 11,
+                "task_center": 0
+              },
+              "max_projected_gradient": 1.2350683691764175e-05,
+              "all_best_status_success": true,
+              "all_selected_probabilities_strictly_interior": true,
+              "min_number_successful_starts": 18
+            },
+            "prior": {
+              "fit_count": 30,
+              "fits_with_each_boundary_type": {
+                "prior_logit": 1,
+                "log_sigma": 0,
+                "lapse": 13,
+                "task_center": 0
+              },
+              "max_projected_gradient": 0.0003140135313235426,
+              "all_best_status_success": true,
+              "all_selected_probabilities_strictly_interior": true,
+              "min_number_successful_starts": 18
+            },
+            "sigma_shift": {
+              "fit_count": 30,
+              "fits_with_each_boundary_type": {
+                "prior_logit": 1,
+                "log_sigma": 0,
+                "lapse": 12,
+                "task_center": 0
+              },
+              "max_projected_gradient": 5.862726442629196e-05,
+              "all_best_status_success": true,
+              "all_selected_probabilities_strictly_interior": true,
+              "min_number_successful_starts": 19,
+              "task_center_ranges_ms": [
+                [
+                  -32.879474829054224,
+                  -39.76822800250788
+                ],
+                [
+                  96.68589383678359,
+                  90.38226757092538
+                ]
+              ],
+              "task_center_medians_ms": [
+                6.715499898120151,
+                11.932345608767404
+              ]
+            },
+            "prior_shift": {
+              "fit_count": 30,
+              "fits_with_each_boundary_type": {
+                "prior_logit": 2,
+                "log_sigma": 0,
+                "lapse": 12,
+                "task_center": 0
+              },
+              "max_projected_gradient": 0.0001772655768185194,
+              "all_best_status_success": true,
+              "all_selected_probabilities_strictly_interior": true,
+              "min_number_successful_starts": 19,
+              "task_center_ranges_ms": [
+                [
+                  -41.76774459856457,
+                  -38.53817052958999
+                ],
+                [
+                  105.23924181834536,
+                  85.79432448396368
+                ]
+              ],
+              "task_center_medians_ms": [
+                7.341052818469926,
+                13.656827011504767
+              ]
+            }
+          },
+          "cv": {
+            "sigma": {
+              "fit_count": 150,
+              "fits_with_each_boundary_type": {
+                "prior_logit": 8,
+                "log_sigma": 5,
+                "lapse": 60,
+                "task_center": 0
+              },
+              "max_projected_gradient": 5.592588664082854e-05,
+              "all_best_status_success": true,
+              "all_selected_probabilities_strictly_interior": true,
+              "min_number_successful_starts": 8
+            },
+            "prior": {
+              "fit_count": 150,
+              "fits_with_each_boundary_type": {
+                "prior_logit": 11,
+                "log_sigma": 0,
+                "lapse": 63,
+                "task_center": 0
+              },
+              "max_projected_gradient": 0.00017793427901668935,
+              "all_best_status_success": true,
+              "all_selected_probabilities_strictly_interior": true,
+              "min_number_successful_starts": 9
+            },
+            "sigma_shift": {
+              "fit_count": 150,
+              "fits_with_each_boundary_type": {
+                "prior_logit": 6,
+                "log_sigma": 0,
+                "lapse": 66,
+                "task_center": 0
+              },
+              "max_projected_gradient": 7.98897237359597e-05,
+              "all_best_status_success": true,
+              "all_selected_probabilities_strictly_interior": true,
+              "min_number_successful_starts": 10,
+              "task_center_ranges_ms": [
+                [
+                  -40.263716976590395,
+                  -44.983142640648715
+                ],
+                [
+                  118.89157748057968,
+                  88.25046225365423
+                ]
+              ],
+              "task_center_medians_ms": [
+                14.098549747539028,
+                13.602072162512524
+              ]
+            },
+            "prior_shift": {
+              "fit_count": 150,
+              "fits_with_each_boundary_type": {
+                "prior_logit": 11,
+                "log_sigma": 0,
+                "lapse": 67,
+                "task_center": 0
+              },
+              "max_projected_gradient": 0.00039565228678295483,
+              "all_best_status_success": true,
+              "all_selected_probabilities_strictly_interior": true,
+              "min_number_successful_starts": 10,
+              "task_center_ranges_ms": [
+                [
+                  -55.50473440140665,
+                  -42.20153515281995
+                ],
+                [
+                  137.26951431916328,
+                  92.77944087594635
+                ]
+              ],
+              "task_center_medians_ms": [
+                13.281132277571956,
+                13.576173575586914
+              ]
+            }
+          }
+        },
+        "full_original_models_max_nll_minus_source_start": -5.948095349594951e-09,
+        "source_fitter_sha256": "397aaf7711160314176a8703340844c55ab58becdf02a2de94d337b734bc46f4",
+        "execution_source_provenance": {
+          "execution_source_sha256": "6f616f9065b9641df92eb6d50288474a3cf3b88a9212520374cde8119d1696b6",
+          "current_source_sha256": "397aaf7711160314176a8703340844c55ab58becdf02a2de94d337b734bc46f4",
+          "execution_receipt_source_sha256": "6f616f9065b9641df92eb6d50288474a3cf3b88a9212520374cde8119d1696b6",
+          "core_ast_sha256_excluding_self_check": "4ba84172ab78492d21094d6fdb7bff2c63be374c3ea40ac4d2f07ab999fd148d",
+          "core_ast_identical": true,
+          "relocation_provenance": "RELOCATION_PROVENANCE.json"
+        },
+        "interpretation": "Convergence and exact score accounting are numerical evidence, not a proof of global optima or of conditional binomial independence."
+      }
+    },
+    {
+      "check": "theory/audit_response_comparison.py",
+      "exit_code": 0,
+      "elapsed_seconds": 2.0224311020065215,
+      "local_file_open_paths": [
+        "RELOCATION_PROVENANCE.json",
+        "empirical/inputs/Experiment_3.xlsx",
+        "empirical/results/bci_response/cv_fits.json",
+        "empirical/results/bci_response/cv_partition_counts.npz",
+        "empirical/results/bci_response/full_fits.json",
+        "empirical/results/bci_response/response_comparison_summary.json",
+        "empirical/run_bci_response_comparison.py",
+        "history/execution_source/fit_response_models.py",
+        "root_analysis/__pycache__/fit_response_models.cpython-312.pyc",
+        "root_analysis/__pycache__/verify_execution_source.cpython-312.pyc",
+        "root_analysis/fit_response_models.py",
+        "root_analysis/verify_execution_source.py",
+        "theory/RESPONSE_COMPARISON_AUDIT.json",
+        "theory/audit_response_comparison.py"
+      ],
+      "outside_record_nonruntime_file_open_paths": [
+        "/etc/mime.types",
+        "/usr/share/zoneinfo/Etc/UTC"
+      ],
+      "forbidden_workspace_accesses": [],
+      "stdout_sha256": "24e160d6b7db281162a20a0b519a6e13ea74be3b5db5d7ba28dfe6106dfff764",
+      "stderr": "",
+      "result": {
+        "status": "Read-only independent audit passed; no refitting performed",
+        "model_sha256": "397aaf7711160314176a8703340844c55ab58becdf02a2de94d337b734bc46f4",
+        "execution_source_provenance": {
+          "execution_source_sha256": "6f616f9065b9641df92eb6d50288474a3cf3b88a9212520374cde8119d1696b6",
+          "current_source_sha256": "397aaf7711160314176a8703340844c55ab58becdf02a2de94d337b734bc46f4",
+          "execution_receipt_source_sha256": "6f616f9065b9641df92eb6d50288474a3cf3b88a9212520374cde8119d1696b6",
+          "core_ast_sha256_excluding_self_check": "4ba84172ab78492d21094d6fdb7bff2c63be374c3ea40ac4d2f07ab999fd148d",
+          "core_ast_identical": true,
+          "relocation_provenance": "RELOCATION_PROVENANCE.json"
+        },
+        "runner_sha256": "8dfd23faa940f3430679d998cc6d0d7a0704e6d38ba80a90f3afee4aefbe2d68",
+        "partition_count_mapping_matches_canonical": true,
+        "partitions_exhaust_counts_once_and_have_two_trials_per_cell_per_fold": true,
+        "train_counts_exclude_the_scored_fold": true,
+        "source_or_full_initializations_in_cv": false,
+        "independent_probability_and_nll_records_checked": 720,
+        "maximum_probability_discrepancy": 5.551115123125783e-16,
+        "maximum_nll_discrepancy": 3.552713678800501e-13,
+        "maximum_projected_gradient_discrepancy": 0.0,
+        "finite_difference_checks": [
+          {
+            "model": "sigma",
+            "finite_difference_points": 7,
+            "maximum_scaled_derivative_error": 5.3870617984343576e-09
+          },
+          {
+            "model": "prior",
+            "finite_difference_points": 7,
+            "maximum_scaled_derivative_error": 2.072199601791815e-08
+          },
+          {
+            "model": "sigma_shift",
+            "finite_difference_points": 7,
+            "maximum_scaled_derivative_error": 2.0569415996446535e-08
+          },
+          {
+            "model": "prior_shift",
+            "finite_difference_points": 7,
+            "maximum_scaled_derivative_error": 3.340922915326357e-07
+          }
+        ],
+        "zero_center_nesting_checks": 60,
+        "full_nesting_violations": 0,
+        "training_fold_nesting_checks": 300,
+        "cv_nesting_violations": 0,
+        "shifted_cv_starts": "Eight Sobol, canonical, and same-training-fold unshifted fit embedded with two zero centers",
+        "repair_scope": "All 300 shifted training-fold fits were uniformly repaired after a nesting failure was detected; no heldout score selected individual repairs.",
+        "effective_parameter_counts": {
+          "sigma": 6,
+          "prior": 8,
+          "sigma_shift": 8,
+          "prior_shift": 10
+        },
+        "shifted_sigma_minus_shifted_prior_cv": {
+          "sum": -60.88459452703219,
+          "mean": -2.0294864842344063,
+          "participant_mean_t95": [
+            -3.2676238032763347,
+            -0.791349165192478
+          ]
+        },
+        "limits": [
+          "Artificial exchangeable binary partitions of aggregate counts do not reconstruct chronology or independent replication.",
+          "A participant interval treats each participant's whole fivefold score as one paired unit; it does not treat overlapping folds as independent.",
+          "Held-out scoring is conditionally honest for the selected fixed pipeline, not an external validation of an analysis family selected after inspecting this dataset.",
+          "Zero projected-gradient flags certify this numerical stopping check, not global optimum or parameter identifiability.",
+          "Several parameter estimates hit bounds; nominal chi-square deviance p values are reference diagnostics only.",
+          "Shifted models add exactly two task centers per participant, stable across stimulation; they do not fit six condition-specific centers.",
+          "No relative score identifies an anatomical noise source or resolves the exact decision-side counterpart."
+        ]
+      }
+    },
+    {
+      "check": "import theory/test_source_symmetry.py; load_source_counts() only",
+      "exit_code": 0,
+      "elapsed_seconds": 1.4825739099978819,
+      "local_file_open_paths": [
+        "empirical/inputs/Experiment_3.xlsx",
+        "theory/SYMMETRY_ANALYSIS_PLAN.json",
+        "theory/__pycache__/test_source_symmetry.cpython-312.pyc",
+        "theory/test_source_symmetry.py"
+      ],
+      "outside_record_nonruntime_file_open_paths": [
+        "/etc/mime.types",
+        "/usr/share/zoneinfo/Etc/UTC"
+      ],
+      "forbidden_workspace_accesses": [],
+      "stdout_sha256": "6cfea86bccc8a140ef7729ee325d1e654b2ed65deb03fa36f489dd60708dd4cc",
+      "stderr": "",
+      "result": {
+        "count_cells": 1260,
+        "judgments": 12600,
+        "cube_shape": [
+          30,
+          2,
+          3,
+          7
+        ],
+        "participants": 30,
+        "input": "/workspace/scratch/5b73aae6b1e4/ctd_v02_portable_check/empirical/inputs/Experiment_3.xlsx",
+        "main_or_monte_carlo_invoked": false
+      }
+    }
+  ],
+  "static_path_verification": {
+    "status": "passed",
+    "completed_utc": "2026-10-10T08:33:38.436119+00:00",
+    "checks": [
+      {
+        "script": "empirical/reconstruct_gaussian_widths.py",
+        "sha256": "9c6fbe5cac9d36599eb1ab7473949763740b0883e041023a5d9e139b3ee9080a",
+        "method": "Static source/path and existence inspection only; neither imported nor executed.",
+        "result": "passed",
+        "inputs": [
+          {
+            "path": "empirical/inputs/Experiment_3.xlsx",
+            "sha256": "d3b2fef22f077788e5299dedb68737d453c09b005d9360bab8dfbe6c35852bc9",
+            "exists_within_copied_record": true
+          }
+        ],
+        "output_directories_within_record": [
+          "empirical/results"
+        ],
+        "path_reasoning": "HERE = Path(__file__).resolve().parent; SOURCE=HERE/inputs and OUT=HERE/results.",
+        "absolute_legacy_workspace_path_literals": []
+      },
+      {
+        "script": "empirical/run_bci_response_comparison.py",
+        "sha256": "8dfd23faa940f3430679d998cc6d0d7a0704e6d38ba80a90f3afee4aefbe2d68",
+        "method": "Static source/path and existence inspection only; neither imported nor executed.",
+        "result": "passed",
+        "inputs": [
+          {
+            "path": "root_analysis/fit_response_models.py",
+            "sha256": "397aaf7711160314176a8703340844c55ab58becdf02a2de94d337b734bc46f4",
+            "exists_within_copied_record": true
+          },
+          {
+            "path": "empirical/inputs/Experiment_3.xlsx",
+            "sha256": "d3b2fef22f077788e5299dedb68737d453c09b005d9360bab8dfbe6c35852bc9",
+            "exists_within_copied_record": true
+          },
+          {
+            "path": "empirical/inputs/Experiment_3_Computational_modelling.xlsx",
+            "sha256": "32e58a814b7d33f52f3dc994a753715d4ddfa21c8ec7424b80ebef43c6d560e4",
+            "exists_within_copied_record": true
+          }
+        ],
+        "output_directories_within_record": [
+          "empirical/results/bci_response"
+        ],
+        "path_reasoning": "Inputs and outputs derive from empirical/HERE; local root_analysis is prepended for the fitter import. No stored outside path supplies input.",
+        "absolute_legacy_workspace_path_literals": []
+      },
+      {
+        "script": "root_analysis/make_figures.py",
+        "sha256": "3ed7566dcda6beb5c962eac9c66c923eb7708f43653440a7e934f544be416def",
+        "method": "Static source/path and existence inspection only; neither imported nor executed.",
+        "result": "passed",
+        "inputs": [
+          {
+            "path": "root_analysis/instantiate_response_twins.py",
+            "sha256": "2751d74fa4465b1e75f13aa3cf45bd0312f57ba7f78e411ea765ea27b0809232",
+            "exists_within_copied_record": true
+          },
+          {
+            "path": "empirical/results/all_gaussian_candidate_fits.csv",
+            "sha256": "042be84e92b7f93a6d1dad6a8de4767ca43de5f818d19e4fefa45406a9422be5",
+            "exists_within_copied_record": true
+          },
+          {
+            "path": "theory/symmetry_conditional_simulations.npz",
+            "sha256": "eec07532caefe82f3dd588a33d02c4d25b8287e1e1fefe8d67781b4bc9964fd7",
+            "exists_within_copied_record": true
+          },
+          {
+            "path": "empirical/results/bci_response/response_comparison_summary.json",
+            "sha256": "95b37c9c258284ef7d6ab72f77961cb7375eb643b9f3b794654258a0806df0aa",
+            "exists_within_copied_record": true
+          },
+          {
+            "path": "root_analysis/response_twin_people.csv",
+            "sha256": "c5e6f7a8fa30dd61ffb6faaca396542b5a2faddd0a2f3c15186d5fdc8fff38b8",
+            "exists_within_copied_record": true
+          },
+          {
+            "path": "root_analysis/response_twin_probabilities.csv",
+            "sha256": "895778dbb4a566adee06fd48be73c8fa659c27ee3aede0557484833cd05fffe3",
+            "exists_within_copied_record": true
+          },
+          {
+            "path": "root_analysis/paired_readout_predictions.csv",
+            "sha256": "89e56aee5fa148fb0e6765837ac2675f31bc78c12c2f480bbd33a88126c953cd",
+            "exists_within_copied_record": true
+          }
+        ],
+        "output_directories_within_record": [
+          "figures"
+        ],
+        "path_reasoning": "BASE = Path(__file__).resolve().parents[1]; each imported project module, CSV, JSON, NPZ and output is beneath BASE. Imported interval_probability does not run the source-twin main.",
+        "absolute_legacy_workspace_path_literals": []
+      },
+      {
+        "script": "root_analysis/build_paper.py",
+        "sha256": "73cb66e62e2507c731cd51884daa29a9cd8aa0812ae90ab339688792296065bb",
+        "method": "Static source/path and existence inspection only; neither imported nor executed.",
+        "result": "passed",
+        "inputs": [
+          {
+            "path": "manuscript/noise-identifiability-bodily-judgments-v0.2.0.md",
+            "sha256": "8c15f9718a2c0daadb3cf85a0b537c71b4595fc46c5b1eb06d0e55db646dfac3",
+            "exists_within_copied_record": true
+          },
+          {
+            "path": "manuscript/preamble.tex",
+            "sha256": "2e5c113617548eeddbf7a210a8602034778e2ceb7a0dfaf0a50516b2275de62d",
+            "exists_within_copied_record": true
+          },
+          {
+            "path": "figures/figure1_audit.pdf",
+            "sha256": "ac5d94025b6df6e77997dde6628fe7acf10811062cbf430633d7beff0cdb4781",
+            "exists_within_copied_record": true
+          },
+          {
+            "path": "figures/figure2_twins.pdf",
+            "sha256": "f50e2291da8e8d2445a6bfed3c2dbdb2efe1b4c4cfb5ea794d4c8f25df3d94f1",
+            "exists_within_copied_record": true
+          },
+          {
+            "path": "figures/figure3_identification.pdf",
+            "sha256": "8c6d2798802c7f847c00de4f20c8bce3f7bd938a9aded7ba98ad816b39c61108",
+            "exists_within_copied_record": true
+          }
+        ],
+        "output_directories_within_record": [
+          "manuscript"
+        ],
+        "path_reasoning": "base = Path(__file__).resolve().parents[1]/manuscript; Pandoc and XeLaTeX both run with cwd=base. Preamble and manuscript are local; three ../figures/*.pdf links resolve within the record.",
+        "absolute_legacy_workspace_path_literals": []
+      }
+    ],
+    "system_dependencies": "Scientific Python dependencies are declared in requirements.txt. Figure rendering uses installed Matplotlib/DejaVu Sans. PDF building uses installed Pandoc, XeLaTeX, Latin Modern and DejaVu fonts and standard TeX packages; README documents the build tool/font requirement. These are runtime dependencies, not missing scientific source/results files.",
+    "optimization_or_pdf_rebuild_performed": false,
+    "outside_record_project_dependency_found": false,
+    "path_fix_required": false
+  },
+  "subsequent_parent_documentation_edits": {
+    "explanation": "After the five runtime checks and their immutable-source comparison completed, the parent independently clarified publication-status wording in README.md, CHANGELOG.md and MANUSCRIPT_DECISION.json. These are parent documentation edits, not writes by the portability checks. Scientific code, result and manuscript hashes remain the same.",
+    "changes": [
+      {
+        "path": "CHANGELOG.md",
+        "before_sha256": "07565394d74d843dc85fde5f5548c93240ff5ce86b4b8e91ea5beaa542f63161",
+        "after_sha256": "83e910dd8b7497e8cf4d3b34cc5926aebad629d361c65c2c72174c2a3aa924d6"
+      },
+      {
+        "path": "MANUSCRIPT_DECISION.json",
+        "before_sha256": "531d4e8b4582568f6037f2ded245fda785bfd5e982a91ac2109cf646a184dc72",
+        "after_sha256": "4e1b62870dfdea198db573309c7d83a94e3f71d19a775d48877359fb32eae4c7"
+      },
+      {
+        "path": "README.md",
+        "before_sha256": "65c2dbb5b44c3a3d618d8c98f07df4cbdcbdd3926f713b196f809c1efffd0fde",
+        "after_sha256": "fba66a3a257b4888c83a7b71da740dc84a47b922dd8b52da2f5494b2c5567f12"
+      }
+    ],
+    "all_other_preexisting_files_unchanged": true
+  },
+  "verification_receipt_updated_utc": "2026-10-10T08:33:38.450385+00:00"
+}

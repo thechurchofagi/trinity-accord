@@ -1,0 +1,72 @@
+{
+  "status": "Read-only independent audit passed; no refitting performed",
+  "model_sha256": "397aaf7711160314176a8703340844c55ab58becdf02a2de94d337b734bc46f4",
+  "execution_source_provenance": {
+    "execution_source_sha256": "6f616f9065b9641df92eb6d50288474a3cf3b88a9212520374cde8119d1696b6",
+    "current_source_sha256": "397aaf7711160314176a8703340844c55ab58becdf02a2de94d337b734bc46f4",
+    "execution_receipt_source_sha256": "6f616f9065b9641df92eb6d50288474a3cf3b88a9212520374cde8119d1696b6",
+    "core_ast_sha256_excluding_self_check": "4ba84172ab78492d21094d6fdb7bff2c63be374c3ea40ac4d2f07ab999fd148d",
+    "core_ast_identical": true,
+    "relocation_provenance": "RELOCATION_PROVENANCE.json"
+  },
+  "runner_sha256": "8dfd23faa940f3430679d998cc6d0d7a0704e6d38ba80a90f3afee4aefbe2d68",
+  "partition_count_mapping_matches_canonical": true,
+  "partitions_exhaust_counts_once_and_have_two_trials_per_cell_per_fold": true,
+  "train_counts_exclude_the_scored_fold": true,
+  "source_or_full_initializations_in_cv": false,
+  "independent_probability_and_nll_records_checked": 720,
+  "maximum_probability_discrepancy": 5.551115123125783e-16,
+  "maximum_nll_discrepancy": 3.552713678800501e-13,
+  "maximum_projected_gradient_discrepancy": 0.0,
+  "finite_difference_checks": [
+    {
+      "model": "sigma",
+      "finite_difference_points": 7,
+      "maximum_scaled_derivative_error": 5.3870617984343576e-09
+    },
+    {
+      "model": "prior",
+      "finite_difference_points": 7,
+      "maximum_scaled_derivative_error": 2.072199601791815e-08
+    },
+    {
+      "model": "sigma_shift",
+      "finite_difference_points": 7,
+      "maximum_scaled_derivative_error": 2.0569415996446535e-08
+    },
+    {
+      "model": "prior_shift",
+      "finite_difference_points": 7,
+      "maximum_scaled_derivative_error": 3.340922915326357e-07
+    }
+  ],
+  "zero_center_nesting_checks": 60,
+  "full_nesting_violations": 0,
+  "training_fold_nesting_checks": 300,
+  "cv_nesting_violations": 0,
+  "shifted_cv_starts": "Eight Sobol, canonical, and same-training-fold unshifted fit embedded with two zero centers",
+  "repair_scope": "All 300 shifted training-fold fits were uniformly repaired after a nesting failure was detected; no heldout score selected individual repairs.",
+  "effective_parameter_counts": {
+    "sigma": 6,
+    "prior": 8,
+    "sigma_shift": 8,
+    "prior_shift": 10
+  },
+  "shifted_sigma_minus_shifted_prior_cv": {
+    "sum": -60.88459452703219,
+    "mean": -2.0294864842344063,
+    "participant_mean_t95": [
+      -3.2676238032763347,
+      -0.791349165192478
+    ]
+  },
+  "limits": [
+    "Artificial exchangeable binary partitions of aggregate counts do not reconstruct chronology or independent replication.",
+    "A participant interval treats each participant's whole fivefold score as one paired unit; it does not treat overlapping folds as independent.",
+    "Held-out scoring is conditionally honest for the selected fixed pipeline, not an external validation of an analysis family selected after inspecting this dataset.",
+    "Zero projected-gradient flags certify this numerical stopping check, not global optimum or parameter identifiability.",
+    "Several parameter estimates hit bounds; nominal chi-square deviance p values are reference diagnostics only.",
+    "Shifted models add exactly two task centers per participant, stable across stimulation; they do not fit six condition-specific centers.",
+    "No relative score identifies an anatomical noise source or resolves the exact decision-side counterpart."
+  ]
+}

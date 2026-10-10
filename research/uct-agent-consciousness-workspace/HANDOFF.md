@@ -1,3 +1,9 @@
+# 当前接续：CTD v0.2 已成稿；完成地图仍为 UCT-MAP-v1.1.2
+
+继续遵循[最高研究指导](RESEARCH_MASTER_GUIDE.md)。本轮按用户要求深入修订未发表CTD论文，现形成18页[英文稿](records/CTD20261010_Cross_Task_Intervention_v02/manuscript/noise-identifiability-bodily-judgments-v0.2.0.pdf)、[中文交接](records/CTD20261010_Cross_Task_Intervention_v02/HANDOFF_ZH.md)、[工作日志](records/CTD20261010_Cross_Task_Intervention_v02/WORK_LOG.md)和[成稿决定](records/CTD20261010_Cross_Task_Intervention_v02/MANUSCRIPT_DECISION.json)。公开数据审计与条件识别结果达到值得外部方法评议的程度；没有新配对人体数据、UCT实证确认、新DOI或投稿。
+
+[地图审计](records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_AUDIT.md)记录20/7/13共40项候选全停用，1,608项基线结构核对与历史深语义欠账分开。发表覆盖UCT-PUB-v1.0.28，正式发表计数不变。[保存收据](records/CTD20261010_Cross_Task_Intervention_v02/PERSISTENCE_RECEIPT.json)在成功保存后记录实际提交和回读。并发[A3M主线](records/A3M20261010_Bodily_Familiarity_Invariance/HANDOFF_ZH.md)和v0.1全部保留。以下旧“当前”标签在冲突处均为历史记录。
+
 # 最新接续 CTD20261010；完成图仍为 UCT-MAP-v1.1.2
 
 [英文论文](records/CTD20261010_Cross_Task_Intervention/manuscript/testing-a-shared-temporal-scale-v0.1.0.pdf) · [中文交接](records/CTD20261010_Cross_Task_Intervention/HANDOFF_ZH.md) · [工作日志](records/CTD20261010_Cross_Task_Intervention/WORK_LOG.md) · [贡献与发表决定](records/CTD20261010_Cross_Task_Intervention/MANUSCRIPT_DECISION.json) · [地图审计](records/CTD20261010_Cross_Task_Intervention/MAP_AUDIT.md)。本轮完成严格比例／较弱次序的心理测量宽度约束、精确修正预算及30人公开干预数据次分析。公开宽度均值约束p=.708107，独立计数模型参数自助p=.105；均不证明共同神经机制或UCT胜出。原研究个体相关、BCI及经典state-trace方法已扣除。

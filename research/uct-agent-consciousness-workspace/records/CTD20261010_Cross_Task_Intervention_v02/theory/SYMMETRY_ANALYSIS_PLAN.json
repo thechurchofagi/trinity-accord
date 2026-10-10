@@ -1,0 +1,18 @@
+{
+  "created_utc": "2026-10-10 07:42:24 UTC",
+  "status": "Retrospective source-model adequacy check, declared before calculating the symmetry statistic. The source model and some data have already been inspected; this is not a prospective preregistration.",
+  "input": "empirical/results/aggregate_counts_tidy.csv",
+  "source": "D'Angelo et al. 2026, DOI 10.1038/s41467-025-67657-w, Experiment 3",
+  "primary_null": "For each participant, task, stimulation condition, and nonzero absolute SOA, the probabilities of yes at +SOA and -SOA are equal. Pair probabilities are otherwise free.",
+  "reason_chosen": "The released modelprediction_log_BCI.m uses centered Gaussian measurement noise and a centered symmetric interval, hence predicts p(s)=p(-s) for every parameter vector.",
+  "unit_structure": "30 participants x 2 tasks x 3 stimulation conditions x 3 positive SOA magnitudes = 540 pairs, two independent Binomial(10,p) counts per pair under the null. Zero-SOA cells are excluded from this test.",
+  "statistic": "Sum over all pairs of twice the log-likelihood gain for separate positive/negative probabilities over their pair-pooled probability.",
+  "conditional_distribution": "Condition on each pair's total yes count K. Its positive-SOA yes count has Hypergeometric(20,K,10) law. Simulate pairs independently conditional on their observed totals.",
+  "replicates": 19999,
+  "seed": 202610100742,
+  "monte_carlo_rule": "One planned run; upper-tail probability includes ties. Report plus-one p=(exceedances+1)/(B+1) and exact 95% binomial interval for the simulated conditional tail probability. Never report zero p.",
+  "subsidiary_outputs": "Task and task-by-stimulation contributions and signed response differences are descriptive only. No subsidiary significance tests or post-hoc exclusions are planned.",
+  "data_checks": "Verify all labels and counts, retain source mapping, and exactly cross-check reshaped tidy counts against empirical/alignment_diagnostic.npz. Record input SHA-256.",
+  "scope": "A global test of centered symmetry under the conditional independent-binomial model; not a test of UCT, neural mediation, or the number of mechanisms. Rejection need not refute Bayesian causal inference generally. Dependence, trial-varying probabilities, or nonzero centers can violate the tested model.",
+  "no_refitting": "No source parameters are fitted and no source widths are used. This conditional test is separate from relative BCI model comparison."
+}

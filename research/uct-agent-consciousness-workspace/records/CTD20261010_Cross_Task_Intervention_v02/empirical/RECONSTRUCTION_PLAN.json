@@ -1,0 +1,21 @@
+{
+  "timestamp_utc": "2026-10-10T07:37:57.403734+00:00",
+  "purpose": "Reconstruct 180 source descriptive Gaussian TBW values without using inferential p values to choose procedures.",
+  "source_count_range": "Experiment_3.xlsx!B4:AQ33",
+  "source_width_range": "Experiment_3.xlsx!BL4:BQ33, zero-based columns 63:69",
+  "published_definition": "Gaussian standard deviation fitted to yes-response proportions; exact fitting equation and constraints not in inspected main Methods.",
+  "known_v01_obstacle": "Three-parameter zero-baseline Gaussian fit did not reproduce source widths; official publisher numeric blocks match source counts and widths.",
+  "candidate_axes": [
+    "additive baseline vs zero baseline",
+    "free vs fixed center",
+    "Gaussian sigma vs sqrt(2)*sigma, FWHM, HWHM, 2*sigma",
+    "height vs area amplitude (equivalent unconstrained parameterizations)",
+    "count/proportion denominator invariance",
+    "signed asynchronies vs absolute-asynchrony symmetrization",
+    "BCI prediction-derived Gaussian widths vs direct descriptive fitting",
+    "task/condition spreadsheet mapping and source-released code identity"
+  ],
+  "evaluation": "Compare every reconstructed width with its source row and condition, retain numerical residuals and all candidate definitions; do not relabel participants to maximize agreement.",
+  "output_precision": "Source widths have 5 decimal places; record max/median absolute ms error and counts within 1e-4, 1e-3, 1e-2 and 1 ms. Exact reconstruction requires an identified estimator and rounding-level agreement, not merely high correlation.",
+  "inference": "No revised scientific significance tests or bootstrap until source estimator clarified and parent coordination."
+}

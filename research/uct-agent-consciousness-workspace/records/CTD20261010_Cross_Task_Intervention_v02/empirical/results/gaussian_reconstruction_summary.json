@@ -1,0 +1,92 @@
+{
+  "free_baseline_free_center": {
+    "n_widths": 180,
+    "max_abs_error_ms": 27.093289136158347,
+    "median_abs_error_ms": 0.00014434495233217604,
+    "RMSE_ms": 2.0892236212514574,
+    "pearson": 0.9994712066725153,
+    "within_ms": {
+      "0.0001": 77,
+      "0.001": 152,
+      "0.01": 176,
+      "1.0": 178,
+      "5.0": 178
+    },
+    "all_converged": true
+  },
+  "free_baseline_zero_center": {
+    "n_widths": 180,
+    "max_abs_error_ms": 842.2551016039986,
+    "median_abs_error_ms": 6.106077142282473,
+    "RMSE_ms": 81.70365975203353,
+    "pearson": 0.6742437690340545,
+    "within_ms": {
+      "0.0001": 3,
+      "0.001": 5,
+      "0.01": 6,
+      "1.0": 39,
+      "5.0": 85
+    },
+    "all_converged": true
+  },
+  "nonnegative_baseline_free_center": {
+    "n_widths": 180,
+    "max_abs_error_ms": 157.1806060323181,
+    "median_abs_error_ms": 0.7630070486841127,
+    "RMSE_ms": 25.373396021718925,
+    "pearson": 0.9453854588209994,
+    "within_ms": {
+      "0.0001": 31,
+      "0.001": 65,
+      "0.01": 76,
+      "1.0": 95,
+      "5.0": 127
+    },
+    "all_converged": true
+  },
+  "nonnegative_baseline_zero_center": {
+    "n_widths": 180,
+    "max_abs_error_ms": 155.72930888661068,
+    "median_abs_error_ms": 6.546485701235355,
+    "RMSE_ms": 31.255571714632257,
+    "pearson": 0.8934786796328946,
+    "within_ms": {
+      "0.0001": 1,
+      "0.001": 2,
+      "0.01": 4,
+      "1.0": 23,
+      "5.0": 79
+    },
+    "all_converged": true
+  },
+  "zero_baseline_free_center": {
+    "n_widths": 180,
+    "max_abs_error_ms": 247.95470001288325,
+    "median_abs_error_ms": 6.711078546787128,
+    "RMSE_ms": 49.296982148212344,
+    "pearson": 0.721447423767281,
+    "within_ms": {
+      "0.0001": 0,
+      "0.001": 0,
+      "0.01": 0,
+      "1.0": 22,
+      "5.0": 77
+    },
+    "all_converged": true
+  },
+  "zero_baseline_zero_center": {
+    "n_widths": 180,
+    "max_abs_error_ms": 247.36097902214246,
+    "median_abs_error_ms": 10.47345261615424,
+    "RMSE_ms": 51.36551208534374,
+    "pearson": 0.700013547594753,
+    "within_ms": {
+      "0.0001": 0,
+      "0.001": 0,
+      "0.01": 1,
+      "1.0": 4,
+      "5.0": 54
+    },
+    "all_converged": true
+  }
+}

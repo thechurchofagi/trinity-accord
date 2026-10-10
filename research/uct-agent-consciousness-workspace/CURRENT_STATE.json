@@ -15,15 +15,17 @@
   "version_policy": "VERSIONING_POLICY.md",
   "changelog": "CHANGELOG.md",
   "latest_research": {
-    "id": "A3M20261010",
-    "result_version": "A3M-EXACT-v0.1.0",
+    "id": "CTD20261010",
+    "candidate_id": "CTD2-20261010",
+    "result_version": "CTD-RESULT-v0.2.0",
     "status": "PENDING_CHECKPOINT_DISABLED",
-    "source": "records/A3M20261010_Bodily_Familiarity_Invariance/RESEARCH_NOTE.md",
-    "handoff": "records/A3M20261010_Bodily_Familiarity_Invariance/HANDOFF_ZH.md",
-    "work_log": "records/A3M20261010_Bodily_Familiarity_Invariance/WORK_LOG.md",
+    "source": "records/CTD20261010_Cross_Task_Intervention_v02/RESEARCH_NOTE.md",
+    "pdf": "records/CTD20261010_Cross_Task_Intervention_v02/manuscript/noise-identifiability-bodily-judgments-v0.2.0.pdf",
+    "handoff": "records/CTD20261010_Cross_Task_Intervention_v02/HANDOFF_ZH.md",
+    "work_log": "records/CTD20261010_Cross_Task_Intervention_v02/WORK_LOG.md",
     "enabled_as_established_premises": false,
-    "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
-    "evidence_status": "EXACT_FINITE_SUPPORT_RESULT; NO_INDEPENDENT_H_ENDPOINT_OR_ACTUAL_OFF_DIAGONAL_INSTALLATION"
+    "manuscript_status": "WORTH_EXTERNAL_REVIEW_AS_METHODS_AND_SECONDARY_ANALYSIS_MANUSCRIPT",
+    "evidence_status": "PUBLIC_DATA_SECONDARY_ANALYSIS_AND_CONDITIONAL_IDENTIFICATION; NO_NEW_PAIRED_HUMAN_DATA_OR_PHENOMENAL_BRIDGE"
   },
   "latest_integrated_research": {
     "id": "R188-CER-20261009",
@@ -77,7 +79,8 @@
     "A3U20261010",
     "A3L20261010",
     "CTD20261010",
-    "A3M20261010"
+    "A3M20261010",
+    "CTD2-20261010"
   ],
   "current_guide": "RESEARCH_MASTER_GUIDE.md v2.3",
   "complete_map_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
@@ -91,49 +94,64 @@
   },
   "pending_note": "All 31 navigated checkpoints remain disabled. A3M adds no completed or candidate nodes/rules/contexts: it records exact application-level support constraints and open physical premises. CTD, A3L and all effective corrections are retained; no completed-graph count or actual-premise truth changes.",
   "publication_coverage": {
+    "version": "UCT-PUB-v1.0.28",
     "entry": "PUBLICATION_COVERAGE.json",
-    "version": "UCT-PUB-v1.0.27",
-    "base_census_version": "UCT-PUB-v1.0.0",
-    "update": "records/A3M20261010_Bodily_Familiarity_Invariance/PUBLICATION_COVERAGE_UPDATE.json",
-    "report": "publication/UCT-PUB-v1.0.27/COVERAGE_REPORT_ZH.md",
-    "nondeductive": true,
-    "counting_scope": "Frozen verified corpus plus one independently verified SCU DOI; not a new worldwide census."
+    "update": "records/CTD20261010_Cross_Task_Intervention_v02/PUBLICATION_COVERAGE_UPDATE.json",
+    "nondeductive": true
   },
   "latest_activity": {
-    "id": "A3M20261010",
-    "kind": "bodily_familiarity_route_cue_fluency_invariance_and_support_ceiling",
-    "work_log": "records/A3M20261010_Bodily_Familiarity_Invariance/WORK_LOG.md",
-    "handoff": "records/A3M20261010_Bodily_Familiarity_Invariance/HANDOFF_ZH.md"
+    "id": "CTD20261010",
+    "candidate_id": "CTD2-20261010",
+    "result_version": "CTD-RESULT-v0.2.0",
+    "status": "PENDING_CHECKPOINT_DISABLED",
+    "source": "records/CTD20261010_Cross_Task_Intervention_v02/RESEARCH_NOTE.md",
+    "pdf": "records/CTD20261010_Cross_Task_Intervention_v02/manuscript/noise-identifiability-bodily-judgments-v0.2.0.pdf",
+    "handoff": "records/CTD20261010_Cross_Task_Intervention_v02/HANDOFF_ZH.md",
+    "work_log": "records/CTD20261010_Cross_Task_Intervention_v02/WORK_LOG.md",
+    "enabled_as_established_premises": false,
+    "manuscript_status": "WORTH_EXTERNAL_REVIEW_AS_METHODS_AND_SECONDARY_ANALYSIS_MANUSCRIPT",
+    "evidence_status": "PUBLIC_DATA_SECONDARY_ANALYSIS_AND_CONDITIONAL_IDENTIFICATION; NO_NEW_PAIRED_HUMAN_DATA_OR_PHENOMENAL_BRIDGE"
   },
   "latest_pending_research": {
-    "id": "A3M20261010",
-    "result_version": "A3M-EXACT-v0.1.0",
+    "id": "CTD20261010",
+    "candidate_id": "CTD2-20261010",
+    "result_version": "CTD-RESULT-v0.2.0",
     "status": "PENDING_CHECKPOINT_DISABLED",
-    "source": "records/A3M20261010_Bodily_Familiarity_Invariance/RESEARCH_NOTE.md",
-    "handoff": "records/A3M20261010_Bodily_Familiarity_Invariance/HANDOFF_ZH.md",
-    "work_log": "records/A3M20261010_Bodily_Familiarity_Invariance/WORK_LOG.md",
+    "source": "records/CTD20261010_Cross_Task_Intervention_v02/RESEARCH_NOTE.md",
+    "pdf": "records/CTD20261010_Cross_Task_Intervention_v02/manuscript/noise-identifiability-bodily-judgments-v0.2.0.pdf",
+    "handoff": "records/CTD20261010_Cross_Task_Intervention_v02/HANDOFF_ZH.md",
+    "work_log": "records/CTD20261010_Cross_Task_Intervention_v02/WORK_LOG.md",
     "enabled_as_established_premises": false,
-    "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
-    "evidence_status": "EXACT_FINITE_SUPPORT RESULT; PHYSICAL AND PHENOMENAL BRIDGE PREMISES OPEN"
+    "manuscript_status": "WORTH_EXTERNAL_REVIEW_AS_METHODS_AND_SECONDARY_ANALYSIS_MANUSCRIPT",
+    "evidence_status": "PUBLIC_DATA_SECONDARY_ANALYSIS_AND_CONDITIONAL_IDENTIFICATION; NO_NEW_PAIRED_HUMAN_DATA_OR_PHENOMENAL_BRIDGE"
   },
   "review_status_scope": "Completed UCT-MAP-v1.1.2 remains unchanged. A3M repeated the 1608-item programmatic structural check and manually compared the affected R173/R175/R176/R177 plus disabled R199/R200 contracts. No fresh full-depth proof review is claimed; all inherited OPEN obligations remain.",
-  "next_priority": "Propose and criticize one independently oriented fallible endpoint for selected bodily/action familiarity and one physically credible R-not-equal-L manipulation. Do not continue generic cube statistics, area-3a classification or publication work without this new bridge evidence.",
+  "next_priority": "The CTD v0.2 manuscript is complete for external methods review. Any empirical extension needs independently calibrated same-internal-sample paired readouts and criterion/lapse dependence bounds. Preserve the separate A3M H endpoint and physical R≠L main-line question; do not replace H with response width.",
   "latest_scoped_review": {
-    "audit": "records/CTD20261010_Cross_Task_Intervention/MAP_AUDIT.md",
-    "per_id_structure": "records/CTD20261010_Cross_Task_Intervention/review/BASELINE_PER_ID_STRUCTURE.json.gz",
-    "summary": "records/CTD20261010_Cross_Task_Intervention/review/BASELINE_STRUCTURE_SUMMARY.json",
-    "independent_candidate_review": "records/CTD20261010_Cross_Task_Intervention/literature/REVIEW_REPORT.md",
+    "audit": "records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_AUDIT.md",
+    "per_id_structure": "records/CTD20261010_Cross_Task_Intervention_v02/governance/BASELINE_PER_ID_STRUCTURE.json.gz",
+    "summary": "records/CTD20261010_Cross_Task_Intervention_v02/governance/BASELINE_STRUCTURE_SUMMARY.json",
+    "receipt": "records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_REVIEW_RECEIPT.json",
+    "internal_candidate_reviews": [
+      "records/CTD20261010_Cross_Task_Intervention_v02/review/THEORY_MANUSCRIPT_REVIEW.md",
+      "records/CTD20261010_Cross_Task_Intervention_v02/review/EMPIRICAL_MANUSCRIPT_REVIEW.md",
+      "records/CTD20261010_Cross_Task_Intervention_v02/review/LITERATURE_MANUSCRIPT_REVIEW.md"
+    ],
     "status": "SCOPED_DISABLED_CANDIDATE_REVIEW_COMPLETE; FULL_HISTORICAL_DEPTH_OPEN",
     "core_layer_item_ids_structurally_visited": 1608,
-    "candidate_items_independently_reviewed": 24,
+    "candidate_items_locally_reviewed": 40,
     "full_map_semantic_completion": false,
     "inherited_unclosed_depth_ledger": {
       "ids": 1034,
       "fields": 1828,
       "proof_ids": 1347,
-      "counting_warning": "Inherited historical debt, not reduced or recomputed by structural visit."
+      "role": "Historical inherited counts, not recomputed or reduced by this structural pass."
     },
     "qc_open": [
+      "CTD-OPEN-ESTIMATOR-RECONSTRUCTION",
+      "CTD-OPEN-INDEPENDENT-CALIBRATION",
+      "CTD-OPEN-ACTUAL-CONSUMER-INTERVENTION",
+      "CTD-OPEN-EXTERNAL-REPLICATION",
       "QC-20261008-10",
       "IA-QC11",
       "QC-20261008-12",
@@ -171,7 +189,10 @@
     "field": "latest_scoped_review",
     "role": "Historical unresolved audit-debt record; old numbers are not newly measured current unread totals."
   },
-  "latest_activity_persistence": "records/A3U20261010_Area3a_Use_Endpoint/DUAL_SAVE_RECEIPT.json",
+  "latest_activity_persistence": {
+    "status": "SEE_RECEIPT_AFTER_VERIFIED_SAVE",
+    "receipt": "records/CTD20261010_Cross_Task_Intervention_v02/PERSISTENCE_RECEIPT.json"
+  },
   "concurrent_research_preserved": {
     "id": "EIP20261010",
     "commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
@@ -192,7 +213,7 @@
     "map_replacement": false,
     "actual_application_established": false
   },
-  "latest_persistence_receipt": "records/A3L20261010_Rescue_Learning/DUAL_SAVE_RECEIPT.json",
+  "latest_persistence_receipt": "records/CTD20261010_Cross_Task_Intervention_v02/PERSISTENCE_RECEIPT.json",
   "previous_latest_research_before_CTD": {
     "id": "A3L20261010",
     "result_version": "A3L-RESULT-v0.1.0",
@@ -204,5 +225,46 @@
     "manuscript_status": "HOLD_STANDALONE_INTEGRATE_RESCUE_CORRECTION_AND_RETURN_TO_H",
     "evidence_status": "INHERITED_ALGEBRA_APPLICATION_AND_PRIMARY_SOURCE_CORRECTION; NO_NEW_NEURAL_OR_H_EXPERIMENT"
   },
-  "previous_next_priority_before_CTD": "Return to familiar bodily H: independently distinguish retained body/action familiarity from learned-cue recognition and fluency in one fixed domain, compare B_ret/B_fit with a held-out consequence. Reopen area-3a instrumentation only on new concrete same-instance direct-path/replay evidence."
+  "previous_next_priority_before_CTD": "Return to familiar bodily H: independently distinguish retained body/action familiarity from learned-cue recognition and fluency in one fixed domain, compare B_ret/B_fit with a held-out consequence. Reopen area-3a instrumentation only on new concrete same-instance direct-path/replay evidence.",
+  "previous_latest_research_before_CTD_v02": {
+    "id": "A3M20261010",
+    "result_version": "A3M-EXACT-v0.1.0",
+    "status": "PENDING_CHECKPOINT_DISABLED",
+    "source": "records/A3M20261010_Bodily_Familiarity_Invariance/RESEARCH_NOTE.md",
+    "handoff": "records/A3M20261010_Bodily_Familiarity_Invariance/HANDOFF_ZH.md",
+    "work_log": "records/A3M20261010_Bodily_Familiarity_Invariance/WORK_LOG.md",
+    "enabled_as_established_premises": false,
+    "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
+    "evidence_status": "EXACT_FINITE_SUPPORT_RESULT; NO_INDEPENDENT_H_ENDPOINT_OR_ACTUAL_OFF_DIAGONAL_INSTALLATION"
+  },
+  "previous_next_priority_before_CTD_v02": "Propose and criticize one independently oriented fallible endpoint for selected bodily/action familiarity and one physically credible R-not-equal-L manipulation. Do not continue generic cube statistics, area-3a classification or publication work without this new bridge evidence.",
+  "previous_scoped_review_before_CTD_v02": {
+    "audit": "records/CTD20261010_Cross_Task_Intervention/MAP_AUDIT.md",
+    "per_id_structure": "records/CTD20261010_Cross_Task_Intervention/review/BASELINE_PER_ID_STRUCTURE.json.gz",
+    "summary": "records/CTD20261010_Cross_Task_Intervention/review/BASELINE_STRUCTURE_SUMMARY.json",
+    "independent_candidate_review": "records/CTD20261010_Cross_Task_Intervention/literature/REVIEW_REPORT.md",
+    "status": "SCOPED_DISABLED_CANDIDATE_REVIEW_COMPLETE; FULL_HISTORICAL_DEPTH_OPEN",
+    "core_layer_item_ids_structurally_visited": 1608,
+    "candidate_items_independently_reviewed": 24,
+    "full_map_semantic_completion": false,
+    "inherited_unclosed_depth_ledger": {
+      "ids": 1034,
+      "fields": 1828,
+      "proof_ids": 1347,
+      "counting_warning": "Inherited historical debt, not reduced or recomputed by structural visit."
+    },
+    "qc_open": [
+      "QC-20261008-10",
+      "IA-QC11",
+      "QC-20261008-12",
+      "QC-20261008-13",
+      "SCU-OPEN-R191-NORMALIZATION",
+      "SCU-AUDIT-DEPTH"
+    ]
+  },
+  "concurrent_A3M_preserved_at_CTD_v02": {
+    "head": "2faccb45147435b67d901e64f8045cd0e31a8d2a",
+    "path": "records/A3M20261010_Bodily_Familiarity_Invariance",
+    "status": "UNCHANGED"
+  }
 }

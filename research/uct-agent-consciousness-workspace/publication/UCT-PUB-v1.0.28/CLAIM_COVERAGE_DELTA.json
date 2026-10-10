@@ -1,0 +1,85 @@
+{
+  "schema": "uct-publication-coverage-update/1",
+  "coverage_version": "UCT-PUB-v1.0.28",
+  "research_id": "CTD20261010",
+  "candidate_id": "CTD2-20261010",
+  "result_version": "CTD-RESULT-v0.2.0",
+  "created_utc": "2026-10-10T08:29:11.609999+00:00",
+  "prior_coverage_version": "UCT-PUB-v1.0.27",
+  "prior_current_decision": "records/A3M20261010_Bodily_Familiarity_Invariance/PUBLICATION_COVERAGE_UPDATE.json",
+  "base_ledger": {
+    "path": "publication/UCT-PUB-v1.0.22/COVERAGE_LEDGER.json",
+    "bytes": 22744,
+    "sha256": "5ce29d547a10900020f7f8656a5ece6a0686b54c4d0fad612f31e5c2ff37d07c"
+  },
+  "base_ledger_unchanged": true,
+  "nondeductive": true,
+  "unknown_is_unpublished": false,
+  "decision": "WORTH_EXTERNAL_REVIEW_AS_METHODS_AND_SECONDARY_ANALYSIS_MANUSCRIPT",
+  "manuscript_decision": "records/CTD20261010_Cross_Task_Intervention_v02/MANUSCRIPT_DECISION.json",
+  "relation": "Revision of the unpublished CTD work, not a new public work or DOI. SCU v1.0.1 remains a distinct published preprint.",
+  "claim_delta": [
+    {
+      "id": "CTD2-N003",
+      "classification": "CORRECTION",
+      "claim": "The released information-criterion rows match a second negation of positive NLL. The corrected aggregate still favors Sigma."
+    },
+    {
+      "id": "CTD2-N005",
+      "classification": "NEW_APPLICATION",
+      "claim": "A conditional signed-SOA symmetry diagnostic rejects the centered independent-binomial family without fitting its parameters."
+    },
+    {
+      "id": "CTD2-N006",
+      "classification": "NEW_APPLICATION",
+      "claim": "A corrected fixed within-cell five-fold comparison favors Sigma plus task-specific centers over Prior plus task-specific centers, conditional on these retrospective families."
+    },
+    {
+      "id": "CTD2-N008",
+      "classification": "NEW_APPLICATION",
+      "claim": "An explicit fixed-sensory, variable-criterion implementation preserves all 1,260 source marginal probabilities while retaining the source threshold policy."
+    },
+    {
+      "id": "CTD2-N011",
+      "classification": "PROPOSED_NEW_RESULT_WITH_CLASSICAL_INGREDIENTS",
+      "claim": "One additional population joint probability identifies shared Gaussian variance under calibrated centers and independent criteria/lapses; bounded criterion correlation yields a sharp set and central weak identification is quantified.",
+      "related_ids": [
+        "CTD2-N013",
+        "CTD2-N014",
+        "CTD2-N015",
+        "CTD2-N016"
+      ]
+    }
+  ],
+  "closest_prior_art_audit": "records/CTD20261010_Cross_Task_Intervention_v02/literature/V02_NOVELTY_AND_PUBLICATION_AUDIT.md",
+  "inherited": [
+    "Gaussian addition of independent variances and sensory/criterion ambiguity (including Yarrow et al.).",
+    "Bias and decision strategy in simultaneity judgments (Cabrera et al.; Yarrow et al.).",
+    "BCI accounts of ownership and sensory uncertainty (Chancel et al.; D’Angelo et al.).",
+    "Bivariate normal derivative identities (Plackett) and the general principle that extra measurements can aid noise identification.",
+    "The SCU distinction between matching behavior and verified source use; CTD v0.1 descriptive width results."
+  ],
+  "priority_status": "No universal first-discovery claim. The exact combined audit and bounded paired-readout result are proposed contributions; exhaustive priority is not established.",
+  "publication_action": "NONE",
+  "publication_counts": {
+    "distinct_research_works": 29,
+    "distinct_research_work_version_label_pairs": 39,
+    "distinct_published_research_doi_records": 40,
+    "separate_editorial_supplement_works": 1,
+    "separate_editorial_doi_records": 1,
+    "all_verified_publication_doi_records_including_editorial": 41,
+    "uninspected_live_account_drafts": "NOT_ENUMERATED",
+    "reserved_only_records_within_verified_publication_records": 0
+  },
+  "formal_publication_counts_unchanged": true,
+  "current_scientific_map": "UCT-MAP-v1.1.2",
+  "candidate_enabled": false,
+  "candidate_counts": {
+    "nodes": 20,
+    "rules": 7,
+    "contexts": 13,
+    "total": 40
+  },
+  "preserved_concurrent_record": "records/A3M20261010_Bodily_Familiarity_Invariance",
+  "no_new_published_claim_coverage": true
+}

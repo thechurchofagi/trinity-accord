@@ -1,0 +1,189 @@
+{
+  "partition_checks_passed": true,
+  "all_600_cv_records_have_training_only_initialization": true,
+  "all_300_shifted_cv_fits_contain_same_training_fold_unshifted_start": true,
+  "all_300_shifted_cv_objectives_pass_training_nesting_check": true,
+  "all_training_and_heldout_counts_match_saved_partition": true,
+  "maximum_recomputed_score_discrepancy": 0.0,
+  "total_fit_records": 720,
+  "best_status_success_count": 720,
+  "max_projected_gradient": 0.00039565228678295483,
+  "number_quality_flags": 0,
+  "boundaries_and_centers": {
+    "full": {
+      "sigma": {
+        "fit_count": 30,
+        "fits_with_each_boundary_type": {
+          "prior_logit": 1,
+          "log_sigma": 0,
+          "lapse": 11,
+          "task_center": 0
+        },
+        "max_projected_gradient": 1.2350683691764175e-05,
+        "all_best_status_success": true,
+        "all_selected_probabilities_strictly_interior": true,
+        "min_number_successful_starts": 18
+      },
+      "prior": {
+        "fit_count": 30,
+        "fits_with_each_boundary_type": {
+          "prior_logit": 1,
+          "log_sigma": 0,
+          "lapse": 13,
+          "task_center": 0
+        },
+        "max_projected_gradient": 0.0003140135313235426,
+        "all_best_status_success": true,
+        "all_selected_probabilities_strictly_interior": true,
+        "min_number_successful_starts": 18
+      },
+      "sigma_shift": {
+        "fit_count": 30,
+        "fits_with_each_boundary_type": {
+          "prior_logit": 1,
+          "log_sigma": 0,
+          "lapse": 12,
+          "task_center": 0
+        },
+        "max_projected_gradient": 5.862726442629196e-05,
+        "all_best_status_success": true,
+        "all_selected_probabilities_strictly_interior": true,
+        "min_number_successful_starts": 19,
+        "task_center_ranges_ms": [
+          [
+            -32.879474829054224,
+            -39.76822800250788
+          ],
+          [
+            96.68589383678359,
+            90.38226757092538
+          ]
+        ],
+        "task_center_medians_ms": [
+          6.715499898120151,
+          11.932345608767404
+        ]
+      },
+      "prior_shift": {
+        "fit_count": 30,
+        "fits_with_each_boundary_type": {
+          "prior_logit": 2,
+          "log_sigma": 0,
+          "lapse": 12,
+          "task_center": 0
+        },
+        "max_projected_gradient": 0.0001772655768185194,
+        "all_best_status_success": true,
+        "all_selected_probabilities_strictly_interior": true,
+        "min_number_successful_starts": 19,
+        "task_center_ranges_ms": [
+          [
+            -41.76774459856457,
+            -38.53817052958999
+          ],
+          [
+            105.23924181834536,
+            85.79432448396368
+          ]
+        ],
+        "task_center_medians_ms": [
+          7.341052818469926,
+          13.656827011504767
+        ]
+      }
+    },
+    "cv": {
+      "sigma": {
+        "fit_count": 150,
+        "fits_with_each_boundary_type": {
+          "prior_logit": 8,
+          "log_sigma": 5,
+          "lapse": 60,
+          "task_center": 0
+        },
+        "max_projected_gradient": 5.592588664082854e-05,
+        "all_best_status_success": true,
+        "all_selected_probabilities_strictly_interior": true,
+        "min_number_successful_starts": 8
+      },
+      "prior": {
+        "fit_count": 150,
+        "fits_with_each_boundary_type": {
+          "prior_logit": 11,
+          "log_sigma": 0,
+          "lapse": 63,
+          "task_center": 0
+        },
+        "max_projected_gradient": 0.00017793427901668935,
+        "all_best_status_success": true,
+        "all_selected_probabilities_strictly_interior": true,
+        "min_number_successful_starts": 9
+      },
+      "sigma_shift": {
+        "fit_count": 150,
+        "fits_with_each_boundary_type": {
+          "prior_logit": 6,
+          "log_sigma": 0,
+          "lapse": 66,
+          "task_center": 0
+        },
+        "max_projected_gradient": 7.98897237359597e-05,
+        "all_best_status_success": true,
+        "all_selected_probabilities_strictly_interior": true,
+        "min_number_successful_starts": 10,
+        "task_center_ranges_ms": [
+          [
+            -40.263716976590395,
+            -44.983142640648715
+          ],
+          [
+            118.89157748057968,
+            88.25046225365423
+          ]
+        ],
+        "task_center_medians_ms": [
+          14.098549747539028,
+          13.602072162512524
+        ]
+      },
+      "prior_shift": {
+        "fit_count": 150,
+        "fits_with_each_boundary_type": {
+          "prior_logit": 11,
+          "log_sigma": 0,
+          "lapse": 67,
+          "task_center": 0
+        },
+        "max_projected_gradient": 0.00039565228678295483,
+        "all_best_status_success": true,
+        "all_selected_probabilities_strictly_interior": true,
+        "min_number_successful_starts": 10,
+        "task_center_ranges_ms": [
+          [
+            -55.50473440140665,
+            -42.20153515281995
+          ],
+          [
+            137.26951431916328,
+            92.77944087594635
+          ]
+        ],
+        "task_center_medians_ms": [
+          13.281132277571956,
+          13.576173575586914
+        ]
+      }
+    }
+  },
+  "full_original_models_max_nll_minus_source_start": -5.948095349594951e-09,
+  "source_fitter_sha256": "397aaf7711160314176a8703340844c55ab58becdf02a2de94d337b734bc46f4",
+  "execution_source_provenance": {
+    "execution_source_sha256": "6f616f9065b9641df92eb6d50288474a3cf3b88a9212520374cde8119d1696b6",
+    "current_source_sha256": "397aaf7711160314176a8703340844c55ab58becdf02a2de94d337b734bc46f4",
+    "execution_receipt_source_sha256": "6f616f9065b9641df92eb6d50288474a3cf3b88a9212520374cde8119d1696b6",
+    "core_ast_sha256_excluding_self_check": "4ba84172ab78492d21094d6fdb7bff2c63be374c3ea40ac4d2f07ab999fd148d",
+    "core_ast_identical": true,
+    "relocation_provenance": "RELOCATION_PROVENANCE.json"
+  },
+  "interpretation": "Convergence and exact score accounting are numerical evidence, not a proof of global optima or of conditional binomial independence."
+}

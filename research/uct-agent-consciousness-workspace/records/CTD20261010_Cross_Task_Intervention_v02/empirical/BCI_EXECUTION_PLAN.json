@@ -1,0 +1,17 @@
+{
+  "status": "Recorded before execution or inspection of new held-out scores",
+  "purpose": "Compare four explicit source-related BCI response models and a limited correction for task-specific response centers",
+  "models": ["sigma", "prior", "sigma_shift", "prior_shift"],
+  "effective_parameters": [6, 8, 8, 10],
+  "full_data_starts": "16 predetermined Sobol starts plus the fitter's generic canonical start, the matching published source start, and zero-center embedding of the fitted unshifted model for shifted models",
+  "cv_starts": "8 predetermined Sobol starts plus the generic canonical start only; selected for a fixed runtime budget before any held-out score is inspected",
+  "cv_forbidden_initialization": "No published full-data parameters, full-data fitted parameters, or full-data labels enter initialization or fitting of any training fold",
+  "cv_folds": 5,
+  "cv_split": "Each participant/task/condition/asynchrony cell's ten binary outcomes are independently permuted once and partitioned into five pairs. Each fold trains on eight and scores the remaining two.",
+  "cv_seed": 2026101017,
+  "fit_seed": 2026101019,
+  "cv_interpretation": "Artificial conditional-exchangeability partitions of aggregate binary counts; no real trial chronology, no independent replication, and no population generalization are reconstructed",
+  "numerical_quality_rule": "Use the supplied fixed refinement for failed status or projected gradient greater than 1e-3. Record unresolved failures, projected gradients, bounds, and every starting objective. Do not select models or retries by scientific significance or held-out score.",
+  "reported_outputs": "All full-data and training-fold fits, parameters, predictions, source starts and nesting provenance, held-out count scores, fold memberships, convergence diagnostics, absolute count deviance, and paired participant score contrasts",
+  "new_model_scope": "Exactly two task centers fixed across all three stimulation conditions. No additional centers or flexible curve features are added."
+}
