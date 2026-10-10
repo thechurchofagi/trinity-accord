@@ -1,0 +1,89 @@
+{
+  "schema": "uct-dual-save-receipt/1.0",
+  "record": "A3P20261010_Area3a_Crossed_Probe",
+  "completed_step": "science result, scoped formal audit, remote science commit, fixed-master v77, and recoverable increment verified",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "baseline_commit": "2537c7f36cdf4bbab0cf2b21d70a3cc2f64d77a9",
+    "science_commit": "7fed437cdb214741f736b6d9d02704bf32ba4a87",
+    "tree_sha": "3531eb6e702be951920a3d3c0431fbb966a096d6",
+    "local_equivalent_tree_commit": "278bca8574c2bae8efcf23d8fc28d1c629529f8f",
+    "update": "expected_sha_fast_forward",
+    "readback": [
+      "commit metadata",
+      "records/A3P20261010_Area3a_Crossed_Probe/RESEARCH_NOTE.md"
+    ],
+    "receipt_commit": "THIS_FILE_IS_ADDED_BY_THE_NEXT_FAST_FORWARD_COMMIT; USE_BRANCH_HEAD_AND_FETCH_COMMIT_READBACK"
+  },
+  "library": {
+    "fixed_master": {
+      "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+      "filename": "UCT_Hourly_Research_Master_Handoff.md",
+      "version": 77,
+      "file_id": "file_00000000fa8081f58faaffeafd8d3f37",
+      "sha256": "3fca6e679884e53546a4c591f72faf942c5c2196356727ff6602c8c26d15ce57",
+      "bytes": 709584,
+      "readback_lines": "1-18"
+    },
+    "increment": {
+      "library_file_id": "libfile_e594226404b88191aba4cd57c704fa36",
+      "file_id": "file_00000000634481fda9e9c6fe2df8a986",
+      "filename": "UCT_A3P20261010_Increment.zip",
+      "sha256": "9c775f4371070522624ac74186efa31429597e4a6b7edd17ca4d08250b71759a",
+      "bytes": 161814,
+      "classification": "incremental_not_full_backup"
+    },
+    "manifest": {
+      "library_file_id": "libfile_8d175d255d988191be36dc03d8996bc3",
+      "file_id": "file_000000009c8881f7ac0b15753e43a254",
+      "filename": "UCT_A3P20261010_Increment_MANIFEST.json",
+      "sha256": "bf741f2e8b73b04d4bf461d8bc97b20d32fd34d5c8114be399bfa5194be2610b",
+      "bytes": 7861,
+      "file_count": 31
+    }
+  },
+  "formal_status": {
+    "completed_map": "UCT-MAP-v1.1.2",
+    "completed_counts": {
+      "nodes": 913,
+      "active_rules": 424,
+      "contexts": 261,
+      "suspended_rules": 10,
+      "review_items": 1608
+    },
+    "candidate": {
+      "nodes": 7,
+      "rules": 2,
+      "contexts": 5,
+      "enabled": false
+    },
+    "open_reviews": [
+      "QC-20261008-10",
+      "IA-QC11",
+      "QC-20261008-12",
+      "QC-20261008-13",
+      "SCU-OPEN-R191-NORMALIZATION",
+      "SCU-AUDIT-DEPTH"
+    ]
+  },
+  "failures": [
+    {
+      "operation": "direct unauthenticated git push",
+      "result": "failed: no credential device",
+      "disposition": "no ref changed; controlled GitHub expected-SHA fast-forward succeeded"
+    }
+  ],
+  "unfinished": [
+    "Define and pre-register one downstream endpoint for the source × region × consumer-perturbation package.",
+    "Validate area-3a versus neighbour/sham perturbation purity and spillover checks.",
+    "Keep the familiar-mineness bridge H separate; all listed supervision items remain open."
+  ],
+  "exact_recovery": [
+    "Fetch branch uct-agent-consciousness-workspace and verify science commit 7fed437cdb214741f736b6d9d02704bf32ba4a87 is an ancestor of the branch head.",
+    "Read the branch-head DUAL_SAVE_RECEIPT.json and fixed Library master version 77.",
+    "If GitHub is unavailable, identify the most recent complete working-set baseline from the fixed master, overlay UCT_A3P20261010_Increment.zip, verify the archive and every manifest hash, and keep MAP_EXTENSION.json disabled.",
+    "Resume from PROBE_CONTRACT.md at the downstream-endpoint and manipulation-purity obligations; do not repeat the A3S Bayesian/row-space work."
+  ]
+}
+

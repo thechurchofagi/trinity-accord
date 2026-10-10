@@ -29,5 +29,8 @@
 
 ## Persistence checkpoint
 
-GitHub and fixed-master/increment receipt fields are filled only after remote readback. Until then the recoverable local commits are `80687494b` (round record) and `a28d6eb16` (core correction/result), followed by the final science commit created after validation.
+- Remote science commit `7fed437cdb214741f736b6d9d02704bf32ba4a87`, tree `3531eb6e702be951920a3d3c0431fbb966a096d6`, was written by expected-SHA fast-forward and read back with the research note.
+- Fixed master handoff `libfile_4175a81748fc819187fa8f5771f056fa` was replaced from retained version 76 to verified version 77; first lines, size and local SHA-256 were checked.
+- Saved a 31-file incremental recovery archive, not a full repository snapshot: `libfile_e594226404b88191aba4cd57c704fa36`; saved its manifest as `libfile_8d175d255d988191be36dc03d8996bc3`.
+- Direct unauthenticated `git push` failed without changing the branch. The controlled expected-SHA path succeeded. Exact hashes, sizes, unfinished work and recovery actions are in `DUAL_SAVE_RECEIPT.json`.
 

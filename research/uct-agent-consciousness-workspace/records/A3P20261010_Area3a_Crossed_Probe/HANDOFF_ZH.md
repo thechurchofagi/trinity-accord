@@ -24,7 +24,7 @@ Johnson 等（2026）每只动物使用一个面向 area 3a 的32通道阵列。
 
 ## 保存与恢复
 
-最终双保存凭据见同目录 `DUAL_SAVE_RECEIPT.json`。若该文件尚无经远端读回核验的提交/Library 版本，则只从最近已核验 A3S 收据 `2537c7f36cdf4bbab0cf2b21d70a3cc2f64d77a9` 恢复，再检查本目录；不得把本地提交或增量包称作双份完成。
+双保存凭据见同目录 `DUAL_SAVE_RECEIPT.json`。科学树已在远端提交 `7fed437cdb214741f736b6d9d02704bf32ba4a87` 回读；固定主交接同一 Library ID 已成为第77版（709,584字节，SHA-256 `3fca6e...ce57`）。恢复包 `UCT_A3P20261010_Increment.zip` 为31文件增量而非完整仓库，Library ID `libfile_e594226404b88191aba4cd57c704fa36`，SHA-256 `9c775f...1759a`；清单 ID `libfile_8d175d255d988191be36dc03d8996bc3`。直接无凭据 `git push` 失败但未改引用，随后 expected-SHA 快进成功。
 
 ## 下一具体问题
 
