@@ -1,0 +1,8 @@
+{
+  "state": "PUBLISH_ONCE_INTENT",
+  "report_number": "TA-TR-2026-26",
+  "record_id": 23279189,
+  "doi": "10.5281/zenodo.23279189",
+  "expected_manifest_sha256": "0c0d2fb0261c67c1b06819586aa3f1a6fe0eda4d5c15aeab0fbb3ae06af7685a",
+  "workflow_run_id": "38042692735"
+}
