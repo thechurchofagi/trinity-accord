@@ -300,3 +300,6 @@ No publication, DOI, OTS, Arweave, PR, deployment, production workflow, or sched
 # Latest handoff — R197 (2026-10-10)
 
 Resume from `records/R197_Fallible_Endpoint_Orientation_20261010/HANDOFF_ZH.md`. The substantive correction is that verbal/nonverbal modality does not orient R196's complement; independent signed reliability does so only conditionally, and nonreport transport additionally requires class-conditional invariance. Do not redo R155–R196. Keep QC10, IA-QC11, QC12 and QC13 open. Next test one actual endpoint candidate with copy/switch and transport falsifiers.
+# Latest research handoff — A3M20261010
+
+Current record: `records/A3M20261010_Bodily_Familiarity_Invariance/HANDOFF_ZH.md`. A3M follows and preserves concurrent CTD. The completed formal map stays UCT-MAP-v1.1.2; the A3M application is disabled. Resume at the independent bodily-familiarity endpoint plus one actual `R≠L` installation, not at generic statistics or area-3a classification.

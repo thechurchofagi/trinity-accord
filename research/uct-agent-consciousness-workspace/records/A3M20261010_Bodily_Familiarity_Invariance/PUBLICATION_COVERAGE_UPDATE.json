@@ -1,0 +1,12 @@
+{
+  "schema": "uct-publication-coverage-update/1",
+  "research_id": "A3M20261010",
+  "status": "PENDING_CHECKPOINT_DISABLED",
+  "decision": "HOLD_STANDALONE; USE_AS_FUTURE_PROTOCOL/GAP NOTE",
+  "reason": "Exact support and invariance obligations are useful, but no independent H endpoint or actual off-diagonal installation exists.",
+  "formal_publication_counts_changed": false,
+  "new_doi": false,
+  "manuscript_created": false,
+  "enabled_as_established_premise": false,
+  "prior_art_boundary": "Elementary Boolean/factorial reasoning and cited motor/agency mechanisms are not claimed original."
+}

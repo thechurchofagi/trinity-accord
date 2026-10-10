@@ -1,0 +1,581 @@
+{
+  "result_id": "A3M-EXACT-v0.1.0",
+  "row_order": [
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      1
+    ],
+    [
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      1,
+      1
+    ],
+    [
+      1,
+      0,
+      0
+    ],
+    [
+      1,
+      0,
+      1
+    ],
+    [
+      1,
+      1,
+      0
+    ],
+    [
+      1,
+      1,
+      1
+    ]
+  ],
+  "truth_tables_checked": 256,
+  "pure_candidates": {
+    "B_ret": [
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1
+    ],
+    "B_cue": [
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      1,
+      1
+    ],
+    "B_fit": [
+      0,
+      1,
+      0,
+      1,
+      0,
+      1,
+      0,
+      1
+    ]
+  },
+  "route_only_invariant_tables": 4,
+  "route_only_positive_tables": 1,
+  "cue_only_invariant_tables": 4,
+  "cue_only_positive_tables": 1,
+  "fit_only_invariant_tables": 4,
+  "fit_only_positive_tables": 1,
+  "minimal_observational_separating_size": 2,
+  "minimal_separating_examples": [
+    {
+      "indices": [
+        1,
+        2
+      ],
+      "rows": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          0
+        ]
+      ],
+      "signatures": {
+        "B_ret": [
+          0,
+          0
+        ],
+        "B_cue": [
+          0,
+          1
+        ],
+        "B_fit": [
+          1,
+          0
+        ]
+      }
+    },
+    {
+      "indices": [
+        1,
+        3
+      ],
+      "rows": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          1
+        ]
+      ],
+      "signatures": {
+        "B_ret": [
+          0,
+          0
+        ],
+        "B_cue": [
+          0,
+          1
+        ],
+        "B_fit": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "indices": [
+        1,
+        4
+      ],
+      "rows": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          0
+        ]
+      ],
+      "signatures": {
+        "B_ret": [
+          0,
+          1
+        ],
+        "B_cue": [
+          0,
+          0
+        ],
+        "B_fit": [
+          1,
+          0
+        ]
+      }
+    },
+    {
+      "indices": [
+        1,
+        5
+      ],
+      "rows": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          1
+        ]
+      ],
+      "signatures": {
+        "B_ret": [
+          0,
+          1
+        ],
+        "B_cue": [
+          0,
+          0
+        ],
+        "B_fit": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "indices": [
+        2,
+        3
+      ],
+      "rows": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          1,
+          1
+        ]
+      ],
+      "signatures": {
+        "B_ret": [
+          0,
+          0
+        ],
+        "B_cue": [
+          1,
+          1
+        ],
+        "B_fit": [
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "indices": [
+        2,
+        4
+      ],
+      "rows": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          0
+        ]
+      ],
+      "signatures": {
+        "B_ret": [
+          0,
+          1
+        ],
+        "B_cue": [
+          1,
+          0
+        ],
+        "B_fit": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "indices": [
+        2,
+        6
+      ],
+      "rows": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ]
+      ],
+      "signatures": {
+        "B_ret": [
+          0,
+          1
+        ],
+        "B_cue": [
+          1,
+          1
+        ],
+        "B_fit": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "indices": [
+        3,
+        5
+      ],
+      "rows": [
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          1,
+          0,
+          1
+        ]
+      ],
+      "signatures": {
+        "B_ret": [
+          0,
+          1
+        ],
+        "B_cue": [
+          1,
+          0
+        ],
+        "B_fit": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "indices": [
+        3,
+        6
+      ],
+      "rows": [
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          0
+        ]
+      ],
+      "signatures": {
+        "B_ret": [
+          0,
+          1
+        ],
+        "B_cue": [
+          1,
+          1
+        ],
+        "B_fit": [
+          1,
+          0
+        ]
+      }
+    },
+    {
+      "indices": [
+        4,
+        5
+      ],
+      "rows": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1
+        ]
+      ],
+      "signatures": {
+        "B_ret": [
+          1,
+          1
+        ],
+        "B_cue": [
+          0,
+          0
+        ],
+        "B_fit": [
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "indices": [
+        4,
+        6
+      ],
+      "rows": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ]
+      ],
+      "signatures": {
+        "B_ret": [
+          1,
+          1
+        ],
+        "B_cue": [
+          0,
+          1
+        ],
+        "B_fit": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "indices": [
+        5,
+        6
+      ],
+      "rows": [
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          0
+        ]
+      ],
+      "signatures": {
+        "B_ret": [
+          1,
+          1
+        ],
+        "B_cue": [
+          0,
+          1
+        ],
+        "B_fit": [
+          1,
+          0
+        ]
+      }
+    }
+  ],
+  "natural_diagonal_signatures": {
+    "B_ret": [
+      0,
+      1
+    ],
+    "B_cue": [
+      0,
+      1
+    ],
+    "B_fit": [
+      0,
+      1
+    ]
+  },
+  "route_equals_fluency_plane_signatures": {
+    "B_ret": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "B_cue": [
+      0,
+      1,
+      0,
+      1
+    ],
+    "B_fit": [
+      0,
+      0,
+      1,
+      1
+    ]
+  },
+  "star_calibration_rows": [
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      1
+    ]
+  ],
+  "star_signatures": {
+    "B_ret": [
+      0,
+      1,
+      0,
+      0
+    ],
+    "B_cue": [
+      0,
+      0,
+      1,
+      0
+    ],
+    "B_fit": [
+      0,
+      0,
+      0,
+      1
+    ]
+  },
+  "held_out_mismatch_rows": [
+    [
+      0,
+      1,
+      1
+    ],
+    [
+      1,
+      0,
+      1
+    ],
+    [
+      1,
+      1,
+      0
+    ]
+  ],
+  "held_out_signatures": {
+    "B_ret": [
+      0,
+      1,
+      1
+    ],
+    "B_cue": [
+      1,
+      0,
+      1
+    ],
+    "B_fit": [
+      1,
+      1,
+      0
+    ]
+  }
+}

@@ -260,3 +260,10 @@ R191 is not an integrated map release. Its 11-node/5-rule/4-context candidate is
 - Completed map: [UCT_FORMAL_GRAPH_MODULES.json](UCT_FORMAL_GRAPH_MODULES.json), [release audit](versions/UCT-MAP-v1.1.2/AUDIT_REPORT.md), and [capsule](versions/UCT-MAP-v1.1.2/UCT_MAP_v1.1.2_Capsule.tar.xz)
 
 R190 is the latest research checkpoint but is not integrated into the completed map. Its disabled candidate adds 10 nodes, 5 rules, and 4 contexts. R189, ONLINE-AC, AC, and IL remain separate pending modules. Completed counts remain 913/424/261 with 10 suspended rules. Historical current/latest headings are superseded only where inconsistent with CURRENT_STATE.json and this index.
+# Latest entry — A3M20261010 bodily-familiarity invariance
+
+- Research note: `records/A3M20261010_Bodily_Familiarity_Invariance/RESEARCH_NOTE.md`
+- Exact checker/results: `check_invariance_cube.py`, `EXACT_RESULTS.json`
+- Map audit/overlay: `MAP_AUDIT.md`, `MAP_COMPATIBILITY_AUDIT.json`, `MAP_EXTENSION.json`
+- Gaps/review: `GAP_LEDGER.md`, `REVIEW_RESPONSE.md`, `FAILURES.md`
+- Handoff: `HANDOFF_ZH.md`

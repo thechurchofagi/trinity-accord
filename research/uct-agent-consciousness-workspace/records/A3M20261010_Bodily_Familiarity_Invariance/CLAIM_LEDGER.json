@@ -1,0 +1,13 @@
+{
+  "schema": "uct-claim-ledger/1",
+  "round_id": "A3M20261010",
+  "claims": [
+    {"id":"A3M-C1","type":"exact finite proposition","status":"PROVED_FINITE","domain":"three pure Boolean candidates on fixed support","premises":["fixed R,Q,L meanings","same rows","no post-hoc relabelling"],"proof":"direct evaluation in check_invariance_cube.py","counterexample":"off-diagonal rows break diagonal aliasing","thought_experiment_role":"natural-learning aliasing"},
+    {"id":"A3M-C2","type":"exact finite proposition","status":"PROVED_FINITE_NO_MATH_NOVELTY","domain":"all 256 Boolean functions on {0,1}^3","premises":["full cube","exact invariance","positive orientation"],"proof":"flip-orbit constancy plus exhaustive enumeration","counterexample":"partial support permits mimics","thought_experiment_role":"pure-route signature"},
+    {"id":"A3M-C3","type":"protocol consequence","status":"PROVED_FINITE_DESIGN_FACT_ACTUAL_INSTALLATION_OPEN","domain":"star calibration and three held-out mismatches","premises":["semantic transport","verified physical cells","no refitting"],"proof":"table evaluation","counterexample":"two arbitrary separating rows do not test invariance","thought_experiment_role":"anti-overclaim control"},
+    {"id":"A3M-C4","type":"identifiability limitation","status":"PROVED_CONDITIONAL","domain":"support restricted to diagonal or R=L plane","premises":["no extra independently oriented distinction"],"proof":"pointwise-equal restricted functions induce equal predictions","counterexample":"verified off-diagonal installation","thought_experiment_role":"missing-support stop rule"},
+    {"id":"A3M-C5","type":"UCT conditional application","status":"OPEN_CONDITIONAL_APPLICATION","domain":"one actual bearer/time/signature/target episode","premises":["independent H-oriented Z","actual R use","off-diagonal installations","same-instance C1 binding","pure-rival scope"],"proof":"A3M-C1..C4 plus explicit UCT C1 postulate","counterexample":"cue/fluency signature, endpoint drift or unrealized cells","thought_experiment_role":"positive organizational bridge boundary"}
+  ],
+  "known_mathematics_not_claimed_original": ["Boolean function enumeration","factorial single-axis contrasts","support-restricted nonidentifiability"],
+  "consciousness_verdict": "NONE"
+}

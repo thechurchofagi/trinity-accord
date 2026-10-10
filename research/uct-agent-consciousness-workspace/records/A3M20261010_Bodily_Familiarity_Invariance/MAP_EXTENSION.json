@@ -1,0 +1,21 @@
+{
+  "schema": "uct-pending-application-amendment/1",
+  "id": "A3M20261010",
+  "base_release": "UCT-MAP-v1.1.2",
+  "integration_status": "PENDING_CHECKPOINT_DISABLED",
+  "enabled": false,
+  "enabled_as_established_premise": false,
+  "release_effect": "NONE; frozen completed graph unchanged",
+  "foundation_effect": "NONE",
+  "nodes": [],
+  "rules": [],
+  "context_links": [],
+  "applications": [
+    {"claim_id":"A3M-C1","completed_node_refs":["R173:RETENTIVE_BINDING_RELATION","R173:FAMILIAR_MINENESS_BOUNDARY","R177:SOURCE_FEATURE_SEPARATION"],"all_simultaneous_premises":["fixed R/Q/L axis meanings","pure candidate scope","fixed observed support"],"status":"PROVED_FINITE_APPLICATION_RELATION; NO_NEW_MAP_THEOREM","actual_premises_discharged":false,"source":"RESEARCH_NOTE.md"},
+    {"claim_id":"A3M-C2","completed_node_refs":["R173:RETENTIVE_BINDING_RELATION","R177:SOURCE_FEATURE_SEPARATION"],"all_simultaneous_premises":["full logical cube","exact non-target-axis invariance","positive orientation"],"status":"ELEMENTARY_FINITE_RESULT; PHYSICAL_REALIZABILITY_OPEN","actual_premises_discharged":false,"source":"RESEARCH_NOTE.md"},
+    {"claim_id":"A3M-C3","completed_node_refs":["R173:FAMILIAR_MINENESS_BOUNDARY"],"pending_node_refs":["R200:SEMANTIC_CALIBRATION_FIREWALL"],"all_simultaneous_premises":["independent endpoint","star cells installed","held-out mismatch cells installed","no refitting","semantic transport"],"status":"PENDING_PROTOCOL_APPLICATION","actual_premises_discharged":false,"source":"RESEARCH_NOTE.md"},
+    {"claim_id":"A3M-C4","completed_node_refs":[],"pending_node_refs":["R199:LINEAGE_PROBE_CEILING","R200:SEMANTIC_CALIBRATION_FIREWALL"],"all_simultaneous_premises":["support restriction","candidate equality on support","no external oriented distinction"],"status":"CONDITIONAL_IDENTIFIABILITY_LIMIT","actual_premises_discharged":false,"source":"RESEARCH_NOTE.md"},
+    {"claim_id":"A3M-C5","completed_node_refs":["R173:RETENTIVE_BINDING_RELATION","R173:RETENTIVE_EXPERIENTIAL_COORDINATE","R173:FAMILIAR_MINENESS_BOUNDARY"],"pending_node_refs":["R200:SEMANTIC_CALIBRATION_FIREWALL"],"all_simultaneous_premises":["actual bearer/time/signature/target binding","independent H-oriented endpoint","verified actual R use","verified off-diagonal installations","same-instance C1 application"],"status":"OPEN_UNVALIDATED; NOT_ENABLED","actual_premises_discharged":false,"source":"RESEARCH_NOTE.md"}
+  ],
+  "reason_no_new_nodes": "The Boolean/factorial mathematics is established; the UCT-specific endpoint and physical installations remain open. Manufacturing nodes would overstate application truth."
+}

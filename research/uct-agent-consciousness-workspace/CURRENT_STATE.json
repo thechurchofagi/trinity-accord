@@ -15,16 +15,15 @@
   "version_policy": "VERSIONING_POLICY.md",
   "changelog": "CHANGELOG.md",
   "latest_research": {
-    "id": "CTD20261010",
-    "result_version": "CTD-RESULT-v0.1.0",
+    "id": "A3M20261010",
+    "result_version": "A3M-EXACT-v0.1.0",
     "status": "PENDING_CHECKPOINT_DISABLED",
-    "source": "records/CTD20261010_Cross_Task_Intervention/manuscript/testing-a-shared-temporal-scale-v0.1.0.md",
-    "pdf": "records/CTD20261010_Cross_Task_Intervention/manuscript/testing-a-shared-temporal-scale-v0.1.0.pdf",
-    "handoff": "records/CTD20261010_Cross_Task_Intervention/HANDOFF_ZH.md",
-    "work_log": "records/CTD20261010_Cross_Task_Intervention/WORK_LOG.md",
+    "source": "records/A3M20261010_Bodily_Familiarity_Invariance/RESEARCH_NOTE.md",
+    "handoff": "records/A3M20261010_Bodily_Familiarity_Invariance/HANDOFF_ZH.md",
+    "work_log": "records/A3M20261010_Bodily_Familiarity_Invariance/WORK_LOG.md",
     "enabled_as_established_premises": false,
-    "manuscript_status": "COMPLETE_WORKING_MANUSCRIPT_FOR_REVIEW_NO_NEW_DOI",
-    "evidence_status": "REAL_PUBLIC_DATA_SECONDARY_ANALYSIS_AND_EXACT_MODEL_APPLICATION; NO_NEW_NEURAL_EXPERIMENT_OR_PHENOMENAL_BRIDGE"
+    "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
+    "evidence_status": "EXACT_FINITE_SUPPORT_RESULT; NO_INDEPENDENT_H_ENDPOINT_OR_ACTUAL_OFF_DIAGONAL_INSTALLATION"
   },
   "latest_integrated_research": {
     "id": "R188-CER-20261009",
@@ -77,7 +76,8 @@
     "A3P20261010",
     "A3U20261010",
     "A3L20261010",
-    "CTD20261010"
+    "CTD20261010",
+    "A3M20261010"
   ],
   "current_guide": "RESEARCH_MASTER_GUIDE.md v2.3",
   "complete_map_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
@@ -89,36 +89,35 @@
     "nondeductive_context_links": 261,
     "total_review_items": 1608
   },
-  "pending_note": "All 30 navigated checkpoints remain disabled. CTD adds13 nodes,4 conditional rules and7 nondeductive contexts only to the candidate layer. Concurrent A3L and all effective corrections are retained; no completed-graph count or actual-premise truth changes.",
+  "pending_note": "All 31 navigated checkpoints remain disabled. A3M adds no completed or candidate nodes/rules/contexts: it records exact application-level support constraints and open physical premises. CTD, A3L and all effective corrections are retained; no completed-graph count or actual-premise truth changes.",
   "publication_coverage": {
     "entry": "PUBLICATION_COVERAGE.json",
     "version": "UCT-PUB-v1.0.27",
     "base_census_version": "UCT-PUB-v1.0.0",
-    "update": "records/CTD20261010_Cross_Task_Intervention/PUBLICATION_COVERAGE_UPDATE.json",
+    "update": "records/A3M20261010_Bodily_Familiarity_Invariance/PUBLICATION_COVERAGE_UPDATE.json",
     "report": "publication/UCT-PUB-v1.0.27/COVERAGE_REPORT_ZH.md",
     "nondeductive": true,
     "counting_scope": "Frozen verified corpus plus one independently verified SCU DOI; not a new worldwide census."
   },
   "latest_activity": {
-    "id": "CTD20261010",
-    "kind": "cross_task_proportional_and_ordinal_constraints_with_real_data_secondary_analysis",
-    "work_log": "records/CTD20261010_Cross_Task_Intervention/WORK_LOG.md",
-    "handoff": "records/CTD20261010_Cross_Task_Intervention/HANDOFF_ZH.md"
+    "id": "A3M20261010",
+    "kind": "bodily_familiarity_route_cue_fluency_invariance_and_support_ceiling",
+    "work_log": "records/A3M20261010_Bodily_Familiarity_Invariance/WORK_LOG.md",
+    "handoff": "records/A3M20261010_Bodily_Familiarity_Invariance/HANDOFF_ZH.md"
   },
   "latest_pending_research": {
-    "id": "CTD20261010",
-    "result_version": "CTD-RESULT-v0.1.0",
+    "id": "A3M20261010",
+    "result_version": "A3M-EXACT-v0.1.0",
     "status": "PENDING_CHECKPOINT_DISABLED",
-    "source": "records/CTD20261010_Cross_Task_Intervention/manuscript/testing-a-shared-temporal-scale-v0.1.0.md",
-    "pdf": "records/CTD20261010_Cross_Task_Intervention/manuscript/testing-a-shared-temporal-scale-v0.1.0.pdf",
-    "handoff": "records/CTD20261010_Cross_Task_Intervention/HANDOFF_ZH.md",
-    "work_log": "records/CTD20261010_Cross_Task_Intervention/WORK_LOG.md",
+    "source": "records/A3M20261010_Bodily_Familiarity_Invariance/RESEARCH_NOTE.md",
+    "handoff": "records/A3M20261010_Bodily_Familiarity_Invariance/HANDOFF_ZH.md",
+    "work_log": "records/A3M20261010_Bodily_Familiarity_Invariance/WORK_LOG.md",
     "enabled_as_established_premises": false,
-    "manuscript_status": "COMPLETE_WORKING_MANUSCRIPT_FOR_REVIEW_NO_NEW_DOI",
-    "evidence_status": "REAL_PUBLIC_DATA_SECONDARY_ANALYSIS_AND_EXACT_MODEL_APPLICATION; NO_NEW_NEURAL_EXPERIMENT_OR_PHENOMENAL_BRIDGE"
+    "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
+    "evidence_status": "EXACT_FINITE_SUPPORT RESULT; PHYSICAL AND PHENOMENAL BRIDGE PREMISES OPEN"
   },
-  "review_status_scope": "Completed UCT-MAP-v1.1.2 remains unchanged. CTD reviewed all24 new candidate items, repeated the1608-item programmatic structural check and compared named affected core semantics. No fresh full-depth review of all historical proofs is claimed; all inherited OPEN obligations remain.",
-  "next_priority": "Preserve A3L familiar bodily H priority: distinguish retained body/action familiarity from learned-cue recognition and fluency, and compare B_ret/B_fit by an independently named held-out consequence. CTD width analysis is complete and does not substitute width for H. Reopen estimator/calibration or consumer instrumentation only on concrete new source-pipeline, independently calibrated measurement, or same-instance route evidence; do not extend generic statistics/control taxonomies.",
+  "review_status_scope": "Completed UCT-MAP-v1.1.2 remains unchanged. A3M repeated the 1608-item programmatic structural check and manually compared the affected R173/R175/R176/R177 plus disabled R199/R200 contracts. No fresh full-depth proof review is claimed; all inherited OPEN obligations remain.",
+  "next_priority": "Propose and criticize one independently oriented fallible endpoint for selected bodily/action familiarity and one physically credible R-not-equal-L manipulation. Do not continue generic cube statistics, area-3a classification or publication work without this new bridge evidence.",
   "latest_scoped_review": {
     "audit": "records/CTD20261010_Cross_Task_Intervention/MAP_AUDIT.md",
     "per_id_structure": "records/CTD20261010_Cross_Task_Intervention/review/BASELINE_PER_ID_STRUCTURE.json.gz",

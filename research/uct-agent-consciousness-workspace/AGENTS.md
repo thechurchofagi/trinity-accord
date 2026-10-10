@@ -625,3 +625,6 @@ Positive UCT application: under C1 plus a separately grounded actual P/I/K, thes
 # Latest operational checkpoint — R197
 
 Read R197 before selecting the next question. Do not treat “nonverbal” as an endpoint guarantee. Require independent target semantics, signed reliability, same-instance evidence and class-conditional transport, while preserving all open review items and C1/U1 boundaries.
+# Latest continuation priority — after A3M20261010
+
+Do not continue generic cube/statistical expansion. The next main-line task is to propose and criticize one independently oriented, fallible endpoint for selected bodily/action familiarity and one physically credible `R≠L` manipulation. Keep route use, cue familiarity, fluency, ownership wording, success and report distinct. Read `records/A3M20261010_Bodily_Familiarity_Invariance/HANDOFF_ZH.md` after the required entry sequence.

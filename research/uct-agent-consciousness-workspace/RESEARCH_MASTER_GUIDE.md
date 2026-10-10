@@ -220,3 +220,7 @@ UCT I v1.2 的 C1 是普遍的、逐实际过程的结构—体验同一公设�
 
 Latest disabled research checkpoint: `records/R197_Fallible_Endpoint_Orientation_20261010/`. Use independently signed fallible evidence rather than requiring a nonverbal medium; keep evidence, target, actual use and experience structure distinct. Completed map remains UCT-MAP-v1.1.2.
 
+# Latest checkpoint note — A3M20261010 (pending disabled)
+
+A3M returns from bounded instrumentation/statistics to the bodily-familiarity H question. It proves a support ceiling: retained-route use `R`, cue familiarity `Q` and present fluency `L` are aliased on the natural diagonal, and route/fluency remain aliased whenever `R=L`. A star calibration plus held-out mismatch design gives distinct pure-candidate predictions, but no independent H endpoint or physical off-diagonal installation is yet supplied. Treat `records/A3M20261010_Bodily_Familiarity_Invariance/HANDOFF_ZH.md` as the latest research handoff after concurrent CTD. C1/U1, actual-organization typing and all OPEN review obligations are unchanged.
+

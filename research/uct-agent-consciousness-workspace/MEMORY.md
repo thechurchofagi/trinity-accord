@@ -176,3 +176,9 @@ R197 corrected the R196 request for a “nonverbal positive endpoint.” Modalit
 # 2026-10-10 — R198 self-profile non-scalarization
 
 R198 showed that the R193–R197 orientation program presupposes target selection. Ownership, agency, retentive familiarity and current practical coupling are typed relations and do not determine one global familiar-mineness bit. In the four-coordinate binary audit domain, fixed endpoints plus monotonicity leave 166 nonconstant scalarizations; crossed profiles receive every possible aggregate label pair. The immediate target is therefore narrowed to retentive familiarity `H`, with `O/G` as dissociation controls and actual `C` as an organizational candidate bridge. No endpoint, actual token or aggregation is validated. R198 remains disabled; all four open review items remain open.
+# 2026-10-10 — A3M bodily-familiarity invariance checkpoint
+
+- Latest bounded result: `R` (actual current retained-route use), `Q` (cue familiarity) and `L` (present fluency) cannot be distinguished on `R=Q=L`; `B_ret` and `B_fit` cannot be distinguished on any `R=L` support.
+- Exact finite result: full-cube invariance to the two non-target axes plus positive target-axis orientation uniquely selects the corresponding pure table. Star rows separate the pure candidates; held-out mismatch rows test them without refitting.
+- Do not interpret this as H calibration. Independent endpoint semantics and real off-diagonal installations remain missing; all relevant review items remain open.
+- Next question: a predeclared bodily-familiarity endpoint that transports across at least one verified `R≠L` manipulation without being defined by fluency, success, ownership report or route membership.
