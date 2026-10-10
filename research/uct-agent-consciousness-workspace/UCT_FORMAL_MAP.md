@@ -58,4 +58,6 @@ Test one independent current bodily/action-familiarity interpretation against or
 
 [A3X H_way内容可接受性](records/A3X20261010_Action_Familiarity_Content_Admissibility/RESEARCH_NOTE.md)把题意`S_H`、判断—体验可靠性`C_H`和同事件实际组织`O_H`分开；代理反例和有限查表构造不赋予H真值。0新图节点/规则/关系，正式图仍913/424/261。
 
+[A3Y 测量对象身份边界](records/A3Y20261010_Measurand_Identity_Barrier/RESEARCH_NOTE.md)进一步区分统计潜类`Z`与体验目标`H_way`：同一两群体两指标观测律允许`H=Z`、`H`独立于`Z`、`H=1-Z`。这不是新增正式规则，而是阻止把潜类拟合偷换成`B_fam/C_H`；正式图仍913/424/261。
+
 基础问题专线 TJR20261010：[交接](records/TJR20261010_Temporal_Joint_Realization/HANDOFF_ZH.md) · [正文](records/TJR20261010_Temporal_Joint_Realization/RESEARCH_NOTE.md) · [日志](records/TJR20261010_Temporal_Joint_Realization/WORK_LOG.md)。串行保留、联合读取与压缩的停用应用；原科学接续和身体熟悉感路线保留。原理多属继承，独立成稿HOLD，全图深审仍未完成。

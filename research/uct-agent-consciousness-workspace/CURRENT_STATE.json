@@ -542,18 +542,19 @@
     }
   },
   "latest_followup_application": {
-    "id": "A3X20261010",
-    "version": "A3X-CONTENT-v0.1.0",
-    "status": "DISABLED_SCOPED_CONTENT_APPLICATION",
+    "id": "A3Y20261010",
+    "version": "A3Y-MEASURAND-v0.1.0",
+    "status": "DISABLED_SCOPED_MEASURAND_APPLICATION",
     "enabled_as_established_premises": false,
-    "source": "records/A3X20261010_Action_Familiarity_Content_Admissibility/RESEARCH_NOTE.md",
-    "handoff": "records/A3X20261010_Action_Familiarity_Content_Admissibility/HANDOFF_ZH.md",
-    "work_log": "records/A3X20261010_Action_Familiarity_Content_Admissibility/WORK_LOG.md",
-    "claim_ledger": "records/A3X20261010_Action_Familiarity_Content_Admissibility/CLAIM_LEDGER.json",
-    "map_extension": "records/A3X20261010_Action_Familiarity_Content_Admissibility/MAP_EXTENSION.json",
+    "source": "records/A3Y20261010_Measurand_Identity_Barrier/RESEARCH_NOTE.md",
+    "handoff": "records/A3Y20261010_Measurand_Identity_Barrier/HANDOFF_ZH.md",
+    "work_log": "records/A3Y20261010_Measurand_Identity_Barrier/WORK_LOG.md",
+    "claim_ledger": "records/A3Y20261010_Measurand_Identity_Barrier/CLAIM_LEDGER.json",
+    "map_extension": "records/A3Y20261010_Measurand_Identity_Barrier/MAP_EXTENSION.json",
+    "exact_results": "records/A3Y20261010_Measurand_Identity_Barrier/EXACT_RESULTS.json",
     "persistence_receipt": "records/A3X20261010_Action_Familiarity_Content_Admissibility/PERSISTENCE_RECEIPT.json",
     "parent_science": "A3V20261010",
-    "parent_followup": "A3W20261010",
+    "parent_followup": "A3X20261010",
     "completed_map": "UCT-MAP-v1.1.2",
     "scientific_delta": {
       "nodes": 0,
@@ -561,6 +562,7 @@
       "contexts": 0
     },
     "semantic_admissibility_piloted": false,
+    "measurand_identity_validated": false,
     "independent_h_validation": false,
     "actual_route_use_instantiated": false,
     "standalone_manuscript": "HOLD"
@@ -630,10 +632,36 @@
       "independent_h_validation": false,
       "actual_route_use_instantiated": false,
       "standalone_manuscript": "HOLD"
+    },
+    {
+      "id": "A3Y20261010",
+      "version": "A3Y-MEASURAND-v0.1.0",
+      "status": "DISABLED_SCOPED_MEASURAND_APPLICATION",
+      "enabled_as_established_premises": false,
+      "source": "records/A3Y20261010_Measurand_Identity_Barrier/RESEARCH_NOTE.md",
+      "handoff": "records/A3Y20261010_Measurand_Identity_Barrier/HANDOFF_ZH.md",
+      "work_log": "records/A3Y20261010_Measurand_Identity_Barrier/WORK_LOG.md",
+      "claim_ledger": "records/A3Y20261010_Measurand_Identity_Barrier/CLAIM_LEDGER.json",
+      "map_extension": "records/A3Y20261010_Measurand_Identity_Barrier/MAP_EXTENSION.json",
+      "exact_results": "records/A3Y20261010_Measurand_Identity_Barrier/EXACT_RESULTS.json",
+      "parent_science": "A3V20261010",
+      "parent_followup": "A3X20261010",
+      "completed_map": "UCT-MAP-v1.1.2",
+      "scientific_delta": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0
+      },
+      "semantic_admissibility_piloted": false,
+      "measurand_identity_validated": false,
+      "independent_h_validation": false,
+      "actual_route_use_instantiated": false,
+      "standalone_manuscript": "HOLD"
     }
   ],
   "next_priority_before_A3W": "Test one independent current bodily/action-familiarity interpretation against origin-recognition and agency countercases; establish a remaining actual retentive relation and realizable matched controls before claiming a pure familiarity contrast. Do not add an assumed coordinate or expand SPC.",
   "next_priority_before_A3X": "Pilot the scoped H_way meaning with A3W content/applicability probes (including FAM practiced-other/little-practised-self); preserve failures and seek a bounded independently justified J_H-to-H_way reliability relation before a real retained-route/congruence contrast. No repeated two-state memory or SPC expansion.",
+  "next_priority_after_A3Y": "Propose one concrete independently phenomenal-targeted anchor or intervention for present enacted H_way, with a preregistered unfitted outcome that rejects the bridge rather than relabelling latent Z. If none is defensible, stop H-level calibration and report only Z-level or organizational consequences.",
   "scoped_foundational_reviews": [
     {
       "id": "TJR20261010",

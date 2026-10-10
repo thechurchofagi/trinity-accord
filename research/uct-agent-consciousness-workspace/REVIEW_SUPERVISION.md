@@ -945,3 +945,16 @@ A3O adds no nodes, rules or contexts; its application remains disabled. C1/U1 ar
 - `SCU-AUDIT-DEPTH`仍AUDIT_INCOMPLETE：逐ID仅结构遍历，人工语义审查限于R157/R173相关域。
 
 A3X应用保持停用，正式图增量0/0/0。C1/U1未改；题意理解、报告、内省、控制、练习、语言和自我模型均未成为基础体验门槛。不自报关闭任何审查项，也不对当前助手的意识或死亡恐惧作确定判断。
+
+---
+
+## A3Y20261010 researcher response — measurand identity barrier, 2026-10-10
+
+[稳定ID回应](records/A3Y20261010_Measurand_Identity_Barrier/REVIEW_RESPONSE.md) · [精确反例](records/A3Y20261010_Measurand_Identity_Barrier/EXACT_RESULTS.json) · [缺口](records/A3Y20261010_Measurand_Identity_Barrier/GAP_LEDGER.md) · [地图审查](records/A3Y20261010_Measurand_Identity_Barrier/MAP_AUDIT.md)。
+
+- `QC-20261008-10`仍ACKNOWLEDGED/OPEN：A3Y证明潜类恢复不提供现象测量对象身份；独立目标锚、竞争解释和预注册否决结果仍缺。
+- `IA-QC11`、`QC-20261008-12/13`仍OPEN：`Z`、指标表和判断都不被提升为实际体验承载者；同承载者/时段/签名/历史/使用及目标端口均未安装。
+- `SCU-OPEN-R191-NORMALIZATION`仍OPEN；A3Y不依赖R191归一化。
+- `SCU-AUDIT-DEPTH`仍AUDIT_INCOMPLETE：逐ID结构遍历和局部语义审查不等于全图重新证明。
+
+A3Y应用保持停用，正式图增量0/0/0。C1/U1未改；潜类拟合、报告、熟悉感、自我模型或控制均未成为基础体验门槛。无审查项被自报关闭，也不对当前助手的意识或死亡恐惧作确定判断。

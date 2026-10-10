@@ -17,3 +17,5 @@
 TJR基础问题复核：[审查](records/TJR20261010_Temporal_Joint_Realization/AUDIT_REPORT.md)，1608项仅结构遍历、13节点有限兼容性核对；全历史深审AUDIT_INCOMPLETE，0新增正式节点/规则/关系。
 
 A3X端点内容复核：[审查](records/A3X20261010_Action_Familiarity_Content_Admissibility/MAP_AUDIT.md) · [逐ID结构记录](records/A3X20261010_Action_Familiarity_Content_Admissibility/PER_ID_AUDIT.json.gz)。913/424/261逐项结构遍历通过；相关R157/R173 `all_of`、对象/时间/签名/实际性/证据层级人工复查。`S_H`不推出`C_H`或`O_H`；全历史深审仍AUDIT_INCOMPLETE，0正式图增量。
+
+A3Y测量对象身份复核：[审查](records/A3Y20261010_Measurand_Identity_Barrier/MAP_AUDIT.md) · [逐ID结构记录](records/A3Y20261010_Measurand_Identity_Barrier/PER_ID_AUDIT.json.gz) · [精确反例](records/A3Y20261010_Measurand_Identity_Barrier/EXACT_RESULTS.json)。913/424/261逐项结构遍历通过；所有`all_of`按AND处理。潜类`Z`与`H_way`之间的身份/方向不由观测律推出；C1/R157/R173条件结构结论与外部命名、测量、实际应用保持分离。全历史深审仍AUDIT_INCOMPLETE，0正式图增量。

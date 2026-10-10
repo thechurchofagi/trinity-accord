@@ -20,4 +20,6 @@
 
 最新内容门槛修正：[A3X交接](records/A3X20261010_Action_Familiarity_Content_Admissibility/HANDOFF_ZH.md)；[正文](records/A3X20261010_Action_Familiarity_Content_Admissibility/RESEARCH_NOTE.md)；[协议](records/A3X20261010_Action_Familiarity_Content_Admissibility/ENDPOINT_CONTENT_PROTOCOL.md)。`S_H`只说明题意未明显被来源/练习/控制/流畅代理取代；有限查表反例表明它不能推出`C_H`。下一题只寻独立有界`C_H`，通过后才进入同事件`O_H`路线比较。
 
+最新测量对象身份修正：[A3Y交接](records/A3Y20261010_Measurand_Identity_Barrier/HANDOFF_ZH.md)；[正文](records/A3Y20261010_Measurand_Identity_Barrier/RESEARCH_NOTE.md)；[精确结果](records/A3Y20261010_Measurand_Identity_Barrier/EXACT_RESULTS.json)。共同潜类`Z`的恢复不等于`Z=H_way`；相同观测表允许正、零、负的`H_way`方向。下一题必须给出一个独立指向现象目标且有预注册否决结果的锚/干预，否则停止H层校准，只报告`Z`层或组织层后果。
+
 基础问题专线 TJR20261010：[交接](records/TJR20261010_Temporal_Joint_Realization/HANDOFF_ZH.md) · [正文](records/TJR20261010_Temporal_Joint_Realization/RESEARCH_NOTE.md) · [日志](records/TJR20261010_Temporal_Joint_Realization/WORK_LOG.md)。串行保留、联合读取与压缩的停用应用；原科学接续和身体熟悉感路线保留。原理多属继承，独立成稿HOLD，全图深审仍未完成。

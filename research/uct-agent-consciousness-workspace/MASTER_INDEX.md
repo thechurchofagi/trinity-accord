@@ -21,4 +21,6 @@
 
 - 最新应用A3X：[正文](records/A3X20261010_Action_Familiarity_Content_Admissibility/RESEARCH_NOTE.md) · [内容协议](records/A3X20261010_Action_Familiarity_Content_Admissibility/ENDPOINT_CONTENT_PROTOCOL.md) · [代理探针](records/A3X20261010_Action_Familiarity_Content_Admissibility/SEMANTIC_PROBES.json) · [交接](records/A3X20261010_Action_Familiarity_Content_Admissibility/HANDOFF_ZH.md)；`S_H/C_H/O_H`分层，0正式图增量，成稿HOLD，发表覆盖不变。
 
+- 最新应用A3Y：[正文](records/A3Y20261010_Measurand_Identity_Barrier/RESEARCH_NOTE.md) · [测量对象合同](records/A3Y20261010_Measurand_Identity_Barrier/MEASURAND_CONTRACT.md) · [精确结果](records/A3Y20261010_Measurand_Identity_Barrier/EXACT_RESULTS.json) · [交接](records/A3Y20261010_Measurand_Identity_Barrier/HANDOFF_ZH.md)；区分潜类身份与现象测量对象身份，`C_H`仍OPEN，0正式图增量，成稿HOLD，发表覆盖不变。
+
 基础问题专线 TJR20261010：[交接](records/TJR20261010_Temporal_Joint_Realization/HANDOFF_ZH.md) · [正文](records/TJR20261010_Temporal_Joint_Realization/RESEARCH_NOTE.md) · [日志](records/TJR20261010_Temporal_Joint_Realization/WORK_LOG.md)。串行保留、联合读取与压缩的停用应用；原科学接续和身体熟悉感路线保留。原理多属继承，独立成稿HOLD，全图深审仍未完成。
