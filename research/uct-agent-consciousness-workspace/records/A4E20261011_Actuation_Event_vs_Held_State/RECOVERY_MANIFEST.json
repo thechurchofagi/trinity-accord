@@ -1,0 +1,29 @@
+{
+  "schema": "a4e-recovery-manifest/1.0",
+  "round_id": "A4E20261011",
+  "classification": "INCREMENT_ONLY_NOT_FULL_REPOSITORY_OR_HISTORY_BACKUP",
+  "baseline_verified_remote_commit": "9eed562e59b0ea19dfe19b52e53143fee3b5443c",
+  "science_integration_commit": "473025e7fe0c8dc1da9bc7ac26d25eb8bbdf0d52",
+  "archive": {
+    "library_file_id": "libfile_2a6868c370208191846388e22d3e0ca3",
+    "name": "UCT_A4E_Increment_20261011_v1.zip",
+    "sha256": "4bea49acc858012cb5dbed68bb26e15fdc3d18909883469c344da71fa8616faf",
+    "size_bytes": 87420,
+    "changed_file_count": 23,
+    "byte_readback_confirmed": true
+  },
+  "manifest": {
+    "library_file_id": "libfile_763d0ceddedc81919558f861f5998809",
+    "name": "UCT_A4E_Increment_20261011_v1_MANIFEST.json",
+    "sha256": "39ccff88dff0a704fe605d0659bfe9a799eb77b02f71f3d5bebd24e0c53d99eb",
+    "size_bytes": 1634,
+    "byte_readback_confirmed": true
+  },
+  "fixed_master": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "verified_version": 116,
+    "file_id": "file_0000000090a881f5b62d703a2df1ae9c",
+    "readback_confirmed": true
+  },
+  "restore_guard": "Fetch the latest remote head first. Never apply this increment over a fast-forward successor without reconciling the newer facts."
+}

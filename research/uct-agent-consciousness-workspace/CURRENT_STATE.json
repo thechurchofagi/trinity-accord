@@ -103,7 +103,7 @@
     "latest_update": "records/A3V20261010_Concurrent_Liveness_and_Familiarity/PUBLICATION_COVERAGE_UPDATE.json",
     "nondeductive": true,
     "latest_originality_review": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/PUBLICATION_COVERAGE_UPDATE.json",
-    "latest_followup_application": "records/A4C20261011_Trace_Swap_Embodied_Loop/PUBLICATION_COVERAGE_UPDATE.json"
+    "latest_followup_application": "records/A4E20261011_Actuation_Event_vs_Held_State/PUBLICATION_COVERAGE_UPDATE.json"
   },
   "latest_activity": {
     "id": "A3V20261010",
@@ -197,12 +197,12 @@
     "role": "Historical unresolved audit-debt record; old numbers are not newly measured current unread totals."
   },
   "latest_activity_persistence": {
-    "status": "A4D_GITHUB_SCIENCE_INTEGRATION_AND_WORKSPACE_MASTER_V114_INCREMENT_CONFIRMED; FINAL_METADATA_COMMIT_IS_BRANCH_HEAD_SUCCESSOR",
-    "receipt": "records/A4D20261011_Actuator_Writer_Completeness/PERSISTENCE_RECEIPT.json",
-    "github_science_integration_commit": "b64e36016cd03588ed446a6b9eb8b6738ffb74b3",
-    "library_master_version": 114,
-    "library_increment_id": "libfile_626a843db20481919b6dc139d85ae4e6",
-    "library_manifest_id": "libfile_31dcf2db98448191a80249c84664dba3"
+    "status": "A4E_GITHUB_SCIENCE_INTEGRATION_AND_WORKSPACE_MASTER_V116_INCREMENT_CONFIRMED; FINAL_METADATA_COMMIT_IS_BRANCH_HEAD_SUCCESSOR",
+    "receipt": "records/A4E20261011_Actuation_Event_vs_Held_State/PERSISTENCE_RECEIPT.json",
+    "github_science_integration_commit": "473025e7fe0c8dc1da9bc7ac26d25eb8bbdf0d52",
+    "library_master_version": 116,
+    "library_increment_id": "libfile_2a6868c370208191846388e22d3e0ca3",
+    "library_manifest_id": "libfile_763d0ceddedc81919558f861f5998809"
   },
   "concurrent_research_preserved": {
     "id": "EIP20261010",
@@ -224,7 +224,7 @@
     "map_replacement": false,
     "actual_application_established": false
   },
-  "latest_persistence_receipt": "records/A4D20261011_Actuator_Writer_Completeness/PERSISTENCE_RECEIPT.json",
+  "latest_persistence_receipt": "records/A4E20261011_Actuation_Event_vs_Held_State/PERSISTENCE_RECEIPT.json",
   "previous_latest_research_before_CTD": {
     "id": "A3L20261010",
     "result_version": "A3L-RESULT-v0.1.0",
@@ -551,6 +551,7 @@
     "claim_ledger": "records/A4E20261011_Actuation_Event_vs_Held_State/CLAIM_LEDGER.json",
     "map_extension": "records/A4E20261011_Actuation_Event_vs_Held_State/MAP_EXTENSION.json",
     "exact_results": "records/A4E20261011_Actuation_Event_vs_Held_State/EXACT_RESULTS.json",
+    "persistence_receipt": "records/A4E20261011_Actuation_Event_vs_Held_State/PERSISTENCE_RECEIPT.json",
     "parent_science": "A3V20261010",
     "parent_followup": "A4D20261011",
     "completed_map": "UCT-MAP-v1.1.2",
@@ -779,6 +780,7 @@
       "claim_ledger": "records/A4E20261011_Actuation_Event_vs_Held_State/CLAIM_LEDGER.json",
       "map_extension": "records/A4E20261011_Actuation_Event_vs_Held_State/MAP_EXTENSION.json",
       "exact_results": "records/A4E20261011_Actuation_Event_vs_Held_State/EXACT_RESULTS.json",
+      "persistence_receipt": "records/A4E20261011_Actuation_Event_vs_Held_State/PERSISTENCE_RECEIPT.json",
       "parent_science": "A3V20261010",
       "parent_followup": "A4D20261011",
       "completed_map": "UCT-MAP-v1.1.2",

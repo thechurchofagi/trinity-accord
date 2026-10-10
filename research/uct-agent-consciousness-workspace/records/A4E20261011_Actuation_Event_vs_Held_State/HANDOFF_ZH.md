@@ -29,4 +29,7 @@
 
 ## 双份保存
 
-待 GitHub 与工作空间持久化及回读完成后填写；此前不宣称成功。
+- GitHub ROUND_RECORD 检查点 `53b6be254525abd38b414842262061d43b63441b` 与科学/入口整合提交 `473025e7fe0c8dc1da9bc7ac26d25eb8bbdf0d52` 已按 expected-SHA 快进并回读；最终收据提交是其快进后继，以远端分支头为准。
+- 固定主交接保持 Library ID `libfile_4175a81748fc819187fa8f5771f056fa`，A4E 首次写入并回读为 v116。
+- 23 文件增量 `libfile_2a6868c370208191846388e22d3e0ca3`，87420 字节，SHA256 `4bea49acc858012cb5dbed68bb26e15fdc3d18909883469c344da71fa8616faf`；清单 `libfile_763d0ceddedc81919558f861f5998809`，1634 字节，SHA256 `39ccff88dff0a704fe605d0659bfe9a799eb77b02f71f3d5bebd24e0c53d99eb`。两者重新物化后逐字节核对通过。
+- 该包只是从 A4D 最终头 `9eed562e59b0ea19dfe19b52e53143fee3b5443c` 到 A4E 科学整合树的增量，不是完整仓库、完整工作集或全部历史备份；最终收据后置于包外。

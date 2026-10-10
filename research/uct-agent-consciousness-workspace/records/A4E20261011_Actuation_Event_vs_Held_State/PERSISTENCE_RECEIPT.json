@@ -1,0 +1,43 @@
+{
+  "schema": "a4e-persistence-receipt/1.0",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "verified_parent": "9eed562e59b0ea19dfe19b52e53143fee3b5443c",
+    "round_record_checkpoint": "53b6be254525abd38b414842262061d43b63441b",
+    "science_integration_commit": "473025e7fe0c8dc1da9bc7ac26d25eb8bbdf0d52",
+    "science_integration_tree": "03ee313c09dc37ec838451e723e601c7cade52ce",
+    "fast_forward_expected_sha_verified": true,
+    "remote_head_and_key_file_readback": true,
+    "status": "SCIENCE_AND_INTEGRATION_CONFIRMED"
+  },
+  "workspace": {
+    "fixed_master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "fixed_master_previous_version": 115,
+    "fixed_master_version": 116,
+    "fixed_master_file_id": "file_0000000090a881f5b62d703a2df1ae9c",
+    "fixed_master_sha256": "0d5b5b7e91484c062ae7fe2b232a5682a20c85ac1ef1621bcb09229fd516295d",
+    "fixed_master_size_bytes": 51985,
+    "fixed_master_readback_confirmed": true,
+    "increment_library_file_id": "libfile_2a6868c370208191846388e22d3e0ca3",
+    "increment_manifest_library_file_id": "libfile_763d0ceddedc81919558f861f5998809",
+    "increment_sha256": "4bea49acc858012cb5dbed68bb26e15fdc3d18909883469c344da71fa8616faf",
+    "increment_manifest_sha256": "39ccff88dff0a704fe605d0659bfe9a799eb77b02f71f3d5bebd24e0c53d99eb",
+    "increment_size_bytes": 87420,
+    "increment_manifest_size_bytes": 1634,
+    "increment_file_count": 23,
+    "increment_and_manifest_byte_readback_confirmed": true,
+    "classification": "INCREMENT_ONLY_NOT_FULL_REPOSITORY_OR_HISTORY_BACKUP",
+    "status": "INCREMENT_MANIFEST_AND_FIXED_MASTER_V116_CONFIRMED"
+  },
+  "scope_note": "The increment freezes the A4E science/integration tree. This receipt and its final metadata successor are intentionally post-package and are recovered from the remote branch or fixed master.",
+  "latest_completed_step": "A4E held-state/current-event countermodel, exact 12-history enumeration, anti-current challenge protocol, whole-map structural audit, review-status preservation, GitHub fast-forward checkpoints and readback, recovery increment plus manifest byte readback, and fixed-master v116 readback.",
+  "unfinished": [
+    "No physical robot, trusted hardware event witness, or source-bound arbitration probe has been installed.",
+    "No complete physical K-signature or actual route-use token has been established.",
+    "No independent identity or polarity calibration for H_way has been established.",
+    "Open supervision items and the full historical semantic audit remain unresolved."
+  ],
+  "failures": "FAILURES.md",
+  "resume": "Read fixed master v116 or a verified successor; verify the branch is 473025e or a fast-forward successor; verify increment and manifest hashes; read REVIEW_SUPERVISION and the A4E ledgers; rerun the A4E exact script and A4D whole-map audit; then inspect only one bounded physical actuator interface for a trusted pre-state and post-arbitration event witness while retaining the H-level stop."
+}
