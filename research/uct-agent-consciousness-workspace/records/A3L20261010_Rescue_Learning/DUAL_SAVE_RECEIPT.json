@@ -1,0 +1,66 @@
+{
+  "schema": "uct-a3l-dual-save-receipt/1",
+  "research_id": "A3L20261010",
+  "result_version": "A3L-RESULT-v0.1.0",
+  "science_commit": "b88ef5b3b97a5421caf2f6014b51a706ffaacf6b",
+  "science_tree": "e03e6fdf3cb801e51f2f762e9326e8332c94cf24",
+  "parent_verified": "6d5bcfed3e8c77c580520908da85731d2b8fffa3",
+  "block_checkpoint": "21424961e9265d68b15bc3516ff5eed2044615f6",
+  "github_science_readback": "FETCHED_TREE_AND_ALL_LOCAL_SCIENCE_BYTES_IDENTICAL",
+  "master": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "file_id": "file_0000000068188230b0ffc8574dfae10d",
+    "previous_version": 78,
+    "verified_version": 79,
+    "bytes": 718579,
+    "sha256": "df2742bae1349b9444caed2624ac926832e36ce467e4c0a451cbe9a8b8668765",
+    "readback_byte_identical": true,
+    "old_v78_entire_byte_suffix_preserved": true
+  },
+  "increment": {
+    "library_file_id": "libfile_71a2e65e5614819197d2c11133d46531",
+    "file_id": "file_0000000024f081fba5e567cfd8a166f9",
+    "name": "UCT_A3L20261010_Increment.zip",
+    "bytes": 265760,
+    "sha256": "a850f01d0862921e22dcbb7d427a9068cee2520acfa797074ddf207250ac70e6",
+    "files": 33,
+    "readback_byte_identical": true,
+    "all_member_hashes_verified": true,
+    "kind": "INCREMENT_NOT_COMPLETE_REPO_OR_HISTORY",
+    "base_git_commit": "6d5bcfed3e8c77c580520908da85731d2b8fffa3"
+  },
+  "manifest": {
+    "library_file_id": "libfile_13cea2d31b7c8191941f803d6f0850ea",
+    "file_id": "file_00000000456881fb8530830b0257cb9e",
+    "name": "UCT_A3L20261010_Increment_Manifest.json",
+    "bytes": 7065,
+    "sha256": "587d7326233156e21b8b0c7095caaeeb582889a54f6f613f938916b8293090ac",
+    "readback_byte_identical": true
+  },
+  "checkpoint_library_id": "libfile_9e344d4687d48191a2fdf2c6963c5f83",
+  "completed_map": "UCT-MAP-v1.1.2_UNCHANGED",
+  "coverage_version": "UCT-PUB-v1.0.26",
+  "deep_semantic_review": "AUDIT_INCOMPLETE",
+  "unresolved_work": [
+    "independent bodily H versus cue-familiarity/fluency bridge",
+    "actual same-instance membership/causal admission",
+    "R191 normalization",
+    "whole-history deep semantic audit"
+  ],
+  "saving_failures": "direct git push lacked credentials; authorized app expected-SHA fallback completed; see FAILURES.md",
+  "precise_recovery": "Restore verified Git base 6d5bcfed or R156 plus every intermediate increment through master v78. Overlay 33 archive members by research-root-relative path and verify manifest hashes to science commit b88ef5b3. Then obtain this receipt and final HANDOFF_ZH/WORK_LOG from latest Git path or corresponding separately mirrored Library files. Determine final Git receipt commit with git log -n1 --format=%H -- research/uct-agent-consciousness-workspace/records/A3L20261010_Rescue_Learning/DUAL_SAVE_RECEIPT.json. It is not self-embedded because it commits these bytes.",
+  "receipt_layer_files": [
+    {
+      "git_path": "research/uct-agent-consciousness-workspace/records/A3L20261010_Rescue_Learning/HANDOFF_ZH.md",
+      "library_filename": "UCT_A3L20261010_Handoff_ZH.md",
+      "bytes": 3739,
+      "sha256": "d4417aeea5816ffe42dbb2ebae2d564d074036fcec3c2d842572e09d4558f465"
+    },
+    {
+      "git_path": "research/uct-agent-consciousness-workspace/records/A3L20261010_Rescue_Learning/WORK_LOG.md",
+      "library_filename": "UCT_A3L20261010_Work_Log.md",
+      "bytes": 3940,
+      "sha256": "9c63c40c130e336cdc97d24e0a6c9a8ab965f89da7ff0a2b6366b8e0a3f301a0"
+    }
+  ]
+}

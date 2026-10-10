@@ -11,3 +11,9 @@ London 2008 在3a训练刺激频率与左右目标提示的关联；Ganguly–Ca
 下一具体问题：在一个固定应用域中，能否独立区分“熟悉身体/行动方式”与“熟悉人工提示、做得流畅”，并给B_ret/B_fit一个未用于选定目标的差异后果？先读R173有效修订、R199/R200和本轮§5；若标记只测任务轻松、提示识别或所有感措辞，就记录失败，不把它改名H。只有获得新同实例直接路径/忠实重放证据时才重开3a装置支线。
 
 恢复路径：仓库thechurchofagi/trinity-accord、分支uct-agent-consciousness-workspace、目录research/uct-agent-consciousness-workspace/records/A3L20261010_Rescue_Learning。先读RESEARCH_NOTE.md、CLAIM_LEDGER.json、SOURCE_SCOPE.md、GAP_LEDGER.md、MAP_AUDIT.md、REVIEW_RESPONSE.md；运行 `python check_rescue_recoding.py` 可复现本轮有限例证。最终双份提交/版本/清单哈希以DUAL_SAVE_RECEIPT.json为准；增量包不是整个仓库或全部历史备份。
+
+## 双份保存已核验
+
+定稿科学提交 `b88ef5b3b97a5421caf2f6014b51a706ffaacf6b` 已从远端取回并与全树本地字节核对。固定主交接同一ID更新至第79版；主交接、33文件增量包、清单和块1检查点均逐字节回读相等，压缩包33成员哈希全部核验。主交接旧第78版的全部原字节在末尾保留。增量包 `libfile_71a2e65e5614819197d2c11133d46531`、清单 `libfile_13cea2d31b7c8191941f803d6f0850ea`；完整哈希与恢复依赖见DUAL_SAVE_RECEIPT.json。
+
+本次保存后交接/日志追加属于回执层，33文件包固定于上述科学提交；追加文本以Git最终回执提交及Library中的UCT_A3L20261010_Handoff_ZH.md、UCT_A3L20261010_Work_Log.md、UCT_A3L20261010_Dual_Save_Receipt.json单文件副本恢复，不把科学增量称完整仓库。未完成的是H桥接、实际实例和历史深层审计，不是科学文件双份保存。

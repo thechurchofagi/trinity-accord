@@ -14,3 +14,7 @@ Date: 10 October 2026. Parent research head: 6d5bcfed3e8c77c580520908da85731d2b8
 Pre-save direction/review check: no new basal gate, unique owner or consciousness verdict. Next concrete task: independently distinguish familiar bodily H from cue familiarity and fluency in one fixed application domain, and find one held-out consequence separating B_ret/B_fit. Do not continue instrumentation without a new concrete premise.
 
 Final dual-save commit, version, byte verification and recovery package are recorded in DUAL_SAVE_RECEIPT.json after persistence. A missing receipt is a pending persistence step, not permission to claim success.
+
+## Persistence verification
+
+Science commit b88ef5b3b97a5421caf2f6014b51a706ffaacf6b was fetched and its tree matched all local scientific bytes. Fixed master identity retained at version 79; 718579 bytes / SHA256 df2742bae1349b9444caed2624ac926832e36ce467e4c0a451cbe9a8b8668765. Master, 33-file archive, manifest and block-1 archive all matched after Library materialization; all 33 archive members verified. The entire original v78 byte suffix is preserved. Final handoff/log additions and receipt are a separately mirrored receipt layer after the fixed science snapshot. No unresolved scientific premise was marked closed.
