@@ -1,0 +1,24 @@
+{
+  "schema": "uct-exact-results/1",
+  "record": "A3P20261010_Area3a_Crossed_Probe",
+  "published_response_counts": {
+    "SO": {"DR": {"area3a": [8, 9], "area3b1": [3, 17]}, "SR": {"area3a": [8, 9], "area3b1": [17, 17]}},
+    "TA": {"DR": {"area3a": [8, 12], "area3b1": [2, 11]}, "SR": {"area3a": [8, 12], "area3b1": [10, 11]}}
+  },
+  "descriptive_interaction": {
+    "definition": "(DR_area3a-DR_area3b1)-(SR_area3a-SR_area3b1)",
+    "SO_fraction": "14/17",
+    "SO_decimal": 0.8235294117647058,
+    "TA_fraction": "8/11",
+    "TA_decimal": 0.7272727272727273,
+    "inferential_status": "DESCRIPTIVE_ONLY_SITES_NESTED_IN_TWO_ANIMALS_SELECTED_LEVELS"
+  },
+  "missing_use_face": {
+    "source_contexts": 2,
+    "unobserved_binary_endpoint_cells_at_consumer_perturbation": 2,
+    "deterministic_completions": 4,
+    "identifies_use_contrast": false,
+    "witness_pair": ["shadow_or_bypass_completion", "endpoint_changing_consumer_use_completion"]
+  }
+}
+

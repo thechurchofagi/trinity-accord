@@ -1,4 +1,10 @@
-# 最新接续 A3S20261010；完成图仍为 UCT-MAP-v1.1.2
+# 最新接续 A3P20261010；完成图仍为 UCT-MAP-v1.1.2
+
+[本轮交接](records/A3P20261010_Area3a_Crossed_Probe/HANDOFF_ZH.md) · [英文研究稿](records/A3P20261010_Area3a_Crossed_Probe/RESEARCH_NOTE.md) · [探针合同](records/A3P20261010_Area3a_Crossed_Probe/PROBE_CONTRACT.md) · [精确结果](records/A3P20261010_Area3a_Crossed_Probe/EXACT_RESULTS.json) · [审计](records/A3P20261010_Area3a_Crossed_Probe/MAP_AUDIT.md)。Yamada 2016 已具备同实验的来源×区域诱发响应面，故 A3S 的过宽否定已在 A3P 前瞻纠正；真正缺口是消费者扰动后的下游实际使用。Johnson 2026 单 3a 阵列首先缺邻区消费者对照。A3P 7/2/5 停用，完成图与 C1/U1 不变，覆盖 v1.0.24。下一步只具体化来源×区域×消费者扰动，并保留 H 独立桥接。
+
+---
+
+# 前一接续 A3S20261010；完成图仍为 UCT-MAP-v1.1.2
 
 [A3S中文交接](records/A3S20261010_Area3a_Selectivity/HANDOFF_ZH.md) · [英文研究稿](records/A3S20261010_Area3a_Selectivity/RESEARCH_NOTE.md) · [精确模型](records/A3S20261010_Area3a_Selectivity/EXACT_RESULTS.json) · [地图审计](records/A3S20261010_Area3a_Selectivity/MAP_AUDIT.md)。S1 3a 区已作为一个命名本体感觉消费者接受正面审查。慢性阵列证明长期记录可行，不等于已经执行来源选择性×消费者选择性×事件绑定的交叉读入。标准识别判据和精确孪生表明两个边际不足。候选 7/3/5 停用；完成图、C1/U1、正式论文数不变；覆盖 v1.0.23。所有既有 OPEN 保留。
 

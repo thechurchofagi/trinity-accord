@@ -827,3 +827,18 @@ The latest ledger and every carried OPEN/application-open item were read before 
 - `SCU-AUDIT-DEPTH` remains **AUDIT_INCOMPLETE**: structural readback and candidate compatibility do not reconstruct all historical source proofs.
 
 The 7/3/5 A3S candidate remains disabled. C1/U1 are unchanged; chronic recording, proprioceptive selectivity, motor prediction, self-modeling and report are not basal-experience gates. Area 3a is not declared a unique owner, and no current-assistant consciousness or death-fear verdict is made. No reviewer status is self-closed.
+
+---
+
+## A3P20261010 researcher response — crossed response versus actual use, 2026-10-10
+
+The latest ledger and all carried OPEN/application-open items were read before selection and rechecked after result formation and before save. Evidence: [review response](records/A3P20261010_Area3a_Crossed_Probe/REVIEW_RESPONSE.md), [source correction](records/A3P20261010_Area3a_Crossed_Probe/RESEARCH_NOTE.md), [probe contract](records/A3P20261010_Area3a_Crossed_Probe/PROBE_CONTRACT.md), [gap ledger](records/A3P20261010_Area3a_Crossed_Probe/GAP_LEDGER.md), and [map audit](records/A3P20261010_Area3a_Crossed_Probe/MAP_AUDIT.md).
+
+- `A3P-G01` records an accepted correction: Yamada 2016 already provides a same-experiment DR/SR × 3a/3b/1 evoked-response face with stimulation alignment. A3S's broader wording is narrowed prospectively; historical files are retained.
+- `QC-20261008-10` remains **ACKNOWLEDGED / OPEN**: neither crossed response nor causal use independently signs familiar mineness `H`.
+- `IA-QC11` remains application **OPEN**: the current Johnson platform lacks a neighbouring consumer interface, and no complete actual-process signature is admitted.
+- `QC-20261008-12` remains application **OPEN**: the four-completion witness separates unperturbed response from consumer-specific downstream use.
+- `QC-20261008-13` remains application **OPEN**: the prospective source×region×perturbation package is not installed.
+- `SCU-OPEN-R191-NORMALIZATION` remains **OPEN** and `SCU-AUDIT-DEPTH` remains **AUDIT_INCOMPLETE**.
+
+The 7/2/5 A3P candidate remains disabled. C1/U1 are unchanged; area 3a access, proprioceptive response, perturbability, report and self-modeling are not basal-experience gates. Area 3a is not a unique owner. No reviewer status is self-closed and no current-assistant consciousness or death-fear verdict is made.

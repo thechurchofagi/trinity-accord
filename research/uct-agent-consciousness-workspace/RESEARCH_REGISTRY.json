@@ -487,15 +487,34 @@
         "rules": 3,
         "contexts": 5
       }
+    },
+    {
+      "research_id": "A3P20261010",
+      "result_version": "A3P-RESULT-v0.1.0",
+      "title": "Area-3a crossed response and actual-use probe boundary",
+      "source": "records/A3P20261010_Area3a_Crossed_Probe/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "actual_application": "OPEN",
+      "publication_coverage_version": "UCT-PUB-v1.0.24",
+      "compatibility_audit": "records/A3P20261010_Area3a_Crossed_Probe/MAP_COMPATIBILITY_AUDIT.json",
+      "handoff": "records/A3P20261010_Area3a_Crossed_Probe/HANDOFF_ZH.md",
+      "manuscript_status": "HOLD_STANDALONE_CORRECTION_AND_PROTOCOL_SECTION",
+      "corrects_pending_record": "A3S20261010 source-grounded feasibility wording only; historical files preserved",
+      "candidate_counts": {
+        "nodes": 7,
+        "rules": 2,
+        "contexts": 5
+      }
     }
   ],
   "preservation": "Exact previous registry remains preserved. The full research manuscript/module and saved per-item review decisions are in the version capsule; expanded artifacts are also in the offline downloadable archive.",
   "publication_coverage": {
     "entry": "PUBLICATION_COVERAGE.json",
-    "version": "UCT-PUB-v1.0.23",
+    "version": "UCT-PUB-v1.0.24",
     "base_census_version": "UCT-PUB-v1.0.0",
-    "update": "records/A3S20261010_Area3a_Selectivity/PUBLICATION_COVERAGE_UPDATE.json",
-    "report": "publication/UCT-PUB-v1.0.23/COVERAGE_REPORT_ZH.md",
+    "update": "records/A3P20261010_Area3a_Crossed_Probe/PUBLICATION_COVERAGE_UPDATE.json",
+    "report": "publication/UCT-PUB-v1.0.24/COVERAGE_REPORT_ZH.md",
     "nondeductive": true,
     "counting_scope": "Frozen verified corpus plus one independently verified SCU DOI; not a new worldwide census."
   },

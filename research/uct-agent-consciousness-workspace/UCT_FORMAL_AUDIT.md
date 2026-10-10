@@ -1,4 +1,10 @@
-# 最新接续 A3S20261010；完成图仍为 UCT-MAP-v1.1.2
+# 最新接续 A3P20261010；完成图仍为 UCT-MAP-v1.1.2
+
+[本轮地图审计](records/A3P20261010_Area3a_Crossed_Probe/MAP_AUDIT.md)逐节点检查对象、量词、范围、时序、实际性与证据等级，逐规则检查 `all_of` 同时前提及同实例约束，并核对纠偏方向。恢复封装图与审查账 SHA 不变；7/2/5候选引用可解、组合 DAG 无环且停用。该结构结果不等于理论为真或全图语义重证；A3S 过宽经验表述、Johnson 单阵列消费者对照缺口和未观测使用面均写入 [GAP_LEDGER](records/A3P20261010_Area3a_Crossed_Probe/GAP_LEDGER.md)。
+
+---
+
+# 前一接续 A3S20261010；完成图仍为 UCT-MAP-v1.1.2
 
 [A3S审计](records/A3S20261010_Area3a_Selectivity/MAP_AUDIT.md)逐节点检查量词/范围，逐规则检查 `all_of` 联合前提，并核对对象、时间、签名、实际性、证据等级和推理方向。恢复的封装图与审查账 SHA 已固定；组合 DAG 无环、引用可解、候选停用。此结构结果不等于理论为真或全图语义重证。边际—交互缺口及慢性访问证据的外推边界保留在 [GAP_LEDGER](records/A3S20261010_Area3a_Selectivity/GAP_LEDGER.md)。
 

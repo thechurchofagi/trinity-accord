@@ -15,15 +15,15 @@
   "version_policy": "VERSIONING_POLICY.md",
   "changelog": "CHANGELOG.md",
   "latest_research": {
-    "id": "A3S20261010",
-    "result_version": "A3S-RESULT-v0.1.0",
+    "id": "A3P20261010",
+    "result_version": "A3P-RESULT-v0.1.0",
     "status": "PENDING_CHECKPOINT_DISABLED",
-    "source": "records/A3S20261010_Area3a_Selectivity/RESEARCH_NOTE.md",
-    "handoff": "records/A3S20261010_Area3a_Selectivity/HANDOFF_ZH.md",
-    "work_log": "records/A3S20261010_Area3a_Selectivity/WORK_LOG.md",
+    "source": "records/A3P20261010_Area3a_Crossed_Probe/RESEARCH_NOTE.md",
+    "handoff": "records/A3P20261010_Area3a_Crossed_Probe/HANDOFF_ZH.md",
+    "work_log": "records/A3P20261010_Area3a_Crossed_Probe/WORK_LOG.md",
     "enabled_as_established_premises": false,
-    "manuscript_status": "HOLD_STANDALONE_INTEGRATE_AS_POST_SCU_METHOD_AND_FRONTIER_UPDATE",
-    "evidence_status": "PRIMARY_SOURCE_AUDIT_AND_EXACT_IDENTIFIABILITY_MODEL; NO_NEW_ANIMAL_OR_HUMAN_EXPERIMENT"
+    "manuscript_status": "HOLD_STANDALONE_CORRECTION_AND_PROTOCOL_SECTION",
+    "evidence_status": "PRIMARY_SOURCE_CORRECTION_AND_MISSING_USE_FACE_MODEL; NO_NEW_ANIMAL_OR_HUMAN_EXPERIMENT"
   },
   "latest_integrated_research": {
     "id": "R188-CER-20261009",
@@ -72,7 +72,8 @@
     "CBI20261010",
     "EIP20261010",
     "DVC20261010",
-    "A3S20261010"
+    "A3S20261010",
+    "A3P20261010"
   ],
   "current_guide": "RESEARCH_MASTER_GUIDE.md v2.3",
   "complete_map_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
@@ -84,35 +85,35 @@
     "nondeductive_context_links": 261,
     "total_review_items": 1608
   },
-  "pending_note": "All 26 listed checkpoints remain disabled, including SCU despite public disclosure. A3S contributes 7 nodes, 3 rules and 5 nondeductive contexts only to the candidate layer. Existing correction overlays remain disabled; no candidate counts enter the completed graph. DVC and EIP remain preserved separately and disabled.",
+  "pending_note": "All 27 listed checkpoints remain disabled, including SCU despite public disclosure. A3P contributes 7 nodes, 2 rules and 5 nondeductive contexts only to the candidate layer and prospectively narrows one A3S empirical claim. Existing correction overlays remain disabled; no candidate counts enter the completed graph.",
   "publication_coverage": {
     "entry": "PUBLICATION_COVERAGE.json",
-    "version": "UCT-PUB-v1.0.23",
+    "version": "UCT-PUB-v1.0.24",
     "base_census_version": "UCT-PUB-v1.0.0",
-    "update": "records/A3S20261010_Area3a_Selectivity/PUBLICATION_COVERAGE_UPDATE.json",
-    "report": "publication/UCT-PUB-v1.0.23/COVERAGE_REPORT_ZH.md",
+    "update": "records/A3P20261010_Area3a_Crossed_Probe/PUBLICATION_COVERAGE_UPDATE.json",
+    "report": "publication/UCT-PUB-v1.0.24/COVERAGE_REPORT_ZH.md",
     "nondeductive": true,
     "counting_scope": "Frozen verified corpus plus one independently verified SCU DOI; not a new worldwide census."
   },
   "latest_activity": {
-    "id": "A3S20261010",
-    "kind": "named_area3a_consumer_primary_source_audit_and_interaction_identifiability",
-    "work_log": "records/A3S20261010_Area3a_Selectivity/WORK_LOG.md",
-    "handoff": "records/A3S20261010_Area3a_Selectivity/HANDOFF_ZH.md"
+    "id": "A3P20261010",
+    "kind": "area3a_crossed_response_correction_and_actual_use_probe_boundary",
+    "work_log": "records/A3P20261010_Area3a_Crossed_Probe/WORK_LOG.md",
+    "handoff": "records/A3P20261010_Area3a_Crossed_Probe/HANDOFF_ZH.md"
   },
   "latest_pending_research": {
-    "id": "A3S20261010",
-    "result_version": "A3S-RESULT-v0.1.0",
+    "id": "A3P20261010",
+    "result_version": "A3P-RESULT-v0.1.0",
     "status": "PENDING_CHECKPOINT_DISABLED",
-    "source": "records/A3S20261010_Area3a_Selectivity/RESEARCH_NOTE.md",
-    "handoff": "records/A3S20261010_Area3a_Selectivity/HANDOFF_ZH.md",
-    "work_log": "records/A3S20261010_Area3a_Selectivity/WORK_LOG.md",
+    "source": "records/A3P20261010_Area3a_Crossed_Probe/RESEARCH_NOTE.md",
+    "handoff": "records/A3P20261010_Area3a_Crossed_Probe/HANDOFF_ZH.md",
+    "work_log": "records/A3P20261010_Area3a_Crossed_Probe/WORK_LOG.md",
     "enabled_as_established_premises": false,
-    "manuscript_status": "HOLD_STANDALONE_INTEGRATE_AS_POST_SCU_METHOD_AND_FRONTIER_UPDATE",
-    "evidence_status": "PRIMARY_SOURCE_AUDIT_AND_EXACT_IDENTIFIABILITY_MODEL; NO_NEW_ANIMAL_OR_HUMAN_EXPERIMENT"
+    "manuscript_status": "HOLD_STANDALONE_CORRECTION_AND_PROTOCOL_SECTION",
+    "evidence_status": "PRIMARY_SOURCE_CORRECTION_AND_MISSING_USE_FACE_MODEL; NO_NEW_ANIMAL_OR_HUMAN_EXPERIMENT"
   },
-  "review_status_scope": "UCT-MAP-v1.1.2 is unchanged. A3S revalidated the restored 913/424/261 completed graph, 10 suspended rules and 1,608 review items, then checked the disabled 7/3/5 candidate for references, all_of conjunctions, acyclicity and scope. This is not a new full-depth semantic proof. Historical audit debt and all named OPEN items remain unclosed.",
-  "next_priority": "Evaluate whether the 2026 chronic area-3a array platform can support one preregistered crossed probe in the same animal and event window: source contrast, area-3a versus neighboring-consumer contrast, event/clock binding and movement/tactile confound controls. Stop at the first missing premise; do not infer the S-to-area-3a interaction from either margin alone and do not promote a neural or digital proxy to an experiential criterion.",
+  "review_status_scope": "UCT-MAP-v1.1.2 is unchanged. A3P revalidated the restored 913/424/261 completed graph, 10 suspended rules and 1,608 review items, then checked the disabled 7/2/5 candidate for references, all_of conjunctions, acyclicity, empirical correction scope and inference direction. This is not a new full-depth semantic proof. Historical audit debt and all named OPEN items remain unclosed.",
+  "next_priority": "Specify the smallest prospective source×region×consumer-perturbation experiment that can test area-3a actual downstream use in one animal and event clock: add simultaneous 3b/1 recording, monitored source delivery, validated reversible 3a versus neighbour/sham perturbations and a predeclared downstream endpoint. Stop at the first failed manipulation or spillover check; do not name the endpoint familiar mineness without an independent bridge.",
   "latest_scoped_review": {
     "audit": "records/DVC20261010_Device_Consumer_Validation/MAP_AUDIT.md",
     "per_id_core_review": "records/DVC20261010_Device_Consumer_Validation/ALL_MAP_CORE_REVIEW.json.gz",
@@ -166,7 +167,7 @@
     "field": "latest_scoped_review",
     "role": "Historical unresolved audit-debt record; old numbers are not newly measured current unread totals."
   },
-  "latest_activity_persistence": "records/A3S20261010_Area3a_Selectivity/DUAL_SAVE_RECEIPT.json",
+  "latest_activity_persistence": "records/A3P20261010_Area3a_Crossed_Probe/DUAL_SAVE_RECEIPT.json",
   "concurrent_research_preserved": {
     "id": "EIP20261010",
     "commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",

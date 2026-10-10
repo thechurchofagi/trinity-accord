@@ -1,4 +1,10 @@
-# 最新接续 A3S20261010；完成图仍为 UCT-MAP-v1.1.2
+# 最新接续 A3P20261010；完成图仍为 UCT-MAP-v1.1.2
+
+[A3P中文交接](records/A3P20261010_Area3a_Crossed_Probe/HANDOFF_ZH.md) · [英文研究稿](records/A3P20261010_Area3a_Crossed_Probe/RESEARCH_NOTE.md) · [探针合同](records/A3P20261010_Area3a_Crossed_Probe/PROBE_CONTRACT.md) · [精确结果](records/A3P20261010_Area3a_Crossed_Probe/EXACT_RESULTS.json) · [地图审计](records/A3P20261010_Area3a_Crossed_Probe/MAP_AUDIT.md)。本轮纠正 A3S 的过宽表述：Yamada 2016 已有同实验来源×区域诱发响应面；缺的是 3a 局部响应被下游实际使用的因果面。Johnson 2026 单 3a 阵列首先缺邻区消费者对照。A3P 7/2/5 候选停用；完成图不变，覆盖 UCT-PUB-v1.0.24，单篇 HOLD。
+
+---
+
+# 前一接续 A3S20261010；完成图仍为 UCT-MAP-v1.1.2
 
 [A3S中文交接](records/A3S20261010_Area3a_Selectivity/HANDOFF_ZH.md) · [英文研究稿](records/A3S20261010_Area3a_Selectivity/RESEARCH_NOTE.md) · [精确结果](records/A3S20261010_Area3a_Selectivity/EXACT_RESULTS.json) · [地图扩展](records/A3S20261010_Area3a_Selectivity/MAP_EXTENSION.json) · [地图审计](records/A3S20261010_Area3a_Selectivity/MAP_AUDIT.md) · [来源范围](records/A3S20261010_Area3a_Selectivity/SOURCE_SCOPE.md)。命名消费者从抽象占位推进到 S1 3a 区；慢性访问可行，但目标交互仍不由来源/消费者边际识别。A3S 7/3/5 候选停用，完成图不变，覆盖 UCT-PUB-v1.0.23，单篇 HOLD。
 

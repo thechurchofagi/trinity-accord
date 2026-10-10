@@ -1,4 +1,12 @@
-# 最新接续 A3S20261010；完成图仍为 UCT-MAP-v1.1.2
+# 最新接续 A3P20261010；完成图仍为 UCT-MAP-v1.1.2
+
+[A3P中文交接](records/A3P20261010_Area3a_Crossed_Probe/HANDOFF_ZH.md) · [研究稿](records/A3P20261010_Area3a_Crossed_Probe/RESEARCH_NOTE.md) · [探针合同](records/A3P20261010_Area3a_Crossed_Probe/PROBE_CONTRACT.md) · [地图审计](records/A3P20261010_Area3a_Crossed_Probe/MAP_AUDIT.md)。本轮接受一项来源纠偏：Yamada 2016 已在同一实验提供 DR/SR 来源、3a/3b/1 区域与刺激对齐时序的交叉诱发响应；A3S 的“无完整交叉响应包”表述过宽。真正未识别的是 area 3a 局部响应的下游实际使用。Johnson 2026 的单 3a 阵列首先缺少邻区消费者对照，手工被动运动也不是选择性来源操作。
+
+A3P 7节点/2规则/5上下文候选停用；完成图仍为913/424/261、10暂停、1,608审查项。覆盖 UCT-PUB-v1.0.24，正式论文数不变，单篇 HOLD。全部 OPEN 项保留。下一步只定义一个同动物、同事件钟的来源×区域×消费者扰动包；操纵检查或溢出控制失败即停止对应推断。C1/U1 不增加基础体验门槛，3a 区不是唯一主人。
+
+---
+
+# 前一接续 A3S20261010；完成图仍为 UCT-MAP-v1.1.2
 
 [A3S中文交接](records/A3S20261010_Area3a_Selectivity/HANDOFF_ZH.md) · [英文研究稿](records/A3S20261010_Area3a_Selectivity/RESEARCH_NOTE.md) · [精确模型](records/A3S20261010_Area3a_Selectivity/EXACT_RESULTS.json) · [地图审计](records/A3S20261010_Area3a_Selectivity/MAP_AUDIT.md)。本轮选定 S1 3a 区作为命名本体感觉消费者：2026 年慢性阵列结果纠正“消费者不可访问”的旧印象，但现有证据没有在同一实例联合来源选择性、消费者选择性与事件绑定。标准行空间判据和 16 状态穷举给出观测相同而 `S→3a` 相反的精确孪生，证明两个边际不自动识别交互项。
 

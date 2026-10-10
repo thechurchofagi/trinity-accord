@@ -1,4 +1,10 @@
-# Current entry — A3S named-consumer selectivity checkpoint
+# Current entry — A3P crossed response and actual use
+
+Read the [A3P handoff](records/A3P20261010_Area3a_Crossed_Probe/HANDOFF_ZH.md), [research note](records/A3P20261010_Area3a_Crossed_Probe/RESEARCH_NOTE.md), [probe contract](records/A3P20261010_Area3a_Crossed_Probe/PROBE_CONTRACT.md), and [map audit](records/A3P20261010_Area3a_Crossed_Probe/MAP_AUDIT.md). Yamada 2016 corrects the claim that no same-instance crossed response exists; the remaining target is consumer-specific downstream use. The Johnson 2026 installed platform lacks a neighbouring consumer contrast. The 7/2/5 candidate remains disabled; completed UCT-MAP-v1.1.2 and C1/U1 are unchanged; coverage is UCT-PUB-v1.0.24.
+
+---
+
+# Previous entry — A3S named-consumer selectivity checkpoint
 
 Read the [A3S handoff](records/A3S20261010_Area3a_Selectivity/HANDOFF_ZH.md), [research note](records/A3S20261010_Area3a_Selectivity/RESEARCH_NOTE.md), [exact results](records/A3S20261010_Area3a_Selectivity/EXACT_RESULTS.json), and [map audit](records/A3S20261010_Area3a_Selectivity/MAP_AUDIT.md). S1 area 3a is now the named proprioceptive consumer. Chronic access is feasible, but no reviewed study jointly establishes source selectivity, consumer selectivity, and same-event binding. Marginal contrasts do not identify the `S→3a` interaction. The 7/3/5 candidate remains disabled; completed UCT-MAP-v1.1.2 and C1/U1 are unchanged; coverage is UCT-PUB-v1.0.23.
 

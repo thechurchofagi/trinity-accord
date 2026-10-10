@@ -1,0 +1,11 @@
+{
+  "schema": "uct-claim-ledger/1",
+  "record": "A3P20261010_Area3a_Crossed_Probe",
+  "claims": [
+    {"id":"A3P-C1","type":"PRIMARY_SOURCE_CORRECTION","statement":"Yamada 2016 supplies a same-experiment source-by-region evoked-response face with event alignment.","domain":"reported two-macaque SEP experiment","premises":["DR/SR cuff conditions","3a and 3b/1 recording sites","stimulation-aligned timing"],"evidence":"RESEARCH_NOTE.md §1; SOURCE_SCOPE.md","counterexample":"response is not downstream use","status":"SUPPORTED_BOUNDED"},
+    {"id":"A3P-C2","type":"PLATFORM_FEASIBILITY_RESULT","statement":"The published Johnson installation first fails the requested crossed probe at neighbouring-consumer contrast.","domain":"reported single-array area-3a configuration","premises":["one array targeted within area 3a","adjacent consumer is a distinct required axis"],"evidence":"RESEARCH_NOTE.md §2; PROBE_CONTRACT.md","counterexample":"an added neighbouring array could repair the failure","status":"SUPPORTED_BOUNDED"},
+    {"id":"A3P-C3","type":"FINITE_NEGATIVE_RESULT","statement":"The complete unperturbed response face does not identify the area-3a consumer-perturbation use contrast.","domain":"two-source binary endpoint model","premises":["fixed use target","no g=1 endpoint constraint"],"evidence":"RESEARCH_NOTE.md §3; EXACT_RESULTS.json","counterexample":"valid g=1 intervention data can remove the ambiguity","status":"EXACT_CONDITIONAL"},
+    {"id":"A3P-C4","type":"UCT_CONDITIONAL_INTERPRETATION","statement":"Grounded source-to-consumer-to-downstream use may be an experience-internal organizational coordinate under C1, without becoming a basal gate or familiar-mineness identity.","domain":"independently admitted actual process and complete signature","premises":["A:C1","actual relation grounding","separate target bridge"],"evidence":"RESEARCH_NOTE.md §5","counterexample":"bypass with matching response/behaviour","status":"ACTUAL_PREMISES_OPEN"}
+  ]
+}
+

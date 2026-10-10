@@ -1,0 +1,24 @@
+{
+  "schema": "uct-publication-coverage-update/1",
+  "version": "UCT-PUB-v1.0.24",
+  "parent": "UCT-PUB-v1.0.23",
+  "round": "A3P20261010",
+  "formal_publication_counts_unchanged": true,
+  "completed_map_changed": false,
+  "net_claims": [
+    {"id":"A3P-C1","classification":"PRIMARY_SOURCE_CORRECTION","scope":"Yamada 2016 already supplies a crossed evoked-response face; A3S wording narrowed."},
+    {"id":"A3P-C2","classification":"BOUNDED_PLATFORM_FEASIBILITY_RESULT","scope":"The current Johnson single-array installation first fails the requested crossed probe at neighbouring-consumer contrast."},
+    {"id":"A3P-C3","classification":"KNOWN_MISSING_INTERVENTION_LOGIC_APPLIED","scope":"An unperturbed response face does not identify consumer-specific downstream use."},
+    {"id":"A3P-C4","classification":"UCT_CONDITIONAL_INTERPRETATION","scope":"Grounded use may be experience-internal under C1; H and basal experience remain separate."}
+  ],
+  "deductions": [
+    "MPC missing-counterfactual logic",
+    "EIP arrival/read distinction",
+    "A3S access/use and row-space result",
+    "Yamada, Johnson, London and Krubitzer prior empirical work",
+    "UCT C1/U1"
+  ],
+  "decision": "HOLD_STANDALONE_CORRECTION_AND_PROTOCOL_SECTION",
+  "world_priority_verified": false
+}
+

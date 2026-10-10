@@ -1,0 +1,16 @@
+{
+  "schema": "uct-claim-coverage-delta/1",
+  "version": "UCT-PUB-v1.0.24",
+  "parent": "UCT-PUB-v1.0.23",
+  "round": "A3P20261010",
+  "formal_publication_counts_unchanged": true,
+  "completed_map_changed": false,
+  "claims": [
+    {"id":"A3P-C1","classification":"PRIMARY_SOURCE_CORRECTION","published":false},
+    {"id":"A3P-C2","classification":"BOUNDED_PLATFORM_FEASIBILITY_RESULT","published":false},
+    {"id":"A3P-C3","classification":"KNOWN_MISSING_INTERVENTION_LOGIC_APPLIED","published":false},
+    {"id":"A3P-C4","classification":"UCT_CONDITIONAL_INTERPRETATION","published":false}
+  ],
+  "decision": "HOLD_STANDALONE_CORRECTION_AND_PROTOCOL_SECTION"
+}
+

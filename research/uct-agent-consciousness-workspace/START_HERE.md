@@ -1,4 +1,10 @@
-# Current entry — A3S named-consumer selectivity checkpoint
+# Current entry — A3P crossed-response correction and actual-use boundary
+
+Start with the [A3P handoff](records/A3P20261010_Area3a_Crossed_Probe/HANDOFF_ZH.md). Yamada 2016 already supplies a same-experiment source×region evoked-response face, correcting A3S's broader wording. The missing coordinate is a validated area-3a consumer perturbation and predeclared downstream endpoint. Johnson 2026's single area-3a array first fails the requested crossed probe at neighbouring-consumer contrast. The 7/2/5 candidate remains disabled; UCT-MAP-v1.1.2 and C1/U1 are unchanged; coverage is UCT-PUB-v1.0.24.
+
+---
+
+# Previous entry — A3S named-consumer selectivity checkpoint
 
 Start with the [A3S handoff](records/A3S20261010_Area3a_Selectivity/HANDOFF_ZH.md). The round selects S1 area 3a as a named proprioceptive consumer and proves a bounded negative result: source and consumer margins do not identify the target source-to-consumer interaction without crossed same-event evidence. Chronic recording access is supported, but the full probe has not been executed. The 7/3/5 candidate remains disabled; UCT-MAP-v1.1.2 and C1/U1 are unchanged; coverage is UCT-PUB-v1.0.23.
 
