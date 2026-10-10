@@ -1,0 +1,33 @@
+{
+  "all_rule_references_resolve": true,
+  "all_rules_treated_as_all_of": true,
+  "claim_count": 4,
+  "completed_graph_additions": {
+    "context_links": 0,
+    "nodes": 0,
+    "rules": 0
+  },
+  "effective_counts": {
+    "context_links": 261,
+    "nodes": 913,
+    "rules": 424
+  },
+  "files": {
+    "CLAIM_LEDGER.json": "f6840da32b7c168d306eea92b1f411a4b2d152f3aeee891908d830ae43479fab",
+    "ENDPOINT_CONTENT_PROTOCOL.md": "98f2f0a39c6a57bc45c7e1e3b10684e91216e5f8bddb612ab5aea441526cf9d8",
+    "GAP_LEDGER.md": "119d47af26623d886bb2546daac9154eb8438650d9308cc751f6d2c1fed0a31c",
+    "MAP_AUDIT.md": "9d64c42eac9095b7d77c8ee8173dc79ad660088da8d5c6df206b53fb93591541",
+    "MAP_EXTENSION.json": "4ab293a41680cd1b5492a307b8da955f2266fc1ee9006f49b97d5c8b090e5f01",
+    "PUBLICATION_COVERAGE_UPDATE.json": "76a6eec1096888ceeb908b8bd8196e5c2346cf43bb9601b4dba266cbe9baa65d",
+    "RESEARCH_NOTE.md": "ca14e13c670fe355bac3ec164ca9076bf175d034fddc00bad676cdac0713b3ce",
+    "REVIEW_RESPONSE.md": "f9dc12cf2b6c4c121997ad3976e13877b0f406068b5fa506ad277cf768d19ac7",
+    "ROUND_RECORD.json": "a588bcceb2eccd45e39eb4409dd8a1d1c513e65f3e52274239bc107694af29ee",
+    "SEMANTIC_PROBES.json": "055a0f8f08dced7c0df3134822c5756d93257a0526af1127068725e800f35bc8",
+    "SOURCE_SCOPE.json": "27db87c8796878b4952a7dff47a65b32d604575ea7188c34e55311c3b7f768bb",
+    "WORK_LOG.md": "0c92d1613a58a1c9d9716110d53c43acdb884a13ba085155e34c5748d26ac294"
+  },
+  "schema": "uct-a3x-validation-v1",
+  "semantic_ceiling": "Structural PASS does not establish theory truth, C_H, O_H, or a full historical semantic audit.",
+  "semantic_probe_count": 9,
+  "status": "PASS_STRUCTURAL_WITH_DECLARED_SEMANTIC_CEILING"
+}

@@ -1,0 +1,40 @@
+{
+  "round_id": "A3X20261010_Action_Familiarity_Content_Admissibility",
+  "version": "A3X-CONTENT-v0.1.0",
+  "created_at_utc": "2026-10-10T13:33:00Z",
+  "record_timing": "Written after mandatory repository, handoff, review-ledger, formal-map, and limited source-triage intake, and before drafting any new A3X claim. The source triage is disclosed rather than backdated.",
+  "user_goal": "Advance the positive account of bodily/action-related self-feeling from actual organization while preserving the distinctions among experience, intelligence, felt self, conceptual self, and report, and while retaining UCT C1 as a consciousness-specific explanatory postulate.",
+  "one_specific_unresolved_question": "Can the proposed H_way item be made semantically admissible as a question about the familiar felt character of a presently enacted bodily manner, rather than a covert question about self-source recognition, known practice history, control/agency, or ease; and what exact evidential limit remains even if that content gate is passed?",
+  "related_nodes_and_fixed_sources": {
+    "formal_nodes": [
+      "A:C1",
+      "A:U1",
+      "R157:SEMANTIC_RESIDUAL",
+      "R157:MINENESS_BRIDGE_SCHEMA",
+      "R173:RETENTIVE_EXPERIENTIAL_COORDINATE",
+      "R173:FAMILIAR_MINENESS_BOUNDARY"
+    ],
+    "fixed_sources": [
+      "records/R128_20260313_Genuine_Ground_Trace/sources/A_UCT_I_v1_2.md",
+      "records/R153_20260313_Experience_Intelligence_Self_Map/sources/experience-intelligence-self-v1.0.md",
+      "records/A3W20261010_Action_Familiarity_Endpoint/RESEARCH_NOTE.md",
+      "records/A3W20261010_Action_Familiarity_Endpoint/ENDPOINT_PROTOCOL.md",
+      "records/FAM20261009_Body_Familiarity_Matrix/RESEARCH_NOTE.md",
+      "records/A3N20261009_Somatic_Self_Familiarity/RESEARCH_NOTE.md",
+      "REVIEW_SUPERVISION.md"
+    ]
+  },
+  "proposed_addition_or_correction": "Add a proxy-substitution stress protocol and a three-layer warrant decomposition: semantic admissibility S_H, independently justified signed judgement-to-experience reliability C_H, and same-instance actual organizational use O_H. Show by a finite lookup-policy witness that passing S_H alone cannot establish C_H; do not add a completed formal node or empirical result.",
+  "deliverable": "An English research note, machine-readable probe set, claim and gap ledgers, review response, formal-map application audit, validation output, Chinese handoff, and recoverable incremental persistence package.",
+  "direction_check": {
+    "status": "on_main_line",
+    "bounded_goal": "Only clarify the H_way target and the ceiling of content checks; do not repeat R155 Bayesian calculations or expand into generic control research.",
+    "return_condition": "Stop this auxiliary semantic work once proxy substitution and the non-calibration ceiling are explicit; return to the main line by seeking an independently justified C_H relation and an actual retained-route/congruence contrast.",
+    "founding_constraints": [
+      "No new threshold for basic experience.",
+      "No claim that introspection, self-model, report, language, integration, recursion, prediction, or continuation control is required for experience.",
+      "No exclusive extra owner and no consciousness verdict about the current assistant.",
+      "Complete organization, finite view, abstract model, actual installation, actual attribution, internal judgement, particular experience, and language report remain distinct."
+    ]
+  }
+}

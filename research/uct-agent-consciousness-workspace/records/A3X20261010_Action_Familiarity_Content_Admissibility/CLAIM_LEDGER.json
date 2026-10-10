@@ -1,0 +1,46 @@
+{
+  "schema": "uct-claim-ledger-v1",
+  "round_id": "A3X20261010_Action_Familiarity_Content_Admissibility",
+  "claims": [
+    {
+      "id": "A3X-C1",
+      "type": "SCOPED_TARGET_SEPARATION_CONTRACT",
+      "full_proposition": "Within the declared reporting-adult, present-enactment domain, H_way is a selected target concerning the familiar felt character of the current bodily manner. O_self, K_practice, A_control, and E_ease are not definitions of that target, although they may overlap or covary with it.",
+      "domain": "Specified presently enacted actions in reporting-capable adults; no universal psychological taxonomy.",
+      "premises": ["A3W target definition", "present-enactment applicability", "proxy terms are separately typed"],
+      "support": "Conceptual distinction plus proxy-reversal vignettes; neighbouring primary studies operationalize distinct recognition/observation constructs.",
+      "counterexamples_and_limits": "No vignette proves empirical independence or assigns H_way truth. Strong covariance in a population remains possible.",
+      "status": "SCOPED_CONCEPTUAL_PASS_NOT_EMPIRICAL"
+    },
+    {
+      "id": "A3X-C2",
+      "type": "PROPOSED_CONTENT_ADMISSIBILITY_METHOD",
+      "full_proposition": "S_H is a four-part content gate requiring present-enactment applicability, a target-directed paraphrase, no declared proxy-substitution rule across held-out vignettes, and response-code invariance.",
+      "domain": "Pre-result item interpretation in the same declared participant/action domain.",
+      "premises": ["item fixed before outcome inspection", "held-out neutral vignettes", "no prescribed H_way ratings", "recorded failure states"],
+      "support": "Protocol construction and construct-validity boundary in the agency measurement literature.",
+      "counterexamples_and_limits": "A strategic or memorizing responder can pass; PASS is not truth, sincerity, or reliability.",
+      "status": "PROPOSED_NOT_PILOTED"
+    },
+    {
+      "id": "A3X-C3",
+      "type": "EXACT_FINITE_NONIDENTIFICATION_WITNESS",
+      "full_proposition": "For any finite semantic battery V with accepted answer vector a and unrestricted response policies, a lookup policy pi_V can reproduce a on every probe without depending on H_way on later target trials. Therefore S_H alone does not entail a signed truth-tracking relation C_H from J_H to H_way.",
+      "domain": "Finite probe batteries and unrestricted response-policy classes.",
+      "premises": ["V is finite", "accepted answers are externally specifiable", "the response-policy class permits finite lookup", "later H_way assignments are not fixed by V"],
+      "proof": "Construct pi_V(v_i)=a_i. Hold V, a, and pi_V fixed in two admissible worlds while varying later H_way. Observed semantic-pass data are identical, so calibration is not identified.",
+      "counterexamples_and_limits": "Restricted causal models, independent convergent measures, interventions, or justified response constraints may supply calibration. The claim is not that all calibration is impossible.",
+      "status": "MANUAL_EXACT_CONSTRUCTION_KNOWN_METHOD_NOT_CLAIMED_NOVEL"
+    },
+    {
+      "id": "A3X-C4",
+      "type": "APPLICATION_WARRANT_DECOMPOSITION",
+      "full_proposition": "An H_way-level organizational comparison requires S_H AND C_H AND O_H on the declared domain and same episodes. S_H is semantic admissibility, C_H is independently justified signed judgement-to-experience reliability, and O_H is actual same-instance retained-route/use and fit evidence.",
+      "domain": "Prospective A3W/FAM application only; not a completed UCT graph rule.",
+      "premises": ["content, truth-tracking, and physical instantiation are different evidential roles", "all three must concern the declared comparison domain", "O_H requires actual same-instance evidence"],
+      "support": "Type/evidence audit and A3X-C3.",
+      "counterexamples_and_limits": "S_H alone leaves C_H and O_H open; S_H plus C_H still leaves actual organization open.",
+      "status": "SCOPED_APPLICATION_CORRECTION_OPEN_PREMISES"
+    }
+  ]
+}

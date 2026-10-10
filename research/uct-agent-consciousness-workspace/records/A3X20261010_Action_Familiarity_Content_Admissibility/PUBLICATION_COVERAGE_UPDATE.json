@@ -1,0 +1,8 @@
+{
+  "round_id": "A3X20261010_Action_Familiarity_Content_Admissibility",
+  "publication_coverage_version": "UCT-PUB-v1.0.33",
+  "coverage_change": false,
+  "publications_added": 0,
+  "reason": "A3X is an internal scoped methodological application with no publication candidate, DOI action, or claim-strength promotion.",
+  "prohibited_actions_confirmed_absent": ["DOI", "Zenodo", "OTS", "Arweave", "email", "Slack", "production_deploy"]
+}

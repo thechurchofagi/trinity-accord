@@ -1,0 +1,39 @@
+{
+  "schema": "uct-source-scope-v1",
+  "round_id": "A3X20261010_Action_Familiarity_Content_Admissibility",
+  "fixed_sources_read": [
+    "records/R128_20260313_Genuine_Ground_Trace/sources/A_UCT_I_v1_2.md",
+    "records/R153_20260313_Experience_Intelligence_Self_Map/sources/experience-intelligence-self-v1.0.md",
+    "records/A3W20261010_Action_Familiarity_Endpoint/RESEARCH_NOTE.md",
+    "records/A3W20261010_Action_Familiarity_Endpoint/ENDPOINT_PROTOCOL.md",
+    "records/FAM20261009_Body_Familiarity_Matrix/RESEARCH_NOTE.md",
+    "records/A3N20261009_Somatic_Self_Familiarity/RESEARCH_NOTE.md"
+  ],
+  "primary_or_direct_sources_checked": [
+    {
+      "citation": "Gardner, T., Goulden, N., & Cross, E. S. (2015). Dynamic Modulation of the Action Observation Network by Movement Familiarity. Journal of Neuroscience, 35(4), 1561-1572.",
+      "doi": "10.1523/JNEUROSCI.2942-14.2015",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4308602/",
+      "scope_used": "Abstract/method description and operational role of observed movement familiarity.",
+      "boundary": "Observation/prediction familiarity is not present enacted H_way."
+    },
+    {
+      "citation": "Blasing, B. E., & Sauzet, O. (2018). My Action, My Self: Recognition of Self-Created but Visually Unfamiliar Dance-Like Actions From Point-Light Displays. Frontiers in Psychology, 9, 1909.",
+      "doi": "10.3389/fpsyg.2018.01909",
+      "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2018.01909/full",
+      "scope_used": "Design and distinction among learned, observed, and self-created action recognition.",
+      "boundary": "Recognition of displayed action is not calibration of current enacted H_way."
+    },
+    {
+      "citation": "Christensen, M. S., & Grunbaum, T. (2020). Measures of agency. Neuroscience of Consciousness, 2020(1), niaa019.",
+      "doi": "10.1093/nc/niaa019",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7416314/",
+      "scope_used": "Construct distinctions, subjective-measure transparency, and construct-validity limits.",
+      "boundary": "Methodological precedent; it does not validate the A3W endpoint."
+    }
+  ],
+  "search_scope": "Targeted, non-systematic primary-source check of neighbouring movement familiarity, self-recognition, and agency measurement constructs.",
+  "negative_result": "No checked source supplies an independently validated signed J_H-to-H_way relation for the present enacted bodily-manner endpoint.",
+  "negative_result_scope": "Only the listed checked sources; not an exhaustive literature-wide absence claim.",
+  "access_notes": "Bibliographic and method claims were checked against publisher, PubMed/PMC, or institutional records on 2026-10-10. No copyrighted full text is redistributed."
+}

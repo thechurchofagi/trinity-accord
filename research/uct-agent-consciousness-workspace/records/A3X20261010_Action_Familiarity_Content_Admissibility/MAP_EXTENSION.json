@@ -1,0 +1,29 @@
+{
+  "schema": "uct-map-followup-application-v1",
+  "id": "A3X-CONTENT-v0.1.0",
+  "kind": "DISABLED_FOLLOWUP_APPLICATION",
+  "status": "SCOPED_APPLICATION_ONLY_NOT_LOADED_INTO_COMPLETED_GRAPH",
+  "added_completed_nodes": 0,
+  "added_completed_rules": 0,
+  "added_completed_context_links": 0,
+  "claims": ["A3X-C1", "A3X-C2", "A3X-C3", "A3X-C4"],
+  "relevant_existing_nodes": [
+    "A:C1",
+    "A:U1",
+    "R157:SEMANTIC_RESIDUAL",
+    "R157:MINENESS_BRIDGE_SCHEMA",
+    "R173:RETENTIVE_EXPERIENTIAL_COORDINATE",
+    "R173:FAMILIAR_MINENESS_BOUNDARY"
+  ],
+  "prospective_all_of_gate": {
+    "premises": ["S_H", "C_H", "O_H"],
+    "connective": "AND",
+    "status": "APPLICATION_REQUIREMENT_NOT_FORMAL_GRAPH_RULE"
+  },
+  "non_promotion_reason": "S_H is unpiloted, C_H is ungrounded, and O_H is not instantiated on any same-episode comparison.",
+  "scientific_graph_counts_unchanged": {
+    "nodes": 913,
+    "rules": 424,
+    "context_links": 261
+  }
+}

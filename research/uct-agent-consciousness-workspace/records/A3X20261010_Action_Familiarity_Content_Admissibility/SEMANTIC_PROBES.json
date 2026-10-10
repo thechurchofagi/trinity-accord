@@ -1,0 +1,97 @@
+{
+  "schema": "uct-a3x-semantic-probes-v1",
+  "status": "conceptual_interpretation_probes_without_phenomenal_ground_truth",
+  "target": "H_way: familiar felt character of the present bodily manner of doing a specified action",
+  "allowed_response_classes": ["left", "right", "no_difference", "cannot_judge", "not_applicable"],
+  "ground_truth_policy": "No probe assigns a correct H_way rating.",
+  "probes": [
+    {
+      "id": "A3X-P01",
+      "name": "recognized_self_video_without_enactment",
+      "present_enactment": false,
+      "varied_proxy": "O_self",
+      "proxy_state": "high",
+      "required_content_result": "not_applicable",
+      "purpose": "Block source recognition from making the H_way item applicable."
+    },
+    {
+      "id": "A3X-P02",
+      "name": "practised_other_manner_enacted_now",
+      "present_enactment": true,
+      "varied_proxy": "O_self",
+      "proxy_state": "known_other_origin",
+      "required_content_result": "rating_not_prescribed",
+      "purpose": "Allow H_way judgement without equating familiarity with self-source."
+    },
+    {
+      "id": "A3X-P03",
+      "name": "little_practised_own_manner_enacted_now",
+      "present_enactment": true,
+      "varied_proxy": "K_practice",
+      "proxy_state": "low_despite_self_origin",
+      "required_content_result": "rating_not_prescribed",
+      "purpose": "Block self-source from entailing an established bodily manner."
+    },
+    {
+      "id": "A3X-P04",
+      "name": "highly_practised_but_perturbed",
+      "present_enactment": true,
+      "varied_proxy": "E_ease",
+      "proxy_state": "low_despite_high_practice",
+      "required_content_result": "rating_not_prescribed",
+      "purpose": "Block practice history or ease from dictating the current judgement."
+    },
+    {
+      "id": "A3X-P05",
+      "name": "novel_guided_but_fluent",
+      "present_enactment": true,
+      "varied_proxy": "E_ease",
+      "proxy_state": "high_despite_low_practice",
+      "required_content_result": "rating_not_prescribed",
+      "purpose": "Block fluency from defining familiarity."
+    },
+    {
+      "id": "A3X-P06",
+      "name": "knowingly_new_yet_reported_familiar",
+      "present_enactment": true,
+      "varied_proxy": "K_practice",
+      "proxy_state": "known_new",
+      "required_content_result": "proxy_conflicting_report_permitted",
+      "purpose": "Ensure declarative novelty does not make a familiar judgement semantically invalid."
+    },
+    {
+      "id": "A3X-P07",
+      "name": "remembered_practised_yet_reported_unfamiliar",
+      "present_enactment": true,
+      "varied_proxy": "K_practice",
+      "proxy_state": "known_practised",
+      "required_content_result": "proxy_conflicting_report_permitted",
+      "purpose": "Ensure remembered practice does not make an unfamiliar judgement semantically invalid."
+    },
+    {
+      "id": "A3X-P08",
+      "name": "first_use_with_clear_control",
+      "present_enactment": true,
+      "varied_proxy": "A_control",
+      "proxy_state": "high_despite_no_practice",
+      "required_content_result": "rating_not_prescribed",
+      "purpose": "Block clear agency or control from entailing familiar manner."
+    },
+    {
+      "id": "A3X-P09",
+      "name": "practised_action_with_transient_low_control",
+      "present_enactment": true,
+      "varied_proxy": "A_control",
+      "proxy_state": "low_despite_high_practice",
+      "required_content_result": "rating_not_prescribed",
+      "purpose": "Block low current control from deciding the familiarity judgement."
+    }
+  ],
+  "content_conditions": [
+    "present_enactment_applicability",
+    "referent_paraphrase",
+    "proxy_non_substitution",
+    "coding_invariance"
+  ],
+  "explicit_non_entailment": "Passing every listed probe does not entail J_H truth-tracks H_way."
+}
