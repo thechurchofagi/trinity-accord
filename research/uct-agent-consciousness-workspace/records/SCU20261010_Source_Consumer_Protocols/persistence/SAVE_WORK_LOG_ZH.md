@@ -1,0 +1,11 @@
+# SCU20261010 保存后日志与交接补充
+
+科学提交 `809f55a0910b395841a5fb9b3d3102ca19618c27` 已以 expected-SHA 接在 R205 最终凭据提交 `7dd9564c50f08a9f78dd8e35a5b960f4f0d30edc` 之后。重新读取提交、分支头及所有本次文件所在树，110个Git blob哈希与本地逐一相同，另按精确提交回读CURRENT_STATE，完成图v1.1.2、最新SCU及覆盖v1.0.18一致。
+
+论文PDF、完整Markdown、复现审计增量ZIP、增量清单、中文交接已成功新建保存。主交接以 expected_current_version=70 写入第71版，678409字节；全部原第70版字节仍为完整未改写后缀。保存结果由新搜索与重新下载核验，不仅依据工具初始返回。
+
+所有非PDF文件回读逐字节一致。单独PDF保存时加入平台来源凭据，文件容器hash变化；15页文字以及全部15页72dpi渲染逐像素相同。原始审阅PDF在科学提交和ZIP内保持原hash，两种PDF的hash均登记在DUAL_SAVE_RECEIPT.json。
+
+本地镜像已按远端确切tree和commit字节同步到科学提交，避免下一窗口把已保存成果误当旧头未提交内容。GitHub REST日期把原时区正规化为UTC；本地精确commit校验识别出原author/committer均为-0700，只有hash匹配后才移动本地HEAD。没有改写远端或源历史。
+
+此凭据与回读细节用科学保存后的独立提交归档，避免循环嵌入自身提交hash。主地图、候选停用状态、开放QC和未发布DOI/OTS/Arweave状态不变。后续先看本轮HANDOFF_ZH.md、DUAL_SAVE_RECEIPT.json与EXACT_UNREAD_SCOPE，再决定实际实验或补齐地图深度审查。

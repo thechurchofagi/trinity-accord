@@ -1,0 +1,144 @@
+{
+  "schema": "uct-scu-dual-save-receipt/1",
+  "research_id": "SCU20261010",
+  "status": "SCIENCE_GITHUB_AND_SPACE_SAVED_AND_READBACK_VERIFIED",
+  "paper": "SCU-PAPER-v1.0.0",
+  "result": "SCU-RESULT-v0.2.0",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "science_commit": "809f55a0910b395841a5fb9b3d3102ca19618c27",
+    "preserved_parent_commit": "7dd9564c50f08a9f78dd8e35a5b960f4f0d30edc",
+    "science_tree": "a10d035629a4424c2bf8cd88ef62ed44576e9bee",
+    "expected_sha_guard_succeeded": true,
+    "files_verified": 110,
+    "all_content_address_hashes_match": true,
+    "readback_method": "Fetched committed tree entries and matched every Git blob SHA to the locally computed content-address hash; separately fetched CURRENT_STATE at exact commit. Not a fresh full-content download of every file.",
+    "detailed_readback": "persistence/GITHUB_SCIENCE_READBACK.json"
+  },
+  "space": {
+    "all_six_writes_succeeded": true,
+    "fresh_downloads_verified": true,
+    "master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "previous_master_version": 70,
+    "verified_current_master_version": 71,
+    "previous_master_all_bytes_preserved": true,
+    "file_records": [
+      {
+        "file": "UCT_SCU_Paper_and_Research_20261010.zip",
+        "uploaded_source_bytes": 1689761,
+        "uploaded_source_sha256": "fdf1d70d24d9955dcd4921f0c72cc5531752c4387114e43443ba9dada0ea0bda",
+        "downloaded_bytes": 1689761,
+        "downloaded_sha256": "fdf1d70d24d9955dcd4921f0c72cc5531752c4387114e43443ba9dada0ea0bda",
+        "byte_equal_to_upload": true,
+        "library_file_id": "libfile_d56fa49b16e0819186d940cd8fbf2674",
+        "file_id": "file_000000000a7881fdb89383309e8a6cc6",
+        "current_version_number": 0,
+        "local_metadata_applied": true
+      },
+      {
+        "file": "Matched_Behavior_and_Source_Use_v1.0.0.pdf",
+        "uploaded_source_bytes": 278096,
+        "uploaded_source_sha256": "5c4afbe1c5d5b51994f3fc5a60fb49e75f5114b6831fcba4ab470295cd0d62bb",
+        "downloaded_bytes": 329858,
+        "downloaded_sha256": "2d4a28c29d2e7dc9f88a96f4f6b5c256ad1abb568432d294e9f03804a4c0c266",
+        "byte_equal_to_upload": false,
+        "provenance_sealed_on_save": true,
+        "page_count": 15,
+        "all_page_text_equal": true,
+        "all_15_page_renders_pixel_equal_72dpi": true,
+        "source_pdf_retained_in_repository_and_zip": true,
+        "library_file_id": "libfile_782edf56107c819193a2f5c4d39af0ba",
+        "file_id": "file_0000000052ac81fd8e6c37d15ddc0f9c",
+        "current_version_number": 0,
+        "local_metadata_applied": true
+      },
+      {
+        "file": "UCT_SCU_Increment_Manifest_20261010.json",
+        "uploaded_source_bytes": 41718,
+        "uploaded_source_sha256": "fcdbc03f2ee34b86f84cc67663f69f072c40cb06eb413ff489c8e4bb87668a04",
+        "downloaded_bytes": 41718,
+        "downloaded_sha256": "fcdbc03f2ee34b86f84cc67663f69f072c40cb06eb413ff489c8e4bb87668a04",
+        "byte_equal_to_upload": true,
+        "library_file_id": "libfile_37c968aab88c8191b86fe3be56a14115",
+        "file_id": "file_000000000e8081fda1d4ff2c0a17d20f",
+        "current_version_number": 0,
+        "local_metadata_applied": true
+      },
+      {
+        "file": "Matched_Behavior_and_Source_Use_v1.0.0.md",
+        "uploaded_source_bytes": 45595,
+        "uploaded_source_sha256": "8e5bdfd1d4e5adc537a20424c5648350c6c6f6e4d9181a9d78bdd2aec73aed4c",
+        "downloaded_bytes": 45595,
+        "downloaded_sha256": "8e5bdfd1d4e5adc537a20424c5648350c6c6f6e4d9181a9d78bdd2aec73aed4c",
+        "byte_equal_to_upload": true,
+        "library_file_id": "libfile_6a331ef8bed4819190210beca9e22c7a",
+        "file_id": "file_00000000e03481fd8343fe828b07a3c8",
+        "current_version_number": 0,
+        "local_metadata_applied": true
+      },
+      {
+        "file": "UCT_Hourly_Research_Master_Handoff.md",
+        "uploaded_source_bytes": 678409,
+        "uploaded_source_sha256": "8128e6f052bed2e01a0b91e37c02387eefab61b35c02b5cd3671f206c17c496d",
+        "downloaded_bytes": 678409,
+        "downloaded_sha256": "8128e6f052bed2e01a0b91e37c02387eefab61b35c02b5cd3671f206c17c496d",
+        "byte_equal_to_upload": true,
+        "previous_v70_exact_suffix_preserved": true,
+        "verified_version": 71,
+        "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+        "file_id": "file_00000000109481fd8602a50e2d4ed3bc",
+        "current_version_number": 71,
+        "local_metadata_applied": true
+      },
+      {
+        "file": "UCT_SCU_Research_Handoff_ZH.md",
+        "uploaded_source_bytes": 8454,
+        "uploaded_source_sha256": "237ce43931fe30481b430db951ddb58da2b740c5a9c0f854a03f3b29fb91f730",
+        "downloaded_bytes": 8454,
+        "downloaded_sha256": "237ce43931fe30481b430db951ddb58da2b740c5a9c0f854a03f3b29fb91f730",
+        "byte_equal_to_upload": true,
+        "library_file_id": "libfile_3a7aef8bc0588191a2e6c93f5e86ef9a",
+        "file_id": "file_00000000fa8c81fdae6e8170dcc78f37",
+        "current_version_number": 0,
+        "local_metadata_applied": true
+      }
+    ],
+    "detailed_readback": "persistence/LIBRARY_CONTENT_READBACK.json"
+  },
+  "pdf_provenance_note": "The standalone saved PDF acquired platform provenance data and changed container bytes. Every one of its 15 page texts and 72dpi page renders is identical to the reviewed source PDF. The exact pre-sealing PDF is retained in GitHub and the increment ZIP; both hashes are recorded.",
+  "research_state": {
+    "completed_map": "UCT-MAP-v1.1.2",
+    "completed_counts": {
+      "nodes": 913,
+      "active_conditional_rules": 424,
+      "nondeductive_contexts": 261,
+      "suspended_rules": 10,
+      "review_items": 1608
+    },
+    "publication_coverage": "UCT-PUB-v1.0.18",
+    "manuscript_complete": true,
+    "formal_publication": false,
+    "candidate_enabled": false,
+    "new_map_release": false,
+    "actual_or_H_validation": false,
+    "all_1608_statement_premise_relationship_items_read": true,
+    "unreviewed_nested_or_supplementary_union_ids": 1034,
+    "unreviewed_nested_or_supplementary_union_fields": 1828,
+    "full_depth_audit_status": "AUDIT_INCOMPLETE",
+    "open_reviews": [
+      "QC-20261008-10",
+      "IA-QC11",
+      "QC-20261008-12",
+      "QC-20261008-13"
+    ]
+  },
+  "verification": {
+    "finite_reproduction_jobs": 6,
+    "mechanical_integrity_checks": 132,
+    "mechanical_checks_are_semantic_proof": false,
+    "no_doi_ots_arweave_action": true
+  },
+  "receipt_self_reference_policy": "This receipt records already verified science and space writes. Its own content hash, containing follow-up Git commit and separate space receipt ID are verified externally after this file is saved, and are not recursively embedded in these bytes.",
+  "archive_scope": "The delivered ZIP is the verified 110-file science increment plus restoration/verification companions, not a full repository/history backup. This post-save receipt is separate from that initial ZIP."
+}

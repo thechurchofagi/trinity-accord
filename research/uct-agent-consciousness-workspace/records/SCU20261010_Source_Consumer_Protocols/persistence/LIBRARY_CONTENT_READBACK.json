@@ -1,0 +1,61 @@
+{
+  "status": "VERIFIED",
+  "files": [
+    {
+      "file": "UCT_SCU_Paper_and_Research_20261010.zip",
+      "uploaded_source_bytes": 1689761,
+      "uploaded_source_sha256": "fdf1d70d24d9955dcd4921f0c72cc5531752c4387114e43443ba9dada0ea0bda",
+      "downloaded_bytes": 1689761,
+      "downloaded_sha256": "fdf1d70d24d9955dcd4921f0c72cc5531752c4387114e43443ba9dada0ea0bda",
+      "byte_equal_to_upload": true
+    },
+    {
+      "file": "Matched_Behavior_and_Source_Use_v1.0.0.pdf",
+      "uploaded_source_bytes": 278096,
+      "uploaded_source_sha256": "5c4afbe1c5d5b51994f3fc5a60fb49e75f5114b6831fcba4ab470295cd0d62bb",
+      "downloaded_bytes": 329858,
+      "downloaded_sha256": "2d4a28c29d2e7dc9f88a96f4f6b5c256ad1abb568432d294e9f03804a4c0c266",
+      "byte_equal_to_upload": false,
+      "provenance_sealed_on_save": true,
+      "page_count": 15,
+      "all_page_text_equal": true,
+      "all_15_page_renders_pixel_equal_72dpi": true,
+      "source_pdf_retained_in_repository_and_zip": true
+    },
+    {
+      "file": "UCT_SCU_Increment_Manifest_20261010.json",
+      "uploaded_source_bytes": 41718,
+      "uploaded_source_sha256": "fcdbc03f2ee34b86f84cc67663f69f072c40cb06eb413ff489c8e4bb87668a04",
+      "downloaded_bytes": 41718,
+      "downloaded_sha256": "fcdbc03f2ee34b86f84cc67663f69f072c40cb06eb413ff489c8e4bb87668a04",
+      "byte_equal_to_upload": true
+    },
+    {
+      "file": "Matched_Behavior_and_Source_Use_v1.0.0.md",
+      "uploaded_source_bytes": 45595,
+      "uploaded_source_sha256": "8e5bdfd1d4e5adc537a20424c5648350c6c6f6e4d9181a9d78bdd2aec73aed4c",
+      "downloaded_bytes": 45595,
+      "downloaded_sha256": "8e5bdfd1d4e5adc537a20424c5648350c6c6f6e4d9181a9d78bdd2aec73aed4c",
+      "byte_equal_to_upload": true
+    },
+    {
+      "file": "UCT_Hourly_Research_Master_Handoff.md",
+      "uploaded_source_bytes": 678409,
+      "uploaded_source_sha256": "8128e6f052bed2e01a0b91e37c02387eefab61b35c02b5cd3671f206c17c496d",
+      "downloaded_bytes": 678409,
+      "downloaded_sha256": "8128e6f052bed2e01a0b91e37c02387eefab61b35c02b5cd3671f206c17c496d",
+      "byte_equal_to_upload": true,
+      "previous_v70_exact_suffix_preserved": true,
+      "verified_version": 71
+    },
+    {
+      "file": "UCT_SCU_Research_Handoff_ZH.md",
+      "uploaded_source_bytes": 8454,
+      "uploaded_source_sha256": "237ce43931fe30481b430db951ddb58da2b740c5a9c0f854a03f3b29fb91f730",
+      "downloaded_bytes": 8454,
+      "downloaded_sha256": "237ce43931fe30481b430db951ddb58da2b740c5a9c0f854a03f3b29fb91f730",
+      "byte_equal_to_upload": true
+    }
+  ],
+  "method": "Fresh known-ID download. All non-PDF bytes equal uploaded sources; PDF provenance sealing verified by all 15 page texts and pixel-identical 72dpi renders."
+}

@@ -1,0 +1,673 @@
+{
+  "schema": "uct-scu-github-readback/1",
+  "science_commit": "809f55a0910b395841a5fb9b3d3102ca19618c27",
+  "parent": "7dd9564c50f08a9f78dd8e35a5b960f4f0d30edc",
+  "tree": "a10d035629a4424c2bf8cd88ef62ed44576e9bee",
+  "branch_readback": "809f55a0910b395841a5fb9b3d3102ca19618c27",
+  "expected_sha_update_succeeded": true,
+  "file_count": 110,
+  "all_content_address_hashes_match": true,
+  "verification_method": "Fetched committed tree entries and matched every Git blob SHA to the locally computed content-address hash; separately fetched CURRENT_STATE at exact commit. Not a fresh full-content download of every file.",
+  "checks": [
+    {
+      "path": "research/uct-agent-consciousness-workspace/CHANGELOG.md",
+      "expected_blob_sha": "04f6790fa2e3a40d09912ebd9ae2ee96b95be86e",
+      "remote_blob_sha": "04f6790fa2e3a40d09912ebd9ae2ee96b95be86e",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/CURRENT_STATE.json",
+      "expected_blob_sha": "27de7364a10f7ffcf39a8b4ae600e838fd79563e",
+      "remote_blob_sha": "27de7364a10f7ffcf39a8b4ae600e838fd79563e",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/HANDOFF.md",
+      "expected_blob_sha": "69b932b23bd1af4ba94c6624df63acd0f3f15523",
+      "remote_blob_sha": "69b932b23bd1af4ba94c6624df63acd0f3f15523",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/MASTER_INDEX.md",
+      "expected_blob_sha": "19896ac275f1dcb38322ea1bb20cb1116d9d02ef",
+      "remote_blob_sha": "19896ac275f1dcb38322ea1bb20cb1116d9d02ef",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/MEMORY.md",
+      "expected_blob_sha": "35152e4c74deeed7b79bb73189c82c18956ccfdc",
+      "remote_blob_sha": "35152e4c74deeed7b79bb73189c82c18956ccfdc",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/PUBLICATION_COVERAGE.json",
+      "expected_blob_sha": "49d604e9e9baf6a067bd51a3a49e2f4ce1a43730",
+      "remote_blob_sha": "49d604e9e9baf6a067bd51a3a49e2f4ce1a43730",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/RESEARCH_REGISTRY.json",
+      "expected_blob_sha": "892ad092aae8911091b2ae94574d1502a3cfbeff",
+      "remote_blob_sha": "892ad092aae8911091b2ae94574d1502a3cfbeff",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/RESEARCH_SESSION_LOG_INDEX.json",
+      "expected_blob_sha": "1a02abbfd4d84b0a7f897799b8207b00830bb8e7",
+      "remote_blob_sha": "1a02abbfd4d84b0a7f897799b8207b00830bb8e7",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/REVIEW_SUPERVISION.md",
+      "expected_blob_sha": "1a733fb09c1cb18470d87732ab65997c1daa7b5a",
+      "remote_blob_sha": "1a733fb09c1cb18470d87732ab65997c1daa7b5a",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_GRAPH_MODULES.json",
+      "expected_blob_sha": "62944861b54982b0dbd389ee8351422dd63a4bc1",
+      "remote_blob_sha": "62944861b54982b0dbd389ee8351422dd63a4bc1",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/ARTIFACT_MANIFEST.json",
+      "expected_blob_sha": "3fa345729018cd8d78d51da6635b08c2305ac367",
+      "remote_blob_sha": "3fa345729018cd8d78d51da6635b08c2305ac367",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/CLAIM_LEDGER.json",
+      "expected_blob_sha": "1a6f8d39b8b38f1977481a900f09d68230c9c350",
+      "remote_blob_sha": "1a6f8d39b8b38f1977481a900f09d68230c9c350",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/EXACT_RESULTS.json",
+      "expected_blob_sha": "ad29a319b37bec39a75e8c3c879afa78f61d64ab",
+      "remote_blob_sha": "ad29a319b37bec39a75e8c3c879afa78f61d64ab",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/FAILURES.md",
+      "expected_blob_sha": "bba3a74b1731f8c303876d378910218f4561be39",
+      "remote_blob_sha": "bba3a74b1731f8c303876d378910218f4561be39",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/FINAL_REPRODUCTION_RECEIPT.json",
+      "expected_blob_sha": "ea410e961267acd110f8862aa79343e8b4cd196e",
+      "remote_blob_sha": "ea410e961267acd110f8862aa79343e8b4cd196e",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/GAP_LEDGER.md",
+      "expected_blob_sha": "3aaccbf087bebfe59c760e24c30fc3e66bf1f424",
+      "remote_blob_sha": "3aaccbf087bebfe59c760e24c30fc3e66bf1f424",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/HANDOFF_ZH.md",
+      "expected_blob_sha": "5958ae16b956ed605b3af2c840c73b45c11b4302",
+      "remote_blob_sha": "5958ae16b956ed605b3af2c840c73b45c11b4302",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/MANUSCRIPT_DECISION.json",
+      "expected_blob_sha": "68c8a754bd9e1cab026bec327fc7bec6a60ce532",
+      "remote_blob_sha": "68c8a754bd9e1cab026bec327fc7bec6a60ce532",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/MAP_AUDIT.md",
+      "expected_blob_sha": "f80d89d1c8e4b3c32fdea5c67aecb2ad84d752e7",
+      "remote_blob_sha": "f80d89d1c8e4b3c32fdea5c67aecb2ad84d752e7",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/MAP_EXTENSION.json",
+      "expected_blob_sha": "4c1f2d83a875b2501fab17e0607cf6e344706dc8",
+      "remote_blob_sha": "4c1f2d83a875b2501fab17e0607cf6e344706dc8",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/MODEL_CLAIM_CONTRACTS.json",
+      "expected_blob_sha": "a40b8f1ce5a8f9f1d906c702d3d217d782963be4",
+      "remote_blob_sha": "a40b8f1ce5a8f9f1d906c702d3d217d782963be4",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/Matched_Behavior_and_Source_Use_v1.0.0.md",
+      "expected_blob_sha": "69325a9fba86fe7cbef7faed4074557ed21e8a16",
+      "remote_blob_sha": "69325a9fba86fe7cbef7faed4074557ed21e8a16",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/Matched_Behavior_and_Source_Use_v1.0.0.pdf",
+      "expected_blob_sha": "c6be5a068cfb07c5ab17288f88d37ac375b23ad1",
+      "remote_blob_sha": "c6be5a068cfb07c5ab17288f88d37ac375b23ad1",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/PDF_QA_RECEIPT.json",
+      "expected_blob_sha": "6797029866653d63f394d796223ec12a81669b24",
+      "remote_blob_sha": "6797029866653d63f394d796223ec12a81669b24",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/PROBE_PROTOCOL.md",
+      "expected_blob_sha": "e47a41ad864663d8d8bcddd582d2222bec80be95",
+      "remote_blob_sha": "e47a41ad864663d8d8bcddd582d2222bec80be95",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/PUBLICATION_COVERAGE_UPDATE.json",
+      "expected_blob_sha": "332b46a31651b8b6f158c92e52feb9a94903f4bc",
+      "remote_blob_sha": "332b46a31651b8b6f158c92e52feb9a94903f4bc",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/README.md",
+      "expected_blob_sha": "511394dcb516737a938b0a08a8b32ca5682eee35",
+      "remote_blob_sha": "511394dcb516737a938b0a08a8b32ca5682eee35",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/REPRODUCTION_RECEIPT.json",
+      "expected_blob_sha": "6bc51dae60cd2ce351b8a87821e7f68359f25a9f",
+      "remote_blob_sha": "6bc51dae60cd2ce351b8a87821e7f68359f25a9f",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/RESEARCH_NOTE.md",
+      "expected_blob_sha": "0da5e795e3320e1a70c8c412bd7c61b572631b9e",
+      "remote_blob_sha": "0da5e795e3320e1a70c8c412bd7c61b572631b9e",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/REVIEW_RESPONSE.md",
+      "expected_blob_sha": "f04a81a023c33651a19b61f59f0ea5c520777843",
+      "remote_blob_sha": "f04a81a023c33651a19b61f59f0ea5c520777843",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/ROOT_NAVIGATION_UPDATE_RECEIPT.json",
+      "expected_blob_sha": "17795950639fca16fcd02364ed862dffeeac176a",
+      "remote_blob_sha": "17795950639fca16fcd02364ed862dffeeac176a",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/RUN_RECEIPT.json",
+      "expected_blob_sha": "ddc2faea801c5282dd1c2b2ca6ea261f77d1d167",
+      "remote_blob_sha": "ddc2faea801c5282dd1c2b2ca6ea261f77d1d167",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/SOURCE_READING_RECEIPT.json",
+      "expected_blob_sha": "f41e2e5f5b70408fc2ee3241fb62dc0b3e370cee",
+      "remote_blob_sha": "f41e2e5f5b70408fc2ee3241fb62dc0b3e370cee",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/SOURCE_SCOPE.json",
+      "expected_blob_sha": "f9c789375770e0fc2f79405f3531463a5bd63394",
+      "remote_blob_sha": "f9c789375770e0fc2f79405f3531463a5bd63394",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/STRUCTURAL_VALIDATION_RECEIPT.json",
+      "expected_blob_sha": "fab5e15685f2a0abf0652eb965b6694e62ae0b1d",
+      "remote_blob_sha": "fab5e15685f2a0abf0652eb965b6694e62ae0b1d",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/THREE_SOURCE_ROUTE_TABLE.csv",
+      "expected_blob_sha": "f0b511dbfbf3ace15432e0d5a2b191da91fb4ca2",
+      "remote_blob_sha": "f0b511dbfbf3ace15432e0d5a2b191da91fb4ca2",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/WORK_LOG.md",
+      "expected_blob_sha": "9fb0d137b1da2d94375e4533c46904a4a39822c9",
+      "remote_blob_sha": "9fb0d137b1da2d94375e4533c46904a4a39822c9",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/build_paper.py",
+      "expected_blob_sha": "65800c86c6000b7b963190c8f7113b3a218f3fbe",
+      "remote_blob_sha": "65800c86c6000b7b963190c8f7113b3a218f3fbe",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/check_source_consumers.py",
+      "expected_blob_sha": "dcbf64792531915c69f6fb32ba239edcd2692529",
+      "remote_blob_sha": "dcbf64792531915c69f6fb32ba239edcd2692529",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/corrections/EFFECTIVE_CORRECTIONS.md",
+      "expected_blob_sha": "eae84762443bae2ddd3d4c815a62f727d56aa4bb",
+      "remote_blob_sha": "eae84762443bae2ddd3d4c815a62f727d56aa4bb",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/corrections/EFFECTIVE_CORRECTION_EXACT_RESULTS.json",
+      "expected_blob_sha": "189b97c6da6f4f4987c6c7ba93daf83c2ae5f686",
+      "remote_blob_sha": "189b97c6da6f4f4987c6c7ba93daf83c2ae5f686",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/corrections/EFFECTIVE_CORRECTION_INDEX.json",
+      "expected_blob_sha": "32be51434d326d9e1806acfb150cdc87e2f8a8c4",
+      "remote_blob_sha": "32be51434d326d9e1806acfb150cdc87e2f8a8c4",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/corrections/R194_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "expected_blob_sha": "5903150e8f7d60e72d24c7f3cabd62f53120034d",
+      "remote_blob_sha": "5903150e8f7d60e72d24c7f3cabd62f53120034d",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/corrections/R201_COHERENT_WITNESSES.json",
+      "expected_blob_sha": "3858bc7e7ec9be78d822f062b5145f9b29b45b2e",
+      "remote_blob_sha": "3858bc7e7ec9be78d822f062b5145f9b29b45b2e",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/corrections/R201_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "expected_blob_sha": "09b85c8688c57bb4445155070378a14b1bc06eea",
+      "remote_blob_sha": "09b85c8688c57bb4445155070378a14b1bc06eea",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/corrections/R201_R202_CORRECTIONS.md",
+      "expected_blob_sha": "e54d7ce18a21acaac8b6f19fadccb89743ac9d51",
+      "remote_blob_sha": "e54d7ce18a21acaac8b6f19fadccb89743ac9d51",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/corrections/R202_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "expected_blob_sha": "88974bf330e066487e4fc1f69db38f3de4a431c8",
+      "remote_blob_sha": "88974bf330e066487e4fc1f69db38f3de4a431c8",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/corrections/R202_RESIDUAL_CORRECTION.json",
+      "expected_blob_sha": "bd213d7a91763e3915cdba8fd1ccd38f2e3d1975",
+      "remote_blob_sha": "bd213d7a91763e3915cdba8fd1ccd38f2e3d1975",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/corrections/R202_RESIDUAL_COUNTEREXAMPLE.json",
+      "expected_blob_sha": "4d5008d7865d9e91590880984084fc5eeefcfece",
+      "remote_blob_sha": "4d5008d7865d9e91590880984084fc5eeefcfece",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/corrections/check_r201_coherent_witnesses.py",
+      "expected_blob_sha": "c263773b524e1c4bdee670d3acca156b61675ccb",
+      "remote_blob_sha": "c263773b524e1c4bdee670d3acca156b61675ccb",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/corrections/check_r202_residual_correction.py",
+      "expected_blob_sha": "af695695913634fd37b690bec7f7c1e7b26259a4",
+      "remote_blob_sha": "af695695913634fd37b690bec7f7c1e7b26259a4",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/corrections/check_r202_residual_witness.py",
+      "expected_blob_sha": "fc74d103146fae5f339cae7783d97c791f137234",
+      "remote_blob_sha": "fc74d103146fae5f339cae7783d97c791f137234",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/corrections/verify_effective_corrections.py",
+      "expected_blob_sha": "54712882c7dc37fc138f54f6b53f4df0dd4b1d86",
+      "remote_blob_sha": "54712882c7dc37fc138f54f6b53f4df0dd4b1d86",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/figures/source_resolution.png",
+      "expected_blob_sha": "4199cb51ecc3b34556feac0a40fa767b071d9db8",
+      "remote_blob_sha": "4199cb51ecc3b34556feac0a40fa767b071d9db8",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/figures/source_resolution.svg",
+      "expected_blob_sha": "edf9a4caf7a801d47bbdbaea2360d977b2e1130b",
+      "remote_blob_sha": "edf9a4caf7a801d47bbdbaea2360d977b2e1130b",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/history/root_at_7dd9564c/CHANGELOG.md",
+      "expected_blob_sha": "9c86629c5a1c82f6545c3ac811bc0dac57a37a34",
+      "remote_blob_sha": "9c86629c5a1c82f6545c3ac811bc0dac57a37a34",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/history/root_at_7dd9564c/CURRENT_STATE.json",
+      "expected_blob_sha": "013ed8d4d2fd727c6e475beff2e2256a2429e1d1",
+      "remote_blob_sha": "013ed8d4d2fd727c6e475beff2e2256a2429e1d1",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/history/root_at_7dd9564c/HANDOFF.md",
+      "expected_blob_sha": "97bba021d14740f55969ad7b80ee4f24c7635d0b",
+      "remote_blob_sha": "97bba021d14740f55969ad7b80ee4f24c7635d0b",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/history/root_at_7dd9564c/MASTER_INDEX.md",
+      "expected_blob_sha": "032b303833412b217a857f03144fea5caa689461",
+      "remote_blob_sha": "032b303833412b217a857f03144fea5caa689461",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/history/root_at_7dd9564c/MEMORY.md",
+      "expected_blob_sha": "991d58f0563ea2dd46476a6d1e32ee92aa193c35",
+      "remote_blob_sha": "991d58f0563ea2dd46476a6d1e32ee92aa193c35",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/history/root_at_7dd9564c/PUBLICATION_COVERAGE.json",
+      "expected_blob_sha": "aebce0fd2d563b51bd88daae893c75571877c562",
+      "remote_blob_sha": "aebce0fd2d563b51bd88daae893c75571877c562",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/history/root_at_7dd9564c/RESEARCH_REGISTRY.json",
+      "expected_blob_sha": "5e0a7013db38e8d099ff91b30771e4228c3def3e",
+      "remote_blob_sha": "5e0a7013db38e8d099ff91b30771e4228c3def3e",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/history/root_at_7dd9564c/RESEARCH_SESSION_LOG_INDEX.json",
+      "expected_blob_sha": "18ec3f3f7579a1630457c38d9768c23f2b2b6254",
+      "remote_blob_sha": "18ec3f3f7579a1630457c38d9768c23f2b2b6254",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/history/root_at_7dd9564c/REVIEW_SUPERVISION.md",
+      "expected_blob_sha": "dab2c488302ba876bf950e3f8877485eaf956e31",
+      "remote_blob_sha": "dab2c488302ba876bf950e3f8877485eaf956e31",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/history/root_at_7dd9564c/UCT_FORMAL_GRAPH_MODULES.json",
+      "expected_blob_sha": "47683d9350e1173c18228011440ee407c52ef9ba",
+      "remote_blob_sha": "47683d9350e1173c18228011440ee407c52ef9ba",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/make_figure.py",
+      "expected_blob_sha": "11e70475343d7197399a95f991946c1411bf8e1f",
+      "remote_blob_sha": "11e70475343d7197399a95f991946c1411bf8e1f",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/pdf_style.tex",
+      "expected_blob_sha": "ed97879a4ad3236b4bb4eeb00777bdd5871666cc",
+      "remote_blob_sha": "ed97879a4ad3236b4bb4eeb00777bdd5871666cc",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/reproduce_all.py",
+      "expected_blob_sha": "ba0ce94e18d858df9eebf21207a33ba8891fb420",
+      "remote_blob_sha": "ba0ce94e18d858df9eebf21207a33ba8891fb420",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/reproduction/baseline_R204/EXACT_RESULTS.json",
+      "expected_blob_sha": "9f0da8b9ac234bfd63b7481a551f9d15675351a4",
+      "remote_blob_sha": "9f0da8b9ac234bfd63b7481a551f9d15675351a4",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/reproduction/baseline_R204/check_alignment_and_use.py",
+      "expected_blob_sha": "217f70950a5e84c334437addbf8feb2a0c58dcdb",
+      "remote_blob_sha": "217f70950a5e84c334437addbf8feb2a0c58dcdb",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/reproduction/baseline_R205/EXACT_RESULTS.json",
+      "expected_blob_sha": "feed94f4da2872b2749bee2d57aa21006ed6b9ac",
+      "remote_blob_sha": "feed94f4da2872b2749bee2d57aa21006ed6b9ac",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/reproduction/baseline_R205/exact_probe.py",
+      "expected_blob_sha": "bb64b2c6a8dcd7c39cf512869bec368bc5a2742c",
+      "remote_blob_sha": "bb64b2c6a8dcd7c39cf512869bec368bc5a2742c",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/COVERAGE_AND_PRIOR_ART_REPORT.md",
+      "expected_blob_sha": "df60ed1918c1e3cc50d8ca81d124034b6442aa6b",
+      "remote_blob_sha": "df60ed1918c1e3cc50d8ca81d124034b6442aa6b",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/CUMULATIVE_CANDIDATE_REVIEW.json",
+      "expected_blob_sha": "f06684fdfa3e55b12b5ec72a746a18451a8a0b20",
+      "remote_blob_sha": "f06684fdfa3e55b12b5ec72a746a18451a8a0b20",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/EFFECTIVE_CORRECTIONS.md",
+      "expected_blob_sha": "eae84762443bae2ddd3d4c815a62f727d56aa4bb",
+      "remote_blob_sha": "eae84762443bae2ddd3d4c815a62f727d56aa4bb",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/EFFECTIVE_CORRECTION_EXACT_RESULTS.json",
+      "expected_blob_sha": "189b97c6da6f4f4987c6c7ba93daf83c2ae5f686",
+      "remote_blob_sha": "189b97c6da6f4f4987c6c7ba93daf83c2ae5f686",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/EFFECTIVE_CORRECTION_INDEX.json",
+      "expected_blob_sha": "32be51434d326d9e1806acfb150cdc87e2f8a8c4",
+      "remote_blob_sha": "32be51434d326d9e1806acfb150cdc87e2f8a8c4",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/EXACT_UNREAD_SCOPE.json",
+      "expected_blob_sha": "db21cb2b487a8d14f1635a61593710f363591241",
+      "remote_blob_sha": "db21cb2b487a8d14f1635a61593710f363591241",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/FAMILY_REVIEW_NOTES.json",
+      "expected_blob_sha": "420e609c0e5f2765f7d5095e806d2205eca74ad2",
+      "remote_blob_sha": "420e609c0e5f2765f7d5095e806d2205eca74ad2",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/FINAL_AUDIT_MANIFEST.json",
+      "expected_blob_sha": "c18b0c24b40dc640f1644c718f749e69e2d8ebc5",
+      "remote_blob_sha": "c18b0c24b40dc640f1644c718f749e69e2d8ebc5",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/FROZEN_SOURCE_RESOLUTION.json",
+      "expected_blob_sha": "27d797dfe79bc868b75cf82331e2eb87714712b3",
+      "remote_blob_sha": "27d797dfe79bc868b75cf82331e2eb87714712b3",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/HANDOFF_ZH.md",
+      "expected_blob_sha": "e61ed57a26278cdc6d9feab4401b9f3434266a02",
+      "remote_blob_sha": "e61ed57a26278cdc6d9feab4401b9f3434266a02",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/MANUAL_ITEM_RATIONALES.tsv",
+      "expected_blob_sha": "f6197abf89a89050592cd47a1a4075dc5a98c829",
+      "remote_blob_sha": "f6197abf89a89050592cd47a1a4075dc5a98c829",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/MAP_SEMANTIC_AUDIT_REPORT.md",
+      "expected_blob_sha": "d6f32034d79af8b8607ee2b85d078e0d4e451bf7",
+      "remote_blob_sha": "d6f32034d79af8b8607ee2b85d078e0d4e451bf7",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/MODEL_GAP_LEDGER.md",
+      "expected_blob_sha": "f16d786889987d3469ee8137fce92bb637f88757",
+      "remote_blob_sha": "f16d786889987d3469ee8137fce92bb637f88757",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/MODEL_HANDOFF_ZH.md",
+      "expected_blob_sha": "152c1c37d473da3c16f414aa757cc5894688e364",
+      "remote_blob_sha": "152c1c37d473da3c16f414aa757cc5894688e364",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/MODEL_MANUSCRIPT_REVIEW.md",
+      "expected_blob_sha": "cba79f6ab2863823738f52e12a81e48e650395e9",
+      "remote_blob_sha": "cba79f6ab2863823738f52e12a81e48e650395e9",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/MODEL_MAP_AUDIT.md",
+      "expected_blob_sha": "a7f118c59889bf315ea07543218e2efb16899b71",
+      "remote_blob_sha": "a7f118c59889bf315ea07543218e2efb16899b71",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/MODEL_REVIEW_RESPONSE.md",
+      "expected_blob_sha": "2e6f857520e32d19455338212776cad985819223",
+      "remote_blob_sha": "2e6f857520e32d19455338212776cad985819223",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/MODEL_WORKER_FILE_MANIFEST.json",
+      "expected_blob_sha": "3e29156cd9bbefecaac2d607bb45dabde3dd770e",
+      "remote_blob_sha": "3e29156cd9bbefecaac2d607bb45dabde3dd770e",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/MODEL_WORK_LOG.md",
+      "expected_blob_sha": "a8354d0f0325bf2dde4710e6e7d9a3ca45f55120",
+      "remote_blob_sha": "a8354d0f0325bf2dde4710e6e7d9a3ca45f55120",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/PER_ITEM_REVIEW_INDEX.csv",
+      "expected_blob_sha": "18ec918365fafa963df6e7e2ae42e897ebda99fd",
+      "remote_blob_sha": "18ec918365fafa963df6e7e2ae42e897ebda99fd",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/PER_ITEM_SEMANTIC_REVIEW.json.gz",
+      "expected_blob_sha": "d8174d6f3239f19f4d79dd043876eaafa30ef24c",
+      "remote_blob_sha": "d8174d6f3239f19f4d79dd043876eaafa30ef24c",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/PRIOR_ART_MANUSCRIPT_REVIEW.md",
+      "expected_blob_sha": "753fa95a32f43a17e855c117a7d2ebb36a55e13f",
+      "remote_blob_sha": "753fa95a32f43a17e855c117a7d2ebb36a55e13f",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/R194_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "expected_blob_sha": "5903150e8f7d60e72d24c7f3cabd62f53120034d",
+      "remote_blob_sha": "5903150e8f7d60e72d24c7f3cabd62f53120034d",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/R201_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "expected_blob_sha": "09b85c8688c57bb4445155070378a14b1bc06eea",
+      "remote_blob_sha": "09b85c8688c57bb4445155070378a14b1bc06eea",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/R202_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "expected_blob_sha": "88974bf330e066487e4fc1f69db38f3de4a431c8",
+      "remote_blob_sha": "88974bf330e066487e4fc1f69db38f3de4a431c8",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/R202_RESIDUAL_COUNTEREXAMPLE.json",
+      "expected_blob_sha": "4d5008d7865d9e91590880984084fc5eeefcfece",
+      "remote_blob_sha": "4d5008d7865d9e91590880984084fc5eeefcfece",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/READ_SCOPE_PROGRESS.json",
+      "expected_blob_sha": "a58861aa9ca8aa06ba079a980aee52cb08076f25",
+      "remote_blob_sha": "a58861aa9ca8aa06ba079a980aee52cb08076f25",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/SOURCE_AND_COVERAGE_INVENTORY.json",
+      "expected_blob_sha": "ba98ad6a925f745fbe4de7aacfd70e1c91b53a6e",
+      "remote_blob_sha": "ba98ad6a925f745fbe4de7aacfd70e1c91b53a6e",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/SOURCE_READ_SCOPE_MANIFEST.json",
+      "expected_blob_sha": "e473222346d166d08a24a798393f209719cb0a9d",
+      "remote_blob_sha": "e473222346d166d08a24a798393f209719cb0a9d",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/WHOLE_MAP_READ_SCOPE.json",
+      "expected_blob_sha": "0c0bd028eeef31b746537b25a6dcca42ccc18581",
+      "remote_blob_sha": "0c0bd028eeef31b746537b25a6dcca42ccc18581",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/WORK_LOG.md",
+      "expected_blob_sha": "39f2fc7ac79b5dc205fcff9d98f386300e4a2447",
+      "remote_blob_sha": "39f2fc7ac79b5dc205fcff9d98f386300e4a2447",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/build_candidate_audit.py",
+      "expected_blob_sha": "6815d8ef7d5c8eb2adc4f8a0489a3040cfc9768d",
+      "remote_blob_sha": "6815d8ef7d5c8eb2adc4f8a0489a3040cfc9768d",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/build_correction_overlays.py",
+      "expected_blob_sha": "3712103dca00b638af10a818ad78c05fa639dc98",
+      "remote_blob_sha": "3712103dca00b638af10a818ad78c05fa639dc98",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/build_review_ledger.py",
+      "expected_blob_sha": "eda1b91e73368a03cfd36ebe36c59557788977c9",
+      "remote_blob_sha": "eda1b91e73368a03cfd36ebe36c59557788977c9",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/check_r202_residual_witness.py",
+      "expected_blob_sha": "fc74d103146fae5f339cae7783d97c791f137234",
+      "remote_blob_sha": "fc74d103146fae5f339cae7783d97c791f137234",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/read_cards.py",
+      "expected_blob_sha": "4bfa2cbb62addc42ff7dbfa9d1bb541d2b78e871",
+      "remote_blob_sha": "4bfa2cbb62addc42ff7dbfa9d1bb541d2b78e871",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/review/verify_effective_corrections.py",
+      "expected_blob_sha": "54712882c7dc37fc138f54f6b53f4df0dd4b1d86",
+      "remote_blob_sha": "54712882c7dc37fc138f54f6b53f4df0dd4b1d86",
+      "match": true
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/SCU20261010_Source_Consumer_Protocols/validate_increment.py",
+      "expected_blob_sha": "a82e4f0223df7905d9aaf670a1a33ca6ccf4f085",
+      "remote_blob_sha": "a82e4f0223df7905d9aaf670a1a33ca6ccf4f085",
+      "match": true
+    }
+  ]
+}
