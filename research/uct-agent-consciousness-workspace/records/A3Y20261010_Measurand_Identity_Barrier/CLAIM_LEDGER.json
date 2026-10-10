@@ -1,0 +1,46 @@
+{
+  "schema": "uct-claim-ledger-v1",
+  "round_id": "A3Y20261010_Measurand_Identity_Barrier",
+  "claims": [
+    {
+      "id": "A3Y-C1",
+      "type": "EXACT_MEASURAND_IDENTITY_NONIDENTIFICATION",
+      "full_proposition": "For the declared two-population, two-indicator conditional-independent law, fixing the statistical latent Z and every observable distribution does not constrain the kernel P(H_way|Z). The identical observable tables admit H_way=Z, H_way independent of Z, and H_way=1-Z, yielding positive, zero, and negative indicator contrasts relative to H_way.",
+      "domain": "The specified binary no-gold-standard indicator model; more generally, evidence laws that factor through Z and omit P(H_way|Z).",
+      "premises": ["the indicator likelihood is specified conditional on Z", "H_way is not definitionally equated with Z", "no independent target-identity observation is added"],
+      "proof": "Hold P(Z), P(T1|Z), and P(T2|Z) fixed, append each of three exact kernels P(H_way|Z), and marginalize. H_way is absent from the observable likelihood, so both population tables remain invariant while exact indicator contrasts relative to H_way are positive, zero, and negative.",
+      "counterexamples_and_limits": "An independently target-directed intervention, phenomenological contrast, or causal measurement bridge may constrain P(H_way|Z); the result does not rule out those evidence classes.",
+      "status": "PROVED_FOR_DECLARED_EVIDENCE_CLASS_STANDARD_MATHEMATICS_NOT_CLAIMED_NOVEL"
+    },
+    {
+      "id": "A3Y-C2",
+      "type": "CALIBRATION_STACK_CORRECTION",
+      "full_proposition": "A3X content admissibility, latent-class recovery, R202 endpoint inversion, and R203 covariance direction support an H_way-level claim only when an independently warranted target-identity bridge makes the calibrated endpoint about H_way; statistical agreement cannot supply that identity bridge by itself.",
+      "domain": "Prospective A3W embodied-manner calibration chain.",
+      "premises": ["A3X S_H is not truth calibration", "R202 requires independently calibrated a and c", "R203 requires independently warranted endpoint direction and residual bound", "A3Y-C1"],
+      "support": "Cross-round type audit and exact A3Y witness.",
+      "counterexamples_and_limits": "A future defensible target-identity bridge could satisfy the missing premise; A3Y does not show none exists.",
+      "status": "SCOPED_APPLICATION_CORRECTION_OPEN_PREMISE"
+    },
+    {
+      "id": "A3Y-C3",
+      "type": "STRUCTURE_SEMANTICS_ACTUALITY_SEPARATION",
+      "full_proposition": "Failure to identify a statistical latent Z with a named H_way value blocks empirical semantic naming but does not negate the conditional C1 transport of independently grounded actual organization to experience-internal structure; semantic measurement and actual same-instance admission remain separate obligations.",
+      "domain": "UCT C1/R157/R173 interpretation with no new formal-map rule.",
+      "premises": ["A:C1 retained as axiom", "R157:SEMANTIC_RESIDUAL", "R173 conditional retentive coordinate", "no inference from model fit to actual installation"],
+      "support": "Inherited formal claims plus A3Y's typed distinction; this is a synthesis/correction, not a new theorem.",
+      "counterexamples_and_limits": "C1 alone does not select the English label familiar mineness or prove that a proposed route is actual.",
+      "status": "INHERITED_CONDITIONAL_SYNTHESIS"
+    },
+    {
+      "id": "A3Y-C4",
+      "type": "MEASURAND_STOP_RULE",
+      "full_proposition": "Without a preregistered phenomenal-target identity bridge and an unfitted defeat condition, a no-gold-standard fit must be reported as a result about latent Z or judgement structure, not as evidence about H_way, and the H_way route-comparison stage must not begin.",
+      "domain": "Prospective reporting-adult A3W application.",
+      "premises": ["A3Y-C1", "target and proxy are separately typed", "route comparison would otherwise inherit an unnamed latent target"],
+      "support": "Logical stopping consequence of nonidentification and the existing review requirements.",
+      "counterexamples_and_limits": "It does not prohibit exploratory Z-level analyses or organizational tests that make no H_way attribution.",
+      "status": "SCOPED_METHOD_RULE_NOT_COMPLETED_GRAPH_RULE"
+    }
+  ]
+}

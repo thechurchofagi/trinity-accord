@@ -1,0 +1,29 @@
+{
+  "h_kernels_checked": [
+    "aligned_H_equals_Z",
+    "independent_H_from_Z",
+    "opposed_H_equals_not_Z"
+  ],
+  "interpretive_ceiling": "The witness fixes a statistical latent Z and its test law; it does not prove that Z is H_way.",
+  "observable_tables_invariant_across_h_kernels": true,
+  "population_tables": [
+    {"00": "37/80", "01": "13/80", "10": "3/16", "11": "3/16"},
+    {"00": "3/16", "01": "3/16", "10": "13/80", "11": "37/80"}
+  ],
+  "schema": "uct-a3y-exact-witness-v1",
+  "status": "PASS_EXACT_RATIONAL_WITNESS",
+  "test_deltas_by_kernel_and_population": {
+    "aligned_H_equals_Z": [
+      {"T1": "1/2", "T2": "3/5"},
+      {"T1": "1/2", "T2": "3/5"}
+    ],
+    "independent_H_from_Z": [
+      {"T1": "0/1", "T2": "0/1"},
+      {"T1": "0/1", "T2": "0/1"}
+    ],
+    "opposed_H_equals_not_Z": [
+      {"T1": "-1/2", "T2": "-3/5"},
+      {"T1": "-1/2", "T2": "-3/5"}
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "round_id": "A3Y20261010_Measurand_Identity_Barrier",
+  "publication_coverage_version": "UCT-PUB-v1.0.33",
+  "coverage_change": false,
+  "publications_added": 0,
+  "reason": "A3Y is a scoped internal methodological correction with no empirical bridge, standalone publication candidate, or claim-strength promotion.",
+  "prohibited_actions_confirmed_absent": ["DOI", "Zenodo", "OTS", "Arweave", "email", "Slack", "production_deploy"]
+}

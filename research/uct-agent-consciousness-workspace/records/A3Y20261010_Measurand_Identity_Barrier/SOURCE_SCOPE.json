@@ -1,0 +1,42 @@
+{
+  "schema": "uct-source-scope-v1",
+  "round_id": "A3Y20261010_Measurand_Identity_Barrier",
+  "fixed_sources_read": [
+    "records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md (C1/U1, actual tokens, finite views, §§8.1-8.2)",
+    "records/R153_Complete_Formal_Map_20261007/sources/experience-intelligence-self-v1.0.md (§§3-4, D4-D5)",
+    "records/R194_Cross_Population_Polarity_20261009/RESEARCH_NOTE.md",
+    "records/R197_Fallible_Endpoint_Orientation_20261010/RESEARCH_NOTE.md",
+    "records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/RESEARCH_NOTE.md",
+    "records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/RESEARCH_NOTE.md",
+    "records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/RESEARCH_NOTE.md",
+    "records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/RESEARCH_NOTE.md",
+    "records/A3X20261010_Action_Familiarity_Content_Admissibility/RESEARCH_NOTE.md"
+  ],
+  "primary_or_direct_sources_checked": [
+    {
+      "citation": "Hui, S. L., & Walter, S. D. (1980). Estimating the error rates of diagnostic tests. Biometrics, 36(1), 167-171.",
+      "doi": "10.2307/2530508",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/7370371/",
+      "scope_used": "Two-test, two-population estimation under conditional independence and differing prevalence assumptions.",
+      "boundary": "The method estimates a declared latent condition; it does not establish that the declared condition is H_way."
+    },
+    {
+      "citation": "Dendukuri, N., Schiller, I., Bijker, E., Libman, M., Gustafson, P., Bossuyt, P., & Merckx, J. (2026). Improving interpretation of latent class models for diagnostic tests by recognizing their measurands via DAGs.",
+      "identifier": "arXiv:2607.14473",
+      "url": "https://arxiv.org/abs/2607.14473",
+      "scope_used": "Direct source on distinct test measurands, latent targets, DAG representation, bias and identifiability.",
+      "boundary": "Diagnostic-test methodology; it does not validate a phenomenal target or UCT."
+    },
+    {
+      "citation": "Da Costa, L., Sandved-Smith, L., Friston, K., Ramstead, M. J. D., & Seth, A. K. (2024). A Mathematical Perspective on Neurophenomenology.",
+      "identifier": "arXiv:2409.20318",
+      "url": "https://arxiv.org/abs/2409.20318",
+      "scope_used": "Direct abstract/full-text framing of first-/third-person correspondence and its operating assumption.",
+      "boundary": "A different conditional framework; cited only to show that a phenomenology-formalism correspondence must be stated."
+    }
+  ],
+  "search_scope": "Targeted, non-systematic check of no-gold-standard latent-class measurands and formal neurophenomenological correspondence, completed 2026-10-10.",
+  "negative_result": "No checked source supplies an independently validated identity or signed reliability bridge from a fitted latent class to present enacted H_way.",
+  "negative_result_scope": "Only the listed sources; not a literature-wide absence claim.",
+  "originality_boundary": "Latent-class estimation, label switching, and measurand mismatch are prior methods/results. A3Y contributes a typed UCT application, exact H-kernel witness, and calibration-stack correction without claiming mathematical priority."
+}

@@ -1,0 +1,35 @@
+{
+  "all_rule_references_resolve": true,
+  "all_rules_treated_as_all_of": true,
+  "claim_count": 4,
+  "completed_graph_additions": {
+    "context_links": 0,
+    "nodes": 0,
+    "rules": 0
+  },
+  "effective_counts": {
+    "context_links": 261,
+    "nodes": 913,
+    "rules": 424
+  },
+  "exact_h_kernel_count": 3,
+  "files": {
+    "CLAIM_LEDGER.json": "2e2f99bf1339f487351ec3c2179bc33d6c150310a945853cf2108bceb2c92abc",
+    "EXACT_RESULTS.json": "5386ca70105e2e1e6287e62981813d93e048aae0d2d3fd6806b52598f09f91fd",
+    "GAP_LEDGER.md": "a9615467a94cc598453ab5bacf7aeddd11383cf099a704b73d6acabde5d066a1",
+    "HANDOFF_ZH.md": "93968893c90a94d838f5be83793839cd7f216a797ddfa8ebe87923841ff1517a",
+    "MAP_AUDIT.md": "c684ec49fd7d65ef7073ab6ae19d7ce4109a451b00073650f7815268cb590f9a",
+    "MAP_EXTENSION.json": "16f89413dbf6c2db30742563da869d60fdc5616272903665de57805470aa31a2",
+    "MEASURAND_CONTRACT.md": "226b4869e93f602db49f1df60887eaa59d09043973ccda562b8b51440070044a",
+    "PUBLICATION_COVERAGE_UPDATE.json": "ea78380c041da09a8f59260cb1060595b331b9c62d61d790dba696096273d6ec",
+    "RESEARCH_NOTE.md": "7809d22e20844c079c0de002078fa51ea6558d70fa06eed77c05e1e60c65fafc",
+    "REVIEW_RESPONSE.md": "b6c1ab5bb628fa2e38bc247e2b7ab5c08f6ad6f6950a109f9a09963d3b068048",
+    "ROUND_RECORD.json": "11606b8d0c12c9d887ce9bbc73fac557c15a90bc8cb38edc9bbfbd88790250e7",
+    "SOURCE_SCOPE.json": "826fdf17e73920c7a1234a96bca50d30f995dc651e0db7e0a94278179ec6c349",
+    "WORK_LOG.md": "c4b9076c157c1fd5312a634dcf5ec69113b5273263829334cd0d3db61946c314",
+    "check_measurand_identity.py": "cb9246b10ad6eff8ad79606dd585f6ecc7595419084831c85cf6fd609c4e7899"
+  },
+  "schema": "uct-a3y-validation-v1",
+  "semantic_ceiling": "Structural and exact-witness PASS does not establish theory truth, Z=H_way, C_H, O_H, or a full historical semantic audit.",
+  "status": "PASS_STRUCTURAL_WITH_DECLARED_SEMANTIC_CEILING"
+}
