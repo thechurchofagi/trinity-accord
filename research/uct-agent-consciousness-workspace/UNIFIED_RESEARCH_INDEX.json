@@ -1,0 +1,2556 @@
+{
+  "schema": "uct-unified-research-catalog/1",
+  "version": "UCT-INTEGRATION-v1.0.0",
+  "source_commit": "0ef07e2e92d4b7279b1c324abc31fd76650bbcd1",
+  "completed_map": "UCT-MAP-v1.1.2",
+  "publication_coverage": "UCT-PUB-v1.0.31",
+  "latest_scientific_research": {
+    "id": "A3V20261010",
+    "result_version": "A3V-SCOPE-v0.1.0",
+    "status": "PENDING_CHECKPOINT_DISABLED",
+    "source": "records/A3V20261010_Concurrent_Liveness_and_Familiarity/RESEARCH_NOTE.md",
+    "handoff": "records/A3V20261010_Concurrent_Liveness_and_Familiarity/HANDOFF_ZH.md",
+    "work_log": "records/A3V20261010_Concurrent_Liveness_and_Familiarity/WORK_LOG.md",
+    "enabled_as_established_premises": false,
+    "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
+    "evidence_status": "BOUNDED_PRIMARY_SOURCE_APPLICATION_STOP_AND_R173_SCOPE_RETURN; ACTUAL_PREMISES_AND_H_OPEN"
+  },
+  "families": [
+    {
+      "id": "calibration",
+      "title": "行动校准与可识别性",
+      "checkpoint_ids": [
+        "AC20261009",
+        "IL20261009",
+        "ONLINE-AC-PROBE-20261009",
+        "R189-HACA-20261009"
+      ],
+      "question": "在什么干预、记忆与时限条件下，能识别或使用实际行动关系？",
+      "completed_anchor": "R172:ONLINE_ACTION_USE_RELATION",
+      "relation_type": "EDITORIAL_NAVIGATION_NOT_DEDUCTION"
+    },
+    {
+      "id": "self",
+      "title": "自我相关组织的分解",
+      "checkpoint_ids": [
+        "R190-PCBC-20261009",
+        "R191-OCCA-20261009",
+        "R198-SPNS-20261010"
+      ],
+      "question": "实际行动中心、冲突授权、归属感、能动感和熟悉感如何区分？",
+      "completed_anchor": "R173:FAMILIAR_MINENESS_BOUNDARY",
+      "relation_type": "EDITORIAL_NAVIGATION_NOT_DEDUCTION"
+    },
+    {
+      "id": "bridge",
+      "title": "体验端点与校准边界",
+      "checkpoint_ids": [
+        "R192-CTBI-20261009",
+        "R193-NCI-20261009",
+        "R194-CPP-20261009",
+        "R195-IPA-20261009",
+        "R196-TPD-20261009",
+        "R197-FEO-20261010",
+        "R199-CPC-20261010",
+        "R200-SCF-20261010",
+        "R201-ROTM-20261010",
+        "R202-TMAB-20261010",
+        "R203-ACD-20261010"
+      ],
+      "question": "怎样把结构或代理指标与一个独立指定的体验目标联系起来？",
+      "completed_anchor": "R173:FAMILIAR_MINENESS_BOUNDARY",
+      "relation_type": "EDITORIAL_NAVIGATION_NOT_DEDUCTION"
+    },
+    {
+      "id": "routing",
+      "title": "相同行为下的信息来源与使用",
+      "checkpoint_ids": [
+        "R204-SAU-20261010",
+        "R205-ASC-20261010",
+        "SCU20261010"
+      ],
+      "question": "行为相同时，哪些干预才能识别被实际使用的信息？",
+      "completed_anchor": "R172:ONLINE_ACTION_USE_RELATION",
+      "relation_type": "EDITORIAL_NAVIGATION_NOT_DEDUCTION"
+    },
+    {
+      "id": "device",
+      "title": "具体消费者与装置可行性",
+      "checkpoint_ids": [
+        "MPC20261010",
+        "CBI20261010",
+        "EIP20261010",
+        "DVC20261010",
+        "A3S20261010",
+        "A3P20261010",
+        "A3U20261010",
+        "A3L20261010"
+      ],
+      "question": "运动／本体感觉通路的同实例干预条件是否真正满足？",
+      "completed_anchor": "R177:SOURCE_FEATURE_SEPARATION",
+      "relation_type": "EDITORIAL_NAVIGATION_NOT_DEDUCTION"
+    },
+    {
+      "id": "familiarity",
+      "title": "身体熟悉感与保留历史",
+      "checkpoint_ids": [
+        "A3M20261010",
+        "A3N20261010",
+        "A3O20261010",
+        "A3Q20261010",
+        "A3R20261010",
+        "A3V20261010"
+      ],
+      "question": "保留历史与当下协调怎样对应身体熟悉感，哪些选择器条件仅适用于支线？",
+      "completed_anchor": "R173:RETENTIVE_EXPERIENTIAL_COORDINATE",
+      "relation_type": "EDITORIAL_NAVIGATION_NOT_DEDUCTION"
+    },
+    {
+      "id": "psychometrics",
+      "title": "身体判断的噪声识别",
+      "checkpoint_ids": [
+        "CTD20261010",
+        "CTD2-20261010",
+        "CTD3-20261010"
+      ],
+      "question": "身体判断数据能区分哪些噪声模型，又有哪些识别上限？",
+      "completed_anchor": "R173:FAMILIAR_MINENESS_BOUNDARY",
+      "relation_type": "EDITORIAL_NAVIGATION_NOT_DEDUCTION"
+    }
+  ],
+  "pending_count": 38,
+  "pending_checkpoints": [
+    {
+      "id": "AC20261009",
+      "title": "{",
+      "family": "calibration",
+      "path": "records/AC20261009_Action_Calibration/MAP_EXTENSION.json",
+      "source_sha256": "c2544dce8abc0e3867a4eb603528a880e17017d72bc34551fe0b8eaefb1b817a",
+      "result_version": "AC-RESULT-v1.0.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/AC20261009_Action_Calibration/MAP_EXTENSION.json",
+      "handoff": "records/AC20261009_Action_Calibration/CURRENT_HANDOFF_ZH.md",
+      "audit": "records/AC20261009_Action_Calibration/RUN_RECEIPT.json",
+      "candidate_counts": {
+        "nodes": 26,
+        "rules": 11,
+        "contexts": 8,
+        "applications": 0
+      },
+      "prior_entry_snapshots": {
+        "modules": {
+          "id": "AC20261009",
+          "result_version": "AC-RESULT-v1.0.0",
+          "candidate_map_id": "UCT-MAP-v1.0.1-AC20261009-candidate.1",
+          "path": "records/AC20261009_Action_Calibration/MAP_EXTENSION.json",
+          "git_blob_sha": "db6f9cef3191cc6c04f83c40146810ac39ba7d37",
+          "status": "PENDING_CHECKPOINT",
+          "enabled_as_established_premises": false,
+          "compatibility_audit": "records/AC20261009_Action_Calibration/RUN_RECEIPT.json",
+          "handoff": "records/AC20261009_Action_Calibration/CURRENT_HANDOFF_ZH.md",
+          "instruction": "Historical candidate ID retained. Rebase future semantic promotion on current v1.1.0 and create a higher completed version; do not overwrite this release or confuse the old candidate number with the current map."
+        },
+        "registry": {
+          "research_id": "AC20261009",
+          "source": "records/AC20261009_Action_Calibration/MAP_EXTENSION.json",
+          "status": "PENDING_CHECKPOINT",
+          "enabled_as_established_premises": false
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth."
+    },
+    {
+      "id": "IL20261009",
+      "title": "{",
+      "family": "calibration",
+      "path": "records/IL20261009_Intervention_Locality/MAP_EXTENSION.json",
+      "source_sha256": "abdfa604c5dc6011668c180869a0798a49249237bd45f32707fe8f92c3d70ff2",
+      "result_version": "IL-RESULT-v0.1.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/IL20261009_Intervention_Locality/MAP_EXTENSION.json",
+      "handoff": "records/IL20261009_Intervention_Locality/CURRENT_HANDOFF_ZH.md",
+      "audit": "records/IL20261009_Intervention_Locality/RUN_RECEIPT.json",
+      "candidate_counts": {
+        "nodes": 26,
+        "rules": 13,
+        "contexts": 7,
+        "applications": 0
+      },
+      "prior_entry_snapshots": {
+        "modules": {
+          "id": "IL20261009",
+          "result_version": "IL-RESULT-v0.1.0",
+          "candidate_map_id": "UCT-MAP-v1.1.1-IL20261009-candidate.1",
+          "path": "records/IL20261009_Intervention_Locality/MAP_EXTENSION.json",
+          "git_blob_sha": "6e18c39a7a31733c6a47337d75d007b0782f4c81",
+          "status": "PENDING_MAP",
+          "audit_status": "AUDIT_INCOMPLETE",
+          "enabled_as_established_premises": false,
+          "compatibility_audit": "records/IL20261009_Intervention_Locality/RUN_RECEIPT.json",
+          "handoff": "records/IL20261009_Intervention_Locality/CURRENT_HANDOFF_ZH.md",
+          "instruction": "Exact reset normal form, minimal LTI behavior twin and1/11 local-imitation gap are saved conditional results. Current whole-map fresh semantic integration is incomplete. Keep this module disabled until current v1.1.0 is completely restored/reviewed and affected conclusions rederived. No actual or named-phenomenal premise is discharged by storage."
+        },
+        "registry": {
+          "research_id": "IL20261009",
+          "source": "records/IL20261009_Intervention_Locality/MAP_EXTENSION.json",
+          "status": "PENDING_MAP",
+          "enabled_as_established_premises": false
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth."
+    },
+    {
+      "id": "ONLINE-AC-PROBE-20261009",
+      "title": "{",
+      "family": "calibration",
+      "path": "records/ONLINE_AC_20261009_Dynamic_Calibration/MAP_EXTENSION_PENDING.json",
+      "source_sha256": "d33d61cdfcab5f54d14c9afbdb91ca210137408077d61eb5724fb31bc125b8dc",
+      "result_version": "0.2.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/ONLINE_AC_20261009_Dynamic_Calibration/MAP_EXTENSION_PENDING.json",
+      "handoff": "records/ONLINE_AC_20261009_Dynamic_Calibration/HANDOFF_ZH.md",
+      "audit": null,
+      "candidate_counts": {
+        "nodes": 12,
+        "rules": 4,
+        "contexts": 4,
+        "applications": 0
+      },
+      "prior_entry_snapshots": {
+        "modules": {
+          "id": "ONLINE-AC-PROBE-20261009",
+          "result_version": "0.2.0",
+          "path": "records/ONLINE_AC_20261009_Dynamic_Calibration/MAP_EXTENSION_PENDING.json",
+          "sha256": "d33d61cdfcab5f54d14c9afbdb91ca210137408077d61eb5724fb31bc125b8dc",
+          "status": "PENDING_MAP",
+          "audit_status": "LOCAL_REVIEW_ONLY_FULL_MAP_INTEGRATION_NOT_COMPLETED",
+          "enabled_as_established_premises": false,
+          "handoff": "records/ONLINE_AC_20261009_Dynamic_Calibration/HANDOFF_ZH.md",
+          "instruction": "Specific online calibration result; static AC is independently pending. Read the exact contract, proof and independent review before any semantic integration. Do not treat this entry as completed v1.1.3."
+        },
+        "registry": {
+          "research_id": "ONLINE-AC-PROBE-20261009",
+          "source": "records/ONLINE_AC_20261009_Dynamic_Calibration/MAP_EXTENSION_PENDING.json",
+          "status": "PENDING_MAP",
+          "enabled_as_established_premises": false,
+          "publication_coverage_version": "UCT-PUB-v1.0.0"
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth."
+    },
+    {
+      "id": "R189-HACA-20261009",
+      "title": "{",
+      "family": "calibration",
+      "path": "records/R189_Higher_Arity_Context_Access_20261009/MAP_EXTENSION.json",
+      "source_sha256": "1944e1ffbad4bac1883ed7fe2752ef1547484c0f43236eb04c9115850dff1f59",
+      "result_version": "HACA-RESULT-v0.1.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/R189_Higher_Arity_Context_Access_20261009/MAP_EXTENSION.json",
+      "handoff": "records/R189_Higher_Arity_Context_Access_20261009/HANDOFF_ZH.md",
+      "audit": "records/R189_Higher_Arity_Context_Access_20261009/MAP_COMPATIBILITY_AUDIT.json",
+      "candidate_counts": {
+        "nodes": 11,
+        "rules": 6,
+        "contexts": 3,
+        "applications": 0
+      },
+      "prior_entry_snapshots": {
+        "modules": {
+          "id": "R189-HACA-20261009",
+          "result_version": "HACA-RESULT-v0.1.0",
+          "base_release": "UCT-MAP-v1.1.2",
+          "path": "records/R189_Higher_Arity_Context_Access_20261009/MAP_EXTENSION.json",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "publication_coverage_version": "UCT-PUB-v1.0.1",
+          "candidate_counts": {
+            "nodes": 11,
+            "active_conditional_rules": 6,
+            "nondeductive_context_links": 3
+          },
+          "compatibility_audit": "records/R189_Higher_Arity_Context_Access_20261009/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/R189_Higher_Arity_Context_Access_20261009/HANDOFF_ZH.md",
+          "instruction": "Structural compatibility with v1.1.2 passed. Semantic adoption, actual installation/use, named phenomenal interpretation and reviewer disposition remain open; do not count this module in completed-release totals."
+        },
+        "registry": {
+          "research_id": "R189-HACA-20261009",
+          "result_version": "HACA-RESULT-v0.1.0",
+          "source": "records/R189_Higher_Arity_Context_Access_20261009/MAP_EXTENSION.json",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "publication_coverage_version": "UCT-PUB-v1.0.1",
+          "compatibility_audit": "records/R189_Higher_Arity_Context_Access_20261009/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/R189_Higher_Arity_Context_Access_20261009/HANDOFF_ZH.md"
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth."
+    },
+    {
+      "id": "R190-PCBC-20261009",
+      "title": "Practical Centering and Bearer-Directed Consequence Coupling",
+      "family": "self",
+      "path": "records/R190_Practical_Centering_Bearer_Coupling_20261009/MAP_EXTENSION.json",
+      "source_sha256": "6f14a9ff44f8402f29348196bd3aa308a4cc6a71786dc194f5ab4d8817e0dcfa",
+      "result_version": "PCBC-RESULT-v0.1.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/R190_Practical_Centering_Bearer_Coupling_20261009/MAP_EXTENSION.json",
+      "handoff": "records/R190_Practical_Centering_Bearer_Coupling_20261009/HANDOFF_ZH.md",
+      "audit": "records/R190_Practical_Centering_Bearer_Coupling_20261009/MAP_COMPATIBILITY_AUDIT.json",
+      "candidate_counts": {
+        "nodes": 10,
+        "rules": 5,
+        "contexts": 4,
+        "applications": 0
+      },
+      "prior_entry_snapshots": {
+        "modules": {
+          "id": "R190-PCBC-20261009",
+          "result_version": "PCBC-RESULT-v0.1.0",
+          "base_release": "UCT-MAP-v1.1.2",
+          "path": "records/R190_Practical_Centering_Bearer_Coupling_20261009/MAP_EXTENSION.json",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "publication_coverage_version": "UCT-PUB-v1.0.2",
+          "candidate_counts": {
+            "nodes": 10,
+            "active_conditional_rules": 5,
+            "nondeductive_context_links": 4
+          },
+          "compatibility_audit": "records/R190_Practical_Centering_Bearer_Coupling_20261009/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/R190_Practical_Centering_Bearer_Coupling_20261009/HANDOFF_ZH.md",
+          "instruction": "Structural compatibility with v1.1.2 passed. PC and BDCC are independent only in the declared finite construction; actual installation, named phenomenal interpretation, semantic adoption and reviewer disposition remain open."
+        },
+        "registry": {
+          "research_id": "R190-PCBC-20261009",
+          "result_version": "PCBC-RESULT-v0.1.0",
+          "title": "Practical Centering and Bearer-Directed Consequence Coupling",
+          "source": "records/R190_Practical_Centering_Bearer_Coupling_20261009/MAP_EXTENSION.json",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "actual_application": "OPEN",
+          "publication_coverage_version": "UCT-PUB-v1.0.2",
+          "novelty": "NEW_APPLICATION_SYNTHESIS_PRIORITY_UNVERIFIED",
+          "compatibility_audit": "records/R190_Practical_Centering_Bearer_Coupling_20261009/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/R190_Practical_Centering_Bearer_Coupling_20261009/HANDOFF_ZH.md"
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth."
+    },
+    {
+      "id": "R191-OCCA-20261009",
+      "title": "Online Conflict-Conditioned Authorization at a Fixed Practical Center",
+      "family": "self",
+      "path": "records/R191_Conflict_Conditioned_Authorization_20261009/MAP_EXTENSION.json",
+      "source_sha256": "e5803dc71b56c3c594d6f34b699b7ad3fae425e3e418d841060f55c1bc22b0d6",
+      "result_version": "OCCA-RESULT-v0.1.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/R191_Conflict_Conditioned_Authorization_20261009/MAP_EXTENSION.json",
+      "handoff": "records/R191_Conflict_Conditioned_Authorization_20261009/HANDOFF_ZH.md",
+      "audit": "records/R191_Conflict_Conditioned_Authorization_20261009/MAP_COMPATIBILITY_AUDIT.json",
+      "candidate_counts": {
+        "nodes": 11,
+        "rules": 5,
+        "contexts": 4,
+        "applications": 0
+      },
+      "prior_entry_snapshots": {
+        "modules": {
+          "id": "R191-OCCA-20261009",
+          "result_version": "OCCA-RESULT-v0.1.0",
+          "base_release": "UCT-MAP-v1.1.2",
+          "path": "records/R191_Conflict_Conditioned_Authorization_20261009/MAP_EXTENSION.json",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "publication_coverage_version": "UCT-PUB-v1.0.3",
+          "candidate_counts": {
+            "nodes": 11,
+            "active_conditional_rules": 5,
+            "nondeductive_context_links": 4
+          },
+          "compatibility_audit": "records/R191_Conflict_Conditioned_Authorization_20261009/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/R191_Conflict_Conditioned_Authorization_20261009/HANDOFF_ZH.md",
+          "instruction": "Structural compatibility with v1.1.2 passed. OCCA/LGRU actual installation, named phenomenal interpretation, semantic adoption and reviewer disposition remain open; do not count this module in completed totals.",
+          "additional_open_normalization_obligation": "r_occa and r_history require a later exact actual-instance guard review; definition/schema availability is not actual premise truth."
+        },
+        "registry": {
+          "research_id": "R191-OCCA-20261009",
+          "result_version": "OCCA-RESULT-v0.1.0",
+          "title": "Online Conflict-Conditioned Authorization at a Fixed Practical Center",
+          "source": "records/R191_Conflict_Conditioned_Authorization_20261009/MAP_EXTENSION.json",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "actual_application": "OPEN",
+          "publication_coverage_version": "UCT-PUB-v1.0.3",
+          "novelty": "SCOPED_INTERFACE_REPAIR_AND_COUNTERMODEL_PRIORITY_UNVERIFIED",
+          "compatibility_audit": "records/R191_Conflict_Conditioned_Authorization_20261009/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/R191_Conflict_Conditioned_Authorization_20261009/HANDOFF_ZH.md"
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth."
+    },
+    {
+      "id": "R192-CTBI-20261009",
+      "title": "Complete-Twin Bridge Invariance and the Signature-Ladder Repair",
+      "family": "bridge",
+      "path": "records/R192_Complete_Twin_Bridge_Invariance_20261009/MAP_EXTENSION.json",
+      "source_sha256": "a546ebd83ddae5125411241a8cd5b074579df00cb6b98ecfab98b24e134047b6",
+      "result_version": "CTBI-RESULT-v0.1.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/R192_Complete_Twin_Bridge_Invariance_20261009/MAP_EXTENSION.json",
+      "handoff": "records/R192_Complete_Twin_Bridge_Invariance_20261009/HANDOFF_ZH.md",
+      "audit": "records/R192_Complete_Twin_Bridge_Invariance_20261009/MAP_COMPATIBILITY_AUDIT.json",
+      "candidate_counts": {
+        "nodes": 9,
+        "rules": 6,
+        "contexts": 4,
+        "applications": 0
+      },
+      "prior_entry_snapshots": {
+        "modules": {
+          "id": "R192-CTBI-20261009",
+          "result_version": "CTBI-RESULT-v0.1.0",
+          "base_release": "UCT-MAP-v1.1.2",
+          "path": "records/R192_Complete_Twin_Bridge_Invariance_20261009/MAP_EXTENSION.json",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "publication_coverage_version": "UCT-PUB-v1.0.4",
+          "candidate_counts": {
+            "nodes": 9,
+            "active_conditional_rules": 6,
+            "nondeductive_context_links": 4
+          },
+          "compatibility_audit": "records/R192_Complete_Twin_Bridge_Invariance_20261009/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/R192_Complete_Twin_Bridge_Invariance_20261009/HANDOFF_ZH.md",
+          "instruction": "Structural compatibility with v1.1.2 passed. The signature ladder is a scope/protocol correction; B_fam, actual installation, semantic adoption and reviewer disposition remain open. Do not count this module in completed totals."
+        },
+        "registry": {
+          "research_id": "R192-CTBI-20261009",
+          "result_version": "CTBI-RESULT-v0.1.0",
+          "title": "Complete-Twin Bridge Invariance and the Signature-Ladder Repair",
+          "source": "records/R192_Complete_Twin_Bridge_Invariance_20261009/MAP_EXTENSION.json",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "actual_application": "OPEN",
+          "publication_coverage_version": "UCT-PUB-v1.0.4",
+          "novelty": "UCT_SPECIFIC_SCOPE_AND_METHOD_SYNTHESIS_PRIORITY_UNVERIFIED",
+          "compatibility_audit": "records/R192_Complete_Twin_Bridge_Invariance_20261009/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/R192_Complete_Twin_Bridge_Invariance_20261009/HANDOFF_ZH.md"
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth."
+    },
+    {
+      "id": "R193-NCI-20261009",
+      "title": "Nonreport Contrast Constraints and the Remaining Familiar-Mineness Polarity",
+      "family": "bridge",
+      "path": "records/R193_Nonreport_Contrast_Identifiability_20261009/MAP_EXTENSION.json",
+      "source_sha256": "977e423d80c54bff29c9f45c1402fffaf0b559b3b4d819ff78bb750587f54001",
+      "result_version": "NCI-RESULT-v0.1.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/R193_Nonreport_Contrast_Identifiability_20261009/MAP_EXTENSION.json",
+      "handoff": "records/R193_Nonreport_Contrast_Identifiability_20261009/HANDOFF_ZH.md",
+      "audit": "records/R193_Nonreport_Contrast_Identifiability_20261009/MAP_COMPATIBILITY_AUDIT.json",
+      "candidate_counts": {
+        "nodes": 9,
+        "rules": 6,
+        "contexts": 5,
+        "applications": 0
+      },
+      "prior_entry_snapshots": {
+        "modules": {
+          "id": "R193-NCI-20261009",
+          "result_version": "NCI-RESULT-v0.1.0",
+          "base_release": "UCT-MAP-v1.1.2",
+          "path": "records/R193_Nonreport_Contrast_Identifiability_20261009/MAP_EXTENSION.json",
+          "sha256": "977e423d80c54bff29c9f45c1402fffaf0b559b3b4d819ff78bb750587f54001",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "publication_coverage_version": "UCT-PUB-v1.0.5",
+          "candidate_counts": {
+            "nodes": 9,
+            "active_conditional_rules": 6,
+            "nondeductive_context_links": 5
+          },
+          "compatibility_audit": "records/R193_Nonreport_Contrast_Identifiability_20261009/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/R193_Nonreport_Contrast_Identifiability_20261009/HANDOFF_ZH.md",
+          "navigation_added_by": "SCU20261010",
+          "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present."
+        },
+        "registry": {
+          "research_id": "R193-NCI-20261009",
+          "result_version": "NCI-RESULT-v0.1.0",
+          "title": "Nonreport Contrast Constraints and the Remaining Familiar-Mineness Polarity",
+          "source": "records/R193_Nonreport_Contrast_Identifiability_20261009/MAP_EXTENSION.json",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "actual_application": "OPEN",
+          "publication_coverage_version": "UCT-PUB-v1.0.5",
+          "novelty": "UCT_SPECIFIC_IDENTIFICATION_BOUNDARY_PRIORITY_UNVERIFIED",
+          "compatibility_audit": "records/R193_Nonreport_Contrast_Identifiability_20261009/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/R193_Nonreport_Contrast_Identifiability_20261009/HANDOFF_ZH.md"
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth."
+    },
+    {
+      "id": "R194-CPP-20261009",
+      "title": "Cross-Population Alignment and the Remaining Phenomenal Polarity",
+      "family": "bridge",
+      "path": "records/R194_Cross_Population_Polarity_20261009/MAP_EXTENSION.json",
+      "source_sha256": "2827d07d0a279e9d86b0bf7044dc414702043ec0cb366ebca6c5b23119273c1b",
+      "result_version": "CPP-RESULT-v0.1.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/R194_Cross_Population_Polarity_20261009/MAP_EXTENSION.json",
+      "handoff": "records/R194_Cross_Population_Polarity_20261009/HANDOFF_ZH.md",
+      "audit": "records/R194_Cross_Population_Polarity_20261009/MAP_COMPATIBILITY_AUDIT.json",
+      "candidate_counts": {
+        "nodes": 9,
+        "rules": 6,
+        "contexts": 5,
+        "applications": 0
+      },
+      "prior_entry_snapshots": {
+        "modules": {
+          "id": "R194-CPP-20261009",
+          "result_version": "CPP-RESULT-v0.1.0",
+          "base_release": "UCT-MAP-v1.1.2",
+          "path": "records/R194_Cross_Population_Polarity_20261009/MAP_EXTENSION.json",
+          "sha256": "2827d07d0a279e9d86b0bf7044dc414702043ec0cb366ebca6c5b23119273c1b",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "publication_coverage_version": "UCT-PUB-v1.0.6",
+          "candidate_counts": {
+            "nodes": 9,
+            "active_conditional_rules": 6,
+            "nondeductive_context_links": 5
+          },
+          "compatibility_audit": "records/R194_Cross_Population_Polarity_20261009/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/R194_Cross_Population_Polarity_20261009/HANDOFF_ZH.md",
+          "navigation_added_by": "SCU20261010",
+          "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present.",
+          "effective_correction_index": "records/SCU20261010_Source_Consumer_Protocols/corrections/EFFECTIVE_CORRECTION_INDEX.json"
+        },
+        "registry": {
+          "research_id": "R194-CPP-20261009",
+          "result_version": "CPP-RESULT-v0.1.0",
+          "title": "Cross-Population Alignment and the Remaining Phenomenal Polarity",
+          "source": "records/R194_Cross_Population_Polarity_20261009/MAP_EXTENSION.json",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "actual_application": "OPEN",
+          "publication_coverage_version": "UCT-PUB-v1.0.6",
+          "novelty": "UCT_SPECIFIC_RELATIVE_VERSUS_SEMANTIC_ANCHOR_APPLICATION_PRIORITY_UNVERIFIED",
+          "compatibility_audit": "records/R194_Cross_Population_Polarity_20261009/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/R194_Cross_Population_Polarity_20261009/HANDOFF_ZH.md",
+          "effective_correction_index": "records/SCU20261010_Source_Consumer_Protocols/corrections/EFFECTIVE_CORRECTION_INDEX.json"
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth."
+    },
+    {
+      "id": "R195-IPA-20261009",
+      "title": "Interventional Causal Orientation Is Not Yet Phenomenal Polarity",
+      "family": "bridge",
+      "path": "records/R195_Interventional_Polarity_Anchor_20261009/MAP_EXTENSION.json",
+      "source_sha256": "a8e8185ef922e353de9e7384842238ceb3777d15a224743a51f5c0dc67ec56c5",
+      "result_version": "IPA-RESULT-v0.1.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/R195_Interventional_Polarity_Anchor_20261009/MAP_EXTENSION.json",
+      "handoff": "records/R195_Interventional_Polarity_Anchor_20261009/HANDOFF_ZH.md",
+      "audit": "records/R195_Interventional_Polarity_Anchor_20261009/MAP_COMPATIBILITY_AUDIT.json",
+      "candidate_counts": {
+        "nodes": 9,
+        "rules": 6,
+        "contexts": 5,
+        "applications": 0
+      },
+      "prior_entry_snapshots": {
+        "modules": {
+          "id": "R195-IPA-20261009",
+          "result_version": "IPA-RESULT-v0.1.0",
+          "base_release": "UCT-MAP-v1.1.2",
+          "path": "records/R195_Interventional_Polarity_Anchor_20261009/MAP_EXTENSION.json",
+          "sha256": "a8e8185ef922e353de9e7384842238ceb3777d15a224743a51f5c0dc67ec56c5",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "publication_coverage_version": "UCT-PUB-v1.0.7",
+          "candidate_counts": {
+            "nodes": 9,
+            "active_conditional_rules": 6,
+            "nondeductive_context_links": 5
+          },
+          "compatibility_audit": "records/R195_Interventional_Polarity_Anchor_20261009/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/R195_Interventional_Polarity_Anchor_20261009/HANDOFF_ZH.md",
+          "navigation_added_by": "SCU20261010",
+          "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present."
+        },
+        "registry": {
+          "research_id": "R195-IPA-20261009",
+          "result_version": "IPA-RESULT-v0.1.0",
+          "title": "Interventional Causal Orientation Is Not Yet Phenomenal Polarity",
+          "source": "records/R195_Interventional_Polarity_Anchor_20261009/MAP_EXTENSION.json",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "actual_application": "OPEN",
+          "publication_coverage_version": "UCT-PUB-v1.0.7",
+          "novelty": "UCT_SPECIFIC_FUNCTIONAL_VERSUS_PHENOMENAL_DIRECTION_APPLICATION_PRIORITY_UNVERIFIED",
+          "compatibility_audit": "records/R195_Interventional_Polarity_Anchor_20261009/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/R195_Interventional_Polarity_Anchor_20261009/HANDOFF_ZH.md"
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth."
+    },
+    {
+      "id": "R196-TPD-20261009",
+      "title": "Two-Axis Dissociation Separates Structural Tracking from Phenomenal Direction",
+      "family": "bridge",
+      "path": "records/R196_Two_Axis_Phenomenal_Calibration_20261009/MAP_EXTENSION.json",
+      "source_sha256": "c76edc4aeb640419ab4b0badbd2daa81c6c0cb876cf728a183ef17cf34c93f38",
+      "result_version": "TPD-RESULT-v0.1.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/R196_Two_Axis_Phenomenal_Calibration_20261009/MAP_EXTENSION.json",
+      "handoff": "records/R196_Two_Axis_Phenomenal_Calibration_20261009/HANDOFF_ZH.md",
+      "audit": "records/R196_Two_Axis_Phenomenal_Calibration_20261009/MAP_COMPATIBILITY_AUDIT.json",
+      "candidate_counts": {
+        "nodes": 9,
+        "rules": 6,
+        "contexts": 5,
+        "applications": 0
+      },
+      "prior_entry_snapshots": {
+        "modules": {
+          "id": "R196-TPD-20261009",
+          "result_version": "TPD-RESULT-v0.1.0",
+          "base_release": "UCT-MAP-v1.1.2",
+          "path": "records/R196_Two_Axis_Phenomenal_Calibration_20261009/MAP_EXTENSION.json",
+          "sha256": "c76edc4aeb640419ab4b0badbd2daa81c6c0cb876cf728a183ef17cf34c93f38",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "publication_coverage_version": "UCT-PUB-v1.0.8",
+          "candidate_counts": {
+            "nodes": 9,
+            "active_conditional_rules": 6,
+            "nondeductive_context_links": 5
+          },
+          "compatibility_audit": "records/R196_Two_Axis_Phenomenal_Calibration_20261009/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/R196_Two_Axis_Phenomenal_Calibration_20261009/HANDOFF_ZH.md",
+          "navigation_added_by": "SCU20261010",
+          "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present."
+        },
+        "registry": {
+          "research_id": "R196-TPD-20261009",
+          "result_version": "TPD-RESULT-v0.1.0",
+          "title": "Two-Axis Dissociation Separates Structural Tracking from Phenomenal Direction",
+          "source": "records/R196_Two_Axis_Phenomenal_Calibration_20261009/MAP_EXTENSION.json",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "actual_application": "OPEN",
+          "publication_coverage_version": "UCT-PUB-v1.0.8",
+          "novelty": "UCT_SPECIFIC_TWO_AXIS_PHENOMENAL_CALIBRATION_APPLICATION_PRIORITY_UNVERIFIED",
+          "compatibility_audit": "records/R196_Two_Axis_Phenomenal_Calibration_20261009/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/R196_Two_Axis_Phenomenal_Calibration_20261009/HANDOFF_ZH.md"
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth."
+    },
+    {
+      "id": "R197-FEO-20261010",
+      "title": "Fallible Endpoint Orientation Without a Nonverbality Requirement",
+      "family": "bridge",
+      "path": "records/R197_Fallible_Endpoint_Orientation_20261010/MAP_EXTENSION.json",
+      "source_sha256": "a686e03922a8c2cf5d175dcec53a49df5e5b01f5652c3693ebd35642817d47a6",
+      "result_version": "FEO-RESULT-v0.1.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/R197_Fallible_Endpoint_Orientation_20261010/MAP_EXTENSION.json",
+      "handoff": "records/R197_Fallible_Endpoint_Orientation_20261010/HANDOFF_ZH.md",
+      "audit": "records/R197_Fallible_Endpoint_Orientation_20261010/MAP_COMPATIBILITY_AUDIT.json",
+      "candidate_counts": {
+        "nodes": 9,
+        "rules": 5,
+        "contexts": 5,
+        "applications": 0
+      },
+      "prior_entry_snapshots": {
+        "modules": {
+          "id": "R197-FEO-20261010",
+          "result_version": "FEO-RESULT-v0.1.0",
+          "base_release": "UCT-MAP-v1.1.2",
+          "path": "records/R197_Fallible_Endpoint_Orientation_20261010/MAP_EXTENSION.json",
+          "sha256": "a686e03922a8c2cf5d175dcec53a49df5e5b01f5652c3693ebd35642817d47a6",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "publication_coverage_version": "UCT-PUB-v1.0.9",
+          "candidate_counts": {
+            "nodes": 9,
+            "active_conditional_rules": 5,
+            "nondeductive_context_links": 5
+          },
+          "compatibility_audit": "records/R197_Fallible_Endpoint_Orientation_20261010/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/R197_Fallible_Endpoint_Orientation_20261010/HANDOFF_ZH.md",
+          "navigation_added_by": "SCU20261010",
+          "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present."
+        },
+        "registry": {
+          "research_id": "R197-FEO-20261010",
+          "result_version": "FEO-RESULT-v0.1.0",
+          "title": "Fallible Endpoint Orientation Without a Nonverbality Requirement",
+          "source": "records/R197_Fallible_Endpoint_Orientation_20261010/MAP_EXTENSION.json",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "actual_application": "OPEN",
+          "publication_coverage_version": "UCT-PUB-v1.0.9",
+          "compatibility_audit": "records/R197_Fallible_Endpoint_Orientation_20261010/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/R197_Fallible_Endpoint_Orientation_20261010/HANDOFF_ZH.md"
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth."
+    },
+    {
+      "id": "R198-SPNS-20261010",
+      "title": "The Self-Profile Non-Scalarization Result",
+      "family": "self",
+      "path": "records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/MAP_EXTENSION.json",
+      "source_sha256": "4870660b8de3bfa8c4f8db15c75002dcb614d517c3fc415a35f28ad980653440",
+      "result_version": "SPNS-RESULT-v0.1.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/MAP_EXTENSION.json",
+      "handoff": "records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/HANDOFF_ZH.md",
+      "audit": "records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/MAP_COMPATIBILITY_AUDIT.json",
+      "candidate_counts": {
+        "nodes": 8,
+        "rules": 5,
+        "contexts": 5,
+        "applications": 0
+      },
+      "prior_entry_snapshots": {
+        "modules": {
+          "id": "R198-SPNS-20261010",
+          "result_version": "SPNS-RESULT-v0.1.0",
+          "base_release": "UCT-MAP-v1.1.2",
+          "path": "records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/MAP_EXTENSION.json",
+          "sha256": "4870660b8de3bfa8c4f8db15c75002dcb614d517c3fc415a35f28ad980653440",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "publication_coverage_version": "UCT-PUB-v1.0.10",
+          "candidate_counts": {
+            "nodes": 8,
+            "active_conditional_rules": 5,
+            "nondeductive_context_links": 5
+          },
+          "compatibility_audit": "records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/HANDOFF_ZH.md",
+          "navigation_added_by": "SCU20261010",
+          "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present."
+        },
+        "registry": {
+          "research_id": "R198-SPNS-20261010",
+          "result_version": "SPNS-RESULT-v0.1.0",
+          "title": "The Self-Profile Non-Scalarization Result",
+          "source": "records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/MAP_EXTENSION.json",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "actual_application": "OPEN",
+          "publication_coverage_version": "UCT-PUB-v1.0.10",
+          "compatibility_audit": "records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/HANDOFF_ZH.md"
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth."
+    },
+    {
+      "id": "R199-CPC-20261010",
+      "title": "The Continuation-Probe Ceiling for Retentive Familiarity",
+      "family": "bridge",
+      "path": "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/MAP_EXTENSION.json",
+      "source_sha256": "975bdd0a502d725425d48763a6f0955ab545b63ccf3765c2d422a2b0a1cee2b5",
+      "result_version": "CPC-RESULT-v0.1.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/MAP_EXTENSION.json",
+      "handoff": "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/HANDOFF_ZH.md",
+      "audit": "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/MAP_COMPATIBILITY_AUDIT.json",
+      "candidate_counts": {
+        "nodes": 8,
+        "rules": 5,
+        "contexts": 5,
+        "applications": 0
+      },
+      "prior_entry_snapshots": {
+        "modules": {
+          "id": "R199-CPC-20261010",
+          "result_version": "CPC-RESULT-v0.1.0",
+          "base_release": "UCT-MAP-v1.1.2",
+          "path": "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/MAP_EXTENSION.json",
+          "sha256": "975bdd0a502d725425d48763a6f0955ab545b63ccf3765c2d422a2b0a1cee2b5",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "publication_coverage_version": "UCT-PUB-v1.0.11",
+          "candidate_counts": {
+            "nodes": 8,
+            "active_conditional_rules": 5,
+            "nondeductive_context_links": 5
+          },
+          "compatibility_audit": "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/HANDOFF_ZH.md",
+          "navigation_added_by": "SCU20261010",
+          "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present."
+        },
+        "registry": {
+          "research_id": "R199-CPC-20261010",
+          "result_version": "CPC-RESULT-v0.1.0",
+          "title": "The Continuation-Probe Ceiling for Retentive Familiarity",
+          "source": "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/MAP_EXTENSION.json",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "actual_application": "OPEN",
+          "publication_coverage_version": "UCT-PUB-v1.0.11",
+          "novelty": "UCT_SPECIFIC_EVIDENTIAL_CEILING_AND_EXPERIMENT_CONTRACT_PRIORITY_UNVERIFIED",
+          "compatibility_audit": "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/HANDOFF_ZH.md"
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth."
+    },
+    {
+      "id": "R200-SCF-20261010",
+      "title": "The Semantic Calibration Firewall for Retentive Familiarity",
+      "family": "bridge",
+      "path": "records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/MAP_EXTENSION.json",
+      "source_sha256": "a7cda22b0f3efa292fb9bbaa826039cb7c43ea14bf70851a9ee51825b6463272",
+      "result_version": "SCF-RESULT-v0.1.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/MAP_EXTENSION.json",
+      "handoff": "records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/HANDOFF_ZH.md",
+      "audit": "records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/MAP_COMPATIBILITY_AUDIT.json",
+      "candidate_counts": {
+        "nodes": 9,
+        "rules": 5,
+        "contexts": 5,
+        "applications": 0
+      },
+      "prior_entry_snapshots": {
+        "modules": {
+          "id": "R200-SCF-20261010",
+          "result_version": "SCF-RESULT-v0.1.0",
+          "base_release": "UCT-MAP-v1.1.2",
+          "path": "records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/MAP_EXTENSION.json",
+          "sha256": "a7cda22b0f3efa292fb9bbaa826039cb7c43ea14bf70851a9ee51825b6463272",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "publication_coverage_version": "UCT-PUB-v1.0.12",
+          "candidate_counts": {
+            "nodes": 9,
+            "active_conditional_rules": 5,
+            "nondeductive_context_links": 5
+          },
+          "compatibility_audit": "records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/HANDOFF_ZH.md",
+          "navigation_added_by": "SCU20261010",
+          "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present."
+        },
+        "registry": {
+          "research_id": "R200-SCF-20261010",
+          "result_version": "SCF-RESULT-v0.1.0",
+          "title": "The Semantic Calibration Firewall for Retentive Familiarity",
+          "source": "records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/MAP_EXTENSION.json",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "actual_application": "OPEN",
+          "publication_coverage_version": "UCT-PUB-v1.0.12",
+          "novelty": "UCT_SPECIFIC_SEMANTIC_CALIBRATION_FIREWALL_PRIORITY_UNVERIFIED",
+          "compatibility_audit": "records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/HANDOFF_ZH.md"
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth."
+    },
+    {
+      "id": "R201-ROTM-20261010",
+      "title": "{",
+      "family": "bridge",
+      "path": "records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/MAP_EXTENSION.json",
+      "source_sha256": "279c2761ff8755784e1007cd3d641eb26fc909d86f2f2f8a3b882488efe98788",
+      "result_version": "ROTM-RESULT-v0.1.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/MAP_EXTENSION.json",
+      "handoff": "records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/HANDOFF_ZH.md",
+      "audit": "records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/MAP_COMPATIBILITY_AUDIT.json",
+      "candidate_counts": {
+        "nodes": 9,
+        "rules": 3,
+        "contexts": 5,
+        "applications": 0
+      },
+      "prior_entry_snapshots": {
+        "modules": {
+          "id": "R201-ROTM-20261010",
+          "result_version": "ROTM-RESULT-v0.1.0",
+          "base_release": "UCT-MAP-v1.1.2",
+          "path": "records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/MAP_EXTENSION.json",
+          "sha256": "279c2761ff8755784e1007cd3d641eb26fc909d86f2f2f8a3b882488efe98788",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "publication_coverage_version": "UCT-PUB-v1.0.13",
+          "candidate_counts": {
+            "nodes": 9,
+            "active_conditional_rules": 3,
+            "nondeductive_context_links": 5
+          },
+          "compatibility_audit": "records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/HANDOFF_ZH.md",
+          "navigation_added_by": "SCU20261010",
+          "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present.",
+          "effective_correction_index": "records/SCU20261010_Source_Consumer_Protocols/corrections/EFFECTIVE_CORRECTION_INDEX.json"
+        },
+        "registry": {
+          "research_id": "R201-ROTM-20261010",
+          "result_version": "ROTM-RESULT-v0.1.0",
+          "source": "records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/MAP_EXTENSION.json",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "actual_application": "OPEN",
+          "publication_coverage_version": "UCT-PUB-v1.0.13",
+          "compatibility_audit": "records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/HANDOFF_ZH.md",
+          "navigation_added_by": "SCU20261010",
+          "effective_correction_index": "records/SCU20261010_Source_Consumer_Protocols/corrections/EFFECTIVE_CORRECTION_INDEX.json"
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth."
+    },
+    {
+      "id": "R202-TMAB-20261010",
+      "title": "{",
+      "family": "bridge",
+      "path": "records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/MAP_EXTENSION.json",
+      "source_sha256": "d417239cce217badaf099801d03ff064152d211c44f6b8d98d4aaa63d91fbd74",
+      "result_version": "TMAB-RESULT-v0.1.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/MAP_EXTENSION.json",
+      "handoff": "records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/HANDOFF_ZH.md",
+      "audit": "records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/MAP_COMPATIBILITY_AUDIT.json",
+      "candidate_counts": {
+        "nodes": 10,
+        "rules": 4,
+        "contexts": 5,
+        "applications": 0
+      },
+      "prior_entry_snapshots": {
+        "modules": {
+          "id": "R202-TMAB-20261010",
+          "result_version": "TMAB-RESULT-v0.1.0",
+          "base_release": "UCT-MAP-v1.1.2",
+          "path": "records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/MAP_EXTENSION.json",
+          "sha256": "d417239cce217badaf099801d03ff064152d211c44f6b8d98d4aaa63d91fbd74",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "publication_coverage_version": "UCT-PUB-v1.0.14",
+          "candidate_counts": {
+            "nodes": 10,
+            "active_conditional_rules": 4,
+            "nondeductive_context_links": 5
+          },
+          "compatibility_audit": "records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/HANDOFF_ZH.md",
+          "navigation_added_by": "SCU20261010",
+          "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present.",
+          "effective_correction_index": "records/SCU20261010_Source_Consumer_Protocols/corrections/EFFECTIVE_CORRECTION_INDEX.json"
+        },
+        "registry": {
+          "research_id": "R202-TMAB-20261010",
+          "result_version": "TMAB-RESULT-v0.1.0",
+          "source": "records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/MAP_EXTENSION.json",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "actual_application": "OPEN",
+          "publication_coverage_version": "UCT-PUB-v1.0.14",
+          "compatibility_audit": "records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/HANDOFF_ZH.md",
+          "navigation_added_by": "SCU20261010",
+          "effective_correction_index": "records/SCU20261010_Source_Consumer_Protocols/corrections/EFFECTIVE_CORRECTION_INDEX.json"
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth."
+    },
+    {
+      "id": "R203-ACD-20261010",
+      "title": "{",
+      "family": "bridge",
+      "path": "records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/MAP_EXTENSION.json",
+      "source_sha256": "43510d7cc5c4595a355cd0e15d008d50efa9a6872f33bc9c9bc18a070e36fa8e",
+      "result_version": "ACD-RESULT-v0.2.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/MAP_EXTENSION.json",
+      "handoff": "records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/HANDOFF_ZH.md",
+      "audit": "records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/MAP_COMPATIBILITY_AUDIT.json",
+      "candidate_counts": {
+        "nodes": 10,
+        "rules": 4,
+        "contexts": 5,
+        "applications": 0
+      },
+      "prior_entry_snapshots": {
+        "modules": {
+          "id": "R203-ACD-20261010",
+          "result_version": "ACD-RESULT-v0.2.0",
+          "base_release": "UCT-MAP-v1.1.2",
+          "path": "records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/MAP_EXTENSION.json",
+          "sha256": "43510d7cc5c4595a355cd0e15d008d50efa9a6872f33bc9c9bc18a070e36fa8e",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "publication_coverage_version": "UCT-PUB-v1.0.15",
+          "candidate_counts": {
+            "nodes": 10,
+            "active_conditional_rules": 4,
+            "nondeductive_context_links": 5
+          },
+          "compatibility_audit": "records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/HANDOFF_ZH.md",
+          "navigation_added_by": "SCU20261010",
+          "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present."
+        },
+        "registry": {
+          "research_id": "R203-ACD-20261010",
+          "result_version": "ACD-RESULT-v0.2.0",
+          "source": "records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/MAP_EXTENSION.json",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "actual_application": "OPEN",
+          "publication_coverage_version": "UCT-PUB-v1.0.15",
+          "compatibility_audit": "records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/HANDOFF_ZH.md",
+          "navigation_added_by": "SCU20261010"
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth."
+    },
+    {
+      "id": "R204-SAU-20261010",
+      "title": "{",
+      "family": "routing",
+      "path": "records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/MAP_EXTENSION.json",
+      "source_sha256": "c5c0b0cf669b089855509384bb2b8ee9e9d61be64afb6765cd4d5718e4c0b388",
+      "result_version": "SAU-RESULT-v0.2.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/MAP_EXTENSION.json",
+      "handoff": "records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/HANDOFF_ZH.md",
+      "audit": "records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/MAP_COMPATIBILITY_AUDIT.json",
+      "candidate_counts": {
+        "nodes": 11,
+        "rules": 5,
+        "contexts": 5,
+        "applications": 0
+      },
+      "prior_entry_snapshots": {
+        "modules": {
+          "id": "R204-SAU-20261010",
+          "result_version": "SAU-RESULT-v0.2.0",
+          "base_release": "UCT-MAP-v1.1.2",
+          "path": "records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/MAP_EXTENSION.json",
+          "sha256": "c5c0b0cf669b089855509384bb2b8ee9e9d61be64afb6765cd4d5718e4c0b388",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "publication_coverage_version": "UCT-PUB-v1.0.16",
+          "candidate_counts": {
+            "nodes": 11,
+            "active_conditional_rules": 5,
+            "nondeductive_context_links": 5
+          },
+          "compatibility_audit": "records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/HANDOFF_ZH.md",
+          "navigation_added_by": "SCU20261010",
+          "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present."
+        },
+        "registry": {
+          "research_id": "R204-SAU-20261010",
+          "result_version": "SAU-RESULT-v0.2.0",
+          "source": "records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/MAP_EXTENSION.json",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "actual_application": "OPEN",
+          "publication_coverage_version": "UCT-PUB-v1.0.16",
+          "compatibility_audit": "records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/HANDOFF_ZH.md",
+          "navigation_added_by": "SCU20261010"
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth."
+    },
+    {
+      "id": "R205-ASC-20261010",
+      "title": "{",
+      "family": "routing",
+      "path": "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/MAP_EXTENSION.json",
+      "source_sha256": "fd34ee26a7ef861b4037d30bd07c609445700c1e50c57cf7521b3e1181b63cea",
+      "result_version": "ASC-RESULT-v0.1.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/MAP_EXTENSION.json",
+      "handoff": "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/HANDOFF_ZH.md",
+      "audit": "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/MAP_COMPATIBILITY_AUDIT.json",
+      "candidate_counts": {
+        "nodes": 13,
+        "rules": 5,
+        "contexts": 7,
+        "applications": 0
+      },
+      "prior_entry_snapshots": {
+        "modules": {
+          "id": "R205-ASC-20261010",
+          "result_version": "ASC-RESULT-v0.1.0",
+          "base_release": "UCT-MAP-v1.1.2",
+          "path": "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/MAP_EXTENSION.json",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "publication_coverage_version": "UCT-PUB-v1.0.17",
+          "candidate_counts": {
+            "nodes": 13,
+            "active_conditional_rules": 5,
+            "nondeductive_context_links": 7
+          },
+          "compatibility_audit": "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/HANDOFF_ZH.md",
+          "instruction": "Single-read recovery and cancellation counterexample are scoped model results. Do not turn structural coverage into actual/H admission or completed-map promotion."
+        },
+        "registry": {
+          "research_id": "R205-ASC-20261010",
+          "result_version": "ASC-RESULT-v0.1.0",
+          "source": "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/MAP_EXTENSION.json",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "actual_application": "OPEN",
+          "publication_coverage_version": "UCT-PUB-v1.0.17",
+          "compatibility_audit": "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/HANDOFF_ZH.md",
+          "navigation_added_by": "SCU20261010"
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth."
+    },
+    {
+      "id": "SCU20261010",
+      "title": "Matched Behavior and Source Use",
+      "family": "routing",
+      "path": "records/SCU20261010_Source_Consumer_Protocols/MAP_EXTENSION.json",
+      "source_sha256": "64768a5dcd3fa1f90eaf4f9b19b0ea58afdcf96a821f025216ef9ebaa67ff257",
+      "result_version": "SCU-RESULT-v0.2.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/SCU20261010_Source_Consumer_Protocols/MAP_EXTENSION.json",
+      "handoff": "records/SCU20261010_Source_Consumer_Protocols/HANDOFF_ZH.md",
+      "audit": "records/SCU20261010_Source_Consumer_Protocols/MAP_AUDIT.md",
+      "candidate_counts": {
+        "nodes": 23,
+        "rules": 8,
+        "contexts": 16,
+        "applications": 0
+      },
+      "prior_entry_snapshots": {
+        "modules": {
+          "id": "SCU20261010",
+          "result_version": "SCU-RESULT-v0.2.0",
+          "base_release": "UCT-MAP-v1.1.2",
+          "path": "records/SCU20261010_Source_Consumer_Protocols/MAP_EXTENSION.json",
+          "sha256": "64768a5dcd3fa1f90eaf4f9b19b0ea58afdcf96a821f025216ef9ebaa67ff257",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "publication_coverage_version": "UCT-PUB-v1.0.18",
+          "candidate_counts": {
+            "nodes": 23,
+            "active_conditional_rules": 8,
+            "nondeductive_context_links": 16
+          },
+          "compatibility_audit": "records/SCU20261010_Source_Consumer_Protocols/MAP_AUDIT.md",
+          "handoff": "records/SCU20261010_Source_Consumer_Protocols/HANDOFF_ZH.md",
+          "instruction": "Full typed SCU contract locally reviewed. All base statements/premises/relationships were read, but exact deeper unread scope remains open. No candidate, correction or actual premise is promoted."
+        },
+        "registry": {
+          "research_id": "SCU20261010",
+          "result_version": "SCU-RESULT-v0.2.0",
+          "title": "Matched Behavior and Source Use",
+          "source": "records/SCU20261010_Source_Consumer_Protocols/MAP_EXTENSION.json",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "actual_application": "OPEN",
+          "publication_coverage_version": "UCT-PUB-v1.0.22",
+          "compatibility_audit": "records/SCU20261010_Source_Consumer_Protocols/MAP_AUDIT.md",
+          "handoff": "records/SCU20261010_Source_Consumer_Protocols/HANDOFF_ZH.md",
+          "manuscript": "records/SCUPUB20261010_DOI_Publication/release/matched-behavior-and-source-use-v1.0.1.md",
+          "manuscript_status": "PUBLISHED_PREPRINT_PUBLIC_READBACK_AND_DOI_RESOLUTION_VERIFIED",
+          "historical_working_manuscript": "records/SCU20261010_Source_Consumer_Protocols/Matched_Behavior_and_Source_Use_v1.0.0.md",
+          "publication_doi": "10.5281/zenodo.23272690",
+          "publication_receipt": "records/SCUPUB20261010_DOI_Publication/FINAL_PUBLICATION_RECEIPT.json",
+          "publication_does_not_admit_scientific_premises": true
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth.",
+      "publication": "See PUBLICATION_COVERAGE.json exact claim/version coverage; publication does not promote this candidate."
+    },
+    {
+      "id": "MPC20261010",
+      "title": "Motor and Proprioceptive Consumers",
+      "family": "device",
+      "path": "records/MPC20261010_Motor_Proprioceptive_Consumers/MAP_EXTENSION.json",
+      "source_sha256": "4da927878d333d026ec874637b3c146763406bf8b4557bfba49b59eb9a384e1a",
+      "result_version": "MPC-RESULT-v0.1.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/MPC20261010_Motor_Proprioceptive_Consumers/MAP_EXTENSION.json",
+      "handoff": "records/MPC20261010_Motor_Proprioceptive_Consumers/HANDOFF_ZH.md",
+      "audit": "records/MPC20261010_Motor_Proprioceptive_Consumers/MAP_COMPATIBILITY_AUDIT.json",
+      "candidate_counts": {
+        "nodes": 7,
+        "rules": 4,
+        "contexts": 5,
+        "applications": 0
+      },
+      "prior_entry_snapshots": {
+        "registry": {
+          "research_id": "MPC20261010",
+          "result_version": "MPC-RESULT-v0.1.0",
+          "title": "Motor and Proprioceptive Consumers",
+          "source": "records/MPC20261010_Motor_Proprioceptive_Consumers/MAP_EXTENSION.json",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "actual_application": "OPEN",
+          "publication_coverage_version": "UCT-PUB-v1.0.19",
+          "compatibility_audit": "records/MPC20261010_Motor_Proprioceptive_Consumers/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/MPC20261010_Motor_Proprioceptive_Consumers/HANDOFF_ZH.md",
+          "manuscript_status": "HOLD_STANDALONE_COMPACT_FOLLOWUP_TO_SCU"
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth."
+    },
+    {
+      "id": "CBI20261010",
+      "title": "Consumer-Relative Branch Isolation",
+      "family": "device",
+      "path": "records/CBI20261010_Consumer_Branch_Isolation/MAP_EXTENSION.json",
+      "source_sha256": "f21b3b33a2316f7373ec05814a66795542ea5472e10b1651f4873eaaa8fc7905",
+      "result_version": "CBI-RESULT-v0.1.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/CBI20261010_Consumer_Branch_Isolation/MAP_EXTENSION.json",
+      "handoff": "records/CBI20261010_Consumer_Branch_Isolation/HANDOFF_ZH.md",
+      "audit": "records/CBI20261010_Consumer_Branch_Isolation/MAP_COMPATIBILITY_AUDIT.json",
+      "candidate_counts": {
+        "nodes": 7,
+        "rules": 4,
+        "contexts": 5,
+        "applications": 0
+      },
+      "prior_entry_snapshots": {
+        "registry": {
+          "research_id": "CBI20261010",
+          "result_version": "CBI-RESULT-v0.1.0",
+          "title": "Consumer-Relative Branch Isolation",
+          "source": "records/CBI20261010_Consumer_Branch_Isolation/MAP_EXTENSION.json",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "actual_application": "OPEN",
+          "publication_coverage_version": "UCT-PUB-v1.0.20",
+          "compatibility_audit": "records/CBI20261010_Consumer_Branch_Isolation/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/CBI20261010_Consumer_Branch_Isolation/HANDOFF_ZH.md",
+          "manuscript_status": "HOLD_STANDALONE_TECHNICAL_SECTION_FOR_SCU_MPC_FAMILY"
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth."
+    },
+    {
+      "id": "EIP20261010",
+      "title": "Exoskeleton Instrumentation Package",
+      "family": "device",
+      "path": "records/EIP20261010_Exoskeleton_Instrumentation/MAP_EXTENSION.json",
+      "source_sha256": "64a8b1f82bb92c6158f42a264b92541c7c0ce7cf27a289639d9a54f1301a8adc",
+      "result_version": "EIP-RESULT-v0.1.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/EIP20261010_Exoskeleton_Instrumentation/MAP_EXTENSION.json",
+      "handoff": "records/EIP20261010_Exoskeleton_Instrumentation/HANDOFF_ZH.md",
+      "audit": "records/EIP20261010_Exoskeleton_Instrumentation/MAP_COMPATIBILITY_AUDIT.json",
+      "candidate_counts": {
+        "nodes": 6,
+        "rules": 3,
+        "contexts": 5,
+        "applications": 0
+      },
+      "prior_entry_snapshots": {
+        "registry": {
+          "research_id": "EIP20261010",
+          "result_version": "EIP-RESULT-v0.1.0",
+          "title": "Exoskeleton Instrumentation Package",
+          "source": "records/EIP20261010_Exoskeleton_Instrumentation/MAP_EXTENSION.json",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "actual_application": "OPEN",
+          "publication_coverage_version": "UCT-PUB-v1.0.21",
+          "compatibility_audit": "records/EIP20261010_Exoskeleton_Instrumentation/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/EIP20261010_Exoskeleton_Instrumentation/HANDOFF_ZH.md",
+          "manuscript_status": "HOLD_STANDALONE_INTEGRATE_AS_SCU_MPC_METHODS_SECTION"
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth."
+    },
+    {
+      "id": "DVC20261010",
+      "title": "Device consumer validation",
+      "family": "device",
+      "path": "records/DVC20261010_Device_Consumer_Validation/MAP_EXTENSION.json",
+      "source_sha256": "c35c38d5046dcf3aa30646e2fd27237f53a75505922be9ae1854c15e90e8db29",
+      "result_version": "DVC-RESULT-v0.1.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/DVC20261010_Device_Consumer_Validation/MAP_EXTENSION.json",
+      "handoff": "records/DVC20261010_Device_Consumer_Validation/HANDOFF_ZH.md",
+      "audit": "records/DVC20261010_Device_Consumer_Validation/MAP_AUDIT.md",
+      "candidate_counts": {
+        "nodes": 24,
+        "rules": 6,
+        "contexts": 15,
+        "applications": 0
+      },
+      "prior_entry_snapshots": {
+        "registry": {
+          "research_id": "DVC20261010",
+          "result_version": "DVC-RESULT-v0.1.0",
+          "title": "Device consumer validation",
+          "source": "records/DVC20261010_Device_Consumer_Validation/MAP_EXTENSION.json",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "actual_application": "OPEN",
+          "publication_coverage_version": "UCT-PUB-v1.0.22",
+          "compatibility_audit": "records/DVC20261010_Device_Consumer_Validation/MAP_AUDIT.md",
+          "handoff": "records/DVC20261010_Device_Consumer_Validation/HANDOFF_ZH.md",
+          "manuscript_status": "HOLD_STANDALONE_POST_PUBLICATION_TECHNICAL_SUPPLEMENT",
+          "candidate_counts": {
+            "nodes": 24,
+            "rules": 6,
+            "contexts": 15
+          }
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth."
+    },
+    {
+      "id": "A3S20261010",
+      "title": "Area 3a named-consumer selectivity",
+      "family": "device",
+      "path": "records/A3S20261010_Area3a_Selectivity/MAP_EXTENSION.json",
+      "source_sha256": "1b1c435869ee7a09792460b11ab718006f3aa7fbdfc1190af86517797dbe5a7c",
+      "result_version": "A3S-RESULT-v0.1.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/A3S20261010_Area3a_Selectivity/MAP_EXTENSION.json",
+      "handoff": "records/A3S20261010_Area3a_Selectivity/HANDOFF_ZH.md",
+      "audit": "records/A3S20261010_Area3a_Selectivity/MAP_AUDIT.md",
+      "candidate_counts": {
+        "nodes": 7,
+        "rules": 3,
+        "contexts": 5,
+        "applications": 0
+      },
+      "prior_entry_snapshots": {
+        "registry": {
+          "research_id": "A3S20261010",
+          "result_version": "A3S-RESULT-v0.1.0",
+          "title": "Area 3a named-consumer selectivity",
+          "source": "records/A3S20261010_Area3a_Selectivity/MAP_EXTENSION.json",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "actual_application": "OPEN",
+          "publication_coverage_version": "UCT-PUB-v1.0.23",
+          "compatibility_audit": "records/A3S20261010_Area3a_Selectivity/MAP_AUDIT.md",
+          "handoff": "records/A3S20261010_Area3a_Selectivity/HANDOFF_ZH.md",
+          "manuscript_status": "HOLD_STANDALONE_INTEGRATE_AS_POST_SCU_METHOD_AND_FRONTIER_UPDATE",
+          "candidate_counts": {
+            "nodes": 7,
+            "rules": 3,
+            "contexts": 5
+          }
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth."
+    },
+    {
+      "id": "A3P20261010",
+      "title": "Area-3a crossed response and actual-use probe boundary",
+      "family": "device",
+      "path": "records/A3P20261010_Area3a_Crossed_Probe/MAP_EXTENSION.json",
+      "source_sha256": "75337f473f4642f4f14fd6dc19dc0ecf259f9a0315e371d8ac3ebb1166ef1665",
+      "result_version": "A3P-RESULT-v0.1.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/A3P20261010_Area3a_Crossed_Probe/MAP_EXTENSION.json",
+      "handoff": "records/A3P20261010_Area3a_Crossed_Probe/HANDOFF_ZH.md",
+      "audit": "records/A3P20261010_Area3a_Crossed_Probe/MAP_COMPATIBILITY_AUDIT.json",
+      "candidate_counts": {
+        "nodes": 7,
+        "rules": 2,
+        "contexts": 5,
+        "applications": 0
+      },
+      "prior_entry_snapshots": {
+        "registry": {
+          "research_id": "A3P20261010",
+          "result_version": "A3P-RESULT-v0.1.0",
+          "title": "Area-3a crossed response and actual-use probe boundary",
+          "source": "records/A3P20261010_Area3a_Crossed_Probe/MAP_EXTENSION.json",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "actual_application": "OPEN",
+          "publication_coverage_version": "UCT-PUB-v1.0.24",
+          "compatibility_audit": "records/A3P20261010_Area3a_Crossed_Probe/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/A3P20261010_Area3a_Crossed_Probe/HANDOFF_ZH.md",
+          "manuscript_status": "HOLD_STANDALONE_CORRECTION_AND_PROTOCOL_SECTION",
+          "corrects_pending_record": "A3S20261010 source-grounded feasibility wording only; historical files preserved",
+          "candidate_counts": {
+            "nodes": 7,
+            "rules": 2,
+            "contexts": 5
+          }
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth."
+    },
+    {
+      "id": "A3U20261010",
+      "title": "Area-3a endpoint causal firewall",
+      "family": "device",
+      "path": "records/A3U20261010_Area3a_Use_Endpoint/MAP_EXTENSION.json",
+      "source_sha256": "0d51e3aa0ba032a2d837b57dab4a9ca50a06ccc22ed5187262e55dc4f36fa077",
+      "result_version": "A3U-RESULT-v0.1.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/A3U20261010_Area3a_Use_Endpoint/MAP_EXTENSION.json",
+      "handoff": "records/A3U20261010_Area3a_Use_Endpoint/HANDOFF_ZH.md",
+      "audit": "records/A3U20261010_Area3a_Use_Endpoint/MAP_COMPATIBILITY_AUDIT.json",
+      "candidate_counts": {
+        "nodes": 7,
+        "rules": 3,
+        "contexts": 5,
+        "applications": 0
+      },
+      "prior_entry_snapshots": {
+        "registry": {
+          "research_id": "A3U20261010",
+          "result_version": "A3U-RESULT-v0.1.0",
+          "title": "Area-3a endpoint causal firewall",
+          "source": "records/A3U20261010_Area3a_Use_Endpoint/MAP_EXTENSION.json",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "actual_application": "OPEN",
+          "publication_coverage_version": "UCT-PUB-v1.0.25",
+          "compatibility_audit": "records/A3U20261010_Area3a_Use_Endpoint/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/A3U20261010_Area3a_Use_Endpoint/HANDOFF_ZH.md",
+          "manuscript_status": "HOLD_STANDALONE_CORRECTION_AND_PROTOCOL_SECTION",
+          "candidate_counts": {
+            "nodes": 7,
+            "rules": 3,
+            "contexts": 5
+          }
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth."
+    },
+    {
+      "id": "A3L20261010",
+      "title": "Rescue, learned compensation, and familiar bodily use",
+      "family": "device",
+      "path": "records/A3L20261010_Rescue_Learning/MAP_EXTENSION.json",
+      "source_sha256": "4bf6dad21c18b367abc82b6462a2253208ecc74d50d41430f6949f38074fd081",
+      "result_version": "A3L-RESULT-v0.1.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/A3L20261010_Rescue_Learning/MAP_EXTENSION.json",
+      "handoff": "records/A3L20261010_Rescue_Learning/HANDOFF_ZH.md",
+      "audit": "records/A3L20261010_Rescue_Learning/MAP_COMPATIBILITY_AUDIT.json",
+      "candidate_counts": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0,
+        "applications": 6
+      },
+      "prior_entry_snapshots": {
+        "modules": {
+          "id": "A3L20261010",
+          "result_version": "A3L-RESULT-v0.1.0",
+          "base_release": "UCT-MAP-v1.1.2",
+          "path": "records/A3L20261010_Rescue_Learning/MAP_EXTENSION.json",
+          "sha256": "4bf6dad21c18b367abc82b6462a2253208ecc74d50d41430f6949f38074fd081",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "candidate_counts": {
+            "nodes": 0,
+            "active_conditional_rules": 0,
+            "nondeductive_context_links": 0
+          },
+          "publication_coverage_version": "UCT-PUB-v1.0.26",
+          "compatibility_audit": "records/A3L20261010_Rescue_Learning/MAP_AUDIT.md",
+          "handoff": "records/A3L20261010_Rescue_Learning/HANDOFF_ZH.md",
+          "instruction": "Application guards and open H candidates map to existing nodes; no new deductions; full deep semantic proof remains incomplete."
+        },
+        "registry": {
+          "research_id": "A3L20261010",
+          "result_version": "A3L-RESULT-v0.1.0",
+          "title": "Rescue, learned compensation, and familiar bodily use",
+          "source": "records/A3L20261010_Rescue_Learning/MAP_EXTENSION.json",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "actual_application": "OPEN",
+          "publication_coverage_version": "UCT-PUB-v1.0.26",
+          "compatibility_audit": "records/A3L20261010_Rescue_Learning/MAP_COMPATIBILITY_AUDIT.json",
+          "handoff": "records/A3L20261010_Rescue_Learning/HANDOFF_ZH.md",
+          "manuscript_status": "HOLD_STANDALONE_INTEGRATE_RESCUE_CORRECTION_AND_RETURN_TO_H",
+          "candidate_counts": {
+            "nodes": 0,
+            "rules": 0,
+            "contexts": 0
+          },
+          "claim_ledger": "records/A3L20261010_Rescue_Learning/CLAIM_LEDGER.json"
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth."
+    },
+    {
+      "id": "CTD20261010",
+      "title": "CTD20261010",
+      "family": "psychometrics",
+      "path": "records/CTD20261010_Cross_Task_Intervention/MAP_EXTENSION.json",
+      "source_sha256": "27f5ee9afbab13f8652b6eded67745c2b0a5ab2272c79ece92f18c9f6b1bdedc",
+      "result_version": "CTD-RESULT-v0.1.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": null,
+      "handoff": "records/CTD20261010_Cross_Task_Intervention/HANDOFF_ZH.md",
+      "audit": "records/CTD20261010_Cross_Task_Intervention/MAP_AUDIT.md",
+      "candidate_counts": {
+        "nodes": 13,
+        "rules": 4,
+        "contexts": 7,
+        "applications": 0
+      },
+      "prior_entry_snapshots": {
+        "modules": {
+          "id": "CTD20261010",
+          "result_version": "CTD-RESULT-v0.1.0",
+          "base_release": "UCT-MAP-v1.1.2",
+          "path": "records/CTD20261010_Cross_Task_Intervention/MAP_EXTENSION.json",
+          "sha256": "27f5ee9afbab13f8652b6eded67745c2b0a5ab2272c79ece92f18c9f6b1bdedc",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "candidate_counts": {
+            "nodes": 13,
+            "active_conditional_rules": 4,
+            "nondeductive_context_links": 7
+          },
+          "publication_coverage_version": "UCT-PUB-v1.0.27",
+          "compatibility_audit": "records/CTD20261010_Cross_Task_Intervention/MAP_AUDIT.md",
+          "handoff": "records/CTD20261010_Cross_Task_Intervention/HANDOFF_ZH.md",
+          "instruction": "Class definitions, mathematical applications and secondary observations are separated. Empirical nodes are not deductive rule premises. No actual consumer or phenomenal calibration is admitted."
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth.",
+      "result_family": "CTD",
+      "version_relation": "Successive research stages; preserve distinct claim IDs; not three independent paper counts.",
+      "publication": "See PUBLICATION_COVERAGE.json exact claim/version coverage; publication does not promote this candidate."
+    },
+    {
+      "id": "A3M20261010",
+      "title": "Bodily familiarity route-cue-fluency invariance",
+      "family": "familiarity",
+      "path": "records/A3M20261010_Bodily_Familiarity_Invariance/MAP_EXTENSION.json",
+      "source_sha256": "53c2707f43367569da9752c7de18832081a6d1d750beb2ee8be70b122b1da8f1",
+      "result_version": "A3M-EXACT-v0.1.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/A3M20261010_Bodily_Familiarity_Invariance/MAP_EXTENSION.json",
+      "handoff": "records/A3M20261010_Bodily_Familiarity_Invariance/HANDOFF_ZH.md",
+      "audit": "records/A3M20261010_Bodily_Familiarity_Invariance/MAP_AUDIT.md",
+      "candidate_counts": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0,
+        "applications": 5
+      },
+      "prior_entry_snapshots": {
+        "registry": {
+          "research_id": "A3M20261010",
+          "result_version": "A3M-EXACT-v0.1.0",
+          "title": "Bodily familiarity route-cue-fluency invariance",
+          "source": "records/A3M20261010_Bodily_Familiarity_Invariance/MAP_EXTENSION.json",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "actual_application": "OPEN",
+          "publication_coverage_version": "UCT-PUB-v1.0.27",
+          "compatibility_audit": "records/A3M20261010_Bodily_Familiarity_Invariance/MAP_AUDIT.md",
+          "handoff": "records/A3M20261010_Bodily_Familiarity_Invariance/HANDOFF_ZH.md",
+          "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
+          "candidate_counts": {
+            "nodes": 0,
+            "rules": 0,
+            "contexts": 0
+          },
+          "claim_ledger": "records/A3M20261010_Bodily_Familiarity_Invariance/CLAIM_LEDGER.json"
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth."
+    },
+    {
+      "id": "CTD2-20261010",
+      "title": "Identifiability of Noise Sources in Bodily Judgments",
+      "family": "psychometrics",
+      "path": "records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_EXTENSION.json",
+      "source_sha256": "f00d9af53cca8935f08b6dd979e0f4d28cf5754bc7e9ffb696eb8d7be6095a2f",
+      "result_version": "CTD-RESULT-v0.2.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_EXTENSION.json",
+      "handoff": "records/CTD20261010_Cross_Task_Intervention_v02/HANDOFF_ZH.md",
+      "audit": "records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_AUDIT.md",
+      "candidate_counts": {
+        "nodes": 20,
+        "rules": 7,
+        "contexts": 13,
+        "applications": 0
+      },
+      "prior_entry_snapshots": {
+        "modules": {
+          "id": "CTD2-20261010",
+          "research_id": "CTD20261010",
+          "result_version": "CTD-RESULT-v0.2.0",
+          "base_release": "UCT-MAP-v1.1.2",
+          "path": "records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_EXTENSION.json",
+          "sha256": "f00d9af53cca8935f08b6dd979e0f4d28cf5754bc7e9ffb696eb8d7be6095a2f",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "candidate_counts": {
+            "nodes": 20,
+            "active_conditional_rules": 7,
+            "nondeductive_context_links": 13
+          },
+          "publication_coverage_version": "UCT-PUB-v1.0.28",
+          "compatibility_audit": "records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_AUDIT.md",
+          "handoff": "records/CTD20261010_Cross_Task_Intervention_v02/HANDOFF_ZH.md",
+          "instruction": "Source-audit observations are nondeductive; Gaussian identification requires its complete paired-sample contract. No experience bridge is admitted."
+        },
+        "registry": {
+          "id": "CTD2-20261010",
+          "research_id": "CTD20261010",
+          "result_version": "CTD-RESULT-v0.2.0",
+          "base_release": "UCT-MAP-v1.1.2",
+          "path": "records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_EXTENSION.json",
+          "sha256": "f00d9af53cca8935f08b6dd979e0f4d28cf5754bc7e9ffb696eb8d7be6095a2f",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "candidate_counts": {
+            "nodes": 20,
+            "active_conditional_rules": 7,
+            "nondeductive_context_links": 13
+          },
+          "publication_coverage_version": "UCT-PUB-v1.0.28",
+          "compatibility_audit": "records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_AUDIT.md",
+          "handoff": "records/CTD20261010_Cross_Task_Intervention_v02/HANDOFF_ZH.md",
+          "instruction": "Source-audit observations are nondeductive; Gaussian identification requires its complete paired-sample contract. No experience bridge is admitted.",
+          "title": "Identifiability of Noise Sources in Bodily Judgments",
+          "source": "records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_EXTENSION.json",
+          "actual_application": "OPEN",
+          "manuscript_status": "WORTH_EXTERNAL_REVIEW_AS_METHODS_AND_SECONDARY_ANALYSIS_MANUSCRIPT",
+          "claim_ledger": "records/CTD20261010_Cross_Task_Intervention_v02/CLAIM_LEDGER.json"
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth.",
+      "result_family": "CTD",
+      "version_relation": "Successive research stages; preserve distinct claim IDs; not three independent paper counts.",
+      "publication": "See PUBLICATION_COVERAGE.json exact claim/version coverage; publication does not promote this candidate."
+    },
+    {
+      "id": "A3N20261010",
+      "title": "Route-selection-kinematic fluency crossing and auxiliary alias limit",
+      "family": "familiarity",
+      "path": "records/A3N20261010_Route_Fluency_Crossing/MAP_EXTENSION.json",
+      "source_sha256": "5e0ddccb483a3b2262bc968ff5f9e8c8358d25a74f90fb202ca452591498e014",
+      "result_version": "A3N-EXACT-v0.1.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/A3N20261010_Route_Fluency_Crossing/MAP_EXTENSION.json",
+      "handoff": "records/A3N20261010_Route_Fluency_Crossing/HANDOFF_ZH.md",
+      "audit": "records/A3N20261010_Route_Fluency_Crossing/MAP_AUDIT.md",
+      "candidate_counts": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0,
+        "applications": 1
+      },
+      "prior_entry_snapshots": {
+        "registry": {
+          "research_id": "A3N20261010",
+          "result_version": "A3N-EXACT-v0.1.0",
+          "title": "Route-selection-kinematic fluency crossing and auxiliary alias limit",
+          "source": "records/A3N20261010_Route_Fluency_Crossing/MAP_EXTENSION.json",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "actual_application": "OPEN",
+          "publication_coverage_version": "UCT-PUB-v1.0.29",
+          "compatibility_audit": "records/A3N20261010_Route_Fluency_Crossing/MAP_AUDIT.md",
+          "handoff": "records/A3N20261010_Route_Fluency_Crossing/HANDOFF_ZH.md",
+          "manuscript_status": "HOLD_STANDALONE_USE_AS_METHOD_AND_GAP_MODULE",
+          "candidate_counts": {
+            "nodes": 0,
+            "rules": 0,
+            "contexts": 0
+          },
+          "claim_ledger": "records/A3N20261010_Route_Fluency_Crossing/CLAIM_LEDGER.json"
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth."
+    },
+    {
+      "id": "A3O20261010",
+      "title": "{",
+      "family": "familiarity",
+      "path": "records/A3O20261010_Route_Grain_Selection_Crossing/MAP_EXTENSION.json",
+      "source_sha256": "6b0b3a282841291712956a7b1157f644a9d1502ed34a5ef58ac609616b767b9b",
+      "result_version": "A3O-EXACT-v0.1.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/A3O20261010_Route_Grain_Selection_Crossing/MAP_EXTENSION.json",
+      "handoff": "records/A3O20261010_Route_Grain_Selection_Crossing/HANDOFF_ZH.md",
+      "audit": "records/A3O20261010_Route_Grain_Selection_Crossing/MAP_AUDIT.md",
+      "candidate_counts": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0,
+        "applications": 1
+      },
+      "prior_entry_snapshots": {
+        "registry": {
+          "research_id": "A3O20261010",
+          "result_version": "A3O-EXACT-v0.1.0",
+          "source": "records/A3O20261010_Route_Grain_Selection_Crossing/MAP_EXTENSION.json",
+          "sha256": "6b0b3a282841291712956a7b1157f644a9d1502ed34a5ef58ac609616b767b9b",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "actual_application": "OPEN",
+          "publication_coverage_version": "UCT-PUB-v1.0.30",
+          "compatibility_audit": "records/A3O20261010_Route_Grain_Selection_Crossing/MAP_AUDIT.md",
+          "handoff": "records/A3O20261010_Route_Grain_Selection_Crossing/HANDOFF_ZH.md",
+          "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
+          "candidate_counts": {
+            "nodes": 0,
+            "rules": 0,
+            "context_links": 0
+          },
+          "preservation_scope": "Execution-time concurrent research navigation; not republished as a CTD claim."
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth."
+    },
+    {
+      "id": "A3Q20261010",
+      "title": "{",
+      "family": "familiarity",
+      "path": "records/A3Q20261010_Selector_Ancestry_Dominance/MAP_EXTENSION.json",
+      "source_sha256": "8722c23ac8e55c76e7ab3d0706ee6d6f9997d730e6abeb1f8e258791fec1b7cd",
+      "result_version": "A3Q-EXACT-v0.1.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/A3Q20261010_Selector_Ancestry_Dominance/MAP_EXTENSION.json",
+      "handoff": "records/A3Q20261010_Selector_Ancestry_Dominance/HANDOFF_ZH.md",
+      "audit": "records/A3Q20261010_Selector_Ancestry_Dominance/MAP_AUDIT.md",
+      "candidate_counts": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0,
+        "applications": 1
+      },
+      "prior_entry_snapshots": {
+        "registry": {
+          "research_id": "A3Q20261010",
+          "result_version": "A3Q-EXACT-v0.1.0",
+          "source": "records/A3Q20261010_Selector_Ancestry_Dominance/MAP_EXTENSION.json",
+          "sha256": "8722c23ac8e55c76e7ab3d0706ee6d6f9997d730e6abeb1f8e258791fec1b7cd",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "actual_application": "OPEN",
+          "publication_coverage_version": "UCT-PUB-v1.0.31",
+          "compatibility_audit": "records/A3Q20261010_Selector_Ancestry_Dominance/MAP_AUDIT.md",
+          "handoff": "records/A3Q20261010_Selector_Ancestry_Dominance/HANDOFF_ZH.md",
+          "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
+          "candidate_counts": {
+            "nodes": 0,
+            "rules": 0,
+            "context_links": 0
+          },
+          "scientific_delta": "Actual-selector-use certificate plus finite independence of same-trial causal ancestry and installed-graph dominance; no physical installation or H identification.",
+          "preservation_scope": "Latest disabled scientific navigation; prior research and CTD publication records unchanged."
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth."
+    },
+    {
+      "id": "A3R20261010",
+      "title": "A3R20261010",
+      "family": "familiarity",
+      "path": "records/A3R20261010_Selector_Participation_Contract/MAP_EXTENSION.json",
+      "source_sha256": "505947448467ded3431a3bb5ef627fb00283c6340ede86f057190d85a9b2c504",
+      "result_version": null,
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": null,
+      "handoff": "records/A3R20261010_Selector_Participation_Contract/HANDOFF_ZH.md",
+      "audit": "records/A3R20261010_Selector_Participation_Contract/MAP_AUDIT.md",
+      "candidate_counts": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0,
+        "applications": 1
+      },
+      "prior_entry_snapshots": {},
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth."
+    },
+    {
+      "id": "CTD3-20261010",
+      "title": "CTD3-20261010",
+      "family": "psychometrics",
+      "path": "records/CTD20261010_Noise_Identifiability_v10/governance/CTD3_MAP_EXTENSION.json",
+      "source_sha256": "71789380a7f5c4c8a9bc1b04099efb602a1d9fc39dc793e92d4e62105dd70ecd",
+      "result_version": "CTD-RESULT-v1.0.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": null,
+      "handoff": "records/CTD20261010_Noise_Identifiability_v10/HANDOFF_ZH.md",
+      "audit": "records/CTD20261010_Noise_Identifiability_v10/governance/CTD3_MAP_AUDIT.md",
+      "candidate_counts": {
+        "nodes": 5,
+        "rules": 2,
+        "contexts": 6,
+        "applications": 0
+      },
+      "prior_entry_snapshots": {
+        "modules": {
+          "id": "CTD3-20261010",
+          "research_id": "CTD20261010",
+          "result_version": "CTD-RESULT-v1.0.0",
+          "base_release": "UCT-MAP-v1.1.2",
+          "path": "records/CTD20261010_Noise_Identifiability_v10/governance/CTD3_MAP_EXTENSION.json",
+          "sha256": "71789380a7f5c4c8a9bc1b04099efb602a1d9fc39dc793e92d4e62105dd70ecd",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "candidate_counts": {
+            "nodes": 5,
+            "active_conditional_rules": 2,
+            "nondeductive_context_links": 6
+          },
+          "publication_coverage_version": "UCT-PUB-v1.0.31",
+          "compatibility_audit": "records/CTD20261010_Noise_Identifiability_v10/governance/CTD3_MAP_AUDIT.md",
+          "handoff": "records/CTD20261010_Noise_Identifiability_v10/HANDOFF_ZH.md",
+          "instruction": "Finite-sample projection is conditional on the full paired-binomial and calibration contracts. Public disclosure does not enable a premise or establish an actual experiment.",
+          "publication": {
+            "research_id": "CTD20261010",
+            "report": "TA-TR-2026-26",
+            "version": "1.0.0",
+            "status": "PUBLISHED_PREPRINT_PUBLIC_READBACK_AND_DOI_RESOLUTION_VERIFIED",
+            "doi": "10.5281/zenodo.23279189",
+            "doi_url": "https://doi.org/10.5281/zenodo.23279189",
+            "record_url": "https://zenodo.org/records/23279189",
+            "manuscript": "records/CTD20261010_Noise_Identifiability_v10/release/noise-identifiability-bodily-judgments-v1.0.0.md",
+            "pdf": "records/CTD20261010_Noise_Identifiability_v10/release/noise-identifiability-bodily-judgments-v1.0.0.pdf",
+            "reproduction": "records/CTD20261010_Noise_Identifiability_v10/release/reproducibility-v1.0.0.zip",
+            "receipt": "records/CTD20261010_Noise_Identifiability_v10/publication-record.json",
+            "peer_reviewed": false,
+            "scientific_map_admission_changed": false,
+            "new_human_data": false,
+            "doi_resolution_pass": true,
+            "doi_resolution_source": "records/CTD20261010_Noise_Identifiability_v10/DOI_RESOLUTION.json",
+            "publication_workflow_snapshot_unmodified": true
+          },
+          "actual_application_status": "OPEN"
+        },
+        "registry": {
+          "id": "CTD3-20261010",
+          "research_id": "CTD20261010",
+          "result_version": "CTD-RESULT-v1.0.0",
+          "base_release": "UCT-MAP-v1.1.2",
+          "path": "records/CTD20261010_Noise_Identifiability_v10/governance/CTD3_MAP_EXTENSION.json",
+          "sha256": "71789380a7f5c4c8a9bc1b04099efb602a1d9fc39dc793e92d4e62105dd70ecd",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "candidate_counts": {
+            "nodes": 5,
+            "active_conditional_rules": 2,
+            "nondeductive_context_links": 6
+          },
+          "publication_coverage_version": "UCT-PUB-v1.0.31",
+          "compatibility_audit": "records/CTD20261010_Noise_Identifiability_v10/governance/CTD3_MAP_AUDIT.md",
+          "handoff": "records/CTD20261010_Noise_Identifiability_v10/HANDOFF_ZH.md",
+          "instruction": "Finite-sample projection is conditional on the full paired-binomial and calibration contracts. Public disclosure does not enable a premise or establish an actual experiment.",
+          "publication": {
+            "research_id": "CTD20261010",
+            "report": "TA-TR-2026-26",
+            "version": "1.0.0",
+            "status": "PUBLISHED_PREPRINT_PUBLIC_READBACK_AND_DOI_RESOLUTION_VERIFIED",
+            "doi": "10.5281/zenodo.23279189",
+            "doi_url": "https://doi.org/10.5281/zenodo.23279189",
+            "record_url": "https://zenodo.org/records/23279189",
+            "manuscript": "records/CTD20261010_Noise_Identifiability_v10/release/noise-identifiability-bodily-judgments-v1.0.0.md",
+            "pdf": "records/CTD20261010_Noise_Identifiability_v10/release/noise-identifiability-bodily-judgments-v1.0.0.pdf",
+            "reproduction": "records/CTD20261010_Noise_Identifiability_v10/release/reproducibility-v1.0.0.zip",
+            "receipt": "records/CTD20261010_Noise_Identifiability_v10/publication-record.json",
+            "peer_reviewed": false,
+            "scientific_map_admission_changed": false,
+            "new_human_data": false,
+            "doi_resolution_pass": true,
+            "doi_resolution_source": "records/CTD20261010_Noise_Identifiability_v10/DOI_RESOLUTION.json",
+            "publication_workflow_snapshot_unmodified": true
+          },
+          "actual_application_status": "OPEN"
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth.",
+      "result_family": "CTD",
+      "version_relation": "Successive research stages; preserve distinct claim IDs; not three independent paper counts.",
+      "publication": "See PUBLICATION_COVERAGE.json exact claim/version coverage; publication does not promote this candidate."
+    },
+    {
+      "id": "A3V20261010",
+      "title": "Concurrent option influence and competition-independent retentive bodily familiarity",
+      "family": "familiarity",
+      "path": "records/A3V20261010_Concurrent_Liveness_and_Familiarity/MAP_EXTENSION.json",
+      "source_sha256": "5527ce9861dea9773a98db8bed7ba59de564c8d109f89fda1783bdc4449bdccd",
+      "result_version": "A3V-SCOPE-v0.1.0",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "completed_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/A3V20261010_Concurrent_Liveness_and_Familiarity/RESEARCH_NOTE.md",
+      "handoff": "records/A3V20261010_Concurrent_Liveness_and_Familiarity/HANDOFF_ZH.md",
+      "audit": "records/A3V20261010_Concurrent_Liveness_and_Familiarity/MAP_AUDIT.md",
+      "candidate_counts": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0,
+        "applications": 1
+      },
+      "prior_entry_snapshots": {
+        "registry": {
+          "research_id": "A3V20261010",
+          "result_version": "A3V-SCOPE-v0.1.0",
+          "title": "Concurrent option influence and competition-independent retentive bodily familiarity",
+          "source": "records/A3V20261010_Concurrent_Liveness_and_Familiarity/RESEARCH_NOTE.md",
+          "handoff": "records/A3V20261010_Concurrent_Liveness_and_Familiarity/HANDOFF_ZH.md",
+          "work_log": "records/A3V20261010_Concurrent_Liveness_and_Familiarity/WORK_LOG.md",
+          "module": "records/A3V20261010_Concurrent_Liveness_and_Familiarity/MAP_EXTENSION.json",
+          "review": "records/A3V20261010_Concurrent_Liveness_and_Familiarity/MAP_AUDIT.md",
+          "base_map_release": "UCT-MAP-v1.1.2",
+          "status": "PENDING_CHECKPOINT_DISABLED",
+          "enabled_as_established_premises": false,
+          "actual_application_status": "OPEN",
+          "publication_coverage_version": "UCT-PUB-v1.0.31"
+        }
+      },
+      "promotion_requirement": "Complete applicable semantic compatibility/proof review against the current completed release and retain independent actual/phenomenal obligations. Registration is not premise truth."
+    }
+  ],
+  "effective_corrections": [
+    {
+      "path": "records/SCU20261010_Source_Consumer_Protocols/corrections/R194_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "sha256": "f89ffb70c535d877926ebfc8a8bc7bc418f0486923fab95f9ab20e7ee3747da6",
+      "document": {
+        "schema": "uct-disabled-effective-correction-overlay/1",
+        "overlay_id": "SCU20261010-CORR-R194-v0.1.0",
+        "base_completed_release": "UCT-MAP-v1.1.2",
+        "review_snapshot_sha": "a22ad487b2a072293de2ecb55b4f2cc2a2c0dafc",
+        "historical_source_version": "CPP-RESULT-v0.1.0",
+        "sources": [
+          {
+            "path": "records/R194_Cross_Population_Polarity_20261009/MAP_EXTENSION.json",
+            "sha256": "2827d07d0a279e9d86b0bf7044dc414702043ec0cb366ebca6c5b23119273c1b"
+          },
+          {
+            "path": "records/R194_Cross_Population_Polarity_20261009/RESEARCH_NOTE.md",
+            "sha256": "ec5d60f23202b9be51c5f584f375caca870b75ce7afda3099a907189a0f87194"
+          }
+        ],
+        "status": "PENDING_CHECKPOINT_DISABLED",
+        "enabled_as_established_premise": false,
+        "actual_premises_discharged": false,
+        "phenomenal_validation": false,
+        "completed_map_changed": false,
+        "historical_files_changed": false,
+        "proof_code": "verify_effective_corrections.py",
+        "exact_results": "EFFECTIVE_CORRECTION_EXACT_RESULTS.json",
+        "effective_overrides": [
+          {
+            "target_id": "R194:COMPONENT_COUNT",
+            "expected_original_record_sha256": "265f726569c15158b04c32eeec0ca2c6d94af8cb4e85c45c2a9020fff4b1b629",
+            "hash_serialization": "UTF-8 JSON; sorted keys; ensure_ascii=false; separators comma/colon",
+            "operation": "OVERLAY_FIELDS_WITHOUT_MODIFYING_HISTORICAL_SOURCE",
+            "replacement_fields": {
+              "statement": "For a finite signed graph with a fixed partial binary anchor map, the compatible-labelling count is zero if an XOR-parity cycle is inconsistent or two anchors in one component disagree with path parity. Otherwise it is exactly 2^c, where c is the number of unanchored connected components. In particular one anchor per component gives a unique numeric labelling when all cycle constraints are consistent.",
+              "scope": "All finite XOR graphs with fixed partial anchor assignments; consistency covers edges AND anchors on that same graph.",
+              "quantifier": "For every fixed graph, parity assignment and partial anchor map in the declared domain.",
+              "enabled_as_established_premise": false,
+              "actual_premises_discharged": false,
+              "proof_location": "EFFECTIVE_CORRECTIONS.md; EFFECTIVE_CORRECTION_EXACT_RESULTS.json; verify_effective_corrections.py",
+              "effective_correction_status": "CANDIDATE_DISABLED"
+            },
+            "rationale": "The old cycle-only premise is insufficient when multiple anchors are allowed. The two-vertex core embeds in the original seven-vertex domain; old one-anchor checks remain valid."
+          },
+          {
+            "target_id": "R194:r_component_count",
+            "expected_original_record_sha256": "4f837e7a74da5ee611e2fd72e27581cfb90eb96c2763106d2eb5cd0aa2e2bdae",
+            "hash_serialization": "UTF-8 JSON; sorted keys; ensure_ascii=false; separators comma/colon",
+            "operation": "OVERLAY_FIELDS_WITHOUT_MODIFYING_HISTORICAL_SOURCE",
+            "replacement_fields": {
+              "all_of": [
+                "R194:DOMAIN",
+                "R194:SIGNED_GRAPH",
+                "SCU20261010:CORR_R194_ANCHORED_GRAPH_DOMAIN",
+                "R149:COMPATIBILITY",
+                "R157:COORDINATE_TRANSPORT"
+              ],
+              "statement": "Propagate parity from one root per component; reject cycle or anchor/path conflicts. Each remaining unanchored component has two root values and each compatible anchored component one.",
+              "binding": "One V,E,edge-parity map, partial anchor map eta and coordinate interpretation are retained. The theorem evaluates all constraints jointly; an anchor from another graph or target cannot be pasted into this instance.",
+              "alternative_route_semantics": "Conflicting cycles and conflicting anchors are two failure cases, not alternative positive proofs. The 2^c branch requires joint consistency.",
+              "enabled_as_established_premise": false,
+              "actual_premises_discharged": false,
+              "proof_location": "EFFECTIVE_CORRECTIONS.md; EFFECTIVE_CORRECTION_EXACT_RESULTS.json; verify_effective_corrections.py",
+              "effective_correction_status": "CANDIDATE_DISABLED"
+            },
+            "rationale": "Adds the omitted anchor interface while keeping the theorem conditional rather than asserting that all graphs are consistent."
+          },
+          {
+            "target_id": "R194:RELATIVE_ALIGNMENT",
+            "expected_original_record_sha256": "ee7d93c062f4e002c6ea6d084c0c8ad603e0af6a39161a76f3ddd71d5efb8e3c",
+            "hash_serialization": "UTF-8 JSON; sorted keys; ensure_ascii=false; separators comma/colon",
+            "operation": "OVERLAY_FIELDS_WITHOUT_MODIFYING_HISTORICAL_SOURCE",
+            "replacement_fields": {
+              "statement": "Multiple populations, markers and known reversal relations can identify relative channel polarity and connect components when all edge constraints and any supplied anchors are jointly consistent.",
+              "scope": "One fixed signed comparison design; same-target transport, edge truth and anchor/path compatibility remain simultaneous premises.",
+              "enabled_as_established_premise": false,
+              "actual_premises_discharged": false,
+              "proof_location": "EFFECTIVE_CORRECTIONS.md; EFFECTIVE_CORRECTION_EXACT_RESULTS.json; verify_effective_corrections.py",
+              "effective_correction_status": "CANDIDATE_DISABLED"
+            },
+            "rationale": "A contradiction among anchored assignments is not a positive relative-alignment instance."
+          }
+        ],
+        "nodes": [
+          {
+            "id": "SCU20261010:CORR_R194_ANCHORED_GRAPH_DOMAIN",
+            "kind": "CONDITIONAL_DECLARATION",
+            "statement": "Fix one finite vertex set V, one undirected XOR-parity edge set E, and one partial anchor function eta:V->{0,1}. For vertices in one component, anchor values must agree with the parity of a connecting path for joint satisfiability. Multiple anchors are permitted and tested, not silently assumed compatible.",
+            "scope": "Finite Boolean graphs; the original seven-vertex design is a subcase. This defines a mathematical family and does not assert any empirical anchor or phenomenal orientation.",
+            "status": "CANDIDATE_DISABLED",
+            "enabled_as_established_premise": false,
+            "actual_premises_discharged": false,
+            "node_presence_is_premise_truth": false
+          }
+        ],
+        "rules": [],
+        "context_links": [],
+        "manual_affected_rederivation": [
+          "R194:r_component_count: choose a root, propagate relative signs, test each cycle and each anchor against the same root. A conflict gives no labelling; otherwise multiply two choices over unanchored components.",
+          "R194:r_relative_alignment: the repaired count leaves relative path parity intact within a jointly consistent component. Inconsistent anchored designs have no admitted positive alignment case.",
+          "R194:r_global_complement: on each UNANCHORED consistent component, simultaneous complement still preserves every edge and evidence constraint. Added anchor checking does not orient an unanchored component.",
+          "R194:r_anchor_taxonomy and R194:r_protocol: a conventional numeric anchor still does not warrant a familiar-mineness name. The correction adds consistency checking, not target evidence.",
+          "R193's four-cell one-anchor construction remains unchanged. Its broader graph-language generalization should use the same joint edge/anchor consistency definition."
+        ],
+        "affected_closure": {
+          "seed_ids": [
+            "R194:COMPONENT_COUNT",
+            "R194:RELATIVE_ALIGNMENT",
+            "R194:r_component_count"
+          ],
+          "syntactic_forward_dependency_ids": [
+            "R194:ANCHOR_TAXONOMY",
+            "R194:COMPONENT_COUNT",
+            "R194:GLOBAL_COMPLEMENT",
+            "R194:RELATIVE_ALIGNMENT",
+            "R194:RESEARCH_PROTOCOL",
+            "R194:r_anchor_taxonomy",
+            "R194:r_component_count",
+            "R194:r_global_complement",
+            "R194:r_protocol",
+            "R194:r_relative_alignment"
+          ],
+          "affected_node_ids": [
+            "R194:ANCHOR_TAXONOMY",
+            "R194:COMPONENT_COUNT",
+            "R194:GLOBAL_COMPLEMENT",
+            "R194:RELATIVE_ALIGNMENT",
+            "R194:RESEARCH_PROTOCOL"
+          ],
+          "affected_rule_ids": [
+            "R194:r_anchor_taxonomy",
+            "R194:r_component_count",
+            "R194:r_global_complement",
+            "R194:r_protocol",
+            "R194:r_relative_alignment"
+          ],
+          "adjacent_nondeductive_context_ids": [
+            "R194:ctx_C1",
+            "R194:ctx_R149",
+            "R194:ctx_R157",
+            "R194:ctx_U1"
+          ],
+          "warning": "This is a syntactic over-approximation for review routing, not proof reconstruction or actual premise discharge. Context links never propagate deduction.",
+          "completed_map_ids_requiring_replacement": [],
+          "completed_map_forward_dependents": []
+        }
+      },
+      "enabled_as_established_premises": false
+    },
+    {
+      "path": "records/SCU20261010_Source_Consumer_Protocols/corrections/R201_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "sha256": "037ec7c2abb08fbe108b5aec62e512f979003155d136b79728c4571971580e15",
+      "document": {
+        "schema": "uct-disabled-effective-correction-overlay/1",
+        "overlay_id": "SCU20261010-CORR-R201-v0.1.0",
+        "base_completed_release": "UCT-MAP-v1.1.2",
+        "review_snapshot_sha": "a22ad487b2a072293de2ecb55b4f2cc2a2c0dafc",
+        "historical_source_version": "ROTM-RESULT-v0.1.0",
+        "sources": [
+          {
+            "path": "records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/MAP_EXTENSION.json",
+            "sha256": "279c2761ff8755784e1007cd3d641eb26fc909d86f2f2f8a3b882488efe98788"
+          },
+          {
+            "path": "records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/RESEARCH_NOTE.md",
+            "sha256": "e419f79283ffc2e58fba08cd8723096055fbe8c30831730dd3b5541d96b4cf87"
+          }
+        ],
+        "status": "PENDING_CHECKPOINT_DISABLED",
+        "enabled_as_established_premise": false,
+        "actual_premises_discharged": false,
+        "phenomenal_validation": false,
+        "completed_map_changed": false,
+        "historical_files_changed": false,
+        "proof_code": "verify_effective_corrections.py",
+        "exact_results": "EFFECTIVE_CORRECTION_EXACT_RESULTS.json",
+        "effective_overrides": [
+          {
+            "target_id": "R201:STRICTNESS_COUNTERMODELS",
+            "expected_original_record_sha256": "ab8441e6e3f4f0752436dde8f3dbb2b4b116d67cf11e8a56716f6eceeaeba741",
+            "hash_serialization": "UTF-8 JSON; sorted keys; ensure_ascii=false; separators comma/colon",
+            "operation": "OVERLAY_FIELDS_WITHOUT_MODIFYING_HISTORICAL_SOURCE",
+            "replacement_fields": {
+              "statement": "There exists a coherent equality example with rho=1/2, b=beta=1/10 and epsilon0=epsilon1=0 in which delta=1/10 and Delta_T=0. There exists a separate coherent below-threshold example with rho=1/2, b=beta=1/10, epsilon0=epsilon1=1/10, delta=3/20 and Delta_T=-1/10. Without independently positive endpoint sign, a separate reversed-endpoint example has delta=1 and Delta_C=-1. These witness failure of a general non-strict replacement and of unconstrained endpoint orientation; they do not prove sharpness at every nuisance-budget tuple.",
+              "scope": "Coherent binary probability laws; original rho=1,b=1/10 scalar tuples are withdrawn as unrealizable probability witnesses.",
+              "quantifier": "Existential: one coherent witness per displayed failure mode, with separate world and budget binding.",
+              "enabled_as_established_premise": false,
+              "actual_premises_discharged": false,
+              "proof_location": "EFFECTIVE_CORRECTIONS.md; EFFECTIVE_CORRECTION_EXACT_RESULTS.json; verify_effective_corrections.py",
+              "effective_correction_status": "CANDIDATE_DISABLED"
+            },
+            "rationale": "rho=1 on supported J strata forces H=J almost surely and hence b=0. Replace impossible scalar tuples with actual joint laws."
+          },
+          {
+            "target_id": "R201:r_strictness_witnesses",
+            "expected_original_record_sha256": "8bed0049051d00c62cd0d7db94cf0d6645b9d82c3d8659df4fcc7c7950e97d0b",
+            "hash_serialization": "UTF-8 JSON; sorted keys; ensure_ascii=false; separators comma/colon",
+            "operation": "OVERLAY_FIELDS_WITHOUT_MODIFYING_HISTORICAL_SOURCE",
+            "replacement_fields": {
+              "all_of": [
+                "R201:FIXED_CALIBRATION_TRANSPORT_DOMAIN",
+                "SCU20261010:CORR_R201_COHERENT_WITNESS_DOMAIN"
+              ],
+              "statement": "Evaluate the three explicitly coherent rational probability witnesses under their own retained premises. Equality and below-threshold worlds are not required to satisfy the strict-margin certificate premise.",
+              "binding": "Fix target meaning and variable sorts at schema level. Bind C,T,H,J,M,U=1, a single coherent joint calibration law, target conditionals and budgets separately inside each existential witness. Never combine a strict-margin instance with a different equality or reversal instance.",
+              "alternative_route_semantics": "The three failure modes are alternative witnesses. Positive endpoint sign is retained in the first two and deliberately dropped in the third.",
+              "enabled_as_established_premise": false,
+              "actual_premises_discharged": false,
+              "proof_location": "EFFECTIVE_CORRECTIONS.md; EFFECTIVE_CORRECTION_EXACT_RESULTS.json; verify_effective_corrections.py",
+              "effective_correction_status": "CANDIDATE_DISABLED"
+            },
+            "rationale": "Removes the invalid all_of ROBUST_MARGIN_PREMISE from the counterexample route; same_instance_required remains true within each witness."
+          }
+        ],
+        "nodes": [
+          {
+            "id": "SCU20261010:CORR_R201_COHERENT_WITNESS_DOMAIN",
+            "kind": "CONDITIONAL_DECLARATION",
+            "statement": "Fix a mathematical family of coherent binary calibration and target probability laws with supported H/J strata and explicit nuisance budgets. Each displayed equality, below-threshold, or unsigned-endpoint counterexample is a SEPARATE joint law satisfying its own retained premises. The strict positive-margin premise is deliberately not imposed on equality or below-threshold witnesses.",
+            "scope": "Exactly the three rational witnesses in EFFECTIVE_CORRECTION_EXACT_RESULTS.json and their explicitly proved interpretation; no arbitrary-positive-budget sharpness claim and no actual endpoint validation.",
+            "status": "CANDIDATE_DISABLED",
+            "enabled_as_established_premise": false,
+            "actual_premises_discharged": false,
+            "node_presence_is_premise_truth": false
+          }
+        ],
+        "rules": [],
+        "context_links": [],
+        "manual_affected_rederivation": [
+          "R201:r_source_lower_bound remains valid: delta=rho Delta_C+b, 0<rho<=1 and delta-beta>0 imply Delta_C=(delta-b)/rho>=delta-beta.",
+          "R201:r_target_sign_certificate remains valid: apply both class-specific drift bounds in the same C-to-T instance to obtain Delta_T>=delta-beta-epsilon0-epsilon1>0.",
+          "R201:r_strictness_witnesses is replaced by three coherent existential worlds. The original strict-margin premise cannot be used in the equality or below-threshold worlds.",
+          "R202 marginal nonidentification and R203 total covariance do not use the rejected R201 witness as a deductive premise. Their own defects or scope conditions are reviewed separately."
+        ],
+        "affected_closure": {
+          "seed_ids": [
+            "R201:STRICTNESS_COUNTERMODELS",
+            "R201:r_strictness_witnesses"
+          ],
+          "syntactic_forward_dependency_ids": [
+            "R201:STRICTNESS_COUNTERMODELS",
+            "R201:r_strictness_witnesses"
+          ],
+          "affected_node_ids": [
+            "R201:STRICTNESS_COUNTERMODELS"
+          ],
+          "affected_rule_ids": [
+            "R201:r_strictness_witnesses"
+          ],
+          "adjacent_nondeductive_context_ids": [],
+          "warning": "This is a syntactic over-approximation for review routing, not proof reconstruction or actual premise discharge. Context links never propagate deduction.",
+          "completed_map_ids_requiring_replacement": [],
+          "completed_map_forward_dependents": []
+        }
+      },
+      "enabled_as_established_premises": false
+    },
+    {
+      "path": "records/SCU20261010_Source_Consumer_Protocols/corrections/R202_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "sha256": "fdfdbb681ae59dbc0a0fc324a71bb9c697731fae9030b917bbffaebff9a6ddec",
+      "document": {
+        "schema": "uct-disabled-effective-correction-overlay/1",
+        "overlay_id": "SCU20261010-CORR-R202-v0.1.0",
+        "base_completed_release": "UCT-MAP-v1.1.2",
+        "review_snapshot_sha": "a22ad487b2a072293de2ecb55b4f2cc2a2c0dafc",
+        "historical_source_version": "TMAB-RESULT-v0.1.0",
+        "sources": [
+          {
+            "path": "records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/MAP_EXTENSION.json",
+            "sha256": "d417239cce217badaf099801d03ff064152d211c44f6b8d98d4aaa63d91fbd74"
+          },
+          {
+            "path": "records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/RESEARCH_NOTE.md",
+            "sha256": "8b0cb6460abb79c5d3a701c5c411207743f82ad777b8a6ef2a9893c5219ff9b8"
+          }
+        ],
+        "status": "PENDING_CHECKPOINT_DISABLED",
+        "enabled_as_established_premise": false,
+        "actual_premises_discharged": false,
+        "phenomenal_validation": false,
+        "completed_map_changed": false,
+        "historical_files_changed": false,
+        "proof_code": "verify_effective_corrections.py",
+        "exact_results": "EFFECTIVE_CORRECTION_EXACT_RESULTS.json",
+        "effective_overrides": [
+          {
+            "target_id": "R202:CONDITIONAL_NONDIFFERENTIALITY",
+            "expected_original_record_sha256": "ddfd64d9823b968613e376ceed11a17528a362623ed3375c1841223398008b95",
+            "hash_serialization": "UTF-8 JSON; sorted keys; ensure_ascii=false; separators comma/colon",
+            "operation": "OVERLAY_FIELDS_WITHOUT_MODIFYING_HISTORICAL_SOURCE",
+            "replacement_fields": {
+              "statement": "Within the same validation domain V and actual U=1, endpoint J is conditionally independent of marker M given H in both supported H classes. Bounded departures are a separate residual-sensitivity route and do not satisfy this exact-inversion premise.",
+              "scope": "Exact nondifferential-error route only. Aggregate R=0 is an alternative sufficient premise in a separate rule.",
+              "enabled_as_established_premise": false,
+              "actual_premises_discharged": false,
+              "proof_location": "EFFECTIVE_CORRECTIONS.md; EFFECTIVE_CORRECTION_EXACT_RESULTS.json; verify_effective_corrections.py",
+              "effective_correction_status": "CANDIDATE_DISABLED"
+            },
+            "rationale": "Separates exact point identification from merely bounded dependence; the original OR weakened its own exact premise."
+          },
+          {
+            "target_id": "R202:AUDIT_INVERSION_RESULT",
+            "expected_original_record_sha256": "e98fdfd5d1d782b362af54213421665fe2c69f4e0a5d9144cbacad7b68f39e4e",
+            "hash_serialization": "UTF-8 JSON; sorted keys; ensure_ascii=false; separators comma/colon",
+            "operation": "OVERLAY_FIELDS_WITHOUT_MODIFYING_HISTORICAL_SOURCE",
+            "replacement_fields": {
+              "statement": "Under the fixed coherent audit/endpoint/actual-use contract, positivity c<j<a, and zero aggregate residual R, recover pi=(j-c)/(a-c), q1=(r-c*m)/(j-c), q0=(a*m-r)/(a-j). Conditional independence is sufficient for R=0. A nonzero residual bound alone gives the separately defined common-residual feasible set, not these exact values.",
+              "scope": "Only the same V,H,M,J,A,U=1 law and calibrated endpoint matrix; no V-to-T transport inference is included.",
+              "enabled_as_established_premise": false,
+              "actual_premises_discharged": false,
+              "proof_location": "EFFECTIVE_CORRECTIONS.md; EFFECTIVE_CORRECTION_EXACT_RESULTS.json; verify_effective_corrections.py",
+              "effective_correction_status": "CANDIDATE_DISABLED"
+            },
+            "rationale": "Makes the exact inversion's sufficient condition and its scope explicit."
+          },
+          {
+            "target_id": "R202:r_audit_inversion",
+            "expected_original_record_sha256": "a2c290dbed5e5f4688560af3adb02e7adc270864dcdc4a3124e32694b4a2b639",
+            "hash_serialization": "UTF-8 JSON; sorted keys; ensure_ascii=false; separators comma/colon",
+            "operation": "OVERLAY_FIELDS_WITHOUT_MODIFYING_HISTORICAL_SOURCE",
+            "replacement_fields": {
+              "all_of": [
+                "R202:FIXED_THREE_DOMAIN_CONTRACT",
+                "R202:PROSPECTIVE_IGNORABLE_AUDIT",
+                "R202:INFORMATIVE_SIGNED_ENDPOINT",
+                "R202:CONDITIONAL_NONDIFFERENTIALITY",
+                "R202:ACTUAL_USE_EVIDENCE_FIREWALL",
+                "SCU20261010:CORR_R202_JOINT_AUDIT_LAW"
+              ],
+              "statement": "Conditional independence makes R=0; invert the same two-by-two mixture law at c<j<a to recover pi,q0,q1 exactly.",
+              "binding": "One V,H,M,J,A,U=1 joint law, endpoint-error calibration, audit-selection contract, observed M/J law and positive-support condition are retained. A different dependence model cannot be substituted while keeping the zero-residual answer.",
+              "alternative_route_semantics": "Use the separately guarded zero-aggregate-residual route if independence is absent; a nonzero bound invokes the sensitivity-set rule instead.",
+              "enabled_as_established_premise": false,
+              "actual_premises_discharged": false,
+              "proof_location": "EFFECTIVE_CORRECTIONS.md; EFFECTIVE_CORRECTION_EXACT_RESULTS.json; verify_effective_corrections.py",
+              "effective_correction_status": "CANDIDATE_DISABLED"
+            },
+            "rationale": "Adds explicit joint probability/positivity binding and retains the exact independence route."
+          }
+        ],
+        "nodes": [
+          {
+            "id": "SCU20261010:CORR_R202_JOINT_AUDIT_LAW",
+            "kind": "JOINT_PROBABILITY_AND_POSITIVITY_PREMISE",
+            "statement": "Use one coherent binary joint law of H,M,J in V conditional on actual U=1, with the independently calibrated endpoint rates a=P(J=1|H=1), c=P(J=1|H=0), a>c, and c<j=P(J=1)<a. The audited m=P(M=1),j,r=P(M=1,J=1) must concern that same validation law after justified sampling correction.",
+            "scope": "One frozen V,H,M,J,A,U=1 endpoint and audit interface; both H classes have positive mass. Probability coherence, calibration and sampling are simultaneous, not separate adjustable scalar inputs.",
+            "status": "CANDIDATE_DISABLED",
+            "enabled_as_established_premise": false,
+            "actual_premises_discharged": false,
+            "node_presence_is_premise_truth": false
+          },
+          {
+            "id": "SCU20261010:CORR_R202_ZERO_RESIDUAL",
+            "kind": "OPEN_ZERO_RESIDUAL_PREMISE",
+            "statement": "The aggregate conditional covariance R=(1-pi)Cov(M,J|H=0)+pi Cov(M,J|H=1) is zero in the same validation law. Conditional independence J independent of M given H is sufficient; an asserted cancellation requires independent justification.",
+            "scope": "One common residual in the fixed joint audit law. The observed fit does not establish R=0.",
+            "status": "CANDIDATE_DISABLED",
+            "enabled_as_established_premise": false,
+            "actual_premises_discharged": false,
+            "node_presence_is_premise_truth": false
+          },
+          {
+            "id": "SCU20261010:CORR_R202_COMMON_RESIDUAL_BOUND",
+            "kind": "OPEN_RESIDUAL_BOUND_PREMISE",
+            "statement": "An independently justified kappa>=0 bounds the one common aggregate residual |R|<=kappa in the fixed validation law. H-specific component covariances obey a coherent binary joint law.",
+            "scope": "One V,H,M,J,A,U=1 instance; nuisance uncertainty is shared by both recovered marker rates.",
+            "status": "CANDIDATE_DISABLED",
+            "enabled_as_established_premise": false,
+            "actual_premises_discharged": false,
+            "node_presence_is_premise_truth": false
+          },
+          {
+            "id": "SCU20261010:CORR_R202_COMMON_RESIDUAL_SET",
+            "kind": "CONDITIONAL_SENSITIVITY_RESULT",
+            "statement": "pi=(j-c)/(a-c), q1=(r-c*m-R)/(j-c), q0=(a*m-r+R)/(a-j), with the SAME R. Under |R|<=kappa retain all jointly coherent candidate laws and their rate pairs satisfying those equations. Marginal intervals qhat1 plus/minus kappa/(j-c) and qhat0 plus/minus kappa/(a-j), clipped to [0,1], are conservative outer intervals, not independent choices or a claim of arbitrary-budget sharpness.",
+            "scope": "Fixed positive-support validation law and declared residual budget; no automatic transport from V to nonreporting T.",
+            "status": "CANDIDATE_DISABLED",
+            "enabled_as_established_premise": false,
+            "actual_premises_discharged": false,
+            "node_presence_is_premise_truth": false
+          }
+        ],
+        "rules": [
+          {
+            "id": "SCU20261010:corr_r202_zero_residual_inversion",
+            "all_of": [
+              "R202:FIXED_THREE_DOMAIN_CONTRACT",
+              "R202:PROSPECTIVE_IGNORABLE_AUDIT",
+              "R202:INFORMATIVE_SIGNED_ENDPOINT",
+              "R202:ACTUAL_USE_EVIDENCE_FIREWALL",
+              "SCU20261010:CORR_R202_JOINT_AUDIT_LAW",
+              "SCU20261010:CORR_R202_ZERO_RESIDUAL"
+            ],
+            "conclusion": "R202:AUDIT_INVERSION_RESULT",
+            "statement": "Invert the mixture equations with the independently supplied common R=0; conditional independence is not necessary if the aggregate zero is otherwise justified.",
+            "binding": "All rates, audit inclusion, actual U=1, target meaning, endpoint calibration and nuisance terms concern the SAME V/H/M/J law. No residual is independently chosen for q0 and q1; transport to T remains a separate premise.",
+            "same_instance_required": true,
+            "kind": "CONDITIONAL_CORRECTION_RULE",
+            "status": "CANDIDATE_DISABLED",
+            "enabled_as_established_premise": false,
+            "actual_premises_discharged": false,
+            "proof_location": "EFFECTIVE_CORRECTIONS.md; EFFECTIVE_CORRECTION_EXACT_RESULTS.json"
+          },
+          {
+            "id": "SCU20261010:corr_r202_bounded_residual_set",
+            "all_of": [
+              "R202:FIXED_THREE_DOMAIN_CONTRACT",
+              "R202:PROSPECTIVE_IGNORABLE_AUDIT",
+              "R202:INFORMATIVE_SIGNED_ENDPOINT",
+              "R202:ACTUAL_USE_EVIDENCE_FIREWALL",
+              "SCU20261010:CORR_R202_JOINT_AUDIT_LAW",
+              "SCU20261010:CORR_R202_COMMON_RESIDUAL_BOUND"
+            ],
+            "conclusion": "SCU20261010:CORR_R202_COMMON_RESIDUAL_SET",
+            "statement": "Retain the common-residual formulas and probability-coherent feasible laws; derive clipped marginal outer intervals by |R|<=kappa. Do not report unique rates from the bound alone.",
+            "binding": "All rates, audit inclusion, actual U=1, target meaning, endpoint calibration and nuisance terms concern the SAME V/H/M/J law. No residual is independently chosen for q0 and q1; transport to T remains a separate premise.",
+            "same_instance_required": true,
+            "kind": "CONDITIONAL_CORRECTION_RULE",
+            "status": "CANDIDATE_DISABLED",
+            "enabled_as_established_premise": false,
+            "actual_premises_discharged": false,
+            "proof_location": "EFFECTIVE_CORRECTIONS.md; EFFECTIVE_CORRECTION_EXACT_RESULTS.json"
+          }
+        ],
+        "context_links": [],
+        "manual_affected_rederivation": [
+          "E[J]=c+(a-c)pi identifies pi when a>c; positivity c<j<a keeps both class denominators nonzero.",
+          "E[MJ]=a*pi*q1+c*(1-pi)*q0+R and E[M]=pi*q1+(1-pi)*q0 give q1=(r-cm-R)/(j-c) and q0=(am-r+R)/(a-j). The same R enters with opposite signs.",
+          "R202:r_audit_inversion recovers its original point result only on the independence/zero-R branch. The coherent R203 dependent twin reverses the naive direction and is excluded only by this additional premise.",
+          "R202:r_three_domain_stop remains a stopping rule: even exact V recovery does not provide V-to-T class-conditional transport. A residual set yields an even weaker V conclusion, never a stronger T conclusion.",
+          "R203's covariance identity K=pi(1-pi)(a-c)Delta+R agrees algebraically with the repaired inversion and needs no correction to its core theorem."
+        ],
+        "affected_closure": {
+          "seed_ids": [
+            "R202:AUDIT_INVERSION_RESULT",
+            "R202:CONDITIONAL_NONDIFFERENTIALITY",
+            "R202:r_audit_inversion"
+          ],
+          "syntactic_forward_dependency_ids": [
+            "R202:AUDIT_INVERSION_RESULT",
+            "R202:CONDITIONAL_NONDIFFERENTIALITY",
+            "R202:THREE_DOMAIN_STOP_RULE",
+            "R202:r_audit_inversion",
+            "R202:r_three_domain_stop"
+          ],
+          "affected_node_ids": [
+            "R202:AUDIT_INVERSION_RESULT",
+            "R202:CONDITIONAL_NONDIFFERENTIALITY",
+            "R202:THREE_DOMAIN_STOP_RULE"
+          ],
+          "affected_rule_ids": [
+            "R202:r_audit_inversion",
+            "R202:r_three_domain_stop"
+          ],
+          "adjacent_nondeductive_context_ids": [
+            "R202:ctx_C1",
+            "R202:ctx_R157",
+            "R202:ctx_U1"
+          ],
+          "warning": "This is a syntactic over-approximation for review routing, not proof reconstruction or actual premise discharge. Context links never propagate deduction.",
+          "completed_map_ids_requiring_replacement": [],
+          "completed_map_forward_dependents": []
+        }
+      },
+      "enabled_as_established_premises": false
+    }
+  ],
+  "scientific_promotion": false,
+  "audit_depth_status": "AUDIT_INCOMPLETE",
+  "scope": "All 38 pending identities from the pinned current-state and available canonical registries; not a claim that every unregistered archive file has been rediscovered."
+}

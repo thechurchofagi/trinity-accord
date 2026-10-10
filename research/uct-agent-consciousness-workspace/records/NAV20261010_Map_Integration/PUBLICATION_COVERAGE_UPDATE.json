@@ -1,0 +1,14 @@
+{
+  "coverage_version": "UCT-PUB-v1.0.31",
+  "changed_scientific_claim_ids": [],
+  "newly_covered_claim_ids": [],
+  "reason_no_change": "Navigation-only integration; raw claim source bytes, exact published editions and publication coverage ledger unchanged. Existing guarded corrections already recorded in SCU are displayed, not new scientific corrections.",
+  "checked_sources": [
+    "PUBLICATION_COVERAGE.json",
+    "CURRENT_STATE.json",
+    "UCT_FORMAL_GRAPH_MODULES.json"
+  ],
+  "main_branch_observed": "7b6634f67c38caa2726c64d7f70e32ff35dc8353",
+  "scope": "Existing local publication coverage reused; no new full public-deposit or priority audit.",
+  "manuscript_decision": "NOT_APPLICABLE_NAVIGATION_ONLY"
+}

@@ -1,0 +1,115 @@
+{
+  "base_commit": "0ef07e2e92d4b7279b1c324abc31fd76650bbcd1",
+  "registries": {
+    "CURRENT_STATE.json": {
+      "before_count": 38,
+      "missing": [],
+      "after_count": 38
+    },
+    "FORMAL_MAP_EXTENSION_INDEX.json": {
+      "before_count": 33,
+      "missing": [
+        "A3O20261010",
+        "A3Q20261010",
+        "A3R20261010",
+        "CTD3-20261010",
+        "A3V20261010"
+      ],
+      "after_count": 38
+    },
+    "RESEARCH_REGISTRY.json": {
+      "before_count": 36,
+      "missing": [
+        "CTD20261010",
+        "A3R20261010"
+      ],
+      "after_count": 38
+    },
+    "UCT_FORMAL_GRAPH_MODULES.json": {
+      "before_count": 25,
+      "missing": [
+        "MPC20261010",
+        "CBI20261010",
+        "EIP20261010",
+        "DVC20261010",
+        "A3S20261010",
+        "A3P20261010",
+        "A3U20261010",
+        "A3M20261010",
+        "A3N20261010",
+        "A3O20261010",
+        "A3Q20261010",
+        "A3R20261010",
+        "A3V20261010"
+      ],
+      "after_count": 38
+    },
+    "RESEARCH_SESSION_LOG_INDEX.json": {
+      "before_count": 35,
+      "missing": [
+        "A3Q20261010",
+        "A3R20261010",
+        "A3V20261010"
+      ],
+      "after_count": 38
+    }
+  },
+  "effective_correction_targets": [
+    {
+      "checkpoint": "R194-CPP-20261009",
+      "target_id": "R194:COMPONENT_COUNT",
+      "overlay": "records/SCU20261010_Source_Consumer_Protocols/corrections/R194_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "historical_source_preserved": true
+    },
+    {
+      "checkpoint": "R194-CPP-20261009",
+      "target_id": "R194:r_component_count",
+      "overlay": "records/SCU20261010_Source_Consumer_Protocols/corrections/R194_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "historical_source_preserved": true
+    },
+    {
+      "checkpoint": "R194-CPP-20261009",
+      "target_id": "R194:RELATIVE_ALIGNMENT",
+      "overlay": "records/SCU20261010_Source_Consumer_Protocols/corrections/R194_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "historical_source_preserved": true
+    },
+    {
+      "checkpoint": "R201-ROTM-20261010",
+      "target_id": "R201:STRICTNESS_COUNTERMODELS",
+      "overlay": "records/SCU20261010_Source_Consumer_Protocols/corrections/R201_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "historical_source_preserved": true
+    },
+    {
+      "checkpoint": "R201-ROTM-20261010",
+      "target_id": "R201:r_strictness_witnesses",
+      "overlay": "records/SCU20261010_Source_Consumer_Protocols/corrections/R201_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "historical_source_preserved": true
+    },
+    {
+      "checkpoint": "R202-TMAB-20261010",
+      "target_id": "R202:CONDITIONAL_NONDIFFERENTIALITY",
+      "overlay": "records/SCU20261010_Source_Consumer_Protocols/corrections/R202_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "historical_source_preserved": true
+    },
+    {
+      "checkpoint": "R202-TMAB-20261010",
+      "target_id": "R202:AUDIT_INVERSION_RESULT",
+      "overlay": "records/SCU20261010_Source_Consumer_Protocols/corrections/R202_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "historical_source_preserved": true
+    },
+    {
+      "checkpoint": "R202-TMAB-20261010",
+      "target_id": "R202:r_audit_inversion",
+      "overlay": "records/SCU20261010_Source_Consumer_Protocols/corrections/R202_EFFECTIVE_CORRECTION_OVERLAY.json",
+      "historical_source_preserved": true
+    }
+  ],
+  "pending_identity_count": 38,
+  "object_counts": {
+    "node": 360,
+    "rule": 163,
+    "context": 188,
+    "application": 16
+  },
+  "scientific_graph_unchanged": true
+}

@@ -1,12 +1,30 @@
 # UCT 最高研究指导：原理论优先、局部体验保留、每步全图复核
 
-**稳定入口：** [START_HERE.md](START_HERE.md) → [统一地图](UCT_FORMAL_MAP.md) → [全部候选](PENDING_RESEARCH.md)。科学接续及下一题以 CURRENT_STATE.json 为准；历史逐轮通知见[整理前指南](integration/UCT-INTEGRATION-v1.0.0/history/RESEARCH_MASTER_GUIDE.md)。本次只整理导航，以下政策正文保持原样。
+# 当前科学接续 A3V20261010：并行选项影响与活跃政策证据分开，返回身体熟悉感
+
+[研究稿](records/A3V20261010_Concurrent_Liveness_and_Familiarity/RESEARCH_NOTE.md) · [中文交接](records/A3V20261010_Concurrent_Liveness_and_Familiarity/HANDOFF_ZH.md) · [地图审计](records/A3V20261010_Concurrent_Liveness_and_Familiarity/MAP_AUDIT.md) · [审查回应](records/A3V20261010_Concurrent_Liveness_and_Familiarity/REVIEW_RESPONSE.md)。指定PMd延迟到达案例首先缺实际LiveJoin；后续人类肌电证据限制普遍单计划推论，但不同系统不能拼成SPC联合前提。有效R173保留历史坐标规则不含SPC，熟悉单路线可继续正面解释；特定H桥接仍OPEN。完成图v1.1.2、C1/U1及全部审查OPEN不变，0/0/0停用应用，无新发表。
+
+下一题：在固定实际身体路线粒度与消费关系下，独立签定可错的身体熟悉感端点，比较保留历史B_ret与当下协调B_fit；分开线索熟悉、反应流畅、归属报告、能动性判断。不能分离就保留未决，不延长选择器证书支线。保存事实以本轮PERSISTENCE_RECEIPT.json为准；以下历史不删改。
+
+---
+
+**当前科学接续（A3R20261010）：** A3R完成A3Q所留的同实例活跃输家—分辨—调度合同：`LiveJoin AND LocalRead AND Mediate`必须同时成立；调度、时延和未验证公共日志不能替代局部读入及调度中介。256配置/512回合有限模型给出旁路记录器观测双胞胎；证书有界充分而非普遍必要。无实际安装、H识别或新完成图前提。下一题只做一个具体动作系统的分辨端口验证与保活切断/重放可实现性。见[A3R交接](records/A3R20261010_Selector_Participation_Contract/HANDOFF_ZH.md)。本提示仅同步接续，不修改本指南政策正文。
+
+**当前科学接续（A3Q20261010）：** A3Q将A3O的实际选择消费收窄为实际事件祖先链，并把它与已安装图的支配关系分开；有限模型给出双向非蕴含。无实际安装、H识别或新完成图前提。下一题只做同实例活跃输家—分辨—调度的干预读出合同。见[A3Q交接](records/A3Q20261010_Selector_Ancestry_Dominance/HANDOFF_ZH.md)。本提示仅同步接续，不修改本指南政策正文。
+
+**当前研究接续（A3N20261010）：** 并发 CTD v0.2 已完整保留。A3N 将 A3M 的粗粒度流畅拆为内部选择流畅 `L_sel` 与外显运动学流畅 `L_kin`。机器人引导/扰动可构造 `R≠L_kin`，但尚未构造 `R≠L_sel`；每格独有的辅助干预签名可拟合全部16个二元端点表。下一题只做固定路由粒度下的真实 `R≠L_sel` 交叉及两种机制复现，不把平滑轨迹当成内部流畅或 `H`。见 [A3N交接](records/A3N20261010_Route_Fluency_Crossing/HANDOFF_ZH.md)。完成图v1.1.2、C1/U1和全部OPEN不变；覆盖为v1.0.29。
+
+**当前核验接续（CTD v0.2）：** 用户要求继续深入后，已完成18页噪声来源识别论文、公开数据审计及条件联合读数定理。见[交接](records/CTD20261010_Cross_Task_Intervention_v02/HANDOFF_ZH.md)、[成稿决定](records/CTD20261010_Cross_Task_Intervention_v02/MANUSCRIPT_DECISION.json)及[审计](records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_AUDIT.md)。候选40项全停用；完成图v1.1.2、C1/U1、全部OPEN不变；覆盖UCT-PUB-v1.0.28，无新DOI。原v0.1与并发A3M的独立身体H主问题继续保留。以下最高指导正文的优先级不变。
 
 **政策 ID：POLICY-20261008-WHOLE-MAP-PERSISTENCE；版本 2.3；修订日期：2026-10-09。**
+
+**CTD v1.0.0 发表导航：** [DOI](https://doi.org/10.5281/zenodo.23279189)、[真实公开回读收据](records/CTD20261010_Noise_Identifiability_v10/publication-record.json)与[交接](records/CTD20261010_Noise_Identifiability_v10/HANDOFF_ZH.md)。覆盖UCT-PUB-v1.0.31；这是方法与既有数据二次分析预印本。CTD2/CTD3候选均停用，完成图、C1/U1、全部OPEN及当前A3O20261010科学主线和下一问题不变。本条只同步发表导航，不修改最高研究政策。
 
 本文件落实刘烘炬本次明确指令，是本工作区每次研究开始前及每个实质步骤完成后必须遵循的最高研究方法指南。它约束研究选题、概念解释、推理、查新、成果判断、反馈与保存；不是一条新增物理定律，也不是新的意识公设。后续作者明确修订优先，须记录修改及影响。轮次交接、自动任务中的旧“下一步”、新增审查意见均不得默默覆盖本指南的核心要求。
 
 **一句话原则：先盘点全部成果及已发表主张的覆盖，判断剩余净增量；不足就选择具体缺口突破，足够就完成可引用论文；每一步实质增量须接入地图，逐项复核全图并重推受影响结论，日志、地图和发表覆盖台账同步更新，保存且向作者反馈后继续。**
+
+**前一已核验接续（历史）：** SCU v1.0.1已公开（[DOI 10.5281/zenodo.23272690](https://doi.org/10.5281/zenodo.23272690)）；DVC20261010已完成18人公开数据重算、装置消费者采样/commit合同和有限模型，候选停用，尚无新硬件或人体干预。保留并发MPC/CBI/EIP；完成图v1.1.2不变，覆盖v1.0.21。下一步只接入一个可访问的实际载体—事件—消费者—时序装置并独立核验所选端点，失败即停止对应推断；人体结论另需一个命名消费者的可行选择性差异探针。入口见 [MASTER_INDEX.md](MASTER_INDEX.md)、[CURRENT_STATE.json](CURRENT_STATE.json)及[records/DVC20261010_Device_Consumer_Validation/MAP_AUDIT.md](records/DVC20261010_Device_Consumer_Validation/MAP_AUDIT.md)。
 
 原总指南的全部字节保存在同目录 [RESEARCH_MASTER_GUIDE_BEFORE_POLICY20261008.md](RESEARCH_MASTER_GUIDE_BEFORE_POLICY20261008.md)，其相对链接仍有效；其中详细流程、历史成果、失败、有效修订和存储要求按与本指南相容的部分继续适用。现行科研进展以最新版 [HANDOFF.md](HANDOFF.md)、[MASTER_INDEX.md](MASTER_INDEX.md)、[REVIEW_SUPERVISION.md](REVIEW_SUPERVISION.md) 和真实提交为准，不以本文件冻结轮次。请勿再次将大量轮次摘要堆到本政策之前而掩盖最高原则。
 
@@ -213,3 +231,12 @@ UCT I v1.2 的 C1 是普遍的、逐实际过程的结构—体验同一公设�
 - [TA25](records/R153_Complete_Formal_Map_20261007/sources/experience-intelligence-self-v1.0.md)，DOI 10.5281/zenodo.23206492。
 
 本次任务是核对基础并固化研究规程，不是完成全图的全量语义证明。大 JSON 图的完整可处理读取未完成，不能据部分源文声称所有节点均已审查。实际读取及限制见 [政策采用记录](records/POLICY20261008_Whole_Map_and_Persistent_Experience/ADOPTION_RECORD.md)。本节说明本次操作范围，不降低此后每实质步骤全图检查的要求。
+
+# Current checkpoint addendum — R197
+
+Latest disabled research checkpoint: `records/R197_Fallible_Endpoint_Orientation_20261010/`. Use independently signed fallible evidence rather than requiring a nonverbal medium; keep evidence, target, actual use and experience structure distinct. Completed map remains UCT-MAP-v1.1.2.
+
+# Latest checkpoint note — A3M20261010 (pending disabled)
+
+A3M returns from bounded instrumentation/statistics to the bodily-familiarity H question. It proves a support ceiling: retained-route use `R`, cue familiarity `Q` and present fluency `L` are aliased on the natural diagonal, and route/fluency remain aliased whenever `R=L`. A star calibration plus held-out mismatch design gives distinct pure-candidate predictions, but no independent H endpoint or physical off-diagonal installation is yet supplied. Treat `records/A3M20261010_Bodily_Familiarity_Invariance/HANDOFF_ZH.md` as the latest research handoff after concurrent CTD. C1/U1, actual-organization typing and all OPEN review obligations are unchanged.
+

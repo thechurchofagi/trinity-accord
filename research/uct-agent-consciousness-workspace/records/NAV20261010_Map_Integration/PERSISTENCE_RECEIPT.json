@@ -1,0 +1,9 @@
+{
+  "id": "NAV20261010",
+  "version": "UCT-INTEGRATION-v1.0.0",
+  "source_commit": "0ef07e2e92d4b7279b1c324abc31fd76650bbcd1",
+  "github_status": "PREPARED_NOT_YET_COMMITTED",
+  "library_status": "PENDING",
+  "completion_scope": "NAVIGATION_AND_DISABLED_CANDIDATE_ASSEMBLY",
+  "scientific_promotion": false
+}

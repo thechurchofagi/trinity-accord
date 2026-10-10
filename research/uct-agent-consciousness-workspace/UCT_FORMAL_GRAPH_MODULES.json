@@ -143,11 +143,23 @@
       "candidate_map_id": "UCT-MAP-v1.0.1-AC20261009-candidate.1",
       "path": "records/AC20261009_Action_Calibration/MAP_EXTENSION.json",
       "git_blob_sha": "db6f9cef3191cc6c04f83c40146810ac39ba7d37",
-      "status": "PENDING_CHECKPOINT",
+      "status": "PENDING_CHECKPOINT_DISABLED",
       "enabled_as_established_premises": false,
       "compatibility_audit": "records/AC20261009_Action_Calibration/RUN_RECEIPT.json",
       "handoff": "records/AC20261009_Action_Calibration/CURRENT_HANDOFF_ZH.md",
-      "instruction": "Historical candidate ID retained. Rebase future semantic promotion on current v1.1.0 and create a higher completed version; do not overwrite this release or confuse the old candidate number with the current map."
+      "instruction": "Historical candidate ID retained. Rebase future semantic promotion on current v1.1.0 and create a higher completed version; do not overwrite this release or confuse the old candidate number with the current map.",
+      "title": "{",
+      "source_sha256": "c2544dce8abc0e3867a4eb603528a880e17017d72bc34551fe0b8eaefb1b817a",
+      "candidate_counts": {
+        "nodes": 26,
+        "rules": 11,
+        "contexts": 8,
+        "applications": 0
+      },
+      "family": "calibration",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/AC20261009_Action_Calibration/MAP_EXTENSION.json"
     },
     {
       "id": "IL20261009",
@@ -155,23 +167,47 @@
       "candidate_map_id": "UCT-MAP-v1.1.1-IL20261009-candidate.1",
       "path": "records/IL20261009_Intervention_Locality/MAP_EXTENSION.json",
       "git_blob_sha": "6e18c39a7a31733c6a47337d75d007b0782f4c81",
-      "status": "PENDING_MAP",
+      "status": "PENDING_CHECKPOINT_DISABLED",
       "audit_status": "AUDIT_INCOMPLETE",
       "enabled_as_established_premises": false,
       "compatibility_audit": "records/IL20261009_Intervention_Locality/RUN_RECEIPT.json",
       "handoff": "records/IL20261009_Intervention_Locality/CURRENT_HANDOFF_ZH.md",
-      "instruction": "Exact reset normal form, minimal LTI behavior twin and1/11 local-imitation gap are saved conditional results. Current whole-map fresh semantic integration is incomplete. Keep this module disabled until current v1.1.0 is completely restored/reviewed and affected conclusions rederived. No actual or named-phenomenal premise is discharged by storage."
+      "instruction": "Exact reset normal form, minimal LTI behavior twin and1/11 local-imitation gap are saved conditional results. Current whole-map fresh semantic integration is incomplete. Keep this module disabled until current v1.1.0 is completely restored/reviewed and affected conclusions rederived. No actual or named-phenomenal premise is discharged by storage.",
+      "title": "{",
+      "source_sha256": "abdfa604c5dc6011668c180869a0798a49249237bd45f32707fe8f92c3d70ff2",
+      "candidate_counts": {
+        "nodes": 26,
+        "rules": 13,
+        "contexts": 7,
+        "applications": 0
+      },
+      "family": "calibration",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/IL20261009_Intervention_Locality/MAP_EXTENSION.json"
     },
     {
       "id": "ONLINE-AC-PROBE-20261009",
       "result_version": "0.2.0",
       "path": "records/ONLINE_AC_20261009_Dynamic_Calibration/MAP_EXTENSION_PENDING.json",
       "sha256": "d33d61cdfcab5f54d14c9afbdb91ca210137408077d61eb5724fb31bc125b8dc",
-      "status": "PENDING_MAP",
+      "status": "PENDING_CHECKPOINT_DISABLED",
       "audit_status": "LOCAL_REVIEW_ONLY_FULL_MAP_INTEGRATION_NOT_COMPLETED",
       "enabled_as_established_premises": false,
       "handoff": "records/ONLINE_AC_20261009_Dynamic_Calibration/HANDOFF_ZH.md",
-      "instruction": "Specific online calibration result; static AC is independently pending. Read the exact contract, proof and independent review before any semantic integration. Do not treat this entry as completed v1.1.3."
+      "instruction": "Specific online calibration result; static AC is independently pending. Read the exact contract, proof and independent review before any semantic integration. Do not treat this entry as completed v1.1.3.",
+      "title": "{",
+      "source_sha256": "d33d61cdfcab5f54d14c9afbdb91ca210137408077d61eb5724fb31bc125b8dc",
+      "candidate_counts": {
+        "nodes": 12,
+        "rules": 4,
+        "contexts": 4,
+        "applications": 0
+      },
+      "family": "calibration",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/ONLINE_AC_20261009_Dynamic_Calibration/MAP_EXTENSION_PENDING.json"
     },
     {
       "id": "R189-HACA-20261009",
@@ -183,12 +219,19 @@
       "publication_coverage_version": "UCT-PUB-v1.0.1",
       "candidate_counts": {
         "nodes": 11,
-        "active_conditional_rules": 6,
-        "nondeductive_context_links": 3
+        "rules": 6,
+        "contexts": 3,
+        "applications": 0
       },
       "compatibility_audit": "records/R189_Higher_Arity_Context_Access_20261009/MAP_COMPATIBILITY_AUDIT.json",
       "handoff": "records/R189_Higher_Arity_Context_Access_20261009/HANDOFF_ZH.md",
-      "instruction": "Structural compatibility with v1.1.2 passed. Semantic adoption, actual installation/use, named phenomenal interpretation and reviewer disposition remain open; do not count this module in completed-release totals."
+      "instruction": "Structural compatibility with v1.1.2 passed. Semantic adoption, actual installation/use, named phenomenal interpretation and reviewer disposition remain open; do not count this module in completed-release totals.",
+      "title": "{",
+      "source_sha256": "1944e1ffbad4bac1883ed7fe2752ef1547484c0f43236eb04c9115850dff1f59",
+      "family": "calibration",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/R189_Higher_Arity_Context_Access_20261009/MAP_EXTENSION.json"
     },
     {
       "id": "R190-PCBC-20261009",
@@ -200,12 +243,19 @@
       "publication_coverage_version": "UCT-PUB-v1.0.2",
       "candidate_counts": {
         "nodes": 10,
-        "active_conditional_rules": 5,
-        "nondeductive_context_links": 4
+        "rules": 5,
+        "contexts": 4,
+        "applications": 0
       },
       "compatibility_audit": "records/R190_Practical_Centering_Bearer_Coupling_20261009/MAP_COMPATIBILITY_AUDIT.json",
       "handoff": "records/R190_Practical_Centering_Bearer_Coupling_20261009/HANDOFF_ZH.md",
-      "instruction": "Structural compatibility with v1.1.2 passed. PC and BDCC are independent only in the declared finite construction; actual installation, named phenomenal interpretation, semantic adoption and reviewer disposition remain open."
+      "instruction": "Structural compatibility with v1.1.2 passed. PC and BDCC are independent only in the declared finite construction; actual installation, named phenomenal interpretation, semantic adoption and reviewer disposition remain open.",
+      "title": "Practical Centering and Bearer-Directed Consequence Coupling",
+      "source_sha256": "6f14a9ff44f8402f29348196bd3aa308a4cc6a71786dc194f5ab4d8817e0dcfa",
+      "family": "self",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/R190_Practical_Centering_Bearer_Coupling_20261009/MAP_EXTENSION.json"
     },
     {
       "id": "R191-OCCA-20261009",
@@ -217,13 +267,20 @@
       "publication_coverage_version": "UCT-PUB-v1.0.3",
       "candidate_counts": {
         "nodes": 11,
-        "active_conditional_rules": 5,
-        "nondeductive_context_links": 4
+        "rules": 5,
+        "contexts": 4,
+        "applications": 0
       },
       "compatibility_audit": "records/R191_Conflict_Conditioned_Authorization_20261009/MAP_COMPATIBILITY_AUDIT.json",
       "handoff": "records/R191_Conflict_Conditioned_Authorization_20261009/HANDOFF_ZH.md",
       "instruction": "Structural compatibility with v1.1.2 passed. OCCA/LGRU actual installation, named phenomenal interpretation, semantic adoption and reviewer disposition remain open; do not count this module in completed totals.",
-      "additional_open_normalization_obligation": "r_occa and r_history require a later exact actual-instance guard review; definition/schema availability is not actual premise truth."
+      "additional_open_normalization_obligation": "r_occa and r_history require a later exact actual-instance guard review; definition/schema availability is not actual premise truth.",
+      "title": "Online Conflict-Conditioned Authorization at a Fixed Practical Center",
+      "source_sha256": "e5803dc71b56c3c594d6f34b699b7ad3fae425e3e418d841060f55c1bc22b0d6",
+      "family": "self",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/R191_Conflict_Conditioned_Authorization_20261009/MAP_EXTENSION.json"
     },
     {
       "id": "R192-CTBI-20261009",
@@ -235,29 +292,19 @@
       "publication_coverage_version": "UCT-PUB-v1.0.4",
       "candidate_counts": {
         "nodes": 9,
-        "active_conditional_rules": 6,
-        "nondeductive_context_links": 4
+        "rules": 6,
+        "contexts": 4,
+        "applications": 0
       },
       "compatibility_audit": "records/R192_Complete_Twin_Bridge_Invariance_20261009/MAP_COMPATIBILITY_AUDIT.json",
       "handoff": "records/R192_Complete_Twin_Bridge_Invariance_20261009/HANDOFF_ZH.md",
-      "instruction": "Structural compatibility with v1.1.2 passed. The signature ladder is a scope/protocol correction; B_fam, actual installation, semantic adoption and reviewer disposition remain open. Do not count this module in completed totals."
-    },
-    {
-      "id": "R205-ASC-20261010",
-      "result_version": "ASC-RESULT-v0.1.0",
-      "base_release": "UCT-MAP-v1.1.2",
-      "path": "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/MAP_EXTENSION.json",
-      "status": "PENDING_CHECKPOINT_DISABLED",
-      "enabled_as_established_premises": false,
-      "publication_coverage_version": "UCT-PUB-v1.0.17",
-      "candidate_counts": {
-        "nodes": 13,
-        "active_conditional_rules": 5,
-        "nondeductive_context_links": 7
-      },
-      "compatibility_audit": "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/MAP_COMPATIBILITY_AUDIT.json",
-      "handoff": "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/HANDOFF_ZH.md",
-      "instruction": "Single-read recovery and cancellation counterexample are scoped model results. Do not turn structural coverage into actual/H admission or completed-map promotion."
+      "instruction": "Structural compatibility with v1.1.2 passed. The signature ladder is a scope/protocol correction; B_fam, actual installation, semantic adoption and reviewer disposition remain open. Do not count this module in completed totals.",
+      "title": "Complete-Twin Bridge Invariance and the Signature-Ladder Repair",
+      "source_sha256": "a546ebd83ddae5125411241a8cd5b074579df00cb6b98ecfab98b24e134047b6",
+      "family": "bridge",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/R192_Complete_Twin_Bridge_Invariance_20261009/MAP_EXTENSION.json"
     },
     {
       "id": "R193-NCI-20261009",
@@ -270,13 +317,20 @@
       "publication_coverage_version": "UCT-PUB-v1.0.5",
       "candidate_counts": {
         "nodes": 9,
-        "active_conditional_rules": 6,
-        "nondeductive_context_links": 5
+        "rules": 6,
+        "contexts": 5,
+        "applications": 0
       },
       "compatibility_audit": "records/R193_Nonreport_Contrast_Identifiability_20261009/MAP_COMPATIBILITY_AUDIT.json",
       "handoff": "records/R193_Nonreport_Contrast_Identifiability_20261009/HANDOFF_ZH.md",
       "navigation_added_by": "SCU20261010",
-      "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present."
+      "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present.",
+      "title": "Nonreport Contrast Constraints and the Remaining Familiar-Mineness Polarity",
+      "source_sha256": "977e423d80c54bff29c9f45c1402fffaf0b559b3b4d819ff78bb750587f54001",
+      "family": "bridge",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/R193_Nonreport_Contrast_Identifiability_20261009/MAP_EXTENSION.json"
     },
     {
       "id": "R194-CPP-20261009",
@@ -289,14 +343,21 @@
       "publication_coverage_version": "UCT-PUB-v1.0.6",
       "candidate_counts": {
         "nodes": 9,
-        "active_conditional_rules": 6,
-        "nondeductive_context_links": 5
+        "rules": 6,
+        "contexts": 5,
+        "applications": 0
       },
       "compatibility_audit": "records/R194_Cross_Population_Polarity_20261009/MAP_COMPATIBILITY_AUDIT.json",
       "handoff": "records/R194_Cross_Population_Polarity_20261009/HANDOFF_ZH.md",
       "navigation_added_by": "SCU20261010",
       "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present.",
-      "effective_correction_index": "records/SCU20261010_Source_Consumer_Protocols/corrections/EFFECTIVE_CORRECTION_INDEX.json"
+      "effective_correction_index": "records/SCU20261010_Source_Consumer_Protocols/corrections/EFFECTIVE_CORRECTION_INDEX.json",
+      "title": "Cross-Population Alignment and the Remaining Phenomenal Polarity",
+      "source_sha256": "2827d07d0a279e9d86b0bf7044dc414702043ec0cb366ebca6c5b23119273c1b",
+      "family": "bridge",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/R194_Cross_Population_Polarity_20261009/MAP_EXTENSION.json"
     },
     {
       "id": "R195-IPA-20261009",
@@ -309,13 +370,20 @@
       "publication_coverage_version": "UCT-PUB-v1.0.7",
       "candidate_counts": {
         "nodes": 9,
-        "active_conditional_rules": 6,
-        "nondeductive_context_links": 5
+        "rules": 6,
+        "contexts": 5,
+        "applications": 0
       },
       "compatibility_audit": "records/R195_Interventional_Polarity_Anchor_20261009/MAP_COMPATIBILITY_AUDIT.json",
       "handoff": "records/R195_Interventional_Polarity_Anchor_20261009/HANDOFF_ZH.md",
       "navigation_added_by": "SCU20261010",
-      "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present."
+      "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present.",
+      "title": "Interventional Causal Orientation Is Not Yet Phenomenal Polarity",
+      "source_sha256": "a8e8185ef922e353de9e7384842238ceb3777d15a224743a51f5c0dc67ec56c5",
+      "family": "bridge",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/R195_Interventional_Polarity_Anchor_20261009/MAP_EXTENSION.json"
     },
     {
       "id": "R196-TPD-20261009",
@@ -328,13 +396,20 @@
       "publication_coverage_version": "UCT-PUB-v1.0.8",
       "candidate_counts": {
         "nodes": 9,
-        "active_conditional_rules": 6,
-        "nondeductive_context_links": 5
+        "rules": 6,
+        "contexts": 5,
+        "applications": 0
       },
       "compatibility_audit": "records/R196_Two_Axis_Phenomenal_Calibration_20261009/MAP_COMPATIBILITY_AUDIT.json",
       "handoff": "records/R196_Two_Axis_Phenomenal_Calibration_20261009/HANDOFF_ZH.md",
       "navigation_added_by": "SCU20261010",
-      "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present."
+      "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present.",
+      "title": "Two-Axis Dissociation Separates Structural Tracking from Phenomenal Direction",
+      "source_sha256": "c76edc4aeb640419ab4b0badbd2daa81c6c0cb876cf728a183ef17cf34c93f38",
+      "family": "bridge",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/R196_Two_Axis_Phenomenal_Calibration_20261009/MAP_EXTENSION.json"
     },
     {
       "id": "R197-FEO-20261010",
@@ -347,13 +422,20 @@
       "publication_coverage_version": "UCT-PUB-v1.0.9",
       "candidate_counts": {
         "nodes": 9,
-        "active_conditional_rules": 5,
-        "nondeductive_context_links": 5
+        "rules": 5,
+        "contexts": 5,
+        "applications": 0
       },
       "compatibility_audit": "records/R197_Fallible_Endpoint_Orientation_20261010/MAP_COMPATIBILITY_AUDIT.json",
       "handoff": "records/R197_Fallible_Endpoint_Orientation_20261010/HANDOFF_ZH.md",
       "navigation_added_by": "SCU20261010",
-      "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present."
+      "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present.",
+      "title": "Fallible Endpoint Orientation Without a Nonverbality Requirement",
+      "source_sha256": "a686e03922a8c2cf5d175dcec53a49df5e5b01f5652c3693ebd35642817d47a6",
+      "family": "bridge",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/R197_Fallible_Endpoint_Orientation_20261010/MAP_EXTENSION.json"
     },
     {
       "id": "R198-SPNS-20261010",
@@ -366,13 +448,20 @@
       "publication_coverage_version": "UCT-PUB-v1.0.10",
       "candidate_counts": {
         "nodes": 8,
-        "active_conditional_rules": 5,
-        "nondeductive_context_links": 5
+        "rules": 5,
+        "contexts": 5,
+        "applications": 0
       },
       "compatibility_audit": "records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/MAP_COMPATIBILITY_AUDIT.json",
       "handoff": "records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/HANDOFF_ZH.md",
       "navigation_added_by": "SCU20261010",
-      "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present."
+      "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present.",
+      "title": "The Self-Profile Non-Scalarization Result",
+      "source_sha256": "4870660b8de3bfa8c4f8db15c75002dcb614d517c3fc415a35f28ad980653440",
+      "family": "self",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/R198_SELF_PROFILE_NONSCALARIZATION_2026-10-10/MAP_EXTENSION.json"
     },
     {
       "id": "R199-CPC-20261010",
@@ -385,13 +474,20 @@
       "publication_coverage_version": "UCT-PUB-v1.0.11",
       "candidate_counts": {
         "nodes": 8,
-        "active_conditional_rules": 5,
-        "nondeductive_context_links": 5
+        "rules": 5,
+        "contexts": 5,
+        "applications": 0
       },
       "compatibility_audit": "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/MAP_COMPATIBILITY_AUDIT.json",
       "handoff": "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/HANDOFF_ZH.md",
       "navigation_added_by": "SCU20261010",
-      "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present."
+      "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present.",
+      "title": "The Continuation-Probe Ceiling for Retentive Familiarity",
+      "source_sha256": "975bdd0a502d725425d48763a6f0955ab545b63ccf3765c2d422a2b0a1cee2b5",
+      "family": "bridge",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/MAP_EXTENSION.json"
     },
     {
       "id": "R200-SCF-20261010",
@@ -404,13 +500,20 @@
       "publication_coverage_version": "UCT-PUB-v1.0.12",
       "candidate_counts": {
         "nodes": 9,
-        "active_conditional_rules": 5,
-        "nondeductive_context_links": 5
+        "rules": 5,
+        "contexts": 5,
+        "applications": 0
       },
       "compatibility_audit": "records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/MAP_COMPATIBILITY_AUDIT.json",
       "handoff": "records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/HANDOFF_ZH.md",
       "navigation_added_by": "SCU20261010",
-      "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present."
+      "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present.",
+      "title": "The Semantic Calibration Firewall for Retentive Familiarity",
+      "source_sha256": "a7cda22b0f3efa292fb9bbaa826039cb7c43ea14bf70851a9ee51825b6463272",
+      "family": "bridge",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/MAP_EXTENSION.json"
     },
     {
       "id": "R201-ROTM-20261010",
@@ -423,14 +526,21 @@
       "publication_coverage_version": "UCT-PUB-v1.0.13",
       "candidate_counts": {
         "nodes": 9,
-        "active_conditional_rules": 3,
-        "nondeductive_context_links": 5
+        "rules": 3,
+        "contexts": 5,
+        "applications": 0
       },
       "compatibility_audit": "records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/MAP_COMPATIBILITY_AUDIT.json",
       "handoff": "records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/HANDOFF_ZH.md",
       "navigation_added_by": "SCU20261010",
       "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present.",
-      "effective_correction_index": "records/SCU20261010_Source_Consumer_Protocols/corrections/EFFECTIVE_CORRECTION_INDEX.json"
+      "effective_correction_index": "records/SCU20261010_Source_Consumer_Protocols/corrections/EFFECTIVE_CORRECTION_INDEX.json",
+      "title": "{",
+      "source_sha256": "279c2761ff8755784e1007cd3d641eb26fc909d86f2f2f8a3b882488efe98788",
+      "family": "bridge",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/MAP_EXTENSION.json"
     },
     {
       "id": "R202-TMAB-20261010",
@@ -443,14 +553,21 @@
       "publication_coverage_version": "UCT-PUB-v1.0.14",
       "candidate_counts": {
         "nodes": 10,
-        "active_conditional_rules": 4,
-        "nondeductive_context_links": 5
+        "rules": 4,
+        "contexts": 5,
+        "applications": 0
       },
       "compatibility_audit": "records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/MAP_COMPATIBILITY_AUDIT.json",
       "handoff": "records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/HANDOFF_ZH.md",
       "navigation_added_by": "SCU20261010",
       "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present.",
-      "effective_correction_index": "records/SCU20261010_Source_Consumer_Protocols/corrections/EFFECTIVE_CORRECTION_INDEX.json"
+      "effective_correction_index": "records/SCU20261010_Source_Consumer_Protocols/corrections/EFFECTIVE_CORRECTION_INDEX.json",
+      "title": "{",
+      "source_sha256": "d417239cce217badaf099801d03ff064152d211c44f6b8d98d4aaa63d91fbd74",
+      "family": "bridge",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/MAP_EXTENSION.json"
     },
     {
       "id": "R203-ACD-20261010",
@@ -463,13 +580,20 @@
       "publication_coverage_version": "UCT-PUB-v1.0.15",
       "candidate_counts": {
         "nodes": 10,
-        "active_conditional_rules": 4,
-        "nondeductive_context_links": 5
+        "rules": 4,
+        "contexts": 5,
+        "applications": 0
       },
       "compatibility_audit": "records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/MAP_COMPATIBILITY_AUDIT.json",
       "handoff": "records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/HANDOFF_ZH.md",
       "navigation_added_by": "SCU20261010",
-      "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present."
+      "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present.",
+      "title": "{",
+      "source_sha256": "43510d7cc5c4595a355cd0e15d008d50efa9a6872f33bc9c9bc18a070e36fa8e",
+      "family": "bridge",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/R203_AUDITED_COVARIANCE_DIRECTION_20261010/MAP_EXTENSION.json"
     },
     {
       "id": "R204-SAU-20261010",
@@ -482,13 +606,44 @@
       "publication_coverage_version": "UCT-PUB-v1.0.16",
       "candidate_counts": {
         "nodes": 11,
-        "active_conditional_rules": 5,
-        "nondeductive_context_links": 5
+        "rules": 5,
+        "contexts": 5,
+        "applications": 0
       },
       "compatibility_audit": "records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/MAP_COMPATIBILITY_AUDIT.json",
       "handoff": "records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/HANDOFF_ZH.md",
       "navigation_added_by": "SCU20261010",
-      "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present."
+      "instruction": "Existing historical pending record registered to repair navigation drift. Registration is not semantic adoption or actual-premise truth. Apply indexed effective corrections where present.",
+      "title": "{",
+      "source_sha256": "c5c0b0cf669b089855509384bb2b8ee9e9d61be64afb6765cd4d5718e4c0b388",
+      "family": "routing",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/R204_SENSORIMOTOR_ALIGNMENT_AND_USE_20261010/MAP_EXTENSION.json"
+    },
+    {
+      "id": "R205-ASC-20261010",
+      "result_version": "ASC-RESULT-v0.1.0",
+      "base_release": "UCT-MAP-v1.1.2",
+      "path": "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "publication_coverage_version": "UCT-PUB-v1.0.17",
+      "candidate_counts": {
+        "nodes": 13,
+        "rules": 5,
+        "contexts": 7,
+        "applications": 0
+      },
+      "compatibility_audit": "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/MAP_COMPATIBILITY_AUDIT.json",
+      "handoff": "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/HANDOFF_ZH.md",
+      "instruction": "Single-read recovery and cancellation counterexample are scoped model results. Do not turn structural coverage into actual/H admission or completed-map promotion.",
+      "title": "{",
+      "source_sha256": "fd34ee26a7ef861b4037d30bd07c609445700c1e50c57cf7521b3e1181b63cea",
+      "family": "routing",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/R205_ACTION_SOURCE_CONSUMER_CORRESPONDENCE_20261010/MAP_EXTENSION.json"
     },
     {
       "id": "SCU20261010",
@@ -501,12 +656,152 @@
       "publication_coverage_version": "UCT-PUB-v1.0.18",
       "candidate_counts": {
         "nodes": 23,
-        "active_conditional_rules": 8,
-        "nondeductive_context_links": 16
+        "rules": 8,
+        "contexts": 16,
+        "applications": 0
       },
       "compatibility_audit": "records/SCU20261010_Source_Consumer_Protocols/MAP_AUDIT.md",
       "handoff": "records/SCU20261010_Source_Consumer_Protocols/HANDOFF_ZH.md",
-      "instruction": "Full typed SCU contract locally reviewed. All base statements/premises/relationships were read, but exact deeper unread scope remains open. No candidate, correction or actual premise is promoted."
+      "instruction": "Full typed SCU contract locally reviewed. All base statements/premises/relationships were read, but exact deeper unread scope remains open. No candidate, correction or actual premise is promoted.",
+      "title": "Matched Behavior and Source Use",
+      "source_sha256": "64768a5dcd3fa1f90eaf4f9b19b0ea58afdcf96a821f025216ef9ebaa67ff257",
+      "family": "routing",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/SCU20261010_Source_Consumer_Protocols/MAP_EXTENSION.json"
+    },
+    {
+      "id": "MPC20261010",
+      "title": "Motor and Proprioceptive Consumers",
+      "path": "records/MPC20261010_Motor_Proprioceptive_Consumers/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "source_sha256": "4da927878d333d026ec874637b3c146763406bf8b4557bfba49b59eb9a384e1a",
+      "candidate_counts": {
+        "nodes": 7,
+        "rules": 4,
+        "contexts": 5,
+        "applications": 0
+      },
+      "family": "device",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "handoff": "records/MPC20261010_Motor_Proprioceptive_Consumers/HANDOFF_ZH.md",
+      "source": "records/MPC20261010_Motor_Proprioceptive_Consumers/MAP_EXTENSION.json"
+    },
+    {
+      "id": "CBI20261010",
+      "title": "Consumer-Relative Branch Isolation",
+      "path": "records/CBI20261010_Consumer_Branch_Isolation/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "source_sha256": "f21b3b33a2316f7373ec05814a66795542ea5472e10b1651f4873eaaa8fc7905",
+      "candidate_counts": {
+        "nodes": 7,
+        "rules": 4,
+        "contexts": 5,
+        "applications": 0
+      },
+      "family": "device",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "handoff": "records/CBI20261010_Consumer_Branch_Isolation/HANDOFF_ZH.md",
+      "source": "records/CBI20261010_Consumer_Branch_Isolation/MAP_EXTENSION.json"
+    },
+    {
+      "id": "EIP20261010",
+      "title": "Exoskeleton Instrumentation Package",
+      "path": "records/EIP20261010_Exoskeleton_Instrumentation/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "source_sha256": "64a8b1f82bb92c6158f42a264b92541c7c0ce7cf27a289639d9a54f1301a8adc",
+      "candidate_counts": {
+        "nodes": 6,
+        "rules": 3,
+        "contexts": 5,
+        "applications": 0
+      },
+      "family": "device",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "handoff": "records/EIP20261010_Exoskeleton_Instrumentation/HANDOFF_ZH.md",
+      "source": "records/EIP20261010_Exoskeleton_Instrumentation/MAP_EXTENSION.json"
+    },
+    {
+      "id": "DVC20261010",
+      "title": "Device consumer validation",
+      "path": "records/DVC20261010_Device_Consumer_Validation/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "source_sha256": "c35c38d5046dcf3aa30646e2fd27237f53a75505922be9ae1854c15e90e8db29",
+      "candidate_counts": {
+        "nodes": 24,
+        "rules": 6,
+        "contexts": 15,
+        "applications": 0
+      },
+      "family": "device",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "handoff": "records/DVC20261010_Device_Consumer_Validation/HANDOFF_ZH.md",
+      "source": "records/DVC20261010_Device_Consumer_Validation/MAP_EXTENSION.json"
+    },
+    {
+      "id": "A3S20261010",
+      "title": "Area 3a named-consumer selectivity",
+      "path": "records/A3S20261010_Area3a_Selectivity/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "source_sha256": "1b1c435869ee7a09792460b11ab718006f3aa7fbdfc1190af86517797dbe5a7c",
+      "candidate_counts": {
+        "nodes": 7,
+        "rules": 3,
+        "contexts": 5,
+        "applications": 0
+      },
+      "family": "device",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "handoff": "records/A3S20261010_Area3a_Selectivity/HANDOFF_ZH.md",
+      "source": "records/A3S20261010_Area3a_Selectivity/MAP_EXTENSION.json"
+    },
+    {
+      "id": "A3P20261010",
+      "title": "Area-3a crossed response and actual-use probe boundary",
+      "path": "records/A3P20261010_Area3a_Crossed_Probe/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "source_sha256": "75337f473f4642f4f14fd6dc19dc0ecf259f9a0315e371d8ac3ebb1166ef1665",
+      "candidate_counts": {
+        "nodes": 7,
+        "rules": 2,
+        "contexts": 5,
+        "applications": 0
+      },
+      "family": "device",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "handoff": "records/A3P20261010_Area3a_Crossed_Probe/HANDOFF_ZH.md",
+      "source": "records/A3P20261010_Area3a_Crossed_Probe/MAP_EXTENSION.json"
+    },
+    {
+      "id": "A3U20261010",
+      "title": "Area-3a endpoint causal firewall",
+      "path": "records/A3U20261010_Area3a_Use_Endpoint/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "source_sha256": "0d51e3aa0ba032a2d837b57dab4a9ca50a06ccc22ed5187262e55dc4f36fa077",
+      "candidate_counts": {
+        "nodes": 7,
+        "rules": 3,
+        "contexts": 5,
+        "applications": 0
+      },
+      "family": "device",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "handoff": "records/A3U20261010_Area3a_Use_Endpoint/HANDOFF_ZH.md",
+      "source": "records/A3U20261010_Area3a_Use_Endpoint/MAP_EXTENSION.json"
     },
     {
       "id": "A3L20261010",
@@ -518,13 +813,20 @@
       "enabled_as_established_premises": false,
       "candidate_counts": {
         "nodes": 0,
-        "active_conditional_rules": 0,
-        "nondeductive_context_links": 0
+        "rules": 0,
+        "contexts": 0,
+        "applications": 6
       },
       "publication_coverage_version": "UCT-PUB-v1.0.26",
       "compatibility_audit": "records/A3L20261010_Rescue_Learning/MAP_AUDIT.md",
       "handoff": "records/A3L20261010_Rescue_Learning/HANDOFF_ZH.md",
-      "instruction": "Application guards and open H candidates map to existing nodes; no new deductions; full deep semantic proof remains incomplete."
+      "instruction": "Application guards and open H candidates map to existing nodes; no new deductions; full deep semantic proof remains incomplete.",
+      "title": "Rescue, learned compensation, and familiar bodily use",
+      "source_sha256": "4bf6dad21c18b367abc82b6462a2253208ecc74d50d41430f6949f38074fd081",
+      "family": "device",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/A3L20261010_Rescue_Learning/MAP_EXTENSION.json"
     },
     {
       "id": "CTD20261010",
@@ -536,13 +838,38 @@
       "enabled_as_established_premises": false,
       "candidate_counts": {
         "nodes": 13,
-        "active_conditional_rules": 4,
-        "nondeductive_context_links": 7
+        "rules": 4,
+        "contexts": 7,
+        "applications": 0
       },
       "publication_coverage_version": "UCT-PUB-v1.0.27",
       "compatibility_audit": "records/CTD20261010_Cross_Task_Intervention/MAP_AUDIT.md",
       "handoff": "records/CTD20261010_Cross_Task_Intervention/HANDOFF_ZH.md",
-      "instruction": "Class definitions, mathematical applications and secondary observations are separated. Empirical nodes are not deductive rule premises. No actual consumer or phenomenal calibration is admitted."
+      "instruction": "Class definitions, mathematical applications and secondary observations are separated. Empirical nodes are not deductive rule premises. No actual consumer or phenomenal calibration is admitted.",
+      "title": "CTD20261010",
+      "source_sha256": "27f5ee9afbab13f8652b6eded67745c2b0a5ab2272c79ece92f18c9f6b1bdedc",
+      "family": "psychometrics",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0"
+    },
+    {
+      "id": "A3M20261010",
+      "title": "Bodily familiarity route-cue-fluency invariance",
+      "path": "records/A3M20261010_Bodily_Familiarity_Invariance/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "source_sha256": "53c2707f43367569da9752c7de18832081a6d1d750beb2ee8be70b122b1da8f1",
+      "candidate_counts": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0,
+        "applications": 5
+      },
+      "family": "familiarity",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "handoff": "records/A3M20261010_Bodily_Familiarity_Invariance/HANDOFF_ZH.md",
+      "source": "records/A3M20261010_Bodily_Familiarity_Invariance/MAP_EXTENSION.json"
     },
     {
       "id": "CTD2-20261010",
@@ -555,13 +882,95 @@
       "enabled_as_established_premises": false,
       "candidate_counts": {
         "nodes": 20,
-        "active_conditional_rules": 7,
-        "nondeductive_context_links": 13
+        "rules": 7,
+        "contexts": 13,
+        "applications": 0
       },
       "publication_coverage_version": "UCT-PUB-v1.0.28",
       "compatibility_audit": "records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_AUDIT.md",
       "handoff": "records/CTD20261010_Cross_Task_Intervention_v02/HANDOFF_ZH.md",
-      "instruction": "Source-audit observations are nondeductive; Gaussian identification requires its complete paired-sample contract. No experience bridge is admitted."
+      "instruction": "Source-audit observations are nondeductive; Gaussian identification requires its complete paired-sample contract. No experience bridge is admitted.",
+      "title": "Identifiability of Noise Sources in Bodily Judgments",
+      "source_sha256": "f00d9af53cca8935f08b6dd979e0f4d28cf5754bc7e9ffb696eb8d7be6095a2f",
+      "family": "psychometrics",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "source": "records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_EXTENSION.json"
+    },
+    {
+      "id": "A3N20261010",
+      "title": "Route-selection-kinematic fluency crossing and auxiliary alias limit",
+      "path": "records/A3N20261010_Route_Fluency_Crossing/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "source_sha256": "5e0ddccb483a3b2262bc968ff5f9e8c8358d25a74f90fb202ca452591498e014",
+      "candidate_counts": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0,
+        "applications": 1
+      },
+      "family": "familiarity",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "handoff": "records/A3N20261010_Route_Fluency_Crossing/HANDOFF_ZH.md",
+      "source": "records/A3N20261010_Route_Fluency_Crossing/MAP_EXTENSION.json"
+    },
+    {
+      "id": "A3O20261010",
+      "title": "{",
+      "path": "records/A3O20261010_Route_Grain_Selection_Crossing/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "source_sha256": "6b0b3a282841291712956a7b1157f644a9d1502ed34a5ef58ac609616b767b9b",
+      "candidate_counts": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0,
+        "applications": 1
+      },
+      "family": "familiarity",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "handoff": "records/A3O20261010_Route_Grain_Selection_Crossing/HANDOFF_ZH.md",
+      "source": "records/A3O20261010_Route_Grain_Selection_Crossing/MAP_EXTENSION.json"
+    },
+    {
+      "id": "A3Q20261010",
+      "title": "{",
+      "path": "records/A3Q20261010_Selector_Ancestry_Dominance/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "source_sha256": "8722c23ac8e55c76e7ab3d0706ee6d6f9997d730e6abeb1f8e258791fec1b7cd",
+      "candidate_counts": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0,
+        "applications": 1
+      },
+      "family": "familiarity",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "handoff": "records/A3Q20261010_Selector_Ancestry_Dominance/HANDOFF_ZH.md",
+      "source": "records/A3Q20261010_Selector_Ancestry_Dominance/MAP_EXTENSION.json"
+    },
+    {
+      "id": "A3R20261010",
+      "title": "A3R20261010",
+      "path": "records/A3R20261010_Selector_Participation_Contract/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "source_sha256": "505947448467ded3431a3bb5ef627fb00283c6340ede86f057190d85a9b2c504",
+      "candidate_counts": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0,
+        "applications": 1
+      },
+      "family": "familiarity",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "handoff": "records/A3R20261010_Selector_Participation_Contract/HANDOFF_ZH.md"
     },
     {
       "id": "CTD3-20261010",
@@ -574,8 +983,9 @@
       "enabled_as_established_premises": false,
       "candidate_counts": {
         "nodes": 5,
-        "active_conditional_rules": 2,
-        "nondeductive_context_links": 6
+        "rules": 2,
+        "contexts": 6,
+        "applications": 0
       },
       "publication_coverage_version": "UCT-PUB-v1.0.31",
       "compatibility_audit": "records/CTD20261010_Noise_Identifiability_v10/governance/CTD3_MAP_AUDIT.md",
@@ -600,7 +1010,31 @@
         "doi_resolution_source": "records/CTD20261010_Noise_Identifiability_v10/DOI_RESOLUTION.json",
         "publication_workflow_snapshot_unmodified": true
       },
-      "actual_application_status": "OPEN"
+      "actual_application_status": "OPEN",
+      "title": "CTD3-20261010",
+      "source_sha256": "71789380a7f5c4c8a9bc1b04099efb602a1d9fc39dc793e92d4e62105dd70ecd",
+      "family": "psychometrics",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0"
+    },
+    {
+      "id": "A3V20261010",
+      "title": "Concurrent option influence and competition-independent retentive bodily familiarity",
+      "path": "records/A3V20261010_Concurrent_Liveness_and_Familiarity/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "source_sha256": "5527ce9861dea9773a98db8bed7ba59de564c8d109f89fda1783bdc4449bdccd",
+      "candidate_counts": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0,
+        "applications": 1
+      },
+      "family": "familiarity",
+      "navigation_index": "UNIFIED_RESEARCH_INDEX.json",
+      "navigation_integration": "UCT-INTEGRATION-v1.0.0",
+      "handoff": "records/A3V20261010_Concurrent_Liveness_and_Familiarity/HANDOFF_ZH.md",
+      "source": "records/A3V20261010_Concurrent_Liveness_and_Familiarity/RESEARCH_NOTE.md"
     }
   ],
   "pending_rebase_target": "UCT-MAP-v1.1.2; prior pending instructions and candidate version labels remain historical source metadata.",
@@ -693,5 +1127,13 @@
       "SCU-OPEN-R191-NORMALIZATION",
       "SCU-AUDIT-DEPTH"
     ]
+  },
+  "navigation_integration": {
+    "version": "UCT-INTEGRATION-v1.0.0",
+    "entry": "UNIFIED_RESEARCH_INDEX.json",
+    "overview": "UCT_FORMAL_MAP.md",
+    "report": "records/NAV20261010_Map_Integration/HANDOFF_ZH.md",
+    "scientific_promotion": false,
+    "pending_count": 38
   }
 }

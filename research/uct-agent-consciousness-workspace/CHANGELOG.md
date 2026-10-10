@@ -1,3 +1,7 @@
+# UCT-INTEGRATION-v1.0.0 — unified map navigation, 2026-10-10
+
+Reconciled five pending registries to the same 38 identities; grouped seven question families; assembled disabled candidate view with eight guarded existing corrections; archived old navigation byte-for-byte. Scientific v1.1.2 and publication coverage UCT-PUB-v1.0.31 unchanged. See records/NAV20261010_Map_Integration/HANDOFF_ZH.md.
+
 <!-- CTD_V10_PUBLICATION:10.5281/zenodo.23279189 -->
 # 最新发表：CTD v1.0.0；科学主线保留 A3O20261010
 

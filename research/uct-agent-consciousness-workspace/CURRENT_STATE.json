@@ -506,5 +506,20 @@
     "workflow": "research-paper-26-v100-ots-arweave-scheduler.yml",
     "schedule_utc": "07 * * * *",
     "paid_attempts": 0
+  },
+  "navigation_integration": {
+    "version": "UCT-INTEGRATION-v1.0.0",
+    "entry": "UNIFIED_RESEARCH_INDEX.json",
+    "overview": "UCT_FORMAL_MAP.md",
+    "report": "records/NAV20261010_Map_Integration/HANDOFF_ZH.md",
+    "scientific_promotion": false,
+    "pending_count": 38
+  },
+  "latest_navigation_activity": {
+    "id": "NAV20261010",
+    "version": "UCT-INTEGRATION-v1.0.0",
+    "work_log": "records/NAV20261010_Map_Integration/WORK_LOG.md",
+    "handoff": "records/NAV20261010_Map_Integration/HANDOFF_ZH.md",
+    "scope": "NAVIGATION_AND_DISABLED_CANDIDATE_ASSEMBLY"
   }
 }
