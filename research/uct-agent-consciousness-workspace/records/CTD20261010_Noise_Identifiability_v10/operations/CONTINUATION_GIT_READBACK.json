@@ -1,0 +1,272 @@
+{
+  "schema": "ctd-preservation-continuation-git-readback/1",
+  "state": "ALL_42_CASE_FILES_REMOTE_FETCH_BYTE_READBACK_PASS",
+  "verified_at_utc": "2026-10-10T11:12:07.889120+00:00",
+  "research_branch": "uct-agent-consciousness-workspace",
+  "base_commit": "32fad857bb609f101159d0ac179c397b8bf2599e",
+  "commit": "12f0fa04e7d49f7fb8e7463bf4aa55a5c436d397",
+  "tree": "fbdb31e7044b253bfeeb33c6c9ff74bab4a6122c",
+  "file_count": 42,
+  "files": [
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/HANDOFF_ZH.md",
+      "bytes": 3372,
+      "sha256": "c0e028397e0629e7235a533832ee35209d2f9d315236132f20b54da44700e0dd",
+      "git_blob": "c50d867ad3e7adfdda6e77e9b3455e6ac7096055"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/POST_PUBLICATION_SYNC.md",
+      "bytes": 2847,
+      "sha256": "54ea14c61caccb72e55b9e7e41dfc2978007d17a715a80532bbe610781987b0d",
+      "git_blob": "feaf24e07982650d00a2b64f271c5a0d936efd50"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/CONTINUATION.md",
+      "bytes": 6813,
+      "sha256": "847610d4ef1b07878e65db8fc9ce7afaeb1bbd129a4f3db3fd9a6a1cf90c8ddf",
+      "git_blob": "64fb5af9600d5941785b4a328eaa8ed4075bbffa"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/CONTINUATION_AUTOMATION_CREATED.json",
+      "bytes": 899,
+      "sha256": "d60c3bf0ba9e76c78d29fed24e127ba1016166f8c3d36264a9290cd8e0c89bba",
+      "git_blob": "b2e983e5f596714d92c5245b08898ed4038f91d2"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/CONTINUATION_CONCURRENCY_RECONCILIATION.json",
+      "bytes": 2692,
+      "sha256": "66b4fbb0f3222cd05e3a048a2329e71a5020646ae2552a83541ca32a52c74689",
+      "git_blob": "26372ef05223992a8ec040a9734676cfcdfcd7cd"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/CONTINUATION_SOURCE_IDENTITIES.json",
+      "bytes": 13598,
+      "sha256": "226893677ce0fb74f1b33aa1be29122349452a7006364bc3141aeb0dfe761cb0",
+      "git_blob": "a5b6f822cd5863143bfb4e17345bfda1b68cb3e3"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/CONTINUATION_TASK_PROMPT.txt",
+      "bytes": 6231,
+      "sha256": "0c5c7b80433fb4ae0a08c4e26d8f241c11d0853662f115da409a4b03a543e7ef",
+      "git_blob": "bfa76ed8518f8a28805ec87a812121185b211c19"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/LIBRARY_MASTER_INITIAL_OTS_REPLACE.json",
+      "bytes": 439,
+      "sha256": "2fee653596a7cddb0cd9b75ae7322cdd532d5b52429fe52b5772394fb4be9108",
+      "git_blob": "2b61328a62584cdd017b9f25e622daa0ad1a6a44"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/OPS_CHECKPOINT_GIT_READBACK.json",
+      "bytes": 547,
+      "sha256": "2c06fdee16f5f2ae391240609281cc7d9b5c428530c3ae2508dd7d60dd3d6a88",
+      "git_blob": "28073c2daf422649dc0b9fdd4115555865304473"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/PRESERVATION_WAITING_1057.json",
+      "bytes": 2999,
+      "sha256": "81d64fb044578d121a30543814a398b3c3e1e4a7570ba5a8783406f0b2831bcf",
+      "git_blob": "d6849409a685e9c15c2cda59c9df9cee9ff1ad3e"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/SCHEDULER_HEALTH_1058.json",
+      "bytes": 1055,
+      "sha256": "9c6c57415763d0f380171f531f52d16860caa525aec7c790d8deea8e4c0ea50a",
+      "git_blob": "4986f8baa4dc2774233aa6ef8e841707322e0762"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/chain_context/ROOT_ANCHOR_TRANSACTION_OBSERVATION_1050.json",
+      "bytes": 1688,
+      "sha256": "7ab40961d457baa3879574e880c260445f1971e5816fa83b1e202144753a422c",
+      "git_blob": "d0d1ee5a9231cd72db832c6d27aca68b3280fdee"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/chain_context/ROOT_CHAIN_OBSERVATION.json",
+      "bytes": 375,
+      "sha256": "1ba8366923632ed49a267d26da97c4cb0e9b002152f9f0bf5ef029ea22f6969e",
+      "git_blob": "2fe9dd14a4eee890d9dc55bcdd9010bed04de9e1"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/chain_context/ROOT_CHAIN_OBSERVATION_1048.json",
+      "bytes": 854,
+      "sha256": "b82eca17593019d31634618227169215cef10bfe2c4649dd0bfb6dc0181511fc",
+      "git_blob": "8e548bf49c78a9df8312f9a9b37472e3eb67072f"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/chain_context/ROOT_CHAIN_OBSERVATION_1048_TRACE.jsonl",
+      "bytes": 608,
+      "sha256": "fba02e98c59445e0bb55e9ed655ef9565bbc564b897ae6ff7de7ec6ea19d9484",
+      "git_blob": "67232f20761b3f31b96b6333e0847795ca0b12f5"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/chain_context/ROOT_CHAIN_OBSERVATION_TRACE.jsonl",
+      "bytes": 1992,
+      "sha256": "8463f501f7de7f74fc76f48ce8e96820e25d06239603826db55a3edce4bb0d02",
+      "git_blob": "85c4441b064be2b59c538307b246a84667d3ba3d"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/second_calendar_watch/WATCH_RECEIPT.json",
+      "bytes": 19684,
+      "sha256": "f7360fc99b8e5b442e5763637b58e05fdadcf848cd4b676d5113c15014924e95",
+      "git_blob": "e7463536ab6b52359bff33570040185057d7fa00"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/second_calendar_watch/WATCH_RECEIPT_BEFORE_LOG_ANNOTATION.json",
+      "bytes": 11290,
+      "sha256": "fb4b40491a39fa95656738c5c4ac9950e5c55487f0b45749b49659c466a73458",
+      "git_blob": "4bccffb725c42260af02a39581c9efaffcf95323"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/second_calendar_watch/attempt_01/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "bytes": 770,
+      "sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+      "git_blob": "0cc78145f10bf4c842bdd7c8c0fc151790633bd1"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/second_calendar_watch/attempt_01/upgrade.log",
+      "bytes": 409,
+      "sha256": "33d70e5bd6c1f8693a570683851289834f16457eb36453c999065540b183b96c",
+      "git_blob": "2bf7f94c3dc61d3c14f46fbf64a6d4dabf727359"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/second_calendar_watch/attempt_02/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "bytes": 770,
+      "sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+      "git_blob": "0cc78145f10bf4c842bdd7c8c0fc151790633bd1"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/second_calendar_watch/attempt_02/upgrade.log",
+      "bytes": 409,
+      "sha256": "33d70e5bd6c1f8693a570683851289834f16457eb36453c999065540b183b96c",
+      "git_blob": "2bf7f94c3dc61d3c14f46fbf64a6d4dabf727359"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/second_calendar_watch/attempt_03/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "bytes": 770,
+      "sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+      "git_blob": "0cc78145f10bf4c842bdd7c8c0fc151790633bd1"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/second_calendar_watch/attempt_03/upgrade.log",
+      "bytes": 409,
+      "sha256": "33d70e5bd6c1f8693a570683851289834f16457eb36453c999065540b183b96c",
+      "git_blob": "2bf7f94c3dc61d3c14f46fbf64a6d4dabf727359"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/second_calendar_watch/attempt_04/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "bytes": 770,
+      "sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+      "git_blob": "0cc78145f10bf4c842bdd7c8c0fc151790633bd1"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/second_calendar_watch/attempt_04/upgrade.log",
+      "bytes": 409,
+      "sha256": "33d70e5bd6c1f8693a570683851289834f16457eb36453c999065540b183b96c",
+      "git_blob": "2bf7f94c3dc61d3c14f46fbf64a6d4dabf727359"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/second_calendar_watch/attempt_05/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "bytes": 770,
+      "sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+      "git_blob": "0cc78145f10bf4c842bdd7c8c0fc151790633bd1"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/second_calendar_watch/attempt_05/upgrade.log",
+      "bytes": 409,
+      "sha256": "33d70e5bd6c1f8693a570683851289834f16457eb36453c999065540b183b96c",
+      "git_blob": "2bf7f94c3dc61d3c14f46fbf64a6d4dabf727359"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/second_calendar_watch/attempt_06/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "bytes": 770,
+      "sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+      "git_blob": "0cc78145f10bf4c842bdd7c8c0fc151790633bd1"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/second_calendar_watch/attempt_06/upgrade.log",
+      "bytes": 409,
+      "sha256": "33d70e5bd6c1f8693a570683851289834f16457eb36453c999065540b183b96c",
+      "git_blob": "2bf7f94c3dc61d3c14f46fbf64a6d4dabf727359"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/second_calendar_watch/attempt_07/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "bytes": 770,
+      "sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+      "git_blob": "0cc78145f10bf4c842bdd7c8c0fc151790633bd1"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/second_calendar_watch/attempt_07/upgrade.log",
+      "bytes": 487,
+      "sha256": "fa6dbf2b25350d038a5ba1a6c801c521704656795769b78142b10c4d5f17d39f",
+      "git_blob": "b4de70346b74e80e7cea2552e23a0f632f968c0d"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/second_calendar_watch/attempt_08/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "bytes": 770,
+      "sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+      "git_blob": "0cc78145f10bf4c842bdd7c8c0fc151790633bd1"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/second_calendar_watch/attempt_08/upgrade.log",
+      "bytes": 487,
+      "sha256": "fa6dbf2b25350d038a5ba1a6c801c521704656795769b78142b10c4d5f17d39f",
+      "git_blob": "b4de70346b74e80e7cea2552e23a0f632f968c0d"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/second_calendar_watch/attempt_09/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "bytes": 770,
+      "sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+      "git_blob": "0cc78145f10bf4c842bdd7c8c0fc151790633bd1"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/second_calendar_watch/attempt_09/upgrade.log",
+      "bytes": 487,
+      "sha256": "fa6dbf2b25350d038a5ba1a6c801c521704656795769b78142b10c4d5f17d39f",
+      "git_blob": "b4de70346b74e80e7cea2552e23a0f632f968c0d"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/second_calendar_watch/attempt_10/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "bytes": 770,
+      "sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+      "git_blob": "0cc78145f10bf4c842bdd7c8c0fc151790633bd1"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/second_calendar_watch/attempt_10/upgrade.log",
+      "bytes": 565,
+      "sha256": "bcc680fa751cfd50323035ee1d10cdcddb4809b42cf7e4ec21e21102f6e8fbc3",
+      "git_blob": "06179b8a2c6db68961679c97bafbd7b1032c31b6"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/verification/VERIFY_PUBLIC_PRESERVATION_REVIEW.md",
+      "bytes": 5418,
+      "sha256": "79370d2a100b69381ac03d5e1fd20ab044fb483302e6ad3d41586af05fef06a5",
+      "git_blob": "347402c5e328643de6e1e9a0ef3eebad3afa6bb3"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/verification/tools/verify_public_preservation.py",
+      "bytes": 11385,
+      "sha256": "2e15bdbb194a590ad05640674d3a74894659d90303693de25a5529330bc25bf5",
+      "git_blob": "82becbdfafc7f2be58638073cb98f55b44dc0632"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/watch_sources/monitor_existing_calendars.py",
+      "bytes": 5846,
+      "sha256": "8ccae39dd4fb3ee333f608680919af6685f0b5951a01fa8f547bb1ea59db41e8",
+      "git_blob": "241e78f0cc10f9e6a5de8dce50542af6da28ab50"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/operations/watch_sources/monitor_existing_calendars_20m.py",
+      "bytes": 5952,
+      "sha256": "05e4cca4d357100b7e6805b733f98310982747a3dd419bda2ce816fcc3675000",
+      "git_blob": "b52dc80d6b120423d3aae44a844c22e6206af127"
+    }
+  ],
+  "root_navigation_byte_unchanged": true,
+  "concurrent_A3Q_and_v90_receipts_preserved": true,
+  "local_worktree_clean": true,
+  "partial_checkout_index_omission_flags_restored": 11195,
+  "shared_sparse_configuration_modified": false,
+  "ots_bitcoin_verified": false,
+  "arweave_uploaded": false,
+  "scope": "Persistence of waiting evidence and reviewed future completion tools; no new scientific or preservation-completion claim."
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "ctd-waiting-master-update-local/1",
+  "state": "READY_FOR_VERSION_PROTECTED_REPLACEMENT",
+  "expected_current_version": 90,
+  "base_bytes": 747225,
+  "base_sha256": "a83725c5990694ed62d1e7662487f7d225d8385cac844b74f5568735d1d7f1bc",
+  "output_path": "/workspace/scratch/5b73aae6b1e4/master_ctd_wait/UCT_Hourly_Research_Master_Handoff.md",
+  "output_bytes": 750722,
+  "output_sha256": "af660d879b3563b590545c1f0fbc89566fb0e1b0b5f09fce5183248d6298f4a5",
+  "old_bytes_preserved_as_suffix": true,
+  "readback_report_path": "/workspace/scratch/5b73aae6b1e4/deliverables_v10/CTD_TA26_Preservation_Waiting_Readback_20261010.json",
+  "readback_report_sha256": "0a8b97f387a5647140f50b201f37d9acb33c75d44db7e428731808c50be1d27c",
+  "research_commit": "12f0fa04e7d49f7fb8e7463bf4aa55a5c436d397",
+  "ots_state": "PENDING_BITCOIN",
+  "arweave_state": "NOT_STARTED"
+}

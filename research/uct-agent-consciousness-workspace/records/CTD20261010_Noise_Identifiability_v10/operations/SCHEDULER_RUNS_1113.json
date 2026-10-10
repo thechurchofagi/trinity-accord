@@ -1,0 +1,23 @@
+{
+  "schema": "ctd-workflow-run-observation/1",
+  "observed_at_utc": "2026-10-10T11:13:02.920469+00:00",
+  "endpoint": "https://api.github.com/repos/thechurchofagi/trinity-accord/actions/workflows/380430855/runs?per_page=5",
+  "authenticated": false,
+  "http_status": 200,
+  "total_count": 1,
+  "runs": [
+    {
+      "id": 38044262845,
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "run_attempt": 1,
+      "head_sha": "d1258e8b20adfdb9f90b3ca851df1abe15887615",
+      "head_branch": "main",
+      "created_at": "2026-10-10T10:15:20Z",
+      "updated_at": "2026-10-10T10:16:42Z",
+      "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/38044262845",
+      "jobs_url": "https://api.github.com/repos/thechurchofagi/trinity-accord/actions/runs/38044262845/jobs"
+    }
+  ]
+}
