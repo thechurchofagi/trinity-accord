@@ -1,0 +1,22 @@
+{
+  "schema": "trinityaccord.ctd.final-git-readback.v1",
+  "checked_at_utc": "2026-10-10T12:54:12Z",
+  "repository": "thechurchofagi/trinity-accord",
+  "branch": "uct-agent-consciousness-workspace",
+  "completion_commit": "d71fea6adeb8660bdbb614f1d61bbfa21ca4fe24",
+  "parent_commit": "b4c2fbd78951236ed44799a47af79ad4e4228bdf",
+  "expected_tree_sha1": "7526b49a50973bf930ebc63a724e3a0d9b41da85",
+  "fetched_tree_sha1": "7526b49a50973bf930ebc63a724e3a0d9b41da85",
+  "transport": "fresh unauthenticated git fetch of the public branch",
+  "checked_paths_count": 24,
+  "all_paths_byte_identical": true,
+  "tree_match": true,
+  "source_identity_manifest_sha256": "044f7139e23aca7fd35f881936f2c93d183ea1b6c019f8ba67b29c8c08823bee",
+  "final_chain_receipt_sha256": "f83b6cb74c1b2aad73ccd8d699486b87faea00d39306e8ead8a03593ccfd5bbb",
+  "root_arweave_readback_sha256": "a9ad580430822910e3e2eff31563f4b6770aacc64a690bc2b6e57e72290fea42",
+  "publication_bundle_receipt_sha256": "4b92bd378ff7e8b3e11cacbd26a3ebc5c21ef81bfc131a6e50efc5504116e8be",
+  "arweave_payload_sha256": "5104443441dde47e6185b24735e5596b292d433d8a4a48b6e535e6480b938e4c",
+  "ots_proof_sha256": "640be99b62a1c2689b836496199d26097c7deabc92e5b12b2b9fda583787291d",
+  "result": "PASS",
+  "scope_note": "This receipt covers the first completion commit and its 24 changed paths. The receipt itself is added by a subsequent fail-closed commit and is separately fetched after publication."
+}
