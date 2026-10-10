@@ -1,0 +1,26 @@
+{
+  "schema": "uct-round-record-v1",
+  "round_id": "A3Y20261010_Measurand_Identity_Barrier",
+  "version": "A3Y-MEASURAND-v0.1.0",
+  "date": "2026-10-10",
+  "user_goal": "Continue the UCT experience-intelligence-self programme from actual organization, make a substantive advance on bodily/action-related mineness, and preserve C1/U1, local-whole coexistence, and the distinctions among experience, intelligence, self-related feeling, conceptual self, and report.",
+  "one_concrete_unresolved_question": "Can a no-gold-standard multi-indicator or latent-class design independently establish the directional C_H relation from J_H to present enacted H_way, or can it identify only an unnamed common measurand Z whose identity with H_way remains an extra bridge premise?",
+  "related_nodes_and_fixed_sources": [
+    "A:C1",
+    "A:U1",
+    "R157:SEMANTIC_RESIDUAL",
+    "R157:MINENESS_BRIDGE_SCHEMA",
+    "R173:RETENTIVE_EXPERIENTIAL_COORDINATE",
+    "R173:FAMILIAR_MINENESS_BOUNDARY",
+    "records/A3X20261010_Action_Familiarity_Content_Admissibility/RESEARCH_NOTE.md",
+    "records/R197_Fallible_Endpoint_Orientation_20261010/RESEARCH_NOTE.md",
+    "records/R200_SEMANTIC_CALIBRATION_AND_TRANSPORT_20261010/RESEARCH_NOTE.md",
+    "records/R201_CALIBRATION_TRANSPORT_MARGIN_20261010/RESEARCH_NOTE.md",
+    "records/R202_TARGET_MIXTURE_AUDIT_BRIDGE_20261010/RESEARCH_NOTE.md",
+    "records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md",
+    "records/R153_Complete_Formal_Map_20261007/sources/experience-intelligence-self-v1.0.md"
+  ],
+  "planned_addition_or_correction": "Construct and verify a two-population, two-indicator exact witness in which the Hui-Walter-style observable tables and latent-class fit are unchanged while H_way is respectively identical to, independent of, or opposed to the statistically recovered latent measurand. Use the witness to state the exact boundary between statistical identifiability and phenomenal-target identity, then decide whether C_H is discharged or whether the route comparison must stop.",
+  "deliverable": "An English research note, exact rational checker and results, stable claim and gap ledgers, source-scope and review response, full-map compatibility audit, Chinese handoff, work log, disabled map extension, and verified GitHub plus fixed-Library persistence records.",
+  "record_timing_note": "Written after the mandatory current-state, review-ledger and predecessor-source intake, and before deriving or running the A3Y witness. The intake exposed R197-R202 as mandatory prior work, preventing duplicate novelty claims."
+}
