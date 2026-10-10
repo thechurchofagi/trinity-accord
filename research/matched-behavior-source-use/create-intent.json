@@ -1,0 +1,20 @@
+{
+  "state": "CREATE_ONCE_INTENT",
+  "report_number": "SCU-PAPER",
+  "title": "Matched Behavior and Source Use",
+  "version": "1.0.1",
+  "reservation_token": "6c6a25f8-dcff-45f6-b704-ad66d2aacb5e",
+  "source_inputs": {
+    "source-main.md": "0675c915213448be766f91bccae828674fd46403a76433bafa5bf2d04227e026",
+    "build_pdf.py": "35083a7efaaf34abc67bd524a17b4a88e4102303c662eda47e54435c74283aa5",
+    "reproducibility-v1.0.1.zip": "80c6839b05da8ca3095f3d2941f837a2bcd8cd81d66e294eb0b4a0f4d6191c06",
+    "REVIEW-AND-SOURCES.md": "2fc6d415930309d4fce40b0cf7a00836b1faf9ffb654455ddf5d7168be40f91d",
+    "publication.py": "657d7662e7b4151f8939d750a398c15d536954e2abc3d5b6ccab7159aff62c2d",
+    "pdf_style.tex": "dbf3c624b535823c3adc3d3c1d221ba7c5363b42dfbe9ccaf3e87a2bc7264d88",
+    "figures/source_resolution.png": "82649b57c61b60e90be2d90a4dc0a1885072a31d6e3d0f0cab81676ea182d1d7",
+    "figures/source_resolution.svg": "7291f15460bd19c8a66542a76e8b7e5762125db420ed5c46e9bd2430f677964c"
+  },
+  "source_commit": "67f6fe6337a35c8af30327fbd7bbfb14dabbace0",
+  "workflow_trigger_commit": "67f6fe6337a35c8af30327fbd7bbfb14dabbace0",
+  "workflow_run_id": "38013972883"
+}
