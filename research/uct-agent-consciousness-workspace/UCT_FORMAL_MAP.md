@@ -1,4 +1,8 @@
-# 当前接续：CTD v0.2 已成稿；完成地图仍为 UCT-MAP-v1.1.2
+# 当前接续：A3N20261010；完成地图仍为 UCT-MAP-v1.1.2
+
+A3N 为0节点/0规则/0上下文的停用应用修正：区分选择流畅`L_sel`与运动学流畅`L_kin`，并记录四格辅助签名别名和限定XOR复现不变性。见[全图兼容审计](records/A3N20261010_Route_Fluency_Crossing/MAP_AUDIT.md)。完成计数、图哈希、C1/U1与全部OPEN不变；CTD v0.2候选完整保留。
+
+# 前一接续：CTD v0.2 已成稿；完成地图仍为 UCT-MAP-v1.1.2
 
 继续遵循[最高研究指导](RESEARCH_MASTER_GUIDE.md)。本轮按用户要求深入修订未发表CTD论文，现形成18页[英文稿](records/CTD20261010_Cross_Task_Intervention_v02/manuscript/noise-identifiability-bodily-judgments-v0.2.0.pdf)、[中文交接](records/CTD20261010_Cross_Task_Intervention_v02/HANDOFF_ZH.md)、[工作日志](records/CTD20261010_Cross_Task_Intervention_v02/WORK_LOG.md)和[成稿决定](records/CTD20261010_Cross_Task_Intervention_v02/MANUSCRIPT_DECISION.json)。公开数据审计与条件识别结果达到值得外部方法评议的程度；没有新配对人体数据、UCT实证确认、新DOI或投稿。
 

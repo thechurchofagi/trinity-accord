@@ -1,4 +1,17 @@
-# 当前接续：CTD v0.2 已成稿；完成地图仍为 UCT-MAP-v1.1.2
+# 最新接续 A3N20261010；完成图仍为 UCT-MAP-v1.1.2
+
+- [中文交接](records/A3N20261010_Route_Fluency_Crossing/HANDOFF_ZH.md)
+- [英文研究稿](records/A3N20261010_Route_Fluency_Crossing/RESEARCH_NOTE.md)
+- [端点与安装合同](records/A3N20261010_Route_Fluency_Crossing/ENDPOINT_AND_INSTALLATION_CONTRACT.md)
+- [精确结果](records/A3N20261010_Route_Fluency_Crossing/EXACT_RESULTS.json)
+- [声明台账](records/A3N20261010_Route_Fluency_Crossing/CLAIM_LEDGER.json)
+- [全图审计](records/A3N20261010_Route_Fluency_Crossing/MAP_AUDIT.md)
+
+核心结论：引导与扰动可以构造外显运动学层面的`R≠L_kin`，却不能自动构造内部选择层面的`R≠L_sel`；每格唯一辅助干预会与端点完全别名。A3N 0/0/0 停用应用，完成图与C1/U1不变，CTD v0.2全量保留，覆盖UCT-PUB-v1.0.29；下一步只检验真实`R≠L_sel`及跨两种机制的端点稳定性。
+
+---
+
+# 前一接续：CTD v0.2 已成稿；完成地图仍为 UCT-MAP-v1.1.2
 
 继续遵循[最高研究指导](RESEARCH_MASTER_GUIDE.md)。本轮按用户要求深入修订未发表CTD论文，现形成18页[英文稿](records/CTD20261010_Cross_Task_Intervention_v02/manuscript/noise-identifiability-bodily-judgments-v0.2.0.pdf)、[中文交接](records/CTD20261010_Cross_Task_Intervention_v02/HANDOFF_ZH.md)、[工作日志](records/CTD20261010_Cross_Task_Intervention_v02/WORK_LOG.md)和[成稿决定](records/CTD20261010_Cross_Task_Intervention_v02/MANUSCRIPT_DECISION.json)。公开数据审计与条件识别结果达到值得外部方法评议的程度；没有新配对人体数据、UCT实证确认、新DOI或投稿。
 

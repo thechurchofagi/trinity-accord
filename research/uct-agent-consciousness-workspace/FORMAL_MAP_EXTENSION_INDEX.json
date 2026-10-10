@@ -46,17 +46,19 @@
     "A3U20261010",
     "A3L20261010",
     "CTD20261010",
-    "CTD2-20261010"
+    "A3M20261010",
+    "CTD2-20261010",
+    "A3N20261010"
   ],
-  "status": "All 30 navigated checkpoints remain disabled. CTD adds13 nodes,4 conditional rules and7 nondeductive contexts only to the candidate layer. Concurrent A3L and all effective corrections are retained; no completed-graph count or actual-premise truth changes.",
+  "status": "All 33 listed pending checkpoints remain disabled. A3N adds no nodes, rules or contexts; CTD v0.2 and all effective corrections are retained. No completed-graph count or actual-premise truth changes.",
   "prior_index_commit": "2faccb45147435b67d901e64f8045cd0e31a8d2a",
   "navigation_reconciliation": {
     "source": "CURRENT_STATE.json and RESEARCH_REGISTRY.json",
     "reason": "Older extension index stopped at R190; this index now includes already recorded later checkpoints and DVC without promoting them.",
     "previous_exact_bytes": "records/DVC20261010_Device_Consumer_Validation/history/before_DVC_bd66a621/FORMAL_MAP_EXTENSION_INDEX.json"
   },
-  "latest_candidate": "records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_EXTENSION.json",
-  "latest_scoped_audit": "records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_AUDIT.md",
+  "latest_candidate": "records/A3N20261010_Route_Fluency_Crossing/MAP_EXTENSION.json",
+  "latest_scoped_audit": "records/A3N20261010_Route_Fluency_Crossing/MAP_AUDIT.md",
   "concurrent_candidate": "records/EIP20261010_Exoskeleton_Instrumentation/MAP_EXTENSION.json",
   "previous_latest_candidate_before_CTD_v02": "records/CTD20261010_Cross_Task_Intervention/MAP_EXTENSION.json",
   "ctd_v02_navigation_reconciliation": {

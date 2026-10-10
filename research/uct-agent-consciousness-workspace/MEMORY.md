@@ -1,4 +1,10 @@
-# 当前接续：CTD v0.2 已成稿；完成地图仍为 UCT-MAP-v1.1.2
+# 最新接续 A3N20261010；完成图仍为 UCT-MAP-v1.1.2
+
+[中文交接](records/A3N20261010_Route_Fluency_Crossing/HANDOFF_ZH.md) · [研究稿](records/A3N20261010_Route_Fluency_Crossing/RESEARCH_NOTE.md) · [端点/安装合同](records/A3N20261010_Route_Fluency_Crossing/ENDPOINT_AND_INSTALLATION_CONTRACT.md) · [精确结果](records/A3N20261010_Route_Fluency_Crossing/EXACT_RESULTS.json) · [地图审计](records/A3N20261010_Route_Fluency_Crossing/MAP_AUDIT.md)。A3N把流畅拆成`L_sel`与`L_kin`：机器人引导/扰动只给出部分`R≠L_kin`交叉。每格唯一辅助签名可拟合16/16端点表；两机制不变性只排除声明的XOR变化直达效应。无人体数据、无实际`R≠L_sel`、无H识别。完成图和全部OPEN不变，CTD v0.2保留，覆盖v1.0.29，HOLD独立稿。
+
+---
+
+# 前一接续：CTD v0.2 已成稿；完成地图仍为 UCT-MAP-v1.1.2
 
 继续遵循[最高研究指导](RESEARCH_MASTER_GUIDE.md)。本轮按用户要求深入修订未发表CTD论文，现形成18页[英文稿](records/CTD20261010_Cross_Task_Intervention_v02/manuscript/noise-identifiability-bodily-judgments-v0.2.0.pdf)、[中文交接](records/CTD20261010_Cross_Task_Intervention_v02/HANDOFF_ZH.md)、[工作日志](records/CTD20261010_Cross_Task_Intervention_v02/WORK_LOG.md)和[成稿决定](records/CTD20261010_Cross_Task_Intervention_v02/MANUSCRIPT_DECISION.json)。公开数据审计与条件识别结果达到值得外部方法评议的程度；没有新配对人体数据、UCT实证确认、新DOI或投稿。
 

@@ -1,4 +1,12 @@
-# 当前接续：CTD v0.2 已成稿；完成地图仍为 UCT-MAP-v1.1.2
+# 当前研究接续 — A3N20261010
+
+[中文交接](records/A3N20261010_Route_Fluency_Crossing/HANDOFF_ZH.md) · [研究稿](records/A3N20261010_Route_Fluency_Crossing/RESEARCH_NOTE.md) · [端点/安装合同](records/A3N20261010_Route_Fluency_Crossing/ENDPOINT_AND_INSTALLATION_CONTRACT.md) · [精确结果](records/A3N20261010_Route_Fluency_Crossing/EXACT_RESULTS.json) · [全图审计](records/A3N20261010_Route_Fluency_Crossing/MAP_AUDIT.md)。
+
+A3N纠正把外显平滑等同内部选择流畅的风险：`L_sel`与`L_kin`分开。引导新动作/扰动熟练动作仅构造部分`R≠L_kin`；每格唯一辅助签名可拟合全部16个二元端点表。两机制格内不变性在明确XOR直达效应类中经64模型验证，但恒定、交互和未测直达效应仍开放。无实际人体安装或H识别；0新节点/规则/上下文，完成图913/424/261、10暂停、1608审查项、C1/U1及全部OPEN不变。并发CTD v0.2全部保留，覆盖v1.0.29。下一题：固定路由粒度下构造`R≠L_sel`，并以两种冲突/一致机制检验有符号`J_H`。
+
+---
+
+# 前一接续：CTD v0.2 已成稿；完成地图仍为 UCT-MAP-v1.1.2
 
 继续遵循[最高研究指导](RESEARCH_MASTER_GUIDE.md)。本轮按用户要求深入修订未发表CTD论文，现形成18页[英文稿](records/CTD20261010_Cross_Task_Intervention_v02/manuscript/noise-identifiability-bodily-judgments-v0.2.0.pdf)、[中文交接](records/CTD20261010_Cross_Task_Intervention_v02/HANDOFF_ZH.md)、[工作日志](records/CTD20261010_Cross_Task_Intervention_v02/WORK_LOG.md)和[成稿决定](records/CTD20261010_Cross_Task_Intervention_v02/MANUSCRIPT_DECISION.json)。公开数据审计与条件识别结果达到值得外部方法评议的程度；没有新配对人体数据、UCT实证确认、新DOI或投稿。
 

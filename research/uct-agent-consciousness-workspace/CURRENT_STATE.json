@@ -15,17 +15,15 @@
   "version_policy": "VERSIONING_POLICY.md",
   "changelog": "CHANGELOG.md",
   "latest_research": {
-    "id": "CTD20261010",
-    "candidate_id": "CTD2-20261010",
-    "result_version": "CTD-RESULT-v0.2.0",
+    "id": "A3N20261010",
+    "result_version": "A3N-EXACT-v0.1.0",
     "status": "PENDING_CHECKPOINT_DISABLED",
-    "source": "records/CTD20261010_Cross_Task_Intervention_v02/RESEARCH_NOTE.md",
-    "pdf": "records/CTD20261010_Cross_Task_Intervention_v02/manuscript/noise-identifiability-bodily-judgments-v0.2.0.pdf",
-    "handoff": "records/CTD20261010_Cross_Task_Intervention_v02/HANDOFF_ZH.md",
-    "work_log": "records/CTD20261010_Cross_Task_Intervention_v02/WORK_LOG.md",
+    "source": "records/A3N20261010_Route_Fluency_Crossing/RESEARCH_NOTE.md",
+    "handoff": "records/A3N20261010_Route_Fluency_Crossing/HANDOFF_ZH.md",
+    "work_log": "records/A3N20261010_Route_Fluency_Crossing/WORK_LOG.md",
     "enabled_as_established_premises": false,
-    "manuscript_status": "WORTH_EXTERNAL_REVIEW_AS_METHODS_AND_SECONDARY_ANALYSIS_MANUSCRIPT",
-    "evidence_status": "PUBLIC_DATA_SECONDARY_ANALYSIS_AND_CONDITIONAL_IDENTIFICATION; NO_NEW_PAIRED_HUMAN_DATA_OR_PHENOMENAL_BRIDGE"
+    "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
+    "evidence_status": "PARTIAL_R_NOT_EQUAL_L_KIN_CONSTRUCTION_AND_EXACT_AUXILIARY_ALIAS_LIMIT; NO_ACTUAL_R_NOT_EQUAL_L_SEL_INSTALLATION_OR_H_IDENTIFICATION"
   },
   "latest_integrated_research": {
     "id": "R188-CER-20261009",
@@ -80,7 +78,8 @@
     "A3L20261010",
     "CTD20261010",
     "A3M20261010",
-    "CTD2-20261010"
+    "CTD2-20261010",
+    "A3N20261010"
   ],
   "current_guide": "RESEARCH_MASTER_GUIDE.md v2.3",
   "complete_map_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
@@ -92,41 +91,37 @@
     "nondeductive_context_links": 261,
     "total_review_items": 1608
   },
-  "pending_note": "All 31 navigated checkpoints remain disabled. A3M adds no completed or candidate nodes/rules/contexts: it records exact application-level support constraints and open physical premises. CTD, A3L and all effective corrections are retained; no completed-graph count or actual-premise truth changes.",
+  "pending_note": "All 33 listed pending checkpoints remain disabled. A3N adds no completed or candidate nodes/rules/contexts: it separates selection from kinematic fluency, supplies a partial crossing and records the auxiliary-intervention alias limit. CTD v0.2, A3M, A3L and all effective corrections are retained; no completed-graph count or actual-premise truth changes.",
   "publication_coverage": {
-    "version": "UCT-PUB-v1.0.28",
+    "version": "UCT-PUB-v1.0.29",
     "entry": "PUBLICATION_COVERAGE.json",
-    "update": "records/CTD20261010_Cross_Task_Intervention_v02/PUBLICATION_COVERAGE_UPDATE.json",
+    "update": "records/A3N20261010_Route_Fluency_Crossing/PUBLICATION_COVERAGE_UPDATE.json",
     "nondeductive": true
   },
   "latest_activity": {
-    "id": "CTD20261010",
-    "candidate_id": "CTD2-20261010",
-    "result_version": "CTD-RESULT-v0.2.0",
+    "id": "A3N20261010",
+    "result_version": "A3N-EXACT-v0.1.0",
     "status": "PENDING_CHECKPOINT_DISABLED",
-    "source": "records/CTD20261010_Cross_Task_Intervention_v02/RESEARCH_NOTE.md",
-    "pdf": "records/CTD20261010_Cross_Task_Intervention_v02/manuscript/noise-identifiability-bodily-judgments-v0.2.0.pdf",
-    "handoff": "records/CTD20261010_Cross_Task_Intervention_v02/HANDOFF_ZH.md",
-    "work_log": "records/CTD20261010_Cross_Task_Intervention_v02/WORK_LOG.md",
+    "source": "records/A3N20261010_Route_Fluency_Crossing/RESEARCH_NOTE.md",
+    "handoff": "records/A3N20261010_Route_Fluency_Crossing/HANDOFF_ZH.md",
+    "work_log": "records/A3N20261010_Route_Fluency_Crossing/WORK_LOG.md",
     "enabled_as_established_premises": false,
-    "manuscript_status": "WORTH_EXTERNAL_REVIEW_AS_METHODS_AND_SECONDARY_ANALYSIS_MANUSCRIPT",
-    "evidence_status": "PUBLIC_DATA_SECONDARY_ANALYSIS_AND_CONDITIONAL_IDENTIFICATION; NO_NEW_PAIRED_HUMAN_DATA_OR_PHENOMENAL_BRIDGE"
+    "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
+    "evidence_status": "EXACT AUXILIARY-SIGNATURE LIMIT AND PARTIAL PHYSICAL CROSSING; SELECTION-FLUENCY AND PHENOMENAL BRIDGE PREMISES OPEN"
   },
   "latest_pending_research": {
-    "id": "CTD20261010",
-    "candidate_id": "CTD2-20261010",
-    "result_version": "CTD-RESULT-v0.2.0",
+    "id": "A3N20261010",
+    "result_version": "A3N-EXACT-v0.1.0",
     "status": "PENDING_CHECKPOINT_DISABLED",
-    "source": "records/CTD20261010_Cross_Task_Intervention_v02/RESEARCH_NOTE.md",
-    "pdf": "records/CTD20261010_Cross_Task_Intervention_v02/manuscript/noise-identifiability-bodily-judgments-v0.2.0.pdf",
-    "handoff": "records/CTD20261010_Cross_Task_Intervention_v02/HANDOFF_ZH.md",
-    "work_log": "records/CTD20261010_Cross_Task_Intervention_v02/WORK_LOG.md",
+    "source": "records/A3N20261010_Route_Fluency_Crossing/RESEARCH_NOTE.md",
+    "handoff": "records/A3N20261010_Route_Fluency_Crossing/HANDOFF_ZH.md",
+    "work_log": "records/A3N20261010_Route_Fluency_Crossing/WORK_LOG.md",
     "enabled_as_established_premises": false,
-    "manuscript_status": "WORTH_EXTERNAL_REVIEW_AS_METHODS_AND_SECONDARY_ANALYSIS_MANUSCRIPT",
-    "evidence_status": "PUBLIC_DATA_SECONDARY_ANALYSIS_AND_CONDITIONAL_IDENTIFICATION; NO_NEW_PAIRED_HUMAN_DATA_OR_PHENOMENAL_BRIDGE"
+    "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
+    "evidence_status": "EXACT AUXILIARY-SIGNATURE LIMIT AND PARTIAL PHYSICAL CROSSING; SELECTION-FLUENCY AND PHENOMENAL BRIDGE PREMISES OPEN"
   },
-  "review_status_scope": "Completed UCT-MAP-v1.1.2 remains unchanged. A3M repeated the 1608-item programmatic structural check and manually compared the affected R173/R175/R176/R177 plus disabled R199/R200 contracts. No fresh full-depth proof review is claimed; all inherited OPEN obligations remain.",
-  "next_priority": "The CTD v0.2 manuscript is complete for external methods review. Any empirical extension needs independently calibrated same-internal-sample paired readouts and criterion/lapse dependence bounds. Preserve the separate A3M H endpoint and physical R≠L main-line question; do not replace H with response width.",
+  "review_status_scope": "Completed UCT-MAP-v1.1.2 remains unchanged. A3N repeated the 1608-item programmatic structural check and manually compared the affected R173/R175/R177 plus disabled R197/R200/A3M contracts. No fresh full-depth proof review is claimed; all inherited OPEN obligations remain.",
+  "next_priority": "Attempt one fixed-granularity actual R-not-equal-L_sel crossing using congruent first-use versus retained conflict conditions, with two distinct mechanism families and the signed J_H endpoint. Keep cue, kinematics, effort, success, agency and ownership separate; stop if actual route use cannot be verified.",
   "latest_scoped_review": {
     "audit": "records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_AUDIT.md",
     "per_id_structure": "records/CTD20261010_Cross_Task_Intervention_v02/governance/BASELINE_PER_ID_STRUCTURE.json.gz",

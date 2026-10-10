@@ -1,0 +1,60 @@
+{
+  "schema": "uct-a3n-claim-ledger/1",
+  "claims": [
+    {
+      "id": "A3N-C1",
+      "type": "APPLICATION_TYPING_CORRECTION",
+      "proposition": "External kinematic fluency L_kin and internal selection fluency L_sel are different coordinates; setting one does not set the other.",
+      "domain": "physical applications of A3M route-versus-fluency comparisons",
+      "all_premises": ["fixed bearer/time/target", "separate predeclared criteria", "no success-to-fluency inference"],
+      "proof_or_source": "guided-novice counterexample and primary mechanism literature",
+      "counterexample": "robot carries a hesitant first-use movement smoothly",
+      "status": "ADOPTED_APPLICATION_CORRECTION_NO_MAP_CHANGE",
+      "thought_experiment_role": "prevents external performance from being renamed bodily familiarity"
+    },
+    {
+      "id": "A3N-C2",
+      "type": "CONSTRUCTIVE_PROTOCOL_PROPOSITION",
+      "proposition": "Four R by L_kin cells have explicit candidate realizations using guidance and perturbation.",
+      "domain": "declared robotic target-action installation",
+      "all_premises": ["actual route use independently evidenced", "instrumented intervention fidelity", "fixed kinematic criterion", "route granularity fixed"],
+      "proof_or_source": "direct construction and check_crossing.py",
+      "counterexample": "guidance substitutes a route or perturbation triggers compensation",
+      "status": "PHYSICALLY_PLAUSIBLE_NOT_INSTALLED",
+      "thought_experiment_role": "supplies partial off-diagonal candidates"
+    },
+    {
+      "id": "A3N-C3",
+      "type": "FINITE_NONIDENTIFICATION_THEOREM",
+      "proposition": "One unique auxiliary signature per cell permits nuisance-only D(I) to fit all 16 binary endpoint tables.",
+      "domain": "four-cell binary endpoints with unrestricted direct auxiliary effects",
+      "all_premises": ["unique observed signature per cell", "unrestricted I-to-Z direct path"],
+      "proof_or_source": "lookup construction and exhaustive enumeration",
+      "counterexample": "replicated realization or externally bounded direct effect adds information",
+      "status": "PROVED_FINITE",
+      "thought_experiment_role": "blocks self-interpreting 2x2 claims"
+    },
+    {
+      "id": "A3N-C4",
+      "type": "RESTRICTED_INVARIANCE_THEOREM",
+      "proposition": "In Z=B(R,L) xor d(k), full within-cell replication over k forces d(0)=d(1) when endpoints are invariant.",
+      "domain": "deterministic binary XOR direct-effect class",
+      "all_premises": ["same endpoint semantics", "same realized R,L cells", "full replication", "XOR nuisance form"],
+      "proof_or_source": "cancellation and 64-model enumeration",
+      "counterexample": "constant or interactive direct effects survive",
+      "status": "PROVED_FINITE_RESTRICTED",
+      "thought_experiment_role": "gives a bounded falsifier instead of a universal exclusion claim"
+    },
+    {
+      "id": "A3N-C5",
+      "type": "OPEN_CONDITIONAL_UCT_APPLICATION",
+      "proposition": "A route-like endpoint profile favors B_ret only under all signed-endpoint, actual-use, separated-fluency, replication/direct-path and same-instance C1 premises.",
+      "domain": "reporting-adult calibration of selected bodily/action familiarity",
+      "all_premises": ["R200 semantic firewall", "A3N-C1 through C4", "actual route use", "independent endpoint semantics and reliability", "same bearer/time/signature/target", "rival controls"],
+      "proof_or_source": "conditional synthesis with UCT C1",
+      "counterexample": "endpoint follows intervention, fluency, ownership, success or response key",
+      "status": "OPEN_CONDITIONAL_APPLICATION",
+      "thought_experiment_role": "locates a positive but defeasible experience-internal bridge"
+    }
+  ]
+}

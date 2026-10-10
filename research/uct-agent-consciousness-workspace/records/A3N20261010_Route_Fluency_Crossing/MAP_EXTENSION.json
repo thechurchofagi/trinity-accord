@@ -1,0 +1,23 @@
+{
+  "schema": "uct-a3n-disabled-application/1",
+  "id": "A3N20261010",
+  "enabled": false,
+  "enabled_as_established_premise": false,
+  "foundation_effect": "NONE",
+  "nodes": [],
+  "rules": [],
+  "context_links": [],
+  "applications": [
+    {
+      "id": "A3N:ROUTE_FLUENCY_CROSSING_APPLICATION",
+      "completed_node_refs": [
+        "R173:RETENTIVE_BINDING_RELATION",
+        "R173:FAMILIAR_MINENESS_BOUNDARY",
+        "R175:R173_EFFECTIVE_TARGET_SEPARATION",
+        "R177:SOURCE_FEATURE_SEPARATION"
+      ],
+      "actual_premises_discharged": false,
+      "status": "DISABLED_OPEN_APPLICATION"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "schema": "uct-a3n-exact-results/1",
+  "result_version": "A3N-EXACT-v0.1.0",
+  "cell_order": [[0, 0], [0, 1], [1, 0], [1, 1]],
+  "installation": {
+    "00": {"assist": 0, "perturb": 0, "signature": "baseline-low"},
+    "01": {"assist": 1, "perturb": 0, "signature": "guided-novel"},
+    "10": {"assist": 0, "perturb": 1, "signature": "perturbed-retained"},
+    "11": {"assist": 0, "perturb": 0, "signature": "baseline-high"}
+  },
+  "binary_endpoint_tables": 16,
+  "tables_fitted_by_unique_auxiliary_signature_only": 16,
+  "replicated_xor_models": 64,
+  "replicated_xor_models_invariant_across_mechanism": 32,
+  "invariance_equivalent_to_constant_xor_direct_effect": true,
+  "unique_invariant_observed_tables": 16,
+  "pure_route_table": [0, 0, 1, 1],
+  "pure_external_fluency_table": [0, 1, 0, 1],
+  "interpretive_limit": "Replicated-mechanism invariance removes only the declared mechanism-varying XOR direct effect. It does not exclude constant, interactive, unmeasured, or semantically misoriented direct paths, and it does not prove actual installation."
+}

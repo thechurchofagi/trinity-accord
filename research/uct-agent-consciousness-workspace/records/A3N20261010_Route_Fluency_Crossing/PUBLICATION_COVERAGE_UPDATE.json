@@ -1,0 +1,19 @@
+{
+  "schema": "uct-publication-coverage-update/1",
+  "research_id": "A3N20261010",
+  "coverage_version": "UCT-PUB-v1.0.29",
+  "base_census_version": "UCT-PUB-v1.0.0",
+  "completed_map": "UCT-MAP-v1.1.2",
+  "decision": "HOLD_STANDALONE_USE_AS_METHOD_AND_GAP_MODULE",
+  "formal_publication_counts_changed": false,
+  "new_doi": false,
+  "net_increment": [
+    "typing correction separating selection from external kinematic fluency",
+    "16-of-16 auxiliary-signature alias theorem",
+    "64-model restricted replicated-mechanism invariance result",
+    "signed endpoint and installation contract"
+  ],
+  "inherited": ["latent label switching", "Boolean enumeration", "motor guidance and adaptation mechanisms", "R197/R200 semantic calibration firewall"],
+  "open_before_standalone_use": ["actual R-not-equal-L_sel installation", "signed J_H reliability data", "defended direct-path bound or replicated physical mechanisms"],
+  "priority_status": "PROJECT_LEVEL_INCREMENT_ONLY; WORLDWIDE_PRIORITY_UNVERIFIED"
+}

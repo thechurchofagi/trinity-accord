@@ -1,0 +1,14 @@
+{
+  "schema": "uct-claim-coverage-delta/1",
+  "coverage_version": "UCT-PUB-v1.0.29",
+  "research_id": "A3N20261010",
+  "claims": [
+    {"id": "A3N-C1", "coverage": "NEW_APPLICATION_TYPING_CORRECTION", "published": false},
+    {"id": "A3N-C2", "coverage": "PROPOSED_PHYSICAL_PROTOCOL_NOT_INSTALLED", "published": false},
+    {"id": "A3N-C3", "coverage": "NEW_PROJECT_LEVEL_EXACT_APPLICATION", "published": false},
+    {"id": "A3N-C4", "coverage": "NEW_PROJECT_LEVEL_RESTRICTED_APPLICATION", "published": false},
+    {"id": "A3N-C5", "coverage": "OPEN_CONDITIONAL_SYNTHESIS", "published": false}
+  ],
+  "formal_publication_counts_changed": false,
+  "previous_coverage_version_preserved": "UCT-PUB-v1.0.28"
+}

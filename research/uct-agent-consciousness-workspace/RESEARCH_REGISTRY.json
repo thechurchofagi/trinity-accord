@@ -565,6 +565,21 @@
       "claim_ledger": "records/A3L20261010_Rescue_Learning/CLAIM_LEDGER.json"
     },
     {
+      "research_id": "A3M20261010",
+      "result_version": "A3M-EXACT-v0.1.0",
+      "title": "Bodily familiarity route-cue-fluency invariance",
+      "source": "records/A3M20261010_Bodily_Familiarity_Invariance/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "actual_application": "OPEN",
+      "publication_coverage_version": "UCT-PUB-v1.0.27",
+      "compatibility_audit": "records/A3M20261010_Bodily_Familiarity_Invariance/MAP_AUDIT.md",
+      "handoff": "records/A3M20261010_Bodily_Familiarity_Invariance/HANDOFF_ZH.md",
+      "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
+      "candidate_counts": {"nodes": 0, "rules": 0, "contexts": 0},
+      "claim_ledger": "records/A3M20261010_Bodily_Familiarity_Invariance/CLAIM_LEDGER.json"
+    },
+    {
       "id": "CTD2-20261010",
       "research_id": "CTD20261010",
       "result_version": "CTD-RESULT-v0.2.0",
@@ -587,11 +602,26 @@
       "actual_application": "OPEN",
       "manuscript_status": "WORTH_EXTERNAL_REVIEW_AS_METHODS_AND_SECONDARY_ANALYSIS_MANUSCRIPT",
       "claim_ledger": "records/CTD20261010_Cross_Task_Intervention_v02/CLAIM_LEDGER.json"
+    },
+    {
+      "research_id": "A3N20261010",
+      "result_version": "A3N-EXACT-v0.1.0",
+      "title": "Route-selection-kinematic fluency crossing and auxiliary alias limit",
+      "source": "records/A3N20261010_Route_Fluency_Crossing/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "actual_application": "OPEN",
+      "publication_coverage_version": "UCT-PUB-v1.0.29",
+      "compatibility_audit": "records/A3N20261010_Route_Fluency_Crossing/MAP_AUDIT.md",
+      "handoff": "records/A3N20261010_Route_Fluency_Crossing/HANDOFF_ZH.md",
+      "manuscript_status": "HOLD_STANDALONE_USE_AS_METHOD_AND_GAP_MODULE",
+      "candidate_counts": {"nodes": 0, "rules": 0, "contexts": 0},
+      "claim_ledger": "records/A3N20261010_Route_Fluency_Crossing/CLAIM_LEDGER.json"
     }
   ],
   "preservation": "Exact previous registry remains preserved. The full research manuscript/module and saved per-item review decisions are in the version capsule; expanded artifacts are also in the offline downloadable archive.",
   "publication_coverage": {
-    "version": "UCT-PUB-v1.0.28",
+    "version": "UCT-PUB-v1.0.29",
     "entry": "PUBLICATION_COVERAGE.json",
     "nondeductive": true
   },
