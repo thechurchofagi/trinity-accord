@@ -1,0 +1,83 @@
+{
+  "state": "PUBLISHED_PUBLIC_READBACK_PASS_DOI_RESOLUTION_PENDING",
+  "report_number": "SCU-PAPER",
+  "version": "1.0.1",
+  "title": "Matched Behavior and Source Use",
+  "record_id": 23272690,
+  "doi": "10.5281/zenodo.23272690",
+  "record_url": "https://zenodo.org/records/23272690",
+  "submitted": true,
+  "public_file_readback_pass": true,
+  "public_readback_authenticated": false,
+  "doi_resolution_pass": false,
+  "doi_resolver": {
+    "state": "NOT_CHECKED_ONLY_ZENODO_TRANSPORT_ALLOWED",
+    "matches_record": false
+  },
+  "expected_manifest_sha256": "4f976e85774d787dcafbcd85dd4784637ae67510836847905f938ec3bb6d755d",
+  "file_count": 9,
+  "files": [
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 1199,
+      "sha256": "f25a9d963c200872ca8361b6cb8ff6c22e4dc33c4532b4b69887328a416ca75b",
+      "public_url": "https://zenodo.org/api/records/23272690/files/README-LICENSE.txt/content"
+    },
+    {
+      "name": "REVIEW-AND-SOURCES.md",
+      "bytes": 20882,
+      "sha256": "2fc6d415930309d4fce40b0cf7a00836b1faf9ffb654455ddf5d7168be40f91d",
+      "public_url": "https://zenodo.org/api/records/23272690/files/REVIEW-AND-SOURCES.md/content"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 725,
+      "sha256": "eb00d01f330b9469793564def8beba2caa59a1ec4c790446664da06c4f661138",
+      "public_url": "https://zenodo.org/api/records/23272690/files/SHA256SUMS.txt/content"
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 290,
+      "sha256": "9ac926376ba04fb418ae58e8b87f9558dc32a1e3c94255f3779497d750230084",
+      "public_url": "https://zenodo.org/api/records/23272690/files/citation.bib/content"
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 444,
+      "sha256": "d36033981711418d95ae10d243027f125558c0cd28fec617645afa85779e5d34",
+      "public_url": "https://zenodo.org/api/records/23272690/files/citation.csl.json/content"
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 235,
+      "sha256": "6b24465345d0a6186199875a7a8451b8f959b65bc29eef0701c82305d9e8fdbc",
+      "public_url": "https://zenodo.org/api/records/23272690/files/citation.ris/content"
+    },
+    {
+      "name": "matched-behavior-and-source-use-v1.0.1.md",
+      "bytes": 45968,
+      "sha256": "8fa23cbe9440922f6f56506e5415d17c47875972bdbde1b9428c0fafaaa425ab",
+      "public_url": "https://zenodo.org/api/records/23272690/files/matched-behavior-and-source-use-v1.0.1.md/content"
+    },
+    {
+      "name": "matched-behavior-and-source-use-v1.0.1.pdf",
+      "bytes": 279016,
+      "sha256": "7e6e8c181e98975b3ba3e665982a7dd206a2c8efcf543ce865b34d053290754b",
+      "public_url": "https://zenodo.org/api/records/23272690/files/matched-behavior-and-source-use-v1.0.1.pdf/content"
+    },
+    {
+      "name": "reproducibility-v1.0.1.zip",
+      "bytes": 114649,
+      "sha256": "80c6839b05da8ca3095f3d2941f837a2bcd8cd81d66e294eb0b4a0f4d6191c06",
+      "public_url": "https://zenodo.org/api/records/23272690/files/reproducibility-v1.0.1.zip/content"
+    }
+  ],
+  "source_commit": "2d7fc42d859fada3a316478ac6c0b4b33f1c542d",
+  "workflow_run_id": "38014331872",
+  "prior_records_modified": false,
+  "peer_reviewed": false,
+  "c1_empirically_validated": false,
+  "ots_status": "PENDING",
+  "arweave_status": "PENDING",
+  "preservation_complete": false
+}
