@@ -1,0 +1,36 @@
+{
+  "schema": "uct-dual-persistence-receipt-v1",
+  "round": "A4A20261011_Formation_Intervention",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "science_commit": "11f73b641610f490e5088039aaaae99c58f91182",
+    "receipt_commit": null,
+    "expected_parent": "f440ed310cb6c3d7766ce90b5a9111cb2f2f9e4c",
+    "fast_forward_expected_sha_verified": true,
+    "key_file_readback": "pending final receipt commit readback",
+    "status": "SCIENCE_CONFIRMED; RECEIPT_FINALIZATION_IN_PROGRESS"
+  },
+  "library": {
+    "master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "master_previous_version": 106,
+    "master_expected_version": 107,
+    "master_readback_confirmed": false,
+    "increment_library_file_id": "libfile_35a02a48f4e48191a6e82b887ac8f1af",
+    "increment_manifest_library_file_id": "libfile_5744f60c958881918a2cf37cb4ad87c6",
+    "increment_sha256": "d111a70e6c4ab750815a8d1f0d48d8c5862b23fd32a0e14ac7d25d458b53addb",
+    "increment_manifest_sha256": "1cb6c9bebc1458b742790a7b9d06a70ed56b9e4f6d3a25604a46c79c532b74b2",
+    "increment_size_bytes": 112008,
+    "increment_file_count": 26,
+    "classification": "INCREMENT_ONLY_NOT_FULL_REPOSITORY_BACKUP",
+    "status": "INCREMENT_AND_MANIFEST_CONFIRMED; FIXED_MASTER_FINALIZATION_IN_PROGRESS"
+  },
+  "latest_completed_step": "A4A exact causal correction, formal/review audit, GitHub science readback, and Library increment plus manifest upload.",
+  "unfinished": [
+    "No actual same-event RetBind trace-to-consumer route has been installed.",
+    "No independent identity or polarity calibration for H_way has been established.",
+    "No route-preserving five-way physical clamp or joint positivity has been demonstrated.",
+    "Open supervision items and full historical semantic audit remain unresolved."
+  ],
+  "resume": "Read the fixed Library master expected at v107; verify the live branch is the receipt confirmation commit or a fast-forward successor; verify science commit 11f73b6 and increment SHA256; then instantiate only one randomized longitudinal total-effect formation study plus an independently verified same-event retentive consumer route."
+}

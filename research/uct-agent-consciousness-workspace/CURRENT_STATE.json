@@ -197,13 +197,13 @@
     "role": "Historical unresolved audit-debt record; old numbers are not newly measured current unread totals."
   },
   "latest_activity_persistence": {
-    "status": "GITHUB_SCIENCE_AND_RECEIPT_COMMITS_AND_LIBRARY_MASTER_V106_AND_INCREMENT_CONFIRMED; FINAL_CONFIRMATION_COMMIT_SELF_RECORDED_BY_BRANCH_HEAD",
-    "receipt": "records/A3Z20261010_Phenomenal_Anchor_Triage/PERSISTENCE_RECEIPT.json",
-    "github_science_commit": "d853ab494dc5fc90b4ed476e726884ed2907b27f",
-    "github_receipt_commit": "249d114d8cfd775e8f7887616346de7ff78c9d83",
-    "library_master_version": 106,
-    "library_increment_id": "libfile_549e8736adf481918428f9fcd1a0c454",
-    "library_manifest_id": "libfile_1185f851b75c8191a09e7b0f8d848872"
+    "status": "A4A_GITHUB_SCIENCE_AND_LIBRARY_INCREMENT_CONFIRMED; RECEIPT_AND_FIXED_MASTER_FINALIZATION_IN_PROGRESS",
+    "receipt": "records/A4A20261011_Formation_Intervention/PERSISTENCE_RECEIPT.json",
+    "github_science_commit": "11f73b641610f490e5088039aaaae99c58f91182",
+    "github_receipt_commit": null,
+    "library_master_expected_version": 107,
+    "library_increment_id": "libfile_35a02a48f4e48191a6e82b887ac8f1af",
+    "library_manifest_id": "libfile_5744f60c958881918a2cf37cb4ad87c6"
   },
   "concurrent_research_preserved": {
     "id": "EIP20261010",
@@ -225,7 +225,7 @@
     "map_replacement": false,
     "actual_application_established": false
   },
-  "latest_persistence_receipt": "records/A3Z20261010_Phenomenal_Anchor_Triage/PERSISTENCE_RECEIPT.json",
+  "latest_persistence_receipt": "records/A4A20261011_Formation_Intervention/PERSISTENCE_RECEIPT.json",
   "previous_latest_research_before_CTD": {
     "id": "A3L20261010",
     "result_version": "A3L-RESULT-v0.1.0",

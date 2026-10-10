@@ -33,3 +33,10 @@
 下一轮只实例化一个随机纵向形成史总效应研究：主分析仅使用形成前变量；同时独立核验一个同事件、同承载者的保持痕迹—当前消费者路线。若 `RetBind` 或端点身份仍无实际根据，在 H 层停止，不以形成后匹配修补。
 
 恢复时获取 `uct-agent-consciousness-workspace` 最新远端头，重读固定入口顺序、主交接最新版本及审查 OPEN 项，再从本目录的 `RESEARCH_NOTE.md`、`INTERVENTION_CONTRACT.md`、`EXACT_RESULTS.json`、`MAP_AUDIT.md` 和 `RUN_RESULTS.json` 接续。持久化提交、Library 版本与增量包 ID 见 `PERSISTENCE_RECEIPT.json`。
+
+## 持久化定位
+
+- GitHub 科学定稿：`11f73b641610f490e5088039aaaae99c58f91182`。
+- Library 增量包：`libfile_35a02a48f4e48191a6e82b887ac8f1af`，SHA256 `d111a70e6c4ab750815a8d1f0d48d8c5862b23fd32a0e14ac7d25d458b53addb`，112008 字节，26 个文件；它是从 `4e38e57f7e617ba6413e70125cbfdaef74675216` 到科学定稿的增量，不是完整仓库备份。
+- Library 清单：`libfile_5744f60c958881918a2cf37cb4ad87c6`，SHA256 `1cb6c9bebc1458b742790a7b9d06a70ed56b9e4f6d3a25604a46c79c532b74b2`。
+- 固定主交接目标：保持 `libfile_4175a81748fc819187fa8f5771f056fa` 同一身份，预期由 v106 更新为 v107；最终读回状态见持久化收据及该固定文件最新版本。
