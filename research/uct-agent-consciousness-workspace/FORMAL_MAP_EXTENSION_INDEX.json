@@ -10,10 +10,17 @@
     "RU20261008",
     "R184",
     "RC20261008",
-    "IE20261008"
+    "IE20261008",
+    "TH20261009-RB20261009",
+    "OL20261009"
   ],
   "added_reviewed_modules": [
-    "TH20261009-RB20261009"
+    "R185",
+    "R186-HOM-20261009",
+    "UI20261009",
+    "CM20261009",
+    "R187-CMA-20261009",
+    "R188-CER-20261009"
   ],
   "pending_disabled": [
     "AC20261009",
@@ -58,9 +65,9 @@
   "status": "All 38 checkpoints indexed from the same registry; all remain disabled. Navigation complete, scientific promotion false.",
   "prior_index_commit": "2faccb45147435b67d901e64f8045cd0e31a8d2a",
   "navigation_reconciliation": {
-    "source": "CURRENT_STATE.json and RESEARCH_REGISTRY.json",
-    "reason": "Older extension index stopped at R190; this index now includes already recorded later checkpoints and DVC without promoting them.",
-    "previous_exact_bytes": "records/DVC20261010_Device_Consumer_Validation/history/before_DVC_bd66a621/FORMAL_MAP_EXTENSION_INDEX.json"
+    "source": "UNIFIED_RESEARCH_INDEX.json; UCT_FORMAL_GRAPH_MODULES.json",
+    "record": "records/NAV20261010_Map_Integration/CURRENT_POINTER_RECONCILIATION.json",
+    "scope": "Pending identity sets AND current scientific pointers AND completed module names reconciled; no scientific promotion."
   },
   "latest_candidate": "records/A3V20261010_Concurrent_Liveness_and_Familiarity/MAP_EXTENSION.json",
   "latest_scoped_audit": "records/A3V20261010_Concurrent_Liveness_and_Familiarity/MAP_AUDIT.md",
@@ -78,5 +85,25 @@
     "report": "records/NAV20261010_Map_Integration/HANDOFF_ZH.md",
     "scientific_promotion": false,
     "pending_count": 38
+  },
+  "previous_module_navigation_before_NAV20261010": {
+    "inherited_reviewed_modules": [
+      "CORE20261008",
+      "EI20261008",
+      "R183",
+      "OO20261008",
+      "RU20261008",
+      "R184",
+      "RC20261008",
+      "IE20261008"
+    ],
+    "added_reviewed_modules": [
+      "TH20261009-RB20261009"
+    ],
+    "navigation_reconciliation": {
+      "source": "CURRENT_STATE.json and RESEARCH_REGISTRY.json",
+      "reason": "Older extension index stopped at R190; this index now includes already recorded later checkpoints and DVC without promoting them.",
+      "previous_exact_bytes": "records/DVC20261010_Device_Consumer_Validation/history/before_DVC_bd66a621/FORMAL_MAP_EXTENSION_INDEX.json"
+    }
   }
 }

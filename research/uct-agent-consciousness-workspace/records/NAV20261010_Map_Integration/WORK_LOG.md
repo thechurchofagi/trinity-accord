@@ -11,3 +11,5 @@ Implementation failures retained: first build stopped on a Python string quoting
 Publication coverage: UCT-PUB-v1.0.31 retained; no changed or newly disclosed scientific claim IDs. Existing publication status is separate from candidate adoption. No manuscript is warranted for a navigation-only change. Precise prior publication claims were not re-audited in this task.
 
 See HANDOFF_ZH.md for results and remaining scientific obligations; VALIDATION.json for actual verification; PERSISTENCE_RECEIPT.json for real remote save/readback. The next scientific question remains A3V's independently oriented bodily-familiarity endpoint, not continued generic selector certification.
+
+Final cross-field check also found the session index still pointed to A3O and the extension index still listed older reviewed modules. These mutable navigation pointers were synchronized to A3V and the completed descriptor. Added validate_current_map.py to prevent this class of drift; identity-only checks remain preserved in the original integration snapshot.

@@ -2,8 +2,61 @@
   "id": "NAV20261010",
   "version": "UCT-INTEGRATION-v1.0.0",
   "source_commit": "0ef07e2e92d4b7279b1c324abc31fd76650bbcd1",
-  "github_status": "PREPARED_NOT_YET_COMMITTED",
-  "library_status": "PENDING",
+  "github_status": "COMMITTED_AND_KEY_FILES_BYTE_VERIFIED",
+  "github_integration_commit": "559a7427cd8904370f68cf1b0e04c6b5fb5bef03",
+  "github_readback": [
+    {
+      "path": "START_HERE.md",
+      "bytes": 834,
+      "sha256": "d216a910140a7e072b09e6591c1d2bf06d780c437e449c0cab991d1bd0cf5fa5",
+      "match": true
+    },
+    {
+      "path": "UNIFIED_RESEARCH_INDEX.json",
+      "bytes": 142644,
+      "sha256": "82064817253249dd6a25011b2befe35fba92c70d98872017997ecdedee43e48f",
+      "match": true
+    },
+    {
+      "path": "CURRENT_STATE.json",
+      "bytes": 27615,
+      "sha256": "a4ec63cf0132356684b3d915306563b48e7ebb4db73c05b8512991ac0b5765ca",
+      "match": true
+    },
+    {
+      "path": "UCT_FORMAL_MAP.md",
+      "bytes": 4632,
+      "sha256": "a5603603170f217d867dd9fb25b2ab90ab01375d85c8183a805defe1ebd49d09",
+      "match": true
+    },
+    {
+      "path": "integration/UCT-INTEGRATION-v1.0.0/UNIFIED_MAP.json.gz",
+      "bytes": 628109,
+      "sha256": "b37711fb7dbaca9b728feb38e7cb14abf4f63a9571035b40c048a97472df35be",
+      "match": true
+    },
+    {
+      "path": "integration/UCT-INTEGRATION-v1.0.0/FILE_MANIFEST.json",
+      "bytes": 7129,
+      "sha256": "794df84e72bea89f3754b675ae41da8bd69c50eea2fe76cbc947b476865e8918",
+      "match": true
+    }
+  ],
+  "library_status": "INITIAL_PACKAGE_AND_MASTER_V96_SAVED; FINAL_POINTER_RECONCILIATION_PACKAGE_UPDATE_PENDING",
   "completion_scope": "NAVIGATION_AND_DISABLED_CANDIDATE_ASSEMBLY",
-  "scientific_promotion": false
+  "scientific_promotion": false,
+  "library_initial_save": [
+    {
+      "library_file_id": "libfile_2620ff277d208191871c054f7f2d8df8",
+      "file_name": "UCT_Map_Integration_v1.0.0_20261010.zip",
+      "current_version_number": 0,
+      "status": "succeeded"
+    },
+    {
+      "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+      "file_name": "UCT_Hourly_Research_Master_Handoff.md",
+      "current_version_number": 96,
+      "status": "succeeded"
+    }
+  ]
 }

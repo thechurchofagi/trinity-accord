@@ -1,6 +1,6 @@
 # Stable current navigation — UCT-INTEGRATION-v1.0.0
 
-Read RESEARCH_MASTER_GUIDE.md, START_HERE.md, CURRENT_STATE.json and UNIFIED_RESEARCH_INDEX.json first. Round-specific current/next notices below are preserved historical snapshots; they never override current state or the master guide. Do not prepend another round summary to every entry page. Maintain one canonical checkpoint registry and regenerate/synchronize pending identity sets, retaining disabled status and scientific/publication separation. See integration/UCT-INTEGRATION-v1.0.0/validate_navigation.py.
+Read RESEARCH_MASTER_GUIDE.md, START_HERE.md, CURRENT_STATE.json and UNIFIED_RESEARCH_INDEX.json first. Round-specific current/next notices below are preserved historical snapshots; they never override current state or the master guide. Do not prepend another round summary to every entry page. Maintain one canonical checkpoint registry and regenerate/synchronize pending identity sets, retaining disabled status and scientific/publication separation. See records/NAV20261010_Map_Integration/validate_current_map.py.
 
 # 当前科学接续 A3V20261010：并行选项影响与活跃政策证据分开，返回身体熟悉感
 

@@ -1,0 +1,33 @@
+{
+  "reason": "Final cross-field validation found stale latest-scientific A3O pointers and old inherited-module lists despite matching pending identity sets. Reconciled to canonical A3V and completed module descriptor.",
+  "latest_scientific": "A3V20261010",
+  "old_session_pointers": {
+    "latest_research": "A3O20261010",
+    "latest_activity": "A3O20261010",
+    "latest_pending_research": "A3O20261010",
+    "latest_work_log": "records/A3O20261010_Route_Grain_Selection_Crossing/WORK_LOG.md",
+    "latest_handoff": "records/A3O20261010_Route_Grain_Selection_Crossing/HANDOFF_ZH.md",
+    "latest_persistence_receipt": "records/CTD20261010_Cross_Task_Intervention_v02/PERSISTENCE_RECEIPT.json"
+  },
+  "old_extension_module_lists": {
+    "inherited_reviewed_modules": [
+      "CORE20261008",
+      "EI20261008",
+      "R183",
+      "OO20261008",
+      "RU20261008",
+      "R184",
+      "RC20261008",
+      "IE20261008"
+    ],
+    "added_reviewed_modules": [
+      "TH20261009-RB20261009"
+    ],
+    "navigation_reconciliation": {
+      "source": "CURRENT_STATE.json and RESEARCH_REGISTRY.json",
+      "reason": "Older extension index stopped at R190; this index now includes already recorded later checkpoints and DVC without promoting them.",
+      "previous_exact_bytes": "records/DVC20261010_Device_Consumer_Validation/history/before_DVC_bd66a621/FORMAL_MAP_EXTENSION_INDEX.json"
+    }
+  },
+  "canonical_identity_and_scientific_graph_unchanged": true
+}
