@@ -1,0 +1,112 @@
+{
+  "schema": "uct-a3l-finite-illustration/1",
+  "rows": [
+    {
+      "c": 0,
+      "k": 0,
+      "theta": 0,
+      "port": 0,
+      "output": 0,
+      "success": true
+    },
+    {
+      "c": 0,
+      "k": 0,
+      "theta": 1,
+      "port": 0,
+      "output": 1,
+      "success": false
+    },
+    {
+      "c": 0,
+      "k": 1,
+      "theta": 0,
+      "port": 1,
+      "output": 1,
+      "success": false
+    },
+    {
+      "c": 0,
+      "k": 1,
+      "theta": 1,
+      "port": 1,
+      "output": 0,
+      "success": true
+    },
+    {
+      "c": 1,
+      "k": 0,
+      "theta": 0,
+      "port": 1,
+      "output": 1,
+      "success": true
+    },
+    {
+      "c": 1,
+      "k": 0,
+      "theta": 1,
+      "port": 1,
+      "output": 0,
+      "success": false
+    },
+    {
+      "c": 1,
+      "k": 1,
+      "theta": 0,
+      "port": 0,
+      "output": 0,
+      "success": false
+    },
+    {
+      "c": 1,
+      "k": 1,
+      "theta": 1,
+      "port": 0,
+      "output": 1,
+      "success": true
+    }
+  ],
+  "toy_supervised_updates": [
+    {
+      "training_c": 0,
+      "training_z": 1,
+      "learned_theta": 1,
+      "future": [
+        {
+          "c": 0,
+          "y": 0
+        },
+        {
+          "c": 1,
+          "y": 1
+        }
+      ]
+    },
+    {
+      "training_c": 1,
+      "training_z": 0,
+      "learned_theta": 1,
+      "future": [
+        {
+          "c": 0,
+          "y": 0
+        },
+        {
+          "c": 1,
+          "y": 1
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "baseline_success": true,
+    "uncompensated_inversion_fails": true,
+    "compensated_inversion_success": true,
+    "successful_code_and_reader_differ": true,
+    "no_decoder_recovers_constant_code": true
+  },
+  "attribution": "R177 compensated-recoding theorem; standard composition",
+  "evidence_level": "EXACT_FINITE_MODEL_ONLY",
+  "neural_algorithm_claim": false,
+  "H_assignment": null
+}
