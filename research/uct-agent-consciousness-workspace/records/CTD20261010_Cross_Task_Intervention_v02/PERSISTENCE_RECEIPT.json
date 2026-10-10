@@ -1,0 +1,974 @@
+{
+  "schema": "uct-research-persistence-receipt/1",
+  "research_id": "CTD20261010",
+  "result_version": "CTD-RESULT-v0.2.0",
+  "created_utc": "2026-10-10T08:40:42.860409+00:00",
+  "status": "SCIENCE_CHECKPOINT_AND_LIBRARY_DELIVERABLES_VERIFIED",
+  "scope": "This receipt describes the already verified scientific checkpoint and four completed file saves. Its own later save is not circularly included in the scientific ZIP manifest.",
+  "git": {
+    "verified_utc": "2026-10-10T08:38:19.100195+00:00",
+    "status": "PASS",
+    "science_commit": "883bf023031e59434cc768e0d4cd4bb2bbaa12e2",
+    "base_commit": "2faccb45147435b67d901e64f8045cd0e31a8d2a",
+    "tree_sha": "829e4020421ec5f39f8038a53b0c3609936170cc",
+    "files_verified": [
+      {
+        "path": "research/uct-agent-consciousness-workspace/AGENTS.md",
+        "bytes": 109555,
+        "sha256": "aa68fca93c299668f8e735f74245b7790eda470c2189d08ddac36d09646b7f47"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/CURRENT_STATE.json",
+        "bytes": 13841,
+        "sha256": "3ed615a9d9034d6d1d6abe09991411c1015cb256291db70792b8d0831fd4c23c"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/FORMAL_MAP_EXTENSION_INDEX.json",
+        "bytes": 2449,
+        "sha256": "699fd9840afb8889935b117e2be23da406cd84e830489dc007446e8a16b6fc91"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/HANDOFF.md",
+        "bytes": 43508,
+        "sha256": "3a593c28a7ece1a6153044ac9805c1be31fc7803868c7bbf47c08f97ce0a0a2f"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/MASTER_INDEX.md",
+        "bytes": 34382,
+        "sha256": "675e63928035fbac75d5927d2a5b374696fd0bfef3c771a648733f0b586ee720"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/MEMORY.md",
+        "bytes": 24745,
+        "sha256": "f3d161e33f36efebd283732cb55e8283ae2e3d46d8f3afdcb77d95efb43181f2"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/PUBLICATION_COVERAGE.json",
+        "bytes": 7793,
+        "sha256": "f2e281f655a1d8ec3992ebc376412359ba7d4d8871191109c70fd03fc8acfacd"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/RESEARCH_MASTER_GUIDE.md",
+        "bytes": 31288,
+        "sha256": "8080338e48bbfa29fdd372ccd32e4b5bfcfe5a669c056510be7155c3af61111e"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/RESEARCH_REGISTRY.json",
+        "bytes": 32629,
+        "sha256": "f298840e189c2dda2efd9e3b92eb9c07554e9f76ac94aac94488c2dd61b74908"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/RESEARCH_SESSION_LOG_INDEX.json",
+        "bytes": 2975,
+        "sha256": "e4131f38c8b2cfbecbcd97c91b717f18734a31db53e0ecde34382d3ad319f530"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/REVIEW_SUPERVISION.md",
+        "bytes": 108364,
+        "sha256": "c40e0191e0bee50bc17cab3bbba117abdef533e65fd7650e15302c78d83c7e53"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_AUDIT.md",
+        "bytes": 21653,
+        "sha256": "424f241241cb2ac298ef6983bc2d922bc509e9dbcaaf09a7d6807ab62ee4a1ba"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_GRAPH_MODULES.json",
+        "bytes": 33465,
+        "sha256": "f118adc74ed9a262f4c17d4a225d4dc589cf10e3b1be0028d251b752501a3da7"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_MAP.md",
+        "bytes": 20764,
+        "sha256": "7ecc11cafe27fbb43dd6a9e177e0a628e406e85bf90361208ec9f763d1411c25"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/publication/UCT-PUB-v1.0.28/CLAIM_COVERAGE_DELTA.json",
+        "bytes": 4201,
+        "sha256": "95e37e703fc8d58876f5be323578538db12b25845b07f06e02ac6300f96e94b3"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/publication/UCT-PUB-v1.0.28/COVERAGE_REPORT_ZH.md",
+        "bytes": 1401,
+        "sha256": "fd76349594b6a7ceefef044f3cbaf4305f52c9cafa47ac363f8ddec592958257"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/ANALYSIS_INTENT.json",
+        "bytes": 1640,
+        "sha256": "e3164f4769b9aee7b8f0fbf625ab8f8f81095cb16df41bc81426079380932414"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/CHANGELOG.md",
+        "bytes": 2258,
+        "sha256": "83e910dd8b7497e8cf4d3b34cc5926aebad629d361c65c2c72174c2a3aa924d6"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/CLAIM_LEDGER.json",
+        "bytes": 48172,
+        "sha256": "fc611104b72dbe26a6936e89c10d6ea85a3660788e9097fd5e0a9f34cd6ad6c6"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/FAILURES.md",
+        "bytes": 2506,
+        "sha256": "f421f21777afbce60f2739f3c41c10d0f0c266c36aa39f4e67ba419d51e14a15"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/FILE_MANIFEST.json",
+        "bytes": 26217,
+        "sha256": "336d6fff48f5feaf67b0fa820ebc0a481c500a25cd60a1b14a1eb74c8f62fa83"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/HANDOFF_ZH.md",
+        "bytes": 10823,
+        "sha256": "20a236aa68c859b27f837507de557fcd9fb8626a29837392982565097af87156"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/MANUSCRIPT_DECISION.json",
+        "bytes": 8589,
+        "sha256": "4e1b62870dfdea198db573309c7d83a94e3f71d19a775d48877359fb32eae4c7"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/OMITTED_CONTEXT_FILES.json",
+        "bytes": 5450,
+        "sha256": "562e3df2358025639748b7c0b3b109fc8cd6f73105b1c5fc938ab6e5efb8c37f"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/PUBLICATION_COVERAGE_UPDATE.json",
+        "bytes": 4201,
+        "sha256": "95e37e703fc8d58876f5be323578538db12b25845b07f06e02ac6300f96e94b3"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/README.md",
+        "bytes": 8025,
+        "sha256": "fba66a3a257b4888c83a7b71da740dc84a47b922dd8b52da2f5494b2c5567f12"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/RELOCATION_PROVENANCE.json",
+        "bytes": 3027,
+        "sha256": "a2ced2c1bacd5ea457392b1fa48e98dc2d53fba3b66b2920b3788fde614b3e46"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/RELOCATION_VERIFICATION.json",
+        "bytes": 761,
+        "sha256": "0c21a7937e71e05e35eada8add82d6830d9714e87588e7c40fc0effb6dac0c49"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/RESEARCH_NOTE.md",
+        "bytes": 2337,
+        "sha256": "7e0b7f31e0bd42811577016d36023e3bea8b7fa85e1eab7ff30e462f43f688bb"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/RUNTIME.json",
+        "bytes": 262,
+        "sha256": "ee4d61ae694b80b3165691007e486d3d990612973e91abb334cc25aa32de4d66"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/THEORY_INPUT_RELOCATION_PROVENANCE.json",
+        "bytes": 5160,
+        "sha256": "68226dd23c15c761ffb2a69f5d3d8d0c2bb448018bad64282831df32745109ea"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/THIRD_PARTY_NOTICES.md",
+        "bytes": 2372,
+        "sha256": "8f4ff4f45ff53120445aaa170b572c248810cfea83a0c58b118fd40a1e258bc0"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/WORK_LOG.md",
+        "bytes": 5841,
+        "sha256": "69b8a94454d50c724faadd45715ec84f46f568661d7d1bf40a3d69e887f857d6"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/BCI_CV_NESTING_REPAIR_DECISION.json",
+        "bytes": 1610,
+        "sha256": "39e0a506356d413b2780989f222a47c415fe47faef2ffa331ff1400d05c52ee9"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/BCI_EXECUTION_PLAN.json",
+        "bytes": 2047,
+        "sha256": "60e6b1e3c5302f72bc9d60a78bed747976ebd82eeb1049fe38b4b62daf023ce1"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/BCI_REPORT.md",
+        "bytes": 21351,
+        "sha256": "639a35f8764ba5a783e1e6b138f4f9204505d25e3dfbc842e90e2e4f9ab313e0"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/RECONSTRUCTION_PLAN.json",
+        "bytes": 1731,
+        "sha256": "4ac28e8c9f444b9a6fa0eafb72e1c7bca37b3c6c7af1ff9fbb7d3c76deaee3d2"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/RECONSTRUCTION_PROVENANCE.json",
+        "bytes": 3864,
+        "sha256": "65b2c6c91c1a37d7581f8566184fbabb240dd380446a68fb5d00443c377dab0d"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/WIDTH_RECONSTRUCTION_REPORT.md",
+        "bytes": 12546,
+        "sha256": "40aed07e04f7080f654fd1767f8d925bb875e355208b9525483d1a5728caf9cc"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/audit_bci_execution.py",
+        "bytes": 5185,
+        "sha256": "07923acb16e94835b300cad5d57ba11a45b459fc7237defa8eb0501116b46ffd"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/audit_reconstruction_residuals.py",
+        "bytes": 6466,
+        "sha256": "0bb81c8c2c85090679b2c024f1fd3e3f7df8e8d4953b19f860e3573508bb2014"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/audit_two_case_metrics.py",
+        "bytes": 2587,
+        "sha256": "706d61f1857e62c3db793e3c6f25fe891cc170f66f3be2cfadac17c3bb3a5ba3"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/author_inventory/LICENSE_METADATA_CHECK.json",
+        "bytes": 14661,
+        "sha256": "754587165cac873844af5bbb847761fd4aedf83819030b4740dadae11cea24de"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/author_inventory/archives_receipt.json",
+        "bytes": 9846,
+        "sha256": "3ee74ca4c22ba10da751fbe89b67a4fa6e6d6e6a22fb78346cca32165205d8f7"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/author_inventory/author_code_root.json",
+        "bytes": 12896,
+        "sha256": "78a1bd6d2bb750e23302901027384364ffaf3472505722db807655f357c017a6"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/author_inventory/author_data_root.json",
+        "bytes": 6927,
+        "sha256": "f6887b88f2cd2259873ceaa90bccd109bb6aa8b375a11ee46f4eb20c101c6dac"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/author_inventory/eeg_scripts.json",
+        "bytes": 6556,
+        "sha256": "c6c584b68e61f5c2ce94ce1e074e5de83f9a255e160980334e3f1f6660c104a2"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/author_inventory/experiment1.json",
+        "bytes": 2249,
+        "sha256": "0efd3889d1b9cc116765773bb7116b0e9f855e3597238897d19810f7d0390a38"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/author_inventory/experiment2.json",
+        "bytes": 4422,
+        "sha256": "4cc2269d3ed5ac94d71979752906a0112da2a3a97b367cfbf666757233cb1f97"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/author_inventory/experiment3.json",
+        "bytes": 4423,
+        "sha256": "1b92c9051f56ad431cef8c9b1f9503e003529a12a9148805ca6b3fd82b9904fd"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/author_inventory/inventory_receipt.json",
+        "bytes": 5736,
+        "sha256": "d30f644bc82cbf509ab126b79f2325742cbbfdd42604b944c096cd4f97842380"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/author_inventory/s5p4v_license.json",
+        "bytes": 13121,
+        "sha256": "32fb3d7b32be0843803f96424fe7739f69574481211a2d323e16f8da8536c635"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/author_inventory/s5p4v_node_metadata.json",
+        "bytes": 4495,
+        "sha256": "24f258097f9d3112a9aa2745b9a8debdee90ffe254ab19c814e3a377ec5aa665"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/author_inventory/ytga5_node_metadata.json",
+        "bytes": 4282,
+        "sha256": "6454a737c68eeb789eb1318076c4576f5055b1c8ee41e77debc2afccec42e532"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/inputs/Experiment_3.xlsx",
+        "bytes": 22409,
+        "sha256": "d3b2fef22f077788e5299dedb68737d453c09b005d9360bab8dfbe6c35852bc9"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/inputs/Experiment_3_Computational_modelling.xlsx",
+        "bytes": 26022,
+        "sha256": "32e58a814b7d33f52f3dc994a753715d4ddfa21c8ec7424b80ebef43c6d560e4"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/inputs/NatComm2026_SourceData.xlsx",
+        "bytes": 97514,
+        "sha256": "3202d68439ad502ff95e7a4d59535a4e8ff9072d5c6a76b5aebf7dde90228a82"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/reconstruct_gaussian_widths.py",
+        "bytes": 4250,
+        "sha256": "9c6fbe5cac9d36599eb1ab7473949763740b0883e041023a5d9e139b3ee9080a"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/repair_cv_nesting.py",
+        "bytes": 4223,
+        "sha256": "eacd7fbee92886c6ab24ff8e9c7ceaf4e6a892f0c7041e08e3f8fdda923cefbe"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/results/all_gaussian_candidate_fits.csv",
+        "bytes": 206193,
+        "sha256": "042be84e92b7f93a6d1dad6a8de4767ca43de5f818d19e4fefa45406a9422be5"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/results/bci_response/cv_fits.json",
+        "bytes": 3194214,
+        "sha256": "3c89b2a34460b481a88ed40fe6c2d494b5514aba16d9647eb7423cfe8eb7e83f"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/results/bci_response/cv_nesting_repair_summary.json",
+        "bytes": 1201,
+        "sha256": "678985e965e2917bb577b4ee1fca075aa2ae09161704645c2681e3423e859e25"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/results/bci_response/cv_partition_counts.npz",
+        "bytes": 111914,
+        "sha256": "37a48969f1921095d0a826fc3a83bcdf4b9af8581fab7be6d5ed0394da4374b7"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/results/bci_response/execution_integrity_audit.json",
+        "bytes": 6072,
+        "sha256": "f4014800bce9ceea5e69e5508c5598ab9a089270fad0bc545881d2d3af77d42e"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/results/bci_response/full_fits.json",
+        "bytes": 550887,
+        "sha256": "4b0c6e8366f6ac0cd4e4dd79bcc05c176d9bd3498cb4215f4bd010559c1b2a26"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/results/bci_response/participant_scores.csv",
+        "bytes": 9294,
+        "sha256": "aa3aca6da1a66e4cc2ede037018ef6ce46fcc2ed0f7803e57adfdcb9fdf473e3"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/results/bci_response/proof_facing_model_comparison.csv",
+        "bytes": 857,
+        "sha256": "bca84870870231bf6cb90ad9508b9e4011c6804fcefee6509334742e5d7c2328"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/results/bci_response/response_comparison_summary.json",
+        "bytes": 10366,
+        "sha256": "95b37c9c258284ef7d6ab72f77961cb7375eb643b9f3b794654258a0806df0aa"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/results/gaussian_probability_domain_diagnostics.csv",
+        "bytes": 19329,
+        "sha256": "592759670eceb3708598e589473dccac40d3ca4db6586050f67643deee6a14e2"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/results/gaussian_reconstruction_summary.json",
+        "bytes": 2175,
+        "sha256": "f644cb0a94916031a98814efedb5a7d0544df525e7b7a29d23fe7d38f7c48826"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/results/gaussian_width_convention_checks.csv",
+        "bytes": 3229,
+        "sha256": "63651cc787d072d3b1dff9e3006cace1d96485d2e964d963ff67877f66d5c3de"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/results/independent_response_gradient_check.json",
+        "bytes": 883,
+        "sha256": "d76434d5763ffddb9953bfe0bb1e627703745fdf4e1bd8afb8dc2f95c2e2b403"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/results/pre_nested_cv_repair/audit_bci_execution.pre_repair.py",
+        "bytes": 4383,
+        "sha256": "95b539cb41769e1c80d10cde7353bcf12fd17a72abc045cd46d99abe908eefa9"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/results/pre_nested_cv_repair/cv_fits.json",
+        "bytes": 3040552,
+        "sha256": "19c9af3f139eee48e916b0f9644474a6ba56eaf96dfbdab3aa9ba0b31db095ab"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/results/pre_nested_cv_repair/cv_partition_counts.npz",
+        "bytes": 111914,
+        "sha256": "37a48969f1921095d0a826fc3a83bcdf4b9af8581fab7be6d5ed0394da4374b7"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/results/pre_nested_cv_repair/execution_integrity_audit.json",
+        "bytes": 5376,
+        "sha256": "9c97abd0ed95a2986f066491068f76db2b966695c37b6ac569e2505923602f75"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/results/pre_nested_cv_repair/full_fits.json",
+        "bytes": 550887,
+        "sha256": "4b0c6e8366f6ac0cd4e4dd79bcc05c176d9bd3498cb4215f4bd010559c1b2a26"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/results/pre_nested_cv_repair/participant_scores.csv",
+        "bytes": 9293,
+        "sha256": "fa23bf809537f8e87f2e0d4431c91286d0c8aff4ea1a4673f8a1e2d1d861b3ff"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/results/pre_nested_cv_repair/response_comparison_summary.json",
+        "bytes": 9829,
+        "sha256": "689cb7983e15c02ab015355a8354a0ef517efbab8a35163cfa511e09774425ef"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/results/pre_nested_cv_repair/run_bci_response_comparison.pre_repair.py",
+        "bytes": 9681,
+        "sha256": "986f77d40aedffe8710601fc9b4702c0f71310162e4b6b6adb9520efd1df3b57"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/results/reconstruction_residual_audit.json",
+        "bytes": 5959,
+        "sha256": "e1e2f0ba400219bc0c283ebe45a885e146e78afd061c4664587c79fc10d6b206"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/results/response_runtime_benchmark.json",
+        "bytes": 768,
+        "sha256": "79006a4a89588f74d178d82fee0029d8eecfa334c34a436ac1f5b04f9df4bf17"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/results/two_case_alternative_metrics.json",
+        "bytes": 2200,
+        "sha256": "e386a8ece69fec8df87d90c0e629ffdcfb8a664ae2b27e28db971fbdc4862561"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/run_bci_response_comparison.py",
+        "bytes": 10667,
+        "sha256": "8dfd23faa940f3430679d998cc6d0d7a0704e6d38ba80a90f3afee4aefbe2d68"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/empirical/supplement.txt",
+        "bytes": 45648,
+        "sha256": "677bf3ecd7a5d8846f507fe3576eddd5968a78d3e6874ce976d90aa96be5639a"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/figures/FIGURE_PROVENANCE.json",
+        "bytes": 560,
+        "sha256": "2864c312f2c6465dc988f987a357213d86ecff588f6df944c42ae164f1cec7fe"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/figures/figure1_audit.pdf",
+        "bytes": 28752,
+        "sha256": "ac5d94025b6df6e77997dde6628fe7acf10811062cbf430633d7beff0cdb4781"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/figures/figure1_audit.png",
+        "bytes": 122408,
+        "sha256": "0d340a43514806d9115a9f6021692a87d0d1b2a0fd80ced42020c9eaa10895cb"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/figures/figure2_twins.pdf",
+        "bytes": 31170,
+        "sha256": "f50e2291da8e8d2445a6bfed3c2dbdb2efe1b4c4cfb5ea794d4c8f25df3d94f1"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/figures/figure2_twins.png",
+        "bytes": 139944,
+        "sha256": "6944622c4abe73ae499349b3e36bcde5b083ebb0696fae647346638f992e9a15"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/figures/figure3_identification.pdf",
+        "bytes": 34721,
+        "sha256": "8c6d2798802c7f847c00de4f20c8bce3f7bd938a9aded7ba98ad816b39c61108"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/figures/figure3_identification.png",
+        "bytes": 131970,
+        "sha256": "5a2118f1f708bcc506ebb0697bba6df5f31c86e910baf3fd8aeedda535331ee5"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/governance/BASELINE_PER_ID_STRUCTURE.json.gz",
+        "bytes": 79824,
+        "sha256": "7cc2ba2fc7f48d68d2e15e1d7d5ef1b0c5360e2c4bd3dc29fd98caf782c504b3"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/governance/BASELINE_STRUCTURE_SUMMARY.json",
+        "bytes": 846,
+        "sha256": "d5febcc479f87f5a5eaa1adbbb48e6665719a438a17da606cb60d9c0407dba9a"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/governance/COVERAGE_REPORT_ZH.md",
+        "bytes": 1299,
+        "sha256": "640917a27f46c5029c7ca0bc1b613cc22e642e921c213a47d9871bc8f543fa94"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_AUDIT.md",
+        "bytes": 14564,
+        "sha256": "eead748ac210996a5e36e70a7c863bfd4a2b95a6f86c94899bca563a1f5d0887"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_EXTENSION.json",
+        "bytes": 64887,
+        "sha256": "f00d9af53cca8935f08b6dd979e0f4d28cf5754bc7e9ffb696eb8d7be6095a2f"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_REVIEW_RECEIPT.json",
+        "bytes": 28268,
+        "sha256": "b60eceb512187ce464276dead644bd999805ff486dd8cc3bd3a19095184479ed"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/governance/NAVIGATION_UPDATE_RECEIPT.json",
+        "bytes": 5354,
+        "sha256": "cabba0382ac831b0809096fddf28407ffd7ca5939fd09162bfb70030a5b5a007"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/governance/REVIEWED_EDITION_RELOCATION.json",
+        "bytes": 801,
+        "sha256": "b18922cada728313bc9516833b64772cef91bd394bef00f7e86feb021df03cbf"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/governance/build_map_candidate.py",
+        "bytes": 52324,
+        "sha256": "137ef13f70f09aea69f9837677004359a570a8c0ff8c1a11713537428a29163b"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/history/execution_source/fit_response_models.py",
+        "bytes": 8812,
+        "sha256": "6f616f9065b9641df92eb6d50288474a3cf3b88a9212520374cde8119d1696b6"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/history/pre_relocation/empirical/audit_bci_execution.py",
+        "bytes": 4911,
+        "sha256": "cdaf4ea65e7ea04f23207914bd871ed60835bf9c3840c8838462566978c995c3"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/history/pre_relocation/empirical/results/bci_response/execution_integrity_audit.json",
+        "bytes": 5527,
+        "sha256": "e087689d79937d9f46df75e2c7c1d9ded16ff3457a6833cb4f404f5fc593adbe"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/history/pre_relocation/root_analysis/response_fitter_self_check.json",
+        "bytes": 1103,
+        "sha256": "0cf2ba834ce31098a11621e80e0d63fd1dc2208faa375fc1369757dbf635a2c8"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/history/pre_relocation/theory/RESPONSE_COMPARISON_AUDIT.json",
+        "bytes": 2992,
+        "sha256": "2e76d3869756fe1f3587f51c0c228b26e89865fc97341b441c437160701b12b9"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/history/pre_relocation/theory/audit_response_comparison.py",
+        "bytes": 10786,
+        "sha256": "196a916b63c97e1c2016dc0d0098a1344649ccce18828a4c47de9d4581d8c621"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/history/pre_relocation/theory/test_source_symmetry.py",
+        "bytes": 7373,
+        "sha256": "58d0d2601f9b671f627211c115cdd802a66c51fea2e7d2b9882ecfb4c1156a92"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/literature/CV_NESTING_REVIEW_FINAL.json",
+        "bytes": 1558,
+        "sha256": "49a8e7e3cfe406b4f29b8ccdbd72f93b26abe664ecb03897f22ef1fffed7f776"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/literature/CV_NESTING_REVIEW_INITIAL.json",
+        "bytes": 1772,
+        "sha256": "93979944b2cec962e0ccc3fe39aafe3ba52bb75658e162a635d69694be07e5f1"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/literature/SOURCE_BCI_AUDIT.md",
+        "bytes": 13767,
+        "sha256": "2454251e417a3b30a20a310ec7d94a739d4e23265004a03b6a805d6cbacd57d2"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/literature/TITLE_ABSTRACT_RECOMMENDATION.md",
+        "bytes": 4673,
+        "sha256": "35a22dd6df72ccc4b5942613d3a92a4392dbebb81bbaf51378a6a0fa83a2dacf"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/literature/V02_NOVELTY_AND_PUBLICATION_AUDIT.md",
+        "bytes": 27097,
+        "sha256": "4046b7ef745065f7cfd93a93fd911a0d4cbc3b60076e8345262d8f27de8f3b60"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/literature/code_archive/Master_BCI.m",
+        "bytes": 11332,
+        "sha256": "06e5122cbe1ed7852eb3b3a429ab984125244f76edc503ed32ac33dc3195bb9d"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/literature/code_archive/NLL_BCI_EEG.m",
+        "bytes": 803,
+        "sha256": "43bd2c6df3c7c860496efeb35cd4666178b06ee9eb251ccaee13110bce8532fa"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/literature/code_archive/NLL_BCI_tACS_Psame.m",
+        "bytes": 1437,
+        "sha256": "21d8f3880d97e1b1e5b60d67d4f2febb2f7fe05cb681e6a24f5e952bf4a0fa9b"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/literature/code_archive/NLL_BCI_tACS_Sigma.m",
+        "bytes": 1372,
+        "sha256": "76f00bd51c4f880a03ae024597cafa9bcff4c5b64a9086bde4d0510a7435edc9"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/literature/code_archive/ReadMe_BCI.txt",
+        "bytes": 1201,
+        "sha256": "442b5cf7e81545edab00e7680af8a2a23ca3a28fa2b4a2881d16c77f8a3a921e"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/literature/code_archive/modelprediction_log_BCI.m",
+        "bytes": 517,
+        "sha256": "fd06e42e6e61882475d6d6b4ff10321bd812d7e6c4038b7467dff89f6e8ff814"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/literature/code_archive/retrieval.json",
+        "bytes": 3876,
+        "sha256": "8420f345a18cb7f22307f6559d8943a6a803cd23368234eb355ee21f25f95ced"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/literature/primary_sources/pdf_retrieval.json",
+        "bytes": 911,
+        "sha256": "36faad68071f221c68716c41512bcedecbb298825558c91b1c64fb131866e568"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/literature/primary_sources/retrieval.json",
+        "bytes": 510,
+        "sha256": "786609d358cc997277f9f96e0a14acb3b518853f048bb57f5dcf583af6daa2c2"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/literature/reconcile_source_bci.py",
+        "bytes": 5614,
+        "sha256": "33bdf5fcff39b0b92f7b7c78b3b03ec5cefaba727d71cfe90efab88e4dac7478"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/literature/source_bci_reconciliation.csv",
+        "bytes": 7224,
+        "sha256": "ed77dc0b97e5e36abf844f31a851335779f98cd701ecc1f1fa0efc93ca39cfe1"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/literature/source_bci_reconciliation.json",
+        "bytes": 1869,
+        "sha256": "31c04b6bdcd85316c47124c2d87ca9f632bfd70a63948ee2f83615db582b0856"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/manuscript/noise-identifiability-bodily-judgments-v0.2.0.md",
+        "bytes": 52198,
+        "sha256": "8c15f9718a2c0daadb3cf85a0b537c71b4595fc46c5b1eb06d0e55db646dfac3"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/manuscript/noise-identifiability-bodily-judgments-v0.2.0.pdf",
+        "bytes": 220000,
+        "sha256": "f1441d6e945e5208e2616976975ce1599e60daf7c484bb49a1c069ae4a3f3d29"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/manuscript/noise-identifiability-bodily-judgments-v0.2.0.tex",
+        "bytes": 62164,
+        "sha256": "35e200089b95f898774d373051968072bea212ee7f2912cd91c747510b3d5b2f"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/manuscript/preamble.tex",
+        "bytes": 791,
+        "sha256": "2e5c113617548eeddbf7a210a8602034778e2ceb7a0dfaf0a50516b2275de62d"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/requirements.txt",
+        "bytes": 107,
+        "sha256": "a2828a88cdd6ee997f751394b79a6b1f3ec572c7f8378f0428bb709e5e8a36e3"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/review/EMPIRICAL_MANUSCRIPT_REVIEW.md",
+        "bytes": 11983,
+        "sha256": "d6baa61a8f050e5b4c70e05ea3fda3b1b944d1373dd315bb98a75432f462ebb9"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/review/EMPIRICAL_REVIEW_SNAPSHOT.json",
+        "bytes": 2012,
+        "sha256": "41a01fb8ff156ba13b6d716b7a8fabfca4758f2638a20445ec6c5163a478b32d"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/review/LITERATURE_MANUSCRIPT_REVIEW.md",
+        "bytes": 16656,
+        "sha256": "5d02b9d938b7d42141318634b532b28b6b8501e8eebe1a81f7fa8c473d027cae"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/review/PDF_QA.json",
+        "bytes": 1142,
+        "sha256": "b5f76b38fe21eb2eb7f822cddc8855516547feed3f981e3e25b7c8c988bf39be"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/review/PORTABLE_PACKAGE_VERIFICATION.json",
+        "bytes": 46654,
+        "sha256": "6bea0464826aa6140bee41ecc32b65edafb0543de6d178df1d6cb713cbe258f0"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/review/THEORY_MANUSCRIPT_REVIEW.md",
+        "bytes": 10115,
+        "sha256": "7865ce49b4426883843ddd8052b0bf8dd8790282385ac335c83e53452e681ba9"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/root_analysis/build_paper.py",
+        "bytes": 923,
+        "sha256": "73cb66e62e2507c731cd51884daa29a9cd8aa0812ae90ab339688792296065bb"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/root_analysis/fit_response_models.py",
+        "bytes": 8821,
+        "sha256": "397aaf7711160314176a8703340844c55ab58becdf02a2de94d337b734bc46f4"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/root_analysis/instantiate_response_twins.py",
+        "bytes": 10162,
+        "sha256": "2751d74fa4465b1e75f13aa3cf45bd0312f57ba7f78e411ea765ea27b0809232"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/root_analysis/make_figures.py",
+        "bytes": 9998,
+        "sha256": "3ed7566dcda6beb5c962eac9c66c923eb7708f43653440a7e934f544be416def"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/root_analysis/paired_readout_predictions.csv",
+        "bytes": 36835,
+        "sha256": "89e56aee5fa148fb0e6765837ac2675f31bc78c12c2f480bbd33a88126c953cd"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/root_analysis/response_fitter_self_check.json",
+        "bytes": 1103,
+        "sha256": "0cf2ba834ce31098a11621e80e0d63fd1dc2208faa375fc1369757dbf635a2c8"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/root_analysis/response_twin_people.csv",
+        "bytes": 4489,
+        "sha256": "c5e6f7a8fa30dd61ffb6faaca396542b5a2faddd0a2f3c15186d5fdc8fff38b8"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/root_analysis/response_twin_probabilities.csv",
+        "bytes": 229131,
+        "sha256": "895778dbb4a566adee06fd48be73c8fa659c27ee3aede0557484833cd05fffe3"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/root_analysis/response_twin_summary.json",
+        "bytes": 2254,
+        "sha256": "5822124b66b5e714d9bdcdc9524019bd1aa3ad209de4039ce8c8639a2e7125a2"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/root_analysis/verify_execution_source.py",
+        "bytes": 2242,
+        "sha256": "1b139d2cca7e3d658da23093a5fe417db7237a912195b7850f1e73e7e92fc202"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/theory/BCI_IDENTIFICATION_CHECKS.json",
+        "bytes": 5351,
+        "sha256": "98c5994fe2a13f39cb3651c5c840096098ca50171b1b7e1c7a75bd04625c6ffe"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/theory/RESPONSE_COMPARISON_AUDIT.json",
+        "bytes": 3537,
+        "sha256": "24e160d6b7db281162a20a0b519a6e13ea74be3b5db5d7ba28dfe6106dfff764"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/theory/RESPONSE_COMPARISON_AUDIT.md",
+        "bytes": 6381,
+        "sha256": "49101fc5c891ea75f6753f5b2f976d6d03279a4d8ff990c96d92ce55928bdb9a"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/theory/RESPONSE_IDENTIFIABILITY_RESULTS.md",
+        "bytes": 23891,
+        "sha256": "a4c7588b47082dbe860a39ab133b04bbd4052bd2a77e507bc2d51c8dd31dbca8"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/theory/SYMMETRY_ANALYSIS_PLAN.json",
+        "bytes": 2477,
+        "sha256": "876e8e05fb88e403ffcbd7f50ce8f63b65f253ceb5f599d5f21180538667c17f"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/theory/SYMMETRY_TEST_REPORT.md",
+        "bytes": 8774,
+        "sha256": "a6164a6c87462f8aa6e36a3cf3fcd72c3f7bf6dfa2f4cdef0377dc822e0b9c03"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/theory/SYMMETRY_TEST_RESULTS.json",
+        "bytes": 3300,
+        "sha256": "9e40fb55aac6595e46338f82214331ce4a3bcae14077e1271982ccffdf91d383"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/theory/THEORY_MAIN_TEXT.md",
+        "bytes": 12712,
+        "sha256": "3be55e63de8012a466182c4a5ff5fb0c4e7512b6f60903b32b40d08dc875048d"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/theory/audit_response_comparison.py",
+        "bytes": 10843,
+        "sha256": "00d0cf0f86505fb2e838659ab8e37dce50e024fe6f00e93735a4b98d330e72d0"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/theory/bci_identification.py",
+        "bytes": 7008,
+        "sha256": "88bf1d98258de78bdc3c09db7155ce31dd737d7a8b61debee36559a91cc9c2d0"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/theory/check_bci_identification.py",
+        "bytes": 12404,
+        "sha256": "691f89ecee6c0ca762d7ea67f5030237b55acffccb3576562e33c5dfc6c2ee05"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/theory/paired_affinity_stable_audit.csv",
+        "bytes": 5143,
+        "sha256": "3a6896966ee39f307cc5f20a9fe771e7ce31013b49994c55d4f58961316544b1"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/theory/symmetry_conditional_simulations.npz",
+        "bytes": 165084,
+        "sha256": "eec07532caefe82f3dd588a33d02c4d25b8287e1e1fefe8d67781b4bc9964fd7"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/theory/symmetry_pair_diagnostics.csv",
+        "bytes": 25894,
+        "sha256": "893a2557a3d32bd410af42284f9ac5eb08669a4a003833537d76eccda021e0c2"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/theory/symmetry_task_condition_summaries.csv",
+        "bytes": 422,
+        "sha256": "e4fa82efbf2eceb12876aae7655dcceb9f0c9d85e8c84eb5139c15f922ea16d8"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/theory/symmetry_task_summaries.csv",
+        "bytes": 170,
+        "sha256": "87cf024d74fecbc541ae89e172cf52966be0f6a6f30fa0147204b3b27cb2ed8b"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/theory/test_source_symmetry.py",
+        "bytes": 8339,
+        "sha256": "8c1173fa0eb4ca650da459dc17b9f0117772fdce5dbc2a95edc8be0f55d0add7"
+      },
+      {
+        "path": "research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention_v02/theory/two_anchor_lapse_trajectory.csv",
+        "bytes": 648,
+        "sha256": "3fd79a0cf92508830ac50fa06467de8c21abbadf339c2ce78b70ec5fd9c84a08"
+      }
+    ],
+    "changed_path_count": 164,
+    "frozen_trees_preserved": {
+      "records/CTD20261010_Cross_Task_Intervention": "7ac575a00dea0356d2a2f42dced8e7f6e8e2d938",
+      "records/A3M20261010_Bodily_Familiarity_Invariance": "04a15ede2aa1358ef10b59730b82d5e3193b2ec8",
+      "versions/UCT-MAP-v1.1.2": "345fab619cd7d5ba4f2932dea39c9e11eb55b164"
+    },
+    "working_tree_clean_after_readback": true,
+    "no_force_push": true,
+    "ci_dispatch_or_deployment": false
+  },
+  "library_files": [
+    {
+      "library_file_id": "libfile_8f8636e1d2d08191a996637b54a97858",
+      "file_id": "file_0000000033e4823098238dd0dd470aee",
+      "file_name": "noise-identifiability-bodily-judgments-v0.2.0.pdf",
+      "current_version_number": 0,
+      "local_path": "/workspace/scratch/5b73aae6b1e4/deliverables_v02/noise-identifiability-bodily-judgments-v0.2.0.pdf",
+      "path": "/noise-identifiability-bodily-judgments-v0.2.0.pdf",
+      "local_metadata_applied": true,
+      "readback_path": "/workspace/scratch/5b73aae6b1e4/readback_v02/noise-identifiability-bodily-judgments-v0.2.0.pdf",
+      "local_bytes": 220000,
+      "readback_bytes": 278735,
+      "local_sha256": "f1441d6e945e5208e2616976975ce1599e60daf7c484bb49a1c069ae4a3f3d29",
+      "readback_sha256": "57fb9c5e79c39e3bed50cd5eeff4673dec0bc669f096351888618db0afc607e8",
+      "byte_identical": false,
+      "pdf_normalization_verification": {
+        "pages": 18,
+        "all_page_text_equal": true,
+        "all_page_boxes_equal": true,
+        "all_page_render_pixels_equal_at_72dpi": true,
+        "scope": "Stored standalone PDF bytes differ from the exact scientific edition, but all page text/boxes/render pixels match. The ZIP and Git retain the exact original PDF bytes."
+      }
+    },
+    {
+      "library_file_id": "libfile_9902962a91648191bcd1e701b576e08b",
+      "file_id": "file_000000004b0c823096308c9745a8f92d",
+      "file_name": "UCT_CTD20261010_Paper_and_Reproduction_v0.2.0.zip",
+      "current_version_number": 0,
+      "local_path": "/workspace/scratch/5b73aae6b1e4/deliverables_v02/UCT_CTD20261010_Paper_and_Reproduction_v0.2.0.zip",
+      "path": "/UCT_CTD20261010_Paper_and_Reproduction_v0.2.0.zip",
+      "local_metadata_applied": true,
+      "readback_path": "/workspace/scratch/5b73aae6b1e4/readback_v02/UCT_CTD20261010_Paper_and_Reproduction_v0.2.0.zip",
+      "local_bytes": 2556818,
+      "readback_bytes": 2556818,
+      "local_sha256": "5917b978306c55b224714f703453c92afddbee591f0a9476cad1a2c1952110c8",
+      "readback_sha256": "5917b978306c55b224714f703453c92afddbee591f0a9476cad1a2c1952110c8",
+      "byte_identical": true
+    },
+    {
+      "library_file_id": "libfile_0f415b552fa481919781e8617e84e7d3",
+      "file_id": "file_00000000364c82309b627b5941c3d87a",
+      "file_name": "UCT_CTD20261010_Research_Handoff_v0.2.0_ZH.md",
+      "current_version_number": 0,
+      "local_path": "/workspace/scratch/5b73aae6b1e4/deliverables_v02/UCT_CTD20261010_Research_Handoff_v0.2.0_ZH.md",
+      "path": "/UCT_CTD20261010_Research_Handoff_v0.2.0_ZH.md",
+      "local_metadata_applied": true,
+      "readback_path": "/workspace/scratch/5b73aae6b1e4/readback_v02/UCT_CTD20261010_Research_Handoff_v0.2.0_ZH.md",
+      "local_bytes": 10823,
+      "readback_bytes": 10823,
+      "local_sha256": "20a236aa68c859b27f837507de557fcd9fb8626a29837392982565097af87156",
+      "readback_sha256": "20a236aa68c859b27f837507de557fcd9fb8626a29837392982565097af87156",
+      "byte_identical": true
+    },
+    {
+      "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+      "file_id": "file_0000000027908230af81418631224ec4",
+      "file_name": "UCT_Hourly_Research_Master_Handoff.md",
+      "current_version_number": 83,
+      "local_path": "/workspace/scratch/5b73aae6b1e4/latest_master_v82/UCT_Hourly_Research_Master_Handoff.md",
+      "path": "/UCT_Hourly_Research_Master_Handoff.md",
+      "local_metadata_applied": true,
+      "readback_path": "/workspace/scratch/5b73aae6b1e4/readback_v02/UCT_Hourly_Research_Master_Handoff.md",
+      "local_bytes": 732744,
+      "readback_bytes": 732744,
+      "local_sha256": "467c2818592df1868bf0a922b83e388aee82c6fad3b5e960f1dd7ad4c6f06542",
+      "readback_sha256": "467c2818592df1868bf0a922b83e388aee82c6fad3b5e960f1dd7ad4c6f06542",
+      "byte_identical": true,
+      "preserved_previous_version": 82,
+      "old_suffix_byte_identical": true,
+      "preserved_old_bytes": 728152
+    }
+  ],
+  "master_preservation": {
+    "path": "/workspace/scratch/5b73aae6b1e4/latest_master_v82/UCT_Hourly_Research_Master_Handoff.md",
+    "base_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "expected_current_version": 82,
+    "old_bytes": 728152,
+    "old_sha256": "7c492f30c2923d97daa1b36b27e4279bc7c1077831ee4c60a1e7eddeed310158",
+    "prefix_bytes": 4592,
+    "new_bytes": 732744,
+    "new_sha256": "467c2818592df1868bf0a922b83e388aee82c6fad3b5e960f1dd7ad4c6f06542",
+    "old_suffix_byte_identical": true,
+    "science_commit": "883bf023031e59434cc768e0d4cd4bb2bbaa12e2"
+  },
+  "scientific_artifacts": {
+    "artifacts": [
+      {
+        "local_path": "/workspace/scratch/5b73aae6b1e4/deliverables_v02/noise-identifiability-bodily-judgments-v0.2.0.pdf",
+        "filename": "noise-identifiability-bodily-judgments-v0.2.0.pdf",
+        "bytes": 220000,
+        "sha256": "f1441d6e945e5208e2616976975ce1599e60daf7c484bb49a1c069ae4a3f3d29"
+      },
+      {
+        "local_path": "/workspace/scratch/5b73aae6b1e4/deliverables_v02/UCT_CTD20261010_Paper_and_Reproduction_v0.2.0.zip",
+        "filename": "UCT_CTD20261010_Paper_and_Reproduction_v0.2.0.zip",
+        "bytes": 2556818,
+        "sha256": "5917b978306c55b224714f703453c92afddbee591f0a9476cad1a2c1952110c8"
+      },
+      {
+        "local_path": "/workspace/scratch/5b73aae6b1e4/deliverables_v02/UCT_CTD20261010_Research_Handoff_v0.2.0_ZH.md",
+        "filename": "UCT_CTD20261010_Research_Handoff_v0.2.0_ZH.md",
+        "bytes": 10823,
+        "sha256": "20a236aa68c859b27f837507de557fcd9fb8626a29837392982565097af87156"
+      }
+    ],
+    "scientific_file_count": 147,
+    "zip_members": 148,
+    "manifest_sha256": "336d6fff48f5feaf67b0fa820ebc0a481c500a25cd60a1b14a1eb74c8f62fa83",
+    "zip_crc_and_member_hash_readback": "PASS"
+  },
+  "scientific_manifest": "FILE_MANIFEST.json",
+  "candidate_map": {
+    "id": "CTD2-20261010",
+    "counts": {
+      "nodes": 20,
+      "rules": 7,
+      "contexts": 13
+    },
+    "all_disabled": true,
+    "completed_map": "UCT-MAP-v1.1.2",
+    "completed_map_increment": false
+  },
+  "publication_coverage_version": "UCT-PUB-v1.0.28",
+  "publication_action": "NONE",
+  "new_doi": null,
+  "external_peer_review_or_acceptance": false,
+  "preserved_concurrency": "A3M commit ancestry and original v82 master bytes retained; normal expected-SHA and expected-version guards used.",
+  "verification_limits": "Structural map review is not complete historical semantic reproof. Stored-output audits and data reanalysis are not a new human experiment or a UCT validation."
+}
