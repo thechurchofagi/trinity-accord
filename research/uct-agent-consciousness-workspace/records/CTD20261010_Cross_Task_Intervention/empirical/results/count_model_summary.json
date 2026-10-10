@@ -1,0 +1,383 @@
+{
+  "n_participants": 30,
+  "yes_count_cells": 1260,
+  "nominal_trials": 12600,
+  "test_statistic": 73.81345191953241,
+  "chi_square_reference_df": 60,
+  "chi_square_reference_p": 0.1083666802700271,
+  "null_nll": 4670.114547390252,
+  "alternative_nll": 4633.207821430485,
+  "saturated_nll": 4285.101319988229,
+  "null_deviance": 770.026454804045,
+  "alternative_deviance": 696.2130028845113,
+  "alternative_deviance_reference_df": 720,
+  "alternative_deviance_reference_p": 0.7311396695983119,
+  "all_original_converged": true,
+  "original_fit_status": [
+    {
+      "null_nll": 204.0822772867553,
+      "alt_nll": 204.0102395436078,
+      "null_converged": true,
+      "alt_converged": true,
+      "null_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "alt_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "null_iterations": 144,
+      "alt_iterations": 321,
+      "numerical_retries": 0
+    },
+    {
+      "null_nll": 133.62779009828594,
+      "alt_nll": 133.37632646420147,
+      "null_converged": true,
+      "alt_converged": true,
+      "null_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "alt_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "null_iterations": 12,
+      "alt_iterations": 51,
+      "numerical_retries": 0
+    },
+    {
+      "null_nll": 170.52419688117072,
+      "alt_nll": 169.78274314708526,
+      "null_converged": true,
+      "alt_converged": true,
+      "null_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "alt_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "null_iterations": 52,
+      "alt_iterations": 272,
+      "numerical_retries": 0
+    },
+    {
+      "null_nll": 175.9888027516037,
+      "alt_nll": 170.88242236737824,
+      "null_converged": true,
+      "alt_converged": true,
+      "null_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "alt_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "null_iterations": 61,
+      "alt_iterations": 335,
+      "numerical_retries": 0
+    },
+    {
+      "null_nll": 116.19969841235073,
+      "alt_nll": 116.06585952142494,
+      "null_converged": true,
+      "alt_converged": true,
+      "null_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "alt_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "null_iterations": 146,
+      "alt_iterations": 654,
+      "numerical_retries": 0
+    },
+    {
+      "null_nll": 175.9197513674047,
+      "alt_nll": 175.0980399950184,
+      "null_converged": true,
+      "alt_converged": true,
+      "null_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "alt_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "null_iterations": 337,
+      "alt_iterations": 311,
+      "numerical_retries": 0
+    },
+    {
+      "null_nll": 116.44752614560717,
+      "alt_nll": 116.31016947307471,
+      "null_converged": true,
+      "alt_converged": true,
+      "null_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "alt_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "null_iterations": 64,
+      "alt_iterations": 65,
+      "numerical_retries": 0
+    },
+    {
+      "null_nll": 146.89456347094443,
+      "alt_nll": 146.75980135908705,
+      "null_converged": true,
+      "alt_converged": true,
+      "null_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "alt_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "null_iterations": 82,
+      "alt_iterations": 108,
+      "numerical_retries": 0
+    },
+    {
+      "null_nll": 199.2684758354488,
+      "alt_nll": 198.12191337852593,
+      "null_converged": true,
+      "alt_converged": true,
+      "null_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "alt_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "null_iterations": 271,
+      "alt_iterations": 210,
+      "numerical_retries": 0
+    },
+    {
+      "null_nll": 157.2502289237972,
+      "alt_nll": 156.78678141421298,
+      "null_converged": true,
+      "alt_converged": true,
+      "null_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "alt_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "null_iterations": 53,
+      "alt_iterations": 245,
+      "numerical_retries": 0
+    },
+    {
+      "null_nll": 166.49065479558428,
+      "alt_nll": 165.82070038836838,
+      "null_converged": true,
+      "alt_converged": true,
+      "null_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "alt_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "null_iterations": 35,
+      "alt_iterations": 138,
+      "numerical_retries": 0
+    },
+    {
+      "null_nll": 148.33223031105246,
+      "alt_nll": 145.3943029148343,
+      "null_converged": true,
+      "alt_converged": true,
+      "null_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "alt_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "null_iterations": 135,
+      "alt_iterations": 124,
+      "numerical_retries": 0
+    },
+    {
+      "null_nll": 179.52390878566723,
+      "alt_nll": 178.75786628921188,
+      "null_converged": true,
+      "alt_converged": true,
+      "null_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "alt_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "null_iterations": 56,
+      "alt_iterations": 183,
+      "numerical_retries": 0
+    },
+    {
+      "null_nll": 153.4271763661509,
+      "alt_nll": 150.3481270331752,
+      "null_converged": true,
+      "alt_converged": true,
+      "null_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "alt_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "null_iterations": 176,
+      "alt_iterations": 109,
+      "numerical_retries": 0
+    },
+    {
+      "null_nll": 171.5804617001843,
+      "alt_nll": 170.35181470124184,
+      "null_converged": true,
+      "alt_converged": true,
+      "null_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "alt_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "null_iterations": 128,
+      "alt_iterations": 429,
+      "numerical_retries": 0
+    },
+    {
+      "null_nll": 215.78176662221273,
+      "alt_nll": 213.08536033648824,
+      "null_converged": true,
+      "alt_converged": true,
+      "null_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "alt_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "null_iterations": 101,
+      "alt_iterations": 90,
+      "numerical_retries": 0
+    },
+    {
+      "null_nll": 162.61041033564766,
+      "alt_nll": 162.57817265312124,
+      "null_converged": true,
+      "alt_converged": true,
+      "null_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "alt_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "null_iterations": 25,
+      "alt_iterations": 86,
+      "numerical_retries": 0
+    },
+    {
+      "null_nll": 97.3238046503468,
+      "alt_nll": 97.12487276997076,
+      "null_converged": true,
+      "alt_converged": true,
+      "null_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "alt_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "null_iterations": 12,
+      "alt_iterations": 96,
+      "numerical_retries": 0
+    },
+    {
+      "null_nll": 119.75413103730686,
+      "alt_nll": 117.68736991262942,
+      "null_converged": true,
+      "alt_converged": true,
+      "null_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "alt_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "null_iterations": 134,
+      "alt_iterations": 104,
+      "numerical_retries": 0
+    },
+    {
+      "null_nll": 139.2112528399861,
+      "alt_nll": 138.97943247211253,
+      "null_converged": true,
+      "alt_converged": true,
+      "null_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "alt_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "null_iterations": 57,
+      "alt_iterations": 81,
+      "numerical_retries": 0
+    },
+    {
+      "null_nll": 172.03682699550453,
+      "alt_nll": 168.92942811729458,
+      "null_converged": true,
+      "alt_converged": true,
+      "null_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "alt_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "null_iterations": 43,
+      "alt_iterations": 127,
+      "numerical_retries": 0
+    },
+    {
+      "null_nll": 102.9929143357343,
+      "alt_nll": 102.92954862778856,
+      "null_converged": true,
+      "alt_converged": true,
+      "null_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "alt_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "null_iterations": 167,
+      "alt_iterations": 169,
+      "numerical_retries": 0
+    },
+    {
+      "null_nll": 157.99149726707495,
+      "alt_nll": 157.4815961837135,
+      "null_converged": true,
+      "alt_converged": true,
+      "null_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "alt_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "null_iterations": 87,
+      "alt_iterations": 177,
+      "numerical_retries": 0
+    },
+    {
+      "null_nll": 171.26517503461716,
+      "alt_nll": 167.61337972413577,
+      "null_converged": true,
+      "alt_converged": true,
+      "null_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "alt_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "null_iterations": 214,
+      "alt_iterations": 311,
+      "numerical_retries": 0
+    },
+    {
+      "null_nll": 173.81264386269115,
+      "alt_nll": 173.32532013196123,
+      "null_converged": true,
+      "alt_converged": true,
+      "null_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "alt_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "null_iterations": 156,
+      "alt_iterations": 149,
+      "numerical_retries": 0
+    },
+    {
+      "null_nll": 126.41433414166185,
+      "alt_nll": 125.90769260879719,
+      "null_converged": true,
+      "alt_converged": true,
+      "null_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "alt_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "null_iterations": 125,
+      "alt_iterations": 98,
+      "numerical_retries": 0
+    },
+    {
+      "null_nll": 168.78621890782048,
+      "alt_nll": 165.65093090545582,
+      "null_converged": true,
+      "alt_converged": true,
+      "null_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "alt_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "null_iterations": 93,
+      "alt_iterations": 117,
+      "numerical_retries": 0
+    },
+    {
+      "null_nll": 154.79885422016454,
+      "alt_nll": 154.79495940553284,
+      "null_converged": true,
+      "alt_converged": true,
+      "null_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "alt_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "null_iterations": 128,
+      "alt_iterations": 108,
+      "numerical_retries": 0
+    },
+    {
+      "null_nll": 97.50181329745324,
+      "alt_nll": 95.3252297988969,
+      "null_converged": true,
+      "alt_converged": true,
+      "null_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "alt_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "null_iterations": 33,
+      "alt_iterations": 120,
+      "numerical_retries": 0
+    },
+    {
+      "null_nll": 194.27516071002108,
+      "alt_nll": 193.92741979213812,
+      "null_converged": true,
+      "alt_converged": true,
+      "null_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "alt_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "null_iterations": 32,
+      "alt_iterations": 101,
+      "numerical_retries": 0
+    }
+  ],
+  "new_model_mean_widths_ms": [
+    [
+      205.22034722598553,
+      190.50134569357496,
+      171.77419816820978
+    ],
+    [
+      146.36095912272475,
+      127.8978769481907,
+      106.01573433601526
+    ]
+  ],
+  "limitations": "New explicit binomial Gaussian response model, not the source Gaussian least-squares estimator; no uncertainty transferred to source TBW analysis. Binomial independence and Gaussian shape are assumptions. This tests a strict operational width constraint, not a general common cause or the original BCI model.",
+  "parametric_bootstrap": {
+    "B": 199,
+    "exceedances": 20,
+    "p_plus_one": 0.105,
+    "binomial_tail_MC_ci95": [
+      0.06247738223070603,
+      0.15094612574732913
+    ],
+    "all_fits_converged": true,
+    "converged_subject_fit_pairs": 5970,
+    "total_subject_fit_pairs": 5970,
+    "numerical_retry_count": 10,
+    "unresolved_failures": [],
+    "null_LRT_quantiles": [
+      33.33757110594175,
+      39.52373899518507,
+      60.02265313938898,
+      78.67179934223583,
+      80.35501370786425,
+      85.91706993075357
+    ]
+  }
+}

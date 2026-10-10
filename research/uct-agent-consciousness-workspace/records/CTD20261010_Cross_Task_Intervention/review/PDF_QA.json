@@ -1,0 +1,22 @@
+{
+  "status": "PASS_FINAL_RENDER_AND_VISUAL_INSPECTION",
+  "pages": 16,
+  "pdf_sha256": "8be9e33502d9a342a7f13f25ab93117ddf120e000ccf388af7a0b80e70a1630b",
+  "markdown_sha256": "b91cee9210ce07f7ea513679d718ce9dc39078046aabf68f20a86fe797491ffd",
+  "all_pages_rendered_and_png_decode_validated": true,
+  "all_pages_visually_reviewed_in_contact_sheets": true,
+  "full_resolution_pages_reviewed": [
+    4,
+    9,
+    12
+  ],
+  "checks": [
+    "Formulas legible and not clipped",
+    "Both tables remain whole on their pages",
+    "Charts and captions readable and within margins",
+    "No missing glyph or overfull-box warning",
+    "All16pages contain expected content; no accidental blank page"
+  ],
+  "benign_log_note": "One underfull hbox warning; inspected table spacing is acceptable.",
+  "source_or_data_changes_during_layout": false
+}

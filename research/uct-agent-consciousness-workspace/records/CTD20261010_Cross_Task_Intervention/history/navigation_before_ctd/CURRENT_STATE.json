@@ -1,0 +1,194 @@
+{
+  "schema": "uct-current-state/1.4",
+  "release_id": "UCT-MAP-v1.1.2",
+  "release_seq": 4,
+  "parent_release": "UCT-MAP-v1.1.1",
+  "audit_id": "R188-ALLMAP-COMPAT-20261009-v1",
+  "review_status": "COMPATIBILITY_REVIEW_AND_ASSEMBLY_COMPLETE_WITH_OPEN_APPLICATIONS",
+  "source_commit": "f72f99d60c391c4b15f5c9334b49d09e13abaac8",
+  "source_commit_role": "parent revision containing purpose-policy adoption; final science commit in persistence receipt",
+  "version_directory": "versions/UCT-MAP-v1.1.2",
+  "report": "versions/UCT-MAP-v1.1.2/AUDIT_REPORT.md",
+  "release_manifest": "versions/UCT-MAP-v1.1.2/RELEASE.json",
+  "map_descriptor": "UCT_FORMAL_GRAPH_MODULES.json",
+  "research_registry": "RESEARCH_REGISTRY.json",
+  "version_policy": "VERSIONING_POLICY.md",
+  "changelog": "CHANGELOG.md",
+  "latest_research": {
+    "id": "A3L20261010",
+    "result_version": "A3L-RESULT-v0.1.0",
+    "status": "PENDING_CHECKPOINT_DISABLED",
+    "source": "records/A3L20261010_Rescue_Learning/RESEARCH_NOTE.md",
+    "handoff": "records/A3L20261010_Rescue_Learning/HANDOFF_ZH.md",
+    "work_log": "records/A3L20261010_Rescue_Learning/WORK_LOG.md",
+    "enabled_as_established_premises": false,
+    "manuscript_status": "HOLD_STANDALONE_INTEGRATE_RESCUE_CORRECTION_AND_RETURN_TO_H",
+    "evidence_status": "INHERITED_ALGEBRA_APPLICATION_AND_PRIMARY_SOURCE_CORRECTION; NO_NEW_NEURAL_OR_H_EXPERIMENT"
+  },
+  "latest_integrated_research": {
+    "id": "R188-CER-20261009",
+    "result_version": "CER-RESULT-v0.1.0",
+    "work_log": "records/R188_Encoder_Access_and_Recovery_20261009/WORK_LOG.md",
+    "handoff": "records/R188_Encoder_Access_and_Recovery_20261009/HANDOFF_ZH.md",
+    "paper": "records/R188_Encoder_Access_and_Recovery_20261009/RESEARCH_NOTE.md",
+    "paper_pdf": "records/R188_Encoder_Access_and_Recovery_20261009/When_Behavioral_Recovery_Conceals_Organizational_Change_v0.1.0.pdf",
+    "current_manuscript_decision": "HOLD_STANDALONE_PRESERVE_TECHNICAL_SUPPLEMENT_CANDIDATE",
+    "decision_record": "records/PUB20261009_Publication_Coverage/RESIDUAL_RESEARCH_ASSESSMENT.md",
+    "map_release": "UCT-MAP-v1.1.2"
+  },
+  "persistence_receipt": "persistence/UCT-MAP-v1.1.2_RECEIPT.json",
+  "next_ordinary_completed_version": "UCT-MAP-v1.1.3",
+  "actual_premise_discharge": false,
+  "qc_open": [
+    "QC-20261008-10",
+    "IA-QC11",
+    "QC-20261008-12",
+    "QC-20261008-13"
+  ],
+  "publication_status": "CLAIM_LEVEL_CURRENT_COVERAGE_IN_PUBLICATION_COVERAGE_JSON",
+  "pending_checkpoints_not_promoted": [
+    "AC20261009",
+    "IL20261009",
+    "ONLINE-AC-PROBE-20261009",
+    "R189-HACA-20261009",
+    "R190-PCBC-20261009",
+    "R191-OCCA-20261009",
+    "R192-CTBI-20261009",
+    "R193-NCI-20261009",
+    "R194-CPP-20261009",
+    "R195-IPA-20261009",
+    "R196-TPD-20261009",
+    "R197-FEO-20261010",
+    "R198-SPNS-20261010",
+    "R199-CPC-20261010",
+    "R200-SCF-20261010",
+    "R201-ROTM-20261010",
+    "R202-TMAB-20261010",
+    "R203-ACD-20261010",
+    "R204-SAU-20261010",
+    "R205-ASC-20261010",
+    "SCU20261010",
+    "MPC20261010",
+    "CBI20261010",
+    "EIP20261010",
+    "DVC20261010",
+    "A3S20261010",
+    "A3P20261010",
+    "A3U20261010",
+    "A3L20261010"
+  ],
+  "current_guide": "RESEARCH_MASTER_GUIDE.md v2.3",
+  "complete_map_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
+  "review_ledger_sha256": "0513cb55cef94d82adcaea46af1974438a424aeba152f4c9d5655340f9271687",
+  "counts": {
+    "nodes": 913,
+    "active_conditional_rules": 424,
+    "suspended_historical_rules": 10,
+    "nondeductive_context_links": 261,
+    "total_review_items": 1608
+  },
+  "pending_note": "All 28 listed checkpoints remain disabled, including SCU despite public disclosure. A3U contributes 7 nodes, 3 rules and 5 nondeductive contexts only to the candidate layer and prospectively narrows A3P's endpoint sufficiency. Existing correction overlays remain disabled; no candidate counts enter the completed graph.",
+  "publication_coverage": {
+    "entry": "PUBLICATION_COVERAGE.json",
+    "version": "UCT-PUB-v1.0.26",
+    "base_census_version": "UCT-PUB-v1.0.0",
+    "update": "records/A3L20261010_Rescue_Learning/PUBLICATION_COVERAGE_UPDATE.json",
+    "report": "publication/UCT-PUB-v1.0.26/COVERAGE_REPORT_ZH.md",
+    "nondeductive": true,
+    "counting_scope": "Frozen verified corpus plus one independently verified SCU DOI; not a new worldwide census."
+  },
+  "latest_activity": {
+    "id": "A3L20261010",
+    "kind": "rescue_learning_application_amendment_and_return_to_bodily_H",
+    "work_log": "records/A3L20261010_Rescue_Learning/WORK_LOG.md",
+    "handoff": "records/A3L20261010_Rescue_Learning/HANDOFF_ZH.md"
+  },
+  "latest_pending_research": {
+    "id": "A3L20261010",
+    "result_version": "A3L-RESULT-v0.1.0",
+    "status": "PENDING_CHECKPOINT_DISABLED",
+    "source": "records/A3L20261010_Rescue_Learning/RESEARCH_NOTE.md",
+    "handoff": "records/A3L20261010_Rescue_Learning/HANDOFF_ZH.md",
+    "work_log": "records/A3L20261010_Rescue_Learning/WORK_LOG.md",
+    "enabled_as_established_premises": false,
+    "manuscript_status": "HOLD_STANDALONE_INTEGRATE_RESCUE_CORRECTION_AND_RETURN_TO_H",
+    "evidence_status": "INHERITED_ALGEBRA_APPLICATION_AND_PRIMARY_SOURCE_CORRECTION; NO_NEW_NEURAL_OR_H_EXPERIMENT"
+  },
+  "review_status_scope": "A3L: completed frozen graph unchanged; all IDs structurally traversed/hashed, affected application contracts manually reviewed. Historical deep semantic audit remains AUDIT_INCOMPLETE; no new theorem nodes or actual H premises.",
+  "next_priority": "Return to familiar bodily H: independently distinguish retained body/action familiarity from learned-cue recognition and fluency in one fixed domain, compare B_ret/B_fit with a held-out consequence. Reopen area-3a instrumentation only on new concrete same-instance direct-path/replay evidence.",
+  "latest_scoped_review": {
+    "audit": "records/DVC20261010_Device_Consumer_Validation/MAP_AUDIT.md",
+    "per_id_core_review": "records/DVC20261010_Device_Consumer_Validation/ALL_MAP_CORE_REVIEW.json.gz",
+    "summary": "records/DVC20261010_Device_Consumer_Validation/ALL_MAP_CORE_REVIEW_SUMMARY.json",
+    "status": "CORE_LAYER_COMPATIBILITY_REVIEW_COMPLETE; FULL_HISTORICAL_DEPTH_OPEN",
+    "core_layer_item_ids_visited": 1608,
+    "unvisited_core_ids": [],
+    "candidate_items_independently_reviewed": 45,
+    "full_map_semantic_completion": false,
+    "inherited_unclosed_depth_ledger": {
+      "ids": 1034,
+      "fields": 1828,
+      "proof_ids": 1347,
+      "counting_warning": "Historical unresolved audit debt, not a newly computed count of all currently unread leaf paths; newer per-component pointers cannot be directly subtracted."
+    },
+    "qc_open": [
+      "QC-20261008-10",
+      "IA-QC11",
+      "QC-20261008-12",
+      "QC-20261008-13",
+      "SCU-OPEN-R191-NORMALIZATION",
+      "SCU-AUDIT-DEPTH"
+    ]
+  },
+  "effective_pending_corrections": {
+    "index": "records/SCU20261010_Source_Consumer_Protocols/corrections/EFFECTIVE_CORRECTION_INDEX.json",
+    "original_records_preserved": true,
+    "enabled_as_established_premises": false,
+    "affected_rounds": [
+      "R194",
+      "R201",
+      "R202"
+    ]
+  },
+  "latest_publication": {
+    "research_id": "SCU20261010",
+    "report": "SCU-PAPER",
+    "version": "1.0.1",
+    "status": "PUBLISHED_PREPRINT_PUBLIC_READBACK_AND_DOI_RESOLUTION_VERIFIED",
+    "doi": "10.5281/zenodo.23272690",
+    "doi_url": "https://doi.org/10.5281/zenodo.23272690",
+    "manuscript": "records/SCUPUB20261010_DOI_Publication/release/matched-behavior-and-source-use-v1.0.1.md",
+    "pdf": "records/SCUPUB20261010_DOI_Publication/release/matched-behavior-and-source-use-v1.0.1.pdf",
+    "receipt": "records/SCUPUB20261010_DOI_Publication/FINAL_PUBLICATION_RECEIPT.json",
+    "peer_reviewed": false,
+    "scientific_map_admission_changed": false,
+    "DVC_in_published_paper": false
+  },
+  "prior_scoped_review_snapshot": {
+    "source": "records/DVC20261010_Device_Consumer_Validation/history/before_DVC_bd66a621/CURRENT_STATE.json",
+    "field": "latest_scoped_review",
+    "role": "Historical unresolved audit-debt record; old numbers are not newly measured current unread totals."
+  },
+  "latest_activity_persistence": "records/A3U20261010_Area3a_Use_Endpoint/DUAL_SAVE_RECEIPT.json",
+  "concurrent_research_preserved": {
+    "id": "EIP20261010",
+    "commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+    "source": "records/EIP20261010_Exoskeleton_Instrumentation/RESEARCH_NOTE.md",
+    "handoff": "records/EIP20261010_Exoskeleton_Instrumentation/HANDOFF_ZH.md",
+    "status": "PENDING_CHECKPOINT_DISABLED",
+    "snapshot": "records/DVC20261010_Device_Consumer_Validation/history/before_DVC_d8c94faa/CURRENT_STATE.json"
+  },
+  "additional_candidate_normalization_open": {
+    "source": "records/DVC20261010_Device_Consumer_Validation/review/concurrent_eip/EIP_NORMALIZATION_QUALIFICATIONS.json",
+    "ids": [
+      "EIP-NQ1",
+      "EIP-NQ2",
+      "EIP-NQ3",
+      "EIP-NQ4"
+    ],
+    "nondeductive": true,
+    "map_replacement": false,
+    "actual_application_established": false
+  },
+  "latest_persistence_receipt": "records/A3L20261010_Rescue_Learning/DUAL_SAVE_RECEIPT.json"
+}

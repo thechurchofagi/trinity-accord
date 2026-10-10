@@ -1,0 +1,37 @@
+{
+  "timestamp_utc": "2026-10-10T06:55:28.256119+00:00",
+  "secondary_model": "p_itf(s)=A_itf * exp[-0.5 ((s-mu_itf)/w_itf)^2]",
+  "binomial_n": 10,
+  "treats_counts_as_independent_conditional_on_model": true,
+  "null_width": "log w_itf = baseline_it + frequency_gain_if, gain_isham=0",
+  "alternative_width": "six unconstrained log widths per participant",
+  "amplitude_and_centers": "free for each participant/task/frequency in both models",
+  "null_parameters_per_person": 16,
+  "alternative_parameters_per_person": 18,
+  "aggregate_LRT": "2 sum_i(NLL_null_i-NLL_alternative_i)",
+  "bootstrap_replicates": 199,
+  "seed": 202610101,
+  "estimator_warning": "New explicit binomial Gaussian response model, not the source Gaussian least-squares estimator; no uncertainty transferred to source TBW analysis.",
+  "bounds_scaled_by_400ms": {
+    "amplitude_logit": [
+      -6,
+      14
+    ],
+    "mu": [
+      -0.75,
+      0.75
+    ],
+    "alternative_logw": [
+      -6,
+      6
+    ],
+    "null_baseline_logw": [
+      -3,
+      2.3
+    ],
+    "null_gains": [
+      -3,
+      3
+    ]
+  }
+}

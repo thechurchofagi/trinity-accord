@@ -1,0 +1,22 @@
+{
+  "schema": "uct-claim-coverage-delta/1",
+  "version": "UCT-PUB-v1.0.27",
+  "prior": "UCT-PUB-v1.0.26",
+  "research_id": "CTD20261010",
+  "claim_ids": [
+    "CTD20261010:C1",
+    "CTD20261010:C2",
+    "CTD20261010:C3",
+    "CTD20261010:C4",
+    "CTD20261010:C5",
+    "CTD20261010:C6",
+    "CTD20261010:C7",
+    "CTD20261010:C8"
+  ],
+  "claim_ledger": "records/CTD20261010_Cross_Task_Intervention/CLAIM_LEDGER.json",
+  "classification": "WORKING_PAPER_SPECIFIC_METHODS_AND_SECONDARY_ANALYSIS; OPTIONAL_CALIBRATION_APPENDIX_NOT_MAIN_INCREMENT",
+  "formal_publication_delta": 0,
+  "completed_graph_delta": 0,
+  "preserve_existing_publications": true,
+  "nondeductive": true
+}

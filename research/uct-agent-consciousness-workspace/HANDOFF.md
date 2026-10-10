@@ -1,4 +1,12 @@
-# 最新接续 A3L20261010；完成图仍为 UCT-MAP-v1.1.2
+# 最新接续 CTD20261010；完成图仍为 UCT-MAP-v1.1.2
+
+[英文论文](records/CTD20261010_Cross_Task_Intervention/manuscript/testing-a-shared-temporal-scale-v0.1.0.pdf) · [中文交接](records/CTD20261010_Cross_Task_Intervention/HANDOFF_ZH.md) · [工作日志](records/CTD20261010_Cross_Task_Intervention/WORK_LOG.md) · [贡献与发表决定](records/CTD20261010_Cross_Task_Intervention/MANUSCRIPT_DECISION.json) · [地图审计](records/CTD20261010_Cross_Task_Intervention/MAP_AUDIT.md)。本轮完成严格比例／较弱次序的心理测量宽度约束、精确修正预算及30人公开干预数据次分析。公开宽度均值约束p=.708107，独立计数模型参数自助p=.105；均不证明共同神经机制或UCT胜出。原研究个体相关、BCI及经典state-trace方法已扣除。
+
+CTD13节点／4规则／7上下文候选停用；完成图913/424/261和全部OPEN不变。1,608项结构访问不冒称全历史深语义证明。英文稿为完整可审阅工作论文，UCT-PUB-v1.0.27，无新DOI、正式发表计数不变。并发A3L全部保留；下一主问题仍是独立身体H与提示熟悉／流畅的区分，CTD宽度不替代H，不继续扩展通用统计或装置清单。
+
+---
+
+# 前一接续 A3L20261010；完成图仍为 UCT-MAP-v1.1.2
 
 [A3L中文交接](records/A3L20261010_Rescue_Learning/HANDOFF_ZH.md) · [研究稿](records/A3L20261010_Rescue_Learning/RESEARCH_NOTE.md) · [工作日志](records/A3L20261010_Rescue_Learning/WORK_LOG.md) · [地图审计](records/A3L20261010_Rescue_Learning/MAP_AUDIT.md)。本轮应用已有R177反码/补偿读出器结果，修正A3U的忠实救援应用：输入等价标准及相关读出器须事前固定或独立约束。London2008是学会左右提示，Ganguly–Carmena2009已有非仿生映射学习；不报重复首创。现有来源未提供同实例直接路径上界/忠实下游替代，也不证明不可行；到此停止装置细化。
 

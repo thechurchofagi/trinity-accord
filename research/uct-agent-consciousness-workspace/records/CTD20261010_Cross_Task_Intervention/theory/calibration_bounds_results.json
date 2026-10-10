@@ -1,0 +1,558 @@
+{
+  "kind": "exact finite-model enumeration; no new biological observations",
+  "domain": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "output_grid": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "all_monotone_functions_with_endpoints": 3003,
+  "scenario_count": 5,
+  "ordered_pair_checks": 245,
+  "scenarios": [
+    {
+      "name": "exterior_calibration_only",
+      "anchors": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          6,
+          10,
+          10
+        ]
+      ],
+      "admissible_functions": 3003,
+      "ordered_pairs_checked": 49,
+      "target_pair": [
+        1,
+        5
+      ],
+      "target_effect_bounds_grid": [
+        0,
+        10
+      ],
+      "target_effect_bounds_normalized": [
+        0.0,
+        1.0
+      ],
+      "lower_witness_grid": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        10
+      ],
+      "upper_witness_grid": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        10,
+        10
+      ],
+      "effect_histogram_grid": {
+        "0": 11,
+        "1": 40,
+        "2": 90,
+        "3": 160,
+        "4": 245,
+        "5": 336,
+        "6": 420,
+        "7": 480,
+        "8": 495,
+        "9": 440,
+        "10": 286
+      }
+    },
+    {
+      "name": "one_exact_interior_anchor",
+      "anchors": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          6,
+          10,
+          10
+        ],
+        [
+          3,
+          5,
+          5
+        ]
+      ],
+      "admissible_functions": 441,
+      "ordered_pairs_checked": 49,
+      "target_pair": [
+        1,
+        5
+      ],
+      "target_effect_bounds_grid": [
+        0,
+        10
+      ],
+      "target_effect_bounds_normalized": [
+        0.0,
+        1.0
+      ],
+      "lower_witness_grid": [
+        0,
+        5,
+        5,
+        5,
+        5,
+        5,
+        10
+      ],
+      "upper_witness_grid": [
+        0,
+        0,
+        0,
+        5,
+        5,
+        10,
+        10
+      ],
+      "effect_histogram_grid": {
+        "0": 1,
+        "1": 4,
+        "2": 10,
+        "3": 20,
+        "4": 35,
+        "5": 56,
+        "6": 70,
+        "7": 76,
+        "8": 73,
+        "9": 60,
+        "10": 36
+      }
+    },
+    {
+      "name": "two_exact_interior_anchors",
+      "anchors": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          6,
+          10,
+          10
+        ],
+        [
+          2,
+          3,
+          3
+        ],
+        [
+          4,
+          7,
+          7
+        ]
+      ],
+      "admissible_functions": 80,
+      "ordered_pairs_checked": 49,
+      "target_pair": [
+        1,
+        5
+      ],
+      "target_effect_bounds_grid": [
+        4,
+        10
+      ],
+      "target_effect_bounds_normalized": [
+        0.4,
+        1.0
+      ],
+      "lower_witness_grid": [
+        0,
+        3,
+        3,
+        3,
+        7,
+        7,
+        10
+      ],
+      "upper_witness_grid": [
+        0,
+        0,
+        3,
+        3,
+        7,
+        10,
+        10
+      ],
+      "effect_histogram_grid": {
+        "4": 5,
+        "5": 10,
+        "6": 15,
+        "7": 20,
+        "8": 15,
+        "9": 10,
+        "10": 5
+      }
+    },
+    {
+      "name": "two_uncertain_interior_anchors",
+      "anchors": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          6,
+          10,
+          10
+        ],
+        [
+          2,
+          2,
+          4
+        ],
+        [
+          4,
+          6,
+          8
+        ]
+      ],
+      "admissible_functions": 672,
+      "ordered_pairs_checked": 49,
+      "target_pair": [
+        1,
+        5
+      ],
+      "target_effect_bounds_grid": [
+        2,
+        10
+      ],
+      "target_effect_bounds_normalized": [
+        0.2,
+        1.0
+      ],
+      "lower_witness_grid": [
+        0,
+        4,
+        4,
+        4,
+        6,
+        6,
+        10
+      ],
+      "upper_witness_grid": [
+        0,
+        0,
+        2,
+        2,
+        6,
+        10,
+        10
+      ],
+      "effect_histogram_grid": {
+        "2": 3,
+        "3": 14,
+        "4": 40,
+        "5": 78,
+        "6": 123,
+        "7": 144,
+        "8": 135,
+        "9": 90,
+        "10": 45
+      }
+    },
+    {
+      "name": "overlapping_interior_anchor_bands",
+      "anchors": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          6,
+          10,
+          10
+        ],
+        [
+          2,
+          2,
+          6
+        ],
+        [
+          4,
+          4,
+          8
+        ]
+      ],
+      "admissible_functions": 1424,
+      "ordered_pairs_checked": 49,
+      "target_pair": [
+        1,
+        5
+      ],
+      "target_effect_bounds_grid": [
+        0,
+        10
+      ],
+      "target_effect_bounds_normalized": [
+        0.0,
+        1.0
+      ],
+      "lower_witness_grid": [
+        0,
+        4,
+        4,
+        4,
+        4,
+        4,
+        10
+      ],
+      "upper_witness_grid": [
+        0,
+        0,
+        2,
+        2,
+        4,
+        10,
+        10
+      ],
+      "effect_histogram_grid": {
+        "0": 3,
+        "1": 14,
+        "2": 40,
+        "3": 82,
+        "4": 139,
+        "5": 196,
+        "6": 240,
+        "7": 254,
+        "8": 228,
+        "9": 152,
+        "10": 76
+      }
+    }
+  ],
+  "strict_compression_witnesses": [
+    {
+      "epsilon": 0.1,
+      "strictly_increasing_values": [
+        0,
+        0.4,
+        0.45,
+        0.5,
+        0.55,
+        0.6,
+        1
+      ],
+      "target_effect": 0.19999999999999996
+    },
+    {
+      "epsilon": 0.01,
+      "strictly_increasing_values": [
+        0,
+        0.49,
+        0.495,
+        0.5,
+        0.505,
+        0.51,
+        1
+      ],
+      "target_effect": 0.020000000000000018
+    },
+    {
+      "epsilon": 0.0001,
+      "strictly_increasing_values": [
+        0,
+        0.4999,
+        0.49995,
+        0.5,
+        0.50005,
+        0.5001,
+        1
+      ],
+      "target_effect": 0.00019999999999997797
+    },
+    {
+      "epsilon": 1e-06,
+      "strictly_increasing_values": [
+        0,
+        0.499999,
+        0.4999995,
+        0.5,
+        0.5000005,
+        0.500001,
+        1
+      ],
+      "target_effect": 2.000000000002e-06
+    },
+    {
+      "epsilon": 1e-09,
+      "strictly_increasing_values": [
+        0,
+        0.499999999,
+        0.4999999995,
+        0.5,
+        0.5000000005,
+        0.500000001,
+        1
+      ],
+      "target_effect": 1.9999999989472883e-09
+    }
+  ],
+  "contamination_threshold": {
+    "cases": [
+      {
+        "contrast_bias_budget": 0,
+        "positive_interval": [
+          0.4,
+          1
+        ],
+        "null_interval": [
+          0,
+          0
+        ],
+        "sets_overlap": false,
+        "signed_gap": 0.4
+      },
+      {
+        "contrast_bias_budget": 0.1,
+        "positive_interval": [
+          0.30000000000000004,
+          1.1
+        ],
+        "null_interval": [
+          -0.1,
+          0.1
+        ],
+        "sets_overlap": false,
+        "signed_gap": 0.2
+      },
+      {
+        "contrast_bias_budget": 0.15,
+        "positive_interval": [
+          0.25,
+          1.15
+        ],
+        "null_interval": [
+          -0.15,
+          0.15
+        ],
+        "sets_overlap": false,
+        "signed_gap": 0.10000000000000003
+      },
+      {
+        "contrast_bias_budget": 0.199,
+        "positive_interval": [
+          0.201,
+          1.199
+        ],
+        "null_interval": [
+          -0.199,
+          0.199
+        ],
+        "sets_overlap": false,
+        "signed_gap": 0.0020000000000000018
+      },
+      {
+        "contrast_bias_budget": 0.2,
+        "positive_interval": [
+          0.2,
+          1.2
+        ],
+        "null_interval": [
+          -0.2,
+          0.2
+        ],
+        "sets_overlap": true,
+        "signed_gap": 0.0
+      },
+      {
+        "contrast_bias_budget": 0.25,
+        "positive_interval": [
+          0.15000000000000002,
+          1.25
+        ],
+        "null_interval": [
+          -0.25,
+          0.25
+        ],
+        "sets_overlap": true,
+        "signed_gap": -0.09999999999999998
+      }
+    ],
+    "boundary_twin": {
+      "rescue_model": {
+        "latent_readout_off": 0.3,
+        "latent_readout_on": 0.7,
+        "bias_off": 0,
+        "bias_on": -0.2
+      },
+      "null_model": {
+        "latent_readout_off": 0.3,
+        "latent_readout_on": 0.3,
+        "bias_off": 0,
+        "bias_on": 0.2
+      },
+      "identical_observed_means": [
+        0.3,
+        0.49999999999999994
+      ],
+      "paired_contrast": 0.19999999999999996
+    }
+  },
+  "finite_sample_no_go": [
+    {
+      "delta": 0.1,
+      "n_per_arm": 100,
+      "KL_to_null": 2.0135513550688864,
+      "Pinsker_TV_upper": 1.0,
+      "minimax_max_error_lower": 0.0
+    },
+    {
+      "delta": 0.01,
+      "n_per_arm": 100,
+      "KL_to_null": 0.02000133354671252,
+      "Pinsker_TV_upper": 0.10000333381120981,
+      "minimax_max_error_lower": 0.4499983330943951
+    },
+    {
+      "delta": 0.001,
+      "n_per_arm": 100,
+      "KL_to_null": 0.00020000013333354005,
+      "Pinsker_TV_upper": 0.010000003333337946,
+      "minimax_max_error_lower": 0.494999998333331
+    },
+    {
+      "delta": 0.0001,
+      "n_per_arm": 100,
+      "KL_to_null": 2.000000013333296e-06,
+      "Pinsker_TV_upper": 0.0010000000033333239,
+      "minimax_max_error_lower": 0.49949999999833333
+    }
+  ],
+  "all_checks_passed": true
+}

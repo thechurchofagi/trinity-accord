@@ -1,0 +1,105 @@
+{
+  "schema": "uct-internal-review-receipt/1",
+  "reviewer": "theory_literature independent internal AI pass",
+  "timestamp_utc": "2026-10-10T07:08:26.288425+00:00",
+  "scope": "All 13 new nodes, 4 rules, 7 contexts; supplied manuscript; selected inherited UCT core compatibility. No full 1608-record semantic rereview and no bootstrap rerun.",
+  "candidate_path": "/workspace/scratch/5b73aae6b1e4/uct_repo/research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention/MAP_EXTENSION.json",
+  "candidate_sha256": "27f5ee9afbab13f8652b6eded67745c2b0a5ab2272c79ece92f18c9f6b1bdedc",
+  "manuscript_path": "/workspace/scratch/5b73aae6b1e4/uct_repo/research/uct-agent-consciousness-workspace/records/CTD20261010_Cross_Task_Intervention/manuscript/testing-a-shared-temporal-scale-v0.1.0.md",
+  "manuscript_sha256": "b91cee9210ce07f7ea513679d718ce9dc39078046aabf68f20a86fe797491ffd",
+  "baseline_path": "/workspace/scratch/5b73aae6b1e4/source_archives/UCT_DVC_SCU_DOI_Increment_20261010/reproduction_baseline/UCT_EFFECTIVE_GRAPH.json",
+  "baseline_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
+  "node_ids": [
+    "CTD:DOMAIN",
+    "CTD:MULTIPLICATIVE_CLASS",
+    "CTD:MONOTONE_CLASS",
+    "CTD:UNCERTAINTY_BOX",
+    "CTD:PROPORTIONAL_DISTANCE",
+    "CTD:BOX_DISTANCE",
+    "CTD:ORDINAL_DISTANCE",
+    "CTD:COUNTEREXAMPLES",
+    "CTD:DATA_PROVENANCE",
+    "CTD:RELEASED_ESTIMATE_RESULTS",
+    "CTD:COUNT_MODEL_RESULTS",
+    "CTD:INFERENCE_CEILING",
+    "CTD:PROSPECTIVE_BRIDGE"
+  ],
+  "rule_ids": [
+    "CTD:R1",
+    "CTD:R2",
+    "CTD:R3",
+    "CTD:R4"
+  ],
+  "context_ids": [
+    "CTD:CTX1",
+    "CTD:CTX2",
+    "CTD:CTX3",
+    "CTD:CTX4",
+    "CTD:CTX5",
+    "CTD:CTX6",
+    "CTD:CTX7"
+  ],
+  "checks": {
+    "candidate_13_nodes_4_rules_7_contexts": true,
+    "ids_unique": true,
+    "node_references_resolve": true,
+    "no_node_id_collision_with_baseline": true,
+    "module_disabled": true,
+    "all_nodes_no_automatic_truth_or_promotion": true,
+    "all_rules_disabled_undischarged": true,
+    "all_contexts_nondeductive": true,
+    "empirical_nodes_are_not_deductive_premises": true,
+    "r3_proportional_dependency_added": true,
+    "r4_witnesses_separated": true,
+    "manuscript_spacing_typo_resolved": true,
+    "manuscript_feasibility_claim_resolved": true,
+    "final_rectangle_minimum_wording_read": true,
+    "final_fits_not_assumed_interchangeable": true
+  },
+  "duplicate_ids": [],
+  "unresolved_node_references": [],
+  "packaging_references": {
+    "empirical/results/count_model_summary.json": {
+      "exists": true,
+      "sha256": "e04d422c5f405f73dcec4533267bbd495d611fa5ffe1b6969493387c71530788"
+    },
+    "empirical/results/source_data_crosscheck.json": {
+      "exists": true,
+      "sha256": "85b2d9ee10d61d348a1d3e6fac8a969ebd256f675a1b2a6e177640411b3ca071"
+    },
+    "review/ROOT_NUMERICAL_VERIFICATION.json": {
+      "exists": true,
+      "sha256": "d746cccf24e387e9da88c98e5e7e60af79118d2c9d61d950fdb7c81872ae6db0"
+    },
+    "empirical/fit_count_clock.py": {
+      "exists": true,
+      "sha256": "fbdee763297666a2f05524572431c992a9b07d89d7c37d5f53669f7b640be564"
+    }
+  },
+  "disposition": "PASS_SCOPED_DISABLED_CANDIDATE",
+  "packaging_complete_for_checked_references": true,
+  "no_canonical_promotion": true,
+  "no_physical_or_phenomenal_premise_discharged": true,
+  "report": "REVIEW_REPORT.md",
+  "review_history": [
+    {
+      "timestamp_utc": "2026-10-10T07:05:04.329540+00:00",
+      "candidate_sha256": "27f5ee9afbab13f8652b6eded67745c2b0a5ab2272c79ece92f18c9f6b1bdedc",
+      "manuscript_sha256": "3e08b1761677882267322702ca4efe24ecfb8e0f4a42380a45cf9aa9e25adfdc",
+      "disposition": "PASS_SCOPED_DISABLED_CANDIDATE",
+      "scope": "Full initial candidate and manuscript review before final wording and pagination readback."
+    }
+  ],
+  "final_readback": {
+    "timestamp_utc": "2026-10-10T07:08:26.288425+00:00",
+    "scope": "Only final manuscript wording and pagination edits: minimum over rectangle, separately fitted estimates not assumed interchangeable, and two Needspace commands. No expanded literature search or numerical rerun. Candidate bytes unchanged.",
+    "previous_manuscript_sha256": "3e08b1761677882267322702ca4efe24ecfb8e0f4a42380a45cf9aa9e25adfdc",
+    "current_manuscript_sha256": "b91cee9210ce07f7ea513679d718ce9dc39078046aabf68f20a86fe797491ffd",
+    "candidate_unchanged": true,
+    "rectangle_minimum_explicit_in_text": true,
+    "separate_fits_not_assumed_interchangeable": true,
+    "does_not_assert_different_estimands": true,
+    "two_needspace_commands": true,
+    "rendered_pdf_layout_reviewed_by_this_reviewer": false
+  }
+}

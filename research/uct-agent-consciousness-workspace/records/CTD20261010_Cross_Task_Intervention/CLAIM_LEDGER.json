@@ -1,0 +1,90 @@
+{
+  "schema": "uct-scoped-claim-ledger/1",
+  "research_id": "CTD20261010",
+  "version": "CTD-RESULT-v0.1.0",
+  "public_release_status": "WORKING_MANUSCRIPT_NO_NEW_DOI",
+  "global_priority_verified": false,
+  "all_claims_disabled_as_established_premises": true,
+  "claims": [
+    {
+      "id": "CTD20261010:C1",
+      "question": "Which observable restriction expresses one common multiplicative scale in two task widths?",
+      "net_increment": "An explicit within-person, cross-intervention positive-width factorization; two independent restrictions for three conditions.",
+      "prior_comparison": "Classical rank-one/log-additive measurement; the new contribution is this source-data application, not a new factorization theorem.",
+      "joint_assumptions": "Positive widths, same participant/task meaning, task multipliers fixed across stimulation.",
+      "verification": "Manuscript §3.1; finite checker; root LP.",
+      "reuse_and_boundary": "Use to define a falsifiable operational bridge before comparing neural explanations.",
+      "status": "NEW_SPECIFIC_APPLICATION_CLASSICAL_ANTECEDENT"
+    },
+    {
+      "id": "CTD20261010:C2",
+      "question": "How far is a width matrix from that exact model?",
+      "net_increment": "Exact range(d)/4 uniform log budget and minimum distance over a declared uncertainty rectangle.",
+      "prior_comparison": "Elementary Chebyshev/interval reasoning; related UCT R168/R169 calibration tools inherited; priority not globally established.",
+      "joint_assumptions": "Two task rows, uniform log metric, freely fitted task/condition offsets; a rectangle only has probability coverage if independently justified.",
+      "verification": "Manuscript §3.1-3.2; theory proof and independently solved LP on all 30 matrices.",
+      "reuse_and_boundary": "Quantify required correction without equating it to measured error or neural change.",
+      "status": "EXACT_APPLICATION_NOT_GENERAL_MATH_PRIORITY"
+    },
+    {
+      "id": "CTD20261010:C3",
+      "question": "What remains testable under stable unknown nonlinear task maps?",
+      "net_increment": "Common strict order including ties and exact distance to the nondecreasing closure; contrast with proportionality.",
+      "prior_comparison": "Bamber/Prince/Kalish state-trace and Stout isotonic methods are direct antecedents; no first common-order-test claim.",
+      "joint_assumptions": "A shared scalar, positively oriented fixed maps, finite conditions; closure distinguished from strict membership.",
+      "verification": "Manuscript §3.3-3.4; 729 matrices and 4,392,225 candidate-distance comparisons.",
+      "reuse_and_boundary": "Separate proportional departures from stronger ordinal conflicts.",
+      "status": "CLASSICAL_METHOD_SPECIALIZATION_AND_COMPARISON"
+    },
+    {
+      "id": "CTD20261010:C4",
+      "question": "Do the released width estimates reject the new mean restriction?",
+      "net_increment": "Mean log gain difference -0.01456296, CI [-.09333654,.06421062], p=.708107; median descriptive allowance4.1982 percent; 25/30 common orders.",
+      "prior_comparison": "D'Angelo original stimulation effects/cross-task correlations and BCI comparison are already published and explicitly deducted.",
+      "joint_assumptions": "Released parameter estimand, paired participant analysis; uncalibrated individual distances; retrospective analysis.",
+      "verification": "empirical/results/published_widths_summary.json; review/ROOT_NUMERICAL_VERIFICATION.json.",
+      "reuse_and_boundary": "Reproduce a bounded result on real human data, with no new experiment or individual true-model inference.",
+      "status": "NEW_SECONDARY_ANALYSIS_NON_REJECTION"
+    },
+    {
+      "id": "CTD20261010:C5",
+      "question": "Do both per-person restrictions survive a specified direct count likelihood?",
+      "net_increment": "Independent Gaussian/binomial test of60 restrictions: LR73.81345192,199 null replicates,20 exceeds,p=.105;5970/5970 fitpairs converged.",
+      "prior_comparison": "New constrained application; generic likelihood/parametric-bootstrap methods are not original; original BCI model not retested.",
+      "joint_assumptions": "Gaussian response shape, binomial independence, fixed fitted participant nulls, recorded bounds and optimizer limits.",
+      "verification": "empirical/results/count_model_summary.json; theory/COUNT_MODEL_AUDIT.json.",
+      "reuse_and_boundary": "Test the full restriction set within one explicit response model; do not transfer its errors to source widths.",
+      "status": "NEW_CONDITIONAL_SECONDARY_MODEL_TEST"
+    },
+    {
+      "id": "CTD20261010:C6",
+      "question": "Can count noise be assigned to the source's fitted widths?",
+      "net_increment": "Exact source-column mapping verified, but our ordinary Gaussian least-squares reconstruction is not uniform; layers remain separate.",
+      "prior_comparison": "A reproducibility observation about a stated fitting procedure, not an accusation of source-author error or a general impossibility result.",
+      "joint_assumptions": "Public files match exactly in analyzed ranges; our estimator and unresolved source pipeline remain explicit.",
+      "verification": "empirical/results/source_data_crosscheck.json; check_gaussian_alignment.py; DATA_ANALYSIS_REPORT.md.",
+      "reuse_and_boundary": "Prevents unsupported individual error inference and defines a concrete missing source-estimator link.",
+      "status": "REPRODUCIBILITY_BOUNDARY_OPEN"
+    },
+    {
+      "id": "CTD20261010:C7",
+      "question": "Can this select UCT or an experiential mechanism?",
+      "net_increment": "Only an explicit theory/intervention/measurement conjunction can be tested; a future route experiment must independently ground consumer use and a held-out endpoint bridge.",
+      "prior_comparison": "SCU, R197/R200/R201 and A3U/A3L interpretation boundaries inherited; no new universal nonidentification theorem.",
+      "joint_assumptions": "C1/U1 remain axioms; no actual consumer intervention or independent phenomenal calibration is supplied here.",
+      "verification": "Manuscript §6-8; literature/REVIEW_REPORT.md.",
+      "reuse_and_boundary": "Preserves the difference between a methods result, human endpoint data, and full consciousness theory comparison.",
+      "status": "SCOPED_SYNTHESIS_ACTUAL_APPLICATION_OPEN"
+    },
+    {
+      "id": "CTD20261010:C8",
+      "question": "Can monotone anchors yield a robust local endpoint gap?",
+      "net_increment": "Optional appendix gives exact envelope gap bounds and finite checks under independently valid anchors.",
+      "prior_comparison": "R168 sharp metric envelopes, R175 orientation anchors and related calibration results are acknowledged; not a main paper originality claim.",
+      "joint_assumptions": "One common feasible monotone function and independent anchor intervals; no actual experience anchors in these data.",
+      "verification": "theory/APPENDIX_CALIBRATION_GAP.md and calibration_bounds_check.py.",
+      "reuse_and_boundary": "Possible future calibration analysis only; do not create a second generic-statistics research branch.",
+      "status": "OPTIONAL_THEORETICAL_APPENDIX_NOT_EMPIRICAL"
+    }
+  ]
+}

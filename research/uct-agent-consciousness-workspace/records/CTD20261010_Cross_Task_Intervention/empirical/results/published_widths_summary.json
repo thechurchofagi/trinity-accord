@@ -1,0 +1,147 @@
+{
+  "analysis_time_utc": "2026-10-10T06:46:08.675039+00:00",
+  "primary_population_mean_necessary_implication": {
+    "n": 30,
+    "mean": -0.014562960448196938,
+    "sd": 0.21095952761562792,
+    "se": 0.038515763998571144,
+    "median": -0.016219351080117406,
+    "t": -0.3781038965950979,
+    "df": 29,
+    "p_two_sided": 0.7081070301605145,
+    "ci95": [
+      -0.09333654266746225,
+      0.06421062177106837
+    ],
+    "bootstrap_mean_ci95": [
+      -0.08989228466166693,
+      0.05924433615905107
+    ],
+    "wilcoxon_stat": 230.0,
+    "wilcoxon_p": 0.9676735773682594,
+    "positive": 14,
+    "negative": 16,
+    "geometric_ratio_of_gains": 0.9855425665772782,
+    "ratio_of_gains_ci95": [
+      0.9108868964005169,
+      1.0663169646790605
+    ],
+    "tost_sensitivity": {
+      "1.1": {
+        "log_margin": 0.09531017980432493,
+        "p_tost": 0.022438460838406744,
+        "ci90": [
+          -0.08000613600575507,
+          0.050880215109361165
+        ]
+      },
+      "1.2": {
+        "log_margin": 0.1823215567939546,
+        "p_tost": 7.561401165768642e-05,
+        "ci90": [
+          -0.08000613600575507,
+          0.050880215109361165
+        ]
+      },
+      "1.3": {
+        "log_margin": 0.26236426446749106,
+        "p_tost": 2.4405594091142595e-07,
+        "ci90": [
+          -0.08000613600575507,
+          0.050880215109361165
+        ]
+      }
+    }
+  },
+  "secondary_population_contrasts": {
+    "8Hz_vs_sham": {
+      "n": 30,
+      "mean": 0.014179295748125398,
+      "sd": 0.13850813303054169,
+      "se": 0.02528800961958469,
+      "median": 0.014215866004069877,
+      "t": 0.560712209518618,
+      "df": 29,
+      "p_two_sided": 0.5793005519258163,
+      "ci95": [
+        -0.037540491116386146,
+        0.06589908261263694
+      ],
+      "bootstrap_mean_ci95": [
+        -0.03414870444464467,
+        0.06250398792131893
+      ],
+      "wilcoxon_stat": 199.0,
+      "wilcoxon_p": 0.5027610473334789,
+      "positive": 16,
+      "negative": 14,
+      "p_holm_two_followups": 0.610673171547891
+    },
+    "13Hz_vs_sham": {
+      "n": 30,
+      "mean": 0.028742256196322334,
+      "sd": 0.15086478628501682,
+      "se": 0.027544015527166572,
+      "median": 0.03309816148311917,
+      "t": 1.0435027589922008,
+      "df": 29,
+      "p_two_sided": 0.3053365857739455,
+      "ci95": [
+        -0.02759158082320217,
+        0.08507609321584683
+      ],
+      "bootstrap_mean_ci95": [
+        -0.02359139444596679,
+        0.08282116598568992
+      ],
+      "wilcoxon_stat": 176.0,
+      "wilcoxon_p": 0.25343610532581806,
+      "positive": 18,
+      "negative": 12,
+      "p_holm_two_followups": 0.610673171547891
+    }
+  },
+  "descriptive_source_means_ms": {
+    "ownership": {
+      "8Hz": 208.25549733333335,
+      "sham": 164.9820346666667,
+      "13Hz": 137.92819599999999
+    },
+    "simultaneity": {
+      "8Hz": 156.30519633333333,
+      "sham": 125.31506999999998,
+      "13Hz": 101.415352
+    }
+  },
+  "theory_diagnostic_exploratory": {
+    "formula": "epsilon_i = (max_f(log Wown-log Wsim)-min_f(log Wown-log Wsim))/4",
+    "not_a_measurement_error_confidence_interval": true,
+    "epsilon_median": 0.041122739806286446,
+    "tolerance_percent_quantiles": {
+      "0": 0.585641146824976,
+      "0.25": 1.9133550232460945,
+      "0.5": 4.198165854039569,
+      "0.75": 6.046113485887176,
+      "1": 13.391330111532115
+    },
+    "same_rank_count": 25,
+    "n": 30,
+    "within_10pct_multiplicative_tolerance_count": 27
+  },
+  "inherited_effect_correlations": {
+    "sham_minus_8Hz": {
+      "r": 0.7278002006539952,
+      "p": 5.172984410632227e-06
+    },
+    "13Hz_minus_sham": {
+      "r": 0.5471452015531768,
+      "p": 0.001754047044587917
+    }
+  },
+  "source_mapping_warning": "The final three source headers repeat OwnLow/OwnSham/OwnHigh. Values reproduce the published simultaneity means; mapping is preserved in tidy data. Gaussian refits of counts do not uniformly reproduce source widths, so counts are not used to infer errors on these source TBWs.",
+  "limits": [
+    "Population contrast tests do not establish or refute individual equality by themselves.",
+    "No trial-order or block-level records are available. Source fitted-width uncertainty is absent.",
+    "The multiplicative width model is a new stronger operational bridge, not a necessary implication of the original BCI common-uncertainty model."
+  ]
+}

@@ -1,0 +1,154 @@
+{
+  "kind": "finite mathematical enumeration; no new participant data",
+  "all_checks_passed": true,
+  "log_matrix_domain": [
+    -1,
+    0,
+    1
+  ],
+  "matrices_checked": 729,
+  "common_condition_orders": 6,
+  "all_common_order_half_grid_targets": 6025,
+  "independent_target_distance_comparisons": 4392225,
+  "strict_tie_exceptions": 324,
+  "examples": [
+    {
+      "name": "nonlinear_bridge",
+      "log_widths": [
+        [
+          0,
+          0.6931471805599453,
+          1.3862943611198906
+        ],
+        [
+          0,
+          1.3862943611198906,
+          2.772588722239781
+        ]
+      ],
+      "epsilon_proportional": 0.34657359027997264,
+      "epsilon_monotone_closure": 0.0,
+      "best_common_order": [
+        0,
+        1,
+        2
+      ],
+      "exact_strict_common_order": true
+    },
+    {
+      "name": "direction_reversal",
+      "log_widths": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          0,
+          2,
+          1
+        ]
+      ],
+      "epsilon_proportional": 0.5,
+      "epsilon_monotone_closure": 0.5,
+      "best_common_order": [
+        0,
+        1,
+        2
+      ],
+      "exact_strict_common_order": false
+    },
+    {
+      "name": "strict_tie_failure",
+      "log_widths": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          2
+        ]
+      ],
+      "epsilon_proportional": 0.25,
+      "epsilon_monotone_closure": 0.0,
+      "best_common_order": [
+        0,
+        1,
+        2
+      ],
+      "exact_strict_common_order": false
+    },
+    {
+      "name": "cancellation_subject1",
+      "log_widths": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "epsilon_proportional": 0.25,
+      "epsilon_monotone_closure": 0.0,
+      "best_common_order": [
+        0,
+        2,
+        1
+      ],
+      "exact_strict_common_order": false
+    },
+    {
+      "name": "cancellation_subject2",
+      "log_widths": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ]
+      ],
+      "epsilon_proportional": 0.25,
+      "epsilon_monotone_closure": 0.0,
+      "best_common_order": [
+        0,
+        2,
+        1
+      ],
+      "exact_strict_common_order": false
+    },
+    {
+      "name": "averaged_logs",
+      "log_widths": [
+        [
+          0.0,
+          0.5,
+          0.0
+        ],
+        [
+          0.0,
+          0.5,
+          0.0
+        ]
+      ],
+      "epsilon_proportional": 0.0,
+      "epsilon_monotone_closure": 0.0,
+      "best_common_order": [
+        0,
+        2,
+        1
+      ],
+      "exact_strict_common_order": true
+    }
+  ]
+}

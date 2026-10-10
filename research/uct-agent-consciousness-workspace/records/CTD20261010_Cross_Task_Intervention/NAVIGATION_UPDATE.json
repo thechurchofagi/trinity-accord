@@ -1,0 +1,24 @@
+{
+  "base_commit": "4f15b094a2ac545468e5dbe748b5969df328c721",
+  "previous_coverage": "UCT-PUB-v1.0.26",
+  "coverage_version": "UCT-PUB-v1.0.27",
+  "candidate_counts": {
+    "nodes": 13,
+    "rules": 4,
+    "contexts": 7
+  },
+  "pending_ids_count": 30,
+  "completed_graph_changed": false,
+  "prior_publication_counts_preserved": {
+    "distinct_research_works": 29,
+    "distinct_research_work_version_label_pairs": 39,
+    "distinct_published_research_doi_records": 40,
+    "separate_editorial_supplement_works": 1,
+    "separate_editorial_doi_records": 1,
+    "all_verified_publication_doi_records_including_editorial": 41,
+    "uninspected_live_account_drafts": "NOT_ENUMERATED",
+    "reserved_only_records_within_verified_publication_records": 0
+  },
+  "original_navigation_archive": "history/navigation_before_ctd",
+  "concurrent_A3L_preserved": true
+}

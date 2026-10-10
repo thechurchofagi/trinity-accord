@@ -1,0 +1,8 @@
+{
+  "maximum_proportional_output_error": 9.020562075079397e-17,
+  "maximum_monotone_output_error": 9.898765834792655e-17,
+  "positive_monotone_count": 5,
+  "inconsistent_exact_ties": [],
+  "max_monotone_upper_percent": 4.690078247471799,
+  "all_30_witnesses_pass": true
+}

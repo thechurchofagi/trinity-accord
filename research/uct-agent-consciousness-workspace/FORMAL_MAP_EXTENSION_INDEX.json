@@ -43,16 +43,18 @@
     "DVC20261010",
     "A3S20261010",
     "A3P20261010",
-    "A3U20261010"
+    "A3U20261010",
+    "A3L20261010",
+    "CTD20261010"
   ],
-  "status": "The authoritative completed descriptor remains UCT_FORMAL_GRAPH_MODULES.json at UCT-MAP-v1.1.2. All 28 navigated checkpoints are disabled; A3U narrows A3P's endpoint sufficiency without promoting either candidate or changing completed premises.",
+  "status": "All 30 navigated checkpoints remain disabled. CTD adds13 nodes,4 conditional rules and7 nondeductive contexts only to the candidate layer. Concurrent A3L and all effective corrections are retained; no completed-graph count or actual-premise truth changes.",
   "prior_index_commit": "11c1af83fa7e9eabca8351b67dfe162f59da7dd1",
   "navigation_reconciliation": {
     "source": "CURRENT_STATE.json and RESEARCH_REGISTRY.json",
     "reason": "Older extension index stopped at R190; this index now includes already recorded later checkpoints and DVC without promoting them.",
     "previous_exact_bytes": "records/DVC20261010_Device_Consumer_Validation/history/before_DVC_bd66a621/FORMAL_MAP_EXTENSION_INDEX.json"
   },
-  "latest_candidate": "records/A3U20261010_Area3a_Use_Endpoint/MAP_EXTENSION.json",
-  "latest_scoped_audit": "records/A3U20261010_Area3a_Use_Endpoint/MAP_AUDIT.md",
+  "latest_candidate": "records/CTD20261010_Cross_Task_Intervention/MAP_EXTENSION.json",
+  "latest_scoped_audit": "records/CTD20261010_Cross_Task_Intervention/MAP_AUDIT.md",
   "concurrent_candidate": "records/EIP20261010_Exoskeleton_Instrumentation/MAP_EXTENSION.json"
 }

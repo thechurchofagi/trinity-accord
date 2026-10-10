@@ -159,6 +159,26 @@
       "publication_coverage_version": "UCT-PUB-v1.0.0",
       "manuscript_decision": "HOLD_STANDALONE_TECHNICAL_SUPPLEMENT_CANDIDATE",
       "decision_record": "records/PUB20261009_Publication_Coverage/RESIDUAL_RESEARCH_ASSESSMENT.md"
+    },
+    {
+      "research_id": "CTD20261010",
+      "title": "Testing a Shared Temporal Scale Across Bodily Judgments",
+      "result_version": "0.1.0",
+      "base_map_release": "UCT-MAP-v1.1.2",
+      "first_map_release": null,
+      "source": "records/CTD20261010_Cross_Task_Intervention/manuscript/testing-a-shared-temporal-scale-v0.1.0.md",
+      "pdf": "records/CTD20261010_Cross_Task_Intervention/manuscript/testing-a-shared-temporal-scale-v0.1.0.pdf",
+      "module": "records/CTD20261010_Cross_Task_Intervention/MAP_EXTENSION.json",
+      "review": "records/CTD20261010_Cross_Task_Intervention/MAP_AUDIT.md",
+      "work_log": "records/CTD20261010_Cross_Task_Intervention/WORK_LOG.md",
+      "handoff": "records/CTD20261010_Cross_Task_Intervention/HANDOFF_ZH.md",
+      "actual_application": "OPEN_FOR_NEURAL_CONSUMER_AND_PHENOMENAL_BRIDGE",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "publication": "COMPLETE_WORKING_MANUSCRIPT_NO_NEW_DOI",
+      "publication_coverage_version": "UCT-PUB-v1.0.27",
+      "novelty": "SPECIFIC_CLASSICAL_METHODS_APPLICATION_AND_REAL_DATA_SECONDARY_ANALYSIS_PRIORITY_UNVERIFIED",
+      "scientific_delta": "Explicit proportional/ordinal cross-task constraints, sharp correction budgets, released-width and direct-count non-rejection results, source-estimator reconstruction boundary.",
+      "enabled_as_established_premises": false
     }
   ],
   "pending_checkpoints": [

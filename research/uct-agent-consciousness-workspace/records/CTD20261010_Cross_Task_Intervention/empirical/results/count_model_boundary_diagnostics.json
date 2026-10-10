@@ -1,0 +1,12 @@
+{
+  "null": {
+    "participants_with_upper_amplitude_bound": 29,
+    "curves_at_upper_amplitude_bound": 93,
+    "participants_with_mu_bound": 0
+  },
+  "alternative": {
+    "participants_with_upper_amplitude_bound": 30,
+    "curves_at_upper_amplitude_bound": 99,
+    "participants_with_mu_bound": 0
+  }
+}

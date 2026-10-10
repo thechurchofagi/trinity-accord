@@ -1,0 +1,6 @@
+scenario,admissible_functions,lower_gap,upper_gap
+exterior_calibration_only,3003,0.0,1.0
+one_exact_interior_anchor,441,0.0,1.0
+two_exact_interior_anchors,80,0.4,1.0
+two_uncertain_interior_anchors,672,0.2,1.0
+overlapping_interior_anchor_bands,1424,0.0,1.0

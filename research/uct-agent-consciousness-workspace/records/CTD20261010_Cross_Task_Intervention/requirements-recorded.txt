@@ -1,0 +1,9 @@
+# Recorded environment, not a minimum-version or install guarantee.
+# Python 3.12.14
+numpy==2.3.5
+scipy==1.17.0
+pandas==2.2.3
+openpyxl==3.1.5
+matplotlib==3.10.8
+pypdf==6.10.0
+Pillow==12.3.0

@@ -1,0 +1,29 @@
+{
+  "schema": "uct-publication-coverage-update/1",
+  "research_id": "CTD20261010",
+  "coverage_version": "UCT-PUB-v1.0.27",
+  "prior_coverage_version": "UCT-PUB-v1.0.26",
+  "result_version": "CTD-RESULT-v0.1.0",
+  "decision": "COMPLETE_WORKING_MANUSCRIPT_FOR_REVIEW",
+  "claim_ledger": "records/CTD20261010_Cross_Task_Intervention/CLAIM_LEDGER.json",
+  "manuscript_decision": "records/CTD20261010_Cross_Task_Intervention/MANUSCRIPT_DECISION.json",
+  "published_counts_delta": 0,
+  "new_doi": null,
+  "formal_publication_counts_unchanged": true,
+  "scientific_map_promotion": false,
+  "novelty": "Specific cross-task secondary-analysis application; classical mathematics and original source-study effects deducted; global priority unverified.",
+  "original_source_credit": "D'Angelo et al2026 DOI10.1038/s41467-025-67657-w; original correlations and BCI comparison retained as inherited.",
+  "new_main_results": [
+    "Strict proportional and ordinal bridge constraints with exact model distances",
+    "Retrospective released-width mean contrast p=.708107 with descriptive individual distances",
+    "Independent conditional count-model LR73.81345 and parametric-bootstrap p=.105"
+  ],
+  "open": [
+    "Source Gaussian-estimator reconstruction",
+    "Independent error/endpoint calibration",
+    "Actual consumer intervention",
+    "Independent replication",
+    "Global theory discrimination"
+  ],
+  "nondeductive": true
+}

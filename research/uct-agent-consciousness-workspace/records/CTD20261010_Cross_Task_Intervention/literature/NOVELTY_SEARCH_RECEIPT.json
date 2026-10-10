@@ -1,0 +1,136 @@
+{
+  "date": "2026-10-10",
+  "scoped_negative_search_only": true,
+  "text_files_searched": 207,
+  "queries": {
+    "strict_clock": "shared.{0,14}clock|multiplicative.{0,30}clock|clock.{0,30}multiplicative|log.?ratio|ratio.{0,12}invarian|cross.task.{0,50}(multiplicative|clock|width)|共享.{0,12}时钟|乘法.{0,12}时钟|对数比",
+    "anchor_gap": "anchor.{0,30}(pair|gap)|pair.{0,30}anchor|monoton.{0,40}(gap|bound|calibrat)|calibrat.{0,40}monoton|单调.{0,20}(界|差|校准)|校准.{0,20}(锚|单调)"
+  },
+  "matches": [
+    {
+      "scope": "corpus_file",
+      "file": "source_corpus/publication_audit_work/map_result_inventory.json",
+      "query": "anchor_gap",
+      "hits": [
+        {
+          "line": 75699,
+          "text": "      \"substantive_summary\": \"Typed premise routes, source anchors and proof-gap repairs. A formalization/method contribution is separate from new consciousness results.\","
+        }
+      ]
+    },
+    {
+      "scope": "corpus_file",
+      "file": "source_corpus/publication_audit_work/build_map_inventory.py",
+      "query": "anchor_gap",
+      "hits": [
+        {
+          "line": 378,
+          "text": "'R153':('formalization_and_review','Typed premise routes, source anchors and proof-gap repairs. A formalization/method contribution is separate from new consciousness results.'),"
+        }
+      ]
+    },
+    {
+      "scope": "corpus_file",
+      "file": "source_corpus/publication_audit_work/sources/attachments/mgtd_v100/MGTD_Method_Paper_v1.0.0/evidence/REVIEW_LEDGER.json",
+      "query": "anchor_gap",
+      "hits": [
+        {
+          "line": 27571,
+          "text": "        \"proof_sketch\": \"Use interval order L<=U for disjointness and inclusion-monotonic lower/upper bounds for refinement stability.\","
+        }
+      ]
+    },
+    {
+      "scope": "corpus_file",
+      "file": "source_corpus/publication_audit_work/sources/attachments/mgtd_v100/MGTD_Method_Paper_v1.0.0/evidence/UCT_EFFECTIVE_GRAPH.json",
+      "query": "anchor_gap",
+      "hits": [
+        {
+          "line": 43078,
+          "text": "      \"proof_sketch\": \"Use interval order L<=U for disjointness and inclusion-monotonic lower/upper bounds for refinement stability.\","
+        }
+      ]
+    },
+    {
+      "scope": "corpus_file",
+      "file": "source_corpus/publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/REVIEW_LEDGER.json",
+      "query": "anchor_gap",
+      "hits": [
+        {
+          "line": 27571,
+          "text": "        \"proof_sketch\": \"Use interval order L<=U for disjointness and inclusion-monotonic lower/upper bounds for refinement stability.\","
+        }
+      ]
+    },
+    {
+      "scope": "corpus_file",
+      "file": "source_corpus/publication_audit_work/sources/attachments/mgtd_v101/MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+      "query": "anchor_gap",
+      "hits": [
+        {
+          "line": 43078,
+          "text": "      \"proof_sketch\": \"Use interval order L<=U for disjointness and inclusion-monotonic lower/upper bounds for refinement stability.\","
+        }
+      ]
+    },
+    {
+      "scope": "corpus_file",
+      "file": "source_corpus/publication_audit_work/sources/fulltext/uct_iii/C_UCT_III_v1_0.md",
+      "query": "strict_clock",
+      "hits": [
+        {
+          "line": 581,
+          "text": "A fair binary randomization of which internal condition is nearer a reference, independent of every public record available to the observer, gives a precise public-input-only null: forced binary choice has expected accuracy one half if the public record carries no information about that assignment. Success can establish private-information use under the protocol. A direct decoder remains an alternative to second-order monitoring, and neither mechanism by itself establishes felt similarity. Coordinate-invariant descriptors prevent one avoidable artifact: a description-only rescaling of an activation chart can reverse raw Euclidean rankings when Euclidean weights are retained, even though the process is unchanged and every physical map is transported consistently. Physically rescaling activations inside a fixed network is a different operation. These invariance requirements do not identify a unique experiential metric."
+        }
+      ]
+    },
+    {
+      "scope": "archive_member",
+      "file": "source_corpus/publication_audit_work/sources/branches/mgtd_v101/research/map-guided-theory-development/MGTD_Method_Paper_v1.0.0_Complete_Package.zip",
+      "member": "MGTD_Method_Paper_v1.0.0/evidence/REVIEW_LEDGER.json",
+      "query": "anchor_gap",
+      "hits": [
+        {
+          "line": 27571,
+          "text": "        \"proof_sketch\": \"Use interval order L<=U for disjointness and inclusion-monotonic lower/upper bounds for refinement stability.\","
+        }
+      ]
+    },
+    {
+      "scope": "archive_member",
+      "file": "source_corpus/publication_audit_work/sources/branches/mgtd_v101/research/map-guided-theory-development/MGTD_Method_Paper_v1.0.0_Complete_Package.zip",
+      "member": "MGTD_Method_Paper_v1.0.0/evidence/UCT_EFFECTIVE_GRAPH.json",
+      "query": "anchor_gap",
+      "hits": [
+        {
+          "line": 43078,
+          "text": "      \"proof_sketch\": \"Use interval order L<=U for disjointness and inclusion-monotonic lower/upper bounds for refinement stability.\","
+        }
+      ]
+    },
+    {
+      "scope": "archive_member",
+      "file": "source_corpus/publication_audit_work/sources/branches/mgtd_v101/research/map-guided-theory-development/v1.0.1/MGTD_Method_Paper_v1.0.1_Complete_Package.zip",
+      "member": "MGTD_Method_Paper_v1.0.1/evidence/REVIEW_LEDGER.json",
+      "query": "anchor_gap",
+      "hits": [
+        {
+          "line": 27571,
+          "text": "        \"proof_sketch\": \"Use interval order L<=U for disjointness and inclusion-monotonic lower/upper bounds for refinement stability.\","
+        }
+      ]
+    },
+    {
+      "scope": "archive_member",
+      "file": "source_corpus/publication_audit_work/sources/branches/mgtd_v101/research/map-guided-theory-development/v1.0.1/MGTD_Method_Paper_v1.0.1_Complete_Package.zip",
+      "member": "MGTD_Method_Paper_v1.0.1/evidence/UCT_EFFECTIVE_GRAPH.json",
+      "query": "anchor_gap",
+      "hits": [
+        {
+          "line": 43078,
+          "text": "      \"proof_sketch\": \"Use interval order L<=U for disjointness and inclusion-monotonic lower/upper bounds for refinement stability.\","
+        }
+      ]
+    }
+  ]
+}

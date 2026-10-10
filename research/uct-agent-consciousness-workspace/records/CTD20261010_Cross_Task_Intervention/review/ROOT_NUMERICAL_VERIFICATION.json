@@ -1,0 +1,17 @@
+{
+  "method": "Independent pivot by explicit participant/task/condition labels; separate linear program for every proportional distance.",
+  "n_participants": 30,
+  "n_widths": 180,
+  "mean_log_gain_difference": -0.014562960448196938,
+  "t": -0.3781038965950979,
+  "p_two_sided": 0.7081070301605145,
+  "ci95": [
+    -0.09333654266746225,
+    0.06421062177106837
+  ],
+  "max_abs_formula_vs_LP": 0.0,
+  "ordinal_rank_agreement_count": 25,
+  "max_ordinal_upper_allowance_pct": 4.690078247471799,
+  "median_proportional_upper_allowance_pct": 4.198165854039569,
+  "inference": "Point-estimate distance calculations are descriptive, not participant-level hypothesis tests."
+}

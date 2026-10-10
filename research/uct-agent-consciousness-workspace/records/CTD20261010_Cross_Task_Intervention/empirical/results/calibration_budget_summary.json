@@ -1,0 +1,54 @@
+{
+  "epsilon_monotone_positive_count": 5,
+  "epsilon_monotone_log_max": 0.045834163763580626,
+  "monotone_upward_tolerance_percent_max": 4.690078247471799,
+  "clock_upward_tolerance_percent_median": 4.198165854039569,
+  "monotone_nonzero_rows": [
+    {
+      "participant": 11,
+      "epsilon_clock_log": 0.05610279963519482,
+      "epsilon_monotone_log": 0.007269758982524799,
+      "clock_upward_tolerance_percent": 5.770640998109565,
+      "monotone_upward_tolerance_percent": 0.7296247830631796,
+      "monotone_optimal_weak_order": "sham,13Hz,8Hz",
+      "note": "Distances for released point estimates, not confidence bounds on true values"
+    },
+    {
+      "participant": 16,
+      "epsilon_clock_log": 0.09038199474358755,
+      "epsilon_monotone_log": 0.045834163763580626,
+      "clock_upward_tolerance_percent": 9.459233237126744,
+      "monotone_upward_tolerance_percent": 4.690078247471799,
+      "monotone_optimal_weak_order": "13Hz,8Hz,sham",
+      "note": "Distances for released point estimates, not confidence bounds on true values"
+    },
+    {
+      "participant": 24,
+      "epsilon_clock_log": 0.11721697057972547,
+      "epsilon_monotone_log": 0.008226494658812644,
+      "clock_upward_tolerance_percent": 12.4363356996445,
+      "monotone_upward_tolerance_percent": 0.8260425245441655,
+      "monotone_optimal_weak_order": "13Hz,sham,8Hz",
+      "note": "Distances for released point estimates, not confidence bounds on true values"
+    },
+    {
+      "participant": 27,
+      "epsilon_clock_log": 0.12440225897134205,
+      "epsilon_monotone_log": 0.000461818848147999,
+      "clock_upward_tolerance_percent": 13.247132613830251,
+      "monotone_upward_tolerance_percent": 0.046192550289000954,
+      "monotone_optimal_weak_order": "13Hz,sham,8Hz",
+      "note": "Distances for released point estimates, not confidence bounds on true values"
+    },
+    {
+      "participant": 29,
+      "epsilon_clock_log": 0.05723626767721657,
+      "epsilon_monotone_log": 0.015043156386560952,
+      "clock_upward_tolerance_percent": 5.8905966095483455,
+      "monotone_upward_tolerance_percent": 1.51568741728629,
+      "monotone_optimal_weak_order": "13Hz,sham,8Hz",
+      "note": "Distances for released point estimates, not confidence bounds on true values"
+    }
+  ],
+  "error_budgets_not_calibrated_from_data": true
+}

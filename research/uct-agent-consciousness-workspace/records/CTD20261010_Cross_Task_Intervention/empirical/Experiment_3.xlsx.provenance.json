@@ -1,0 +1,10 @@
+{
+  "name": "Experiment_3.xlsx",
+  "url": "https://osf.io/download/p5un6/",
+  "status": 200,
+  "bytes": 22409,
+  "sha256": "d3b2fef22f077788e5299dedb68737d453c09b005d9360bab8dfbe6c35852bc9",
+  "expected_sha256": "d3b2fef22f077788e5299dedb68737d453c09b005d9360bab8dfbe6c35852bc9",
+  "hash_match": true,
+  "content_type": "application/octet-stream"
+}

@@ -1,0 +1,30 @@
+{
+  "schema": "uct-manuscript-decision/1",
+  "research_id": "CTD20261010",
+  "manuscript_version": "CTD-PAPER-v0.1.0",
+  "status": "COMPLETE_WORKING_MANUSCRIPT_FOR_REVIEW",
+  "reason": "Specific reproducible methods application and genuine public-data secondary analysis; non-rejection retained. No new neural or phenomenal finding, no external review, no whole-theory discrimination.",
+  "main_contribution": "Cross-task proportional/ordinal model constraints, exact adjustment budgets, released-width and independently specified count analysis.",
+  "mathematical_priority": "Classical antecedents credited; global priority not established.",
+  "new_experiments": false,
+  "new_doi": null,
+  "submission_performed": false,
+  "map_promotion": false,
+  "completed_map": "UCT-MAP-v1.1.2",
+  "review_reports": [
+    "literature/REVIEW_REPORT.md",
+    "theory/COUNT_MODEL_AUDIT.md",
+    "review/ROOT_NUMERICAL_VERIFICATION.json"
+  ],
+  "future_publication_work": [
+    "Resolve or precisely retain the source-width reconstruction boundary.",
+    "Justify any scientific equivalence/error margin independently before treating it as substantive equivalence.",
+    "Obtain independent scientific review; a working-paper save does not imply external endorsement."
+  ],
+  "not_required_to_complete_current_working_manuscript": [
+    "A new human experiment",
+    "Proof of UCT",
+    "An independently validated H endpoint"
+  ],
+  "main_open_research_priority": "Preserve A3L familiar bodily H distinction from cue familiarity and fluency; CTD width is not substituted for H."
+}

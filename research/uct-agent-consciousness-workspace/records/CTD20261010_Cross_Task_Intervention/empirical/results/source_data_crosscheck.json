@@ -1,0 +1,34 @@
+{
+  "Fig 6a": {
+    "shape": [
+      30,
+      3
+    ],
+    "exact_values_equal_to_OSF": true,
+    "max_abs_difference": 0.0
+  },
+  "Fig 6c": {
+    "shape": [
+      30,
+      3
+    ],
+    "exact_values_equal_to_OSF": true,
+    "max_abs_difference": 0.0
+  },
+  "Fig 6b": {
+    "shape": [
+      30,
+      21
+    ],
+    "exact_values_equal_to_OSF": true,
+    "max_abs_difference": 0.0
+  },
+  "Fig 6d": {
+    "shape": [
+      30,
+      21
+    ],
+    "exact_values_equal_to_OSF": true,
+    "max_abs_difference": 0.0
+  }
+}

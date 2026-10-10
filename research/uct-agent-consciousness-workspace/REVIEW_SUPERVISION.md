@@ -1,3 +1,9 @@
+# CTD20261010 新增审查接续
+
+全部24项候选已逐项审查、数值实现缺陷已修复并独立复验。基线1608项仅结构访问及相关核心语义对照；深层历史证明与全部OPEN保留。见[records/CTD20261010_Cross_Task_Intervention/MAP_AUDIT.md](records/CTD20261010_Cross_Task_Intervention/MAP_AUDIT.md)。完成图不变，候选disabled，无经验节点进入新规则前提。
+
+---
+
 # UCT Research Review and Direction Ledger
 
 ## A3L20261010 researcher response — rescue learning and return to H, 2026-10-10

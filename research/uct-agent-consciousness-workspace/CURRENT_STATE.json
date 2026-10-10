@@ -15,15 +15,16 @@
   "version_policy": "VERSIONING_POLICY.md",
   "changelog": "CHANGELOG.md",
   "latest_research": {
-    "id": "A3L20261010",
-    "result_version": "A3L-RESULT-v0.1.0",
+    "id": "CTD20261010",
+    "result_version": "CTD-RESULT-v0.1.0",
     "status": "PENDING_CHECKPOINT_DISABLED",
-    "source": "records/A3L20261010_Rescue_Learning/RESEARCH_NOTE.md",
-    "handoff": "records/A3L20261010_Rescue_Learning/HANDOFF_ZH.md",
-    "work_log": "records/A3L20261010_Rescue_Learning/WORK_LOG.md",
+    "source": "records/CTD20261010_Cross_Task_Intervention/manuscript/testing-a-shared-temporal-scale-v0.1.0.md",
+    "pdf": "records/CTD20261010_Cross_Task_Intervention/manuscript/testing-a-shared-temporal-scale-v0.1.0.pdf",
+    "handoff": "records/CTD20261010_Cross_Task_Intervention/HANDOFF_ZH.md",
+    "work_log": "records/CTD20261010_Cross_Task_Intervention/WORK_LOG.md",
     "enabled_as_established_premises": false,
-    "manuscript_status": "HOLD_STANDALONE_INTEGRATE_RESCUE_CORRECTION_AND_RETURN_TO_H",
-    "evidence_status": "INHERITED_ALGEBRA_APPLICATION_AND_PRIMARY_SOURCE_CORRECTION; NO_NEW_NEURAL_OR_H_EXPERIMENT"
+    "manuscript_status": "COMPLETE_WORKING_MANUSCRIPT_FOR_REVIEW_NO_NEW_DOI",
+    "evidence_status": "REAL_PUBLIC_DATA_SECONDARY_ANALYSIS_AND_EXACT_MODEL_APPLICATION; NO_NEW_NEURAL_EXPERIMENT_OR_PHENOMENAL_BRIDGE"
   },
   "latest_integrated_research": {
     "id": "R188-CER-20261009",
@@ -75,7 +76,8 @@
     "A3S20261010",
     "A3P20261010",
     "A3U20261010",
-    "A3L20261010"
+    "A3L20261010",
+    "CTD20261010"
   ],
   "current_guide": "RESEARCH_MASTER_GUIDE.md v2.3",
   "complete_map_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
@@ -87,49 +89,50 @@
     "nondeductive_context_links": 261,
     "total_review_items": 1608
   },
-  "pending_note": "All 28 listed checkpoints remain disabled, including SCU despite public disclosure. A3U contributes 7 nodes, 3 rules and 5 nondeductive contexts only to the candidate layer and prospectively narrows A3P's endpoint sufficiency. Existing correction overlays remain disabled; no candidate counts enter the completed graph.",
+  "pending_note": "All 30 navigated checkpoints remain disabled. CTD adds13 nodes,4 conditional rules and7 nondeductive contexts only to the candidate layer. Concurrent A3L and all effective corrections are retained; no completed-graph count or actual-premise truth changes.",
   "publication_coverage": {
     "entry": "PUBLICATION_COVERAGE.json",
-    "version": "UCT-PUB-v1.0.26",
+    "version": "UCT-PUB-v1.0.27",
     "base_census_version": "UCT-PUB-v1.0.0",
-    "update": "records/A3L20261010_Rescue_Learning/PUBLICATION_COVERAGE_UPDATE.json",
-    "report": "publication/UCT-PUB-v1.0.26/COVERAGE_REPORT_ZH.md",
+    "update": "records/CTD20261010_Cross_Task_Intervention/PUBLICATION_COVERAGE_UPDATE.json",
+    "report": "publication/UCT-PUB-v1.0.27/COVERAGE_REPORT_ZH.md",
     "nondeductive": true,
     "counting_scope": "Frozen verified corpus plus one independently verified SCU DOI; not a new worldwide census."
   },
   "latest_activity": {
-    "id": "A3L20261010",
-    "kind": "rescue_learning_application_amendment_and_return_to_bodily_H",
-    "work_log": "records/A3L20261010_Rescue_Learning/WORK_LOG.md",
-    "handoff": "records/A3L20261010_Rescue_Learning/HANDOFF_ZH.md"
+    "id": "CTD20261010",
+    "kind": "cross_task_proportional_and_ordinal_constraints_with_real_data_secondary_analysis",
+    "work_log": "records/CTD20261010_Cross_Task_Intervention/WORK_LOG.md",
+    "handoff": "records/CTD20261010_Cross_Task_Intervention/HANDOFF_ZH.md"
   },
   "latest_pending_research": {
-    "id": "A3L20261010",
-    "result_version": "A3L-RESULT-v0.1.0",
+    "id": "CTD20261010",
+    "result_version": "CTD-RESULT-v0.1.0",
     "status": "PENDING_CHECKPOINT_DISABLED",
-    "source": "records/A3L20261010_Rescue_Learning/RESEARCH_NOTE.md",
-    "handoff": "records/A3L20261010_Rescue_Learning/HANDOFF_ZH.md",
-    "work_log": "records/A3L20261010_Rescue_Learning/WORK_LOG.md",
+    "source": "records/CTD20261010_Cross_Task_Intervention/manuscript/testing-a-shared-temporal-scale-v0.1.0.md",
+    "pdf": "records/CTD20261010_Cross_Task_Intervention/manuscript/testing-a-shared-temporal-scale-v0.1.0.pdf",
+    "handoff": "records/CTD20261010_Cross_Task_Intervention/HANDOFF_ZH.md",
+    "work_log": "records/CTD20261010_Cross_Task_Intervention/WORK_LOG.md",
     "enabled_as_established_premises": false,
-    "manuscript_status": "HOLD_STANDALONE_INTEGRATE_RESCUE_CORRECTION_AND_RETURN_TO_H",
-    "evidence_status": "INHERITED_ALGEBRA_APPLICATION_AND_PRIMARY_SOURCE_CORRECTION; NO_NEW_NEURAL_OR_H_EXPERIMENT"
+    "manuscript_status": "COMPLETE_WORKING_MANUSCRIPT_FOR_REVIEW_NO_NEW_DOI",
+    "evidence_status": "REAL_PUBLIC_DATA_SECONDARY_ANALYSIS_AND_EXACT_MODEL_APPLICATION; NO_NEW_NEURAL_EXPERIMENT_OR_PHENOMENAL_BRIDGE"
   },
-  "review_status_scope": "A3L: completed frozen graph unchanged; all IDs structurally traversed/hashed, affected application contracts manually reviewed. Historical deep semantic audit remains AUDIT_INCOMPLETE; no new theorem nodes or actual H premises.",
-  "next_priority": "Return to familiar bodily H: independently distinguish retained body/action familiarity from learned-cue recognition and fluency in one fixed domain, compare B_ret/B_fit with a held-out consequence. Reopen area-3a instrumentation only on new concrete same-instance direct-path/replay evidence.",
+  "review_status_scope": "Completed UCT-MAP-v1.1.2 remains unchanged. CTD reviewed all24 new candidate items, repeated the1608-item programmatic structural check and compared named affected core semantics. No fresh full-depth review of all historical proofs is claimed; all inherited OPEN obligations remain.",
+  "next_priority": "Preserve A3L familiar bodily H priority: distinguish retained body/action familiarity from learned-cue recognition and fluency, and compare B_ret/B_fit by an independently named held-out consequence. CTD width analysis is complete and does not substitute width for H. Reopen estimator/calibration or consumer instrumentation only on concrete new source-pipeline, independently calibrated measurement, or same-instance route evidence; do not extend generic statistics/control taxonomies.",
   "latest_scoped_review": {
-    "audit": "records/DVC20261010_Device_Consumer_Validation/MAP_AUDIT.md",
-    "per_id_core_review": "records/DVC20261010_Device_Consumer_Validation/ALL_MAP_CORE_REVIEW.json.gz",
-    "summary": "records/DVC20261010_Device_Consumer_Validation/ALL_MAP_CORE_REVIEW_SUMMARY.json",
-    "status": "CORE_LAYER_COMPATIBILITY_REVIEW_COMPLETE; FULL_HISTORICAL_DEPTH_OPEN",
-    "core_layer_item_ids_visited": 1608,
-    "unvisited_core_ids": [],
-    "candidate_items_independently_reviewed": 45,
+    "audit": "records/CTD20261010_Cross_Task_Intervention/MAP_AUDIT.md",
+    "per_id_structure": "records/CTD20261010_Cross_Task_Intervention/review/BASELINE_PER_ID_STRUCTURE.json.gz",
+    "summary": "records/CTD20261010_Cross_Task_Intervention/review/BASELINE_STRUCTURE_SUMMARY.json",
+    "independent_candidate_review": "records/CTD20261010_Cross_Task_Intervention/literature/REVIEW_REPORT.md",
+    "status": "SCOPED_DISABLED_CANDIDATE_REVIEW_COMPLETE; FULL_HISTORICAL_DEPTH_OPEN",
+    "core_layer_item_ids_structurally_visited": 1608,
+    "candidate_items_independently_reviewed": 24,
     "full_map_semantic_completion": false,
     "inherited_unclosed_depth_ledger": {
       "ids": 1034,
       "fields": 1828,
       "proof_ids": 1347,
-      "counting_warning": "Historical unresolved audit debt, not a newly computed count of all currently unread leaf paths; newer per-component pointers cannot be directly subtracted."
+      "counting_warning": "Inherited historical debt, not reduced or recomputed by structural visit."
     },
     "qc_open": [
       "QC-20261008-10",
@@ -190,5 +193,17 @@
     "map_replacement": false,
     "actual_application_established": false
   },
-  "latest_persistence_receipt": "records/A3L20261010_Rescue_Learning/DUAL_SAVE_RECEIPT.json"
+  "latest_persistence_receipt": "records/A3L20261010_Rescue_Learning/DUAL_SAVE_RECEIPT.json",
+  "previous_latest_research_before_CTD": {
+    "id": "A3L20261010",
+    "result_version": "A3L-RESULT-v0.1.0",
+    "status": "PENDING_CHECKPOINT_DISABLED",
+    "source": "records/A3L20261010_Rescue_Learning/RESEARCH_NOTE.md",
+    "handoff": "records/A3L20261010_Rescue_Learning/HANDOFF_ZH.md",
+    "work_log": "records/A3L20261010_Rescue_Learning/WORK_LOG.md",
+    "enabled_as_established_premises": false,
+    "manuscript_status": "HOLD_STANDALONE_INTEGRATE_RESCUE_CORRECTION_AND_RETURN_TO_H",
+    "evidence_status": "INHERITED_ALGEBRA_APPLICATION_AND_PRIMARY_SOURCE_CORRECTION; NO_NEW_NEURAL_OR_H_EXPERIMENT"
+  },
+  "previous_next_priority_before_CTD": "Return to familiar bodily H: independently distinguish retained body/action familiarity from learned-cue recognition and fluency in one fixed domain, compare B_ret/B_fit with a held-out consequence. Reopen area-3a instrumentation only on new concrete same-instance direct-path/replay evidence."
 }

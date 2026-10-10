@@ -1,0 +1,342 @@
+{
+  "schema": "uct-pending-extension/1",
+  "id": "CTD20261010",
+  "result_version": "CTD-RESULT-v0.1.0",
+  "base_release": "UCT-MAP-v1.1.2",
+  "integration_status": "PENDING_CHECKPOINT_DISABLED",
+  "status": "PENDING_CHECKPOINT_DISABLED",
+  "enabled": false,
+  "enabled_as_established_premise": false,
+  "release_effect": "NONE; completed graph and hashes unchanged",
+  "adoption_note": "Specific empirical methods application with classical antecedents; formal definitions, theorems, secondary observations and future conditions are typed separately. No empirical result is an automatic deductive premise.",
+  "nodes": [
+    {
+      "id": "CTD:DOMAIN",
+      "kind": "DEFINITION",
+      "statement": "One participant, two declared positive psychometric-width endpoints, a finite common condition set, and one fixed estimator/measurement interpretation. Population parameters and fitted estimates are separate objects.",
+      "domain": "Two-task finite-condition psychometric-width analysis; see individual premises.",
+      "scope": "Conditional model or explicitly labeled secondary evidence; no basal experience claim.",
+      "quantifier": "One fixed same-participant matrix at a time unless the node explicitly describes paired population statistics.",
+      "status": "DEFINITION",
+      "all_premises": "Same participant and task/condition labels; widths positive; finite F >= 2.",
+      "proof_location": "manuscript/testing-a-shared-temporal-scale-v0.1.0.md §2",
+      "counterexamples_and_limits": "Changing participant, task definition, estimator or condition identity invalidates binding.",
+      "thought_experiment_role": "Maintains the distinction between equal outputs, actual mechanism, and a justified measurement interpretation.",
+      "automatic_premise_truth": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "CTD:MULTIPLICATIVE_CLASS",
+      "kind": "MODEL_CLASS_DEFINITION",
+      "statement": "M_times consists of W_tf=c_t*tau_f with positive factors and a task factor invariant across intervention. This defines a candidate class; it does not assert that a biological system belongs to it.",
+      "domain": "Two-task finite-condition psychometric-width analysis; see individual premises.",
+      "scope": "Conditional model or explicitly labeled secondary evidence; no basal experience claim.",
+      "quantifier": "One fixed same-participant matrix at a time unless the node explicitly describes paired population statistics.",
+      "status": "MODEL_CLASS_DEFINITION",
+      "all_premises": "CTD:DOMAIN; fixed task factors across all compared conditions.",
+      "proof_location": "manuscript/testing-a-shared-temporal-scale-v0.1.0.md §2.2",
+      "counterexamples_and_limits": "Common neural input with nonlinear task maps need not belong to this class.",
+      "thought_experiment_role": "Maintains the distinction between equal outputs, actual mechanism, and a justified measurement interpretation.",
+      "automatic_premise_truth": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "CTD:MONOTONE_CLASS",
+      "kind": "MODEL_CLASS_DEFINITION",
+      "statement": "M_up uses a common scalar through fixed positively strictly increasing task maps; its finite-condition closure permits nondecreasing maps and task-specific plateaus.",
+      "domain": "Two-task finite-condition psychometric-width analysis; see individual premises.",
+      "scope": "Conditional model or explicitly labeled secondary evidence; no basal experience claim.",
+      "quantifier": "One fixed same-participant matrix at a time unless the node explicitly describes paired population statistics.",
+      "status": "MODEL_CLASS_DEFINITION",
+      "all_premises": "CTD:DOMAIN; one common scalar; stable positive orientation; strict versus closure distinguished.",
+      "proof_location": "manuscript/testing-a-shared-temporal-scale-v0.1.0.md §2.2, §3.3",
+      "counterexamples_and_limits": "Intervention-specific task maps erase the restriction; exact tie patterns matter for strict membership.",
+      "thought_experiment_role": "Maintains the distinction between equal outputs, actual mechanism, and a justified measurement interpretation.",
+      "automatic_premise_truth": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "CTD:UNCERTAINTY_BOX",
+      "kind": "CONDITIONAL_UNCERTAINTY_DOMAIN",
+      "statement": "A declared rectangular set constrains all true log widths simultaneously; independent differences may be selected within induced intervals. Probabilistic coverage must be justified separately.",
+      "domain": "Two-task finite-condition psychometric-width analysis; see individual premises.",
+      "scope": "Conditional model or explicitly labeled secondary evidence; no basal experience claim.",
+      "quantifier": "One fixed same-participant matrix at a time unless the node explicitly describes paired population statistics.",
+      "status": "CONDITIONAL_UNCERTAINTY_DOMAIN",
+      "all_premises": "One same-participant simultaneous log-width rectangle; no unrecorded coupling; nonempty finite intervals.",
+      "proof_location": "manuscript/testing-a-shared-temporal-scale-v0.1.0.md §3.2",
+      "counterexamples_and_limits": "Marginal 95 percent intervals are not automatically a simultaneous 95 percent rectangle.",
+      "thought_experiment_role": "Maintains the distinction between equal outputs, actual mechanism, and a justified measurement interpretation.",
+      "automatic_premise_truth": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "CTD:PROPORTIONAL_DISTANCE",
+      "kind": "EXACT_CONDITIONAL_MATHEMATICS",
+      "statement": "Positive proportionality is equivalent to constant d_f=log W_Of-log W_Sf; inf max-cell log distance is (max d-min d)/4. This is an application of classical positive rank-one and Chebyshev reasoning.",
+      "domain": "Two-task finite-condition psychometric-width analysis; see individual premises.",
+      "scope": "Conditional model or explicitly labeled secondary evidence; no basal experience claim.",
+      "quantifier": "One fixed same-participant matrix at a time unless the node explicitly describes paired population statistics.",
+      "status": "EXACT_CONDITIONAL_MATHEMATICS",
+      "all_premises": "CTD:DOMAIN and CTD:MULTIPLICATIVE_CLASS jointly define the quantified model and metric.",
+      "proof_location": "manuscript/testing-a-shared-temporal-scale-v0.1.0.md §3.1, Theorem 1",
+      "counterexamples_and_limits": "Does not identify a cause of residuals or create participant-level significance from point estimates.",
+      "thought_experiment_role": "Maintains the distinction between equal outputs, actual mechanism, and a justified measurement interpretation.",
+      "automatic_premise_truth": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "CTD:BOX_DISTANCE",
+      "kind": "EXACT_CONDITIONAL_MATHEMATICS",
+      "statement": "The smallest proportional distance in the rectangular uncertainty set equals [max_f(L_Of-U_Sf)-min_f(U_Of-L_Sf)]_+/4.",
+      "domain": "Two-task finite-condition psychometric-width analysis; see individual premises.",
+      "scope": "Conditional model or explicitly labeled secondary evidence; no basal experience claim.",
+      "quantifier": "One fixed same-participant matrix at a time unless the node explicitly describes paired population statistics.",
+      "status": "EXACT_CONDITIONAL_MATHEMATICS",
+      "all_premises": "CTD:DOMAIN, CTD:UNCERTAINTY_BOX and CTD:PROPORTIONAL_DISTANCE with the same cells.",
+      "proof_location": "manuscript/testing-a-shared-temporal-scale-v0.1.0.md §3.2",
+      "counterexamples_and_limits": "Only the supplied uncertainty set is quantified; not a data-derived calibration for this experiment.",
+      "thought_experiment_role": "Maintains the distinction between equal outputs, actual mechanism, and a justified measurement interpretation.",
+      "automatic_premise_truth": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "CTD:ORDINAL_DISTANCE",
+      "kind": "EXACT_CONDITIONAL_MATHEMATICS",
+      "statement": "Strict membership requires identical signs for every between-condition difference in both tasks. Closure distance is min_permutation max_positive_inversion/2 and is at most the proportional distance.",
+      "domain": "Two-task finite-condition psychometric-width analysis; see individual premises.",
+      "scope": "Conditional model or explicitly labeled secondary evidence; no basal experience claim.",
+      "quantifier": "One fixed same-participant matrix at a time unless the node explicitly describes paired population statistics.",
+      "status": "EXACT_CONDITIONAL_MATHEMATICS",
+      "all_premises": "CTD:DOMAIN, CTD:MONOTONE_CLASS and CTD:PROPORTIONAL_DISTANCE for the class-nesting inequality, with one fixed positive orientation and finite F.",
+      "proof_location": "manuscript/testing-a-shared-temporal-scale-v0.1.0.md §3.3, Proposition 2 and Theorem 2",
+      "counterexamples_and_limits": "Zero closure distance can coexist with incompatible strict ties. Established state-trace/isotonic prior art is credited.",
+      "thought_experiment_role": "Maintains the distinction between equal outputs, actual mechanism, and a justified measurement interpretation.",
+      "automatic_premise_truth": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "CTD:COUNTEREXAMPLES",
+      "kind": "FINITE_COUNTERMODELS",
+      "statement": "Stable nonlinear maps separate proportional from ordinal compatibility; opposite order defeats stable positive scalar maps; unrestricted condition-specific maps fit arbitrary positive tables; population cancellation hides individual departure.",
+      "domain": "Two-task finite-condition psychometric-width analysis; see individual premises.",
+      "scope": "Conditional model or explicitly labeled secondary evidence; no basal experience claim.",
+      "quantifier": "One fixed same-participant matrix at a time unless the node explicitly describes paired population statistics.",
+      "status": "FINITE_COUNTERMODELS",
+      "all_premises": "Explicit constructions in manuscript §3.4; claimed outcomes refer only to their specified model classes.",
+      "proof_location": "manuscript/testing-a-shared-temporal-scale-v0.1.0.md §3.4",
+      "counterexamples_and_limits": "No inference from a mathematical table to complete actual physical or experiential organization.",
+      "thought_experiment_role": "Maintains the distinction between equal outputs, actual mechanism, and a justified measurement interpretation.",
+      "automatic_premise_truth": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "CTD:DATA_PROVENANCE",
+      "kind": "OBSERVED_PUBLIC_DATA_RECORD",
+      "statement": "Public Experiment 3 includes 30 participants, 180 fitted widths, and 1260 count cells with denominator ten. Publisher Figure 6a/6c widths and Figure 6b/6d counts exactly match the analyzed OSF columns.",
+      "domain": "Two-task finite-condition psychometric-width analysis; see individual premises.",
+      "scope": "Conditional model or explicitly labeled secondary evidence; no basal experience claim.",
+      "quantifier": "All analyzed source cells and all 30 participant rows in the explicitly mapped Experiment 3 ranges.",
+      "status": "OBSERVED_PUBLIC_DATA_RECORD",
+      "all_premises": "Unchanged source bytes and explicit task/header mapping; source-data checksum and extraction evidence.",
+      "proof_location": "manuscript/testing-a-shared-temporal-scale-v0.1.0.md §4.1; empirical/results/source_data_crosscheck.json",
+      "counterexamples_and_limits": "12,600 judgments are repeated observations, not 12,600 independent participants; no new experiment by this project.",
+      "thought_experiment_role": "Maintains the distinction between equal outputs, actual mechanism, and a justified measurement interpretation.",
+      "automatic_premise_truth": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "CTD:RELEASED_ESTIMATE_RESULTS",
+      "kind": "SECONDARY_ANALYSIS_CONTEXT",
+      "statement": "Mean 8/13 cross-task log gain is -0.01456296045 with 95 percent CI [-0.09333654267,0.06421062177], p=.708107. Median descriptive upper adjustment allowance is 4.1982 percent; 25/30 released profiles share order.",
+      "domain": "Two-task finite-condition psychometric-width analysis; see individual premises.",
+      "scope": "Conditional model or explicitly labeled secondary evidence; no basal experience claim.",
+      "quantifier": "Paired participant-level or jointly fitted 30-participant analyses as explicitly stated; individual descriptive statistics are separately labeled.",
+      "status": "SECONDARY_ANALYSIS_CONTEXT",
+      "all_premises": "Released fitted-width estimand; paired participant-level statistics; descriptive individual distances; missing estimator uncertainty acknowledged.",
+      "proof_location": "manuscript/testing-a-shared-temporal-scale-v0.1.0.md §5.1-5.2; review/ROOT_NUMERICAL_VERIFICATION.json",
+      "counterexamples_and_limits": "Not a proof of individual equality or significant individual mechanism differences; not an independent replication.",
+      "thought_experiment_role": "Maintains the distinction between equal outputs, actual mechanism, and a justified measurement interpretation.",
+      "automatic_premise_truth": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "CTD:COUNT_MODEL_RESULTS",
+      "kind": "SECONDARY_CONDITIONAL_LIKELIHOOD_ANALYSIS",
+      "statement": "A separately specified independent-binomial Gaussian response model tests 60 proportional-width restrictions using free amplitudes/centers and recorded optimizer bounds. Final numerical values are bound to empirical/results/count_model_summary.json.",
+      "domain": "Two-task finite-condition psychometric-width analysis; see individual premises.",
+      "scope": "Conditional model or explicitly labeled secondary evidence; no basal experience claim.",
+      "quantifier": "Paired participant-level or jointly fitted 30-participant analyses as explicitly stated; individual descriptive statistics are separately labeled.",
+      "status": "SECONDARY_CONDITIONAL_LIKELIHOOD_ANALYSIS",
+      "all_premises": "Specified likelihood, fixed participant parameter estimates, stable numerical implementation, conditional independence, 199 null parametric replicates; boundary and dependence limits.",
+      "proof_location": "manuscript/testing-a-shared-temporal-scale-v0.1.0.md §4.3, §5.3; empirical/fit_count_clock.py",
+      "counterexamples_and_limits": "Not the source Gaussian estimator or original BCI model; bootstrap error not transported to released widths; no biological mediation identification.",
+      "thought_experiment_role": "Maintains the distinction between equal outputs, actual mechanism, and a justified measurement interpretation.",
+      "automatic_premise_truth": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "CTD:INFERENCE_CEILING",
+      "kind": "SCOPED_METHOD_INTERPRETATION",
+      "statement": "A result targets a declared model plus its intervention and measurement assumptions. No tested width constraint follows from C1 alone; true organization, finite view, estimate, report, selected phenomenal endpoint and basic experience remain distinct.",
+      "domain": "Two-task finite-condition psychometric-width analysis; see individual premises.",
+      "scope": "Conditional model or explicitly labeled secondary evidence; no basal experience claim.",
+      "quantifier": "One fixed same-participant matrix at a time unless the node explicitly describes paired population statistics.",
+      "status": "SCOPED_METHOD_INTERPRETATION",
+      "all_premises": "Retain C1/U1 as inherited axioms; no independent actual consumer route or phenomenal calibration in this study.",
+      "proof_location": "manuscript/testing-a-shared-temporal-scale-v0.1.0.md §6-8",
+      "counterexamples_and_limits": "No winner among UCT/IIT/GNWT/HOT; no experience-existence gate, unique owner, or exclusion of nested/overlapping processes.",
+      "thought_experiment_role": "Maintains the distinction between equal outputs, actual mechanism, and a justified measurement interpretation.",
+      "automatic_premise_truth": false,
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "CTD:PROSPECTIVE_BRIDGE",
+      "kind": "PROPOSED_EMPIRICAL_CONTRACT",
+      "statement": "A future selective route experiment must bind an actual source/consumer/time relation, freeze an independently calibrated endpoint bridge, bound direct intervention paths and learning changes, and compare predeclared held-out predictions.",
+      "domain": "Two-task finite-condition psychometric-width analysis; see individual premises.",
+      "scope": "Conditional model or explicitly labeled secondary evidence; no basal experience claim.",
+      "quantifier": "One fixed same-participant matrix at a time unless the node explicitly describes paired population statistics.",
+      "status": "PROPOSED_EMPIRICAL_CONTRACT",
+      "all_premises": "All proposed grounding and calibration conditions are jointly required for the stated future interpretation; none is discharged by the present count table.",
+      "proof_location": "manuscript/testing-a-shared-temporal-scale-v0.1.0.md §7",
+      "counterexamples_and_limits": "Proposed design only; no completed human protocol, sample-size justification, new hardware or measured familiar-mineness endpoint.",
+      "thought_experiment_role": "Maintains the distinction between equal outputs, actual mechanism, and a justified measurement interpretation.",
+      "automatic_premise_truth": false,
+      "enabled_as_established_premise": false
+    }
+  ],
+  "rules": [
+    {
+      "id": "CTD:R1",
+      "all_of": [
+        "CTD:DOMAIN",
+        "CTD:MULTIPLICATIVE_CLASS"
+      ],
+      "conclusion": "CTD:PROPORTIONAL_DISTANCE",
+      "type": "CONDITIONAL_MATHEMATICAL_APPLICATION",
+      "same_instance_required": true,
+      "binding": "Same participant, endpoints, condition set, metric and stable map definition; model definitions are not empirical membership assertions.",
+      "proof_location": "manuscript/testing-a-shared-temporal-scale-v0.1.0.md §3.1",
+      "joint_witness": "Midrange construction with opposing half-residuals; independent LP on 30 actual estimate matrices.",
+      "alternative_route_semantics": "Alternative model classes are compared without admitting either as an actual neural mechanism.",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "CTD:R2",
+      "all_of": [
+        "CTD:DOMAIN",
+        "CTD:UNCERTAINTY_BOX",
+        "CTD:PROPORTIONAL_DISTANCE"
+      ],
+      "conclusion": "CTD:BOX_DISTANCE",
+      "type": "CONDITIONAL_MATHEMATICAL_APPLICATION",
+      "same_instance_required": true,
+      "binding": "Same participant, endpoints, condition set, metric and stable map definition; model definitions are not empirical membership assertions.",
+      "proof_location": "manuscript/testing-a-shared-temporal-scale-v0.1.0.md §3.2",
+      "joint_witness": "Choose row differences in their intervals to minimize their range; no probabilistic claim without a calibrated box.",
+      "alternative_route_semantics": "Alternative model classes are compared without admitting either as an actual neural mechanism.",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "CTD:R3",
+      "all_of": [
+        "CTD:DOMAIN",
+        "CTD:MONOTONE_CLASS",
+        "CTD:PROPORTIONAL_DISTANCE"
+      ],
+      "conclusion": "CTD:ORDINAL_DISTANCE",
+      "type": "CONDITIONAL_MATHEMATICAL_APPLICATION",
+      "same_instance_required": true,
+      "binding": "Same participant, endpoints, condition set, metric and stable map definition; model definitions are not empirical membership assertions.",
+      "proof_location": "manuscript/testing-a-shared-temporal-scale-v0.1.0.md §3.3",
+      "joint_witness": "Enumerate condition orders and construct running-max lower corrections; strict-tie exception recorded.",
+      "alternative_route_semantics": "Alternative model classes are compared without admitting either as an actual neural mechanism.",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false
+    },
+    {
+      "id": "CTD:R4",
+      "all_of": [
+        "CTD:DOMAIN",
+        "CTD:MULTIPLICATIVE_CLASS",
+        "CTD:MONOTONE_CLASS"
+      ],
+      "conclusion": "CTD:COUNTEREXAMPLES",
+      "type": "CONDITIONAL_MATHEMATICAL_APPLICATION",
+      "same_instance_required": true,
+      "binding": "Each of the four constructions has its own explicit witness: one stable nonlinear table, one ordinal-conflict table, a family of condition-dependent maps, and a two-person cancellation pair. Participant binding is retained within each matrix; the constructions are not one jointly instantiated biological model.",
+      "proof_location": "manuscript/testing-a-shared-temporal-scale-v0.1.0.md §3.4",
+      "joint_witness": "Four explicit numerical or functional constructions; alternative classes are not conjoined as actual biological truths.",
+      "alternative_route_semantics": "Separate countermodels demonstrate four distinct inference failures. Stable-map membership is not imposed on the condition-dependent-map witness. Each countermodel has its own specified domain.",
+      "enabled_as_established_premise": false,
+      "actual_premises_discharged": false,
+      "instance_quantification": "Binding holds inside each witness. The fourth witness explicitly quantifies two people to establish population cancellation; it does not combine their measurements into one actual-person premise."
+    }
+  ],
+  "context_links": [
+    {
+      "id": "CTD:CTX1",
+      "from": "CTD:DATA_PROVENANCE",
+      "to": "CTD:RELEASED_ESTIMATE_RESULTS",
+      "type": "SUPPLIES_RELEASED_ESTIMATES",
+      "deductive": false
+    },
+    {
+      "id": "CTD:CTX2",
+      "from": "CTD:DATA_PROVENANCE",
+      "to": "CTD:COUNT_MODEL_RESULTS",
+      "type": "SUPPLIES_AGGREGATE_COUNTS",
+      "deductive": false
+    },
+    {
+      "id": "CTD:CTX3",
+      "from": "CTD:PROPORTIONAL_DISTANCE",
+      "to": "CTD:RELEASED_ESTIMATE_RESULTS",
+      "type": "DESCRIPTIVE_APPLICATION",
+      "deductive": false
+    },
+    {
+      "id": "CTD:CTX4",
+      "from": "CTD:ORDINAL_DISTANCE",
+      "to": "CTD:RELEASED_ESTIMATE_RESULTS",
+      "type": "DESCRIPTIVE_APPLICATION",
+      "deductive": false
+    },
+    {
+      "id": "CTD:CTX5",
+      "from": "CTD:INFERENCE_CEILING",
+      "to": "A:C1",
+      "type": "AXIOM_STATUS_PRESERVED",
+      "deductive": false
+    },
+    {
+      "id": "CTD:CTX6",
+      "from": "CTD:INFERENCE_CEILING",
+      "to": "A:U1",
+      "type": "NO_GATE_CONTEXT",
+      "deductive": false
+    },
+    {
+      "id": "CTD:CTX7",
+      "from": "CTD:INFERENCE_CEILING",
+      "to": "CTD:PROSPECTIVE_BRIDGE",
+      "type": "ACTUAL_CALIBRATION_REMAINS_OPEN",
+      "deductive": false
+    }
+  ],
+  "open_obligations": [
+    "CTD-OPEN-ESTIMATOR-RECONSTRUCTION",
+    "CTD-OPEN-INDEPENDENT-CALIBRATION",
+    "CTD-OPEN-ACTUAL-CONSUMER-INTERVENTION",
+    "CTD-OPEN-EXTERNAL-REPLICATION",
+    "QC-20261008-10",
+    "IA-QC11",
+    "QC-20261008-12",
+    "QC-20261008-13",
+    "SCU-OPEN-R191-NORMALIZATION",
+    "SCU-AUDIT-DEPTH"
+  ]
+}

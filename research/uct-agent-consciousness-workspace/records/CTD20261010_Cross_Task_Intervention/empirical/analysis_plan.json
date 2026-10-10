@@ -1,0 +1,32 @@
+{
+  "created_utc": "2026-10-10",
+  "status": "retrospective secondary analysis, fixed before inferential analysis of the downloaded values",
+  "source": "D'Angelo et al. Nature Communications (2026), DOI 10.1038/s41467-025-67657-w, Experiment 3; OSF ytga5, file p5un6",
+  "source_data_unit": "30 participant rows; yes counts per participant/task/stimulation/asynchrony and published fitted widths; aggregate counts, not ordered trial-level records",
+  "primary_hypothesis": "For each participant i, width(i,t,f) = c(i,t) * tau(i,f), with task multiplier c fixed across stimulation conditions",
+  "primary_contrast": "d_i = log(width_ownership_8 / width_ownership_13) - log(width_simultaneity_8 / width_simultaneity_13)",
+  "primary_population_test": "Two-sided one-sample t test of mean(d)=0, 95% Student-t confidence interval; this tests a necessary population implication, not individual equality",
+  "secondary_tests": [
+    "Signed-rank test and bootstrap confidence interval of mean primary contrast",
+    "Low/sham and high/sham task-by-stimulation log contrasts, with Holm correction across these two follow-ups",
+    "TOST against illustrative log-ratio margins log(1.10), log(1.20), and log(1.30); margins are sensitivity analyses, not independently calibrated experience thresholds",
+    "Participant-level observed discrepancies and paired task effect correlation; correlation is inherited from the original analysis and not the new result",
+    "Reconstruct binomial psychometric widths from aggregate counts before treating source width rows as aligned with count rows",
+    "Joint binomial Gaussian-response model comparing shared within-person frequency gain versus task-specific gain; use parametric bootstrap if source-count alignment and numerical identifiability checks permit"
+  ],
+  "data_checks": [
+    "Verify SHA256 hashes against OSF API metadata",
+    "Check all 30 participant IDs and count values are present, integer, between 0 and 10",
+    "Confirm published width means against primary article",
+    "Do not infer row-by-row counts-width linkage solely from agreement of means",
+    "Preserve duplicated source TBW column labels and document mapping"
+  ],
+  "interpretation_limits": [
+    "The strict multiplicative width bridge is an added hypothesis; the original BCI model with common sensory uncertainty does not imply this equality",
+    "Group mean equality and equivalence do not imply equality for every individual",
+    "Published fitted widths lack uncertainty estimates",
+    "Binomial count modeling assumes conditional trial independence; ordered trials/block data are unavailable",
+    "Task reports are operational endpoints, not complete measures of experience",
+    "Stimulation treatment effects do not uniquely identify alpha mediation, efference-copy consumers, or UCT versus GNW/IIT/HOT"
+  ]
+}

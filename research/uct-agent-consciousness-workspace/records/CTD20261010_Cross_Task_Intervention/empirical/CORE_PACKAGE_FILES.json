@@ -1,0 +1,69 @@
+{
+  "status": "Final curated core package, no supporting Job/Kilteni data or author MATLAB files",
+  "paths_relative_to": "empirical directory",
+  "files": [
+    "Experiment_3.xlsx",
+    "NatComm2026_SourceData.xlsx",
+    "NatComm2026_supplement.pdf",
+    "PMC12796323.xml",
+    "analysis_plan.json",
+    "DATA_ANALYSIS_REPORT.md",
+    "DATA_PROVENANCE.json",
+    "REPRODUCIBILITY.json",
+    "check_gaussian_alignment.py",
+    "analyze_published_widths.py",
+    "compute_calibration_budgets.py",
+    "fit_count_clock.py",
+    "make_empirical_figure.py",
+    "reproduce_existing_checks.py",
+    "alignment_diagnostic.npz",
+    "results/aggregate_counts_tidy.csv",
+    "results/published_tbw_tidy.csv",
+    "results/published_tbw_individual_diagnostics.csv",
+    "results/published_widths_summary.json",
+    "results/individual_clock_and_monotone_distances.csv",
+    "results/hypothetical_lognormal_calibration_budgets.csv",
+    "results/calibration_budget_summary.json",
+    "results/exploratory_calibration_plan.json",
+    "results/count_model_plan.json",
+    "results/count_model_summary.json",
+    "results/count_model_fits.npz",
+    "results/count_model_bootstrap.npz",
+    "results/count_model_boundary_diagnostics.json",
+    "results/source_data_crosscheck.json",
+    "results/empirical_shared_scale.pdf",
+    "results/empirical_shared_scale.png",
+    "results/empirical_shared_scale.svg"
+  ],
+  "minimum_numeric_inputs": [
+    "Experiment_3.xlsx"
+  ],
+  "independent_source_mapping_input": [
+    "NatComm2026_SourceData.xlsx"
+  ],
+  "context_only": [
+    "NatComm2026_supplement.pdf",
+    "PMC12796323.xml"
+  ],
+  "unneeded_exclusions": [
+    "Job 2023 source CSVs and analysis",
+    "OSF discovery JSON listings",
+    "download challenge/probe files",
+    "Master_BCI.m",
+    "ReadMe_BCI.txt",
+    "modelprediction_log_BCI.m",
+    "Experiment_3_Computational_modelling.xlsx",
+    "results/count_model_bootstrap_progress.npz",
+    "__pycache__"
+  ],
+  "reproduction_order": [
+    "python check_gaussian_alignment.py",
+    "python analyze_published_widths.py",
+    "python compute_calibration_budgets.py",
+    "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python fit_count_clock.py --bootstrap 199 --workers 4",
+    "python make_empirical_figure.py",
+    "python reproduce_existing_checks.py"
+  ],
+  "independent_audits_supplied_by_parent": "theory/COUNT_MODEL_AUDIT.json and theory/WIDTH_BUDGET_AUDIT.json; not duplicated here",
+  "rights": "Preserve third-party attribution and original terms. Our scripts implement an independent model. No license is asserted for the author MATLAB code, which is only externally cited and not copied."
+}

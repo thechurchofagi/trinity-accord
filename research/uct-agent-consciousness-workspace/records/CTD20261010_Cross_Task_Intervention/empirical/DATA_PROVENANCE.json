@@ -1,0 +1,59 @@
+[
+  {
+    "filename": "NatComm2026_SourceData.xlsx",
+    "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41467-025-67657-w/MediaObjects/41467_2025_67657_MOESM4_ESM.xlsx",
+    "bytes": 97514,
+    "sha256": "3202d68439ad502ff95e7a4d59535a4e8ff9072d5c6a76b5aebf7dde90228a82",
+    "modified": false,
+    "role": "numeric_input",
+    "attribution": "D'Angelo, Lanfranco, Chancel, and Ehrsson (2026), DOI 10.1038/s41467-025-67657-w",
+    "rights_note": "Source article states CC BY 4.0; publisher Source Data accompanies the article. Preserve original attribution and rights; these files are not relicensed as new code."
+  },
+  {
+    "filename": "NatComm2026_supplement.pdf",
+    "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41467-025-67657-w/MediaObjects/41467_2025_67657_MOESM1_ESM.pdf",
+    "bytes": 1251404,
+    "sha256": "51eee35ada6e4d421996ee342a04d83dca484e0e8b98943418519ec5484d6c3e",
+    "modified": false,
+    "role": "source_context",
+    "attribution": "D'Angelo, Lanfranco, Chancel, and Ehrsson (2026), DOI 10.1038/s41467-025-67657-w",
+    "rights_note": "Source article states CC BY 4.0; publisher Source Data accompanies the article. Preserve original attribution and rights; these files are not relicensed as new code."
+  },
+  {
+    "filename": "PMC12796323.xml",
+    "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12796323/fullTextXML",
+    "bytes": 203923,
+    "sha256": "2a1997518ca2fdd3b0e959caa95eb4ad67303e1cf8da83f797de5af18744d587",
+    "modified": false,
+    "role": "source_context",
+    "attribution": "D'Angelo, Lanfranco, Chancel, and Ehrsson (2026), DOI 10.1038/s41467-025-67657-w",
+    "rights_note": "Source article states CC BY 4.0; publisher Source Data accompanies the article. Preserve original attribution and rights; these files are not relicensed as new code."
+  },
+  {
+    "name": "Experiment_3.xlsx",
+    "url": "https://osf.io/download/p5un6/",
+    "status": 200,
+    "bytes": 22409,
+    "sha256": "d3b2fef22f077788e5299dedb68737d453c09b005d9360bab8dfbe6c35852bc9",
+    "expected_sha256": "d3b2fef22f077788e5299dedb68737d453c09b005d9360bab8dfbe6c35852bc9",
+    "hash_match": true,
+    "content_type": "application/octet-stream",
+    "filename": "Experiment_3.xlsx",
+    "source_url": "https://osf.io/download/p5un6/",
+    "modified": false,
+    "role": "numeric_input",
+    "attribution": "D'Angelo, Lanfranco, Chancel, and Ehrsson (2026), DOI 10.1038/s41467-025-67657-w",
+    "rights_note": "Author-linked public OSF file. No separate license was exposed in the inspected OSF node metadata. All analyzed numeric values exactly match the attributed publisher Source Data. No new license is asserted for original bytes."
+  },
+  {
+    "filename": "Master_BCI.m",
+    "source_url": "https://osf.io/download/pnmsx/",
+    "bytes": 11332,
+    "sha256": "06e5122cbe1ed7852eb3b3a429ab984125244f76edc503ed32ac33dc3195bb9d",
+    "role": "externally_cited_verification_source",
+    "redistributed_in_core_package": false,
+    "modified": false,
+    "required_to_execute_new_analysis": false,
+    "rights_note": "Read-only structural verification; external link and checksum retained. No license assigned and no author code redistributed."
+  }
+]
