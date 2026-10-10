@@ -8,5 +8,6 @@
 6. Preserved the dispatch/log observational twins, exact counts, finite soundness and non-necessity boundary.
 7. Restored and verified all 82 UCT-MAP-v1.1.2 capsule members; traversed all 1,598 graph objects and 1,608 review items; added no completed node/rule/context and retained `AUDIT_INCOMPLETE`.
 8. Rechecked direction after selection, after result formation and before save: the block advances one actual-organization premise for the experience–intelligence–mineness question and stops before any `H` or basal-experience inference.
+9. Rebased over concurrent CTD preservation work, saved the science tree by expected-SHA fast-forward, read back the commit and key files, replaced the fixed Library handoff at v92, and materialized the increment, manifest and handoff for byte comparison.
 
 No publication, DOI, OTS, Arweave, email, Slack, PR, CI or deployment action was taken.

@@ -1,0 +1,56 @@
+{
+  "schema": "uct-a3r-dual-save-receipt/1",
+  "research_id": "A3R20261010",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "verified_parent": "12f0fa04e7d49f7fb8e7463bf4aa55a5c436d397",
+    "science_commit": "23a82250f279e027491469bc4fa18d5446c37258",
+    "science_tree": "5f3ccc8b665dc4d48692769618829b7d7e56b4b8",
+    "receipt_commit": "SELF_RECORDED_BY_BRANCH_HEAD_AFTER_THIS_FILE",
+    "method": "Git data API expected-SHA fast-forward after command-line credential failure",
+    "verified": "science commit and key CURRENT_STATE/EXACT_RESULTS bytes read back from the remote commit",
+    "concurrency": "rebased over and preserved CTD preservation checkpoint 12f0fa04e7d49f7fb8e7463bf4aa55a5c436d397",
+    "ci_or_pr": "none"
+  },
+  "library": {
+    "fixed_master_handoff_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "fixed_master_version": 92,
+    "fixed_master_bytes": 754145,
+    "increment_id": "libfile_6eba9b8c8d208191bd8c414a9e63f9b1",
+    "increment_name": "UCT_A3R_Increment_20261010.zip",
+    "increment_bytes": 256566,
+    "increment_sha256": "5428466f910524563a24610e05209aa918ad5a8295af55b2e34b53e79efacb94",
+    "manifest_id": "libfile_00ffd44113d08191a8fc36de4d7e0783",
+    "manifest_name": "UCT_A3R_Increment_20261010_MANIFEST.json",
+    "manifest_bytes": 6357,
+    "manifest_sha256": "84bed7d193388fd055355f4b7377c0bf7f999efec74303fb30a168ad3b9022a4",
+    "increment_scope": "26 repository-relative changed paths from verified parent to science tree; not a complete repository or complete history backup",
+    "baseline_complete_working_set_id": "libfile_f7d404c7734c8191b8257cd4fa6771f5",
+    "verification": "master v92 materialized at 754145 bytes and matched local replacement; ZIP and manifest materialized back and compared byte-for-byte"
+  },
+  "checks": {
+    "boolean_configurations": 256,
+    "intervention_episodes": 512,
+    "mixed_weak_observation_classes": 1,
+    "configurations_in_mixed_class": 72,
+    "certificate_true": 2,
+    "certificate_false_positives": 0,
+    "target_without_full_certificate": 6,
+    "capsule_restore_members": 82,
+    "map_structural_objects": 1598,
+    "review_items_visited": 1608,
+    "semantic_reproof_complete": false
+  },
+  "failures_preserved": [
+    "no actual selector installation or live losing-token instrument",
+    "no independently validated local resolver port",
+    "no physical selective cut or faithful replay",
+    "direct and compensatory bypass remain application risks",
+    "signed J_H reliability and H interpretation remain absent",
+    "command-line Git push lacked credentials; authorized Git data API was used with expected-SHA",
+    "Library full read briefly returned cached v91 after replacement, while materialize resolved v92 and byte-for-byte verification passed"
+  ],
+  "next": "In one concrete action system, validate a local resolver port while preserving losing-token liveness, common event timing, winner content and frozen rho; use selective cut/replay to exclude direct and compensatory bypass, or stop SPC/L_sel/H inference.",
+  "restore": "Fetch the latest branch head and verify science commit 23a82250 in its ancestry; read fixed handoff version 92 or later; verify increment and manifest SHA256; run check_participation_contract.py; restore UCT-MAP-v1.1.2 and run audit_map.py."
+}

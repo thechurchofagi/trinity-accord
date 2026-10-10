@@ -194,12 +194,12 @@
     "role": "Historical unresolved audit-debt record; old numbers are not newly measured current unread totals."
   },
   "latest_activity_persistence": {
-    "status": "GITHUB_SCIENCE_COMMIT_AND_LIBRARY_V90_ROUNDTRIP_VERIFIED; TRUNCATED_CURRENT_STATE_RECEIPT_DETECTED_AND_REPAIRED; RECEIPT_COMMIT_SELF_RECORDED_BY_BRANCH_HEAD",
-    "receipt": "records/A3Q20261010_Selector_Ancestry_Dominance/DUAL_SAVE_RECEIPT.json",
-    "github_science_commit": "4369bc6b2cd3dc3fa44df9cf5135aab44ffcf68a",
-    "github_current_state_repair_commit": "e2398a37068a202021c05577861491836a147566",
-    "library_master_version": 90,
-    "library_increment_id": "libfile_33d55e4191d48191ae2c9c2fa4cf2875"
+    "status": "GITHUB_SCIENCE_COMMIT_AND_LIBRARY_V92_ROUNDTRIP_VERIFIED; RECEIPT_COMMIT_SELF_RECORDED_BY_BRANCH_HEAD",
+    "receipt": "records/A3R20261010_Selector_Participation_Contract/DUAL_SAVE_RECEIPT.json",
+    "github_science_commit": "23a82250f279e027491469bc4fa18d5446c37258",
+    "library_master_version": 92,
+    "library_increment_id": "libfile_6eba9b8c8d208191bd8c414a9e63f9b1",
+    "library_manifest_id": "libfile_00ffd44113d08191a8fc36de4d7e0783"
   },
   "concurrent_research_preserved": {
     "id": "EIP20261010",
@@ -221,7 +221,7 @@
     "map_replacement": false,
     "actual_application_established": false
   },
-  "latest_persistence_receipt": "records/A3Q20261010_Selector_Ancestry_Dominance/DUAL_SAVE_RECEIPT.json",
+  "latest_persistence_receipt": "records/A3R20261010_Selector_Participation_Contract/DUAL_SAVE_RECEIPT.json",
   "previous_latest_research_before_CTD": {
     "id": "A3L20261010",
     "result_version": "A3L-RESULT-v0.1.0",
