@@ -1,0 +1,34 @@
+{
+  "schema": "ctd-final-preservation-source-identities/1",
+  "state": "SOURCE_BYTES_AND_TERMINAL_IDENTITIES_FROZEN",
+  "release_branch": "research/ctd-noise-identifiability-v100-20261010",
+  "release_commit": "28a062b6bfacf647ff182b3e9e24087d468587f0",
+  "batch": "2026-10-10-paper26-v100",
+  "workflow_run_id": 38044262845,
+  "terminal_workflow_attempt": 3,
+  "terminal_job_id": 114213547391,
+  "batch_files": [
+    {"path": "arweave-bundle.json", "bytes": 370493, "sha256": "5104443441dde47e6185b24735e5596b292d433d8a4a48b6e535e6480b938e4c"},
+    {"path": "arweave-receipt.json", "bytes": 1793, "sha256": "22be03426f9573b31459ab372f50f3136a75cff0d834f5274765c1a6be86a1a8"},
+    {"path": "doi-resolution.json", "bytes": 220, "sha256": "af573d85d8430afa394d93678feb0df8865d2166cd8fc2e70758add05b475f4f"},
+    {"path": "paid-intent.json", "bytes": 239, "sha256": "d73c042931082cb5b49cccc9a8d7be956bdefa05465c2f505d441505fc2aa6c8"},
+    {"path": "proofs/TA-TR-2026-26/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots", "bytes": 3843, "sha256": "640be99b62a1c2689b836496199d26097c7deabc92e5b12b2b9fda583787291d"},
+    {"path": "proofs/TA-TR-2026-26/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots.submitted", "bytes": 770, "sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7"},
+    {"path": "proofs/TA-TR-2026-26/noise-identifiability-bodily-judgments-v1.0.0.pdf.stamp.txt", "bytes": 250, "sha256": "e77211ce2eea184720e8a2974e44cabf1184a4c1367ad2000d2214af0143c4f2"},
+    {"path": "proofs/TA-TR-2026-26/noise-identifiability-bodily-judgments-v1.0.0.pdf.upgrade.txt", "bytes": 325, "sha256": "0544c03c5bed6cae3367faeddd2249034085c13d8282ac99d0e7bd8386745cb1"},
+    {"path": "proofs/TA-TR-2026-26/noise-identifiability-bodily-judgments-v1.0.0.pdf.verify.txt", "bytes": 69, "sha256": "e3300058d81490a047e19e3ba5c8f11a1c958002293179ebf9a3660dbcb65ccd"},
+    {"path": "scheduling-status.json", "bytes": 400, "sha256": "5ec2ffac5c7ac99d0b80e6b69166b4321a2c5896156f80cf7de9518da6c347b0"},
+    {"path": "status.json", "bytes": 1328, "sha256": "58ae713541f385d39b324813ea23be712aaa8222f0299f387f4d976c91720168"},
+    {"path": "targets.json", "bytes": 797, "sha256": "70b025f376e56c6547bbcb64243707661c193074320333601b9e154d64051ae8"}
+  ],
+  "root_readback": {"bytes": 4651, "sha256": "a9ad580430822910e3e2eff31563f4b6770aacc64a690bc2b6e57e72290fea42", "state": "PUBLIC_ARWEAVE_READBACK_PASS"},
+  "failed_public_readbacks": [
+    {"name": "ROOT_ARWEAVE_READBACK_ATTEMPT_1.json", "sha256": "a03bbdd95b6b2b64f19001cec431bbbe45f321f6cfd542570c5a3591f40c1fb0"},
+    {"name": "ROOT_ARWEAVE_READBACK_ATTEMPT_2.json", "sha256": "85b13dfc2560645cb3ace835ff773272b3caf12d4f51165c6e82bd7130e62eac"},
+    {"name": "ROOT_ARWEAVE_READBACK_ATTEMPT_3.json", "sha256": "e0c1a48d60afae3b61de986cbe3846e8e94eebaf1746de699736e246f931d2cd"}
+  ],
+  "final_chain_receipt_sha256": "f83b6cb74c1b2aad73ccd8d699486b87faea00d39306e8ead8a03593ccfd5bbb",
+  "completion_report_sha256": "52586b3f9f71460bbd654b86b8a805292951ebb2cfdce878b4cf7a4503c4d2e5",
+  "delivery_bundle": {"name": "CTD_TA26_v1.0.0_Publication_and_Preservation.zip", "bytes": 3936293, "sha256": "6ceb24d4ee6c430d21e3d640e5f5c833a9125aa89a8dbd31f7c38243eb01a61c", "members": 40},
+  "scope": "Terminal operational evidence only. Frozen science and all current research navigation remain unchanged."
+}

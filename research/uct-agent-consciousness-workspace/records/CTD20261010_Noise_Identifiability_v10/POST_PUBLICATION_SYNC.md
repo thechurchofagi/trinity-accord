@@ -27,3 +27,11 @@ This file records preparation of the repository update from actual publication e
 ## 2026-10-10 存证续办检查点
 
 已保存 `operations/CONTINUATION.md`、真实续办任务创建回执、第二轮全部日历查询、独立链背景观察和经过静态审阅的公开回读脚本。最新真实状态仍为 OTS等待Bitcoin证明、AR未开始。所有旧文件与未完成科学条件保留。该条记录不宣称未来操作已经执行。
+
+---
+
+## 2026-10-10 最终存证完成
+
+后续实际状态已由新文件记录，不倒写上述历史检查点。release 提交 `28a062b6bfacf647ff182b3e9e24087d468587f0` 保存 `ARWEAVE_READBACK_PASS`：OTS 高度970752、970753、970754，证明 SHA-256 `640be99b62a1c2689b836496199d26097c7deabc92e5b12b2b9fda583787291d`；Arweave 交易 `6pOSf4PK21Ot3lti8wYDvyL2KUXVC3zCaz1X72zjfBA`，载荷 SHA-256 `5104443441dde47e6185b24735e5596b292d433d8a4a48b6e535e6480b938e4c`。独立匿名公开 GET 于 `2026-10-10T12:43:37.387834Z` 对整包及全部成员逐字节通过。
+
+最终状态见 `FINAL_CHAIN_RECEIPT.json`、`operations/ROOT_ARWEAVE_READBACK.json` 和 `operations/final_preservation_batch/`。三次网关传播期空体回读失败继续保留。该操作不改变当前 A3V 科研接续、地图、发表覆盖、next_priority 或任何科学结论状态。

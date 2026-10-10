@@ -1,3 +1,16 @@
+<!-- CTD_FINAL_PRESERVATION_COMPLETE:2026-10-10 -->
+## CTD DOI → OTS → Arweave 最终完成｜2026-10-10
+
+本篇固定公开版本已经完成全链路存证。DOI 为 `10.5281/zenodo.23279189`。269,961字节正式 PDF 的 SHA-256 为 `479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94`；升级后的 OTS 证明为3,843字节，SHA-256 `640be99b62a1c2689b836496199d26097c7deabc92e5b12b2b9fda583787291d`，已在 Bitcoin 高度970752、970753、970754通过远程区块头验证。
+
+Arweave 交易为 `6pOSf4PK21Ot3lti8wYDvyL2KUXVC3zCaz1X72zjfBA`，记录费用0.006818438011 AR；370,493字节载荷 SHA-256 为 `5104443441dde47e6185b24735e5596b292d433d8a4a48b6e535e6480b938e4c`。上传后的初始公开网关回读尚未传播，工作流随后只恢复同一交易，没有再次付款；最终工作流和独立匿名 HTTP GET 均逐字节通过。独立核验还解码并检查了全部6个 base64 成员，确认包内正式 PDF 与 OTS 证明等于冻结原件。前三次空体回读失败作为历史保存在 `operations/ROOT_ARWEAVE_READBACK_ATTEMPT_*.json`，最终成功收据为 `operations/ROOT_ARWEAVE_READBACK.json`。
+
+最终固定批次原字节位于 `operations/final_preservation_batch/`；全链路收据为 `FINAL_CHAIN_RECEIPT.json`；中文成果与操作交接为 `PUBLICATION_COMPLETION_ZH.md`；完整交付包的构建回执为 `operations/PUBLICATION_AND_PRESERVATION_BUNDLE_RECEIPT.json`。早期 `PERSISTENCE_RECEIPT.json`、pending 检查点和失败记录保持原样。
+
+此次仅完成既有固定论文版本的发表存证，不新增科学主张。当前 A3V20261010 科研主线、`CURRENT_STATE.json` 的 next_priority、UCT-MAP-v1.1.2、C1/U1、体验桥接 OPEN 状态及所有禁用证据节点均未改变。预印本和链上存证不等于外部同行评议、人体内部机制识别、UCT 验证或 AI 意识证明。
+
+---
+
 <!-- CTD_CONTINUATION_CHECKPOINT:2026-10-10_WAITING_SIX_CONFIRMATIONS -->
 ## CTD 存证续办检查点｜2026-10-10
 

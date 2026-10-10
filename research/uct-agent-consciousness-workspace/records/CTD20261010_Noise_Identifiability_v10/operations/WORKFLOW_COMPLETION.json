@@ -1,0 +1,19 @@
+{
+  "schema": "ctd-workflow-completion/1",
+  "state": "WORKFLOW_AND_INDEPENDENT_PUBLIC_READBACK_PASS",
+  "completed_utc": "2026-10-10T12:43:37.387834Z",
+  "workflow_run_id": 38044262845,
+  "initial_job_id": 114190539375,
+  "paid_upload_attempt_job_id": 114212212079,
+  "terminal_readback_recovery_job_id": 114213547391,
+  "terminal_run_attempt": 3,
+  "terminal_conclusion": "success",
+  "release_commit": "28a062b6bfacf647ff182b3e9e24087d468587f0",
+  "transaction_reused_without_second_paid_post": true,
+  "transaction_id": "6pOSf4PK21Ot3lti8wYDvyL2KUXVC3zCaz1X72zjfBA",
+  "workflow_payload_readback": true,
+  "independent_anonymous_http_get_readback": true,
+  "independent_receipt": "ROOT_ARWEAVE_READBACK.json",
+  "early_empty_body_readbacks_preserved": 3,
+  "scientific_status_changed": false
+}

@@ -1,0 +1,23 @@
+{
+  "schema": "ctd-independent-public-preservation-readback/1",
+  "state": "PUBLIC_ARWEAVE_READBACK_NOT_VERIFIED",
+  "doi": "10.5281/zenodo.23279189",
+  "started_utc": "2026-10-10T12:36:03.384026Z",
+  "authenticated": false,
+  "http_method": "GET",
+  "network_request_attempted": true,
+  "hash_match": false,
+  "tx_id": "6pOSf4PK21Ot3lti8wYDvyL2KUXVC3zCaz1X72zjfBA",
+  "downloaded_endpoint": "https://5kjze74dzlnvhlo6lnrpgbqdx4rpmkkf2ufxzqtlhvl663hdpqia.arweave.net/6pOSf4PK21Ot3lti8wYDvyL2KUXVC3zCaz1X72zjfBA",
+  "http_status": 200,
+  "bytes": 0,
+  "readback_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "wallet_payment_upload_or_workflow_actions": false,
+  "requested_endpoint": "https://arweave.net/6pOSf4PK21Ot3lti8wYDvyL2KUXVC3zCaz1X72zjfBA",
+  "payload_sha256": "5104443441dde47e6185b24735e5596b292d433d8a4a48b6e535e6480b938e4c",
+  "expected_bytes": 370493,
+  "content_type": "application/json",
+  "error_type": "ValueError",
+  "error": "Public payload bytes do not equal the frozen bundle",
+  "checked_utc": "2026-10-10T12:36:10.119216Z"
+}

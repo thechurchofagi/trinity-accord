@@ -1,5 +1,15 @@
 # CTD TA26: fixed-publication preservation continuation
 
+## Terminal completion superseding the waiting instruction
+
+The fixed version completed its actual preservation chain on 2026-10-10. DOI `10.5281/zenodo.23279189` remains unchanged. Release commit `28a062b6bfacf647ff182b3e9e24087d468587f0` records `ARWEAVE_READBACK_PASS`; the verified OTS proof SHA256 is `640be99b62a1c2689b836496199d26097c7deabc92e5b12b2b9fda583787291d` at Bitcoin heights 970752, 970753 and 970754. Arweave transaction `6pOSf4PK21Ot3lti8wYDvyL2KUXVC3zCaz1X72zjfBA` carries the 370493-byte payload with SHA256 `5104443441dde47e6185b24735e5596b292d433d8a4a48b6e535e6480b938e4c`.
+
+`ROOT_ARWEAVE_READBACK.json` is the independent anonymous public-GET PASS and validates all six embedded members, including exact public PDF and verified OTS proof bytes. `ROOT_ARWEAVE_READBACK_ATTEMPT_1.json` through `_3.json` retain propagation-time empty-body failures. `final_preservation_batch/` contains the exact terminal batch bytes. `../FINAL_CHAIN_RECEIPT.json` and `../PUBLICATION_COMPLETION_ZH.md` are the completed handoff. Do not run a new paid path for this version; future checks are read-only and idempotent.
+
+All text below is retained historical recovery guidance. It accurately describes the earlier waiting checkpoint but no longer states the current terminal condition.
+
+---
+
 This is an operational waiting checkpoint, not a completed OTS/Arweave receipt. The published science is frozen. Read the latest remote branches and this case's later records before acting.
 
 ## Actual state observed on 2026-10-10

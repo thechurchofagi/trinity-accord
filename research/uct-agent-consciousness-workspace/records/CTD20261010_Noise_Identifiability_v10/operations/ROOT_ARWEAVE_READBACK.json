@@ -1,0 +1,95 @@
+{
+  "schema": "ctd-independent-public-preservation-readback/1",
+  "state": "PUBLIC_ARWEAVE_READBACK_PASS",
+  "doi": "10.5281/zenodo.23279189",
+  "started_utc": "2026-10-10T12:43:30.050180Z",
+  "authenticated": false,
+  "http_method": "GET",
+  "network_request_attempted": true,
+  "hash_match": true,
+  "tx_id": "6pOSf4PK21Ot3lti8wYDvyL2KUXVC3zCaz1X72zjfBA",
+  "downloaded_endpoint": "https://5kjze74dzlnvhlo6lnrpgbqdx4rpmkkf2ufxzqtlhvl663hdpqia.arweave.net/6pOSf4PK21Ot3lti8wYDvyL2KUXVC3zCaz1X72zjfBA",
+  "http_status": 200,
+  "bytes": 370493,
+  "readback_sha256": "5104443441dde47e6185b24735e5596b292d433d8a4a48b6e535e6480b938e4c",
+  "wallet_payment_upload_or_workflow_actions": false,
+  "requested_endpoint": "https://arweave.net/6pOSf4PK21Ot3lti8wYDvyL2KUXVC3zCaz1X72zjfBA",
+  "payload_sha256": "5104443441dde47e6185b24735e5596b292d433d8a4a48b6e535e6480b938e4c",
+  "expected_bytes": 370493,
+  "content_type": "application/json",
+  "pdf_sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94",
+  "pdf_bytes": 269961,
+  "proof_sha256": "640be99b62a1c2689b836496199d26097c7deabc92e5b12b2b9fda583787291d",
+  "bitcoin_heights": [
+    970752,
+    970753,
+    970754
+  ],
+  "members": [
+    {
+      "path": "papers/TA-TR-2026-26/noise-identifiability-bodily-judgments-v1.0.0.pdf",
+      "bytes": 269961,
+      "sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94"
+    },
+    {
+      "path": "proofs/TA-TR-2026-26/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "bytes": 3843,
+      "sha256": "640be99b62a1c2689b836496199d26097c7deabc92e5b12b2b9fda583787291d"
+    },
+    {
+      "path": "proofs/TA-TR-2026-26/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots.submitted",
+      "bytes": 770,
+      "sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7"
+    },
+    {
+      "path": "proofs/TA-TR-2026-26/noise-identifiability-bodily-judgments-v1.0.0.pdf.stamp.txt",
+      "bytes": 250,
+      "sha256": "e77211ce2eea184720e8a2974e44cabf1184a4c1367ad2000d2214af0143c4f2"
+    },
+    {
+      "path": "proofs/TA-TR-2026-26/noise-identifiability-bodily-judgments-v1.0.0.pdf.upgrade.txt",
+      "bytes": 325,
+      "sha256": "0544c03c5bed6cae3367faeddd2249034085c13d8282ac99d0e7bd8386745cb1"
+    },
+    {
+      "path": "proofs/TA-TR-2026-26/noise-identifiability-bodily-judgments-v1.0.0.pdf.verify.txt",
+      "bytes": 69,
+      "sha256": "e3300058d81490a047e19e3ba5c8f11a1c958002293179ebf9a3660dbcb65ccd"
+    }
+  ],
+  "member_count": 6,
+  "source_files": {
+    "status": {
+      "path": "/workspace/scratch/903e9341e668/ta26_release/research/paper-timestamps/2026-10-10-paper26-v100/status.json",
+      "bytes": 1328,
+      "sha256": "58ae713541f385d39b324813ea23be712aaa8222f0299f387f4d976c91720168"
+    },
+    "uploader_receipt": {
+      "path": "/workspace/scratch/903e9341e668/ta26_release/research/paper-timestamps/2026-10-10-paper26-v100/arweave-receipt.json",
+      "bytes": 1793,
+      "sha256": "22be03426f9573b31459ab372f50f3136a75cff0d834f5274765c1a6be86a1a8"
+    },
+    "bundle": {
+      "path": "/workspace/scratch/903e9341e668/ta26_release/research/paper-timestamps/2026-10-10-paper26-v100/arweave-bundle.json",
+      "bytes": 370493,
+      "sha256": "5104443441dde47e6185b24735e5596b292d433d8a4a48b6e535e6480b938e4c"
+    },
+    "targets": {
+      "path": "/workspace/scratch/903e9341e668/ta26_release/research/paper-timestamps/2026-10-10-paper26-v100/targets.json",
+      "bytes": 797,
+      "sha256": "70b025f376e56c6547bbcb64243707661c193074320333601b9e154d64051ae8"
+    },
+    "public_pdf": {
+      "path": "/workspace/scratch/903e9341e668/ta26_release/research/noise-identifiability-bodily-judgments/published/noise-identifiability-bodily-judgments-v1.0.0.pdf",
+      "bytes": 269961,
+      "sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94"
+    },
+    "ots_proof": {
+      "path": "/workspace/scratch/903e9341e668/ta26_release/research/paper-timestamps/2026-10-10-paper26-v100/proofs/TA-TR-2026-26/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "bytes": 3843,
+      "sha256": "640be99b62a1c2689b836496199d26097c7deabc92e5b12b2b9fda583787291d"
+    }
+  },
+  "verification_scope": "Independent anonymous payload-byte readback and embedded-member identity; Bitcoin verification is inherited from the exact frozen remote-header receipt, not rerun here. The nine Zenodo public assets have separate publication-readback evidence; this does not claim all nine are archived by this one-PDF OTS batch. The delivery ZIP and distribution-metadata PDF variants are not this payload.",
+  "checked_utc": "2026-10-10T12:43:37.387834Z"
+}

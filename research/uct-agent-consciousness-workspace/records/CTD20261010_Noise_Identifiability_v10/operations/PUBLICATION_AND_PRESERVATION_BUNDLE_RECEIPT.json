@@ -1,0 +1,9 @@
+{
+  "state": "COMPLETED_CHAIN_DELIVERY_BUNDLE_BYTE_CHECK_PASS",
+  "path": "/workspace/scratch/903e9341e668/ctd_final/deliverables/CTD_TA26_v1.0.0_Publication_and_Preservation.zip",
+  "bytes": 3936293,
+  "sha256": "6ceb24d4ee6c430d21e3d640e5f5c833a9125aa89a8dbd31f7c38243eb01a61c",
+  "members": 40,
+  "public_pdf_sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94",
+  "arweave_payload_sha256": "5104443441dde47e6185b24735e5596b292d433d8a4a48b6e535e6480b938e4c"
+}
