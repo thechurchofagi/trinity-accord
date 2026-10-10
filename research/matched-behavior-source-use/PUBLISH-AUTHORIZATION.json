@@ -1,0 +1,15 @@
+{
+  "authorization": "PUBLISH_EXACT_REVIEWED_PACKAGE",
+  "report_number": "SCU-PAPER",
+  "version": "1.0.1",
+  "record_id": 23272690,
+  "doi": "10.5281/zenodo.23272690",
+  "expected_manifest_sha256": "4f976e85774d787dcafbcd85dd4784637ae67510836847905f938ec3bb6d755d",
+  "pdf_sha256": "7e6e8c181e98975b3ba3e665982a7dd206a2c8efcf543ce865b34d053290754b",
+  "authorization_basis": "The author explicitly requested continuation under the master research guide and an attempt to publish the completed paper DOI in the current user message. Scientific review found it eligible; this file binds that existing authorization to the concrete reviewed nine-file package.",
+  "authorized_action": "Publish this same Zenodo preprint deposit once, then verify anonymous record and exact-file readback.",
+  "authorized_at_binding_utc": "2026-10-10T01:44:01.075673+00:00",
+  "historical_working_edition_preserved": true,
+  "ots_and_arweave_authorization": "Separate actions not performed in this DOI publication workflow.",
+  "existing_published_records_must_not_change": true
+}
