@@ -1,0 +1,63 @@
+{
+  "id": "FAM20261010",
+  "status": "SCIENCE_COMMIT_AND_FOUR_DELIVERIES_EXACTLY_VERIFIED",
+  "github": {
+    "paths": 30,
+    "commit": "7f53c0e3114300e84a4099d6595a22d1576c398b",
+    "tree": "b892fbf34bd0d9f27b0d6590a8cb335299e08e66",
+    "all_blob_sha1_match": true
+  },
+  "remote_note_exact_readback": true,
+  "artifacts": [
+    {
+      "name": "UCT_Hourly_Research_Master_Handoff.md",
+      "bytes": 11800,
+      "sha256": "8da1c710dd861b54b29bced9eedec11bea35f48972a897157e9b3a631570318b",
+      "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+      "file_id": "file_0000000047e4823081744f645a75c7ef",
+      "version": 99,
+      "exact_readback": true,
+      "local_metadata_applied": true
+    },
+    {
+      "name": "FAM20261010_Research_Increment.zip",
+      "bytes": 228587,
+      "sha256": "b34b083e49bf08ebfc1b293b3c7d12934f0c055ca786b68224fd5016f2d448e9",
+      "library_file_id": "libfile_4730ea1d65248191b8a4d2985a8c52f7",
+      "file_id": "file_0000000015cc81fd912a5db06061c37f",
+      "version": 0,
+      "exact_readback": true,
+      "local_metadata_applied": true
+    },
+    {
+      "name": "FAM20261010_Verified_Manifest.json",
+      "bytes": 9663,
+      "sha256": "53bc499b0bb570770d470c1b09c8af941ef4b7b6757ee3486e661de2be06c615",
+      "library_file_id": "libfile_cc6a26c6d9708191a36b33fcac718fff",
+      "file_id": "file_00000000e58081f5b97277d9a6bdb193",
+      "version": 0,
+      "exact_readback": true,
+      "local_metadata_applied": true
+    },
+    {
+      "name": "FAM20261010_HANDOFF_ZH.md",
+      "bytes": 2574,
+      "sha256": "9971e38b570421ae99f98d03904ae80e6d1b273e359b4d9c58aab5a858a08ff1",
+      "library_file_id": "libfile_90b0e733876c819184b047e4812f485c",
+      "file_id": "file_000000009a9081fdacb96ed3907d6e5d",
+      "version": 0,
+      "exact_readback": true,
+      "local_metadata_applied": true
+    }
+  ],
+  "zip_members": 30,
+  "previous_master_version": 98,
+  "master_version": 99,
+  "previous_master_suffix_exact": true,
+  "post_save_receipt_will_be_a_separate_branch_commit": true,
+  "post_save_receipt_excluded_from_prior_increment": true,
+  "publication_action": "NONE",
+  "audit_status": "AUDIT_INCOMPLETE",
+  "scientific_graph_unchanged": true,
+  "all_existing_open_preserved": true
+}
