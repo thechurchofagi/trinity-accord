@@ -1,20 +1,129 @@
 {
+  "schema": "uct-a3w-dual-save-receipt/1",
   "research_id": "A3W20261010",
-  "status": "CHECKPOINT_VERIFIED_FINALIZATION_IN_PROGRESS",
-  "intake_head": "4f85dac95df1fc14ea49d5f772d8df9b1f6d422c",
-  "concurrent_parent_preserved": "3d1a33ce0c8d8f301eb2a049a5bd71449e7f36e5",
-  "checkpoint_commit": "3510381ee2542310b1bdfa6243147d3350d6e64b",
-  "checkpoint_note_git_blob": "833d8e05a6084ad7e7de1868a69ee22fd149cec0",
-  "checkpoint_remote_verified": true,
-  "github_final_science_commit": "PENDING_NEXT_COMMIT",
-  "library_input_id": "libfile_4175a81748fc819187fa8f5771f056fa",
-  "library_input_version": 99,
-  "library_output_status": "PENDING",
-  "remaining": [
-    "final Git commit and readback",
-    "increment manifest/package upload and exact Library byte round-trip",
-    "guarded same-identity master update",
-    "post-save receipt commit"
+  "result_version": "A3W-ENDPOINT-v0.1.0",
+  "status": "SCIENCE_AND_MASTER_AND_INCREMENT_EXACT_READBACK_VERIFIED",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "intake_head": "4f85dac95df1fc14ea49d5f772d8df9b1f6d422c",
+    "concurrent_parent_preserved": "3d1a33ce0c8d8f301eb2a049a5bd71449e7f36e5",
+    "checkpoint_commit": "3510381ee2542310b1bdfa6243147d3350d6e64b",
+    "science_commit": "b4c2fbd78951236ed44799a47af79ad4e4228bdf",
+    "verified_science_paths": 27,
+    "receipt_commit_locator": "Resolve the commit containing this exact receipt via current branch; receipt commit SHA cannot be embedded in its own bytes.",
+    "final_receipt_parent_preserved": "ef0785cf34581ee5d28c0a2eb3a31a95d3311679",
+    "concurrent_ctd_operation_changes": "PRESERVED_WITHOUT_EXECUTION"
+  },
+  "library": {
+    "master_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "input_version": 99,
+    "output_version": 100,
+    "master_file_id": "file_000000001b4c81fb9e117f5f1aa31dff",
+    "increment_id": "libfile_9fd810f4c9508191b8416ed58a5b8d7d",
+    "manifest_id": "libfile_3e39cbe22d388191976f156b73135df7",
+    "metadata_applied_for_all": true,
+    "exact_readback": [
+      {
+        "file": "UCT_Hourly_Research_Master_Handoff.md",
+        "bytes": 14239,
+        "sha256": "463a1b5b43206ecadc9f079a4f8cbc4e8f319c734c54da02c43aafe9c4de5ba6",
+        "exact_roundtrip": true
+      },
+      {
+        "file": "UCT_A3W20261010_Increment.zip",
+        "bytes": 133612,
+        "sha256": "bad1c4017690e76a339920bf40140308748fa32868bbeb6cb0300adc5b18ce9c",
+        "exact_roundtrip": true
+      },
+      {
+        "file": "UCT_A3W20261010_Increment_MANIFEST.json",
+        "bytes": 8744,
+        "sha256": "7f53e3f9c4330bc7fe5257fb5c23e39b975311d5217c27b253e6dabaea6fc188",
+        "exact_roundtrip": true
+      }
+    ],
+    "final_receipt_artifact": {
+      "library_file_id": "libfile_5e9ea315655c8191bac8902b5da18dd8",
+      "file_id": "file_0000000033c881f5a0f577f1d329e150",
+      "bytes": 7024,
+      "sha256": "e6ca1fddb15382e17f71bbc0cd23f441a73b967cb5dd6a49720956bcdd626e37",
+      "exact_roundtrip": true,
+      "scope": "Pre-self-identity receipt; this Git receipt adds its saved artifact identity. Artifact includes post-save worklog verbatim.",
+      "role": "Prior receipt exact readback; same-identity replacement adds concurrency failure/recovery. Final replacement identity/hash recorded in Git receipt after upload."
+    },
+    "final_receipt_replacement_verified": {
+      "library_file_id": "libfile_5e9ea315655c8191bac8902b5da18dd8",
+      "file_id": "file_0000000050988230a1884ec31a0cf01d",
+      "version": 1,
+      "bytes": 8786,
+      "sha256": "c337525ada683df973f29b4deb7f966f32b5a97e185caf0238a08d91c2bc0e71",
+      "exact_roundtrip": true
+    }
+  },
+  "backup_scope": {
+    "kind": "DELTA_ONLY",
+    "base_commit": "3d1a33ce0c8d8f301eb2a049a5bd71449e7f36e5",
+    "science_commit": "b4c2fbd78951236ed44799a47af79ad4e4228bdf",
+    "file_count": 27,
+    "zip_sha256": "bad1c4017690e76a339920bf40140308748fa32868bbeb6cb0300adc5b18ce9c",
+    "zip_bytes": 133612,
+    "not_full_repository_or_all_history": true,
+    "post_save_receipt": "This final receipt and final WORK_LOG addition are after the science increment. The work log is embedded below verbatim for recovery; final receipt is also saved as a separate named artifact."
+  },
+  "science": {
+    "completed_map": "UCT-MAP-v1.1.2",
+    "scientific_pending_latest": "A3V20261010",
+    "latest_followup": "A3W20261010",
+    "concurrent_followup_preserved": "FAM20261010",
+    "pending_checkpoint_count": 38,
+    "coverage_version": "UCT-PUB-v1.0.33",
+    "new_nodes": 0,
+    "new_rules": 0,
+    "new_contexts": 0,
+    "actual_h_validation": false,
+    "full_semantic_reproof": false,
+    "standalone": "HOLD"
+  },
+  "failures": [
+    {
+      "action": "initial upload helper preflight",
+      "result": "unsupported library_artifact_type=file for ZIP",
+      "correction": "changed to documented other; preflight exited before transfer, then authorized batch completed"
+    },
+    {
+      "action": "repeated stable-ID read with previously used arguments",
+      "result": "returned older v99 metadata after v100 write",
+      "correction": "exact new file ID and fresh stable-ID line-window read both confirmed v100; byte round-trip confirmed new14239 bytes"
+    },
+    {
+      "action": "nearby external primary full-method retrieval",
+      "result": "blocked/internal errors",
+      "source": "SOURCE_SCOPE.json",
+      "correction": "no unsupported full-method inference imported"
+    },
+    {
+      "action": "final receipt ref update from b4c2fbd",
+      "result": "GithubGraphQLAPIError UNKNOWN; branch concurrently advanced",
+      "orphan_unsaved_commit": "500677fd49f4aa148c6c39ade66e6404cf6c88e6",
+      "correction": "Re-read new ef0785cf34581ee5d28c0a2eb3a31a95d3311679 and diff; no A3W overlap. Rebuild receipt tree on that head, force=false and expected_sha retained."
+    }
   ],
-  "recovery": "Fetch current branch and master version; preserve FAM concurrent record. If later receipt exists it supersedes this in-progress state. Restore delta on the named Git base; never call this a complete repository backup."
+  "open_obligations": [
+    "QC-20261008-10",
+    "IA-QC11",
+    "QC-20261008-12",
+    "QC-20261008-13",
+    "SCU-OPEN-R191-NORMALIZATION",
+    "SCU-AUDIT-DEPTH",
+    "H_way content calibration and independent J_H reliability",
+    "actual route/current-consumer/grain and R-versus-fit installation"
+  ],
+  "next_question": "Can reporting adults distinguish H_way from origin recognition/practice knowledge/control in neutral content probes, and what independent bounded reliability relation would justify H-level interpretation?",
+  "exact_recovery": "Read latest fixed master and fetch latest branch; preserve concurrent FAM. Checkout named base and overlay increment27 paths or checkout science commit directly, verify listed SHA256. Read this final receipt from current branch and recover post-save WORK_LOG from embedded UTF8 if necessary. No new theoretical proof or H pilot has been completed beyond the stated conceptual application and instrument.",
+  "final_work_log_utf8": "# A3W work log\n\n1. Verified research branch head 4f85dac95df1fc14ea49d5f772d8df9b1f6d422c, main head 7b6634f67c38caa2726c64d7f70e32ff35dc8353; ordered research intake and Library master v98 agree on A3V science and NOV/NAV governance.\n2. Read effective integrated graph and affected R173/R175 contracts, R151 D4/D5, A3M/A3N/A3V and R199. Found the endpoint wording and off-diagonal analysis already exist; withdrew that apparent novelty before writing the result.\n3. Wrote five-field ROUND_RECORD before the application increment. Selected target-scope repair; read Fuchs primary author-hosted PDF bounded §§3/6, abstract/§5 context. Retrieval failures preserved in SOURCE_SCOPE.json.\n4. Produced scoped English note, prospective content/applicability instrument, source/failure and review response. No computation or empirical experiment justified; no invented new theorem.\n5. Formed-result direction check: action-specific H distinguished from basic self-familiarity and recognition; report remains evidence, C1/U1 unchanged. Next stage is content pilot plus independent measurement relation, not general control research.\n6. First substantive checkpoint is saved before navigation/persistence finalization. Exact commit IDs and remaining recovery steps are in PERSISTENCE_RECEIPT.json and the fixed Library master.\n\n7. Concurrent save detected before checkpoint: FAM follow-up and master v99 were newer than intake. Preserved remote work with a fast-forward checkpoint parent, read its full note/endpoint screen, and reconciled provisional-context statements. First checkpoint 3510381ee2542310b1bdfa6243147d3350d6e64b; no root navigation overwritten by that checkpoint.\n\n8. Final navigation/admission checks passed with formal graph and38 pending candidates unchanged; FAM and A3W follow-up entries agree across six indexes.27 final science paths matched remote Git tree at b4c2fbd78951236ed44799a47af79ad4e4228bdf. Master same identity v100, delta ZIP and manifest saved and exact-byte readback passed. One upload preflight failed because archive artifact type was unsupported; corrected to other before any transfer. A repeated read returned cached v99 metadata; pinned new file ID and a fresh stable-ID read both verified v100. These failures are preserved in the final receipt; no unknown write was retried.\n\n9. Final receipt ref update failed while independent CTD operations advanced head to ef0785cf34581ee5d28c0a2eb3a31a95d3311679. The rejected/orphan receipt500677fd49f4aa148c6c39ade66e6404cf6c88e6 was not declared saved. Read the new head/diff; only CTD operation paths changed, no A3W file conflict. Rebuild receipt on ef0785c with expected-SHA fast-forward, preserving those external task bytes without executing its provenance workflow.\n",
+  "final_work_log_sha256": "6056b403d11432b96b9d0c476db4721a9804ea65148f04c17287764a30c4c8d0",
+  "remaining_work": [
+    "Scientific target/measurement and actual installation obligations listed above; storage complete for stated scope."
+  ]
 }
