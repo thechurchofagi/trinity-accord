@@ -1,0 +1,60 @@
+{
+  "schema": "uct-dual-save-receipt/1",
+  "research_id": "EIP20261010",
+  "science_commit": "d8c94faa846fc4d459628c9bc896adfb4a038d7e",
+  "science_parent": "79ec03184ce66ac2c1e44d0dc6ba88c3f774d33a",
+  "science_tree": "8981b315f75aab547e0106329dd15096a3884383",
+  "github_branch": "uct-agent-consciousness-workspace",
+  "github_guard": "EXPECTED_SHA_FAST_FORWARD",
+  "github_readback": {
+    "commit_equal": true,
+    "tree_equal": true,
+    "exact_results_exclusive_probe_ambiguities_for_S1": 0,
+    "map_structural_checks_all_pass": true,
+    "current_state_latest_research": "EIP20261010",
+    "publication_coverage": "UCT-PUB-v1.0.21"
+  },
+  "library_master": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "file_id": "file_00000000c20c81f78ba0825c64c71acc",
+    "version": 74,
+    "bytes": 690479,
+    "sha256": "e1c11fe8b2ca8ec9b67fa86c5dcdbb02e17a1f454f167e3399afeb5aa4b859b7",
+    "previous_version": 73,
+    "previous_bytes": 685815,
+    "previous_sha256": "e39617af5a4979a50f2fefc436662f376317583016561c9df3ab9d681f031ef1",
+    "previous_version_preserved_as_exact_suffix": true,
+    "readback_byte_equal": true
+  },
+  "library_increment": {
+    "library_file_id": "libfile_b655c3522ea08191a6c40dca0c88aeae",
+    "file_id": "file_00000000f5cc81f79b19994fedc4e151",
+    "file_name": "UCT_EIP20261010_Increment.zip",
+    "bytes": 227485,
+    "sha256": "b7475aa1df9451070f79065edd5804b5e08bf0b8b54835f58b83fbd59e0f7325",
+    "file_count": 33,
+    "scope": "Increment from the science tree only; not a full repository or history backup.",
+    "zip_integrity": "PASS",
+    "readback_byte_equal": true
+  },
+  "library_manifest": {
+    "library_file_id": "libfile_565df6df08f481918559141e747b6eee",
+    "file_id": "file_0000000018f481f7a0ea2d251767fe2f",
+    "file_name": "UCT_EIP20261010_INCREMENT_MANIFEST.txt",
+    "bytes": 5731,
+    "sha256": "9dc6eae826848b969ff4bc5bc62079180da1226bd173af1d33f9d31f2a4ba168",
+    "readback_byte_equal": true
+  },
+  "library_handoff": {
+    "library_file_id": "libfile_6e23e2a5c70481918843f53ba4176afc",
+    "file_id": "file_0000000028fc81f7b6d23dafec8ed9cb",
+    "file_name": "UCT_EIP20261010_HANDOFF_ZH.md",
+    "bytes": 2778,
+    "sha256": "4d71dff769b366643ab337d957e816c5dbde4dbfd4b0b7a128d1b3a3db9da0e8",
+    "readback_byte_equal": true
+  },
+  "latest_completed_step": "Science tree and all four Library artifacts were materialized and byte-hash verified.",
+  "unfinished_work": "A physically and ethically validated selective discrepancy probe for one named central consumer, actual bearer/signature admission, H calibration and reviewer-controlled OPEN items remain unresolved.",
+  "recovery_action": "Fetch the recorded branch receipt commit. If repository access is unavailable, restore the 33-file increment ZIP over parent 79ec03184ce66ac2c1e44d0dc6ba88c3f774d33a and verify every path against the manifest. Read master handoff v74. Do not treat the increment as a full clone.",
+  "dual_save_verified": true
+}
