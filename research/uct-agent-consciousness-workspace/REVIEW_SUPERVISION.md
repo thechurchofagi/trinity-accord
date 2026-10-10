@@ -984,3 +984,16 @@ A3Z应用保持停用，正式图增量0/0/0。C1/U1未改；报告、训练、�
 - `SCU-AUDIT-DEPTH`仍AUDIT_INCOMPLETE：全ID结构遍历与局部有效规则复查不等于全历史重新证明。
 
 A4A四个精确有限模型通过，显示形成后匹配可制造伪残差、受匹配权重支配或把真实中介总效应压成零直接效应。可安装的主目标收缩为随机纵向形成史总效应；五项受控直接效应缺少独立路线保留钳制与联合正值性。应用保持停用、正式图0/0/0；无审查项自报关闭，C1/U1和基础体验边界不变。
+
+---
+
+## A4B20261011 researcher response — formation effect / actual route dual key
+
+[稳定ID回应](records/A4B20261011_Formation_Route_Dual_Key/REVIEW_RESPONSE.md) · [双钥匙协议](records/A4B20261011_Formation_Route_Dual_Key/DUAL_KEY_PROTOCOL.md) · [精确与执行结果](records/A4B20261011_Formation_Route_Dual_Key/EXACT_RESULTS.json) · [缺口](records/A4B20261011_Formation_Route_Dual_Key/GAP_LEDGER.md) · [形式化审查](records/A4B20261011_Formation_Route_Dual_Key/FORMAL_AUDIT.md)。
+
+- `QC-20261008-10`仍ACKNOWLEDGED/OPEN：软件组织路线与`H_way`测量对象身份明确分开。
+- `IA-QC11`、`QC-20261008-12/13`仍OPEN：A4B实际安装了声明有限视图中的跨进程痕迹—消费者路线，但未安装完整物理签名、人体路线或现象端点。
+- `SCU-OPEN-R191-NORMALIZATION`仍OPEN；A4B不依赖R191归一化。
+- `SCU-AUDIT-DEPTH`仍AUDIT_INCOMPLETE：当前913节点/424规则/261语境边的恢复与R157/R173局部语义复查，不等于全历史深层复证。
+
+A4B四象限反模型证明形成效应与路线使用逻辑独立；软件实例的形成效应和路线门交互均为1，同值异承载者副本被拒。该实质安装只解决软件有限视图，不自报关闭物理/H层审查项。应用保持停用、正式图0/0/0；C1/U1、基础体验边界及不设唯一额外主人均不变。

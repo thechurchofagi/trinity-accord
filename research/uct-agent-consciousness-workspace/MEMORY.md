@@ -25,3 +25,7 @@ Scientific continuation and next question live in CURRENT_STATE.json. All pendin
 ## 最新应用 A4A20261011
 
 形成后的易度、成功、价值、预期和来源/能动性变量不能不分角色地拿来“匹配”。精确模型表明它们可制造伪残差、破坏正值性或阻断形成本来经由的组织路径。可安装主目标改为随机形成史的总效应，主要分析只调形成前变量；五项受控直接效应尚未共同可安装，`RetBind`和`H_way`仍OPEN；[交接](records/A4A20261011_Formation_Intervention/HANDOFF_ZH.md)。
+
+## 最新应用 A4B20261011
+
+随机形成效应与当前事件实际使用形成痕迹是两把逻辑独立的钥匙，四个有限模型覆盖全部真值组合。本轮已在声明的软件承载者上实际安装：跨进程保留痕迹、当前消费者读/用、独立读取消融和同值异承载者拒绝；形成效应与路线交互均为1。此证据只及软件有限视图，不是完整物理`K`签名、人体`RetBind`或`H_way`；0/0/0正式图增量，全部审查OPEN保留；[交接](records/A4B20261011_Formation_Route_Dual_Key/HANDOFF_ZH.md)。

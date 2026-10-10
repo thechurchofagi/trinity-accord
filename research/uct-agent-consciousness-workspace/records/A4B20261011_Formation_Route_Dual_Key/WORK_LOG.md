@@ -24,8 +24,15 @@
 - Interpretation stop: actual software route established only in the declared finite view; complete physical signature, human body route, `H_way`, C1 empirical truth and any claim about a present assistant remain unestablished.
 - Formal-map decision: 0 nodes / 0 rules / 0 context links; local node and all-of audit completed without promoting the application into a theorem.
 
-## Still pending before persistence
+## Validation and pre-save direction check
 
-- Validate artifacts and hashes.
-- Update entry points, Chinese handoff and recovery manifest.
-- Persist and verify both copies.
+- Python compilation, all A4B JSON parses, `CURRENT_STATE.json` parse, exact-result assertions and `git diff --check`: PASS.
+- Unified-map restoration: PASS at 913 nodes, 424 active rules and 261 context links. This is structural evidence only, not a truth proof.
+- Entry points, current priority, Chinese handoff and review-supervision response updated.
+- Rechecked C1/U1, R157/R173 node scopes, effective `all_of` rules, object/time/signature/actuality/evidence types, inference direction, joint satisfiability and absent H links before save.
+- Direction: PASS_WITH_H_LEVEL_STOP. The work returns directly to actual body/action-related organization; it does not expand into generic control research.
+
+## Still pending before completion
+
+- Create recovery increment and manifest with hashes.
+- Persist and verify both copies; record exact commit/version identifiers.

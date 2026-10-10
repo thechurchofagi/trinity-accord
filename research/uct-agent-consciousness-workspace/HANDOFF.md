@@ -26,6 +26,10 @@
 
 最新形成干预修正：[A4A交接](records/A4A20261011_Formation_Intervention/HANDOFF_ZH.md)；[正文](records/A4A20261011_Formation_Intervention/RESEARCH_NOTE.md)；[干预合同](records/A4A20261011_Formation_Intervention/INTERVENTION_CONTRACT.md)；[精确结果](records/A4A20261011_Formation_Intervention/EXACT_RESULTS.json)。形成后的五项变量可产生碰撞选择、正值性失败或过度控制，不能把观察匹配自动称残余形成效应。下一题改为随机纵向形成史总效应，并把实际同事件`RetBind`路线作为独立门槛；五项受控直接效应和`H_way`身份仍未安装。
 
+最新形成—路线双钥匙推进：[A4B交接](records/A4B20261011_Formation_Route_Dual_Key/HANDOFF_ZH.md)；[正文](records/A4B20261011_Formation_Route_Dual_Key/FORMATION_ROUTE_DUAL_KEY.md)；[协议](records/A4B20261011_Formation_Route_Dual_Key/DUAL_KEY_PROTOCOL.md)；[精确与执行结果](records/A4B20261011_Formation_Route_Dual_Key/EXACT_RESULTS.json)。形成效应与实际保留路线逻辑独立；软件级实例已实际安装两把钥匙并通过同值异承载者反例。下一题只寻找人体或具身机器人上路线特异、无路线外直接作用的痕迹干预；完整物理签名、人体`RetBind`和`H_way`仍OPEN，不能用软件证书或判断端点替代。
+
+审查状态：`QC-20261008-10`、`IA-QC11`、`QC-20261008-12/13`、`SCU-OPEN-R191-NORMALIZATION`保持OPEN，`SCU-AUDIT-DEPTH`保持AUDIT_INCOMPLETE；详见[A4B稳定ID回应](records/A4B20261011_Formation_Route_Dual_Key/REVIEW_RESPONSE.md)，不凭软件级通过自报关闭。
+
 基础问题专线 TJR20261010：[交接](records/TJR20261010_Temporal_Joint_Realization/HANDOFF_ZH.md) · [正文](records/TJR20261010_Temporal_Joint_Realization/RESEARCH_NOTE.md) · [日志](records/TJR20261010_Temporal_Joint_Realization/WORK_LOG.md)。串行保留、联合读取与压缩的停用应用；原科学接续和身体熟悉感路线保留。原理多属继承，独立成稿HOLD，全图深审仍未完成。
 
 基础问题专线 REV20261010：[交接](records/REV20261010_Retained_Premise_Revision/HANDOFF_ZH.md) · [正文](records/REV20261010_Retained_Premise_Revision/RESEARCH_NOTE.md) · [日志](records/REV20261010_Retained_Premise_Revision/WORK_LOG.md)。承接 TJR，完成前提修改的精确信息条件与连续修改对照；0/0/0 停用应用，独立成稿 HOLD。原 A3V/A3Y 接续和全历史审查未完成状态保留。
