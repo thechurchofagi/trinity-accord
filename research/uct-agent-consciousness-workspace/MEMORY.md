@@ -1,4 +1,10 @@
-# 最新接续 DVC20261010；SCU v1.0.1 已公开
+# 最新接续 A3S20261010；完成图仍为 UCT-MAP-v1.1.2
+
+[A3S中文交接](records/A3S20261010_Area3a_Selectivity/HANDOFF_ZH.md) · [英文研究稿](records/A3S20261010_Area3a_Selectivity/RESEARCH_NOTE.md) · [精确模型](records/A3S20261010_Area3a_Selectivity/EXACT_RESULTS.json) · [地图审计](records/A3S20261010_Area3a_Selectivity/MAP_AUDIT.md)。本轮把 S1 3a 区固定为命名消费者；新慢性阵列证据解除“不可访问”障碍，却没有完成来源选择性×消费者选择性×同事件绑定。边际可识别不蕴含交互可识别，精确孪生已保存。候选 7/3/5 停用；完成图和 C1/U1 不变；覆盖 v1.0.23。下一步只核对一个可执行交叉探针，失败即停止对应推断。
+
+---
+
+# 前一接续 DVC20261010；SCU v1.0.1 已公开
 
 **正式论文：** [Matched Behavior and Source Use，SCU-PAPER v1.0.1](https://doi.org/10.5281/zenodo.23272690)，15页英文预印本；[公开核验收据](records/SCUPUB20261010_DOI_Publication/FINAL_PUBLICATION_RECEIPT.json)。DOI解析与公开文件已核验，非期刊同行评审。
 

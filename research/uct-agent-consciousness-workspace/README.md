@@ -1,4 +1,10 @@
-# Current entry — SCU published; DVC device validation checkpoint
+# Current entry — A3S named-consumer selectivity checkpoint
+
+Read the [A3S handoff](records/A3S20261010_Area3a_Selectivity/HANDOFF_ZH.md), [research note](records/A3S20261010_Area3a_Selectivity/RESEARCH_NOTE.md), [exact results](records/A3S20261010_Area3a_Selectivity/EXACT_RESULTS.json), and [map audit](records/A3S20261010_Area3a_Selectivity/MAP_AUDIT.md). S1 area 3a is now the named proprioceptive consumer. Chronic access is feasible, but no reviewed study jointly establishes source selectivity, consumer selectivity, and same-event binding. Marginal contrasts do not identify the `S→3a` interaction. The 7/3/5 candidate remains disabled; completed UCT-MAP-v1.1.2 and C1/U1 are unchanged; coverage is UCT-PUB-v1.0.23.
+
+---
+
+# Previous entry — SCU published; DVC device validation checkpoint
 
 Read [RESEARCH_MASTER_GUIDE.md](RESEARCH_MASTER_GUIDE.md) v2.3, [CURRENT_STATE.json](CURRENT_STATE.json), [HANDOFF.md](HANDOFF.md), and [DVC handoff](records/DVC20261010_Device_Consumer_Validation/HANDOFF_ZH.md). **SCU-PAPER v1.0.1 is a public preprint at [DOI 10.5281/zenodo.23272690](https://doi.org/10.5281/zenodo.23272690).** The completed map remains UCT-MAP-v1.1.2 / seq4, with 913 nodes, 424 active conditional rules, 261 contexts, 10 suspended rules and 1,608 review items. Publication coverage is UCT-PUB-v1.0.22 (frozen base plus verified delta). All 25 pending research checkpoints remain disabled.
 

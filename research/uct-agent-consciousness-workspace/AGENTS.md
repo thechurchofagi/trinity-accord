@@ -1,4 +1,12 @@
-# 最新接续 DVC20261010；SCU v1.0.1 已公开
+# 最新接续 A3S20261010；完成图仍为 UCT-MAP-v1.1.2
+
+[A3S中文交接](records/A3S20261010_Area3a_Selectivity/HANDOFF_ZH.md) · [英文研究稿](records/A3S20261010_Area3a_Selectivity/RESEARCH_NOTE.md) · [精确模型](records/A3S20261010_Area3a_Selectivity/EXACT_RESULTS.json) · [地图审计](records/A3S20261010_Area3a_Selectivity/MAP_AUDIT.md)。本轮选定 S1 3a 区作为命名本体感觉消费者：2026 年慢性阵列结果纠正“消费者不可访问”的旧印象，但现有证据没有在同一实例联合来源选择性、消费者选择性与事件绑定。标准行空间判据和 16 状态穷举给出观测相同而 `S→3a` 相反的精确孪生，证明两个边际不自动识别交互项。
+
+A3S 7 节点/3 规则/5 上下文候选停用；完成图仍为 913/424/261、10 暂停、1,608 审查项。覆盖更新为非演绎 UCT-PUB-v1.0.23，正式论文数不变，单篇 HOLD。QC10、IA-QC11、QC12、QC13、R191 规范化和全图深审计继续开放。下一步只核对慢性阵列平台能否支持一个交叉探针；失败即记录首先缺失的选择性或事件绑定。C1/U1 不增加基础体验门槛，3a 区不是唯一主人。
+
+---
+
+# 前一接续 DVC20261010；SCU v1.0.1 已公开
 
 **正式论文：** [Matched Behavior and Source Use，SCU-PAPER v1.0.1](https://doi.org/10.5281/zenodo.23272690)，15页英文预印本；[公开核验收据](records/SCUPUB20261010_DOI_Publication/FINAL_PUBLICATION_RECEIPT.json)。DOI解析与公开文件已核验，非期刊同行评审。
 

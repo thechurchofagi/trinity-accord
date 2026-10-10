@@ -1,0 +1,11 @@
+{
+  "id": "A3S-CLAIMS-v0.1.0",
+  "claims": [
+    {"id":"A3S-C1","type":"CONDITIONAL_THEOREM","statement":"A target linear coordinate is identifiable exactly when its functional lies in the observation row span.","domain":"finite unrestricted real linear model","premises":["fixed H","fixed latent ordering","exact observation"],"proof":"RESEARCH_NOTE.md §2","source_lineage":"standard linear algebra applied to EIP/DVC actual-read contract","counterexample":"null-space target-switch vector","status":"PROVED_WITHIN_MODEL"},
+    {"id":"A3S-C2","type":"NEGATIVE_RESULT","statement":"Source-only, consumer-only and their separate margins do not identify the selected source-by-consumer coordinate in the declared four-cell model.","domain":"five exact matrices and 16 binary vectors","premises":["unrestricted four-cell alternatives"],"proof":"model.py and EXACT_RESULTS.json","source_lineage":"new application, mathematics inherited","counterexample":"explicit twins in results","status":"EXACT_ENUMERATION_PASS"},
+    {"id":"A3S-C3","type":"SOURCE_GROUNDED_FEASIBILITY_CORRECTION","statement":"Chronic invasive access to macaque area 3a is demonstrated, but the reviewed studies do not jointly execute source selectivity, consumer selectivity and event binding.","domain":"five primary studies reviewed","premises":["do not compose across instances","direction of intervention preserved"],"proof":"SOURCE_SCOPE.md and RESEARCH_NOTE.md §3","source_lineage":"targeted synthesis","counterexample":"future crossed package would defeat the negative assessment","status":"BOUNDED_CURRENT_EVIDENCE_RESULT"},
+    {"id":"A3S-C4","type":"UCT_CONDITIONAL_INTERPRETATION","statement":"An independently grounded actual selected-source-to-area-3a relation has an experience-internal structural counterpart under C1, without identifying mineness, agency, ownership or report.","domain":"one complete admitted actual P/I/K instance","premises":["A:C1","actual relation grounding","same bearer/interval/signature"],"proof":"C1 application","source_lineage":"inherited UCT application","counterexample":"missing actual or semantic bridge stops application","status":"CONDITIONAL_ACTUAL_PREMISES_OPEN"}
+  ],
+  "publication_decision": "HOLD_STANDALONE_INTEGRATE_AS_POST_SCU_METHOD_AND_FRONTIER_UPDATE",
+  "priority_status": "WORLDWIDE_PRIORITY_UNVERIFIED"
+}

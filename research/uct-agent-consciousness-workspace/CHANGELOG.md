@@ -1,3 +1,9 @@
+## A3S20261010 — named area-3a consumer and interaction-identifiability boundary
+
+Selected S1 area 3a as the named proprioceptive consumer. A 2026 chronic-array study removes the prior access objection, while the reviewed primary literature does not jointly provide source selectivity, consumer selectivity and same-event binding. A standard row-space test and exhaustive 16-state check show that the two margins do not identify the `S→3a` interaction. Added a disabled 7-node/3-rule/5-context candidate, source scope, exact witnesses, gap ledger, review response and whole-map compatibility audit. The completed map, C1/U1 and paper count remain unchanged; non-deductive coverage advances to UCT-PUB-v1.0.23. All existing OPEN supervision items remain open.
+
+---
+
 ## SCUPUB20261010 / DVC20261010 — 2026-10-10 — publication and disabled device checkpoint
 
 SCU-PAPER v1.0.1 is publicly deposited and read back at DOI 10.5281/zenodo.23272690. The frozen scientific paper is unchanged by the later DVC work. DVC adds specified event/cache/commit acquisition contracts, a finite model, and an executed exploratory reanalysis of 18 participants in a public tactile dataset; no new hardware or human observations. Candidate 24/6/15 remains disabled. All 1,608 completed-map IDs received the documented core-layer compatibility visit; historical semantic/proof depth and actual/phenomenal applications remain open. Publication coverage advances to UCT-PUB-v1.0.22 using frozen base plus reviewed claim delta. Concurrent CBI and EIP files and all previous versions are retained.

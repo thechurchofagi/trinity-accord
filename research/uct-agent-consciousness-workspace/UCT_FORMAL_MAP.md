@@ -1,4 +1,10 @@
-# 最新接续 DVC20261010；SCU v1.0.1 已公开
+# 最新接续 A3S20261010；完成图仍为 UCT-MAP-v1.1.2
+
+[停用候选](records/A3S20261010_Area3a_Selectivity/MAP_EXTENSION.json)含 7 节点/3 `all_of` 规则/5 上下文；[全图兼容审计](records/A3S20261010_Area3a_Selectivity/MAP_AUDIT.md)核对 913 节点、424 活跃规则、261 上下文、10 暂停规则和 1,608 审查项。目标 `S→3a` 只在其坐标泛函属于观测矩阵行空间时可识别；来源边际与消费者边际不能替代同一事件的交叉项。候选保持停用，不新增基础体验门槛、唯一主人或实际归属结论。
+
+---
+
+# 前一接续 DVC20261010；SCU v1.0.1 已公开
 
 **正式论文：** [Matched Behavior and Source Use，SCU-PAPER v1.0.1](https://doi.org/10.5281/zenodo.23272690)，15页英文预印本；[公开核验收据](records/SCUPUB20261010_DOI_Publication/FINAL_PUBLICATION_RECEIPT.json)。DOI解析与公开文件已核验，非期刊同行评审。
 

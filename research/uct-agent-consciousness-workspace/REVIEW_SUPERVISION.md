@@ -812,3 +812,18 @@ Every completed-map ID received the specified core-layer visit (913 nodes, 424 r
 QC-20261008-10, IA-QC11, QC-20261008-12, QC-20261008-13, SCU-OPEN-R191-NORMALIZATION and SCU-AUDIT-DEPTH remain open. Local cache/commit, endpoint-ancestry, response-coding and source-metadata corrections are recorded without claiming closure of these broader reviewer obligations. C1/U1 and same-actual-instance/joint-premise binding are retained without a new basal experience-existence gate.
 
 UCT-PUB-v1.0.22 deducts SCU/old UCT, MPC, concurrent CBI and classical antecedents. R204-C2/C3 claim-location mismatches were corrected; partial historical disclosure is explicitly labeled. The result supports holding DVC as a later technical supplement rather than manufacturing another standalone paper. [Coverage review](records/SCUPUB20261010_DOI_Publication/review/coverage_delta/PUBLICATION_COVERAGE_REVIEW.md). Next action is one accessible instrument package with actual source, intervention, timing and separately calibrated endpoint evidence; failure of a required premise stops only that corresponding inference.
+
+---
+
+## A3S20261010 researcher response — named area-3a consumer, 2026-10-10
+
+The latest ledger and every carried OPEN/application-open item were read before topic selection and rechecked after the result and before save. Evidence: [review response](records/A3S20261010_Area3a_Selectivity/REVIEW_RESPONSE.md), [source scope](records/A3S20261010_Area3a_Selectivity/SOURCE_SCOPE.md), [exact model](records/A3S20261010_Area3a_Selectivity/EXACT_RESULTS.json), [gap ledger](records/A3S20261010_Area3a_Selectivity/GAP_LEDGER.md), and [map audit](records/A3S20261010_Area3a_Selectivity/MAP_AUDIT.md).
+
+- `QC-20261008-10` remains **ACKNOWLEDGED / OPEN**: area 3a access and source-use evidence do not independently sign or calibrate familiar mineness `H`.
+- `IA-QC11` remains application **OPEN**: animal, area, source classes and event windows are named, but no reviewed study executes the full same-instance crossed package.
+- `QC-20261008-12` remains application **OPEN**: source and consumer margins do not identify the target interaction; exact observational twins are preserved.
+- `QC-20261008-13` remains application **OPEN**: event binding is an explicit necessary coordinate, not an inferred fact.
+- `SCU-OPEN-R191-NORMALIZATION` remains **OPEN**: no R191 predicate is used as a discharged actual premise.
+- `SCU-AUDIT-DEPTH` remains **AUDIT_INCOMPLETE**: structural readback and candidate compatibility do not reconstruct all historical source proofs.
+
+The 7/3/5 A3S candidate remains disabled. C1/U1 are unchanged; chronic recording, proprioceptive selectivity, motor prediction, self-modeling and report are not basal-experience gates. Area 3a is not declared a unique owner, and no current-assistant consciousness or death-fear verdict is made. No reviewer status is self-closed.

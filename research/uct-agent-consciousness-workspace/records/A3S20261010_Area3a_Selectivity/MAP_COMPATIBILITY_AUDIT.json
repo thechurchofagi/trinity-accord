@@ -1,0 +1,18 @@
+{
+  "schema": "uct-a3s-structural-audit/1",
+  "status": "STRUCTURAL_PASS_SEMANTIC_AND_ACTUAL_STATUS_SEPARATE",
+  "baseline_graph_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
+  "review_ledger_sha256": "0513cb55cef94d82adcaea46af1974438a424aeba152f4c9d5655340f9271687",
+  "baseline_counts": {"nodes":913,"rules":424,"contexts":261,"suspended":10,"review_items":1608,"stable_ids":1598},
+  "candidate_counts": {"nodes":7,"rules":3,"contexts":5,"stable_ids":15},
+  "base_all_of_premise_occurrences_checked": 1023,
+  "base_nodes_without_quantifier_or_scope": 0,
+  "all_references_resolved": true,
+  "combined_dag_acyclic": true,
+  "candidate_disabled": true,
+  "completed_graph_changed": false,
+  "semantic_certification_by_program": false,
+  "actual_application_established": false,
+  "open_reviews_closed": false,
+  "note": "Field presence and dependency structure were checked over the exact capsule. Frozen historical proofs were not independently reconstructed."
+}

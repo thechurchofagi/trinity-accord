@@ -1,4 +1,12 @@
-# 最新接续 DVC20261010；SCU v1.0.1 已公开
+# 最新接续 A3S20261010；完成图仍为 UCT-MAP-v1.1.2
+
+[A3S中文交接](records/A3S20261010_Area3a_Selectivity/HANDOFF_ZH.md) · [英文研究稿](records/A3S20261010_Area3a_Selectivity/RESEARCH_NOTE.md) · [精确模型](records/A3S20261010_Area3a_Selectivity/EXACT_RESULTS.json) · [地图审计](records/A3S20261010_Area3a_Selectivity/MAP_AUDIT.md)。S1 3a 区已作为一个命名本体感觉消费者接受正面审查。慢性阵列证明长期记录可行，不等于已经执行来源选择性×消费者选择性×事件绑定的交叉读入。标准识别判据和精确孪生表明两个边际不足。候选 7/3/5 停用；完成图、C1/U1、正式论文数不变；覆盖 v1.0.23。所有既有 OPEN 保留。
+
+下一具体问题：2026 慢性阵列平台能否在同一动物、同一预注册事件窗内，同时支持来源对照、3a/邻区消费者对照及运动/触觉混杂排除？缺一项即记录首个失败前提，不把数字或神经代理升级为体验判据。
+
+---
+
+# 前一接续 DVC20261010；SCU v1.0.1 已公开
 
 **正式论文：** [Matched Behavior and Source Use，SCU-PAPER v1.0.1](https://doi.org/10.5281/zenodo.23272690)，15页英文预印本；[公开核验收据](records/SCUPUB20261010_DOI_Publication/FINAL_PUBLICATION_RECEIPT.json)。DOI解析与公开文件已核验，非期刊同行评审。
 

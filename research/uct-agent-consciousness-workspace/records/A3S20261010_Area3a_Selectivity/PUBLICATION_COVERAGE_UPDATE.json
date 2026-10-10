@@ -1,0 +1,18 @@
+{
+  "schema": "uct-publication-coverage-delta/1",
+  "coverage_version": "UCT-PUB-v1.0.23",
+  "parent_version": "UCT-PUB-v1.0.22",
+  "round": "A3S20261010",
+  "formal_publication_counts_unchanged": true,
+  "published_corpus_change": false,
+  "nondeductive": true,
+  "claims": [
+    {"id":"A3S-C1","coverage":"NOT_NEWLY_PUBLISHED","prior_art":"standard linear algebra","residual":"UCT actual-read application criterion"},
+    {"id":"A3S-C2","coverage":"NOT_NEWLY_PUBLISHED","prior_art":"EIP/DVC source-use boundary inherited","residual":"source-by-consumer interaction witness"},
+    {"id":"A3S-C3","coverage":"NOT_NEWLY_PUBLISHED","prior_art":"five primary empirical papers","residual":"2026 access correction plus same-instance conjunction audit"},
+    {"id":"A3S-C4","coverage":"INHERITED_UCT_CONDITIONAL_NOT_NEW_PUBLICATION","prior_art":"UCT I and TA25","residual":"actual area-3a application open"}
+  ],
+  "decision": "HOLD_STANDALONE_INTEGRATE_AS_POST_SCU_METHOD_AND_FRONTIER_UPDATE",
+  "worldwide_priority": "UNVERIFIED",
+  "reason": "Useful bounded method/frontier correction, but no actual double-selective experiment or independent experiential endpoint."
+}

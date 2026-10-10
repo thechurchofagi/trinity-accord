@@ -1,4 +1,10 @@
-# 最新接续 DVC20261010；SCU v1.0.1 已公开
+# 最新接续 A3S20261010；完成图仍为 UCT-MAP-v1.1.2
+
+[A3S中文交接](records/A3S20261010_Area3a_Selectivity/HANDOFF_ZH.md) · [英文研究稿](records/A3S20261010_Area3a_Selectivity/RESEARCH_NOTE.md) · [精确结果](records/A3S20261010_Area3a_Selectivity/EXACT_RESULTS.json) · [地图扩展](records/A3S20261010_Area3a_Selectivity/MAP_EXTENSION.json) · [地图审计](records/A3S20261010_Area3a_Selectivity/MAP_AUDIT.md) · [来源范围](records/A3S20261010_Area3a_Selectivity/SOURCE_SCOPE.md)。命名消费者从抽象占位推进到 S1 3a 区；慢性访问可行，但目标交互仍不由来源/消费者边际识别。A3S 7/3/5 候选停用，完成图不变，覆盖 UCT-PUB-v1.0.23，单篇 HOLD。
+
+---
+
+# 前一接续 DVC20261010；SCU v1.0.1 已公开
 
 **正式论文：** [Matched Behavior and Source Use，SCU-PAPER v1.0.1](https://doi.org/10.5281/zenodo.23272690)，15页英文预印本；[公开核验收据](records/SCUPUB20261010_DOI_Publication/FINAL_PUBLICATION_RECEIPT.json)。DOI解析与公开文件已核验，非期刊同行评审。
 

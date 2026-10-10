@@ -1,0 +1,15 @@
+{
+  "id": "A3S-EXACT-v0.1.0",
+  "method": "exact rational row-space test plus exhaustive enumeration of all 16 binary latent-use vectors",
+  "latent_order": ["S_to_A3a", "Q_to_A3a", "S_to_N", "Q_to_N"],
+  "packages": {
+    "pooled": {"matrix": [[1,1,1,1]], "rank": 1, "target_identifiable": false, "twin": [[0,0,0,1],[1,0,0,0]]},
+    "consumer_only": {"matrix": [[1,1,0,0]], "rank": 1, "target_identifiable": false, "twin": [[0,1,0,0],[1,0,0,0]]},
+    "source_only": {"matrix": [[1,0,1,0]], "rank": 1, "target_identifiable": false, "twin": [[0,0,1,0],[1,0,0,0]]},
+    "crossed_but_no_interaction": {"matrix": [[1,1,0,0],[1,0,1,0]], "rank": 2, "target_identifiable": false, "twin": [[0,1,1,0],[1,0,0,0]]},
+    "target_selective": {"matrix": [[1,0,0,0]], "rank": 1, "target_identifiable": true, "twin": null}
+  },
+  "assertions_passed": 5,
+  "violations": 0,
+  "scope": "finite linear observation contract only; no neural, behavioral or experiential measurement"
+}

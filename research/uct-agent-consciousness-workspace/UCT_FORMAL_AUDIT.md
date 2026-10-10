@@ -1,4 +1,10 @@
-# 最新接续 DVC20261010；SCU v1.0.1 已公开
+# 最新接续 A3S20261010；完成图仍为 UCT-MAP-v1.1.2
+
+[A3S审计](records/A3S20261010_Area3a_Selectivity/MAP_AUDIT.md)逐节点检查量词/范围，逐规则检查 `all_of` 联合前提，并核对对象、时间、签名、实际性、证据等级和推理方向。恢复的封装图与审查账 SHA 已固定；组合 DAG 无环、引用可解、候选停用。此结构结果不等于理论为真或全图语义重证。边际—交互缺口及慢性访问证据的外推边界保留在 [GAP_LEDGER](records/A3S20261010_Area3a_Selectivity/GAP_LEDGER.md)。
+
+---
+
+# 前一接续 DVC20261010；SCU v1.0.1 已公开
 
 **正式论文：** [Matched Behavior and Source Use，SCU-PAPER v1.0.1](https://doi.org/10.5281/zenodo.23272690)，15页英文预印本；[公开核验收据](records/SCUPUB20261010_DOI_Publication/FINAL_PUBLICATION_RECEIPT.json)。DOI解析与公开文件已核验，非期刊同行评审。
 

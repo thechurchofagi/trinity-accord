@@ -1,0 +1,15 @@
+{
+  "schema": "uct-claim-coverage-delta/1",
+  "version": "UCT-PUB-v1.0.23",
+  "parent": "UCT-PUB-v1.0.22",
+  "round": "A3S20261010",
+  "formal_publication_counts_unchanged": true,
+  "completed_map_changed": false,
+  "claims": [
+    {"id":"A3S-C1","classification":"NEW_APPLICATION_OF_KNOWN_MATHEMATICS","published":false},
+    {"id":"A3S-C2","classification":"BOUNDED_NEGATIVE_RESULT","published":false},
+    {"id":"A3S-C3","classification":"PRIMARY_SOURCE_FRONTIER_CORRECTION","published":false},
+    {"id":"A3S-C4","classification":"UCT_CONDITIONAL_INTERPRETATION","published":false}
+  ],
+  "decision": "HOLD_STANDALONE_INTEGRATE_AS_POST_SCU_METHOD_AND_FRONTIER_UPDATE"
+}
