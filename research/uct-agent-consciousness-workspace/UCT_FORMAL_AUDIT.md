@@ -25,3 +25,5 @@ A3Z现象锚点复核：[审查](records/A3Z20261010_Phenomenal_Anchor_Triage/MA
 A4A形成干预复核：[审查](records/A4A20261011_Formation_Intervention/MAP_AUDIT.md) · [逐ID结构记录](records/A4A20261011_Formation_Intervention/PER_ID_AUDIT.json.gz) · [精确结果](records/A4A20261011_Formation_Intervention/EXACT_RESULTS.json)。913/424/261逐项结构遍历通过；有效R175替代边界规则与R173合取路线按AND复核。形成后匹配可制造残差或阻断目标路径；五项受控直接效应未共同安装，全历史深审仍AUDIT_INCOMPLETE，0正式图增量。
 
 REV基础问题复核：[审查](records/REV20261010_Retained_Premise_Revision/AUDIT_REPORT.md)，1608项仅结构遍历、18节点有限兼容性核对；全历史深审 AUDIT_INCOMPLETE，0新增正式节点/规则/关系。
+
+A4C同承载者痕迹换接复核：[审查](records/A4C20261011_Trace_Swap_Embodied_Loop/FORMAL_AUDIT.md) · [精确结果](records/A4C20261011_Trace_Swap_Embodied_Loop/EXACT_RESULTS.json)。历史根图584/284/178已读，统一图恢复为913/424/261并保持727个待定对象停用；相关C1/U1/R157/R172/R173节点、`all_of`方向、对象/时间/签名/实际性和证据层级复核。执行成功仅及声明的具身模拟，不能触发R173体验坐标路线；全历史深审仍AUDIT_INCOMPLETE，0正式图增量。

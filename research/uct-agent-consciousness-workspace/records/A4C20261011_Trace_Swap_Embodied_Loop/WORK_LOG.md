@@ -28,3 +28,10 @@
 - Formal decision: map delta `0/0/0`; restored DAG success is not a theory proof or global audit completion.
 - Open review items were reread and remain open unless closed by the independent reviewer.
 
+## Entry integration and final direction review
+
+- Integrated A4C into `CURRENT_STATE.json`, `UNIFIED_RESEARCH_INDEX.json`, the master index, memory, handoff, formal-map notes, formal audit and review supervision without promoting any premise.
+- Re-ran the unified navigation/disabled-assembly validator: 913 completed nodes, 424 active rules, 727 disabled pending objects, zero unresolved deductive references, `scientific_promotion=false`.
+- Rechecked the relevant `R173` `all_of` conjunction. A4C supplies only a scoped software organization example; it does not supply an actual UCT token, complete physical `K`, independently identified phenomenal endpoint or bridge. The rule therefore remains untriggered.
+- Preserved two invalid verification invocations in `FAILURES.md`; the corrected validator passed. Code/DAG success is recorded only as consistency evidence, not theoretical truth.
+

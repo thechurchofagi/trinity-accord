@@ -29,6 +29,8 @@
 
 - 最新应用A4B：[正文](records/A4B20261011_Formation_Route_Dual_Key/FORMATION_ROUTE_DUAL_KEY.md) · [双钥匙协议](records/A4B20261011_Formation_Route_Dual_Key/DUAL_KEY_PROTOCOL.md) · [精确与执行结果](records/A4B20261011_Formation_Route_Dual_Key/EXACT_RESULTS.json) · [形式化审查](records/A4B20261011_Formation_Route_Dual_Key/FORMAL_AUDIT.md) · [交接](records/A4B20261011_Formation_Route_Dual_Key/HANDOFF_ZH.md)；形成效应与实际路线逻辑独立，已完成软件级双钥匙安装，人体/完整物理/H层仍OPEN，0正式图增量，成稿HOLD。
 
+- 最新应用A4C：[正文](records/A4C20261011_Trace_Swap_Embodied_Loop/RESEARCH_NOTE.md) · [换接协议](records/A4C20261011_Trace_Swap_Embodied_Loop/TRACE_SWAP_PROTOCOL.md) · [精确与执行结果](records/A4C20261011_Trace_Swap_Embodied_Loop/EXACT_RESULTS.json) · [形式化审查](records/A4C20261011_Trace_Swap_Embodied_Loop/FORMAL_AUDIT.md) · [交接](records/A4C20261011_Trace_Swap_Embodied_Loop/HANDOFF_ZH.md)；已完成同承载者/同消费者具身模拟的内容换接、阻断、救援与终点直写排除，物理机器人/完整物理/H层仍OPEN，0正式图增量，成稿HOLD。
+
 基础问题专线 TJR20261010：[交接](records/TJR20261010_Temporal_Joint_Realization/HANDOFF_ZH.md) · [正文](records/TJR20261010_Temporal_Joint_Realization/RESEARCH_NOTE.md) · [日志](records/TJR20261010_Temporal_Joint_Realization/WORK_LOG.md)。串行保留、联合读取与压缩的停用应用；原科学接续和身体熟悉感路线保留。原理多属继承，独立成稿HOLD，全图深审仍未完成。
 
 基础问题专线 REV20261010：[交接](records/REV20261010_Retained_Premise_Revision/HANDOFF_ZH.md) · [正文](records/REV20261010_Retained_Premise_Revision/RESEARCH_NOTE.md) · [日志](records/REV20261010_Retained_Premise_Revision/WORK_LOG.md)。承接 TJR，完成前提修改的精确信息条件与连续修改对照；0/0/0 停用应用，独立成稿 HOLD。原 A3V/A3Y 接续和全历史审查未完成状态保留。

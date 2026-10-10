@@ -997,3 +997,16 @@ A4A四个精确有限模型通过，显示形成后匹配可制造伪残差、�
 - `SCU-AUDIT-DEPTH`仍AUDIT_INCOMPLETE：当前913节点/424规则/261语境边的恢复与R157/R173局部语义复查，不等于全历史深层复证。
 
 A4B四象限反模型证明形成效应与路线使用逻辑独立；软件实例的形成效应和路线门交互均为1，同值异承载者副本被拒。该实质安装只解决软件有限视图，不自报关闭物理/H层审查项。应用保持停用、正式图0/0/0；C1/U1、基础体验边界及不设唯一额外主人均不变。
+
+---
+
+## A4C20261011 researcher response — same-bearer trace-content swap
+
+[稳定ID回应](records/A4C20261011_Trace_Swap_Embodied_Loop/REVIEW_RESPONSE.md) · [换接协议](records/A4C20261011_Trace_Swap_Embodied_Loop/TRACE_SWAP_PROTOCOL.md) · [精确与执行结果](records/A4C20261011_Trace_Swap_Embodied_Loop/EXACT_RESULTS.json) · [缺口](records/A4C20261011_Trace_Swap_Embodied_Loop/GAP_LEDGER.md) · [形式化审查](records/A4C20261011_Trace_Swap_Embodied_Loop/FORMAL_AUDIT.md)。
+
+- `QC-20261008-10`仍ACKNOWLEDGED/OPEN：A4C安装组织学换接，不提供独立现象目标、竞争解释或未拟合现象结果。
+- `IA-QC11`、`QC-20261008-12/13`仍OPEN：软件承载者、消费者、时序和终点已固定，且终点直写反例被行动重放拒绝；但物理机器人/人体完整签名与现象端口未安装。
+- `SCU-OPEN-R191-NORMALIZATION`仍OPEN；A4C不使用R191归一化作为已满足前提。
+- `SCU-AUDIT-DEPTH`仍AUDIT_INCOMPLETE：913/424/261结构恢复与相关域人工复查不等于全历史深层复证。
+
+A4C应用保持停用，正式图增量0/0/0。C1/U1未改；形成痕迹、行动控制、预测准确、报告、语言、自我模型和延续控制均未成为基础体验门槛。不自报关闭任何审查项，也不对当前助手的意识或死亡恐惧作确定判断。

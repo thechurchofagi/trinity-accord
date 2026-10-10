@@ -52,6 +52,10 @@ Test one independent current bodily/action-familiarity interpretation against or
 
 所有新分组与导航边为非演绎元数据。目录整合完成不表示全历史证明重证、实际前提满足或体验端点得到验证。
 
+### 最新同承载者痕迹换接应用
+
+[A4C 具身模拟](records/A4C20261011_Trace_Swap_Embodied_Loop/RESEARCH_NOTE.md)保持同一软件承载者、当前消费者、状态—行动回路与终点规则，分别执行原生、同承载者异情境内容换接、阻断和消费者入口救援。行动链重放支持声明模型内的形成内容敏感性；终点直写反例说明终点数值本身不识别路线。该应用保持停用，0新节点/规则/语境；物理实际性、完整签名和`B_fam/H_way`均未闭合。
+
 ### 当前端点应用修正
 
 [A3W H_way范围及端点草案](records/A3W20261010_Action_Familiarity_Endpoint/RESEARCH_NOTE.md)接续A3N/A3V及FAM；0新图节点，停用应用。统一登记的followup_applications保存这类应用，不改变38项待整合图与已完成图。

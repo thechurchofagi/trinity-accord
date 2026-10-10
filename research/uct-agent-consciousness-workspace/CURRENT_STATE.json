@@ -103,7 +103,7 @@
     "latest_update": "records/A3V20261010_Concurrent_Liveness_and_Familiarity/PUBLICATION_COVERAGE_UPDATE.json",
     "nondeductive": true,
     "latest_originality_review": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/PUBLICATION_COVERAGE_UPDATE.json",
-    "latest_followup_application": "records/FAM20261010_Memory_Matching/PUBLICATION_COVERAGE_UPDATE.json"
+    "latest_followup_application": "records/A4C20261011_Trace_Swap_Embodied_Loop/PUBLICATION_COVERAGE_UPDATE.json"
   },
   "latest_activity": {
     "id": "A3V20261010",
@@ -128,7 +128,7 @@
     "evidence_status": "BOUNDED_PRIMARY_SOURCE_APPLICATION_STOP_AND_R173_SCOPE_RETURN; ACTUAL_PREMISES_AND_H_OPEN"
   },
   "review_status_scope": "Completed v1.1.2 unchanged; A3V1598 frozen objects and1608 review IDs structurally traversed; affected all_of/typing and unlinked R199/SPC scope manually checked; deep full-map semantics AUDIT_INCOMPLETE.",
-  "next_priority": "Install one trace-specific intervention in a human or embodied-robot bearer that preserves the same bearer/current consumer and has no route-independent direct effect on the organizational endpoint. Keep complete physical-signature binding and H_way identity separate; stop H-level interpretation unless both are independently grounded.",
+  "next_priority": "Install the A4C block/same-bearer content-swap/consumer-interface rescue package in one physical robot, preserving one body and current control consumer. Use hardware timing and action replay to exclude direct actuator or endpoint writes. Keep complete physical-signature binding and H_way identity separate; stop H-level interpretation unless both are independently grounded.",
   "latest_scoped_review": {
     "audit": "records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_AUDIT.md",
     "per_id_structure": "records/CTD20261010_Cross_Task_Intervention_v02/governance/BASELINE_PER_ID_STRUCTURE.json.gz",
@@ -541,28 +541,27 @@
     }
   },
   "latest_followup_application": {
-    "id": "A4B20261011",
-    "version": "A4B-DUAL-KEY-v0.1.0",
-    "status": "DISABLED_SCOPED_SOFTWARE_APPLICATION",
+    "id": "A4C20261011",
+    "version": "A4C-TRACE-SWAP-v0.1.0",
+    "status": "DISABLED_SCOPED_SIMULATION_APPLICATION",
     "enabled_as_established_premises": false,
-    "source": "records/A4B20261011_Formation_Route_Dual_Key/FORMATION_ROUTE_DUAL_KEY.md",
-    "handoff": "records/A4B20261011_Formation_Route_Dual_Key/HANDOFF_ZH.md",
-    "work_log": "records/A4B20261011_Formation_Route_Dual_Key/WORK_LOG.md",
-    "claim_ledger": "records/A4B20261011_Formation_Route_Dual_Key/CLAIM_LEDGER.json",
-    "map_extension": "records/A4B20261011_Formation_Route_Dual_Key/MAP_EXTENSION.json",
-    "exact_results": "records/A4B20261011_Formation_Route_Dual_Key/EXACT_RESULTS.json",
-    "persistence_receipt": "records/A4B20261011_Formation_Route_Dual_Key/PERSISTENCE_RECEIPT.json",
+    "source": "records/A4C20261011_Trace_Swap_Embodied_Loop/RESEARCH_NOTE.md",
+    "handoff": "records/A4C20261011_Trace_Swap_Embodied_Loop/HANDOFF_ZH.md",
+    "work_log": "records/A4C20261011_Trace_Swap_Embodied_Loop/WORK_LOG.md",
+    "claim_ledger": "records/A4C20261011_Trace_Swap_Embodied_Loop/CLAIM_LEDGER.json",
+    "map_extension": "records/A4C20261011_Trace_Swap_Embodied_Loop/MAP_EXTENSION.json",
+    "exact_results": "records/A4C20261011_Trace_Swap_Embodied_Loop/EXACT_RESULTS.json",
     "parent_science": "A3V20261010",
-    "parent_followup": "A4A20261011",
+    "parent_followup": "A4B20261011",
     "completed_map": "UCT-MAP-v1.1.2",
     "scientific_delta": {
       "nodes": 0,
       "rules": 0,
       "contexts": 0
     },
-    "formation_route_logical_independence_proved": true,
-    "randomized_software_formation_effect_instantiated": true,
-    "actual_software_route_use_instantiated": true,
+    "same_bearer_trace_content_sensitivity_instantiated": true,
+    "block_swap_rescue_embodied_simulation_instantiated": true,
+    "endpoint_only_counterexample_rejected_by_replay": true,
     "complete_physical_route_use_instantiated": false,
     "independent_h_validation": false,
     "standalone_manuscript": "HOLD"
@@ -722,6 +721,28 @@
       "complete_physical_route_use_instantiated": false,
       "independent_h_validation": false,
       "standalone_manuscript": "HOLD"
+    },
+    {
+      "id": "A4C20261011",
+      "version": "A4C-TRACE-SWAP-v0.1.0",
+      "status": "DISABLED_SCOPED_SIMULATION_APPLICATION",
+      "enabled_as_established_premises": false,
+      "source": "records/A4C20261011_Trace_Swap_Embodied_Loop/RESEARCH_NOTE.md",
+      "handoff": "records/A4C20261011_Trace_Swap_Embodied_Loop/HANDOFF_ZH.md",
+      "work_log": "records/A4C20261011_Trace_Swap_Embodied_Loop/WORK_LOG.md",
+      "claim_ledger": "records/A4C20261011_Trace_Swap_Embodied_Loop/CLAIM_LEDGER.json",
+      "map_extension": "records/A4C20261011_Trace_Swap_Embodied_Loop/MAP_EXTENSION.json",
+      "exact_results": "records/A4C20261011_Trace_Swap_Embodied_Loop/EXACT_RESULTS.json",
+      "parent_science": "A3V20261010",
+      "parent_followup": "A4B20261011",
+      "completed_map": "UCT-MAP-v1.1.2",
+      "scientific_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+      "same_bearer_trace_content_sensitivity_instantiated": true,
+      "block_swap_rescue_embodied_simulation_instantiated": true,
+      "endpoint_only_counterexample_rejected_by_replay": true,
+      "complete_physical_route_use_instantiated": false,
+      "independent_h_validation": false,
+      "standalone_manuscript": "HOLD"
     }
   ],
   "next_priority_before_A3W": "Test one independent current bodily/action-familiarity interpretation against origin-recognition and agency countercases; establish a remaining actual retentive relation and realizable matched controls before claiming a pure familiarity contrast. Do not add an assumed coordinate or expand SPC.",
@@ -730,6 +751,7 @@
   "next_priority_after_A3Z": "Test one actually installable formation/history intervention for residual action-familiarity judgment after matching motor ease, success, value, expectation, and source/agency feeling. Treat failure as bridge rejection and survival only as organizational support; do not claim H_way identity without an independent phenomenal-identity premise.",
   "next_priority_after_A4A": "Instantiate one randomized longitudinal total-effect formation study with pre-formation adjustment only, and separately verify one actual same-event retentive trace-to-consumer route. Treat post-formation ease, success, value, expectation and source/agency judgments as outcomes or mediators unless route-preserving clamps and joint positivity are demonstrated; stop H-level interpretation if RetBind or endpoint identity remains ungrounded.",
   "next_priority_after_A4B": "Install one trace-specific intervention in a human or embodied-robot bearer that preserves the same bearer/current consumer and has no route-independent direct effect on the organizational endpoint. Keep complete physical-signature binding and H_way identity separate; stop H-level interpretation unless both are independently grounded.",
+  "next_priority_after_A4C": "Install the A4C block/same-bearer content-swap/consumer-interface rescue package in one physical robot, preserving one body and current control consumer. Use hardware timing and action replay to exclude direct actuator or endpoint writes. Keep complete physical-signature binding and H_way identity separate; stop H-level interpretation unless both are independently grounded.",
   "scoped_foundational_reviews": [
     {
       "id": "TJR20261010",
