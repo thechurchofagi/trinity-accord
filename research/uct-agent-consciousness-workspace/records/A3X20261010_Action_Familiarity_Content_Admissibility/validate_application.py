@@ -90,8 +90,10 @@ per_id_document = {
     "counts": {"nodes": len(nodes), "rules": len(rules), "context_links": len(links)},
     "records": per_id,
 }
-with gzip.open(HERE / "PER_ID_AUDIT.json.gz", "wt", encoding="utf-8") as stream:
-    json.dump(per_id_document, stream, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+per_id_bytes = json.dumps(
+    per_id_document, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+).encode("utf-8")
+(HERE / "PER_ID_AUDIT.json.gz").write_bytes(gzip.compress(per_id_bytes, mtime=0))
 
 results = {
     "schema": "uct-a3x-validation-v1",

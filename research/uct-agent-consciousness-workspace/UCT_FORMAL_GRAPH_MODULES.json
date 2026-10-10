@@ -1176,24 +1176,26 @@
     }
   ],
   "latest_followup_application": {
-    "id": "A3W20261010",
-    "version": "A3W-ENDPOINT-v0.1.0",
-    "status": "DISABLED_OPEN_APPLICATION",
+    "id": "A3X20261010",
+    "version": "A3X-CONTENT-v0.1.0",
+    "status": "DISABLED_SCOPED_CONTENT_APPLICATION",
     "enabled_as_established_premises": false,
-    "source": "records/A3W20261010_Action_Familiarity_Endpoint/RESEARCH_NOTE.md",
-    "handoff": "records/A3W20261010_Action_Familiarity_Endpoint/HANDOFF_ZH.md",
-    "work_log": "records/A3W20261010_Action_Familiarity_Endpoint/WORK_LOG.md",
-    "claim_ledger": "records/A3W20261010_Action_Familiarity_Endpoint/CLAIM_LEDGER.json",
-    "map_extension": "records/A3W20261010_Action_Familiarity_Endpoint/MAP_EXTENSION.json",
+    "source": "records/A3X20261010_Action_Familiarity_Content_Admissibility/RESEARCH_NOTE.md",
+    "handoff": "records/A3X20261010_Action_Familiarity_Content_Admissibility/HANDOFF_ZH.md",
+    "work_log": "records/A3X20261010_Action_Familiarity_Content_Admissibility/WORK_LOG.md",
+    "claim_ledger": "records/A3X20261010_Action_Familiarity_Content_Admissibility/CLAIM_LEDGER.json",
+    "map_extension": "records/A3X20261010_Action_Familiarity_Content_Admissibility/MAP_EXTENSION.json",
     "parent_science": "A3V20261010",
-    "parent_followup": "FAM20261010",
+    "parent_followup": "A3W20261010",
     "completed_map": "UCT-MAP-v1.1.2",
     "scientific_delta": {
       "nodes": 0,
       "rules": 0,
       "contexts": 0
     },
+    "semantic_admissibility_piloted": false,
     "independent_h_validation": false,
+    "actual_route_use_instantiated": false,
     "standalone_manuscript": "HOLD"
   },
   "disabled_application_reviews": [
@@ -1256,6 +1258,29 @@
         "contexts": 0
       },
       "independent_h_validation": false,
+      "standalone_manuscript": "HOLD"
+    },
+    {
+      "id": "A3X20261010",
+      "version": "A3X-CONTENT-v0.1.0",
+      "status": "DISABLED_SCOPED_CONTENT_APPLICATION",
+      "enabled_as_established_premises": false,
+      "source": "records/A3X20261010_Action_Familiarity_Content_Admissibility/RESEARCH_NOTE.md",
+      "handoff": "records/A3X20261010_Action_Familiarity_Content_Admissibility/HANDOFF_ZH.md",
+      "work_log": "records/A3X20261010_Action_Familiarity_Content_Admissibility/WORK_LOG.md",
+      "claim_ledger": "records/A3X20261010_Action_Familiarity_Content_Admissibility/CLAIM_LEDGER.json",
+      "map_extension": "records/A3X20261010_Action_Familiarity_Content_Admissibility/MAP_EXTENSION.json",
+      "parent_science": "A3V20261010",
+      "parent_followup": "A3W20261010",
+      "completed_map": "UCT-MAP-v1.1.2",
+      "scientific_delta": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0
+      },
+      "semantic_admissibility_piloted": false,
+      "independent_h_validation": false,
+      "actual_route_use_instantiated": false,
       "standalone_manuscript": "HOLD"
     }
   ],

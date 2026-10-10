@@ -128,7 +128,7 @@
     "evidence_status": "BOUNDED_PRIMARY_SOURCE_APPLICATION_STOP_AND_R173_SCOPE_RETURN; ACTUAL_PREMISES_AND_H_OPEN"
   },
   "review_status_scope": "Completed v1.1.2 unchanged; A3V1598 frozen objects and1608 review IDs structurally traversed; affected all_of/typing and unlinked R199/SPC scope manually checked; deep full-map semantics AUDIT_INCOMPLETE.",
-  "next_priority": "Pilot the scoped H_way meaning with A3W content/applicability probes (including FAM practiced-other/little-practised-self); preserve failures and seek a bounded independently justified J_H-to-H_way reliability relation before a real retained-route/congruence contrast. No repeated two-state memory or SPC expansion.",
+  "next_priority": "Seek one independently justified, directional and bounded C_H relation from J_H to present enacted H_way in a predeclared participant/action domain; semantic admissibility S_H is necessary but cannot serve as calibration. Stop before retained-route/congruence comparison unless C_H is supported, then require same-episode actual O_H route-use evidence.",
   "latest_scoped_review": {
     "audit": "records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_AUDIT.md",
     "per_id_structure": "records/CTD20261010_Cross_Task_Intervention_v02/governance/BASELINE_PER_ID_STRUCTURE.json.gz",
@@ -542,24 +542,26 @@
     }
   },
   "latest_followup_application": {
-    "id": "A3W20261010",
-    "version": "A3W-ENDPOINT-v0.1.0",
-    "status": "DISABLED_OPEN_APPLICATION",
+    "id": "A3X20261010",
+    "version": "A3X-CONTENT-v0.1.0",
+    "status": "DISABLED_SCOPED_CONTENT_APPLICATION",
     "enabled_as_established_premises": false,
-    "source": "records/A3W20261010_Action_Familiarity_Endpoint/RESEARCH_NOTE.md",
-    "handoff": "records/A3W20261010_Action_Familiarity_Endpoint/HANDOFF_ZH.md",
-    "work_log": "records/A3W20261010_Action_Familiarity_Endpoint/WORK_LOG.md",
-    "claim_ledger": "records/A3W20261010_Action_Familiarity_Endpoint/CLAIM_LEDGER.json",
-    "map_extension": "records/A3W20261010_Action_Familiarity_Endpoint/MAP_EXTENSION.json",
+    "source": "records/A3X20261010_Action_Familiarity_Content_Admissibility/RESEARCH_NOTE.md",
+    "handoff": "records/A3X20261010_Action_Familiarity_Content_Admissibility/HANDOFF_ZH.md",
+    "work_log": "records/A3X20261010_Action_Familiarity_Content_Admissibility/WORK_LOG.md",
+    "claim_ledger": "records/A3X20261010_Action_Familiarity_Content_Admissibility/CLAIM_LEDGER.json",
+    "map_extension": "records/A3X20261010_Action_Familiarity_Content_Admissibility/MAP_EXTENSION.json",
     "parent_science": "A3V20261010",
-    "parent_followup": "FAM20261010",
+    "parent_followup": "A3W20261010",
     "completed_map": "UCT-MAP-v1.1.2",
     "scientific_delta": {
       "nodes": 0,
       "rules": 0,
       "contexts": 0
     },
+    "semantic_admissibility_piloted": false,
     "independent_h_validation": false,
+    "actual_route_use_instantiated": false,
     "standalone_manuscript": "HOLD"
   },
   "next_priority_before_FAM": "Independent signed fallible bodily-familiarity endpoint comparing familiar singleton retained route versus unfamiliar presently congruent route at fixed actual frame consumer/grain; separate cue familiarity, response fluency, ownership report and agency judgment. No more SPC expansion after named PMd feasibility stop.",
@@ -603,9 +605,33 @@
       },
       "independent_h_validation": false,
       "standalone_manuscript": "HOLD"
+    },
+    {
+      "id": "A3X20261010",
+      "version": "A3X-CONTENT-v0.1.0",
+      "status": "DISABLED_SCOPED_CONTENT_APPLICATION",
+      "enabled_as_established_premises": false,
+      "source": "records/A3X20261010_Action_Familiarity_Content_Admissibility/RESEARCH_NOTE.md",
+      "handoff": "records/A3X20261010_Action_Familiarity_Content_Admissibility/HANDOFF_ZH.md",
+      "work_log": "records/A3X20261010_Action_Familiarity_Content_Admissibility/WORK_LOG.md",
+      "claim_ledger": "records/A3X20261010_Action_Familiarity_Content_Admissibility/CLAIM_LEDGER.json",
+      "map_extension": "records/A3X20261010_Action_Familiarity_Content_Admissibility/MAP_EXTENSION.json",
+      "parent_science": "A3V20261010",
+      "parent_followup": "A3W20261010",
+      "completed_map": "UCT-MAP-v1.1.2",
+      "scientific_delta": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0
+      },
+      "semantic_admissibility_piloted": false,
+      "independent_h_validation": false,
+      "actual_route_use_instantiated": false,
+      "standalone_manuscript": "HOLD"
     }
   ],
   "next_priority_before_A3W": "Test one independent current bodily/action-familiarity interpretation against origin-recognition and agency countercases; establish a remaining actual retentive relation and realizable matched controls before claiming a pure familiarity contrast. Do not add an assumed coordinate or expand SPC.",
+  "next_priority_before_A3X": "Pilot the scoped H_way meaning with A3W content/applicability probes (including FAM practiced-other/little-practised-self); preserve failures and seek a bounded independently justified J_H-to-H_way reliability relation before a real retained-route/congruence contrast. No repeated two-state memory or SPC expansion.",
   "scoped_foundational_reviews": [
     {
       "id": "TJR20261010",

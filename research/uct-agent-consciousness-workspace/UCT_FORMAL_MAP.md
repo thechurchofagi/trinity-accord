@@ -56,4 +56,6 @@ Test one independent current bodily/action-familiarity interpretation against or
 
 [A3W H_way范围及端点草案](records/A3W20261010_Action_Familiarity_Endpoint/RESEARCH_NOTE.md)接续A3N/A3V及FAM；0新图节点，停用应用。统一登记的followup_applications保存这类应用，不改变38项待整合图与已完成图。
 
+[A3X H_way内容可接受性](records/A3X20261010_Action_Familiarity_Content_Admissibility/RESEARCH_NOTE.md)把题意`S_H`、判断—体验可靠性`C_H`和同事件实际组织`O_H`分开；代理反例和有限查表构造不赋予H真值。0新图节点/规则/关系，正式图仍913/424/261。
+
 基础问题专线 TJR20261010：[交接](records/TJR20261010_Temporal_Joint_Realization/HANDOFF_ZH.md) · [正文](records/TJR20261010_Temporal_Joint_Realization/RESEARCH_NOTE.md) · [日志](records/TJR20261010_Temporal_Joint_Realization/WORK_LOG.md)。串行保留、联合读取与压缩的停用应用；原科学接续和身体熟悉感路线保留。原理多属继承，独立成稿HOLD，全图深审仍未完成。

@@ -18,4 +18,6 @@
 
 最新端点范围修正：[A3W交接](records/A3W20261010_Action_Familiarity_Endpoint/HANDOFF_ZH.md)；[日志](records/A3W20261010_Action_Familiarity_Endpoint/WORK_LOG.md)。FAM并发成果保留；正式科学接续仍A3V，最新应用以CURRENT_STATE.latest_followup_application为准。下一题先检验H_way题意并寻找有界可靠性依据，避免把问卷通过称H校准。
 
+最新内容门槛修正：[A3X交接](records/A3X20261010_Action_Familiarity_Content_Admissibility/HANDOFF_ZH.md)；[正文](records/A3X20261010_Action_Familiarity_Content_Admissibility/RESEARCH_NOTE.md)；[协议](records/A3X20261010_Action_Familiarity_Content_Admissibility/ENDPOINT_CONTENT_PROTOCOL.md)。`S_H`只说明题意未明显被来源/练习/控制/流畅代理取代；有限查表反例表明它不能推出`C_H`。下一题只寻独立有界`C_H`，通过后才进入同事件`O_H`路线比较。
+
 基础问题专线 TJR20261010：[交接](records/TJR20261010_Temporal_Joint_Realization/HANDOFF_ZH.md) · [正文](records/TJR20261010_Temporal_Joint_Realization/RESEARCH_NOTE.md) · [日志](records/TJR20261010_Temporal_Joint_Realization/WORK_LOG.md)。串行保留、联合读取与压缩的停用应用；原科学接续和身体熟悉感路线保留。原理多属继承，独立成稿HOLD，全图深审仍未完成。

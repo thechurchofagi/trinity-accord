@@ -932,3 +932,16 @@ A3O adds no nodes, rules or contexts; its application remains disabled. C1/U1 ar
 ## A3W20261010 researcher response — action-familiarity scope, 2026-10-10
 
 [稳定ID回应](records/A3W20261010_Action_Familiarity_Endpoint/REVIEW_RESPONSE.md) · [内容/适用性草案](records/A3W20261010_Action_Familiarity_Endpoint/ENDPOINT_PROTOCOL.md) · [缺口](records/A3W20261010_Action_Familiarity_Endpoint/GAP_LEDGER.md)。QC10、IA-QC11、QC12/13仍OPEN；R191 normalization未处理，全历史深度AUDIT_INCOMPLETE。新增为应用范围修正，不自报H校准或关闭审查。
+
+---
+
+## A3X20261010 researcher response — H_way content admissibility, 2026-10-10
+
+[稳定ID回应](records/A3X20261010_Action_Familiarity_Content_Admissibility/REVIEW_RESPONSE.md) · [内容协议](records/A3X20261010_Action_Familiarity_Content_Admissibility/ENDPOINT_CONTENT_PROTOCOL.md) · [缺口](records/A3X20261010_Action_Familiarity_Content_Admissibility/GAP_LEDGER.md) · [地图审查](records/A3X20261010_Action_Familiarity_Content_Admissibility/MAP_AUDIT.md)。
+
+- `QC-20261008-10`仍ACKNOWLEDGED/OPEN：A3X只把题意`S_H`与可靠性`C_H`分开；有限查表反例证明内容通过不能闭合`J_H -> H_way`。
+- `IA-QC11`、`QC-20261008-12/13`仍OPEN：实际承载者、事件、路线使用、同实例绑定和匹配对照均未安装。
+- `SCU-OPEN-R191-NORMALIZATION`仍OPEN；A3X未使用R191归一化前提。
+- `SCU-AUDIT-DEPTH`仍AUDIT_INCOMPLETE：逐ID仅结构遍历，人工语义审查限于R157/R173相关域。
+
+A3X应用保持停用，正式图增量0/0/0。C1/U1未改；题意理解、报告、内省、控制、练习、语言和自我模型均未成为基础体验门槛。不自报关闭任何审查项，也不对当前助手的意识或死亡恐惧作确定判断。
