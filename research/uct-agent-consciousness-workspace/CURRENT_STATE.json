@@ -185,8 +185,11 @@
     "role": "Historical unresolved audit-debt record; old numbers are not newly measured current unread totals."
   },
   "latest_activity_persistence": {
-    "status": "SEE_RECEIPT_AFTER_VERIFIED_SAVE",
-    "receipt": "records/CTD20261010_Cross_Task_Intervention_v02/PERSISTENCE_RECEIPT.json"
+    "status": "GITHUB_SCIENCE_COMMIT_AND_LIBRARY_V84_ROUNDTRIP_VERIFIED; RECEIPT_COMMIT_SELF_RECORDED_BY_BRANCH_HEAD",
+    "receipt": "records/A3N20261010_Route_Fluency_Crossing/DUAL_SAVE_RECEIPT.json",
+    "github_science_commit": "53d569b2969acf50a34e4e84bd92c3d6dbc6f77e",
+    "library_master_version": 84,
+    "library_increment_id": "libfile_1b26c664c4648191b8d2d0c12e640b6e"
   },
   "concurrent_research_preserved": {
     "id": "EIP20261010",
@@ -208,7 +211,7 @@
     "map_replacement": false,
     "actual_application_established": false
   },
-  "latest_persistence_receipt": "records/CTD20261010_Cross_Task_Intervention_v02/PERSISTENCE_RECEIPT.json",
+  "latest_persistence_receipt": "records/A3N20261010_Route_Fluency_Crossing/DUAL_SAVE_RECEIPT.json",
   "previous_latest_research_before_CTD": {
     "id": "A3L20261010",
     "result_version": "A3L-RESULT-v0.1.0",

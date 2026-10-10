@@ -1,0 +1,86 @@
+{
+  "schema": "uct-dual-save-receipt/1",
+  "round_id": "A3N20261010_Route_Fluency_Crossing",
+  "saved_at_utc": "2026-10-10T08:53:20Z",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "expected_parent": "2b0fcb40ec4d22785e797bbdc764b5e323c13d59",
+    "science_commit": "53d569b2969acf50a34e4e84bd92c3d6dbc6f77e",
+    "science_tree": "56154f2d0c6eaec08aa29f6abf5142254b173dde",
+    "science_file_count": 32,
+    "science_ref_update": "EXPECTED_SHA_FAST_FORWARD_VERIFIED",
+    "receipt_commit": "SEE_BRANCH_HEAD_AFTER_THIS_RECEIPT_COMMIT",
+    "commit_message_policy": "[skip ci]",
+    "pull_request_created": false,
+    "ci_or_deployment_requested": false
+  },
+  "library": {
+    "fixed_master": {
+      "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+      "file_name": "UCT_Hourly_Research_Master_Handoff.md",
+      "version": 84,
+      "sha256": "3d509439c2156c386c2ec3ba5f10ebb4bc9b8ca394e610e4a8b8be73c0ebeb25",
+      "size_bytes": 735901,
+      "identity_preserved": true,
+      "roundtrip_readback_verified": true
+    },
+    "increment": {
+      "classification": "INCREMENT_ONLY_NOT_A_COMPLETE_REPOSITORY_BACKUP",
+      "library_file_id": "libfile_1b26c664c4648191b8d2d0c12e640b6e",
+      "file_name": "UCT_A3N_Increment_20261010.zip",
+      "version": 0,
+      "sha256": "bb306fef47a3352fc68cf34f87ff9af1cd336280d08945771ee5561e5af37bdb",
+      "size_bytes": 236205,
+      "file_count": 32,
+      "roundtrip_readback_verified": true
+    },
+    "increment_manifest": {
+      "library_file_id": "libfile_7ca08abad8ac8191911a5c3ac0dcc852",
+      "file_name": "UCT_A3N_Increment_20261010_MANIFEST.json",
+      "version": 0,
+      "sha256": "f014865be3f0589de0bcf9f3ec17cddb464782b281a4c1a3f3f512adf95ea609",
+      "size_bytes": 1590,
+      "roundtrip_readback_verified": true
+    },
+    "complete_baseline": {
+      "library_file_id": "libfile_f7d404c7734c8191b8257cd4fa6771f5",
+      "file_name": "UCT_R156_Working_Set_20261007.zip",
+      "repository_commit": "d80d08a4c0c09559e2122da38e24956b17bb711b",
+      "sha256": "95cc3ea1ec45eb273531c25525edcb7f8e6f2088c650a39b97d24817704ec40a",
+      "role": "COMPLETE_WORKING_SET_BASELINE_NOT_COMPLETE_REPOSITORY_HISTORY"
+    }
+  },
+  "key_file_sha256": {
+    "RESEARCH_NOTE.md": "0a575fe6f52156c5dcdd6afc82cb93c8a8b4ee3f0a536b7eeb560ab2f4176739",
+    "EXACT_RESULTS.json": "78f5c38a9cb11606c2398de12b34b6da66a00308a9a37dea58600f4250a42d90",
+    "MAP_COMPATIBILITY_AUDIT.json": "689d5a49fa69594ff6482b243792c9059f7e3b64f1ce04066f5b9fe16ce0b794",
+    "MAP_EXTENSION.json": "5e0ddccb483a3b2262bc968ff5f9e8c8358d25a74f90fb202ca452591498e014",
+    "HANDOFF_ZH.md": "ae72914d8729a77f72de2b7c2c89b82cd6c3873bfd72d0776f03fa257a865e60",
+    "CURRENT_STATE.json": "6323c2725a20c75e8ad5d5ee89412fb85c194e33a0db29376d2efce796999bff",
+    "PUBLICATION_COVERAGE.json": "05a60df9231d15967bd0184bb07c4a9242cdbe890799e13c71672368e35423de"
+  },
+  "validation": {
+    "exact_checker": "PASS",
+    "map_structural_check": "PASS_1598_OBJECTS",
+    "map_semantic_status": "AUDIT_INCOMPLETE",
+    "new_nodes_rules_contexts": "0/0/0_DISABLED_APPLICATION_ONLY",
+    "git_diff_check": "PASS",
+    "json_parse": "PASS",
+    "concurrent_ctd_v02_preserved": true,
+    "open_review_items_preserved": true
+  },
+  "not_completed": [
+    "No actual human, robot or neural installation was performed.",
+    "R not equal to L_sel was not installed; only a physically plausible R not equal to L_kin construction was recorded.",
+    "J_H signed reliability and broad direct-path exclusion remain open.",
+    "The v1.1.2 inherited deep semantic contracts were not freshly re-proved."
+  ],
+  "restore": [
+    "Fetch the latest uct-agent-consciousness-workspace branch and verify this receipt is reachable from its head.",
+    "Read RESEARCH_MASTER_GUIDE.md through the current A3N handoff, then REVIEW_SUPERVISION.md and all OPEN or ACKNOWLEDGED items.",
+    "Read fixed Library master version 84 and verify the increment archive SHA-256 before using it.",
+    "Run check_crossing.py; restore the hash-verified UCT-MAP-v1.1.2 capsule and run audit_map_compatibility.py with explicit base, ledger, extension and output paths.",
+    "Continue only with the fixed-granularity R versus L_sel crossing and signed J_H reliability question."
+  ]
+}

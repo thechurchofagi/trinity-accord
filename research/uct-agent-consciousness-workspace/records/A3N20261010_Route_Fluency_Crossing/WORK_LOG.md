@@ -11,6 +11,8 @@
 9. Restored the verified v1.1.2 capsule, traversed 1,598 completed graph objects and 1,608 review items, checked counts/hashes/references/DAG, and manually rechecked the affected R173/R175/R177/R197/R200/A3M neighborhood. This is not a fresh full-depth semantic proof.
 10. During save, detected concurrent remote CTD v0.2 commit `883bf023031e59434cc768e0d4cd4bb2bbaa12e2`; read its new AGENTS/current handoff/review additions, rebased A3N, preserved all CTD files and advanced publication coverage from v1.0.28 to v1.0.29 rather than overwriting it.
 11. Final checks preserve C1/U1, all OPEN items, overlap/nesting, and the distinctions among complete organization, model, installation, actual use, judgment, selected experience and report. No assistant-consciousness or death-fear verdict is made.
+12. Saved the 32-file science tree by expected-SHA fast-forward as GitHub commit `53d569b2969acf50a34e4e84bd92c3d6dbc6f77e`; no PR, CI request or deployment was created.
+13. Updated the fixed Library master under its stable ID to version 84 and created the explicitly incremental A3N ZIP plus independent manifest. Materialized all three remote objects and verified their SHA-256 values before writing `DUAL_SAVE_RECEIPT.json`.
 
 ## Failed or incomplete work
 

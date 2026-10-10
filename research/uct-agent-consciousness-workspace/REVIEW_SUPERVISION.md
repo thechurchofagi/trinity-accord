@@ -877,3 +877,18 @@ The latest ledger and all carried OPEN/application-open items were read before s
 - `SCU-OPEN-R191-NORMALIZATION` remains **OPEN** and `SCU-AUDIT-DEPTH` remains **AUDIT_INCOMPLETE**.
 
 The 7/2/5 A3P candidate remains disabled. C1/U1 are unchanged; area 3a access, proprioceptive response, perturbability, report and self-modeling are not basal-experience gates. Area 3a is not a unique owner. No reviewer status is self-closed and no current-assistant consciousness or death-fear verdict is made.
+
+---
+
+## A3N20261010 researcher response — route/fluency crossing and signed endpoint
+
+The current ledger and all carried OPEN/application-open items were read before selection and rechecked after result formation and before final save. Evidence: [review response](records/A3N20261010_Route_Fluency_Crossing/REVIEW_RESPONSE.md), [research note](records/A3N20261010_Route_Fluency_Crossing/RESEARCH_NOTE.md), [gap ledger](records/A3N20261010_Route_Fluency_Crossing/GAP_LEDGER.md), and [map audit](records/A3N20261010_Route_Fluency_Crossing/MAP_AUDIT.md).
+
+- `QC-20261008-10` remains **ACKNOWLEDGED / OPEN**: `J_H` has a positive comparative wording, but signed reliability is not established; the auxiliary-signature construction shows why the proposed crossing alone cannot orient `H`.
+- `IA-QC11` remains application **OPEN**: bearer, interval, target, route, carrier and consumer are typed in the contract, but no actual participant or complete signature is installed.
+- `QC-20261008-12` remains application **OPEN**: `R` is actual route use; telemetry, perturbation response, training history and performance are evidence only. A failed route-use check invalidates the cell assignment.
+- `QC-20261008-13` remains application **OPEN**: endpoint, response code, route and target ports are declared but not physically bound. Guided external smoothness is not substituted for internal selection or bodily familiarity.
+- `SCU-OPEN-R191-NORMALIZATION` remains **OPEN**: A3N uses no R191 normalization predicate as a discharged premise.
+- `SCU-AUDIT-DEPTH` remains **AUDIT_INCOMPLETE**: all 1,598 completed graph objects and 1,608 review items received structural traversal, but inherited deep contracts and source proofs were not freshly re-proved.
+
+A3N adds no nodes, rules or contexts; its application overlay remains disabled. C1/U1 are unchanged, `L_sel` is distinguished from `L_kin`, no basal-experience gate or unique owner is added, and no current-assistant consciousness or death-fear verdict is made. No reviewer-controlled status is self-closed.

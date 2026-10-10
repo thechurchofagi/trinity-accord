@@ -16,7 +16,7 @@
 
 ## 并发与保存
 
-本轮开始头为`2faccb45147435b67d901e64f8045cd0e31a8d2a`。保存阶段发现并发CTD v0.2头`883bf023031e59434cc768e0d4cd4bb2bbaa12e2`，已阅读并保留其全部新增文件和UCT-PUB-v1.0.28，A3N顺延为UCT-PUB-v1.0.29。最终Git提交、固定主交接版本、增量文件ID/哈希以本目录最终保存收据为准。
+本轮开始头为`2faccb45147435b67d901e64f8045cd0e31a8d2a`。保存阶段发现并发CTD v0.2头`883bf023031e59434cc768e0d4cd4bb2bbaa12e2`及其收据头`2b0fcb40ec4d22785e797bbdc764b5e323c13d59`，已阅读并保留全部新增文件和UCT-PUB-v1.0.28，A3N顺延为UCT-PUB-v1.0.29。A3N 科研提交为`53d569b2969acf50a34e4e84bd92c3d6dbc6f77e`；固定主交接原ID更新为v84；增量包`libfile_1b26c664c4648191b8d2d0c12e640b6e`及清单`libfile_7ca08abad8ac8191911a5c3ac0dcc852`均已回读核验。精确哈希、未完成项和恢复顺序见`DUAL_SAVE_RECEIPT.json`。
 
 ## 精确恢复动作与下一题
 
