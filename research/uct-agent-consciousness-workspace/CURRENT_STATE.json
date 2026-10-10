@@ -194,10 +194,11 @@
     "role": "Historical unresolved audit-debt record; old numbers are not newly measured current unread totals."
   },
   "latest_activity_persistence": {
-    "status": "GITHUB_SCIENCE_COMMIT_AND_LIBRARY_V92_ROUNDTRIP_VERIFIED; RECEIPT_COMMIT_SELF_RECORDED_BY_BRANCH_HEAD",
+    "status": "GITHUB_SCIENCE_AND_RECEIPT_COMMITS_AND_LIBRARY_V93_CONFIRMED; FINAL_CONFIRMATION_COMMIT_SELF_RECORDED_BY_BRANCH_HEAD",
     "receipt": "records/A3R20261010_Selector_Participation_Contract/DUAL_SAVE_RECEIPT.json",
     "github_science_commit": "23a82250f279e027491469bc4fa18d5446c37258",
-    "library_master_version": 92,
+    "github_receipt_commit": "190272ec867a208c57b1d2a153a9a2180a80dbbe",
+    "library_master_version": 93,
     "library_increment_id": "libfile_6eba9b8c8d208191bd8c414a9e63f9b1",
     "library_manifest_id": "libfile_00ffd44113d08191a8fc36de4d7e0783"
   },

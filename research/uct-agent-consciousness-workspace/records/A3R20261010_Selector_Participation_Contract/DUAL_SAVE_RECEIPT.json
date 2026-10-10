@@ -7,7 +7,8 @@
     "verified_parent": "12f0fa04e7d49f7fb8e7463bf4aa55a5c436d397",
     "science_commit": "23a82250f279e027491469bc4fa18d5446c37258",
     "science_tree": "5f3ccc8b665dc4d48692769618829b7d7e56b4b8",
-    "receipt_commit": "SELF_RECORDED_BY_BRANCH_HEAD_AFTER_THIS_FILE",
+    "receipt_commit": "190272ec867a208c57b1d2a153a9a2180a80dbbe",
+    "final_confirmation_commit": "SELF_RECORDED_BY_BRANCH_HEAD_AFTER_THIS_FILE",
     "method": "Git data API expected-SHA fast-forward after command-line credential failure",
     "verified": "science commit and key CURRENT_STATE/EXACT_RESULTS bytes read back from the remote commit",
     "concurrency": "rebased over and preserved CTD preservation checkpoint 12f0fa04e7d49f7fb8e7463bf4aa55a5c436d397",
@@ -15,8 +16,9 @@
   },
   "library": {
     "fixed_master_handoff_id": "libfile_4175a81748fc819187fa8f5771f056fa",
-    "fixed_master_version": 92,
-    "fixed_master_bytes": 754145,
+    "fixed_master_science_version": 92,
+    "fixed_master_confirmed_version": 93,
+    "fixed_master_confirmed_bytes": 754766,
     "increment_id": "libfile_6eba9b8c8d208191bd8c414a9e63f9b1",
     "increment_name": "UCT_A3R_Increment_20261010.zip",
     "increment_bytes": 256566,
@@ -27,7 +29,7 @@
     "manifest_sha256": "84bed7d193388fd055355f4b7377c0bf7f999efec74303fb30a168ad3b9022a4",
     "increment_scope": "26 repository-relative changed paths from verified parent to science tree; not a complete repository or complete history backup",
     "baseline_complete_working_set_id": "libfile_f7d404c7734c8191b8257cd4fa6771f5",
-    "verification": "master v92 materialized at 754145 bytes and matched local replacement; ZIP and manifest materialized back and compared byte-for-byte"
+    "verification": "master v92 materialized at 754145 bytes and matched local replacement; ZIP and manifest materialized back and compared byte-for-byte; confirmation replacement succeeded as v93 after receipt commit 190272ec"
   },
   "checks": {
     "boolean_configurations": 256,
@@ -52,5 +54,5 @@
     "Library full read briefly returned cached v91 after replacement, while materialize resolved v92 and byte-for-byte verification passed"
   ],
   "next": "In one concrete action system, validate a local resolver port while preserving losing-token liveness, common event timing, winner content and frozen rho; use selective cut/replay to exclude direct and compensatory bypass, or stop SPC/L_sel/H inference.",
-  "restore": "Fetch the latest branch head and verify science commit 23a82250 in its ancestry; read fixed handoff version 92 or later; verify increment and manifest SHA256; run check_participation_contract.py; restore UCT-MAP-v1.1.2 and run audit_map.py."
+  "restore": "Fetch the latest branch head and verify science commit 23a82250 and receipt commit 190272ec in its ancestry; read fixed handoff version 93 or later; verify increment and manifest SHA256; run check_participation_contract.py; restore UCT-MAP-v1.1.2 and run audit_map.py."
 }
