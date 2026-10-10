@@ -1,0 +1,44 @@
+{
+  "state": "VISUAL_REVIEW_PASS",
+  "reviewed_at_utc": "2026-10-10T09:47:57.727960+00:00",
+  "report_number": "TA-TR-2026-26",
+  "version": "1.0.0",
+  "record_id": 23279189,
+  "doi": "10.5281/zenodo.23279189",
+  "expected_manifest_sha256": "0c0d2fb0261c67c1b06819586aa3f1a6fe0eda4d5c15aeab0fbb3ae06af7685a",
+  "pdf_sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94",
+  "pdf_bytes": 269961,
+  "page_count": 21,
+  "reviewer": "ChatGPT root assistant; internal AI-assisted visual inspection, not external peer review",
+  "inspection": {
+    "renderer": "Poppler pdftoppm at 105 dpi",
+    "all_pages_rendered_and_decoded": true,
+    "all_21_pages_inspected_in_montages": true,
+    "figure_4_page_13_inspected_at_full_render_size": true,
+    "real_reserved_doi_present": true,
+    "unreplaced_doi_placeholder_absent": true,
+    "formula_table_figure_caption_reference_layout": "PASS",
+    "text_spans_outside_page": 0,
+    "source_pdf_modified": false
+  },
+  "supporting_receipts": [
+    {
+      "name": "EXACT_PACKAGE_TEXT_REVIEW.json",
+      "sha256": "da3b4cdfb505be13917ebbc5a7f2226b30dcdc0332ab860142940f3ea8bf7ae9"
+    },
+    {
+      "name": "exact_pdf_qa/bounds-and-text.json",
+      "sha256": "6517d7aac1b1da14a7e05cf89595743c84b02085ca8a7a59d185cfd98b12c7a8"
+    },
+    {
+      "name": "exact_pdf_qa/render-receipt.json",
+      "sha256": "805a52c8a9e4823137cfe14bfbfd0542be7f978c30442ef93db0c3f8d92e59c3"
+    }
+  ],
+  "montage_sha256": {
+    "montage-01.png": "2e37b4d9ed64be10da2711663f9ddfd9fc1479d5c5c52c2211abf35af1d98e95",
+    "montage-07.png": "11122a0570f25869a2451c4c60bb3954a89a056d5b842be4ee9df0085ac8ece6",
+    "montage-13.png": "914a48e99416d038fc91bebb69937e4eca8c028f86784c2906dc3b1517ee47f8",
+    "montage-19.png": "eafbfe6cb6abc894f46115983a135e690c72f359558613b5da2b63cc885406d8"
+  }
+}
