@@ -14,8 +14,8 @@
 
 ## 持久保存
 
-GitHub科学提交`4369bc6b2cd3dc3fa44df9cf5135aab44ffcf68a`已从远端回读；它以并发CTD/OTS检查点`891433b6e91f564feeccc9f3c55cf117f2c2a3fe`为父提交并保留其内容。固定主交接保持`libfile_4175a81748fc819187fa8f5771f056fa`同一身份与规范文件名，科学段保存为v88，带回读确认的最终版本为v89（746,551字节）。
+GitHub科学提交`4369bc6b2cd3dc3fa44df9cf5135aab44ffcf68a`已从远端回读；它以并发CTD/OTS检查点`891433b6e91f564feeccc9f3c55cf117f2c2a3fe`为父提交并保留其内容。首个收据提交`0f990beb52bb1b7ec5ab2f3604b55b926c98c716`暴露上传层截断`CURRENT_STATE.json`的失败；回拉树不一致与JSON检查发现后，修复提交`e2398a37068a202021c05577861491836a147566`以本地Git blob强校验，远端树`f97257232cef275345f19427e3109b690639adf5`已与本地完整树一致。固定主交接保持`libfile_4175a81748fc819187fa8f5771f056fa`同一身份与规范文件名，科学段保存为v88，失败修复段以v89为并发前提更新为最终v90（747,225字节）并已回读。
 
 A3Q增量包为`libfile_33d55e4191d48191ae2c9c2fa4cf2875`，273,719字节，SHA-256 `8b4df544ff5441e94c784a829568b5e446e33d6061f6048f4a21431bf90c9f44`；逐文件清单为`libfile_7bc802a142d48191978e603c804d88e0`，7,046字节，SHA-256 `be223eb4bf259ba694e9c3ec98d5e37c71d202ee57048e4bf94a9d95ee8ff23d`。两者取回后逐字节相等。增量仅含父提交到科学提交的28个变更路径，不是完整仓库或全部历史；完整工作集基线仍是`libfile_f7d404c7734c8191b8257cd4fa6771f5`。
 
-最终机器收据见`DUAL_SAVE_RECEIPT.json`。精确恢复：取最新分支头并核验科学提交祖先；读固定主交接v89；核验增量和清单哈希；运行`check_selector_ancestry.py`；恢复v1.1.2封装并运行`audit_map.py`。收据提交本身不循环纳入本增量包。
+最终机器收据见`DUAL_SAVE_RECEIPT.json`。精确恢复：取最新分支头并核验科学提交`4369bc6`与修复提交`e2398a3`均在祖先中；读固定主交接v90；核验增量和清单哈希；运行`check_selector_ancestry.py`；恢复v1.1.2封装并运行`audit_map.py`。收据提交本身不循环纳入本增量包。

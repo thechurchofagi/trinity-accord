@@ -193,10 +193,11 @@
     "role": "Historical unresolved audit-debt record; old numbers are not newly measured current unread totals."
   },
   "latest_activity_persistence": {
-    "status": "GITHUB_SCIENCE_COMMIT_AND_LIBRARY_V89_ROUNDTRIP_VERIFIED; RECEIPT_COMMIT_SELF_RECORDED_BY_BRANCH_HEAD",
+    "status": "GITHUB_SCIENCE_COMMIT_AND_LIBRARY_V90_ROUNDTRIP_VERIFIED; TRUNCATED_CURRENT_STATE_RECEIPT_DETECTED_AND_REPAIRED; RECEIPT_COMMIT_SELF_RECORDED_BY_BRANCH_HEAD",
     "receipt": "records/A3Q20261010_Selector_Ancestry_Dominance/DUAL_SAVE_RECEIPT.json",
     "github_science_commit": "4369bc6b2cd3dc3fa44df9cf5135aab44ffcf68a",
-    "library_master_version": 89,
+    "github_current_state_repair_commit": "e2398a37068a202021c05577861491836a147566",
+    "library_master_version": 90,
     "library_increment_id": "libfile_33d55e4191d48191ae2c9c2fa4cf2875"
   },
   "concurrent_research_preserved": {

@@ -6,17 +6,19 @@
     "branch": "uct-agent-consciousness-workspace",
     "parent": "891433b6e91f564feeccc9f3c55cf117f2c2a3fe",
     "science_commit": "4369bc6b2cd3dc3fa44df9cf5135aab44ffcf68a",
+    "initial_receipt_commit_with_truncated_current_state": "0f990beb52bb1b7ec5ab2f3604b55b926c98c716",
+    "current_state_repair_commit": "e2398a37068a202021c05577861491836a147566",
     "receipt_commit": "SELF_RECORDED_BY_BRANCH_HEAD_AFTER_THIS_FILE",
     "method": "authorized Git data API expected-SHA fast-forward after command-line credential failure",
-    "verified": "branch fetched back at the science commit; research note and CURRENT_STATE were read from the remote tree",
+    "verified": "science commit was read back; after detecting a truncated CURRENT_STATE in the initial receipt commit, repair commit e2398a3 was read back with remote tree f97257232cef275345f19427e3109b690639adf5 exactly equal to the local complete tree and remote JSON parse passing",
     "concurrency": "rebased over and preserved CTD/OTS checkpoint 891433b6e91f564feeccc9f3c55cf117f2c2a3fe",
     "ci_or_pr": "none"
   },
   "library": {
     "fixed_master_handoff_id": "libfile_4175a81748fc819187fa8f5771f056fa",
     "fixed_master_science_version": 88,
-    "fixed_master_confirmed_version": 89,
-    "fixed_master_confirmed_bytes": 746551,
+    "fixed_master_confirmed_version": 90,
+    "fixed_master_confirmed_bytes": 747225,
     "increment_id": "libfile_33d55e4191d48191ae2c9c2fa4cf2875",
     "increment_name": "UCT_A3Q_Increment_20261010.zip",
     "increment_bytes": 273719,
@@ -27,7 +29,7 @@
     "manifest_sha256": "be223eb4bf259ba694e9c3ec98d5e37c71d202ee57048e4bf94a9d95ee8ff23d",
     "increment_scope": "28 repository-relative changed paths from the named parent to the science tree; not a complete repository or complete history backup",
     "baseline_complete_working_set_id": "libfile_f7d404c7734c8191b8257cd4fa6771f5",
-    "verification": "master v89 reread with the science commit and increment ID present; ZIP and manifest materialized back and compared byte-for-byte"
+    "verification": "master v90 reread at 747225 bytes with the science commit, increment ID, detected truncation, and verified repair present; ZIP and manifest materialized back and compared byte-for-byte"
   },
   "checks": {
     "finite_edge_state_configurations": 19683,
@@ -43,7 +45,8 @@
     "live losing policy is not yet distinguished from stored idle policy in an actual installation",
     "resolver-to-dispatch causal contribution is not physically validated",
     "signed J_H reliability and H interpretation remain absent"
+    ,"initial receipt upload truncated CURRENT_STATE.json because the local encoding stream exceeded its output cap; detected by remote-tree mismatch and JSON/readback checks, then repaired with exact Git blob verification"
   ],
   "next": "Specify one same-instance intervention-and-readout contract for live-losing versus stored-idle policy status and resolution-to-dispatch causal ancestry under frozen rho.",
-  "restore": "Fetch the latest branch head and verify the science commit in its ancestry; read fixed handoff v89; verify increment and manifest SHA256; run check_selector_ancestry.py; restore the UCT-MAP-v1.1.2 capsule and run audit_map.py."
+  "restore": "Fetch the latest branch head and verify science commit 4369bc6 and repair commit e2398a3 in its ancestry; read fixed handoff v90; verify increment and manifest SHA256; run check_selector_ancestry.py; restore the UCT-MAP-v1.1.2 capsule and run audit_map.py."
 }
