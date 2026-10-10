@@ -1,0 +1,27 @@
+{
+  "schema": "uct-a3x-final-remote-readback-v1",
+  "round_id": "A3X20261010_Action_Familiarity_Content_Admissibility",
+  "verified_branch_head_before_confirmation": "7e23e857dd24b998f5c301ab8dd00faa55deda1d",
+  "verified_branch_tree_before_confirmation": "e685b1fd9c6ddaf0742a975618e6e4e11a139ac1",
+  "expected_ancestry": [
+    "6628f74b10c93e1a97f64507b99af15f012f3005",
+    "d0552cddd041d74119b9659cdec9166e2b06406b",
+    "2ddf011533573c1ea3e9d8dcfe92ef177d4ebde0",
+    "7e23e857dd24b998f5c301ab8dd00faa55deda1d"
+  ],
+  "remote_file_readback": {
+    "CURRENT_STATE.json_blob_sha": "d7cd3bda2bf836c97b865e2bc8f89b43785356ce",
+    "HANDOFF_ZH.md_blob_sha": "d057de8ad0b6b29541a6d73453f32fcfafc49df6",
+    "PERSISTENCE_RECEIPT.json_blob_sha": "3bc47d60fbb0092107d4ac447a93c7b583acd9f3",
+    "RESEARCH_NOTE.md_blob_sha": "bced418690910d0cfd73644b3b82aef713f4b8f8",
+    "status": "MATCHED_REMOTE_FETCH_AND_LOCAL_GIT_OBJECT"
+  },
+  "workspace_readback": {
+    "master_handoff_version": 103,
+    "master_handoff_sha256": "e0d5ee8e2dcdd043e4aef8b98f48b329ff08a940017b18d514a5d63ac528357b",
+    "increment_sha256": "897e0075bce65ff744ee5e00b3a3bc4ebf7cdabdf2f2ccaf5f7d698e76a5e9bf",
+    "manifest_sha256": "bb16ebfc2f4822b53dccad036f3ca2e06af17d92d86a6411e778e81143913cd3",
+    "status": "ALL_THREE_MATERIALIZED_BACK_AND_HASH_MATCHED"
+  },
+  "confirmation_commit_note": "The commit containing this record is the final branch head for the round and is verified after the ref update; it is intentionally not self-addressed inside this file."
+}

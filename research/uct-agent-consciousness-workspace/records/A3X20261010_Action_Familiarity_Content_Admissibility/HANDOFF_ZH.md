@@ -30,6 +30,7 @@
 - 固定主交接保持同一ID `libfile_4175a81748fc819187fa8f5771f056fa`，由v102更新为v103；顶部内容、21299字节与SHA256 `e0d5ee8e2dcdd043e4aef8b98f48b329ff08a940017b18d514a5d63ac528357b`已回读。
 - 增量包ID `libfile_218b4cfc5da0819197c819d212dbb6d2`，28文件、146619字节、SHA256 `897e0075bce65ff744ee5e00b3a3bc4ebf7cdabdf2f2ccaf5f7d698e76a5e9bf`；清单ID `libfile_7b112296f7b481918760dcc5efb5309a`、SHA256 `bb16ebfc2f4822b53dccad036f3ca2e06af17d92d86a6411e778e81143913cd3`。二者均回读匹配；增量不是完整备份。
 - 最终双份保存细节、失败与精确恢复见 `PERSISTENCE_RECEIPT.json`。
+- 首个持久化回执提交：`7e23e857dd24b998f5c301ab8dd00faa55deda1d`；其远端分支头、树及四个关键Git对象已回读匹配，最终确认见 `FINAL_REMOTE_READBACK.json`。
 - 精确恢复：获取远端分支最新头，先读根入口与 `REVIEW_SUPERVISION.md`，再读本目录 `ROUND_RECORD.json`、`RESEARCH_NOTE.md`、`CLAIM_LEDGER.json`、`GAP_LEDGER.md`、`MAP_AUDIT.md` 和 `RUN_RESULTS.json`；不得把 `S_H` 解释为 `C_H`。
 
 ## 下一具体问题

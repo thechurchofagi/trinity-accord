@@ -11,8 +11,8 @@
     "update_method": "GitHub Git-data API create-blob/create-tree/create-commit and expected-SHA non-force ref update",
     "fast_forward_and_expected_sha": true,
     "remote_branch_and_key_files_verified": true,
-    "receipt_commit": null,
-    "receipt_commit_note": "This receipt is committed after creation; its containing commit is recorded by the subsequent final remote-readback record."
+    "receipt_commit": "7e23e857dd24b998f5c301ab8dd00faa55deda1d",
+    "receipt_commit_note": "This is the first commit containing the persistence receipt and Library identifiers; a later confirmation commit contains FINAL_REMOTE_READBACK.json."
   },
   "workspace_persistence": {
     "master_handoff": {
