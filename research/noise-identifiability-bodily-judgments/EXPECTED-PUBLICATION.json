@@ -1,0 +1,70 @@
+{
+  "report_number": "TA-TR-2026-26",
+  "record_id": 23279189,
+  "doi": "10.5281/zenodo.23279189",
+  "title": "Identifiability of Noise Sources in Bodily Judgments",
+  "version": "1.0.0",
+  "file_count": 9,
+  "files": [
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 1424,
+      "sha256": "23dff3138f77e15da819e44ea279613a28db0a0851a53954ab2bf4f86976d29f"
+    },
+    {
+      "name": "REVIEW-AND-SOURCES.md",
+      "bytes": 8359,
+      "sha256": "472dad1ae8beb49fe0f31993ad698953cad787047c4a17e3b98797c8b3ccf0a9"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 739,
+      "sha256": "76d54b2580071308cb7ad572a4e6af5c810a106fdafb1d2fd1c185884d06c718"
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 355,
+      "sha256": "e8a4e5c1f69e5394dcacb6d220e180b52af7e9a2b5f843191cd0fb66c457974b"
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 498,
+      "sha256": "18e213dcd79bceb790b48bfe354fadc6fbe0baf5091135d79dce9ee91c11b1c0"
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 289,
+      "sha256": "ed067583e9294147420e1b87ec133853fe5523f60c220d9fb7b5b672c4bfc8ed"
+    },
+    {
+      "name": "noise-identifiability-bodily-judgments-v1.0.0.md",
+      "bytes": 61049,
+      "sha256": "031a5881915e32057816070b029ebac566b39d325ee4c8a68485c199d90a77f9"
+    },
+    {
+      "name": "noise-identifiability-bodily-judgments-v1.0.0.pdf",
+      "bytes": 269961,
+      "sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94"
+    },
+    {
+      "name": "reproducibility-v1.0.0.zip",
+      "bytes": 3238582,
+      "sha256": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de"
+    }
+  ],
+  "source_inputs": {
+    "source-main.md": "2d1add95023a7069b2e2d0a1a66de9505e78c0329ac599cc712356f3d23c1ba5",
+    "build_pdf.py": "1f7b348bbb493e8cc869a76bbdf68074c72707ce93ea7695c0303d425698eee1",
+    "reproducibility-v1.0.0.zip": "275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de",
+    "REVIEW-AND-SOURCES.md": "472dad1ae8beb49fe0f31993ad698953cad787047c4a17e3b98797c8b3ccf0a9",
+    "publication.py": "c55b188787dce0a3bd687d18ef1430e1dd3050b0629067157ef29064bae5e4ac",
+    "pdf_style.tex": "30dcf54c2f9f5a8b44e2348c546d4a290077e2bce324a05449e78f2ca657b60f",
+    "figures/figure1_audit.pdf": "ac5d94025b6df6e77997dde6628fe7acf10811062cbf430633d7beff0cdb4781",
+    "figures/figure2_twins.pdf": "f50e2291da8e8d2445a6bfed3c2dbdb2efe1b4c4cfb5ea794d4c8f25df3d94f1",
+    "figures/figure3_identification.pdf": "8c6d2798802c7f847c00de4f20c8bce3f7bd938a9aded7ba98ad816b39c61108",
+    "figures/figure4_finite_sample.pdf": "64036c928d2a46e230696e7413e96ce43d68b014046e6f185a397aebcd9a1a2f"
+  },
+  "source_commit": "7b70d23c4cebd59689d39bb43c62de5f7c26f0d5",
+  "workflow_trigger_commit": "ea18a21ebd996beac6f87767f03be741a4dc2b88",
+  "prior_records_modified": false
+}
