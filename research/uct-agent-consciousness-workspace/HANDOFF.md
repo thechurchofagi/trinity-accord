@@ -1,3 +1,11 @@
+# 当前科学接续 A3Q20261010；完成图仍为 UCT-MAP-v1.1.2
+
+[中文交接](records/A3Q20261010_Selector_Ancestry_Dominance/HANDOFF_ZH.md) · [研究稿](records/A3Q20261010_Selector_Ancestry_Dominance/RESEARCH_NOTE.md) · [精确结果](records/A3Q20261010_Selector_Ancestry_Dominance/EXACT_RESULTS.json) · [地图审计](records/A3Q20261010_Selector_Ancestry_Dominance/MAP_AUDIT.md)。A3Q纠正A3O遗留的实际性歧义：本回合的双政策分辨消费是实际事件祖先关系；分辨节点是否位于所有允许调度路径上是架构支配关系。二者在有限模型中双向不蕴含，图形、日志、RT与报告均不能替代实际发生。无物理安装或H识别，0新增节点/规则/上下文，全部审查OPEN保留。
+
+下一具体问题：预先声明一个干预—读出合同，区分活跃输家与闲置存储政策，并验证两者实际进入同一分辨事件及该事件对调度的因果贡献；不能同实例核验则停止相应推断。
+
+---
+
 <!-- CTD_OPS_CHECKPOINT:2026-10-10_INITIAL_OTS -->
 # CTD v1.0.0 发表与首次 OTS 检查点
 
@@ -5,7 +13,7 @@
 
 **OTS 已取得4份日历回执，当前 PENDING_BITCOIN；Arweave 尚未付款。** 首次证明已保存于 release commit `df37353d5153e981caae4017cae1fc12677e085d`；main PR1261已合并，既有小时流程会在验证Bitcoin后依原预算与去重门进入AR。工作流success仅表示本轮检查/保存成功。完整链路收据尚未产生，准备中的报告和构建器不能当完成证据。
 
-此次是操作保存，不改变 A3O 科学主线、next_priority、UCT-PUB-v1.0.31、全部禁用候选或OPEN。当前状态详见 CTD记录的 `PERSISTENCE_RECEIPT.json` 和 `operations/`。下方历史状态完整保留。
+此次是操作保存，不改变 A3Q 科学主线、next_priority、UCT-PUB-v1.0.31、全部禁用候选或OPEN。当前状态详见 CTD记录的 `PERSISTENCE_RECEIPT.json` 和 `operations/`。下方历史状态完整保留。
 
 ---
 

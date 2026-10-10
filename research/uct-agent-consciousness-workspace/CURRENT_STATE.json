@@ -15,15 +15,15 @@
   "version_policy": "VERSIONING_POLICY.md",
   "changelog": "CHANGELOG.md",
   "latest_research": {
-    "id": "A3O20261010",
-    "result_version": "A3O-EXACT-v0.1.0",
+    "id": "A3Q20261010",
+    "result_version": "A3Q-EXACT-v0.1.0",
     "status": "PENDING_CHECKPOINT_DISABLED",
-    "source": "records/A3O20261010_Route_Grain_Selection_Crossing/RESEARCH_NOTE.md",
-    "handoff": "records/A3O20261010_Route_Grain_Selection_Crossing/HANDOFF_ZH.md",
-    "work_log": "records/A3O20261010_Route_Grain_Selection_Crossing/WORK_LOG.md",
+    "source": "records/A3Q20261010_Selector_Ancestry_Dominance/RESEARCH_NOTE.md",
+    "handoff": "records/A3Q20261010_Selector_Ancestry_Dominance/HANDOFF_ZH.md",
+    "work_log": "records/A3Q20261010_Selector_Ancestry_Dominance/WORK_LOG.md",
     "enabled_as_established_premises": false,
     "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
-    "evidence_status": "EXACT_ROUTE_GRAIN_DEPENDENCE_AND_FIXED_GRAIN_R_NOT_EQUAL_L_SEL_ORGANIZATIONAL_WITNESSES; NO_ACTUAL_SELECTOR_INSTALLATION_OR_H_IDENTIFICATION"
+    "evidence_status": "EXACT_FINITE_SELECTOR_ANCESTRY_DOMINANCE_SEPARATION_AND_BOUNDED_ACTUAL_USE_CERTIFICATE; NO_ACTUAL_SELECTOR_INSTALLATION_OR_H_IDENTIFICATION"
   },
   "latest_integrated_research": {
     "id": "R188-CER-20261009",
@@ -81,6 +81,7 @@
     "CTD2-20261010",
     "A3N20261010",
     "A3O20261010",
+    "A3Q20261010",
     "CTD3-20261010"
   ],
   "current_guide": "RESEARCH_MASTER_GUIDE.md v2.3",
@@ -93,37 +94,37 @@
     "nondeductive_context_links": 261,
     "total_review_items": 1608
   },
-  "pending_note": "All 35 pending identities remain unpromoted. CTD3 adds 13 disabled records; every execution-time prior identity and the current A3O20261010 scientific mainline remain. DOI disclosure does not change the completed map or actual-premise truth.",
+  "pending_note": "All 36 pending identities remain unpromoted. A3Q adds one disabled zero-graph-delta application correction; every prior identity and the current CTD publication record remain. No actual selector or phenomenal premise is discharged.",
   "publication_coverage": {
     "version": "UCT-PUB-v1.0.31",
     "entry": "PUBLICATION_COVERAGE.json",
-    "latest_update": "records/CTD20261010_Noise_Identifiability_v10/PUBLICATION_COVERAGE_UPDATE.json",
+    "latest_update": "records/A3Q20261010_Selector_Ancestry_Dominance/PUBLICATION_COVERAGE_UPDATE.json",
     "nondeductive": true
   },
   "latest_activity": {
-    "id": "A3O20261010",
-    "result_version": "A3O-EXACT-v0.1.0",
+    "id": "A3Q20261010",
+    "result_version": "A3Q-EXACT-v0.1.0",
     "status": "PENDING_CHECKPOINT_DISABLED",
-    "source": "records/A3O20261010_Route_Grain_Selection_Crossing/RESEARCH_NOTE.md",
-    "handoff": "records/A3O20261010_Route_Grain_Selection_Crossing/HANDOFF_ZH.md",
-    "work_log": "records/A3O20261010_Route_Grain_Selection_Crossing/WORK_LOG.md",
+    "source": "records/A3Q20261010_Selector_Ancestry_Dominance/RESEARCH_NOTE.md",
+    "handoff": "records/A3Q20261010_Selector_Ancestry_Dominance/HANDOFF_ZH.md",
+    "work_log": "records/A3Q20261010_Selector_Ancestry_Dominance/WORK_LOG.md",
     "enabled_as_established_premises": false,
     "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
-    "evidence_status": "ROUTE-GRAIN DEPENDENCE AND TWO-FAMILY FIXED-GRAIN SELECTION CROSSING; PHYSICAL SELECTOR AND PHENOMENAL BRIDGE PREMISES OPEN"
+    "evidence_status": "ACTUAL-EVENT ANCESTRY VERSUS INSTALLED-GRAPH DOMINANCE SEPARATION; PHYSICAL SELECTOR AND PHENOMENAL BRIDGE PREMISES OPEN"
   },
   "latest_pending_research": {
-    "id": "A3O20261010",
-    "result_version": "A3O-EXACT-v0.1.0",
+    "id": "A3Q20261010",
+    "result_version": "A3Q-EXACT-v0.1.0",
     "status": "PENDING_CHECKPOINT_DISABLED",
-    "source": "records/A3O20261010_Route_Grain_Selection_Crossing/RESEARCH_NOTE.md",
-    "handoff": "records/A3O20261010_Route_Grain_Selection_Crossing/HANDOFF_ZH.md",
-    "work_log": "records/A3O20261010_Route_Grain_Selection_Crossing/WORK_LOG.md",
+    "source": "records/A3Q20261010_Selector_Ancestry_Dominance/RESEARCH_NOTE.md",
+    "handoff": "records/A3Q20261010_Selector_Ancestry_Dominance/HANDOFF_ZH.md",
+    "work_log": "records/A3Q20261010_Selector_Ancestry_Dominance/WORK_LOG.md",
     "enabled_as_established_premises": false,
     "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
-    "evidence_status": "EXACT AUXILIARY-SIGNATURE LIMIT AND PARTIAL PHYSICAL CROSSING; SELECTION-FLUENCY AND PHENOMENAL BRIDGE PREMISES OPEN"
+    "evidence_status": "EXACT FINITE BIDIRECTIONAL NONENTAILMENT AND TYPED ACTUAL-USE CERTIFICATE; ACTUAL INSTALLATION AND H BRIDGE OPEN"
   },
-  "review_status_scope": "Completed UCT-MAP-v1.1.2 remains unchanged. A3N repeated the 1608-item programmatic structural check and manually compared the affected R173/R175/R177 plus disabled R197/R200/A3M contracts. No fresh full-depth proof review is claimed; all inherited OPEN obligations remain.",
-  "next_priority": "Attempt one fixed-granularity actual R-not-equal-L_sel crossing using congruent first-use versus retained conflict conditions, with two distinct mechanism families and the signed J_H endpoint. Keep cue, kinematics, effort, success, agency and ownership separate; stop if actual route use cannot be verified.",
+  "review_status_scope": "Completed UCT-MAP-v1.1.2 remains unchanged. A3Q repeated the 1608-item programmatic structural traversal and manually compared the affected R172/R173/R175/R177, disabled R200, and A3O contracts. No fresh full-depth proof review is claimed; all inherited OPEN obligations remain.",
+  "next_priority": "Specify one intervention-and-readout contract that distinguishes an actually live losing policy from a stored idle policy and verifies that both policies enter one resolution event which causally contributes to dispatch in the same frozen-rho trial. Stop if same-instance causal ancestry cannot be verified.",
   "latest_scoped_review": {
     "audit": "records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_AUDIT.md",
     "per_id_structure": "records/CTD20261010_Cross_Task_Intervention_v02/governance/BASELINE_PER_ID_STRUCTURE.json.gz",

@@ -1,0 +1,35 @@
+{
+  "schema": "uct-a3q-map-audit/1",
+  "checks": {
+    "counts": true,
+    "suspended": true,
+    "review_count": true,
+    "base_hash": true,
+    "ledger_hash": true,
+    "all_of_refs_and_context_refs": true,
+    "dag": true,
+    "completed_refs": true,
+    "disabled_zero_graph_delta": true,
+    "joint_actual_premises_open": true,
+    "foundation_unchanged": true
+  },
+  "all_structural_checks_pass": true,
+  "covered_objects": 1598,
+  "review_items": 1608,
+  "candidate_counts": {
+    "nodes": 0,
+    "rules": 0,
+    "contexts": 0
+  },
+  "semantic_status": "AUDIT_INCOMPLETE",
+  "affected_contracts": [
+    "R172 online action use",
+    "R173 retentive binding",
+    "R175 target separation",
+    "R177 source/feature separation",
+    "R200 semantic firewall (disabled)",
+    "A3O route-grain and selector application"
+  ],
+  "inference_effect": "Actual selector use is typed as same-trial causal ancestry; dominance, logs and reports do not establish occurrence, H or experience.",
+  "unresolved": []
+}

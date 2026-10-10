@@ -1,0 +1,11 @@
+{
+  "schema": "uct-a3q-claim-ledger/1",
+  "research_id": "A3Q20261010",
+  "claims": [
+    {"id":"A3Q-C1","type":"DEFINITIONAL_CORRECTION","status":"PHYSICAL_APPLICATION_OPEN","domain":"typed actual-event and possible-execution graphs","premises":["common bearer/target/window/signature","faithful actual-edge semantics"],"counterexample":"untaken bypass changes dominance without changing the actual trace"},
+    {"id":"A3Q-C2","type":"CONDITIONAL_ORGANIZATIONAL_SUFFICIENCY","status":"EXACT_UNDER_DECLARED_EVENT_SEMANTICS_NO_ACTUAL_INSTALLATION","domain":"one declared selector episode","premises":["two actual live mutually exclusive policies","both actually consumed by one resolution occurrence","resolution causally contributes to actual dispatch","same-instance bindings"],"counterexample":"present but idle policy or resolver"},
+    {"id":"A3Q-C3","type":"EXHAUSTIVE_FINITE_NONENTAILMENT","status":"PROVED_FINITE_NO_MATH_NOVELTY","domain":"six nodes, nine candidate edges, three edge states","premises":["declared finite predicates"],"proof":"check_selector_ancestry.py and EXACT_RESULTS.json","counterexample":"canonical witnesses in exact results"},
+    {"id":"A3Q-C4","type":"EVIDENCE_FIREWALL","status":"EXACT_COUNTERMODEL_SCHEMA_APPLICATION_OPEN","domain":"finite selector evidence","premises":["measurement relation not perfect by definition"],"counterexample":"copied identical log on use/non-use episodes"},
+    {"id":"A3Q-C5","type":"CONDITIONAL_UCT_APPLICATION","status":"OPEN_CONDITIONAL_APPLICATION","domain":"one common same-instance UCT application","premises":["C1","corrected R172 path","R173 RetBind","A3O frozen rho","A3Q-C2","actual installation","separate H bridge"],"counterexample":"copied policy/log, wrong bearer/trial, unused resolution, endpoint tracks report demand"}
+  ]
+}

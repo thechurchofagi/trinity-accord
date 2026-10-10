@@ -1,0 +1,44 @@
+{
+  "schema": "uct-a3q-selector-ancestry-check/1",
+  "model": {
+    "nodes": ["s", "p1", "p2", "z", "b", "d"],
+    "candidate_edges": ["s->p1", "s->p2", "p1->z", "p2->z", "z->d", "p1->b", "p2->b", "b->d", "s->d"],
+    "edge_states": ["absent", "potential_only", "actual_and_potential"],
+    "mutual_exclusion_of_policies": "typed premise on p1 and p2"
+  },
+  "counts": {
+    "pairs": 19683,
+    "use_true": 81,
+    "dominance_true": 1424,
+    "use_without_dominance": 70,
+    "dominance_without_use": 1413
+  },
+  "checks": {
+    "dominance_does_not_imply_use": true,
+    "use_does_not_imply_dominance": true,
+    "one_actual_trace_allows_both_architectural_answers": true,
+    "one_architecture_allows_both_actual_use_answers": true,
+    "enumeration_complete": true
+  },
+  "canonical_witnesses": {
+    "use_without_dominance": {
+      "actual": ["s->p1", "s->p2", "p1->z", "p2->z", "z->d"],
+      "potential_addition": ["s->d"]
+    },
+    "dominance_without_use": {
+      "actual_and_potential": ["s->p2", "p2->z", "z->d"],
+      "missing": "p1 is not an actual live input to z"
+    },
+    "same_actual_different_dominance": {
+      "actual": ["s->p1", "s->p2", "p1->z", "p2->z", "z->d"],
+      "dominance_true_potential": ["s->p1", "s->p2", "p1->z", "p2->z", "z->d"],
+      "dominance_false_potential_addition": ["s->d"]
+    },
+    "same_potential_different_actual_use": {
+      "potential": ["s->p1", "s->p2", "p1->z", "p2->z", "z->d", "s->d"],
+      "use_true_actual": ["s->p1", "s->p2", "p1->z", "p2->z", "z->d"],
+      "use_false_actual": ["s->d"]
+    }
+  },
+  "scope": "Exact only for the declared finite graph semantics; physical fidelity is an open application premise."
+}

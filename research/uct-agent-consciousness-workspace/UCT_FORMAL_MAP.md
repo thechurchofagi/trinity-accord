@@ -1,4 +1,10 @@
-# 当前接续：A3N20261010；完成地图仍为 UCT-MAP-v1.1.2
+# A3Q20261010 disabled application correction; completed map unchanged
+
+A3Q adds no completed node, rule or context. It separates actual event ancestry (`p1,p2 -> z -> d` under faithful same-instance semantics) from resolver dominance in an installed possible-execution graph. The finite model proves neither entails the other. The application remains disabled with physical installation, evidence binding and `H` interpretation open. See [map extension](records/A3Q20261010_Selector_Ancestry_Dominance/MAP_EXTENSION.json) and [audit](records/A3Q20261010_Selector_Ancestry_Dominance/MAP_AUDIT.md).
+
+---
+
+# 前一接续：A3N20261010；完成地图仍为 UCT-MAP-v1.1.2
 
 A3N 为0节点/0规则/0上下文的停用应用修正：区分选择流畅`L_sel`与运动学流畅`L_kin`，并记录四格辅助签名别名和限定XOR复现不变性。见[全图兼容审计](records/A3N20261010_Route_Fluency_Crossing/MAP_AUDIT.md)。完成计数、图哈希、C1/U1与全部OPEN不变；CTD v0.2候选完整保留。
 

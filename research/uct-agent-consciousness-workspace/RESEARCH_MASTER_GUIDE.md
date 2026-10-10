@@ -1,5 +1,7 @@
 # UCT 最高研究指导：原理论优先、局部体验保留、每步全图复核
 
+**当前科学接续（A3Q20261010）：** A3Q将A3O的实际选择消费收窄为实际事件祖先链，并把它与已安装图的支配关系分开；有限模型给出双向非蕴含。无实际安装、H识别或新完成图前提。下一题只做同实例活跃输家—分辨—调度的干预读出合同。见[A3Q交接](records/A3Q20261010_Selector_Ancestry_Dominance/HANDOFF_ZH.md)。本提示仅同步接续，不修改本指南政策正文。
+
 **当前研究接续（A3N20261010）：** 并发 CTD v0.2 已完整保留。A3N 将 A3M 的粗粒度流畅拆为内部选择流畅 `L_sel` 与外显运动学流畅 `L_kin`。机器人引导/扰动可构造 `R≠L_kin`，但尚未构造 `R≠L_sel`；每格独有的辅助干预签名可拟合全部16个二元端点表。下一题只做固定路由粒度下的真实 `R≠L_sel` 交叉及两种机制复现，不把平滑轨迹当成内部流畅或 `H`。见 [A3N交接](records/A3N20261010_Route_Fluency_Crossing/HANDOFF_ZH.md)。完成图v1.1.2、C1/U1和全部OPEN不变；覆盖为v1.0.29。
 
 **当前核验接续（CTD v0.2）：** 用户要求继续深入后，已完成18页噪声来源识别论文、公开数据审计及条件联合读数定理。见[交接](records/CTD20261010_Cross_Task_Intervention_v02/HANDOFF_ZH.md)、[成稿决定](records/CTD20261010_Cross_Task_Intervention_v02/MANUSCRIPT_DECISION.json)及[审计](records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_AUDIT.md)。候选40项全停用；完成图v1.1.2、C1/U1、全部OPEN不变；覆盖UCT-PUB-v1.0.28，无新DOI。原v0.1与并发A3M的独立身体H主问题继续保留。以下最高指导正文的优先级不变。

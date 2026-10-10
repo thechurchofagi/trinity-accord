@@ -720,6 +720,22 @@
         "publication_workflow_snapshot_unmodified": true
       },
       "actual_application_status": "OPEN"
+    },
+    {
+      "research_id": "A3Q20261010",
+      "result_version": "A3Q-EXACT-v0.1.0",
+      "source": "records/A3Q20261010_Selector_Ancestry_Dominance/MAP_EXTENSION.json",
+      "sha256": "8722c23ac8e55c76e7ab3d0706ee6d6f9997d730e6abeb1f8e258791fec1b7cd",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "actual_application": "OPEN",
+      "publication_coverage_version": "UCT-PUB-v1.0.31",
+      "compatibility_audit": "records/A3Q20261010_Selector_Ancestry_Dominance/MAP_AUDIT.md",
+      "handoff": "records/A3Q20261010_Selector_Ancestry_Dominance/HANDOFF_ZH.md",
+      "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
+      "candidate_counts": {"nodes": 0, "rules": 0, "context_links": 0},
+      "scientific_delta": "Actual-selector-use certificate plus finite independence of same-trial causal ancestry and installed-graph dominance; no physical installation or H identification.",
+      "preservation_scope": "Latest disabled scientific navigation; prior research and CTD publication records unchanged."
     }
   ],
   "preservation": "Exact previous registry remains preserved. The full research manuscript/module and saved per-item review decisions are in the version capsule; expanded artifacts are also in the offline downloadable archive.",

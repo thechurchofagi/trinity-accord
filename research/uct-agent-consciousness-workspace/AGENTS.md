@@ -1,3 +1,9 @@
+# 当前科学接续 A3Q20261010
+
+先读[A3Q交接](records/A3Q20261010_Selector_Ancestry_Dominance/HANDOFF_ZH.md)、[研究稿](records/A3Q20261010_Selector_Ancestry_Dominance/RESEARCH_NOTE.md)和[地图审计](records/A3Q20261010_Selector_Ancestry_Dominance/MAP_AUDIT.md)。实际选择使用必须绑定同一回合的双政策—分辨—调度因果祖先；可能执行图的支配、日志、RT或报告均不代替实际发生。0/0/0停用，完成图及全部OPEN不变。
+
+---
+
 <!-- CTD_V10_PUBLICATION:10.5281/zenodo.23279189 -->
 # 最新发表：CTD v1.0.0；科学主线保留 A3O20261010
 

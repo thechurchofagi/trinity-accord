@@ -1,3 +1,11 @@
+# A3Q20261010 researcher response — selector ancestry versus dominance
+
+The latest ledger and every carried OPEN/application-open item were read before selection and rechecked before save. Evidence: [response](records/A3Q20261010_Selector_Ancestry_Dominance/REVIEW_RESPONSE.md), [note](records/A3Q20261010_Selector_Ancestry_Dominance/RESEARCH_NOTE.md), [exact results](records/A3Q20261010_Selector_Ancestry_Dominance/EXACT_RESULTS.json), [gaps](records/A3Q20261010_Selector_Ancestry_Dominance/GAP_LEDGER.md), and [map audit](records/A3Q20261010_Selector_Ancestry_Dominance/MAP_AUDIT.md).
+
+`QC-20261008-10`, `IA-QC11`, `QC-20261008-12/13`, `SCU-OPEN-R191-NORMALIZATION`, and `SCU-AUDIT-DEPTH` all retain their previous OPEN/application-open/incomplete status. A3Q concretely answers the evidence/actuality concern by separating same-trial causal ancestry from all-path architectural dominance and from logs. No physical instance, signed `H` endpoint or full-depth semantic audit is claimed. The 0/0/0 application remains disabled; C1/U1 and the completed map are unchanged. This is a researcher response, not self-closure.
+
+---
+
 # 当前接续：CTD v0.2 已成稿；完成地图仍为 UCT-MAP-v1.1.2
 
 继续遵循[最高研究指导](RESEARCH_MASTER_GUIDE.md)。本轮按用户要求深入修订未发表CTD论文，现形成18页[英文稿](records/CTD20261010_Cross_Task_Intervention_v02/manuscript/noise-identifiability-bodily-judgments-v0.2.0.pdf)、[中文交接](records/CTD20261010_Cross_Task_Intervention_v02/HANDOFF_ZH.md)、[工作日志](records/CTD20261010_Cross_Task_Intervention_v02/WORK_LOG.md)和[成稿决定](records/CTD20261010_Cross_Task_Intervention_v02/MANUSCRIPT_DECISION.json)。公开数据审计与条件识别结果达到值得外部方法评议的程度；没有新配对人体数据、UCT实证确认、新DOI或投稿。

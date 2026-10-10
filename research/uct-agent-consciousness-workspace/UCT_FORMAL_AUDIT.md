@@ -1,4 +1,10 @@
-# 当前接续：A3N20261010；完成地图仍为 UCT-MAP-v1.1.2
+# A3Q20261010 latest scoped audit
+
+[A3Q audit](records/A3Q20261010_Selector_Ancestry_Dominance/MAP_AUDIT.md) restored the hash-verified v1.1.2 capsule and traversed 913 nodes, 424 active `all_of` rules, 261 nondeductive contexts, 10 suspended rules and 1,608 review items. The 0/0/0 candidate is disabled; all structural checks pass. This is not a physical selector validation, theory truth certificate or full historical semantic reproof; status remains `AUDIT_INCOMPLETE`.
+
+---
+
+# 前一接续：A3N20261010；完成地图仍为 UCT-MAP-v1.1.2
 
 [A3N审计](records/A3N20261010_Route_Fluency_Crossing/MAP_AUDIT.md)从82成员胶囊复核913/424/261、10暂停规则、1608审查项、1598个完成对象哈希/引用/DAG，并审读受影响R173/R175/R177/R197/R200/A3M合同。结构检查通过；实际安装、端点可靠性、直达路径排除和历史全深度语义证明均未成立。全部OPEN保留。
 

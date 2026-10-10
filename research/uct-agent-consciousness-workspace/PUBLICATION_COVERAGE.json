@@ -55,7 +55,8 @@
     "records/CTD20261010_Cross_Task_Intervention_v02/PUBLICATION_COVERAGE_UPDATE.json",
     "records/A3N20261010_Route_Fluency_Crossing/PUBLICATION_COVERAGE_UPDATE.json",
     "records/A3O20261010_Route_Grain_Selection_Crossing/PUBLICATION_COVERAGE_UPDATE.json",
-    "records/CTD20261010_Noise_Identifiability_v10/PUBLICATION_COVERAGE_UPDATE.json"
+    "records/CTD20261010_Noise_Identifiability_v10/PUBLICATION_COVERAGE_UPDATE.json",
+    "records/A3Q20261010_Selector_Ancestry_Dominance/PUBLICATION_COVERAGE_UPDATE.json"
   ],
   "historical_census_decision": "publication/UCT-PUB-v1.0.0/MANUSCRIPT_DECISION.json",
   "latest_manuscript_status": "PUBLISHED_PREPRINT_PUBLIC_READBACK_AND_DOI_RESOLUTION_VERIFIED",
@@ -91,7 +92,7 @@
     "doi_resolution_source": "records/CTD20261010_Noise_Identifiability_v10/DOI_RESOLUTION.json",
     "publication_workflow_snapshot_unmodified": true
   },
-  "latest_pending_research_decision": "HOLD_STANDALONE_USE_AS_METHOD_AND_GAP_MODULE; ACTUAL_R_NOT_EQUAL_L_SEL_AND_SIGNED_H_ENDPOINT_RELIABILITY_OPEN",
+  "latest_pending_research_decision": "HOLD_STANDALONE_USE_AS_A3O_TYPING_CORRECTION; ACTUAL_SELECTOR_INSTALLATION_AND_SIGNED_H_ENDPOINT_RELIABILITY_OPEN",
   "coverage_review": "records/CTD20261010_Noise_Identifiability_v10/publication_review/COVERAGE_REVIEW.md",
   "prior_entry_snapshot": "records/DVC20261010_Device_Consumer_Validation/history/before_DVC_d8c94faa/PUBLICATION_COVERAGE.json",
   "concurrent_pending_coverage": "publication/UCT-PUB-v1.0.22/CONCURRENT_PENDING_COVERAGE.json",

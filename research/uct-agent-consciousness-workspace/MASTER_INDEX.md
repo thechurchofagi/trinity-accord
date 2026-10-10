@@ -1,3 +1,16 @@
+# 最新科学接续 A3Q20261010；完成图仍为 UCT-MAP-v1.1.2
+
+- [中文交接](records/A3Q20261010_Selector_Ancestry_Dominance/HANDOFF_ZH.md)
+- [英文研究稿](records/A3Q20261010_Selector_Ancestry_Dominance/RESEARCH_NOTE.md)
+- [声明台账](records/A3Q20261010_Selector_Ancestry_Dominance/CLAIM_LEDGER.json)
+- [精确结果](records/A3Q20261010_Selector_Ancestry_Dominance/EXACT_RESULTS.json)
+- [全图审计](records/A3Q20261010_Selector_Ancestry_Dominance/MAP_AUDIT.md)
+- [审查回应](records/A3Q20261010_Selector_Ancestry_Dominance/REVIEW_RESPONSE.md)
+
+净增量：把实际选择使用定义为同回合的双政策—分辨—调度因果祖先链，并与已安装可能执行图的支配关系分开；有限模型证明二者双向不蕴含。0/0/0停用，完成图、发表计数、C1/U1与所有OPEN不变。
+
+---
+
 <!-- CTD_V10_PUBLICATION:10.5281/zenodo.23279189 -->
 # 最新发表：CTD v1.0.0；科学主线保留 A3O20261010
 

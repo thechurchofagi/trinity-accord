@@ -1,3 +1,11 @@
+# 最新科学接续 A3Q20261010：实际选择使用是事件祖先关系，不是架构支配
+
+[研究稿](records/A3Q20261010_Selector_Ancestry_Dominance/RESEARCH_NOTE.md) · [精确结果](records/A3Q20261010_Selector_Ancestry_Dominance/EXACT_RESULTS.json) · [地图审计](records/A3Q20261010_Selector_Ancestry_Dominance/MAP_AUDIT.md) · [中文交接](records/A3Q20261010_Selector_Ancestry_Dominance/HANDOFF_ZH.md)。A3Q把A3O的“实际分辨被消费”收窄为同一回合中两个实际活跃、互斥政策进入同一分辨事件，且该事件因果进入实际调度；已安装图中分辨节点支配调度是另一种全路径命题。19,683个有限配置给出双向非蕴含：70个实际使用但不支配，1,413个支配但无双政策实际使用。没有实际选择器安装、`J_H`可靠性或`H`识别；0/0/0停用应用，完成图、C1/U1与全部OPEN不变。
+
+下一题：用一个同实例干预—读出合同区分“实际活跃但输掉”的政策与“仅存储未用”的政策，并同时验证二者进入同一分辨事件、分辨事件进入实际调度。
+
+---
+
 <!-- CTD_V10_PUBLICATION:10.5281/zenodo.23279189 -->
 # 最新发表：CTD v1.0.0；科学主线保留 A3O20261010
 
