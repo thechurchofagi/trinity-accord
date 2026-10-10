@@ -1,0 +1,41 @@
+{
+  "schema": "doi-resolution-readback/1",
+  "doi": "10.5281/zenodo.23272690",
+  "public_record": "https://zenodo.org/records/23272690",
+  "observed_at_utc": "2026-10-10T01:47:07.972728+00:00",
+  "checks": [
+    {
+      "kind": "doi_resolver",
+      "requested_url": "https://doi.org/10.5281/zenodo.23272690",
+      "final_url": "https://zenodo.org/records/23272690",
+      "status": 200,
+      "bytes": 112895,
+      "sha256": "6e848778be3b4ff6f5c0e75805022459694f84ca3ab56e5c21601ef1abe416d5",
+      "authenticated": false
+    },
+    {
+      "kind": "record_api",
+      "requested_url": "https://zenodo.org/api/records/23272690",
+      "final_url": "https://zenodo.org/api/records/23272690",
+      "status": 200,
+      "bytes": 9282,
+      "sha256": "b55979efe74dfc2062e62290a058a95a7973be1e635df4e7d6f47b57b110bd98",
+      "authenticated": false,
+      "record_id": 23272690,
+      "doi": "10.5281/zenodo.23272690",
+      "title": "Matched Behavior and Source Use",
+      "version": "1.0.1"
+    },
+    {
+      "kind": "pdf",
+      "requested_url": "https://zenodo.org/records/23272690/files/matched-behavior-and-source-use-v1.0.1.pdf?download=1",
+      "final_url": "https://zenodo.org/records/23272690/files/matched-behavior-and-source-use-v1.0.1.pdf?download=1",
+      "status": 200,
+      "bytes": 279016,
+      "sha256": "7e6e8c181e98975b3ba3e665982a7dd206a2c8efcf543ce865b34d053290754b",
+      "authenticated": false
+    }
+  ],
+  "historical_publication_receipt_state": "PUBLISHED_PUBLIC_READBACK_PASS_DOI_RESOLUTION_PENDING",
+  "historical_receipt_preserved": true
+}

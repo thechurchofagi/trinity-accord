@@ -1,0 +1,19 @@
+{
+  "schema": "scu-release-status/1",
+  "state": "PUBLISHED_PUBLIC_FILES_READ_BACK_AND_DOI_RESOLVED",
+  "doi": "10.5281/zenodo.23272690",
+  "record_id": 23272690,
+  "version": "1.0.1",
+  "public_file_count": 9,
+  "public_files_verified_by_workflow": true,
+  "doi_resolution_pass": true,
+  "anonymous_root_pdf_readback_pass": true,
+  "expected_manifest_sha256": "4f976e85774d787dcafbcd85dd4784637ae67510836847905f938ec3bb6d755d",
+  "pdf_sha256": "7e6e8c181e98975b3ba3e665982a7dd206a2c8efcf543ce865b34d053290754b",
+  "historical_publication_receipt": "publication-record.json",
+  "later_doi_readback": "doi-resolution.json",
+  "peer_reviewed": false,
+  "ots_status": "NOT_EXECUTED_REQUIRES_SEPARATE_EXPLICIT_AUTHORIZATION",
+  "arweave_status": "NOT_EXECUTED_REQUIRES_SEPARATE_EXPLICIT_AUTHORIZATION",
+  "preservation_complete": false
+}
