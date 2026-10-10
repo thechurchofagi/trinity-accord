@@ -1,0 +1,14 @@
+{
+  "science_commit": "1f2ace73304917069cdf37a4774477d8a3353559",
+  "receipt_checkpoint": "ba64b5f69f94b83a2121f8920c8b691f16bb0f6e",
+  "master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+  "master_version": 95,
+  "master_file_id": "file_00000000538c81fb9e109da676d6a228",
+  "master_bytes": 760035,
+  "master_sha256": "7ea4dba70882a3918327115f31c05529f54b5561859009af0b9a69eb07603396",
+  "exact_roundtrip": true,
+  "increment_library_file_id": "libfile_84824ad6d0a881918a8c06e79b93921f",
+  "manifest_library_file_id": "libfile_ae057ed8b3648191bfe9ebff49adddc6",
+  "science_unchanged": true,
+  "all_review_open_retained": true
+}

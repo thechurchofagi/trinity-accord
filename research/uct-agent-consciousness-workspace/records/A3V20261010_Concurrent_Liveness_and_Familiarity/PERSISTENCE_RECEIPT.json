@@ -13,14 +13,14 @@
       "local_path": "/workspace/scratch/8d66fc8ef2f5/a3v_delivery/UCT_Hourly_Research_Master_Handoff.md",
       "purpose": "replace_library_file",
       "status": "succeeded",
-      "file_id": "file_000000001f1882308539faacd41821cc",
+      "file_id": "file_00000000538c81fb9e109da676d6a228",
       "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
       "file_name": "UCT_Hourly_Research_Master_Handoff.md",
       "local_metadata_applied": true,
       "path": "/UCT_Hourly_Research_Master_Handoff.md",
-      "current_version_number": 94,
-      "bytes": 758802,
-      "sha256": "e4e393524115fcfd6afec47503703c89168fbc1198ca21977f5068c0cf5b29a1",
+      "current_version_number": 95,
+      "bytes": 760035,
+      "sha256": "7ea4dba70882a3918327115f31c05529f54b5561859009af0b9a69eb07603396",
       "roundtrip_equal": true
     },
     {
@@ -53,7 +53,7 @@
     }
   ],
   "master_identity_preserved": true,
-  "master_history": "v93 bytes retained verbatim after prepended v94 handoff",
+  "master_history": "v95 retains exact v94 bytes; v94 retains exact v93 bytes; stable Library identity unchanged.",
   "backup_kind": "30-path increment plus manifest; NOT full repository/history",
   "receipt_scope": "This receipt and subsequent save confirmations excluded from science zip; master final confirmation carries receipt reference and restore state",
   "failures": [
@@ -70,5 +70,22 @@
     "Resume next question; retain all reviewer OPENs and immutable mapv1.1.2"
   ],
   "model_selector_verified": false,
-  "final_master_confirmation": "PENDING; later receipt version supersedes this stage"
+  "final_master_confirmation": "VERIFIED v95 same identity exact roundtrip; final Git confirmation in containing commit",
+  "library_master_v94_preserved": {
+    "local_path": "/workspace/scratch/8d66fc8ef2f5/a3v_delivery/UCT_Hourly_Research_Master_Handoff.md",
+    "purpose": "replace_library_file",
+    "status": "succeeded",
+    "file_id": "file_000000001f1882308539faacd41821cc",
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "file_name": "UCT_Hourly_Research_Master_Handoff.md",
+    "local_metadata_applied": true,
+    "path": "/UCT_Hourly_Research_Master_Handoff.md",
+    "current_version_number": 94,
+    "bytes": 758802,
+    "sha256": "e4e393524115fcfd6afec47503703c89168fbc1198ca21977f5068c0cf5b29a1",
+    "roundtrip_equal": true
+  },
+  "verified_receipt_checkpoint": "ba64b5f69f94b83a2121f8920c8b691f16bb0f6e",
+  "latest_completed_step": "DUAL_SAVE_COMPLETE_WITH_EXACT_RECOVERY; research bridge/application OPEN",
+  "final_commit_identity": "SELF_CONTAINING_THIS_FINAL_RECEIPT; resolve from verified remote branch, not an invented self-hash"
 }
