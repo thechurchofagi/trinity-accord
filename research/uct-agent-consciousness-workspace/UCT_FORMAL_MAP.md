@@ -85,3 +85,12 @@ Test one independent current bodily/action-familiarity interpretation against or
 基础问题专线 TJR20261010：[交接](records/TJR20261010_Temporal_Joint_Realization/HANDOFF_ZH.md) · [正文](records/TJR20261010_Temporal_Joint_Realization/RESEARCH_NOTE.md) · [日志](records/TJR20261010_Temporal_Joint_Realization/WORK_LOG.md)。串行保留、联合读取与压缩的停用应用；原科学接续和身体熟悉感路线保留。原理多属继承，独立成稿HOLD，全图深审仍未完成。
 
 基础问题专线 REV20261010：[交接](records/REV20261010_Retained_Premise_Revision/HANDOFF_ZH.md) · [正文](records/REV20261010_Retained_Premise_Revision/RESEARCH_NOTE.md) · [日志](records/REV20261010_Retained_Premise_Revision/WORK_LOG.md)。承接 TJR，完成前提修改的精确信息条件与连续修改对照；0/0/0 停用应用，独立成稿 HOLD。原 A3V/A3Y 接续和全历史审查未完成状态保留。
+
+
+## 超级智能控制与共存专题（独立候选，非正式科学图）
+
+[ASI-CC-20261011 · 形式化研究候选 v0.1.0](records/ASI_CC_20261011_Control_and_Coexistence/RESEARCH_NOTE.md) · [中文交接](records/ASI_CC_20261011_Control_and_Coexistence/HANDOFF_ZH.md) · [精确有限模型](records/ASI_CC_20261011_Control_and_Coexistence/exact_check.py) · [工作记录](records/ASI_CC_20261011_Control_and_Coexistence/WORK_LOG.md)。
+
+作者新增专题：区分超级智能的可控性、共同安全可强制性、可协调共存及持续互利。定义联合存续核 J、人类强制核 C、AI 强制核 M，有限系统中有条件证明 C⊆J、M⊆J，并构造自愿共存与隐藏旁路的反例。核方法、屏蔽及观测等价论证有明确外部前例；本专题**尚无经确认原创的广义 ASI 定理**，所有结论仅对所声明的模型成立。下一步研究共同控制切割、激励稳定性、资源及双方自主权的同一实例可行证书。
+
+**导航-only，无科学晋级：** 这个独立专题不纳入原来的38个待整合检查点，不改变913/424/261、正式版本UCT-MAP-v1.1.2、当前科学收束点、PUBLICATION_COVERAGE.json 或未闭合QC。未经全图语义审查及真实前提核验，不得将候选结论当作已建立公设或真实超级智能的预测。
