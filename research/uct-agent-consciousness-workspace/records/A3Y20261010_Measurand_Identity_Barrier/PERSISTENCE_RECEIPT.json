@@ -1,7 +1,7 @@
 {
   "schema": "uct-a3y-dual-persistence-receipt-v1",
   "round_id": "A3Y20261010_Measurand_Identity_Barrier",
-  "status": "GITHUB_SCIENCE_NAVIGATION_AND_LIBRARY_V104_READBACK_CONFIRMED",
+  "status": "GITHUB_AND_LIBRARY_READBACK_CONFIRMED",
   "github": {
     "repository": "thechurchofagi/trinity-accord",
     "branch": "uct-agent-consciousness-workspace",
@@ -11,8 +11,8 @@
     "update_method": "GitHub Git-data API create-blob/create-tree/create-commit and expected-SHA non-force ref update after ordinary HTTPS push credentials were unavailable",
     "fast_forward_and_expected_sha": true,
     "remote_branch_and_key_files_verified": true,
-    "receipt_commit": null,
-    "receipt_commit_note": "Filled with the actual receipt commit in the later final readback confirmation commit."
+    "receipt_commit": "572a2b6e36269f8a8c09813b6f8d5899634b39bb",
+    "receipt_commit_note": "The receipt commit and its six key A3Y/navigation files were read back exactly. The later confirmation commit intentionally does not self-address its own SHA."
   },
   "workspace_persistence": {
     "master_handoff": {
@@ -46,7 +46,7 @@
       "readback_sha256_verified": true
     }
   },
-  "latest_completed_step": "A3Y measurand-identity analysis, exact witness, entry synchronization, full-map structural traversal, GitHub science/navigation save, fixed master handoff v104 replacement, and increment/manifest byte readback are complete.",
+  "latest_completed_step": "A3Y measurand-identity analysis, exact witness, entry synchronization, full-map structural traversal, fixed master handoff v104 replacement, increment/manifest byte readback, and GitHub receipt-commit key-file readback are complete.",
   "not_completed": [
     "No independently phenomenal-targeted H_way anchor or intervention.",
     "No signed and bounded C_H calibration.",

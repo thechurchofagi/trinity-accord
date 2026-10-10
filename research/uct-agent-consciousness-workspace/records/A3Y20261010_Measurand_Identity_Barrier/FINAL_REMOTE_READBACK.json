@@ -1,0 +1,50 @@
+{
+  "schema": "uct-a3y-final-remote-readback-v1",
+  "round_id": "A3Y20261010_Measurand_Identity_Barrier",
+  "verified_branch": "uct-agent-consciousness-workspace",
+  "verified_branch_head_before_confirmation": "572a2b6e36269f8a8c09813b6f8d5899634b39bb",
+  "verified_tree": "e2a14e40bcee841c8091746a9c044cd28e236231",
+  "expected_ancestry": [
+    "92342aa516b2b1169103a978c9dc48b179e212f8",
+    "e84684294940f9df546f0b177b0e154ad217470f",
+    "0a7755287cdef5e3bd7f01a01abfc6760c0bcc3c",
+    "1f4002993a0f2bde15e12927686bf06ec8946c8d",
+    "e792283f086a914da0b289c1554b7c1342742820",
+    "e51e4d674509314b176c60206ddb10e4619f399f",
+    "572a2b6e36269f8a8c09813b6f8d5899634b39bb"
+  ],
+  "concurrency_preserved": true,
+  "remote_key_file_readback": {
+    "method": "GitHub contents API at the verified receipt commit, exact text comparison with the local integrated tree",
+    "all_exact": true,
+    "files": {
+      "research/uct-agent-consciousness-workspace/CURRENT_STATE.json": "a6f1c0a23b05cc86a5eafc056c0939fa4af9f4fc",
+      "research/uct-agent-consciousness-workspace/RESEARCH_SESSION_LOG_INDEX.json": "aed29a269d2d1f3ba5d45cebcb47535bc0899da7",
+      "research/uct-agent-consciousness-workspace/records/A3Y20261010_Measurand_Identity_Barrier/HANDOFF_ZH.md": "c533f09a3d3d101b7a8fcc3f2716df336e20c06b",
+      "research/uct-agent-consciousness-workspace/records/A3Y20261010_Measurand_Identity_Barrier/INCREMENT_MANIFEST.json": "c83adf4f1393fa740e6dfbe6a7c927ad1f8458e6",
+      "research/uct-agent-consciousness-workspace/records/A3Y20261010_Measurand_Identity_Barrier/PERSISTENCE_RECEIPT.json": "87c8985ae9153dd590733db22d83972f82dffac6",
+      "research/uct-agent-consciousness-workspace/records/A3Y20261010_Measurand_Identity_Barrier/RESEARCH_NOTE.md": "59fc2ad1d66f55d21704d6ac89993a657e7c24fe"
+    }
+  },
+  "workspace_readback": {
+    "master_handoff": {
+      "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+      "version": 104,
+      "sha256": "5aca18b6ef887850c9760b7f88792354bf2880289579988cc000c9c785ec1b9d",
+      "exact": true
+    },
+    "increment": {
+      "library_file_id": "libfile_258cf45f655c8191a9bafc4fa63503de",
+      "sha256": "8a8e727a43b930119f71800587a0d353a13cc726b46619193d3a48bb7166397f",
+      "exact": true,
+      "scope": "increment_only_not_full_backup"
+    },
+    "manifest": {
+      "library_file_id": "libfile_0f69244a29ec81919fc19ccb920da1c6",
+      "version": 2,
+      "sha256": "5c1f6955bef6c0af55cfe2cc4964bdeae6bf17cee4f5dd6b6b0078a73298bc07",
+      "exact": true
+    }
+  },
+  "confirmation_commit_note": "The commit containing this record is intentionally not self-addressed; its branch-head and this file are verified after the expected-SHA update."
+}

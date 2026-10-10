@@ -28,3 +28,5 @@
 ## 双份保存
 
 科学与导航已在远端提交`1f4002993a0f2bde15e12927686bf06ec8946c8d`。固定主交接同一Library身份已更新为v104并逐字节回读；29文件增量包Library ID为`libfile_258cf45f655c8191a9bafc4fa63503de`，SHA256为`8a8e727a43b930119f71800587a0d353a13cc726b46619193d3a48bb7166397f`；清单Library ID为`libfile_0f69244a29ec81919fc19ccb920da1c6`。该ZIP明确只是从A3X最终提交到A3Y科学/导航树的增量，不是完整备份。最终收据与远端回读见`PERSISTENCE_RECEIPT.json`和`FINAL_REMOTE_READBACK.json`。
+
+收据提交`572a2b6e36269f8a8c09813b6f8d5899634b39bb`已在吸收并发REV提交后以expected-SHA方式保存，六个关键文件逐字节回读一致；最终确认提交不自指其自身SHA。
