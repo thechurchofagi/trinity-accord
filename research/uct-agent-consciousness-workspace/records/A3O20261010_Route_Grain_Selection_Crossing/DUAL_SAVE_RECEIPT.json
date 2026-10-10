@@ -12,8 +12,8 @@
   },
   "library":{
     "fixed_master_handoff_id":"libfile_4175a81748fc819187fa8f5771f056fa",
-    "fixed_master_handoff_version":85,
-    "fixed_master_handoff_bytes":738561,
+    "fixed_master_handoff_version":86,
+    "fixed_master_handoff_bytes":739337,
     "increment_id":"libfile_8cb70e94b16881919fe057bb73e19332",
     "increment_name":"UCT_A3O_Increment_20261010.zip",
     "increment_bytes":188713,
@@ -24,10 +24,10 @@
     "manifest_sha256":"4a864e6f53f498305c5cec51d5acf776700594ab454f2ed074f8da4c7034be1a",
     "increment_scope":"22 repository-relative changed paths; not a complete repository or complete history backup",
     "baseline_complete_working_set_id":"libfile_f7d404c7734c8191b8257cd4fa6771f5",
-    "verification":"fixed handoff reread as version 85; ZIP and manifest materialized back and compared byte-for-byte"
+    "verification":"fixed handoff v85 reread, then verified confirmation written as v86 under the same stable identity and canonical filename; ZIP and manifest materialized back and compared byte-for-byte"
   },
   "checks":{"exact_partition_and_witness_check":true,"capsule_restore_82_members":true,"map_structural_check_1598_objects":true,"review_items_visited":1608,"semantic_reproof_complete":false},
   "failures_preserved":["route value depends on frozen grain","organizational witnesses are not physical installations","RT/error do not identify selector topology","signed J_H reliability remains absent"],
   "next":"Identify a physically accessible selector exposing live-policy multiplicity and resolution consumption under the same frozen rho in both mechanism families.",
-  "restore":"Fetch the latest branch head and verify the final receipt commit; read fixed handoff v85 and A3O HANDOFF_ZH; verify increment SHA256; run check_route_grain.py; restore UCT-MAP-v1.1.2 capsule and run audit_map.py."
+  "restore":"Fetch the latest branch head and verify the final receipt commit; read fixed handoff v86 and A3O HANDOFF_ZH; verify increment SHA256; run check_route_grain.py; restore UCT-MAP-v1.1.2 capsule and run audit_map.py."
 }

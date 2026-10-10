@@ -12,4 +12,4 @@
 
 ## 双份保存核验
 
-GitHub 科研提交 `9ebba92c2f1c51a5d1c4adb917688a1e73c15d4c` 已从远端回读。固定主交接保持 `libfile_4175a81748fc819187fa8f5771f056fa` 同一身份并更新为第85版。A3O增量包为 `libfile_8cb70e94b16881919fe057bb73e19332`，188713字节，SHA-256 `acbbf915da5d66e21e4a02c9c6ff8239606210465abf5caa4482773074eb6d03`；逐文件清单为 `libfile_8ee0c84042188191b207fe7435a28d83`。两者取回后逐字节相等。该包只含22个变更路径，不是完整仓库或全部历史；完整工作集基线仍为 `libfile_f7d404c7734c8191b8257cd4fa6771f5`。最终收据见 `DUAL_SAVE_RECEIPT.json`；收据本身的后续提交不循环纳入本增量包。
+GitHub 科研提交 `9ebba92c2f1c51a5d1c4adb917688a1e73c15d4c` 与首轮收据提交 `61eb2891aeb3342a1dff08afc08481cee081392c` 已从远端回读。固定主交接保持 `libfile_4175a81748fc819187fa8f5771f056fa` 同一身份及规范文件名并更新为第86版。A3O增量包为 `libfile_8cb70e94b16881919fe057bb73e19332`，188713字节，SHA-256 `acbbf915da5d66e21e4a02c9c6ff8239606210465abf5caa4482773074eb6d03`；逐文件清单为 `libfile_8ee0c84042188191b207fe7435a28d83`。两者取回后逐字节相等。该包只含22个变更路径，不是完整仓库或全部历史；完整工作集基线仍为 `libfile_f7d404c7734c8191b8257cd4fa6771f5`。最终收据见 `DUAL_SAVE_RECEIPT.json`；收据本身的后续提交不循环纳入本增量包。
