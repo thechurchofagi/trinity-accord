@@ -1,3 +1,10 @@
+<!-- CTD_CONTINUATION_CHECKPOINT:2026-10-10_WAITING_SIX_CONFIRMATIONS -->
+## CTD 存证续办检查点｜2026-10-10
+
+本篇 DOI `10.5281/zenodo.23279189` 已公开。10:57 UTC 新检查确认：批次顶层 `WAITING`，PDF 为 `PENDING_BITCOIN`；没有 AR paid-intent、交易回执或上传包。第二轮20分钟以内的既有日历查询已停止，Alice/Bob 报告等待六次确认，`.ots` 中仍无 Bitcoin heights。独立交易状态查询只作为链上背景保存，不代替证明。main scheduler 为 active。
+
+本篇专用存证收尾任务已实际启用；后续读取 `records/CTD20261010_Noise_Identifiability_v10/operations/CONTINUATION.md`、当前 release 批次及实际回执接续。独立 AR 回读脚本已完成静态审阅，但尚无真实 AR 交易可执行；完成版 ZIP 构建器也保持未执行。科学定稿、原始 pending 历史、当前 A3Q 主线与 next_priority 均保持原样。
+
 <!-- CTD_OPS_CHECKPOINT:2026-10-10_INITIAL_OTS -->
 # CTD v1.0.0 发表与首次 OTS 检查点
 

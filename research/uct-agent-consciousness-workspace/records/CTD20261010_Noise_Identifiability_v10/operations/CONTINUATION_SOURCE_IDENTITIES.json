@@ -1,0 +1,237 @@
+{
+  "schema": "ctd-preservation-continuation-source-identities/1",
+  "created_utc": "2026-10-10T10:59:02.932165+00:00",
+  "source_research_commit": "891433b6e91f564feeccc9f3c55cf117f2c2a3fe",
+  "copied_file_count": 38,
+  "files": [
+    {
+      "path": "operations/verification/tools/verify_public_preservation.py",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_post_publication/verify_public_preservation.py",
+      "bytes": 11385,
+      "sha256": "2e15bdbb194a590ad05640674d3a74894659d90303693de25a5529330bc25bf5"
+    },
+    {
+      "path": "operations/verification/VERIFY_PUBLIC_PRESERVATION_REVIEW.md",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_post_publication/VERIFY_PUBLIC_PRESERVATION_REVIEW.md",
+      "bytes": 5418,
+      "sha256": "79370d2a100b69381ac03d5e1fd20ab044fb483302e6ad3d41586af05fef06a5"
+    },
+    {
+      "path": "operations/CONTINUATION.md",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_post_publication/CONTINUATION.md",
+      "bytes": 6813,
+      "sha256": "847610d4ef1b07878e65db8fc9ce7afaeb1bbd129a4f3db3fd9a6a1cf90c8ddf"
+    },
+    {
+      "path": "operations/CONTINUATION_TASK_PROMPT.txt",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_post_publication/CONTINUATION_TASK_PROMPT.txt",
+      "bytes": 6231,
+      "sha256": "0c5c7b80433fb4ae0a08c4e26d8f241c11d0853662f115da409a4b03a543e7ef"
+    },
+    {
+      "path": "operations/CONTINUATION_AUTOMATION_CREATED.json",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/CONTINUATION_AUTOMATION_CREATED.json",
+      "bytes": 899,
+      "sha256": "d60c3bf0ba9e76c78d29fed24e127ba1016166f8c3d36264a9290cd8e0c89bba"
+    },
+    {
+      "path": "operations/PRESERVATION_WAITING_1057.json",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/PRESERVATION_WAITING_1057.json",
+      "bytes": 2999,
+      "sha256": "81d64fb044578d121a30543814a398b3c3e1e4a7570ba5a8783406f0b2831bcf"
+    },
+    {
+      "path": "operations/SCHEDULER_HEALTH_1058.json",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/SCHEDULER_HEALTH_1058.json",
+      "bytes": 1055,
+      "sha256": "9c6c57415763d0f380171f531f52d16860caa525aec7c790d8deea8e4c0ea50a"
+    },
+    {
+      "path": "operations/OPS_CHECKPOINT_GIT_READBACK.json",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/OPS_CHECKPOINT_GIT_READBACK.json",
+      "bytes": 547,
+      "sha256": "2c06fdee16f5f2ae391240609281cc7d9b5c428530c3ae2508dd7d60dd3d6a88"
+    },
+    {
+      "path": "operations/LIBRARY_MASTER_INITIAL_OTS_REPLACE.json",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/LIBRARY_MASTER_INITIAL_OTS_REPLACE.json",
+      "bytes": 439,
+      "sha256": "2fee653596a7cddb0cd9b75ae7322cdd532d5b52429fe52b5772394fb4be9108"
+    },
+    {
+      "path": "operations/second_calendar_watch/WATCH_RECEIPT.json",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/agent_watch_20m_20261010T103544Z/WATCH_RECEIPT.json",
+      "bytes": 19684,
+      "sha256": "f7360fc99b8e5b442e5763637b58e05fdadcf848cd4b676d5113c15014924e95"
+    },
+    {
+      "path": "operations/second_calendar_watch/WATCH_RECEIPT_BEFORE_LOG_ANNOTATION.json",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/agent_watch_20m_20261010T103544Z/WATCH_RECEIPT_BEFORE_LOG_ANNOTATION.json",
+      "bytes": 11290,
+      "sha256": "fb4b40491a39fa95656738c5c4ac9950e5c55487f0b45749b49659c466a73458"
+    },
+    {
+      "path": "operations/second_calendar_watch/attempt_01/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/agent_watch_20m_20261010T103544Z/attempt_01/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "bytes": 770,
+      "sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7"
+    },
+    {
+      "path": "operations/second_calendar_watch/attempt_01/upgrade.log",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/agent_watch_20m_20261010T103544Z/attempt_01/upgrade.log",
+      "bytes": 409,
+      "sha256": "33d70e5bd6c1f8693a570683851289834f16457eb36453c999065540b183b96c"
+    },
+    {
+      "path": "operations/second_calendar_watch/attempt_02/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/agent_watch_20m_20261010T103544Z/attempt_02/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "bytes": 770,
+      "sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7"
+    },
+    {
+      "path": "operations/second_calendar_watch/attempt_02/upgrade.log",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/agent_watch_20m_20261010T103544Z/attempt_02/upgrade.log",
+      "bytes": 409,
+      "sha256": "33d70e5bd6c1f8693a570683851289834f16457eb36453c999065540b183b96c"
+    },
+    {
+      "path": "operations/second_calendar_watch/attempt_03/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/agent_watch_20m_20261010T103544Z/attempt_03/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "bytes": 770,
+      "sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7"
+    },
+    {
+      "path": "operations/second_calendar_watch/attempt_03/upgrade.log",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/agent_watch_20m_20261010T103544Z/attempt_03/upgrade.log",
+      "bytes": 409,
+      "sha256": "33d70e5bd6c1f8693a570683851289834f16457eb36453c999065540b183b96c"
+    },
+    {
+      "path": "operations/second_calendar_watch/attempt_04/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/agent_watch_20m_20261010T103544Z/attempt_04/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "bytes": 770,
+      "sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7"
+    },
+    {
+      "path": "operations/second_calendar_watch/attempt_04/upgrade.log",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/agent_watch_20m_20261010T103544Z/attempt_04/upgrade.log",
+      "bytes": 409,
+      "sha256": "33d70e5bd6c1f8693a570683851289834f16457eb36453c999065540b183b96c"
+    },
+    {
+      "path": "operations/second_calendar_watch/attempt_05/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/agent_watch_20m_20261010T103544Z/attempt_05/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "bytes": 770,
+      "sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7"
+    },
+    {
+      "path": "operations/second_calendar_watch/attempt_05/upgrade.log",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/agent_watch_20m_20261010T103544Z/attempt_05/upgrade.log",
+      "bytes": 409,
+      "sha256": "33d70e5bd6c1f8693a570683851289834f16457eb36453c999065540b183b96c"
+    },
+    {
+      "path": "operations/second_calendar_watch/attempt_06/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/agent_watch_20m_20261010T103544Z/attempt_06/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "bytes": 770,
+      "sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7"
+    },
+    {
+      "path": "operations/second_calendar_watch/attempt_06/upgrade.log",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/agent_watch_20m_20261010T103544Z/attempt_06/upgrade.log",
+      "bytes": 409,
+      "sha256": "33d70e5bd6c1f8693a570683851289834f16457eb36453c999065540b183b96c"
+    },
+    {
+      "path": "operations/second_calendar_watch/attempt_07/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/agent_watch_20m_20261010T103544Z/attempt_07/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "bytes": 770,
+      "sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7"
+    },
+    {
+      "path": "operations/second_calendar_watch/attempt_07/upgrade.log",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/agent_watch_20m_20261010T103544Z/attempt_07/upgrade.log",
+      "bytes": 487,
+      "sha256": "fa6dbf2b25350d038a5ba1a6c801c521704656795769b78142b10c4d5f17d39f"
+    },
+    {
+      "path": "operations/second_calendar_watch/attempt_08/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/agent_watch_20m_20261010T103544Z/attempt_08/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "bytes": 770,
+      "sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7"
+    },
+    {
+      "path": "operations/second_calendar_watch/attempt_08/upgrade.log",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/agent_watch_20m_20261010T103544Z/attempt_08/upgrade.log",
+      "bytes": 487,
+      "sha256": "fa6dbf2b25350d038a5ba1a6c801c521704656795769b78142b10c4d5f17d39f"
+    },
+    {
+      "path": "operations/second_calendar_watch/attempt_09/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/agent_watch_20m_20261010T103544Z/attempt_09/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "bytes": 770,
+      "sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7"
+    },
+    {
+      "path": "operations/second_calendar_watch/attempt_09/upgrade.log",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/agent_watch_20m_20261010T103544Z/attempt_09/upgrade.log",
+      "bytes": 487,
+      "sha256": "fa6dbf2b25350d038a5ba1a6c801c521704656795769b78142b10c4d5f17d39f"
+    },
+    {
+      "path": "operations/second_calendar_watch/attempt_10/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/agent_watch_20m_20261010T103544Z/attempt_10/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "bytes": 770,
+      "sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7"
+    },
+    {
+      "path": "operations/second_calendar_watch/attempt_10/upgrade.log",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/agent_watch_20m_20261010T103544Z/attempt_10/upgrade.log",
+      "bytes": 565,
+      "sha256": "bcc680fa751cfd50323035ee1d10cdcddb4809b42cf7e4ec21e21102f6e8fbc3"
+    },
+    {
+      "path": "operations/chain_context/ROOT_CHAIN_OBSERVATION.json",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/ROOT_CHAIN_OBSERVATION.json",
+      "bytes": 375,
+      "sha256": "1ba8366923632ed49a267d26da97c4cb0e9b002152f9f0bf5ef029ea22f6969e"
+    },
+    {
+      "path": "operations/chain_context/ROOT_CHAIN_OBSERVATION_TRACE.jsonl",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/ROOT_CHAIN_OBSERVATION_TRACE.jsonl",
+      "bytes": 1992,
+      "sha256": "8463f501f7de7f74fc76f48ce8e96820e25d06239603826db55a3edce4bb0d02"
+    },
+    {
+      "path": "operations/chain_context/ROOT_CHAIN_OBSERVATION_1048.json",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/ROOT_CHAIN_OBSERVATION_1048.json",
+      "bytes": 854,
+      "sha256": "b82eca17593019d31634618227169215cef10bfe2c4649dd0bfb6dc0181511fc"
+    },
+    {
+      "path": "operations/chain_context/ROOT_CHAIN_OBSERVATION_1048_TRACE.jsonl",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/ROOT_CHAIN_OBSERVATION_1048_TRACE.jsonl",
+      "bytes": 608,
+      "sha256": "fba02e98c59445e0bb55e9ed655ef9565bbc564b897ae6ff7de7ec6ea19d9484"
+    },
+    {
+      "path": "operations/chain_context/ROOT_ANCHOR_TRANSACTION_OBSERVATION_1050.json",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/ROOT_ANCHOR_TRANSACTION_OBSERVATION_1050.json",
+      "bytes": 1688,
+      "sha256": "7ab40961d457baa3879574e880c260445f1971e5816fa83b1e202144753a422c"
+    },
+    {
+      "path": "operations/watch_sources/monitor_existing_calendars.py",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/monitor_existing_calendars.py",
+      "bytes": 5846,
+      "sha256": "8ccae39dd4fb3ee333f608680919af6685f0b5951a01fa8f547bb1ea59db41e8"
+    },
+    {
+      "path": "operations/watch_sources/monitor_existing_calendars_20m.py",
+      "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/monitor_existing_calendars_20m.py",
+      "bytes": 5952,
+      "sha256": "05e4cca4d357100b7e6805b733f98310982747a3dd419bda2ce816fcc3675000"
+    }
+  ],
+  "scope": "Exact copies of real waiting observations, enabled continuation configuration, and statically reviewed future verification tools. No claim of Bitcoin or AR completion."
+}

@@ -1,0 +1,10 @@
+{
+  "state": "ALL_73_OPERATIONAL_CHECKPOINT_FILES_REMOTE_FETCH_BYTE_READBACK_PASS",
+  "at_utc": "2026-10-10T10:39:00.829884+00:00",
+  "commit": "891433b6e91f564feeccc9f3c55cf117f2c2a3fe",
+  "tree": "de30018ec494b965bac9135e6514acbca5625b69",
+  "files": 73,
+  "scope": "Publication checks, successful science save, readable/exact delivery identities, initial pending OTS proof and prepared completion materials. No Bitcoin or AR completion claim.",
+  "scientific_base_commit": "fda7a0ae491c4bf3a7c9bc80ccab38acb3984299",
+  "worktree_clean": true
+}

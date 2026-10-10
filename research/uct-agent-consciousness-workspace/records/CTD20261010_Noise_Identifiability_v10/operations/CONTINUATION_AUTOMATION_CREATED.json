@@ -1,0 +1,18 @@
+{
+  "schema": "ctd-preservation-completion-watch-creation/1",
+  "state": "CREATED_ENABLED",
+  "recorded_from": "Actual automations.create result",
+  "automation_id": "6aca19710ac4819189d5a98c1a91ead3",
+  "title": "TA26 存证收尾",
+  "schedule": "BEGIN:VEVENT\nDTSTART:20261010T105541Z\nRRULE:FREQ=HOURLY\nEND:VEVENT",
+  "timing_mode": "condition_watch",
+  "default_timezone": "Asia/Shanghai",
+  "is_enabled": true,
+  "created_or_updated_utc": "2026-10-10T10:54:41.170056+00:00",
+  "conversation_id": "6ac9dd33-59ec-83e8-ba4a-06ea208c961c",
+  "prompt_sha256": "0c5c7b80433fb4ae0a08c4e26d8f241c11d0853662f115da409a4b03a543e7ef",
+  "scope": "Finish only the already-authorized TA26 fixed-version DOI→OTS→AR chain and final delivery; no change to other tasks.",
+  "completion_state": "NOT_YET_VERIFIED",
+  "ots_state": "PENDING_BITCOIN",
+  "arweave_state": "NOT_STARTED_AT_LAST_VERIFIED_BATCH"
+}

@@ -1,0 +1,4 @@
+{"bytes":6,"elapsed_ms":4869,"event":"provider_response","path":"/blocks/tip/height","provider":"blockstream","status":200,"ts":"2026-10-10T10:48:02Z"}
+{"bytes":6,"elapsed_ms":3371,"event":"provider_response","path":"/blocks/tip/height","provider":"mempool","status":200,"ts":"2026-10-10T10:48:05Z"}
+{"conservative_height":970752,"event":"tip_consensus","heights":{"blockstream":970752,"mempool":970752},"ts":"2026-10-10T10:48:05Z"}
+{"elapsed_ms":3370,"error":"HTTPError: HTTP Error 404: Not Found","event":"provider_error","path":"/block-height/970752","provider":"blockstream","ts":"2026-10-10T10:48:09Z"}

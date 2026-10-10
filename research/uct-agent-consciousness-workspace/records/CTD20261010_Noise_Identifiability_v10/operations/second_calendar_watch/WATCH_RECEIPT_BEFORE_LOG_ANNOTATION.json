@@ -1,0 +1,244 @@
+{
+  "schema": "ctd.pending-ots-calendar-watch.v1",
+  "started_at_utc": "2026-10-10T10:35:44.647754+00:00",
+  "source_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/preservation_attempt_1/proofs/TA-TR-2026-26/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+  "source_sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+  "pdf_sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94",
+  "client_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/venv/bin/ots",
+  "client_version": "0.7.2",
+  "cadence_seconds": 120,
+  "maximum_watch_seconds": 1200,
+  "maximum_attempts": 10,
+  "per_query_timeout_seconds": 45,
+  "state": "WATCH_LIMIT_REACHED_NO_BITCOIN_ATTESTATION",
+  "attempts": [
+    {
+      "attempt": 1,
+      "started_at_utc": "2026-10-10T10:35:44.652131+00:00",
+      "copy_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/agent_watch_20m_20261010T103544Z/attempt_01/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "before": {
+        "bytes": 770,
+        "proof_sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+        "pdf_sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94",
+        "bitcoin_heights": [],
+        "pending_calendar_attestations": 4
+      },
+      "exit_code": 1,
+      "completed_at_utc": "2026-10-10T10:35:58.857107+00:00",
+      "after": {
+        "bytes": 770,
+        "proof_sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+        "pdf_sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94",
+        "bitcoin_heights": [],
+        "pending_calendar_attestations": 4
+      },
+      "original_proof_unchanged": true
+    },
+    {
+      "attempt": 2,
+      "started_at_utc": "2026-10-10T10:37:44.649951+00:00",
+      "copy_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/agent_watch_20m_20261010T103544Z/attempt_02/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "before": {
+        "bytes": 770,
+        "proof_sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+        "pdf_sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94",
+        "bitcoin_heights": [],
+        "pending_calendar_attestations": 4
+      },
+      "exit_code": 1,
+      "completed_at_utc": "2026-10-10T10:38:01.869122+00:00",
+      "after": {
+        "bytes": 770,
+        "proof_sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+        "pdf_sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94",
+        "bitcoin_heights": [],
+        "pending_calendar_attestations": 4
+      },
+      "original_proof_unchanged": true
+    },
+    {
+      "attempt": 3,
+      "started_at_utc": "2026-10-10T10:39:44.651129+00:00",
+      "copy_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/agent_watch_20m_20261010T103544Z/attempt_03/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "before": {
+        "bytes": 770,
+        "proof_sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+        "pdf_sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94",
+        "bitcoin_heights": [],
+        "pending_calendar_attestations": 4
+      },
+      "exit_code": 1,
+      "completed_at_utc": "2026-10-10T10:39:57.636774+00:00",
+      "after": {
+        "bytes": 770,
+        "proof_sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+        "pdf_sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94",
+        "bitcoin_heights": [],
+        "pending_calendar_attestations": 4
+      },
+      "original_proof_unchanged": true
+    },
+    {
+      "attempt": 4,
+      "started_at_utc": "2026-10-10T10:41:44.649114+00:00",
+      "copy_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/agent_watch_20m_20261010T103544Z/attempt_04/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "before": {
+        "bytes": 770,
+        "proof_sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+        "pdf_sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94",
+        "bitcoin_heights": [],
+        "pending_calendar_attestations": 4
+      },
+      "exit_code": 1,
+      "completed_at_utc": "2026-10-10T10:42:01.651601+00:00",
+      "after": {
+        "bytes": 770,
+        "proof_sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+        "pdf_sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94",
+        "bitcoin_heights": [],
+        "pending_calendar_attestations": 4
+      },
+      "original_proof_unchanged": true
+    },
+    {
+      "attempt": 5,
+      "started_at_utc": "2026-10-10T10:43:44.650015+00:00",
+      "copy_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/agent_watch_20m_20261010T103544Z/attempt_05/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "before": {
+        "bytes": 770,
+        "proof_sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+        "pdf_sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94",
+        "bitcoin_heights": [],
+        "pending_calendar_attestations": 4
+      },
+      "exit_code": 1,
+      "completed_at_utc": "2026-10-10T10:43:59.096259+00:00",
+      "after": {
+        "bytes": 770,
+        "proof_sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+        "pdf_sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94",
+        "bitcoin_heights": [],
+        "pending_calendar_attestations": 4
+      },
+      "original_proof_unchanged": true
+    },
+    {
+      "attempt": 6,
+      "started_at_utc": "2026-10-10T10:45:44.657699+00:00",
+      "copy_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/agent_watch_20m_20261010T103544Z/attempt_06/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "before": {
+        "bytes": 770,
+        "proof_sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+        "pdf_sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94",
+        "bitcoin_heights": [],
+        "pending_calendar_attestations": 4
+      },
+      "exit_code": 1,
+      "completed_at_utc": "2026-10-10T10:45:58.471842+00:00",
+      "after": {
+        "bytes": 770,
+        "proof_sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+        "pdf_sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94",
+        "bitcoin_heights": [],
+        "pending_calendar_attestations": 4
+      },
+      "original_proof_unchanged": true
+    },
+    {
+      "attempt": 7,
+      "started_at_utc": "2026-10-10T10:47:44.649802+00:00",
+      "copy_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/agent_watch_20m_20261010T103544Z/attempt_07/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "before": {
+        "bytes": 770,
+        "proof_sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+        "pdf_sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94",
+        "bitcoin_heights": [],
+        "pending_calendar_attestations": 4
+      },
+      "exit_code": 1,
+      "completed_at_utc": "2026-10-10T10:48:00.325470+00:00",
+      "after": {
+        "bytes": 770,
+        "proof_sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+        "pdf_sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94",
+        "bitcoin_heights": [],
+        "pending_calendar_attestations": 4
+      },
+      "original_proof_unchanged": true
+    },
+    {
+      "attempt": 8,
+      "started_at_utc": "2026-10-10T10:49:44.651850+00:00",
+      "copy_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/agent_watch_20m_20261010T103544Z/attempt_08/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "before": {
+        "bytes": 770,
+        "proof_sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+        "pdf_sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94",
+        "bitcoin_heights": [],
+        "pending_calendar_attestations": 4
+      },
+      "exit_code": 1,
+      "completed_at_utc": "2026-10-10T10:49:59.681349+00:00",
+      "after": {
+        "bytes": 770,
+        "proof_sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+        "pdf_sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94",
+        "bitcoin_heights": [],
+        "pending_calendar_attestations": 4
+      },
+      "original_proof_unchanged": true
+    },
+    {
+      "attempt": 9,
+      "started_at_utc": "2026-10-10T10:51:44.652345+00:00",
+      "copy_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/agent_watch_20m_20261010T103544Z/attempt_09/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "before": {
+        "bytes": 770,
+        "proof_sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+        "pdf_sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94",
+        "bitcoin_heights": [],
+        "pending_calendar_attestations": 4
+      },
+      "exit_code": 1,
+      "completed_at_utc": "2026-10-10T10:51:59.485626+00:00",
+      "after": {
+        "bytes": 770,
+        "proof_sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+        "pdf_sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94",
+        "bitcoin_heights": [],
+        "pending_calendar_attestations": 4
+      },
+      "original_proof_unchanged": true
+    },
+    {
+      "attempt": 10,
+      "started_at_utc": "2026-10-10T10:53:44.650267+00:00",
+      "copy_path": "/workspace/scratch/5b73aae6b1e4/ctd_publication_operations/ots_local/agent_watch_20m_20261010T103544Z/attempt_10/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+      "before": {
+        "bytes": 770,
+        "proof_sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+        "pdf_sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94",
+        "bitcoin_heights": [],
+        "pending_calendar_attestations": 4
+      },
+      "exit_code": 1,
+      "completed_at_utc": "2026-10-10T10:53:58.820258+00:00",
+      "after": {
+        "bytes": 770,
+        "proof_sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+        "pdf_sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94",
+        "bitcoin_heights": [],
+        "pending_calendar_attestations": 4
+      },
+      "original_proof_unchanged": true
+    }
+  ],
+  "boundary": "Local upgrade only. Bitcoin attestation presence is not official Bitcoin verification or paid archival completion.",
+  "new_stamp": false,
+  "workflow_dispatch": false,
+  "wallet_access": false,
+  "payment": false,
+  "completed_at_utc": "2026-10-10T10:53:58.821273+00:00",
+  "elapsed_seconds": 1094.1736387400015,
+  "original_proof_unchanged": true
+}

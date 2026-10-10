@@ -1,0 +1,38 @@
+{
+  "state": "CALENDAR_REPORTED_ANCHOR_TRANSACTION_CONTEXT",
+  "tx_id": "ea9ac90f9c9a850808a0d2c8d9c3d2200634491668cc2d999547439b21f2dbbe",
+  "source_log": "agent_watch_20m_20261010T103544Z/attempt_08/upgrade.log",
+  "calendar_statement": "waiting for 6 confirmations",
+  "observations": [
+    {
+      "provider": "blockstream",
+      "url": "https://blockstream.info/api/tx/ea9ac90f9c9a850808a0d2c8d9c3d2200634491668cc2d999547439b21f2dbbe/status",
+      "requested_at_utc": "2026-10-10T10:50:32.848635+00:00",
+      "status": 200,
+      "body_sha256": "47af04ae6fa5f0b93ff2214704d325ebd203c7dc4fbd250a6cdd868cafa8a603",
+      "body": {
+        "confirmed": true,
+        "block_height": 970752,
+        "block_hash": "00000000000000000002060f5d031a8e26e1f4504f8a50be0fd44e2cf7511214",
+        "block_time": 1791629250
+      },
+      "completed_at_utc": "2026-10-10T10:50:38.015509+00:00"
+    },
+    {
+      "provider": "mempool",
+      "url": "https://mempool.space/api/tx/ea9ac90f9c9a850808a0d2c8d9c3d2200634491668cc2d999547439b21f2dbbe/status",
+      "requested_at_utc": "2026-10-10T10:50:32.853497+00:00",
+      "status": 200,
+      "body_sha256": "47af04ae6fa5f0b93ff2214704d325ebd203c7dc4fbd250a6cdd868cafa8a603",
+      "body": {
+        "confirmed": true,
+        "block_height": 970752,
+        "block_hash": "00000000000000000002060f5d031a8e26e1f4504f8a50be0fd44e2cf7511214",
+        "block_time": 1791629250
+      },
+      "completed_at_utc": "2026-10-10T10:50:38.577824+00:00"
+    }
+  ],
+  "bitcoin_proof_verified": false,
+  "scope": "Read-only provider transaction status. Does not itself cryptographically bind the PDF to a block or replace the required OTS verification."
+}

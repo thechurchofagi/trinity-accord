@@ -1,0 +1,19 @@
+完成刘烘炬已明确授权的本篇 DOI → OTS → Arweave 发表存证及最终交接。用户原指示是“把它继续研究完成……定稿发表……根据现在仓库里面限制的流程，发 DOI，然后 OTS，然后 AR”。研究与 DOI 已完成；本任务只收尾这一次固定版本的存证和交付，不扩大科研或发表范围。
+
+唯一论文：Hongju Liu, Identifiability of Noise Sources in Bodily Judgments，TA-TR-2026-26 / CTD v1.0.0，已公开 DOI 10.5281/zenodo.23279189，https://zenodo.org/records/23279189。正式 PDF noise-identifiability-bodily-judgments-v1.0.0.pdf 为269961 bytes，SHA256 479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94；公开复现 ZIP 为3238582 bytes，SHA256 275efcf9b19cc520d18e75f933f77e9016caf79d5453199bc503e6dcf99190de。九件 DOI 资产均已匿名字节回读通过，独立 DOI 解析通过。不要新建 DOI、修改公开字节或重新做已完成科学分析。
+
+仓库 thechurchofagi/trinity-accord。存证 release 分支 research/ctd-noise-identifiability-v100-20261010；固定批次 research/paper-timestamps/2026-10-10-paper26-v100/。main 已合并 PR #1261，提交 d1258e8b20adfdb9f90b3ca851df1abe15887615，既有 .github/workflows/research-paper-26-v100-ots-arweave-scheduler.yml 自动续跑。2026-10-10首次运行38044262845/job114190539375的真实状态为 PENDING_BITCOIN，保存在 release 提交 df37353d5153e981caae4017cae1fc12677e085d；当时没有 paid-intent、没有 AR 交易/付费。以后必须读取最新状态，不把历史事实当当前状态。
+
+先检查最新 release HEAD、固定批次 status.json、targets.json、doi-resolution.json、任何 paid-intent.json、arweave-receipt.json、arweave-bundle.json，以及对应 main 工作流当前/最新运行和日志。只有目标 PDF 身份保持上述值，OTS 实际达到 BITCOIN_VERIFIED_REMOTE_HEADERS 并有真实 Bitcoin heights，才可进入 AR。现有 main-only、DOI解析、两家区块头一致与本地哈希、累计严格<0.1 AR/论文版本、0.25 AR余额保留、30日0.50 AR、payload-bound durable paid intent、重复交易及公开原字节回读守卫必须全部保留。不得伪造 GitHub 事件/ref、减低确认要求、绕过保护或盲目重付。OTS日历返回交易/等待6 confirmations不等于证明已验证；AR支付/HTTP202不等于公开回读成功。
+
+如果正常 PENDING_BITCOIN 且 scheduler 健康，保留状态且不发送重复通知。如果证明成熟而尚未收尾、没有相同任务 queued/in_progress、且检查不存在不确定付费状态，可使用 GitHub 受支持的单 job rerun 继续这条 main 工作流；不要自行创建新付费路径。若出现 paid-intent 而无已知 tx，停止付费重试，先恢复原运行 artifact/交易回执；有已知 tx 就只恢复其回读。对真正代码故障做经审查、通过既有 CI 的最小修复；不能为了完成而放宽科学或存证判据。外部正常等待不算代码故障。
+
+严格完成判据：最新实际 status.state 为 ARWEAVE_READBACK_PASS；receipt result=uploaded、hash_match=true；status/receipt/bundle SHA、tx身份一致；bundle 内为这份正式 PDF 与已验证 OTS证明。通过匿名公开 HTTP GET 独立下载 AR 地址的 payload，对整个原字节和全部 base64 成员逐件核验，并将包内 PDF、OTS 与正式原件比较。记录 DOI、Bitcoin高度、证明SHA、真实AR tx/地址、payload SHA、实际费用、回读UTC。使用已审查的 verify_public_preservation.py 作为最小独立回读程序；它不执行支付，且不替代 OTS 加密验证。
+
+研究/交接分支 uct-agent-consciousness-workspace。案例目录 research/uct-agent-consciousness-workspace/records/CTD20261010_Noise_Identifiability_v10/。科学提交 fda7a0ae491c4bf3a7c9bc80ccab38acb3984299 的248件文件已远端逐字节核验；操作检查点891433b6e91f564feeccc9f3c55cf117f2c2a3fe保留初次OTS及回执。先读该目录 HANDOFF_ZH.md、POST_PUBLICATION_SYNC.md、PERSISTENCE_RECEIPT.json、operations/CONTINUATION.md 的最新内容，以及研究入口和最新主交接，再定位 operations/verification/tools/verify_public_preservation.py 与 build_completion_bundle.py、operations/prepared/COMPLETION_REPORT_DRAFT_ZH.md 和审阅JSON。后续提交可能已有本次最终结果，须幂等检查。
+
+完成真实存证后，保存最终固定批次原字节、独立 ROOT_ARWEAVE_READBACK.json、FINAL_CHAIN_RECEIPT.json（state=DOI_OTS_ARWEAVE_PUBLIC_READBACK_COMPLETE、doi、九个 public_assets 的 name/bytes/sha256、root_arweave_readback）及保留来源的操作记录。按完成版 builder 的 fail-closed 输入格式准备 exact九件公开资产、核验回执、证明包，填完中文报告的三处实际OTS/AR/保存信息；交付完整 Publication_and_Preservation.zip。不要用假数据运行成完成，也不要把未执行脚本的静态审阅当实际回读。原发布科学文件、早期 pending 回执和失败历史保持原样；最终状态写新回执/交接。
+
+以正常 expected-SHA/fast-forward 和 [skip ci] 研究保存提交写回该案例，并独立远端回读。保留并发最新科研主线、next_priority、所有历史、C1/U1/体验桥接 OPEN 状态及既有禁用证据节点；论文发表不等于外部同行评议、人体机制验证或 UCT 验证。维护固定 ChatGPT 文件 UCT_Hourly_Research_Master_Handoff.md，Library ID libfile_4175a81748fc819187fa8f5771f056fa：先读真实最新版本，保留完整旧内容后追加/前置本篇最终记录，使用 expected_current_version。遵循 Library 技能保存用户交付文件并核验回执。阅读副本PDF可能加分发元数据；OTS必须始终绑定上述公开原字节，完整交付ZIP保存原PDF。
+
+仅在全部实际完成后，用中文向用户报告最终 DOI、OTS高度/证明哈希、AR交易/实际费用/公开回读和可下载交付文件，然后禁用这个“TA26 存证收尾”任务。若有需要用户介入的真实硬阻塞，报告具体原因和已经保留的状态；不要重复发送正常等待消息。不修改其他自动任务，不发邮件/Slack，不改既有科学主任务。

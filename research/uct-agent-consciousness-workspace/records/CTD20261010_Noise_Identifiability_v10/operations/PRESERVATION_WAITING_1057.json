@@ -1,0 +1,76 @@
+{
+  "schema": "ctd-preservation-waiting-observation/1",
+  "checked_through_utc": "2026-10-10 10:57:34 UTC",
+  "state": "DOI_PUBLIC_OTS_PENDING_ARWEAVE_NOT_STARTED",
+  "release_ref": "refs/heads/research/ctd-noise-identifiability-v100-20261010",
+  "release_commit": "df37353d5153e981caae4017cae1fc12677e085d",
+  "batch_status": {
+    "batch": "2026-10-10-paper26-v100",
+    "files": [
+      {
+        "bitcoin_heights": [],
+        "bytes": 269961,
+        "doi": "10.5281/zenodo.23279189",
+        "name": "noise-identifiability-bodily-judgments-v1.0.0.pdf",
+        "pending_calendar_attestations": 4,
+        "proof": "research/paper-timestamps/2026-10-10-paper26-v100/proofs/TA-TR-2026-26/noise-identifiability-bodily-judgments-v1.0.0.pdf.ots",
+        "proof_sha256": "a407ef8f904c9bb67d49d3017d8acecebfe8a7e2c082a31dfe3a35f57cc762c7",
+        "report": "TA-TR-2026-26",
+        "role": "Complete English methods and retrospective secondary-analysis preprint with finite-sample model calculations",
+        "sha256": "479b4f2403ad7416f99f7676533fd4a8b9efed1bb289c7fcd52f64a09bf81c94",
+        "state": "PENDING_BITCOIN"
+      }
+    ],
+    "paper_count": 1,
+    "pdf_count": 1,
+    "schema": "trinityaccord.paper-ots-status.v1",
+    "state": "WAITING",
+    "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
+  },
+  "batch_top_level_files": [
+    {
+      "name": "doi-resolution.json",
+      "path": "research/paper-timestamps/2026-10-10-paper26-v100/doi-resolution.json",
+      "git_sha": "78c17ceb9c36dd6955414c237e0ab2650123052a",
+      "bytes": 220,
+      "type": "file"
+    },
+    {
+      "name": "proofs",
+      "path": "research/paper-timestamps/2026-10-10-paper26-v100/proofs",
+      "git_sha": "9e83f8e6255a0d45962fec7c670d560e1e659fe0",
+      "bytes": 0,
+      "type": "dir"
+    },
+    {
+      "name": "status.json",
+      "path": "research/paper-timestamps/2026-10-10-paper26-v100/status.json",
+      "git_sha": "c1c9d058b4be7844e0cfa28a445c83de9cc6bfcb",
+      "bytes": 1007,
+      "type": "file"
+    },
+    {
+      "name": "targets.json",
+      "path": "research/paper-timestamps/2026-10-10-paper26-v100/targets.json",
+      "git_sha": "2dfd0edecc0c6216b88af70ddd6d6fb90ae2a422",
+      "bytes": 797,
+      "type": "file"
+    }
+  ],
+  "main_workflow_runs": [
+    {
+      "id": 38044262845,
+      "run_attempt": 1,
+      "head_sha": "d1258e8b20adfdb9f90b3ca851df1abe15887615",
+      "status": "completed",
+      "conclusion": "success",
+      "event": "push",
+      "updated_at": "2026-10-10T10:16:42Z"
+    }
+  ],
+  "no_paid_intent_or_transaction_receipt_observed": true,
+  "rerun_or_paid_actions_in_this_check": false,
+  "scope": "Actual current waiting state. The normal waiting iteration does not establish Bitcoin verification or AR publication.",
+  "independent_calendar_watch": "second_calendar_watch/WATCH_RECEIPT.json",
+  "independent_chain_context": "chain_context/ROOT_ANCHOR_TRANSACTION_OBSERVATION_1050.json"
+}

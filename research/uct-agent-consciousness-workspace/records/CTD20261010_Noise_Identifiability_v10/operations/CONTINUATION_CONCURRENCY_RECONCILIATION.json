@@ -1,0 +1,44 @@
+{
+  "schema": "ctd-preservation-concurrent-research-reconciliation/1",
+  "state": "LOCAL_SEMANTIC_RECONCILIATION_PASS",
+  "at_utc": "2026-10-10T11:02:37.348106+00:00",
+  "original_preparation_base": "891433b6e91f564feeccc9f3c55cf117f2c2a3fe",
+  "concurrent_science_commit": "4369bc6b2cd3dc3fa44df9cf5135aab44ffcf68a",
+  "concurrent_science_case": "A3Q20261010_Selector_Ancestry_Dominance",
+  "method": "Separate detached worktree; copy new case-operation files; add only new preservation keys to latest JSON; prepend/append operational text while retaining all current bytes. No checkout/reset of the original staged worktree.",
+  "protected_json_fields": {
+    "CURRENT_STATE.json": {
+      "all_existing_fields_except_added_preservation_keys_retained": true,
+      "next_priority": "Specify one intervention-and-readout contract that distinguishes an actually live losing policy from a stored idle policy and verifies that both policies enter one resolution event which causally contributes to dispatch in the same frozen-rho trial. Stop if same-instance causal ancestry cannot be verified."
+    },
+    "RESEARCH_SESSION_LOG_INDEX.json": {
+      "all_existing_fields_except_added_preservation_keys_retained": true,
+      "next_priority": null
+    }
+  },
+  "new_a3q_science_files_modified": false,
+  "ots_bitcoin_verified": false,
+  "arweave_uploaded": false,
+  "remote_save_state": "PENDING",
+  "latest_reconciled_base": "32fad857bb609f101159d0ac179c397b8bf2599e",
+  "additional_concurrent_receipt_commits": [
+    "0f990beb52bb1b7ec5ab2f3604b55b926c98c716",
+    "e2398a37068a202021c05577861491836a147566"
+  ],
+  "latest_base_current_state_json_parsed": true,
+  "additional_current_state_fields_preserved": [
+    "latest_activity_persistence",
+    "latest_persistence_receipt"
+  ],
+  "updated_at_utc": "2026-10-10T11:08:59.388053+00:00",
+  "final_remote_write_scope": "Only CTD case operations and its own HANDOFF_ZH/POST_PUBLICATION_SYNC. Proposed root CURRENT_STATE, RESEARCH_SESSION_LOG_INDEX and HANDOFF changes are omitted; latest concurrent root navigation is preserved exactly.",
+  "current_science": "A3Q20261010",
+  "current_science_persistence": {
+    "status": "GITHUB_SCIENCE_COMMIT_AND_LIBRARY_V90_ROUNDTRIP_VERIFIED; TRUNCATED_CURRENT_STATE_RECEIPT_DETECTED_AND_REPAIRED; RECEIPT_COMMIT_SELF_RECORDED_BY_BRANCH_HEAD",
+    "receipt": "records/A3Q20261010_Selector_Ancestry_Dominance/DUAL_SAVE_RECEIPT.json",
+    "github_science_commit": "4369bc6b2cd3dc3fa44df9cf5135aab44ffcf68a",
+    "github_current_state_repair_commit": "e2398a37068a202021c05577861491836a147566",
+    "library_master_version": 90,
+    "library_increment_id": "libfile_33d55e4191d48191ae2c9c2fa4cf2875"
+  }
+}

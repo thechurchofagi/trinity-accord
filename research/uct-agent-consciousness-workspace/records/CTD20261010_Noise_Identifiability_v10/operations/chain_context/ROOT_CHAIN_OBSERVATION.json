@@ -1,0 +1,8 @@
+{
+  "state": "TWO_PROVIDER_TIP_AND_HEADER_READ_PASS",
+  "checked_utc": "2026-10-10T10:30:14.710921+00:00",
+  "height": 970750,
+  "block_hash": "00000000000000000001e1e38c6d266011fd7233a0a91571d4cc9c8bbffc1807",
+  "block_header_time_utc": "2026-10-10T10:07:58+00:00",
+  "purpose": "Read-only context for pending timestamp maturity; this does not bind the paper to a block."
+}

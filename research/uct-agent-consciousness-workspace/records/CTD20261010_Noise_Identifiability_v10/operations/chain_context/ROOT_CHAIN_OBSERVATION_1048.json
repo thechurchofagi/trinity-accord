@@ -1,0 +1,24 @@
+{
+  "state": "TIP_OBSERVED_TARGET_HEADER_LOOKUP_UNAVAILABLE",
+  "recorded_at_utc": "2026-10-10T10:48:35.541437+00:00",
+  "tip_observation": {
+    "conservative_height": 970752,
+    "event": "tip_consensus",
+    "heights": {
+      "blockstream": 970752,
+      "mempool": 970752
+    },
+    "ts": "2026-10-10T10:48:05Z"
+  },
+  "failure": {
+    "elapsed_ms": 3370,
+    "error": "HTTPError: HTTP Error 404: Not Found",
+    "event": "provider_error",
+    "path": "/block-height/970752",
+    "provider": "blockstream",
+    "ts": "2026-10-10T10:48:09Z"
+  },
+  "trace_sha256": "fba02e98c59445e0bb55e9ed655ef9565bbc564b897ae6ff7de7ec6ea19d9484",
+  "bitcoin_proof_verified": false,
+  "scope": "Read-only chain context. Target height lookup returned HTTP 404. No paper-to-block binding, OTS verification, workflow rerun, or payment follows from this observation."
+}
