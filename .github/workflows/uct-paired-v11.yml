@@ -1,0 +1,126 @@
+name: UCT paired v1.1 guarded release
+on:
+  push:
+    branches: [research/uct-ab-v1-1-20260929]
+    paths:
+      - '.github/workflows/uct-paired-v11.yml'
+      - 'research/uct-paired-v1.1/trigger.json'
+permissions:
+  contents: write
+concurrency:
+  group: uct-paired-v11-release
+  cancel-in-progress: false
+jobs:
+  reserve:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[uct11-reserve]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/uct-ab-v1-1-20260929
+          fetch-depth: 1
+          show-progress: false
+      - name: Reconcile and reserve successors; no publication
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: python3 research/uct-paired-v1.1/reconcile_reservations.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: uct-v11-reservation
+          path: |
+            research/uct-paired-v1.1/deposit-*.json
+            research/uct-paired-v1.1/newversion-*.json
+            research/uct-paired-v1.1/reconciliation-*.json
+            research/uct-paired-v1.1/prior-public-*.json
+          retention-days: 90
+  build:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[uct11-build]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/uct-ab-v1-1-20260929
+          fetch-depth: 1
+          show-progress: false
+      - name: Install document toolchain
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends pandoc texlive-xetex texlive-latex-extra texlive-fonts-recommended fonts-dejavu lmodern poppler-utils
+      - name: Assemble, verify and render final DOI PDFs
+        env:
+          SOURCE_DATE_EPOCH: '1790636400'
+          FORCE_SOURCE_DATE: '1'
+          PYTHONHASHSEED: '0'
+        run: python3 research/uct-paired-v1.1/prepare.py
+      - name: Persist prepared artifacts only
+        if: always()
+        run: |
+          find research/uct-paired-v1.1 -type d -name __pycache__ -prune -exec rm -rf {} +
+          git config user.name trinity-research-release-bot
+          git config user.email actions@github.com
+          git add -- research/uct-paired-v1.1
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'research: preserve UCT v1.1 build and verification [skip ci]'
+          for attempt in 1 2 3; do
+            git push origin HEAD:research/uct-ab-v1-1-20260929 && exit 0
+            git fetch origin research/uct-ab-v1-1-20260929 --prune
+            git rebase origin/research/uct-ab-v1-1-20260929
+          done
+          exit 1
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: uct-v11-build
+          path: research/uct-paired-v1.1/
+          if-no-files-found: error
+          retention-days: 90
+  publish:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[uct11-publish]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/uct-ab-v1-1-20260929
+          fetch-depth: 1
+          show-progress: false
+      - name: Verify worker syntax
+        run: python3 -m py_compile research/uct-paired-v1.1/publish.py research/uct-paired-v1.1/run_publish.py research/uct-paired-v1.1/make_targets.py
+      - name: Publish exact reviewed new editions and verify public bytes
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: python3 research/uct-paired-v1.1/run_publish.py
+      - name: Install pinned timestamp client
+        run: python3 -m pip install --user -r requirements-ots.txt
+      - name: Submit published PDFs to timestamp calendars
+        run: |
+          python3 research/uct-paired-v1.1/make_targets.py
+          python3 scripts/research_paper_ots.py stamp --batch research/paper-timestamps/2026-09-29-uct-v11
+      - name: Persist publication and timestamp checkpoints
+        if: always()
+        run: |
+          find research/uct-paired-v1.1 -type d -name __pycache__ -prune -exec rm -rf {} +
+          git config user.name trinity-research-release-bot
+          git config user.email actions@github.com
+          git add -- research/uct-paired-v1.1
+          if test -d research/paper-timestamps/2026-09-29-uct-v11; then git add -- research/paper-timestamps/2026-09-29-uct-v11; fi
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'research: preserve UCT v1.1 public receipts and timestamp submissions [skip ci]'
+          for attempt in 1 2 3; do
+            git push origin HEAD:research/uct-ab-v1-1-20260929 && exit 0
+            git fetch origin research/uct-ab-v1-1-20260929 --prune
+            git rebase origin/research/uct-ab-v1-1-20260929
+          done
+          exit 1
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: uct-v11-publication
+          path: |
+            research/uct-paired-v1.1/
+            research/paper-timestamps/2026-09-29-uct-v11/
+          if-no-files-found: error
+          retention-days: 90

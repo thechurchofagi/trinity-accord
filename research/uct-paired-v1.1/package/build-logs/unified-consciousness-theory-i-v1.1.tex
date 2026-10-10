@@ -1,0 +1,3419 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  11pt,
+  a4paper,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{setspace}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+  \setmainfont[]{DejaVu Serif}
+  \setsansfont[]{DejaVu Sans}
+  \setmonofont[]{DejaVu Sans Mono}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=23mm]{geometry}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{fancyhdr}
+\usepackage{needspace}
+\usepackage{xurl}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small UCT I v1.1}
+\fancyhead[R]{\small Theoretical preprint}
+\fancyfoot[C]{\small\thepage}
+\setlength{\headheight}{15pt}
+\setlength{\emergencystretch}{2em}
+\widowpenalty=10000
+\clubpenalty=10000
+\displaywidowpenalty=10000
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.4em}
+\AtBeginEnvironment{longtable}{\small}
+\AtBeginEnvironment{quote}{\small}
+\AtBeginDocument{\hypersetup{pdftitle={UCT I v1.1},pdfauthor={Hongju Liu},pdfsubject={Revised theoretical preprint; not peer reviewed}}}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\setstretch{1.03}
+\hypertarget{unified-consciousness-theory-i}{%
+\Needspace{5\baselineskip}
+\section{Unified Consciousness Theory
+I}\label{unified-consciousness-theory-i}}
+
+\hypertarget{ontic-structure-physical-views-and-the-structural-continuity-from-physical-process-to-conceptual-self}{%
+\Needspace{4\baselineskip}
+\subsection{Ontic Structure, Physical Views, and the Structural
+Continuity from Physical Process to Conceptual
+Self}\label{ontic-structure-physical-views-and-the-structural-continuity-from-physical-process-to-conceptual-self}}
+
+\textbf{Author:} Hongju Liu\\
+\textbf{Affiliation:} Independent researcher, Shenzhen, China\\
+\textbf{Report:} TA-TR-2026-20\\
+\textbf{Version:} 1.1\\
+\textbf{Date:} 29 September 2026\\
+\textbf{Prior published version:} v1.0, DOI 10.5281/zenodo.23005588\\
+\textbf{DOI:} 10.5281/zenodo.23030207\\
+\textbf{Companion revision:} UCT II v1.1, DOI 10.5281/zenodo.23030320\\
+\textbf{Status:} Revised theoretical preprint; not peer reviewed.
+
+\textbf{Versioning statement.} This manuscript is a revised successor to
+\emph{Unified Consciousness Theory I: From Experience Existence to
+Experiential Structure}, v1.0. It does not overwrite or retroactively
+alter v1.0. The main purposes of v1.1 are to (i) separate ontic process
+structure from scientific views and estimates, (ii) state explicitly the
+strength of the structural-identity commitment used by later
+derivations, (iii) repair theorem dependencies, (iv) formalize the
+distinction between metaphysical identity and finite empirical bridge
+tests, (v) develop a structural-evolutionary synthesis from elementary
+physical processes to human conceptual selfhood, and (vi) align UCT II
+through a typed scientific-view interface and an exact
+structural-retention example. Evolution is not treated as a proof of the
+foundational axioms. Internal candidate labels rc3 and rc4 refer to the
+preserved development history, not additional published editions.
+
+\textbf{AI assistance disclosure.} Substantial ChatGPT (OpenAI GPT-5.6
+Sol) assistance was used for literature retrieval, formalization,
+adversarial review, dependency auditing, theorem checking, drafting,
+editing, and publication preparation under human direction. The human
+author of record is responsible for the theory commitments and the
+decision to publish. The rc4 revision additionally used ChatGPT for
+logical counterexamples, exact finite-model verification, revision, and
+layout checking. The paired v1.1 revision additionally used ChatGPT
+(GPT-6 Astra Pro) for the interpaper interface, explicit signature,
+bridge-logic repair, extended finite example, numerical
+reimplementation, editorial work, and release preparation. These checks
+are not independent peer review; no separate final human line-by-line
+verification is claimed.
+
+\hypertarget{abstract}{%
+\Needspace{4\baselineskip}
+\subsection{Abstract}\label{abstract}}
+
+Unified Consciousness Theory (UCT) adopts nonempty experience for every
+actual valid physical process token and treats that experience as the
+intrinsic presentation of the process's own organization. A cell and a
+human are interpreted by the same principle. Evolutionary change
+concerns the relations, discriminations, temporal organization, and
+self-representations instantiated by processes, rather than the arrival
+of a new experiential substance at a privileged biological stage.
+
+This revision makes the intended structure-for-structure identity
+explicit. For each actual process \(P\), its complete physical and
+experiential organizations, expressed in a declared common structural
+signature \(\mathcal K\), are isomorphic:
+\nopagebreak[4]
+\[
+\Phi_{\mathcal K}(P)\cong\mathbf D^{ontic}_{\mathcal K}(P).
+\]
+
+The statement, denoted A5-SI, formalizes one organization under physical
+description and intrinsic experiential presentation. It is stronger than
+the pairwise type-equivalence formula displayed in rc3; that weaker
+formula is now a consequence. A finite countermodel explains why the
+distinction matters. Under A5-SI, standard products of constituent
+isomorphisms yield a corrected non-summative combination theorem without
+adding an independent experience-generating mechanism. Nonproduct
+organization concerns a specified constituent comparison, not a
+numerical subject count.
+
+Actual process plurality is accepted at all relevant physical scales.
+Macroprocess analysis describes realized causal organization; it does
+not introduce another experience-existence gate. A unique universal
+partition into subjects is not a prerequisite of the theory. A scoped
+symmetry-orbit result constrains optional exclusive subject selectors
+while retaining possible invariant global partitions. Human conceptual
+selfhood is treated as higher-order organization within experience.
+
+A three-register thought experiment has identical declared input-output
+behavior in two circuit settings while its complete modeled transition
+maps are nonisomorphic. An implemented sub-process retains its
+organization. This exactly checked case distinguishes whole-process
+change from sub-process preservation without changing the comparison
+token after an outcome. An extension with separately controlled
+cross-links proves three exact internal-retention regimes: immediate
+erasure, one-step retention, and sustained distinguishability, despite
+unchanged declared output. The mathematical models supply no independent
+phenomenal measurements.
+
+The framework separates ontic organization from finite scientific views
+and estimates. For later empirical applications, physical sufficiency
+for a measured target and reflection of all relevant structural
+differences are distinct bridge requirements. The remaining research
+program is to derive more specific structural consequences and faithful
+comparisons with neighboring theories. It does not require a second
+account of why human rather than cellular experience exists. The paper
+presents a unified explanatory principle with conditional formal
+consequences; empirical confirmation and complete intertheory recovery
+are separate claims.
+
+\textbf{Keywords:} consciousness; panexperientialism; process ontology;
+structural identity; composition; evolution; experiential structure;
+self-model; scientific views
+
+\hypertarget{the-target-problem}{%
+\Needspace{5\baselineskip}
+\section{1. The target problem}\label{the-target-problem}}
+
+Contemporary consciousness theories assign central roles to integrated
+causal structure, recurrent processing, global availability,
+higher-order representation, predictive modeling, information closure,
+temporal organization, and related mechanisms (Seth \& Bayne, 2022;
+Albantakis et al., 2023; Chang et al., 2020; Kanai \& Fujisawa, 2024).
+Much of the competition among theories concerns whether one of these
+mechanisms constitutes, enables, or marks consciousness.
+
+UCT begins by separating two questions:
+\nopagebreak[4]
+\[
+\boxed{\text{Does experience exist?}}
+\]
+
+and:
+\nopagebreak[4]
+\[
+\boxed{\text{What is the organization of that experience?}}
+\]
+
+UCT fixes the first question axiomatically on its declared domain of
+actual process tokens. It therefore relocates the nontrivial universal
+problem to experiential structure.
+
+Universal experience and structural identity are the adopted explanatory
+starting points. Internal derivations are assessed by whether they
+follow from those commitments. The substantive comparative task is to
+constrain structured differences, multiscale relations, and
+transformations; empirical applications additionally require declared
+bridge predictions. Human and cellular experience do not require
+different existence mechanisms within this framework.
+
+The principal clarification of v1.1 is that the identity claim concerns
+the actual physical organization of a process token, not a
+representation chosen by an analyst. The second is that finite
+experiments do not directly observe complete ontic organization or
+complete phenomenology. Operational tests therefore target explicitly
+declared finite bridge hypotheses.
+
+\hypertarget{ontological-domain-actual-process-tokens}{%
+\Needspace{5\baselineskip}
+\section{2. Ontological domain: actual process
+tokens}\label{ontological-domain-actual-process-tokens}}
+
+\hypertarget{actuality-and-tokenhood}{%
+\Needspace{4\baselineskip}
+\subsection{2.1 Actuality and tokenhood}\label{actuality-and-tokenhood}}
+
+Let:
+\nopagebreak[4]
+\[
+\mathcal P
+\]
+
+be the domain of actual valid physical process tokens. An element:
+\nopagebreak[4]
+\[
+P\in\mathcal P
+\]
+
+is an actual causally continuous physical subhistory, not an arbitrary
+set of variables selected after the fact.
+
+A valid token must satisfy, at minimum:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{actual support} --- the relevant states/events are physically
+  instantiated;
+\item
+  \textbf{induced-relation fidelity} --- attributed internal relations
+  are inherited from physical organization rather than invented by the
+  modeller;
+\item
+  \textbf{causal continuity} --- the token has a physically traceable
+  causal history over the interval of interest;
+\item
+  \textbf{boundary accountability} --- materially relevant
+  cross-boundary influences are represented rather than silently erased;
+\item
+  \textbf{lineage traceability} --- continuation, replacement,
+  branching, merger, and cessation are physically trackable;
+\item
+  \textbf{description invariance} --- invertible coordinate or label
+  changes do not create new tokens.
+\end{enumerate}
+
+UCT is process-token pluralist. Actual tokens may:
+
+\begin{itemize}
+\tightlist
+\item
+  overlap;
+\item
+  nest;
+\item
+  branch;
+\item
+  merge;
+\item
+  persist through replacement;
+\item
+  exist at multiple physical scales.
+\end{itemize}
+
+No maximality or exclusion rule is imposed at the basal level.
+
+\hypertarget{multiscale-token-plurality}{%
+\Needspace{4\baselineskip}
+\subsection{2.2 Multiscale token
+plurality}\label{multiscale-token-plurality}}
+
+A critical distinction in v1.1 is:
+\nopagebreak[4]
+\[
+\boxed{
+\text{actual macroprocess token}
+\neq
+\text{arbitrary coarse description}.
+}
+\]
+
+Molecular, cellular, circuit-level, neural-system, organism-level, and
+other macroprocesses may all be actual process tokens when the relevant
+organization is physically instantiated. A scientist does not create a
+macroprocess merely by averaging microscopic variables.
+
+Macroprocess is a scale-relative description of actual organized
+physical activity. Its experience does not wait for a new threshold of
+autonomy, recurrence, closure, complexity, or subjecthood. Many
+overlapping and nested processes may qualify; UCT does not require a
+unique privileged macro boundary. In an application, one must specify
+which actual causal organization is being described, just as one must
+specify which physical process a model concerns. That identification
+task should not be confused with a missing mechanism that turns
+macroprocesses into experience.
+
+\hypertarget{token-type-and-lineage}{%
+\Needspace{4\baselineskip}
+\subsection{2.3 Token, type, and lineage}\label{token-type-and-lineage}}
+
+UCT distinguishes:
+\nopagebreak[4]
+\[
+\boxed{
+\text{structural type}
+\neq
+\text{numerical token}
+\neq
+\text{causal lineage}.
+}
+\]
+
+Two process tokens can have isomorphic organization without being
+numerically identical:
+\nopagebreak[4]
+\[
+\mathbf D(P)\cong \mathbf D(Q)
+\not\Rightarrow
+P=Q.
+\]
+
+Lineage is a directed continuation relation rather than numerical
+identity. A process may branch:
+\nopagebreak[4]
+\[
+P\leadsto Q_1,
+\qquad
+P\leadsto Q_2,
+\qquad
+Q_1\neq Q_2,
+\]
+
+or contribute to a merger:
+\nopagebreak[4]
+\[
+P\leadsto M,
+\qquad
+Q\leadsto M.
+\]
+
+Nothing in these relations alone determines a unique subject count.
+
+\hypertarget{a-concrete-finite-process-criterion}{%
+\Needspace{4\baselineskip}
+\subsection{2.4 A concrete finite process
+criterion}\label{a-concrete-finite-process-criterion}}
+
+In a finite classical description, let \(G\) represent physically
+instantiated events and their causal relations. An admissible process
+subhistory \(H\) consists of actual events, inherits their physical
+relations, is connected through the inherited causal links over the
+declared interval, and records materially relevant links across its
+boundary. Connectivity here does not require mutual influence between
+every pair, maximality, an autonomous Markov state, or a nervous system.
+A numerical renaming of \(H\) does not create another physical
+occurrence.
+
+This is a concrete expression of Section 2.1's process domain, not an
+independent consciousness detector. Whenever such a process is actual,
+A1 applies. Different subhistories can overlap and nest; selecting all
+admissible processes does not demand an exclusive partition. Greater
+integration, temporal depth, differentiation, or self-maintenance then
+characterizes differences of organization within the domain.
+
+The representation \(G\) must itself be grounded in the physical system.
+A convenient calculated feature may describe an existing process without
+creating an additional token. In contrast, an actual causal relation
+remains relevant even when it crosses an observer's preferred anatomical
+or computational boundary. Applications may investigate a process's
+current state carriers, dynamical contributors, enabling conditions, and
+output recipients separately. Those roles do not determine whether some
+underlying actual local process has experience.
+
+A cell, a multicellular organism, and an extended interaction can
+therefore each instantiate experience-bearing organization without
+passing three different ontological tests. An entire organism need not
+be one indivisible subject for its many realized processes to fall
+within UCT. Appendix D gives optional procedures for checking finite
+coarse descriptions; their predictive-closure conditions are not
+required by the process criterion or by A1.
+
+\hypertarget{ontic-organization-views-estimates-and-subjects}{%
+\Needspace{5\baselineskip}
+\section{3. Ontic organization, views, estimates, and
+subjects}\label{ontic-organization-views-estimates-and-subjects}}
+
+The central formal firewall of v1.1 is:
+\nopagebreak[4]
+\[
+\boxed{
+\text{ontic process token}
+\neq
+\text{physical view}
+\neq
+\text{scientific estimate}
+\neq
+\text{subject}.
+}
+\]
+
+\hypertarget{full-token-relative-ontic-organization}{%
+\Needspace{4\baselineskip}
+\subsection{3.1 Full token-relative ontic
+organization}\label{full-token-relative-ontic-organization}}
+
+For an actual process token \(P\), define:
+\nopagebreak[4]
+\[
+\boxed{
+\mathbf D^{ontic}_t(P)
+}
+\]
+
+as the complete currently instantiated physical organization
+constitutive of that token.
+
+``Complete'' is token-relative. It means that every physical distinction
+or relation constitutive of \(P\)'s own organization is included. It
+does not mean that every microscopic fact anywhere in the realizing
+substrate or surrounding universe is part of the same token.
+
+This distinction permits fine and coarse actual process tokens to
+coexist without making every microscopic fluctuation a mandatory
+difference in a human-scale macroexperience.
+
+\hypertarget{physical-scientific-views}{%
+\Needspace{4\baselineskip}
+\subsection{3.2 Physical scientific
+views}\label{physical-scientific-views}}
+
+Science does not ordinarily access \(\mathbf D^{ontic}(P)\) directly.
+Instead, it constructs physically anchored views indexed by:
+\nopagebreak[4]
+\[
+v=(t,\tau,g,\mathcal I,\mathcal B,\ldots),
+\]
+
+where \(t\) is time, \(\tau\) a horizon, \(g\) a
+measurement/representation grain, \(\mathcal I\) a physically admissible
+intervention family, and \(\mathcal B\) a declared boundary
+representation.
+
+Write:
+\nopagebreak[4]
+\[
+D_v(P)
+=
+\Pi_v[
+\mathbf D^{ontic}(P)
+].
+\]
+
+Different views need not form one total hierarchy. Some are refinements
+or coarse projections of others; some are incomparable.
+
+Where two routes claim to construct the same target physical view, local
+consistency requires approximate or exact commutation:
+\nopagebreak[4]
+\[
+R_{v\to z}
+\cong
+R_{w\to z}\circ R_{v\to w}.
+\]
+
+\hypertarget{scientific-estimates}{%
+\Needspace{4\baselineskip}
+\subsection{3.3 Scientific estimates}\label{scientific-estimates}}
+
+Actual data yield:
+\nopagebreak[4]
+\[
+\widehat D_v(P\mid\mathcal E,\mathcal M),
+\]
+
+an estimate conditioned on evidence \(\mathcal E\) and model class
+\(\mathcal M\).
+
+If evidence underdetermines the physical organization, the appropriate
+scientific output is an identified set:
+\nopagebreak[4]
+\[
+\mathfrak I(P)
+=
+\left\{
+D:
+D\text{ remains compatible with the available evidence}
+\right\},
+\]
+
+rather than an ontological point estimate chosen for convenience.
+
+\hypertarget{subjecthood}{%
+\Needspace{4\baselineskip}
+\subsection{3.4 Subjecthood}\label{subjecthood}}
+
+A subject is not defined merely by being a process token, a scientific
+view, or a macroprocess.
+
+UCT therefore maintains:
+\nopagebreak[4]
+\[
+\boxed{
+\text{experience-bearing process}
+\neq
+\text{canonically individuated subject}.
+}
+\]
+
+A universal positive subject selector is not required for this basal
+theory. Where a study uses subject to mean an experience-bearing
+process, the process domain supplies its referent. Where it means a
+human-like owner or conceptual self, the relevant self-organizing and
+self-representational relations belong to higher-order organization.
+Neither usage licenses imposing one exclusive subject partition on all
+actual processes.
+
+\hypertarget{a-pointed-port-aware-comparison-signature}{%
+\Needspace{4\baselineskip}
+\subsection{3.5 A pointed, port-aware comparison
+signature}\label{a-pointed-port-aware-comparison-signature}}
+
+The word \emph{structure} must not conceal what an isomorphism is
+required to preserve. In the finite controlled models below, the
+declared signature has sorts for states, boundary inputs, intervention
+ports, outputs, constituent slots, and time; operation symbols for
+update, reset, readout, and constituent projection; a distinguished
+current-state constant; and the declared temporal and incidence
+relations. A model in that signature can be written
+\nopagebreak[4]
+\[
+\mathcal M_v=(X,x_\bullet,U,J,Y,T,I,o,\mathscr C,\preceq).
+\]
+
+The tuple is a model \textbf{in} the signature, not the signature
+itself. Here \(T_u:X\to X\) is an update at fixed constitutive
+mechanism, \(I_j:X\to X\) a permitted state reset, and \(o:X\to Y\) a
+declared output. \(\mathscr C\) specifies constituent projections and
+physically identified ports. Current-state pointing is essential: two
+occurrences of the same transition law at inequivalent current states
+need not have the same complete organization.
+
+An admissible isomorphism contains bijections \(f_X,f_U,f_J,f_Y\) that
+satisfy
+\nopagebreak[4]
+\[
+f_X(x_\bullet)=x'_\bullet,\qquad
+f_XT_u=T'_{f_U(u)}f_X,\qquad
+f_XI_j=I'_{f_J(j)}f_X,\qquad
+f_Yo=o'f_X,
+\]
+
+and preserve the declared temporal relations and constituent incidence.
+A port permutation is allowed only when it is declared as a symmetry of
+the comparison; an arbitrary mixture of physically distinct ports is not
+a relabeling of a fixed constituent split. Changing a mechanism,
+removing an intervention, or reversing a directed temporal relation
+generally changes the comparison rather than supplying an isomorphism. A
+probe family chosen by the analyst remains part of a scientific view,
+whereas a process's actual causal dispositions are ontic.
+
+For the product comparison in Section 6, hold the common boundary
+convention fixed, use the product state space with its pointed state,
+and retain the specified component-local update and reset operations.
+These declarations identify the ordinary independent product used on
+both sides of A5-SI. They do not impose autonomy, reciprocity,
+maximality, or a new threshold for experience.
+
+The finite signature supplies an explicit example, not a claim that a
+finite model captures all constitutive properties of real hardware or a
+brain. A restricted signature or measured view can omit distinctions.
+Completeness relative to an actual token is therefore not inferred from
+success in this finite representation. In biological applications the
+relevant state carriers, interfaces, and time relations must be
+justified independently; the same foundational identity principle is
+used.
+
+\hypertarget{foundational-commitments}{%
+\Needspace{5\baselineskip}
+\section{4. Foundational commitments}\label{foundational-commitments}}
+
+\hypertarget{a1-universal-experience}{%
+\Needspace{4\baselineskip}
+\subsection{A1 --- Universal Experience}\label{a1-universal-experience}}
+
+For every actual valid process token:
+\nopagebreak[4]
+\[
+\boxed{
+\forall P\in\mathcal P,
+\qquad
+\Phi(P)\neq\varnothing.
+}
+\]
+
+A1 is not derived from evolution, neuroscience, intelligence, report,
+complexity, or biology.
+
+The weaker equivalence formulas A5-W and A5-OI do not themselves
+establish nonemptiness for every actual token. Under a strong
+structure-for-structure representation, nonemptiness may also follow
+mathematically from nonempty physical structure. A1 is retained to state
+the intended ontological commitment and to prevent actual-process
+definitions from quietly excluding simple cases.
+
+\hypertarget{a2-scoped-structural-continuity}{%
+\Needspace{4\baselineskip}
+\subsection{A2 --- Scoped Structural
+Continuity}\label{a2-scoped-structural-continuity}}
+
+For an explicitly declared continuously comparable family
+\(P(\lambda)\), if the relevant physical organization varies
+continuously in a specified structural topology, then experiential
+organization varies continuously:
+\nopagebreak[4]
+\[
+\boxed{
+\mathbf D(P_\lambda)\text{ continuous}
+\Rightarrow
+\Phi(P_\lambda)\text{ continuous}.
+}
+\]
+
+A2 is a schema, not a universal scalar continuity law. Quantitative use
+requires a declared metric/topology. A derived categorical observable
+can undergo a threshold transition even when underlying structure varies
+continuously.
+
+\hypertarget{a3-persistence-under-embedding}{%
+\Needspace{4\baselineskip}
+\subsection{A3 --- Persistence Under
+Embedding}\label{a3-persistence-under-embedding}}
+
+If an actual process \(P\) remains physically realized while embedded in
+a larger actual process \(Q\), embedding alone does not terminate \(P\):
+\nopagebreak[4]
+\[
+\boxed{
+P\triangleleft Q
+\not\Rightarrow
+\text{cessation of }P.
+}
+\]
+
+The distinctive content of A3 is process ontological. Once the lower
+token remains actual, A1 supplies nonempty lower-scale experience.
+
+A3 does not imply that a process continues after its constitutive
+dynamics cease.
+
+\hypertarget{a4-selfhood-non-prerequisite}{%
+\Needspace{4\baselineskip}
+\subsection{A4 --- Selfhood
+Non-Prerequisite}\label{a4-selfhood-non-prerequisite}}
+
+Human-like conceptual selfhood is not required for basal experience:
+\nopagebreak[4]
+\[
+\boxed{
+\neg Self_I(P)
+\not\Rightarrow
+\Phi(P)=\varnothing.
+}
+\]
+
+The positive mechanisms by which body models, agency, autobiographical
+memory, metacognition, and a conceptual ``I'' form are not axioms. They
+belong to higher-order application/bridge layers.
+
+\hypertarget{a5---experience-structure-identity}{%
+\Needspace{4\baselineskip}
+\subsection{A5 - Experience-Structure
+Identity}\label{a5---experience-structure-identity}}
+
+UCT's intended claim is that experience is the intrinsic presentation of
+an actual physical process's own organization. Cellular and human
+experience instantiate this same identity principle; richer organization
+does not require a second kind of experiential ingredient.
+
+\hypertarget{a5-si---explicit-structure-for-structure-identity}{%
+\subsubsection{A5-SI - explicit structure-for-structure
+identity}\label{a5-si---explicit-structure-for-structure-identity}}
+
+Fix a common structural signature \(\mathcal K\) for the comparison: the
+relevant state distinctions, causal and temporal relations, and
+constituent organization must be specified. Write
+\(\mathbf D^{ontic}_{\mathcal K}(P)\) and \(\Phi_{\mathcal K}(P)\) for
+the complete physical and experiential organization of the same actual
+token in this signature. The strong intended identity is expressed by
+\nopagebreak[4]
+\[
+h_P:\mathbf D^{ontic}_{\mathcal K}(P)
+\;\cong\;\Phi_{\mathcal K}(P).
+\]
+
+The two expressions describe the same organization in physical and
+experiential terms. The isomorphism is a formal expression of that
+commitment, not an empirically fitted correspondence, an extra causal
+force, or an experience-generating mechanism. Structural relations must
+be fixed by the declared signature; they cannot be freely relabeled to
+fit a desired phenomenal result. When an independent product is used, it
+is the ordinary product in the common comparison category on both sides.
+Section 6 makes this typing explicit.
+
+\textbf{Version boundary.} This is stronger than the pairwise
+equivalence formula displayed in rc3. The rc4 development revision
+adopted it to formalize the intended identity interpretation; it does
+not claim to have deduced it from the weaker formula or to have
+established it empirically. The published v1.0 and the original rc3
+remain unchanged.
+
+\hypertarget{a5-oi---pairwise-type-equivalence-as-a-consequence}{%
+\subsubsection{A5-OI - pairwise type equivalence as a
+consequence}\label{a5-oi---pairwise-type-equivalence-as-a-consequence}}
+
+Within that common signature, composing the tokenwise isomorphisms gives
+\nopagebreak[4]
+\[
+\Phi(P)\cong\Phi(Q)
+\iff
+\mathbf D^{ontic}(P)\cong\mathbf D^{ontic}(Q).
+\]
+
+The subscripts are suppressed when the scope is clear. This consequence
+preserves and reflects equivalence between actual token types, but if
+written alone it is weaker than A5-SI: an arbitrary permutation of type
+labels can satisfy it without preserving each token's organization.
+Section 6 supplies an explicit counterexample to that weaker reading.
+
+\hypertarget{a5-w---one-way-phenomenal-completeness}{%
+\subsubsection{A5-W - one-way phenomenal
+completeness}\label{a5-w---one-way-phenomenal-completeness}}
+
+The one-way consequence inherited from the explicitly stated v1.0
+formula is
+\nopagebreak[4]
+\[
+\mathbf D(P)\cong\mathbf D(Q)
+\ \Longrightarrow\ \Phi(P)\cong\Phi(Q).
+\]
+
+It excludes a freely varying hidden phenomenal variable when complete
+constitutive physical organization is fixed. No product conclusion is
+attributed to this one-way formula alone. In the rest of the paper, A5
+denotes the intended strong identity, with A5-W or A5-OI cited when a
+weaker consequence already suffices.
+
+\hypertarget{a6-token-type-lineage-distinction}{%
+\Needspace{4\baselineskip}
+\subsection{A6 --- Token / Type / Lineage
+Distinction}\label{a6-token-type-lineage-distinction}}
+\nopagebreak[4]
+\[
+\boxed{
+\mathbf D(P)\cong\mathbf D(Q)
+\not\Rightarrow
+P=Q.
+}
+\]
+
+Structural equivalence does not imply numerical identity.
+
+\hypertarget{formal-consequences}{%
+\Needspace{5\baselineskip}
+\section{5. Formal consequences}\label{formal-consequences}}
+
+\hypertarget{organization-gate-impossibility}{%
+\Needspace{4\baselineskip}
+\subsection{5.1 Organization-Gate
+Impossibility}\label{organization-gate-impossibility}}
+
+Define an experience-existence predicate:
+\nopagebreak[4]
+\[
+E(P)=\mathbf 1[\Phi(P)\neq\varnothing].
+\]
+
+By A1:
+\nopagebreak[4]
+\[
+E(P)=1
+\qquad
+\forall P\in\mathcal P.
+\]
+
+Let \(F(P)\) be any organization descriptor and \(S\) a threshold/target
+region. If:
+\nopagebreak[4]
+\[
+\exists Q\in\mathcal P:
+F(Q)\notin S,
+\]
+
+then:
+\nopagebreak[4]
+\[
+\boxed{
+\mathbf 1[F(P)\in S]
+\not\equiv
+E(P).
+}
+\]
+
+Hence, within UCT, no nonuniversal threshold of:
+
+\begin{itemize}
+\tightlist
+\item
+  integration;
+\item
+  recurrence;
+\item
+  global availability;
+\item
+  explicit memory;
+\item
+  higher-order representation;
+\item
+  predictive modeling;
+\item
+  autonomy;
+\item
+  entropy;
+\item
+  generic biological complexity;
+\end{itemize}
+
+can equal the universal experience-existence predicate.
+
+This theorem does not make those mechanisms irrelevant. It relocates
+them from experience existence to experience organization.
+
+\hypertarget{no-hidden-quale}{%
+\Needspace{4\baselineskip}
+\subsection{5.2 No Hidden Quale}\label{no-hidden-quale}}
+
+From A5-W:
+\nopagebreak[4]
+\[
+\mathbf D^{ontic}(P)\cong
+\mathbf D^{ontic}(Q)
+\Rightarrow
+\Phi(P)\cong
+\Phi(Q).
+\]
+
+UCT therefore rejects an additional hidden phenomenal degree of freedom
+that varies independently while complete token-relative physical
+organization is fixed.
+
+Within the intended structuralist interpretation, words such as ``red''
+and ``pain'' label experiential organizations rather than additional
+freely varying quale atoms. A5-W alone does not determine the physical
+organization corresponding to either label or establish the complete
+structuralist interpretation.
+
+\hypertarget{probe-invariance}{%
+\Needspace{4\baselineskip}
+\subsection{5.3 Probe Invariance}\label{probe-invariance}}
+
+Let \(\mathcal I^{exp}\) denote an experimenter-selected probe family.
+Merely changing this choice, without changing the complete constitutive
+physical organization, cannot alter phenomenology under A5-W:
+\nopagebreak[4]
+\[
+\begin{aligned}
+\mathcal I^{exp}_1&\ne\mathcal I^{exp}_2,\\
+\mathbf D^{ontic}_1(P)&\cong\mathbf D^{ontic}_2(P)
+\quad\Longrightarrow\quad \Phi_1(P)\cong\Phi_2(P).
+\end{aligned}
+\]
+
+The completeness qualifier matters. Holding only one causal graph or one
+response descriptor fixed is insufficient if other constitutive state
+distinctions change. A probe that physically intervenes on the process
+can change its experience by changing its organization; the invariant
+claim concerns a merely external change of description or choice.
+
+\hypertarget{no-future-contamination}{%
+\Needspace{4\baselineskip}
+\subsection{5.4 No Future Contamination}\label{no-future-contamination}}
+
+If:
+\nopagebreak[4]
+\[
+\mathbf D^{ontic}_t(P)
+\cong
+\mathbf D^{ontic}_t(Q),
+\]
+
+then a future external divergence that is not physically instantiated at
+time \(t\) cannot imply a present phenomenal difference:
+\nopagebreak[4]
+\[
+\boxed{
+\Phi_t(P)\cong\Phi_t(Q).
+}
+\]
+
+Present causal dispositions are part of the present organization; actual
+future facts are not.
+
+\hypertarget{causally-screened-history-no-ghost-history}{%
+\Needspace{4\baselineskip}
+\subsection{5.5 Causally Screened History / No Ghost
+History}\label{causally-screened-history-no-ghost-history}}
+
+Suppose:
+\nopagebreak[4]
+\[
+History(P)\neq History(Q)
+\]
+
+but all current constitutive physical consequences of those histories
+have converged:
+\nopagebreak[4]
+\[
+\mathbf D^{ontic}_t(P)
+\cong
+\mathbf D^{ontic}_t(Q).
+\]
+
+Then:
+\nopagebreak[4]
+\[
+\boxed{
+\Phi_t(P)\cong\Phi_t(Q).
+}
+\]
+
+A6 still permits the tokens to remain numerically distinct because
+lineage can differ even when current structural type is the same.
+
+\hypertarget{external-reward-label-non-identity}{%
+\Needspace{4\baselineskip}
+\subsection{5.6 External reward-label
+non-identity}\label{external-reward-label-non-identity}}
+
+Changing an external reward sign, semantic label, or experimenter
+convention without changing intrinsic constitutive organization cannot
+by itself alter phenomenology under A5-W.
+
+Therefore:
+\nopagebreak[4]
+\[
+\boxed{
+\text{reward sign}
+\neq
+\text{phenomenal valence sign}.
+}
+\]
+
+\hypertarget{factorization-macroprocesses-and-combination}{%
+\Needspace{5\baselineskip}
+\section{6. Factorization, macroprocesses, and
+combination}\label{factorization-macroprocesses-and-combination}}
+
+\hypertarget{independent-products-and-comparison-objects}{%
+\Needspace{4\baselineskip}
+\subsection{6.1 Independent products and comparison
+objects}\label{independent-products-and-comparison-objects}}
+
+Fix structural signatures and a constituent split before comparing a
+whole with its parts. The physical product
+\(X_1\otimes\cdots\otimes X_n\) represents independent juxtaposition
+relative to that split and a declared boundary convention. In a
+transition model, component updates must not depend on the other
+component states once the declared boundary is fixed. A shared drive can
+create statistical correlations without creating the internal causal
+dependence at issue. Product factorization is consequently not
+synonymous with unconditional statistical independence.
+
+For this product comparison, constituents occupy nonoverlapping slots of
+the specified physical split. A product of overlapping actual tokens
+would require a separately justified comparison construction; general
+gluing of overlapping processes is not established here. An abstract
+product is initially a \textbf{comparison object}. It need not itself be
+an actual causally continuous token; A1 is not automatically applied to
+it. Unrestricted mixing of physically distinct intervention ports must
+not be mistaken for a mere relabeling that preserves a particular
+constituent split. The phenomenal product must also be specified as the
+intended independent juxtaposition, not retrospectively defined to make
+a desired conclusion true.
+
+\hypertarget{why-a5-oi-alone-is-insufficient}{%
+\Needspace{4\baselineskip}
+\subsection{6.2 Why A5-OI alone is
+insufficient}\label{why-a5-oi-alone-is-insufficient}}
+
+A5-OI constrains equivalence of structural types. It does not state how
+products are transported. The distinction is visible in a finite-set
+countermodel. Take isomorphism classes indexed by positive cardinality
+and the bijection
+\nopagebreak[4]
+\[
+f(6)=7,\qquad f(7)=6,\qquad f(n)=n\quad(n\ne6,7).
+\]
+
+Let physical constituent types have sizes 2 and 3, and a whole type have
+size 7. Map phenomenal types using \(f\). The equivalence biconditional
+holds because \(f\) is injective. Nevertheless,
+\nopagebreak[4]
+\[
+7\ne2\cdot3,\qquad f(7)=6=f(2)\cdot f(3).
+\]
+
+Thus a nonproduct physical type can correspond to the product of the
+constituent phenomenal types while the bare A5-OI equivalence formula is
+satisfied. This is an abstract countermodel to an implication of the
+formula, not a claim that unstructured finite sets are adequate physical
+or phenomenal models. It pinpoints the missing algebraic commitment.
+Additional physical restrictions may exclude it, but those restrictions
+must be stated.
+
+\hypertarget{non-summative-combination-from-the-intended-identity}{%
+\Needspace{4\baselineskip}
+\subsection{6.3 Non-summative combination from the intended
+identity}\label{non-summative-combination-from-the-intended-identity}}
+
+Use the strong tokenwise identity A5-SI in a common comparison category
+with the finite products needed for the argument. Independent
+juxtaposition on each side is represented by this same standard product.
+Ordinary products preserve isomorphisms: if each \(h_i:X_i\cong Y_i\),
+then
+\nopagebreak[4]
+\[
+\bigotimes_i h_i:\bigotimes_i X_i\cong\bigotimes_i Y_i.
+\]
+
+This is the relevant mathematical consequence of expressing the same
+constituent organizations in two descriptions. It is not another
+physical mechanism of experiential combination. The use of a common
+signature and product must be declared; the weak type-equivalence
+formula alone cannot supply it.
+
+\textbf{Theorem 6.3 (non-summative combination in the declared product
+comparison).} Let \(M\) be an actual whole process and \(P_i\) its
+actual constituents in the nonoverlapping slots of the specified
+comparison. If
+\nopagebreak[4]
+\[
+\mathbf D^{ontic}(M)\not\cong
+\bigotimes_i\mathbf D^{ontic}(P_i),
+\]
+
+then A5-SI implies
+\nopagebreak[4]
+\[
+\Phi(M)\not\cong\bigotimes_i\Phi(P_i).
+\]
+
+\textbf{Proof.} Let \(h_M\) and \(h_i\) be the tokenwise isomorphisms
+supplied by A5-SI. If \(\Phi(M)\cong\bigotimes_i\Phi(P_i)\), compose
+that isomorphism with \(h_M\) and the inverse of the product of the
+\(h_i\). This yields
+\nopagebreak[4]
+\[
+\mathbf D^{ontic}(M)
+\cong\Phi(M)
+\cong\bigotimes_i\Phi(P_i)
+\cong\bigotimes_i\mathbf D^{ontic}(P_i),
+\]
+
+contradicting the physical premise. The abstract comparison product need
+not be an actual token, so no extension of A1 to imaginary processes is
+used. \(\square\)
+
+The result says that actual additional constitutive relations are not
+erased in the experiential description. It does not add together
+subjective substances. Its nonproduct conclusion is relative to the
+specified constituent product, not every possible decomposition.
+Continuing constituent processes remain experience-bearing by A1 and A3.
+Neither the theorem nor the theory requires a unique numerical subject
+count before admitting the whole's experiential organization.
+
+If identity is deliberately weakened back to the pairwise A5-OI formula
+alone, the countermodel in Section 6.2 still applies and this proof is
+unavailable. The repair therefore makes the intended premise explicit
+rather than silently inferring a stronger premise from a weaker formula.
+
+\hypertarget{macro-invariance-with-micro-change}{%
+\Needspace{4\baselineskip}
+\subsection{6.4 Macro invariance with micro
+change}\label{macro-invariance-with-micro-change}}
+
+Suppose actual macroprocess tokens obey
+\nopagebreak[4]
+\[
+\mathbf D^{ontic}(M_A)\cong\mathbf D^{ontic}(M_B),
+\]
+
+while an independently identified pair of lower-scale actual tokens
+obeys
+\nopagebreak[4]
+\[
+\mathbf D^{ontic}(p^A)\not\cong\mathbf D^{ontic}(p^B).
+\]
+
+A5-W suffices for \(\Phi(M_A)\cong\Phi(M_B)\). The converse component of
+A5-OI additionally yields \(\Phi(p^A)\not\cong\Phi(p^B)\). Only the
+stated pairwise consequences are needed for these claims; the product
+construction is not involved.
+
+The result is conditional: it does not show that any specified material
+replacement actually preserves complete macro organization. Nor can one
+establish it merely by observing the same coarse statistic of the same
+token. The macro token must have an independently supported realization
+and boundary; lower-scale physical differences must not be constitutive
+differences of that macro token. Appendix B demonstrates the
+corresponding distinction between a fixed whole-process token and an
+invariant implemented sub-process in an idealized finite model. It is
+not a general biological replacement theorem.
+
+\hypertarget{subject-selection-under-symmetry-an-orbit-obstruction}{%
+\Needspace{5\baselineskip}
+\section{7. Subject selection under symmetry: an orbit
+obstruction}\label{subject-selection-under-symmetry-an-orbit-obstruction}}
+
+UCT distinguishes experience, structural unity, macroprocess tokenhood,
+subjecthood, and self-modeling. The result below concerns a proposed
+selection rule. It neither derives subjecthood from A1 nor treats every
+experience-bearing process as one canonical subject.
+
+\hypertarget{equivariant-selection-is-a-union-of-candidate-orbits}{%
+\Needspace{4\baselineskip}
+\subsection{7.1 Equivariant selection is a union of candidate
+orbits}\label{equivariant-selection-is-a-union-of-candidate-orbits}}
+
+Let \(W\) be a physical structure and \(\Gamma\) a group of its
+structure-preserving automorphisms. Let \(\mathcal C(W)\) be a candidate
+family closed under this group. A deterministic selector returns
+\(S(W)\subseteq\mathcal C(W)\) and is equivariant:
+\nopagebreak[4]
+\[
+S(gW)=gS(W).
+\]
+
+Since \(gW=W\) for \(g\in\Gamma\), the selected family is invariant
+under \(\Gamma\).
+
+\textbf{Orbit lemma.} If a candidate \(P\) is selected, its entire orbit
+\(\Gamma P\) is selected.
+
+\textbf{Proof.} For each \(g\in\Gamma\), invariance gives
+\(gP\in gS(W)=S(W)\). Thus a selected family is a union of full orbits.
+\(\square\)
+
+\textbf{Corollary 7.1 (restricted exclusive-selection obstruction).}
+Suppose the admissible candidates are one orbit \(O\) containing an
+overlapping pair. No deterministic equivariant selector can return a
+nonempty, pairwise disjoint subfamily of \(O\).
+
+\textbf{Proof.} A nonempty selection contains one candidate and hence
+all of \(O\). It then contains the overlapping pair, contrary to
+pairwise disjointness. \(\square\)
+
+This corollary requires the stated restriction of the candidate family
+and a nonempty-output requirement. These are selection requirements, not
+consequences of A1-A6.
+
+\hypertarget{the-three-part-example-and-its-counterlimits}{%
+\Needspace{4\baselineskip}
+\subsection{7.2 The three-part example and its
+counterlimits}\label{the-three-part-example-and-its-counterlimits}}
+
+For a reflection-symmetric world with parts \(a,b,c\), let the
+reflection exchange \(a\) and \(c\), and let the candidate orbit be
+\nopagebreak[4]
+\[
+O=\bigl\{\{a,b\},\{b,c\}\bigr\}.
+\]
+
+The two invariant selected subfamilies are the empty family and the
+whole orbit. The first violates nonemptiness; the second violates
+exclusivity. An unbiased random rule could choose either member with
+equal probability, but it would not determine one unique subject from
+\(W\); a realized random seed would add selection data.
+
+The theorem does \textbf{not} rule out the invariant partitions
+\nopagebreak[4]
+\[
+\bigl\{\{a,b,c\}\bigr\},\qquad
+\bigl\{\{a\},\{b\},\{c\}\bigr\}.
+\]
+
+If a positive subject theory admits one of these, it needs its own
+physical justification. Neither is excluded by the orbit lemma. The
+correct conclusion is a scoped obstruction to selecting nonempty
+exclusive candidates from an overlapping symmetry orbit, not a general
+theorem that intrinsic structure cannot determine any unique partition.
+A universal positive subject criterion is not imposed by UCT. Any
+additional exclusive selector must justify its own scope and purpose.
+
+\hypertarget{from-physical-process-to-conceptual-self-a-structural-evolutionary-synthesis}{%
+\Needspace{5\baselineskip}
+\section{8. From physical process to conceptual self: a
+structural-evolutionary
+synthesis}\label{from-physical-process-to-conceptual-self-a-structural-evolutionary-synthesis}}
+
+This section is explanatory rather than foundational.
+
+It asks:
+
+\begin{quote}
+If A1 and the intended identity A5-SI are granted, can one describe a
+continuous and branching path from elementary physical processes to
+human conceptual selfhood without introducing successive new phenomenal
+substances?
+\end{quote}
+
+UCT can represent such a path coherently as a structural synthesis. This
+does not establish that the historical transitions occurred in exactly
+the sequence listed below, nor does it provide independent evidence for
+A1 or A5-SI. The relevant theoretical claim is narrower: no additional
+phenomenal substance is required by the UCT formalism when these
+organizational transformations are described.
+
+Evolution supplies the organizing rationale for continuity across these
+cases. UCT takes universal experience and structural identity as its
+starting commitments; it does not repeatedly reopen their derivation
+inside each biological application. Comparative evolutionary findings
+illustrate changes of organization. Accepting biological evolution by
+itself need not force another theorist to adopt UCT's axioms; that
+external disagreement is distinct from whether UCT's internal
+explanations consistently use them.
+
+\hypertarget{elementary-physical-processes}{%
+\Needspace{4\baselineskip}
+\subsection{8.1 Elementary physical
+processes}\label{elementary-physical-processes}}
+
+At the most elementary level considered by UCT, an actual interaction
+process possesses whatever relational structure is physically
+instantiated.
+
+UCT does not require:
+
+\begin{itemize}
+\tightlist
+\item
+  a nervous system;
+\item
+  a sensor;
+\item
+  a memory;
+\item
+  a self-model;
+\item
+  a report channel.
+\end{itemize}
+
+Under A1, the experience-existence predicate is already nonzero. A5-SI
+identifies this process's experiential organization with its actual
+organization. The pairwise A5-OI formula is a consequence of that
+stronger statement.
+
+UCT therefore refuses to project human terms such as ``seeing,''
+``wanting,'' or ``suffering'' onto elementary interactions. The
+primitive claim is structural, not anthropomorphic.
+
+\hypertarget{from-stable-chemistry-to-self-maintaining-organization}{%
+\Needspace{4\baselineskip}
+\subsection{8.2 From stable chemistry to self-maintaining
+organization}\label{from-stable-chemistry-to-self-maintaining-organization}}
+
+The transition from nonliving chemistry to the first cells is an
+origin-of-life problem, not a solved Darwinian lineage. UCT does not
+claim to reconstruct the historical path.
+
+The theoretical point is narrower. If physical processes develop
+persistent boundaries, recurrent chemical organization, and endogenous
+regulation, then new relations appear inside the process organization:
+\nopagebreak[4]
+\[
+\text{internal state}
+\leftrightarrow
+\text{boundary}
+\leftrightarrow
+\text{environmental perturbation}
+\leftrightarrow
+\text{regulatory response}.
+\]
+
+These relations are not the origin of experience under A1. They are
+transformations of experiential organization.
+
+\hypertarget{single-cell-and-non-neural-learning-temporal-depth}{%
+\Needspace{4\baselineskip}
+\subsection{8.3 Single-cell and non-neural learning: temporal
+depth}\label{single-cell-and-non-neural-learning-temporal-depth}}
+
+A decisive organizational transition occurs when past events leave
+present physical traces that modify current response:
+\nopagebreak[4]
+\[
+History
+\to
+m_t
+\to
+Response_t.
+\]
+
+This is the minimal form of temporal depth required by UCT's memory
+analysis.
+
+The framework does not require memory to create experience. Memory
+changes current organization.
+
+Non-neural learning illustrates the physical possibility of
+history-dependent behavior without a brain. Habituation has been
+experimentally demonstrated in the slime mould \emph{Physarum
+polycephalum} (Boisseau, Vogel, \& Dussutour, 2016). Such evidence does
+not establish phenomenology in the organism; it demonstrates that
+learning-like temporal organization need not await centralized nervous
+systems.
+
+If all physical consequences of a history are erased, No Ghost History
+predicts no remaining current phenomenal-type difference attributable
+solely to the past.
+
+\hypertarget{multicellularity-from-juxtaposition-to-organism-scale-relations}{%
+\Needspace{4\baselineskip}
+\subsection{8.4 Multicellularity: from juxtaposition to organism-scale
+relations}\label{multicellularity-from-juxtaposition-to-organism-scale-relations}}
+
+Consider independent cells:
+\nopagebreak[4]
+\[
+C_1,\ldots,C_n.
+\]
+
+If their joint organization remains a product, there is no new
+irreducible cross-cell relation merely because the cells are spatially
+adjacent.
+
+If, however, real chemical, electrical, mechanical, developmental, or
+other causal relations generate an actual multicellular process \(M\)
+with:
+\nopagebreak[4]
+\[
+\mathbf D(M)
+\not\cong
+\bigotimes_i
+\mathbf D(C_i),
+\]
+
+then the structure-for-structure identity A5-SI assigns \(M\) an
+experiential organization that is nonproduct relative to that
+constituent comparison, by Theorem 6.3. The multicellular case uses the
+same identity principle as the cellular case; no new experiential
+substance or threshold is introduced.
+
+The significance of multicellularity in UCT is therefore not cell count.
+It is the formation of new actual macroprocess organization.
+
+No privileged signaling medium is required. Mechanical, chemical,
+electrical, and neural relations can all contribute when they are
+physically constitutive.
+
+\hypertarget{nervous-systems-routing-and-specialization-not-an-experience-switch}{%
+\Needspace{4\baselineskip}
+\subsection{8.5 Nervous systems: routing and specialization, not an
+experience
+switch}\label{nervous-systems-routing-and-specialization-not-an-experience-switch}}
+
+The evolution of neurons adds high-speed, long-range, selectively
+routed, and plastic coordination.
+
+Under UCT:
+\nopagebreak[4]
+\[
+\boxed{
+\text{neuron}
+\neq
+\text{experience ignition}.
+}
+\]
+
+Neurons transform organization. They can increase spatial
+discrimination, routing, temporal coordination, learning capacity, and
+context sensitivity.
+
+Associative learning in the box jellyfish \emph{Tripedalia cystophora},
+a cnidarian without a vertebrate-style centralized brain, provides an
+empirical illustration that nontrivial learning need not wait for
+vertebrate-like centralization (Bielecki et al., 2023).
+
+This finding is not evidence for UCT's A1. It illustrates the danger of
+equating a particular level of centralized neural architecture with the
+first appearance of complex learning.
+
+\hypertarget{damage-regulation-nociception-and-affect}{%
+\Needspace{4\baselineskip}
+\subsection{8.6 Damage regulation, nociception, and
+affect}\label{damage-regulation-nociception-and-affect}}
+
+The pain lineage is particularly useful because it exposes the mistake
+of projecting a fully human quale backward.
+
+Comparative biology indicates that damage detection and adaptive
+cellular stress responses predate nervous systems, while specialized
+nociceptors, sensitization, central aversive states, and human pain
+involve progressively richer mechanisms (Walters, 2025).
+
+A schematic structural trajectory proceeds through:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  cellular damage regulation;
+\item
+  multicellular injury coordination;
+\item
+  specialized nociception and sensitization;
+\item
+  aversive learning and multidimensional affective pain;
+\item
+  human suffering.
+\end{enumerate}
+
+UCT does not identify the first term with human pain.
+
+It instead asks which physical relations constituting later pain are
+already present in simpler systems.
+
+Human pain also illustrates why one scalar valence variable is
+inadequate. Clinical and conceptual literatures distinguish
+sensory-discriminative from affective-motivational dimensions of pain,
+and pain-asymbolia cases have been interpreted as evidence for partial
+dissociation between them (Auvray, Myin, \& Spence, 2010). That
+interpretation is not uncontested: recent philosophical reviews
+emphasize that asymbolia may reflect strongly reduced rather than
+literally absent negative affect, and that the taxonomy of the residual
+state remains debated (Coninx, 2024). The conservative UCT conclusion is
+therefore:
+
+\textbf{Nociceptive discrimination, unpleasantness, and suffering should
+not be collapsed into one primitive scalar variable.}
+
+Under A5-SI, unpleasantness belongs to the intrinsic organization of the
+relevant actual process, just as any cellular quality does. Identifying
+which concrete human mechanisms instantiate a specified pain experience
+is an application-level biological question; it does not require another
+foundational account of why human experience exists.
+
+\hypertarget{one-explanatory-principle-across-experiential-qualities}{%
+\subsubsection{One explanatory principle across experiential
+qualities}\label{one-explanatory-principle-across-experiential-qualities}}
+
+Let \(P_c\) be a cellular process and \(P_h\) a human process. UCT
+applies the same relation
+\(\Phi_{\mathcal K}(P)\cong\mathbf D^{ontic}_{\mathcal K}(P)\) in each
+appropriately declared comparison. The organizations differ in their
+realized distinctions and relations; the explanatory principle does not
+change. Human red, pain, and bodily ownership can occupy richly
+differentiated positions within a process's experiential organization
+without requiring that a cell possess those same human discriminations
+or linguistic labels.
+
+In a continuously comparable transformation family, A2 supplies
+experiential continuity and A5 supplies structural identity. Added,
+removed, or reorganized causal relations correspond to changes in the
+intrinsic organization itself. The theory need not posit a point where
+an otherwise nonexperiential organization suddenly acquires a new
+phenomenal substance. Nor does it follow that evolution must
+monotonically increase one scalar amount of experience.
+
+At this explanatory level, asking for a second mechanism connecting a
+fully specified actual organization to its experience would reopen what
+A5 fixes as the identity principle. A separate question is which actual
+organization realizes a particular familiar human experience.
+Investigating that empirical instance can refine an application without
+constituting a missing axiom of the general theory.
+
+\hypertarget{association-relational-abstraction-and-reasoning}{%
+\Needspace{4\baselineskip}
+\subsection{8.7 Association, relational abstraction, and
+reasoning}\label{association-relational-abstraction-and-reasoning}}
+
+Cognitive evolution can likewise be represented as transformations of
+organization rather than the sudden arrival of a new phenomenal
+substance.
+
+A simplified comparative sequence runs from state-dependent response
+through habituation and sensitization, association, relational
+abstraction, relations over relations, and symbolic or compositional
+reasoning.
+
+The sequence is not a literal phylogenetic ladder.
+
+Honeybees can learn and transfer same/different relational rules to
+novel stimuli (Giurfa et al., 2001), supporting the narrower claim that
+transferable relational discrimination need not require a human-sized
+brain.
+
+Cuttlefish have shown what-where-when behavioral organization meeting
+standard criteria for episodic-like memory (Jozet-Alves, Bertin, \&
+Clayton, 2013), and later work demonstrated substantial delayed control
+in a delay-of-gratification task (Schnell et al., 2021).
+
+These examples support the narrower conclusion that component capacities
+relevant to human cognition occur in distant lineages and can be
+realized by substantially different nervous-system architectures. They
+do not establish a single linear ancestry of cognition, nor do they
+demonstrate that nonhuman animals execute human formal logic or possess
+phenomenology identical to human cognition.
+
+\hypertarget{physical-witness-and-semantic-inflation}{%
+\Needspace{4\baselineskip}
+\subsection{8.8 Physical witness and semantic
+inflation}\label{physical-witness-and-semantic-inflation}}
+
+A danger in comparative cognition is to redescribe simple behavior with
+sophisticated human concepts.
+
+UCT therefore introduces a Physical Witness Criterion:
+
+\begin{quote}
+A claimed higher-order relation belongs to the actual constitutive
+organization only if the physical process itself distinguishes that
+relational configuration under controlled, physically admissible
+perturbation.
+\end{quote}
+
+For example, ``same/different'' should not be attributed merely because
+an analyst can describe stimuli relationally. Transfer to novel physical
+stimuli provides stronger evidence that the system is sensitive to an
+invariant relation, though behavioral transfer alone still need not
+reveal the complete ontic mechanism.
+
+The criterion blocks:
+\nopagebreak[4]
+\[
+\text{observer's description}
+\Rightarrow
+\text{invented phenomenal dimension}.
+\]
+
+\hypertarget{body-centered-organization}{%
+\Needspace{4\baselineskip}
+\subsection{8.9 Body-centered
+organization}\label{body-centered-organization}}
+
+With increasingly coordinated sensorimotor organization, a system can
+physically encode relations involving:
+
+\begin{itemize}
+\tightlist
+\item
+  internal/external boundary;
+\item
+  body position;
+\item
+  sensor position;
+\item
+  action state;
+\item
+  consequences of self-generated action;
+\item
+  persistent internal variables.
+\end{itemize}
+
+Write this only as a projection of already existing process
+organization:
+\nopagebreak[4]
+\[
+\mathcal S(M)
+=
+\Pi_{sys}
+[
+\mathbf D^{ontic}(M)
+].
+\]
+
+This is system-relative organization, not a new observer inside the
+system.
+
+It can support increasingly rich body-centered and agency-related
+experience without being the origin of experience itself.
+
+\hypertarget{self-model}{%
+\Needspace{4\baselineskip}
+\subsection{8.10 Self-model}\label{self-model}}
+
+A self-model is a high-level physical organization in which some
+internal states track, predict, compress, or regulate aspects of the
+system's own organization across time.
+
+Possible ingredients include:
+
+\begin{itemize}
+\tightlist
+\item
+  body state;
+\item
+  action consequences;
+\item
+  memory;
+\item
+  prediction;
+\item
+  social information;
+\item
+  control;
+\item
+  metacognitive access.
+\end{itemize}
+
+UCT does not define the self-model as the subject, and it does not make
+self-modeling necessary for basal experience.
+
+\hypertarget{the-conceptual-i}{%
+\Needspace{4\baselineskip}
+\subsection{8.11 The conceptual ``I''}\label{the-conceptual-i}}
+
+Human conceptual selfhood adds language, autobiographical structure,
+explicit temporal narration, symbolic categorization, social cognition,
+metacognition, and culturally transmitted conceptual tools.
+
+A system can then instantiate structures corresponding to propositions
+such as:
+
+\begin{quote}
+I am the one undergoing this experience.
+\end{quote}
+
+or:
+
+\begin{quote}
+I remember being the same individual who experienced that event.
+\end{quote}
+
+Within UCT, this conceptual ``I'' is a late, high-dimensional
+organization inside experience, not the entity that creates experience.
+
+The proposed structural sequence is therefore:
+\nopagebreak[4]
+\[
+\boxed{
+\begin{array}{c}
+\text{elementary actual physical process}\\
+\downarrow\\
+\text{persistent / self-maintaining organization}\\
+\downarrow\\
+\text{history-dependent regulation}\\
+\downarrow\\
+\text{multicellular macroprocess relations}\\
+\downarrow\\
+\text{specialized neural routing}\\
+\downarrow\\
+\text{multimodal memory / prediction / affect}\\
+\downarrow\\
+\text{body-centered control organization}\\
+\downarrow\\
+\text{self-model}\\
+\downarrow\\
+\text{conceptual autobiographical “I”}
+\end{array}
+}
+\]
+
+The arrows mean structural transformation, not one linear species
+ancestry.
+
+The comparative cases in this section are therefore evidential anchors
+for organizational possibilities and intermediate capacities. They are
+not empirical confirmation of universal experience, structural identity,
+or cross-species quale identity.
+
+\hypertarget{no-universal-consciousness-ladder}{%
+\Needspace{4\baselineskip}
+\subsection{8.12 No universal consciousness
+ladder}\label{no-universal-consciousness-ladder}}
+
+Evolution can:
+
+\begin{itemize}
+\tightlist
+\item
+  add relations;
+\item
+  delete relations;
+\item
+  reweight couplings;
+\item
+  prune structure;
+\item
+  specialize;
+\item
+  compress irrelevant details;
+\item
+  introduce new temporal dependencies;
+\item
+  bifurcate dynamically;
+\item
+  lose capacities;
+\item
+  converge on similar functions by different architectures.
+\end{itemize}
+
+Therefore UCT rejects:
+\nopagebreak[4]
+\[
+\boxed{
+\frac{dC}{dt}>0
+}
+\]
+
+for a universal scalar amount of consciousness.
+
+The more general representation is:
+\nopagebreak[4]
+\[
+\boxed{
+\lambda
+\mapsto
+\mathbf D^{ontic}_\lambda(P_\lambda)
+\mapsto
+\Phi_\lambda(P_\lambda).
+}
+\]
+
+Evolution is a path through a branching space of experiential
+organization, not a staircase from unconscious matter to conscious
+humans.
+
+\hypertarget{structural-transformation-versus-enrichment}{%
+\Needspace{5\baselineskip}
+\section{9. Structural transformation versus
+enrichment}\label{structural-transformation-versus-enrichment}}
+
+A previous development branch emphasized relational enrichment:
+\nopagebreak[4]
+\[
+D_1\prec_E D_2.
+\]
+
+Strict enrichment remains useful when \(D_2\) preserves the distinctions
+of \(D_1\) while adding new, nonredundant constitutive relations.
+
+But biological change is more general.
+
+Let:
+\nopagebreak[4]
+\[
+T:
+\mathbf D_1
+\mapsto
+\mathbf D_2.
+\]
+
+Possible transformations include:
+
+\begin{itemize}
+\tightlist
+\item
+  current-state change;
+\item
+  coupling reweighting;
+\item
+  relation addition;
+\item
+  relation deletion;
+\item
+  pruning;
+\item
+  factorization or refactorization;
+\item
+  temporal-depth change;
+\item
+  abstraction/compression;
+\item
+  dynamic bifurcation;
+\item
+  specialization.
+\end{itemize}
+
+Thus:
+\nopagebreak[4]
+\[
+\boxed{
+\text{enrichment}
+\subset
+\text{structural transformation}.
+}
+\]
+
+Under A5-OI:
+\nopagebreak[4]
+\[
+\mathbf D_1\not\cong\mathbf D_2
+\Rightarrow
+\Phi_1\not\cong\Phi_2.
+\]
+
+This is a direct consequence of the identity commitment, not an
+independent discovery or an additional empirical law.
+
+\hypertarget{an-exact-edge-addition-family-with-unchanged-declared-output}{%
+\Needspace{4\baselineskip}
+\subsection{9.1 An exact edge-addition family with unchanged declared
+output}\label{an-exact-edge-addition-family-with-unchanged-declared-output}}
+
+A concrete consequence should identify which relation changes, rather
+than merely restating that different complete structures have different
+experiential types. Extend Appendix B by controlling the two cross-links
+separately:
+\nopagebreak[4]
+\[
+s^+=s\oplus u,\qquad
+a^+=s\oplus(\alpha b),\qquad
+b^+=s\oplus(\beta a),\qquad y=s,
+\quad (\alpha,\beta)\in\{0,1\}^2.
+\]
+
+The fixed comparison contains the whole network \(W_{\alpha\beta}\), the
+implemented \(s\)-process, and the boundary-conditioned \(a\mid b\)
+constituent split. Buffers, the clock, state-reset ports, and idealized
+completeness are as in Appendix B. The settings are distinct mechanisms,
+not one continuous A2 interpolation. Conditional UCT statements concern
+their actual realizations, not uninstantiated equations.
+
+For common \(s_0\) and input string, all four settings have the same
+declared output. To measure retention of an \emph{initial internal
+perturbation}, fix the common boundary trajectory \(s_t\), allow all
+four initial pair states \(z_0=(a_0,b_0)^T\), and apply no further pair
+resets. Differences between two pair trajectories obey linear dynamics
+over \(\mathbb F_2\):
+\nopagebreak[4]
+\[
+\delta z_n=A_{\alpha\beta}^{\,n}\delta z_0,\qquad
+A_{\alpha\beta}=\begin{pmatrix}0&\alpha\\\beta&0\end{pmatrix}.
+\]
+
+The identical boundary drive cancels from the difference equation.
+Define the retained distinguishability at horizon \(n\geq1\) by the
+number of different pair states reachable from the four initial pair
+states under that fixed drive:
+\nopagebreak[4]
+\[
+N_n=|\{z_n:z_0\in\mathbb F_2^2\}|=2^{\operatorname{rank}(A_{\alpha\beta}^{\,n})}.
+\]
+
+This is a specific response-partition invariant. It is not the number of
+experiences, a scalar amount of consciousness, a familiar quale label,
+or a full phenomenal metric.
+
+\hypertarget{proposition-three-distinct-causal-retention-regimes}{%
+\Needspace{4\baselineskip}
+\subsection{9.2 Proposition: three distinct causal-retention
+regimes}\label{proposition-three-distinct-causal-retention-regimes}}
+
+Within this declared family, the following statements hold for every
+\(n\geq1\):
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1667}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2222}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2222}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1667}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2222}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Cross-links
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\(N_1\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\(N_n\), \(n\geq2\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Directed pair cycle
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Whole-update image size
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\((0,0)\) & 1 & 1 & absent & 2 \\
+\((1,0)\) & 2 & 1 & absent & 4 \\
+\((0,1)\) & 2 & 1 & absent & 4 \\
+\((1,1)\) & 4 & 4 & present & 8 \\
+\end{longtable}
+
+\textbf{Proof.} For \((0,0)\), the pair matrix is zero. With exactly one
+cross-link it has rank one and square zero. With both cross-links it is
+the swap matrix and has square equal to the identity; all its powers are
+invertible. Rank-nullity gives the values of \(N_n\). At fixed input
+\(u\), the whole transition first determines \(s^+=s\oplus u\), so the
+images from the two different current \(s\) values are disjoint. For
+each such value the pair map has \(2^{\operatorname{rank}A}\) images,
+giving \(2\cdot2^{\operatorname{rank}A}=2,4,4,8\). The pair has a
+directed two-edge cycle precisely when both cross-links are present.
+\(\square\)
+
+Consequently, adding a first link creates one-step distinguishability of
+some initial pair perturbations; adding the complementary link creates
+indefinitely sustained distinguishability in this exact noiseless model.
+Neither single link alone produces that sustained response property.
+With one link, the fixed split already fails independent
+component-update factorization despite lacking a directed pair cycle.
+Nonproduct organization, recurrence, and persistence are therefore
+different properties, not interchangeable labels.
+
+The all-horizon result follows from \(A^2=0\) or \(A^2=I\), not from
+extrapolating a finite simulation. An independently executable check
+enumerates the finite transition and intervention cases and checks
+representative horizons as a regression test. In nonideal or noisy
+systems indefinite retention is not implied by a finite feedback
+diagram; the noise model and stability would have to be analyzed.
+
+\hypertarget{the-conditional-experiential-interpretation-and-its-limit}{%
+\Needspace{4\baselineskip}
+\subsection{9.3 The conditional experiential interpretation and its
+limit}\label{the-conditional-experiential-interpretation-and-its-limit}}
+
+Image cardinality is preserved under bijective state conjugacy. The
+settings with image sizes 2, 4, and 8 therefore have different complete
+\textbf{modeled} transition types. If these are actual tokens and the
+stipulated organization is complete for them, A5-OI entails different
+whole-token experiential types. A5-SI says more specifically that their
+distinctions, causal relations, and temporal-retention relations belong
+to the same tokenwise organization in experiential presentation. The
+result does not assert that the bit count \(\log_2N_n\) measures how
+much experience exists.
+
+Throughout the family the implemented \(s\)-process has the same current
+state, update, and represented interfaces under common \(s_0,u\). A5-W
+consequently gives its type equivalence under the same
+actuality/completeness qualifications. These sub-process and
+whole-process comparisons are fixed in advance. They are not alternative
+boundaries selected to rescue an unwanted result.
+
+The one-link settings are related by exchange of \(a,b\) when the
+comparison permits that physical port permutation and maps the pointed
+state accordingly. With fixed individually named intervention roles,
+their directed roles remain distinguishable. This makes the covariance
+convention explicit rather than choosing it after the conclusion.
+
+\hypertarget{a-shared-physical-example-not-an-independent-proof-of-identity}{%
+\Needspace{4\baselineskip}
+\subsection{9.4 A shared physical example, not an independent proof of
+identity}\label{a-shared-physical-example-not-an-independent-proof-of-identity}}
+
+The mathematics uses specified dynamics, boundary conventions, and
+admissible resets. It does not require A1 or A5 to calculate \(N_n\).
+UCT supplies a conditional experiential interpretation of independently
+specified organizational facts; the numbers do not independently verify
+that interpretation. An output-only whole-token equivalence hypothesis
+identifies all four settings, while UCT's complete-organization
+hypothesis separates the three image-size classes under its stated
+premises. This is a difference of conditional theoretical commitments,
+not an observed phenomenal discrimination or a refutation of every
+functionalist account.
+
+UCT II v1.1 uses the same family to separate causal retention, graph
+recurrence, and unchanged declared consumer output, while retaining
+target-specific semantic and biological bridges. The point is a
+constrained connection between the two papers: a precise relation is
+added, a calculable temporal distinction changes, and neither a new
+existence gate nor a new experience substance is introduced. Nilpotence,
+invertibility, and response partitions are established mathematical
+tools; no priority claim is made for that mathematics or for the general
+possibility of behaviorally silent internal change.
+
+\hypertarget{scientific-bridge-architecture}{%
+\Needspace{5\baselineskip}
+\section{10. Scientific bridge
+architecture}\label{scientific-bridge-architecture}}
+
+A5-OI concerns complete ontic organization and complete experiential
+structure.
+
+Ordinary science observes neither completely.
+
+Finite empirical tests therefore require explicit auxiliary structures.
+
+\hypertarget{declared-phenomenal-target}{%
+\Needspace{4\baselineskip}
+\subsection{10.1 Declared phenomenal
+target}\label{declared-phenomenal-target}}
+
+Let:
+\nopagebreak[4]
+\[
+\Psi_v(P)
+\]
+
+be a finite, preregistered phenomenal/psychophysical target inferred
+from some combination of:
+
+\begin{itemize}
+\tightlist
+\item
+  similarity judgments;
+\item
+  discrimination performance;
+\item
+  subjective ratings;
+\item
+  confidence;
+\item
+  no-report perceptual indicators;
+\item
+  multidimensional report patterns;
+\item
+  physiological measures with independently justified interpretation.
+\end{itemize}
+
+By default:
+\nopagebreak[4]
+\[
+\boxed{
+\Psi_v(P)
+\neq
+\Phi(P).
+}
+\]
+
+It is a scientific projection, not complete phenomenology.
+
+\hypertarget{sufficiency-and-reflection-are-different-bridge-hypotheses}{%
+\Needspace{4\baselineskip}
+\subsection{10.2 Sufficiency and reflection are different bridge
+hypotheses}\label{sufficiency-and-reflection-are-different-bridge-hypotheses}}
+
+Let \(D_v\) be a frozen finite physical view and \(\Psi_v\) a declared
+finite phenomenal target. A \textbf{sufficiency bridge} \(B_v^{\to}\)
+asserts
+\nopagebreak[4]
+\[
+D_v(A)\cong D_v(B)
+\ \Longrightarrow\ \Psi_v(A)\cong\Psi_v(B).
+\]
+
+Equivalently, on the compared classes, the target factors through a map
+\(f_v\) from the physical view. This does not require that \(f_v\) be
+injective. To assert a biconditional one must separately impose a
+\textbf{reflection bridge} \(B_v^{\leftarrow}\):
+\nopagebreak[4]
+\[
+\Psi_v(A)\cong\Psi_v(B)
+\ \Longrightarrow\ D_v(A)\cong D_v(B).
+\]
+
+Together these bridges say that the physical view and the finite target
+distinguish the same classes within the declared scope. A5-OI for
+complete structures does not imply reflection after either side has
+undergone a lossy projection. For example, even an identity
+correspondence between two full physical and phenomenal states can have
+an observed target that assigns both states the same response. The
+finite target then remains sufficient as a function of the physical
+state but fails reflection.
+
+\hypertarget{operational-structural-correspondence}{%
+\Needspace{4\baselineskip}
+\subsection{10.3 Operational Structural
+Correspondence}\label{operational-structural-correspondence}}
+
+Two packages should therefore be distinguished:
+\nopagebreak[4]
+\[
+\begin{aligned}
+OSC_v^{\to}&=A5\;+\;B_v^{\to}\;+\;\text{measurement assumptions},\\
+OSC_v^{\leftrightarrow}&=A5\;+\;B_v^{\to}\;+\;B_v^{\leftarrow}
+\;+\;\text{measurement assumptions}.
+\end{aligned}
+\]
+
+The notation denotes packages of assumptions, not numeric addition. The
+operational implications are supplied by the bridge conditions;
+attaching A5 explains their theoretical interpretation and does not
+constitute a separate empirical derivation of those conditions. The
+one-way package predicts target equivalence for equivalent frozen
+physical views. The two-way package additionally predicts target
+non-equivalence for non-equivalent views. Reflection must be defended
+for the specific target; it cannot be supplied merely by requesting more
+confidence in the same coarse report.
+
+Approximate applications must declare physical and phenomenal distance
+functions, equivalence tolerances, and error models. Failure to reject a
+measured difference is not evidence of equivalence without a suitable
+equivalence-testing design and adequate precision. The exact finite
+examples below do not solve this measurement problem.
+
+A finite empirical failure challenges the operational package. It does
+not automatically isolate A5 from either bridge direction or from
+measurement assumptions.
+
+\hypertarget{physical-tokenview-selection-protocol}{%
+\Needspace{5\baselineskip}
+\section{11. Physical Token/View Selection
+Protocol}\label{physical-tokenview-selection-protocol}}
+
+The main falsifiability danger for UCT is post-hoc redefinition.
+
+If a failed experiment can always be answered by choosing a new token,
+scale, horizon, intervention family, or structural descriptor after
+seeing the phenomenal result, the theory becomes scientifically
+non-vulnerable.
+
+Version 1.1 therefore proposes the Physical Token/View Selection
+Protocol (PTVSP).
+
+Before phenomenal unblinding:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  declare candidate actual-token hypotheses;
+\item
+  declare admissible physical views;
+\item
+  declare physical intervention families;
+\item
+  declare held-out physical response targets;
+\item
+  evaluate physical predictive sufficiency;
+\item
+  evaluate stability under measurement perturbation;
+\item
+  evaluate cross-system reproducibility when possible;
+\item
+  prefer parsimonious physically sufficient views or a preregistered
+  Pareto set;
+\item
+  freeze token/view/bridge definitions;
+\item
+  only then join or reveal phenomenal outcomes.
+\end{enumerate}
+
+The central rule is:
+\nopagebreak[4]
+\[
+\boxed{
+\text{No Post-Hoc Token/View Rescue}.
+}
+\]
+
+A failed preregistered bridge remains failed.
+
+Changing token, view, grain, horizon, or bridge afterwards creates a new
+version of the hypothesis.
+
+\hypertarget{empirical-failure-conditions}{%
+\Needspace{5\baselineskip}
+\section{12. Empirical failure
+conditions}\label{empirical-failure-conditions}}
+
+\hypertarget{same-frozen-physical-view-different-phenomenal-target}{%
+\Needspace{4\baselineskip}
+\subsection{12.1 Same frozen physical view, different phenomenal
+target}\label{same-frozen-physical-view-different-phenomenal-target}}
+
+If \[
+D_v(A)\cong D_v(B),\qquad \Psi_v(A)\not\cong\Psi_v(B),
+\] then the frozen one-way operational bridge fails, subject to its
+error model. It would be circular to retain that very implication as an
+independently secure premise while using its counterexample to isolate
+A5. The failure directly concerns the view/target bridge, not
+automatically the full identity axiom.
+
+A countermodel explains the distinction: take two different complete
+physical structures, identify each tokenwise with its experiential
+structure, let the finite physical view map both to one value, and let
+the finite phenomenal target distinguish them. A5-SI is satisfied, while
+the proposed finite sufficiency bridge fails. Thus finite physical
+underdescription alone can produce this pattern.
+
+A challenge specifically to A5-W would instead require independently
+supported equivalence of the \textbf{complete constitutive} physical
+organizations and a valid phenomenal observation that cannot differ
+between isomorphic full experiential structures. Those are stronger
+premises than agreement on a frozen coarse view. They must not be
+smuggled in by renaming the failed finite prediction ``completeness.''
+In ordinary experiments the operational package is the direct test
+target.
+
+\hypertarget{different-frozen-physical-views-identical-phenomenal-target}{%
+\Needspace{4\baselineskip}
+\subsection{12.2 Different frozen physical views, identical phenomenal
+target}\label{different-frozen-physical-views-identical-phenomenal-target}}
+
+Under a declared two-way operational bridge, the pattern \[
+D_v(A)\not\cong D_v(B),\qquad \Psi_v(A)\cong\Psi_v(B)
+\] refutes the finite reflection direction. The same full-identity
+construction with an information-preserving physical view and a constant
+phenomenal readout satisfies A5-SI while failing reflection. A
+difference can therefore be discarded by measurement even when it
+belongs to the full structure.
+
+To challenge the converse full-structure implication, one would need
+independently supported complete physical nonisomorphism \textbf{and}
+complete experiential equivalence, not merely equivalent reports. This
+paper does not claim that routine measurements supply those premises.
+
+A5 is not needed to derive operational predictions that have already
+been stipulated in a bridge. A successful bridge test supports that
+fixed bridge/model against specified alternatives; it is not, solely for
+that reason, differential evidence for A5 over every other
+interpretation using the same operational law. Any stronger model
+comparison must expose independently motivated constraints that generate
+different likelihoods or predictions. This is a statement about
+empirical discrimination, not an additional foundational mechanism of
+experience.
+
+\hypertarget{behaviorally-matched-causal-rewiring}{%
+\Needspace{4\baselineskip}
+\subsection{12.3 Behaviorally matched causal
+rewiring}\label{behaviorally-matched-causal-rewiring}}
+
+A particularly informative design would match:
+
+\begin{itemize}
+\tightlist
+\item
+  overt behavior;
+\item
+  report;
+\item
+  task accuracy;
+\item
+  confidence;
+\item
+  access variables;
+\end{itemize}
+
+while manipulating a preregistered constitutive causal relation that
+survives the frozen physical view.
+
+For actual tokens whose complete constitutive structures differ, A5-OI
+predicts a difference in complete experiential organization even when
+the chosen output variables match. A finite measurement difference
+additionally requires the corresponding reflection bridge. If every
+available phenomenal indicator has been matched by design, the remaining
+structural claim has not thereby become an observed empirical
+discrimination.
+
+This places UCT within the empirical pressure created by
+unfolding/substitution arguments against causal-structure theories
+(Doerig et al., 2019; Kleiner, 2020; Tsuchiya et al., 2020; Usher, 2021;
+Herzog et al., 2022; Basri, BarAvi, \& Hemmo, 2026).
+
+\hypertarget{latent-memory-test}{%
+\Needspace{4\baselineskip}
+\subsection{12.4 Latent-memory test}\label{latent-memory-test}}
+
+Match explicit current report and task content while preserving a
+preregistered difference in latent constitutive memory dispositions that
+changes future admissible response.
+
+A5-OI predicts a difference in complete experiential organization,
+though not necessarily a difference in explicitly recalled content.
+
+This is a conditional consequence of the injective identity commitment;
+other sufficiently strong causal-structural accounts may share it. A
+distinguishing experiment needs a named competing prediction and a
+separately justified sensitive phenomenal target. Internal-model
+verification alone does not supply either.
+
+\hypertarget{relation-to-uct-ii-and-neighboring-theories}{%
+\Needspace{5\baselineskip}
+\section{13. Relation to UCT II and neighboring
+theories}\label{relation-to-uct-ii-and-neighboring-theories}}
+
+UCT II asks whether operational cores of major consciousness theories
+can be reconstructed, embedded, reinterpreted, or shown to conflict as
+effective organization theories on top of the UCT mother formalism.
+
+The v1.1 interface is explicitly view-based:
+\nopagebreak[4]
+\[
+D^{PA}_v(P):=\Pi_v[\mathbf D^{ontic}(P)],\qquad
+O_T=\mathcal T_T(D^{PA}_v(P),B_T).
+\]
+
+An estimate is denoted \(\widehat D^{PA}_v\), and an underidentified
+view yields an output set rather than an arbitrarily selected point. The
+tuple formerly written \(\mathfrak D^{PA}\) in UCT II v1.0 is a
+physically anchored scientific representation when used in finite
+translation, not a license to identify every chosen view with complete
+ontic organization. Reproducing target-theory computations requires its
+fixed bridge conventions, not A1. No-universal-gate relocation
+additionally uses A1 and a scoped nonuniversality witness; interpreting
+physical organization as experiential uses the relevant A5 commitment.
+Finite phenomenal prediction needs a separate operational bridge. The
+shared example in Section 9 respects all four distinctions.
+
+The relation is asymmetric:
+\nopagebreak[4]
+\[
+\boxed{
+\text{failure of one UCT-II bridge}
+\not\Rightarrow
+\text{failure of the basal ontology}
+}
+\]
+
+but:
+\nopagebreak[4]
+\[
+\boxed{
+\text{failure of A1/A5}
+\Rightarrow
+\text{revision of the UCT-specific interpretation of UCT II}.
+}
+\]
+
+UCT II introduced explicit Bridge Admissibility Conditions, Translation
+Fidelity Requirements, formal recovery classes, and separate
+empirical-validation levels. Those constraints remain essential for
+preventing a rich mother formalism from trivially ``containing'' other
+theories by lookup.
+
+Version 1.1 does not claim novelty for:
+
+\begin{itemize}
+\tightlist
+\item
+  panexperientialism or panpsychism;
+\item
+  process-oriented metaphysics of experience;
+\item
+  mind--brain or mind--physical identity strategies in general;
+\item
+  causal/phenomenal structuralism;
+\item
+  multiscale process accounts;
+\item
+  overlapping conscious systems;
+\item
+  mechanistic physical implementation criteria;
+\item
+  structural approaches to subjectivity;
+\item
+  the general idea that theories may be partially complementary.
+\end{itemize}
+
+Several neighboring traditions overlap with individual UCT commitments.
+Panexperientialist and process traditions already treat experience as
+widespread or fundamental rather than as a late biological product
+(e.g., Rosenberg, 2004, building on earlier process traditions). IIT
+explicitly advances an explanatory identity between phenomenal structure
+and a substrate's intrinsic cause--effect structure (Albantakis et al.,
+2023), while neurophenomenal structuralism develops a
+relational/structural account of specific phenomenal character (Lyre,
+2022). General mind--brain identity theories likewise deny that mental
+and physical processes are merely correlated. UCT therefore does not
+claim to originate the idea of identity itself.
+
+The combination, de-combination, overlap, and individuation problems are
+also established literatures (Chalmers, 2016; Miller, 2018; Blackmon,
+2021). Recent preprint-level structural-subjectivity programs go further
+by proposing positive structural criteria for the presence or locus of
+subjectivity; for example, Nagae (2026) identifies subjectivity with
+viability-constrained irreversible exclusive commitment. UCT differs at
+this point: it does not use action, viability, irreversibility,
+recurrence, access, self-modeling, or any other nonuniversal
+organization as a basal experience-existence gate, and it presently
+offers only a scoped no-free-selection theorem rather than a universal
+positive subject criterion.
+
+Neighboring and critical literatures also include Information Closure
+Theory (Chang et al., 2020), universal-theory criteria (Kanai \&
+Fujisawa, 2024), mechanistic computation and implementation accounts
+(Piccinini, 2015; Anderson \& Piccinini, 2024), and the
+unfolding/substitution debate (Doerig et al., 2019; Kleiner, 2020;
+Tsuchiya et al., 2020; Usher, 2021; Herzog et al., 2022; Basri et al.,
+2026).
+
+The contribution claimed here is therefore not any single ingredient.
+This revision explicitly formalizes the intended tokenwise identity and
+distinguishes it from its weaker pairwise consequence.
+Product-isomorphism reasoning, quotient closure, and intervention
+consistency use established mathematics. The claimed contribution is the
+following constrained conjunction and dependency architecture:
+\nopagebreak[4]
+\[
+\boxed{
+\begin{aligned}
+&\text{universal process-token experience}\\
++&\text{ontic-token structural identity}\\
++&\text{nested non-exclusion}\\
++&\text{token/type/lineage separation}\\
++&\text{composition under tokenwise structural identity}\\
++&\text{experience/subject separation}\\
++&\text{restricted selection obstruction in an overlap orbit}\\
++&\text{explicit ontic/view/estimate firewall}\\
++&\text{failure-prone finite bridge methodology}.
+\end{aligned}
+}
+\]
+
+The earlier targeted prior-art audit did not locate an exact match for
+the rc3 package. That observation neither certifies historical priority
+nor establishes that a conjunction of familiar elements is a major
+advance. Rc4 adds proof repairs and a finite worked instance; it does
+not claim priority for the orbit argument, product-preservation
+mathematics, causal abstraction, or the general possibility of
+behaviorally silent internal change. Its scientific value must be
+assessed through the explanatory restrictions of the package and future
+independently constrained applications.
+
+\hypertarget{strong-objections-and-limitations}{%
+\Needspace{5\baselineskip}
+\section{14. Strong objections and
+limitations}\label{strong-objections-and-limitations}}
+
+\hypertarget{the-axioms-are-strong}{%
+\Needspace{4\baselineskip}
+\subsection{14.1 The axioms are strong}\label{the-axioms-are-strong}}
+
+A1 and A5-SI are not empirical discoveries.
+
+They are strong starting commitments.
+
+The formal theorems derived from them must therefore be evaluated partly
+by the explanatory costs and empirical obligations of the axioms.
+
+\hypertarget{a5-oi-risks-tautological-explanatory-rhetoric}{%
+\Needspace{4\baselineskip}
+\subsection{14.2 A5-OI risks tautological explanatory
+rhetoric}\label{a5-oi-risks-tautological-explanatory-rhetoric}}
+
+Once structural identity is assumed, results of the form:
+\nopagebreak[4]
+\[
+\mathbf D\not\cong\mathbf D'
+\Rightarrow
+\Phi\not\cong\Phi'
+\]
+
+are straightforward consequences.
+
+They should not be marketed as deep independent discoveries.
+
+The nontrivial content must come from:
+
+\begin{itemize}
+\tightlist
+\item
+  process individuation;
+\item
+  physical anchoring;
+\item
+  exact no-go consequences;
+\item
+  multiscale relations;
+\item
+  subject non-selection;
+\item
+  independently constrained bridge predictions.
+\end{itemize}
+
+\hypertarget{complete-ontic-organization-is-not-directly-observed}{%
+\Needspace{4\baselineskip}
+\subsection{14.3 Complete ontic organization is not directly
+observed}\label{complete-ontic-organization-is-not-directly-observed}}
+
+Science works with:
+\nopagebreak[4]
+\[
+D_v
+\]
+
+and:
+\nopagebreak[4]
+\[
+\widehat D_v.
+\]
+
+Direct empirical isolation of full A5-OI from bridge assumptions is
+therefore difficult.
+
+UCT should not disguise this epistemic limitation.
+
+\hypertarget{complete-phenomenology-is-not-directly-measured}{%
+\Needspace{4\baselineskip}
+\subsection{14.4 Complete phenomenology is not directly
+measured}\label{complete-phenomenology-is-not-directly-measured}}
+
+Human report, behavior, psychophysics, and physiology are projections.
+
+Even convergent measures do not automatically equal complete phenomenal
+structure.
+
+This limits the strength of empirical falsification claims.
+
+\hypertarget{process-proliferation}{%
+\Needspace{4\baselineskip}
+\subsection{14.5 Process proliferation}\label{process-proliferation}}
+
+A permissive process ontology can yield many weak, overlapping, or
+nested experience-bearing tokens.
+
+UCT accepts such plurality as part of its intended ontology. The number
+of tokens is not a problem to be eliminated by an arbitrary experience
+threshold; the scientific task is to distinguish their organizations and
+relevance to a specified target.
+
+Scientific salience and experience existence are separate questions.
+
+\hypertarget{macroprocess-descriptions-are-applications-not-new-existence-gates}{%
+\Needspace{4\baselineskip}
+\subsection{14.6 Macroprocess descriptions are applications, not new
+existence
+gates}\label{macroprocess-descriptions-are-applications-not-new-existence-gates}}
+
+UCT accepts actual causal processes at different scales. The finite
+criterion in Section 2.4 makes that domain concrete in one classical
+representation. No unique natural macro boundary, autonomous coarse
+state, or maximal integration score is required before an actual process
+can possess experience. In concrete applications, competing claims about
+physical boundaries and constitutive relations remain accountable to the
+system being described. Uncertainty in that physical identification is
+not evidence that the framework lacks a separate macro-experience
+mechanism.
+
+\hypertarget{subject-terminology-must-not-become-a-prerequisite}{%
+\Needspace{4\baselineskip}
+\subsection{14.7 Subject terminology must not become a
+prerequisite}\label{subject-terminology-must-not-become-a-prerequisite}}
+
+If subject names an experience-bearing process, the ontology supplies
+many possible referents. If it names a conceptual owner, self-model, or
+one exclusive human-like agent, additional organizational descriptions
+are relevant to that usage. UCT need not add an extra owner of
+experience to explain why processes have experience. The optional
+selection theorem constrains exclusive labeling rules; failure to
+specify one universal subject partition is not a foundational
+incompleteness criterion adopted by this paper.
+
+\hypertarget{general-quality-identity-and-biological-specification}{%
+\Needspace{4\baselineskip}
+\subsection{14.8 General quality identity and biological
+specification}\label{general-quality-identity-and-biological-specification}}
+
+A5-SI supplies the same general account of experiential quality for
+elementary processes, cells, animals, and humans: the quality is the
+intrinsic presentation of the actual organization. Human complexity does
+not introduce a second explanatory gap inside the theory. A1-A6 do not
+provide a biological lookup table assigning familiar labels such as red
+or unpleasant to every measured neural configuration. Obtaining such
+mappings is a task for particular scientific applications, just as
+identifying a concrete cellular organization is. It must not be
+misreported as absence of the general physical-experiential principle.
+
+\hypertarget{cross-species-qualia-identity-is-underidentified}{%
+\Needspace{4\baselineskip}
+\subsection{14.9 Cross-species qualia identity is
+underidentified}\label{cross-species-qualia-identity-is-underidentified}}
+
+Similar behavior, homologous mechanisms, or structurally comparable
+organization do not by themselves prove identical subjective qualities
+across species.
+
+Claims should therefore use terms such as:
+
+\begin{itemize}
+\tightlist
+\item
+  precursor;
+\item
+  conserved mechanism;
+\item
+  structural homology;
+\item
+  convergent similarity;
+\end{itemize}
+
+rather than asserting uncalibrated qualitative identity.
+
+\hypertarget{relativistic-and-quantum-extensions}{%
+\Needspace{4\baselineskip}
+\subsection{14.10 Relativistic and quantum
+extensions}\label{relativistic-and-quantum-extensions}}
+
+The present finite/classical formalism is not a final
+fundamental-physics theory.
+
+A relativistic version should be formulated over causal spacetime
+histories rather than a preferred global time slice.
+
+A quantum version requires appropriate state spaces,
+channels/instruments, subsystem criteria, and intervention notions.
+
+\hypertarget{semantic-representation}{%
+\Needspace{4\baselineskip}
+\subsection{14.11 Semantic
+representation}\label{semantic-representation}}
+
+Causal tracking does not automatically establish semantic aboutness.
+
+Detailed models of semantic representation, conceptual content, and
+explicit self-reference belong to higher-order applications. They do not
+supply prerequisites for basal experience or a second
+physical-experiential principle.
+
+\hypertarget{formal-strength-and-finite-measurements-must-remain-explicit}{%
+\Needspace{4\baselineskip}
+\subsection{14.12 Formal strength and finite measurements must remain
+explicit}\label{formal-strength-and-finite-measurements-must-remain-explicit}}
+
+A5-SI is a strong interpretation of identity. Its tokenwise isomorphisms
+support the product proof; the weaker A5-OI formula by itself does not.
+Rc4 records this difference rather than attributing the stronger formal
+statement retroactively to the old formula. A critic may reject the
+identity commitment; that is distinct from an internal derivation
+failing to follow from it.
+
+Finite scientific measurements can discard distinctions even when
+complete experiential and physical organizations share the same
+structure. Therefore finite reflection remains an additional condition
+of an operational two-way test, not another experience-generating
+mechanism or another foundational axiom. The measurement qualifications
+do not replace the unified explanation of experience.
+
+\hypertarget{claim-status-summary}{%
+\Needspace{5\baselineskip}
+\section{15. Claim-status summary}\label{claim-status-summary}}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Claim
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Status in v1.1
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Universal experience for actual valid process tokens & Axiom A1 \\
+Scoped continuity of experiential organization & Axiom-schema A2 \\
+Embedding does not terminate a continuing token & Axiom A3 \\
+Human-like conceptual self not required for basal experience & A4
+boundary commitment \\
+One-way phenomenal completeness & inherited A5-W \\
+Tokenwise structure-for-structure identity & A5-SI: explicit
+formalization of the intended identity; stronger than the rc3 displayed
+formula \\
+Pairwise type equivalence & A5-OI consequence of A5-SI \\
+Token/type/lineage distinction & Axiom A6 \\
+Organization-Gate Impossibility & theorem conditional on A1 +
+nonuniversality witness \\
+No Hidden Quale & consequence of A5-W \\
+Probe Invariance & consequence of ontic/probe separation + A5-W \\
+No Future Contamination & consequence of A5-W \\
+Causally Screened History & consequence of A5-W + A6 \\
+Non-Summative Combination & actual tokens + A5-SI + standard product in
+the declared common category \\
+Extra experience-generating composition mechanism & not introduced \\
+A5-OI alone transports independent products & disproved as an
+implication of the displayed formula \\
+Macro invariance with micro change & macro equivalence: A5-W; lower-type
+difference: A5-OI \\
+Symmetric-overlap non-selection & orbit lemma plus explicit
+nonempty/exclusive candidate restriction \\
+Intrinsic structure rules out every invariant partition & not
+established; explicit counterexamples \\
+Canonical positive subject selector & not a required universal element
+of UCT \\
+General account of human/cellular quality & one A5-SI identity
+principle \\
+Familiar quality labels mapped to measured mechanisms &
+application-level biological/psychophysical task \\
+Structural evolution from physical process to conceptual self &
+explanatory/application synthesis \\
+Evolutionary continuity entails A1/A5 & explicitly rejected \\
+PTVSP & methodological proposal \\
+OSC\(_v\) & one-way and two-way packages distinguished \\
+Finite bridge reflection & additional requirement for the two-way
+package \\
+Exact quotient closure & established mathematical construction, not a
+tokenhood theorem \\
+Three-register example & exact finite thought-experiment verification;
+no empirical consciousness validation \\
+Four-setting causal-retention result & stated finite dynamics; algebraic
+all-horizon proof; conditional A5 interpretation \\
+UCT-II v1.1 interface & scientific view/estimate separated from ontic
+structure \\
+A1/A5 empirically established & not established \\
+Hard problem deductively solved & not claimed \\
+Extra universal subject owner or partition & not postulated as a
+prerequisite of experience \\
+Individual ingredients are unprecedented & explicitly not claimed \\
+Exact rc3 conjunction found in prior targeted search & earlier audit
+located no exact match; does not certify rc4 priority \\
+Historical priority & not established \\
+\end{longtable}
+
+\hypertarget{conclusion}{%
+\Needspace{5\baselineskip}
+\section{16. Conclusion}\label{conclusion}}
+
+UCT I v1.1 uses one explanatory principle from elementary physical
+processes through cells, animals, and humans: each actual process has
+experience, and its experiential organization is the intrinsic
+presentation of its physical organization. Evolution changes that
+organization, its discriminative repertoire, temporal relations, and
+higher-order self-representations. It does not require a new
+experiential substance when a cell becomes part of a multicellular
+process or when human conceptual selfhood appears.
+
+This edition formalizes this intended identity as A5-SI. The tokenwise
+structural isomorphism is stronger than the earlier displayed pairwise
+equivalence formula. With the standard product in a common declared
+structural category, it supports the repaired non-summative combination
+proof. The distinction between strong identity and weak type
+correspondence is an explicit formal clarification, not an additional
+mechanism for generating experience.
+
+The theory accepts nested and overlapping actual processes without
+requiring one exclusive macro boundary or subject partition. Selfhood
+and familiar quality labels concern particular organizations and their
+scientific descriptions; they are not new existence gates. A scoped
+symmetry theorem explains a limitation of optional exclusive selectors
+without making the absence of such a selector a defect in the basal
+ontology.
+
+The exact three-register example illustrates a substantive consequence
+of token-relative organization: a whole-process structure can change
+while an implemented sub-process and the declared output remain
+invariant. The finite calculations verify those model properties. They
+do not supply independent empirical confirmation of structural identity
+or a measurement of circuit experience.
+
+The four-setting extension proves exactly which initial perturbation
+distinctions are erased, retained for one step, or sustained by
+complementary coupling; these are finite-model organizational results,
+not scalar consciousness levels. Further theoretical work should extend
+such controlled transformation analyses and establish faithful links to
+neighboring theories. Biological and psychophysical work can identify
+concrete realizations when a particular application requires them.
+Neither task calls for a second foundational explanation of why human
+rather than cellular experience exists. The general principle, its
+conditional deductions, and its empirical status are stated separately.
+The paired UCT II v1.1 uses a compatible scientific-view interface and
+preserves both exact mechanistic results and their evidential limits.
+
+\hypertarget{references}{%
+\Needspace{5\baselineskip}
+\section{References}\label{references}}
+
+\textbf{Reference and version note.} Earlier editions and internal
+candidates are retained in the revision record. The three
+causal-abstraction references introduced during rc4 were checked against
+the original publisher or author-hosted records; their use does not
+imply empirical support for UCT. This edition identifies its companion
+by the new version-specific DOI. Sources support the particular
+biological or mathematical claims for which they are cited, not A1 or A5
+by themselves.
+
+\textbf{Reference-status note.} Literature added specifically for the
+v1.1 evolutionary/comparative synthesis was checked against publisher,
+PubMed, or journal records during the 29 September 2026 claim audit.
+Basri et al.~(2026) was indexed by PubMed as ahead-of-print on 8
+September 2026 even though the journal issue is dated November 2026. The
+prior-art audit also added Rosenberg (2004) as an explicit
+panexperientialist comparison and Nagae (2026) as a recent
+preprint-level structural-subjectivity comparator.
+
+Albantakis, L., Barbosa, L., Findlay, G., Grasso, M., Haun, A. M.,
+Marshall, W., Mayner, W. G. P., Zaeemzadeh, A., Boly, M., Juel, B. E.,
+Sasai, S., Fujii, K., David, I., Hendren, J., Lang, J. P., \& Tononi, G.
+(2023). Integrated information theory (IIT) 4.0: Formulating the
+properties of phenomenal existence in physical terms. \emph{PLoS
+Computational Biology, 19}(10), e1011465.
+\href{https://doi.org/10.1371/journal.pcbi.1011465}{\nolinkurl{doi:10.1371/journal.pcbi.1011465}}.
+
+Anderson, N. G., \& Piccinini, G. (2024). \emph{The Physical Signature
+of Computation: A Robust Mapping Account}. Oxford University Press.
+\href{https://doi.org/10.1093/9780191872075.001.0001}{\nolinkurl{doi:10.1093/9780191872075.001.0001}}.
+
+Auvray, M., Myin, E., \& Spence, C. (2010). The sensory-discriminative
+and affective-motivational aspects of pain. \emph{Neuroscience \&
+Biobehavioral Reviews, 34}(2), 214--223.
+\href{https://doi.org/10.1016/j.neubiorev.2008.07.008}{\nolinkurl{doi:10.1016/j.neubiorev.2008.07.008}}.
+
+Basri, J., BarAvi, P., \& Hemmo, M. (2026). Functionalist theories of
+consciousness: unfolding, substitution and the indeterminacy of function
+by the physics of the brain. \emph{Consciousness and Cognition, 145},
+104121. Advance online publication, 8 September 2026.
+\href{https://doi.org/10.1016/j.concog.2026.104121}{\nolinkurl{doi:10.1016/j.concog.2026.104121}}.
+
+Beckers, S., \& Halpern, J. Y. (2019). Abstracting causal models.
+\emph{Proceedings of the AAAI Conference on Artificial Intelligence,
+33}(01), 2678-2685.
+\href{https://doi.org/10.1609/aaai.v33i01.33012678}{\nolinkurl{doi:10.1609/aaai.v33i01.33012678}}.
+
+Bielecki, J., Dam Nielsen, S. K., Nachman, G., \& Garm, A. (2023).
+Associative learning in the box jellyfish \emph{Tripedalia cystophora}.
+\emph{Current Biology, 33}(19), 4150--4159.e5.
+\href{https://doi.org/10.1016/j.cub.2023.08.056}{\nolinkurl{doi:10.1016/j.cub.2023.08.056}}.
+
+Blackmon, J. C. (2021). Integrated Information Theory, intrinsicality,
+and overlapping conscious systems. \emph{Journal of Consciousness
+Studies, 28}(11--12), 31--53.
+\href{https://doi.org/10.53765/20512201.28.11.031}{\nolinkurl{doi:10.53765/20512201.28.11.031}}.
+
+Boisseau, R. P., Vogel, D., \& Dussutour, A. (2016). Habituation in
+non-neural organisms: evidence from slime moulds. \emph{Proceedings of
+the Royal Society B, 283}(1829), 20160446.
+\href{https://doi.org/10.1098/rspb.2016.0446}{\nolinkurl{doi:10.1098/rspb.2016.0446}}.
+
+Buchholz, P. (1994). Exact and ordinary lumpability in finite Markov
+chains. \emph{Journal of Applied Probability, 31}(1), 59-75.
+\href{https://doi.org/10.2307/3215235}{\nolinkurl{doi:10.2307/3215235}}.
+
+Chalmers, D. J. (2016). The combination problem for panpsychism. In G.
+Bruntrup \& L. Jaskolla (Eds.), \emph{Panpsychism: Contemporary
+Perspectives} (pp.~179--214). Oxford University Press.
+\href{https://doi.org/10.1093/acprof:oso/9780199359943.003.0008}{\nolinkurl{doi:10.1093/acprof:oso/9780199359943.003.0008}}.
+
+Chang, A. Y. C., Biehl, M., Yu, Y., \& Kanai, R. (2020). Information
+Closure Theory of Consciousness. \emph{Frontiers in Psychology, 11},
+1504.
+\href{https://doi.org/10.3389/fpsyg.2020.01504}{\nolinkurl{doi:10.3389/fpsyg.2020.01504}}.
+
+Coninx, S. (2024). Pain philosophy: Recent debates and future
+challenges. \emph{Philosophy Compass, 19}(4), e12981.
+\href{https://doi.org/10.1111/phc3.12981}{\nolinkurl{doi:10.1111/phc3.12981}}.
+
+Doerig, A., Schurger, A., Hess, K., \& Herzog, M. H. (2019). The
+unfolding argument: Why IIT and other causal structure theories cannot
+explain consciousness. \emph{Consciousness and Cognition, 72}, 49--59.
+\href{https://doi.org/10.1016/j.concog.2019.04.002}{\nolinkurl{doi:10.1016/j.concog.2019.04.002}}.
+
+Doerig, A., Schurger, A., \& Herzog, M. H. (2021). Hard criteria for
+empirical theories of consciousness. \emph{Cognitive Neuroscience,
+12}(2), 41--62.
+\href{https://doi.org/10.1080/17588928.2020.1772214}{\nolinkurl{doi:10.1080/17588928.2020.1772214}}.
+
+Giurfa, M., Zhang, S., Jenett, A., Menzel, R., \& Srinivasan, M. V.
+(2001). The concepts of `sameness' and `difference' in an insect.
+\emph{Nature, 410}, 930--933.
+\href{https://doi.org/10.1038/35073582}{\nolinkurl{doi:10.1038/35073582}}.
+
+Herzog, M. H., Schurger, A., \& Doerig, A. (2022). First-person
+experience cannot rescue causal structure theories from the unfolding
+argument. \emph{Consciousness and Cognition, 98}, 103261.
+\href{https://doi.org/10.1016/j.concog.2021.103261}{\nolinkurl{doi:10.1016/j.concog.2021.103261}}.
+
+Jozet-Alves, C., Bertin, M., \& Clayton, N. S. (2013). Evidence of
+episodic-like memory in cuttlefish. \emph{Current Biology, 23}(23),
+R1033--R1035.
+\href{https://doi.org/10.1016/j.cub.2013.10.021}{\nolinkurl{doi:10.1016/j.cub.2013.10.021}}.
+
+Kanai, R., \& Fujisawa, I. (2024). Toward a universal theory of
+consciousness. \emph{Neuroscience of Consciousness, 2024}(1), niae022.
+\href{https://doi.org/10.1093/nc/niae022}{\nolinkurl{doi:10.1093/nc/niae022}}.
+
+Kleiner, J. (2020). Brain states matter. A reply to the unfolding
+argument. \emph{Consciousness and Cognition, 85}, 102981.
+\href{https://doi.org/10.1016/j.concog.2020.102981}{\nolinkurl{doi:10.1016/j.concog.2020.102981}}.
+
+Lyre, H. (2022). Neurophenomenal structuralism. A philosophical agenda
+for a structuralist neuroscience of consciousness. \emph{Neuroscience of
+Consciousness, 2022}(1), niac012.
+\href{https://doi.org/10.1093/nc/niac012}{\nolinkurl{doi:10.1093/nc/niac012}}.
+
+Miller, G. (2018). Can subjects be proper parts of subjects? The
+de-combination problem. \emph{Ratio, 31}(2), 137--154.
+\href{https://doi.org/10.1111/rati.12166}{\nolinkurl{doi:10.1111/rati.12166}}.
+
+Nagae, M. (2026). \emph{The Structural Conditions of Consciousness VI
+--- Final Volume --- Structural Knot Theory: Toward a Structural
+Decision Tool: Determining the Presence and Degree of Subjectivity}.
+Zenodo preprint.
+\href{https://doi.org/10.5281/zenodo.20887803}{\nolinkurl{doi:10.5281/zenodo.20887803}}.
+
+Negro, N. (2025). Three arguments against metaphysical structuralism in
+consciousness research. \emph{Synthese, 206}, 8.
+\href{https://doi.org/10.1007/s11229-025-05103-6}{\nolinkurl{doi:10.1007/s11229-025-05103-6}}.
+
+Piccinini, G. (2015). \emph{Physical Computation: A Mechanistic
+Account}. Oxford University Press.
+\href{https://doi.org/10.1093/acprof:oso/9780199658855.001.0001}{\nolinkurl{doi:10.1093/acprof:oso/9780199658855.001.0001}}.
+
+Rosenberg, G. H. (2004). \emph{A Place for Consciousness: Probing the
+Deep Structure of the Natural World}. Oxford University Press.
+\href{https://doi.org/10.1093/acprof:oso/9780195168143.001.0001}{\nolinkurl{doi:10.1093/acprof:oso/9780195168143.001.0001}}.
+
+Rubenstein, P. K., Weichwald, S., Bongers, S., Mooij, J. M., Janzing,
+D., Grosse-Wentrup, M., \& Schölkopf, B. (2017). Causal consistency of
+structural equation models. \emph{Proceedings of the 33rd Conference on
+Uncertainty in Artificial Intelligence}.
+\href{https://arxiv.org/abs/1707.00819}{\nolinkurl{arXiv:1707.00819}}.
+
+Schnell, A. K., Boeckle, M., Rivera, M., Clayton, N. S., \& Hanlon, R.
+T. (2021). Cuttlefish exert self-control in a delay of gratification
+task. \emph{Proceedings of the Royal Society B, 288}(1946), 20203161.
+\href{https://doi.org/10.1098/rspb.2020.3161}{\nolinkurl{doi:10.1098/rspb.2020.3161}}.
+
+Seth, A. K., \& Bayne, T. (2022). Theories of consciousness.
+\emph{Nature Reviews Neuroscience, 23}, 439--452.
+\href{https://doi.org/10.1038/s41583-022-00587-4}{\nolinkurl{doi:10.1038/s41583-022-00587-4}}.
+
+Tsuchiya, N., Andrillon, T., \& Haun, A. (2020). A reply to ``the
+unfolding argument'': Beyond functionalism/behaviorism and towards a
+science of causal structure theories of consciousness.
+\emph{Consciousness and Cognition, 79}, 102877.
+\href{https://doi.org/10.1016/j.concog.2020.102877}{\nolinkurl{doi:10.1016/j.concog.2020.102877}}.
+
+Usher, M. (2021). Refuting the unfolding-argument on the irrelevance of
+causal structure to consciousness. \emph{Consciousness and Cognition,
+95}, 103212.
+\href{https://doi.org/10.1016/j.concog.2021.103212}{\nolinkurl{doi:10.1016/j.concog.2021.103212}}.
+
+Walters, E. T. (2025). From nociception in aneural animals to human
+suffering: Toward a comparative biology of pain. \emph{Journal of
+Experimental Biology, 228}(19), jeb251210.
+\href{https://doi.org/10.1242/jeb.251210}{\nolinkurl{doi:10.1242/jeb.251210}}.
+
+Winters, J. J. (2020). The temporally-integrated causality landscape: A
+theoretical framework for consciousness and meaning. \emph{Consciousness
+and Cognition, 83}, 102976.
+\href{https://doi.org/10.1016/j.concog.2020.102976}{\nolinkurl{doi:10.1016/j.concog.2020.102976}}.
+
+Winters, J. J. (2021). The Temporally-Integrated Causality Landscape:
+Reconciling neuroscientific theories with the phenomenology of
+consciousness. \emph{Frontiers in Human Neuroscience, 15}, 768459.
+\href{https://doi.org/10.3389/fnhum.2021.768459}{\nolinkurl{doi:10.3389/fnhum.2021.768459}}.
+
+Yaron, I., Melloni, L., Pitts, M., et al.~(2022). The ConTraSt database
+for analysing and comparing empirical studies of consciousness theories.
+\emph{Nature Human Behaviour, 6}, 593--604.
+\href{https://doi.org/10.1038/s41562-021-01284-5}{\nolinkurl{doi:10.1038/s41562-021-01284-5}}.
+
+\hypertarget{appendix-a.-main-changes-relative-to-v1.0}{%
+\clearpage
+\section{Appendix A. Main changes relative to
+v1.0}\label{appendix-a.-main-changes-relative-to-v1.0}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Replaces the potentially ambiguous scale-indexed ontological reading
+  with a token-relative ontic organization: \[
+  \Phi(P)\leftrightarrow\mathbf D^{ontic}(P).
+  \]
+\item
+  Separates: \[
+  \mathbf D^{ontic}
+  \neq
+  D_v
+  \neq
+  \widehat D_v
+  \neq
+  Subject.
+  \]
+\item
+  Separates the intended tokenwise identity A5-SI from its pairwise
+  A5-OI and one-way A5-W consequences.
+\item
+  Marks all converse/nonisomorphism theorems as A5-OI-dependent.
+\item
+  Repairs Non-Summative Combination using explicit tokenwise identity
+  A5-SI and the standard product in the declared common structural
+  category.
+\item
+  Adds Probe Invariance, No Future Contamination, and Causally Screened
+  History.
+\item
+  Adds the restricted candidate-orbit obstruction and explicitly retains
+  possible invariant global partitions.
+\item
+  Recasts A3 primarily as process persistence under embedding.
+\item
+  Recasts A4 as Selfhood Non-Prerequisite and removes positive
+  self-formation mechanisms from the axiomatic layer.
+\item
+  Demotes First-Person Reference Field, binary macrofield membership,
+  H-V*, and RREP-as-universal-generator from the foundational layer.
+\item
+  Adds the structural-evolutionary synthesis from elementary physical
+  processes to conceptual selfhood.
+\item
+  Introduces the distinction (with one-way sufficiency and two-way
+  reflection separated in rc4): \[
+  A5
+  \neq
+  B_v
+  \neq
+  OSC_v,
+  \] making finite empirical bridge assumptions explicit.
+\item
+  Replaces grain-only falsifiability discipline with Physical Token/View
+  Selection Protocol and No Post-Hoc Token/View Rescue.
+\item
+  States explicitly that finite experiments ordinarily test an
+  operational bridge package rather than isolated full A5-OI.
+\item
+  Distinguishes internal theoretical obligations from application-level
+  physical identification and measurement. General macro-experience
+  gates, a universal exclusive subject selector, and a second
+  human-quality mechanism are not added as prerequisites.
+\item
+  Adds the pointed, port-aware finite comparison signature, four-setting
+  causal-retention proposition, noncircular bridge-failure
+  countermodels, and a typed interface to UCT II v1.1.
+\end{enumerate}
+
+\hypertarget{appendix-b.-an-exact-three-register-thought-experiment}{%
+\clearpage
+\section{Appendix B. An exact three-register thought
+experiment}\label{appendix-b.-an-exact-three-register-thought-experiment}}
+
+\hypertarget{b.1-physical-specification-and-scope}{%
+\Needspace{4\baselineskip}
+\subsection{B.1 Physical specification and
+scope}\label{b.1-physical-specification-and-scope}}
+
+Stipulate three physically implemented binary registers \(s,a,b\), a
+common clock, an external input \(u\), XOR gates, buffered one-way
+connections from \(s\), and switchable cross-connections between \(a\)
+and \(b\). The switch setting is \(\lambda\in\{0,1\}\). One clock step
+is
+\nopagebreak[4]
+\[
+\begin{aligned}
+s_{t+1}&=s_t\oplus u_t,\\
+a_{t+1}&=s_t\oplus(\lambda b_t),\\
+b_{t+1}&=s_t\oplus(\lambda a_t),\\
+y_t&=s_t.
+\end{aligned}
+\]
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=stealth, every node/.style={font=\small}, scale=0.9]
+\foreach \dx/\label in {0/{Setting 0: cross-links absent},7/{Setting 1: cross-links present}} {
+  \begin{scope}[xshift=\dx cm]
+    \node at (0,1.6) {\label};
+    \node[circle,draw,minimum size=7mm] (s\dx) at (0,0.7) {$s$};
+    \node[circle,draw,minimum size=7mm] (a\dx) at (-1,-1) {$a$};
+    \node[circle,draw,minimum size=7mm] (b\dx) at (1,-1) {$b$};
+    \draw[->] (-2,0.7) node[left] {$u$} -- (s\dx);
+    \draw[->] (s\dx) -- (2,0.7) node[right] {$y=s$};
+    \draw[->] (s\dx) to[loop above] (s\dx);
+    \draw[->] (s\dx) -- (a\dx);
+    \draw[->] (s\dx) -- (b\dx);
+  \end{scope}
+}
+\draw[->] (a7) to[bend left=22] (b7);
+\draw[->] (b7) to[bend left=22] (a7);
+\node at (0,-2) {Transition images: 2};
+\node at (7,-2) {Transition images: 8};
+\end{tikzpicture}
+\caption{The two stipulated circuit settings. Arrows denote state dependencies. The added pair cross-links distinguish the settings; the external output is the same implemented state in both. Clock and buffering are specified in the text.}
+\end{figure}
+
+Multiplication and XOR act on bits. Buffering is stipulated to exclude
+feedback and loading from the downstream pair into the \(s\) update. In
+real hardware this isolation and all relevant boundary effects would
+require examination. The mathematics treats the finite
+update/intervention specification as complete within the stated
+idealized model. A real circuit's complete ontic structure is not
+established by this calculation. No circuit was built and no phenomenal
+observations were collected.
+
+Before calculating any output, specify two token hypotheses: the whole
+implemented network \(W_\lambda\), and the continuing implemented
+register process \(S_\lambda\) with state \(s\), its update mechanism,
+clock, and declared boundary \(u\). The whole is causally connected
+through the outgoing \(s\) links in both settings. The cross-coupled
+\(a,b\) pair has boundary \(s\). These are explicit component/boundary
+choices, not subject assignments. A1 applies conditionally if the
+stipulated processes are actually instantiated and meet the token
+requirements; a mathematical state table is not itself proof of that
+instantiation.
+
+The intervention family comprises all 27 coordinate clamps immediately
+before an update: each register is either unchanged, set to 0, or set to
+1. The boundary input takes both bit values. The switch settings are
+separately compared mechanisms; they are not assumed to constitute a
+continuous A2 path. This is a worked theoretical specification, not a
+preregistered empirical study.
+
+\hypertarget{b.2-exact-closure-of-an-implemented-sub-process}{%
+\Needspace{4\baselineskip}
+\subsection{B.2 Exact closure of an implemented
+sub-process}\label{b.2-exact-closure-of-an-implemented-sub-process}}
+
+For \(\pi(s,a,b)=s\), the macro update is \(\bar T_u(s)=s\oplus u\).
+Every two physical states with the same \(s\) have the same next
+projected state. Projected coordinate clamps act as the same clamp on
+\(s\) if it is targeted and as the identity otherwise. Hence
+\nopagebreak[4]
+\[
+\pi(T_u^\lambda(Ix))
+=\bar T_u(\omega(I)\pi(x))
+\]
+
+for every declared clamp, input, setting, and state. The implementation
+of \(s\) is part of the physical specification, not inferred from
+closure alone. The present state and future update of this sub-process
+do not depend on \(a\) or \(b\), even though it causally drives them.
+The case separates physical downstream connection from participation in
+this particular process's state and update.
+
+By induction on time, for the same \(s_0\) and any input string,
+\nopagebreak[4]
+\[
+y_t=s_0\oplus u_0\oplus\cdots\oplus u_{t-1}
+\quad(t\ge1)
+\]
+
+in both settings, independently of initial \(a,b\). This is equality of
+the declared output behavior, not equivalence under every conceivable
+additional physical experiment.
+
+\hypertarget{b.3-full-structural-difference-is-invariant-to-state-relabeling}{%
+\Needspace{4\baselineskip}
+\subsection{B.3 Full structural difference is invariant to state
+relabeling}\label{b.3-full-structural-difference-is-invariant-to-state-relabeling}}
+
+Fix either input value. At \(\lambda=0\), both downstream next states
+equal \(s\), so the eight-state transition map has exactly two images.
+At \(\lambda=1\), the map is bijective: from \((s',a',b')\), recover
+\nopagebreak[4]
+\[
+s=s'\oplus u,\qquad a=b'\oplus s,\qquad b=a'\oplus s.
+\]
+
+It therefore has eight images. Conjugating a transition map by a
+bijective state relabeling preserves its image cardinality. Consequently
+the two whole-network transition structures are not isomorphic, even
+before requiring isomorphisms to preserve the intervention ports.
+
+At a fixed boundary \(s\), the \(a\mid b\) split has independent
+component updates at \(\lambda=0\). At \(\lambda=1\), changing \(b\)
+changes \(a^+\) and changing \(a\) changes \(b^+\); no product of
+component-local update maps reproduces this behavior relative to these
+physical ports. This is a statement about the specified split, not about
+every conceivable factorization or about one phenomenal subject. Because
+the boundary is explicitly conditioned, correlation from the common
+\(s\) drive is not mistaken for cross-coupling.
+
+The two distinctions yield compatible conditional UCT statements:
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Fixed comparison
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Mathematical result
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Conditional UCT interpretation
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Whole tokens \(W_0,W_1\) & Nonisomorphic full modeled dynamics & A5-OI
+gives different complete experiential types if the stipulated
+organization is complete and the tokens actual \\
+Implemented processes \(S_0,S_1\) & Same state/update and represented
+interfaces & A5-W gives equivalent experiential types under the same
+completeness and actuality qualifications \\
+Output \(y\) & Same trajectory for common \(s_0,u\) & Output equality
+does not settle whole-token experiential equivalence \\
+Downstream split \(a\mid b\), boundary \(s\) fixed & Cross-dependence
+appears at setting 1 & A compositional interpretation uses A5-SI and the
+specified constituent product; it does not determine one subject \\
+\end{longtable}
+
+The coexistence of these conclusions is the point of token-relative
+completeness. Replacing a whole-process claim by the sub-process claim
+after a failed test would still violate the freeze protocol. Here both
+comparisons are specified in advance and are reported together.
+
+\hypertarget{b.4-two-checks-against-arbitrary-coarse-graining}{%
+\Needspace{4\baselineskip}
+\subsection{B.4 Two checks against arbitrary
+coarse-graining}\label{b.4-two-checks-against-arbitrary-coarse-graining}}
+
+The feature \(q=a\oplus b\) obeys \(q^+=\lambda q\). Its exact algebraic
+closure does not establish a separate actual \(q\)-token. No separate
+parity register is stipulated. A distributed realization could still be
+proposed and independently examined; absence of a literal register is
+not a proof of absence of such a process. This example demonstrates a
+limit of the certificate: algebra alone does not finish the realization
+argument.
+
+The feature \(r=s\oplus a\oplus b\) fails even the deterministic closure
+test at \(\lambda=0\). With \(u=0\), states \((0,0,0)\) and \((1,1,0)\)
+both have \(r=0\), but their next \(r\) values are respectively 0 and 1.
+Thus no deterministic one-state update for \(r\) alone exists in that
+scope. This is a model failure, not a no-experience conclusion.
+
+\hypertarget{b.5-what-the-example-does-and-does-not-distinguish}{%
+\Needspace{4\baselineskip}
+\subsection{B.5 What the example does and does not
+distinguish}\label{b.5-what-the-example-does-and-does-not-distinguish}}
+
+An output-sufficiency hypothesis assigning whole-token experiential
+equivalence whenever every declared \(u\)-to-\(y\) response agrees
+conflicts with A5-OI on this model, conditional on the stated
+actuality/completeness premises. This comparator is deliberately narrow.
+It is not all functionalism: theories that include internal
+counterfactual organization need not identify the two whole networks. No
+IIT 4.0 quantity or GNWT neural model is calculated here; this
+construction is not reported as an empirical victory over either theory.
+
+The example is a finite specialization and audit of the project's
+earlier behaviorally silent internal-change argument. Its value is to
+put output equality, full nonisomorphism, fixed token boundaries,
+intervention closure, and the limits of coarse descriptions in one
+independently checkable specification. It does not claim that the
+general phenomenon or the underlying mathematics is new.
+
+\hypertarget{b.6-exact-verification-record}{%
+\Needspace{4\baselineskip}
+\subsection{B.6 Exact verification
+record}\label{b.6-exact-verification-record}}
+
+The accompanying standard-library Python script
+\texttt{verification/check\_rc4.py} checks 13 scoped properties. It
+enumerates all 32 state/input/setting transitions, 128 same-projection
+closure comparisons, and 864 state-reset intervention cases. It also
+verifies the finite-set compositional counterexample, the restricted
+symmetry orbit and invariant global counterpartitions, the lossy-target
+counterexample, the transition-image invariant, and the
+coarse-projection examples. Full transition data and results are
+supplied in \texttt{transition\_table.csv} and
+\texttt{verification\_results.json}.
+
+The original 13-check script is preserved and rerun in the v1.1 package.
+A separate \texttt{verification/check\_transformations.py} checks the
+four-setting extension, port covariance, and bridge countermodels.
+General statements rely on the analytic proofs above; finite enumeration
+is not a proof about arbitrary physical systems and is not empirical
+validation of any consciousness axiom.
+
+\hypertarget{appendix-c.-revision-specific-dependency-ledger}{%
+\clearpage
+\section{Appendix C. Revision-specific dependency
+ledger}\label{appendix-c.-revision-specific-dependency-ledger}}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Result
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Required premises
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Scope boundary
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Pairwise type equivalence & Tokenwise A5-SI in the common signature &
+Weaker A5-OI alone does not establish A5-SI \\
+Repaired combination & Actual whole/parts; tokenwise A5-SI; standard
+constituent product & Relative nonproduct structure, not a subject
+count \\
+Restricted selection obstruction & One symmetry orbit with overlap;
+equivariance; nonempty exclusive output & Does not exclude other
+invariant partitions \\
+Actual finite process criterion & Actual events; inherited causal links;
+connected subhistory; represented boundary & Describes the domain; no
+new experience threshold \\
+Finite closure lemma & Surjective projection; representative-independent
+projected next state & Optional scientific model consistency \\
+One-way measured correspondence & Frozen view/target; sufficiency;
+measurement assumptions & Not necessarily injective after projection \\
+Two-way measured correspondence & One-way package plus finite reflection
+& Does not isolate the identity axiom from all auxiliaries \\
+Whole-model divergence & Specified actual realization/completeness;
+image-cardinality invariant; A5-OI & No independently measured
+phenomenal difference \\
+Sub-process invariance & Same complete implemented sub-process; A5-W &
+Does not assert whole-network invariance \\
+Human and cellular quality & The same A1 and A5-SI principles & Concrete
+biological identification is a separate application \\
+Pointed, port-aware isomorphism & Declared signature; fixed point,
+ports, operations and temporal relations & A finite model is not a
+certificate of complete ontic organization \\
+Four-setting retention partition & Stated binary updates; held common
+boundary; initial perturbation; rank-nullity & Counts response
+distinctions, not consciousness or subjects \\
+Finite bridge failure does not isolate A5 & Explicit lossy-view and
+lossy-target countermodels & No preservation of a falsified implication
+as a secure premise \\
+UCT-II operational reconstruction & Frozen physical view, shared
+operators, applicable fixed bridge & Does not alone establish A1/A5 or
+sensitive phenomenal measurement \\
+\end{longtable}
+
+The earlier static dependency-map audit checked the presence and
+direction of encoded dependencies. It did not verify that the displayed
+weak formula expressed all of the intended strong identity. Rc4 makes
+that difference explicit. The old freeze candidate should not be reused
+as a semantic proof certificate without updating the identity and
+composition nodes.
+
+\hypertarget{appendix-d.-optional-checks-on-a-finite-coarse-description}{%
+\clearpage
+\section{Appendix D. Optional checks on a finite coarse
+description}\label{appendix-d.-optional-checks-on-a-finite-coarse-description}}
+
+These checks concern a proposed scientific model, not the existence of
+experience. Actual processes need not admit autonomous, closed coarse
+descriptions. The finite process criterion in Section 2.4 does not
+depend on the checks below.
+
+A useful model dossier identifies the actual referent and its physical
+state carriers or distributed organization; declares the time horizon,
+boundary, and omitted feedback; and distinguishes implemented relations
+from a calculated summary. Predictive success alone does not create a
+new token. A literal register is not required for a distributed
+realization.
+
+For a deterministic lower-level update \(x^+=T_e(x)\) and a surjective
+coarse map \(\pi:X\to M\), a closed deterministic update \(\bar T_e\)
+exists exactly when
+\nopagebreak[4]
+\[
+\pi(x)=\pi(x')\ \Longrightarrow\
+\pi(T_e x)=\pi(T_e x').
+\]
+
+\textbf{Proof.} If \(\pi T_e=\bar T_e\pi\), equal coarse states have
+equal coarse successors. Conversely, define \(\bar T_e(m)=\pi(T_e x)\)
+using any representative of \(m\). The displayed condition makes the
+definition representative-independent, and surjectivity supplies a
+representative. \(\square\)
+
+For a declared state-reset intervention \(I\), an additional
+intervention correspondence \(\omega\) can be checked by
+\nopagebreak[4]
+\[
+\pi(T_e(Ix))=\bar T_e(\omega(I)\pi(x)).
+\]
+
+The reset is applied before the transition. Mechanism-changing
+interventions require separately indexed update maps; the reset equation
+does not automatically cover them. Approximate, probabilistic, or
+history-dependent models need their own error and sufficiency
+conditions. Failure of a closed deterministic description is a failure
+of that model, not absence of experience in the actual process.
+
+This mathematics belongs to established lumpability and
+causal-abstraction methodology (Buchholz, 1994; Rubenstein et al., 2017;
+Beckers \& Halpern, 2019). UCT claims no mathematical priority. Appendix
+B supplies both an implemented closed process and examples illustrating
+why a closed calculated feature is not automatically another token, and
+why an arbitrary feature can fail closure. These distinctions keep
+optional modeling requirements separate from the common explanatory
+principle for elementary, cellular, and human experience.
+
+\end{document}
