@@ -1,0 +1,24 @@
+{
+  "schema": "uct-disabled-scoped-application/1.0",
+  "id": "A4D20261011",
+  "status": "DISABLED_SCOPED_NEGATIVE_AND_PROTOCOL_APPLICATION",
+  "enabled_as_established_premises": false,
+  "completed_map": "UCT-MAP-v1.1.2",
+  "scientific_delta": {
+    "nodes": 0,
+    "rules": 0,
+    "contexts": 0
+  },
+  "related_completed_nodes": [
+    "A:C1",
+    "A:U1",
+    "R157:COORDINATE_TRANSPORT",
+    "R172:ONLINE_ACTION_USE_RELATION",
+    "R172:WITNESSED_ONLINE_ACTION_USE",
+    "R173:RETENTIVE_BINDING_RELATION",
+    "R173:FAMILIAR_MINENESS_BOUNDARY"
+  ],
+  "reason_for_no_promotion": "The finite result establishes a hidden-writer nonidentification witness and a prospective device-relative evidence contract. No physical device, complete K, actual C1 instance, RetBind or phenomenal target is installed.",
+  "inference_policy": "All completed-map all_of lists retain AND semantics; A4D evidence cannot replace any actual-instance or semantic premise."
+}
+

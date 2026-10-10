@@ -1,0 +1,74 @@
+{
+  "schema": "uct-a4d-claim-ledger/1.0",
+  "claims": [
+    {
+      "id": "A4D-N1",
+      "type": "FINITE_NONENTAILMENT_WITH_EXACT_WITNESS",
+      "statement": "On the six Boolean challenge-by-mode cells, if an unobserved downstream writer has timely access to challenge and mode, command/actuator/endpoint replay does not identify the named target writer: a target-idle observational twin exists.",
+      "domain": "q in {0,1}; mode in {baseline,block,rescue}; deterministic downstream plant/readout; monitor lacks independently complete writer provenance.",
+      "all_premises": [
+        "hidden writer may read q and mode before actuation",
+        "hidden writer may overwrite the selected actuator value downstream of the target",
+        "writer identity is not independently observed",
+        "downstream transition and endpoint are deterministic functions of the final actuator value"
+      ],
+      "proof_or_source": "Construct H(q,mode)=G(q,mode); exhaustive enumeration of 64 tables finds one exact twin.",
+      "counterexample_or_limit": "A trusted complete writer inventory plus a cut or challenge-isolation premise removes this exact construction; the result is not universal over every instrumented device.",
+      "status": "PROVED_IN_DECLARED_FINITE_MODEL",
+      "thought_experiment_role": "Copy/switch and hidden-magnet/calculator witness: identical transitions can conceal writer substitution."
+    },
+    {
+      "id": "A4D-P1",
+      "type": "BOUNDED_CONDITIONAL_EXCLUSION",
+      "statement": "No hidden writer whose output depends only on mode can reproduce G(q,mode)=q,0,q across both challenge values; testing q=1 alone leaves one exact twin.",
+      "domain": "The same six cells and the eight mode-only Boolean tables.",
+      "all_premises": [
+        "every non-target writer is physically fixed across paired challenges",
+        "non-target writers cannot access q or a timely correlate",
+        "target/rescue interface is the only admitted timely q channel",
+        "post-arbitration probe and cut/rescue locality are faithful"
+      ],
+      "proof_or_source": "Baseline and rescue each require one fixed h(mode) to equal both 0 and 1; exact enumeration confirms zero six-cell matches and one q=1-only match.",
+      "counterexample_or_limit": "If any hidden writer sees q, A4D-N1 applies. The physical premises are not proved by the enumeration.",
+      "status": "PROVED_CONDITIONALLY_IN_DECLARED_FINITE_MODEL",
+      "thought_experiment_role": "Ancestor/formation and human-realized-agent controls vary hidden timely access while fixing outputs."
+    },
+    {
+      "id": "A4D-C1",
+      "type": "PROSPECTIVE_SUFFICIENT_EVIDENCE_CONTRACT",
+      "statement": "The eight-clause AWC package is sufficient only for device-relative evidence that the named target route carries paired challenge dependence to the selected actuator transition.",
+      "domain": "One frozen physical device bearer, interval, declared device signature, writer set, target consumer/interface, arbitration and probe placement.",
+      "all_premises": [
+        "frozen boundary and writer inventory",
+        "transition accounting",
+        "faithful target cut",
+        "non-target isolation or challenge blindness",
+        "post-arbitration pre-plant probe",
+        "same-interface rescue",
+        "upstream trace challenge",
+        "chronology and replay"
+      ],
+      "proof_or_source": "Contract synthesis from A4C-G2 and A4D-N1/P1; ordinary causal isolation logic, not a completed installation.",
+      "counterexample_or_limit": "Omit any clause and a hidden writer, direct rescue, misplaced probe or boundary redraw can mimic the result.",
+      "status": "DECLARED_PROSPECTIVE_NOT_INSTANTIATED",
+      "thought_experiment_role": "All four inherited families test boundary, route and writer substitutions."
+    },
+    {
+      "id": "A4D-B1",
+      "type": "UCT_APPLICATION_BOUNDARY",
+      "statement": "A successful AWC installation would not by itself establish complete K, a C1 instance, RetBind, B_fam, H_way, report identity, conceptual self or an exclusive owner.",
+      "domain": "UCT application of any future AWC device result.",
+      "all_premises": [
+        "R172 actual-path/evidence distinction",
+        "R173 all-of route",
+        "R157 semantic residual",
+        "C1 remains a stipulated tokenwise consciousness-specific axiom"
+      ],
+      "proof_or_source": "Typing and missing-premise audit against the completed map.",
+      "counterexample_or_limit": "A separately admitted complete same-instance organization plus independent B_fam evidence could advance a later application; A4D supplies neither.",
+      "status": "BOUNDARY_CONFIRMED_NO_PROMOTION",
+      "thought_experiment_role": "Prevents hidden-writer evidence from being redescribed as a feeling or unique subject."
+    }
+  ]
+}
+

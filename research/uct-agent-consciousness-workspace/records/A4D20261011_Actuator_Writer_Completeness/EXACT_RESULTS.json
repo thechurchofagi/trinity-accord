@@ -1,0 +1,118 @@
+{
+  "bounded_positive_result": {
+    "exact_twins_if_only_q_equals_1_is_tested": 1,
+    "exact_twins_under_paired_challenges": 0,
+    "interpretation": "Paired challenge variation rejects every mode-only writer, but only if physical evidence independently establishes that all non-target writers are challenge-blind or cut.",
+    "mode_only_hidden_writer_tables": 8
+  },
+  "checks": {
+    "explicit_twin_matches_every_actuator_cell": true,
+    "explicit_twin_target_is_idle_everywhere": true,
+    "mode_only_exact_twin_count": true,
+    "mode_only_function_count": true,
+    "single_challenge_mode_only_twin_count": true,
+    "six_cells_enumerated": true,
+    "unrestricted_exact_twin_count": true,
+    "unrestricted_hidden_writer_function_count": true
+  },
+  "domain": {
+    "cell_count": 6,
+    "challenge": [
+      0,
+      1
+    ],
+    "meaning": "Boolean actuator-transition abstraction; not a robot or human experiment.",
+    "modes": [
+      "baseline",
+      "block",
+      "rescue"
+    ]
+  },
+  "expected_genuine_table": {
+    "q=0|mode=baseline": 0,
+    "q=0|mode=block": 0,
+    "q=0|mode=rescue": 0,
+    "q=1|mode=baseline": 1,
+    "q=1|mode=block": 0,
+    "q=1|mode=rescue": 1
+  },
+  "explicit_twin": [
+    {
+      "actuator_genuine": 0,
+      "actuator_twin": 0,
+      "challenge": 0,
+      "genuine_target_connected": true,
+      "logged_command": 0,
+      "mode": "baseline",
+      "observational_match": true,
+      "twin_hidden_writer_value": 0,
+      "twin_target_connected": false
+    },
+    {
+      "actuator_genuine": 1,
+      "actuator_twin": 1,
+      "challenge": 1,
+      "genuine_target_connected": true,
+      "logged_command": 1,
+      "mode": "baseline",
+      "observational_match": true,
+      "twin_hidden_writer_value": 1,
+      "twin_target_connected": false
+    },
+    {
+      "actuator_genuine": 0,
+      "actuator_twin": 0,
+      "challenge": 0,
+      "genuine_target_connected": false,
+      "logged_command": 0,
+      "mode": "block",
+      "observational_match": true,
+      "twin_hidden_writer_value": 0,
+      "twin_target_connected": false
+    },
+    {
+      "actuator_genuine": 0,
+      "actuator_twin": 0,
+      "challenge": 1,
+      "genuine_target_connected": false,
+      "logged_command": 0,
+      "mode": "block",
+      "observational_match": true,
+      "twin_hidden_writer_value": 0,
+      "twin_target_connected": false
+    },
+    {
+      "actuator_genuine": 0,
+      "actuator_twin": 0,
+      "challenge": 0,
+      "genuine_target_connected": true,
+      "logged_command": 0,
+      "mode": "rescue",
+      "observational_match": true,
+      "twin_hidden_writer_value": 0,
+      "twin_target_connected": false
+    },
+    {
+      "actuator_genuine": 1,
+      "actuator_twin": 1,
+      "challenge": 1,
+      "genuine_target_connected": true,
+      "logged_command": 1,
+      "mode": "rescue",
+      "observational_match": true,
+      "twin_hidden_writer_value": 1,
+      "twin_target_connected": false
+    }
+  ],
+  "limits": [
+    "Enumeration proves only the stated finite Boolean claims.",
+    "Challenge blindness, writer enumeration, cut fidelity and probe placement are physical premises, not consequences of the table.",
+    "No complete K signature, RetBind, H_way, familiar mineness or consciousness status is established."
+  ],
+  "negative_result": {
+    "exact_observational_twins": 1,
+    "interpretation": "If an uncut writer sees current challenge and intervention mode, one target-idle table reproduces all tested actuator transitions.",
+    "unrestricted_hidden_writer_tables": 64
+  },
+  "schema": "a4d-writer-completeness-exact/1.0"
+}
