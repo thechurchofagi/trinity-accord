@@ -1,4 +1,16 @@
-# 最新接续 A3N20261010；完成图仍为 UCT-MAP-v1.1.2
+# 最新接续 A3O20261010；完成图仍为 UCT-MAP-v1.1.2
+
+- [中文交接](records/A3O20261010_Route_Grain_Selection_Crossing/HANDOFF_ZH.md)
+- [英文研究稿](records/A3O20261010_Route_Grain_Selection_Crossing/RESEARCH_NOTE.md)
+- [精确结果](records/A3O20261010_Route_Grain_Selection_Crossing/EXACT_RESULTS.json)
+- [声明与漏洞](records/A3O20261010_Route_Grain_Selection_Crossing/GAP_LEDGER.md)
+- [全图审计](records/A3O20261010_Route_Grain_Selection_Crossing/MAP_AUDIT.md)
+
+核心结论：没有无粒度的保留路线真值；同一物理历史可因路线分区改变而翻转`R`。固定细粒度`rho`后，映射与序列两族分别构造`R≠L_sel`，但只是组织可满足性，未安装实际选择器，也未验证`J_H`。A3O 0/0/0停用应用，完成图与C1/U1不变，覆盖UCT-PUB-v1.0.30。
+
+---
+
+# 前一接续 A3N20261010；完成图仍为 UCT-MAP-v1.1.2
 
 - [中文交接](records/A3N20261010_Route_Fluency_Crossing/HANDOFF_ZH.md)
 - [英文研究稿](records/A3N20261010_Route_Fluency_Crossing/RESEARCH_NOTE.md)

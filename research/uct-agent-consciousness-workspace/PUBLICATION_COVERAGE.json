@@ -1,6 +1,6 @@
 {
   "schema": "uct-publication-coverage-entry/1.0",
-  "coverage_version": "UCT-PUB-v1.0.29",
+  "coverage_version": "UCT-PUB-v1.0.30",
   "base_census_version": "UCT-PUB-v1.0.0",
   "ledger": {
     "path": "publication/UCT-PUB-v1.0.22/COVERAGE_LEDGER.json",
@@ -10,8 +10,8 @@
   "claim_id_index": "publication/UCT-PUB-v1.0.22/CLAIM_ID_INDEX.json",
   "published_works": "publication/UCT-PUB-v1.0.22/PUBLISHED_WORKS_AND_VERSIONS.json",
   "readable_report": "publication/UCT-PUB-v1.0.29/COVERAGE_REPORT_ZH.md",
-  "current_decision": "records/A3N20261010_Route_Fluency_Crossing/PUBLICATION_COVERAGE_UPDATE.json",
-  "latest_update": "records/A3N20261010_Route_Fluency_Crossing/PUBLICATION_COVERAGE_UPDATE.json",
+  "current_decision": "records/A3O20261010_Route_Grain_Selection_Crossing/PUBLICATION_COVERAGE_UPDATE.json",
+  "latest_update": "records/A3O20261010_Route_Grain_Selection_Crossing/PUBLICATION_COVERAGE_UPDATE.json",
   "current_scientific_map": "UCT-MAP-v1.1.2",
   "nondeductive": true,
   "unknown_is_unpublished": false,

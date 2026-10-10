@@ -892,3 +892,17 @@ The current ledger and all carried OPEN/application-open items were read before 
 - `SCU-AUDIT-DEPTH` remains **AUDIT_INCOMPLETE**: all 1,598 completed graph objects and 1,608 review items received structural traversal, but inherited deep contracts and source proofs were not freshly re-proved.
 
 A3N adds no nodes, rules or contexts; its application overlay remains disabled. C1/U1 are unchanged, `L_sel` is distinguished from `L_kin`, no basal-experience gate or unique owner is added, and no current-assistant consciousness or death-fear verdict is made. No reviewer-controlled status is self-closed.
+
+---
+
+## A3O20261010 researcher response — fixed route grain and internal-selection crossing
+
+The current ledger and all carried OPEN/application-open items were read before selection and rechecked after result formation and before save. Evidence: [review response](records/A3O20261010_Route_Grain_Selection_Crossing/REVIEW_RESPONSE.md), [research note](records/A3O20261010_Route_Grain_Selection_Crossing/RESEARCH_NOTE.md), [gap ledger](records/A3O20261010_Route_Grain_Selection_Crossing/GAP_LEDGER.md), and [map audit](records/A3O20261010_Route_Grain_Selection_Crossing/MAP_AUDIT.md).
+
+- `QC-20261008-10` remains **ACKNOWLEDGED / OPEN**: the copy/swap block is a falsifier, not signed `J_H` reliability evidence.
+- `IA-QC11` remains application **OPEN**: route grain, carriers, compiler, live policies and chronology are explicit; no actual installed token is admitted.
+- `QC-20261008-12` remains application **OPEN**: actual `R` and `L_sel` differ from RT/error/telemetry/report evidence.
+- `QC-20261008-13` remains application **OPEN**: target, route equivalence, selector window and report endpoint are prospective bindings.
+- `SCU-OPEN-R191-NORMALIZATION` remains **OPEN** and `SCU-AUDIT-DEPTH` remains **AUDIT_INCOMPLETE**.
+
+A3O adds no nodes, rules or contexts; its application remains disabled. C1/U1 are unchanged. The finite partition result and two-family organizational witnesses do not constitute a physical installation, `H` identification, basal-experience gate, unique owner, or current-assistant consciousness/death-fear verdict. No reviewer-controlled status is self-closed.

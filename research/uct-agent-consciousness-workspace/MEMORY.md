@@ -1,4 +1,10 @@
-# 最新接续 A3N20261010；完成图仍为 UCT-MAP-v1.1.2
+# 最新接续 A3O20261010；完成图仍为 UCT-MAP-v1.1.2
+
+[中文交接](records/A3O20261010_Route_Grain_Selection_Crossing/HANDOFF_ZH.md) · [研究稿](records/A3O20261010_Route_Grain_Selection_Crossing/RESEARCH_NOTE.md) · [精确结果](records/A3O20261010_Route_Grain_Selection_Crossing/EXACT_RESULTS.json) · [地图审计](records/A3O20261010_Route_Grain_Selection_Crossing/MAP_AUDIT.md)。A3O先证明`R`依赖预先固定的路线等价关系：同一三元素物理历史的5个分区同时容许`R=0/1`。冻结细粒度`rho`后，映射冲突与序列分块两族都给出`(R=1,L_sel=0)`和`(R=0,L_sel=1)`组织见证；`L_sel`由实际活跃路线/冲突消解定义，不由反应时定义。无人体安装、无`J_H`可靠性或H识别。完成图、C1/U1和全部OPEN不变；覆盖v1.0.30，HOLD独立稿。
+
+---
+
+# 前一接续 A3N20261010；完成图仍为 UCT-MAP-v1.1.2
 
 [中文交接](records/A3N20261010_Route_Fluency_Crossing/HANDOFF_ZH.md) · [研究稿](records/A3N20261010_Route_Fluency_Crossing/RESEARCH_NOTE.md) · [端点/安装合同](records/A3N20261010_Route_Fluency_Crossing/ENDPOINT_AND_INSTALLATION_CONTRACT.md) · [精确结果](records/A3N20261010_Route_Fluency_Crossing/EXACT_RESULTS.json) · [地图审计](records/A3N20261010_Route_Fluency_Crossing/MAP_AUDIT.md)。A3N把流畅拆成`L_sel`与`L_kin`：机器人引导/扰动只给出部分`R≠L_kin`交叉。每格唯一辅助签名可拟合16/16端点表；两机制不变性只排除声明的XOR变化直达效应。无人体数据、无实际`R≠L_sel`、无H识别。完成图和全部OPEN不变，CTD v0.2保留，覆盖v1.0.29，HOLD独立稿。
 

@@ -1,0 +1,34 @@
+{
+  "schema": "uct-a3o-map-audit/1",
+  "checks": {
+    "counts": true,
+    "suspended": true,
+    "review_count": true,
+    "base_hash": true,
+    "ledger_hash": true,
+    "all_of_refs_and_context_refs": true,
+    "dag": true,
+    "completed_refs": true,
+    "disabled_zero_graph_delta": true,
+    "joint_actual_premises_open": true,
+    "foundation_unchanged": true
+  },
+  "all_structural_checks_pass": true,
+  "covered_objects": 1598,
+  "review_items": 1608,
+  "candidate_counts": {
+    "nodes": 0,
+    "rules": 0,
+    "contexts": 0
+  },
+  "semantic_status": "AUDIT_INCOMPLETE",
+  "affected_contracts": [
+    "R173 retentive binding",
+    "R175 target separation",
+    "R177 source/feature separation",
+    "R200 semantic firewall (disabled)",
+    "A3M/A3N application contracts"
+  ],
+  "inference_effect": "Route grain and selector topology constrain an application; they do not establish route use, H, experience, or a report semantics.",
+  "unresolved": []
+}

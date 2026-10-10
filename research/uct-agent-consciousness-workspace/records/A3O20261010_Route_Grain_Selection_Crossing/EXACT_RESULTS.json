@@ -1,0 +1,51 @@
+{
+  "schema": "A3O_EXACT_RESULTS/v1",
+  "partition_count": 5,
+  "retained_zero_partitions": 3,
+  "retained_one_partitions": 2,
+  "same_physical_history_supports_both_R_values_when_grain_varies": true,
+  "fixed_grain_off_diagonal_witnesses": [
+    {
+      "family": "mapping",
+      "cell": "R1_L0",
+      "R": 1,
+      "L_sel": 0,
+      "route": "same retained effector route",
+      "selector": "two incompatible live mappings plus resolution"
+    },
+    {
+      "family": "mapping",
+      "cell": "R0_L1",
+      "R": 0,
+      "L_sel": 1,
+      "route": "new fine-grained effector route",
+      "selector": "retained compiler emits one eligible route"
+    },
+    {
+      "family": "sequence",
+      "cell": "R1_L0",
+      "R": 1,
+      "L_sel": 0,
+      "route": "same retained action chunk",
+      "selector": "two live boundary parses plus resolution"
+    },
+    {
+      "family": "sequence",
+      "cell": "R0_L1",
+      "R": 0,
+      "L_sel": 1,
+      "route": "new fine-grained sequence",
+      "selector": "deterministic grammar emits one eligible sequence"
+    }
+  ],
+  "checks": {
+    "partition_variation": true,
+    "two_families": true,
+    "all_witnesses_off_diagonal": true
+  },
+  "limits": [
+    "logical/organizational witnesses, not a human installation",
+    "selector topology is not identified by latency or error",
+    "no J_H or H value is generated"
+  ]
+}

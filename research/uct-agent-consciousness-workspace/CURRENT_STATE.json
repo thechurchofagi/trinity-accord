@@ -15,15 +15,15 @@
   "version_policy": "VERSIONING_POLICY.md",
   "changelog": "CHANGELOG.md",
   "latest_research": {
-    "id": "A3N20261010",
-    "result_version": "A3N-EXACT-v0.1.0",
+    "id": "A3O20261010",
+    "result_version": "A3O-EXACT-v0.1.0",
     "status": "PENDING_CHECKPOINT_DISABLED",
-    "source": "records/A3N20261010_Route_Fluency_Crossing/RESEARCH_NOTE.md",
-    "handoff": "records/A3N20261010_Route_Fluency_Crossing/HANDOFF_ZH.md",
-    "work_log": "records/A3N20261010_Route_Fluency_Crossing/WORK_LOG.md",
+    "source": "records/A3O20261010_Route_Grain_Selection_Crossing/RESEARCH_NOTE.md",
+    "handoff": "records/A3O20261010_Route_Grain_Selection_Crossing/HANDOFF_ZH.md",
+    "work_log": "records/A3O20261010_Route_Grain_Selection_Crossing/WORK_LOG.md",
     "enabled_as_established_premises": false,
     "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
-    "evidence_status": "PARTIAL_R_NOT_EQUAL_L_KIN_CONSTRUCTION_AND_EXACT_AUXILIARY_ALIAS_LIMIT; NO_ACTUAL_R_NOT_EQUAL_L_SEL_INSTALLATION_OR_H_IDENTIFICATION"
+    "evidence_status": "EXACT_ROUTE_GRAIN_DEPENDENCE_AND_FIXED_GRAIN_R_NOT_EQUAL_L_SEL_ORGANIZATIONAL_WITNESSES; NO_ACTUAL_SELECTOR_INSTALLATION_OR_H_IDENTIFICATION"
   },
   "latest_integrated_research": {
     "id": "R188-CER-20261009",
@@ -79,7 +79,8 @@
     "CTD20261010",
     "A3M20261010",
     "CTD2-20261010",
-    "A3N20261010"
+    "A3N20261010",
+    "A3O20261010"
   ],
   "current_guide": "RESEARCH_MASTER_GUIDE.md v2.3",
   "complete_map_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
@@ -91,31 +92,31 @@
     "nondeductive_context_links": 261,
     "total_review_items": 1608
   },
-  "pending_note": "All 33 listed pending checkpoints remain disabled. A3N adds no completed or candidate nodes/rules/contexts: it separates selection from kinematic fluency, supplies a partial crossing and records the auxiliary-intervention alias limit. CTD v0.2, A3M, A3L and all effective corrections are retained; no completed-graph count or actual-premise truth changes.",
+  "pending_note": "All listed pending checkpoints remain disabled. A3O adds no completed or candidate nodes/rules/contexts: it fixes route-grain dependence, supplies fixed-grain R by L_sel organizational witnesses and preserves the evidence firewall. A3N, CTD v0.2, A3M, A3L and all effective corrections are retained; no completed-graph count or actual-premise truth changes.",
   "publication_coverage": {
-    "version": "UCT-PUB-v1.0.29",
+    "version": "UCT-PUB-v1.0.30",
     "entry": "PUBLICATION_COVERAGE.json",
-    "update": "records/A3N20261010_Route_Fluency_Crossing/PUBLICATION_COVERAGE_UPDATE.json",
+    "update": "records/A3O20261010_Route_Grain_Selection_Crossing/PUBLICATION_COVERAGE_UPDATE.json",
     "nondeductive": true
   },
   "latest_activity": {
-    "id": "A3N20261010",
-    "result_version": "A3N-EXACT-v0.1.0",
+    "id": "A3O20261010",
+    "result_version": "A3O-EXACT-v0.1.0",
     "status": "PENDING_CHECKPOINT_DISABLED",
-    "source": "records/A3N20261010_Route_Fluency_Crossing/RESEARCH_NOTE.md",
-    "handoff": "records/A3N20261010_Route_Fluency_Crossing/HANDOFF_ZH.md",
-    "work_log": "records/A3N20261010_Route_Fluency_Crossing/WORK_LOG.md",
+    "source": "records/A3O20261010_Route_Grain_Selection_Crossing/RESEARCH_NOTE.md",
+    "handoff": "records/A3O20261010_Route_Grain_Selection_Crossing/HANDOFF_ZH.md",
+    "work_log": "records/A3O20261010_Route_Grain_Selection_Crossing/WORK_LOG.md",
     "enabled_as_established_premises": false,
     "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
-    "evidence_status": "EXACT AUXILIARY-SIGNATURE LIMIT AND PARTIAL PHYSICAL CROSSING; SELECTION-FLUENCY AND PHENOMENAL BRIDGE PREMISES OPEN"
+    "evidence_status": "ROUTE-GRAIN DEPENDENCE AND TWO-FAMILY FIXED-GRAIN SELECTION CROSSING; PHYSICAL SELECTOR AND PHENOMENAL BRIDGE PREMISES OPEN"
   },
   "latest_pending_research": {
-    "id": "A3N20261010",
-    "result_version": "A3N-EXACT-v0.1.0",
+    "id": "A3O20261010",
+    "result_version": "A3O-EXACT-v0.1.0",
     "status": "PENDING_CHECKPOINT_DISABLED",
-    "source": "records/A3N20261010_Route_Fluency_Crossing/RESEARCH_NOTE.md",
-    "handoff": "records/A3N20261010_Route_Fluency_Crossing/HANDOFF_ZH.md",
-    "work_log": "records/A3N20261010_Route_Fluency_Crossing/WORK_LOG.md",
+    "source": "records/A3O20261010_Route_Grain_Selection_Crossing/RESEARCH_NOTE.md",
+    "handoff": "records/A3O20261010_Route_Grain_Selection_Crossing/HANDOFF_ZH.md",
+    "work_log": "records/A3O20261010_Route_Grain_Selection_Crossing/WORK_LOG.md",
     "enabled_as_established_premises": false,
     "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
     "evidence_status": "EXACT AUXILIARY-SIGNATURE LIMIT AND PARTIAL PHYSICAL CROSSING; SELECTION-FLUENCY AND PHENOMENAL BRIDGE PREMISES OPEN"

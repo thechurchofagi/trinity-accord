@@ -1,0 +1,14 @@
+{
+  "schema":"uct-publication-coverage-update/1",
+  "research_id":"A3O20261010",
+  "coverage_version":"UCT-PUB-v1.0.30",
+  "base_census_version":"UCT-PUB-v1.0.0",
+  "completed_map":"UCT-MAP-v1.1.2",
+  "decision":"HOLD_STANDALONE_USE_AS_A3N_METHOD_CORRECTION",
+  "formal_publication_counts_changed":false,
+  "new_doi":false,
+  "net_increment":["route-grain dependence theorem for R","fixed-grain R by L_sel organizational witnesses in two families","selection-evidence firewall","copy/swap held-out J_H falsifier"],
+  "inherited":["equivalence relations and finite partitions","task/sequence conflict mechanisms","R173 retentive binding","A3M/A3N","Chambon-Haggard 2012"],
+  "open_before_standalone_use":["actual selector installation","actual route-use chronology","signed J_H reliability","defended cross-family direct-effect bound"],
+  "priority_status":"PROJECT_LEVEL_TYPING_INCREMENT_ONLY; WORLDWIDE_PRIORITY_UNVERIFIED"
+}

@@ -1,4 +1,12 @@
-# 当前研究接续 — A3N20261010
+# 当前研究接续 — A3O20261010
+
+[中文交接](records/A3O20261010_Route_Grain_Selection_Crossing/HANDOFF_ZH.md) · [研究稿](records/A3O20261010_Route_Grain_Selection_Crossing/RESEARCH_NOTE.md) · [精确结果](records/A3O20261010_Route_Grain_Selection_Crossing/EXACT_RESULTS.json) · [全图审计](records/A3O20261010_Route_Grain_Selection_Crossing/MAP_AUDIT.md)。
+
+A3O修复路线粒度偷换：`R`只在预先冻结的`rho`下有值。冻结细粒度路线后，映射与序列机制各构造两种真正的`R≠L_sel`组织见证；选择流畅改由实际选择器拓扑定义，RT/错误/报告只作证据。两族仍只是有限组织构造，无实际安装或H识别；0新节点/规则/上下文，完成图913/424/261、10暂停、1608审查项及全部OPEN不变。下一题只寻找能直接读出活跃政策复数和冲突消解消费的实际选择器，并保持同一`rho`。
+
+---
+
+# 前一研究接续 — A3N20261010
 
 [中文交接](records/A3N20261010_Route_Fluency_Crossing/HANDOFF_ZH.md) · [研究稿](records/A3N20261010_Route_Fluency_Crossing/RESEARCH_NOTE.md) · [端点/安装合同](records/A3N20261010_Route_Fluency_Crossing/ENDPOINT_AND_INSTALLATION_CONTRACT.md) · [精确结果](records/A3N20261010_Route_Fluency_Crossing/EXACT_RESULTS.json) · [全图审计](records/A3N20261010_Route_Fluency_Crossing/MAP_AUDIT.md)。
 
