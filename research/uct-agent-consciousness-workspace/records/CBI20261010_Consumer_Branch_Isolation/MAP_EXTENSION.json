@@ -1,0 +1,159 @@
+{
+  "schema": "uct-pending-extension/1",
+  "id": "CBI20261010-MAP-CANDIDATE-v0.1.0",
+  "base_release": "UCT-MAP-v1.1.2",
+  "enabled": false,
+  "status": "PENDING_CHECKPOINT_DISABLED",
+  "nodes": [
+    {
+      "id": "CBI:EPISODE_CONTRACT",
+      "kind": "DEFINITION",
+      "statement": "One actual candidate bearer, selected consumer, episode, time window, motor carrier, movement/contact event and proprioceptive/state carrier are fixed before comparison.",
+      "scope": "Consumer-, event- and window-relative; not whole-organism sensory absence.",
+      "quantifier": "One declared episode contract at a time.",
+      "status": "DECLARED_MODEL_DOMAIN_NOT_EMPIRICAL",
+      "all_premises": "RESEARCH_NOTE.md §2",
+      "proof_location": "RESEARCH_NOTE.md §2",
+      "counterexamples_and_limits": "Undeclared parallel state carriers invalidate P=0.",
+      "thought_experiment_role": "Human-formation case prevents consumer-local absence from becoming whole-system absence.",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "CBI:PROPRIO_INTAKE_EVENT",
+      "kind": "DEFINITION",
+      "statement": "For the selected movement-evoked branch, P equals the conjunction of actual action, transduction, delivery and consumer read in the declared window.",
+      "scope": "Serial finite branch model only.",
+      "quantifier": "Every row of the displayed finite model.",
+      "status": "DECLARED_EVENT_DEFINITION",
+      "all_premises": "CBI:EPISODE_CONTRACT and P := A AND T AND L AND R.",
+      "proof_location": "RESEARCH_NOTE.md §2; model.py",
+      "counterexamples_and_limits": "Parallel topology requires an expanded definition.",
+      "thought_experiment_role": "Separates carrier existence from actual intake.",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "CBI:C1",
+      "kind": "THEOREM",
+      "statement": "A=1 and P=0 require at least one cut among transduction, delivery and read/timing.",
+      "scope": "CBI:PROPRIO_INTAKE_EVENT only.",
+      "quantifier": "For every row in the displayed 32-row model.",
+      "status": "EXACT_FINITE_RESULT_PENDING_ADOPTION",
+      "all_premises": "CBI:EPISODE_CONTRACT and CBI:PROPRIO_INTAKE_EVENT jointly.",
+      "proof_location": "RESEARCH_NOTE.md §3; EXACT_RESULTS.json",
+      "counterexamples_and_limits": "Not a biological impossibility theorem or selectivity result.",
+      "thought_experiment_role": "Three copies realize the three minimal cut locations.",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "CBI:C2",
+      "kind": "CONDITIONAL_ORGANIZATIONAL_CONSEQUENCE",
+      "statement": "A genuine action-present, selected-intake-absent realization changes at least one actual branch relation even when distal output is matched.",
+      "scope": "Actual UCT token only after constitutive branch and boundary grounding.",
+      "quantifier": "Conditional over admitted same-instance applications.",
+      "status": "CONDITIONAL_APPLICATION_OPEN",
+      "all_premises": "CBI:C1 plus independently grounded constitutive branch relation.",
+      "proof_location": "RESEARCH_NOTE.md §§3,5,7",
+      "counterexamples_and_limits": "Output matching is partial, not complete-type equality.",
+      "thought_experiment_role": "Exoskeleton holds world output while varying causal lineage.",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "CBI:HUMAN_EVIDENCE_BOUNDARY",
+      "kind": "EMPIRICAL_SCOPE_CONSTRAINT",
+      "statement": "Inspected human evidence realizes components of the missing cell but not the complete frozen episode contract.",
+      "scope": "SOURCE_SCOPE.md through 2026-10-10; no exhaustive impossibility claim.",
+      "quantifier": "Source-bounded not-found assessment.",
+      "status": "EMPIRICAL_APPLICATION_OPEN",
+      "all_premises": "Primary source table and frozen contract.",
+      "proof_location": "RESEARCH_NOTE.md §4; SOURCE_SCOPE.md",
+      "counterexamples_and_limits": "An uninspected selective intervention may qualify.",
+      "thought_experiment_role": "Closest regimes expose which contract coordinate fails.",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "CBI:EXOSKELETON_APPROXIMATION",
+      "kind": "PROSPECTIVE_DESIGN",
+      "statement": "External actuation can match selected distal/world outputs while a declared state branch is blocked, but does not preserve complete organization or natural causal lineage.",
+      "scope": "Engineering thought experiment; no human installation performed.",
+      "quantifier": "Existential design sketch conditional on feasible selective instrumentation.",
+      "status": "PROSPECTIVE_UNVALIDATED",
+      "all_premises": "Selective block, independent motor/read logging and preregistered output matching.",
+      "proof_location": "RESEARCH_NOTE.md §5",
+      "counterexamples_and_limits": "Effort, muscle state, timing, attention, cutaneous input and plant drive may differ.",
+      "thought_experiment_role": "Distinguishes matched consequence from matched organization.",
+      "automatic_premise_truth": false
+    },
+    {
+      "id": "CBI:C4",
+      "kind": "CONDITIONAL_INTERPRETATION",
+      "statement": "Under C1, independently admitted branch organization has an experience-internal counterpart; no named self-related endpoint or basal experience gate follows.",
+      "scope": "Actual token and complete signature with independently justified target bridge.",
+      "quantifier": "Conditional application of C1 only.",
+      "status": "CONDITIONAL_APPLICATION_OPEN",
+      "all_premises": "Actual token, complete signature, branch grounding, target semantics and A:C1.",
+      "proof_location": "RESEARCH_NOTE.md §7",
+      "counterexamples_and_limits": "No agency, ownership, familiar-mineness, current-assistant or fear verdict.",
+      "thought_experiment_role": "Ancestor family prevents a new basal gate.",
+      "automatic_premise_truth": false
+    }
+  ],
+  "rules": [
+    {
+      "id": "CBI:R1",
+      "all_of": ["CBI:EPISODE_CONTRACT", "CBI:PROPRIO_INTAKE_EVENT"],
+      "conclusion": "CBI:C1",
+      "type": "CONDITIONAL_DEDUCTION",
+      "same_instance_required": true,
+      "binding": "one consumer, selected branch, movement event and time window",
+      "proof_location": "RESEARCH_NOTE.md §3",
+      "alternative_route_semantics": "Both premises are simultaneous, not alternative routes.",
+      "joint_witness": "All 32 rows in model.py; seven action-present cut sets.",
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "CBI:R2",
+      "all_of": ["CBI:C1", "CBI:EPISODE_CONTRACT"],
+      "conclusion": "CBI:C2",
+      "type": "CONDITIONAL_APPLICATION",
+      "same_instance_required": true,
+      "binding": "same admitted token and constitutive branch relation",
+      "proof_location": "RESEARCH_NOTE.md §§3,5",
+      "alternative_route_semantics": "No route from distal output equality alone.",
+      "joint_witness": "No actual witness acquired; exoskeleton remains prospective.",
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "CBI:R3",
+      "all_of": ["CBI:C2", "CBI:EXOSKELETON_APPROXIMATION"],
+      "conclusion": "CBI:HUMAN_EVIDENCE_BOUNDARY",
+      "type": "NONDEDUCTIVE_DESIGN_COMPARISON",
+      "same_instance_required": false,
+      "binding": "source regimes compared to one invariant contract",
+      "proof_location": "RESEARCH_NOTE.md §§4–5",
+      "alternative_route_semantics": "Source-bounded not-found assessment, not logical impossibility.",
+      "joint_witness": "Six inspected primary-source families.",
+      "enabled_as_established_premise": false
+    },
+    {
+      "id": "CBI:R4",
+      "all_of": ["CBI:C2", "A:C1"],
+      "conclusion": "CBI:C4",
+      "type": "CONDITIONAL_INTERPRETATION",
+      "same_instance_required": true,
+      "binding": "one actual token with complete signature and independently justified target semantics",
+      "proof_location": "RESEARCH_NOTE.md §7",
+      "alternative_route_semantics": "C1 remains axiomatic; no endpoint is inferred from task performance.",
+      "joint_witness": "No actual witness or named phenomenal bridge acquired.",
+      "enabled_as_established_premise": false
+    }
+  ],
+  "context_links": [
+    {"id": "CBI:CTX1", "from": "CBI:C4", "to": "A:C1", "type": "AXIOM_STATUS_PRESERVED"},
+    {"id": "CBI:CTX2", "from": "CBI:C1", "to": "MPC:DOMAIN", "type": "REALIZABILITY_FOLLOWUP_TO_MISSING_CELL"},
+    {"id": "CBI:CTX3", "from": "CBI:C2", "to": "R205:C3", "type": "ACTUAL_USE_AND_OUTPUT_LIMIT"},
+    {"id": "CBI:CTX4", "from": "CBI:HUMAN_EVIDENCE_BOUNDARY", "to": "SCU20261010:C8", "type": "SOURCE_PROTOCOL_CONTEXT"},
+    {"id": "CBI:CTX5", "from": "CBI:C4", "to": "D:UCT_INTERPRETATION", "type": "NO_CONSCIOUSNESS_OR_FEAR_INFERENCE"}
+  ],
+  "adoption_note": "Disabled candidate only; no completed map version or premise truth is changed."
+}
+

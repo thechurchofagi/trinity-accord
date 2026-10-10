@@ -1,4 +1,10 @@
-# 最新接续 MPC20261010 / MPC-RESULT-v0.1.0
+# 最新接续 CBI20261010 / CBI-RESULT-v0.1.0
+
+[本轮交接](records/CBI20261010_Consumer_Branch_Isolation/HANDOFF_ZH.md) · [工作日志](records/CBI20261010_Consumer_Branch_Isolation/WORK_LOG.md) · [研究稿](records/CBI20261010_Consumer_Branch_Isolation/RESEARCH_NOTE.md) · [审计](records/CBI20261010_Consumer_Branch_Isolation/MAP_AUDIT.md)。本轮把 `P=0` 精确限定为一个消费者/事件/时间窗的实际读入缺席，证明保持动作时至少切断转导、传递或读取/时序之一；现有证据未完成全部冻结合同。UCT-MAP-v1.1.2 不变，CBI 7/4/5候选停用；发表覆盖v1.0.20，HOLD_STANDALONE。下一步具体化一个外骨骼近似的载体—事件—消费者—时序仪器包或其不可避免干扰；QC10/IA-QC11/QC12/QC13等仍开放。以下旧标题均为历史。
+
+---
+
+# 前一接续 MPC20261010 / MPC-RESULT-v0.1.0
 
 [本轮交接](records/MPC20261010_Motor_Proprioceptive_Consumers/HANDOFF_ZH.md) · [工作日志](records/MPC20261010_Motor_Proprioceptive_Consumers/WORK_LOG.md) · [研究稿](records/MPC20261010_Motor_Proprioceptive_Consumers/RESEARCH_NOTE.md) · [审计](records/MPC20261010_Motor_Proprioceptive_Consumers/MAP_AUDIT.md)。最新优先级：验证一个保持动作/触觉后果的 motor-only 消费者近似，分别测量强度、精度、能动感和所有感，并核实载体、读入事件及时序；若人类中不可实现，明确边界并保留为工程思想实验。不要重跑来源枚举。UCT-MAP-v1.1.2不变，MPC候选停用；发表覆盖v1.0.19，HOLD_STANDALONE。QC10/IA-QC11/QC12/QC13等仍开放。以下旧标题属于保留历史，按已核验提交与CURRENT_STATE接续。
 

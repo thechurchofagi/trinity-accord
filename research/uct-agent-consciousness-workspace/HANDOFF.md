@@ -1,4 +1,10 @@
-# 最新接续 MPC20261010：运动命令—本体消费者的缺失反事实
+# 最新接续 CBI20261010：消费者相对的运动—本体分支隔离
+
+[中文交接](records/CBI20261010_Consumer_Branch_Isolation/HANDOFF_ZH.md) · [英文研究稿](records/CBI20261010_Consumer_Branch_Isolation/RESEARCH_NOTE.md) · [精确结果](records/CBI20261010_Consumer_Branch_Isolation/EXACT_RESULTS.json) · [思想实验](records/CBI20261010_Consumer_Branch_Isolation/THOUGHT_EXPERIMENT_MATRIX.md) · [地图审计](records/CBI20261010_Consumer_Branch_Isolation/MAP_AUDIT.md)。本轮证明消费者相对的动作存在/本体读入缺席必须有真实分支切断；现有人类证据只完成部分坐标，外骨骼近似只保持选定输出。完成图仍为 UCT-MAP-v1.1.2；CBI 7/4/5候选停用；覆盖 UCT-PUB-v1.0.20，单篇 HOLD。下一步写出一个真实载体—事件—消费者—时序仪器包或不可避免干扰。所有审查项继续开放。
+
+---
+
+# 前一接续 MPC20261010：运动命令—本体消费者的缺失反事实
 
 [中文交接](records/MPC20261010_Motor_Proprioceptive_Consumers/HANDOFF_ZH.md) · [英文研究稿](records/MPC20261010_Motor_Proprioceptive_Consumers/RESEARCH_NOTE.md) · [精确结果](records/MPC20261010_Motor_Proprioceptive_Consumers/EXACT_RESULTS.json) · [协议](records/MPC20261010_Motor_Proprioceptive_Consumers/PROTOCOL.md) · [地图审计](records/MPC20261010_Motor_Proprioceptive_Consumers/MAP_AUDIT.md)。三格 `00,01,11` 对每个二元端点恰留两个补全，差在缺失 `10`；对 k 个独立端点留 `2^k` 补全。补齐响应表仍不能识别实际读入（贪婪/短路 OR 反例）。完成图仍为 UCT-MAP-v1.1.2；MPC 7/4/5 候选停用；覆盖 UCT-PUB-v1.0.19，单篇 HOLD。下一步只检查一个物理可行的 `10` 近似及载体/事件/时序/分端点证据，找不到则明确不可实现边界。QC10/IA-QC11/QC12/QC13等继续开放。
 

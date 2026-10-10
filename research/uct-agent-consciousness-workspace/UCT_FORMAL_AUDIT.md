@@ -1,4 +1,10 @@
-# 最新接续 MPC20261010 / MPC-RESULT-v0.1.0
+# 最新接续 CBI20261010 / CBI-RESULT-v0.1.0
+
+[本轮地图审计](records/CBI20261010_Consumer_Branch_Isolation/MAP_AUDIT.md) · [机器结果](records/CBI20261010_Consumer_Branch_Isolation/MAP_COMPATIBILITY_AUDIT.json) · [缺口](records/CBI20261010_Consumer_Branch_Isolation/GAP_LEDGER.md)。恢复并核验82成员完成图，遍历913节点、424规则、261上下文、10暂停规则及1608审查项；CBI 20项结构检查通过，7/4/5候选停用。该 PASS 不表示生物可行性、全图语义重证、实际消费者安装、命名体验桥或审查关闭。
+
+---
+
+# 前一接续 MPC20261010 / MPC-RESULT-v0.1.0
 
 [本轮地图审计](records/MPC20261010_Motor_Proprioceptive_Consumers/MAP_AUDIT.md) · [机器结果](records/MPC20261010_Motor_Proprioceptive_Consumers/MAP_COMPATIBILITY_AUDIT.json) · [缺口](records/MPC20261010_Motor_Proprioceptive_Consumers/GAP_LEDGER.md)。恢复完成图并遍历913节点、424规则、261上下文、10暂停规则及1608审查项；MPC 21项结构检查通过，7/4/5候选停用。该 PASS 不表示全图语义重证、实际消费者安装、命名体验桥或审查关闭；SCU-AUDIT-DEPTH等继续开放。
 

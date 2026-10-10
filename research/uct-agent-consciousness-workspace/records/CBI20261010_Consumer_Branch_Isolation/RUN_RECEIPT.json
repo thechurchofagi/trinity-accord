@@ -1,0 +1,27 @@
+{
+  "schema": "uct-research-run-receipt/1",
+  "research_id": "CBI20261010",
+  "base_commit": "8bac31cc0b9fb4c70d87f688dabbadeb6166addb",
+  "base_release": "UCT-MAP-v1.1.2",
+  "base_graph_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
+  "review_ledger_sha256": "0513cb55cef94d82adcaea46af1974438a424aeba152f4c9d5655340f9271687",
+  "exact_result": "CBI-RESULT-v0.1.0",
+  "checks": {
+    "finite_model": "PASS_5_OF_5",
+    "formal_map_structural": "PASS_20_OF_20",
+    "json_parse": "PASS",
+    "python_compile": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "key_files": {
+    "RESEARCH_NOTE.md": "183e2ae49a3c8f2cb3bfb520675ecf73a05d31d9bda876ce08c27c37e31a3746",
+    "EXACT_RESULTS.json": "9b3fbc0c58eb35d1648afb68e6ef4907059eadf5da0f2b676ce0449389b5cb25",
+    "MAP_EXTENSION.json": "f21b3b33a2316f7373ec05814a66795542ea5472e10b1651f4873eaaa8fc7905",
+    "MAP_COMPATIBILITY_AUDIT.json": "dda2f518d88c510e24fbf41eb435345954e6af4efa95a3f1155dff7daeba5be4",
+    "SOURCE_SCOPE.md": "77722099734ade464c14b559ec80e094003bfe69df13d3874dddd4be0fea2fa1",
+    "HANDOFF_ZH.md": "d303923bbe98818eb3d8e70488f534acd6c45d8dbdc9faf1a69e2355655a7f12"
+  },
+  "semantic_limit": "Machine checks do not establish biological feasibility, actual installation, C1, a named phenomenal bridge, reviewer closure or complete-map truth.",
+  "persistence_status": "PENDING_GUARDED_REMOTE_AND_LIBRARY_READBACK"
+}
+

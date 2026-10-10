@@ -1,4 +1,10 @@
-# 最新接续 MPC20261010 / MPC-RESULT-v0.1.0
+# 最新接续 CBI20261010 / CBI-RESULT-v0.1.0
+
+[本轮交接](records/CBI20261010_Consumer_Branch_Isolation/HANDOFF_ZH.md) · [候选图](records/CBI20261010_Consumer_Branch_Isolation/MAP_EXTENSION.json) · [全图范围审计](records/CBI20261010_Consumer_Branch_Isolation/MAP_AUDIT.md)。完成地图仍为 UCT-MAP-v1.1.2（913/424/261，10暂停，1608审查项）；CBI 7/4/5候选停用。分支切断定理只在一个消费者/事件/时间窗合同中成立，不晋升为实际安装、完整组织等同或命名体验证据。覆盖v1.0.20；全部开放审查保留。
+
+---
+
+# 前一接续 MPC20261010 / MPC-RESULT-v0.1.0
 
 [本轮交接](records/MPC20261010_Motor_Proprioceptive_Consumers/HANDOFF_ZH.md) · [候选图](records/MPC20261010_Motor_Proprioceptive_Consumers/MAP_EXTENSION.json) · [全图范围审计](records/MPC20261010_Motor_Proprioceptive_Consumers/MAP_AUDIT.md)。完成地图仍为 UCT-MAP-v1.1.2（913/424/261，10暂停，1608审查项）；MPC 7/4/5候选停用。三格消费者设计的缺失 `10` 定理和全表/读入反例均不晋升为实际安装或命名体验证据。覆盖v1.0.19；全部开放审查保留。
 

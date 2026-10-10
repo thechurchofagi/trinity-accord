@@ -1,0 +1,22 @@
+{
+  "schema": "uct-publication-coverage-update/1",
+  "coverage_version": "UCT-PUB-v1.0.20",
+  "parent_coverage_version": "UCT-PUB-v1.0.19",
+  "research_id": "CBI20261010",
+  "checked_publication_sources": [
+    "publication/UCT-PUB-v1.0.0/COVERAGE_LEDGER.json",
+    "publication/UCT-PUB-v1.0.0/CLAIM_ID_INDEX.json",
+    "records/SCU20261010_Source_Consumer_Protocols/MANUSCRIPT_DECISION.json",
+    "records/MPC20261010_Motor_Proprioceptive_Consumers/PUBLICATION_COVERAGE_UPDATE.json"
+  ],
+  "changed_claim_ids": ["CBI-C1", "CBI-C2", "CBI-C3", "CBI-C4"],
+  "newly_covered_claim_ids": [],
+  "residual_increment": "Consumer-relative branch-cut necessity, three cut locations, closest-regime table and matched-world-output exoskeleton approximation.",
+  "unverified_scope": "No performed intervention, raw-data reanalysis, exhaustive systematic review, or named phenomenal target bridge.",
+  "originality_and_manuscript_decision": "HOLD_STANDALONE; retain as a compact technical/prospective-method section for the SCU/MPC result family.",
+  "next_specific_action": "Specify one ethically feasible carrier/event instrument package or prove that available interventions cannot satisfy the frozen contract without changing declared nuisance coordinates.",
+  "scientific_map_change": false,
+  "formal_publication_counts_unchanged": true,
+  "nondeductive": true
+}
+

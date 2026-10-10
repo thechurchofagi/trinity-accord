@@ -1,4 +1,10 @@
-# 最新接续 MPC20261010：运动命令—本体消费者的缺失反事实
+# 最新接续 CBI20261010：消费者相对的运动—本体分支隔离
+
+[中文交接](records/CBI20261010_Consumer_Branch_Isolation/HANDOFF_ZH.md) · [英文研究稿](records/CBI20261010_Consumer_Branch_Isolation/RESEARCH_NOTE.md) · [精确结果](records/CBI20261010_Consumer_Branch_Isolation/EXACT_RESULTS.json) · [地图审计](records/CBI20261010_Consumer_Branch_Isolation/MAP_AUDIT.md)。`P=0` 不再泛指整个人体无本体信息，而是一个消费者/事件/时间窗的实际读入缺席；保持动作/接触时必切断转导、传递或读取/时序之一。现有来源未完成全冻结人类合同；外骨骼只能匹配选定世界输出，不能保持完整组织。UCT-MAP-v1.1.2不变，CBI 7/4/5停用，UCT-PUB-v1.0.20且不另成稿。下一步只做具体仪器包或不可避免干扰分析。
+
+---
+
+# 前一接续 MPC20261010：运动命令—本体消费者的缺失反事实
 
 [中文交接](records/MPC20261010_Motor_Proprioceptive_Consumers/HANDOFF_ZH.md) · [英文研究稿](records/MPC20261010_Motor_Proprioceptive_Consumers/RESEARCH_NOTE.md) · [精确结果](records/MPC20261010_Motor_Proprioceptive_Consumers/EXACT_RESULTS.json) · [地图审计](records/MPC20261010_Motor_Proprioceptive_Consumers/MAP_AUDIT.md)。三格 `00,01,11` 对每端点总留两个补全，缺失 `10`；k 个端点留下 `2^k`。四格输出仍不证明实际消费，命名体验和实际安装均开放。UCT-MAP-v1.1.2不变，MPC 7/4/5停用，UCT-PUB-v1.0.19且不另成稿。下一步检验物理可行的 motor-only 消费者近似，否则给出不可实现边界；不回到来源枚举。
 

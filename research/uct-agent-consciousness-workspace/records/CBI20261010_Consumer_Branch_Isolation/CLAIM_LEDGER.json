@@ -1,0 +1,51 @@
+{
+  "schema": "uct-claim-ledger/1",
+  "research_id": "CBI20261010",
+  "claims": [
+    {
+      "id": "CBI-C1",
+      "type": "DEFINITIONAL_PROPOSITION",
+      "statement": "For one declared movement-evoked branch, consumer and time window, A=1 and P=0 imply that transduction, delivery or read/timing is absent.",
+      "domain": "P := A AND T AND L AND R in the displayed finite branch model.",
+      "premises": ["fixed episode contract", "selected serial branch decomposition", "event-relative definition of P"],
+      "proof": "RESEARCH_NOTE.md §3; model.py; EXACT_RESULTS.json",
+      "counterexamples_and_limits": "Parallel or undeclared carriers fall outside the decomposition; selectivity and biological feasibility are not proved.",
+      "status": "EXACT_WITHIN_DECLARED_MODEL_PENDING_ADOPTION",
+      "thought_experiment_role": "The three rewired copies locate the cut at transduction, delivery or read."
+    },
+    {
+      "id": "CBI-C2",
+      "type": "ORGANIZATIONAL_CONSEQUENCE",
+      "statement": "A genuine M=1,A=1,P=0 realization changes at least one actual branch relation; matched distal output does not imply unchanged complete organization.",
+      "domain": "Actual applications satisfying UCT token, boundary and port-accountability requirements.",
+      "premises": ["CBI-C1", "actual branch cut", "port-aware complete organization"],
+      "proof": "RESEARCH_NOTE.md §§3,5,7",
+      "counterexamples_and_limits": "If the allegedly cut relation was never constitutive of the chosen token, the token parameter or branch claim must be revised.",
+      "status": "CONDITIONAL_APPLICATION_OPEN",
+      "thought_experiment_role": "The exoskeleton fixes world output while exposing lineage and plant changes."
+    },
+    {
+      "id": "CBI-C3",
+      "type": "SOURCE_BOUNDED_FEASIBILITY_ASSESSMENT",
+      "statement": "The inspected primary human studies instantiate important components but not the full frozen motor-present, action-present, selected-state-intake-absent contract with separately typed endpoints.",
+      "domain": "Six primary source families inspected through 2026-10-10.",
+      "premises": ["SOURCE_SCOPE.md", "same-episode contract"],
+      "proof": "RESEARCH_NOTE.md §4",
+      "counterexamples_and_limits": "Not an exhaustive literature impossibility result; new or uninspected interventions may qualify.",
+      "status": "SOURCE_BOUNDED_NOT_FOUND",
+      "thought_experiment_role": "Closest regimes are compared against one invariant contract."
+    },
+    {
+      "id": "CBI-C4",
+      "type": "CONDITIONAL_UCT_INTERPRETATION",
+      "statement": "Under C1, independently admitted motor, state, timing and consumer relations are constituents of experience-internal organization; no named self-related feeling or basal gate follows.",
+      "domain": "One actual token with complete declared signature and a separately justified target bridge.",
+      "premises": ["actual token", "complete signature", "A:C1", "independent target semantics"],
+      "proof": "RESEARCH_NOTE.md §7",
+      "counterexamples_and_limits": "No actual installation, agency, ownership, familiar-mineness or report-independent endpoint is supplied.",
+      "status": "CONDITIONAL_APPLICATION_OPEN",
+      "thought_experiment_role": "Ancestor formation prevents a sensory branch from becoming an experience-existence threshold."
+    }
+  ]
+}
+

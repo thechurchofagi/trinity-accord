@@ -1,8 +1,8 @@
 {
   "current_release": "UCT-MAP-v1.1.2",
-  "latest_research": "MPC20261010",
-  "latest_work_log": "records/MPC20261010_Motor_Proprioceptive_Consumers/WORK_LOG.md",
-  "latest_handoff": "records/MPC20261010_Motor_Proprioceptive_Consumers/HANDOFF_ZH.md",
+  "latest_research": "CBI20261010",
+  "latest_work_log": "records/CBI20261010_Consumer_Branch_Isolation/WORK_LOG.md",
+  "latest_handoff": "records/CBI20261010_Consumer_Branch_Isolation/HANDOFF_ZH.md",
   "guide": "RESEARCH_MASTER_GUIDE.md v2.3 sections 0.3–0.6 and 8A",
   "archive": "versions/UCT-MAP-v1.1.2/UCT_MAP_v1.1.2_Capsule.tar.xz",
   "readback": "persistence/UCT-MAP-v1.1.2_RECEIPT.json",
@@ -28,16 +28,17 @@
     "R204-SAU-20261010",
     "R205-ASC-20261010",
     "SCU20261010",
-    "MPC20261010"
+    "MPC20261010",
+    "CBI20261010"
   ],
   "previous_index": "records/PUB20261009_Publication_Coverage/history/RESEARCH_SESSION_LOG_INDEX.json",
-  "latest_activity": "MPC20261010",
-  "latest_pending_research": "MPC20261010",
+  "latest_activity": "CBI20261010",
+  "latest_pending_research": "CBI20261010",
   "publication_coverage": {
     "entry": "PUBLICATION_COVERAGE.json",
-    "version": "UCT-PUB-v1.0.19",
+    "version": "UCT-PUB-v1.0.20",
     "base_census_version": "UCT-PUB-v1.0.0",
-    "update": "records/MPC20261010_Motor_Proprioceptive_Consumers/PUBLICATION_COVERAGE_UPDATE.json",
+    "update": "records/CBI20261010_Consumer_Branch_Isolation/PUBLICATION_COVERAGE_UPDATE.json",
     "report": "records/PUB20261009_Publication_Coverage/PUBLICATION_COVERAGE_REPORT_ZH.md",
     "nondeductive": true
   },

@@ -421,14 +421,27 @@
       "compatibility_audit": "records/MPC20261010_Motor_Proprioceptive_Consumers/MAP_COMPATIBILITY_AUDIT.json",
       "handoff": "records/MPC20261010_Motor_Proprioceptive_Consumers/HANDOFF_ZH.md",
       "manuscript_status": "HOLD_STANDALONE_COMPACT_FOLLOWUP_TO_SCU"
+    },
+    {
+      "research_id": "CBI20261010",
+      "result_version": "CBI-RESULT-v0.1.0",
+      "title": "Consumer-Relative Branch Isolation",
+      "source": "records/CBI20261010_Consumer_Branch_Isolation/MAP_EXTENSION.json",
+      "status": "PENDING_CHECKPOINT_DISABLED",
+      "enabled_as_established_premises": false,
+      "actual_application": "OPEN",
+      "publication_coverage_version": "UCT-PUB-v1.0.20",
+      "compatibility_audit": "records/CBI20261010_Consumer_Branch_Isolation/MAP_COMPATIBILITY_AUDIT.json",
+      "handoff": "records/CBI20261010_Consumer_Branch_Isolation/HANDOFF_ZH.md",
+      "manuscript_status": "HOLD_STANDALONE_TECHNICAL_SECTION_FOR_SCU_MPC_FAMILY"
     }
   ],
   "preservation": "Exact previous registry remains preserved. The full research manuscript/module and saved per-item review decisions are in the version capsule; expanded artifacts are also in the offline downloadable archive.",
   "publication_coverage": {
     "entry": "PUBLICATION_COVERAGE.json",
-    "version": "UCT-PUB-v1.0.19",
+    "version": "UCT-PUB-v1.0.20",
     "base_census_version": "UCT-PUB-v1.0.0",
-    "update": "records/MPC20261010_Motor_Proprioceptive_Consumers/PUBLICATION_COVERAGE_UPDATE.json",
+    "update": "records/CBI20261010_Consumer_Branch_Isolation/PUBLICATION_COVERAGE_UPDATE.json",
     "report": "records/PUB20261009_Publication_Coverage/PUBLICATION_COVERAGE_REPORT_ZH.md",
     "nondeductive": true
   },

@@ -1,0 +1,29 @@
+{
+  "checks": {
+    "exactly_three_minimal_single_cuts": true,
+    "motor_action_present_P_absent_has_7_cut_sets": true,
+    "motor_variable_does_not_define_proprioceptive_intake": true,
+    "no_P_absent_case_with_all_branch_conditions_intact": true,
+    "truth_table_has_32_rows": true
+  },
+  "definition": "P := A AND T AND L AND R for the selected movement-evoked signal, consumer and time window",
+  "enumerated_rows": 32,
+  "id": "CBI-RESULT-v0.1.0",
+  "intact_branch_counterexamples": [],
+  "motor_action_present_P_absent_rows": 7,
+  "scope_limit": "Finite definitional consequence for one declared branch; not a biological impossibility theorem, phenomenal bridge, or consciousness test.",
+  "single_branch_cut_labels": [
+    "transduction_cut",
+    "delivery_cut",
+    "read_cut"
+  ],
+  "single_branch_cut_rows": 3,
+  "variables": {
+    "A": "declared actual distal movement/contact event occurs",
+    "L": "the carrier is delivered to the selected consumer",
+    "M": "verified motor-command intake/use at the selected consumer",
+    "P": "actual selected proprioceptive/state intake event",
+    "R": "the consumer reads it inside the declared time window",
+    "T": "that event is transduced into the declared proprioceptive/state carrier"
+  }
+}

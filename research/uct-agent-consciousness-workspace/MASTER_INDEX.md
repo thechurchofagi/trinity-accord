@@ -1,4 +1,10 @@
-# 最新接续 MPC20261010：运动命令—本体消费者的缺失反事实
+# 最新接续 CBI20261010：消费者相对的运动—本体分支隔离
+
+[中文交接](records/CBI20261010_Consumer_Branch_Isolation/HANDOFF_ZH.md) · [英文研究稿](records/CBI20261010_Consumer_Branch_Isolation/RESEARCH_NOTE.md) · [精确结果](records/CBI20261010_Consumer_Branch_Isolation/EXACT_RESULTS.json) · [来源范围](records/CBI20261010_Consumer_Branch_Isolation/SOURCE_SCOPE.md) · [地图审计](records/CBI20261010_Consumer_Branch_Isolation/MAP_AUDIT.md) · [审查回应](records/CBI20261010_Consumer_Branch_Isolation/REVIEW_RESPONSE.md)。净增量是消费者相对的分支切断边界、三种最小切口、现有证据近似表和匹配世界输出的外骨骼思想实验。完成图不变；候选停用；覆盖 UCT-PUB-v1.0.20，单篇 HOLD。
+
+---
+
+# 前一接续 MPC20261010：运动命令—本体消费者的缺失反事实
 
 [中文交接](records/MPC20261010_Motor_Proprioceptive_Consumers/HANDOFF_ZH.md) · [英文研究稿](records/MPC20261010_Motor_Proprioceptive_Consumers/RESEARCH_NOTE.md) · [精确结果](records/MPC20261010_Motor_Proprioceptive_Consumers/EXACT_RESULTS.json) · [协议](records/MPC20261010_Motor_Proprioceptive_Consumers/PROTOCOL.md) · [地图审计](records/MPC20261010_Motor_Proprioceptive_Consumers/MAP_AUDIT.md) · [审查回应](records/MPC20261010_Motor_Proprioceptive_Consumers/REVIEW_RESPONSE.md)。结果精确定位主动/被动/静止三角缺少的 motor-only 消费者反事实，并证明四格输出仍不识别实际读入。端点保持向量化，不从触觉效应推能动感、所有感或熟悉我感。完成图不变；候选停用；覆盖 UCT-PUB-v1.0.19，单篇 HOLD。
 
