@@ -1,0 +1,55 @@
+{
+  "schema": "uct-dual-save-receipt/2",
+  "research_id": "A3S20261010",
+  "phase": "GITHUB_SCIENCE_AND_LIBRARY_READBACK_VERIFIED",
+  "dual_save_verified": true,
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "parent": "8a4f6bc8649563efbb803dc58f28ebdacd6ca410",
+    "science_commit": "fc3f50d5cc044ae20a9a9c519b6f05ce7325860e",
+    "science_tree": "352660a2d85b4cd47c3518f4df08658f258648d0",
+    "guard": "EXPECTED_SHA_FAST_FORWARD",
+    "changed_files": 32,
+    "readback": ["CURRENT_STATE.json", "records/A3S20261010_Area3a_Selectivity/EXACT_RESULTS.json", "records/A3S20261010_Area3a_Selectivity/MAP_EXTENSION.json"]
+  },
+  "library": {
+    "master_handoff": {
+      "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+      "file_id": "file_00000000bba481fbaef5e3ea183af21a",
+      "version": 76,
+      "bytes": 705494,
+      "sha256": "b111f1e9ab9a8e30da314075292c9e1dc5f32e209fea26fa58f11755cd338452",
+      "byte_readback_equal": true
+    },
+    "increment_zip": {
+      "library_file_id": "libfile_b0a4be4bb99c8191a0997a9015db3d52",
+      "file_id": "file_00000000c6e081fbbed690e220bbe700",
+      "file_name": "UCT_A3S20261010_Increment.zip",
+      "bytes": 173641,
+      "sha256": "5b577117304335fc4ada5171c0f61fbbf13ad75183af6ded81df6bb51f6b6fe4",
+      "archive_test": "PASS",
+      "byte_readback_equal": true
+    },
+    "increment_manifest": {
+      "library_file_id": "libfile_9e320e3b26948191b4334e93ffa467d6",
+      "file_id": "file_00000000f08881fb9e75722a36ed492d",
+      "file_name": "UCT_A3S20261010_Increment_MANIFEST.json",
+      "bytes": 7198,
+      "sha256": "aadb7b1eed43571bdada537cee7fb0ffe7da3018287d8ea657a7eefee24ae929",
+      "listed_science_files": 32,
+      "byte_readback_equal": true
+    }
+  },
+  "scope_warning": "The ZIP is the exact A3S science increment relative to the recorded parent, not a full repository or full-history backup. The later receipt-only commit is not inside the increment.",
+  "latest_completed_step": "Library version 76 and both increment objects were downloaded and byte-compared; ZIP integrity passed.",
+  "unfinished": [
+    "Execute or reject one same-animal crossed source-by-consumer probe with event binding.",
+    "Close none of QC10, IA-QC11, QC12, QC13, R191 normalization or full-depth audit without independent evidence."
+  ],
+  "failures": [
+    "No reviewed primary study jointly instantiates source selectivity, consumer selectivity and same-event binding.",
+    "The first generated manifest paired size and hash on separate lines; it was deleted and rebuilt correctly before archiving or upload."
+  ],
+  "recovery": "Fetch science_commit on the named branch; read HANDOFF_ZH.md and this receipt; verify Library master version 76 and the two Library IDs and hashes. Treat the ZIP as an increment only."
+}

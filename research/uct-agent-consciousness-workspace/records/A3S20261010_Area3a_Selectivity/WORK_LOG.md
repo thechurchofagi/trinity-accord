@@ -8,6 +8,9 @@
 6. Wrote the bounded negative result, evidence ladder, claim/gap ledgers and disabled 7/3/5 map candidate.
 7. Restored and hash-verified the complete v1.1.2 capsule; traversed all stable IDs, 1,023 completed `all_of` premise occurrences and the new candidate. References and combined DAG passed. This is structural compatibility only.
 8. Rechecked all carried OPEN/ACKNOWLEDGED items. None is self-closed. C1/U1 and experience/intelligence/self/report distinctions remain intact.
+9. Persisted the science tree by expected-SHA fast-forward as `fc3f50d5cc044ae20a9a9c519b6f05ce7325860e` and read back three key files.
+10. Replaced the fixed master handoff at the same Library identity with version 76, created an exact 32-file increment ZIP and manifest, then downloaded and byte-compared all three Library objects. The ZIP passed integrity testing.
+11. Retained one save-stage failure: the first manifest construction put size and hash on separate rows. It was deleted and rebuilt correctly before archive creation and upload.
 
 ## Failures retained
 
