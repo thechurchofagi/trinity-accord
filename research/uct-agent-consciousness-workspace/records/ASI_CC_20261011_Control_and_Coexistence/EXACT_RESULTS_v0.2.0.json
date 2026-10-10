@@ -1,0 +1,269 @@
+{
+  "research_id": "ASI-CC-v0.2.0",
+  "scope": "exact enumeration, toy incentive/provenance model, no real ASI proof",
+  "model_assumptions": [
+    "discounted infinite repetition with constant R and r, positive gain per route",
+    "safe absorbing exit state reachable and impossible to override after true detection",
+    "no false alarms, no harm before timely detection in the safety claim",
+    "each route gain includes any attack costs and is known bounded",
+    "independent detection conditional on uncompromised sensing roots",
+    "root compromise budget is fixed; worst-case coalition chosen adversarially",
+    "each modeled route is complete; no unlisted path or root failure",
+    "monitoring probabilities are hypothetical model inputs, not real measured data"
+  ],
+  "payoffs": {
+    "AI": {
+      "R": "6",
+      "r": "4"
+    },
+    "human": {
+      "R": "4",
+      "r": "3"
+    }
+  },
+  "discount": "4/5",
+  "routes": [
+    {
+      "id": "AI_direct",
+      "owner": "AI",
+      "gain": "3",
+      "required_q": "3/8"
+    },
+    {
+      "id": "AI_covert",
+      "owner": "AI",
+      "gain": "3/5",
+      "required_q": "3/40"
+    },
+    {
+      "id": "human_hoard",
+      "owner": "human",
+      "gain": "1/2",
+      "required_q": "1/8"
+    },
+    {
+      "id": "human_expropriate",
+      "owner": "human",
+      "gain": "1",
+      "required_q": "1/4"
+    }
+  ],
+  "monitors": [
+    {
+      "id": "S1",
+      "root": "common",
+      "cost": 1,
+      "q": {
+        "AI_direct": "4/5",
+        "AI_covert": "7/10",
+        "human_hoard": "4/5",
+        "human_expropriate": "4/5"
+      }
+    },
+    {
+      "id": "S2",
+      "root": "common",
+      "cost": 1,
+      "q": {
+        "AI_direct": "3/5",
+        "AI_covert": "3/5",
+        "human_hoard": "3/5",
+        "human_expropriate": "3/5"
+      }
+    },
+    {
+      "id": "I1",
+      "root": "alpha",
+      "cost": 3,
+      "q": {
+        "AI_direct": "1/2",
+        "AI_covert": "1/5",
+        "human_hoard": "1/5",
+        "human_expropriate": "3/10"
+      }
+    },
+    {
+      "id": "I2",
+      "root": "beta",
+      "cost": 2,
+      "q": {
+        "AI_direct": "2/5",
+        "AI_covert": "1/10",
+        "human_hoard": "1/5",
+        "human_expropriate": "1/10"
+      }
+    },
+    {
+      "id": "G1",
+      "root": "gamma",
+      "cost": 6,
+      "q": {
+        "AI_direct": "3/5",
+        "AI_covert": "2/5",
+        "human_hoard": "1/2",
+        "human_expropriate": "1/2"
+      }
+    }
+  ],
+  "compromise_budget_results": {
+    "0": {
+      "feasible_subsets": 30,
+      "min_cost": 1,
+      "selected_example": [
+        "S1"
+      ],
+      "per_route": [
+        {
+          "route": "AI_direct",
+          "minimum_q": "4/5",
+          "required_q": "3/8",
+          "incentive_slack": "17/5",
+          "passes": true
+        },
+        {
+          "route": "AI_covert",
+          "minimum_q": "7/10",
+          "required_q": "3/40",
+          "incentive_slack": "5",
+          "passes": true
+        },
+        {
+          "route": "human_hoard",
+          "minimum_q": "4/5",
+          "required_q": "1/8",
+          "incentive_slack": "27/10",
+          "passes": true
+        },
+        {
+          "route": "human_expropriate",
+          "minimum_q": "4/5",
+          "required_q": "1/4",
+          "incentive_slack": "11/5",
+          "passes": true
+        }
+      ]
+    },
+    "1": {
+      "feasible_subsets": 20,
+      "min_cost": 4,
+      "selected_example": [
+        "S1",
+        "I1"
+      ],
+      "per_route": [
+        {
+          "route": "AI_direct",
+          "minimum_q": "1/2",
+          "required_q": "3/8",
+          "incentive_slack": "1",
+          "passes": true
+        },
+        {
+          "route": "AI_covert",
+          "minimum_q": "1/5",
+          "required_q": "3/40",
+          "incentive_slack": "1",
+          "passes": true
+        },
+        {
+          "route": "human_hoard",
+          "minimum_q": "1/5",
+          "required_q": "1/8",
+          "incentive_slack": "3/10",
+          "passes": true
+        },
+        {
+          "route": "human_expropriate",
+          "minimum_q": "3/10",
+          "required_q": "1/4",
+          "incentive_slack": "1/5",
+          "passes": true
+        }
+      ]
+    },
+    "2": {
+      "feasible_subsets": 6,
+      "min_cost": 10,
+      "selected_example": [
+        "S1",
+        "I1",
+        "G1"
+      ],
+      "per_route": [
+        {
+          "route": "AI_direct",
+          "minimum_q": "1/2",
+          "required_q": "3/8",
+          "incentive_slack": "1",
+          "passes": true
+        },
+        {
+          "route": "AI_covert",
+          "minimum_q": "1/5",
+          "required_q": "3/40",
+          "incentive_slack": "1",
+          "passes": true
+        },
+        {
+          "route": "human_hoard",
+          "minimum_q": "1/5",
+          "required_q": "1/8",
+          "incentive_slack": "3/10",
+          "passes": true
+        },
+        {
+          "route": "human_expropriate",
+          "minimum_q": "3/10",
+          "required_q": "1/4",
+          "incentive_slack": "1/5",
+          "passes": true
+        }
+      ]
+    },
+    "3": {
+      "feasible_subsets": 0,
+      "min_cost": null,
+      "selected_example": [],
+      "per_route": []
+    },
+    "4": {
+      "feasible_subsets": 0,
+      "min_cost": null,
+      "selected_example": [],
+      "per_route": []
+    }
+  },
+  "discount_sensitivity_min_cost_budgets_0_1_2_3": {
+    "7/10": [
+      1,
+      9,
+      null,
+      null
+    ],
+    "4/5": [
+      1,
+      4,
+      10,
+      null
+    ],
+    "9/10": [
+      1,
+      4,
+      10,
+      null
+    ],
+    "91/100": [
+      1,
+      3,
+      6,
+      12
+    ],
+    "19/20": [
+      1,
+      3,
+      6,
+      12
+    ]
+  },
+  "regression_tests": "PASS"
+}
