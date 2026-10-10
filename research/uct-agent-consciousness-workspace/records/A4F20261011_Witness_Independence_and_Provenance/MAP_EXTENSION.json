@@ -1,0 +1,10 @@
+{
+  "schema": "uct-a4f-map-extension/1.0",
+  "status": "DISABLED_APPLICATION_NO_PROMOTION",
+  "completed_graph_delta": {"nodes": 0, "rules": 0, "context_links": 0},
+  "candidate_claims": ["A4F-N1", "A4F-N2", "A4F-P1", "A4F-C1", "A4F-B1"],
+  "depends_on": ["A4D-N1", "A4D-C1", "A4E-N1", "A4E-N2", "A4E-C1", "R172 evidence/use distinction", "R173 all_of route"],
+  "non_edges": ["witness vector -> complete K", "source evidence -> C1 admission", "source evidence -> RetBind", "source evidence -> B_fam", "source evidence -> H_way", "source evidence -> report or conceptual I", "source evidence -> unique owner"],
+  "reason": "The exact model supplies a local evidential nonentailment and prospective contract, not an actual installation or a new formal theorem needed by the completed graph."
+}
+

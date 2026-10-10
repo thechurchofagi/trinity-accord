@@ -1,0 +1,201 @@
+{
+  "bounded_consequence": "A current transition witness can establish event occurrence without identifying its source. Source identification requires whole-vector report disjointness relative to every admitted alternative writer; multiplying logs behind one controllable root does not supply this. In the declared two-writer model, complete source-specific taps identify the source only while neither writer can forge, replay, suppress, reset or re-time the other source's tap and the writer inventory is complete.",
+  "checks": {
+    "complete_unforgeable_source_taps_are_disjoint": true,
+    "identifying_schemes": 1,
+    "nonidentifying_schemes": 5,
+    "replay_permission_restores_twin": true,
+    "schemes": 6,
+    "self_attestation_has_forged_overlap": true,
+    "shared_root_redundancy_has_overlap": true,
+    "transition_only_proves_event_not_source": true
+  },
+  "domain": {
+    "actual_sources": [
+      "target",
+      "hidden"
+    ],
+    "event_assumption": "A4E anti-current conditions already establish that one current commit occurred.",
+    "report_semantics": "Each source maps to the set of complete witness vectors it can physically realize under the scheme's declared forge/replay permissions."
+  },
+  "identifiability_rule": "The target source is identified in this two-source finite model iff its possible-report set is disjoint from the hidden source's possible-report set.",
+  "limits": [
+    "The disjointness calculation is elementary finite identifiability, not a new general theorem.",
+    "The complete-tap row is conditional on the declared physical control/placement premises; the program does not validate hardware independence.",
+    "An unlisted writer, shared power/reset/clock controller or downstream injection path can restore an observational twin.",
+    "No complete UCT signature, C1 admission, RetBind, B_fam, H_way, conceptual self, report identity or consciousness verdict follows."
+  ],
+  "schema": "a4f-witness-independence-exact/1.0",
+  "schemes": {
+    "dual_logs_shared_controller": {
+      "possible_reports": {
+        "hidden": [
+          [
+            "changed",
+            "hidden",
+            "hidden"
+          ],
+          [
+            "changed",
+            "target",
+            "target"
+          ]
+        ],
+        "target": [
+          [
+            "changed",
+            "target",
+            "target"
+          ]
+        ]
+      },
+      "source_identified": false,
+      "target_hidden_overlap": [
+        [
+          "changed",
+          "target",
+          "target"
+        ]
+      ]
+    },
+    "independent_transition_only": {
+      "possible_reports": {
+        "hidden": [
+          [
+            "commit",
+            1
+          ]
+        ],
+        "target": [
+          [
+            "commit",
+            1
+          ]
+        ]
+      },
+      "source_identified": false,
+      "target_hidden_overlap": [
+        [
+          "commit",
+          1
+        ]
+      ]
+    },
+    "level_change_only": {
+      "possible_reports": {
+        "hidden": [
+          [
+            "changed"
+          ]
+        ],
+        "target": [
+          [
+            "changed"
+          ]
+        ]
+      },
+      "source_identified": false,
+      "target_hidden_overlap": [
+        [
+          "changed"
+        ]
+      ]
+    },
+    "nominal_taps_hidden_can_replay_target_vector": {
+      "possible_reports": {
+        "hidden": [
+          [
+            "commit",
+            1,
+            "tap_target",
+            0,
+            "tap_hidden",
+            1
+          ],
+          [
+            "commit",
+            1,
+            "tap_target",
+            1,
+            "tap_hidden",
+            0
+          ]
+        ],
+        "target": [
+          [
+            "commit",
+            1,
+            "tap_target",
+            1,
+            "tap_hidden",
+            0
+          ]
+        ]
+      },
+      "source_identified": false,
+      "target_hidden_overlap": [
+        [
+          "commit",
+          1,
+          "tap_target",
+          1,
+          "tap_hidden",
+          0
+        ]
+      ]
+    },
+    "self_attested_source_label": {
+      "possible_reports": {
+        "hidden": [
+          [
+            "changed",
+            "hidden"
+          ],
+          [
+            "changed",
+            "target"
+          ]
+        ],
+        "target": [
+          [
+            "changed",
+            "target"
+          ]
+        ]
+      },
+      "source_identified": false,
+      "target_hidden_overlap": [
+        [
+          "changed",
+          "target"
+        ]
+      ]
+    },
+    "source_specific_taps_complete": {
+      "possible_reports": {
+        "hidden": [
+          [
+            "commit",
+            1,
+            "tap_target",
+            0,
+            "tap_hidden",
+            1
+          ]
+        ],
+        "target": [
+          [
+            "commit",
+            1,
+            "tap_target",
+            1,
+            "tap_hidden",
+            0
+          ]
+        ]
+      },
+      "source_identified": true,
+      "target_hidden_overlap": []
+    }
+  }
+}

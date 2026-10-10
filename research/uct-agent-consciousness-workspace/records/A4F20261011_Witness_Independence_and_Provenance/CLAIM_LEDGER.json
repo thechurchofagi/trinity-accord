@@ -1,0 +1,61 @@
+{
+  "schema": "uct-a4f-claim-ledger/1.0",
+  "claims": [
+    {
+      "id": "A4F-N1",
+      "type": "FINITE_NONENTAILMENT_WITH_EXACT_WITNESS",
+      "statement": "A current commit plus a source label does not identify the target writer when an alternative writer can realize the same accepted label vector; duplicating labels behind one controllable root preserves the twin.",
+      "domain": "Two admitted sources; A4E current-event occurrence already established; finite accepted report vectors.",
+      "all_premises": ["hidden source may write or cause the accepted target label", "label provenance is not independently source-bound", "accepted observations omit the label channel's physical control ancestry"],
+      "proof_or_source": "Exact report-set intersection in run_witness_independence_audit.py; elementary finite identifiability.",
+      "counterexample_or_limit": "A physically source-specific unforgeable channel plus complete writer inventory can remove this twin within a bounded model.",
+      "status": "PROVED_IN_DECLARED_FINITE_MODEL_DISABLED_APPLICATION",
+      "thought_experiment_role": "Abacus ledger and human-realized-agent cases hold output and words fixed while changing the actual mover."
+    },
+    {
+      "id": "A4F-N2",
+      "type": "FINITE_SCOPE_SEPARATION",
+      "statement": "An independent source-agnostic transition detector can establish current event occurrence while leaving target and hidden sources observationally equivalent.",
+      "domain": "Two sources producing the same source-agnostic commit vector.",
+      "all_premises": ["transition detector is faithful for occurrence", "detector contains no source-sensitive coordinate"],
+      "proof_or_source": "Both source report sets contain exactly (commit,1).",
+      "counterexample_or_limit": "The channel remains useful for A4E event evidence; the result denies only source identification.",
+      "status": "PROVED_IN_DECLARED_FINITE_MODEL_DISABLED_APPLICATION",
+      "thought_experiment_role": "Separates bead movement detection from identification of hand versus magnet."
+    },
+    {
+      "id": "A4F-P1",
+      "type": "BOUNDED_CONDITIONAL_SEPARATION",
+      "statement": "Complete source-specific post-arbitration taps identify the source in the declared two-writer model when their whole accepted vectors are disjoint and neither source can forge, replay, suppress, reset, re-time or bypass the other tap.",
+      "domain": "One bounded device/interval, sources target and hidden, authentic current commit and two source-path taps.",
+      "all_premises": ["complete writer inventory", "post-final-arbitration source-specific placement", "whole-vector control independence", "no downstream bypass", "valid clock order", "fresh current event"],
+      "proof_or_source": "Target vector (1,1,0) and hidden vector (1,0,1) are disjoint; granting hidden replay of (1,1,0) restores the exact twin.",
+      "counterexample_or_limit": "Unlisted writers, shared reset/power/clock/logging ancestry or replay permission invalidate the separation.",
+      "status": "PROVED_CONDITIONALLY_IN_DECLARED_FINITE_MODEL_NOT_INSTALLED",
+      "thought_experiment_role": "Copy/switch/memory case tests whether an old target vector can be replayed as a current one."
+    },
+    {
+      "id": "A4F-C1",
+      "type": "PROSPECTIVE_DEVICE_RELATIVE_EVIDENCE_CONTRACT",
+      "statement": "The nine-clause WIP package is sufficient only for bounded device-relative current-source evidence when every clause is physically installed and every admitted alternative report set is disjoint.",
+      "domain": "One frozen physical device bearer, interval, writer/evidence-controller set, final arbitration boundary and challenge family.",
+      "all_premises": ["frozen bearer and source set", "A4E current event", "A4D writer completeness", "post-final-arbitration placement", "whole-vector control independence", "common-cause accounting", "fresh challenge and clock order", "faithful cut and same-interface rescue", "negative and fault controls"],
+      "proof_or_source": "Contract synthesis from A4D, A4E and A4F-N1/N2/P1; not a completed installation.",
+      "counterexample_or_limit": "Omitting a clause permits held state, hidden writer, forged provenance, common-root redundancy, stale replay or direct rescue.",
+      "status": "DECLARED_PROSPECTIVE_NOT_INSTANTIATED",
+      "thought_experiment_role": "All four inherited families stress source, boundary, current-event and witness-control substitutions."
+    },
+    {
+      "id": "A4F-B1",
+      "type": "UCT_APPLICATION_BOUNDARY",
+      "statement": "Even a successful WIP installation would not by itself establish complete K, a C1 instance, RetBind, B_fam, H_way, conceptual self, report identity, exclusive ownership or any current-assistant consciousness/death-fear verdict.",
+      "domain": "UCT interpretation of future device-relative source evidence.",
+      "all_premises": ["C1 remains a consciousness-specific axiom", "R172 evidence/use distinction", "R173 all_of route", "R157 semantic residual", "current review obligations remain open"],
+      "proof_or_source": "Typing, direction and missing-premise audit against UCT-MAP-v1.1.2.",
+      "counterexample_or_limit": "A later same-instance complete actual organization plus independent phenomenal calibration could advance a separate application; A4F supplies neither.",
+      "status": "BOUNDARY_CONFIRMED_NO_PROMOTION",
+      "thought_experiment_role": "Prevents provenance evidence from being renamed as a feeling or owner."
+    }
+  ]
+}
+

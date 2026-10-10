@@ -1,0 +1,21 @@
+{
+  "schema": "a4f-formal-audit-summary/1.0",
+  "completed_counts": {"nodes": 913, "rules": 424, "context_links": 261},
+  "pending_disabled_objects": 727,
+  "suspended_historical_rules": 10,
+  "structural_evidence": "A4D whole-map traversal reused because A4F changes no graph object; A4E already confirmed byte-stable reproduction.",
+  "all_of_policy": "Every all_of array is conjunctive; separate rule IDs are alternative routes.",
+  "schema_debt_retained": {"rules_without_local_and_annotation": 81, "context_links_without_two_completed_node_endpoints": 22},
+  "local_checks": {
+    "event_and_source_distinct": true,
+    "source_label_and_physical_source_distinct": true,
+    "multiple_logs_and_independent_constraints_distinct": true,
+    "evidence_and_ontic_use_distinct": true,
+    "device_signature_and_complete_K_distinct": true,
+    "r173_all_premises_not_satisfied": true,
+    "c1_u1_unchanged": true,
+    "formal_delta_zero": true
+  },
+  "audit_limit": "Local semantic audit plus inherited structural traversal; SCU-AUDIT-DEPTH remains AUDIT_INCOMPLETE."
+}
+
