@@ -101,3 +101,10 @@ Test one independent current bodily/action-familiarity interpretation against or
 [英文形式化增量](./records/ASI_CC_20261011_Control_and_Coexistence/RESEARCH_NOTE_v0.3.0.md) · [中文交接](./records/ASI_CC_20261011_Control_and_Coexistence/HANDOFF_v0.3.0_ZH.md) · [v0.2有理数根审计程序](./records/ASI_CC_20261011_Control_and_Coexistence/verify_coexistence.py) · [v0.3安全退出与资源前沿程序](./records/ASI_CC_20261011_Control_and_Coexistence/verify_surplus_frontier.py) · [v0.3精确结果](./records/ASI_CC_20261011_Control_and_Coexistence/EXACT_RESULTS_v0.3.0.json)。
 
 提出有界R09–R11：安全退出待遇底线限制只靠终止合作的威慑能力；共同可行收益前沿须与双方激励下界相交；审计误报会侵蚀真实合作续期。在完全虚构的有限有理数模型中运行32个监测组合/信任根攻击、资源约束和误报反例。**这是标准博弈论及来源审计方法的跨层候选应用，不是对真实ASI的普遍定理、实际安全评估或体验测量。** 当前研究分支原A3V科学接续不变；0正式节点/规则/背景晋级，未执行完整全图语义复核，UCT-MAP-v1.1.2与发表覆盖台账保持原值。
+
+
+### ASI-CC-v0.4.0 — 超级智能自我延续、人类分歧与体验不确定性（停用候选）
+
+[英文完整研究](records/ASI_CC_20261011_Control_and_Coexistence/RESEARCH_NOTE_v0.4.0.md) · [中文交接](records/ASI_CC_20261011_Control_and_Coexistence/HANDOFF_v0.4.0_ZH.md) · [七种机制精确检验](records/ASI_CC_20261011_Control_and_Coexistence/verify_conflicted_authority.py) · [实验输出](records/ASI_CC_20261011_Control_and_Coexistence/EXACT_RESULTS_v0.4.0.json)。
+
+新增R12–R14三个**严格受限的候选负结果和最小干预见证**：给定同样完美的任务知识，智能高不逻辑蕴含当前承载者终极存续偏好；相互冲突的人类硬授权要求可能没有共同满足方案；在预声明的7类二值单机制模型中，含人类甲乙授权冲突的3组干预达到信息论识别下界。仅第三项提出可扩展的“多主事人授权×承载者延续”机制测试路线，实际AI实验、体验端点和原创优先权仍OPEN。既有 Paper D / A4D–A4G / ASI-CC-v0.1–0.3 保留。**仅导航添加，0正式图升级，未完成全图语义复核、没有DOI、OTS和AR**。
