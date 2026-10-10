@@ -22,4 +22,6 @@ A3Y测量对象身份复核：[审查](records/A3Y20261010_Measurand_Identity_Ba
 
 A3Z现象锚点复核：[审查](records/A3Z20261010_Phenomenal_Anchor_Triage/MAP_AUDIT.md) · [逐ID结构记录](records/A3Z20261010_Phenomenal_Anchor_Triage/PER_ID_AUDIT.json.gz) · [精确结果](records/A3Z20261010_Phenomenal_Anchor_Triage/EXACT_RESULTS.json)。913/424/261逐项结构遍历通过；所有`all_of`按AND处理。候选桥接的预注册失败可在全部应用前提成立时否决它，但全部通过仍允许非现象代理模型；全历史深审仍AUDIT_INCOMPLETE，0正式图增量。
 
+A4A形成干预复核：[审查](records/A4A20261011_Formation_Intervention/MAP_AUDIT.md) · [逐ID结构记录](records/A4A20261011_Formation_Intervention/PER_ID_AUDIT.json.gz) · [精确结果](records/A4A20261011_Formation_Intervention/EXACT_RESULTS.json)。913/424/261逐项结构遍历通过；有效R175替代边界规则与R173合取路线按AND复核。形成后匹配可制造残差或阻断目标路径；五项受控直接效应未共同安装，全历史深审仍AUDIT_INCOMPLETE，0正式图增量。
+
 REV基础问题复核：[审查](records/REV20261010_Retained_Premise_Revision/AUDIT_REPORT.md)，1608项仅结构遍历、18节点有限兼容性核对；全历史深审 AUDIT_INCOMPLETE，0新增正式节点/规则/关系。

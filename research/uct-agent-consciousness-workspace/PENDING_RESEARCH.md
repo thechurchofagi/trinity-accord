@@ -93,6 +93,7 @@
 | A3R20261010 | [A3R20261010](records/A3R20261010_Selector_Participation_Contract/MAP_EXTENSION.json) | 0/0/0/1 | [交接](records/A3R20261010_Selector_Participation_Contract/HANDOFF_ZH.md) |
 | A3V20261010 | [Concurrent option influence and competition-independent retentive bodily familiarity](records/A3V20261010_Concurrent_Liveness_and_Familiarity/MAP_EXTENSION.json) | 0/0/0/1 | [交接](records/A3V20261010_Concurrent_Liveness_and_Familiarity/HANDOFF_ZH.md) |
 | A3Z20261010 | [Phenomenal-anchor triage and one-way bridge falsification](records/A3Z20261010_Phenomenal_Anchor_Triage/MAP_EXTENSION.json) | 0/0/0/1 | [交接](records/A3Z20261010_Phenomenal_Anchor_Triage/HANDOFF_ZH.md) |
+| A4A20261011 | [Formation intervention and post-treatment matching boundary](records/A4A20261011_Formation_Intervention/MAP_EXTENSION.json) | 0/0/0/1 | [交接](records/A4A20261011_Formation_Intervention/HANDOFF_ZH.md) |
 
 <a id="psychometrics"></a>
 

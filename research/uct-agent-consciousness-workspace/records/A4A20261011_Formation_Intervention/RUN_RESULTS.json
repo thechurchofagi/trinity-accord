@@ -1,0 +1,33 @@
+{
+  "all_rule_references_resolve": true,
+  "all_rules_treated_as_all_of": true,
+  "completed_graph_additions": {
+    "context_links": 0,
+    "nodes": 0,
+    "rules": 0
+  },
+  "controlled_five_way_route_jointly_discharged": false,
+  "effective_counts": {
+    "context_links": 261,
+    "nodes": 913,
+    "rules": 424
+  },
+  "exact_checks_pass": true,
+  "exact_models": 4,
+  "files": {
+    "CLAIM_LEDGER.json": "cf4d8ee0ef36f559ff1f8b0822d1768ccb96e0f3b61420b329d3bdc3d06b504b",
+    "EXACT_RESULTS.json": "3e7ba13c3849e2721701602d217086403414c36c075bdedca8c4bb3075520573",
+    "GAP_LEDGER.md": "7cadb1fe20b0802657d8af98513f69a54c95234ddbe427ff7b4c5a4d73bd593d",
+    "INTERVENTION_CONTRACT.md": "0268367d347a8619fe134c9d377cbdc2f2a517e8d93e42f9714616136b3d8fc7",
+    "MAP_AUDIT.md": "1c8fa7d6e30de0369463a001f53715832c4e90872548c3748962b05babc65ec3",
+    "MAP_EXTENSION.json": "976b5c52b9d457d58bcdc0475296b469e2ebe08ba9582f7e86de55efe546400f",
+    "RESEARCH_NOTE.md": "613d009eb083bdad98e7474472b415646b35bfd79dbe61cdc11edf5b109d9e7e",
+    "REVIEW_RESPONSE.md": "d05def527a6c90136f295bf0ca19b92adef32511bd14feb6d43224be01f3fdc9",
+    "ROUND_RECORD.json": "ee90edc8b104e4f7a51fee65fcdf3e41841ad59ad94d85369e7d27a3e6d12454",
+    "SOURCE_SCOPE.md": "52dfa88f7c7e6683437a19375044b44f24d338a399e6f82e484e0aff57441380",
+    "check_exact_models.py": "b963c9307fa03759f10be3f5f912dbb158afa7b2f91a3835e1d187bfdb7ac79e"
+  },
+  "schema": "uct-a4a-validation-v1",
+  "semantic_ceiling": "PASS does not establish an actual intervention, RetBind, H_way identity, C1, or global theory truth.",
+  "status": "PASS_STRUCTURAL_WITH_NONINSTALLABILITY_RESULT"
+}

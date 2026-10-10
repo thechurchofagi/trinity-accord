@@ -21,3 +21,7 @@ Scientific continuation and next question live in CURRENT_STATE.json. All pendin
 ## 最新应用 A3Z20261010
 
 现象目标措辞、报告、按键编码、来源/能动性干扰、形成史和代理变量被显式分型。256函数穷举仅留下两个互补方向；代理`W`仍可在三种不相容`H_way`解释下复制全部观测。桥接失败可证伪，桥接幸存不等于现象身份成立；0/0/0正式图增量，全部OPEN保留；[交接](records/A3Z20261010_Phenomenal_Anchor_Triage/HANDOFF_ZH.md)。
+
+## 最新应用 A4A20261011
+
+形成后的易度、成功、价值、预期和来源/能动性变量不能不分角色地拿来“匹配”。精确模型表明它们可制造伪残差、破坏正值性或阻断形成本来经由的组织路径。可安装主目标改为随机形成史的总效应，主要分析只调形成前变量；五项受控直接效应尚未共同可安装，`RetBind`和`H_way`仍OPEN；[交接](records/A4A20261011_Formation_Intervention/HANDOFF_ZH.md)。

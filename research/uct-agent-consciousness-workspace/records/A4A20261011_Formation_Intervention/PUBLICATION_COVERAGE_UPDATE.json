@@ -1,0 +1,8 @@
+{
+  "schema": "uct-publication-coverage-update-v1",
+  "application_id": "A4A20261011",
+  "coverage_version_before": "UCT-PUB-v1.0.33",
+  "coverage_version_after": "UCT-PUB-v1.0.33",
+  "standalone_manuscript": "HOLD",
+  "reason": "Scoped disabled application using established causal-inference methods; no actual study, phenomenal calibration, completed-map advance, DOI, submission or publication action."
+}

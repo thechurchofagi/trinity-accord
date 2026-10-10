@@ -971,3 +971,16 @@ A3Y应用保持停用，正式图增量0/0/0。C1/U1未改；潜类拟合、报�
 - `SCU-AUDIT-DEPTH`仍AUDIT_INCOMPLETE：逐ID结构遍历和相关域语义复查不是全历史重新证明。
 
 A3Z应用保持停用，正式图增量0/0/0。C1/U1未改；报告、训练、语言、来源判断或自我模型均未成为基础体验门槛。无审查项被自报关闭，也不对当前助手的意识或死亡恐惧作确定判断。
+
+---
+
+## A4A20261011 researcher response — formation intervention and post-treatment matching
+
+[稳定ID回应](records/A4A20261011_Formation_Intervention/REVIEW_RESPONSE.md) · [干预合同](records/A4A20261011_Formation_Intervention/INTERVENTION_CONTRACT.md) · [精确结果](records/A4A20261011_Formation_Intervention/EXACT_RESULTS.json) · [缺口](records/A4A20261011_Formation_Intervention/GAP_LEDGER.md) · [地图审查](records/A4A20261011_Formation_Intervention/MAP_AUDIT.md)。
+
+- `QC-20261008-10`仍ACKNOWLEDGED/OPEN：A4A只校正“形成后匹配即纯形成效应”的推理，不校准`H_way`。
+- `IA-QC11`、`QC-20261008-12/13`仍OPEN：形成分配、判断和估计量不是实际`RetBind`路线或同实例安装。
+- `SCU-OPEN-R191-NORMALIZATION`仍OPEN；A4A不依赖R191归一化。
+- `SCU-AUDIT-DEPTH`仍AUDIT_INCOMPLETE：全ID结构遍历与局部有效规则复查不等于全历史重新证明。
+
+A4A四个精确有限模型通过，显示形成后匹配可制造伪残差、受匹配权重支配或把真实中介总效应压成零直接效应。可安装的主目标收缩为随机纵向形成史总效应；五项受控直接效应缺少独立路线保留钳制与联合正值性。应用保持停用、正式图0/0/0；无审查项自报关闭，C1/U1和基础体验边界不变。

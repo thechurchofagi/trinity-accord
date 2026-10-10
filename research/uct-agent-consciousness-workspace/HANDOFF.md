@@ -24,6 +24,8 @@
 
 最新现象锚点审查：[A3Z交接](records/A3Z20261010_Phenomenal_Anchor_Triage/HANDOFF_ZH.md)；[正文](records/A3Z20261010_Phenomenal_Anchor_Triage/RESEARCH_NOTE.md)；[合同](records/A3Z20261010_Phenomenal_Anchor_Triage/ANCHOR_CONTRACT.md)；[精确结果](records/A3Z20261010_Phenomenal_Anchor_Triage/EXACT_RESULTS.json)。预注册失败可以否决候选桥接，但全部不变性/敏感性通过仍允许代理`W`复制观测，不能证明`H_way`身份。下一题只检验一个可安装形成史干预在易度、成功、价值、预期和来源感匹配后的剩余效应；否则停止H层解释。
 
+最新形成干预修正：[A4A交接](records/A4A20261011_Formation_Intervention/HANDOFF_ZH.md)；[正文](records/A4A20261011_Formation_Intervention/RESEARCH_NOTE.md)；[干预合同](records/A4A20261011_Formation_Intervention/INTERVENTION_CONTRACT.md)；[精确结果](records/A4A20261011_Formation_Intervention/EXACT_RESULTS.json)。形成后的五项变量可产生碰撞选择、正值性失败或过度控制，不能把观察匹配自动称残余形成效应。下一题改为随机纵向形成史总效应，并把实际同事件`RetBind`路线作为独立门槛；五项受控直接效应和`H_way`身份仍未安装。
+
 基础问题专线 TJR20261010：[交接](records/TJR20261010_Temporal_Joint_Realization/HANDOFF_ZH.md) · [正文](records/TJR20261010_Temporal_Joint_Realization/RESEARCH_NOTE.md) · [日志](records/TJR20261010_Temporal_Joint_Realization/WORK_LOG.md)。串行保留、联合读取与压缩的停用应用；原科学接续和身体熟悉感路线保留。原理多属继承，独立成稿HOLD，全图深审仍未完成。
 
 基础问题专线 REV20261010：[交接](records/REV20261010_Retained_Premise_Revision/HANDOFF_ZH.md) · [正文](records/REV20261010_Retained_Premise_Revision/RESEARCH_NOTE.md) · [日志](records/REV20261010_Retained_Premise_Revision/WORK_LOG.md)。承接 TJR，完成前提修改的精确信息条件与连续修改对照；0/0/0 停用应用，独立成稿 HOLD。原 A3V/A3Y 接续和全历史审查未完成状态保留。

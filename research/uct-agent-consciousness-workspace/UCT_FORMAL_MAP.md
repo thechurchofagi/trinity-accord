@@ -60,6 +60,8 @@ Test one independent current bodily/action-familiarity interpretation against or
 
 [A3Y 测量对象身份边界](records/A3Y20261010_Measurand_Identity_Barrier/RESEARCH_NOTE.md)进一步区分统计潜类`Z`与体验目标`H_way`：同一两群体两指标观测律允许`H=Z`、`H`独立于`Z`、`H=1-Z`。这不是新增正式规则，而是阻止把潜类拟合偷换成`B_fam/C_H`；正式图仍913/424/261。
 
+[A4A 形成干预与形成后匹配](records/A4A20261011_Formation_Intervention/RESEARCH_NOTE.md)区分随机形成史总效应、观察条件残差和受控直接效应。形成后的易度、成功、价值、预期及来源/能动性判断可能是共同结果或中介；匹配它们可制造伪差异、破坏正值性或删除RetBind候选路径。应用保持停用，正式图仍913/424/261。
+
 基础问题专线 TJR20261010：[交接](records/TJR20261010_Temporal_Joint_Realization/HANDOFF_ZH.md) · [正文](records/TJR20261010_Temporal_Joint_Realization/RESEARCH_NOTE.md) · [日志](records/TJR20261010_Temporal_Joint_Realization/WORK_LOG.md)。串行保留、联合读取与压缩的停用应用；原科学接续和身体熟悉感路线保留。原理多属继承，独立成稿HOLD，全图深审仍未完成。
 
 基础问题专线 REV20261010：[交接](records/REV20261010_Retained_Premise_Revision/HANDOFF_ZH.md) · [正文](records/REV20261010_Retained_Premise_Revision/RESEARCH_NOTE.md) · [日志](records/REV20261010_Retained_Premise_Revision/WORK_LOG.md)。承接 TJR，完成前提修改的精确信息条件与连续修改对照；0/0/0 停用应用，独立成稿 HOLD。原 A3V/A3Y 接续和全历史审查未完成状态保留。

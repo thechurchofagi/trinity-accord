@@ -25,6 +25,8 @@
 
 - 最新应用A3Z：[正文](records/A3Z20261010_Phenomenal_Anchor_Triage/RESEARCH_NOTE.md) · [锚点合同](records/A3Z20261010_Phenomenal_Anchor_Triage/ANCHOR_CONTRACT.md) · [精确结果](records/A3Z20261010_Phenomenal_Anchor_Triage/EXACT_RESULTS.json) · [交接](records/A3Z20261010_Phenomenal_Anchor_Triage/HANDOFF_ZH.md)；候选桥接具有单向证伪力但无正面现象身份识别力，0正式图增量，成稿HOLD，发表覆盖不变。
 
+- 最新应用A4A：[正文](records/A4A20261011_Formation_Intervention/RESEARCH_NOTE.md) · [干预合同](records/A4A20261011_Formation_Intervention/INTERVENTION_CONTRACT.md) · [精确结果](records/A4A20261011_Formation_Intervention/EXACT_RESULTS.json) · [地图审查](records/A4A20261011_Formation_Intervention/MAP_AUDIT.md) · [交接](records/A4A20261011_Formation_Intervention/HANDOFF_ZH.md)；区分总效应、形成后匹配与受控直接效应，五项钳制未共同安装，0正式图增量，成稿HOLD，发表覆盖不变。
+
 基础问题专线 TJR20261010：[交接](records/TJR20261010_Temporal_Joint_Realization/HANDOFF_ZH.md) · [正文](records/TJR20261010_Temporal_Joint_Realization/RESEARCH_NOTE.md) · [日志](records/TJR20261010_Temporal_Joint_Realization/WORK_LOG.md)。串行保留、联合读取与压缩的停用应用；原科学接续和身体熟悉感路线保留。原理多属继承，独立成稿HOLD，全图深审仍未完成。
 
 基础问题专线 REV20261010：[交接](records/REV20261010_Retained_Premise_Revision/HANDOFF_ZH.md) · [正文](records/REV20261010_Retained_Premise_Revision/RESEARCH_NOTE.md) · [日志](records/REV20261010_Retained_Premise_Revision/WORK_LOG.md)。承接 TJR，完成前提修改的精确信息条件与连续修改对照；0/0/0 停用应用，独立成稿 HOLD。原 A3V/A3Y 接续和全历史审查未完成状态保留。
