@@ -1,0 +1,11 @@
+{
+  "schema": "uct-final-remote-readback-v1",
+  "round": "A3Z20261010_Phenomenal_Anchor_Triage",
+  "observed_branch_head_before_confirmation": "249d114d8cfd775e8f7887616346de7ff78c9d83",
+  "observed_message": "research: record A3Z dual persistence [skip ci]",
+  "receipt_schema_readback": "uct-dual-persistence-receipt-v1",
+  "library_master_version_readback": 106,
+  "increment_sha256_readback": "4a6c0b4736537b9cc958e3e9bfa4fb606f49b41b636f0234fa620847df4ccf43",
+  "status": "CONFIRMED",
+  "note": "The commit containing this record is the final fast-forward successor and cannot contain its own SHA; verify it as the current branch head."
+}

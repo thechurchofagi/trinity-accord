@@ -5,10 +5,11 @@
     "repository": "thechurchofagi/trinity-accord",
     "branch": "uct-agent-consciousness-workspace",
     "science_commit": "d853ab494dc5fc90b4ed476e726884ed2907b27f",
+    "receipt_commit": "249d114d8cfd775e8f7887616346de7ff78c9d83",
     "expected_parent": "b86589f1c94d47dee63e07e6874091b323ee4c3b",
     "fast_forward_expected_sha_verified": true,
     "key_file_readback": "EXACT_RESULTS.json: 256 functions, 2 survivors, 3 proxy-compatible H assignments",
-    "status": "CONFIRMED"
+    "status": "CONFIRMED; FINAL_CONFIRMATION_COMMIT_IS_BRANCH_HEAD_SUCCESSOR"
   },
   "library": {
     "master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
