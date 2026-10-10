@@ -32,7 +32,9 @@
       "filename": "UCT_A3P20261010_Increment.zip",
       "sha256": "9c775f4371070522624ac74186efa31429597e4a6b7edd17ca4d08250b71759a",
       "bytes": 161814,
-      "classification": "incremental_not_full_backup"
+      "classification": "incremental_not_full_backup",
+      "byte_readback_equal": true,
+      "archive_test": "PASS"
     },
     "manifest": {
       "library_file_id": "libfile_8d175d255d988191be36dc03d8996bc3",
@@ -40,7 +42,8 @@
       "filename": "UCT_A3P20261010_Increment_MANIFEST.json",
       "sha256": "bf741f2e8b73b04d4bf461d8bc97b20d32fd34d5c8114be399bfa5194be2610b",
       "bytes": 7861,
-      "file_count": 31
+      "file_count": 31,
+      "byte_readback_equal": true
     }
   },
   "formal_status": {
