@@ -21,3 +21,13 @@ No scientific graph nodes, active rules, context relations, or theorem premises 
 
 ## Next action
 Build a grounded dynamic game with causal writer rights, independent actuator provenance, strategic bypass/human influence, bilateral viability K, resource constraints and incentives, then adversarially test a candidate coexistence certificate under held-out threat models. Stop if observational twins cannot be excluded; preserve the failed certificate as a negative result.
+
+
+## Follow-up v0.2.0 and v0.3.0 (2026-10-11)
+
+- Read and cross-compared current UCT-MAP-v1.1.2, A4G provenance logic and the v0.1.0 ASI safety/coexistence kernels; searched 2026 peer-reviewed game/commitment/control research (including ICML 2026 Overman–Bayati Oversight Game, Trivedi, Yadav; AAAI 2026 Sauerberg–Oesterheld; September 2026 verifiable authorization).
+- v0.2.0 R05–R08: derived declared repeated safe-exit incentive condition; adversarial lower-bound detection with common-root compromise; post-effect irreversible-harm barrier; finite trace incompleteness. Exact Fraction/finite exhaustive tests PASS; five sensors, four routes, b=0/1/2/3 min monitor costs 1/4/10/infeasible under fixed invented δ=0.8 payoffs. Complete result saved.
+- v0.3.0 R09–R11: derived safe-exit entitlement deterrence ceiling, physically feasible bilateral resource-payoff frontier criterion, and false-positive monitoring generalization. Exact transferable-credit optimization PASS: root budget1 resource B=10,10.5/11/11.5/12 minimal monitor cost unavailable/unavailable/9/6/4; root budget2 and B=11 no solution in the invented catalog. Fraction tests show α=0.05 destabilizes the human route of the previous nominally stable pair.
+- Novelty ledger: standard repeated games, incentive constraints, partial-order feasible payoffs and sensor compromise analysis INHERITED; specific cross-layer critique is a PROJECT-SPECIFIC APPLICATION with first-priority UNVERIFIED. No empirical ASI measurement, subjective welfare bridge, full-map semantic review, independent publication/DOI, OTS, AR, or scientific-graph admission. Original 913/424/261 counts and publication coverage unchanged.
+- Persistence: GitHub records/ASI_CC_20261011_Control_and_Coexistence/RESEARCH_NOTE_v0.2.0.md and v0.3.0.md, HANDOFF_v0.2.0_ZH.md and HANDOFF_v0.3.0_ZH.md, both Python scripts and exact JSON outputs; mirrored into Library /ASI_Control_Coexistence_20261011.
+- Next: controlled accessible tool-agent causal authorization/provenance and pre-effect hazard blocking experiment; verify independent sensor roots and false alarms, tested utility sensitivity, and true joint-safe exit before any scientific graph promotion.
