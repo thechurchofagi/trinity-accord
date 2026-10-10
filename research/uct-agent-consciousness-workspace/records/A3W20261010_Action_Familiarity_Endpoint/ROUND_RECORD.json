@@ -1,0 +1,32 @@
+{
+  "research_id": "A3W20261010",
+  "result_version": "A3W-ENDPOINT-v0.1.0",
+  "base_commit": "4f85dac95df1fc14ea49d5f772d8df9b1f6d422c",
+  "user_goal": "Explain bodily/action self-related feeling within actual experiential organization while separating intelligence, conceptual self, judgment and report.",
+  "unresolved_question": "Can a fallible endpoint refer specifically to the already-established character of an enacted bodily action, rather than basic self-acquaintance, action identity recognition or control judgment?",
+  "related_nodes_and_fixed_sources": [
+    "A:C1",
+    "A:U1",
+    "R157:COORDINATE_TRANSPORT",
+    "R173:FIXED_FAMILIAR_TARGET_CONTRACT",
+    "R173:RETENTIVE_BINDING_RELATION",
+    "R173:FAMILIAR_MINENESS_BOUNDARY",
+    "A3M20261010",
+    "A3V20261010",
+    "R199-CPC-20261010",
+    "UCT I v1.2 §§4,10",
+    "R151 manuscript v0.2 §4 D4/D5",
+    "Thomas Fuchs 2016 DOI10.1007/s11097-015-9449-4 §§3,6 (bounded philosophical source)"
+  ],
+  "proposed_increment": "Draft an action-specific immediate judgment endpoint, contrast it with recognition and fluency endpoints, expose the broad-self-familiarity scope trap, and specify failure/held-out interpretation before results. No new cube or memory-state calculation.",
+  "deliverables": [
+    "English research note",
+    "English endpoint protocol",
+    "source scope and failure ledger",
+    "map/supervision response",
+    "Chinese handoff",
+    "verified Git checkpoint and Library increment"
+  ],
+  "direction_check_after_selection": "Direct return to selected experience-internal H; auxiliary measurement work bounded to one endpoint and two existing rivals. C1/U1 unchanged; no report gate, unique owner or assistant-consciousness verdict.",
+  "external_context_status": "A recently described fast/slow memory analysis is supplied conversation context, not a verified saved remote result. No alleged new data or model fit is imported."
+}

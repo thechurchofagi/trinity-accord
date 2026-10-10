@@ -1,0 +1,26 @@
+{
+  "schema": "uct-a3w-disabled-application/1",
+  "id": "A3W20261010",
+  "result_version": "A3W-ENDPOINT-v0.1.0",
+  "enabled": false,
+  "enabled_as_established_premise": false,
+  "foundation_effect": "NONE",
+  "nodes": [],
+  "rules": [],
+  "context_links": [],
+  "applications": [
+    {
+      "id": "A3W:ACTION_FAMILIARITY_TARGET_AND_ENDPOINT_SCOPE",
+      "completed_node_refs": [
+        "R173:FIXED_FAMILIAR_TARGET_CONTRACT",
+        "R173:RETENTIVE_BINDING_RELATION",
+        "R173:RETENTIVE_EXPERIENTIAL_COORDINATE",
+        "R173:FAMILIAR_MINENESS_BOUNDARY",
+        "R175:R173_EFFECTIVE_TARGET_SEPARATION",
+        "R157:COORDINATE_TRANSPORT"
+      ],
+      "actual_premises_discharged": false,
+      "status": "DISABLED_OPEN_APPLICATION"
+    }
+  ]
+}

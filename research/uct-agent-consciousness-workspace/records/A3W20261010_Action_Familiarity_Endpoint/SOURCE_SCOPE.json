@@ -1,0 +1,70 @@
+{
+  "schema": "uct-source-scope/1",
+  "read_date": "2026-10-10",
+  "primary_source": {
+    "author": "Thomas Fuchs",
+    "year": 2016,
+    "title": "Self across time: the diachronic unity of bodily existence",
+    "doi": "10.1007/s11097-015-9449-4",
+    "url": "https://www.klinikum.uni-heidelberg.de/fileadmin/zpm/psychatrie/fuchs/Literatur/Self_across_time.pdf",
+    "read_scope": "abstract; §3 pp6-8; §6 pp14-16; adjacent §5 transplantation argument pp13-14. Not a complete independent review of all clinical cases/references.",
+    "role": "Philosophical distinction between basic self-familiarity and presently enacted acquired body memory; not experimental validation, not accepted biological gate.",
+    "verbatim_words_saved": 0
+  },
+  "retrieval_failures": [
+    {
+      "url": "https://hal.science/ijn_03034503v1/file/Vignemont_BodilyFeelings_2020.pdf",
+      "failure": "Anubis block; chapter not read or used substantively"
+    },
+    {
+      "url": "https://www.sciencedirect.com/science/article/pii/S2589004221014826",
+      "failure": "Internal error; 2021 full methods not verified in this run"
+    },
+    {
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11735670/",
+      "failure": "captcha; 2025 self-movement study not full-method verified; provisional context only"
+    },
+    {
+      "url": "https://www.redalyc.org/journal/3073/307372487005/html/",
+      "failure": "Internal error; not used"
+    }
+  ],
+  "source_snapshots": [
+    {
+      "path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md",
+      "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+      "read_scope": "Affected target, conditional scope and limits; original historical withdrawal read with effective correction."
+    },
+    {
+      "path": "records/R151_Foundational_Manuscript_20261007/Experience_Intelligence_and_Self_v0_2.md",
+      "sha256": "c16abd2b87eb2c91b673efc22cb81a810466ff9de989795660be8a9541811471",
+      "read_scope": "Affected target, conditional scope and limits; original historical withdrawal read with effective correction."
+    },
+    {
+      "path": "records/R173_Familiar_Mineness_and_Retentive_History_20261008/Familiar_Mineness_Retentive_History_v0_1.md",
+      "sha256": "20325c5a191ddd0be04ebac3c3e9de2c37fb1134488f07015cff080620f864fa",
+      "read_scope": "Affected target, conditional scope and limits; original historical withdrawal read with effective correction."
+    },
+    {
+      "path": "versions/UCT-MAP-v1.1.2/audit/R173_EFFECTIVE_CORRECTION_PATCH.json",
+      "sha256": "fadc0c83c2e6fc4e6bf3274a020f5ee5f1cfbf66d2b2948874e51df90f28f78d",
+      "read_scope": "Affected target, conditional scope and limits; original historical withdrawal read with effective correction."
+    },
+    {
+      "path": "records/A3N20261010_Route_Fluency_Crossing/RESEARCH_NOTE.md",
+      "sha256": "0a575fe6f52156c5dcdd6afc82cb93c8a8b4ee3f0a536b7eeb560ab2f4176739",
+      "read_scope": "Affected target, conditional scope and limits; original historical withdrawal read with effective correction."
+    },
+    {
+      "path": "records/A3V20261010_Concurrent_Liveness_and_Familiarity/RESEARCH_NOTE.md",
+      "sha256": "b822b88f31f617753627855d9b7f6dc6702af70789347edda09dc2eee290b539",
+      "read_scope": "Affected target, conditional scope and limits; original historical withdrawal read with effective correction."
+    },
+    {
+      "path": "records/R199_CONSTITUTIVE_RETENTION_AND_FAMILIARITY_2026-10-10/RESEARCH_NOTE.md",
+      "sha256": "0c1d6af3e8b68f8424097251ee4e0f41607d7b9c73800da3a4dd2eae0106d31f",
+      "read_scope": "Affected target, conditional scope and limits; original historical withdrawal read with effective correction."
+    }
+  ],
+  "prior_art_boundary": "A3N question and controls, A3M crossing/support results, A3V conditional scope and R199 ceiling are inherited; no new math, empirical dissociation or worldwide originality claim."
+}
