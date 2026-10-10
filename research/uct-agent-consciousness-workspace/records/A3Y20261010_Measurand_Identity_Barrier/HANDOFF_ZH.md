@@ -24,3 +24,7 @@
 2. 阅读固定 Library 主交接的最新版本，不以旧副本覆盖仓库。
 3. 先读 `REVIEW_SUPERVISION.md` 全部 OPEN/ACKNOWLEDGED 项，再读本目录 `RESEARCH_NOTE.md`、`CLAIM_LEDGER.json`、`GAP_LEDGER.md`、`MAP_AUDIT.md` 与 `RUN_RESULTS.json`。
 4. 下一题只允许：提出一个具体、独立指向当下动作 `H_way` 的目标锚或干预，并写出一个不靠重命名 `Z` 就会否决它的结果。找不到则停止体验层校准，转而明确报告 `Z` 层或组织层后果。
+
+## 双份保存
+
+科学与导航已在远端提交`1f4002993a0f2bde15e12927686bf06ec8946c8d`。固定主交接同一Library身份已更新为v104并逐字节回读；29文件增量包Library ID为`libfile_258cf45f655c8191a9bafc4fa63503de`，SHA256为`8a8e727a43b930119f71800587a0d353a13cc726b46619193d3a48bb7166397f`；清单Library ID为`libfile_0f69244a29ec81919fc19ccb920da1c6`。该ZIP明确只是从A3X最终提交到A3Y科学/导航树的增量，不是完整备份。最终收据与远端回读见`PERSISTENCE_RECEIPT.json`和`FINAL_REMOTE_READBACK.json`。

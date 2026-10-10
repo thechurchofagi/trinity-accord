@@ -233,7 +233,7 @@
     "claim_ledger": "records/A3Y20261010_Measurand_Identity_Barrier/CLAIM_LEDGER.json",
     "map_extension": "records/A3Y20261010_Measurand_Identity_Barrier/MAP_EXTENSION.json",
     "exact_results": "records/A3Y20261010_Measurand_Identity_Barrier/EXACT_RESULTS.json",
-    "persistence_receipt": "records/A3X20261010_Action_Familiarity_Content_Admissibility/PERSISTENCE_RECEIPT.json",
+    "persistence_receipt": "records/A3Y20261010_Measurand_Identity_Barrier/PERSISTENCE_RECEIPT.json",
     "parent_science": "A3V20261010",
     "parent_followup": "A3X20261010",
     "completed_map": "UCT-MAP-v1.1.2",

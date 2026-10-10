@@ -1,0 +1,27 @@
+{
+  "schema": "uct-increment-manifest-v1",
+  "round_id": "A3Y20261010_Measurand_Identity_Barrier",
+  "scope": "increment_only_not_full_backup",
+  "base_verified_commit": "92342aa516b2b1169103a978c9dc48b179e212f8",
+  "science_navigation_commit": "1f4002993a0f2bde15e12927686bf06ec8946c8d",
+  "archive_file_name": "UCT_A3Y_Increment_92342aa_to_1f40029.zip",
+  "archive_sha256": "8a8e727a43b930119f71800587a0d353a13cc726b46619193d3a48bb7166397f",
+  "archive_size_bytes": 148896,
+  "file_count": 29,
+  "file_selection": "All paths changed between the verified A3X final head and the A3Y science/navigation tree, before persistence-receipt files.",
+  "restore_requirements": [
+    "Obtain base commit 92342aa516b2b1169103a978c9dc48b179e212f8 or a verified descendant containing the same base tree.",
+    "Verify the archive SHA-256 before extraction.",
+    "Apply only as an A3Y increment; do not call this archive a complete repository or working-set backup.",
+    "Reconcile against the fixed master handoff and the live branch before overwriting any newer concurrent work."
+  ],
+  "library": {
+    "increment_library_file_id": "libfile_258cf45f655c8191a9bafc4fa63503de",
+    "increment_file_id": "file_0000000026d88246a62ba180316a2e6e",
+    "manifest_library_file_id": "libfile_0f69244a29ec81919fc19ccb920da1c6",
+    "manifest_file_id_at_initial_create": "file_00000000789c82468a2bce5560d020f2",
+    "master_handoff_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "master_handoff_previous_version": 103,
+    "master_handoff_current_version": 104
+  }
+}

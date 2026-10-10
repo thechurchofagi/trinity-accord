@@ -1,0 +1,70 @@
+{
+  "schema": "uct-a3y-dual-persistence-receipt-v1",
+  "round_id": "A3Y20261010_Measurand_Identity_Barrier",
+  "status": "GITHUB_SCIENCE_NAVIGATION_AND_LIBRARY_V104_READBACK_CONFIRMED",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "initial_verified_head": "92342aa516b2b1169103a978c9dc48b179e212f8",
+    "first_recoverable_checkpoint": "e84684294940f9df546f0b177b0e154ad217470f",
+    "science_and_navigation_commit": "1f4002993a0f2bde15e12927686bf06ec8946c8d",
+    "update_method": "GitHub Git-data API create-blob/create-tree/create-commit and expected-SHA non-force ref update after ordinary HTTPS push credentials were unavailable",
+    "fast_forward_and_expected_sha": true,
+    "remote_branch_and_key_files_verified": true,
+    "receipt_commit": null,
+    "receipt_commit_note": "Filled with the actual receipt commit in the later final readback confirmation commit."
+  },
+  "workspace_persistence": {
+    "master_handoff": {
+      "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+      "file_name": "UCT_Hourly_Research_Master_Handoff.md",
+      "previous_version": 103,
+      "current_version": 104,
+      "size_bytes": 24206,
+      "sha256": "5aca18b6ef887850c9760b7f88792354bf2880289579988cc000c9c785ec1b9d",
+      "same_identity_preserved": true,
+      "version_104_readback_verified": true
+    },
+    "increment": {
+      "library_file_id": "libfile_258cf45f655c8191a9bafc4fa63503de",
+      "file_id": "file_0000000026d88246a62ba180316a2e6e",
+      "file_name": "UCT_A3Y_Increment_92342aa_to_1f40029.zip",
+      "version": 0,
+      "size_bytes": 148896,
+      "sha256": "8a8e727a43b930119f71800587a0d353a13cc726b46619193d3a48bb7166397f",
+      "file_count": 29,
+      "readback_sha256_verified": true,
+      "scope": "increment_only_not_full_backup"
+    },
+    "manifest": {
+      "library_file_id": "libfile_0f69244a29ec81919fc19ccb920da1c6",
+      "initial_file_id": "file_00000000789c82468a2bce5560d020f2",
+      "current_file_id": "file_0000000070488243a6289cf7b90e447d",
+      "current_version": 2,
+      "size_bytes": 1568,
+      "sha256": "5c1f6955bef6c0af55cfe2cc4964bdeae6bf17cee4f5dd6b6b0078a73298bc07",
+      "readback_sha256_verified": true
+    }
+  },
+  "latest_completed_step": "A3Y measurand-identity analysis, exact witness, entry synchronization, full-map structural traversal, GitHub science/navigation save, fixed master handoff v104 replacement, and increment/manifest byte readback are complete.",
+  "not_completed": [
+    "No independently phenomenal-targeted H_way anchor or intervention.",
+    "No signed and bounded C_H calibration.",
+    "No participant endpoint result.",
+    "No same-episode actual O_H retained-route/use installation.",
+    "No full historical semantic proof audit.",
+    "No publication or external preservation action."
+  ],
+  "failures": [
+    {"event": "ordinary git push", "result": "HTTPS credential unavailable", "recovery": "Used the configured GitHub connector with expected-SHA fast-forward updates; no force push, PR, CI or deployment."},
+    {"event": "first strict exact-result validation", "result": "Equivalent fractions were serialized as 15/80 in the hand-authored file and 3/16 by the canonical checker.", "recovery": "Normalized the stored fractions and reran the exact and full-map validation successfully."}
+  ],
+  "exact_restore": [
+    "Fetch branch uct-agent-consciousness-workspace and verify it contains commit 1f4002993a0f2bde15e12927686bf06ec8946c8d or a descendant.",
+    "Read repository entry files in required order and every OPEN/ACKNOWLEDGED review item.",
+    "Read records/A3Y20261010_Measurand_Identity_Barrier/HANDOFF_ZH.md, RESEARCH_NOTE.md, MEASURAND_CONTRACT.md, CLAIM_LEDGER.json, GAP_LEDGER.md, MAP_AUDIT.md and RUN_RESULTS.json.",
+    "If repository access is unavailable, obtain base commit 92342aa516b2b1169103a978c9dc48b179e212f8, verify the A3Y ZIP SHA-256, then apply the increment; the ZIP is not a complete backup.",
+    "Read fixed master handoff libfile_4175a81748fc819187fa8f5771f056fa at version 104 or later; reconcile by verified commit/version and never overwrite newer concurrent content.",
+    "Continue only with one independently phenomenal-targeted H_way anchor/intervention and an unfitted rejection result; do not relabel latent Z as H_way."
+  ]
+}
