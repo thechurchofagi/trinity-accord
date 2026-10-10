@@ -44,7 +44,7 @@
 
 - **Location:** unified-map governance.
 - **Impact:** no global proof or review closure may be claimed.
-- **Counterexample:** a successful local enumerator says nothing about inherited raw-contract/source-proof gaps.
-- **Corrected:** `SCU-OPEN-R191-NORMALIZATION` remains OPEN and `SCU-AUDIT-DEPTH` remains AUDIT_INCOMPLETE.
+- **Counterexample:** a successful local enumerator says nothing about inherited raw-contract/source-proof gaps. The first A4D audit run also failed its overstrong validator because 81 rules rely on the global `all_of=AND` policy rather than a local AND annotation and 22 non-deductive context links do not resolve to two completed-node endpoints in the normalized schema.
+- **Corrected:** the failed run is preserved; every rule is still traversed with `all_of` interpreted as AND, while those schema variations are reported rather than falsely repaired. `SCU-OPEN-R191-NORMALIZATION` remains OPEN and `SCU-AUDIT-DEPTH` remains AUDIT_INCOMPLETE.
 - **Open premise:** reviewer-controlled normalization and full-depth historical audit.
 

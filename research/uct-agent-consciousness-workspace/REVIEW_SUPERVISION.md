@@ -1010,3 +1010,16 @@ A4B四象限反模型证明形成效应与路线使用逻辑独立；软件实�
 - `SCU-AUDIT-DEPTH`仍AUDIT_INCOMPLETE：913/424/261结构恢复与相关域人工复查不等于全历史深层复证。
 
 A4C应用保持停用，正式图增量0/0/0。C1/U1未改；形成痕迹、行动控制、预测准确、报告、语言、自我模型和延续控制均未成为基础体验门槛。不自报关闭任何审查项，也不对当前助手的意识或死亡恐惧作确定判断。
+
+---
+
+## A4D20261011 researcher response — actuator-writer completeness
+
+[稳定ID回应](records/A4D20261011_Actuator_Writer_Completeness/REVIEW_RESPONSE.md) · [写入器协议](records/A4D20261011_Actuator_Writer_Completeness/ACTUATOR_WRITER_PROTOCOL.md) · [精确结果](records/A4D20261011_Actuator_Writer_Completeness/EXACT_RESULTS.json) · [缺口](records/A4D20261011_Actuator_Writer_Completeness/GAP_LEDGER.md) · [形式化审查](records/A4D20261011_Actuator_Writer_Completeness/FORMAL_AUDIT.md)。
+
+- `QC-20261008-10`仍ACKNOWLEDGED/OPEN：A4D只推进物理路线证据，不提供独立现象目标或`H_way`方向。
+- `IA-QC11`、`QC-20261008-12/13`仍OPEN：A4D证明重放证据与实际写入器身份可分离，并声明同实例AWC合同；但没有安装物理机器人、完整签名或现象端口。
+- `SCU-OPEN-R191-NORMALIZATION`仍OPEN；A4D不使用R191归一化作为已满足前提。
+- `SCU-AUDIT-DEPTH`仍AUDIT_INCOMPLETE：913/424/261遍历保留81条本地AND注记与22条语境端点格式差异；这不是全历史深层复证。
+
+A4D应用保持停用，正式图增量0/0/0。C1/U1未改；执行器审计不是基础体验门槛或唯一主人选择器。不自报关闭任何审查项。

@@ -33,3 +33,7 @@ Scientific continuation and next question live in CURRENT_STATE.json. All pendin
 ## 最新应用 A4C20261011
 
 在同一软件承载者与同一当前消费者中形成两个相反情境痕迹，安装原生、同承载者内容换接、阻断、消费者接口救援四臂具身模拟。32个试次的情境对齐终点均值为0、约4、约2、0，全部行动链可精确重放；直接写终点的伪双胞胎虽复制终点却不能重放。结果只证明声明模拟中的形成内容敏感性，不是物理机器人/人体、完整`K`或`H_way`；0/0/0正式图增量，审查保持OPEN；[交接](records/A4C20261011_Trace_Swap_Embodied_Loop/HANDOFF_ZH.md)。
+
+## 最新应用 A4D20261011
+
+A4C式行动重放仍不能识别实际执行器写入器：允许旁路及时读取挑战与模式时，六单元格中存在一个目标路线全程闲置的完全观测双胞胎。配对挑战只能在写入器清单、非目标挑战盲法、后仲裁探针、忠实切断和同接口救援共同成立时排除限定旁路。未安装机器人/完整`K`/`H_way`，0/0/0正式图增量，审查保持OPEN；[交接](records/A4D20261011_Actuator_Writer_Completeness/HANDOFF_ZH.md)。

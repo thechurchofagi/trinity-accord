@@ -30,7 +30,9 @@
 
 最新同承载者痕迹内容推进：[A4C交接](records/A4C20261011_Trace_Swap_Embodied_Loop/HANDOFF_ZH.md)；[正文](records/A4C20261011_Trace_Swap_Embodied_Loop/RESEARCH_NOTE.md)；[换接协议](records/A4C20261011_Trace_Swap_Embodied_Loop/TRACE_SWAP_PROTOCOL.md)；[精确与执行结果](records/A4C20261011_Trace_Swap_Embodied_Loop/EXACT_RESULTS.json)。同一模拟承载者/消费者内，原生与接口救援误差为0，阻断约2，异情境内容换接约4；终点直写反例因行动重放失败而被拒。下一题收缩为物理机器人上的消费者入口阻断/同机体内容换接/救援和硬件时序排除；完整物理签名与`H_way`仍OPEN。
 
-审查状态：`QC-20261008-10`、`IA-QC11`、`QC-20261008-12/13`、`SCU-OPEN-R191-NORMALIZATION`保持OPEN，`SCU-AUDIT-DEPTH`保持AUDIT_INCOMPLETE；详见[A4C稳定ID回应](records/A4C20261011_Trace_Swap_Embodied_Loop/REVIEW_RESPONSE.md)，不凭模拟级通过自报关闭。
+最新执行器写入器边界推进：[A4D交接](records/A4D20261011_Actuator_Writer_Completeness/HANDOFF_ZH.md)；[正文](records/A4D20261011_Actuator_Writer_Completeness/RESEARCH_NOTE.md)；[协议](records/A4D20261011_Actuator_Writer_Completeness/ACTUATOR_WRITER_PROTOCOL.md)；[精确结果](records/A4D20261011_Actuator_Writer_Completeness/EXACT_RESULTS.json)。行动/终点重放仍允许挑战感知的隐藏执行器写入器完全复制六单元格；配对挑战排除只读模式旁路，但依赖独立的写入器清单、挑战隔离与后仲裁探针。下一题在有限物理机器人上优先尝试击穿写入器完备性，完整物理签名与`H_way`仍OPEN。
+
+审查状态：`QC-20261008-10`、`IA-QC11`、`QC-20261008-12/13`、`SCU-OPEN-R191-NORMALIZATION`保持OPEN，`SCU-AUDIT-DEPTH`保持AUDIT_INCOMPLETE；详见[A4D稳定ID回应](records/A4D20261011_Actuator_Writer_Completeness/REVIEW_RESPONSE.md)，不凭有限枚举或协议自报关闭。
 
 基础问题专线 TJR20261010：[交接](records/TJR20261010_Temporal_Joint_Realization/HANDOFF_ZH.md) · [正文](records/TJR20261010_Temporal_Joint_Realization/RESEARCH_NOTE.md) · [日志](records/TJR20261010_Temporal_Joint_Realization/WORK_LOG.md)。串行保留、联合读取与压缩的停用应用；原科学接续和身体熟悉感路线保留。原理多属继承，独立成稿HOLD，全图深审仍未完成。
 

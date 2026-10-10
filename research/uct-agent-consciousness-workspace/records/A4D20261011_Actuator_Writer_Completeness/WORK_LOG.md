@@ -8,4 +8,5 @@
 - Stated AWC as an eight-clause physical evidence package and preserved failure states.
 - Compared only to primary unknown-input/actuator-attack work and limited novelty claims.
 - Rechecked direction: the result advances actual organization evidence and stops before complete-K or phenomenal interpretation.
+- Preserved an initial whole-map audit failure caused by overstrong schema assumptions; revised the validator to apply global `all_of=AND` semantics and report 81 local-annotation plus 22 context-endpoint variations without treating them as repaired.
 

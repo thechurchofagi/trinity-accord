@@ -1,0 +1,34 @@
+{
+  "schema": "uct-publication-coverage-update/1",
+  "round": "A4D20261011",
+  "formal_publication_counts_unchanged": true,
+  "completed_map_changed": false,
+  "result_class": "DISABLED_SCOPED_NEGATIVE_AND_PROTOCOL_APPLICATION",
+  "net_claims": [
+    {
+      "id": "A4D-C1",
+      "classification": "BOUNDED_OBSERVATIONAL_NONIDENTIFICATION",
+      "scope": "Within the declared six-cell binary device model, an unrestricted parallel actuator writer can reproduce all command, actuator and endpoint observations while the target consumer is idle."
+    },
+    {
+      "id": "A4D-C2",
+      "classification": "EXACT_RESTRICTED_DISCRIMINATION",
+      "scope": "Paired binary challenges exclude the declared mode-only hidden-writer class, but only under the separately stated physical completeness and challenge-isolation premises."
+    },
+    {
+      "id": "A4D-C3",
+      "classification": "PROSPECTIVE_PHYSICAL_PROTOCOL",
+      "scope": "The eight-clause actuator-writer-completeness contract states what a future bounded device installation must establish; it is not itself an installation result."
+    }
+  ],
+  "deductions": [
+    "Unknown-input and actuator-attack identifiability/control-security literature",
+    "A4C action-ledger replay and trace-swap result",
+    "R172 actual online action-use distinction",
+    "R173 actual retentive binding and familiar-mineness boundary",
+    "UCT C1/U1"
+  ],
+  "decision": "HOLD_STANDALONE; retain as a disabled evidential correction and prospective protocol",
+  "world_priority_verified": false,
+  "new_doi_or_timestamp_action": false
+}
