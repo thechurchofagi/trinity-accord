@@ -1,0 +1,34 @@
+{
+  "schema": "uct-round-record/1.0",
+  "round_id": "A4C20261011",
+  "result_id": "A4C-TRACE-SWAP-v0.1.0",
+  "date_local": "2026-10-11",
+  "user_goal": "Continue the UCT experience-intelligence-self project from actual organization, advancing the positive bodily/action-mineness line without changing C1, adding a basal experience gate, selecting a unique owner, or conflating organization, judgment, experience and report.",
+  "one_concrete_open_question": "Can a same-bearer, same-consumer, time-resolved embodied control loop use a retained formation trace such that a blinded trace-content swap changes the declared organizational endpoint in the trace-predicted direction, while the intervention has no route-independent write to that endpoint?",
+  "related_nodes_and_fixed_sources": {
+    "completed_nodes": [
+      "A:C1",
+      "A:U1",
+      "R157:STRUCTURAL_COORDINATE_TRANSPORT",
+      "R173:RETENTIVE_EXPERIENTIAL_COORDINATE",
+      "R173:FAMILIAR_MINENESS_BOUNDARY"
+    ],
+    "review_items": [
+      "QC-20261008-10",
+      "IA-QC11",
+      "QC-20261008-12",
+      "QC-20261008-13",
+      "SCU-OPEN-R191-NORMALIZATION",
+      "SCU-AUDIT-DEPTH"
+    ],
+    "fixed_sources": [
+      "records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md",
+      "records/R153_Complete_Formal_Map_20261007/sources/experience-intelligence-self-v1.0.md",
+      "records/R173_Familiar_Mineness_and_Retentive_History_20261008/Familiar_Mineness_Retentive_History_v0_1.md",
+      "records/A4B20261011_Formation_Route_Dual_Key/FORMATION_ROUTE_DUAL_KEY.md",
+      "records/A4B20261011_Formation_Route_Dual_Key/DUAL_KEY_PROTOCOL.md"
+    ]
+  },
+  "planned_addition_or_correction": "Install and attack a bounded trace-swap protocol in a simulated embodied control loop. Separate block, content swap, consumer-interface rescue and endpoint observation; require same bearer/current consumer, event chronology, no intervention-to-endpoint write, and a counterexample showing that endpoint equality alone still cannot prove route fidelity.",
+  "deliverable": "An English research note and protocol, executable implementation with event-level results and failures, stable claim and gap ledgers, review response, formal-map audit, publication-coverage decision, Chinese handoff, and two verified persistent copies. If the installation does not meet the contract, preserve the failure and stop at the last valid organizational claim."
+}
