@@ -1,0 +1,20 @@
+{
+  "commit": "9d841d273a03626f30211e3535f7171d0c2f74ca",
+  "doi": "10.5281/zenodo.23299153",
+  "manifest_sha256": "684c3bef05fab94c4443b3452f172aa6b193214174f5e83135eb066b0af53e8b",
+  "paper_id": "ASI-CC-v1.3.0",
+  "record_id": 23299153,
+  "run_id": "38144868048",
+  "schema": "rac13-publication-attempt/1",
+  "started_at_utc": "2026-10-11T13:52:23.976199+00:00",
+  "state": "unsubmitted",
+  "status": "PUBLISHED_PUBLIC_BYTE_READBACK_PASS",
+  "uploaded_files": [
+    "when-revocation-does-not-restore-safety-v1.3.0.pdf",
+    "reproducibility-v1.3.0.zip",
+    "when-revocation-does-not-restore-safety-v1.3.0.tex",
+    "README-LICENSE.txt",
+    "REVIEW-AND-SOURCES.md",
+    "SHA256SUMS.txt"
+  ]
+}
