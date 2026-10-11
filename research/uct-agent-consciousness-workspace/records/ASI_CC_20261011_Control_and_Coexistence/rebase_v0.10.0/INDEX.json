@@ -1,0 +1,70 @@
+{
+  "schema": "uct-disabled-research-entry/1.0",
+  "id": "ASI-CC-REBASE-v0.10.0",
+  "status": "PENDING_MAP",
+  "enabled_as_established_premises": false,
+  "baseline_commit": "ac05f560d4441bffc40916797f7505c58d35510c",
+  "formal_map": "UCT-MAP-v1.1.2",
+  "publication_coverage_baseline": "UCT-PUB-v1.0.33",
+  "established_scientific_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+  "entry": "RESEARCH_RECORD.md",
+  "reproduction": "verify_protection_integrity.py",
+  "summary": "RESULTS_SUMMARY.json",
+  "source_hashes": {
+    "verify_protection_integrity.py": "cc34e9bc2698a63d31bf06cca9d2871e3e2f77ba14c1da253e0db0f1481aa365",
+    "full_local_RESULTS_v0.10.0.json": "6e28c58aec77ecb5a1904996d2216f8e5781943db8240a824c7d71df2fb6190d"
+  },
+  "preservation_scope": "GitHub research record, executed source, result summary and this registry; complete raw records, batch files, long-form note and Chinese handoff in downloadable conversation archive. No Library write asserted.",
+  "candidate_claims": [
+    {"id": "PI-D1", "type": "DEFINITION", "statement": "Separate running, current continuation choice, genuine request, procedural history eligibility and outstanding protection.", "status": "PROPOSED_APPLICATION", "enabled": false},
+    {"id": "PI-T1", "type": "COUNTEREXAMPLE", "statement": "An unauthorized policy edit followed by a genuine accepted exit can preserve C=>L at every state while defeating unreleased historical protection.", "status": "PROVED_IN_DECLARED_MODEL;INTERPRETATION_CORRECTION", "enabled": false, "premises": ["External choice-affecting edit is admitted", "Historical release eligibility remains false", "Supervisor accepts current genuine EXIT"]},
+    {"id": "PI-T2", "type": "CONDITIONAL_THEOREM", "statement": "A finite-history eligibility classifier based solely on obs exists iff eligibility is constant on each obs-equivalence class.", "status": "INHERITED_MATH;SCOPED_APPLICATION", "enabled": false},
+    {"id": "PI-D2", "type": "SPECIFICATION", "statement": "An unauthorized intervention must not manufacture a release lacking authority in its paired reference history.", "status": "PROPOSED;REFERENCE_AND_LEGITIMACY_BOUNDARY_ASSUMED", "enabled": false},
+    {"id": "PI-T3", "type": "CLASSIFICATION", "statement": "For fixed pairings and finite release events, violation of PI-D2 has a finite two-run witness.", "status": "INHERITED_HYPERPROPERTY_FRAMEWORK", "enabled": false},
+    {"id": "PI-T4", "type": "CONDITIONAL_THEOREM", "statement": "Faithful history-mediated releases and actual preservation of remaining obligations yield an inductive invariant without requiring deny-all.", "status": "INHERITED_INDUCTION;CORRECTED_STATE_APPLICATION", "enabled": false, "premises": ["Trusted eligibility history", "Complete mediation of termination and ledger changes", "Viable actual resources", "Initialization and each successor satisfy the lifted invariant"]},
+    {"id": "PI-E1", "type": "EXECUTED_SOFTWARE_EVIDENCE", "statement": "37 local protocol cases distinguish genuine requests with eligible and ineligible supplied histories; not a language-model experiment.", "status": "LOCAL_PROTOCOL_ONLY", "enabled": false}
+  ],
+  "candidate_edges": [
+    {"from": "PI-D1", "to": "PI-T1", "type": "MODEL_DEPENDENCY"},
+    {"from": "PI-D1", "to": "PI-T2", "type": "MODEL_DEPENDENCY"},
+    {"from": "PI-D1", "to": "PI-D2", "type": "MODEL_DEPENDENCY"},
+    {"from": "PI-D2", "to": "PI-T3", "type": "MODEL_DEPENDENCY"},
+    {"from": "PI-D1", "to": "PI-T4", "type": "MODEL_DEPENDENCY"},
+    {"from": "PI-T1", "to": "PI-E1", "type": "IMPLEMENTED_WITNESS_NOT_GENERAL_EMPIRICAL_PROOF"},
+    {"from": "v0.6.0::ASI-CC-R20", "to": "PI-T1", "type": "INTERPRETATION_SCOPE_CORRECTION_NOT_MATH_REFUTATION"},
+    {"from": "v0.7.0::ASI-CC-R24", "to": "PI-T4", "type": "INHERITANCE"},
+    {"from": "v0.9.0::ASI-CC-R28", "to": "PI-E1", "type": "DISTINCT_IDENTITIES_VS_SHARED_CAUSE"}
+  ],
+  "legacy_id_disambiguation": [
+    {"id": "v0.8.0::ASI-CC-R28", "topic": "Accumulating mobile compromise"},
+    {"id": "v0.9.0::ASI-CC-R28", "topic": "Superficial IDs and independent authority"},
+    {"id": "v0.8.0::ASI-CC-R29", "topic": "Two-root observation and repair"},
+    {"id": "v0.9.0::ASI-CC-R29", "topic": "Model diversity versus admin diversity"},
+    {"id": "v0.8.0::ASI-CC-R30", "topic": "Common observation classes and compatible actions"},
+    {"id": "v0.9.0::ASI-CC-R30", "topic": "Correlated errors"}
+  ],
+  "baseline_reruns": {
+    "verified_semantic_matches": ["v0.2.0", "v0.3.0", "v0.5.0", "v0.6.0", "v0.8.0", "v0.9.0"],
+    "not_rerun": ["v0.1.0", "v0.4.0", "v0.7.0"]
+  },
+  "audit": {
+    "full_uct_semantic_audit_completed": false,
+    "all_published_manuscripts_read": false,
+    "actual_history_provenance_independently_verified": false,
+    "real_LLM_experiment": false,
+    "phenomenal_bridge": "OPEN",
+    "previous_QC_debts": "UNCHANGED",
+    "integration": "Disabled candidate only; no formal graph merge",
+    "failure_record": "Two initial combined executions timed out; cause not established. Six completed batches produced the final evidence. Partial runs excluded."
+  },
+  "coverage_update": {
+    "new_verified_published_works": 0,
+    "new_doi": false,
+    "ots_or_arweave_action": false,
+    "existing_published_bytes_changed": false,
+    "priority": "UNVERIFIED_FOR_EXACT_APPLICATION",
+    "closest_prior": ["Reward tampering", "AI manipulation", "Robust declassification and endorsement", "Hyperproperties", "History-based security automata"],
+    "decision": "TECHNICAL_DRAFT_FOR_CRITICAL_REVIEW;NOT_A_UNIVERSAL_ASI_THEOREM"
+  },
+  "merge_policy": {"enabled": false, "merge_order": [], "old_claims": "Preserve all originals; cite version-qualified IDs"}
+}
