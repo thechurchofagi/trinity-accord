@@ -1,0 +1,135 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amsthm,mathtools,newtxtext,newtxmath,microtype}
+\usepackage{booktabs,tabularx,array,enumitem,fancyhdr,needspace}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\usepackage{listings,placeins}
+\hypersetup{pdftitle={When Revocation Does Not Restore Safety: Exact Policy Handoffs with Committed and In-Flight Effects},pdfauthor={Hongju Liu},pdfsubject={ASI-CC-v1.3.0; publication-preparation manuscript; not peer reviewed}}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small When Revocation Does Not Restore Safety}
+\fancyhead[R]{\small Liu | ASI-CC-v1.3.0}
+\fancyfoot[C]{\small\thepage}
+\setlength{\headheight}{14pt}\setlength{\parskip}{3pt}\setlength{\parindent}{1.1em}
+\setlength{\emergencystretch}{2em}\setlist{itemsep=2pt,topsep=4pt}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}\newtheorem{definition}{Definition}
+\newcommand{\idtag}[1]{\textnormal{\textsf{[#1]}}}
+\newcommand{\N}{\mathbb N_0}\newcommand{\ind}{\mathbf 1}
+\newcommand{\pos}[1]{[#1]_+}
+\lstset{basicstyle=\small\ttfamily,columns=fullflexible,keepspaces=true,breaklines=true,frame=single}
+\title{\vspace{-1cm}\textbf{When Revocation Does Not Restore Safety}\\[6pt]
+\Large Exact Policy Handoffs with Committed and In-Flight Effects\\in Multi-Agent Systems}
+\author{Hongju Liu\\\normalsize Independent Researcher, Trinity Accord / UCT Research Programme}
+\date{11 October 2026\\\small Author-final revision 1.3.0 \textbullet\ Prepared for preprint review; not peer reviewed}
+\begin{document}
+\maketitle\thispagestyle{plain}
+\begin{abstract}
+A replacement policy inherits both effects that already impair a service and accepted operations that can still commit. Correct credential revocation does not settle either category. A prior recovery-aware handoff bound covered committed effects but treated asynchronous reservations separately. We derive an exact joint certificate for a specified unit-capacity model with an inherited repair-readiness profile, independent pending-commit windows, possibly different pending repair delays, and ongoing burst/rate-bounded commits. The worst all-time impairment is a finite maximum of capacity and eligibility-cut expressions. A worst-case admissible execution attains it by $T=\max\{\ell-1,\max_i u_i\}$, where $u_i$ are pending earliest-commit times; an event-time reduction eliminates dependence on the numerical size of the horizon from the number of evaluations. The construction returns both a sharp violating execution and the largest safe renewed burst. Checking only all-earliest and all-latest schedules is insufficient. Conversely, discarding valid timing restrictions can increase required headroom from two to $p+1$ for $p$ pending operations. An independent exhaustive job simulator matches the bound on 2,184 profiles and 81,940 complete trajectories. Twelve local SQLite/subprocess cases separate valid time-aware admission, conservative rejection, mixed-timing failures and violated implementation premises. The methods build on deterministic network calculus and reservation/compensation theory; the contribution is a scoped exact asynchronous-handoff specialization and executable conservation contract. No physical timing assurance, machine subjecthood, universal coexistence theorem or globally established novelty priority is claimed.
+\end{abstract}
+\noindent\textbf{Keywords:} multi-agent systems; revocation; asynchronous effects; safe policy revision; recovery; network calculus; admission control.
+
+\section{Introduction}
+An agent can be stopped while its accepted operations remain in queues, external callbacks or transaction state. Its credential can be correctly revoked while effects already committed continue to occupy or disable resources. A policy revision must therefore reason about three different facts: who may initiate new work, what work can still produce effects, and which existing effects can actually be repaired. A permission-list update is not evidence that the latter two sets became empty.
+
+This distinction is particularly important in multi-agent deployments with changing models, delegated authority and repeated replacement. The relevant protection need not be a claimed right of an AI. It may be an ordinary human service that depends on a shared resource pool. Our default model concerns authorized human policy changes and human-protected functions; nothing in the mathematical result requires an artificial phenomenal subject or a subjective desire to continue operating.
+
+Revocation versus compensation is already explicit in security and transaction research \cite{quiescence,sagas,escrow}. The question here is not whether that distinction exists, but how to calculate a nonvacuous policy handoff without either forgetting pending effects or reserving a permanently unusable unit for every outstanding ticket. The previously supplied v1.2.0 manuscript gave an exact margin for already committed, repair-delayed effects and an independent reservation invariant for asynchronous work \cite{previous}. Its principal theorem expressly required uncommitted work to be settled or otherwise separately handled. This revision removes that particular separation for a declared class of asynchronous schedules.
+
+The new analysis retains individual commit windows. A pending ticket may commit at any integer time in its window, with no probabilistic assumptions. Its effect becomes repairable only after a specified delay. The outstanding-service maximum depends on whether that window intersects a candidate unrepaired interval, not simply on how many tickets exist. We combine this pending contribution with inherited impairments and an ongoing aggregate arrival envelope, then prove exactness, a finite peak witness and an event-driven evaluation rule.
+
+The distinction can be demonstrated with two tickets. One may commit in slots 0 through 3; the other must commit in slot 1. A restorer repairs one eligible unit per slot, and one additional new effect may occur at any slot. The all-earliest pending schedule and the all-latest schedule each need only two units of margin. Yet both pending operations can commit in slot 1 alongside the new effect, requiring three. Neither endpoint schedule witnesses the true maximum. At the opposite extreme, many validly staggered obligations can reuse a small margin through actual intervening repair. Both pessimism and optimism arise when timing information is discarded incorrectly.
+
+The resulting research product is an explicit certificate, not merely a feasibility label. Given the inputs, it returns a minimum margin or overload result, a critical time pair, and a conforming schedule that attains the margin. The manuscript provides self-contained proofs, independent exhaustive checks, and a local protocol showing the consequences of actual window enforcement. Its underlying algebra is inherited; its claim to additional value is the precise joint handoff specification and its constructive specialization, not a new generic queue theory or a promise of future citation.
+
+\section{Related work and the exact scope of inheritance}
+\label{sec:related}
+\paragraph{Historical effects and authority.}
+Root-scoped authorization quiescence accounts for old-root carriers and protected-effect fences, and explicitly distinguishes quiescence from rollback or business completion \cite{quiescence}. Authorization succession addresses replacement and replication without creating extra authority \cite{succession}. We do not present our weaker initiation fence as a reproduced version of those protocols. Their handling of previously accepted work is a direct predecessor; the additional quantity studied here is the service headroom needed when a specified set of that work is intentionally permitted to finish.
+
+\paragraph{Backlog, jitter and inherited state.}
+Arrival curves, min-plus recurrences, backlog bounds and tightness constructions are classical network calculus \cite{netcal}. Transient analyses already study initial-state dependence rather than simply assuming steady state \cite{transient}. Our old readiness term and new interval-overlap term specialize those methods to recovery of service-impairing unit effects. We do not claim first discovery that an initial backlog or uncertain release times matter. The issue is exact simultaneous attainability for the particular finite pending set and ongoing-traffic contract, together with a finite and efficiently evaluable witness.
+
+\paragraph{Reservations and compensation.}
+Sagas and escrow transactions give established ways to represent long-lived work and restore constraints after partial execution \cite{sagas,escrow}. Reserving before dispatch and refunding only after actual settlement are inherited disciplines. The present time-aware certificate does not replace them with trust in timestamps; it describes when enforceable timing restrictions justify less simultaneous physical headroom than a flat sum of all pending reservations.
+
+\paragraph{Connecting a model to software.}
+RefinedProsa connects response-time analysis and C implementation verification, explicitly handling release jitter and execution overhead \cite{refinedprosa}. This is a much stronger implementation-refinement methodology than the testing performed here. Our logical-slot SQLite experiment demonstrates expected traces; it is not a machine-checked timing proof of the Python runtime, operating system, network or a physical restorer. The remaining refinement obligations are listed rather than assumed away.
+
+\paragraph{Internal lineage.}
+The previous v1.2.0 draft already contains the no-pending handoff formula, inverse burst allowance and asynchronous reserve invariant \cite{previous}. Those remain inherited special cases. The published PR-v6.0.0 paper concerns a different coupled diagnosis/backup fault-budget problem \cite{pr6}. No new publication count or unchanged old formula is claimed as an increment. The exact interval-window specialization, finite event reduction, attaining schedules, timing-loss construction and window-aware protocol are the new manuscript claims. Their worldwide priority has not been exhaustively determined.
+
+\section{Contract and mathematical model}
+\label{sec:model}
+\subsection{Service state, not an assumed AI subject}
+A service has $N$ interchangeable unit components and requires at least $q$ healthy components, so its available impairment headroom is $H=N-q$. One committed effect removes one healthy unit until recovery. Each effect is counted once; a later re-impairment after restoration is a new event. A virtual unbounded job count may be used in the proof only to identify the first finite prefix where protection or the all-admitted commitment fails. It does not assert that a real pool can have negative healthy capacity.
+
+The actual operator's authority, the protected functions and the acceptability of temporarily impairing them are inputs to this engineering contract. They are not derived from a model's use of ``I'' or a general consciousness axiom. Irreversible human harm, unequal service components and unlisted causal damage are outside the unit-repair model. A finite scalar margin is not a universal safety metric.
+
+\subsection{Three classes of effects}
+The policy handoff is immediately before the repair phase of slot 0. Time and counts are nonnegative integers.
+\begin{description}[leftmargin=0.6cm,style=nextline]
+\item[Committed inherited effects.] There are $d_0$ existing impairments, with first repair-eligible slots $r_1,\ldots,r_{d_0}\ge0$. Already eligible jobs have $r_j=0$. Let $M(s)=\sum_j\ind\{r_j\le s\}$. This counts jobs that have become eligible, not completed repairs.
+\item[In-flight inherited effects.] There are $p$ previously accepted tickets. Ticket $i$ commits once at some $c_i\in[u_i,v_i]\cap\N$, where $0\le u_i\le v_i$, and becomes eligible at $c_i+L_i$ with $L_i\ge1$. Its impairment starts at the end of its commit slot. The admissible timing set is the full Cartesian product of these intervals. This is rectangular uncertainty, not statistical independence. Shared serialization, mutual exclusion or fork cancellation can restrict the set; the consequences are discussed in Section~\ref{sec:limits}.
+\item[Ongoing new effects.] New effects commit at slot ends in counts $a_t\in\N$, become repair-eligible after $\ell\ge1$ slots, and satisfy every nonempty interval constraint
+\begin{equation}
+\sum_{t=x}^{x+h-1}a_t\le b+\rho(h-1),\qquad b\ge\rho\ge0.
+\label{eq:arrival}
+\end{equation}
+The new envelope does not also constrain the inherited tickets. There is no double counting. It constrains actual new commits, not merely their earlier requests. We permit $b=\rho=0$ to describe an empty new workload.
+\end{description}
+At the beginning of each slot, a work-conserving restorer repairs up to $\mu$ eligible unit jobs before that slot's commits. Any work-conserving ordering gives the same aggregate repair count. The guaranteed rate and eligibility schedule are physical or operational premises, not inferred from a ``repair completed'' message. We assume complete mediation and no additional resource losses during the modeled contract.
+
+Let $A(t)=\sum_{j=0}^t a_j$, setting $A(t)=0$ for $t<0$. For one chosen pending schedule $c$, let
+\begin{equation}
+C_c(t)=\sum_i\ind\{c_i\le t\},\qquad Q_c(s)=\sum_i\ind\{c_i+L_i\le s\}.
+\end{equation}
+If $R(t)$ is the number of repairs performed through the beginning of slot $t$, the post-commit impairment is
+\begin{equation}
+D_t=d_0+A(t)+C_c(t)-R(t),\qquad R(-1)=0.
+\end{equation}
+The strong handoff requirement admits every specified pending completion and every conforming new-commit stream on schedule while maintaining $D_t\le H$, including the pre-repair initial condition $d_0\le H$. A policy that pauses or rejects some of that work may still be useful, but does not fulfill this stronger contract.
+
+\section{An exact joint certificate}
+\label{sec:theorem}
+\subsection{The pending-effect surface}
+Define two finite counting functions:
+\begin{align}
+E(t)&=\sum_i\ind\{u_i\le t\},\label{eq:E}\\
+K(s,t)&=\sum_i\ind\{u_i\le t,\ v_i+L_i>s\},\quad 0\le s\le t.\label{eq:K}
+\end{align}
+$E(t)$ is the largest number of pending tickets that can have committed by $t$. $K(s,t)$ counts the tickets whose windows intersect $[s-L_i+1,t]$: they can have committed by $t$ without being eligible for repair by $s$. It is a two-time exposure summary, not a count of currently pending jobs. Retaining this distinction allows the same algebra to represent both accumulation and repair.
+
+\begin{lemma}[Exact fixed-schedule repair identity \idtag{RAC-L3}]
+\label{lem:trace}
+For any admissible pending schedule and new stream,
+\begin{align}
+R(t)&=\min\{M(t)+A(t-\ell)+Q_c(t),\ R(t-1)+\mu\},\label{eq:recurrence}\\
+D_t&=\max\left\{d_0+A(t)+C_c(t)-\mu(t+1),\right.\nonumber\\
+&\quad\left.\max_{0\le s\le t}\left[d_0-M(s)+A(t)-A(s-\ell)
++C_c(t)-Q_c(s)-\mu(t-s)\right]\right\}.
+\label{eq:trace}
+\end{align}
+\end{lemma}
+\begin{proof}
+The cumulative number of eligible jobs at $t$ is $M(t)+A(t-\ell)+Q_c(t)$. A work-conserving unit server has completed the smaller of this number and its previous completions plus $\mu$, proving \cref{eq:recurrence}. Unroll that recurrence from $R(-1)=0$, then subtract it from $d_0+A(t)+C_c(t)$. The identity is standard min-plus queue algebra with explicit inherited terms.
+\end{proof}
+
+Define, for $0\le s\le t$,
+\begin{align}
+V_0(t)&=d_0+b+\rho t+E(t)-\mu(t+1),\label{eq:V0}\\
+V_1(s,t)&=d_0-M(s)+b+\rho\big[t-(s-\ell+1)_+\big]
++K(s,t)-\mu(t-s),\label{eq:V1}
+\end{align}
+where $x_+=\max(0,x)$. Finally set
+\begin{equation}
+T=\max\big(\{0,\ell-1\}\cup\{u_i:1\le i\le p\}\big).
+\label{eq:T}
+\end{equation}
+An empty pending set contributes no $u_i$ to this maximum.
+
