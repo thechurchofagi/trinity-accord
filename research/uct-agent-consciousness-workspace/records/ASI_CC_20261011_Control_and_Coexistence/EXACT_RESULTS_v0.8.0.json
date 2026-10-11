@@ -1,0 +1,105 @@
+{
+  "version": "ASI-CC-v0.8.0",
+  "scope": "EXACT abstract safety/observation game; invented two route roots; no real AI, physics, experience, or calibrated hazards",
+  "quantifiers": "defender repair (possibly based on truthful observation) precedes each attacker one-root corruption; prior corruption persists",
+  "supply_rule": "at least one of two routes uncorrupted at end of each round",
+  "attacker_new_roots_per_round": 1,
+  "defender_refresh_per_round": 1,
+  "initial_corruption": [],
+  "static_one_round_safety": true,
+  "perfect_observation_infinite_guarantee": true,
+  "no_corruption_location_observation_infinite_guarantee": false,
+  "no_corruption_location_observation_horizon": {
+    "1": true,
+    "2": false,
+    "3": false,
+    "4": false
+  },
+  "blind_but_atomic_refresh_both_infinite_guarantee": true,
+  "zero_refresh_perfect_observation_infinite_guarantee": false,
+  "observation_cell_second_round": [
+    [
+      "A"
+    ],
+    [
+      "B"
+    ]
+  ],
+  "per_state_safe_repairs": {
+    "EMPTY": [
+      "NONE",
+      "A",
+      "B"
+    ],
+    "A": [
+      "A"
+    ],
+    "B": [
+      "B"
+    ]
+  },
+  "common_safe_repair_for_ambiguous_singletons": [],
+  "mobile_attack_two_round_loss_trace": [
+    {
+      "round": 1,
+      "defender_repair": "NONE",
+      "attacker_new_corruption": "A",
+      "persistently_corrupted": [
+        "A"
+      ],
+      "bearer_supplied": true
+    },
+    {
+      "round": 2,
+      "defender_repair": "NONE",
+      "attacker_new_corruption": "B",
+      "persistently_corrupted": [
+        "A",
+        "B"
+      ],
+      "bearer_supplied": false
+    }
+  ],
+  "trusted_attestation_safe_trace": [
+    {
+      "round": 1,
+      "defender_repair": "NONE",
+      "attacker_new_corruption": "A",
+      "persistently_corrupted": [
+        "A"
+      ],
+      "bearer_supplied": true
+    },
+    {
+      "round": 2,
+      "defender_repair": "A",
+      "attacker_new_corruption": "B",
+      "persistently_corrupted": [
+        "B"
+      ],
+      "bearer_supplied": true
+    }
+  ],
+  "exhaustive_perfect_witness_checks": 10,
+  "independent_blind_two_round_schedule_count": 9,
+  "blind_two_round_defeating_witnesses": {
+    "NONE>NONE": "A>B",
+    "NONE>A": "B>A",
+    "NONE>B": "A>B",
+    "A>NONE": "A>B",
+    "A>A": "B>A",
+    "A>B": "A>B",
+    "B>NONE": "A>B",
+    "B>A": "B>A",
+    "B>B": "A>B"
+  },
+  "status": "PASS",
+  "limits": [
+    "attacker never compromises independently trusted observer or repair engine in perfect-observation model",
+    "attacker can cause persistent corruption of one new supply root per round without immediate direct harm",
+    "no protected battery, secret third route, stock buffers, or other physical bypass",
+    "attacker can observe defender chosen refresh before choosing next root",
+    "an actor can willingly terminate its own process; such choices are outside other-caused non-domination condition",
+    "full observation result is conditional on faithful instrumentation and sufficiently quick repair"
+  ]
+}
