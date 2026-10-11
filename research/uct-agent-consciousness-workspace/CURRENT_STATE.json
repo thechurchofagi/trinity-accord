@@ -88,7 +88,7 @@
   ],
   "current_guide": "RESEARCH_MASTER_GUIDE.md v2.3",
   "complete_map_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
-  "review_ledger_sha256": "694c15bf74c97f29b5f035cc27fae89e39e0d18d4bbaf80f69eebea74c6d292b",
+  "review_ledger_sha256": "8d9fee51e1e625c4bf120529955113dc0b15e33dee577602ac36be6ee42e1387",
   "counts": {
     "nodes": 913,
     "active_conditional_rules": 424,
@@ -96,14 +96,14 @@
     "nondeductive_context_links": 261,
     "total_review_items": 1608
   },
-  "pending_note": "All prior pending identities retained. A4O adds a disabled 0/0/0 bounded primary-paradigm screen and endpoint/compensator countermodel; no full same-instance source, physical installation, H_cf calibration or completed-map promotion.",
+  "pending_note": "All prior pending identities retained. A4P adds a disabled 0/0/0 same-event anchor-route intervention contract: the open model remains non-identifying and only the explicitly closed faithful submodel conditionally identifies route use; no physical installation, H_cf calibration or completed-map promotion.",
   "publication_coverage": {
     "version": "UCT-PUB-v1.0.33",
     "entry": "PUBLICATION_COVERAGE.json",
-    "latest_update": "records/A4O20261011_Enacted_Frame_Paradigm_Triage/PUBLICATION_COVERAGE_UPDATE.json",
+    "latest_update": "records/A4P20261011_Anchor_Route_Intervention_Contract/PUBLICATION_COVERAGE_UPDATE.json",
     "nondeductive": true,
     "latest_originality_review": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/PUBLICATION_COVERAGE_UPDATE.json",
-    "latest_followup_application": "records/A4O20261011_Enacted_Frame_Paradigm_Triage/PUBLICATION_COVERAGE_UPDATE.json"
+    "latest_followup_application": "records/A4P20261011_Anchor_Route_Intervention_Contract/PUBLICATION_COVERAGE_UPDATE.json"
   },
   "latest_activity": {
     "id": "A3V20261010",
@@ -543,27 +543,29 @@
     }
   },
   "latest_followup_application": {
-    "id": "A4O20261011",
-    "version": "A4O-EFP-v0.1.0",
-    "status": "DISABLED_BOUNDED_PRIMARY_PARADIGM_SCREEN_AND_SAME_INSTANCE_NONIDENTIFICATION",
+    "id": "A4P20261011",
+    "version": "A4P-ARIC-v0.1.0",
+    "status": "DISABLED_PROSPECTIVE_ANCHOR_ROUTE_INTERVENTION_AND_CONDITIONAL_IDENTIFICATION",
     "enabled_as_established_premises": false,
-    "source": "records/A4O20261011_Enacted_Frame_Paradigm_Triage/RESEARCH_NOTE.md",
-    "handoff": "records/A4O20261011_Enacted_Frame_Paradigm_Triage/HANDOFF_ZH.md",
-    "work_log": "records/A4O20261011_Enacted_Frame_Paradigm_Triage/WORK_LOG.md",
-    "claim_ledger": "records/A4O20261011_Enacted_Frame_Paradigm_Triage/CLAIM_LEDGER.json",
-    "map_extension": "records/A4O20261011_Enacted_Frame_Paradigm_Triage/MAP_EXTENSION.json",
-    "exact_results": "records/A4O20261011_Enacted_Frame_Paradigm_Triage/EXACT_RESULTS.json",
+    "source": "records/A4P20261011_Anchor_Route_Intervention_Contract/RESEARCH_NOTE.md",
+    "handoff": "records/A4P20261011_Anchor_Route_Intervention_Contract/HANDOFF_ZH.md",
+    "work_log": "records/A4P20261011_Anchor_Route_Intervention_Contract/WORK_LOG.md",
+    "claim_ledger": "records/A4P20261011_Anchor_Route_Intervention_Contract/CLAIM_LEDGER.json",
+    "map_extension": "records/A4P20261011_Anchor_Route_Intervention_Contract/MAP_EXTENSION.json",
+    "exact_results": "records/A4P20261011_Anchor_Route_Intervention_Contract/EXACT_RESULTS.json",
     "parent_science": "A3V20261010",
-    "parent_followup": "A4N20261011",
+    "parent_followup": "A4O20261011",
     "completed_map": "UCT-MAP-v1.1.2",
     "scientific_delta": {
       "nodes": 0,
       "rules": 0,
       "contexts": 0
     },
-    "primary_sources_scoped": 6,
-    "eligible_full_joint_paradigms": 0,
-    "endpoint_compensator_twin": true,
+    "same_event_anchor_route_contract": true,
+    "worlds_enumerated": 32,
+    "unrestricted_target_fibre": 7,
+    "closed_target_fibre": 1,
+    "conditional_route_identification": true,
     "independent_h_validation": false,
     "actual_bodily_installation": false,
     "standalone_manuscript": "HOLD"
@@ -1030,6 +1032,34 @@
       "independent_h_validation": false,
       "actual_bodily_installation": false,
       "standalone_manuscript": "HOLD"
+    },
+    {
+      "id": "A4P20261011",
+      "version": "A4P-ARIC-v0.1.0",
+      "status": "DISABLED_PROSPECTIVE_ANCHOR_ROUTE_INTERVENTION_AND_CONDITIONAL_IDENTIFICATION",
+      "enabled_as_established_premises": false,
+      "source": "records/A4P20261011_Anchor_Route_Intervention_Contract/RESEARCH_NOTE.md",
+      "handoff": "records/A4P20261011_Anchor_Route_Intervention_Contract/HANDOFF_ZH.md",
+      "work_log": "records/A4P20261011_Anchor_Route_Intervention_Contract/WORK_LOG.md",
+      "claim_ledger": "records/A4P20261011_Anchor_Route_Intervention_Contract/CLAIM_LEDGER.json",
+      "map_extension": "records/A4P20261011_Anchor_Route_Intervention_Contract/MAP_EXTENSION.json",
+      "exact_results": "records/A4P20261011_Anchor_Route_Intervention_Contract/EXACT_RESULTS.json",
+      "parent_science": "A3V20261010",
+      "parent_followup": "A4O20261011",
+      "completed_map": "UCT-MAP-v1.1.2",
+      "scientific_delta": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0
+      },
+      "same_event_anchor_route_contract": true,
+      "worlds_enumerated": 32,
+      "unrestricted_target_fibre": 7,
+      "closed_target_fibre": 1,
+      "conditional_route_identification": true,
+      "independent_h_validation": false,
+      "actual_bodily_installation": false,
+      "standalone_manuscript": "HOLD"
     }
   ],
   "next_priority_before_A3W": "Test one independent current bodily/action-familiarity interpretation against origin-recognition and agency countercases; establish a remaining actual retentive relation and realizable matched controls before claiming a pure familiarity contrast. Do not add an assumed coordinate or expand SPC.",
@@ -1228,5 +1258,6 @@
     "library_manifest_sha256": "0be4af120c7fded0aa66bc0bfe9b8e9d0c1fa44d6a0d6307623b0a4c2e217682",
     "library_manifest_size_bytes": 7284,
     "reverse_materialized_byte_equal": true
-  }
+  },
+  "next_priority_after_A4P": "Select one publicly auditable embodied-device or human tool interface and instantiate the A4P port-and-timing table: fixed external geometry, independently oriented bearer-anchor perturbation, route-input cut, same-interface rescue and a complete alternate-controller inventory on one bearer/event/route. If the clauses cannot be jointly installed without changing event or route grain, report non-installability and stop before H_cf."
 }

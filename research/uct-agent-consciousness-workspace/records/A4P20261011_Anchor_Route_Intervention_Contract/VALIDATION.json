@@ -1,0 +1,36 @@
+{
+  "schema": "a4p-validation/1",
+  "round": "A4P20261011",
+  "status": "PASS_ARTIFACT_AND_STRUCTURAL_CHECKS_WITH_DECLARED_SEMANTIC_LIMITS",
+  "checks": {
+    "checker_output_byte_equals_exact_results": true,
+    "primitive_world_count": 32,
+    "unrestricted_target_fibre_count": 7,
+    "unrestricted_target_fibre_contains_both_route_values": true,
+    "closed_model_world_count": 2,
+    "closed_target_fibre_count": 1,
+    "closed_target_fibre_route_value": 1,
+    "phenomenal_assignments": 0,
+    "physical_installations": 0,
+    "completed_nodes": 913,
+    "completed_rules": 424,
+    "completed_context_links": 261,
+    "pending_objects_disabled": 727,
+    "suspended_historical_rules": 10,
+    "unresolved_deductive_references": 0,
+    "active_dependency_cycles": 0,
+    "all_of_interpreted_as_and": true,
+    "navigation_and_disabled_assembly_pass": true,
+    "current_scientific_pointer_match": true,
+    "scientific_promotion": false,
+    "full_semantic_reproof": false
+  },
+  "hashes": {
+    "checker_sha256": "759ccce3ab262da89b6c90d25dbbca5ade08346727d081b0c390977937588b82",
+    "checker_stdout_sha256": "2666be6ea876827c3b92b329520cfc5dfee0810e7339a37717b5c64b1769b8c4",
+    "exact_results_sha256": "2666be6ea876827c3b92b329520cfc5dfee0810e7339a37717b5c64b1769b8c4",
+    "review_ledger_sha256": "8d9fee51e1e625c4bf120529955113dc0b15e33dee577602ac36be6ee42e1387",
+    "unified_map_gzip_sha256": "b37711fb7dbaca9b728feb38e7cb14abf4f63a9571035b40c048a97472df35be"
+  },
+  "limit": "A prospective same-event intervention contract and finite conditional-identification proof only; not evidence of physical controller closure, an actual anchor-consuming route, tool incorporation, H_cf calibration, C1, or a global semantic proof."
+}

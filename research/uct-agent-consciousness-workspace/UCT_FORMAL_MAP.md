@@ -2,7 +2,11 @@
 
 [总览](UCT_FORMAL_MAP.md) · [全部候选](PENDING_RESEARCH.md) · [当前状态](CURRENT_STATE.json) · [统一登记](UNIFIED_RESEARCH_INDEX.json) · [审查](UCT_FORMAL_AUDIT.md)
 
-整合版本 **UCT-INTEGRATION-v1.0.0**。正式科学图 **UCT-MAP-v1.1.2**；最新科学研究 **A3V20261010**；最新停用应用 **A4O20261011**；发表覆盖 **UCT-PUB-v1.0.33**。
+整合版本 **UCT-INTEGRATION-v1.0.0**。正式科学图 **UCT-MAP-v1.1.2**；最新科学研究 **A3V20261010**；最新停用应用 **A4P20261011**；发表覆盖 **UCT-PUB-v1.0.33**。
+
+### A4P 停用应用边界
+
+A4P 不新增正式对象。它把 A4O 的 `C_anchor AND C_route` 缺口写成同事件四条件合同：无锚扰动、锚扰动原生、路线锚输入切断、同接口救援。32世界中目标签名的无限制纤维含7个世界且同时含路线使用0/1；干预感知隐藏控制器可在目标路线闲置时复制签名。只有控制器闭合、当前事件来源与切断/救援忠实等八项前提共同成立时，闭合目标纤维才唯一指向路线使用。该有限条件证书不是实际物理安装、`EnactedFrameBind`、`B_cf`或`H_cf`证据。正式增量 **0/0/0**；C1/U1、R157、R159与有效R173不变。
 
 ### A4O 停用应用边界
 
@@ -44,9 +48,9 @@ A4N 不新增正式对象。它修正 A4M 的身体特异性反例：R159 已允
 
 ## 当前收束点
 
-Design or locate one primary same-instance human or embodied-device paradigm that closes the six A4O criteria, with special priority on independently fixing the external target while perturbing the bearer pose/proprioceptive anchor and causally isolating the remap-consuming learned route under a closed writer/controller inventory. Stop before `H_cf` unless that organizational installation and an independently specified endpoint are both established.
+Select one publicly auditable embodied-device or human tool interface and instantiate A4P's port-and-timing table: fixed external geometry, independently oriented bearer-anchor perturbation, route-input cut, same-interface rescue and alternate-controller inventory on one bearer/event/route. If these clauses cannot be jointly installed without changing event or route grain, report non-installability and stop before `H_cf`.
 
-通俗地说：现有研究分别提供了姿态扰动、工具使用、重映射或身体表征改变的证据，却没有把这些条件同时装进同一个可核查实例。下一步不是拼接论文，而是寻找或设计一个能在同一次装置中隔离“谁读取了重映射”的范式；只有组织证据先成立，才讨论体验端点。
+通俗地说：A4P 已说明怎样测试“谁读取了身体锚点”，也说明漂亮的切断/救援曲线仍可能被隐藏控制器伪造。下一步要把合同落实到一张可核查的实际装置图；只有组织证据先成立，才讨论体验端点。
 
 [正式图 424 条推导路线](integration/UCT-INTEGRATION-v1.0.0/COMPLETED_RULE_ROUTES.md)
 

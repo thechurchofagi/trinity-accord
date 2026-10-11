@@ -2,13 +2,15 @@
 
 [总览](UCT_FORMAL_MAP.md) · [全部候选](PENDING_RESEARCH.md) · [当前状态](CURRENT_STATE.json) · [统一登记](UNIFIED_RESEARCH_INDEX.json) · [审查](UCT_FORMAL_AUDIT.md)
 
-正式科学接续仍为 **A3V20261010**；最新停用应用为 **A4O20261011**。
+正式科学接续仍为 **A3V20261010**；最新停用应用为 **A4P20261011**。
 
-[A4O 中文交接](records/A4O20261011_Enacted_Frame_Paradigm_Triage/HANDOFF_ZH.md) · [英文研究](records/A4O20261011_Enacted_Frame_Paradigm_Triage/RESEARCH_NOTE.md) · [范式合同](records/A4O20261011_Enacted_Frame_Paradigm_Triage/PARADIGM_CONTRACT.md) · [形式审查](records/A4O20261011_Enacted_Frame_Paradigm_Triage/FORMAL_AUDIT.md)
+[A4P 中文交接](records/A4P20261011_Anchor_Route_Intervention_Contract/HANDOFF_ZH.md) · [英文研究](records/A4P20261011_Anchor_Route_Intervention_Contract/RESEARCH_NOTE.md) · [干预合同](records/A4P20261011_Anchor_Route_Intervention_Contract/INTERVENTION_CONTRACT.md) · [形式审查](records/A4P20261011_Anchor_Route_Intervention_Contract/FORMAL_AUDIT.md)
 
-当前结果：六项一手范式分别提供姿态/本体干预、工具纳入迹象或在线坐标变换，但没有一项在同实例内安装 A4N 的完整合取。跨论文拼接不等于实际共同满足；端点/报告变化也允许独立补偿器双胞胎。故停止于组织证据层，未建立实际 `EnactedFrameBind` 或 `H_cf`。
+当前结果：四条件锚点—路线设计在32个世界中产生7个目标签名世界，包含路线使用0/1；干预感知隐藏控制器能复制原生—切断—救援模式。只有控制器闭合且切断/救援忠实时，目标纤维才唯一指向路线使用。故得到的是有明确失败条件的实验合同，不是实际 `EnactedFrameBind` 或 `H_cf`。
 
-下一具体问题：在一个已形成的工具路线中，固定外部目标/工具几何，独立扰动身体姿态/本体锚，并对同一路线的锚输入做切断与同接口救援；先审查备用控制器完备性。若仍只有端点、报告、跨任务后效或跨论文拼接，继续停止。
+下一具体问题：选择一个公开、可核查的具身装置或人体工具接口，把外部几何固定、承载者锚扰动、路线输入切断/同接口救援与备用控制器清单落实到一张实际端口—时序表。若无法保持同一事件和路线粒度，报告不可安装并停止。
+
+[上一轮 A4O 交接](records/A4O20261011_Enacted_Frame_Paradigm_Triage/HANDOFF_ZH.md)
 
 [既有 A3V 科学交接](records/A3V20261010_Concurrent_Liveness_and_Familiarity/HANDOFF_ZH.md) · [地图整理交接](records/NAV20261010_Map_Integration/HANDOFF_ZH.md)
 

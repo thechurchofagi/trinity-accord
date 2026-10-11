@@ -1137,3 +1137,14 @@ A4G应用保持停用，正式图增量0/0/0。C1/U1未改；硬件来源坐标�
 - `SCU-AUDIT-DEPTH`: **AUDIT_INCOMPLETE**. The completed inventory and affected C1/R157/R159/R173/A4M/A4N neighborhood were reviewed; all historical proofs were not reconstructed.
 - Substantive result: no scoped primary source supplies all six same-instance criteria; endpoint changes alone remain compatible with an allocentric compensator. The stop rule is retained before `H_cf`.
 - Evidence: `records/A4O20261011_Enacted_Frame_Paradigm_Triage/REVIEW_RESPONSE.md`, `SOURCE_SCOPE.md`, `PARADIGM_CONTRACT.md`, `EXACT_RESULTS.json`, `FORMAL_AUDIT.md`, `GAP_LEDGER.md`.
+
+## A4P20261011 research response (does not close supervision items)
+
+- `QC-20261008-10`: **ACKNOWLEDGED/OPEN**. A4P supplies an organizational route certificate only; `H_cf` identity, direction and measurement remain uncalibrated.
+- `IA-QC11`: **OPEN**. Bearer, event, route, anchor port, interventions, controllers and transform are prospectively typed, but no actual token jointly installs them.
+- `QC-20261008-12`: **OPEN**. The seven-world target fibre contains both route-use values; only the explicitly closed finite submodel identifies route use.
+- `QC-20261008-13`: **OPEN**. Same-instance ports and chronology are declared but not physically bound.
+- `SCU-OPEN-R191-NORMALIZATION`: **OPEN**. No R191 normalization is attempted or used.
+- `SCU-AUDIT-DEPTH`: **AUDIT_INCOMPLETE**. The effective inventory and affected C1/R157/R159/R173/A4D–A4O neighborhood were checked; all historical proofs were not reconstructed.
+- Substantive result: a `0,1,0,1` anchor/native/block/rescue signature is non-identifying in the open controller model but conditionally identifies route contribution when the eight same-event closure and fidelity premises jointly hold. This remains a disabled design, not physical or phenomenal evidence.
+- Evidence: `records/A4P20261011_Anchor_Route_Intervention_Contract/REVIEW_RESPONSE.md`, `INTERVENTION_CONTRACT.md`, `EXACT_RESULTS.json`, `FORMAL_AUDIT.md`, `GAP_LEDGER.md`.

@@ -6,6 +6,10 @@ The full prior memory is preserved at [historical memory](integration/UCT-INTEGR
 
 Scientific continuation and next question live in CURRENT_STATE.json. All pending source documents, effective corrections and family membership live in UNIFIED_RESEARCH_INDEX.json; history never silently becomes an established premise. Publication, storage, conditional validity, actual support and phenomenal support remain separate states.
 
+## 最新应用 A4P20261011
+
+A4P 把 A4O 的缺口转成同事件锚点—路线干预合同：固定外部目标／工具状态，比较无锚扰动、锚扰动原生、路线锚输入切断和同接口救援。32世界中目标签名的无限制纤维含7个世界且同时含路线使用0/1；干预感知隐藏控制器可复制完整签名。只有控制器闭合且切断／救援忠实时，闭合目标纤维才唯一指向路线使用。该结果是停用的有限条件证书，不是实际安装或`H_cf`证据；正式图0/0/0，全部OPEN保留。[交接](records/A4P20261011_Anchor_Route_Intervention_Contract/HANDOFF_ZH.md)。
+
 ## 最新应用 A4O20261011
 
 六项一手范式没有一项在同一承载者/事件/路线中共同满足外部状态固定、独立姿态/本体锚干预、在线重映射、同路线读取、肢体/已纳入/未纳入工具比较与同实例绑定。跨研究的互补证据不能拼成一个 `all_of` 实例。64世界反例显示姿态扰动后的端点/报告变化仍可由独立补偿器复制；路线切断/救援只在备用控制器完备时条件分离。停止于组织层，不进入 `H_cf`；正式图0/0/0，全部OPEN保留。[交接](records/A4O20261011_Enacted_Frame_Paradigm_Triage/HANDOFF_ZH.md)。

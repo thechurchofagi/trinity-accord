@@ -1,0 +1,146 @@
+{
+  "schema": "uct-a4p-anchor-route-check/1.0",
+  "model_status": "finite_abstract_declared_model_not_physical_installation",
+  "world_count": 32,
+  "conditions": [
+    "no_anchor_baseline",
+    "anchor_native",
+    "anchor_route_input_block",
+    "anchor_same_interface_rescue"
+  ],
+  "target_signature": [
+    0,
+    1,
+    0,
+    1
+  ],
+  "unrestricted_target_fibre_count": 7,
+  "unrestricted_target_fibre_route_values": [
+    0,
+    1
+  ],
+  "unrestricted_target_fibre": [
+    {
+      "use_route": 0,
+      "compensator": 0,
+      "hidden_controller": 1,
+      "block_faithful": 0,
+      "rescue_faithful": 0,
+      "signature": [
+        0,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "use_route": 0,
+      "compensator": 0,
+      "hidden_controller": 1,
+      "block_faithful": 0,
+      "rescue_faithful": 1,
+      "signature": [
+        0,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "use_route": 0,
+      "compensator": 0,
+      "hidden_controller": 1,
+      "block_faithful": 1,
+      "rescue_faithful": 0,
+      "signature": [
+        0,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "use_route": 0,
+      "compensator": 0,
+      "hidden_controller": 1,
+      "block_faithful": 1,
+      "rescue_faithful": 1,
+      "signature": [
+        0,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "use_route": 1,
+      "compensator": 0,
+      "hidden_controller": 0,
+      "block_faithful": 1,
+      "rescue_faithful": 1,
+      "signature": [
+        0,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "use_route": 1,
+      "compensator": 0,
+      "hidden_controller": 1,
+      "block_faithful": 1,
+      "rescue_faithful": 0,
+      "signature": [
+        0,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "use_route": 1,
+      "compensator": 0,
+      "hidden_controller": 1,
+      "block_faithful": 1,
+      "rescue_faithful": 1,
+      "signature": [
+        0,
+        1,
+        0,
+        1
+      ]
+    }
+  ],
+  "closed_model_world_count": 2,
+  "closed_target_fibre_count": 1,
+  "closed_target_fibre_route_values": [
+    1
+  ],
+  "closed_target_fibre": [
+    {
+      "use_route": 1,
+      "compensator": 0,
+      "hidden_controller": 0,
+      "block_faithful": 1,
+      "rescue_faithful": 1,
+      "signature": [
+        0,
+        1,
+        0,
+        1
+      ]
+    }
+  ],
+  "checks": {
+    "unrestricted_signature_does_not_identify_route": true,
+    "closure_and_fidelity_make_signature_identify_route": true,
+    "closed_target_fibre_is_singleton": true,
+    "no_phenomenal_assignment": true
+  },
+  "interpretation": {
+    "positive": "In this declared Boolean model, the 0-1-0-1 signature identifies declared route use only after ordinary compensators and intervention-aware hidden controllers are excluded and block/rescue fidelity is fixed.",
+    "negative": "Without those closure premises, the same signature is compatible with both route-use values.",
+    "limit": "The truth table does not prove physical controller completeness, route equivalence, incorporation, complete UCT actuality, C1, H_cf, report validity, or unique ownership."
+  }
+}

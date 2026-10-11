@@ -1,5 +1,9 @@
 # UCT 地图审查状态
 
+## A4P20261011 增量审计
+
+A4P 只增加停用的前瞻实验合同，不改变正式图。它以32世界精确模型证明：`[0,1,0,1]` 原生—切断—救援签名在开放控制器模型中同时兼容路线使用0/1；只有同一承载者/事件/路线、外部固定、独立锚扰动、忠实切断、同接口救援、控制器闭合、当前事件来源与冻结读出八项 `all_of` 同时成立时，闭合目标纤维才唯一。该命题不倒推物理闭合、完整K、C1或`H_cf`。正式计数仍913/424/261，727待定对象停用、10历史规则暂停；全部审查OPEN/INCOMPLETE保留。详见 [A4P形式审查](records/A4P20261011_Anchor_Route_Intervention_Contract/FORMAL_AUDIT.md)。
+
 [总览](UCT_FORMAL_MAP.md) · [全部候选](PENDING_RESEARCH.md) · [当前状态](CURRENT_STATE.json) · [统一登记](UNIFIED_RESEARCH_INDEX.json) · [审查](UCT_FORMAL_AUDIT.md)
 
 | 范围 | 当前结论 |

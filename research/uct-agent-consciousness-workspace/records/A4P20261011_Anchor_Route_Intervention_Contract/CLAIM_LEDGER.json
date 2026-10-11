@@ -1,0 +1,49 @@
+{
+  "schema": "uct-claim-ledger/1.0",
+  "record": "A4P20261011",
+  "result_version": "A4P-ARIC-v0.1.0",
+  "claims": [
+    {
+      "id": "A4P-C01",
+      "type": "finite_conditional_identification",
+      "statement": "In the declared Boolean model, on one frozen bearer/event/route package with fixed external state, independently oriented anchor intervention, faithful route-input block, faithful same-interface rescue, closed compensator/controller inventory, current-event source evidence and frozen transform semantics, signature [0,1,0,1] entails declared route use.",
+      "domain": "32 explicitly enumerated binary worlds restricted by the eight joint premises",
+      "all_of": ["P_same", "P_ext", "P_anchor", "P_block", "P_rescue", "P_closed", "P_event", "P_readout"],
+      "proof_or_source": ["check_anchor_route_identification.py", "EXACT_RESULTS.json", "INTERVENTION_CONTRACT.md"],
+      "counterexample_or_limit": "Removing P_closed permits an intervention-aware hidden controller with use_route=0 and the same signature; physical satisfaction of the premises is not established.",
+      "status": "PENDING_CHECKPOINT_DISABLED"
+    },
+    {
+      "id": "A4P-C02",
+      "type": "finite_nonidentification_counterexample",
+      "statement": "Without controller closure and block/rescue fidelity, the complete four-condition target signature is compatible with both declared route-use values.",
+      "domain": "all 32 declared binary worlds",
+      "all_of": ["declared response equations", "target signature [0,1,0,1]"],
+      "proof_or_source": ["EXACT_RESULTS.json unrestricted_target_fibre"],
+      "counterexample_or_limit": "This is not a universal statement about all possible experiments; it applies to the declared finite mechanism family.",
+      "status": "PENDING_CHECKPOINT_DISABLED"
+    },
+    {
+      "id": "A4P-C03",
+      "type": "application_scope_correction",
+      "statement": "Limb, incorporated-tool and non-incorporated-tool labels do not establish route equivalence or frame status; each must be independently grounded before cross-stratum interpretation.",
+      "domain": "A4P prospective comparison",
+      "all_of": ["R159 typing", "A4N EnactedFrameBind scope", "A4O same-instance contract"],
+      "proof_or_source": ["R159", "A4N", "A4O", "INTERVENTION_CONTRACT.md"],
+      "counterexample_or_limit": "An external tool may be genuinely incorporated; toolhood is not a negative-control witness.",
+      "status": "PENDING_CHECKPOINT_DISABLED"
+    },
+    {
+      "id": "A4P-C04",
+      "type": "uct_placement",
+      "statement": "A future actual same-event anchor-consuming route would be conditionally transported by C1/R157 as an experience-internal structural relation, while B_cf, H_cf measurement and report reliability remain separate open bridges.",
+      "domain": "only admitted actual tokens with complete sorted grounding",
+      "all_of": ["actual token admission", "complete P/I/K binding", "A:C1", "R157 premises", "independent application bridge for H_cf"],
+      "proof_or_source": ["UCT I v1.2", "R157", "R159", "A4M"],
+      "counterexample_or_limit": "The present finite model and prospective contract supply none of the actual-token or phenomenal premises.",
+      "status": "OPEN_CONDITIONAL_APPLICATION"
+    }
+  ],
+  "formal_graph_delta": {"nodes": 0, "rules": 0, "context_links": 0},
+  "phenomenal_assignments": 0
+}

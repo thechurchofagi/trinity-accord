@@ -13,6 +13,8 @@
 
 研究按问题家族阅读；轮次编号用于追溯。精确主张和论文覆盖仍以各自台账为准。
 
+- **当前应用 A4P：** [正文](records/A4P20261011_Anchor_Route_Intervention_Contract/RESEARCH_NOTE.md) · [干预合同](records/A4P20261011_Anchor_Route_Intervention_Contract/INTERVENTION_CONTRACT.md) · [精确结果](records/A4P20261011_Anchor_Route_Intervention_Contract/EXACT_RESULTS.json) · [缺口](records/A4P20261011_Anchor_Route_Intervention_Contract/GAP_LEDGER.md) · [形式审查](records/A4P20261011_Anchor_Route_Intervention_Contract/FORMAL_AUDIT.md) · [交接](records/A4P20261011_Anchor_Route_Intervention_Contract/HANDOFF_ZH.md)。目标签名在开放模型中不识别路线使用；控制器闭合与切断/救援忠实时形成有限条件证书。`H_cf`仍未校准，0正式图增量，成稿HOLD。
+
 - **当前应用 A4O：** [正文](records/A4O20261011_Enacted_Frame_Paradigm_Triage/RESEARCH_NOTE.md) · [范式合同](records/A4O20261011_Enacted_Frame_Paradigm_Triage/PARADIGM_CONTRACT.md) · [来源范围](records/A4O20261011_Enacted_Frame_Paradigm_Triage/SOURCE_SCOPE.md) · [精确结果](records/A4O20261011_Enacted_Frame_Paradigm_Triage/EXACT_RESULTS.json) · [缺口](records/A4O20261011_Enacted_Frame_Paradigm_Triage/GAP_LEDGER.md) · [形式审查](records/A4O20261011_Enacted_Frame_Paradigm_Triage/FORMAL_AUDIT.md) · [交接](records/A4O20261011_Enacted_Frame_Paradigm_Triage/HANDOFF_ZH.md)。六项一手范式无完整同实例合取；端点/报告允许独立补偿器双胞胎。`H_cf`仍未校准，0正式图增量，成稿HOLD。
 
 原创性复核：[NOV20261010](records/NOV20261010_Prior_Art_and_Bodily_Familiarity/HANDOFF_ZH.md)，仅前例/范围元数据，独立成稿HOLD；科学接续仍A3V。
