@@ -1,0 +1,20 @@
+{
+  "id": "A4Z20261012",
+  "version": "A4Z-TRMF-v0.1.0",
+  "title": "Target-indexed relational mineness family",
+  "type": "DISABLED_SCOPED_FOLLOWUP_APPLICATION",
+  "status": "EXACT_RELATION_FAMILY_AND_ROUTE_SWAP_ORBIT_COMPARISON",
+  "parent_science": "A3V20261010",
+  "parent_followups": ["R15720261009", "R17320261008", "R18120261008", "A4M20261011", "A4N20261011", "A4V20261012", "A4W20261012", "A4X20261012", "A4Y20261012"],
+  "domain": "one fixed P/I/K/event with two-route/two-target exact model and a general disabled target-indexed relation schema",
+  "candidate_all_of": ["BIND", "ROUTE", "PARTICIPATION", "COVER", "INDEX", "COVARIANCE", "NONEXCLUSIVITY", "SEPARATION"],
+  "conditional_conclusion": "A target-indexed nonexclusive route relation preserves practical-centering structure lost by coverage and avoids a presentation-dependent unique-owner variable; only an actual complete instance may be conditionally transported by C1/R157.",
+  "open_bridge": "B_pc^family and H_cf remain open; conceptual self, report and subject count are separate.",
+  "proof_role": "9 covered matrices, 4 locally unique, 2 global single-owner, 7 coverage countermodels, 2 local-uniqueness countermodels, and 5 route-swap orbits.",
+  "counterexamples": ["distributed singleton targets", "joint-versus-distributed two-hand case", "route-label swap", "same Pi with swapped autobiography", "same report across distinct Pi"],
+  "scientific_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+  "enabled_as_established_premises": false,
+  "actual_token_installed": false,
+  "independent_h_validation": false,
+  "standalone_manuscript": "HOLD_MERGE_A4V_TO_A4Z_SYNTHESIS"
+}

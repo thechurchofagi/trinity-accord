@@ -1,3 +1,9 @@
+# A4Z20261012 audit addendum
+
+A4Z preserves the effective 913/424/261 graph and adds 0/0/0. Fresh traversal accessed every node and found zero unresolved deductive references, active cycles, non-list `all_of` or empty `all_of`. Coverage, per-target local uniqueness and one-route-for-all-targets are separately quantified; their 9/4/2 counts are not interchanged. The disabled eight-clause relation-family contract remains simultaneous on one P/I/K/event binding, with actual participation and complete-K premises uninstalled. Route labels, relation orbits, conceptual self, report, phenomenal target and subject count remain distinct. Structural and finite-model PASS do not establish physical actuality, theory truth or full historical semantic depth. See [A4Z formal audit](records/A4Z20261012_Target_Relational_Mineness_Family/FORMAL_AUDIT.md).
+
+---
+
 # A4Y20261012 audit addendum
 
 A4Y preserves the effective 913/424/261 graph and adds 0/0/0. Fresh traversal accessed every node and found zero unresolved deductive references, active cycles, non-list `all_of` or empty `all_of`; this is not global semantic proof. The disabled `PBRW` contract reads `BEFORE AND BLIND AND BOUND` simultaneously with the relevant A4X clauses. Fixed dual-read AND/OR witness joint satisfiability; late record, cue-indexed dispatcher and clean sidecar are premise-drop countermodels. Objects, event times, challenge labels, data values, policy state, actual reads, witness paths, complete `K`, finite views and reports remain separately typed. All theorems and minimality language are restricted to `T_1`; no inference runs from accuracy or state bytes to actual organization. C1/U1 and all OPEN/INCOMPLETE items remain unchanged. See [A4Y formal audit](records/A4Y20261012_Prechallenge_Read_Policy_Commitment/FORMAL_AUDIT.md).

@@ -106,10 +106,10 @@
     "latest_followup_application": "records/A4W20261012_Overlapping_Bearer_Centres/PUBLICATION_COVERAGE_UPDATE.json"
   },
   "latest_activity": {
-    "id": "A4Y20261012",
+    "id": "A4Z20261012",
     "type": "FOLLOWUP_APPLICATION",
-    "status": "DISABLED_PRECHALLENGE_READ_POLICY_COMMITMENT_APPLICATION",
-    "source": "records/A4Y20261012_Prechallenge_Read_Policy_Commitment/RESEARCH_NOTE.md"
+    "status": "DISABLED_TARGET_RELATIONAL_MINENESS_FAMILY_APPLICATION",
+    "source": "records/A4Z20261012_Target_Relational_Mineness_Family/RESEARCH_NOTE.md"
   },
   "latest_pending_research": {
     "id": "A3V20261010",
@@ -123,7 +123,7 @@
     "evidence_status": "BOUNDED_PRIMARY_SOURCE_APPLICATION_STOP_AND_R173_SCOPE_RETURN; ACTUAL_PREMISES_AND_H_OPEN"
   },
   "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 effective objects retain a fresh per-ID structural traversal. A4Y manually rechecked C1/U1, P3/P6, R157, R159, effective R173, R181 and A4P/A4D-A4G/A4V-A4Y. Deep full-history semantics remain AUDIT_INCOMPLETE.",
-  "next_priority": "A4Y next: on one actual accessible consumer boundary, determine whether an independently controlled witness can bind a prechallenge read-policy state to the actual named-port read event while challenge labels, schedules and shared randomness are physically excluded. If no such interface is available, stop the certificate branch and return to independent B_pc^family/H_cf target semantics rather than enumerate broader controllers.",
+  "next_priority": "A4Z next: independently predeclare one fallible phenomenal target that distinguishes joint-source from distributed-source practical mineness while holding target coverage, route-label orbit, conceptual self and report fixed. If no target/evidence bridge is available, preserve B_pc^family/H_cf as OPEN and do not resume certificate expansion.",
   "latest_activity_persistence_after_A4W_science": {
     "science_commit": "0eddd9c06670a7357a8be5e38efc8af1f335405f",
     "science_tree": "f840be3dc13e384d8074f3e34500ea637fd42ced",
@@ -607,31 +607,31 @@
     }
   },
   "latest_followup_application": {
-    "id": "A4Y20261012",
-    "version": "A4Y-PBRW-v0.1.0",
-    "status": "EXACT_CHALLENGE_AWARE_MIMICRY_AND_BOUNDED_COMMITMENT_SEPARATION",
+    "id": "A4Z20261012",
+    "version": "A4Z-TRMF-v0.1.0",
+    "status": "EXACT_RELATION_FAMILY_AND_ROUTE_SWAP_ORBIT_COMPARISON",
     "enabled_as_established_premises": false,
-    "source": "records/A4Y20261012_Prechallenge_Read_Policy_Commitment/RESEARCH_NOTE.md",
-    "handoff": "records/A4Y20261012_Prechallenge_Read_Policy_Commitment/HANDOFF_ZH.md",
-    "work_log": "records/A4Y20261012_Prechallenge_Read_Policy_Commitment/WORK_LOG.md",
-    "claim_ledger": "records/A4Y20261012_Prechallenge_Read_Policy_Commitment/CLAIM_LEDGER.json",
-    "map_extension": "records/A4Y20261012_Prechallenge_Read_Policy_Commitment/MAP_EXTENSION.json",
-    "exact_results": "records/A4Y20261012_Prechallenge_Read_Policy_Commitment/EXACT_RESULTS.json",
+    "source": "records/A4Z20261012_Target_Relational_Mineness_Family/RESEARCH_NOTE.md",
+    "handoff": "records/A4Z20261012_Target_Relational_Mineness_Family/HANDOFF_ZH.md",
+    "work_log": "records/A4Z20261012_Target_Relational_Mineness_Family/WORK_LOG.md",
+    "claim_ledger": "records/A4Z20261012_Target_Relational_Mineness_Family/CLAIM_LEDGER.json",
+    "map_extension": "records/A4Z20261012_Target_Relational_Mineness_Family/MAP_EXTENSION.json",
+    "exact_results": "records/A4Z20261012_Target_Relational_Mineness_Family/EXACT_RESULTS.json",
     "parent_science": "A3V20261010",
-    "parent_followup": "A4X20261012",
+    "parent_followup": "A4Y20261012",
     "completed_map": "UCT-MAP-v1.1.2",
     "scientific_delta": {
       "nodes": 0,
       "rules": 0,
       "contexts": 0
     },
-    "challenge_indexed_policies_per_target": 256,
-    "challenge_indexed_exact_mimics_per_target": 16,
-    "fixed_one_port_policies_per_target": 4,
-    "fixed_one_port_exact_mimics_per_target": 0,
+    "covered_relation_matrices": 9,
+    "locally_unique_matrices": 4,
+    "global_single_owner_matrices": 2,
+    "route_label_swap_orbits": 5,
     "independent_h_validation": false,
     "actual_bodily_installation": false,
-    "standalone_manuscript": "HOLD_MERGE_WITH_A4V_A4W_A4X_FAMILY"
+    "standalone_manuscript": "HOLD_MERGE_A4V_TO_A4Z_SYNTHESIS"
   },
   "next_priority_before_FAM": "Independent signed fallible bodily-familiarity endpoint comparing familiar singleton retained route versus unfamiliar presently congruent route at fixed actual frame consumer/grain; separate cue familiarity, response fluency, ownership report and agency judgment. No more SPC expansion after named PMd feasibility stop.",
   "followup_applications": [

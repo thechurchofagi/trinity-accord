@@ -1,3 +1,9 @@
+# A4Z20261012 disabled addendum — target-indexed relational mineness
+
+A4Z adds no completed node, rule or context (0/0/0). Its disabled candidate `Pi subseteq R x T` records which actual bearer-centred routes participate in which selected targets on one fixed P/I/K/event binding. The two-route/two-target family has 9 covered matrices, 4 target-locally unique matrices, only 2 global-owner matrices, and 5 structural orbits under route-label swap. Thus coverage is information-losing and local uniqueness does not imply one global owner. Only an independently grounded complete relation may be conditionally transported by C1/R157; `B_pc^family`, `H_cf`, conceptual self, report and subject count remain separate/open. See [A4Z audit](records/A4Z20261012_Target_Relational_Mineness_Family/FORMAL_AUDIT.md).
+
+---
+
 # A4Y20261012 disabled addendum — prechallenge bound read-policy commitment
 
 A4Y adds no completed node, rule or context (0/0/0). For every finite labelled Boolean challenge family, a challenge-indexed `T_1` policy that reads one named port and optionally negates it can reproduce any Boolean target table. On A4X's four rows, 16 of 256 such policies match each AND/OR target; no fixed member of the four-mode family does. The disabled evidence repair is `PBRW = BEFORE AND BLIND AND BOUND` on one binding. Late record, cue-indexed meta-program and clean sidecar witness the componentwise necessity of the three roles inside the declared family. PBRW is not complete controller closure, actual installation, a basal gate or a phenomenal bridge. C1/R157 transport remains conditional; `B_pc^family/H_cf`, report and subject count remain open. See [A4Y audit](records/A4Y20261012_Prechallenge_Read_Policy_Commitment/FORMAL_AUDIT.md).

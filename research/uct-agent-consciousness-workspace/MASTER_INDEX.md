@@ -1,3 +1,9 @@
+# A4Z20261012 — target-indexed relational mineness
+
+[Research note](records/A4Z20261012_Target_Relational_Mineness_Family/RESEARCH_NOTE.md) · [contract](records/A4Z20261012_Target_Relational_Mineness_Family/TARGET_RELATIONAL_MINENESS_CONTRACT.md) · [proof](records/A4Z20261012_Target_Relational_Mineness_Family/MODEL_PROOF.md) · [exact results](records/A4Z20261012_Target_Relational_Mineness_Family/EXACT_RESULTS.json) · [claims](records/A4Z20261012_Target_Relational_Mineness_Family/CLAIM_LEDGER.json) · [gaps](records/A4Z20261012_Target_Relational_Mineness_Family/GAP_LEDGER.json) · [audit](records/A4Z20261012_Target_Relational_Mineness_Family/FORMAL_AUDIT.md) · [Chinese handoff](records/A4Z20261012_Target_Relational_Mineness_Family/HANDOFF_ZH.md). Disabled 0/0/0 application: exact 9/4/2/7 matrix counts and 5 route-swap orbits compare unique-owner, coverage and relational-family bridges; no actual installation, phenomenal identity or subject count is claimed.
+
+---
+
 # A4Y20261012 — prechallenge bound read-policy commitment
 
 [Research note](records/A4Y20261012_Prechallenge_Read_Policy_Commitment/RESEARCH_NOTE.md) · [contract](records/A4Y20261012_Prechallenge_Read_Policy_Commitment/PRECHALLENGE_READ_POLICY_CONTRACT.md) · [proof](records/A4Y20261012_Prechallenge_Read_Policy_Commitment/MODEL_PROOF.md) · [exact results](records/A4Y20261012_Prechallenge_Read_Policy_Commitment/EXACT_RESULTS.json) · [claims](records/A4Y20261012_Prechallenge_Read_Policy_Commitment/CLAIM_LEDGER.json) · [gaps](records/A4Y20261012_Prechallenge_Read_Policy_Commitment/GAP_LEDGER.json) · [audit](records/A4Y20261012_Prechallenge_Read_Policy_Commitment/FORMAL_AUDIT.md) · [Chinese handoff](records/A4Y20261012_Prechallenge_Read_Policy_Commitment/HANDOFF_ZH.md). Disabled 0/0/0 application: exact finite challenge-aware mimicry and a bounded BEFORE/BLIND/BOUND repair within `T_1`; no actual installation, global controller closure or phenomenal bridge is claimed.

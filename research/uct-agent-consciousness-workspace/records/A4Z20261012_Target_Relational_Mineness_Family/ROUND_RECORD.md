@@ -1,0 +1,11 @@
+# A4Z20261012 round record
+
+1. **User goal.** Continue the UCT experience–intelligence–self programme from actual organization, return from the stopped certificate chain to a positive account of bodily/action mineness inside experience, and preserve C1/U1, overlapping processes, and the distinction among experience, intelligence, felt mineness, conceptual self and report.
+2. **One concrete unresolved question.** Can bodily/action mineness be represented positively as a target-indexed, non-exclusive family of bearer-centred participation relations without introducing a unique owner selector, and what exact information is lost by replacing that family with mere target coverage?
+3. **Relevant nodes and fixed sources.** UCT I v1.2 C1/U1/P3/P6; R157 structural-coordinate transport; effective R173 target/evidence separation; R181 practical centring; A4M coupled formation; A4N enacted-frame specificity; A4V \`BearerCentredRoute\`; A4W overlapping routes; A4X/A4Y participation and evidence firewalls; all current OPEN/ACKNOWLEDGED review items.
+4. **Planned addition or correction.** Compare three candidate bridges—unique-owner label, mere coverage, and a target-indexed relational family—using an exact two-route/two-target model, label-swap invariance, drop-information counterexamples, and the required separation from conceptual self and report. Record the positive bridge as disabled unless an independently specified phenomenal target is supplied.
+5. **Deliverable.** An English contract, proof and exact checker/results, counterexample matrix, claim and gap ledgers, fresh whole-map audit, Chinese handoff, navigation updates, and recoverable dual persistence with exact hashes and version guards.
+
+## Direction check at selection
+
+The accessible record contains no actual same-event installation of the A4Y chain \`z -> rho -> read_m\`; the prior round's stop condition therefore applies. This round will not add another controller/certificate layer. It returns to the positive experience-internal mineness question. Exact finite combinatorics may test the proposed distinction, but cannot establish actual installation, phenomenal identity, C1 truth, report validity, or a subject count.

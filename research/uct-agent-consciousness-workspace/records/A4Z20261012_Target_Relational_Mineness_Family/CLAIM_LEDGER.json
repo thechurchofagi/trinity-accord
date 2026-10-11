@@ -1,0 +1,72 @@
+{
+  "schema": "uct-a4z-claim-ledger/1.0",
+  "round": "A4Z20261012_Target_Relational_Mineness_Family",
+  "claims": [
+    {
+      "id": "A4Z-C1",
+      "type": "DEFINITION_DISABLED",
+      "statement": "TargetRelationalMinenessFamily is a same-binding target-indexed relation Pi between actual bearer-centred routes and selected targets, satisfying BIND, ROUTE, PARTICIPATION, COVER, INDEX, COVARIANCE, NONEXCLUSIVITY and SEPARATION.",
+      "domain": "one fixed admitted P/I/K/event with predeclared route and target sets",
+      "premises": ["actual A4V bearer-centred routes", "actual same-event participation edges", "complete target and binding types", "route-renaming covariance"],
+      "proof_or_source": "TARGET_RELATIONAL_MINENESS_CONTRACT.md",
+      "counterexamples": ["passive route log", "compiled boundary relocation", "conceptual owner label", "report-only attribution"],
+      "status": "DISABLED_NOT_INSTALLED",
+      "thought_experiment_role": "provides a positive nonexclusive representation of bodily/action mineness without an owner object"
+    },
+    {
+      "id": "A4Z-T1",
+      "type": "FINITE_EXACT_RESULT",
+      "statement": "For two named routes and two named targets with nonempty route sets per target, there are 9 covered matrices, 4 locally unique matrices, and 2 global-single-owner matrices; hence 7 covered countermodels and 2 locally unique countermodels lack a global single owner.",
+      "domain": "all two-route/two-target nonempty relation matrices",
+      "premises": ["target labels fixed", "empty target columns excluded", "route participation represented extensionally"],
+      "proof_or_source": "MODEL_PROOF.md A4Z-T1; check_relational_family.py",
+      "counterexamples": ["joint target column", "distributed singleton columns"],
+      "status": "PROVED_FINITE_SCOPE",
+      "thought_experiment_role": "refutes coverage-to-owner and local-uniqueness-to-global-owner inferences"
+    },
+    {
+      "id": "A4Z-T2",
+      "type": "FINITE_ORBIT_RESULT",
+      "statement": "The nine covered matrices form five structural orbits under swapping the two route labels; only the all-both matrix is fixed.",
+      "domain": "the A4Z finite matrix family under the order-two route-label permutation group",
+      "premises": ["target labels retained", "route labels treated as presentation names"],
+      "proof_or_source": "Burnside's lemma; MODEL_PROOF.md A4Z-T2; exact enumeration",
+      "counterexamples": ["a unique-owner label changes under the swap", "coverage collapses all five orbits"],
+      "status": "PROVED_FINITE_SCOPE_INHERITED_MATHEMATICS",
+      "thought_experiment_role": "separates structural participation from arbitrary owner naming"
+    },
+    {
+      "id": "A4Z-C2",
+      "type": "BOUNDED_COMPARATIVE_RESULT",
+      "statement": "Within the finite family, unique-owner labeling is overstrong and presentation-dependent, coverage is information-losing, and the target-indexed relational family is the least of the three candidates that preserves all five route-swap orbits.",
+      "domain": "only the three declared representations on the A4Z finite family",
+      "premises": ["A4Z-T1", "A4Z-T2", "no claim of global minimality among arbitrary representations"],
+      "proof_or_source": "TARGET_RELATIONAL_MINENESS_CONTRACT.md section 3",
+      "counterexamples": ["other richer covariant representations may exist"],
+      "status": "PROVED_BOUNDED_COMPARISON",
+      "thought_experiment_role": "selects a candidate bridge representation without claiming phenomenal sufficiency"
+    },
+    {
+      "id": "A4Z-U1",
+      "type": "CONDITIONAL_UCT_APPLICATION",
+      "statement": "If one complete actual same-instance target-indexed participation family is independently grounded, C1/R157 conditionally transports that relational structure inside experience; B_pc^family, H_cf, conceptual self, report and subject count remain separate and open.",
+      "domain": "one complete actual UCT token with correctly sorted routes, targets, consumers, events and transported parameters",
+      "premises": ["A:C1", "R157 transport premises", "actual A4Z-C1 instance", "complete K and same binding"],
+      "proof_or_source": "inherited isomorphism preservation; RESEARCH_NOTE.md section 4",
+      "counterexamples": ["finite matrix alone", "route label", "coverage bit", "report or conceptual owner model"],
+      "status": "CONDITIONAL_OPEN_APPLICATION",
+      "thought_experiment_role": "locates multiple nonexclusive practical centres in experience without a homuncular owner"
+    },
+    {
+      "id": "A4Z-C3",
+      "type": "TYPE_SEPARATION",
+      "statement": "A conceptual self may summarize or misdescribe Pi and a report may measure or collapse it; neither constitutes Pi or basal experience.",
+      "domain": "actual organization, conceptual-model and report-process types in the fixed A4Z binding",
+      "premises": ["no reverse inference from language or self-label", "C1/U1 boundaries preserved"],
+      "proof_or_source": "RESEARCH_NOTE.md section 4 and thought experiments",
+      "counterexamples": ["same Pi with swapped autobiographical report", "same report with joint versus distributed Pi"],
+      "status": "SUPPORTED_BY_TYPED_COUNTEREXAMPLES",
+      "thought_experiment_role": "keeps felt mineness, conceptual I and report distinct"
+    }
+  ]
+}

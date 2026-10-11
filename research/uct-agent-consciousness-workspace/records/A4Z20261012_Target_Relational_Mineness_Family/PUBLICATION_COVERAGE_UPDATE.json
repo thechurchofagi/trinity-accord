@@ -1,0 +1,12 @@
+{
+  "schema": "uct-publication-coverage-update/1.0",
+  "round": "A4Z20261012_Target_Relational_Mineness_Family",
+  "coverage_change": "NONE",
+  "works_checked": ["UCT I v1.2", "R157", "effective R173", "R181", "A4M", "A4N", "A4V", "A4W", "A4X", "A4Y"],
+  "new_publication": false,
+  "new_doi": false,
+  "net_increment": "Disabled project-specific target-indexed relation-family contract, exact 9/4/2/7 and 5-orbit comparison, and conceptual-self/report type separation.",
+  "inherited": "Elementary relation counting, Burnside's lemma, C1/R157 transport, practical centring, bearer-centred routes, overlapping routes and participation/evidence firewalls.",
+  "priority_status": "EXTERNAL_PRIORITY_UNVERIFIED",
+  "decision": "HOLD_MERGE_A4V_TO_A4Z_SYNTHESIS"
+}

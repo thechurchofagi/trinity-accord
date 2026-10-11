@@ -1,0 +1,10 @@
+{
+  "schema": "uct-map-extension/1.0",
+  "round": "A4Z20261012_Target_Relational_Mineness_Family",
+  "status": "DISABLED_APPLICATION_NO_FORMAL_GRAPH_PROMOTION",
+  "nodes": [],
+  "rules": [],
+  "context_links": [],
+  "delta": {"nodes": 0, "rules": 0, "contexts": 0},
+  "reason": "The finite relation/orbit theorems are valid in their declared model, but actual participation, complete K, B_pc^family and H_cf remain open; promotion would confuse a candidate representation with an installed experiential bridge."
+}

@@ -1,0 +1,324 @@
+{
+  "schema": "uct-a4z-exact-results/1.0",
+  "round": "A4Z20261012_Target_Relational_Mineness_Family",
+  "model": {
+    "routes": [
+      "r1",
+      "r2"
+    ],
+    "targets": [
+      "tau1",
+      "tau2"
+    ],
+    "admitted_column_states": {
+      "1": [
+        "r1"
+      ],
+      "2": [
+        "r2"
+      ],
+      "3": [
+        "r1",
+        "r2"
+      ]
+    },
+    "meaning": "Each target is indexed by a nonempty set of actual bearer-centred participating routes."
+  },
+  "counts": {
+    "covered_relation_matrices": 9,
+    "locally_unique_matrices": 4,
+    "global_single_owner_matrices": 2,
+    "coverage_without_global_single_owner": 7,
+    "local_uniqueness_without_global_single_owner": 2,
+    "route_label_swap_fixed_matrices": 1,
+    "route_label_swap_orbits": 5
+  },
+  "burnside_check": {
+    "identity_fixed": 9,
+    "swap_fixed": 1,
+    "orbit_count": 5
+  },
+  "rows": [
+    {
+      "matrix": {
+        "tau1": [
+          "r1"
+        ],
+        "tau2": [
+          "r1"
+        ]
+      },
+      "mask_tuple": [
+        1,
+        1
+      ],
+      "target_coverage": true,
+      "local_target_uniqueness": true,
+      "global_single_owner": true,
+      "route_swap_orbit": [
+        1,
+        1
+      ]
+    },
+    {
+      "matrix": {
+        "tau1": [
+          "r1"
+        ],
+        "tau2": [
+          "r2"
+        ]
+      },
+      "mask_tuple": [
+        1,
+        2
+      ],
+      "target_coverage": true,
+      "local_target_uniqueness": true,
+      "global_single_owner": false,
+      "route_swap_orbit": [
+        1,
+        2
+      ]
+    },
+    {
+      "matrix": {
+        "tau1": [
+          "r1"
+        ],
+        "tau2": [
+          "r1",
+          "r2"
+        ]
+      },
+      "mask_tuple": [
+        1,
+        3
+      ],
+      "target_coverage": true,
+      "local_target_uniqueness": false,
+      "global_single_owner": false,
+      "route_swap_orbit": [
+        1,
+        3
+      ]
+    },
+    {
+      "matrix": {
+        "tau1": [
+          "r2"
+        ],
+        "tau2": [
+          "r1"
+        ]
+      },
+      "mask_tuple": [
+        2,
+        1
+      ],
+      "target_coverage": true,
+      "local_target_uniqueness": true,
+      "global_single_owner": false,
+      "route_swap_orbit": [
+        1,
+        2
+      ]
+    },
+    {
+      "matrix": {
+        "tau1": [
+          "r2"
+        ],
+        "tau2": [
+          "r2"
+        ]
+      },
+      "mask_tuple": [
+        2,
+        2
+      ],
+      "target_coverage": true,
+      "local_target_uniqueness": true,
+      "global_single_owner": true,
+      "route_swap_orbit": [
+        1,
+        1
+      ]
+    },
+    {
+      "matrix": {
+        "tau1": [
+          "r2"
+        ],
+        "tau2": [
+          "r1",
+          "r2"
+        ]
+      },
+      "mask_tuple": [
+        2,
+        3
+      ],
+      "target_coverage": true,
+      "local_target_uniqueness": false,
+      "global_single_owner": false,
+      "route_swap_orbit": [
+        1,
+        3
+      ]
+    },
+    {
+      "matrix": {
+        "tau1": [
+          "r1",
+          "r2"
+        ],
+        "tau2": [
+          "r1"
+        ]
+      },
+      "mask_tuple": [
+        3,
+        1
+      ],
+      "target_coverage": true,
+      "local_target_uniqueness": false,
+      "global_single_owner": false,
+      "route_swap_orbit": [
+        3,
+        1
+      ]
+    },
+    {
+      "matrix": {
+        "tau1": [
+          "r1",
+          "r2"
+        ],
+        "tau2": [
+          "r2"
+        ]
+      },
+      "mask_tuple": [
+        3,
+        2
+      ],
+      "target_coverage": true,
+      "local_target_uniqueness": false,
+      "global_single_owner": false,
+      "route_swap_orbit": [
+        3,
+        1
+      ]
+    },
+    {
+      "matrix": {
+        "tau1": [
+          "r1",
+          "r2"
+        ],
+        "tau2": [
+          "r1",
+          "r2"
+        ]
+      },
+      "mask_tuple": [
+        3,
+        3
+      ],
+      "target_coverage": true,
+      "local_target_uniqueness": false,
+      "global_single_owner": false,
+      "route_swap_orbit": [
+        3,
+        3
+      ]
+    }
+  ],
+  "orbits": [
+    {
+      "canonical": [
+        1,
+        1
+      ],
+      "members": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ]
+    },
+    {
+      "canonical": [
+        1,
+        2
+      ],
+      "members": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          1
+        ]
+      ]
+    },
+    {
+      "canonical": [
+        1,
+        3
+      ],
+      "members": [
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          3
+        ]
+      ]
+    },
+    {
+      "canonical": [
+        3,
+        1
+      ],
+      "members": [
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          2
+        ]
+      ]
+    },
+    {
+      "canonical": [
+        3,
+        3
+      ],
+      "members": [
+        [
+          3,
+          3
+        ]
+      ]
+    }
+  ],
+  "assertions": {
+    "three_nonempty_states_per_target": true,
+    "coverage_does_not_entail_global_owner": true,
+    "local_uniqueness_does_not_entail_global_owner": true,
+    "route_label_swap_has_five_orbits": true,
+    "only_all_both_is_swap_fixed": true
+  },
+  "scope_limit": "Finite exact combinatorics only; no actual installation, phenomenal identity, report validity, C1 confirmation, or subject count."
+}

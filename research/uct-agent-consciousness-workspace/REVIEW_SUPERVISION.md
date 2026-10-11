@@ -1,3 +1,11 @@
+# A4Z20261012 researcher response — target-indexed relational mineness
+
+The latest ledger and all carried OPEN/ACKNOWLEDGED items were read before selection, after result formation and before save. A4Z honors A4Y's stop: no archived actual `z -> rho -> read_m` installation was found, so no further certificate layer was added. The round instead supplies a disabled positive relational-family representation, exact 9/4/2/7 counts and five route-swap orbits.
+
+`QC-20261008-10` remains ACKNOWLEDGED/OPEN; `IA-QC11`, `QC-20261008-12/13` and `SCU-OPEN-R191-NORMALIZATION` remain OPEN; `SCU-AUDIT-DEPTH` remains AUDIT_INCOMPLETE. No item is self-closed. There is no actual same-instance relation family, complete physical K, independent `B_pc^family` or `H_cf` calibration, report validation or subject-count result. Evidence: [response](records/A4Z20261012_Target_Relational_Mineness_Family/REVIEW_RESPONSE.md), [contract](records/A4Z20261012_Target_Relational_Mineness_Family/TARGET_RELATIONAL_MINENESS_CONTRACT.md), [exact results](records/A4Z20261012_Target_Relational_Mineness_Family/EXACT_RESULTS.json), [gaps](records/A4Z20261012_Target_Relational_Mineness_Family/GAP_LEDGER.json), [audit](records/A4Z20261012_Target_Relational_Mineness_Family/FORMAL_AUDIT.md).
+
+---
+
 # A4Y20261012 researcher response — prechallenge bound read policy
 
 The latest ledger and all carried OPEN/ACKNOWLEDGED items were read before selection, after result formation and before save. A4Y proves exact finite challenge-aware mimicry inside `T_1` and supplies the disabled `BEFORE AND BLIND AND BOUND` repair with three drop-one countermodels. It does not infer actual use from output, state bytes or a self-authored record.

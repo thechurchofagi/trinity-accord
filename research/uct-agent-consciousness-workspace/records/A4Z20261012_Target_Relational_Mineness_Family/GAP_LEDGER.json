@@ -1,0 +1,62 @@
+{
+  "schema": "uct-a4z-gap-ledger/1.0",
+  "round": "A4Z20261012_Target_Relational_Mineness_Family",
+  "gaps": [
+    {
+      "id": "A4Z-G01",
+      "location": "A4Y next installation question",
+      "impact": ["A4X-SEPP", "A4Y-PBRW", "A4Z-C1 actual participation premise"],
+      "counterexample": "the archive contains a formal state-to-read contract but no accessible named consumer with independently witnessed z-to-rho-to-read occurrence",
+      "fixed": "NOT_INSTALLED recorded and certificate expansion stopped",
+      "unresolved": "no actual consumer, cue cut, complete K or same-event witness path exists in the archive"
+    },
+    {
+      "id": "A4Z-G02",
+      "location": "unique-owner bridge",
+      "impact": ["A4Z-C2", "B_pc^family", "subject-count inference"],
+      "counterexample": "seven of nine covered matrices and two of four target-locally unique matrices lack one global owner",
+      "fixed": "replace the owner variable with a target-indexed nonexclusive relation family",
+      "unresolved": "the relational family does not determine numerical subjecthood"
+    },
+    {
+      "id": "A4Z-G03",
+      "location": "coverage-only bridge",
+      "impact": ["A4Z-C2", "target-relative explanatory content"],
+      "counterexample": "all nine matrices share target coverage while spanning five route-swap orbits",
+      "fixed": "retain the route-set column for each target",
+      "unresolved": "no claim that this is globally minimal among arbitrary covariant representations"
+    },
+    {
+      "id": "A4Z-G04",
+      "location": "actuality and complete-signature membership",
+      "impact": ["A4Z-C1", "A4Z-U1", "IA-QC11", "QC-20261008-12/13"],
+      "counterexample": "an analyst can draw Pi from logs while the named consumer uses a bypass or a different boundary",
+      "fixed": "ROUTE, PARTICIPATION, BIND and complete-K premises are explicit",
+      "unresolved": "no human, device or deployed-model token installs the conjunction"
+    },
+    {
+      "id": "A4Z-G05",
+      "location": "phenomenal and semantic bridge",
+      "impact": ["A4Z-U1", "B_pc^family", "H_cf", "QC-20261008-10"],
+      "counterexample": "the same exact matrix model can be externally labeled with incompatible mineness descriptions without an independent target constraint",
+      "fixed": "C1 transport is separated from B_pc^family and from measurement/report",
+      "unresolved": "no independently calibrated phenomenal endpoint or fallible bridge is available"
+    },
+    {
+      "id": "A4Z-G06",
+      "location": "conceptual self and report",
+      "impact": ["A4Z-C3", "claims about selfhood"],
+      "counterexample": "hold Pi fixed and swap autobiography/report; or hold a positive report fixed across joint and distributed matrices",
+      "fixed": "conceptual self and report are typed as downstream or neighboring processes",
+      "unresolved": "their actual readout relation to Pi is system-specific"
+    },
+    {
+      "id": "A4Z-G07",
+      "location": "whole-map audit depth and normalization",
+      "impact": ["SCU-AUDIT-DEPTH", "SCU-OPEN-R191-NORMALIZATION"],
+      "counterexample": "fresh structural traversal and bounded semantic review do not re-prove every historical node and rule",
+      "fixed": "status remains AUDIT_INCOMPLETE and no formal graph promotion is made",
+      "unresolved": "full historical semantic depth and normalization remain open"
+    }
+  ]
+}
