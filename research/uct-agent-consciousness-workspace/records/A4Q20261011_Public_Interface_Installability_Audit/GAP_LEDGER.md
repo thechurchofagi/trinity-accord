@@ -71,3 +71,11 @@
 - **Counterexample:** restored graph structure can pass while an inherited proof/source annotation remains defective.
 - **Corrected now:** no formal object is promoted and all supervision statuses remain open.
 - **Unresolved premise:** reviewer-controlled full proof reconstruction and source-depth audit.
+
+## A4Q-G10 — first remote transport truncated one large index
+
+- **Location:** initial Git data transport for `UNIFIED_RESEARCH_INDEX.json`.
+- **Impact:** commit `e487b338e3a329783c5e042ee8642e6cc6b43efa` did not represent the intended complete science tree and could not be accepted as the final science checkpoint.
+- **Counterexample:** local and remote tree hashes differed even though the API call returned success.
+- **Corrected now:** resent the large blob in bounded chunks, created expected-SHA successor `5b9776c40dfef967b6702f2dcbf9f122c495c56f`, fetched it, compared the complete tree and read back key files.
+- **Unresolved premise:** none for this transport event; future large-blob writes still require independent post-write tree comparison.

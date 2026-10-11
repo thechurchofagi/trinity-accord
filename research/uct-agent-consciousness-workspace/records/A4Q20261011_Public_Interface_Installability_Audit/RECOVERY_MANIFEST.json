@@ -1,0 +1,22 @@
+{
+  "schema": "uct-a4q-recovery/1",
+  "round": "A4Q20261011",
+  "fixed_master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+  "science_commit": "5b9776c40dfef967b6702f2dcbf9f122c495c56f",
+  "science_tree": "ae14fae056d4f3862e72c116fdbe96b9b5322e90",
+  "increment_library_file_id": "libfile_dfa295538f58819183f2d5832d00bd84",
+  "increment_sha256": "aaa6b690cf543d2d4be9ab5872ae4b3b124f970582eb69d68d1063f6833ce270",
+  "manifest_library_file_id": "libfile_f53fc6b983048191b290ea24710771be",
+  "manifest_sha256": "aadae9ef136f375da161368aad430c6f2722e71fc0cb23347fcbc91c12aedc8b",
+  "scope": "The Library archive is an increment of 30 A4Q science-save paths, not a complete repository, complete working set, or full history.",
+  "steps": [
+    "Read the latest version of fixed master libfile_4175a81748fc819187fa8f5771f056fa; do not rely on an older local copy.",
+    "Fetch the latest uct-agent-consciousness-workspace branch and require 5b9776c40dfef967b6702f2dcbf9f122c495c56f or a verified fast-forward successor.",
+    "Read ROUND_RECORD.md, PUBLIC_INTERFACE_CONTRACT.md, RESEARCH_NOTE.md, PORT_TIMING_TABLE.csv, INTERFACE_AUDIT.json, EXACT_RESULTS.json, CLAIM_LEDGER.json, GAP_LEDGER.md, FORMAL_AUDIT.md, REVIEW_RESPONSE.md, VALIDATION.json and HANDOFF_ZH.md in this directory.",
+    "Verify both Library-object SHA256 values and every per-path hash in the manifest before overlaying; never overwrite a newer verified tree with this increment.",
+    "Run check_interface_audit.py and require three route grains, all eight A4P premises represented, zero actually discharged premises and no phenomenal assignment.",
+    "Run integration/UCT-INTEGRATION-v1.0.0/validate_navigation.py --root . and records/NAV20261010_Map_Integration/validate_current_map.py --root .",
+    "Read REVIEW_SUPERVISION.md latest section and every OPEN/ACKNOWLEDGED item; keep them open absent reviewer-governed evidence."
+  ],
+  "next_question": "Can a public sensor-to-consumer splice be identified, or can one bounded rho_ext installation supply independent geometry, same-argument block/rescue, post-consumer/post-arbitration event witnesses and a complete controller inventory on one actual composite bearer?"
+}

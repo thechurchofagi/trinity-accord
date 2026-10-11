@@ -22,6 +22,6 @@ A4Q 把 A4P 的八项合同落实到一个公开可核查接口族：Universal R
 
 ## 保存与恢复
 
-本交接的Git科学提交、增量包、固定主交接版本及最终收据由本目录 `PERSISTENCE_RECEIPT.json`、`RECOVERY_MANIFEST.json` 和固定主交接最新版本记录；只有远端与反向物化核验后才算成功。增量包不是完整仓库备份。
+远端科学提交已修正并核验为 `5b9776c40dfef967b6702f2dcbf9f122c495c56f`，树 `ae14fae056d4f3862e72c116fdbe96b9b5322e90` 与本地一致；第一次传输提交 `e487b338…` 的大索引截断已保留为失败记录。科学增量与清单分别保存为 Library `libfile_dfa295538f58819183f2d5832d00bd84` 和 `libfile_f53fc6b983048191b290ea24710771be`，并已反向逐字节核验；固定主交接同一身份v141亦已反向核验。增量包不是完整仓库、完整工作集或全部历史备份；最终收据后继SHA由固定主交接下一版本记录。
 
 恢复时先读固定主交接最新版本和远端分支头，再读本目录 `ROUND_RECORD.md`、`PUBLIC_INTERFACE_CONTRACT.md`、`RESEARCH_NOTE.md`、`PORT_TIMING_TABLE.csv`、`INTERFACE_AUDIT.json`、`EXACT_RESULTS.json`、`CLAIM_LEDGER.json`、`GAP_LEDGER.md`、`FORMAL_AUDIT.md`、`REVIEW_RESPONSE.md`、`PERSISTENCE_RECEIPT.json` 与 `RECOVERY_MANIFEST.json`；重跑 `check_interface_audit.py`，要求八项前提均存在、实际获准为0、三条路线分型、无正式图与现象赋值。
