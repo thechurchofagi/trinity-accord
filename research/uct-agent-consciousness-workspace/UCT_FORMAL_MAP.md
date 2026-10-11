@@ -129,3 +129,10 @@ R20–R23候选：纠正将“阻止其他人强行终止仍想继续存在的�
 [英文候选研究与R24–R27](records/ASI_CC_20261011_Control_and_Coexistence/RESEARCH_NOTE_v0.7.0.md) · [中文交接](records/ASI_CC_20261011_Control_and_Coexistence/HANDOFF_v0.7.0_ZH.md) · [已运行的Linux/Unix受限工具网关源码](records/ASI_CC_20261011_Control_and_Coexistence/verify_dynamic_viability_stable.py) · [原始运行结果](records/ASI_CC_20261011_Control_and_Coexistence/EXACT_RESULTS_v0.7.0.json) · [工作日志](records/ASI_CC_20261011_Control_and_Coexistence/WORK_LOG_v0.7.0.md)。
 
 纠正v0.6单轮资源匹配不等于可无限期保持：联合安全状态需满足动态权限与资源的鲁棒安全博弈最大不动点，授权变化的全部实际后继需重新验证；真实Unix内核凭据的不同UID进程/可信网关/受保护状态文件测试通过了两次合法权限叠加造成模拟供给断开、事前联合门禁拒绝第二次、动态委托后的晚阶段拒绝、无补给时钟推进导致消耗、文件直写OS拒绝及可信root修改文件权限导致失守等测试。**实际执行仅为Linux软件权限和虚构状态，非大模型/真实电源/实际体验承载者实验。** 2026已有 *Bounded Agents* / *Unfireable Safety Kernel* 等明确前例，所有数学和基础防护原则归于继承，原创优先权未确立。**仅导航追加，不晋级正式科学图，0节点/规则/关系变化，UCT-MAP-v1.1.2 (913/424/261)和原有科学接续不变，未完成全图语义深审、未发布DOI/OTS/Arweave。**
+
+
+### ASI-CC-v0.8.0 — 移动权限侵蚀与可信观测信息下界（停用候选）
+
+[英文形式化证明](records/ASI_CC_20261011_Control_and_Coexistence/RESEARCH_NOTE_v0.8.0.md) · [中文交接](records/ASI_CC_20261011_Control_and_Coexistence/HANDOFF_v0.8.0_ZH.md) · [可复核 Python](records/ASI_CC_20261011_Control_and_Coexistence/verify_mobile_roots.py) · [精确结果](records/ASI_CC_20261011_Control_and_Coexistence/EXACT_RESULTS_v0.8.0.json) · [研究日志](records/ASI_CC_20261011_Control_and_Coexistence/WORK_LOG_v0.8.0.md)。
+
+对 v0.6–v0.7 的鲁棒长期安全前提进行进一步反例检验：攻击者每轮只能新改动一个供给信任根，但历史改动持续积累；在仅知“仍运行”的不完全观测下，一次只修复一条供给线无法保证两轮以后仍持续供应。完整可信定位信息可在声明的两根固定转移游戏内支持每轮修复后的安全不变性；同样可由更强的原子双根刷新能力代替定位，前提须实际成立。精确有限状态/信念不动点及9组两轮盲策略的敌手反例全部通过。**数学继承1991/1995移动攻击/主动刷新、1984不完全信息博弈与2023部分观察屏蔽，非公认新定理；未作实际AI/电源/体验实验，不得宣称未来ASI必然不可控或共存无解。** 仅导航元数据，保持正式UCT-MAP-v1.1.2的913/424/261及已发表覆盖与其他待审项不变；尚未完成全图语义审查/正式理论晋级。
