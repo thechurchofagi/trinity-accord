@@ -215,7 +215,7 @@ def publish():
         else:
             # A second public title match (perhaps on another account) requires inspection.
             from urllib.parse import urlencode
-            public=api(requests.Session(),'GET','/records?'+urlencode({'q':'title:"'+title+'"','size':100}))
+            public=api(requests.Session(),'GET','/records?'+urlencode({'q':'title:"'+title+'"','size':25}))
             hits=((public.get('hits') or {}).get('hits') or [])
             same=[x for x in hits if x.get('metadata',{}).get('title')==title and
                   str(x.get('metadata',{}).get('version',''))==version]
