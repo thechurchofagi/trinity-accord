@@ -96,20 +96,20 @@
     "nondeductive_context_links": 261,
     "total_review_items": 1608
   },
-  "pending_note": "All prior pending identities retained. A4V adds a disabled 0/0/0 scoped application: an exact matched-output classification separates two bearer-centred from two anchor-insensitive perfect routes, while actual installation, B_pc semantics and H_cf calibration remain open.",
+  "pending_note": "All prior pending identities retained. A4W adds a disabled 0/0/0 scoped application: with two simultaneous local BCRs, the exact normal-output fibre contains two projections and two symmetric mergers. Local many-centredness needs no owner selector; joint centring of a named target requires separately grounded non-exclusive participation from both routes. Actual installation, B_pc^family semantics and H_cf calibration remain open.",
   "publication_coverage": {
     "version": "UCT-PUB-v1.0.33",
     "entry": "PUBLICATION_COVERAGE.json",
-    "latest_update": "records/A4V20261012_Bearer_Centered_Practical_Coordinate/PUBLICATION_COVERAGE_UPDATE.json",
+    "latest_update": "records/A4W20261012_Overlapping_Bearer_Centres/PUBLICATION_COVERAGE_UPDATE.json",
     "nondeductive": true,
     "latest_originality_review": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/PUBLICATION_COVERAGE_UPDATE.json",
-    "latest_followup_application": "records/A4V20261012_Bearer_Centered_Practical_Coordinate/PUBLICATION_COVERAGE_UPDATE.json"
+    "latest_followup_application": "records/A4W20261012_Overlapping_Bearer_Centres/PUBLICATION_COVERAGE_UPDATE.json"
   },
   "latest_activity": {
-    "id": "A4V20261012",
+    "id": "A4W20261012",
     "type": "FOLLOWUP_APPLICATION",
-    "status": "DISABLED_BEARER_CENTRED_COORDINATE_APPLICATION",
-    "source": "records/A4V20261012_Bearer_Centered_Practical_Coordinate/RESEARCH_NOTE.md"
+    "status": "DISABLED_OVERLAPPING_BEARER_CENTRES_APPLICATION",
+    "source": "records/A4W20261012_Overlapping_Bearer_Centres/RESEARCH_NOTE.md"
   },
   "latest_pending_research": {
     "id": "A3V20261010",
@@ -122,8 +122,8 @@
     "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
     "evidence_status": "BOUNDED_PRIMARY_SOURCE_APPLICATION_STOP_AND_R173_SCOPE_RETURN; ACTUAL_PREMISES_AND_H_OPEN"
   },
-  "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 effective objects retain a fresh per-ID structural traversal. A4V manually rechecked C1/U1, P3/P6, R157, R159, effective R173, A4M and A4N. Deep full-history semantics remain AUDIT_INCOMPLETE.",
-  "next_priority": "A4V next: construct one actual-organization case with two simultaneous partly overlapping bearer-centred routes. Hold complete organization and successful output fixed while varying their live-anchor relations; test whether B_pc is coherently many-centred or requires a further non-exclusive target-selection relation. Do not introduce a unique owner or promote H_cf.",
+  "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 effective objects retain a fresh per-ID structural traversal. A4W manually rechecked C1/U1, P3/P6, R157, R159, effective R173, R181, A4M, A4N and A4V. Deep full-history semantics remain AUDIT_INCOMPLETE.",
+  "next_priority": "A4W next: define a same-event causal participation criterion under redundant two-route consumption that distinguishes an actual two-port merger from a compiled one-port equivalent without requiring universal but-for necessity. Apply it to one physically auditable consumer if available; otherwise preserve NOT_INSTALLED and stop before H_cf. Do not introduce a unique owner.",
   "latest_activity_persistence_after_A4T_science": {
     "science_commit": "547c8471de28ad8c729d278d4a0f0f9fd6bd2cc9",
     "science_tree": "51b66b731cf2573195d86de33bf6d4327dd1527c",

@@ -1,0 +1,8 @@
+{
+  "schema": "uct-manuscript-decision/1",
+  "id": "A4W20261012",
+  "decision": "HOLD_STANDALONE",
+  "reason": "The exact finite result repairs a specific interpretation and supplies reusable countermodels, but actual grounding, event-level use under redundancy, the semantic bridge, external priority and H_cf calibration remain open.",
+  "permitted_use": "Future synthesis or technical supplement with explicit disabled status and known-mathematics attribution.",
+  "forbidden_claims": ["multiple BCRs are necessary for basal experience", "local multiple centres prove a jointly centred target", "correct output identifies merger", "a participation relation selects a unique owner", "the Boolean mathematics is novel"]
+}

@@ -1,0 +1,69 @@
+{
+  "schema": "uct-gap-ledger/1.0",
+  "round": "A4W20261012",
+  "gaps": [
+    {
+      "id": "A4W-G01",
+      "location": "A4W-C1/C5 actual grounding",
+      "impact": ["A4W-C6", "B_pc^family", "H_cf"],
+      "counterexample": "Two route traces and correct output can be produced while the downstream consumer projects one branch or bypasses both.",
+      "repaired": "Local BCR and target participation are separate all_of premises; off-manifold challenges are specified.",
+      "unresolved": "No human, robot, or device token jointly installs the complete same-event contract.",
+      "status": "OPEN"
+    },
+    {
+      "id": "A4W-G02",
+      "location": "partial-overlap composition",
+      "impact": ["claims about one complete organization", "C1 transport"],
+      "counterexample": "Sharing a target label or downstream output does not establish a shared actual event or compatible ports.",
+      "repaired": "SAME-BINDING and SIMULTANEOUS are explicit, and UCT I's general overlapping-product construction is not assumed.",
+      "unresolved": "A general gluing theorem for arbitrary overlapping actual processes is not supplied or needed by this two-route contract.",
+      "status": "OPEN_GENERALIZATION"
+    },
+    {
+      "id": "A4W-G03",
+      "location": "event-level causal contribution",
+      "impact": ["interpretation of AND/OR as two-route target use"],
+      "counterexample": "At a redundant diagonal input, one branch may not be but-for necessary on that particular trial although the consumer reads both ports.",
+      "repaired": "Participation is defined as actual read/use, not universal single-event but-for necessity; dependence is probed over a predeclared challenge family.",
+      "unresolved": "Physical use criteria and intervention fidelity remain installation-specific.",
+      "status": "OPEN_ACTUAL_APPLICATION"
+    },
+    {
+      "id": "A4W-G04",
+      "location": "A4W-C7 semantic interpretation",
+      "impact": ["B_pc^family", "H_cf", "measurement"],
+      "counterexample": "The same transported structural family can retain every K fact under a different external semantic description.",
+      "repaired": "The bridge is explicitly open and separated from target participation and report.",
+      "unresolved": "No independently calibrated phenomenal target or measurement bridge exists.",
+      "status": "OPEN"
+    },
+    {
+      "id": "A4W-G05",
+      "location": "owner and subject interpretation",
+      "impact": ["self terminology", "overlapping-process conclusions"],
+      "counterexample": "The local-centre set can contain two members in both a one-route projection world and a two-route merger world, while numerical subjecthood remains unspecified.",
+      "repaired": "Participation is non-exclusive and no function from target to owner is introduced.",
+      "unresolved": "Numerical subject individuation remains outside this result and is not required for it.",
+      "status": "OPEN_NOT_REQUIRED_FOR_RESULT"
+    },
+    {
+      "id": "A4W-G06",
+      "location": "originality",
+      "impact": ["publication and priority claims"],
+      "counterexample": "Boolean mergers, redundancy, body-centred frames, and multi-input control are established topics.",
+      "repaired": "Inherited mathematics and mechanisms are credited; the increment is limited to the UCT application correction.",
+      "unresolved": "External priority for the exact package was not exhaustively searched.",
+      "status": "PRIORITY_UNVERIFIED"
+    },
+    {
+      "id": "A4W-G07",
+      "location": "whole-map audit depth",
+      "impact": ["global consistency claim"],
+      "counterexample": "DAG, JSON, and per-ID structural checks do not reconstruct all historical proofs.",
+      "repaired": "Fresh effective-map traversal and an affected-neighbourhood manual audit are recorded separately.",
+      "unresolved": "Full historical semantic depth and R191 normalization remain open.",
+      "status": "AUDIT_INCOMPLETE"
+    }
+  ]
+}

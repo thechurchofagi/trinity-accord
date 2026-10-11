@@ -1,3 +1,9 @@
+# A4W20261012 current handoff — overlapping bearer centres
+
+[English note](records/A4W20261012_Overlapping_Bearer_Centres/RESEARCH_NOTE.md) · [Chinese handoff](records/A4W20261012_Overlapping_Bearer_Centres/HANDOFF_ZH.md) · [exact results](records/A4W20261012_Overlapping_Bearer_Centres/EXACT_RESULTS.json) · [formal audit](records/A4W20261012_Overlapping_Bearer_Centres/FORMAL_AUDIT.md). Sixteen downstream Boolean mergers split into four normal-output-correct functions: two projections and two symmetric mergers. This proves neither a unique owner nor joint target participation. The latter requires both non-exclusive actual participation edges; actual installation and all phenomenal bridges remain open. Formal graph delta 0/0/0; all reviewer items retain their prior open/incomplete state. Next: define an evidence criterion for redundant same-event consumption that does not require each route to be individually but-for necessary.
+
+---
+
 # 当前交接
 
 ## Latest verified follow-up — A4V bearer-centred practical coordinate

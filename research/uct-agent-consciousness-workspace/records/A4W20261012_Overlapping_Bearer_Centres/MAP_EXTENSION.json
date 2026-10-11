@@ -1,0 +1,13 @@
+{
+  "schema": "uct-map-extension/1",
+  "id": "A4W20261012",
+  "version": "A4W-OCF-v0.1.0",
+  "status": "DISABLED_APPLICATION_ZERO_FORMAL_DELTA",
+  "enabled_as_established_premises": false,
+  "base_completed_map": "UCT-MAP-v1.1.2",
+  "nodes": [],
+  "rules": [],
+  "context_links": [],
+  "candidate_claims": "CLAIM_LEDGER.json",
+  "reason": "The exact classification answers the local selector-versus-merger question and types a non-exclusive participation relation, but no complete actual installation or independently calibrated phenomenal target is available. No completed-map promotion is warranted."
+}

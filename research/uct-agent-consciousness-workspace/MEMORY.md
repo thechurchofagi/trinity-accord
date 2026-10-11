@@ -1,5 +1,9 @@
 # UCT durable memory
 
+## A4W20261012 latest memory
+
+A4W permits two same-event `BearerCentredRoute` tuples in one fixed organization without an exclusive owner. In the exact model both decoded coordinates equal the target, so normal operation visits only merger inputs `(0,0)` and `(1,1)`. Of 16 Boolean mergers, four are output-correct: two one-input projections and two symmetric two-input mergers (AND/OR). Therefore two local centres do not entail that a named downstream target is jointly centred. The stronger disabled claim requires non-exclusive `Participates_tau(r_i,m,e)` edges for both routes; off-diagonal challenges and an independently grounded consumer are needed to distinguish projection from merger. Conditional C1/R157 transport, `B_pc^family`, `H_cf`, conceptual self, report and subject count remain separate/open. Formal delta 0/0/0; next define same-event causal participation for redundant two-route consumption without universal but-for necessity.
+
 ## A4V20261012 latest memory
 
 A4V returns from the stopped hardware branch to bodily/action mineness. `BearerCentredRoute` requires one same-instance eight-clause actual relation: live anchor, target-relative encoding, actual route/anchor consumption, nontrivial single contrasts, joint compensation and event order. Exact one-bit classification: 256 encoder/consumer pairs, four perfect-output pairs, split exactly two bearer-centred and two anchor-insensitive; all four use the route, so success plus route use is insufficient. Constant-route and direct-bypass refuters block vacuous symmetry and evidence/use reversal. Conditional C1/R157 transport is separated from open bridge `B_pc`; `RetBind∧CoupledForm∧BCR` remains an uninstalled candidate. Formal delta 0/0/0; next test two simultaneous overlapping BCR routes without adding a unique owner.

@@ -1,0 +1,21 @@
+{
+  "id": "A4W20261012",
+  "version": "A4W-OCF-v0.1.0",
+  "title": "Overlapping bearer-centres without an exclusive owner",
+  "type": "DISABLED_SCOPED_FOLLOWUP_APPLICATION",
+  "status": "EXACT_SELECTOR_MERGER_CLASSIFICATION_WITH_OPEN_ACTUAL_AND_PHENOMENAL_BRIDGES",
+  "parent_science": "A3V20261010",
+  "parent_followups": ["R15720261009", "R15920261009", "R18120261008", "A4M20261011", "A4N20261011", "A4V20261012"],
+  "domain": "One fixed P/I/K/event/target binding with two simultaneous live anchor-route-consumer triples and a named downstream consumer",
+  "all_of": ["SAME-BINDING", "BCR-1", "BCR-2", "SIMULTANEOUS", "DISTINCT-LIVE-ROLES"],
+  "joint_target_all_of": ["CONCURRENT-BCR2", "PARTICIPATES-1", "PARTICIPATES-2"],
+  "conditional_conclusion": "Multiple local bearer-centred relations are coherent without an owner selector. A claim that one named target is jointly centred additionally requires non-exclusive actual participation from both routes.",
+  "open_bridge": "B_pc^family interprets the transported family as multiple practical coordinates inside experience; phenomenal target, measurement, H_cf and subject count remain open.",
+  "proof_role": "Complete classification of all 16 Boolean mergers after two one-bit XOR BCR witnesses yields two projections and two symmetric mergers at matched normal output.",
+  "counterexamples": ["projection merger", "direct bypass", "diagonal aliasing", "copied or stale anchor", "body/tool label", "post-hoc report"],
+  "scientific_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+  "enabled_as_established_premises": false,
+  "actual_token_installed": false,
+  "independent_h_validation": false,
+  "standalone_manuscript": "HOLD"
+}

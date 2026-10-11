@@ -1,0 +1,12 @@
+{
+  "schema": "uct-publication-coverage-update/1",
+  "id": "A4W20261012",
+  "coverage_change": "NONE",
+  "checked_publication_sources": ["UCT I v1.2", "Experience, Intelligence and Self", "R157", "R159", "R181", "A4M", "A4N", "A4V"],
+  "changed_claim_ids": [],
+  "newly_covered_claim_ids": [],
+  "residual_increment": "Project-local selector/merger classification and two-level correction: local many-centred BCR does not require an owner selector, while joint centring of a named target requires non-exclusive actual participation from both routes.",
+  "unverified_scope": "External priority, actual same-instance installation, B_pc^family semantics, H_cf calibration, measurement and subject individuation.",
+  "originality_and_manuscript_decision": "Boolean function classification, redundant merger logic, body-centred coordinates and multi-input control are credited as known; standalone manuscript HOLD.",
+  "next_specific_action": "Give a same-event causal criterion for route participation under redundancy that distinguishes actual two-port consumption from a compiled one-port equivalent without demanding universal but-for necessity; test it on one physically auditable consumer or stop before H_cf."
+}

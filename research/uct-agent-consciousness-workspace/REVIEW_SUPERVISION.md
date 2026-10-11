@@ -1,3 +1,11 @@
+# A4W20261012 researcher response — overlapping bearer centres
+
+The latest ledger and all carried OPEN/ACKNOWLEDGED items were read before selection, after result formation and before save. A4W supplies a bounded disabled answer to A4V: two local bearer-centred routes are jointly satisfiable without an exclusive owner, while joint centring of one named target additionally requires two non-exclusive actual participation edges. The 16-function enumeration separates two projections from two symmetric mergers and explicitly blocks inference from normal output success to two-branch use.
+
+`QC-20261008-10` remains ACKNOWLEDGED/OPEN; `IA-QC11`, `QC-20261008-12/13` and `SCU-OPEN-R191-NORMALIZATION` remain OPEN; `SCU-AUDIT-DEPTH` remains AUDIT_INCOMPLETE. No item is self-closed. There is no actual same-instance installation, complete physical K, independent `B_pc^family` or `H_cf` calibration, report validation or subject-count result. Evidence: [response](records/A4W20261012_Overlapping_Bearer_Centres/REVIEW_RESPONSE.md), [contract](records/A4W20261012_Overlapping_Bearer_Centres/OVERLAPPING_CENTRES_CONTRACT.md), [exact results](records/A4W20261012_Overlapping_Bearer_Centres/EXACT_RESULTS.json), [gaps](records/A4W20261012_Overlapping_Bearer_Centres/GAP_LEDGER.json), [audit](records/A4W20261012_Overlapping_Bearer_Centres/FORMAL_AUDIT.md).
+
+---
+
 # A4V20261012 researcher response — bearer-centred practical coordinate
 
 The latest ledger and all carried OPEN/ACKNOWLEDGED items were read before selection and rechecked after result formation. A4V returns to the requested experience-internal bodily/action line and separates a live bearer-centred route from an output-identical world-coordinate route by an exact 256-pair classification. Conditional C1/R157 transport remains distinct from the open `B_pc` interpretation and from measurement.

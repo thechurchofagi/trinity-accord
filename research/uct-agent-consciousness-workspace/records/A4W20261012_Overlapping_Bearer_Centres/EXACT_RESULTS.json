@@ -1,0 +1,105 @@
+{
+  "claims_not_tested": [
+    "physical actuality or complete organization",
+    "phenomenal identity or measurement",
+    "unique subject or owner count",
+    "general noisy, multibit or continuous composition"
+  ],
+  "correct_functions": [
+    {
+      "bits_00_01_10_11": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "depends_on_u": true,
+      "depends_on_v": true,
+      "kind": "SYMMETRIC_TWO_INPUT_MERGE",
+      "name": "AND",
+      "normal_correct": true,
+      "symmetric": true,
+      "table_id": 8
+    },
+    {
+      "bits_00_01_10_11": [
+        0,
+        1,
+        0,
+        1
+      ],
+      "depends_on_u": false,
+      "depends_on_v": true,
+      "kind": "ONE_INPUT_PROJECTION",
+      "name": "PROJECTION_V",
+      "normal_correct": true,
+      "symmetric": false,
+      "table_id": 10
+    },
+    {
+      "bits_00_01_10_11": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "depends_on_u": true,
+      "depends_on_v": false,
+      "kind": "ONE_INPUT_PROJECTION",
+      "name": "PROJECTION_U",
+      "normal_correct": true,
+      "symmetric": false,
+      "table_id": 12
+    },
+    {
+      "bits_00_01_10_11": [
+        0,
+        1,
+        1,
+        1
+      ],
+      "depends_on_u": true,
+      "depends_on_v": true,
+      "kind": "SYMMETRIC_TWO_INPUT_MERGE",
+      "name": "OR",
+      "normal_correct": true,
+      "symmetric": true,
+      "table_id": 14
+    }
+  ],
+  "input_worlds": 8,
+  "local_bcr_checks": {
+    "route_1_anchor_contrast": true,
+    "route_1_joint_compensation": true,
+    "route_1_route_contrast": true,
+    "route_2_anchor_contrast": true,
+    "route_2_joint_compensation": true,
+    "route_2_route_contrast": true
+  },
+  "merge_functions": 16,
+  "model_scope": "two XOR bearer-centred local routes plus every deterministic Boolean downstream merger",
+  "normal_manifold": [
+    [
+      0,
+      0
+    ],
+    [
+      1,
+      1
+    ]
+  ],
+  "normal_output_correct": 4,
+  "off_manifold_challenge_required": [
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      0
+    ]
+  ],
+  "one_input_projections": 2,
+  "schema": "uct-a4w-overlapping-centres-exact/1.0",
+  "symmetric_two_input_merges": 2
+}

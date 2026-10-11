@@ -1,3 +1,9 @@
+# A4W20261012 — overlapping bearer centres
+
+[Research note](records/A4W20261012_Overlapping_Bearer_Centres/RESEARCH_NOTE.md) · [contract](records/A4W20261012_Overlapping_Bearer_Centres/OVERLAPPING_CENTRES_CONTRACT.md) · [proof](records/A4W20261012_Overlapping_Bearer_Centres/MODEL_PROOF.md) · [exact results](records/A4W20261012_Overlapping_Bearer_Centres/EXACT_RESULTS.json) · [claims](records/A4W20261012_Overlapping_Bearer_Centres/CLAIM_LEDGER.json) · [gaps](records/A4W20261012_Overlapping_Bearer_Centres/GAP_LEDGER.json) · [audit](records/A4W20261012_Overlapping_Bearer_Centres/FORMAL_AUDIT.md) · [Chinese handoff](records/A4W20261012_Overlapping_Bearer_Centres/HANDOFF_ZH.md). Disabled 0/0/0 application: local multiple centres are coherent; joint centring of one target requires non-exclusive actual participation by both routes. No actual or phenomenal installation is claimed.
+
+---
+
 # UCT 主索引
 
 ## Current follow-up application: A4V20261012

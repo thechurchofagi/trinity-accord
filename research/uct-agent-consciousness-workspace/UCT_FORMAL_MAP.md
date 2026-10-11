@@ -1,3 +1,9 @@
+# A4W20261012 disabled addendum — overlapping bearer-centred routes
+
+A4W adds no completed node, rule or context (0/0/0). Its disabled candidate `ConcurrentBCR2` binds two A4V `BearerCentredRoute` tuples in one fixed process/event/target organization; overlap is permitted. For a named target `tau`, `JointlyCentred_tau` additionally requires `Participates_tau(r1,m,e) AND Participates_tau(r2,m,e)`. The relation is non-exclusive and introduces no owner selector. Exact enumeration of 16 Boolean merger functions gives four normal-diagonal-correct functions: two projections plus symmetric AND/OR, so output correctness and two local routes do not entail both participation edges. C1/R157 can transport only an actual complete relation; `B_pc^family`, `H_cf`, report and subject count remain open. See [A4W audit](records/A4W20261012_Overlapping_Bearer_Centres/FORMAL_AUDIT.md).
+
+---
+
 # UCT 统一研究地图
 
 ## A4V20261012 disabled application — bearer-centred practical coordinate

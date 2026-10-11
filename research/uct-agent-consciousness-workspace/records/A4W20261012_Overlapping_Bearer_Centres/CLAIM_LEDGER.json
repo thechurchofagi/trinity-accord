@@ -1,0 +1,84 @@
+{
+  "schema": "uct-claim-ledger/1.0",
+  "round": "A4W20261012",
+  "map_status": "PENDING_CHECKPOINT_DISABLED",
+  "claims": [
+    {
+      "id": "A4W-C1",
+      "type": "DEFINITION_AND_ASSUMPTION_PACKAGE",
+      "statement": "ConcurrentBCR2 is two A4V BCR conjunctions on one P/I/K/event/target binding, with simultaneous activity and distinct live anchor/route roles; overlap is allowed.",
+      "domain": "One candidate actual organization with two typed local routes.",
+      "all_of": ["SAME-BINDING", "BCR-1", "BCR-2", "SIMULTANEOUS", "DISTINCT-LIVE-ROLES"],
+      "proof_or_source": "Definition in OVERLAPPING_CENTRES_CONTRACT.md; each BCR expands to all eight A4V clauses.",
+      "counterexamples": ["two available but not simultaneous schemas", "copied or stale anchor", "cross-event assembly"],
+      "status": "DECLARED_DISABLED_APPLICATION_CONTRACT_NOT_INSTALLED",
+      "thought_experiment_role": "Fixes the local many-centre relation in all four families."
+    },
+    {
+      "id": "A4W-C2",
+      "type": "FINITE_CLASSIFICATION_THEOREM",
+      "statement": "After two one-bit XOR bearer-centred local decoders, exactly four of sixteen Boolean mergers recover the target on all eight target/anchor worlds: two projections and two symmetric two-input mergers.",
+      "domain": "All deterministic Boolean h:{0,1}^2->{0,1} after the declared two-route witness.",
+      "all_of": ["u=x", "v=x", "all sixteen Boolean mergers", "correctness on every x,a,b"],
+      "proof_or_source": "Diagonal truth-table proof in MODEL_PROOF.md and exhaustive check_overlapping_centres.py output.",
+      "counterexamples": ["No automatic extension to noisy, multibit, continuous, or physical systems"],
+      "status": "PROVED_IN_DECLARED_FINITE_DOMAIN",
+      "thought_experiment_role": "Separates projection from genuine symmetric merger under matched normal output."
+    },
+    {
+      "id": "A4W-C3",
+      "type": "NEGATIVE_IDENTIFICATION_RESULT",
+      "statement": "Normal successful output plus both local BCR traces does not identify whether the downstream target uses one route or symmetrically merges two routes.",
+      "domain": "The four correct functions in A4W-C2 under diagonal normal inputs.",
+      "all_of": ["A4W-C2", "observation restricted to the normal diagonal"],
+      "proof_or_source": "All four correct functions agree on 00 and 11 and differ only off the normal manifold.",
+      "counterexamples": ["Independently grounded off-manifold branch challenges can distinguish them"],
+      "status": "PROVED_IN_DECLARED_FINITE_DOMAIN",
+      "thought_experiment_role": "Blocks success, logs, and report from replacing target-use evidence."
+    },
+    {
+      "id": "A4W-C4",
+      "type": "COUNTERMODEL_AND_SCOPE_RESULT",
+      "statement": "ConcurrentBCR2 does not entail that both local routes organize the same named downstream target.",
+      "domain": "One fixed event with two local BCRs and a named downstream consumer.",
+      "all_of": ["A4W-C1", "downstream merger may be a projection"],
+      "proof_or_source": "Projection-U and projection-V preserve both local BCRs while only one route is consumed downstream.",
+      "counterexamples": ["AND and OR show that an exclusive selector is not required"],
+      "status": "PROVED_BY_EXACT_COUNTERMODEL_IN_DECLARED_DOMAIN",
+      "thought_experiment_role": "Motivates a target-indexed non-exclusive participation relation."
+    },
+    {
+      "id": "A4W-C5",
+      "type": "POSITIVE_APPLICATION_CONTRACT",
+      "statement": "Joint centring of a named target requires ConcurrentBCR2 AND Participates_tau(r1) AND Participates_tau(r2); participation is a many-valued relation, not an owner function.",
+      "domain": "One actual target consumer and event; route occurrences and ports fixed before comparison.",
+      "all_of": ["A4W-C1", "PARTICIPATES-1", "PARTICIPATES-2"],
+      "proof_or_source": "Typed repair of A4W-C4; AND/OR supply finite joint-use witnesses, projections supply premise-drop countermodels.",
+      "counterexamples": ["direct bypass", "one-input projection", "parallel recorder", "post-hoc joint label"],
+      "status": "DECLARED_DISABLED_CONTRACT_LOGICALLY_SATISFIABLE_NOT_INSTALLED",
+      "thought_experiment_role": "States the exact additional organizational relation required for the stronger target claim."
+    },
+    {
+      "id": "A4W-C6",
+      "type": "CONDITIONAL_C1_APPLICATION",
+      "statement": "If the two BCRs and route-to-target participation relations are independently grounded in one complete actual K organization, C1 plus R157 transports the whole relation family to experience-internal structure without selecting a unique owner.",
+      "domain": "Exactly one admitted actual token and complete signature satisfying all A4W-C1/C5 premises.",
+      "all_of": ["A:C1", "R157:COORDINATE_TRANSPORT", "A4W-C1 actual grounding", "A4W-C5 actual grounding"],
+      "proof_or_source": "Ordinary pointwise first-order isomorphism preservation; inherited from R157.",
+      "counterexamples": ["finite view", "cross-token assembly", "unbound time", "evidence substituted for actual use"],
+      "status": "CONDITIONAL_NOT_ACTUALLY_INSTANTIATED",
+      "thought_experiment_role": "Places multiple practical relations within experience while preserving overlapping processes."
+    },
+    {
+      "id": "A4W-C7",
+      "type": "OPEN_INTERPRETATION_BRIDGE",
+      "statement": "B_pc^family proposes that the transported family realizes multiple practical bearer-relative coordinates; joint organization of a selected target additionally follows the participation subrelation, but H_cf, agency, ownership, conceptual self, report, and subject count remain open.",
+      "domain": "Predeclared bodily/action target and independently grounded actual organization.",
+      "all_of": ["A4W-C6", "independent target semantics", "fallible measurement bridge", "predeclared refuters"],
+      "proof_or_source": "Positive UCT interpretation constrained by R157 semantic residual, R181, A4M, A4N, and A4V.",
+      "counterexamples": ["target contrast within a fully grounded family fibre", "target invariance across a grounded projection/merger contrast"],
+      "status": "OPEN_NOT_DERIVED_NOT_CALIBRATED",
+      "thought_experiment_role": "Names the main-line explanatory proposal without upgrading it to a theorem."
+    }
+  ]
+}
