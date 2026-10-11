@@ -96,20 +96,20 @@
     "nondeductive_context_links": 261,
     "total_review_items": 1608
   },
-  "pending_note": "All prior pending identities retained. A4U adds a disabled 0/0/0 scoped application: an RP2040 ADC FIFO→DMA→RAM route is publicly specified as possible, but current-epoch lineage requires seven jointly bound run facts; equal payload and terminal state do not install them.",
+  "pending_note": "All prior pending identities retained. A4V adds a disabled 0/0/0 scoped application: an exact matched-output classification separates two bearer-centred from two anchor-insensitive perfect routes, while actual installation, B_pc semantics and H_cf calibration remain open.",
   "publication_coverage": {
     "version": "UCT-PUB-v1.0.33",
     "entry": "PUBLICATION_COVERAGE.json",
-    "latest_update": "records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/PUBLICATION_COVERAGE_UPDATE.json",
+    "latest_update": "records/A4V20261012_Bearer_Centered_Practical_Coordinate/PUBLICATION_COVERAGE_UPDATE.json",
     "nondeductive": true,
     "latest_originality_review": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/PUBLICATION_COVERAGE_UPDATE.json",
-    "latest_followup_application": "records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/PUBLICATION_COVERAGE_UPDATE.json"
+    "latest_followup_application": "records/A4V20261012_Bearer_Centered_Practical_Coordinate/PUBLICATION_COVERAGE_UPDATE.json"
   },
   "latest_activity": {
-    "id": "A4U20261012",
+    "id": "A4V20261012",
     "type": "FOLLOWUP_APPLICATION",
-    "status": "DISABLED_EPOCH_BOUND_ADC_DMA_LINEAGE_APPLICATION",
-    "source": "records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/RESEARCH_NOTE.md"
+    "status": "DISABLED_BEARER_CENTRED_COORDINATE_APPLICATION",
+    "source": "records/A4V20261012_Bearer_Centered_Practical_Coordinate/RESEARCH_NOTE.md"
   },
   "latest_pending_research": {
     "id": "A3V20261010",
@@ -122,8 +122,8 @@
     "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
     "evidence_status": "BOUNDED_PRIMARY_SOURCE_APPLICATION_STOP_AND_R173_SCOPE_RETURN; ACTUAL_PREMISES_AND_H_OPEN"
   },
-  "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 effective objects retain a fresh per-ID structural traversal. A4U manually rechecked C1/U1, P3/P6, R157, R159, effective R173 and the A4R→A4T route chain. Deep full-history semantics remain AUDIT_INCOMPLETE.",
-  "next_priority": "A4U next: on one real RP2040 run, bind a tagged input to pre-start drain completion, ADC channel/round-robin configuration, DMA source/count/destination/ring settings and consumer-read-before-reuse timing. If this bounded installation is unavailable, stop the instrumentation branch and return to the experience-internal bodily/action bridge; stop before H_cf in either case.",
+  "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 effective objects retain a fresh per-ID structural traversal. A4V manually rechecked C1/U1, P3/P6, R157, R159, effective R173, A4M and A4N. Deep full-history semantics remain AUDIT_INCOMPLETE.",
+  "next_priority": "A4V next: construct one actual-organization case with two simultaneous partly overlapping bearer-centred routes. Hold complete organization and successful output fixed while varying their live-anchor relations; test whether B_pc is coherently many-centred or requires a further non-exclusive target-selection relation. Do not introduce a unique owner or promote H_cf.",
   "latest_activity_persistence_after_A4T_science": {
     "science_commit": "547c8471de28ad8c729d278d4a0f0f9fd6bd2cc9",
     "science_tree": "51b66b731cf2573195d86de33bf6d4327dd1527c",

@@ -1,5 +1,9 @@
 # UCT durable memory
 
+## A4V20261012 latest memory
+
+A4V returns from the stopped hardware branch to bodily/action mineness. `BearerCentredRoute` requires one same-instance eight-clause actual relation: live anchor, target-relative encoding, actual route/anchor consumption, nontrivial single contrasts, joint compensation and event order. Exact one-bit classification: 256 encoder/consumer pairs, four perfect-output pairs, split exactly two bearer-centred and two anchor-insensitive; all four use the route, so success plus route use is insufficient. Constant-route and direct-bypass refuters block vacuous symmetry and evidence/use reversal. Conditional C1/R157 transport is separated from open bridge `B_pc`; `RetBind∧CoupledForm∧BCR` remains an uninstalled candidate. Formal delta 0/0/0; next test two simultaneous overlapping BCR routes without adding a unique owner.
+
 ## A4U20261012 latest memory
 
 A4U instantiates the A4T sampler-to-consumer question at the RP2040 ADC FIFO→DMA→RAM→consumer boundary. Public documentation warrants a possible route, not its use in any particular run. A current-epoch ordered-lineage conclusion is conditional on seven jointly bound facts: pre-start FIFO empty, acquisition start, fixed/tagged ADC source, ordered lossless FIFO use, DMA source/count/destination binding, no wrap/reuse/alternate writer in the window, and consumer read before reuse. A constant-payload stale-FIFO counterexample preserves final buffer values and terminal status while changing lineage. Exact checker: 128 binary worlds, one all-clause world and 127 declared adversarial failures; queue-order induction checked for N=1..8. Formal delta 0/0/0; actual run, complete `K`, and `H_cf` remain open. Next: instrument one real run with pre-start drain completion, captured channel configuration and buffer-read timing, or return to the experience-internal bodily/action bridge if that installation is unavailable.

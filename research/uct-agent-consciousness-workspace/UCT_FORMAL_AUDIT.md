@@ -1,5 +1,9 @@
 # UCT 地图审查状态
 
+## A4V20261012 audit addendum
+
+A4V traversed the restored effective 913/424/261 graph and visited all nodes structurally; unresolved deductive references, active cycles, empty `all_of`, and non-list `all_of` counts are zero. P3/P6, C1/U1, R157, R159, effective R173, A4M and A4N were manually rechecked for quantifier, scope, object/time/signature/actuality/evidence and direction. The eight-clause `BCR` conjunction has two abstract one-bit witnesses, but no actual token or phenomenal bridge. Formal delta 0/0/0; `SCU-AUDIT-DEPTH` remains incomplete. [Full audit](records/A4V20261012_Bearer_Centered_Practical_Coordinate/FORMAL_AUDIT.md).
+
 ## A4U20261012 audit addendum
 
 A4U changes no completed-map object. Fresh root parsing and restored integrated traversal covered 584/284/178 root objects and 913/424/261 effective completed objects; all 913 effective nodes exposed the required concept/quantifier/scope fields, every active rule kept list-valued conjunctive `all_of`, references resolved and the active dependency graph remained acyclic. The disabled seven-premise contract is jointly satisfiable and the checker explicitly drops each premise in a countermodel family. Object, epoch, value, actual lineage, evidence, complete organization, limited view and phenomenal interpretation remain distinct. Passing code establishes only the enumerated finite checks and structural traversal, not physical installation or theory truth. Formal delta 0/0/0; full historical semantic depth remains `AUDIT_INCOMPLETE`. Full record: [A4U audit](records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/FORMAL_AUDIT.md).

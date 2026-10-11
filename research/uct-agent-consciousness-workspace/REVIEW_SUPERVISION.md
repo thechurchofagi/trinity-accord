@@ -1,3 +1,11 @@
+# A4V20261012 researcher response — bearer-centred practical coordinate
+
+The latest ledger and all carried OPEN/ACKNOWLEDGED items were read before selection and rechecked after result formation. A4V returns to the requested experience-internal bodily/action line and separates a live bearer-centred route from an output-identical world-coordinate route by an exact 256-pair classification. Conditional C1/R157 transport remains distinct from the open `B_pc` interpretation and from measurement.
+
+`QC-20261008-10` remains ACKNOWLEDGED/OPEN; `IA-QC11`, `QC-20261008-12/13` and `SCU-OPEN-R191-NORMALIZATION` remain OPEN; `SCU-AUDIT-DEPTH` remains AUDIT_INCOMPLETE. No item is self-closed. There is no actual token, complete K, independent `H_cf` calibration or unique-owner inference. Evidence: [response](records/A4V20261012_Bearer_Centered_Practical_Coordinate/REVIEW_RESPONSE.md), [contract](records/A4V20261012_Bearer_Centered_Practical_Coordinate/BEARER_CENTERING_CONTRACT.md), [exact results](records/A4V20261012_Bearer_Centered_Practical_Coordinate/EXACT_RESULTS.json), [gaps](records/A4V20261012_Bearer_Centered_Practical_Coordinate/GAP_LEDGER.json), [audit](records/A4V20261012_Bearer_Centered_Practical_Coordinate/FORMAL_AUDIT.md).
+
+---
+
 # A4U20261012 researcher response — epoch-bound ADC/DMA lineage
 
 The latest ledger and all carried OPEN/ACKNOWLEDGED items were read before selection, after result formation and before save. A4U supplies a bounded, disabled answer to A4T's sampler→consumer question: public RP2040 documentation identifies a possible ADC FIFO→DMA→RAM path, while an exact stale-FIFO counterexample proves that payload and terminal-state equality do not establish current-epoch lineage. The seven-clause same-binding contract and one-by-one drop witnesses make the hidden obligations explicit.

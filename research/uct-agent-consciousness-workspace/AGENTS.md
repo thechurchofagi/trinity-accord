@@ -2,7 +2,7 @@
 
 Read RESEARCH_MASTER_GUIDE.md, START_HERE.md, CURRENT_STATE.json and UNIFIED_RESEARCH_INDEX.json first. Round-specific current/next notices below are preserved historical snapshots; they never override current state or the master guide. Do not prepend another round summary to every entry page. Maintain one canonical checkpoint registry and regenerate/synchronize pending identity sets, retaining disabled status and scientific/publication separation. See records/NAV20261010_Map_Integration/validate_current_map.py.
 
-Latest bounded follow-up: A4U20261012 instantiates the RP2040 ADC FIFO→DMA→RAM→consumer lineage contract. It is disabled, 0/0/0, and not an actual board run or phenomenal bridge. Follow `CURRENT_STATE.json` and [A4U handoff](records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/HANDOFF_ZH.md); if a real tagged-input installation is unavailable, return to the experience-internal bodily/action main line rather than extending instrumentation certificates.
+Latest bounded follow-up: A4V20261012 returns to the experience-internal bodily/action main line and distinguishes a live bearer-centred route from an output-identical world-coordinate route. The exact one-bit classification is 256 total encoder/consumer pairs, four perfect pairs, split 2 centred + 2 anchor-insensitive. It is disabled, 0/0/0, and not an actual installation or phenomenal identity. Follow `CURRENT_STATE.json` and [A4V handoff](records/A4V20261012_Bearer_Centered_Practical_Coordinate/HANDOFF_ZH.md); next test overlapping simultaneous centred routes without positing a unique owner.
 
 # 当前科学接续 A3V20261010：并行选项影响与活跃政策证据分开，返回身体熟悉感
 

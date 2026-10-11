@@ -1,0 +1,54 @@
+{
+  "round": "A4V20261012",
+  "result_version": "A4V-BCR-v0.1.0",
+  "exact_checker": {
+    "command": "python3 check_bearer_coordinate.py",
+    "status": "PASS",
+    "results_sha256": "46a2d59baea47f34b4a0cad595229d790b0c09974e451f77f63efa099a15c982",
+    "pairs": 256,
+    "perfect_output_pairs": 4,
+    "bearer_centred_pairs": 2,
+    "anchor_insensitive_pairs": 2
+  },
+  "formal_audit": {
+    "command": "python3 audit_map.py <research-root> <restored-effective-graph.json>",
+    "status": "FRESH_STRUCTURAL_PASS_BOUNDED_SEMANTIC_PASS_FULL_DEPTH_INCOMPLETE",
+    "effective_nodes": 913,
+    "active_rules": 424,
+    "context_links": 261,
+    "all_of_nonlist": 0,
+    "all_of_empty": 0,
+    "unresolved_references": 0,
+    "active_cycles": 0
+  },
+  "json_validation": {
+    "command": "jq empty CURRENT_STATE.json PUBLICATION_COVERAGE.json UNIFIED_RESEARCH_INDEX.json records/A4V20261012_Bearer_Centered_Practical_Coordinate/*.json",
+    "status": "PASS"
+  },
+  "navigation_validation": {
+    "command": "python3 integration/UCT-INTEGRATION-v1.0.0/validate_navigation.py",
+    "status": "PASS_NAVIGATION_AND_DISABLED_ASSEMBLY"
+  },
+  "legacy_wrapper_validation": {
+    "command": "python3 records/NAV20261010_Map_Integration/validate_current_map.py",
+    "status": "FAIL_INHERITED_POINTER_CONTRACT",
+    "detail": "The legacy wrapper requires RESEARCH_SESSION_LOG_INDEX latest_work_log/latest_handoff to equal CURRENT_STATE latest_research, while the maintained navigation separates the completed/latest scientific pointer from disabled follow-up applications. The core integration validator passes."
+  },
+  "review_recheck": {
+    "status": "PASS_RETAIN_OPEN",
+    "open_or_incomplete": [
+      "QC-20261008-10",
+      "IA-QC11",
+      "QC-20261008-12",
+      "QC-20261008-13",
+      "SCU-OPEN-R191-NORMALIZATION",
+      "SCU-AUDIT-DEPTH"
+    ]
+  },
+  "limits": [
+    "No actual same-instance installation",
+    "No complete physical signature",
+    "No independent B_pc or H_cf calibration",
+    "No full historical semantic reproof"
+  ]
+}

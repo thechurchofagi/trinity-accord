@@ -1,0 +1,14 @@
+{
+  "schema": "uct-manuscript-decision/1",
+  "id": "A4V20261012",
+  "decision": "HOLD_STANDALONE",
+  "reason": "The exact finite result is useful as a technical lemma and counterexample package, but actual grounding, the B_pc semantic bridge, external priority and H_cf calibration remain open.",
+  "permitted_use": "Future synthesis or technical supplement with explicit disabled status and known-mathematics attribution.",
+  "forbidden_claims": [
+    "BCR is necessary for basal experience",
+    "BCR by itself is bodily mineness",
+    "successful output establishes BCR",
+    "BCR selects a unique owner",
+    "the Boolean mathematics is novel"
+  ]
+}

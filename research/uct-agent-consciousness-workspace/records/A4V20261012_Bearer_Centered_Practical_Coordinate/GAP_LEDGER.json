@@ -1,0 +1,69 @@
+{
+  "schema": "uct-gap-ledger/1.0",
+  "round": "A4V20261012",
+  "gaps": [
+    {
+      "id": "A4V-G01",
+      "location": "A4V-C1 actual grounding",
+      "impact": ["A4V-C4", "A4V-C5", "H_cf application"],
+      "counterexample": "A direct bypass or parallel recorder can match output and route values while the named consumer does not use the route.",
+      "repaired": "USE, same-instance BIND and ORDER are explicit conjuncts.",
+      "unresolved": "No human, robot or device token jointly installs the full contract.",
+      "status": "OPEN"
+    },
+    {
+      "id": "A4V-G02",
+      "location": "JOINT symmetry clause",
+      "impact": ["A4V-C1", "claims of a nontrivial practical index"],
+      "counterexample": "Constant encoder/consumer gives vacuous invariance.",
+      "repaired": "Added independent A-CONTRAST and R-CONTRAST clauses; checker retains the failure.",
+      "unresolved": "Higher-dimensional/noisy tolerance and admissible transformation classes require separate contracts.",
+      "status": "PARTIALLY_REPAIRED_OPEN_GENERALIZATION"
+    },
+    {
+      "id": "A4V-G03",
+      "location": "A4V-C5 semantic interpretation",
+      "impact": ["B_pc", "B_cf-centred", "H_cf"],
+      "counterexample": "The same grounded BCR relation may be assigned another external semantic description without altering any K fact.",
+      "repaired": "B_pc is explicitly an open application bridge with fibre/sensitivity refuters.",
+      "unresolved": "No independently calibrated phenomenal target or measurement bridge.",
+      "status": "OPEN"
+    },
+    {
+      "id": "A4V-G04",
+      "location": "A4M/A4N composition",
+      "impact": ["Refined H_cf candidate"],
+      "counterexample": "RetBind, CoupledForm and BCR can be distributed across different tokens, times or routes.",
+      "repaired": "The candidate is explicitly conjunctive on one P/I/K/event/route; cross-study assembly is prohibited.",
+      "unresolved": "No jointly satisfiable physical witness has been installed, although the finite contracts are logically compatible.",
+      "status": "OPEN_ACTUAL_APPLICATION"
+    },
+    {
+      "id": "A4V-G05",
+      "location": "owner/subject interpretation",
+      "impact": ["self terminology", "overlapping-process conclusions"],
+      "counterexample": "A larger process may contain two overlapping BCR relations with different declared anchors.",
+      "repaired": "BCR is a token-relative relation, not an exclusive-owner selector.",
+      "unresolved": "Numerical subject individuation remains outside the result.",
+      "status": "OPEN_NOT_REQUIRED_FOR_RESULT"
+    },
+    {
+      "id": "A4V-G06",
+      "location": "originality",
+      "impact": ["publication and novelty claims"],
+      "counterexample": "Boolean normal forms, equivariance, body-centred transformations and tool incorporation are established topics.",
+      "repaired": "The note credits inherited mathematics/mechanisms and limits the increment to the UCT application contract and exact comparison.",
+      "unresolved": "External priority for the exact package has not been exhaustively searched.",
+      "status": "PRIORITY_UNVERIFIED"
+    },
+    {
+      "id": "A4V-G07",
+      "location": "whole-map audit depth",
+      "impact": ["global compatibility claim"],
+      "counterexample": "Structural parsing and DAG checks do not reconstruct all historical proofs.",
+      "repaired": "Fresh per-ID structural traversal and affected-neighbourhood semantic review will be recorded separately.",
+      "unresolved": "Full historical semantic depth and R191 normalization remain open.",
+      "status": "AUDIT_INCOMPLETE"
+    }
+  ]
+}

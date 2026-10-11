@@ -1,5 +1,15 @@
 # UCT 主索引
 
+## Current follow-up application: A4V20261012
+
+- [Research note](records/A4V20261012_Bearer_Centered_Practical_Coordinate/RESEARCH_NOTE.md)
+- [Bearer-centering contract](records/A4V20261012_Bearer_Centered_Practical_Coordinate/BEARER_CENTERING_CONTRACT.md)
+- [Exact results](records/A4V20261012_Bearer_Centered_Practical_Coordinate/EXACT_RESULTS.json)
+- [Formal audit](records/A4V20261012_Bearer_Centered_Practical_Coordinate/FORMAL_AUDIT.md)
+- [Chinese handoff](records/A4V20261012_Bearer_Centered_Practical_Coordinate/HANDOFF_ZH.md)
+
+Status: disabled 0/0/0 scoped application; exact 2+2 matched-output classification, not an actual installation or phenomenal bridge; manuscript HOLD.
+
 ## Current follow-up application: A4U20261012
 
 - [Research note](records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/RESEARCH_NOTE.md)

@@ -1,0 +1,84 @@
+{
+  "schema": "uct-claim-ledger/1.0",
+  "round": "A4V20261012",
+  "map_status": "PENDING_CHECKPOINT_DISABLED",
+  "claims": [
+    {
+      "id": "A4V-C1",
+      "type": "DEFINITION_AND_ASSUMPTION_PACKAGE",
+      "statement": "On one fixed actual P/I/K/event binding, BearerCentredRoute is the conjunction BIND AND ANCHOR AND ENCODE AND USE AND A-CONTRAST AND R-CONTRAST AND JOINT AND ORDER.",
+      "domain": "One admitted actual process, complete signature, event grain, grounded target, live bearer anchor, route occurrence and named consumer.",
+      "all_of": ["BIND", "ANCHOR", "ENCODE", "USE", "A-CONTRAST", "R-CONTRAST", "JOINT", "ORDER"],
+      "proof_or_source": "Definition in BEARER_CENTERING_CONTRACT.md; typed by R157/R159 and refined from A4N EnactedFrameBind.",
+      "counterexamples": ["constant-route vacuity", "direct bypass", "copied/stale anchor", "body-label world route"],
+      "status": "DECLARED_DISABLED_APPLICATION_CONTRACT_NOT_INSTALLED",
+      "thought_experiment_role": "Fixes the organizational variable varied in all four retained thought-experiment families."
+    },
+    {
+      "id": "A4V-C2",
+      "type": "FINITE_CLASSIFICATION_THEOREM",
+      "statement": "Among deterministic Boolean encoder-consumer pairs r=f(x,a), y=g(r,a), exactly four satisfy y=x for all inputs; exactly two are bearer-centred and two are anchor-insensitive.",
+      "domain": "All 16 Boolean f:{0,1}^2->{0,1} and all 16 Boolean g:{0,1}^2->{0,1}.",
+      "all_of": ["deterministic one-bit encoder", "deterministic one-bit consumer", "perfect recovery on all four inputs"],
+      "proof_or_source": "Sectionwise bijection proof in MODEL_PROOF.md and exhaustive 256-pair cross-check in check_bearer_coordinate.py/EXACT_RESULTS.json.",
+      "counterexamples": ["Does not generalize without proof to noisy, multibit or continuous systems", "Does not establish physical realization or experience"],
+      "status": "PROVED_IN_DECLARED_FINITE_DOMAIN",
+      "thought_experiment_role": "Supplies the strict matched-output bearer-centred/world-coordinate pair."
+    },
+    {
+      "id": "A4V-C3",
+      "type": "NEGATIVE_IDENTIFICATION_RESULT",
+      "statement": "Perfect output and actual use of the declared route do not identify bearer centring in the one-bit class.",
+      "domain": "The four perfect pairs of A4V-C2.",
+      "all_of": ["A4V-C2", "observer restricted to output and route-use truth"],
+      "proof_or_source": "All four perfect pairs have y=x and route sensitivity; the two centring classes differ only in anchor relations and joint compensation.",
+      "counterexamples": ["A live-anchor intervention or joint anchor-route compensation test can distinguish the classes"],
+      "status": "PROVED_IN_DECLARED_FINITE_DOMAIN",
+      "thought_experiment_role": "Prevents intelligence, success and generic route use from replacing the bodily/action coordinate."
+    },
+    {
+      "id": "A4V-C4",
+      "type": "CONDITIONAL_C1_APPLICATION",
+      "statement": "If A4V-C1 is independently grounded as a correctly sorted relation in one complete actual K organization, then C1 plus R157 transports it to an experience-internal structural relation.",
+      "domain": "Exactly one actual P/I/K/D/Phi/h satisfying every A4V-C1 conjunct and R157 parameter transport.",
+      "all_of": ["A:C1", "R157:COORDINATE_TRANSPORT", "A4V-C1 actual same-instance grounding"],
+      "proof_or_source": "Standard first-order isomorphism preservation from R157 applied to the full conjunction.",
+      "counterexamples": ["finite view only", "unbound token or time", "missing actual use", "external label substituted for internal relation"],
+      "status": "CONDITIONAL_NOT_ACTUALLY_INSTANTIATED",
+      "thought_experiment_role": "Places the practical coordinate inside experience without an extra owner."
+    },
+    {
+      "id": "A4V-C5",
+      "type": "OPEN_INTERPRETATION_BRIDGE",
+      "statement": "B_pc proposes that the transported BCR relation realizes a practical bearer-relative coordinate—organization from this live anchor—but does not by itself establish H_cf, ownership, agency, conceptual self or report.",
+      "domain": "Selected bodily/action interpretation on a predeclared actual domain; not universal mineness or basal experience.",
+      "all_of": ["A4V-C4", "independently fixed target semantics", "separate fallible measurement", "explicit fibre and sensitivity refuters"],
+      "proof_or_source": "Positive candidate motivated by R157 semantic residual, R159 internal frame binding and A4N enacted-frame specificity; no proof of the semantic premise.",
+      "counterexamples": ["independently warranted target difference inside a BCR fibre", "target invariance across a grounded centred/uncentred contrast"],
+      "status": "OPEN_NOT_DERIVED_NOT_CALIBRATED",
+      "thought_experiment_role": "States exactly what the four families test and what their organizational results cannot settle."
+    },
+    {
+      "id": "A4V-C6",
+      "type": "SCOPE_AND_INVARIANCE_RESULT",
+      "statement": "Anatomical membership is neither necessary nor sufficient for A4V-C1; an incorporated tool may preserve the same centring relation, and an anatomical part may be controlled through an anchor-insensitive route.",
+      "domain": "A4N-style body/tool comparisons with the same bearer convention and independently grounded BCR clauses.",
+      "all_of": ["R159 representation/referent typing", "A4N membership/frame independence", "A4V-C1"],
+      "proof_or_source": "Typed substitution into the A4N four-case square; BCR concerns the internal anchor relation rather than organism membership.",
+      "counterexamples": ["tool label alone", "anatomical label alone", "process-boundary change without restating the bearer"],
+      "status": "CONDITIONAL_SCOPE_REFINEMENT_NO_ACTUAL_INSTALLATION",
+      "thought_experiment_role": "Tool incorporation supplies the invariance case; non-incorporated tools supply a negative control only after grounding."
+    },
+    {
+      "id": "A4V-C7",
+      "type": "COUNTEREXAMPLE",
+      "statement": "Joint transformation invariance alone does not establish a bearer-centred coordinate: a constant encoder and constant consumer satisfy trivial invariance while failing route use and target contrast.",
+      "domain": "The declared one-bit deterministic class.",
+      "all_of": ["f=0", "g=0"],
+      "proof_or_source": "Direct evaluation and exact checker.",
+      "counterexamples": ["Excluded by A4V-C1 R-CONTRAST and A-CONTRAST"],
+      "status": "EXACT_COUNTEREXAMPLE",
+      "thought_experiment_role": "Blocks renaming a vacuous symmetry as a self coordinate."
+    }
+  ]
+}

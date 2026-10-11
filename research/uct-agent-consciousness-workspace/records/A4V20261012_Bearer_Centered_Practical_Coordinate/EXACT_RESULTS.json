@@ -1,0 +1,79 @@
+{
+  "schema": "uct-a4v-bearer-centred-coordinate/1.0",
+  "scope": "deterministic one-bit encoder r=f(x,a) and consumer y=g(r,a)",
+  "interpretation_warning": "Finite organizational classification only; no actual installation, complete K, C1 verification, H_cf value or report calibration.",
+  "counts": {
+    "encoder_functions": 16,
+    "consumer_functions": 16,
+    "pairs": 256,
+    "perfect_output_pairs": 4,
+    "bearer_centred_perfect_pairs": 2,
+    "anchor_insensitive_perfect_pairs": 2
+  },
+  "index_order": {
+    "encoder": "(x,a)=(0,0),(0,1),(1,0),(1,1)",
+    "consumer": "(r,a)=(0,0),(0,1),(1,0),(1,1)"
+  },
+  "perfect_pairs": [
+    {
+      "encoder_f_xa": "0011",
+      "consumer_g_ra": "0011",
+      "perfect_output": true,
+      "actual_route_use_in_declared_consumer": true,
+      "nontrivial_anchor_to_route_sensitivity": false,
+      "nontrivial_anchor_use_at_consumer": false,
+      "joint_anchor_route_compensation": false,
+      "bearer_centred_route_view": false
+    },
+    {
+      "encoder_f_xa": "0110",
+      "consumer_g_ra": "0110",
+      "perfect_output": true,
+      "actual_route_use_in_declared_consumer": true,
+      "nontrivial_anchor_to_route_sensitivity": true,
+      "nontrivial_anchor_use_at_consumer": true,
+      "joint_anchor_route_compensation": true,
+      "bearer_centred_route_view": true
+    },
+    {
+      "encoder_f_xa": "1001",
+      "consumer_g_ra": "1001",
+      "perfect_output": true,
+      "actual_route_use_in_declared_consumer": true,
+      "nontrivial_anchor_to_route_sensitivity": true,
+      "nontrivial_anchor_use_at_consumer": true,
+      "joint_anchor_route_compensation": true,
+      "bearer_centred_route_view": true
+    },
+    {
+      "encoder_f_xa": "1100",
+      "consumer_g_ra": "1100",
+      "perfect_output": true,
+      "actual_route_use_in_declared_consumer": true,
+      "nontrivial_anchor_to_route_sensitivity": false,
+      "nontrivial_anchor_use_at_consumer": false,
+      "joint_anchor_route_compensation": false,
+      "bearer_centred_route_view": false
+    }
+  ],
+  "vacuous_counterexample": {
+    "encoder_f_xa": "0000",
+    "consumer_g_ra": "0000",
+    "point": "Joint-flip invariance holds trivially, but the route is unused and target recovery fails. Nontrivial sensitivities and actual consumption are indispensable."
+  },
+  "direct_bypass_twin": {
+    "law": "y=x with r ignored",
+    "point": "All external outputs match both perfect classes; the bypass is excluded only by same-instance evidence of actual route consumption."
+  },
+  "checks": {
+    "all_256_pairs_enumerated": true,
+    "perfect_pairs_equal_normal_form": true,
+    "exactly_four_perfect_pairs": true,
+    "exactly_two_bearer_centred_pairs": true,
+    "exactly_two_anchor_insensitive_pairs": true,
+    "route_use_alone_shared_by_all_perfect_pairs": true,
+    "anchor_flip_separates_classes": true,
+    "joint_compensation_separates_classes": true,
+    "equivariance_alone_is_vacuous": true
+  }
+}

@@ -1,5 +1,15 @@
 # 当前交接
 
+## Latest verified follow-up — A4V bearer-centred practical coordinate
+
+A4V returns from the bounded hardware branch to the experience-internal bodily/action main line. It defines a disabled eight-clause `BearerCentredRoute` and proves an exact matched-output separation: among 256 one-bit encoder/consumer pairs, four recover the target for every target/anchor input, exactly two bearer-centred and two anchor-insensitive. All four actually use the route, so successful output plus route use does not establish centring. Constant-route and direct-bypass counterexamples block vacuous invariance and evidence/use reversal.
+
+Conditional C1/R157 transport is distinct from the open `B_pc` interpretation. `RetBind AND CoupledForm AND BCR` is a refined same-instance candidate, not an installed phenomenal identity. No actual token, complete signature, independent `H_cf` calibration or unique owner is claimed. Formal delta 0/0/0; every review item remains open/incomplete.
+
+Deliverables: `records/A4V20261012_Bearer_Centered_Practical_Coordinate/`. Next exact task: test two simultaneous overlapping bearer-centred routes in one actual organization to determine whether `B_pc` is coherently many-centred or requires a further non-exclusive target-selection relation.
+
+---
+
 ## Latest verified follow-up — A4U epoch-bound ADC/DMA lineage
 
 A4U instantiates A4T's source-side question at the RP2040 ADC FIFO→DMA→RAM→consumer boundary. The public datasheet and SDK document a possible path, including `DREQ_ADC`, FIFO ordering/overflow behavior, DMA address/count registers and FIFO drain. They do not establish that a particular run used that path. The disabled contract therefore requires the same acquisition binding to satisfy `BIND AND START AND SOURCE AND FIFO AND DMA AND WINDOW AND READ`.
