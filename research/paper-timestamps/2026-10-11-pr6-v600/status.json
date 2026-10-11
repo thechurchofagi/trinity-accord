@@ -2,22 +2,26 @@
   "batch": "2026-10-11-pr6-v600",
   "files": [
     {
-      "bitcoin_heights": [],
+      "bitcoin_heights": [
+        970897,
+        970900,
+        970948
+      ],
       "bytes": 278521,
       "doi": "10.5281/zenodo.23295776",
       "name": "safe-revocation-without-complete-diagnosis-pr-v6.0.0.pdf",
       "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-10-11-pr6-v600/proofs/ASI-CC-PR6/safe-revocation-without-complete-diagnosis-pr-v6.0.0.pdf.ots",
-      "proof_sha256": "8e36c1c2b15ba9ed9ded98b8e4476d6d0bd319bd9b65748c38975e9a2150709d",
+      "proof_sha256": "da74df21857637f4506cc97e0d2548dd6bbc3287d6ee78ae20b9ac1fa99a0225",
       "report": "ASI-CC-PR6",
       "role": "Complete English theoretical preprint PR-v6.0.0",
       "sha256": "b36fab74520f0f686b2b8252d60ff99a6925779cadd88e784d511945f34d4b61",
-      "state": "PENDING_BITCOIN"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     }
   ],
   "paper_count": 1,
   "pdf_count": 1,
   "schema": "trinityaccord.paper-ots-status.v1",
-  "state": "WAITING",
+  "state": "READY_FOR_ARWEAVE",
   "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
 }
