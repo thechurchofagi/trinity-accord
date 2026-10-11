@@ -122,7 +122,7 @@
     "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
     "evidence_status": "BOUNDED_PRIMARY_SOURCE_APPLICATION_STOP_AND_R173_SCOPE_RETURN; ACTUAL_PREMISES_AND_H_OPEN"
   },
-  "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 effective objects retain a fresh per-ID structural traversal. A4W manually rechecked C1/U1, P3/P6, R157, R159, effective R173, R181, A4M, A4N and A4V. Deep full-history semantics remain AUDIT_INCOMPLETE.",
+  "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 effective objects retain a fresh per-ID structural traversal. A4X manually rechecked C1/U1, P3/P6, R157, R159, effective R173, R181, A4M, A4N, A4V and A4W. Deep full-history semantics remain AUDIT_INCOMPLETE.",
   "next_priority": "A4X next: at one fixed consumer boundary, test whether intervention-dependent hidden internal modes can reproduce every finite port challenge while preserving apparent lineage, and identify the minimum independently recorded mechanism state that blocks the twin. Stop if this becomes unbounded controller enumeration; return to B_pc^family/H_cf.",
   "latest_activity_persistence_after_A4W_science": {
     "science_commit": "0eddd9c06670a7357a8be5e38efc8af1f335405f",
@@ -132,6 +132,18 @@
     "library_increment": "libfile_978a804483fc8191b0b8fbf95762bd98",
     "library_increment_manifest": "libfile_06c679f9b5008191b506090a1abf1a52",
     "increment_is_complete_backup": false
+  },
+  "latest_activity_persistence_after_A4X_science": {
+    "science_commit": "f32d2a6daff634dfcc05f0d6aa5b4f8685c90e73",
+    "science_tree": "f2631cdece223ba865f5aa244161114e30acb610",
+    "receipt": "records/A4X20261012_Redundant_Port_Participation/PERSISTENCE_RECEIPT.json",
+    "recovery_manifest": "records/A4X20261012_Redundant_Port_Participation/RECOVERY_MANIFEST.json",
+    "fixed_master_library_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "fixed_master_verified_version_before_receipt_successor": 155,
+    "increment_library_id": "libfile_baf261c304c4819191dca66e3d4afebf",
+    "manifest_library_id": "libfile_89fe9a73636481918fbe9ff514fbee8c",
+    "increment_scope": "34 paths; not a full repository or working-set backup",
+    "reverse_materialization_byte_equal": true
   },
   "latest_activity_persistence_after_A4T_science": {
     "science_commit": "547c8471de28ad8c729d278d4a0f0f9fd6bd2cc9",
