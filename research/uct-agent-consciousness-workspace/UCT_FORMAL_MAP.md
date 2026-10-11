@@ -155,3 +155,12 @@ A4I introduces no formal object. It distinguishes the enacted target `H_cont(x)`
 ## A4J20261011 disabled cross-perturbation application
 
 A4J adds no formal object. It defines set-valued signed predictions for randomized relation- and fit-directed total effects while allowing both cross-effects. Strict independently signed targeted first stages yield one shared, two relation-only, two fit-only and four neither signatures; without signed first stages both candidates allow all nine. The result is a disabled method/application record, not `H_cont` calibration, actual `RetBind` installation or a C1 consequence. Map delta: **0/0/0**.
+
+
+### PR-v4.0.0 — 有效撤销的证据与备用资源定量边界（停用论文候选）
+
+[论文 LaTeX](records/ASI_CC_20261011_Control_and_Coexistence/paper_coexistence_v4.0.0/paper/manuscript.tex) · [独立有穷枚举程序](records/ASI_CC_20261011_Control_and_Coexistence/paper_coexistence_v4.0.0/src/revocation_frontier.py) · [真实本地固定网络执行协议](records/ASI_CC_20261011_Control_and_Coexistence/paper_coexistence_v4.0.0/src/service_handoff.py) · [结果汇总](records/ASI_CC_20261011_Control_and_Coexistence/paper_coexistence_v4.0.0/RESULTS_SUMMARY.json) · [中文交接](records/ASI_CC_20261011_Control_and_Coexistence/paper_coexistence_v4.0.0/HANDOFF_ZH.md)。
+
+从 PR-v3.0.0 自包含修订：在无需确认AI主体性的纯工具网络内，研究人类授权撤销时保留受保护服务的可信证据量与预先配置的备用资源间的精确权衡。有限一次预提交、可信及时反馈、无后续未申报路由器条件下，单失效覆盖边界 M*r >= n；n=4 时 0比特需4备用、1比特需2备用、完整2比特需1备用。n路k失效的预武装r槽最少信号数等于已知覆盖设计数 C(n,r,k)；同一不可区分观察格内全部世界的可成功计划交集才提供必然成功。两两相容不保证全体相容，已有超图/信息论前例。新程序的5776有穷关系表、52890分区比对、704通信期限条件和86本地协议案例均为**局部精确模型或固定规则程序实验**；非真实ASI、非真实硬件容量、非UCT体验端点。最终 PDF 已实测 **14页**（此前口述16页错误）。核心组合原创优先权仍未证实。
+
+**仅导航/停用候选：** UCT-MAP-v1.1.2 (913节点/424有效规则/261非演绎关系)、PENDING_MAP、UCT-PUB-v1.0.33、全部旧QC、原A3V科学接续不变。未完成全图语义审查/全部文献优先权判定，没有DOI/OTS/AR，不能宣称普适超级智能可控性已被证明。
