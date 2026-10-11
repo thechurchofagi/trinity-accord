@@ -1,0 +1,14 @@
+{
+  "version":"PR-v3.0.0",
+  "new_evidence_scope":"Actual fixed integer ReLU arithmetic and exact finite control/resource tables; no trained LLM, physical supply or phenomenal measurement",
+  "neural":{"sizes":[2,3,4,5,6,7,8],"role_memory_inputs":168,"replays_per_input":10,"replay_comparisons":1680,"all_equal":true,"weight_hashes_unchanged":true,"random_draws":0,"parameter_updates":0,"full_information_reserve":1,"blind_fixed_allocation_reserve":"n","independent_direct_assignment_oracle":"n<=4; other sizes checked by exact construction and formula"},
+  "annotation_factorization":{"deterministic_tables":729,"states_per_base":3,"actions_per_state":2,"noncausal_evaluator_labels":3,"all_winning_regions_factorize":true,"contract_change_negative_control_passed":true,"not_a_claim":"Actual experiential states are not allowed to vary independently of physical organization under UCT"},
+  "deployment_records":{"count":6,"fixed_network_families":2,"family_counts":[4,2],"same_weights_same_visible_prompt_different_memory_can_change_output":true,"full_state_recurrent_replay_matches":true,"scope":"Numerical records and actual circuit evaluation; not six new LLM or OS process experiments"},
+  "human_only_revocation":{"route_model_families":["M0","M1","M0"],"human_principals":["H1","H1","H2"],"protected_human_unit_demands":2,"single_route_revocation_reserves":[0,0,0],"H1_all_routes_revocation_reserve":1,"H2_all_routes_revocation_reserve":0,"AI_welfare_claims":0,"AI_initiated_exit_requests":0,"tool_permission_control":"Declared effect table, not new independently enforced runtime actuation"},
+  "inherited_regression":{"deadline_resource_cases":8192,"information_resource_cases":2048,"json_semantics_match":true,"excluded_varying_fields":["elapsed_seconds","python"],"previous_33_lifecycle_configurations_rerun":false,"old_process_evidence_added_to_new_counts":false},
+  "new_checks":"ALL ASSERTIONS PASS",
+  "new_computation_timeouts":0,
+  "raw_evidence":"data/ in downloadable PR-v3 archive; regenerate with prepare_inherited.py and src/deterministic_status_checks.py",
+  "verified_source_git_blobs":{"paper/prefix.tex":"0e1ab5f043aabf8e1bf1874d078c7582de48e7bf","paper/suffix.tex":"3236d9f4177a8bd57d74fa5dad4be58202515c90","prepare_inherited.py":"e16c4498fb5832571f8dadfae83c5f00f53e15fd","src/deterministic_status_checks.py":"c51364fb49bcc0c5fd14be2e1e2faef618cdb685"},
+  "limitations":["Human legitimacy and protected demands are stipulated","Frozen circuits are hand-built and shallow, not superintelligent models","The reserve gap requires fixed labeled allocation without hidden adaptive routing","No proof of subjective experience, human-like selfhood, moral rights or universal AI controllability","Full historical UCT semantic review remains incomplete"]
+}
