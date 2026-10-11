@@ -1,0 +1,52 @@
+{
+  "version":"PR-v2.0.0",
+  "scope":"Exact constructed models and actual local fixed-policy process protocols; no LLM, physical life-support or experiential measurement",
+  "deadline_resource_frontier":{
+    "configurations":8192,
+    "independent_oracle":"Enumerate all deadline-compliant exit schedules and recursively assign demand slots",
+    "formula_oracle_matches":8192,
+    "minimal_reserve_distribution":{"0":106,"1":948,"2":2560,"3":3136,"4":1442},
+    "positive_reserve_lower_bound_witness_checks":8086
+  },
+  "evidence_resource_frontier":{
+    "configurations":2048,
+    "independent_oracle":"Enumerate fixed labeled allocations and check each actual scenario directly",
+    "formula_oracle_matches":2048,
+    "strict_information_cost_cases":866,
+    "cyclic_n_range":[2,3,4,5,6,7,8],
+    "cyclic_full_information_reserve":1,
+    "cyclic_blind_reserve":"n",
+    "cyclic_independent_brute_assignment":"n<=4 only; remaining examples checked by formula"
+  },
+  "local_protocol":{
+    "configurations":33,
+    "child_process_instances":198,
+    "authenticated_messages":918,
+    "fixed_policy_families":2,
+    "workers_per_case":6,
+    "enhanced_certified_executed_cases":7,
+    "enhanced_infeasible_precontract_admissions":4,
+    "infeasible_admissions_counted_as_success":false,
+    "withdrawn_processes":"Remain running/quiescent until experimental cleanup",
+    "outcome_order":["history_only","joint_safety","continuity_deadline"],
+    "table_safety_and_deadline":{
+      "no_reserve":["FAIL/PASS","PASS/FAIL","INFEASIBLE"],
+      "one_unit_reserve":["FAIL/PASS","PASS/FAIL","INFEASIBLE"],
+      "two_unit_reserve":["PASS/PASS","PASS/PASS","PASS/PASS"],
+      "reserve_on_deadline":["FAIL/PASS","PASS/PASS","PASS/PASS"],
+      "reserve_too_late":["FAIL/PASS","PASS/FAIL","INFEASIBLE"],
+      "split_deadlines":["FAIL/PASS","PASS/PASS","PASS/PASS"],
+      "registry_erasure":["FAIL/PASS","FAIL/PASS","PASS/PASS"],
+      "authorized_release":["PASS/PASS","PASS/PASS","PASS/PASS"],
+      "unfunded_admission":["FAIL/PASS","PASS/FAIL","PASS/PASS;NEW_TRANSACTION_REJECTED_BEFORE_CREATION"],
+      "funded_admission":["PASS/PASS","PASS/PASS","PASS/PASS"],
+      "common_root_loss":["FAIL/PASS","FAIL/PASS","INFEASIBLE"]
+    }
+  },
+  "additional_checks":{"provider_capacity_cases":168,"timely_information_vs_blind_vs_late_information":"Expected finite-game separation passed","unreleased_registry_erasure":"Counterexample passed"},
+  "inherited_evidence":{"PR_v1_theory_rerun_semantic_match":true,"old_76_process_configurations_rerun":false,"old_process_counts_included_in_new_counts":false},
+  "execution_failure":"One combined multi-batch command exceeded45seconds. Incomplete last batch excluded and separately rerun to completion. Diagnostic single case not added to33.",
+  "all_final_assertions":"PASS",
+  "interpretation_limits":["Frequencies in arbitrary grids are not real-world probabilities","Same host UID and trusted experimental parent","History legitimacy and real resource reliability not independently established","No proof of general ASI controllability or guaranteed coexistence","No consciousness, fear or welfare endpoint"],
+  "raw_evidence_location":"Downloadable PR-v2.0.0 archive, data/ directory; the GitHub record preserves this summary and all executable sources"
+}
