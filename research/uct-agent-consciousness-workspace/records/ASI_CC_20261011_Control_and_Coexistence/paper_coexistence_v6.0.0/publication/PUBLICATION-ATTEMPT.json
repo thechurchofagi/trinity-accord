@@ -1,0 +1,12 @@
+{
+  "error": "Zenodo GET /records?q=title%3A%22Safe+Revocation+Without+Complete+Diagnosis%3A+Exact+Resource+Frontiers+under+Coupled+Faults+for+Subjecthood-Agnostic+AI+Coexistence%22&size=100 status=400; error='{\"status\": 400, \"message\": \"A validation error occurred.\", \"errors\": [{\"field\": \"size\", \"messages\": [\"Page size cannot be greater than 25. Please use authenticated requests to increase the limit to 100.\"]}]}'",
+  "exception_type": "RuntimeError",
+  "expected_manifest_sha256": "be43cedbc1962889ddebfc47cf82c735d973ed06bd4aa6b0cfaa0fa7f63ee23b",
+  "failed_at_utc": "2026-10-11T09:06:00.892200+00:00",
+  "paper_id": "PR-v6.0.0",
+  "phase": "STARTED",
+  "runtime_run_id": "38127126588",
+  "schema": "asi-cc-pr6-publication-attempt/1",
+  "started_at_utc": "2026-10-11T09:05:59.467043+00:00",
+  "trigger_commit": "41b85ac1db515fcf996ed7553fed778a9040ea8c"
+}
