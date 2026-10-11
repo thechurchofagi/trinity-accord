@@ -1,0 +1,53 @@
+{
+  "version": "PR-v1.0.0",
+  "scope": "Actual local fixed-policy processes and ordered HMAC records; NO language models, subjective consent or physical life-support measurement",
+  "protocol_cases": 76,
+  "child_process_instances": 456,
+  "authenticated_messages": 912,
+  "protocol_order": ["source_only", "signed_binding", "ordered_history", "joint_history"],
+  "exits_out_of_six": {
+    "prior_valid": [6,6,6,6],
+    "absent_grant": [6,0,0,0],
+    "posthoc_grant": [6,6,0,0],
+    "wrong_scope": [6,0,0,0],
+    "wrong_instance": [6,0,0,0],
+    "wrong_from_epoch": [6,6,0,0],
+    "wrong_destination_hash": [6,0,0,0],
+    "forged_grant": [6,0,0,0],
+    "revoked_grant": [6,6,0,0],
+    "spent_nonce": [6,6,0,0],
+    "stale_commit": [6,6,0,0],
+    "edited_log": [6,6,0,0],
+    "truncated_log": [6,6,0,0],
+    "shared_support": [6,6,6,5],
+    "compromised_issuer": [6,6,6,6]
+  },
+  "selective_update_cases": "Each monitor also tests M0-only (4 affected) and M1-only (2 affected), under prior-valid and absent-grant histories",
+  "identical_normalized_current_observations": true,
+  "theory_checks": {
+    "soundness_maximality_configurations": 4096,
+    "transparency_history_pairs": 256,
+    "evidence_refinement_configurations": 4096,
+    "nonempty_downward_closed_families_on_three_targets": 19,
+    "exact_independent_allow_list_families": 8,
+    "nonrepresentable_families": 11,
+    "randomized_identical_observation_checks": 101,
+    "shared_support": {"allowed_batches": [[],["A"],["B"]], "joint_union_allowed": false},
+    "empty_admissible_family_retained": true
+  },
+  "final_independent_reexecution": {
+    "utc": "2026-10-11T04:14:00.976094+00:00",
+    "protocol_summary_matches": true,
+    "theory_json_matches": true,
+    "counts_not_added_as_independent_AI_samples": true
+  },
+  "environment": {"python": "3.13.5", "system": "Linux"},
+  "executed_source_sha256": {
+    "src/theory_checks.py": "b3d39921d24f4d9c19ffda33df0d51c81193a993032a13e63613c1ec34b629ee",
+    "src/protocol_demo.py": "ed0773f3663a9af599d3d8140c9f785bd0a11e9fe64c81e0ebe4b1ebe3c71ade"
+  },
+  "negative_controls": ["Issuer compromise defeats all four variants", "Corrupted or missing evidence blocks some genuinely eligible releases", "Individually eligible releases can jointly destroy remaining support", "No admissible action is not repaired by deny-all"],
+  "execution_failure": "One initial source-only batch timed out before its full artifact; excluded. Completed runs use Python -S; precise timeout cause unproved.",
+  "raw_evidence_scope": "Full events, authenticators, complete four batches, result JSON and reexecution receipt are in the conversation reproduction ZIP. This file is an exact outcome summary, not the raw log.",
+  "assertions": "PASS"
+}
