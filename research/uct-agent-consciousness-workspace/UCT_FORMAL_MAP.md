@@ -2,7 +2,11 @@
 
 [总览](UCT_FORMAL_MAP.md) · [全部候选](PENDING_RESEARCH.md) · [当前状态](CURRENT_STATE.json) · [统一登记](UNIFIED_RESEARCH_INDEX.json) · [审查](UCT_FORMAL_AUDIT.md)
 
-整合版本 **UCT-INTEGRATION-v1.0.0**。正式科学图 **UCT-MAP-v1.1.2**；最新科学研究 **A3V20261010**；最新停用应用 **A4N20261011**；发表覆盖 **UCT-PUB-v1.0.33**。
+整合版本 **UCT-INTEGRATION-v1.0.0**。正式科学图 **UCT-MAP-v1.1.2**；最新科学研究 **A3V20261010**；最新停用应用 **A4O20261011**；发表覆盖 **UCT-PUB-v1.0.33**。
+
+### A4O 停用应用边界
+
+A4O 不新增正式对象。它把 A4N 的下一步压缩为六项同实例范式合同，并对六篇一手研究逐项筛查：没有一篇同时固定外部对象、独立扰动承载者姿态／本体感觉锚、诱发在线重映射、证明同一学习路线读取该重映射、比较肢体／纳入工具／未纳入工具，并提供同实例绑定。64 世界反例表明，姿态扰动后的终点与报告可由目标框架路线或独立扰动敏感补偿器生成；路线阻断只有在 A4D–A4G 的写入器／控制者清单闭合后才有分离力。跨研究互补证据不得拼接成一次 `all_of` 实际安装。无合格同实例范式，停止在 `H_cf` 之前。正式增量 **0/0/0**；C1/U1、R157、R159 与有效 R173 的原范围和状态不变。
 
 ### A4N 停用应用边界
 
@@ -40,9 +44,9 @@ A4N 不新增正式对象。它修正 A4M 的身体特异性反例：R159 已允
 
 ## 当前收束点
 
-Find one primary human or embodied-device paradigm that independently perturbs the bearer's pose anchor while external target/tool state is fixed, and tests whether the same learned route actually uses the online remapping. Compare limb, incorporated-tool and non-incorporated-tool cases. Stop before `H_cf` comparison if same-route use or the endpoint is not independently established.
+Design or locate one primary same-instance human or embodied-device paradigm that closes the six A4O criteria, with special priority on independently fixing the external target while perturbing the bearer pose/proprioceptive anchor and causally isolating the remap-consuming learned route under a closed writer/controller inventory. Stop before `H_cf` unless that organizational installation and an independently specified endpoint are both established.
 
-通俗地说：A4N 证明“这是工具”不等于“它不在身体行动框架里”。下一步必须找到能把承载者姿态锚与工具/目标状态分开扰动、并能证明同一路线确实读取重映射的实际范式；只有组织证据先成立，才讨论体验端点。
+通俗地说：现有研究分别提供了姿态扰动、工具使用、重映射或身体表征改变的证据，却没有把这些条件同时装进同一个可核查实例。下一步不是拼接论文，而是寻找或设计一个能在同一次装置中隔离“谁读取了重映射”的范式；只有组织证据先成立，才讨论体验端点。
 
 [正式图 424 条推导路线](integration/UCT-INTEGRATION-v1.0.0/COMPLETED_RULE_ROUTES.md)
 

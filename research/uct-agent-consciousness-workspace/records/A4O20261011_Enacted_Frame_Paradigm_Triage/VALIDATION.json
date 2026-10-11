@@ -1,0 +1,35 @@
+{
+  "schema": "a4o-validation/1",
+  "round": "A4O20261011",
+  "status": "PASS_ARTIFACT_AND_STRUCTURAL_CHECKS_WITH_DECLARED_SEMANTIC_LIMITS",
+  "checks": {
+    "checker_output_semantically_equals_exact_results": true,
+    "primitive_world_count": 64,
+    "primary_sources_scoped": 6,
+    "eligible_same_instance_sources": 0,
+    "endpoint_observation_keys_with_route_twins": 8,
+    "frame_only_compensator_only_twin_displayed": true,
+    "route_block_separation_is_conditional": true,
+    "phenomenal_assignments": 0,
+    "physical_installations": 0,
+    "completed_nodes": 913,
+    "completed_rules": 424,
+    "completed_context_links": 261,
+    "pending_objects_disabled": 727,
+    "suspended_historical_rules": 10,
+    "unresolved_deductive_references": 0,
+    "active_dependency_cycles": 0,
+    "all_of_interpreted_as_and": true,
+    "navigation_and_disabled_assembly_pass": true,
+    "current_scientific_pointer_match": true,
+    "scientific_promotion": false,
+    "full_semantic_reproof": false
+  },
+  "hashes": {
+    "checker_sha256": "b078356321b31602aaeed3717ff2524e0e7a34f2a60028bbd91977beedb6bdc3",
+    "checker_stdout_sha256": "2cf8334dbca8d79c9d4157e2c920d2beffcf6fdbdbe5d75491df1b87a71ac936",
+    "exact_results_sha256": "4460f399676fdbe18536b38b985df6785289401d569f3d002d3aa1d1bba40e2b",
+    "unified_map_gzip_sha256": "b37711fb7dbaca9b728feb38e7cb14abf4f63a9571035b40c048a97472df35be"
+  },
+  "limit": "A bounded source-contract audit and exact logical countermodel only; not evidence of an actual same-instance route, tool incorporation, H_cf calibration, C1, or a global semantic proof."
+}

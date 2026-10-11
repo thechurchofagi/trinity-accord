@@ -2,13 +2,13 @@
 
 [总览](UCT_FORMAL_MAP.md) · [全部候选](PENDING_RESEARCH.md) · [当前状态](CURRENT_STATE.json) · [统一登记](UNIFIED_RESEARCH_INDEX.json) · [审查](UCT_FORMAL_AUDIT.md)
 
-正式科学接续仍为 **A3V20261010**；最新停用应用为 **A4N20261011**。
+正式科学接续仍为 **A3V20261010**；最新停用应用为 **A4O20261011**。
 
-[A4N 中文交接](records/A4N20261011_Enacted_Frame_Specificity/HANDOFF_ZH.md) · [英文研究](records/A4N20261011_Enacted_Frame_Specificity/RESEARCH_NOTE.md) · [框架合同](records/A4N20261011_Enacted_Frame_Specificity/FRAME_SPECIFICITY_CONTRACT.md) · [形式审查](records/A4N20261011_Enacted_Frame_Specificity/FORMAL_AUDIT.md)
+[A4O 中文交接](records/A4O20261011_Enacted_Frame_Paradigm_Triage/HANDOFF_ZH.md) · [英文研究](records/A4O20261011_Enacted_Frame_Paradigm_Triage/RESEARCH_NOTE.md) · [范式合同](records/A4O20261011_Enacted_Frame_Paradigm_Triage/PARADIGM_CONTRACT.md) · [形式审查](records/A4O20261011_Enacted_Frame_Paradigm_Triage/FORMAL_AUDIT.md)
 
-当前结果：工具/器官标签不能检验 A4M 的身体特异性。64世界与四例方阵在固定 `CoupledForm`、保留使用、适配、输出和报告下，实现了解剖成员资格与承载者中心行动框架绑定的四种组合；纳入行动框架的工具可 `Member=0,Frame=1`，仅有解剖标签的回路可 `Member=1,Frame=0`。因此 A4M 第三类反例已修正为：只有独立证明工具回路缺少实际框架绑定时，才是负对照。
+当前结果：六项一手范式分别提供姿态/本体干预、工具纳入迹象或在线坐标变换，但没有一项在同实例内安装 A4N 的完整合取。跨论文拼接不等于实际共同满足；端点/报告变化也允许独立补偿器双胞胎。故停止于组织证据层，未建立实际 `EnactedFrameBind` 或 `H_cf`。
 
-下一具体问题：寻找一个一手人体或具身装置范式，能在固定外部目标/工具状态下独立扰动承载者姿态锚，并检验同一已学习路线是否实际使用在线重映射；比较肢体、纳入框架工具和未纳入工具。若现有范式只给输出/报告或没有同路线使用证据，保留停止，不进入 `H_cf` 比较。
+下一具体问题：在一个已形成的工具路线中，固定外部目标/工具几何，独立扰动身体姿态/本体锚，并对同一路线的锚输入做切断与同接口救援；先审查备用控制器完备性。若仍只有端点、报告、跨任务后效或跨论文拼接，继续停止。
 
 [既有 A3V 科学交接](records/A3V20261010_Concurrent_Liveness_and_Familiarity/HANDOFF_ZH.md) · [地图整理交接](records/NAV20261010_Map_Integration/HANDOFF_ZH.md)
 

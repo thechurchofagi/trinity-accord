@@ -1,0 +1,12 @@
+{
+  "schema": "uct-disabled-application/1",
+  "id": "A4O20261011",
+  "version": "A4O-EFP-v0.1.0",
+  "enabled": false,
+  "nodes": [],
+  "rules": [],
+  "context_links": [],
+  "counts": {"nodes": 0, "rules": 0, "contexts": 0},
+  "reason": "A4O is a bounded primary-source screen and finite application countermodel. No same-instance physical installation, selected phenomenal endpoint or new completed-map deduction is established."
+}
+

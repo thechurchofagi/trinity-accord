@@ -1,0 +1,23 @@
+{
+  "id": "A4O20261011",
+  "version": "A4O-EFP-v0.1.0",
+  "status": "DISABLED_BOUNDED_PRIMARY_PARADIGM_SCREEN_AND_SAME_INSTANCE_NONIDENTIFICATION",
+  "enabled_as_established_premises": false,
+  "source": "records/A4O20261011_Enacted_Frame_Paradigm_Triage/RESEARCH_NOTE.md",
+  "handoff": "records/A4O20261011_Enacted_Frame_Paradigm_Triage/HANDOFF_ZH.md",
+  "work_log": "records/A4O20261011_Enacted_Frame_Paradigm_Triage/WORK_LOG.md",
+  "claim_ledger": "records/A4O20261011_Enacted_Frame_Paradigm_Triage/CLAIM_LEDGER.json",
+  "map_extension": "records/A4O20261011_Enacted_Frame_Paradigm_Triage/MAP_EXTENSION.json",
+  "exact_results": "records/A4O20261011_Enacted_Frame_Paradigm_Triage/EXACT_RESULTS.json",
+  "parent_science": "A3V20261010",
+  "parent_followup": "A4N20261011",
+  "completed_map": "UCT-MAP-v1.1.2",
+  "scientific_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+  "primary_sources_scoped": 6,
+  "eligible_full_joint_paradigms": 0,
+  "endpoint_compensator_twin": true,
+  "independent_h_validation": false,
+  "actual_bodily_installation": false,
+  "standalone_manuscript": "HOLD"
+}
+

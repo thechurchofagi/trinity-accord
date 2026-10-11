@@ -1126,3 +1126,14 @@ A4G应用保持停用，正式图增量0/0/0。C1/U1未改；硬件来源坐标�
 - `SCU-AUDIT-DEPTH`: AUDIT_INCOMPLETE. The 913/424/261 assembly is structurally retraversed and affected semantics reviewed, not globally re-proved.
 - Substantive repair: an external tool can be incorporated into an actual bearer-centred frame, so toolhood alone is not A4M's body-specificity refuter. A valid negative control needs independently grounded absence of `EnactedFrameBind` while generic `CoupledForm` remains actual.
 - Evidence: `records/A4N20261011_Enacted_Frame_Specificity/REVIEW_RESPONSE.md`, `FORMAL_AUDIT.md`, `GAP_LEDGER.md`.
+
+## A4O20261011 research response (does not close supervision items)
+
+- `QC-20261008-10`: **ACKNOWLEDGED/OPEN**. The screen does not assign, orient or calibrate `H_cf`.
+- `IA-QC11`: **OPEN**. Six primary experiments contribute separate components, but no single bearer/event/route/complete signature installs the full conjunction; cross-study assembly is rejected.
+- `QC-20261008-12`: **OPEN**. A 64-world compensator twin preserves endpoint/report dependence while changing same-route frame use.
+- `QC-20261008-13`: **OPEN**. The anchor, route, tool state, event and endpoint ports are prospectively typed but not jointly physically bound.
+- `SCU-OPEN-R191-NORMALIZATION`: **OPEN**. No normalization is attempted or used as a discharged premise.
+- `SCU-AUDIT-DEPTH`: **AUDIT_INCOMPLETE**. The completed inventory and affected C1/R157/R159/R173/A4M/A4N neighborhood were reviewed; all historical proofs were not reconstructed.
+- Substantive result: no scoped primary source supplies all six same-instance criteria; endpoint changes alone remain compatible with an allocentric compensator. The stop rule is retained before `H_cf`.
+- Evidence: `records/A4O20261011_Enacted_Frame_Paradigm_Triage/REVIEW_RESPONSE.md`, `SOURCE_SCOPE.md`, `PARADIGM_CONTRACT.md`, `EXACT_RESULTS.json`, `FORMAL_AUDIT.md`, `GAP_LEDGER.md`.

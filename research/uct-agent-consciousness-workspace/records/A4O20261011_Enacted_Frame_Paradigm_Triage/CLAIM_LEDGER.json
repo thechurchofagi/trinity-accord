@@ -1,0 +1,51 @@
+{
+  "schema": "a4o-claims/1",
+  "enabled_as_established_premises": false,
+  "claims": [
+    {
+      "id": "A4O-C01",
+      "type": "empirical_eligibility_contract",
+      "statement": "A primary paradigm grounds the selected A4N comparison only when external-state fixation, an independently oriented bearer-anchor intervention, online remapping, same-route consumption, declared comparison coverage and same-instance binding all hold jointly.",
+      "domain": "A4N/A4M enacted body/action-frame comparisons; not a universal criterion for bodily experience or basal experience.",
+      "all_of": ["C_ext", "C_anchor", "C_remap", "C_route", "C_compare", "C_bind"],
+      "proof_or_source": "PARADIGM_CONTRACT.md §§1–2; this is a declared application/evidence contract preserving A4N's five conjuncts and A4M same-route mediation.",
+      "counterexamples_limits": "Cross-study evidence, endpoint change, report, tool label or model fit cannot substitute for a missing conjunct. The contract may be refined by future primary evidence.",
+      "status": "DECLARED_DISABLED_EMPIRICAL_CONTRACT",
+      "thought_experiment_role": "Keeps fixed and varied coordinates explicit across all four inherited families."
+    },
+    {
+      "id": "A4O-C02",
+      "type": "bounded_primary_source_screen",
+      "statement": "None of six scoped primary paradigms satisfies all six A4O-C01 conjuncts; the strongest ingredients are distributed across incompatible bearer/event/route packages.",
+      "domain": "The six primary sources and accessible scopes recorded in SOURCE_SCOPE.md; not a claim about all literature.",
+      "all_of": ["predeclared six-criterion matrix", "primary-source scope only", "UNCLEAR/PARTIAL never upgraded to YES", "same-instance conjunction"],
+      "proof_or_source": "SOURCE_SCOPE.md, RESEARCH_NOTE.md §2 and EXACT_RESULTS.json; eligible_sources is empty.",
+      "counterexamples_limits": "A primary source outside the bounded screen or fuller inaccessible methods could change a grade after explicit review. That would revise this screen, not retroactively install an actual token here.",
+      "status": "BOUNDED_NEGATIVE_SCREEN_NO_SYSTEMATIC_REVIEW_CLAIM",
+      "thought_experiment_role": "Blocks combining an anchor intervention from one bearer with tool remapping from another."
+    },
+    {
+      "id": "A4O-C03",
+      "type": "exact_finite_nonidentification",
+      "statement": "At fixed external target/tool state, pose-perturbation-dependent endpoint and report signatures do not identify same-route frame use: a frame route and a separate perturbation-sensitive compensator can be observationally equal.",
+      "domain": "The declared 64-world binary model; no phenomenal variable and no physical universal quantification.",
+      "all_of": ["fixed external-state observation", "pose perturbation", "endpoint/report observation", "admitted alternate compensator"],
+      "proof_or_source": "check_paradigm_identification.py and EXACT_RESULTS.json; eight observable fibres contain both frame_route values and the displayed pair has the same observation key.",
+      "counterexamples_limits": "A route-specific block separates the displayed pair only in the declared closed controller model. Intervention-aware hidden writers reopen the twin under A4D–A4G.",
+      "status": "PROVED_FINITE_APPLICATION_COUNTERMODEL_NO_MATH_NOVELTY",
+      "thought_experiment_role": "Abacus/calculator and copy/swap cases distinguish live frame use from cached or parallel correction."
+    },
+    {
+      "id": "A4O-C04",
+      "type": "stop_result_and_next_target",
+      "statement": "Because no reviewed source jointly installs A4O-C01, EnactedFrameBind and H_cf remain unassigned. The smallest prospective target is a same-event incorporated-tool test that jointly installs an independently perturbed bearer anchor and route-specific consumption under fixed external state.",
+      "domain": "This bounded A4N continuation; not a negative conclusion about all tool incorporation or experience.",
+      "all_of": ["A4O-C02", "A4O-C03", "A4N stop rule", "open B_cf-frame and measurement bridges"],
+      "proof_or_source": "RESEARCH_NOTE.md §§5–6 and PARADIGM_CONTRACT.md §4.",
+      "counterexamples_limits": "A future eligible primary paradigm can reopen the application. No present source failure refutes C1/U1 or proves absence of the selected experience.",
+      "status": "STOPPED_OPEN_APPLICATION_NO_PHENOMENAL_ASSIGNMENT",
+      "thought_experiment_role": "Returns the next round to one concrete actual-installation question."
+    }
+  ]
+}
+

@@ -96,14 +96,14 @@
     "nondeductive_context_links": 261,
     "total_review_items": 1608
   },
-  "pending_note": "All prior pending identities retained. A4N adds a disabled 0/0/0 scope correction and finite membership/frame counterexample square; no physical token, H_cf calibration or completed-map promotion.",
+  "pending_note": "All prior pending identities retained. A4O adds a disabled 0/0/0 bounded primary-paradigm screen and endpoint/compensator countermodel; no full same-instance source, physical installation, H_cf calibration or completed-map promotion.",
   "publication_coverage": {
     "version": "UCT-PUB-v1.0.33",
     "entry": "PUBLICATION_COVERAGE.json",
-    "latest_update": "records/A4N20261011_Enacted_Frame_Specificity/PUBLICATION_COVERAGE_UPDATE.json",
+    "latest_update": "records/A4O20261011_Enacted_Frame_Paradigm_Triage/PUBLICATION_COVERAGE_UPDATE.json",
     "nondeductive": true,
     "latest_originality_review": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/PUBLICATION_COVERAGE_UPDATE.json",
-    "latest_followup_application": "records/A4N20261011_Enacted_Frame_Specificity/PUBLICATION_COVERAGE_UPDATE.json"
+    "latest_followup_application": "records/A4O20261011_Enacted_Frame_Paradigm_Triage/PUBLICATION_COVERAGE_UPDATE.json"
   },
   "latest_activity": {
     "id": "A3V20261010",
@@ -127,8 +127,8 @@
     "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
     "evidence_status": "BOUNDED_PRIMARY_SOURCE_APPLICATION_STOP_AND_R173_SCOPE_RETURN; ACTUAL_PREMISES_AND_H_OPEN"
   },
-  "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 completed objects retain structural traversal, and A4N manually rechecked C1/U1, R157, R159, effective R173, A4H and A4M. Deep full-history semantics remain AUDIT_INCOMPLETE.",
-  "next_priority": "Find one primary human or embodied-device paradigm that independently perturbs the bearer pose anchor while external target/tool state is fixed and tests same-learned-route use of online remapping across limb, incorporated-tool and non-incorporated-tool cases; stop before H_cf if actual route use or endpoint calibration is absent.",
+  "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 completed objects retain structural traversal, and A4O manually rechecked C1/U1, R157, R159, effective R173, A4M and A4N. Deep full-history semantics remain AUDIT_INCOMPLETE.",
+  "next_priority": "Design or locate one same-event incorporated-tool paradigm that fixes external target/tool state, independently perturbs the bearer pose/proprioceptive anchor, and blocks/rescues that anchor at the same learned route after auditing alternate controllers. Stop if only endpoint/report, aftereffect, or cross-study evidence is available.",
   "latest_scoped_review": {
     "audit": "records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_AUDIT.md",
     "per_id_structure": "records/CTD20261010_Cross_Task_Intervention_v02/governance/BASELINE_PER_ID_STRUCTURE.json.gz",
@@ -543,26 +543,27 @@
     }
   },
   "latest_followup_application": {
-    "id": "A4N20261011",
-    "version": "A4N-ENACTED-FRAME-v0.1.0",
-    "status": "DISABLED_SCOPED_ENACTED_FRAME_SPECIFICITY_REPAIR_AND_EXACT_COUNTEREXAMPLE_SQUARE",
+    "id": "A4O20261011",
+    "version": "A4O-EFP-v0.1.0",
+    "status": "DISABLED_BOUNDED_PRIMARY_PARADIGM_SCREEN_AND_SAME_INSTANCE_NONIDENTIFICATION",
     "enabled_as_established_premises": false,
-    "source": "records/A4N20261011_Enacted_Frame_Specificity/RESEARCH_NOTE.md",
-    "handoff": "records/A4N20261011_Enacted_Frame_Specificity/HANDOFF_ZH.md",
-    "work_log": "records/A4N20261011_Enacted_Frame_Specificity/WORK_LOG.md",
-    "claim_ledger": "records/A4N20261011_Enacted_Frame_Specificity/CLAIM_LEDGER.json",
-    "map_extension": "records/A4N20261011_Enacted_Frame_Specificity/MAP_EXTENSION.json",
-    "exact_results": "records/A4N20261011_Enacted_Frame_Specificity/EXACT_RESULTS.json",
+    "source": "records/A4O20261011_Enacted_Frame_Paradigm_Triage/RESEARCH_NOTE.md",
+    "handoff": "records/A4O20261011_Enacted_Frame_Paradigm_Triage/HANDOFF_ZH.md",
+    "work_log": "records/A4O20261011_Enacted_Frame_Paradigm_Triage/WORK_LOG.md",
+    "claim_ledger": "records/A4O20261011_Enacted_Frame_Paradigm_Triage/CLAIM_LEDGER.json",
+    "map_extension": "records/A4O20261011_Enacted_Frame_Paradigm_Triage/MAP_EXTENSION.json",
+    "exact_results": "records/A4O20261011_Enacted_Frame_Paradigm_Triage/EXACT_RESULTS.json",
     "parent_science": "A3V20261010",
-    "parent_followup": "A4M20261011",
+    "parent_followup": "A4N20261011",
     "completed_map": "UCT-MAP-v1.1.2",
     "scientific_delta": {
       "nodes": 0,
       "rules": 0,
       "contexts": 0
     },
-    "enacted_frame_contract": true,
-    "membership_frame_independence_square": true,
+    "primary_sources_scoped": 6,
+    "eligible_full_joint_paradigms": 0,
+    "endpoint_compensator_twin": true,
     "independent_h_validation": false,
     "actual_bodily_installation": false,
     "standalone_manuscript": "HOLD"

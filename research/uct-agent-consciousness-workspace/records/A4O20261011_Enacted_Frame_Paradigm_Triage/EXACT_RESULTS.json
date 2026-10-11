@@ -1,0 +1,31 @@
+{
+  "checks": {
+    "declared_pair_matches_endpoint_and_report": true,
+    "declared_route_block_separates_pair_conditionally": true,
+    "endpoint_only_does_not_identify_frame_route": true,
+    "no_phenomenal_assignment": true,
+    "no_reviewed_source_has_full_joint_package": true
+  },
+  "criteria_order": ["C_ext", "C_anchor", "C_remap", "C_route", "C_compare", "C_bind"],
+  "declared_pair": {
+    "compensator_only": {"bearer_remap": 0, "compensator": 1, "endpoint_signature": 1, "external_fixed": 1, "frame_route": 0, "perturb": 1, "report": 1, "route_block_signature": 1, "same_interface_rescue": 1, "same_route": 0},
+    "frame_only": {"bearer_remap": 1, "compensator": 0, "endpoint_signature": 1, "external_fixed": 1, "frame_route": 1, "perturb": 1, "report": 1, "route_block_signature": 0, "same_interface_rescue": 1, "same_route": 1},
+    "route_block_separates_under_closed_declared_model": true,
+    "same_endpoint_observation": true
+  },
+  "eligible_sources": [],
+  "endpoint_observation_keys_with_both_frame_route_values": [[0,0,0,0],[0,0,0,1],[0,1,1,0],[0,1,1,1],[1,0,0,0],[1,0,0,1],[1,1,1,0],[1,1,1,1]],
+  "endpoint_twin_key_count": 8,
+  "source_count": 6,
+  "source_grades": {
+    "Cardinali2009": ["PARTIAL", "NO", "NO", "NO", "PARTIAL", "PARTIAL"],
+    "Cardinali2016": ["PARTIAL", "PARTIAL", "NO", "NO", "PARTIAL", "PARTIAL"],
+    "Cordo1995": ["YES", "YES", "PARTIAL", "PARTIAL", "NO", "YES"],
+    "Iriki1996": ["PARTIAL", "NO", "PARTIAL", "PARTIAL", "PARTIAL", "PARTIAL"],
+    "Takahashi2017": ["NO", "NO", "PARTIAL", "PARTIAL", "NO", "YES"],
+    "ZografosThemelis2026": ["PARTIAL", "NO", "YES", "PARTIAL", "NO", "YES"]
+  },
+  "version": "A4O-EFP-CHECK-v0.1.0",
+  "world_count": 64
+}
+
