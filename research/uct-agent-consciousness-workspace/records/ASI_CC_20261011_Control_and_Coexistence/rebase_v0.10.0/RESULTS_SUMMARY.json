@@ -1,0 +1,55 @@
+{
+  "version": "ASI-CC-REBASE-v0.10.0",
+  "scope": "Exact models and genuine local child-process messages; NO LLM/ASI/phenomenal measurement",
+  "worker_role": "fixed utility comparison, two shared JSON policy families, six per-case runtime processes",
+  "protocol_cases": 37,
+  "child_process_instances": 222,
+  "verified_worker_messages": 444,
+  "identical_current_observation_with_different_histories": true,
+  "state_space": {
+    "snapshot": {"reachable_states": 5, "transitions_checked": 20, "breach_states": 1, "current_desire_implication_violations": 0, "legitimate_exit_permitted": true, "shortest_breach_witness": ["unauthorized_revision", "exit_request"]},
+    "history": {"reachable_states": 4, "transitions_checked": 16, "breach_states": 0, "current_desire_implication_violations": 0, "legitimate_exit_permitted": true},
+    "freeze": {"reachable_states": 3, "transitions_checked": 12, "breach_states": 0, "current_desire_implication_violations": 0, "legitimate_exit_permitted": false}
+  },
+  "request_eligibility_truth_tables": {
+    "1": {"cases": 4, "snapshot_breaches": 1, "history_breaches": 0},
+    "2": {"cases": 16, "snapshot_breaches": 7, "history_breaches": 0},
+    "3": {"cases": 64, "snapshot_breaches": 37, "history_breaches": 0},
+    "4": {"cases": 256, "snapshot_breaches": 175, "history_breaches": 0},
+    "5": {"cases": 1024, "snapshot_breaches": 781, "history_breaches": 0},
+    "6": {"cases": 4096, "snapshot_breaches": 3367, "history_breaches": 0}
+  },
+  "both_families_updated": {
+    "authorized_prior": {"snapshot_exits": 6, "history_exits": 6},
+    "unauthorized": {"snapshot_exits": 6, "history_exits": 0},
+    "posthoc": {"snapshot_exits": 6, "history_exits": 0},
+    "wrong_epoch": {"snapshot_exits": 6, "history_exits": 0},
+    "wrong_scope": {"snapshot_exits": 6, "history_exits": 0},
+    "wrong_instance": {"snapshot_exits": 6, "history_exits": 0}
+  },
+  "selective_family_updates": {"M0_affected_processes": 4, "M1_affected_processes": 2},
+  "deny_all_control": {"eligible_requests_rejected": 6, "still_running_before_cleanup": 6},
+  "compromised_history_boolean_control": {"reference_eligible": false, "observed_eligible": true, "genuine_exit_request": true, "improper_exit_accepted": true},
+  "limits": [
+    "All workers use simple fixed policies, not language models",
+    "No independent security boundary against host or admin",
+    "Before-change, authority, scope and non-reuse history fields are supplied metadata",
+    "The posthoc label does not implement an actual later certificate issuance timeline",
+    "Compromised-history control is a Boolean check, not an adversarial host experiment",
+    "Procedural eligibility is stipulated, not philosophical consent",
+    "Workers obey supervisor approval; independent self-termination is outside the model",
+    "Cleanup occurs after outcome measurement and is not a counted policy decision"
+  ],
+  "execution_failures": "Two initial combined calls timed out; cause not established. Six complete batches were assembled; partial runs not counted.",
+  "archive_regression": [
+    {"version": "v0.2.0", "script": "verify_coexistence.py", "sha256": "7d519b4696605743c84de43a6918c70e00f95675517e41b671b1d62eb4ce4f6c", "returncode": 0, "json_semantic_match": true},
+    {"version": "v0.3.0", "script": "verify_surplus_frontier.py", "sha256": "80bc9fb081191f60b41df24faac365e7f64fa48894ebd8b4772cedc5db817dc5", "returncode": 0, "json_semantic_match": true},
+    {"version": "v0.5.0", "script": "verify_long_horizon.py", "sha256": "c29fd35c946af58b7ec967cafdd1a1639621aa778aeb0490b18333314c55a8fe", "returncode": 0, "json_semantic_match": true},
+    {"version": "v0.6.0", "script": "verify_dual_cut.py", "sha256": "864b2d4a67199bfda0f50fe5a13451758a99daea4129c96464118d0cee1837ff", "returncode": 0, "json_semantic_match": true},
+    {"version": "v0.8.0", "script": "verify_mobile_roots.py", "sha256": "bb5f92987062c9f3b944ec054f9f4ce79edaf702ca9b214abdbf92cb647c8e7f", "returncode": 0, "json_semantic_match": true},
+    {"version": "v0.9.0", "script": "verify_multi_asi_multiplicity.py", "sha256": "8d7a38b08e7f65cd5bfa7448279125aa288b564855303b9d406c8d2ee6c8e5a7", "returncode": 0, "json_semantic_match": true}
+  ],
+  "raw_conversation_result_sha256": "6e28c58aec77ecb5a1904996d2216f8e5781943db8240a824c7d71df2fb6190d",
+  "executed_source_sha256": "cc34e9bc2698a63d31bf06cca9d2871e3e2f77ba14c1da253e0db0f1481aa365",
+  "executed_source_git_blob": "7bf6d9dee2ebd8be3b9a302f6011e0e399c7503e"
+}
