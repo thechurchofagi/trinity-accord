@@ -11,3 +11,7 @@
 9. Rechecked direction after selection and after results: the work distinguishes two positive explanations of one bodily continuation character, adds no basal-experience gate and stops without actual calibration.
 10. Updated the disabled application indexes, formal map/audit, memory, handoff and supervision response. Publication coverage remains unchanged and standalone manuscript status remains HOLD.
 11. Pre-save review retained every OPEN/ACKNOWLEDGED item and the incomplete deep-audit status. GitHub and Library persistence details are finalized in the recovery manifest and master handoff.
+12. Verified GitHub science commit `e196fafe02c3cc40d016fe6eb3975bfddaf5054e` and tree `d87e3ac84ac1eae133b833d842ce260453cf2236` against the local validated tree.
+13. Built a 25-file incremental ZIP directly from that commit, uploaded it with a separate per-file manifest, reverse-materialized both, and obtained byte equality plus matching SHA256 values.
+14. Replaced the fixed master handoff at expected version 128, preserving its identity; reverse materialization confirmed version 129 and byte equality.
+15. Prepared the non-self-referential Git persistence receipt and recovery manifest. The final metadata commit is recorded by the fixed master after remote readback.

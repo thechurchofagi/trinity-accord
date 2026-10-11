@@ -1,0 +1,41 @@
+{
+  "schema": "uct-recovery-manifest/1",
+  "round": "A4K20261011",
+  "recovery_order": [
+    "Read the latest version of Library file libfile_4175a81748fc819187fa8f5771f056fa.",
+    "Fetch branch uct-agent-consciousness-workspace and require science commit e196fafe02c3cc40d016fe6eb3975bfddaf5054e or a verified fast-forward successor.",
+    "Read HANDOFF_ZH.md, UNCERTAINTY_REGION_CONTRACT.md, RESEARCH_NOTE.md, EXACT_RESULTS.json, CLAIM_LEDGER.json, GAP_LEDGER.md, FORMAL_AUDIT.md, REVIEW_RESPONSE.md, VALIDATION.json and PERSISTENCE_RECEIPT.json in the A4K record.",
+    "Verify the 25-file increment ZIP and manifest by their exact SHA256 values before using them; do not overlay them on a newer verified branch.",
+    "Run check_interval_regions.py and require the exact disjoint, overlap, observed-box and zero-orientation checks with zero phenomenal assignments.",
+    "Run records/NAV20261010_Map_Integration/validate_current_map.py --root research/uct-agent-consciousness-workspace and retain all OPEN/AUDIT_INCOMPLETE states."
+  ],
+  "verified_science": {
+    "base_commit": "e5cebca96e9673093bb779534640657331462db9",
+    "commit": "e196fafe02c3cc40d016fe6eb3975bfddaf5054e",
+    "tree": "d87e3ac84ac1eae133b833d842ce260453cf2236"
+  },
+  "increment": {
+    "library_file_id": "libfile_9b90ab31ad708191a8d6913660b0db04",
+    "sha256": "d174870d93be21c1bfd92f3b21c069593a4b3606108cb4b08ab544efe0e646e0",
+    "size_bytes": 135927,
+    "file_count": 25,
+    "complete_snapshot": false
+  },
+  "manifest": {
+    "library_file_id": "libfile_322f053240848191bf5aa7ced5ac5139",
+    "sha256": "a502eedecf0876d6e96c816f2ca5a4ea957c6aed93033201b3bf0973ecd7510c",
+    "size_bytes": 7014
+  },
+  "master": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "science_version": 129,
+    "science_version_reverse_materialized_byte_equal": true,
+    "final_confirmation_version": "recorded_after_final_remote_commit"
+  },
+  "not_completed": [
+    "Independent pre-outcome fidelity intervals from an actual same-bearer installation",
+    "Actual same-event retained route and complete bearer installation",
+    "Signed J_cont-to-H_cont calibration",
+    "Global deep semantic proof of the complete historical map"
+  ]
+}

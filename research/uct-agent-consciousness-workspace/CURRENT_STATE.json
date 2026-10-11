@@ -228,7 +228,7 @@
     "map_replacement": false,
     "actual_application_established": false
   },
-  "latest_persistence_receipt": "records/A4H20261011_Compositional_Action_Familiarity/PERSISTENCE_RECEIPT.json",
+  "latest_persistence_receipt": "records/A4K20261011_Uncertainty_Bounded_Prediction_Regions/PERSISTENCE_RECEIPT.json",
   "previous_latest_research_before_CTD": {
     "id": "A3L20261010",
     "result_version": "A3L-RESULT-v0.1.0",
@@ -1083,6 +1083,22 @@
     "library_manifest_id": "libfile_0fc22e51098481918e1828fc5e4a396b",
     "library_manifest_sha256": "6fb0301b708e48e706034311defb59fc79f5d0c5403c1b1a16b3d7b4b93fb106",
     "library_manifest_size_bytes": 5573,
+    "reverse_materialized_byte_equal": true
+  },
+  "latest_activity_persistence_after_A4K_science": {
+    "status": "GITHUB_SCIENCE_COMMIT_VERIFIED; LIBRARY_INCREMENT_REVERSE_VERIFIED; MASTER_V129_CONFIRMED; FINAL_METADATA_COMMIT_IS_EXPECTED_SHA_SUCCESSOR",
+    "receipt": "records/A4K20261011_Uncertainty_Bounded_Prediction_Regions/PERSISTENCE_RECEIPT.json",
+    "recovery_manifest": "records/A4K20261011_Uncertainty_Bounded_Prediction_Regions/RECOVERY_MANIFEST.json",
+    "github_base_commit": "e5cebca96e9673093bb779534640657331462db9",
+    "github_science_commit": "e196fafe02c3cc40d016fe6eb3975bfddaf5054e",
+    "github_science_tree": "d87e3ac84ac1eae133b833d842ce260453cf2236",
+    "library_master_science_version": 129,
+    "library_increment_id": "libfile_9b90ab31ad708191a8d6913660b0db04",
+    "library_increment_sha256": "d174870d93be21c1bfd92f3b21c069593a4b3606108cb4b08ab544efe0e646e0",
+    "library_increment_size_bytes": 135927,
+    "library_manifest_id": "libfile_322f053240848191bf5aa7ced5ac5139",
+    "library_manifest_sha256": "a502eedecf0876d6e96c816f2ca5a4ea957c6aed93033201b3bf0973ecd7510c",
+    "library_manifest_size_bytes": 7014,
     "reverse_materialized_byte_equal": true
   },
   "latest_activity_persistence_after_A4I_science": {

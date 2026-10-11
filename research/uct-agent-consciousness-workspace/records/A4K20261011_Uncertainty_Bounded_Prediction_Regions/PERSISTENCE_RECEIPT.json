@@ -1,0 +1,46 @@
+{
+  "schema": "uct-persistence-receipt/1",
+  "round": "A4K20261011",
+  "status": "SCIENCE_COMMIT_AND_LIBRARY_INCREMENT_VERIFIED; FINAL_METADATA_COMMIT_IS_EXPECTED_SHA_SUCCESSOR",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "base_commit": "e5cebca96e9673093bb779534640657331462db9",
+    "science_commit": "e196fafe02c3cc40d016fe6eb3975bfddaf5054e",
+    "science_tree": "d87e3ac84ac1eae133b833d842ce260453cf2236",
+    "changed_paths": 25,
+    "expected_sha_update": true,
+    "remote_commit_readback": true,
+    "storage_commit_message_has_skip_ci": true
+  },
+  "library": {
+    "master_handoff_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "master_science_version": 129,
+    "increment": {
+      "library_file_id": "libfile_9b90ab31ad708191a8d6913660b0db04",
+      "file_id": "file_000000005b1081f58e7789b008d2a268",
+      "filename": "UCT_A4K_Increment_20261011.zip",
+      "sha256": "d174870d93be21c1bfd92f3b21c069593a4b3606108cb4b08ab544efe0e646e0",
+      "size_bytes": 135927,
+      "file_count": 25,
+      "scope": "increment_only"
+    },
+    "manifest": {
+      "library_file_id": "libfile_322f053240848191bf5aa7ced5ac5139",
+      "file_id": "file_00000000598081f5b89f944044c3ab32",
+      "filename": "UCT_A4K_Increment_20261011_MANIFEST.json",
+      "sha256": "a502eedecf0876d6e96c816f2ca5a4ea957c6aed93033201b3bf0973ecd7510c",
+      "size_bytes": 7014
+    },
+    "reverse_materialized": true,
+    "byte_equal": true,
+    "hashes_reverified": true
+  },
+  "limits": {
+    "complete_repository_backup": false,
+    "complete_history_backup": false,
+    "formal_scientific_promotion": false,
+    "phenomenal_validation": false
+  },
+  "self_reference_note": "The final metadata commit cannot contain its own SHA. Its exact SHA is recorded in the protected successor version of the fixed master handoff after remote readback."
+}
