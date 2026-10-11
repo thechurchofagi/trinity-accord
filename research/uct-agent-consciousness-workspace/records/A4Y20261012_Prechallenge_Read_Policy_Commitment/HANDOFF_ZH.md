@@ -14,7 +14,7 @@ A4Y 回答 A4X 留下的干预感知隐藏模式问题。在固定消费者边�
 
 ## 保存与恢复
 
-最终 Git 提交、树、固定主交接版本、增量包及清单哈希见 `PERSISTENCE_RECEIPT.json` 和 `RECOVERY_MANIFEST.json`。增量包只覆盖本轮核验基线到科学树的变化，不是完整仓库、完整工作集或全部历史。
+GitHub 科学提交 `1e3f5280c69753a677552e07589dbaa5e6a6455b`、树 `add6917c06fc673ed010ded6435785139bda5487` 已用 expected-SHA 快进并回读。固定主交接保持 Library ID `libfile_4175a81748fc819187fa8f5771f056fa`，科学阶段 v157 已反向核验。34 路径增量为 `libfile_f16dfd7eb3e48191832194d80dc2e528`（237247 字节，SHA256 `8707ba4d…`）；清单为 `libfile_ffccda464e7c8191942ee02d876edb1a`（8749 字节，SHA256 `27bb162b…`），两者反向物化逐字节相等。增量只覆盖核验基线到科学树的变化，不是完整仓库、完整工作集或全部历史。最终 Git 收据后继由固定主交接 v158 记录以避免自指；完整字段见 `PERSISTENCE_RECEIPT.json` 与 `RECOVERY_MANIFEST.json`。
 
 ## 下一具体问题
 

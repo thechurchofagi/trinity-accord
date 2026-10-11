@@ -122,7 +122,7 @@
     "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
     "evidence_status": "BOUNDED_PRIMARY_SOURCE_APPLICATION_STOP_AND_R173_SCOPE_RETURN; ACTUAL_PREMISES_AND_H_OPEN"
   },
-  "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 effective objects retain a fresh per-ID structural traversal. A4X manually rechecked C1/U1, P3/P6, R157, R159, effective R173, R181, A4M, A4N, A4V and A4W. Deep full-history semantics remain AUDIT_INCOMPLETE.",
+  "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 effective objects retain a fresh per-ID structural traversal. A4Y manually rechecked C1/U1, P3/P6, R157, R159, effective R173, R181 and A4P/A4D-A4G/A4V-A4Y. Deep full-history semantics remain AUDIT_INCOMPLETE.",
   "next_priority": "A4Y next: on one actual accessible consumer boundary, determine whether an independently controlled witness can bind a prechallenge read-policy state to the actual named-port read event while challenge labels, schedules and shared randomness are physically excluded. If no such interface is available, stop the certificate branch and return to independent B_pc^family/H_cf target semantics rather than enumerate broader controllers.",
   "latest_activity_persistence_after_A4W_science": {
     "science_commit": "0eddd9c06670a7357a8be5e38efc8af1f335405f",
@@ -132,6 +132,18 @@
     "library_increment": "libfile_978a804483fc8191b0b8fbf95762bd98",
     "library_increment_manifest": "libfile_06c679f9b5008191b506090a1abf1a52",
     "increment_is_complete_backup": false
+  },
+  "latest_activity_persistence_after_A4Y_science": {
+    "science_commit": "1e3f5280c69753a677552e07589dbaa5e6a6455b",
+    "science_tree": "add6917c06fc673ed010ded6435785139bda5487",
+    "receipt": "records/A4Y20261012_Prechallenge_Read_Policy_Commitment/PERSISTENCE_RECEIPT.json",
+    "recovery_manifest": "records/A4Y20261012_Prechallenge_Read_Policy_Commitment/RECOVERY_MANIFEST.json",
+    "fixed_master_library_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "fixed_master_verified_version_before_receipt_successor": 157,
+    "increment_library_id": "libfile_f16dfd7eb3e48191832194d80dc2e528",
+    "manifest_library_id": "libfile_ffccda464e7c8191942ee02d876edb1a",
+    "increment_scope": "34 paths; not a full repository or working-set backup",
+    "reverse_materialization_byte_equal": true
   },
   "latest_activity_persistence_after_A4X_science": {
     "science_commit": "f32d2a6daff634dfcc05f0d6aa5b4f8685c90e73",

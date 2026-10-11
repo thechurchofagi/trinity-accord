@@ -1,0 +1,21 @@
+{
+  "schema": "uct-recovery-manifest/1.0",
+  "round": "A4Y20261012",
+  "authoritative_science_commit": "1e3f5280c69753a677552e07589dbaa5e6a6455b",
+  "authoritative_science_tree": "add6917c06fc673ed010ded6435785139bda5487",
+  "baseline_commit": "54b68ce4e3ac7514a85f85e9f900ede5507fb97c",
+  "increment_library_file_id": "libfile_f16dfd7eb3e48191832194d80dc2e528",
+  "increment_manifest_library_file_id": "libfile_ffccda464e7c8191942ee02d876edb1a",
+  "fixed_master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+  "fixed_master_science_version": 157,
+  "fixed_master_final_receipt_version": 158,
+  "recovery_steps": [
+    "Fetch the branch and verify the baseline or a descendant containing it.",
+    "If the Git science commit is unavailable, materialize both Library increment and manifest and verify their recorded SHA-256 values.",
+    "Check out the exact baseline and extract the increment at the repository root; never apply it over a newer tree.",
+    "Validate all 34 per-path sizes and SHA-256 values listed in the increment manifest.",
+    "Run the A4Y exact checker, JSON validation, integration navigation validator and fresh effective-map audit.",
+    "Confirm the resulting science tree is add6917c06fc673ed010ded6435785139bda5487.",
+    "Read fixed master v158 for the receipt-successor commit; do not treat this incremental package as a complete backup."
+  ]
+}
