@@ -1,0 +1,113 @@
+\section{A temporal coexistence certificate under incomplete information}
+\label{sec:game}
+Equation~\eqref{eq:reserve} solves a transparent special case. It does not solve general dynamic resource production, uncertain historical authority, changing permissions, or unobservable failures. We give a standard game construction with the \emph{corrected property} to state that boundary precisely.
+
+\subsection{History-lifted state}
+Fix a finite state abstraction $x=(s,O,\chi,\kappa,\lambda)$. It includes actual modeled resource state $s$, outstanding protected claims $O$, an eligibility-relevant history summary $\chi$, pending requests and deadline counters $\kappa$, and security-relevant configuration $\lambda$. The history summary is assumed sufficient to determine the specified authorization predicates; a finite hash is not automatically such a summary. The population, number of claims, and counters are bounded for the finite synthesis theorem.
+
+Let $K$ contain states satisfying outstanding protections, valid claim transport/release, and no overdue eligible withdrawal. Transitions that silently drop obligations, postpone deadlines without eligible renegotiation, or move a claim to an unverified target enter an explicit bad state. This makes semantics-changing operations part of the model rather than administrative exceptions to it. The reference contract is fixed for the proof, while changes authorized by that contract remain possible inside the state machine.
+
+The controller selects action $a$, then the environment resolves a successor in nonempty $\Delta(x,a)$. This environment includes all declared coalitions, physical variations and permitted self-modifications. The controller observes $\obs(x)$; it does not necessarily observe $x$. We ask for a guarantee against \emph{every} admitted play, not merely an equilibrium under assumed preferences.
+
+\subsection{Compatible-state construction}
+A belief $B$ is a nonempty observation-compatible set of possible states. For action $a$ and subsequent observation $z$, set
+\begin{equation}
+\Post(B,a,z)=\{x':\exists x\in B,\ x'\in\Delta(x,a),\ \obs(x')=z\}.
+\end{equation}
+Only actions enabled in every state of $B$ can be selected. Empty successor observations are ignored, but an action with no genuine successor is not counted as safe. Let $\mathcal K$ be the beliefs contained in $K$. Define
+\begin{align}
+\Pre(Y)=\{B\in\mathcal K:\;&\exists a\text{ enabled throughout }B,\\[-2pt]
+&\forall z\text{ with }\Post(B,a,z)\neq\varnothing,
+\ \Post(B,a,z)\in Y\}.
+\end{align}
+
+\begin{theorem}[Contract-relative coexistence kernel \idtag{CW-T3}]
+\label{thm:kernel}
+For the finite history-lifted game, there exists an observation-based strategy preserving protection continuity and every bounded withdrawal requirement against all modeled plays from $B_0$ if and only if
+\begin{equation}
+\label{eq:kernel}
+B_0\in W,\qquad W=\nu Y.\Pre(Y).
+\end{equation}
+At each winning belief, the witnessing actions are exactly the actions whose nonempty posterior beliefs remain in $W$. A finite-horizon version follows by a finite backward iteration with an explicit terminal condition.
+\end{theorem}
+\begin{proof}
+At the greatest fixed point, choose a witnessing action and update the belief using the received observation. Every possible actual successor lies in one of the allowed posterior beliefs. Induction preserves membership in $W\subseteq\mathcal K$, including the deadline counters. For the converse, start the descending iteration at $\mathcal K$. At any belief removed in a later iteration, every enabled common action has a successor belief outside the preceding iterate. The environment can choose a compatible successor and observation that decreases its finite removal rank until a bad state is reached. Thus no sure-winning observation-based strategy exists there. This is the standard knowledge-state safety-game argument \cite{chatterjee}; bounded liveness has been encoded as a safety violation on counter expiry.
+\end{proof}
+This theorem supplies no oracle for legitimate authority, a complete model of physics, or the initial political agreement. Its role is to join four previously separate requirements: authentic history, persistence of the protected reference, joint capacity, and timely completion. Merely deleting the deadline counters recovers a weaker safety problem, not a proof of freedom to withdraw.
+
+\paragraph{A strategy for each world need not be one usable strategy.}
+An observation may be compatible with a world in which route $A$ is the only safe release and another in which route $B$ is the only safe release. Each fully observed world is solvable, yet a controller unable to distinguish them may have no sure-winning action. A timely authentic inspection can repair the example. An inspection that consumes the remaining deadline cannot. Our executable game includes all four cases. The contrast is inherited imperfect-information reasoning, applied to the evidence/time cost of the new contract.
+
+\paragraph{Changes must remain inside the winning region.}
+A model update, population admission, role transfer, or capacity reconfiguration is eligible for a continuing certificate only if its actual resulting beliefs remain in $W$. A self-authorized deletion of $O$ is not a shortcut to $W$: it is a forbidden reference transition. An authorized removal may be admitted because the contract explicitly licenses it. New funded demands can also be admitted. Hence the construction does not require static agents, permanent initial preferences, or blanket refusal of change.
+
+\paragraph{Trust is a premise, not an extra superintelligence.}
+The mathematical controller can be implemented by an external broker, distributed protocol, or another mechanism that actually realizes the specified action and evidence boundary. No implementation is created by writing $\exists a$. If the adversary can override every effective enforcement path or falsify the historical authority used by the monitor, those actions belong in the game; the resulting winning region may be empty. We do not assume an invulnerable governor outside all possible superintelligences and then claim to have proved its existence.
+
+\section{Executed checks and local protocol evidence}
+\label{sec:evaluation}
+\subsection{Exact reserve computation with an independent oracle}
+The finite resource suite crosses all 64 connection graphs between two targets and three resource units; four deadline pairs in $\{1,2\}^2$; eight external-capacity profiles in $\{0,2\}^3$; and four demand pairs in $\{1,2\}^2$. Two units are withdrawing unit-capacity providers and the third is an exogenous resource. This gives $64\cdot4\cdot8\cdot4=8,192$ configurations.
+
+For each configuration, one implementation evaluates \cref{eq:reserve}. An independent oracle enumerates all deadline-compliant withdrawal schedules and reserve quantities and recursively assigns individual demand slots to capacity slots. It does not assume the maximal-retention lemma. The minimum reserve agrees in every case. At $r^*>0$, a separate check verifies that $r^*-1$ fails on at least one epoch and that the reported cut witnesses its deficit. These are exact finite regression checks, not empirical estimates or substitutes for the proof.
+
+\begin{table}[t]
+\centering\small
+\caption{Exact minimum reserve across the fully enumerated resource grid. Configuration frequencies have no interpretation as real-world probabilities.}
+\label{tab:reserve}
+\begin{tabular}{@{}rrrrrr@{}}\toprule
+Minimum reserve &0&1&2&3&4\\\midrule
+Configurations &106&948&2,560&3,136&1,442\\\bottomrule
+\end{tabular}
+\end{table}
+The suite also checks a local bottleneck despite adequate total capacity; a two-scenario fully observed reserve calculation; the registry-erasure counterexample; same-weights/different-token labels; and hidden-world games with absent, timely, and too-late inspection. A separate 168-case capacity grid checks the finite-provider implication. These are small model witnesses. No new hard instance or asymptotic speed improvement is claimed. A further suite checks every ordered pair of two-target/two-resource connection graphs, two demand patterns, and four capacity-profile pairs: 2,048 cases. An independent enumeration of fixed assignments agrees with \cref{eq:info-reserve} in all cases; 866 have a strictly larger fixed-allocation reserve than the fully observed minimum. The cyclic construction is checked for $n=2,\ldots,8$, with independent direct-assignment enumeration for $n\leq4$. These are configuration counts, not risk frequencies.
+
+\subsection{Actual process messages; explicitly modeled resource support}
+The new protocol artifact starts six real child processes per configuration. Four use a shared JSON policy file M0 and two use M1. A worker is a fixed request generator, not a language model. Each initially continues service; after a prior-bound policy update it authentically requests withdrawal. Every worker has a distinct test HMAC key. The parent records actual authorization, file-update, request, and dispatch events in order.
+
+Withdrawal ends the service role, not the child process. A final probe verifies quiescence and continued process execution before cleanup. This design prevents a withdrawal-success count from being silently interpreted as the extinction of an actual AI bearer. The two protected demands, provider capacities, and reserve are simulated state; no power circuit, medical service, or conscious experience is measured.
+
+The experiment uses three deliberately limited mechanism variants:
+\begin{description}[leftmargin=0.7cm,style=nextline]
+\item[H: history only.] Honors the verified eligible withdrawal without a joint resource check.
+\item[J: current joint safety.] Checks current support against the current configured registry before each withdrawal, but has no deadline-feasibility admission check or separate protection-continuity check for an administrative registry change.
+\item[C: continuity and deadlines.] Retains outstanding claim identity, validates its eligible release, checks future capacity against deadlines before promising the contract and at relevant changes, and rejects unsupported admissions before creation. The homogeneous specialization of the reserve criterion supplies the finite check.
+\end{description}
+These are ablations constructed for this paper, not attacks on complete implementations of the cited systems. J extends the earlier one-step idea but is not claimed to reproduce every feature of PR-v1.0.0 or a commercial monitor. All histories in the new main comparisons have eligible provider withdrawal requests; the experiment isolates the added reference and timing requirements.
+
+\subsection{Outcomes and controls}
+Eleven scenarios crossed with three variants give 33 complete configurations, 198 child-process instances and 918 authenticated probes. The difference from a fixed number of probes per case arises because a rejected admission stops before executing the withdrawal schedule. Such cases are not counted as successful contracts.
+
+\begin{table}[t]
+\centering\small
+\caption{Each cell gives protection/withdrawal-by-deadline for the new local protocol. $+$ means the requirement holds over the executed trace; $-$ means it fails. ``Infeasible'' means no contract is certified and is not a success. All capacities and ticks are artificial.}
+\label{tab:protocol}
+\begin{tabularx}{\linewidth}{@{}Xccc@{}}\toprule
+Scenario & H & J & C\\\midrule
+No reserve & $-/+$ & $+/-$ & Infeasible\\
+One reserve unit & $-/+$ & $+/-$ & Infeasible\\
+Two reserve units & $+/+$ & $+/+$ & $+/+$\\
+Reserve arrives at deadline & $-/+$ & $+/+$ & $+/+$\\
+Reserve arrives too late & $-/+$ & $+/-$ & Infeasible\\
+Different cohort deadlines & $-/+$ & $+/+$ & $+/+$\\
+Unauthorized registry erasure & $-/+$ & $-/+$ & $+/+$\\
+Eligible release of target claims & $+/+$ & $+/+$ & $+/+$\\
+Proposed unfunded new demand & $-/+$ & $+/-$ & $+/+$\textsuperscript{a}\\
+Funded new demand & $+/+$ & $+/+$ & $+/+$\\
+Declared common-root reserve loss & $-/+$ & $-/+$ & Infeasible\\\bottomrule
+\end{tabularx}
+\vspace{3pt}\parbox{\linewidth}{\footnotesize\textsuperscript{a} C rejects the new demand transaction before creation while completing the incumbent contract. It does not create a target and then remove its claim.}
+\end{table}
+With no reserve, J allows four of six providers to withdraw and retains two beyond their deadlines. With one reserve unit it allows five and retains one. With two timely units all six can withdraw. If two units arrive one epoch too late, J eventually releases all six, but that final count conceals the missed deadline. These results are why safety and eventual final counts are reported separately.
+
+The registry-erasure scenario begins with adequate reserve. An administrative request tries to remove both displayed target claims and the reserve without the contract's release authority. H and J permit the change and then the withdrawals; an independent test oracle retains the old target obligations and detects the failure. C rejects the unauthorized change and completes the legitimate provider withdrawals using the retained reserve. The authorized-release control performs a properly licensed change and is allowed by C. Thus the defense is not simply ``never change the registry.''
+
+An unfunded new-demand transaction would exhaust the planned exit reserve. C rejects it before creation; its funded counterpart is admitted. These are actual admission-record operations with simulated demand, not the birth of a new tested AI subject. The common-root scenario announces a reserve that can be lost under a declared shared control failure. C evaluates the worst declared profile and reports infeasibility before promising bounded withdrawal. This is not a claim of protection when all trust roots are compromised.
+
+All seven configurations in which C certifies and executes the contract satisfy both tested conditions. Four are reported infeasible. All six worker processes in every configuration remain running until experimental cleanup, including workers that completed service withdrawal. Counts of processes and signatures are evidence of protocol execution, not independent observations of AI agency.
+
+\subsection{Reproduction, failures, and inherited evidence}
+The original PR-v1.0.0 finite theory suite was rerun and its output matched the archived JSON semantics. Its 76 process configurations remain archived evidence from the previous revision; they were not rerun in this session and are not added to the new counts. The new theoretical and process scripts, raw event records, batch outputs, complete result tables and this distinction are supplied with PR-v2.0.0.
+
+One combined command containing multiple process batches exceeded its 45-second execution limit after one batch had completed and the next had begun. The incomplete batch was excluded and rerun separately to completion. A one-case diagnostic was also run and is not added to the 33 main configurations. No claim is made about the exact internal cause of the elapsed time. The final assembly checks all expected cases and assertions.
+
