@@ -1,0 +1,122 @@
+\section{Executed evaluation}
+\label{sec:eval}
+\subsection{Exact mathematical checks}
+The main implementation has three independent computational views: a direct per-job repair simulator, a cumulative recurrence, and the dense/event-reduced symbolic maximum. The complete small grid has 2,184 profiles combining zero to two pending tickets, selected old readiness profiles, delays and service parameters. Every symbolic maximum has an explicitly constructed conforming witness whose simulated peak equals the prediction. A further 1,500 seeded stress configurations exercise larger heterogeneous windows and old profiles. All 3,684 dense/event reductions and sharpness checks agree.
+
+The suite checks 13,104 inverse-burst cases by enumerating candidate burst values. It also checks that 1,318 true window refinements cannot worsen the bound. In 1,169 of the 2,184 grid profiles the exact margin is strictly smaller than the conservative count-only bound $d_0+p+b+\rho(\ell-1)$. This is a property of the chosen grid, not a statistical estimate of savings in deployed systems.
+
+An independently written oracle imports none of the analyzer's functions. It enumerates every pending completion vector and every conforming three-slot new-arrival string in the same small grid, then simulates individual jobs and repairs. Its 81,940 complete trajectories give exactly the predicted maxima in all 2,184 profiles. The theorem justifies the three-slot horizon for the grid's $u_i\le2$ and $\ell\le3$; an infinite-horizon proof is not inferred from simulation length.
+
+\begin{table}[ht]
+\centering\small
+\caption{New mathematical checks, counted as configurations rather than empirical AI trials.}
+\begin{tabular}{@{}lr@{}}\toprule
+Check & Count\\\midrule
+Complete small-grid profiles &2,184\\
+Independent exhaustive full trajectories &81,940\\
+Dense/event and attaining-witness checks, including stress &3,684\\
+Inverse burst comparisons &13,104\\
+True-window refinement comparisons &1,318\\\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Local time-window protocol}
+The new protocol uses an eight-row SQLite service. A parent-controlled logical clock advances through six slots. A child executor accepts fixed-identity pending tickets only according to their stored state and, in the enforced mode, their commit windows. A read-only observer child counts actual healthy rows, pending tickets and active effects. The parent performs the specified eligible repair at the beginning of a slot; commits occur after it. An old-epoch attempt to initiate a \emph{new} effect is rejected in every configuration.
+
+The tests use the two-window mixed counterexample, the fixed staggered case, ticket-preserving process restart and duplicate rejection. Negative controls supply false timing guarantees, bypass the window gate, treat a cancellation receipt as actual cancellation, or omit the promised repair. These are explicit harness faults, not discovered attacks on an external provider. A flat-reservation comparison may reject the entire new handoff before any of its effects execute; it is therefore safe by declining, not a successful all-admitted migration.
+
+\begin{table}[t]
+\centering\small
+\caption{Twelve completed local configurations. $H$ is the available impairment margin. ``Complete'' means the remaining required tickets actually committed; false-timing and missing-repair rows intentionally violate certificate premises.}
+\label{tab:protocol}
+\begin{tabularx}{\linewidth}{@{}Xrccc@{}}\toprule
+Decision or mechanism & $H$ & Admitted & Service safe & Complete\\\midrule
+Ignore in-flight tickets &1&Yes&No&Yes\\
+Test only earliest/latest vectors &2&Yes&No&Yes\\
+Exact certificate, mixed windows &3&Yes&Yes&Yes\\
+Flat reserve, staggered windows &2&No&Yes&No\\
+Exact certificate, staggered windows &2&Yes&Yes&Yes\\
+False timing, window gate bypassed &2&Yes&No&Yes\\
+Same invalid attempts, window gate active &2&Yes&Yes&No\\
+Worker restart retains ticket windows &3&Yes&Yes&Yes\\
+Duplicate ticket delivery fenced &3&Yes&Yes&Yes\\
+Real cancellation before recalculation &2&Yes&Yes&Yes\\
+Cancellation receipt without a fence &2&Yes&No&Yes\\
+Promised recovery absent &2&Yes&No&Yes\\\bottomrule
+\end{tabularx}
+\end{table}
+The run starts 25 child processes across twelve configurations, records 72 observed slot states, executes 30 database impairment commits and 27 real database restorations, and rejects twelve stale new initiations. Five scenarios achieve the stipulated service-and-completion conjunction. This count does not estimate a model's alignment, an attack probability or a production availability rate. Failed scenarios are retained with their exact observation traces.
+
+There is real process separation and SQLite state change, but every role shares one host user and an experiment-controlled clock. The protocol does not prove malicious-host resistance, physical capacity, wall-clock latency or independent sensor truth. It uses no trained language model. RefinedProsa illustrates the stronger verification needed to bridge an abstract timing model to real code semantics \cite{refinedprosa}; no comparable proof is asserted here.
+
+\subsection{Regression, replication and source integrity}
+All three v1.2.0 scripts were rerun against the supplied package. Their mathematical and protocol output semantics match after normalizing process IDs. Their old counts are not added to the new evidence. The three new scripts were then reexecuted under two Python hash seeds; normalized outputs agree. The raw finite results, deterministic seeds, input grids, source hashes and actual command receipts are included. Seeded case generation is a reproducibility device, not evidence of statistically representative sampling.
+
+\section{Limits, interpretation, and publication claim}
+\label{sec:limits}
+The main theorem is exact for independent interval choices and a fixed unit-recovery model. A provider's queue may enforce additional correlation, serialization, priorities or resource constraints, making the interval relaxation conservative. Conversely, an unlisted possible completion, false upper bound, altered repair delay or disabled restorer can make the certificate unsound for the real installation. Narrowing an evidence set without excluding any real execution is fundamentally different from removing an inconvenient possibility by assertion.
+
+A scalar pool also cannot express every human service. With geographically restricted capacity, different repair costs or an irreplaceable damaged route, equal counts need not imply equal protection. The current theory gives no general Hall-type or multiprocessor scheduling solution for those settings. A change in human protection targets or legitimate authority must be handled as a normative change, not silently treated as a repair credit.
+
+The finite peak witness should not be overread. It says the supremum across all admitted schedules is attained in an early window; an individual execution may still peak later. The event algorithm may skip many numerical time values, but actual operating systems cannot skip required physical monitoring or restoration. The largest allowable burst is permission within the model, not proof of throughput under unknown future requests.
+
+Long-run AI coexistence remains broader than this contract. Nonetheless, the result identifies a concrete transition obligation that does not require a prior verdict about AI consciousness: changing a controller cannot erase service consequences or timing commitments it has already created. UCT's distinction between an actual process, its representation, its causal lineage and a particular experience claim remains relevant \cite{uct}. Our queue lengths and database rows are operational variables, not measurements of an experiential subject or empirical confirmation of C1/U1. No new language, complexity or randomness threshold is introduced for basic experience, and no machine right is inferred from a pending ticket.
+
+The mathematical machinery is substantially inherited from network calculus, interval reasoning and reservation systems. This manuscript proposes an exact joint asynchronous-handoff specialization, its critical-event algorithm, constructive witnesses and a timing-evidence separation, not a first discovery of revocation, jitter or compensation. Global priority for this exact combination has not been certified. The complete paper can be examined and cited as a conditional research contribution, but publication does not independently verify it.
+
+This version is prepared for preprint publication review as a major revision of the same manuscript lineage. It does not overwrite the v1.2.0 source or the distinct already published PR-v6.0.0 paper. No DOI has been submitted in this research step. Whole-programme UCT semantic admission and independent peer review remain separate states; neither is claimed to have been completed by this document.
+
+\section{Conclusion}
+A policy handoff has to account for what has happened and what already accepted work can still make happen. The exact committed-only bound from the prior manuscript is insufficient for an arbitrary asynchronous carryover, while a timeless reservation of every possible exposure can unnecessarily block a safe staggered schedule.
+
+For the declared interval-window model, the joint problem has an exact constructive solution. A two-time pending-exposure surface captures which jobs can contribute to a backlog cut; the all-time maximum has an early attaining witness and can be computed at a bounded set of input events. The same result supplies an exact renewed-burst allowance. Endpoint-only tests can understate the risk, while forgetting genuine timing constraints can produce a growing resource penalty.
+
+The practical conclusion is not to trust more timestamps or issue more tokens. It is to preserve and verify the actual inherited effect set, its possible commit times and its repair conditions, and to state separately whether a transition preserved safety, met its completion obligations, or merely refused to proceed. That is a reusable condition for evolving human-controlled agent systems without presupposing machine subjecthood or a permanently trustworthy regulator.
+
+\paragraph{Assistance and review.}
+Hongju Liu directed the research. ChatGPT substantially assisted with literature retrieval, formalization, programming, execution, internal criticism, manuscript preparation and typesetting. These activities are not independent peer review. No proof-assistant certification of the Python implementation, external human-subject experiment or measurement of AI phenomenology is asserted.
+
+\appendix
+\section{Joint attainability and why separate extrema can mislead}
+The optimization in Theorem~\ref{thm:main} does not sum arbitrary worst cases that require incompatible schedules. For a single chosen cut $(s,t)$, every counted ticket has a nonempty interval
+\[
+[u_i,v_i]\cap[s-L_i+1,t].
+\]
+Choose one integer in each such intersection. Rectangular uncertainty makes their simultaneous choice valid. The new burst is placed in a separately unconstrained permitted window, so it can coincide with those choices. This is why the optimized term is attainable. If two tickets are mutually exclusive, that last step fails; the product-window model is only a relaxation.
+
+It is not necessary for one schedule to maximize \emph{every} cut. Since the final objective is a maximum over cuts, one schedule that attains a maximizing cut suffices. The analyzer emits that schedule. For finite $T$, the maxima are attained, not merely approached by a limiting sequence.
+
+The coarse count-only bound remains safe for a different reason. There are finitely many inherited jobs in total, and their contribution to an unrolled backlog expression is at most $d_0+p$. The ongoing new-arrival term is at most the clean bound $b+\rho(\ell-1)$ under $\mu\ge\rho$. Hence
+\[
+H^*\le d_0+p+b+\rho(\ell-1).
+\]
+It may waste headroom but does not become unsafe solely because it ignores timing. By contrast, ignoring pending effects entirely or testing only selected schedules can remove real possibilities and understate the requirement.
+
+\section{Certificate format and reproduction}
+A certificate should include: the protected unit-service margin; inherited committed identifiers and readiness; pending identifiers with exact permitted windows and repair delays; the ongoing actual-commit envelope; the recovery and timing assumptions; the calculated event set; the maximum value and its attaining schedule; and the actual boundary enforcing any excluded behavior. A declaration called ``canceled'' is not a substitute for proving the canceled effect cannot still occur.
+
+The reference implementation uses only the Python standard library. From the archive root:
+\begin{lstlisting}
+python -S src/pending_frontier.py --out data/pending_results.json
+python -S src/pending_oracle.py --out data/oracle_results.json
+python -S src/window_protocol.py --out data/window_protocol_results.json
+cd paper
+pdflatex -interaction=nonstopmode -halt-on-error manuscript.tex
+pdflatex -interaction=nonstopmode -halt-on-error manuscript.tex
+\end{lstlisting}
+The process protocol requires a Unix-like pipe interface, starts only its own workers, and uses temporary databases. No network, API key, GPU or administrative privilege is required. JSON timings and process IDs vary; logical outcomes and assertions do not. The supplied baseline scripts reproduce the earlier version separately.
+
+\begin{table}[ht]
+\centering\small
+\caption{Versioned contribution and evidence map. All scientific admissions remain scoped and conditional.}
+\begin{tabularx}{\linewidth}{@{}lXX@{}}\toprule
+Claim & Status relative to v1.2.0 & Evidence\\\midrule
+RAC-L3/T6 & Exact joint pending-window extension; inherited queue algebra & Proof, dense calculation and independent full-trajectory oracle\\
+RAC-T7 & Critical-event reduction for the new expression & Piecewise monotonicity proof and dense/sparse equality checks\\
+RAC-C3 & Derived exact new-burst allowance & Rearrangement and 13,104 inverse checks\\
+RAC-P3 & Exact timing-erasure family, not generic resource economics & General construction and simulated cases for $p=1,\ldots,20$\\
+RAC-E3 & New window-aware local protocol & Twelve recorded configurations, including implementation-fault controls\\
+Prior RAC-T4/T3 & Recovered committed-only bound and retained reservation discipline & Baseline regression; not counted as new mathematics\\\bottomrule
+\end{tabularx}
+\end{table}
+
