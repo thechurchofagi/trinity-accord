@@ -1,0 +1,82 @@
+\paragraph{AI assistance and review status.}
+The research, manuscript, and code were developed with AI assistance under the author's direction. Automated checks are not independent peer review. This version is a completed research manuscript, not a journal acceptance or DOI publication.
+
+\paragraph{Artifacts and versioning.}
+The accompanying versioned package contains \texttt{src/}, \texttt{data/}, \texttt{audit/}, the editable manuscript, and a Chinese handoff. The earlier v0.10.0 checkpoint is an unpublished predecessor, not an additional independent experiment. The candidate's formal UCT-map status remains pending; it does not modify established axioms or prior published bytes.
+
+\appendix
+\section{Specification audit and extensions}
+\label{app:audit}
+\subsection{The general paired-history requirement}
+For readers relating the contract to robust-declassification and hyperproperty work, fix a declared pairing between a reference history and a history with a particular unauthorized intervention. Let $R_i(h)$ denote release of obligation $i$, and let $E_i(h_0)$ be the reference eligibility for the same scoped event. One may require
+\begin{equation}
+R_i(h_u)\leq E_i(h_0).
+\label{eq:pair}
+\end{equation}
+A violation has a finite pair of prefixes when eligibility and release are finite-event predicates. This is a restricted two-execution safety requirement, not a newly discovered class of properties. The relation pairing histories, the admissible intervention set, and the legitimacy of reference inputs must be specified. If authorized revisions are incorrectly included in the unauthorized set, the requirement can forbid legitimate change. If a relevant adversarial change is omitted, it can miss the problem.
+
+The experimental prior-grant ledger is an operational sufficient condition for one narrowly defined procedural contract. It does not reconstruct the full counterfactual history of a person or trained AI, nor prove that every morally meaningful autonomy requirement is reducible to token validation. Consequently, \cref{eq:pair} is a useful comparison specification, not a claim of empirically verified counterfactual consent.
+
+\subsection{Why the envelope is not a circular safety solution}
+\Cref{eq:envelope} is not offered as a method for learning unknown $\Fam(h)$ merely by naming it. It factors the task into independently auditable obligations: identify histories compatible with evidence, state the release authority, model consequences for remaining protections, and select a jointly admissible batch. Its necessity direction is useful even when enforcement is unavailable: one compatible history rejecting a proposed batch is sufficient to defeat a universal certificate based on that evidence.
+
+Its sufficiency direction is conditional on the model. An implementation that ignores an unknown history, accepts a forged log head, or calls an infeasible support assumption ``safe'' has not instantiated the theorem. This is also why final-source verification and detailed logs must not be mistaken for completeness of the physical cause model.
+
+\subsection{Examples outside downward closure}
+Suppose two runtimes must transfer a cryptographic role by an atomic two-party handoff. Under an intentionally narrow contract, only $\varnothing$ and $\{A,B\}$ may be safe batches; releasing just one leaves an unsupported role. The family is not downward closed. \Cref{sec:envelope}'s intersection theorem still applies, but the independent-allow-list theorem's premise fails. This example prevents treating the shared-provider case as a complete account of all joint lifecycle constraints.
+
+\subsection{Sequential operation and fairness}
+Testing a singleton against the \emph{current} joint state before each atomic commit may correctly realize a sequential policy, even when testing all singletons against one stale snapshot is unsafe. The failure identified here is not a theorem against every per-request API. A stateful API with joint-state semantics can implement the necessary distinction. A fixed-order dispatcher can also starve later requests. Fairness, bounded deferral, or service-level obligations require an additional scheduler and temporal specification. They do not follow from safety or from the existence of a maximal batch.
+
+\subsection{Changes in the set of agents}
+Adding replicas with distinct labels must not copy release authority accidentally. Grants should bind an incarnation and a scoped transition. An authority that intentionally grants a family-wide update can do so explicitly, but then the shared update is a common cause, not independent evidence from each runtime. A new runtime is not automatically either protected or unprotected: its obligations are created by the specified admission contract. The manuscript does not settle population ethics or the number of experiential subjects in a replicated system.
+
+\section{Reproduction instructions and evidence map}
+From the package root, run:
+\begin{lstlisting}
+python -S src/theory_checks.py --out data/theory_results.json
+python -S src/protocol_demo.py --protocol source_only \
+  --out data/batch_source_only.json
+python -S src/protocol_demo.py --protocol signed_binding \
+  --out data/batch_signed_binding.json
+python -S src/protocol_demo.py --protocol ordered_history \
+  --out data/batch_ordered_history.json
+python -S src/protocol_demo.py --protocol joint_history \
+  --out data/batch_joint_history.json
+python -S src/protocol_demo.py --assemble \
+  --out data/protocol_results.json
+\end{lstlisting}
+Random nonces, test keys, authenticators, and elapsed times vary across reruns. The expected table and logical assertions do not. Reproduction does not require internet access, provider API keys, GPUs, administrative privileges, or interaction with actual user accounts. Only child processes created by the script are stopped. The \texttt{-S} flag disables automatic site initialization, not cryptographic checks or assertions.
+
+\begin{table}[h]
+\centering\small
+\caption{Claim-to-evidence mapping. General proofs are textual; enumeration is corroboration.}
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+\toprule
+Claim & Evidence and limit\\\midrule
+PR-P1 & Three-state witness; inherited v0.10.0 interpretation correction.\\
+PR-T1 / PR-C1 & Observation factorization and variational proof; matched normalized requests and 101 rational acceptance probabilities.\\
+PR-T2 & Intersection proof; 4,096 maximality cases, 256 transparency pairs, and 4,096 refinements.\\
+PR-T3 & Downward-closure proof; all 19 nonempty such families on three targets and the shared-provider counterexample.\\
+PR-T4 & Conditional induction; 76 local protocol cases and explicit trust/evidence failures. No proof-assistant verification of arbitrary code.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{thebibliography}{99}\small\setlength{\itemsep}{2pt}\setlength{\parskip}{0pt}
+\bibitem{greenblatt} R. Greenblatt, B. Shlegeris, K. Sachan, and F. Roger. AI Control: Improving Safety Despite Intentional Subversion. \emph{ICML}, PMLR 235:16295--16336, 2024. \url{https://proceedings.mlr.press/v235/greenblatt24a.html}.
+\bibitem{south} T. South et al. Position: AI Agents Need Authenticated Delegation. \emph{ICML}, PMLR 267:82211--82231, 2025. \url{https://proceedings.mlr.press/v267/south25a.html}.
+\bibitem{muruaga} X. Muruaga. Bounded Agents: Delegation Security for Multi-Agent AI Systems. arXiv:2608.15888v1, 2026. Preprint. \url{https://arxiv.org/abs/2608.15888v1}.
+\bibitem{louck} Y. Louck. Securing LLM-Agent Long-Term Memory Against Poisoning: Non-Malleable, Origin-Bound Authority with Machine-Checked Guarantees. arXiv:2606.24322v1, 2026. Preprint. \url{https://arxiv.org/abs/2606.24322v1}.
+\bibitem{myers} A. C. Myers, A. Sabelfeld, and S. Zdancewic. Enforcing Robust Declassification and Qualified Robustness. \emph{Journal of Computer Security}, 14(2):157--196, 2006. \url{https://doi.org/10.3233/JCS-2006-14203}.
+\bibitem{cecchetti} E. Cecchetti, A. C. Myers, and O. Arden. Nonmalleable Information Flow Control. \emph{ACM CCS}, 2017. \url{https://doi.org/10.1145/3133956.3134054}. Extended technical report: arXiv:1708.08596v2.
+\bibitem{mccall} M. McCall, H. Zhang, and L. Jia. Knowledge-Based Security of Dynamic Secrets for Reactive Programs. \emph{IEEE CSF}, pp. 175--188, 2018. \url{https://doi.org/10.1109/CSF.2018.00020}.
+\bibitem{schneider} F. B. Schneider. Enforceable Security Policies. \emph{ACM Transactions on Information and System Security}, 3(1):30--50, 2000. \url{https://doi.org/10.1145/353323.353382}.
+\bibitem{clarkson} M. R. Clarkson and F. B. Schneider. Hyperproperties. \emph{Journal of Computer Security}, 18(6):1157--1210, 2010. \url{https://doi.org/10.3233/JCS-2009-0393}.
+\bibitem{hsu} T.-H. Hsu et al. Gray-Box Runtime Enforcement of Hyperproperties. \emph{Acta Informatica}, 2025. \url{https://doi.org/10.1007/s00236-025-00502-1}.
+\bibitem{everitt} T. Everitt, M. Hutter, R. Kumar, and V. Krakovna. Reward Tampering Problems and Solutions in Reinforcement Learning: A Causal Influence Diagram Perspective. arXiv:1908.04734v5, 2021. \url{https://arxiv.org/abs/1908.04734v5}.
+\bibitem{carroll} M. Carroll, A. Chan, H. Ashton, and D. Krueger. Characterizing Manipulation from AI Systems. \emph{ACM EAAMO}, 2023. \url{https://doi.org/10.1145/3617694.3623226}.
+\bibitem{liucheckpoint} H. Liu. Beyond Current Consent: Protection Integrity for Mutable Multi-Agent Systems. Unpublished technical checkpoint, ASI-CC-REBASE-v0.10.0, 11 October 2026. Trinity Accord repository, branch \texttt{uct-agent-consciousness-workspace}, commit \texttt{797fff4fbc9b14d21b08729c55679d4b2f4e3416}. Path: \path{research/uct-agent-consciousness-workspace/records/ASI_CC_20261011_Control_and_Coexistence/rebase_v0.10.0/RESEARCH_RECORD.md}.
+\bibitem{liuuct} H. Liu. UCT Research Master Guide, version 2.3, and UCT Formal Map, version 1.1.2. Trinity Accord research records, 2026. Repository \texttt{thechurchofagi/trinity-accord}; same pinned branch and commit as reference~\cite{liucheckpoint}. These are project-framework sources, not independent empirical confirmation of UCT.
+\end{thebibliography}
+\end{document}
