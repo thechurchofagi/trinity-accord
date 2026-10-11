@@ -1,0 +1,14 @@
+{
+  "schema": "asi-cc-pr6-publish-authorization/1",
+  "status": "AUTHORIZED_FOR_ONE_PUBLIC_ZENODO_PREPRINT",
+  "paper_id": "PR-v6.0.0",
+  "owner_instruction": "Publish PR-v6.0.0 DOI, following the repository established workflow",
+  "user_authorized_at_local_date": "2026-10-11",
+  "expected_sha256": "be43cedbc1962889ddebfc47cf82c735d973ed06bd4aa6b0cfaa0fa7f63ee23b",
+  "zenodo_publication_once": true,
+  "publication_license": "cc-by-4.0",
+  "allow_change_of_frozen_assets": false,
+  "allow_existing_other_deposit_overwrite": false,
+  "ots_follow_up_separate": true,
+  "arweave_follow_up_separate_budget_guarded": true
+}
