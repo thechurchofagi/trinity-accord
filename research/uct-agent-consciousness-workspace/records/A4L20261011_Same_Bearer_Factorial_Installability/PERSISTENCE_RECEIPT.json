@@ -1,0 +1,54 @@
+{
+  "schema": "uct-persistence-receipt/1",
+  "round": "A4L20261011",
+  "status": "SCIENCE_COMMIT_AND_LIBRARY_INCREMENT_VERIFIED; MASTER_V131_REVERSE_VERIFIED; FINAL_METADATA_COMMIT_IS_EXPECTED_SHA_SUCCESSOR",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "base_commit": "564cabcb151ef8f4b515e955b05160e0845da6a5",
+    "science_commit": "0c6137f88fd0e473ec8f383636ba1d61185068bc",
+    "science_tree": "b1fe984710c785ee65b3ce33b0574a417896def1",
+    "changed_paths": 23,
+    "expected_sha_update": true,
+    "remote_commit_readback": true,
+    "storage_commit_message_has_skip_ci": true
+  },
+  "library": {
+    "master_handoff_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "master_science_version": 131,
+    "master_science_sha256": "c64606b9dc284d3376ea60e1598d2e9c04309484b2dc98436abf199d08615c30",
+    "master_science_size_bytes": 84369,
+    "master_science_reverse_materialized_byte_equal": true,
+    "increment": {
+      "library_file_id": "libfile_db8f8ba35b008191bcec5c0fdf2652d5",
+      "file_id": "file_00000000d7a481fd8dbe0e843eea8940",
+      "filename": "UCT_A4L_Increment_20261011.zip",
+      "sha256": "37d76357abf15c4c59ed31b5417025060022fe748759a6fee7d3a4a383e61834",
+      "size_bytes": 115602,
+      "file_count": 23,
+      "scope": "increment_only"
+    },
+    "manifest": {
+      "library_file_id": "libfile_e39c7fcebf548191af88b319ccd59d25",
+      "file_id": "file_000000007df08230b5e765ffb03c3dc2",
+      "filename": "UCT_A4L_Increment_20261011_MANIFEST.json",
+      "sha256": "7d3b7982f2c583c4b0c1bc760d6326a86467c155176dd9ac0b7adfca33cecba6",
+      "size_bytes": 5705
+    },
+    "reverse_materialized": true,
+    "byte_equal": true,
+    "hashes_reverified": true
+  },
+  "preserved_failures": [
+    "Plain HTTPS git push lacked interactive credentials; no remote state was changed by it.",
+    "The first connected-object attempt met a concurrently advanced branch head and did not update the ref.",
+    "One initial blob transfer was truncated by command-output limits; tree-hash mismatch detected it, and the large file was retransferred and verified before the successful expected-SHA update."
+  ],
+  "limits": {
+    "complete_repository_backup": false,
+    "complete_history_backup": false,
+    "formal_scientific_promotion": false,
+    "phenomenal_validation": false
+  },
+  "self_reference_note": "The final metadata commit cannot contain its own SHA. Its exact SHA is recorded in the protected successor version of the fixed master handoff after remote readback."
+}

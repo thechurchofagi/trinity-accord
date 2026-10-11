@@ -1,0 +1,42 @@
+{
+  "schema": "uct-recovery-manifest/1",
+  "round": "A4L20261011",
+  "recovery_order": [
+    "Read the latest version of Library file libfile_4175a81748fc819187fa8f5771f056fa.",
+    "Fetch branch uct-agent-consciousness-workspace and require science commit 0c6137f88fd0e473ec8f383636ba1d61185068bc or a verified fast-forward successor.",
+    "Read HANDOFF_ZH.md, FACTORIAL_INSTALLATION_CONTRACT.md, RESEARCH_NOTE.md, EXACT_RESULTS.json, CLAIM_LEDGER.json, GAP_LEDGER.md, FORMAL_AUDIT.md, REVIEW_RESPONSE.md, VALIDATION.json, WORK_LOG.md and PERSISTENCE_RECEIPT.json in the A4L record.",
+    "Verify the 23-file increment ZIP and manifest by their exact SHA256 values before use; do not overlay them on a newer verified branch.",
+    "Run check_factorial_installability.py and require the free-crossing, structural-coupling, label-echo and compensator checks with zero phenomenal assignments.",
+    "Run records/NAV20261010_Map_Integration/validate_current_map.py --root research/uct-agent-consciousness-workspace and retain all OPEN/AUDIT_INCOMPLETE states."
+  ],
+  "verified_science": {
+    "base_commit": "564cabcb151ef8f4b515e955b05160e0845da6a5",
+    "commit": "0c6137f88fd0e473ec8f383636ba1d61185068bc",
+    "tree": "b1fe984710c785ee65b3ce33b0574a417896def1"
+  },
+  "increment": {
+    "library_file_id": "libfile_db8f8ba35b008191bcec5c0fdf2652d5",
+    "sha256": "37d76357abf15c4c59ed31b5417025060022fe748759a6fee7d3a4a383e61834",
+    "size_bytes": 115602,
+    "file_count": 23,
+    "complete_snapshot": false
+  },
+  "manifest": {
+    "library_file_id": "libfile_e39c7fcebf548191af88b319ccd59d25",
+    "sha256": "7d3b7982f2c583c4b0c1bc760d6326a86467c155176dd9ac0b7adfca33cecba6",
+    "size_bytes": 5705
+  },
+  "master": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "science_version": 131,
+    "science_version_sha256": "c64606b9dc284d3376ea60e1598d2e9c04309484b2dc98436abf199d08615c30",
+    "science_version_reverse_materialized_byte_equal": true,
+    "final_confirmation_version": "recorded_after_final_remote_commit"
+  },
+  "not_completed": [
+    "An actual same-bearer four-cell installation with independent pre-outcome factor witnesses",
+    "A mixed non-exclusive experience-internal bridge for necessarily covarying relation use and fit",
+    "Independent phenomenal identity or signed judgment-to-experience calibration",
+    "Global deep semantic proof of the complete historical map"
+  ]
+}

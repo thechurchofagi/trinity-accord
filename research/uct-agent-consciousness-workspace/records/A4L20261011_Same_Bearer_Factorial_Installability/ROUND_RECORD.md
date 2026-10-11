@@ -9,3 +9,5 @@ Date: 2026-10-11
 5. **Deliverable.** English research note, exact finite checker/results, factor-installation contract, stable claim/gap/review ledgers, source scope/hashes, formal-map audit, publication hold, Chinese handoff, recovery manifest and persistence receipt.
 
 Direction check at selection: this bounded question returns A4K's uncertainty work to the actual organization → experience/mineness problem. Success means an installable four-cell design under preserved organizational invariants; failure means terminating this candidate comparison now rather than adding another calibration or certificate layer.
+
+Direction check after result and before save: the bounded failure was used to terminate the uninstalled pure comparison and return to a mixed experience-internal bridge. No control/statistical subproblem became the research target; C1, basal experience, overlap, non-unique ownership and no-current-assistant-verdict boundaries remain intact.
