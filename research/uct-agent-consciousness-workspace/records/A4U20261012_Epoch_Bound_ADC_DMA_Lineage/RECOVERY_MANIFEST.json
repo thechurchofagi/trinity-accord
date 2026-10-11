@@ -1,0 +1,167 @@
+{
+  "schema": "uct-library-increment-manifest/1.0",
+  "round": "A4U20261012",
+  "scope": "Increment from the exact verified A4T receipt baseline to the A4U science tree; not a full repository, full working set, or complete history backup.",
+  "baseline_commit": "caad74c0185784e1ec5cc8db73781887e4ce6830",
+  "science_commit_github": "277abf465f53a4a607aa565db9c1a32f08afda63",
+  "equivalent_local_commit": "b72bcd5994cd086794486a13a4375aa699c08c6f",
+  "science_tree": "c9b0ea5a0b15f915fc3fb033c149f63aec625e07",
+  "archive": {
+    "name": "UCT_A4U_Science_Increment_20261012.zip",
+    "size_bytes": 219523,
+    "sha256": "95779f34bb79df36e623f3ec90fbbec6b5a821659f3807d958b9fa839ae0ec28"
+  },
+  "path_count": 30,
+  "files": [
+    {
+      "path": "research/uct-agent-consciousness-workspace/AGENTS.md",
+      "size_bytes": 114877,
+      "sha256": "0884e2493e8625e6570b4fe975d0a44d67ff51d1b9b95a73b5fe982915c85dcc"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/CURRENT_STATE.json",
+      "size_bytes": 85734,
+      "sha256": "5adecbb3867c89b64f47e9781b94683b1ad98c7038a89b628715760bf57280cd"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/HANDOFF.md",
+      "size_bytes": 17941,
+      "sha256": "1d44aa72f4c311b9f6f2ceb9dc3f44c32c1e23018f3a5b4ecb93db25c2efdfd4"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/MASTER_INDEX.md",
+      "size_bytes": 14641,
+      "sha256": "1cc790aaf671604fe4d005c8cd35720f934810132a0975a2bfe63437ae6f6244"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/MEMORY.md",
+      "size_bytes": 17145,
+      "sha256": "27e5dee7d71c0fc0b2303f5cbc249ddf6575ca56732dd446d9083534dec9fdf1"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/PUBLICATION_COVERAGE.json",
+      "size_bytes": 16692,
+      "sha256": "0fcaad12229d39878eb0a97c600bc82abedb26e10c054f07d6d7f4facf1f86df"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/REVIEW_SUPERVISION.md",
+      "size_bytes": 145706,
+      "sha256": "a361c89d274f1b82b5a36fc2fa961aaf332f16668ce7a410d5868a5dcd97e8b3"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_AUDIT.md",
+      "size_bytes": 15654,
+      "sha256": "4ae4443fd5ca806ea222fc1ac49d5c0bbb48c6802c85b9889c1e8fb26db3bd3f"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_MAP.md",
+      "size_bytes": 38718,
+      "sha256": "5a343a13f454d93ac2820b64f24c1b7b1703b165f9fa75530985900316da95e0"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UNIFIED_RESEARCH_INDEX.json",
+      "size_bytes": 179886,
+      "sha256": "ab8cdd74fd8d721e6ab504eb1064bcdf531c28c58a2b56ed3f766e6d86d2e34b"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/APPLICATION_ENTRY.json",
+      "size_bytes": 1675,
+      "sha256": "7fc1a0858d386e1354d70d691cca85752b758c016d6985fb9bf9a76df1d2d821"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/AUDIT_SUMMARY.json",
+      "size_bytes": 1258,
+      "sha256": "dead33581dae0b7e41d5c2f99089409d47cb68d49f1a1f054d01a0cc25907fca"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/CLAIM_LEDGER.json",
+      "size_bytes": 5065,
+      "sha256": "83def9e9f14a3571096a4125f75e1fea301f226fdf20b5986b6bd14ef5a31abc"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/EPOCH_LINEAGE_CONTRACT.md",
+      "size_bytes": 5111,
+      "sha256": "351664bc2496562c93ba51209fe0aecac1b37bdfb98c11daedfc96713f822526"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/EXACT_RESULTS.json",
+      "size_bytes": 3099,
+      "sha256": "9137594d16338c9809e6cae271b38c8b5b6e2e4c01703fa941a1eed51548acc0"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/FAILURES.md",
+      "size_bytes": 1975,
+      "sha256": "93fbf040414839fab3ca1569a9f69a52fcf1cf64d1e87a1c2a60c4dd4125cf53"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/FORMAL_AUDIT.md",
+      "size_bytes": 4237,
+      "sha256": "fbc5ca70a3eda5e007ad92f58a5ca5311f0a5566c861f8f2ff691f061101bae7"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/GAP_LEDGER.json",
+      "size_bytes": 2956,
+      "sha256": "942f54694fa9f6831023328483d7abe76499e602dddd6d1446da5a27396beab4"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/HANDOFF_ZH.md",
+      "size_bytes": 2893,
+      "sha256": "a07b3f0ae8141386c278d72da4867d6f41b976b1e8272c84c27c7a4c760b9c7a"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/MAP_EXTENSION.json",
+      "size_bytes": 531,
+      "sha256": "571e2182816ade0b6c91dd998da25d3a3ce96f9306bc72e96d93488a10449774"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/PER_ID_AUDIT.json.gz",
+      "size_bytes": 14176,
+      "sha256": "0e759bcbf6610d2a0230430a968fc706b290ce87d493a785e1617ae252127060"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/PUBLICATION_COVERAGE_UPDATE.json",
+      "size_bytes": 879,
+      "sha256": "80379ef1dcc5208448d3222dceaf48b7dd761d6f004fbe5cb68fa8aeef76ed7a"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/RESEARCH_NOTE.md",
+      "size_bytes": 6489,
+      "sha256": "48e42b22470d73889041a094e32b0b23e0942eb6efc065a456b4c167c7b8c075"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/REVIEW_RESPONSE.md",
+      "size_bytes": 1502,
+      "sha256": "39ca007a678b96336b0b925321be1c172f6482532c45eb1f42b3d22b8e03a217"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/ROUND_RECORD.md",
+      "size_bytes": 2336,
+      "sha256": "ecc99cebbec63f80b859267c967cfc7853d2e76404843b98df0e380196c3d0f9"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/SOURCE_SCOPE.md",
+      "size_bytes": 3039,
+      "sha256": "565532c871242b838ae23d24f4b8645d6c372c78236214e616df36047c5dea4c"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/VALIDATION.json",
+      "size_bytes": 1698,
+      "sha256": "ebdb5fb681921b2b305fe1f600f05ffad1f0f8dabf4581f903f64398f0300c5d"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/WORK_LOG.md",
+      "size_bytes": 1923,
+      "sha256": "9b17352c77e75f7ed7364ab1ae19706c45a179d71e1f84472c34c5046d753695"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/audit_map.py",
+      "size_bytes": 4957,
+      "sha256": "257eb9c0388e93076e3d8b1b8b76b85f3f5fa14b0fb08aab6a708cb83b8910c2"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/check_epoch_lineage.py",
+      "size_bytes": 5760,
+      "sha256": "67e3f70cfac1cf49daef84c61ba35d8102a71c076aef501e8912457512bb56c2"
+    }
+  ]
+}

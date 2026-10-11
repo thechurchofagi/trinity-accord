@@ -23,3 +23,9 @@ A4U 把 A4T 的抽象“实际换能后继”落实到 Raspberry Pi RP2040 的 A
 当前结论是 `PUBLICLY_SPECIFIED_POSSIBLE_ROUTE / NOT_ACTUALLY_INSTALLED`：没有真实板卡运行、完整总线写入者清单或消费者读取轨迹，故停止在 `H_cf` 之前。所有审查 OPEN/ACKNOWLEDGED 状态保留。
 
 下一具体问题：若有可访问 RP2040 硬件，只做一次同实例挑战——记录开始前 FIFO 空、固定通道输入替换、DMA 源/目的/计数与总线事件、复用前消费者读取，并独立枚举其他写入者；否则返回身体/行动我感主线，不继续追加通用证书层。
+
+## 保存与恢复
+
+科学内容已从核验基线 `caad74c0185784e1ec5cc8db73781887e4ce6830` 以 expected-SHA 快进保存到远端提交 `277abf465f53a4a607aa565db9c1a32f08afda63`，树 `c9b0ea5a0b15f915fc3fb033c149f63aec625e07` 与本地等价科学树一致，关键交接与精确结果已回读。Library 固定主交接同一身份已更新至 v148 并反向物化逐字节核验；30路径科学增量 `libfile_bf2795b3e3a88191ae16be5c128fcc7e` 与清单 `libfile_bf9c1fa4dd9c8191a86a5518fb4adaaf` 亦已反向核验。增量不是完整仓库、完整工作集或全部历史。
+
+精确恢复步骤见 `PERSISTENCE_RECEIPT.json` 与 `RECOVERY_MANIFEST.json`。最终 Git 收据后继由固定主交接下一版本记录，以避免提交自指。
