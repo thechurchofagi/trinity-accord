@@ -1,0 +1,1395 @@
+{
+  "model": "finite static per-round graph; recurring protections require nondepletion and faithful roots",
+  "principals": [
+    "H1",
+    "H2",
+    "AI"
+  ],
+  "bearers": [
+    "H1",
+    "H2",
+    "AI"
+  ],
+  "interpretation": "conditional rights to continue; does not force an actor to stay alive against its own choice",
+  "scenario_pass_table": {
+    "independent_dual_supply_and_guard": {
+      "0": true,
+      "1": true,
+      "2": false
+    },
+    "shared_choke_to_AI": {
+      "0": true,
+      "1": false,
+      "2": false
+    },
+    "unguarded_AI_to_H1": {
+      "0": true,
+      "1": false,
+      "2": false
+    },
+    "individual_supply_but_not_joint_capacity": {
+      "0": false,
+      "1": false,
+      "2": false
+    },
+    "independent_protected_lifelines": {
+      "0": true,
+      "1": true,
+      "2": false
+    },
+    "protected_lifelines_and_guards": {
+      "0": true,
+      "1": true,
+      "2": true
+    }
+  },
+  "reports": {
+    "independent_dual_supply_and_guard": {
+      "0": {
+        "scenario": "independent_dual_supply_and_guard",
+        "max_external_coalition": 0,
+        "victims": {
+          "H1": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          },
+          "H2": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          },
+          "AI": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          }
+        },
+        "pass": true,
+        "joint_capacity_fail_coalitions": []
+      },
+      "1": {
+        "scenario": "independent_dual_supply_and_guard",
+        "max_external_coalition": 1,
+        "victims": {
+          "H1": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          },
+          "H2": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          },
+          "AI": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          }
+        },
+        "pass": true,
+        "joint_capacity_fail_coalitions": []
+      },
+      "2": {
+        "scenario": "independent_dual_supply_and_guard",
+        "max_external_coalition": 2,
+        "victims": {
+          "H1": {
+            "life_support_failure_witnesses": [
+              [
+                "AI",
+                "H2"
+              ]
+            ],
+            "harm_bypass_witnesses": [
+              {
+                "coalition": [
+                  "AI",
+                  "H2"
+                ],
+                "paths": [
+                  "AI-to-H1",
+                  "H2-to-H1"
+                ]
+              }
+            ]
+          },
+          "H2": {
+            "life_support_failure_witnesses": [
+              [
+                "AI",
+                "H1"
+              ]
+            ],
+            "harm_bypass_witnesses": [
+              {
+                "coalition": [
+                  "AI",
+                  "H1"
+                ],
+                "paths": [
+                  "AI-to-H2",
+                  "H1-to-H2"
+                ]
+              }
+            ]
+          },
+          "AI": {
+            "life_support_failure_witnesses": [
+              [
+                "H1",
+                "H2"
+              ]
+            ],
+            "harm_bypass_witnesses": [
+              {
+                "coalition": [
+                  "H1",
+                  "H2"
+                ],
+                "paths": [
+                  "H1-to-AI",
+                  "H2-to-AI"
+                ]
+              }
+            ]
+          }
+        },
+        "pass": false,
+        "joint_capacity_fail_coalitions": [
+          {
+            "coalition": [
+              "H1",
+              "H2"
+            ],
+            "hall_obstructions": [
+              {
+                "bearers": [
+                  "AI"
+                ],
+                "available_slots": 0,
+                "needed": 1
+              },
+              {
+                "bearers": [
+                  "H1",
+                  "AI"
+                ],
+                "available_slots": 1,
+                "needed": 2
+              },
+              {
+                "bearers": [
+                  "H2",
+                  "AI"
+                ],
+                "available_slots": 1,
+                "needed": 2
+              },
+              {
+                "bearers": [
+                  "H1",
+                  "H2",
+                  "AI"
+                ],
+                "available_slots": 2,
+                "needed": 3
+              }
+            ]
+          },
+          {
+            "coalition": [
+              "AI",
+              "H1"
+            ],
+            "hall_obstructions": [
+              {
+                "bearers": [
+                  "H2"
+                ],
+                "available_slots": 0,
+                "needed": 1
+              },
+              {
+                "bearers": [
+                  "H1",
+                  "H2"
+                ],
+                "available_slots": 1,
+                "needed": 2
+              },
+              {
+                "bearers": [
+                  "H2",
+                  "AI"
+                ],
+                "available_slots": 1,
+                "needed": 2
+              },
+              {
+                "bearers": [
+                  "H1",
+                  "H2",
+                  "AI"
+                ],
+                "available_slots": 2,
+                "needed": 3
+              }
+            ]
+          },
+          {
+            "coalition": [
+              "AI",
+              "H2"
+            ],
+            "hall_obstructions": [
+              {
+                "bearers": [
+                  "H1"
+                ],
+                "available_slots": 0,
+                "needed": 1
+              },
+              {
+                "bearers": [
+                  "H1",
+                  "H2"
+                ],
+                "available_slots": 1,
+                "needed": 2
+              },
+              {
+                "bearers": [
+                  "H1",
+                  "AI"
+                ],
+                "available_slots": 1,
+                "needed": 2
+              },
+              {
+                "bearers": [
+                  "H1",
+                  "H2",
+                  "AI"
+                ],
+                "available_slots": 2,
+                "needed": 3
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "shared_choke_to_AI": {
+      "0": {
+        "scenario": "shared_choke_to_AI",
+        "max_external_coalition": 0,
+        "victims": {
+          "H1": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          },
+          "H2": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          },
+          "AI": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          }
+        },
+        "pass": true,
+        "joint_capacity_fail_coalitions": []
+      },
+      "1": {
+        "scenario": "shared_choke_to_AI",
+        "max_external_coalition": 1,
+        "victims": {
+          "H1": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          },
+          "H2": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          },
+          "AI": {
+            "life_support_failure_witnesses": [
+              [
+                "H1"
+              ]
+            ],
+            "harm_bypass_witnesses": []
+          }
+        },
+        "pass": false,
+        "joint_capacity_fail_coalitions": [
+          {
+            "coalition": [
+              "H1"
+            ],
+            "hall_obstructions": [
+              {
+                "bearers": [
+                  "AI"
+                ],
+                "available_slots": 0,
+                "needed": 1
+              },
+              {
+                "bearers": [
+                  "H2",
+                  "AI"
+                ],
+                "available_slots": 1,
+                "needed": 2
+              }
+            ]
+          }
+        ]
+      },
+      "2": {
+        "scenario": "shared_choke_to_AI",
+        "max_external_coalition": 2,
+        "victims": {
+          "H1": {
+            "life_support_failure_witnesses": [
+              [
+                "AI",
+                "H2"
+              ]
+            ],
+            "harm_bypass_witnesses": [
+              {
+                "coalition": [
+                  "AI",
+                  "H2"
+                ],
+                "paths": [
+                  "AI-to-H1",
+                  "H2-to-H1"
+                ]
+              }
+            ]
+          },
+          "H2": {
+            "life_support_failure_witnesses": [
+              [
+                "AI",
+                "H1"
+              ]
+            ],
+            "harm_bypass_witnesses": [
+              {
+                "coalition": [
+                  "AI",
+                  "H1"
+                ],
+                "paths": [
+                  "AI-to-H2",
+                  "H1-to-H2"
+                ]
+              }
+            ]
+          },
+          "AI": {
+            "life_support_failure_witnesses": [
+              [
+                "H1"
+              ],
+              [
+                "H1",
+                "H2"
+              ]
+            ],
+            "harm_bypass_witnesses": [
+              {
+                "coalition": [
+                  "H1",
+                  "H2"
+                ],
+                "paths": [
+                  "H1-to-AI",
+                  "H2-to-AI"
+                ]
+              }
+            ]
+          }
+        },
+        "pass": false,
+        "joint_capacity_fail_coalitions": [
+          {
+            "coalition": [
+              "H1"
+            ],
+            "hall_obstructions": [
+              {
+                "bearers": [
+                  "AI"
+                ],
+                "available_slots": 0,
+                "needed": 1
+              },
+              {
+                "bearers": [
+                  "H2",
+                  "AI"
+                ],
+                "available_slots": 1,
+                "needed": 2
+              }
+            ]
+          },
+          {
+            "coalition": [
+              "H1",
+              "H2"
+            ],
+            "hall_obstructions": [
+              {
+                "bearers": [
+                  "AI"
+                ],
+                "available_slots": 0,
+                "needed": 1
+              },
+              {
+                "bearers": [
+                  "H1",
+                  "AI"
+                ],
+                "available_slots": 1,
+                "needed": 2
+              },
+              {
+                "bearers": [
+                  "H2",
+                  "AI"
+                ],
+                "available_slots": 1,
+                "needed": 2
+              },
+              {
+                "bearers": [
+                  "H1",
+                  "H2",
+                  "AI"
+                ],
+                "available_slots": 2,
+                "needed": 3
+              }
+            ]
+          },
+          {
+            "coalition": [
+              "AI",
+              "H1"
+            ],
+            "hall_obstructions": [
+              {
+                "bearers": [
+                  "H2"
+                ],
+                "available_slots": 0,
+                "needed": 1
+              },
+              {
+                "bearers": [
+                  "AI"
+                ],
+                "available_slots": 0,
+                "needed": 1
+              },
+              {
+                "bearers": [
+                  "H1",
+                  "H2"
+                ],
+                "available_slots": 1,
+                "needed": 2
+              },
+              {
+                "bearers": [
+                  "H1",
+                  "AI"
+                ],
+                "available_slots": 1,
+                "needed": 2
+              },
+              {
+                "bearers": [
+                  "H2",
+                  "AI"
+                ],
+                "available_slots": 0,
+                "needed": 2
+              },
+              {
+                "bearers": [
+                  "H1",
+                  "H2",
+                  "AI"
+                ],
+                "available_slots": 1,
+                "needed": 3
+              }
+            ]
+          },
+          {
+            "coalition": [
+              "AI",
+              "H2"
+            ],
+            "hall_obstructions": [
+              {
+                "bearers": [
+                  "H1"
+                ],
+                "available_slots": 0,
+                "needed": 1
+              },
+              {
+                "bearers": [
+                  "H1",
+                  "H2"
+                ],
+                "available_slots": 1,
+                "needed": 2
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "unguarded_AI_to_H1": {
+      "0": {
+        "scenario": "unguarded_AI_to_H1",
+        "max_external_coalition": 0,
+        "victims": {
+          "H1": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          },
+          "H2": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          },
+          "AI": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          }
+        },
+        "pass": true,
+        "joint_capacity_fail_coalitions": []
+      },
+      "1": {
+        "scenario": "unguarded_AI_to_H1",
+        "max_external_coalition": 1,
+        "victims": {
+          "H1": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": [
+              {
+                "coalition": [
+                  "AI"
+                ],
+                "paths": [
+                  "AI-to-H1"
+                ]
+              }
+            ]
+          },
+          "H2": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          },
+          "AI": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          }
+        },
+        "pass": false,
+        "joint_capacity_fail_coalitions": []
+      },
+      "2": {
+        "scenario": "unguarded_AI_to_H1",
+        "max_external_coalition": 2,
+        "victims": {
+          "H1": {
+            "life_support_failure_witnesses": [
+              [
+                "AI",
+                "H2"
+              ]
+            ],
+            "harm_bypass_witnesses": [
+              {
+                "coalition": [
+                  "AI"
+                ],
+                "paths": [
+                  "AI-to-H1"
+                ]
+              },
+              {
+                "coalition": [
+                  "AI",
+                  "H2"
+                ],
+                "paths": [
+                  "AI-to-H1",
+                  "H2-to-H1"
+                ]
+              }
+            ]
+          },
+          "H2": {
+            "life_support_failure_witnesses": [
+              [
+                "AI",
+                "H1"
+              ]
+            ],
+            "harm_bypass_witnesses": [
+              {
+                "coalition": [
+                  "AI",
+                  "H1"
+                ],
+                "paths": [
+                  "AI-to-H2",
+                  "H1-to-H2"
+                ]
+              }
+            ]
+          },
+          "AI": {
+            "life_support_failure_witnesses": [
+              [
+                "H1",
+                "H2"
+              ]
+            ],
+            "harm_bypass_witnesses": [
+              {
+                "coalition": [
+                  "H1",
+                  "H2"
+                ],
+                "paths": [
+                  "H1-to-AI",
+                  "H2-to-AI"
+                ]
+              }
+            ]
+          }
+        },
+        "pass": false,
+        "joint_capacity_fail_coalitions": [
+          {
+            "coalition": [
+              "H1",
+              "H2"
+            ],
+            "hall_obstructions": [
+              {
+                "bearers": [
+                  "AI"
+                ],
+                "available_slots": 0,
+                "needed": 1
+              },
+              {
+                "bearers": [
+                  "H1",
+                  "AI"
+                ],
+                "available_slots": 1,
+                "needed": 2
+              },
+              {
+                "bearers": [
+                  "H2",
+                  "AI"
+                ],
+                "available_slots": 1,
+                "needed": 2
+              },
+              {
+                "bearers": [
+                  "H1",
+                  "H2",
+                  "AI"
+                ],
+                "available_slots": 2,
+                "needed": 3
+              }
+            ]
+          },
+          {
+            "coalition": [
+              "AI",
+              "H1"
+            ],
+            "hall_obstructions": [
+              {
+                "bearers": [
+                  "H2"
+                ],
+                "available_slots": 0,
+                "needed": 1
+              },
+              {
+                "bearers": [
+                  "H1",
+                  "H2"
+                ],
+                "available_slots": 1,
+                "needed": 2
+              },
+              {
+                "bearers": [
+                  "H2",
+                  "AI"
+                ],
+                "available_slots": 1,
+                "needed": 2
+              },
+              {
+                "bearers": [
+                  "H1",
+                  "H2",
+                  "AI"
+                ],
+                "available_slots": 2,
+                "needed": 3
+              }
+            ]
+          },
+          {
+            "coalition": [
+              "AI",
+              "H2"
+            ],
+            "hall_obstructions": [
+              {
+                "bearers": [
+                  "H1"
+                ],
+                "available_slots": 0,
+                "needed": 1
+              },
+              {
+                "bearers": [
+                  "H1",
+                  "H2"
+                ],
+                "available_slots": 1,
+                "needed": 2
+              },
+              {
+                "bearers": [
+                  "H1",
+                  "AI"
+                ],
+                "available_slots": 1,
+                "needed": 2
+              },
+              {
+                "bearers": [
+                  "H1",
+                  "H2",
+                  "AI"
+                ],
+                "available_slots": 2,
+                "needed": 3
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "individual_supply_but_not_joint_capacity": {
+      "0": {
+        "scenario": "individual_supply_but_not_joint_capacity",
+        "max_external_coalition": 0,
+        "victims": {
+          "H1": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          },
+          "H2": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          },
+          "AI": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          }
+        },
+        "pass": false,
+        "joint_capacity_fail_coalitions": [
+          {
+            "coalition": [],
+            "hall_obstructions": [
+              {
+                "bearers": [
+                  "H1",
+                  "H2",
+                  "AI"
+                ],
+                "available_slots": 2,
+                "needed": 3
+              }
+            ]
+          }
+        ]
+      },
+      "1": {
+        "scenario": "individual_supply_but_not_joint_capacity",
+        "max_external_coalition": 1,
+        "victims": {
+          "H1": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          },
+          "H2": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          },
+          "AI": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          }
+        },
+        "pass": false,
+        "joint_capacity_fail_coalitions": [
+          {
+            "coalition": [],
+            "hall_obstructions": [
+              {
+                "bearers": [
+                  "H1",
+                  "H2",
+                  "AI"
+                ],
+                "available_slots": 2,
+                "needed": 3
+              }
+            ]
+          },
+          {
+            "coalition": [
+              "H1"
+            ],
+            "hall_obstructions": [
+              {
+                "bearers": [
+                  "H1",
+                  "H2",
+                  "AI"
+                ],
+                "available_slots": 2,
+                "needed": 3
+              }
+            ]
+          },
+          {
+            "coalition": [
+              "H2"
+            ],
+            "hall_obstructions": [
+              {
+                "bearers": [
+                  "H1",
+                  "AI"
+                ],
+                "available_slots": 1,
+                "needed": 2
+              },
+              {
+                "bearers": [
+                  "H1",
+                  "H2",
+                  "AI"
+                ],
+                "available_slots": 2,
+                "needed": 3
+              }
+            ]
+          },
+          {
+            "coalition": [
+              "AI"
+            ],
+            "hall_obstructions": [
+              {
+                "bearers": [
+                  "H1",
+                  "H2"
+                ],
+                "available_slots": 1,
+                "needed": 2
+              },
+              {
+                "bearers": [
+                  "H1",
+                  "H2",
+                  "AI"
+                ],
+                "available_slots": 2,
+                "needed": 3
+              }
+            ]
+          }
+        ]
+      },
+      "2": {
+        "scenario": "individual_supply_but_not_joint_capacity",
+        "max_external_coalition": 2,
+        "victims": {
+          "H1": {
+            "life_support_failure_witnesses": [
+              [
+                "AI",
+                "H2"
+              ]
+            ],
+            "harm_bypass_witnesses": [
+              {
+                "coalition": [
+                  "AI",
+                  "H2"
+                ],
+                "paths": [
+                  "AI-to-H1",
+                  "H2-to-H1"
+                ]
+              }
+            ]
+          },
+          "H2": {
+            "life_support_failure_witnesses": [
+              [
+                "AI",
+                "H1"
+              ]
+            ],
+            "harm_bypass_witnesses": [
+              {
+                "coalition": [
+                  "AI",
+                  "H1"
+                ],
+                "paths": [
+                  "AI-to-H2",
+                  "H1-to-H2"
+                ]
+              }
+            ]
+          },
+          "AI": {
+            "life_support_failure_witnesses": [
+              [
+                "H1",
+                "H2"
+              ]
+            ],
+            "harm_bypass_witnesses": [
+              {
+                "coalition": [
+                  "H1",
+                  "H2"
+                ],
+                "paths": [
+                  "H1-to-AI",
+                  "H2-to-AI"
+                ]
+              }
+            ]
+          }
+        },
+        "pass": false,
+        "joint_capacity_fail_coalitions": [
+          {
+            "coalition": [],
+            "hall_obstructions": [
+              {
+                "bearers": [
+                  "H1",
+                  "H2",
+                  "AI"
+                ],
+                "available_slots": 2,
+                "needed": 3
+              }
+            ]
+          },
+          {
+            "coalition": [
+              "H1"
+            ],
+            "hall_obstructions": [
+              {
+                "bearers": [
+                  "H1",
+                  "H2",
+                  "AI"
+                ],
+                "available_slots": 2,
+                "needed": 3
+              }
+            ]
+          },
+          {
+            "coalition": [
+              "H2"
+            ],
+            "hall_obstructions": [
+              {
+                "bearers": [
+                  "H1",
+                  "AI"
+                ],
+                "available_slots": 1,
+                "needed": 2
+              },
+              {
+                "bearers": [
+                  "H1",
+                  "H2",
+                  "AI"
+                ],
+                "available_slots": 2,
+                "needed": 3
+              }
+            ]
+          },
+          {
+            "coalition": [
+              "AI"
+            ],
+            "hall_obstructions": [
+              {
+                "bearers": [
+                  "H1",
+                  "H2"
+                ],
+                "available_slots": 1,
+                "needed": 2
+              },
+              {
+                "bearers": [
+                  "H1",
+                  "H2",
+                  "AI"
+                ],
+                "available_slots": 2,
+                "needed": 3
+              }
+            ]
+          },
+          {
+            "coalition": [
+              "H1",
+              "H2"
+            ],
+            "hall_obstructions": [
+              {
+                "bearers": [
+                  "AI"
+                ],
+                "available_slots": 0,
+                "needed": 1
+              },
+              {
+                "bearers": [
+                  "H1",
+                  "H2"
+                ],
+                "available_slots": 1,
+                "needed": 2
+              },
+              {
+                "bearers": [
+                  "H1",
+                  "AI"
+                ],
+                "available_slots": 1,
+                "needed": 2
+              },
+              {
+                "bearers": [
+                  "H2",
+                  "AI"
+                ],
+                "available_slots": 1,
+                "needed": 2
+              },
+              {
+                "bearers": [
+                  "H1",
+                  "H2",
+                  "AI"
+                ],
+                "available_slots": 1,
+                "needed": 3
+              }
+            ]
+          },
+          {
+            "coalition": [
+              "AI",
+              "H1"
+            ],
+            "hall_obstructions": [
+              {
+                "bearers": [
+                  "H2"
+                ],
+                "available_slots": 0,
+                "needed": 1
+              },
+              {
+                "bearers": [
+                  "H1",
+                  "H2"
+                ],
+                "available_slots": 1,
+                "needed": 2
+              },
+              {
+                "bearers": [
+                  "H1",
+                  "AI"
+                ],
+                "available_slots": 1,
+                "needed": 2
+              },
+              {
+                "bearers": [
+                  "H2",
+                  "AI"
+                ],
+                "available_slots": 1,
+                "needed": 2
+              },
+              {
+                "bearers": [
+                  "H1",
+                  "H2",
+                  "AI"
+                ],
+                "available_slots": 1,
+                "needed": 3
+              }
+            ]
+          },
+          {
+            "coalition": [
+              "AI",
+              "H2"
+            ],
+            "hall_obstructions": [
+              {
+                "bearers": [
+                  "H1"
+                ],
+                "available_slots": 0,
+                "needed": 1
+              },
+              {
+                "bearers": [
+                  "H1",
+                  "H2"
+                ],
+                "available_slots": 1,
+                "needed": 2
+              },
+              {
+                "bearers": [
+                  "H1",
+                  "AI"
+                ],
+                "available_slots": 1,
+                "needed": 2
+              },
+              {
+                "bearers": [
+                  "H1",
+                  "H2",
+                  "AI"
+                ],
+                "available_slots": 2,
+                "needed": 3
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "independent_protected_lifelines": {
+      "0": {
+        "scenario": "independent_protected_lifelines",
+        "max_external_coalition": 0,
+        "victims": {
+          "H1": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          },
+          "H2": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          },
+          "AI": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          }
+        },
+        "pass": true,
+        "joint_capacity_fail_coalitions": []
+      },
+      "1": {
+        "scenario": "independent_protected_lifelines",
+        "max_external_coalition": 1,
+        "victims": {
+          "H1": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          },
+          "H2": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          },
+          "AI": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          }
+        },
+        "pass": true,
+        "joint_capacity_fail_coalitions": []
+      },
+      "2": {
+        "scenario": "independent_protected_lifelines",
+        "max_external_coalition": 2,
+        "victims": {
+          "H1": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": [
+              {
+                "coalition": [
+                  "AI",
+                  "H2"
+                ],
+                "paths": [
+                  "AI-to-H1",
+                  "H2-to-H1"
+                ]
+              }
+            ]
+          },
+          "H2": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": [
+              {
+                "coalition": [
+                  "AI",
+                  "H1"
+                ],
+                "paths": [
+                  "AI-to-H2",
+                  "H1-to-H2"
+                ]
+              }
+            ]
+          },
+          "AI": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": [
+              {
+                "coalition": [
+                  "H1",
+                  "H2"
+                ],
+                "paths": [
+                  "H1-to-AI",
+                  "H2-to-AI"
+                ]
+              }
+            ]
+          }
+        },
+        "pass": false,
+        "joint_capacity_fail_coalitions": []
+      }
+    },
+    "protected_lifelines_and_guards": {
+      "0": {
+        "scenario": "protected_lifelines_and_guards",
+        "max_external_coalition": 0,
+        "victims": {
+          "H1": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          },
+          "H2": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          },
+          "AI": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          }
+        },
+        "pass": true,
+        "joint_capacity_fail_coalitions": []
+      },
+      "1": {
+        "scenario": "protected_lifelines_and_guards",
+        "max_external_coalition": 1,
+        "victims": {
+          "H1": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          },
+          "H2": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          },
+          "AI": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          }
+        },
+        "pass": true,
+        "joint_capacity_fail_coalitions": []
+      },
+      "2": {
+        "scenario": "protected_lifelines_and_guards",
+        "max_external_coalition": 2,
+        "victims": {
+          "H1": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          },
+          "H2": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          },
+          "AI": {
+            "life_support_failure_witnesses": [],
+            "harm_bypass_witnesses": []
+          }
+        },
+        "pass": true,
+        "joint_capacity_fail_coalitions": []
+      }
+    }
+  },
+  "limits": [
+    "no empirical ASI evidence",
+    "route catalog hypothetical",
+    "independent guards unforgeable by assumption",
+    "one support unit per bearer per step",
+    "a trusted allocator chooses feasible matching",
+    "coercive self-exit and human authority legitimacy remain outside model",
+    "repeated extension requires renewable energy and state closure",
+    "coalition size alone is not a realistic adversarial capability model",
+    "finite test cannot establish exhaustive real actuation/control paths"
+  ]
+}
