@@ -10,5 +10,7 @@
   "allow_change_of_frozen_assets": false,
   "allow_existing_other_deposit_overwrite": false,
   "ots_follow_up_separate": true,
-  "arweave_follow_up_separate_budget_guarded": true
+  "arweave_follow_up_separate_budget_guarded": true,
+  "retry_attempt": 1,
+  "retry_reason": "Initial workflow stopped before draft creation: unauthenticated public records API maximum page size 25; query corrected"
 }
