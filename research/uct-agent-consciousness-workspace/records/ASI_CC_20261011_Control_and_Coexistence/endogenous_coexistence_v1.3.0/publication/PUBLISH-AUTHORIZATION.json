@@ -1,0 +1,13 @@
+{
+  "schema": "rac13-publication-authorization/1",
+  "status": "AUTHORIZED_FOR_ONE_PUBLIC_ZENODO_PREPRINT",
+  "paper_id": "ASI-CC-v1.3.0",
+  "owner_instruction": "Publish ASI-CC-v1.3.0 following the repository established paper publication workflow",
+  "requested_at_date": "2026-10-11",
+  "manifest_sha256": "684c3bef05fab94c4443b3452f172aa6b193214174f5e83135eb066b0af53e8b",
+  "license": "cc-by-4.0",
+  "no_old_record_replacement": true,
+  "no_duplicate_publication": true,
+  "ots_followup": true,
+  "arweave_followup_budget_guarded": true
+}
