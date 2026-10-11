@@ -1,0 +1,43 @@
+{
+  "schema": "uct-scoped-publication-coverage-delta/1.0",
+  "baseline_coverage": "UCT-PUB-v1.0.33",
+  "research_id": "ASI-CC-PR6",
+  "new_published_work": true,
+  "new_doi": "10.5281/zenodo.23295776",
+  "date": "2026-10-11",
+  "published_version": "PR-v6.0.0",
+  "publication_type": "preprint",
+  "peer_reviewed": false,
+  "public_source_receipt": "research/uct-agent-consciousness-workspace/records/ASI_CC_20261011_Control_and_Coexistence/paper_coexistence_v6.0.0/publication/PUBLICATION-RECEIPT.json",
+  "claims_disclosed_in_full_manuscript": [
+    "CB-D1",
+    "CB-P1",
+    "CB-L1",
+    "CB-L2",
+    "CB-T1",
+    "CB-C1",
+    "CB-C2",
+    "CB-T2",
+    "CB-T3",
+    "CB-E1"
+  ],
+  "content_scope": "The precise manuscript and accompanying public supplement; does not automatically validate the listed propositions.",
+  "claims_prior_art": "Information-theoretic/list-decoding and robust-control precedents explicitly cited; priority of exact combined formula unverified",
+  "claim_validity": "scoped conditional mathematical proofs checked by exhaustive finite programs; not independent peer review",
+  "map_promotion": "NONE; formal UCT-MAP-v1.1.2 unchanged",
+  "baseline_counts": {
+    "research_works": 30,
+    "research_dois": 41,
+    "all_dois_including_editorial": 42
+  },
+  "provisional_delta_from_one_verified_paper": {
+    "research_works": 1,
+    "research_dois": 1,
+    "all_dois_including_editorial": 1
+  },
+  "new_total_requires_corpus_reconciliation": true,
+  "other_publications_since_baseline": "NOT_EXHAUSTIVELY_CENSUSED; avoid asserting globally complete current totals",
+  "ots": "CALENDAR_SUBMITTED;PENDING_BITCOIN",
+  "arweave": "NOT_UPLOADED",
+  "no_old_published_manuscript_modified": true
+}

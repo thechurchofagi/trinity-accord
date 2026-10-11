@@ -1,0 +1,13 @@
+# PR-v6.0.0 DOI Publication and OTS Initiation Work Log — 2026-10-11
+
+User explicitly instructed publication by DOI and the established repository process. Frozen 14-page English preprint and reproducibility ZIP matched exact local SHA-256 identifiers; no manuscript bytes were altered.
+
+1. Inspected existing repository Zenodo precedents and GitHub workflows; determined credential lives in GitHub Actions rather than the chat/container. Searched connected plugin directory for a native Zenodo publisher and found no direct installed provider.
+2. Created isolated publication branch research/safe-revocation-v6-20261011 from the existing research branch. Uploaded exact original PDF and ZIP as binary Git blobs, both verified against expected Git IDs. Added CC-BY-4.0 license/readme, TeX text and source comparisons, manifest-bound EXPECTED-PUBLICATION, and idempotent Zenodo publishing script.
+3. Authorized and triggered initial GitHub workflow 38127126588. It failed BEFORE any draft was created because Zenodo unauthenticated public record query used size=100, while anonymous limit is 25. Persisted exact error; corrected query to 25 without changing frozen assets.
+4. Triggered retry 38127289268: completed SUCCESS. Zenodo created published record 23295776, DOI 10.5281/zenodo.23295776, six public files exact-byte SHA-256 readback PASS, independent DOI resolver status PASS HTTP 200 to correct record. Public date 2026-10-11. No claim of peer review.
+5. Created the dedicated OTS target based on the publication receipt; triggered OTS calendar workflow 38127624723, completed SUCCESS. Original .ots proof saved with four calendar attestations. Bitcoin proof not yet embedded: state WAITING/PENDING_BITCOIN.
+6. Reused the existing strict paper-preservation OTS/Arweave scheduler on main (commit 47c405f46278238b4e012187e6fac7a10a1776ba); initial scheduled/push run 38127779117 completed SUCCESS but OTS remains pending, so paid Arweave submission was SKIPPED. It checks hourly; no guaranteed completion time.
+7. Wrote scoped coverage delta for DOI and verified claims without pretending a full census or updating formal UCT science graph. Original publication versions remain unchanged. Frozen scientific map remains UCT-MAP-v1.1.2 (913 nodes,424 active rules,261 non-deductive).
+
+Outstanding: Bitcoin header attestation/independent verification pending; protected budget-limited Arweave upload not yet executed; final Arweave public readback, OTS finalized receipt, library and global publication corpus counts must be reconciled separately. No payment or transaction is claimed in this turn. Global priority comparison and the historical UCT deep audit remain open.

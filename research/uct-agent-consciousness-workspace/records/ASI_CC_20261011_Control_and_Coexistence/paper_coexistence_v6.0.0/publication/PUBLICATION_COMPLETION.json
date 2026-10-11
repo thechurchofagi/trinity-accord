@@ -1,0 +1,91 @@
+{
+  "schema": "asi-cc-pr6-publication-completion/1.0",
+  "research_id": "ASI-CC-PR6",
+  "version": "PR-v6.0.0",
+  "title": "Safe Revocation Without Complete Diagnosis: Exact Resource Frontiers under Coupled Faults for Subjecthood-Agnostic AI Coexistence",
+  "author": "Hongju Liu",
+  "date": "2026-10-11",
+  "state": "DOI_PUBLISHED;OTS_CALENDAR_SUBMITTED;BITCOIN_PENDING;ARWEAVE_PENDING",
+  "doi": "10.5281/zenodo.23295776",
+  "doi_url": "https://doi.org/10.5281/zenodo.23295776",
+  "zenodo_record": 23295776,
+  "record_url": "https://zenodo.org/records/23295776",
+  "zenodo_published_at_utc": "2026-10-11T09:09:45.997915+00:00",
+  "license": "CC-BY-4.0",
+  "publication_type": "preprint",
+  "peer_reviewed": false,
+  "pdf_pages": 14,
+  "published_files": {
+    "safe-revocation-without-complete-diagnosis-pr-v6.0.0.pdf": {
+      "bytes": 278521,
+      "sha256": "b36fab74520f0f686b2b8252d60ff99a6925779cadd88e784d511945f34d4b61",
+      "public_url": "https://zenodo.org/api/records/23295776/files/safe-revocation-without-complete-diagnosis-pr-v6.0.0.pdf/content"
+    },
+    "safe-revocation-without-complete-diagnosis-pr-v6.0.0.tex": {
+      "bytes": 51638,
+      "sha256": "f2d2fb79b826864638aaa77f373399e558de46886ba632c8883f596f059d49c5",
+      "public_url": "https://zenodo.org/api/records/23295776/files/safe-revocation-without-complete-diagnosis-pr-v6.0.0.tex/content"
+    },
+    "reproducibility-pr-v6.0.0.zip": {
+      "bytes": 1405564,
+      "sha256": "1d95d1c41a715855779df19b4d53f3d22070879f5ed693b18cfdeaadcb58ade9",
+      "public_url": "https://zenodo.org/api/records/23295776/files/reproducibility-pr-v6.0.0.zip/content"
+    },
+    "README-LICENSE.txt": {
+      "bytes": 1468,
+      "sha256": "ddf3c6f81db4471a72ee1d1a6acf938f28ad69d41128b2f14fb661ff786d832b",
+      "public_url": "https://zenodo.org/api/records/23295776/files/README-LICENSE.txt/content"
+    },
+    "REVIEW-AND-SOURCES.md": {
+      "bytes": 1911,
+      "sha256": "08df34cfde7d84e4aae901915cb76d6561caf17ab5228f056ab731ba0f6c8940",
+      "public_url": "https://zenodo.org/api/records/23295776/files/REVIEW-AND-SOURCES.md/content"
+    },
+    "SHA256SUMS.txt": {
+      "bytes": 515,
+      "sha256": "94eb138564be03b5fd259980ee529f4b7ec0b9fb21f6610758526ac28e08fbc0",
+      "public_url": "https://zenodo.org/api/records/23295776/files/SHA256SUMS.txt/content"
+    }
+  },
+  "public_byte_readback_pass": true,
+  "doi_resolver_pass": true,
+  "doi_resolver_final_url": "https://zenodo.org/records/23295776",
+  "publication_branch": "research/safe-revocation-v6-20261011",
+  "publication_trigger_commit": "d82ee167670a91c188216db7630c352ba6319bbb",
+  "publication_workflow_run_id": 38127289268,
+  "publication_workflow_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/38127289268",
+  "publication_receipt_path": "research/uct-agent-consciousness-workspace/records/ASI_CC_20261011_Control_and_Coexistence/paper_coexistence_v6.0.0/publication/PUBLICATION-RECEIPT.json",
+  "ots": {
+    "state": "PENDING_BITCOIN",
+    "submitted_to_calendars": true,
+    "pending_calendar_attestations": 4,
+    "embedded_bitcoin_heights": [],
+    "proof_sha256": "8e36c1c2b15ba9ed9ded98b8e4476d6d0bd319bd9b65748c38975e9a2150709d",
+    "batch": "research/paper-timestamps/2026-10-11-pr6-v600",
+    "submission_workflow_run_id": 38127624723,
+    "submission_workflow_status": "success"
+  },
+  "arweave": {
+    "state": "NOT_UPLOADED_WAITING_FOR_BITCOIN_VERIFIED_OTS_AND_BUDGET",
+    "tx_id": null,
+    "charged_ar_this_session": 0,
+    "future_followup_workflow_run_id": 38127779117,
+    "future_followup_status_first_run": "success; pending; no paid upload",
+    "scheduled_workflow": "https://github.com/thechurchofagi/trinity-accord/actions/workflows/research-pr6-v600-ots-arweave-scheduler.yml",
+    "frequency": "hourly; uses existing strict budget and paid-intent mechanisms; eventual outcome not guaranteed"
+  },
+  "research_source_branch": "uct-agent-consciousness-workspace",
+  "formal_scientific_map": "UCT-MAP-v1.1.2",
+  "formal_nodes_added": 0,
+  "scientific_map_unchanged": true,
+  "publication_coverage_baseline": "UCT-PUB-v1.0.33",
+  "limitations": [
+    "No external peer review",
+    "No hardware/AI consciousness experiment",
+    "OTS calendars are not yet Bitcoin finality",
+    "Arweave is not complete",
+    "Existing UCT pending full semantic audit unchanged"
+  ],
+  "no_previous_publication_bytes_modified": true,
+  "source_versions_preserved": true
+}
