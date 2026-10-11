@@ -1,0 +1,48 @@
+{
+  "schema": "uct-dual-persistence-receipt/1.0",
+  "round": "A4Z20261012",
+  "git": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "baseline_verified_remote_commit": "4feb7e97a29555423a95765a339eca3f2d6bf86b",
+    "science_commit": "1346861f057d7b8f57515d81fef98b81d7c7063e",
+    "science_tree": "c1549de27063efb4ae0cb8151165f4e38ee95329",
+    "science_commit_verified_by_ref_commit_and_file_readback": true,
+    "receipt_successor_commit": "RECORDED_IN_FIXED_MASTER_HANDOFF_V160",
+    "receipt_successor_tree": "FILLED_BY_REMOTE_VERIFICATION_IN_FIXED_MASTER_HANDOFF_V160"
+  },
+  "library": {
+    "fixed_master": {
+      "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+      "version_after_science": 159,
+      "file_id": "file_0000000036188230aa55034e3ada1597",
+      "size_bytes": 154043,
+      "sha256": "6a1ee58dbd58fdfba253fc2388a56ae2ed77dd957ddc71980c13bac8682eb81c",
+      "verified_by_reverse_materialized_byte_comparison": true,
+      "final_version_after_receipt": 160
+    },
+    "science_increment": {
+      "classification": "INCREMENT_NOT_COMPLETE_REPOSITORY_OR_WORKING_SET",
+      "library_file_id": "libfile_6e2c18305e2c8191a3ee0b911a82e3b6",
+      "file_id": "file_000000006dac823080591bf5e1f68b14",
+      "file_name": "UCT_A4Z_Science_Increment_20261012.zip",
+      "size_bytes": 234986,
+      "sha256": "70dd9a9fb3d0ae195ad339158e9c03c6d403ee7b152bde04852742075932b09a",
+      "file_count": 34,
+      "reverse_materialized_byte_equal": true
+    },
+    "science_increment_manifest": {
+      "library_file_id": "libfile_95f393e9a6b0819195cac961f88cf987",
+      "file_id": "file_00000000b27c81fd8ca2387c0c74d528",
+      "file_name": "UCT_A4Z_Science_Increment_Manifest_20261012.json",
+      "size_bytes": 8789,
+      "sha256": "95f79410e6b4f31bafa84ce749364813e7be85c7ef6a28943136e68183800e81",
+      "reverse_materialized_byte_equal": true
+    }
+  },
+  "limits": [
+    "The Library archive is an increment from the verified baseline to the science tree, not a complete repository, complete working set, or all history.",
+    "The science commit precedes this receipt by design; fixed master handoff v160 records the verified receipt-successor commit and tree to avoid self-reference.",
+    "Persistence verification does not promote the disabled scientific claims or close any supervision item."
+  ]
+}

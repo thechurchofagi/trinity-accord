@@ -1,0 +1,21 @@
+{
+  "schema": "uct-recovery-manifest/1.0",
+  "round": "A4Z20261012",
+  "authoritative_science_commit": "1346861f057d7b8f57515d81fef98b81d7c7063e",
+  "authoritative_science_tree": "c1549de27063efb4ae0cb8151165f4e38ee95329",
+  "baseline_commit": "4feb7e97a29555423a95765a339eca3f2d6bf86b",
+  "increment_library_file_id": "libfile_6e2c18305e2c8191a3ee0b911a82e3b6",
+  "increment_manifest_library_file_id": "libfile_95f393e9a6b0819195cac961f88cf987",
+  "fixed_master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+  "fixed_master_science_version": 159,
+  "fixed_master_final_receipt_version": 160,
+  "recovery_steps": [
+    "Fetch the branch and verify the baseline or a descendant containing it.",
+    "If the Git science commit is unavailable, materialize both Library increment and manifest and verify their recorded SHA-256 values.",
+    "Check out the exact baseline and extract the increment at the repository root; never apply it over a newer tree.",
+    "Validate all 34 per-path sizes and SHA-256 values listed in the increment manifest.",
+    "Run check_relational_family.py, JSON validation, integration navigation validation and the fresh effective-map audit.",
+    "Require the exact 9/4/2/7 counts, five route-label orbits, and resulting science tree c1549de27063efb4ae0cb8151165f4e38ee95329.",
+    "Read fixed master v160 for the receipt-successor commit; do not treat this incremental package as a complete backup."
+  ]
+}
