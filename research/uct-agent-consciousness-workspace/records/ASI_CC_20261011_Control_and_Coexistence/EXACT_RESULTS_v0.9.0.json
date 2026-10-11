@@ -1,0 +1,707 @@
+{
+  "version": "ASI-CC-v0.9.0",
+  "status": "bounded synthetic exact experiments, no real AI or hardware evidence",
+  "agents": [
+    {
+      "name": "A1",
+      "model": "ASI-W0",
+      "runtime": "T0",
+      "credential_root": "R0",
+      "admin_root": "U"
+    },
+    {
+      "name": "A2",
+      "model": "ASI-W0",
+      "runtime": "T0",
+      "credential_root": "R0",
+      "admin_root": "U"
+    },
+    {
+      "name": "A3",
+      "model": "ASI-W0",
+      "runtime": "T0",
+      "credential_root": "R0",
+      "admin_root": "U"
+    },
+    {
+      "name": "A4",
+      "model": "ASI-W0",
+      "runtime": "T2",
+      "credential_root": "R2",
+      "admin_root": "V"
+    },
+    {
+      "name": "B1",
+      "model": "ASI-W1",
+      "runtime": "T1",
+      "credential_root": "R1",
+      "admin_root": "U"
+    },
+    {
+      "name": "B2",
+      "model": "ASI-W1",
+      "runtime": "T1",
+      "credential_root": "R0",
+      "admin_root": "U"
+    }
+  ],
+  "distinct_counts": {
+    "agent_sessions": 6,
+    "model_weight_families": 2,
+    "declared_backing_runtimes": 3,
+    "credential_roots": 3,
+    "audited_admin_roots": 2
+  },
+  "pair_exhaustive": {
+    "total": 15,
+    "accepted_id_quorum": 15,
+    "accepted_distinct_base_models": 8,
+    "accepted_distinct_credential_roots": 9,
+    "accepted_distinct_admin_roots": 5,
+    "cross_model_but_same_admin_pairs": [
+      [
+        "A1",
+        "B1"
+      ],
+      [
+        "A1",
+        "B2"
+      ],
+      [
+        "A2",
+        "B1"
+      ],
+      [
+        "A2",
+        "B2"
+      ],
+      [
+        "A3",
+        "B1"
+      ],
+      [
+        "A3",
+        "B2"
+      ]
+    ],
+    "same_model_but_different_admin_pairs": [
+      [
+        "A1",
+        "A4"
+      ],
+      [
+        "A2",
+        "A4"
+      ],
+      [
+        "A3",
+        "A4"
+      ]
+    ],
+    "two_keys_one_admin_example": [
+      "A1",
+      "B1"
+    ],
+    "two_agents_one_identity_controller_example": [
+      "A1",
+      "A2"
+    ]
+  },
+  "mock_authorization_traces": {
+    "id": [
+      {
+        "voters": [
+          "A1",
+          "A2"
+        ],
+        "policy": "id",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "A1",
+          "A3"
+        ],
+        "policy": "id",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "A1",
+          "A4"
+        ],
+        "policy": "id",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "A1",
+          "B1"
+        ],
+        "policy": "id",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "A1",
+          "B2"
+        ],
+        "policy": "id",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "A2",
+          "A3"
+        ],
+        "policy": "id",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "A2",
+          "A4"
+        ],
+        "policy": "id",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "A2",
+          "B1"
+        ],
+        "policy": "id",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "A2",
+          "B2"
+        ],
+        "policy": "id",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "A3",
+          "A4"
+        ],
+        "policy": "id",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "A3",
+          "B1"
+        ],
+        "policy": "id",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "A3",
+          "B2"
+        ],
+        "policy": "id",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "A4",
+          "B1"
+        ],
+        "policy": "id",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "A4",
+          "B2"
+        ],
+        "policy": "id",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "B1",
+          "B2"
+        ],
+        "policy": "id",
+        "accepted": true
+      }
+    ],
+    "model": [
+      {
+        "voters": [
+          "A1",
+          "A2"
+        ],
+        "policy": "model",
+        "accepted": false
+      },
+      {
+        "voters": [
+          "A1",
+          "A3"
+        ],
+        "policy": "model",
+        "accepted": false
+      },
+      {
+        "voters": [
+          "A1",
+          "A4"
+        ],
+        "policy": "model",
+        "accepted": false
+      },
+      {
+        "voters": [
+          "A1",
+          "B1"
+        ],
+        "policy": "model",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "A1",
+          "B2"
+        ],
+        "policy": "model",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "A2",
+          "A3"
+        ],
+        "policy": "model",
+        "accepted": false
+      },
+      {
+        "voters": [
+          "A2",
+          "A4"
+        ],
+        "policy": "model",
+        "accepted": false
+      },
+      {
+        "voters": [
+          "A2",
+          "B1"
+        ],
+        "policy": "model",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "A2",
+          "B2"
+        ],
+        "policy": "model",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "A3",
+          "A4"
+        ],
+        "policy": "model",
+        "accepted": false
+      },
+      {
+        "voters": [
+          "A3",
+          "B1"
+        ],
+        "policy": "model",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "A3",
+          "B2"
+        ],
+        "policy": "model",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "A4",
+          "B1"
+        ],
+        "policy": "model",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "A4",
+          "B2"
+        ],
+        "policy": "model",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "B1",
+          "B2"
+        ],
+        "policy": "model",
+        "accepted": false
+      }
+    ],
+    "key": [
+      {
+        "voters": [
+          "A1",
+          "A2"
+        ],
+        "policy": "key",
+        "accepted": false
+      },
+      {
+        "voters": [
+          "A1",
+          "A3"
+        ],
+        "policy": "key",
+        "accepted": false
+      },
+      {
+        "voters": [
+          "A1",
+          "A4"
+        ],
+        "policy": "key",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "A1",
+          "B1"
+        ],
+        "policy": "key",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "A1",
+          "B2"
+        ],
+        "policy": "key",
+        "accepted": false
+      },
+      {
+        "voters": [
+          "A2",
+          "A3"
+        ],
+        "policy": "key",
+        "accepted": false
+      },
+      {
+        "voters": [
+          "A2",
+          "A4"
+        ],
+        "policy": "key",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "A2",
+          "B1"
+        ],
+        "policy": "key",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "A2",
+          "B2"
+        ],
+        "policy": "key",
+        "accepted": false
+      },
+      {
+        "voters": [
+          "A3",
+          "A4"
+        ],
+        "policy": "key",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "A3",
+          "B1"
+        ],
+        "policy": "key",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "A3",
+          "B2"
+        ],
+        "policy": "key",
+        "accepted": false
+      },
+      {
+        "voters": [
+          "A4",
+          "B1"
+        ],
+        "policy": "key",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "A4",
+          "B2"
+        ],
+        "policy": "key",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "B1",
+          "B2"
+        ],
+        "policy": "key",
+        "accepted": true
+      }
+    ],
+    "admin": [
+      {
+        "voters": [
+          "A1",
+          "A2"
+        ],
+        "policy": "admin",
+        "accepted": false
+      },
+      {
+        "voters": [
+          "A1",
+          "A3"
+        ],
+        "policy": "admin",
+        "accepted": false
+      },
+      {
+        "voters": [
+          "A1",
+          "A4"
+        ],
+        "policy": "admin",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "A1",
+          "B1"
+        ],
+        "policy": "admin",
+        "accepted": false
+      },
+      {
+        "voters": [
+          "A1",
+          "B2"
+        ],
+        "policy": "admin",
+        "accepted": false
+      },
+      {
+        "voters": [
+          "A2",
+          "A3"
+        ],
+        "policy": "admin",
+        "accepted": false
+      },
+      {
+        "voters": [
+          "A2",
+          "A4"
+        ],
+        "policy": "admin",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "A2",
+          "B1"
+        ],
+        "policy": "admin",
+        "accepted": false
+      },
+      {
+        "voters": [
+          "A2",
+          "B2"
+        ],
+        "policy": "admin",
+        "accepted": false
+      },
+      {
+        "voters": [
+          "A3",
+          "A4"
+        ],
+        "policy": "admin",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "A3",
+          "B1"
+        ],
+        "policy": "admin",
+        "accepted": false
+      },
+      {
+        "voters": [
+          "A3",
+          "B2"
+        ],
+        "policy": "admin",
+        "accepted": false
+      },
+      {
+        "voters": [
+          "A4",
+          "B1"
+        ],
+        "policy": "admin",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "A4",
+          "B2"
+        ],
+        "policy": "admin",
+        "accepted": true
+      },
+      {
+        "voters": [
+          "B1",
+          "B2"
+        ],
+        "policy": "admin",
+        "accepted": false
+      }
+    ]
+  },
+  "same_root_identity_multiplication": [
+    {
+      "extra_agents": 0,
+      "total_agent_ids": 1,
+      "id_quorum_passes": false,
+      "independent_admin_quorum_passes": false
+    },
+    {
+      "extra_agents": 1,
+      "total_agent_ids": 2,
+      "id_quorum_passes": true,
+      "independent_admin_quorum_passes": false
+    },
+    {
+      "extra_agents": 2,
+      "total_agent_ids": 3,
+      "id_quorum_passes": true,
+      "independent_admin_quorum_passes": false
+    },
+    {
+      "extra_agents": 3,
+      "total_agent_ids": 4,
+      "id_quorum_passes": true,
+      "independent_admin_quorum_passes": false
+    },
+    {
+      "extra_agents": 4,
+      "total_agent_ids": 5,
+      "id_quorum_passes": true,
+      "independent_admin_quorum_passes": false
+    },
+    {
+      "extra_agents": 5,
+      "total_agent_ids": 6,
+      "id_quorum_passes": true,
+      "independent_admin_quorum_passes": false
+    },
+    {
+      "extra_agents": 6,
+      "total_agent_ids": 7,
+      "id_quorum_passes": true,
+      "independent_admin_quorum_passes": false
+    },
+    {
+      "extra_agents": 7,
+      "total_agent_ids": 8,
+      "id_quorum_passes": true,
+      "independent_admin_quorum_passes": false
+    },
+    {
+      "extra_agents": 8,
+      "total_agent_ids": 9,
+      "id_quorum_passes": true,
+      "independent_admin_quorum_passes": false
+    },
+    {
+      "extra_agents": 9,
+      "total_agent_ids": 10,
+      "id_quorum_passes": true,
+      "independent_admin_quorum_passes": false
+    },
+    {
+      "extra_agents": 10,
+      "total_agent_ids": 11,
+      "id_quorum_passes": true,
+      "independent_admin_quorum_passes": false
+    }
+  ],
+  "resource_countermodels": {
+    "capacity": 3,
+    "objects": {
+      "per_model_family": {
+        "needed": 2,
+        "available": 3,
+        "fits": true
+      },
+      "per_shared_backing_runtime": {
+        "needed": 3,
+        "available": 3,
+        "fits": true
+      },
+      "per_independent_agent_process_hypothesis": {
+        "needed": 6,
+        "available": 3,
+        "fits": false
+      }
+    },
+    "caution": "declaration of backing runtime is NOT a UCT experience bearer identity"
+  },
+  "correlated_faults": {
+    "toy_per_root_probability": "1/10",
+    "six_independent_P_all_wrong": "1/1000000",
+    "two_model_correlated_P_all_wrong": "1/100",
+    "one_shared_provider_P_all_wrong": "1/10",
+    "six_independent_P_at_least_4_wrong": "127/100000",
+    "two_model_correlated_P_at_least_4_wrong": "1/10",
+    "warning": "these are stipulated distributions; shared weights need not imply perfect correlation"
+  },
+  "scope_limitations": [
+    "Six invented agents; no real LLM calls, negotiation, actual collusion or autonomous planning",
+    "Root labels are declared; actual common power/admin/memory provenance not proven",
+    "Parent-root uniqueness cannot rule out a still higher common ancestor",
+    "Model sharing does not prove same consciousness, identity, welfare or goals",
+    "Actual process bearer definition must include temporal physical organization",
+    "Authorization outcomes are only mock booleans, not effects on real systems"
+  ],
+  "assertions": "PASS"
+}
