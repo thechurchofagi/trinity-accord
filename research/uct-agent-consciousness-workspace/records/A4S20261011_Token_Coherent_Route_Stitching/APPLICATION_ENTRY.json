@@ -1,0 +1,42 @@
+{
+  "schema": "uct-followup-application/1.0",
+  "application": {
+    "id": "A4S20261011",
+    "version": "A4S-TCRS-v0.1.0",
+    "status": "DISABLED_TOKEN_COHERENCE_CORRECTION_AND_FINITE_COUNTEREXAMPLE",
+    "enabled_as_established_premises": false,
+    "source": "records/A4S20261011_Token_Coherent_Route_Stitching/RESEARCH_NOTE.md",
+    "handoff": "records/A4S20261011_Token_Coherent_Route_Stitching/HANDOFF_ZH.md",
+    "work_log": "records/A4S20261011_Token_Coherent_Route_Stitching/WORK_LOG.md",
+    "claim_ledger": "records/A4S20261011_Token_Coherent_Route_Stitching/CLAIM_LEDGER.json",
+    "map_extension": "records/A4S20261011_Token_Coherent_Route_Stitching/MAP_EXTENSION.json",
+    "exact_results": "records/A4S20261011_Token_Coherent_Route_Stitching/EXACT_RESULTS.json",
+    "parent_science": "A3V20261010",
+    "parent_followup": "A4R20261011",
+    "completed_map": "UCT-MAP-v1.1.2",
+    "scientific_delta": {
+      "nodes": 0,
+      "rules": 0,
+      "contexts": 0
+    },
+    "finite_worlds": 32,
+    "all_three_local_links_true_worlds": 4,
+    "coherent_full_route_worlds": 1,
+    "unstitched_counterexample_worlds": 3,
+    "independent_h_validation": false,
+    "actual_bodily_installation": false,
+    "standalone_manuscript": "HOLD"
+  },
+  "depends_on": [
+    "A4R20261011",
+    "A4N20261011",
+    "A:C1",
+    "A:U1",
+    "A:P3",
+    "A:P6",
+    "R159:FRAME_RELATION_TRANSPORT",
+    "R173:COUNTERFACTUAL_CONTRAST_CONTRACT"
+  ],
+  "promotion": "NONE",
+  "reason": "Finite correction remains model-relative and lacks actual installation and phenomenal calibration."
+}

@@ -1,5 +1,15 @@
 # UCT 统一研究地图
 
+## A4S disabled application layer — token-coherent route stitching
+
+- Stable claims: A4S-C1 through A4S-C5.
+- Candidate all_of: ([L_s,X_{sc},L_c,X_{cw},L_w]) on the same (P,I,K,B).
+- Countermodel: ([L_s,L_c,L_w]=1) with either stitch false.
+- Relation to graph: no enabled node, rule or context; delta 0/0/0.
+- Firewalls: no edge to basal-experience admission, (H_{cf}), conceptual self or report.
+- Evidence and limits: [contract](records/A4S20261011_Token_Coherent_Route_Stitching/TOKEN_STITCHING_CONTRACT.md), [audit](records/A4S20261011_Token_Coherent_Route_Stitching/FORMAL_AUDIT.md), [gaps](records/A4S20261011_Token_Coherent_Route_Stitching/GAP_LEDGER.md).
+
+
 [总览](UCT_FORMAL_MAP.md) · [全部候选](PENDING_RESEARCH.md) · [当前状态](CURRENT_STATE.json) · [统一登记](UNIFIED_RESEARCH_INDEX.json) · [审查](UCT_FORMAL_AUDIT.md)
 
 整合版本 **UCT-INTEGRATION-v1.0.0**。正式科学图 **UCT-MAP-v1.1.2**；最新科学研究 **A3V20261010**；最新停用应用 **A4R20261011**；发表覆盖 **UCT-PUB-v1.0.33**。

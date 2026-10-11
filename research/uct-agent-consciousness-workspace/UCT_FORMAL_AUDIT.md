@@ -1,5 +1,10 @@
 # UCT 地图审查状态
 
+## A4S20261011 audit addendum
+
+A4S found a hidden occurrence-identity premise in the A4R route composition. Root graph JSON was fetched and parsed (584 nodes, 284 rules, 178 context links); relevant C1/U1/P3/P6/R159 nodes were reviewed. The disabled five-premise candidate is jointly satisfiable and has three exact noncomposition countermodels. No graph promotion occurred. Fresh local all-layer validation was blocked by exec-server failure, so status is **MANUAL_COMPATIBILITY_PASS / AUDIT_INCOMPLETE**, not a global proof. Full record: [A4S audit](records/A4S20261011_Token_Coherent_Route_Stitching/FORMAL_AUDIT.md).
+
+
 ## A4R20261011 增量审计
 
 A4R 只增加停用的三链路有限证书，不改变正式图。完整路线是同一承载者／事件／签名上的 `L_s AND L_c AND L_w`；有限联合可满足见证存在，但三个局部阳性在开放旁路下有27个相容世界并覆盖8种实际链路模式，故不得由状态读取、命令正确和动作成功倒推实际锚点路线。独立闭合三旁路后唯一性只在所声明64世界模型中成立，不等于物理安装。正式计数仍913/424/261，727待定对象停用、10历史规则暂停；全部审查OPEN/INCOMPLETE保留。详见 [A4R形式审查](records/A4R20261011_Three_Link_Anchor_Route_Certificate/FORMAL_AUDIT.md)。

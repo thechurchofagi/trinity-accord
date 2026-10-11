@@ -1,0 +1,77 @@
+{
+  "schema": "uct-a4s-token-stitching-results/1.0",
+  "version": "A4S-TCRS-v0.1.0",
+  "execution": {
+    "engine": "ChatGPT tool-orchestration JavaScript isolate",
+    "method": "exhaustive 0..31 bit enumeration",
+    "executed": true,
+    "selected_exec_environment_available": false
+  },
+  "variables": [
+    "L_s",
+    "L_c",
+    "L_w",
+    "X_sc",
+    "X_cw"
+  ],
+  "definitions": {
+    "local_three": "L_s && L_c && L_w",
+    "coherent_route": "local_three && X_sc && X_cw"
+  },
+  "counts": {
+    "worlds": 32,
+    "local_three_true": 4,
+    "coherent_route_true": 1,
+    "local_three_but_not_coherent": 3
+  },
+  "local_three_worlds": [
+    {
+      "L_s": true,
+      "L_c": true,
+      "L_w": true,
+      "X_sc": false,
+      "X_cw": false,
+      "local_three": true,
+      "coherent_route": false
+    },
+    {
+      "L_s": true,
+      "L_c": true,
+      "L_w": true,
+      "X_sc": true,
+      "X_cw": false,
+      "local_three": true,
+      "coherent_route": false
+    },
+    {
+      "L_s": true,
+      "L_c": true,
+      "L_w": true,
+      "X_sc": false,
+      "X_cw": true,
+      "local_three": true,
+      "coherent_route": false
+    },
+    {
+      "L_s": true,
+      "L_c": true,
+      "L_w": true,
+      "X_sc": true,
+      "X_cw": true,
+      "local_three": true,
+      "coherent_route": true
+    }
+  ],
+  "assertions": {
+    "worlds_32": true,
+    "local_three_4": true,
+    "coherent_1": true
+  },
+  "limits": [
+    "Boolean abstraction only",
+    "No actual device inspected",
+    "No phenomenal label assigned",
+    "No independent H_cf validation",
+    "Not a complete physical-alternative enumeration"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "uct-a4s-validation/1.0",
+  "checks": [
+    {
+      "id": "enumeration",
+      "status": "PASS",
+      "evidence": "EXACT_RESULTS.json; assertions 32/4/1"
+    },
+    {
+      "id": "canonical_graph_json_parse",
+      "status": "PASS",
+      "evidence": {
+        "revision": "R178-SB20261008-v1.0",
+        "nodes": 584,
+        "rules": 284,
+        "context_links": 178
+      }
+    },
+    {
+      "id": "global_json_parse_before_edit",
+      "status": "PASS",
+      "files": [
+        "CURRENT_STATE.json",
+        "RESEARCH_REGISTRY.json",
+        "RESEARCH_SESSION_LOG_INDEX.json",
+        "UNIFIED_RESEARCH_INDEX.json",
+        "PUBLICATION_COVERAGE.json"
+      ]
+    },
+    {
+      "id": "local_repo_test_suite",
+      "status": "NOT_RUN",
+      "reason": "exec-server websocket unavailable"
+    },
+    {
+      "id": "fresh_effective_all_layer_validator",
+      "status": "NOT_RUN_AUDIT_INCOMPLETE",
+      "reason": "exec-server websocket unavailable"
+    },
+    {
+      "id": "library_backup",
+      "status": "PENDING",
+      "reason": "requires local materialization/upload path; selected exec environment unavailable"
+    }
+  ],
+  "claim": "Passing finite checks is not a proof of the theory or an actual installation."
+}

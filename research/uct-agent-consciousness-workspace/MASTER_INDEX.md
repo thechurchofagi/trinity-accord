@@ -1,5 +1,16 @@
 # UCT 主索引
 
+## Current follow-up application: A4S20261011
+
+- [Research note](records/A4S20261011_Token_Coherent_Route_Stitching/RESEARCH_NOTE.md)
+- [Token-stitching contract](records/A4S20261011_Token_Coherent_Route_Stitching/TOKEN_STITCHING_CONTRACT.md)
+- [Proof and exact results](records/A4S20261011_Token_Coherent_Route_Stitching/PROOF.md), [JSON](records/A4S20261011_Token_Coherent_Route_Stitching/EXACT_RESULTS.json)
+- [Formal audit](records/A4S20261011_Token_Coherent_Route_Stitching/FORMAL_AUDIT.md)
+- [Chinese handoff](records/A4S20261011_Token_Coherent_Route_Stitching/HANDOFF_ZH.md)
+
+Status: disabled candidate; internal correction; zero formal-graph delta; manuscript HOLD.
+
+
 [总览](UCT_FORMAL_MAP.md) · [全部候选](PENDING_RESEARCH.md) · [当前状态](CURRENT_STATE.json) · [统一登记](UNIFIED_RESEARCH_INDEX.json) · [审查](UCT_FORMAL_AUDIT.md)
 
 - [研究指南](RESEARCH_MASTER_GUIDE.md)

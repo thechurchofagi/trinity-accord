@@ -1,0 +1,69 @@
+{
+  "schema": "uct-map-extension/1.0",
+  "id": "A4S20261011",
+  "version": "A4S-TCRS-v0.1.0",
+  "base": "UCT-MAP-v1.1.2",
+  "enabled": false,
+  "merge_status": "DISABLED_CANDIDATE_LAYER",
+  "scientific_delta": {
+    "nodes": 0,
+    "rules": 0,
+    "contexts": 0
+  },
+  "candidate_nodes": [
+    {
+      "id": "A4S-C1",
+      "kind": "CORRECTION",
+      "status": "PROVED_IN_DECLARED_ABSTRACTION; DISABLED_GENERAL_PREMISE",
+      "source": "records/A4S20261011_Token_Coherent_Route_Stitching/CLAIM_LEDGER.json"
+    },
+    {
+      "id": "A4S-C2",
+      "kind": "FINITE_COUNTEREXAMPLE",
+      "status": "EXACT_MODEL_RESULT",
+      "source": "records/A4S20261011_Token_Coherent_Route_Stitching/CLAIM_LEDGER.json"
+    },
+    {
+      "id": "A4S-C3",
+      "kind": "CONDITIONAL_RESULT",
+      "status": "MODEL_RELATIVE",
+      "source": "records/A4S20261011_Token_Coherent_Route_Stitching/CLAIM_LEDGER.json"
+    },
+    {
+      "id": "A4S-C4",
+      "kind": "INHERITED_APPLICATION",
+      "status": "INHERITED_WITH_NEW_APPLICATION",
+      "source": "records/A4S20261011_Token_Coherent_Route_Stitching/CLAIM_LEDGER.json"
+    },
+    {
+      "id": "A4S-C5",
+      "kind": "UCT_CONDITIONAL_INTERPRETATION",
+      "status": "OPEN_EMPIRICAL_AND_PHENOMENAL_BRIDGE",
+      "source": "records/A4S20261011_Token_Coherent_Route_Stitching/CLAIM_LEDGER.json"
+    }
+  ],
+  "candidate_rule": {
+    "id": "a4s_coherent_route",
+    "all_of": [
+      "A4S:L_s",
+      "A4S:X_sc",
+      "A4S:L_c",
+      "A4S:X_cw",
+      "A4S:L_w"
+    ],
+    "conclusion": "A4S:ACTUAL_COHERENT_ROUTE",
+    "status": "DISABLED_MODEL_RELATIVE"
+  },
+  "forbidden_edges": [
+    "A4S:ACTUAL_COHERENT_ROUTE -> A4S:H_cf",
+    "A4S:ACTUAL_COHERENT_ROUTE -> conceptual_self",
+    "A4S:ACTUAL_COHERENT_ROUTE -> report",
+    "A4S:ACTUAL_COHERENT_ROUTE -> basal_experience_gate"
+  ],
+  "open": [
+    "actual token-stitch evidence",
+    "H_cf calibration",
+    "physical alternative closure",
+    "fresh all-layer programmatic audit"
+  ]
+}

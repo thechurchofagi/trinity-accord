@@ -106,15 +106,10 @@
     "latest_followup_application": "records/A4R20261011_Three_Link_Anchor_Route_Certificate/PUBLICATION_COVERAGE_UPDATE.json"
   },
   "latest_activity": {
-    "id": "A3V20261010",
-    "result_version": "A3V-SCOPE-v0.1.0",
-    "status": "PENDING_CHECKPOINT_DISABLED",
-    "source": "records/A3V20261010_Concurrent_Liveness_and_Familiarity/RESEARCH_NOTE.md",
-    "handoff": "records/A3V20261010_Concurrent_Liveness_and_Familiarity/HANDOFF_ZH.md",
-    "work_log": "records/A3V20261010_Concurrent_Liveness_and_Familiarity/WORK_LOG.md",
-    "enabled_as_established_premises": false,
-    "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
-    "evidence_status": "BOUNDED_PRIMARY_SOURCE_APPLICATION_STOP_AND_R173_SCOPE_RETURN; ACTUAL_PREMISES_AND_H_OPEN"
+    "id": "A4S20261011",
+    "type": "FOLLOWUP_APPLICATION",
+    "status": "DISABLED_TOKEN_COHERENCE_CORRECTION_AND_FINITE_COUNTEREXAMPLE",
+    "source": "records/A4S20261011_Token_Coherent_Route_Stitching/RESEARCH_NOTE.md"
   },
   "latest_pending_research": {
     "id": "A3V20261010",
@@ -128,7 +123,7 @@
     "evidence_status": "BOUNDED_PRIMARY_SOURCE_APPLICATION_STOP_AND_R173_SCOPE_RETURN; ACTUAL_PREMISES_AND_H_OPEN"
   },
   "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 completed objects retain structural traversal, and A4R manually rechecked C1/U1, R157, R159, effective R173 and A4D-A4Q. Deep full-history semantics remain AUDIT_INCOMPLETE.",
-  "next_priority": "Instantiate one actual same-event three-link trial: independently perturb and close bypasses for physical-anchor sampling, current-consumer use and post-arbitration plant write while holding bearer, event, signature and route fixed. Stop before H_cf if any link or closure cannot be bound to that same instance.",
+  "next_priority": "A4S next: specify and attack a physically testable same-occurrence/lineage criterion at sampler→consumer and consumer→writer boundaries in one actual bearer, without treating value equality, software identifiers, or abstract port matching as physical token identity; retain H_cf calibration as OPEN.",
   "latest_scoped_review": {
     "audit": "records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_AUDIT.md",
     "per_id_structure": "records/CTD20261010_Cross_Task_Intervention_v02/governance/BASELINE_PER_ID_STRUCTURE.json.gz",
@@ -543,28 +538,28 @@
     }
   },
   "latest_followup_application": {
-    "id": "A4R20261011",
-    "version": "A4R-TLARC-v0.1.0",
-    "status": "DISABLED_THREE_LINK_ANCHOR_ROUTE_IDENTIFIABILITY_CERTIFICATE",
+    "id": "A4S20261011",
+    "version": "A4S-TCRS-v0.1.0",
+    "status": "DISABLED_TOKEN_COHERENCE_CORRECTION_AND_FINITE_COUNTEREXAMPLE",
     "enabled_as_established_premises": false,
-    "source": "records/A4R20261011_Three_Link_Anchor_Route_Certificate/RESEARCH_NOTE.md",
-    "handoff": "records/A4R20261011_Three_Link_Anchor_Route_Certificate/HANDOFF_ZH.md",
-    "work_log": "records/A4R20261011_Three_Link_Anchor_Route_Certificate/WORK_LOG.md",
-    "claim_ledger": "records/A4R20261011_Three_Link_Anchor_Route_Certificate/CLAIM_LEDGER.json",
-    "map_extension": "records/A4R20261011_Three_Link_Anchor_Route_Certificate/MAP_EXTENSION.json",
-    "exact_results": "records/A4R20261011_Three_Link_Anchor_Route_Certificate/EXACT_RESULTS.json",
+    "source": "records/A4S20261011_Token_Coherent_Route_Stitching/RESEARCH_NOTE.md",
+    "handoff": "records/A4S20261011_Token_Coherent_Route_Stitching/HANDOFF_ZH.md",
+    "work_log": "records/A4S20261011_Token_Coherent_Route_Stitching/WORK_LOG.md",
+    "claim_ledger": "records/A4S20261011_Token_Coherent_Route_Stitching/CLAIM_LEDGER.json",
+    "map_extension": "records/A4S20261011_Token_Coherent_Route_Stitching/MAP_EXTENSION.json",
+    "exact_results": "records/A4S20261011_Token_Coherent_Route_Stitching/EXACT_RESULTS.json",
     "parent_science": "A3V20261010",
-    "parent_followup": "A4Q20261011",
+    "parent_followup": "A4R20261011",
     "completed_map": "UCT-MAP-v1.1.2",
     "scientific_delta": {
       "nodes": 0,
       "rules": 0,
       "contexts": 0
     },
-    "finite_worlds": 64,
-    "positive_fibre_worlds_without_closure": 27,
-    "actual_patterns_in_positive_fibre": 8,
-    "positive_fibre_worlds_with_closure": 1,
+    "finite_worlds": 32,
+    "all_three_local_links_true_worlds": 4,
+    "coherent_full_route_worlds": 1,
+    "unstitched_counterexample_worlds": 3,
     "independent_h_validation": false,
     "actual_bodily_installation": false,
     "standalone_manuscript": "HOLD"
@@ -1102,11 +1097,42 @@
       "parent_science": "A3V20261010",
       "parent_followup": "A4Q20261011",
       "completed_map": "UCT-MAP-v1.1.2",
-      "scientific_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+      "scientific_delta": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0
+      },
       "finite_worlds": 64,
       "positive_fibre_worlds_without_closure": 27,
       "actual_patterns_in_positive_fibre": 8,
       "positive_fibre_worlds_with_closure": 1,
+      "independent_h_validation": false,
+      "actual_bodily_installation": false,
+      "standalone_manuscript": "HOLD"
+    },
+    {
+      "id": "A4S20261011",
+      "version": "A4S-TCRS-v0.1.0",
+      "status": "DISABLED_TOKEN_COHERENCE_CORRECTION_AND_FINITE_COUNTEREXAMPLE",
+      "enabled_as_established_premises": false,
+      "source": "records/A4S20261011_Token_Coherent_Route_Stitching/RESEARCH_NOTE.md",
+      "handoff": "records/A4S20261011_Token_Coherent_Route_Stitching/HANDOFF_ZH.md",
+      "work_log": "records/A4S20261011_Token_Coherent_Route_Stitching/WORK_LOG.md",
+      "claim_ledger": "records/A4S20261011_Token_Coherent_Route_Stitching/CLAIM_LEDGER.json",
+      "map_extension": "records/A4S20261011_Token_Coherent_Route_Stitching/MAP_EXTENSION.json",
+      "exact_results": "records/A4S20261011_Token_Coherent_Route_Stitching/EXACT_RESULTS.json",
+      "parent_science": "A3V20261010",
+      "parent_followup": "A4R20261011",
+      "completed_map": "UCT-MAP-v1.1.2",
+      "scientific_delta": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0
+      },
+      "finite_worlds": 32,
+      "all_three_local_links_true_worlds": 4,
+      "coherent_full_route_worlds": 1,
+      "unstitched_counterexample_worlds": 3,
       "independent_h_validation": false,
       "actual_bodily_installation": false,
       "standalone_manuscript": "HOLD"
@@ -1363,5 +1389,11 @@
     "library_manifest_sha256": "c719abda8d931d93a8796668c9a7706dc05f8575ac8bc46903e1007ed3938043",
     "library_manifest_size_bytes": 4396,
     "reverse_materialized_byte_equal": true
+  },
+  "next_priority_before_A4S": "Instantiate one actual same-event three-link trial: independently perturb and close bypasses for physical-anchor sampling, current-consumer use and post-arbitration plant write while holding bearer, event, signature and route fixed. Stop before H_cf if any link or closure cannot be bound to that same instance.",
+  "next_priority_after_A4S": "A4S next: specify and attack a physically testable same-occurrence/lineage criterion at sampler→consumer and consumer→writer boundaries in one actual bearer, without treating value equality, software identifiers, or abstract port matching as physical token identity; retain H_cf calibration as OPEN.",
+  "latest_activity_persistence_after_A4S_science": {
+    "github": "PENDING_SCIENCE_COMMIT_IN_THIS_TREE",
+    "library": "PENDING_EXEC_SERVER_UNAVAILABLE"
   }
 }

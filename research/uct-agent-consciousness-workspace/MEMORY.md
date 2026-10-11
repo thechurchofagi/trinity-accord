@@ -1,5 +1,10 @@
 # UCT durable memory
 
+## A4S20261011 latest memory
+
+A4R's three local actual links require shared boundary occurrences. With independently quantified boundaries, all three links can be true while a sample or command is replaced by a value-equal duplicate. A4S adds (X_{sc}) and (X_{cw}): 32 worlds, four all-link worlds, one coherent route, three counterexamples. Preserve C1/U1, nested/overlapping processes and the open (H_{cf}) bridge. Next: operational physical evidence for same occurrence/lineage across ports. GitHub saved path: `records/A4S20261011_Token_Coherent_Route_Stitching/`; Library pending due exec-server failure.
+
+
 [总览](UCT_FORMAL_MAP.md) · [全部候选](PENDING_RESEARCH.md) · [当前状态](CURRENT_STATE.json) · [统一登记](UNIFIED_RESEARCH_INDEX.json) · [审查](UCT_FORMAL_AUDIT.md)
 
 The full prior memory is preserved at [historical memory](integration/UCT-INTEGRATION-v1.0.0/history/MEMORY.md). Required foundations remain UCT I/II/III, the clinical source and their verified editions; follow the source-specific contracts in the completed map. C1/U1, local/whole coexistence, no new basal gate, and distinction of organization/experience/intelligence/self/report remain binding.

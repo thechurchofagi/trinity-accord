@@ -1,0 +1,16 @@
+{
+  "schema": "uct-publication-coverage-update/1.0",
+  "round": "A4S20261011",
+  "coverage_change": "NONE",
+  "new_claims": [
+    "A4S-C1",
+    "A4S-C2",
+    "A4S-C3",
+    "A4S-C4",
+    "A4S-C5"
+  ],
+  "published_coverage": "NOT_CLAIMED",
+  "originality": "INTERNAL_CORRECTION_AND_APPLICATION; EXTERNAL_PRIORITY_UNVERIFIED",
+  "manuscript_decision": "HOLD",
+  "reason": "Bounded correction should be integrated with the route/agency family before any standalone manuscript decision."
+}

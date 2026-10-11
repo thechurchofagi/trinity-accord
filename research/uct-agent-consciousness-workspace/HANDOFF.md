@@ -1,5 +1,10 @@
 # 当前交接
 
+## Latest verified follow-up — A4S token-coherent route stitching
+
+A4S corrects A4R's conditional sufficiency: three actual local links do not compose into one route when adjacent links may use different value-equal occurrences. Two explicit stitches yield a five-predicate model with 32 worlds, 4 all-local-link worlds, 1 coherent route and 3 fork counterexamples. Candidate only; 0/0/0 graph delta; (H_{cf}), actual installation and fresh all-layer programmatic audit remain OPEN. See [A4S handoff](records/A4S20261011_Token_Coherent_Route_Stitching/HANDOFF_ZH.md). Library synchronization is pending because the selected exec environment was unavailable.
+
+
 [总览](UCT_FORMAL_MAP.md) · [全部候选](PENDING_RESEARCH.md) · [当前状态](CURRENT_STATE.json) · [统一登记](UNIFIED_RESEARCH_INDEX.json) · [审查](UCT_FORMAL_AUDIT.md)
 
 正式科学接续仍为 **A3V20261010**；最新停用应用为 **A4R20261011**。

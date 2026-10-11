@@ -1,0 +1,51 @@
+{
+  "schema": "uct-a4s-audit-summary/1.0",
+  "canonical_graph": {
+    "revision": "R178-SB20261008-v1.0",
+    "nodes": 584,
+    "rules": 284,
+    "context_links": 178
+  },
+  "relevant_nodes": [
+    {
+      "id": "A:P3",
+      "status": "DECLARED_CONTEXT_OR_METHOD",
+      "kind": "ONTO_RULE",
+      "statement": "For every P,Q and interval I in the declared physical comparison, Persist(P,I) AND Embed(P,Q,I) implies that P remains in P_actual throughout I. Persist requires continuing constitutive support/dynamics/boundary and lineage; embedding alone neither establishes persistence nor establishes cessation."
+    },
+    {
+      "id": "A:P6",
+      "status": "DECLARED_CONTEXT_OR_METHOD",
+      "kind": "ONTO_DEF",
+      "statement": "Numerical token equality P=Q, complete-type equivalence D(P) isomorphic to D(Q), and directed causal-lineage relation P leads_to Q are distinct relations. Type equivalence need not imply token equality; lineage may branch or merge and is not an equivalence relation or a subject-count function."
+    },
+    {
+      "id": "A:C1",
+      "status": "FIXED_AXIOM",
+      "kind": "AX_C",
+      "statement": "For every P in P_actual in the fixed signature K, there exist an experiential K-structure Phi_K(P) and a sort-preserving isomorphism h_P:D_ontic_K(P)->Phi_K(P). This is the stipulated tokenwise structural-experiential identity axiom, including its experiential interpretation and existential commitment; it is not an empirically derived bijection or a scalar measure."
+    },
+    {
+      "id": "A:U1",
+      "status": "MANUAL_CONDITIONAL_PASS",
+      "kind": "THM",
+      "statement": "Every actual token has a nonempty distinguished experiential carrier"
+    },
+    {
+      "id": "R159:FRAME_RELATION_TRANSPORT",
+      "status": "MANUAL_CONDITIONAL_C1_APPLICATION",
+      "kind": "CONDITIONAL_STRUCTURAL_APPLICATION",
+      "statement": "Given R157:COORDINATE_TRANSPORT and ANCHOR_BINDING_CONTRACT on the same instance, D|=theta_frame(r,k) iff Phi|=theta_frame(h(r),h(k)). False external anatomical membership does not logically negate the installed internal relation; this does not establish a familiar F_O interpretation."
+    }
+  ],
+  "selection_check": "PASS",
+  "result_check": "PASS_WITH_OPEN_BRIDGES",
+  "pre_save_check": "PASS_WITH_AUDIT_INCOMPLETE",
+  "scientific_delta": {
+    "nodes": 0,
+    "rules": 0,
+    "contexts": 0
+  },
+  "programmatic_all_layer_validator": "NOT_RUN_EXEC_SERVER_UNAVAILABLE",
+  "theoretical_truth_from_code": false
+}

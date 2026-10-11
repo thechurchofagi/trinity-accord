@@ -1,0 +1,82 @@
+{
+  "schema": "uct-claim-ledger/1.0",
+  "round": "A4S20261011",
+  "version": "A4S-TCRS-v0.1.0",
+  "claims": [
+    {
+      "id": "A4S-C1",
+      "type": [
+        "CORRECTION",
+        "PROPOSED_NEW_RESULT"
+      ],
+      "statement": "Independently established local route links do not compose into one actual route without shared boundary-occurrence identity or explicit stitching predicates.",
+      "domain": "One fixed actual-candidate P,I,K,B with independently quantified link-boundary occurrences.",
+      "premises": [
+        "A4R three local links",
+        "UCT I P6 token/type distinction",
+        "independent boundary variables"
+      ],
+      "proof": "A4S-C2 finite countermodels",
+      "counterexample": "sample, command, and double forks",
+      "status": "PROVED_IN_DECLARED_ABSTRACTION; DISABLED_GENERAL_PREMISE"
+    },
+    {
+      "id": "A4S-C2",
+      "type": [
+        "FINITE_COUNTEREXAMPLE"
+      ],
+      "statement": "Three of four all-local-link worlds fail route coherence.",
+      "domain": "Five-Boolean model",
+      "premises": [
+        "Boolean independence"
+      ],
+      "proof": "32-world exhaustive enumeration",
+      "counterexample": "X_sc=0 or X_cw=0 with all local links true",
+      "status": "EXACT_MODEL_RESULT"
+    },
+    {
+      "id": "A4S-C3",
+      "type": [
+        "CONDITIONAL_RESULT"
+      ],
+      "statement": "All three local links plus both token stitches suffice for coherent route in the declared model.",
+      "domain": "Five-predicate contract",
+      "premises": [
+        "all five predicates on same P,I,K,B"
+      ],
+      "proof": "definition expansion",
+      "counterexample": "Any missing stitch defeats the antecedent, not the implication.",
+      "status": "MODEL_RELATIVE"
+    },
+    {
+      "id": "A4S-C4",
+      "type": [
+        "INHERITED_APPLICATION"
+      ],
+      "statement": "Value/type equality does not entail numerical occurrence identity.",
+      "domain": "Boundary sample and command events",
+      "premises": [
+        "UCT I P6"
+      ],
+      "proof": "specialization of inherited distinction",
+      "counterexample": "value-equal duplicate occurrence",
+      "status": "INHERITED_WITH_NEW_APPLICATION"
+    },
+    {
+      "id": "A4S-C5",
+      "type": [
+        "UCT_CONDITIONAL_INTERPRETATION"
+      ],
+      "statement": "C1 transports an admitted stitched actual organization into Phi_K(P), without establishing H_cf or a specific self-feeling.",
+      "domain": "Actual P and complete K satisfying C1",
+      "premises": [
+        "A:C1",
+        "actual admission",
+        "A4S-C3"
+      ],
+      "proof": "conditional application only",
+      "counterexample": "Finite model alone lacks actual admission and phenomenal calibration",
+      "status": "OPEN_EMPIRICAL_AND_PHENOMENAL_BRIDGE"
+    }
+  ]
+}
