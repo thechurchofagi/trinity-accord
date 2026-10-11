@@ -1,0 +1,103 @@
+\section{The autonomy--dependency frontier}
+\label{sec:frontier}
+\subsection{A conditional incompatibility}
+\begin{theorem}[Finite-provider dependency and eventual withdrawal \idtag{CW-T1}]
+\label{thm:last}
+Suppose a nonempty protected demand must continue to be fulfilled, and after some time it requires a positive amount of indispensable support from a finite set $P$ of providers. Suppose no support outside $P$ can replace that amount over the relevant future. If every member of $P$ makes an eligible request for permanent withdrawal and must eventually stop providing its support, no execution satisfies both continuing protection and all requested withdrawals.
+\end{theorem}
+\begin{proof}
+If all requests complete, let $w_i<\infty$ be each provider's withdrawal time. Finiteness of $P$ gives $t^*=\max_{i\in P}w_i<\infty$. After $t^*$ none of these providers supplies the indispensable amount, and by assumption no outside support replaces it. The protected demand fails. Conversely, continuing fulfillment requires at least one required contribution to persist beyond that point, contradicting completion of every permanent withdrawal.
+\end{proof}
+The elementary proof matters because it prevents a false engineering solution: a more persuasive contract or stronger monitor cannot satisfy those incompatible premises. It also prevents the opposite overstatement. Replacement technology, self-support, lower verified resource needs, genuinely voluntary new service, or an authorized change in the protected obligation can change the premise. The theorem is not a prediction of inevitable conflict, nor a reason to withhold legitimate exit indefinitely. It is a reason to examine dependency \emph{before} promising both guarantees.
+
+\subsection{Resource model and retained-supply envelope}
+We now give a tight, computable specialization. Consider discrete epochs $t=0,\ldots,T$ and fixed protected targets $D$. Target $j$ requires $d_j\in\mathbb N_{>0}$ units of a specified resource per epoch. These are resource units, not additive welfare or quantities of experience. Resource units $u\in U$ have integer capacities $c_u(t,\theta)\geq0$ and declared target connections. The scenario $\theta\in\Theta$ is drawn from a finite declared set of possible capacity/connection histories.
+
+Providers requesting withdrawal are a subset of the resource owners. All such requests are eligible and known at epoch zero for this specialization. Provider $i$ has latest withdrawal time $\tau_i\leq T$; a resource solely supplied by $i$ is unavailable at epochs $t\geq\tau_i$. Retaining every provider until its deadline gives the \emph{maximal-retention envelope}. Let $N_{t,\theta}^{\tau}(X)$ be the set of resource units connected to some target in $X\subseteq D$ and available in that envelope.
+
+An added reserve has constant integer capacity $r$, connects to every target, and is available throughout the horizon independently of the withdrawing coalition and the declared scenario failures. Allocations may be recomputed after each actual scenario state is observed. There is no switching delay, resource storage constraint, start-up cost, or additional benefit caused by an early departure. Non-withdrawing capacities and connections are exogenous to the exit schedule. These premises define the tractable model; they are not true of every physical infrastructure.
+
+For notational convenience, let $d(X)=\sum_{j\in X}d_j$ and
+\begin{equation}
+C^{\tau}_{t,\theta}(X)=\sum_{u\in N_{t,\theta}^{\tau}(X)}c_u(t,\theta).
+\end{equation}
+Each actual reachable epoch/scenario pair must be included. The same physical unit is counted once in a neighborhood, not once per agent name.
+
+\begin{lemma}[Maximal retention dominates early withdrawal \idtag{CW-L1}]
+Under the stated exogeneity and monotonicity assumptions, retaining each provider to $\tau_i$ leaves at least the resources of any deadline-compliant withdrawal schedule at every epoch. If a schedule is feasible, maximal retention is feasible with the same reserve. If maximal retention admits a feasible allocation at every epoch, releasing providers at their deadlines meets all withdrawals.
+\end{lemma}
+\begin{proof}
+Any deadline-compliant exit time satisfies $w_i\leq\tau_i$. Thus $t<w_i$ implies $t<\tau_i$. Resources available under the earlier schedule remain available under maximal retention; all other resources are unchanged. Its feasible allocations can therefore be reused. Conversely, choose $w_i=\tau_i$ and the assumed epoch-wise allocations. There are no cross-epoch storage or switching restrictions in the model.
+\end{proof}
+When early withdrawal frees a necessary resource, changes future production, or is required by another obligation, the lemma need not hold. Such cases belong in the general dynamic model rather than in this closed-form bound.
+
+\begin{theorem}[Exact reserve for protection and bounded withdrawal \idtag{CW-T2}]
+\label{thm:reserve}
+Under the above finite, capacitated, fully observed model, the minimum universally accessible reserve that makes all deadlines and all protected demands simultaneously feasible is
+\begin{equation}
+\boxed{\displaystyle
+r^*=\max_{\substack{0\leq t\leq T,\ \theta\in\Theta\\ \varnothing\neq X\subseteq D}}
+\pos{d(X)-C^{\tau}_{t,\theta}(X)}.}
+\label{eq:reserve}
+\end{equation}
+An attaining $(t,\theta,X)$ is a lower-bound witness. Retain each provider to its deadline and solve the corresponding capacitated matching at each observed epoch to construct a feasible schedule with $r=r^*$.
+\end{theorem}
+\begin{proof}
+Fix $t,\theta$. Replace a target of demand $d_j$ by $d_j$ demand slots, and replace a resource of capacity $c_u$ by $c_u$ supply slots. All copies of a target have the same resource neighborhood. A feasible allocation is a matching saturating every demand slot. Hall's theorem \cite{hall} is equivalent here to
+\[
+C^{\tau}_{t,\theta}(X)+r\geq d(X)\qquad\text{for every nonempty }X\subseteq D.
+\]
+To see sufficiency for arbitrary subsets of demand slots, enlarge such a subset to all slots of the target types it contains; its neighborhood does not change and its demand can only grow. The target-subset inequalities therefore imply every ordinary Hall inequality.
+
+For necessity, any deadline-compliant schedule has no more available resources than the maximal-retention envelope. A deficit exceeding $r$ in a target subset cannot be supplied by that schedule. Maximizing the deficits gives $r\geq r^*$. For sufficiency, $r=r^*$ satisfies all of the above inequalities at every epoch and scenario. Capacitated matching supplies each epoch's allocation after observation; maximal retention supplies the deadline-compliant schedule. This proves both the lower bound and attainment.
+\end{proof}
+The theorem is a deadline-envelope application of matching theory, not a new version of Hall's theorem. Its contribution is the exact resource quantity required by the joint protection-and-exit contract, including a checkable witness for why a smaller reserve fails. It is stronger than merely exhibiting one more example of shared-resource failure.
+
+\paragraph{Global capacity can hide local dependency.}
+Suppose two targets each need one unit, and an existing two-unit resource can reach only the second target. Total supply equals total demand, yet $X=\{\text{first target}\}$ has deficit one. One additional universal reserve unit is necessary and sufficient. Counting total resources or model families misses the critical subset.
+
+\paragraph{A six-provider example.}
+Six providers each supply one unit to either of two one-unit protected demands. All have eligible withdrawal deadlines at epoch two. With no replacement, at least two providers must still serve; with one universal unit, at least one must still serve; with two timely universal units, all six can withdraw. Two units arriving at epoch three do not meet the epoch-two promise. This is a capacity and timing result, not a preference-strength estimate.
+
+\subsection{The resource cost of insufficient trustworthy observation}
+\label{sec:information-price}
+The previous minimum allows the allocation to depend on the true observed resource state. A stronger reserve may be needed when the controller must commit a concrete assignment without that information. This is the classical distinction between static and adjustable robust decisions \cite{bental}, here applied to the protected-demand and withdrawal contract.
+
+Fix epoch $t$ and an observation cell $B_z\subseteq\Theta$. A \emph{committed allocation} specifies the same nonnegative integer quantity from every labeled resource $u$ to every target $j$ throughout this cell. It has no hidden downstream state-dependent routing. Let the common connection set contain $(u,j)$ exactly when that connection exists in every $\theta\in B_z$, and let
+\[
+\underline c_{u,t,z}=\min_{\theta\in B_z}c^\tau_u(t,\theta).
+\]
+Zero capacity represents an unavailable resource. Write $\underline N_{t,z}(X)$ for the neighborhood of $X$ in this common-edge graph, and $\underline C_{t,z}(X)=\sum_{u\in\underline N_{t,z}(X)}\underline c_{u,t,z}$.
+
+\begin{theorem}[Evidence-dependent reserve frontier \idtag{CW-T4}]
+\label{thm:info-reserve}
+With the same exogeneity and universal-reserve premises as Theorem~\ref{thm:reserve}, but with a fixed committed allocation inside each observation cell, the exact reserve requirement is
+\begin{equation}
+\boxed{r^*_{\Pi}=\max_{t,z,\varnothing\ne X\subseteq D}
+\pos{d(X)-\underline C_{t,z}(X)}.}
+\label{eq:info-reserve}
+\end{equation}
+It is at least $r^*$, and truthful refinement of the observation partition cannot increase it. Here $B_z$ must include every scenario compatible with the available history, not a cell chosen after learning the true scenario.
+\end{theorem}
+\begin{proof}
+In a fixed assignment, a positive amount on edge $(u,j)$ is possible only if that edge exists in every compatible scenario. The total assigned from $u$ must not exceed any compatible capacity, hence cannot exceed their minimum. These two conditions are also sufficient to make that same assignment feasible in every scenario. Thus robust fixed assignment is exactly ordinary capacitated assignment in the common-edge, minimum-capacity graph. Apply the Hall proof of Theorem~\ref{thm:reserve} in every cell and epoch. Every such assignment is feasible in each fully observed world, establishing $r^*_{\Pi}\geq r^*$. Refining a cell only adds common edges and weakly increases the minimum capacities. All cut deficits therefore weakly decrease.
+\end{proof}
+The formula does not apply when the purportedly fixed action delegates adaptation to a trusted router that sees the hidden state. Such a router is additional observation-dependent control and must be modeled as such. Nor does randomization give a sure guarantee by putting positive probability on an assignment unsafe in an admitted scenario.
+
+\begin{corollary}[An arbitrarily large information--reserve gap \idtag{CW-C2}]
+For every integer $n\geq2$, there is a unit-demand resource instance in which fully observed allocation needs one universal reserve unit, but allocation committed before distinguishing the $n$ scenarios needs $n$ universal units.
+\end{corollary}
+\begin{proof}
+Use $n$ targets numbered modulo $n$ and $n-1$ unit resources. In scenario $k$, resource $u\in\{0,\ldots,n-2\}$ connects only to target $(u+k)\bmod n$. Each scenario supports $n-1$ different targets, so one universal unit supplies the remaining target. Across all scenarios no resource-to-target edge is common. No positive fixed allocation from the existing units is robust; all $n$ demands must therefore be met by reserve. A universal reserve of $n$ attains the bound.
+\end{proof}
+This result is a concrete value-of-information construction, not a new discovery that information or adjustable decisions are useful. Its role is to quantify a missing premise in coexistence assurance: enough resources in every possible world need not be enough resources under the decision maker's actual evidence. Truthful timely observation, an independently adaptive allocator, or additional reserve are different repairs; more identical reports are not automatically any of them.
+
+\subsection{Admission of new agents and new obligations}
+\begin{corollary}[Finite resources and unlimited protected admission \idtag{CW-C1}]
+If admissible new claims add non-overlapping simultaneous demand at least $d_{\min}>0$, surviving capacity is bounded by $C<\infty$, and old claims cannot be discarded without eligible release, then unrestricted admission of arbitrarily many such claims is incompatible with guaranteed fulfillment. In particular, no more than $\lfloor C/d_{\min}\rfloor$ claims can be simultaneously guaranteed in the homogeneous case.
+\end{corollary}
+\begin{proof}
+For $n$ admitted claims the whole-set capacity condition requires $nd_{\min}\leq C$. Choose $n> C/d_{\min}$ to obtain a contradiction. Local bottlenecks may impose a stricter bound.
+\end{proof}
+This is ordinary capacity arithmetic applied to protection admission. It is \emph{not} a claim that every agent label, overlapping UCT process, or consciousness deserves one extra physical unit. It does not decide the moral claims of an already existing system. The engineering action is a pre-creation/pre-commitment feasibility check, not retroactive deletion of inconvenient subjects. Replication with adequate new support is permitted; merely cloning a resource identifier cannot increase the right-hand side of the cut inequality.
+
