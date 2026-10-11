@@ -34,4 +34,4 @@ A4W keeps C1 as the consciousness-specific axiom; BCR and participation are not 
 
 ## Persistence
 
-Persistence receipts are filled only after verified remote and Library saves. Any failed channel or concurrency retry will be retained rather than rewritten as success.
+The direct local Git push failed because no HTTPS credential was exposed. The repository connector then created the identical science tree and used expected-SHA `4e3b0ed9...` to fast-forward the branch to science commit `0eddd9c...`; ref, commit, tree and key file were read back. A 33-path incremental ZIP and manifest were created, uploaded, reverse-materialized and byte-compared. Fixed master handoff identity was advanced from v151 to v152 and reverse-verified. The receipt successor and final master v153 remain the last bounded persistence block.

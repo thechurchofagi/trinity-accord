@@ -124,6 +124,15 @@
   },
   "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 effective objects retain a fresh per-ID structural traversal. A4W manually rechecked C1/U1, P3/P6, R157, R159, effective R173, R181, A4M, A4N and A4V. Deep full-history semantics remain AUDIT_INCOMPLETE.",
   "next_priority": "A4W next: define a same-event causal participation criterion under redundant two-route consumption that distinguishes an actual two-port merger from a compiled one-port equivalent without requiring universal but-for necessity. Apply it to one physically auditable consumer if available; otherwise preserve NOT_INSTALLED and stop before H_cf. Do not introduce a unique owner.",
+  "latest_activity_persistence_after_A4W_science": {
+    "science_commit": "0eddd9c06670a7357a8be5e38efc8af1f335405f",
+    "science_tree": "f840be3dc13e384d8074f3e34500ea637fd42ced",
+    "receipt_successor": "recorded in A4W PERSISTENCE_RECEIPT.json and fixed master handoff v153",
+    "library_fixed_master_version_after_science": 152,
+    "library_increment": "libfile_978a804483fc8191b0b8fbf95762bd98",
+    "library_increment_manifest": "libfile_06c679f9b5008191b506090a1abf1a52",
+    "increment_is_complete_backup": false
+  },
   "latest_activity_persistence_after_A4T_science": {
     "science_commit": "547c8471de28ad8c729d278d4a0f0f9fd6bd2cc9",
     "science_tree": "51b66b731cf2573195d86de33bf6d4327dd1527c",

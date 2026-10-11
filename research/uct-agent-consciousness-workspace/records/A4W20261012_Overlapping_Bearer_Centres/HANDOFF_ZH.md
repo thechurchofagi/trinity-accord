@@ -26,4 +26,6 @@ A4W 直接接续 A4V：在同一固定组织、事件与目标中允许两个同
 
 ## 保存与恢复
 
-本节的确切 Git 提交、Library 增量、固定主交接版本及恢复命令只以本轮 `PERSISTENCE_RECEIPT.json` 为准；生成收据前不预报成功。Library 包将明确标记为从上一核验提交到本轮科学提交的增量，而不是完整仓库、完整工作集或全部历史。
+科学树已用 expected-SHA 从基线 `4e3b0ed995204b930ea2bd6b1698cc07cb03c532` 快进至远端科学提交 `0eddd9c06670a7357a8be5e38efc8af1f335405f`，树 `f840be3dc13e384d8074f3e34500ea637fd42ced`，并回读分支、提交与关键结果。固定主交接同一身份已更新至 v152 并反向逐字节核验；最终 Git 收据后继将由 v153 记录以避免自指。
+
+Library 恢复包是 33 路径科学增量，不是完整仓库、完整工作集或全部历史：增量 `libfile_978a804483fc8191b0b8fbf95762bd98`（230889 字节，SHA256 `5a077d229d3da60d02fde7a97f8cbc34c6f622475b37c140691d2cf691a2fac3`）；清单 `libfile_06c679f9b5008191b506090a1abf1a52`（8836 字节，SHA256 `3c5375176beb04dfa9dc0c81a733bb0e2079f74b1a6b277144727f1c67e65560`）。二者均已反向物化逐字节核验。精确恢复步骤见 `RECOVERY_MANIFEST.json` 与 `PERSISTENCE_RECEIPT.json`。
