@@ -1,0 +1,52 @@
+{
+  "schema": "uct-round-persistence-receipt/1.0",
+  "round": "A4V20261012",
+  "baseline_commit": "d76e0a2f5bc9e5e685cbccb3bf03cf1590df6ce9",
+  "science_commit": "cef32dbaa0f121e715c37fed3fcc199db9c6a61e",
+  "science_tree": "5b322288727894941c14edf575b6fca99eff04be",
+  "equivalent_local_science_commit": "a901fe7eb026ec4693931e6ec396f50dde6b94cb",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "write_method": "Git Data expected-head fast-forward",
+    "expected_head": "d76e0a2f5bc9e5e685cbccb3bf03cf1590df6ce9",
+    "science_head_verified": true,
+    "tree_verified": true,
+    "key_files_read_back": [
+      "records/A4V20261012_Bearer_Centered_Practical_Coordinate/HANDOFF_ZH.md",
+      "records/A4V20261012_Bearer_Centered_Practical_Coordinate/EXACT_RESULTS.json"
+    ],
+    "receipt_successor_commit": "RECORDED_IN_FIXED_MASTER_V151_TO_AVOID_SELF_REFERENCE"
+  },
+  "library": {
+    "fixed_master_library_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "fixed_master_version_with_science_and_recovery": 150,
+    "fixed_master_sha256": "81d38d6ef7abb958bafc8f8c0fbf78b54ec6f546b0c082ad44717e5ed02a3ac1",
+    "increment": {
+      "name": "UCT_A4V_Science_Increment_20261012.zip",
+      "library_file_id": "libfile_99f8f6cefd188191b475d6d273fc2859",
+      "size_bytes": 222474,
+      "sha256": "46ce5387fe3d104df666ec16813b35ef707f7c6b8a2ce12ec26598e3ea2e2d40"
+    },
+    "manifest": {
+      "name": "UCT_A4V_Science_Increment_Manifest_20261012.json",
+      "library_file_id": "libfile_10dc7897dbb08191aef3619312fe3e75",
+      "size_bytes": 8165,
+      "sha256": "4bfea0587ff347a677fe41d902bd0d24777f1a754540b950919c6fa107faf75e"
+    },
+    "reverse_materialization_byte_equal": true,
+    "fixed_master_reverse_materialization_byte_equal": true,
+    "increment_scope": "31 changed paths from baseline to science tree; not a full repository, full working set or complete history backup"
+  },
+  "validation": {
+    "finite_pairs": 256,
+    "perfect_output_pairs": 4,
+    "bearer_centred_pairs": 2,
+    "anchor_insensitive_pairs": 2,
+    "effective_map_counts": "913/424/261",
+    "canonical_navigation": "PASS_NAVIGATION_AND_DISABLED_ASSEMBLY",
+    "legacy_wrapper": "FAIL_INHERITED_POINTER_CONTRACT_RETAINED"
+  },
+  "recovery": "Read fixed master latest version; fetch branch and require science_commit or its verified fast-forward successor; read the complete A4V directory; verify the increment and manifest hashes; if Git is unavailable only, apply the 31-path increment to the exact baseline commit; rerun the exact checker, scoped formal audit and canonical navigation validator.",
+  "status": "SCIENCE_AND_LIBRARY_RECOVERY_VERIFIED; FINAL_RECEIPT_SUCCESSOR_PENDING"
+}

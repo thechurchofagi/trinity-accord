@@ -31,3 +31,10 @@ Question selected: distinguish a live bearer-centred action coordinate from a wo
 ## Before-save direction check
 
 A4V does not add an introspection, self-model, report, language, integration, recursion, accurate-prediction or continuation-control gate to basal experience. It permits nested and overlapping centred routes and does not infer a unique owner. The formal graph delta remains 0/0/0. Full historical semantic reproof remains incomplete.
+
+## Persistence
+
+- Saved the science tree by expected-head fast-forward to GitHub commit `cef32dbaa0f121e715c37fed3fcc199db9c6a61e`; verified remote tree and key-file readback.
+- Saved and reverse-materialized a 31-path Library science increment and manifest; both byte-equal to their local sources.
+- Updated and reverse-materialized fixed master handoff v150 under the same stable Library ID.
+- Direct `git push` lacked noninteractive credentials; the authorized Git Data path succeeded without overwriting concurrent history. The failure is retained as a storage-channel fact, not a science result.

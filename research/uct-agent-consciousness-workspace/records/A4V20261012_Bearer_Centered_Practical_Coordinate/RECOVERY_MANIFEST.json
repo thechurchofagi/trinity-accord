@@ -1,0 +1,172 @@
+{
+  "schema": "uct-library-increment-manifest/1.0",
+  "round": "A4V20261012",
+  "scope": "Increment from the exact verified A4U receipt baseline to the A4V science tree; not a full repository, full working set, or complete history backup.",
+  "baseline_commit": "d76e0a2f5bc9e5e685cbccb3bf03cf1590df6ce9",
+  "science_commit_github": "cef32dbaa0f121e715c37fed3fcc199db9c6a61e",
+  "equivalent_local_commit": "a901fe7eb026ec4693931e6ec396f50dde6b94cb",
+  "science_tree": "5b322288727894941c14edf575b6fca99eff04be",
+  "archive": {
+    "name": "UCT_A4V_Science_Increment_20261012.zip",
+    "size_bytes": 222474,
+    "sha256": "46ce5387fe3d104df666ec16813b35ef707f7c6b8a2ce12ec26598e3ea2e2d40"
+  },
+  "path_count": 31,
+  "files": [
+    {
+      "path": "research/uct-agent-consciousness-workspace/AGENTS.md",
+      "size_bytes": 115022,
+      "sha256": "d95f7222e07b62ff05cf488eb9bfea63ac8b9214464f850056a461841aa0be77"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/CURRENT_STATE.json",
+      "size_bytes": 86520,
+      "sha256": "0dc0539ae50c501ac93a35c2b181b898156012751c2ecb6f3749e7fdf109ecef"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/HANDOFF.md",
+      "size_bytes": 19215,
+      "sha256": "ba73041d36be52c223543adc2a89acbe071600eef9d5e56bc80841a087e9b7b4"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/MASTER_INDEX.md",
+      "size_bytes": 15328,
+      "sha256": "0cdcaa3538e659dc987ca7186d063a0e69097ee6f620770b41e6bc8bbbcd5a60"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/MEMORY.md",
+      "size_bytes": 18001,
+      "sha256": "be808d37c3b9f84d579573ddf0ae72aa619e1b92d490601771e9dbdbf9b2d407"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/PUBLICATION_COVERAGE.json",
+      "size_bytes": 17990,
+      "sha256": "c1d48844d9d9924eed6127d7118a71dc87ce46dced5dec7345e607f496d36c72"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/REVIEW_SUPERVISION.md",
+      "size_bytes": 146954,
+      "sha256": "a14b4d88eff779bb11e83d2b7585806646afbadb47e90579b2a51288f1af9120"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_AUDIT.md",
+      "size_bytes": 16296,
+      "sha256": "c6fa6301fac08c1a1551b75bf63e649e8d8ce620700dca9f0c07010045e3e4d3"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_MAP.md",
+      "size_bytes": 39424,
+      "sha256": "64368ffa34c7bf86a4e2c182e00bbf435cc803b830615604cf2d12577660083b"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UNIFIED_RESEARCH_INDEX.json",
+      "size_bytes": 181175,
+      "sha256": "fc5428a54d663a4f27d06e9661448b17df8080febf5fcf02951ccc9febad9ee2"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4V20261012_Bearer_Centered_Practical_Coordinate/APPLICATION_ENTRY.json",
+      "size_bytes": 1758,
+      "sha256": "912af4e27ec4b9311a8804288f2ae8fe221fbc74f73a5ee02ad6d2792d6fc412"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4V20261012_Bearer_Centered_Practical_Coordinate/AUDIT_SUMMARY.json",
+      "size_bytes": 1602,
+      "sha256": "cd13be4fbcf35abea1cf4fae4ba87877296ad813a09292bfc3c86906d6bb779a"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4V20261012_Bearer_Centered_Practical_Coordinate/BEARER_CENTERING_CONTRACT.md",
+      "size_bytes": 5742,
+      "sha256": "0beff55e55642d54dc9288e0e3c670fd11eadbd9f97b39a2fc66ab39743465b3"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4V20261012_Bearer_Centered_Practical_Coordinate/CLAIM_LEDGER.json",
+      "size_bytes": 6640,
+      "sha256": "0eb18f9d1baa731fa3dc4c7733e348d94d1ac868c8e2278b15d9f9ba705588f9"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4V20261012_Bearer_Centered_Practical_Coordinate/EXACT_RESULTS.json",
+      "size_bytes": 2946,
+      "sha256": "46a2d59baea47f34b4a0cad595229d790b0c09974e451f77f63efa099a15c982"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4V20261012_Bearer_Centered_Practical_Coordinate/FORMAL_AUDIT.md",
+      "size_bytes": 3519,
+      "sha256": "694c72c599427a1d2c2d8f843ca1722230281943bcd39637ef3915ab2fc0ea55"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4V20261012_Bearer_Centered_Practical_Coordinate/GAP_LEDGER.json",
+      "size_bytes": 3631,
+      "sha256": "f253c794157aed7f88de2f7c99b63c5aef20502996df1d329877d603d75557f3"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4V20261012_Bearer_Centered_Practical_Coordinate/HANDOFF_ZH.md",
+      "size_bytes": 2644,
+      "sha256": "e685bc4f5c848c170ef72b4e599f27dbcd69c8832f3ad5ff0c92e730001de98f"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4V20261012_Bearer_Centered_Practical_Coordinate/MANUSCRIPT_DECISION.json",
+      "size_bytes": 654,
+      "sha256": "2568b652e483460d327d605f82af5eaf9858e4f3b6fd6e8c9d93e4a52a180155"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4V20261012_Bearer_Centered_Practical_Coordinate/MAP_EXTENSION.json",
+      "size_bytes": 568,
+      "sha256": "63e01cad8b2cc53fc073bc5b7fdea33727318dd044f920497e3d629e116ae236"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4V20261012_Bearer_Centered_Practical_Coordinate/MODEL_PROOF.md",
+      "size_bytes": 1458,
+      "sha256": "91263bb382a228f61b5b8e61e8fa42554034ddb99e36973d6be962ae93c5273f"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4V20261012_Bearer_Centered_Practical_Coordinate/PER_ID_AUDIT.json.gz",
+      "size_bytes": 14176,
+      "sha256": "0e759bcbf6610d2a0230430a968fc706b290ce87d493a785e1617ae252127060"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4V20261012_Bearer_Centered_Practical_Coordinate/PUBLICATION_COVERAGE_UPDATE.json",
+      "size_bytes": 1019,
+      "sha256": "9b1303c9d7667d01c92e809eadc1bab7dc7692a903ed3234d1c49bd73a0b86ce"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4V20261012_Bearer_Centered_Practical_Coordinate/RESEARCH_NOTE.md",
+      "size_bytes": 9029,
+      "sha256": "a62e395c7f41c220c07e4f62f3d40584353e7e388475ab741e69077d4ac024ca"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4V20261012_Bearer_Centered_Practical_Coordinate/REVIEW_RESPONSE.md",
+      "size_bytes": 2062,
+      "sha256": "8556f9c8d4a5f102944e83c635879b0aaf7edd0a59ea60eaff340b661c7b5e51"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4V20261012_Bearer_Centered_Practical_Coordinate/ROUND_RECORD.md",
+      "size_bytes": 2173,
+      "sha256": "b7c213f5c0d17fc0df3f167d237e5d7f812ed3a9751dbc46437e8cb037136d6c"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4V20261012_Bearer_Centered_Practical_Coordinate/SOURCE_SCOPE.md",
+      "size_bytes": 1716,
+      "sha256": "ef0f5010921555341a10a60dace704cdabb0c2098174677276f8b710cbe15ae6"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4V20261012_Bearer_Centered_Practical_Coordinate/VALIDATION.json",
+      "size_bytes": 2043,
+      "sha256": "4c04b108694a146d0d0b9d2d95f62a6e63b3c2790c9bd70aeded02375181fb60"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4V20261012_Bearer_Centered_Practical_Coordinate/WORK_LOG.md",
+      "size_bytes": 2847,
+      "sha256": "368d062282185e84f063ff554f54207704602920db18ee4eef3b161a0f62cf3c"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4V20261012_Bearer_Centered_Practical_Coordinate/audit_map.py",
+      "size_bytes": 4909,
+      "sha256": "92730b95cc8ad09dc95e5cfa9eccce85875bab405e6379383c28124a32206a52"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A4V20261012_Bearer_Centered_Practical_Coordinate/check_bearer_coordinate.py",
+      "size_bytes": 5344,
+      "sha256": "fcf68f4b19ccce1a22e321c43c815c12746484087da675640cb26ed09a242096"
+    }
+  ]
+}

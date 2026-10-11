@@ -148,6 +148,18 @@
     "increment_scope": "30 paths; not a full repository or working-set backup",
     "reverse_materialization_byte_equal": true
   },
+  "latest_activity_persistence_after_A4V_science": {
+    "science_commit": "cef32dbaa0f121e715c37fed3fcc199db9c6a61e",
+    "science_tree": "5b322288727894941c14edf575b6fca99eff04be",
+    "receipt": "records/A4V20261012_Bearer_Centered_Practical_Coordinate/PERSISTENCE_RECEIPT.json",
+    "recovery_manifest": "records/A4V20261012_Bearer_Centered_Practical_Coordinate/RECOVERY_MANIFEST.json",
+    "fixed_master_library_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "fixed_master_verified_version_before_receipt_successor": 150,
+    "increment_library_id": "libfile_99f8f6cefd188191b475d6d273fc2859",
+    "manifest_library_id": "libfile_10dc7897dbb08191aef3619312fe3e75",
+    "increment_scope": "31 paths; not a full repository or working-set backup",
+    "reverse_materialization_byte_equal": true
+  },
   "latest_scoped_review": {
     "audit": "records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_AUDIT.md",
     "per_id_structure": "records/CTD20261010_Cross_Task_Intervention_v02/governance/BASELINE_PER_ID_STRUCTURE.json.gz",
