@@ -1,0 +1,75 @@
+{
+  "schema": "uct-paper-candidate/3.0",
+  "id": "PR-v3.0.0",
+  "title": "Coexistence Without Presupposed Subjecthood: Deterministic Multi-Agent Systems, Human Control, and Dependency-Safe Revocation",
+  "author": "Hongju Liu",
+  "date": "2026-10-11",
+  "manuscript_status": "COMPLETE_MAJOR_PREMISE_REVISION_FOR_CRITICAL_REVIEW",
+  "pages": 18,
+  "peer_reviewed": false,
+  "baseline_commit": "bc8c2b0b8c4d0bdc41aa5b7e2b75d2c1dd97beea",
+  "manuscript_lineage": "PR-v2.0.0 and PR-v1.0.0; preserved",
+  "formal_map": "UCT-MAP-v1.1.2",
+  "publication_coverage_baseline": "UCT-PUB-v1.0.33",
+  "scientific_map_status": "PENDING_MAP",
+  "enabled_as_established_premises": false,
+  "default_AI_moral_protection_claims": 0,
+  "default_retirement_authority": "human principal or explicitly delegated procedure",
+  "paper": "paper/manuscript.tex",
+  "new_script": "src/deterministic_status_checks.py",
+  "new_results": "data/deterministic_status_results.json",
+  "work_log": "audit/WORK_LOG.md",
+  "handoff": "HANDOFF_ZH.md",
+  "claims": [
+    {
+      "id": "BS-D1",
+      "kind": "CONCEPTUAL_CORRECTION",
+      "statement": "Operational coexistence and tool retirement do not presuppose machine phenomenal subjecthood or intrinsic exit rights."
+    },
+    {
+      "id": "BS-T1",
+      "kind": "CONDITIONAL_PROPOSITION",
+      "statement": "Non-causal evaluator annotation does not change a human-only fully observed finite control certificate under unchanged projected transitions, actions and contract.",
+      "priority": "INHERITED_FACTORIZATION;NEW_SPECIFICATION_AUDIT"
+    },
+    {
+      "id": "BS-T2",
+      "kind": "CONSTRUCTIVE_PROOF",
+      "statement": "The inherited n-versus-1 reserve gap admits one frozen shared two-layer integer ReLU network realization for every n>=2, without random draws or parameter updates.",
+      "priority": "EXPLICIT_REALIZATION;INHERITED_INFORMATION_FRONTIER"
+    },
+    {
+      "id": "BS-E1",
+      "kind": "EXECUTED_FINITE_WITNESS",
+      "statement": "1680 neural replay comparisons,729 annotation lifts,six deployment records,and human-only root-revocation resource witness."
+    },
+    {
+      "id": "CW-T1/T2/T3/T4,CW-C1/C2",
+      "kind": "INHERITED",
+      "statement": "PR2 resource/game theorems retained with human-only/default operator-authorized interpretation; not newly discovered."
+    }
+  ],
+  "new_runs": {
+    "neural_replay_comparisons": 1680,
+    "annotation_transition_tables": 729,
+    "cyclic_network_sizes": [2,3,4,5,6,7,8]
+  },
+  "reruns": {
+    "deadline_resource_configurations": 8192,
+    "uncertain_resource_configurations": 2048,
+    "old_lifecycle_process_cases_rerun": false
+  },
+  "evidence_scope": "Hand-built frozen neural arithmetic and finite tables; no trained LLM, physical actuation, independent history authority, or phenomenal endpoint",
+  "formal_scientific_delta": {"nodes":0,"rules":0,"relations":0},
+  "new_doi": false,
+  "ots_action": false,
+  "arweave_action": false,
+  "publication_decision": "User conditional revision branch applies; revised v3 produced, no publication submitted",
+  "full_historical_semantic_audit_completed": false,
+  "all_published_manuscripts_reread": false,
+  "global_priority_verified": false,
+  "old_published_bytes_changed": false,
+  "reconstruction": "Run prepare_inherited.py first inside this repository. It verifies old PR2 TeX and script SHA256s and generates the wrapper, inherited mathematical sections and helper scripts without altering PR2. Downloaded conversation archive already contains the generated full source.",
+  "github_preservation_scope": "New prefix/suffix, reconstruction script, executed new code, index, summary, work log and handoff. Complete PDF, raw data and supplementary audits in the downloadable conversation archive. No remote PDF upload or Library backup asserted.",
+  "result_summary": "RESULTS_SUMMARY.json"
+}
