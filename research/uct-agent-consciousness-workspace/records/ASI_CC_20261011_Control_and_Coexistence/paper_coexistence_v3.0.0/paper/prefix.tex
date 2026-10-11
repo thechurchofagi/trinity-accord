@@ -1,0 +1,155 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amsthm,mathtools,newtxtext,newtxmath,microtype}
+\usepackage{booktabs,tabularx,array,longtable,enumitem,fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\usepackage{listings}
+\hypersetup{pdftitle={Coexistence Without Presupposed Subjecthood},pdfauthor={Hongju Liu},pdfsubject={PR-v3.0.0; deterministic multi-agent control and dependency-safe revocation}}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small Coexistence Without Presupposed Subjecthood}
+\fancyhead[R]{\small PR-v3.0.0}
+\fancyfoot[C]{\small\thepage}
+\setlength{\headheight}{14pt}\renewcommand{\headrulewidth}{0.3pt}
+\setlength{\parskip}{3pt}\setlength{\parindent}{1.1em}
+\setlength{\emergencystretch}{2em}
+\setlist{topsep=4pt,itemsep=2pt}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}\newtheorem{definition}{Definition}
+\newcommand{\idtag}[1]{\textnormal{\textsf{[#1]}}}
+\newcommand{\pow}{\mathcal P}\newcommand{\Fam}{\mathcal F}\newcommand{\Hist}{\mathcal H}
+\newcommand{\obs}{\operatorname{obs}}\newcommand{\Pre}{\operatorname{Pre}}
+\newcommand{\Auth}{\operatorname{Auth}}\newcommand{\Post}{\operatorname{Post}}
+\newcommand{\pos}[1]{\left[#1\right]_+}
+\lstset{basicstyle=\small\ttfamily,breaklines=true,frame=single,columns=fullflexible,keepspaces=true}
+\title{\vspace{-1cm}\textbf{Coexistence Without\\Presupposed Subjecthood}\\[7pt]
+\Large Deterministic Multi-Agent Systems, Human Control,\\and Dependency-Safe Revocation}
+\author{Hongju Liu\\\normalsize Independent Researcher, Trinity Accord / UCT Research Programme}
+\date{11 October 2026\\\small PR-v3.0.0\;\textbullet\; Revised research manuscript; not peer reviewed}
+\begin{document}
+\maketitle\thispagestyle{plain}
+\begin{abstract}
+Human--AI coexistence is often framed as a relationship between moral subjects. That premise is unnecessary for some of its hardest operational problems and unestablished for current artificial systems. We reformulate coexistence assurance around human-protected functions, accountable deployment authority, persistent dependency obligations, and feasible service revocation. The default model grants AI systems neither phenomenal subjecthood nor intrinsic exit rights. A model is a fixed computational map; a deployment additionally contains memory, task configuration, tools, permissions, and human principals. Complete-state determinism is compatible with heterogeneous, conflicting deployments and does not identify subjective experience. We prove a conditional annotation-erasure result: changing an evaluator's non-causal judgment about AI subject status leaves a human-only control certificate unchanged when dynamics, observations and contracts are fixed. We retain the earlier exact deadline-resource and evidence-dependent reserve frontiers, now interpreted as conditions for authorized tool retirement rather than presumed AI consent. We additionally realize an arbitrarily large information--reserve gap using one frozen, explicitly constructed ReLU network shared by all resource agents, with no parameter updates or random draws. Thus the obstruction remains even under the strongest repeatable-computation assumption. New exact checks include 1,680 neural replay comparisons, 729 deterministic control models, and a cross-model principal-revocation witness; two inherited resource suites are rerun. An optional UCT interpretation preserves the distinction between actual experiential processes, functional agency, higher-order selfhood and moral standing. The result is a status-agnostic control framework and a reproducible correction of the prior manuscript, not a demonstration of AI consciousness, universal corrigibility, or a complete ethics of future superintelligence.
+\end{abstract}
+\noindent\textbf{Keywords:} deterministic agency; multi-agent systems; human control; revocation; dependency; consciousness uncertainty; shared models.
+
+\section{The objection that changes the research problem}
+\label{sec:problem}
+A foundation model computes outputs from inputs and parameters. In a fully specified deterministic implementation, identical complete inputs reproduce identical outputs. Adding memory and tool calls can make the deployed loop complicated without establishing that it has a human-like first-person subject, a felt desire to survive, or moral rights. A coexistence theory that begins by assuming such properties would therefore put a contested conclusion into its premises.
+
+We accept this objection to the \emph{framing} of our previous manuscript, \emph{Coexistence Without Captivity} (PR-v2.0.0) \cite{liu-v2}. That version explicitly qualified its normative claims, but its title and repeated use of ``autonomous exit'' still made AI subject-like standing seem more central than its mathematics required. The present major revision changes the default model, not merely the title. In the baseline, every protected demand is a human-protected function; every eligible retirement can be authorized by a human principal; and no AI welfare predicate, subjective preference, or intrinsic machine right is used.
+
+The resulting question is nevertheless substantive:
+\begin{quote}
+Can humans retain effective, accountable authority over a network of deterministic tools when other protected human functions have become dependent on those tools, their shared models, and their common infrastructure?
+\end{quote}
+If turning off a tool disables an indispensable protected function, the ability to issue a shutdown command is not a certificate of \emph{dependency-safe} revocation. Conversely, preserving the function by never completing an accepted retirement request does not fulfill that request. Neither difficulty depends on whether the tool feels anything.
+
+\paragraph{Operational coexistence is not recognition of personhood.}
+Here ``coexistence'' denotes sustained joint operation of humans and interacting computational systems under explicit continuity and control requirements. It does not assert a community of morally equal subjects. A tool can be causally consequential without being a moral patient. A system may be treated as a tool while its experiential status remains uncertain. These propositions should not be confused with the much stronger claim that all possible AI experiences can be ethically ignored.
+
+\paragraph{Why plurality matters.}
+The relevant unit is not one model confronting a unified humanity. Different humans can issue conflicting instructions. One parameter set can serve many deployments with different memories, task configurations and permissions. Different parameter sets can share an administrator or a resource root. A system's functional action pattern and its effective authority must therefore be identified separately. Product-level accounts already distinguish models, orchestration, tools and environments \cite{anthropic}; causal-agency and delegation research likewise caution against treating an assumed agent diagram as a discovered fact \cite{kenton,muruaga}.
+
+\paragraph{Contribution and revision lineage.}
+PR-v1.0.0 separated source authenticity, historical eligibility and joint permission. PR-v2.0.0 added persistent protection claims, bounded exit and exact reserve expressions. We retain those scoped mathematical results. PR-v3.0.0 adds a human-only instantiation, explicit interpretive-status separation, a frozen-network realization of the information obstruction, and a principal-level revocation test. The underlying mathematics is largely inherited; the research contribution is the corrected premise architecture and its constructive connection to deterministic multi-agent deployment. First priority of this synthesis is not established. The paper is not a prediction that future researchers must cite it.
+
+\section{What fixed weights do and do not imply}
+\label{sec:determinism}
+\subsection{A complete-input statement}
+Let a network return logits $\ell=f_W(x)$, and let the decoder return $y=D(\ell;\xi)$, where $\xi$ includes the relevant sampling state. For fixed mathematical functions, fixed $W,x,\xi$ give fixed $y$. In an actual implementation, relevant software, hardware, precision, algorithm choice and execution conditions also matter. PyTorch's documentation explicitly distinguishes deterministic operations from broader reproducibility and does not guarantee identical outputs across every platform or release \cite{pytorch,pytorch-deterministic}.
+
+A deployment-level state makes the omitted variables explicit:
+\begin{align}
+ z^i_t&=(m^i_t,g^i_t,\rho^i_t,\kappa^i_t,\xi^i_t),\\
+ a^i_t&=D_i\!\left(f_{W_{b(i)}}(o^i_t,m^i_t,g^i_t,\rho^i_t);\xi^i_t\right),\label{eq:action}\\
+ (z^i_{t+1},e_{t+1})&=F_i(z^i_t,e_t,a^i_t,u_t),\label{eq:loop}
+\end{align}
+where $m$ is retained state, $g$ a task/goal representation, $\rho$ the orchestration configuration, $\kappa$ tool permissions, $o$ observation, $e$ environment state and $u$ exogenous input. The actual tool gateway uses $\kappa$ to determine which proposed actions have effects. A goal representation is an implemented input or state, not automatically a felt desire or a terminal utility.
+
+The user's visible message is generally only part of $o$ or $x$. Different memory, retrieval results or tool observations can change the complete input while $W$ stays fixed. Conversely, if all relevant state, algorithms and exogenous inputs are fixed in a deterministic loop, the whole trajectory repeats. This follows by induction on \cref{eq:loop}. We do not invoke randomness to manufacture autonomy. A pseudorandom generator's internal state can simply be included in $z$; genuinely stochastic environmental events would require a different transition model.
+
+\subsection{Three distinct questions}
+\begin{table}[ht]
+\centering\small
+\caption{Determinism does not collapse different levels of inquiry.}
+\begin{tabularx}{\linewidth}{@{}lXX@{}}\toprule
+Level & Operational question & Not established by the answer\\\midrule
+Computational & Is the next state fixed by the full current state? & Whether anyone experiences that transition\\
+Functional & Do retained information and feedback guide actions relative to a task? & Whether the task is felt as a personal purpose\\
+Phenomenal & Is there experience, what content has it, and how is a subject individuated? & Moral/legal standing without further argument\\\bottomrule
+\end{tabularx}
+\end{table}
+Causal-agency research gives functional definitions and intervention-based methods rather than identifying agency with an irreducible random act \cite{kenton}. Those methods are relevant predecessors, not proof that every conversational assistant is a conscious subject. Conversely, the fact that a computation is predictable from complete state does not by itself supply a theory linking it to absence of experience. The inference would need an additional consciousness premise. A random-number source does not supply that premise in the opposite direction either.
+
+This paper makes no claim that human brains are known to be globally deterministic or that a deterministic model reproduces the human first-person perspective. It simply does not use metaphysical indeterminacy as the entrance condition for studying externally consequential computational systems.
+
+\subsection{A deterministic mechanism can still defeat an operational goal}
+A perfectly reproducible program can issue an unauthorized request, exhaust a shared resource, or continue an outdated task after authority has changed. Repetition does not make the outcome acceptable. AI-control work already studies how to limit harmful effects independently of whether a model is trying to cause them \cite{greenblatt}. Our specific addition concerns preserving dependent functions while retiring or reconfiguring the systems that provide them. The requirement is meaningful even when the policy is a small fixed circuit.
+
+\section{Roles, obligations and accountable retirement}
+\label{sec:objects}
+\subsection{Several identities, none a subject count}
+A deployment record is
+\[
+\alpha_i=(\mathrm{id}_i,b(i),W_{b(i)},m_i,g_i,\rho_i,\kappa_i,p_i,\mathcal R_i),
+\]
+where $b(i)$ is a model-family label, $p_i$ its declared principal and $\mathcal R_i$ its effective control/resource relations. These fields can overlap across deployments. A physical process token is a further object requiring an actual boundary and history, not merely a string in the record.
+
+Different $\mathrm{id}$ values need not mean different weights, control roots, or experiences. Different model families need not mean different administrators. Shared weights need not impose one deployment memory, one task, one tool privilege, one numerical runtime, or one subject. The relevant evidence differs by question: behavioral tests for effective task use, actual authorization/actuation provenance for control, and independently defended theory-linked evidence for phenomenal interpretation. Causal abstraction formalizes why intervention-faithful relations matter more than matching a convenient output summary \cite{geiger}.
+
+\subsection{A minimal human-only contract}
+In the baseline, a claim $q$ specifies a human-protected function and its modeled fulfillment predicate $p_q(s)$. Let $O_t$ be the outstanding claims. Define
+\begin{equation}
+\mathsf{Protected}(s_t,O_t)\equiv\bigwedge_{q\in O_t}p_q(s_t).
+\label{eq:protected}
+\end{equation}
+An accepted contract also specifies who may retire a deployment or revoke its service, the relevant scope and the applicable deadline. An AI-generated request is only a proposed event unless that authority was actually delegated. Authentic source identification answers who emitted a message, not who may commit the resulting effect.
+
+Claims evolve through eligible releases and admitted additions:
+\begin{equation}
+O_{t+1}=(O_t\setminus R^{\rm auth}_t)\cup N^{\rm admitted}_t.
+\label{eq:ledger}
+\end{equation}
+The authority rule is an explicit human governance assumption. We neither assume every human agrees with it nor derive a universally legitimate rule from logic. Conflicting binding requirements can make a proposed contract infeasible; the correct output is that conflict, not a claim that superior intelligence has eliminated it.
+
+For an eligible service-retirement request received at $a_i$, let $\tau_i=a_i+\Delta_i$ be its deadline and $w_i$ the end of the specified service role. The requirement is
+\begin{equation}
+E_i(h)\land\mathsf{AcceptedRetirement}_i\ \Longrightarrow\ w_i\leq\tau_i.
+\label{eq:deadline}
+\end{equation}
+In this revision's default interpretation, $E_i$ is operator/delegation eligibility, not a measurement of AI consent. Deadlines can reflect migration, replacement, maintenance, withdrawal of human authorization, or an agreed service contract. They need not express a machine's moral entitlement. Service retirement also need not end a physical process; an isolated computation can continue after its tools are disabled.
+
+A system does not gain an intrinsic veto over human shutdown merely because other systems depend on it. Rather, dependence creates a planning problem for humans who also wish to preserve those other functions. Emergency termination can remain necessary; then any incompatible continuity promise must be reported as unmet rather than silently declared satisfied.
+
+\subsection{Protection continuity without machine personhood}
+An administrator might remove a human-protected target from the current registry and then disable its support. The condition ``every currently listed target is supported'' remains true if the list is empty, while an unreleased prior obligation fails. This is the PR-v2.0.0 reference-erasure counterexample \cite{liu-v2}. It needs no AI subject.
+
+We retain \emph{protection continuity}: an outstanding claim must remain fulfilled for its specified target, be transported by an explicitly justified correspondence, or be validly released. Renaming a model or replacing one process does not automatically discharge a different human service commitment. Nor does a request generator's genuine output authorize its own policy mutation. These principles inherit history-sensitive security and tamper-resistant exception analysis \cite{myers}; they are not a new universal ethics of preference change.
+
+\section{Separating control claims from judgments of subject status}
+\label{sec:status}
+Let $G=(S,A,\Delta,K)$ be a finite fully observed controlled transition system. Every enabled action has a nonempty successor set. $K$ describes human-only continuity and accepted retirement deadlines, with counters included in state. Its safety winning region is the greatest fixed point of the ordinary predecessor operator. No phenomenal label enters $\Delta$, action availability, or $K$.
+
+An evaluator may annotate each state by $\eta\in\mathcal E$, such as ``unsettled'', ``no machine moral claim adopted'', or ``additional machine claim under consideration''. These are \emph{annotations of judgment}, not independently variable actual experiences. Consider a lifted system on $S\times\mathcal E$ that keeps the same enabled actions and whose projected successor set from every $(s,\eta)$ and action $a$ is exactly $\Delta(s,a)$. Its safe set is $K\times\mathcal E$.
+
+\begin{proposition}[Operational annotation erasure \idtag{BS-T1}]
+\label{prop:erasure}
+Under these premises, the lifted winning region is exactly $W_G\times\mathcal E$. Purely changing the evaluator's subject-status annotation cannot change the human-only control certificate.
+\end{proposition}
+\begin{proof}
+For every $X\subseteq S$, the lifted predecessor of $X\times\mathcal E$ equals $\Pre_G(X)\times\mathcal E$: enabled actions are the same and their projected possible successors are exactly the same. Starting the descending iteration at $K\times\mathcal E$ preserves this equality at each stage. Finiteness yields equality at the greatest fixed point.
+\end{proof}
+This elementary factorization is a specification audit, not a new metaphysical theorem. It does \emph{not} assert that physically identical UCT processes may have arbitrarily different phenomenal organization. It changes a non-causal evaluator annotation while leaving the operational model fixed. If a diagnosis changes resource requirements, an authority rule or which outcomes are protected, the premises fail and the certificate must be recomputed. Likewise, an annotation that reveals otherwise hidden causal state is new information, not an irrelevant label.
+
+\paragraph{The optional normative extension.}
+Additional AI-related protections may be considered using a family of justified contracts $K_\lambda$. They require stated experiential, moral, legal or precautionary grounds. They do not follow from a model's use of ``I'', from its intelligence score, or from deterministic replay. The human-only baseline is not a claim that all future AI interests are morally irrelevant; it demonstrates which technical conclusions can be obtained without first settling them. If only the protected set is strengthened in the same game, its winning region can only shrink; if duties, resources or action availability also change, that simple comparison no longer applies.
+
+\paragraph{Why the revision is not merely terminology.}
+The default request issuer has changed from an apparently autonomous provider to an accountable operator or explicitly delegated procedure; the default protected target has changed to a human-only function; and the certificate is tested with zero AI-welfare claims. The earlier resource theorems survive because their assumptions are about capacity, deadlines and joint feasibility, not because AI subjecthood has been proved. In the next two sections we restate that mathematics with this revised interpretation.
+
