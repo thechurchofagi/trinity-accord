@@ -1159,3 +1159,14 @@ A4G应用保持停用，正式图增量0/0/0。C1/U1未改；硬件来源坐标�
 - `SCU-AUDIT-DEPTH`: **AUDIT_INCOMPLETE**. The 913/424/261 assembly was structurally checked and the C1/R157/R159/R173/A4D–A4P neighborhood reviewed; all historical proofs were not reconstructed.
 - Substantive result: the inspected stock public ports do not expose a native `actual_q` substitution splice. A custom `actual_q -> C_ext -> command` route is prospectively instrumentable but remains uninstalled because independent geometry, controller closure, current-event/source evidence and actual binding are absent. No item is self-closed.
 - Evidence: `records/A4Q20261011_Public_Interface_Installability_Audit/REVIEW_RESPONSE.md`, `PUBLIC_INTERFACE_CONTRACT.md`, `PORT_TIMING_TABLE.csv`, `INTERFACE_AUDIT.json`, `FORMAL_AUDIT.md`, `GAP_LEDGER.md`.
+
+## A4R20261011 research response (does not close supervision items)
+
+- `QC-20261008-10`: **ACKNOWLEDGED/OPEN**. The certificate does not assign, orient or calibrate `H_cf`.
+- `IA-QC11`: **OPEN**. The three links share declared bearer/event/signature types, but no actual token jointly installs them.
+- `QC-20261008-12`: **OPEN**. The all-positive open fibre has 27 worlds and all eight actual-link patterns; bypass closure is therefore an explicit remaining obligation.
+- `QC-20261008-13`: **OPEN**. Same-instance ports and sample–consume–arbitrate–write chronology are prospective, not inferred from matching values.
+- `SCU-OPEN-R191-NORMALIZATION`: **OPEN**. No R191 normalization predicate is discharged.
+- `SCU-AUDIT-DEPTH`: **AUDIT_INCOMPLETE**. The 913/424/261 assembly and affected C1/U1, R157/R159/effective R173 and A4D–A4Q neighborhood were checked; all historical proofs were not reconstructed.
+- Substantive result: three local positive tests do not identify the actual anchor route; only the explicitly bypass-closed finite submodel leaves the full three-link conjunction. This is a disabled conditional certificate, not physical or phenomenal evidence.
+- Evidence: `records/A4R20261011_Three_Link_Anchor_Route_Certificate/REVIEW_RESPONSE.md`, `THREE_LINK_CONTRACT.md`, `EXACT_RESULTS.json`, `FORMAL_AUDIT.md`, `GAP_LEDGER.md`.

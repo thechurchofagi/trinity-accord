@@ -96,14 +96,14 @@
     "nondeductive_context_links": 261,
     "total_review_items": 1608
   },
-  "pending_note": "All prior pending identities retained. A4Q adds a disabled 0/0/0 public-interface audit: stock public ports do not expose the native internal anchor-consumer splice; a custom external composite route is prospectively instrumentable but no actual token discharges the eight A4P premises, H_cf or a completed-map promotion.",
+  "pending_note": "All prior pending identities retained. A4R adds a disabled 0/0/0 finite certificate: three local positive link tests leave 27 compatible worlds spanning all eight actual-link patterns; independent bypass closure is required before the actual anchor route is identified.",
   "publication_coverage": {
     "version": "UCT-PUB-v1.0.33",
     "entry": "PUBLICATION_COVERAGE.json",
-    "latest_update": "records/A4Q20261011_Public_Interface_Installability_Audit/PUBLICATION_COVERAGE_UPDATE.json",
+    "latest_update": "records/A4R20261011_Three_Link_Anchor_Route_Certificate/PUBLICATION_COVERAGE_UPDATE.json",
     "nondeductive": true,
     "latest_originality_review": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/PUBLICATION_COVERAGE_UPDATE.json",
-    "latest_followup_application": "records/A4Q20261011_Public_Interface_Installability_Audit/PUBLICATION_COVERAGE_UPDATE.json"
+    "latest_followup_application": "records/A4R20261011_Three_Link_Anchor_Route_Certificate/PUBLICATION_COVERAGE_UPDATE.json"
   },
   "latest_activity": {
     "id": "A3V20261010",
@@ -127,8 +127,8 @@
     "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
     "evidence_status": "BOUNDED_PRIMARY_SOURCE_APPLICATION_STOP_AND_R173_SCOPE_RETURN; ACTUAL_PREMISES_AND_H_OPEN"
   },
-  "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 completed objects retain structural traversal, and A4Q manually rechecked C1/U1, R157, R159, effective R173 and A4D-A4P. Deep full-history semantics remain AUDIT_INCOMPLETE.",
-  "next_priority": "Find one open or vendor-supported sensor-to-consumer interface that exposes a time-stamped anchor input and same-port substitution, or implement the bounded rho_ext composite-route package with an external tracker, post-arbitration event witness and complete controller inventory. Stop if route grain, same-event chronology or independent geometry cannot be held fixed; do not proceed to H_cf.",
+  "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 completed objects retain structural traversal, and A4R manually rechecked C1/U1, R157, R159, effective R173 and A4D-A4Q. Deep full-history semantics remain AUDIT_INCOMPLETE.",
+  "next_priority": "Instantiate one actual same-event three-link trial: independently perturb and close bypasses for physical-anchor sampling, current-consumer use and post-arbitration plant write while holding bearer, event, signature and route fixed. Stop before H_cf if any link or closure cannot be bound to that same instance.",
   "latest_scoped_review": {
     "audit": "records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_AUDIT.md",
     "per_id_structure": "records/CTD20261010_Cross_Task_Intervention_v02/governance/BASELINE_PER_ID_STRUCTURE.json.gz",
@@ -226,7 +226,7 @@
     "map_replacement": false,
     "actual_application_established": false
   },
-  "latest_persistence_receipt": "records/A4Q20261011_Public_Interface_Installability_Audit/PERSISTENCE_RECEIPT.json",
+  "latest_persistence_receipt": "records/A4R20261011_Three_Link_Anchor_Route_Certificate/PERSISTENCE_RECEIPT.json",
   "previous_latest_research_before_CTD": {
     "id": "A3L20261010",
     "result_version": "A3L-RESULT-v0.1.0",
@@ -543,29 +543,28 @@
     }
   },
   "latest_followup_application": {
-    "id": "A4Q20261011",
-    "version": "A4Q-PIIA-v0.1.0",
-    "status": "DISABLED_PUBLIC_INTERFACE_INSTALLABILITY_AUDIT_AND_COMPOSITE_ROUTE_RECIPE",
+    "id": "A4R20261011",
+    "version": "A4R-TLARC-v0.1.0",
+    "status": "DISABLED_THREE_LINK_ANCHOR_ROUTE_IDENTIFIABILITY_CERTIFICATE",
     "enabled_as_established_premises": false,
-    "source": "records/A4Q20261011_Public_Interface_Installability_Audit/RESEARCH_NOTE.md",
-    "handoff": "records/A4Q20261011_Public_Interface_Installability_Audit/HANDOFF_ZH.md",
-    "work_log": "records/A4Q20261011_Public_Interface_Installability_Audit/WORK_LOG.md",
-    "claim_ledger": "records/A4Q20261011_Public_Interface_Installability_Audit/CLAIM_LEDGER.json",
-    "map_extension": "records/A4Q20261011_Public_Interface_Installability_Audit/MAP_EXTENSION.json",
-    "exact_results": "records/A4Q20261011_Public_Interface_Installability_Audit/EXACT_RESULTS.json",
+    "source": "records/A4R20261011_Three_Link_Anchor_Route_Certificate/RESEARCH_NOTE.md",
+    "handoff": "records/A4R20261011_Three_Link_Anchor_Route_Certificate/HANDOFF_ZH.md",
+    "work_log": "records/A4R20261011_Three_Link_Anchor_Route_Certificate/WORK_LOG.md",
+    "claim_ledger": "records/A4R20261011_Three_Link_Anchor_Route_Certificate/CLAIM_LEDGER.json",
+    "map_extension": "records/A4R20261011_Three_Link_Anchor_Route_Certificate/MAP_EXTENSION.json",
+    "exact_results": "records/A4R20261011_Three_Link_Anchor_Route_Certificate/EXACT_RESULTS.json",
     "parent_science": "A3V20261010",
-    "parent_followup": "A4P20261011",
+    "parent_followup": "A4Q20261011",
     "completed_map": "UCT-MAP-v1.1.2",
     "scientific_delta": {
       "nodes": 0,
       "rules": 0,
       "contexts": 0
     },
-    "official_public_sources": 8,
-    "route_grains_distinguished": 3,
-    "a4p_premises_discharged_on_actual_token": 0,
-    "native_route_publicly_installable": false,
-    "external_composite_route_prospective": true,
+    "finite_worlds": 64,
+    "positive_fibre_worlds_without_closure": 27,
+    "actual_patterns_in_positive_fibre": 8,
+    "positive_fibre_worlds_with_closure": 1,
     "independent_h_validation": false,
     "actual_bodily_installation": false,
     "standalone_manuscript": "HOLD"
@@ -1088,6 +1087,29 @@
       "independent_h_validation": false,
       "actual_bodily_installation": false,
       "standalone_manuscript": "HOLD"
+    },
+    {
+      "id": "A4R20261011",
+      "version": "A4R-TLARC-v0.1.0",
+      "status": "DISABLED_THREE_LINK_ANCHOR_ROUTE_IDENTIFIABILITY_CERTIFICATE",
+      "enabled_as_established_premises": false,
+      "source": "records/A4R20261011_Three_Link_Anchor_Route_Certificate/RESEARCH_NOTE.md",
+      "handoff": "records/A4R20261011_Three_Link_Anchor_Route_Certificate/HANDOFF_ZH.md",
+      "work_log": "records/A4R20261011_Three_Link_Anchor_Route_Certificate/WORK_LOG.md",
+      "claim_ledger": "records/A4R20261011_Three_Link_Anchor_Route_Certificate/CLAIM_LEDGER.json",
+      "map_extension": "records/A4R20261011_Three_Link_Anchor_Route_Certificate/MAP_EXTENSION.json",
+      "exact_results": "records/A4R20261011_Three_Link_Anchor_Route_Certificate/EXACT_RESULTS.json",
+      "parent_science": "A3V20261010",
+      "parent_followup": "A4Q20261011",
+      "completed_map": "UCT-MAP-v1.1.2",
+      "scientific_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+      "finite_worlds": 64,
+      "positive_fibre_worlds_without_closure": 27,
+      "actual_patterns_in_positive_fibre": 8,
+      "positive_fibre_worlds_with_closure": 1,
+      "independent_h_validation": false,
+      "actual_bodily_installation": false,
+      "standalone_manuscript": "HOLD"
     }
   ],
   "next_priority_before_A3W": "Test one independent current bodily/action-familiarity interpretation against origin-recognition and agency countercases; establish a remaining actual retentive relation and realizable matched controls before claiming a pure familiarity contrast. Do not add an assumed coordinate or expand SPC.",
@@ -1289,6 +1311,7 @@
   },
   "next_priority_after_A4P": "Select one publicly auditable embodied-device or human tool interface and instantiate the A4P port-and-timing table: fixed external geometry, independently oriented bearer-anchor perturbation, route-input cut, same-interface rescue and a complete alternate-controller inventory on one bearer/event/route. If the clauses cannot be jointly installed without changing event or route grain, report non-installability and stop before H_cf.",
   "next_priority_after_A4Q": "Locate a genuinely inspectable sensor-to-consumer splice or implement one bounded rho_ext external-composite trial with independent geometry, same-argument block/rescue, source-specific event witness and full controller inventory. Preserve the internal/external route distinction and stop before H_cf if any conjunct remains uninstalled.",
+  "next_priority_after_A4R": "Bind L_s, L_c and L_w to one actual bearer/event/signature and independently close the sensor, consumer and actuator bypasses with blinded local challenge-block-same-interface rescue. If any binding or closure fails, retain NOT_IDENTIFIED and stop before H_cf.",
   "latest_activity_persistence_after_A4P_science": {
     "status": "GITHUB_SCIENCE_COMMIT_VERIFIED; LIBRARY_INCREMENT_REVERSE_VERIFIED; MASTER_V139_REVERSE_VERIFIED; FINAL_RECEIPT_SUCCESSOR_SHA_IN_FIXED_MASTER",
     "receipt": "records/A4P20261011_Anchor_Route_Intervention_Contract/PERSISTENCE_RECEIPT.json",

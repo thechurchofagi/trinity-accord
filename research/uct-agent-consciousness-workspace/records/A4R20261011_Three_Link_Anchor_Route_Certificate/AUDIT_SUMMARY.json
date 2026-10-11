@@ -1,0 +1,22 @@
+{
+  "schema": "a4r-formal-audit-summary/1",
+  "graph_version": "UCT-INTEGRATION-v1.0.0",
+  "completed_counts": {"nodes": 913, "rules": 424, "context_links": 261},
+  "pending_disabled_objects": 727,
+  "suspended_historical_rules": 10,
+  "checks": {
+    "all_of_interpreted_as_and": true,
+    "active_dependency_graph_acyclic": true,
+    "unresolved_deductive_references": 0,
+    "all_pending_disabled": true,
+    "a4r_adds_no_completed_graph_object": true,
+    "three_links_are_distinct": true,
+    "joint_satisfiability_has_finite_witness": true,
+    "local_positive_tests_do_not_identify_route_without_closure": true,
+    "actuality_not_inferred_from_finite_model": true,
+    "h_cf_remains_open": true,
+    "c1_and_u1_status_unchanged": true,
+    "full_semantic_reproof": false
+  },
+  "limit": "Finite certificate plus bounded C1/R157/R159/R173/A4D-A4Q review; SCU-AUDIT-DEPTH remains AUDIT_INCOMPLETE."
+}

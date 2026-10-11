@@ -1,0 +1,16 @@
+{
+  "schema": "uct-a4r-persistence-receipt/1",
+  "round": "A4R20261011",
+  "status": "PENDING_SCIENCE_AND_LIBRARY_PERSISTENCE",
+  "github": {},
+  "library": {},
+  "validation": {
+    "checker_output_byte_equal": true,
+    "finite_worlds": 64,
+    "open_positive_fibre_worlds": 27,
+    "closed_positive_fibre_worlds": 1,
+    "formal_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+    "review_items_self_closed": false,
+    "full_semantic_reproof": false
+  }
+}

@@ -2,9 +2,11 @@
 
 [总览](UCT_FORMAL_MAP.md) · [全部候选](PENDING_RESEARCH.md) · [当前状态](CURRENT_STATE.json) · [统一登记](UNIFIED_RESEARCH_INDEX.json) · [审查](UCT_FORMAL_AUDIT.md)
 
-正式科学接续仍为 **A3V20261010**；最新停用应用为 **A4Q20261011**。
+正式科学接续仍为 **A3V20261010**；最新停用应用为 **A4R20261011**。
 
-[A4Q 中文交接](records/A4Q20261011_Public_Interface_Installability_Audit/HANDOFF_ZH.md) · [英文研究](records/A4Q20261011_Public_Interface_Installability_Audit/RESEARCH_NOTE.md) · [公开接口合同](records/A4Q20261011_Public_Interface_Installability_Audit/PUBLIC_INTERFACE_CONTRACT.md) · [端口时序表](records/A4Q20261011_Public_Interface_Installability_Audit/PORT_TIMING_TABLE.csv) · [形式审查](records/A4Q20261011_Public_Interface_Installability_Audit/FORMAL_AUDIT.md)
+[A4R 中文交接](records/A4R20261011_Three_Link_Anchor_Route_Certificate/HANDOFF_ZH.md) · [英文研究](records/A4R20261011_Three_Link_Anchor_Route_Certificate/RESEARCH_NOTE.md) · [三链路合同](records/A4R20261011_Three_Link_Anchor_Route_Certificate/THREE_LINK_CONTRACT.md) · [端口测试矩阵](records/A4R20261011_Three_Link_Anchor_Route_Certificate/PORT_TEST_MATRIX.csv) · [形式审查](records/A4R20261011_Three_Link_Anchor_Route_Certificate/FORMAL_AUDIT.md)
+
+A4R 将 A4Q 的复合锚点路线拆成物理采样来源、当前消费者使用和后仲裁写入三条实际链路。三个局部测试同时阳性仍留下27个相容世界并覆盖全部8种实际链路模式；只有独立关闭三个旁路后才识别完整合取。当前没有实际同实例安装，故保持停用、0/0/0正式图增量并停在 `H_cf` 之前。
 
 当前结果：Universal Robots 的公开 RTDE/ROS 2/Client Library 边界把实际关节/TCP状态作为输出、运动目标作为另一条命令输入；停用ROS命令控制器切的是外部命令路线，不能冒充内部锚点消费者切断。若自定义外部控制器读取`actual_q`再回送命令，可形成可同参数切断/救援的复合路线，但公开文档仍不能联合闭合外部几何、控制器清单、当前事件来源与实际同实例八项前提。故状态是`NOT_INSTALLED`，不是路线不存在或体验否定。
 

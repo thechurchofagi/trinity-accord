@@ -6,7 +6,11 @@ The full prior memory is preserved at [historical memory](integration/UCT-INTEGR
 
 Scientific continuation and next question live in CURRENT_STATE.json. All pending source documents, effective corrections and family membership live in UNIFIED_RESEARCH_INDEX.json; history never silently becomes an established premise. Publication, storage, conditional validity, actual support and phenomenal support remain separate states.
 
-## 最新应用 A4Q20261011
+## 最新应用 A4R20261011
+
+A4R 将身体／行动锚点的正面组织桥接拆成 `L_s`（物理锚点进入采样及来源）、`L_c`（样本被当前消费者用于形成命令）和 `L_w`（该命令进入当前后仲裁写入）。64世界穷举显示：三个局部测试全阳性仍有27个相容世界，覆盖全部8种实际链路模式；仅独立关闭三个旁路后才剩唯一的三链路合取。结果是条件性可识别性证书，不是实际安装或 `H_cf` 校准；正式图0/0/0，全部OPEN保留。[交接](records/A4R20261011_Three_Link_Anchor_Route_Certificate/HANDOFF_ZH.md)。
+
+## 前轮应用 A4Q20261011
 
 A4Q 把 A4P 合同落实到 Universal Robots 公开 RTDE/ROS 2/Client Library 边界。`actual_q`/TCP是控制器输出，反向接口输入运动目标；停止ROS命令控制器只切外部命令路线，不能冒充内部锚点消费者切断。自定义外部消费者可形成`actual_q -> C_ext -> command`复合路线，并在同一参数上前瞻切断/救援，但公开文档没有闭合独立外部几何、控制器清单、后仲裁事件来源、包丢失时序和实际同实例八项前提。结论为`NOT_INSTALLED`，不是路线不存在或体验否定；正式图0/0/0，全部OPEN保留。[交接](records/A4Q20261011_Public_Interface_Installability_Audit/HANDOFF_ZH.md)。
 

@@ -1,0 +1,49 @@
+{
+  "schema": "uct-claim-ledger/1.0",
+  "record": "A4R20261011",
+  "result_version": "A4R-TLARC-v0.1.0",
+  "claims": [
+    {
+      "id": "A4R-C01",
+      "type": "organizational_factorization",
+      "statement": "For one fixed bearer/event/signature, an actual bearer-anchored action route requires the simultaneous relations physical-anchor-to-sample, sample-to-current-consumer-command, and consumer-command-to-current-plant-write.",
+      "domain": "the declared A4Q rho_ext composite route and analogous explicitly typed routes",
+      "all_of": ["same actual bearer", "same event interval", "same route grain", "L_s", "L_c", "L_w"],
+      "proof_or_source": ["THREE_LINK_CONTRACT.md §§1,4", "UCT I v1.2 §8.12", "A4D–A4Q"],
+      "counterexample_or_limit": "The factorization is a declared application contract, not a claim that these three predicates exhaust complete organization.",
+      "status": "OPEN_DISABLED_APPLICATION"
+    },
+    {
+      "id": "A4R-C02",
+      "type": "finite_nonidentification_result",
+      "statement": "In the six-bit link/bypass model, the all-positive observed local signature has 27 worlds and contains all eight actual-link patterns; observed success does not identify the full conjunction.",
+      "domain": "the exact finite model Q_i=L_i OR B_i",
+      "all_of": ["three Boolean actual links", "three Boolean bypasses", "declared observation map"],
+      "proof_or_source": ["check_three_link_certificate.py", "EXACT_RESULTS.json"],
+      "counterexample_or_limit": "This is an exact result for the declared model, not a census of every physical alternative.",
+      "status": "EXACT_FINITE_RESULT_DISABLED"
+    },
+    {
+      "id": "A4R-C03",
+      "type": "conditional_identification_result",
+      "statement": "If every declared local bypass class is independently closed for the same event, the all-positive observed signature uniquely identifies the actual link signature (1,1,1) in the finite model.",
+      "domain": "the closed submodel B_s=B_c=B_w=0",
+      "all_of": ["faithful local tests", "same-event binding", "all three bypass closures", "all-positive signature"],
+      "proof_or_source": ["THREE_LINK_CONTRACT.md §3", "EXACT_RESULTS.json"],
+      "counterexample_or_limit": "An omitted or challenge-aware bypass invalidates closure and restores nonidentification.",
+      "status": "CONDITIONAL_EXACT_RESULT_DISABLED"
+    },
+    {
+      "id": "A4R-C04",
+      "type": "uct_conditional_interpretation",
+      "statement": "Conditional on an admitted actual bearer and complete organization, the grounded three-link relation supplies an experience-internal body/action structural counterpart under C1; identifying it with H_cf requires the separate open bridge B_cf.",
+      "domain": "UCT I C1/R157 plus A4M/A4N target scope",
+      "all_of": ["actual token", "complete relevant organization", "A4R-C01 installed", "C1", "separate B_cf for H_cf"],
+      "proof_or_source": ["RESEARCH_NOTE.md §3", "UCT I v1.2 §§8.12,14.3–14.10"],
+      "counterexample_or_limit": "No actual token or phenomenal endpoint is supplied; the claim does not establish report, conceptual I or exclusive ownership.",
+      "status": "OPEN_CONDITIONAL_INTERPRETATION"
+    }
+  ],
+  "formal_graph_delta": {"nodes":0,"rules":0,"context_links":0},
+  "phenomenal_assignments": 0
+}

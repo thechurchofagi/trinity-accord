@@ -1,0 +1,4 @@
+link,source_role,target_role,required_local_test,bypass_counterexample,status
+L_s,selected physical anchor occurrence,sampled value and provenance,blinded challenge-block-same-interface rescue,sensor bypass reproduces the sampled signature,PROSPECTIVE
+L_c,sampled value,current consumer computation and pre-arbitration command,blinded challenge-block-same-interface rescue,consumer bypass reproduces the command signature,PROSPECTIVE
+L_w,current consumer command,current post-arbitration plant write,blinded challenge-block-same-interface rescue,actuator bypass reproduces the write signature,PROSPECTIVE
