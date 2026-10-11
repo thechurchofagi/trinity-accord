@@ -1,0 +1,13 @@
+{
+  "version":"PR-v6.0.0",
+  "scope":"Conditional general mathematical results and actual finite program runs, not new LLM/hardware/process-role tests",
+  "main_frontier":{"when_d_gt_f_and_b_gt_f":"max_a [w_a+(f-a)ceil(w_a/(b-f+a))], w_a=min(n,k(1+floor(a/(d-f))))","when_d_le_f_and_b_gt_f":"n+f ceil(n/(b-f))","when_b_le_f":"IMPOSSIBLE_WITH_THESE_BANKS","attainment":"One balanced integer capacity vector simultaneously satisfies all prefix constraints","minimal_fixed_architecture":"d=b=f+1, each bank k units, R=(f+1)k","decoupled_fixed_architecture":"When n>=(f+1)k, the stated independent-extremes rule needs (f+1)^2 k; ratio f+1"},
+  "new_exact_evidence":{"separated_basic_configurations":270,"separated_stress_configurations":6,"separated_generated_joint_worlds":649320,"replicated_configurations":90,"replicated_generated_worlds":6816,"arbitrary_binary_code_sets":2693,"separated_plus_replicated_capacity_candidates":5082,"direct_action_configs":7,"direct_labeled_capacity_candidates":175,"total_bank_loss_controls":3,"algebraic_minimal_construction_parameter_checks":21,"final_source_executed_twice":true,"repeat_semantic_equality":true,"excluded_repeat_field":"elapsed_seconds","final_assertions":"PASS"},
+  "asymmetric_one_fault_example":{"truthful_codewords":["0000","1100"],"conditional_union_costs":[2,2,1,1],"attaining_capacities":[0,0,1,1],"minimum":2},
+  "n12_k2_f2_examples":[{"d":2,"b":3,"R":36},{"d":3,"b":3,"R":6},{"d":3,"b":6,"R":6},{"d":4,"b":6,"R":4},{"d":5,"b":6,"R":4}],
+  "PR5_regression":{"independent_capacity_candidates":7380,"complete_json_semantic_match":true,"other_previous_process_runs_repeated":false,"old_counts_added_to_new_counts":false},
+  "negative_controls":["Separate diagnostic and bank budgets invalidate smaller joint-budget guarantee","One hidden co-located diagnostic/bank root invalidates separated-role accounting","All bank owners corrupted leaves no positive capacity even if each initially stores100 units"],
+  "explicit_premises":["Actual independent role ancestry and cumulative root fault budget","Full k-set diagnostic alphabet, not one-bit reporters in CB-T1","Fixed pre-armed channel union, no adaptive primary-route retry after commitment","Faithful reference controller and surviving-pool binding to the already selected set","Complete serial final-effect veto cut","Compromised banks lose capacity, not arbitrary extra malicious effects"],
+  "raw_records":"Full outputs and receipts in downloadable PR-v6 archive data/; source scripts reproduce them",
+  "not_established":["A universally safe real superintelligence","AI moral subjecthood or experiential welfare","Independent physical roots in a deployed installation","Complete worldwide originality priority","Full historical UCT semantic review"]
+}
