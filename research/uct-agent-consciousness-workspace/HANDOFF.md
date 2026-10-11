@@ -63,3 +63,11 @@ A4J permits both interventions to have cross-effects. With independently signed 
 Deliverables: `records/A4J20261011_Cross_Perturbation_Predictions/`. Claims remain disabled; formal delta is 0/0/0; no participant, actual route, signed phenomenal endpoint or complete physical installation is supplied. No post-formation adjustment is used to manufacture selectivity.
 
 Next exact task: establish pre-outcome uncertainty-bounded first-stage and endpoint-orientation sign sets, or stop at the qualitative organizational comparison if they cannot be independently warranted.
+
+## Current continuation: A4K20261011
+
+A4K propagates pre-outcome first-stage, pure-gain and `J_cont`-orientation intervals into exact two-arm common-scale prediction regions. A shared scale couples the arms, so the product rectangle is only an outer hull; exact region overlap and observed-box compatibility each reduce to one scalar linear-feasibility problem. Rational examples preserve both separation and overlap, while any orientation interval containing zero forces a common zero prediction.
+
+Deliverables: `records/A4K20261011_Uncertainty_Bounded_Prediction_Regions/`. Claims remain disabled; formal delta is 0/0/0. No actual joint calibration, participant, same-event route, oriented phenomenal endpoint or complete physical installation exists, so the application stops at organization/judgment rather than claiming `H_cont`.
+
+Next exact task: determine whether one actually installable same-bearer 2x2 manipulation can vary retained-relation use and present fit with independent pre-outcome fidelity evidence while preserving the event, route and response coding. If not, terminate this comparison rather than extend the interval/certificate chain.

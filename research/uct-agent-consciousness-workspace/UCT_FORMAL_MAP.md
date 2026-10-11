@@ -156,6 +156,10 @@ A4I introduces no formal object. It distinguishes the enacted target `H_cont(x)`
 
 A4J adds no formal object. It defines set-valued signed predictions for randomized relation- and fit-directed total effects while allowing both cross-effects. Strict independently signed targeted first stages yield one shared, two relation-only, two fit-only and four neither signatures; without signed first stages both candidates allow all nine. The result is a disabled method/application record, not `H_cont` calibration, actual `RetBind` installation or a C1 consequence. Map delta: **0/0/0**.
 
+## A4K20261011 disabled uncertainty-region application
+
+A4K adds no formal object. It propagates pre-outcome first-stage, pure-gain and readout-orientation intervals into common-scale two-arm prediction regions. The shared scale makes coordinatewise interval rectangles conservative outer hulls; exact candidate overlap and observation compatibility reduce to one-scalar linear feasibility. Zero in the orientation interval blocks global separation. No actual calibration or `H_cont`/`RetBind` installation is supplied. Map delta: **0/0/0**; C1/U1 and all completed-map counts remain unchanged.
+
 
 ### PR-v4.0.0 — 有效撤销的证据与备用资源定量边界（停用论文候选）
 

@@ -1085,3 +1085,11 @@ A4G应用保持停用，正式图增量0/0/0。C1/U1未改；硬件来源坐标�
 - `SCU-OPEN-R191-NORMALIZATION`: OPEN. No normalization attempted.
 - `SCU-AUDIT-DEPTH`: AUDIT_INCOMPLETE. All 913/424/261 completed objects were structurally traversed; deep semantic review remained restricted to the affected C1/R157/R173/R199 and A4A/A4H/A4I neighborhood.
 - Evidence: `records/A4J20261011_Cross_Perturbation_Predictions/REVIEW_RESPONSE.md`, `FORMAL_AUDIT.md`, `GAP_LEDGER.md`.
+
+## A4K20261011 research response (does not close supervision items)
+
+- `QC-20261008-10`: ACKNOWLEDGED/OPEN. A4K makes `J_cont` orientation uncertainty explicit and proves a zero-containing orientation set prevents global candidate separation; it supplies no positive phenomenal calibration.
+- `IA-QC11`, `QC-20261008-12`, `QC-20261008-13`: OPEN. Calibration sets, actual route use, complete bearer organization, target port, selected experience and report remain separate; no actual installation or current-assistant verdict is made.
+- `SCU-OPEN-R191-NORMALIZATION`: OPEN. No normalization attempted or used.
+- `SCU-AUDIT-DEPTH`: AUDIT_INCOMPLETE. The 913/424/261 assembly was structurally retraversed; manual semantics remain bounded to C1/R157/R173/R199 and A4A/A4H–A4J.
+- Evidence: `records/A4K20261011_Uncertainty_Bounded_Prediction_Regions/REVIEW_RESPONSE.md`, `FORMAL_AUDIT.md`, `GAP_LEDGER.md`.

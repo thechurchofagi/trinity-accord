@@ -1,0 +1,66 @@
+{
+  "schema": "uct-claim-ledger/1",
+  "round": "A4K20261011",
+  "claims": [
+    {
+      "id": "A4K-C1",
+      "type": "CONDITIONAL_METHOD_RESULT",
+      "statement": "For one frozen pure candidate with a strictly signed common scale interval M and arm-specific input-effect intervals D1,D2, the exact two-arm judgment-effect region is P={m(d1,d2):m in M, di in Di}; its coordinate interval products form an exact marginal hull but only a conservative Cartesian outer rectangle.",
+      "domain": "Two randomized intervention arms, one fixed response coding and one common candidate scale across arms.",
+      "all_premises": ["fixed bearer/event/grain/estimand", "pre-outcome compact intervals", "one common scale per candidate", "pure linear candidate on the declared family", "no post-outcome interval selection"],
+      "proof": "Continuous image of the compact product domain; coordinate extrema occur at interval-product corners; common m couples coordinates.",
+      "counterexamples_limits": "Arm-specific gains can fill more of the outer rectangle; mixed or nonlinear bridges are outside scope.",
+      "status": "DISABLED_CONDITIONAL_RESULT"
+    },
+    {
+      "id": "A4K-C2",
+      "type": "CONDITIONAL_DEDUCTION",
+      "statement": "For strictly positive scale intervals Ma,Mb, the two common-scale prediction regions intersect exactly when some lambda in Mb/Ma makes Dai intersect lambda Dbi for both arms, equivalently Lai<=lambda Ubi and lambda Lbi<=Uai for each arm.",
+      "domain": "A4K-C1 regions with positive scale intervals.",
+      "all_premises": ["both scales bounded away from zero", "same two effect coordinates", "closed input intervals", "same response units"],
+      "proof": "Divide equal predicted vectors by their positive scales for necessity; choose coordinate intersections and scales with the feasible ratio for sufficiency.",
+      "counterexamples_limits": "A zero-containing or disconnected-sign orientation requires a different branched analysis.",
+      "status": "DISABLED_CONDITIONAL_RESULT"
+    },
+    {
+      "id": "A4K-C3",
+      "type": "CONDITIONAL_METHOD_RESULT",
+      "statement": "A frozen outcome uncertainty box O intersects a candidate region exactly when one m in M satisfies L_Oi<=m U_Di and m L_Di<=U_Oi for both arms.",
+      "domain": "Same common-scale candidate with rectangular outcome uncertainty.",
+      "all_premises": ["outcome box frozen under a declared error rule", "common scale premise", "interval endpoints in common units"],
+      "proof": "Interval intersection for each scaled coordinate becomes four linear inequalities in the same scalar m.",
+      "counterexamples_limits": "Compatibility is not confirmation; wrong coverage or response mapping invalidates the result.",
+      "status": "DISABLED_CONDITIONAL_RESULT"
+    },
+    {
+      "id": "A4K-C4",
+      "type": "NEGATIVE_RESULT",
+      "statement": "If the readout-orientation interval contains zero and candidate gains are positive, both prediction regions contain the zero vector, so global separation fails and strict sign transfer is not warranted.",
+      "domain": "A4K quantitative pure-candidate family.",
+      "all_premises": ["zero is admitted by the pre-outcome orientation set", "finite positive gain intervals"],
+      "proof": "Choose readout scale zero under either candidate.",
+      "counterexamples_limits": "A particular nonzero observed box may still reject one branch, but it does not retroactively orient the scale.",
+      "status": "DISABLED_NEGATIVE_RESULT"
+    },
+    {
+      "id": "A4K-C5",
+      "type": "CORRECTION",
+      "statement": "If the input, orientation or gain intervals are statistical, prediction-region coverage is conditional on their declared simultaneous pre-outcome coverage event; marginal coverage levels and post-outcome interval choice do not supply that joint guarantee.",
+      "domain": "Prospective calibration for A4J/A4K.",
+      "all_premises": ["random uncertainty sets", "joint inclusion is needed for the candidate vector", "outcome rule separately frozen"],
+      "proof": "Logical propagation holds on the intersection of all calibration events; no stronger probability follows without a joint-error argument.",
+      "counterexamples_limits": "Deterministic physical bounds do not need a confidence interpretation but still need independent warrant.",
+      "status": "DISABLED_APPLICATION_CORRECTION"
+    },
+    {
+      "id": "A4K-C6",
+      "type": "BOUNDARY",
+      "statement": "The interval analysis does not calibrate H_cont, install actual RetBind use, establish complete bearer organization or alter C1/U1; without independent bounds the line stops at organizational and judgment consequences.",
+      "domain": "UCT interpretation of A4K-C1--C5.",
+      "all_premises": ["A4I target/report distinction", "R157 semantic residual", "effective R173 same-instance conjunction", "R199 complete-current-twin ceiling"],
+      "proof": "Type, scope and inference-direction audit.",
+      "counterexamples_limits": "A future actual jointly calibrated installation could enable a new scoped application; none exists here.",
+      "status": "OPEN_BOUNDARY_RETAINED"
+    }
+  ]
+}

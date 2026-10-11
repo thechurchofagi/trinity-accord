@@ -1,0 +1,11 @@
+{
+  "schema": "uct-disabled-application/1",
+  "id": "A4K20261011",
+  "version": "A4K-INTERVAL-REGIONS-v0.1.0",
+  "enabled": false,
+  "nodes": [],
+  "rules": [],
+  "context_links": [],
+  "counts": {"nodes": 0, "rules": 0, "contexts": 0},
+  "reason": "The interval theorems are inherited elementary mathematics and the UCT application lacks actual first-stage/orientation calibration, same-event route installation and complete bearer binding. Stable A4K claims remain disabled records."
+}

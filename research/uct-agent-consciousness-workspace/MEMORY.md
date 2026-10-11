@@ -69,3 +69,11 @@ A4C式行动重放仍不能识别实际执行器写入器：允许旁路及时�
 - Exact nine-signature classification: 1 both, 2 relation-only, 2 fit-only, 4 neither. Weak sensitivity enlarges overlap to 4.
 - With no independently warranted first-stage signs, both candidates allow all nine signatures: intervention names alone identify nothing.
 - No post-formation covariate adjustment, H truth assignment, actual bodily installation or formal-map promotion. Next: uncertainty-bounded pre-outcome sign calibration or a principled stop.
+
+## A4K20261011 — uncertainty-bounded common-scale regions
+
+- Replacing signs by intervals requires preserving a shared bridge/readout scale across both intervention arms. Coordinatewise products give exact marginal hulls but generally only a conservative Cartesian outer rectangle.
+- Exact candidate overlap reduces to one positive scale-ratio interval plus two pairs of linear inequalities. Outcome-box compatibility is an analogous one-scale feasibility test.
+- Exact rational examples include disjoint relation/fit regions, a genuine overlap interval `[4/5,22/15]`, and the hard obstruction that `0` in the endpoint-orientation interval puts `(0,0)` in both regions.
+- No actual first-stage, gain or endpoint-orientation intervals exist in the record. Application therefore stops at organizational/judgment consequences; formal delta 0/0/0 and all review items remain open.
+- Next: return to one actually installable same-bearer 2x2 relation-use × current-fit manipulation, or terminate this candidate comparison rather than add more calibration layers.

@@ -46,3 +46,7 @@ The effective restored inventory remains 913 nodes, 424 rules and 261 context li
 ## A4J20261011 scoped audit addendum
 
 The effective restored inventory remains 913/424/261 with 727 pending objects disabled and 10 historical rules suspended; A4J adds 0/0/0. All completed IDs were structurally traversed and every `all_of` read conjunctively. The finite sign-set result allows cross-effects but requires independently signed targeted first stages and a scoped positive pure bridge; it does not install R157/R173's same-instance actual relation, semantic bridge or bearer premises. The shared `(-,-)` signature and fully unrestricted nine-signature equality are retained failures. Full historical-depth audit and R191 normalization remain open.
+
+## A4K20261011 scoped audit addendum
+
+The effective restored inventory remains 913/424/261 with 727 pending objects disabled and 10 historical rules suspended; A4K adds 0/0/0. Fresh structural traversal again reads every `all_of` conjunctively. Interval first stages, readout orientation, pure gain, actual route use, complete bearer organization, selected experience and delayed report remain distinct types. The common-scale region is a disabled method object and does not satisfy any R157/R173 premise. The dependence correction, overlap witness and zero-orientation failure are retained; they are not a global semantic proof. Full historical-depth audit and R191 normalization remain open.

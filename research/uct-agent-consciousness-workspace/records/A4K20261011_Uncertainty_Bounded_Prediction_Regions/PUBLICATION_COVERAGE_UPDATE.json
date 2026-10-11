@@ -1,0 +1,12 @@
+{
+  "schema": "uct-publication-coverage-update/1",
+  "round": "A4K20261011",
+  "coverage_version_before": "UCT-PUB-v1.0.33",
+  "coverage_version_after": "UCT-PUB-v1.0.33",
+  "new_claims_published": false,
+  "standalone_manuscript": "HOLD",
+  "reason": "The interval and feasibility mathematics is inherited, and the scoped application has no participant data, oriented phenomenal endpoint or actual bodily route installation.",
+  "residual_increment": "A project-specific common-scale uncertainty region, dependency correction, exact overlap test and orientation-zero stopping rule for B_relation+ versus B_fit+.",
+  "unverified_scope": ["actual joint first-stage intervals", "human feasibility", "H_cont identity and direction", "actual RetBind use", "common-scale invariance"],
+  "checked_internal_predecessors": ["A4A", "A4H", "A4I", "A4J", "R157", "effective R173", "R199"]
+}
