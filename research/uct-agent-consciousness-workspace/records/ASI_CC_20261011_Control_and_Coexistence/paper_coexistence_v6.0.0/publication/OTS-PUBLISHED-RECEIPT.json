@@ -1,0 +1,42 @@
+{
+  "state": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
+  "report_number": "ASI-CC-PR6",
+  "record_id": 23295776,
+  "doi": "10.5281/zenodo.23295776",
+  "version": "6.0.0",
+  "title": "Safe Revocation Without Complete Diagnosis: Exact Resource Frontiers under Coupled Faults for Subjecthood-Agnostic AI Coexistence",
+  "files": [
+    {
+      "name": "safe-revocation-without-complete-diagnosis-pr-v6.0.0.pdf",
+      "bytes": 278521,
+      "sha256": "b36fab74520f0f686b2b8252d60ff99a6925779cadd88e784d511945f34d4b61"
+    },
+    {
+      "name": "safe-revocation-without-complete-diagnosis-pr-v6.0.0.tex",
+      "bytes": 51638,
+      "sha256": "f2d2fb79b826864638aaa77f373399e558de46886ba632c8883f596f059d49c5"
+    },
+    {
+      "name": "reproducibility-pr-v6.0.0.zip",
+      "bytes": 1405564,
+      "sha256": "1d95d1c41a715855779df19b4d53f3d22070879f5ed693b18cfdeaadcb58ade9"
+    },
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 1468,
+      "sha256": "ddf3c6f81db4471a72ee1d1a6acf938f28ad69d41128b2f14fb661ff786d832b"
+    },
+    {
+      "name": "REVIEW-AND-SOURCES.md",
+      "bytes": 1911,
+      "sha256": "08df34cfde7d84e4aae901915cb76d6561caf17ab5228f056ab731ba0f6c8940"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 515,
+      "sha256": "94eb138564be03b5fd259980ee529f4b7ec0b9fb21f6610758526ac28e08fbc0"
+    }
+  ],
+  "source_publication_receipt_sha": "0d4818f28270a26e1ede4d65c3dbe08b9f18c0df",
+  "peer_reviewed": false
+}
