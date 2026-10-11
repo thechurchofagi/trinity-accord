@@ -1,0 +1,30 @@
+{
+  "version": "ASI-CC-v0.9.0",
+  "status": "bounded research candidate",
+  "files": {
+    "EXACT_RESULTS_v0.9.0.json": {
+      "size": 13043,
+      "sha256": "fc97bb1e0e88b2d0fcb857cf2338df7118af9d32671890f7d664fa5483456899"
+    },
+    "HANDOFF_v0.9.0_ZH.md": {
+      "size": 3777,
+      "sha256": "08cca70437c5da2ac66d4d77cc05206fe213272a8ce78935cbeb058731cd6fb3"
+    },
+    "RESEARCH_NOTE_v0.9.0.md": {
+      "size": 14135,
+      "sha256": "07b18756af30e474fc7ff1fbddc4027db6059e3d3223aa0d2eb6dbea91767478"
+    },
+    "WORK_LOG_v0.9.0.md": {
+      "size": 1856,
+      "sha256": "8c4458f6e99eadc96b9819b2b4f9608cb68057129171c865e4439527c76b2dee"
+    },
+    "check.stdout": {
+      "size": 1170,
+      "sha256": "dafba187a0d6d2caf93de0891ac1aba778c170bdc5e4aa128da12006f18d3f00"
+    },
+    "verify_multi_asi_multiplicity.py": {
+      "size": 8741,
+      "sha256": "8d7a38b08e7f65cd5bfa7448279125aa288b564855303b9d406c8d2ee6c8e5a7"
+    }
+  }
+}
