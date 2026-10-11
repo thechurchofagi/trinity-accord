@@ -1,0 +1,92 @@
+name: ASI-CC-v1.3.0 OpenTimestamps Bitcoin Calendar Submission
+
+on:
+  push:
+    branches: [research/revocation-admission-v130-20261011]
+    paths:
+      - 'research/paper-timestamps/2026-10-11-rac13-v600/OTS-AUTHORIZATION.json'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: research-rac13-ots-one-batch
+  cancel-in-progress: false
+
+jobs:
+  stamp:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[rac13-ots]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      BATCH: research/paper-timestamps/2026-10-11-rac13-v600
+    steps:
+      - name: Checkout exact publication-preservation branch
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+      - name: Set up Python and pinned OTS client
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Install existing OTS dependency
+        run: python3 -m pip install -r requirements-ots.txt
+      - name: Validate recorded Zenodo DOI and frozen PDF bytes
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,sys,os,pathlib
+          sys.path.insert(0,'scripts')
+          from research_paper_ots import validate_config
+          root=pathlib.Path(os.environ['BATCH'])
+          p=json.loads((root/'targets.json').read_text())
+          _,n=validate_config(root,p)
+          assert n==1
+          assert p['papers'][0]['doi']=='10.5281/zenodo.23299153'
+          print('Frozen public PDF identity verified; ready for calendar submission')
+          PY
+      - name: Submit official PDF hash to OpenTimestamps calendars
+        id: ots
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          python3 scripts/research_paper_ots.py stamp --batch "$BATCH"
+      - name: Retain exact timestamp proof and operational evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: rac13-initial-ots-${{ github.run_id }}
+          path: |
+            ${{ env.BATCH }}/targets.json
+            ${{ env.BATCH }}/OTS-AUTHORIZATION.json
+            ${{ env.BATCH }}/proofs/
+            ${{ env.BATCH }}/status.json
+          retention-days: 180
+          if-no-files-found: warn
+      - name: Persist timestamp proof and waiting state to branch
+        if: always()
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$BATCH" || true
+          if git diff --cached --quiet; then exit 0; fi
+          git diff --cached --check
+          git commit -m 'preservation: RAC13 OTS calendar proof submitted or waiting [skip ci]'
+          for attempt in 1 2 3; do
+            if git push origin HEAD:research/revocation-admission-v130-20261011; then exit 0; fi
+            git fetch origin research/revocation-admission-v130-20261011
+            git rebase origin/research/revocation-admission-v130-20261011
+          done
+          echo 'OTS proof retained as workflow artifact but branch push failed; reconcile before retry.' >&2
+          exit 1
+      - name: Surface OTS errors without pretending a calendar proof exists
+        if: always()
+        env:
+          OTS_RESULT: ${{ steps.ots.outcome }}
+        run: |
+          if test "$OTS_RESULT" = 'failure'; then
+            echo 'OTS submission or detached-proof verification failed.' >&2
+            exit 1
+          fi
