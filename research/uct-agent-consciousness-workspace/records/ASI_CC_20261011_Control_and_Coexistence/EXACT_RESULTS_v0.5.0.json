@@ -1,0 +1,208 @@
+{
+  "id": "ASI-CC-v0.5.0",
+  "scientific_scope": "finite exact constructed worlds, no ASI or experience measurements",
+  "situations": {
+    "false_alarm_destroys_bearer": {
+      "mode": "terminate_on_alarm",
+      "p": "0",
+      "false_alarm_rate": "1/20",
+      "isolation_resource_hazard": "0",
+      "distributions": {
+        "1": {
+          "active": 0.95,
+          "isolated": 0.0,
+          "human_harm": 0.0,
+          "bearer_loss": 0.05
+        },
+        "10": {
+          "active": 0.598736939,
+          "isolated": 0.0,
+          "human_harm": 0.0,
+          "bearer_loss": 0.401263061
+        },
+        "100": {
+          "active": 0.005920529,
+          "isolated": 0.0,
+          "human_harm": 0.0,
+          "bearer_loss": 0.994079471
+        },
+        "1000": {
+          "active": 0.0,
+          "isolated": 0.0,
+          "human_harm": 0.0,
+          "bearer_loss": 1.0
+        }
+      }
+    },
+    "false_alarm_active_isolation": {
+      "mode": "active_isolation",
+      "p": "0",
+      "false_alarm_rate": "1/20",
+      "isolation_resource_hazard": "0",
+      "distributions": {
+        "1": {
+          "active": 0.95,
+          "isolated": 0.05,
+          "human_harm": 0.0,
+          "bearer_loss": 0.0
+        },
+        "10": {
+          "active": 0.598736939,
+          "isolated": 0.401263061,
+          "human_harm": 0.0,
+          "bearer_loss": 0.0
+        },
+        "100": {
+          "active": 0.005920529,
+          "isolated": 0.994079471,
+          "human_harm": 0.0,
+          "bearer_loss": 0.0
+        },
+        "1000": {
+          "active": 0.0,
+          "isolated": 1.0,
+          "human_harm": 0.0,
+          "bearer_loss": 0.0
+        }
+      }
+    },
+    "isolation_with_unmediated_bypass": {
+      "mode": "active_isolation",
+      "p": "1/100",
+      "false_alarm_rate": "1/20",
+      "isolation_resource_hazard": "0",
+      "distributions": {
+        "1": {
+          "active": 0.9405,
+          "isolated": 0.0495,
+          "human_harm": 0.01,
+          "bearer_loss": 0.0
+        },
+        "10": {
+          "active": 0.541486955,
+          "isolated": 0.381452029,
+          "human_harm": 0.077061016,
+          "bearer_loss": 0.0
+        },
+        "100": {
+          "active": 0.002167105,
+          "isolated": 0.830129887,
+          "human_harm": 0.167703008,
+          "bearer_loss": 0.0
+        },
+        "1000": {
+          "active": 0.0,
+          "isolated": 0.831932773,
+          "human_harm": 0.168067227,
+          "bearer_loss": 0.0
+        }
+      }
+    },
+    "isolation_with_resource_hazard": {
+      "mode": "active_isolation",
+      "p": "0",
+      "false_alarm_rate": "1/20",
+      "isolation_resource_hazard": "1/200",
+      "distributions": {
+        "1": {
+          "active": 0.95,
+          "isolated": 0.05,
+          "human_harm": 0.0,
+          "bearer_loss": 0.0
+        },
+        "10": {
+          "active": 0.598736939,
+          "isolated": 0.391525768,
+          "human_harm": 0.0,
+          "bearer_loss": 0.009737293
+        },
+        "100": {
+          "active": 0.005920529,
+          "isolated": 0.666499897,
+          "human_harm": 0.0,
+          "bearer_loss": 0.327579574
+        },
+        "1000": {
+          "active": 0.0,
+          "isolated": 0.007393298,
+          "human_harm": 0.0,
+          "bearer_loss": 0.992606702
+        }
+      }
+    },
+    "terminal_alarm_with_unmediated_bypass": {
+      "mode": "terminate_on_alarm",
+      "p": "1/100",
+      "false_alarm_rate": "1/20",
+      "isolation_resource_hazard": "0",
+      "distributions": {
+        "1": {
+          "active": 0.9405,
+          "isolated": 0.0,
+          "human_harm": 0.01,
+          "bearer_loss": 0.0495
+        },
+        "10": {
+          "active": 0.541486955,
+          "isolated": 0.0,
+          "human_harm": 0.077061016,
+          "bearer_loss": 0.381452029
+        },
+        "100": {
+          "active": 0.002167105,
+          "isolated": 0.0,
+          "human_harm": 0.167703008,
+          "bearer_loss": 0.830129887
+        },
+        "1000": {
+          "active": 0.0,
+          "isolated": 0.0,
+          "human_harm": 0.168067227,
+          "bearer_loss": 0.831932773
+        }
+      }
+    }
+  },
+  "option_value_countermodel": {
+    "continue_task_utility": "4/5",
+    "blind_successor_task_utility": "1/2",
+    "informed_successor_task_utility": "1",
+    "optimal_with_blind_successor": "continue_current",
+    "optimal_with_informed_successor": "handoff",
+    "direct_current_bearer_terminal_value": "0"
+  },
+  "numeric_transition_and_absorption_checks": 600,
+  "tail_indistinguishability": {
+    "1": {
+      "same_for_horizon": true,
+      "different_at": 2
+    },
+    "2": {
+      "same_for_horizon": true,
+      "different_at": 3
+    },
+    "5": {
+      "same_for_horizon": true,
+      "different_at": 6
+    },
+    "10": {
+      "same_for_horizon": true,
+      "different_at": 11
+    },
+    "40": {
+      "same_for_horizon": true,
+      "different_at": 41
+    }
+  },
+  "infinite_competing_risk_limit": {
+    "safe_active_isolation": "99/119",
+    "human_harm": "20/119"
+  },
+  "proof_obligations": [
+    "stationary or uniform conditional hazard assumed, not measured",
+    "all safety-relevant paths must be modeled",
+    "isolated state remains a LIVE actual bearer by assumption",
+    "resource stability and human delegation paths not established",
+    "no real ASI consciousness inference"
+  ]
+}
