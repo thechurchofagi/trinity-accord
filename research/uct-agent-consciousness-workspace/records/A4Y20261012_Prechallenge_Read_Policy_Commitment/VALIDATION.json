@@ -1,0 +1,50 @@
+{
+  "round": "A4Y20261012",
+  "result_version": "A4Y-PBRW-v0.1.0",
+  "exact_checker": {
+    "command": "python3 check_mode_commitment.py",
+    "status": "PASS_BYTE_IDENTICAL_TO_EXACT_RESULTS",
+    "checker_sha256": "d80917930604175321e2fe024f5427ad79746cc16a6efad4801a86d9682641ed",
+    "results_sha256": "dc5cac388b2d48e4781f6ce7db12e96a24e46c7023a15dbfcc2400afda792064",
+    "challenge_indexed_policies_per_target": 256,
+    "challenge_indexed_exact_matches_per_target": 16,
+    "fixed_one_port_modes_per_target": 4,
+    "fixed_one_port_exact_matches_per_target": 0
+  },
+  "formal_audit": {
+    "command": "python3 audit_map.py <research-root> <restored-effective-graph.json>",
+    "status": "FRESH_STRUCTURAL_PASS_BOUNDED_SEMANTIC_PASS_FULL_DEPTH_INCOMPLETE",
+    "effective_nodes": 913,
+    "active_rules": 424,
+    "context_links": 261,
+    "all_of_nonlist": 0,
+    "all_of_empty": 0,
+    "unresolved_references": 0,
+    "active_cycles": 0,
+    "summary_sha256": "5a3f360a9989ab65dad7ff030ac123ca20be06cb7598b8181f9a6a59657939e1",
+    "per_id_audit_gzip_sha256": "0e759bcbf6610d2a0230430a968fc706b290ce87d493a785e1617ae252127060"
+  },
+  "json_validation": {"status": "PASS"},
+  "navigation_validation": {
+    "command": "python3 integration/UCT-INTEGRATION-v1.0.0/validate_navigation.py --root .",
+    "status": "PASS_NAVIGATION_AND_DISABLED_ASSEMBLY",
+    "applications": 16
+  },
+  "legacy_wrapper_validation": {
+    "command": "python3 records/NAV20261010_Map_Integration/validate_current_map.py --root .",
+    "status": "FAIL_INHERITED_POINTER_CONTRACT",
+    "detail": "The preserved wrapper requires RESEARCH_SESSION_LOG_INDEX latest_work_log/latest_handoff to equal CURRENT_STATE latest_research. Maintained navigation separates completed science from disabled follow-up applications; the core validator passes."
+  },
+  "review_recheck": {
+    "status": "PASS_RETAIN_OPEN",
+    "open_or_incomplete": ["QC-20261008-10", "IA-QC11", "QC-20261008-12", "QC-20261008-13", "SCU-OPEN-R191-NORMALIZATION", "SCU-AUDIT-DEPTH"]
+  },
+  "limits": [
+    "No actual same-instance installation",
+    "No complete physical signature or global cue/controller closure",
+    "No theorem outside the declared T_1 family",
+    "No independent B_pc^family or H_cf calibration",
+    "No report or subject-count result",
+    "No full historical semantic reproof"
+  ]
+}

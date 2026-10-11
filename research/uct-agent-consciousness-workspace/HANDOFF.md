@@ -1,4 +1,10 @@
-# A4X20261012 current handoff — redundant same-event port participation
+# A4Y20261012 current handoff — prechallenge bound read-policy commitment
+
+[English note](records/A4Y20261012_Prechallenge_Read_Policy_Commitment/RESEARCH_NOTE.md) · [contract](records/A4Y20261012_Prechallenge_Read_Policy_Commitment/PRECHALLENGE_READ_POLICY_CONTRACT.md) · [proof](records/A4Y20261012_Prechallenge_Read_Policy_Commitment/MODEL_PROOF.md) · [exact results](records/A4Y20261012_Prechallenge_Read_Policy_Commitment/EXACT_RESULTS.json) · [formal audit](records/A4Y20261012_Prechallenge_Read_Policy_Commitment/FORMAL_AUDIT.md) · [Chinese handoff](records/A4Y20261012_Prechallenge_Read_Policy_Commitment/HANDOFF_ZH.md). Finite public Boolean challenges are exactly mimicked by challenge-indexed one-port policies; fixing and binding the policy before an independent, cue-blind draw excludes those mimics only inside the declared `T_1` family. The three-part PBRW witness is disabled, 0/0/0 and not an actual or phenomenal installation. Next: install one actual `z -> rho -> read_m` binding or return to `B_pc^family/H_cf` when finite closure is unavailable.
+
+---
+
+# A4X20261012 previous handoff — redundant same-event port participation
 
 [English note](records/A4X20261012_Redundant_Port_Participation/RESEARCH_NOTE.md) · [contract](records/A4X20261012_Redundant_Port_Participation/REDUNDANT_PORT_PARTICIPATION_CONTRACT.md) · [proof](records/A4X20261012_Redundant_Port_Participation/MODEL_PROOF.md) · [exact results](records/A4X20261012_Redundant_Port_Participation/EXACT_RESULTS.json) · [formal audit](records/A4X20261012_Redundant_Port_Participation/FORMAL_AUDIT.md) · [Chinese handoff](records/A4X20261012_Redundant_Port_Participation/HANDOFF_ZH.md). A4X requires actual same-event lineage/read plus frozen, independently reachable and exclusion-controlled port challenges. Four diagonal-correct consumers split into AND/OR versus two projections; universal per-row two-port but-for accepts none. The contract is consumer-boundary indexed, disabled and 0/0/0; actual installation and phenomenal bridges remain open. Next: test the minimum independent mechanism-state witness needed to block intervention-dependent hidden-mode twins, with an explicit stop before unbounded controller enumeration.
 

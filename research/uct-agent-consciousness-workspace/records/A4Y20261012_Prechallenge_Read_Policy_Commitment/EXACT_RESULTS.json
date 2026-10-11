@@ -1,0 +1,156 @@
+{
+  "schema": "uct-a4y-prechallenge-read-policy-exact/1.0",
+  "scope": "deterministic Boolean AND/OR targets and a declared one-port identity/negation mode family at one fixed consumer boundary",
+  "challenge_rows": [
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      1
+    ]
+  ],
+  "modes": [
+    {
+      "port": "u",
+      "invert": false
+    },
+    {
+      "port": "u",
+      "invert": true
+    },
+    {
+      "port": "v",
+      "invert": false
+    },
+    {
+      "port": "v",
+      "invert": true
+    }
+  ],
+  "counts": {
+    "AND": {
+      "target_table_00_01_10_11": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "challenge_indexed_policies": 256,
+      "challenge_indexed_exact_matches": 16,
+      "prechallenge_static_policies": 4,
+      "prechallenge_static_exact_matches": 0,
+      "example_adaptive_match": [
+        {
+          "row": [
+            0,
+            0
+          ],
+          "port": "u",
+          "invert": false
+        },
+        {
+          "row": [
+            0,
+            1
+          ],
+          "port": "u",
+          "invert": false
+        },
+        {
+          "row": [
+            1,
+            0
+          ],
+          "port": "u",
+          "invert": true
+        },
+        {
+          "row": [
+            1,
+            1
+          ],
+          "port": "u",
+          "invert": false
+        }
+      ]
+    },
+    "OR": {
+      "target_table_00_01_10_11": [
+        0,
+        1,
+        1,
+        1
+      ],
+      "challenge_indexed_policies": 256,
+      "challenge_indexed_exact_matches": 16,
+      "prechallenge_static_policies": 4,
+      "prechallenge_static_exact_matches": 0,
+      "example_adaptive_match": [
+        {
+          "row": [
+            0,
+            0
+          ],
+          "port": "u",
+          "invert": false
+        },
+        {
+          "row": [
+            0,
+            1
+          ],
+          "port": "u",
+          "invert": true
+        },
+        {
+          "row": [
+            1,
+            0
+          ],
+          "port": "u",
+          "invert": false
+        },
+        {
+          "row": [
+            1,
+            1
+          ],
+          "port": "u",
+          "invert": false
+        }
+      ]
+    }
+  },
+  "drop_one_countermodels": {
+    "drop_challenge_blindness": {
+      "construction": "commit a challenge-indexed dispatch table before the draw, then reveal the challenge label to the dispatcher",
+      "exact_matches_per_target": 16
+    },
+    "drop_temporal_precedence": {
+      "construction": "select the bound port/polarity mode after the challenge is known",
+      "exact_matches_per_target": 16
+    },
+    "drop_consumer_binding": {
+      "construction": "record an isolated sidecar state before the draw while the actual consumer dispatcher remains challenge-indexed",
+      "exact_matches_per_target": 16
+    }
+  },
+  "not_tested": [
+    "physical witness independence or tamper resistance",
+    "completeness of cue/alternate-path inventory",
+    "actual port lineage/read or complete UCT organization",
+    "B_pc^family, H_cf, report reliability or subject count",
+    "arbitrary hidden-controller classes outside the declared one-port mode family"
+  ],
+  "bounded_result": "A public finite challenge suite is exactly mimicked by 16 challenge-indexed one-port policies for each target. Within the declared family, a consumer-bound policy fixed before an independently drawn challenge and blind to every pre-read cue except the named data ports has no one-port exact match to AND or OR."
+}

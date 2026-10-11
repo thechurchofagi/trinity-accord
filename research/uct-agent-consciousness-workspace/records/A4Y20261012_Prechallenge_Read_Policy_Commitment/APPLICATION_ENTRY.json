@@ -1,0 +1,20 @@
+{
+  "id": "A4Y20261012",
+  "version": "A4Y-PBRW-v0.1.0",
+  "title": "Prechallenge bound read-policy commitment",
+  "type": "DISABLED_SCOPED_FOLLOWUP_APPLICATION",
+  "status": "EXACT_CHALLENGE_AWARE_MIMICRY_AND_BOUNDED_COMMITMENT_SEPARATION",
+  "parent_science": "A3V20261010",
+  "parent_followups": ["R15720261009", "R15920261009", "R18120261008", "A4V20261012", "A4W20261012", "A4X20261012"],
+  "domain": "one fixed P/I/K/event/consumer binding, Boolean full-factorial challenges and the declared one-port polarity twin family T_1",
+  "pbrw_all_of": ["BEFORE", "BLIND", "BOUND"],
+  "conditional_conclusion": "Within T_1, a consumer-bound read policy witnessed before an independently drawn challenge and blind to all pre-read challenge cues cannot mimic AND/OR with one fixed port/polarity mode; public finite challenges without this package are exactly mimickable.",
+  "open_bridge": "Actual SEPP installation and complete K remain absent; C1/R157 transport is conditional; B_pc^family, H_cf, measurement, report and subject count remain open.",
+  "proof_role": "For each four-row target, 16 of 256 challenge-indexed policies are exact mimics and zero of four fixed one-port policies are; three drop-one constructions delimit the evidence package.",
+  "counterexamples": ["late bound record", "precommitted cue-indexed meta-program", "timely blind sidecar", "controllers outside T_1"],
+  "scientific_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+  "enabled_as_established_premises": false,
+  "actual_token_installed": false,
+  "independent_h_validation": false,
+  "standalone_manuscript": "HOLD_MERGE_WITH_A4V_A4W_A4X_FAMILY"
+}

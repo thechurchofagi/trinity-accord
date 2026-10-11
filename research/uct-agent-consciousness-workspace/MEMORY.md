@@ -1,5 +1,9 @@
 # UCT durable memory
 
+## A4Y20261012 latest memory
+
+A4Y shows that finite public challenges do not by themselves exclude a test-aware one-port rival: for each AND/OR table, 16 of 256 challenge-indexed `T_1` policies match exactly, while zero of four fixed one-port modes do. A bare state snapshot is insufficient. Disabled `PBRW = BEFORE AND BLIND AND BOUND` binds an operative policy before an independent unpredictable draw, cuts pre-read challenge cues except named data ports, and ties the witness to the actual named consumer/read through an independently alteration-detecting path. Late record, cue-indexed meta-program and clean sidecar are the three drop-one countermodels. Minimality is only componentwise within the declared family. Actual installation, complete `K`, global cue/path closure, `B_pc^family`, `H_cf`, report and subject count remain open. Formal delta 0/0/0; next install `z -> rho -> read_m` on one accessible consumer or stop certificate expansion.
+
 ## A4X20261012 latest memory
 
 A4X refines A4W's open target-participation edge at one named consumer boundary. Disabled `SEPP_i` requires `BIND AND LINEAGE AND READ AND FROZEN AND FACTORIAL AND CONTINGENT-SENSITIVITY AND EXCLUSION`; actual event lineage/read and counterfactual mechanism evidence cannot replace one another. Among all 16 Boolean consumers, four are diagonal-correct, exactly AND/OR are contingent on both ports, and zero make both ports individually but-for necessary at every normal row. Both off-diagonal challenges are needed to exclude both unknown projections. An upstream two-port compiler feeding one-port `m` locates participation upstream, not at `m`. C1/R157 transport remains conditional; `B_pc^family`, `H_cf`, actual installation, report and subject count remain open. Formal delta 0/0/0. Next: bound intervention-dependent hidden-mode twins without entering unbounded controller enumeration.

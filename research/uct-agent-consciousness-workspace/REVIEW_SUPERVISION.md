@@ -1,3 +1,11 @@
+# A4Y20261012 researcher response — prechallenge bound read policy
+
+The latest ledger and all carried OPEN/ACKNOWLEDGED items were read before selection, after result formation and before save. A4Y proves exact finite challenge-aware mimicry inside `T_1` and supplies the disabled `BEFORE AND BLIND AND BOUND` repair with three drop-one countermodels. It does not infer actual use from output, state bytes or a self-authored record.
+
+`QC-20261008-10` remains ACKNOWLEDGED/OPEN; `IA-QC11`, `QC-20261008-12/13` and `SCU-OPEN-R191-NORMALIZATION` remain OPEN; `SCU-AUDIT-DEPTH` remains AUDIT_INCOMPLETE. No item is self-closed. There is no actual `z -> rho -> read_m` installation, complete physical `K`, global cue/acceptance-path closure, independent `B_pc^family` or `H_cf` calibration, report validation or subject-count result. Evidence: [response](records/A4Y20261012_Prechallenge_Read_Policy_Commitment/REVIEW_RESPONSE.md), [contract](records/A4Y20261012_Prechallenge_Read_Policy_Commitment/PRECHALLENGE_READ_POLICY_CONTRACT.md), [exact results](records/A4Y20261012_Prechallenge_Read_Policy_Commitment/EXACT_RESULTS.json), [gaps](records/A4Y20261012_Prechallenge_Read_Policy_Commitment/GAP_LEDGER.json), [audit](records/A4Y20261012_Prechallenge_Read_Policy_Commitment/FORMAL_AUDIT.md).
+
+---
+
 # A4W20261012 researcher response — overlapping bearer centres
 
 The latest ledger and all carried OPEN/ACKNOWLEDGED items were read before selection, after result formation and before save. A4W supplies a bounded disabled answer to A4V: two local bearer-centred routes are jointly satisfiable without an exclusive owner, while joint centring of one named target additionally requires two non-exclusive actual participation edges. The 16-function enumeration separates two projections from two symmetric mergers and explicitly blocks inference from normal output success to two-branch use.

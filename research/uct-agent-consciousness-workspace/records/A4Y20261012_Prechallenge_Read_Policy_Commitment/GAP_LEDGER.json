@@ -1,0 +1,54 @@
+{
+  "schema": "uct-a4y-gap-ledger/1.0",
+  "round": "A4Y20261012_Prechallenge_Read_Policy_Commitment",
+  "gaps": [
+    {
+      "id": "A4Y-G01",
+      "location": "state-evidence sufficiency",
+      "impact": ["A4Y-C1", "A4Y-C2", "A4X-G03"],
+      "counterexample": "the same recorded bytes can be a bound policy, a cue-indexed meta-program or an irrelevant sidecar",
+      "fixed": "state evidence is replaced by the BEFORE AND BLIND AND BOUND relation package",
+      "unresolved": "no actual device installs that package"
+    },
+    {
+      "id": "A4Y-G02",
+      "location": "challenge timing and secrecy",
+      "impact": ["A4Y-T2", "A4X FACTORIAL/FROZEN"],
+      "counterexample": "trial order, shared RNG or clock-coded schedule leaks the challenge before the consumer read",
+      "fixed": "BEFORE and BLIND explicitly include independent post-witness draw and bounded cue cuts",
+      "unresolved": "physical unpredictability and the cue inventory are application-specific"
+    },
+    {
+      "id": "A4Y-G03",
+      "location": "consumer binding and witness independence",
+      "impact": ["A4Y-C1", "A4Y-U1", "QC-20261008-12/13"],
+      "counterexample": "a clean sidecar/consumer-authored log coexists with an adaptive actual dispatcher",
+      "fixed": "BOUND requires state-to-read-policy-to-read-event linkage and independent alteration detection",
+      "unresolved": "A4F/A4G-style common-control and acceptance-path closure is not installed"
+    },
+    {
+      "id": "A4Y-G04",
+      "location": "finite family scope",
+      "impact": ["A4Y-T1", "A4Y-T2", "minimality language"],
+      "counterexample": "an arbitrary controller outside T_1 may use another cue, read both ports, change the boundary or forge the witness",
+      "fixed": "all theorems and the componentwise minimality claim are restricted to T_1",
+      "unresolved": "no global controller-completeness theorem is attempted"
+    },
+    {
+      "id": "A4Y-G05",
+      "location": "actual organizational installation",
+      "impact": ["A4Y-U1", "IA-QC11", "QC-20261008-13"],
+      "counterexample": "the abstract chronology and read policy are drawn without a physical consumer or complete signature",
+      "fixed": "application status is DISABLED_NOT_INSTALLED and all same-instance bindings are explicit",
+      "unresolved": "no human/device token, actual read event or complete K is supplied"
+    },
+    {
+      "id": "A4Y-G06",
+      "location": "phenomenal interpretation",
+      "impact": ["B_pc^family", "H_cf", "QC-20261008-10", "IA-QC11"],
+      "counterexample": "the same organizational certificate has no independently fixed phenomenal identity or sign",
+      "fixed": "C1/R157 transport, B_pc^family, H_cf, judgment and report remain separate",
+      "unresolved": "independent selected-target semantics and calibration remain absent"
+    }
+  ]
+}

@@ -1,3 +1,9 @@
+# A4Y20261012 disabled addendum — prechallenge bound read-policy commitment
+
+A4Y adds no completed node, rule or context (0/0/0). For every finite labelled Boolean challenge family, a challenge-indexed `T_1` policy that reads one named port and optionally negates it can reproduce any Boolean target table. On A4X's four rows, 16 of 256 such policies match each AND/OR target; no fixed member of the four-mode family does. The disabled evidence repair is `PBRW = BEFORE AND BLIND AND BOUND` on one binding. Late record, cue-indexed meta-program and clean sidecar witness the componentwise necessity of the three roles inside the declared family. PBRW is not complete controller closure, actual installation, a basal gate or a phenomenal bridge. C1/R157 transport remains conditional; `B_pc^family/H_cf`, report and subject count remain open. See [A4Y audit](records/A4Y20261012_Prechallenge_Read_Policy_Commitment/FORMAL_AUDIT.md).
+
+---
+
 # A4X20261012 disabled addendum — redundant same-event port participation
 
 A4X adds no completed node, rule or context (0/0/0). At one predeclared consumer boundary, disabled `SEPP_i` is `BIND AND LINEAGE AND READ AND FROZEN AND FACTORIAL AND CONTINGENT-SENSITIVITY AND EXCLUSION`. Actual route occurrence/read is not inferred from counterfactual response tables, and contingent sensitivity does not replace actual binding. Of 16 Boolean consumers, four match the A4W diagonal; AND/OR depend on both ports under a declared contingency, projections on one, while universal two-port but-for at every normal row accepts none. An upstream dual-port compiler followed by a one-port consumer blocks end-to-end functional dependence from being assigned to the wrong consumer. Joint target participation remains a disabled `ConcurrentBCR2 AND SEPP_1 AND SEPP_2`; C1/R157 transport is conditional and `B_pc^family/H_cf` remain open. See [A4X audit](records/A4X20261012_Redundant_Port_Participation/FORMAL_AUDIT.md).

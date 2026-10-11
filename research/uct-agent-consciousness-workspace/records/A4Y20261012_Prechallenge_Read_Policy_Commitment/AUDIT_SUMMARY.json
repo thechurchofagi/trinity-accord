@@ -1,0 +1,63 @@
+{
+  "a4y_joint_witness": {
+    "binding": "one P/I/K/event/target/consumer/challenge binding with read-policy state, draw, actual policy and independent witness path",
+    "finite_satisfiable_models": [
+      "fixed dual-read AND",
+      "fixed dual-read OR"
+    ],
+    "premise_drop_countermodels": [
+      "late bound record",
+      "preloaded cue-indexed dispatcher",
+      "timely blind sidecar",
+      "controller outside T_1"
+    ],
+    "premises": [
+      "A4X-SEPP-CLAUSES",
+      "BEFORE",
+      "BLIND",
+      "BOUND",
+      "DUAL-READ-POLICY",
+      "REMAINING-EXCLUSION"
+    ]
+  },
+  "a4y_scientific_delta": {
+    "contexts": 0,
+    "nodes": 0,
+    "rules": 0
+  },
+  "affected_semantic_nodes": [
+    "A:P3",
+    "A:P6",
+    "A:C1",
+    "A:U1",
+    "R157:COORDINATE_TRANSPORT",
+    "R157:SEMANTIC_RESIDUAL",
+    "R157:MINENESS_BRIDGE_SCHEMA",
+    "R159:ANCHOR_BINDING_CONTRACT",
+    "R159:FRAME_RELATION_TRANSPORT",
+    "R173:RETENTIVE_EXPERIENTIAL_COORDINATE",
+    "R173:FAMILIAR_MINENESS_BOUNDARY"
+  ],
+  "all_rules_read_all_of_as_simultaneous_and": true,
+  "context_links_treated_as_nondeductive": true,
+  "deductive_cycles": [],
+  "effective_counts": {
+    "context_links": 261,
+    "nodes": 913,
+    "rules": 424
+  },
+  "nodes_without_scope_or_domain": [],
+  "per_node_fields_accessed": 913,
+  "root_counts": {
+    "context_links": 178,
+    "nodes": 584,
+    "rules": 284
+  },
+  "root_graph_sha256": "40d17cd5f61ebcc1bfcea65eb59c3c730208bcfcf69ba92e2f615a993584e3ce",
+  "rules_with_empty_all_of": [],
+  "rules_with_nonlist_all_of": [],
+  "schema": "a4y-map-audit/1",
+  "semantic_scope": "Fresh structural traversal plus bounded manual review of C1/U1, P3/P6, R157, R159, effective R173, R181 and A4P/A4D-A4G/A4V-A4Y; not a full historical semantic reproof.",
+  "status": "FRESH_STRUCTURAL_PASS_BOUNDED_SEMANTIC_PASS_FULL_DEPTH_INCOMPLETE",
+  "unresolved_deductive_references": []
+}

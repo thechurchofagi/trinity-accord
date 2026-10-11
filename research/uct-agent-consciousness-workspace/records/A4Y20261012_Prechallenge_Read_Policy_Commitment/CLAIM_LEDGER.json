@@ -1,0 +1,72 @@
+{
+  "schema": "uct-a4y-claim-ledger/1.0",
+  "round": "A4Y20261012_Prechallenge_Read_Policy_Commitment",
+  "claims": [
+    {
+      "id": "A4Y-C1",
+      "type": "DEFINITION_DISABLED",
+      "statement": "PBRW is the same-binding conjunction BEFORE AND BLIND AND BOUND for a read-policy state, independently drawn challenge, actual named consumer and independently controlled witness path.",
+      "domain": "one fixed P/I/K/event/consumer/challenge binding and the declared T_1 one-port polarity twin family",
+      "premises": ["temporal order and unpredictable challenge draw", "bounded no-cue inventory except named data ports", "state-to-actual-consumer-read-policy binding"],
+      "proof_or_source": "PRECHALLENGE_READ_POLICY_CONTRACT.md",
+      "counterexamples": ["late record", "preloaded cue-indexed dispatcher", "clean sidecar with adaptive consumer"],
+      "status": "DISABLED_NOT_INSTALLED",
+      "thought_experiment_role": "holds output and state bytes fixed while varying whether the state is operative"
+    },
+    {
+      "id": "A4Y-T1",
+      "type": "FINITE_EXACT_NEGATIVE_RESULT",
+      "statement": "For every finite labelled Boolean challenge family and every Boolean target table, a challenge-indexed one-port identity/negation policy reproduces the target exactly; for four rows there are 16 exact mimics among 256 policies.",
+      "domain": "finite labelled Boolean challenge rows and the declared T_1 family",
+      "premises": ["challenge identity reaches the dispatcher", "one port and a row-selected polarity may be used on each row"],
+      "proof_or_source": "MODEL_PROOF.md A4Y-T1; check_mode_commitment.py",
+      "counterexamples": ["one-port consumer plus dual side recorder", "public challenge-indexed lookup"],
+      "status": "PROVED_FINITE_SCOPE",
+      "thought_experiment_role": "shows why adding finite public tests does not close test-aware mode selection"
+    },
+    {
+      "id": "A4Y-T2",
+      "type": "CONDITIONAL_FINITE_SEPARATION",
+      "statement": "Within T_1, PBRW reduces a one-port rival to one of four fixed modes, none of which reproduces AND or OR on the full factorial.",
+      "domain": "A4X full-factorial Boolean AND/OR consumer comparison",
+      "premises": ["A4Y-C1", "all PBRW clauses actually hold", "fixed consumer boundary", "full-factorial reachability"],
+      "proof_or_source": "MODEL_PROOF.md A4Y-T2; exact enumeration",
+      "counterexamples": ["controllers outside T_1", "forged witness", "unbounded cue path"],
+      "status": "PROVED_CONDITIONAL_FINITE_SCOPE",
+      "thought_experiment_role": "separates fixed mechanism evidence from test-conditioned performance"
+    },
+    {
+      "id": "A4Y-T3",
+      "type": "COMPONENTWISE_DROP_ONE_RESULT",
+      "statement": "Dropping BEFORE, BLIND or BOUND separately restores an exact challenge-aware mimic in the declared evidence model.",
+      "domain": "PBRW evidence model over T_1",
+      "premises": ["the other advertised relations are retained in their narrowed time/binding scope"],
+      "proof_or_source": "MODEL_PROOF.md A4Y-T3; EXACT_RESULTS.json",
+      "counterexamples": ["post-draw bound record", "precommitted cue-indexed meta-program", "timely blind sidecar"],
+      "status": "PROVED_BY_CONSTRUCTION",
+      "thought_experiment_role": "bounds the minimality claim to three independently falsifiable roles"
+    },
+    {
+      "id": "A4Y-C2",
+      "type": "NONENTAILMENT",
+      "statement": "A recorded internal state value alone does not entail a challenge-independent actual read policy at the named consumer.",
+      "domain": "the declared PBRW/T_1 evidence model",
+      "premises": ["no unstated temporal, cue-isolation or consumer-binding premise"],
+      "proof_or_source": "MODEL_PROOF.md A4Y-C1 and A4Y-T3",
+      "counterexamples": ["all three drop-one constructions"],
+      "status": "PROVED_BOUNDED_NONENTAILMENT",
+      "thought_experiment_role": "prevents state snapshots or hashes from being treated as operative organization"
+    },
+    {
+      "id": "A4Y-U1",
+      "type": "CONDITIONAL_UCT_APPLICATION",
+      "statement": "Only a complete actual same-instance dual-route relation, with both A4X SEPP relations and the relevant PBRW hidden-mode exclusion independently grounded, may be conditionally transported by C1/R157; B_pc^family and H_cf remain open.",
+      "domain": "one complete actual UCT token with correctly sorted route, consumer, witness and challenge relations",
+      "premises": ["A:C1", "R157 transport premises", "actual ConcurrentBCR2", "actual SEPP_1 and SEPP_2", "actual PBRW where used"],
+      "proof_or_source": "standard isomorphism preservation under the fixed UCT premises",
+      "counterexamples": ["finite response table", "state hash without policy binding", "uncalibrated report"],
+      "status": "CONDITIONAL_OPEN_APPLICATION",
+      "thought_experiment_role": "keeps multiple bodily/action centres inside experience without adding an owner or basal gate"
+    }
+  ]
+}

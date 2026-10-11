@@ -1,3 +1,9 @@
+# A4Y20261012 audit addendum
+
+A4Y preserves the effective 913/424/261 graph and adds 0/0/0. Fresh traversal accessed every node and found zero unresolved deductive references, active cycles, non-list `all_of` or empty `all_of`; this is not global semantic proof. The disabled `PBRW` contract reads `BEFORE AND BLIND AND BOUND` simultaneously with the relevant A4X clauses. Fixed dual-read AND/OR witness joint satisfiability; late record, cue-indexed dispatcher and clean sidecar are premise-drop countermodels. Objects, event times, challenge labels, data values, policy state, actual reads, witness paths, complete `K`, finite views and reports remain separately typed. All theorems and minimality language are restricted to `T_1`; no inference runs from accuracy or state bytes to actual organization. C1/U1 and all OPEN/INCOMPLETE items remain unchanged. See [A4Y formal audit](records/A4Y20261012_Prechallenge_Read_Policy_Commitment/FORMAL_AUDIT.md).
+
+---
+
 # A4X20261012 audit addendum
 
 Fresh effective-graph traversal passes at 913 nodes, 424 active rules and 261 context links: zero unresolved references, active cycles, non-list `all_of` or empty `all_of`. A4X keeps every seven-clause `SEPP_i` premise simultaneous on one consumer/event binding, treats AND/OR as alternative satisfiability witnesses, and preserves projection, bypass, stale-copy, hidden-mode and boundary-relocation countermodels. Objects, event time, occurrence lineage, actual read, functional relevance, challenge evidence, complete organization and phenomenal interpretation remain typed separately. Formal delta is 0/0/0; R191 normalization and full historical semantic depth remain open/incomplete. Passing the checker or DAG does not establish physical installation or theory truth. See [round audit](records/A4X20261012_Redundant_Port_Participation/FORMAL_AUDIT.md).

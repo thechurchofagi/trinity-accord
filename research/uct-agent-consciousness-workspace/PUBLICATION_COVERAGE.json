@@ -12,10 +12,10 @@
   "readable_report": "publication/UCT-PUB-v1.0.32/COVERAGE_REPORT_ZH.md",
   "current_decision": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/CLAIM_LEDGER.json",
   "latest_update": {
-    "id": "A4X20261012",
+    "id": "A4Y20261012",
     "coverage_change": "NONE",
-    "source": "records/A4X20261012_Redundant_Port_Participation/PUBLICATION_COVERAGE_UPDATE.json",
-    "manuscript_decision": "HOLD_MERGE_WITH_A4V_A4W_FAMILY"
+    "source": "records/A4Y20261012_Prechallenge_Read_Policy_Commitment/PUBLICATION_COVERAGE_UPDATE.json",
+    "manuscript_decision": "HOLD_MERGE_WITH_A4V_A4W_A4X_FAMILY"
   },
   "current_scientific_map": "UCT-MAP-v1.1.2",
   "nondeductive": true,
@@ -168,32 +168,31 @@
     "does_not_replace_latest_scientific_research": true
   },
   "latest_followup_application": {
-    "id": "A4X20261012",
-    "version": "A4X-RPP-v0.1.0",
-    "status": "EXACT_REDUNDANT_PORT_CLASSIFICATION_WITH_OPEN_ACTUAL_AND_PHENOMENAL_BRIDGES",
+    "id": "A4Y20261012",
+    "version": "A4Y-PBRW-v0.1.0",
+    "status": "EXACT_CHALLENGE_AWARE_MIMICRY_AND_BOUNDED_COMMITMENT_SEPARATION",
     "enabled_as_established_premises": false,
-    "source": "records/A4X20261012_Redundant_Port_Participation/RESEARCH_NOTE.md",
-    "handoff": "records/A4X20261012_Redundant_Port_Participation/HANDOFF_ZH.md",
-    "work_log": "records/A4X20261012_Redundant_Port_Participation/WORK_LOG.md",
-    "claim_ledger": "records/A4X20261012_Redundant_Port_Participation/CLAIM_LEDGER.json",
-    "map_extension": "records/A4X20261012_Redundant_Port_Participation/MAP_EXTENSION.json",
-    "exact_results": "records/A4X20261012_Redundant_Port_Participation/EXACT_RESULTS.json",
+    "source": "records/A4Y20261012_Prechallenge_Read_Policy_Commitment/RESEARCH_NOTE.md",
+    "handoff": "records/A4Y20261012_Prechallenge_Read_Policy_Commitment/HANDOFF_ZH.md",
+    "work_log": "records/A4Y20261012_Prechallenge_Read_Policy_Commitment/WORK_LOG.md",
+    "claim_ledger": "records/A4Y20261012_Prechallenge_Read_Policy_Commitment/CLAIM_LEDGER.json",
+    "map_extension": "records/A4Y20261012_Prechallenge_Read_Policy_Commitment/MAP_EXTENSION.json",
+    "exact_results": "records/A4Y20261012_Prechallenge_Read_Policy_Commitment/EXACT_RESULTS.json",
     "parent_science": "A3V20261010",
-    "parent_followup": "A4W20261012",
+    "parent_followup": "A4X20261012",
     "completed_map": "UCT-MAP-v1.1.2",
     "scientific_delta": {
       "nodes": 0,
       "rules": 0,
       "contexts": 0
     },
-    "merge_functions": 16,
-    "normal_output_correct": 4,
-    "dual_port_contingently_relevant": 2,
-    "one_input_projections": 2,
-    "universal_two_port_but_for_on_all_normal_rows": 0,
+    "challenge_indexed_policies_per_target": 256,
+    "challenge_indexed_exact_mimics_per_target": 16,
+    "fixed_one_port_policies_per_target": 4,
+    "fixed_one_port_exact_mimics_per_target": 0,
     "independent_h_validation": false,
     "actual_bodily_installation": false,
-    "standalone_manuscript": "HOLD_MERGE_WITH_A4V_A4W_FAMILY"
+    "standalone_manuscript": "HOLD_MERGE_WITH_A4V_A4W_A4X_FAMILY"
   },
   "followup_applications": [
     {
@@ -380,6 +379,33 @@
       "independent_h_validation": false,
       "actual_bodily_installation": false,
       "standalone_manuscript": "HOLD_MERGE_WITH_A4V_A4W_FAMILY"
+    },
+    {
+      "id": "A4Y20261012",
+      "version": "A4Y-PBRW-v0.1.0",
+      "status": "EXACT_CHALLENGE_AWARE_MIMICRY_AND_BOUNDED_COMMITMENT_SEPARATION",
+      "enabled_as_established_premises": false,
+      "source": "records/A4Y20261012_Prechallenge_Read_Policy_Commitment/RESEARCH_NOTE.md",
+      "handoff": "records/A4Y20261012_Prechallenge_Read_Policy_Commitment/HANDOFF_ZH.md",
+      "work_log": "records/A4Y20261012_Prechallenge_Read_Policy_Commitment/WORK_LOG.md",
+      "claim_ledger": "records/A4Y20261012_Prechallenge_Read_Policy_Commitment/CLAIM_LEDGER.json",
+      "map_extension": "records/A4Y20261012_Prechallenge_Read_Policy_Commitment/MAP_EXTENSION.json",
+      "exact_results": "records/A4Y20261012_Prechallenge_Read_Policy_Commitment/EXACT_RESULTS.json",
+      "parent_science": "A3V20261010",
+      "parent_followup": "A4X20261012",
+      "completed_map": "UCT-MAP-v1.1.2",
+      "scientific_delta": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0
+      },
+      "challenge_indexed_policies_per_target": 256,
+      "challenge_indexed_exact_mimics_per_target": 16,
+      "fixed_one_port_policies_per_target": 4,
+      "fixed_one_port_exact_mimics_per_target": 0,
+      "independent_h_validation": false,
+      "actual_bodily_installation": false,
+      "standalone_manuscript": "HOLD_MERGE_WITH_A4V_A4W_A4X_FAMILY"
     }
   ]
 }

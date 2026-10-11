@@ -1,0 +1,13 @@
+{
+  "schema": "uct-map-extension/1",
+  "id": "A4Y20261012",
+  "version": "A4Y-PBRW-v0.1.0",
+  "status": "DISABLED_APPLICATION_ZERO_FORMAL_DELTA",
+  "enabled_as_established_premises": false,
+  "base_completed_map": "UCT-MAP-v1.1.2",
+  "nodes": [],
+  "rules": [],
+  "context_links": [],
+  "candidate_claims": "CLAIM_LEDGER.json",
+  "reason": "The result exactly answers A4X's declared hidden-mode question inside T_1 but supplies no actual same-instance witness, complete K, global cue/controller closure or independently calibrated phenomenal target. No completed-map promotion is warranted."
+}

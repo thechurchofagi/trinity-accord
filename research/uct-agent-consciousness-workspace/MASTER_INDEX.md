@@ -1,3 +1,9 @@
+# A4Y20261012 — prechallenge bound read-policy commitment
+
+[Research note](records/A4Y20261012_Prechallenge_Read_Policy_Commitment/RESEARCH_NOTE.md) · [contract](records/A4Y20261012_Prechallenge_Read_Policy_Commitment/PRECHALLENGE_READ_POLICY_CONTRACT.md) · [proof](records/A4Y20261012_Prechallenge_Read_Policy_Commitment/MODEL_PROOF.md) · [exact results](records/A4Y20261012_Prechallenge_Read_Policy_Commitment/EXACT_RESULTS.json) · [claims](records/A4Y20261012_Prechallenge_Read_Policy_Commitment/CLAIM_LEDGER.json) · [gaps](records/A4Y20261012_Prechallenge_Read_Policy_Commitment/GAP_LEDGER.json) · [audit](records/A4Y20261012_Prechallenge_Read_Policy_Commitment/FORMAL_AUDIT.md) · [Chinese handoff](records/A4Y20261012_Prechallenge_Read_Policy_Commitment/HANDOFF_ZH.md). Disabled 0/0/0 application: exact finite challenge-aware mimicry and a bounded BEFORE/BLIND/BOUND repair within `T_1`; no actual installation, global controller closure or phenomenal bridge is claimed.
+
+---
+
 # A4X20261012 — redundant same-event port participation
 
 [Research note](records/A4X20261012_Redundant_Port_Participation/RESEARCH_NOTE.md) · [contract](records/A4X20261012_Redundant_Port_Participation/REDUNDANT_PORT_PARTICIPATION_CONTRACT.md) · [proof](records/A4X20261012_Redundant_Port_Participation/MODEL_PROOF.md) · [exact results](records/A4X20261012_Redundant_Port_Participation/EXACT_RESULTS.json) · [claims](records/A4X20261012_Redundant_Port_Participation/CLAIM_LEDGER.json) · [gaps](records/A4X20261012_Redundant_Port_Participation/GAP_LEDGER.json) · [audit](records/A4X20261012_Redundant_Port_Participation/FORMAL_AUDIT.md) · [Chinese handoff](records/A4X20261012_Redundant_Port_Participation/HANDOFF_ZH.md). Disabled 0/0/0 application: actual route lineage/read is separated from contingent port sensitivity and challenge fidelity; exact Boolean classification rejects universal per-row two-port but-for as a redundancy gate. No actual or phenomenal installation is claimed.
