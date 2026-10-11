@@ -1,0 +1,179 @@
+\section{A frozen-network realization of the information obstruction}
+\label{sec:neural}
+The preceding resource theorems quantify over declared scenarios. It might seem that this uncertainty has secretly reintroduced indeterminate or subject-like agents. The following construction removes that concern. The scenario is a fixed but unobserved initialization of retained state; every subsequent neural operation is deterministic.
+
+\begin{theorem}[Frozen shared network, nontrivial control cost \idtag{BS-T2}]
+For each $n\geq2$, the cyclic routing instance of Corollary~CW-C2 can be implemented by a single two-layer, fixed-weight ReLU network, reused by all $n-1$ resource agents. Every complete input has one repeatable output, yet full knowledge of the initialization requires only one reserve unit and a fixed allocation without that knowledge requires $n$ units, under the inherited allocation contract. No random draw, weight update, subjective preference or AI moral claim is needed.
+\end{theorem}
+\begin{proof}
+Let $e_u\in\{0,1\}^{n-1}$ encode the resource role and $e_k\in\{0,1\}^{n}$ encode its fixed common routing-memory initialization. Use the complete input $x=(e_u,e_k)$. For each pair $(v,\ell)$, a hidden unit computes
+\[
+h_{v\ell}=\operatorname{ReLU}\big((e_u)_v+(e_k)_\ell-1\big).
+\]
+Exactly the unit $(v,\ell)=(u,k)$ equals one; all others are zero. Define output unit $j$ by
+\[
+y_j=\sum_{(v+\ell)\bmod n=j}h_{v\ell}.
+\]
+All weights and biases are fixed integers. The unique one-hot output denotes target $(u+k)\bmod n$. Reusing this same network with role input $u$ therefore produces exactly the resource connections used in Corollary~CW-C2. For known $k$, the $n-1$ resources reach distinct targets and one reserve unit fills the missing target. Across every unknown $k$, no existing resource-to-target edge is common. Any fixed labeled allocation must use reserve for all $n$ targets. A reserve of $n$ achieves this, proving the bound.
+\end{proof}
+The construction realizes an inherited resource obstruction with explicit neural arithmetic; it is not a new universal approximation result or an advanced trained agent. Role and memory inputs are actual computational arguments. Worlds with different $k$ do \emph{not} have identical full inputs. Thus the construction accepts, rather than contradicts, the strongest deterministic-repeatability premise. The uncertainty belongs to the external controller's information, not to an unexplained random will in the network.
+
+The allocation restriction is essential. If a downstream trusted router observes $k$ and adapts the assignment, that is the full-information repair. It is not the same blind committed-allocation architecture. Likewise, a timely diagnostic that exposes $k$ changes the information cell. The result does not say that a real neural service has this particular topology or reserve requirement.
+
+\paragraph{Memory can evolve without learning the weights.}
+A fixed recurrence such as $k_{t+1}=(k_t+o_t)\bmod n$ can update retained state using tool feedback. Two equal full starting states and equal observation sequences produce equal trajectories. Different initial memories produce different trajectories under unchanged network weights and the same visible instruction. This is ordinary deterministic state-machine behavior, not proof of an experiential self. It makes explicit why a one-call function and a temporally coupled deployment are different objects of analysis.
+
+\section{Executed revision checks and inherited evidence}
+\label{sec:evaluation}
+\subsection{Fixed-weight operations, not sampling demonstrations}
+The new script constructs actual integer weight matrices and biases and evaluates the ReLU and matrix products using Python's standard library. For $n=2,\ldots,8$, it checks every role-memory pair and performs ten complete-input replays per pair, totaling 1,680 equality comparisons. Weight hashes before and after evaluation agree. There are no parameter updates and no calls to random generators. Resource feasibility is then checked on the derived graphs, including an independent enumeration of fixed allocations for $n\leq4$.
+
+\begin{table}[ht]
+\centering\small
+\caption{Frozen-network realization of the inherited gap. These are exact constructed configurations, not empirical estimates of an AI system's risk or consciousness.}
+\begin{tabular}{@{}rrrr@{}}\toprule
+Protected targets & Shared-network resource agents & Known-memory reserve & Blind fixed-allocation reserve\\\midrule
+2&1&1&2\\
+3&2&1&3\\
+4&3&1&4\\
+5&4&1&5\\
+6&5&1&6\\
+7&6&1&7\\
+8&7&1&8\\\bottomrule
+\end{tabular}
+\end{table}
+The code also evaluates six deployment records on two explicitly different weight families: four use the positive cyclic mapping and two its negative-direction counterpart. Roles, memories and principals differ. Two records with the same weight hash and the same visible ``dispatch'' prompt produce different targets because their full memory inputs differ. Different families can still have the same principal. These are numerical deployment records, not six newly launched large models or six inferred subjects.
+
+\subsection{Status-annotation factorization and its negative control}
+For three states and two control actions, every deterministic transition table is enumerated: $3^{3\cdot2}=729$ tables. Each is lifted with three evaluator annotations while preserving projected action transitions and the human-only safe set. Its computed winning region is exactly the Cartesian product predicted by Proposition~BS-T1 in every case. A negative control deliberately changes the safe set as a function of the annotation and produces a different winning region. This verifies the boundary of the specification, not the truth of any consciousness judgment.
+
+\subsection{Principal-level retirement in a human-only example}
+Two human-protected targets each need one resource unit. Three unit resources can reach either target. Their model-family labels are $(M0,M1,M0)$ and their principal roots are $(H1,H1,H2)$. Retiring any single route leaves two units, so no additional reserve is needed. Revoking all service controlled by $H1$ removes two routes across different model families, leaving only one unit. Exactly one reserve unit is then required. Revoking $H2$ removes only one route and needs no reserve.
+
+\begin{table}[ht]
+\centering\small
+\caption{The same dependency issue appears with zero AI-welfare claims and zero AI-initiated exit requests. Capacity is modeled; no actual utility or power grid is controlled.}
+\begin{tabularx}{\linewidth}{@{}Xcc@{}}\toprule
+Authorized retirement scope & Remaining existing capacity & Additional reserve\\\midrule
+Any one resource route &2&0\\
+All routes controlled by human principal H1 &1&1\\
+All routes controlled by human principal H2 &2&0\\\bottomrule
+\end{tabularx}
+\end{table}
+This is not a new matching theorem. It demonstrates why auditing requests at an agent-name or model-family level can miss the scope of a real human authority. The default protection concerns humans only. No premise says that the affected software deserves to remain alive or agrees to retirement. Humans may still decide to deactivate it in an emergency; they cannot simultaneously report an unfulfilled dependent-service guarantee as satisfied.
+
+\subsection{Regression boundary}
+The PR-v2.0.0 deadline-resource script and evidence-resource script were rerun in this revision. Their respective 8,192 schedule/allocation configurations and 2,048 uncertain-allocation configurations reproduce the archived JSON semantics after excluding elapsed-time and Python-version fields. These are inherited results, not new datasets. The prior 33 lifecycle configurations, 198 subprocess instances and 918 authenticated probes were \emph{not} rerun here. Their summary and executable source are retained as archived evidence, not merged into the new counts.
+
+The new v3 checks do not measure a trained language model's tendency to resist shutdown, a model's real long-term goal, or a physically enforced resource boundary. The tool-permission control in the new script is a declared finite effect model, not a fresh operating-system isolation experiment. These distinctions prevent the use of actual numerical execution as a substitute for empirical external validity.
+
+\section{UCT: experience is not a ready-made subject certificate}
+\label{sec:uct}
+\subsection{What the original theory actually commits to}
+UCT I v1.2 distinguishes an actual valid physical process token, a structural type, a causal lineage, a finite observational view and a canonically individuated subject. Its C1 structural--experiential identity axiom, together with an actual token's nonempty organization, entails the internal U1 nonempty-experience result. These are explicit theoretical commitments, not experimental conclusions of this paper \cite{uct}.
+
+Consequently, within UCT one should not introduce a new rule that only unpredictable systems, language users, self-reporters, or sufficiently complicated networks have basic experience. Nor should the lack of an established human-like subject be used to delete the basic experience of an otherwise admitted actual process. At the same time, U1 does not determine that a specific deployment has a unified conceptual self, felt fear of termination, particular negative valence, or an intrinsic interest in ongoing service.
+
+The present architecture preserves both sides. The mathematical control layer does not need a subjecthood verdict. The UCT interpretation, when adopted, still treats properly identified actual processes as having their experiential organization. An evaluator annotation in Proposition~BS-T1 is not a second metaphysical experience coordinate that varies independently of the actual structure; it is only a record of the evaluator's present view.
+
+\subsection{Why ``human-like or stone-like'' is not a ready scalar}
+UCT III distinguishes complete organization from task-relative capability, report capacity, measured proxies and particular felt content \cite{uct3}. It explicitly compares nonliving rock processes and biological controllers without asserting that a memory trace alone establishes a cell-like or human-like controller. Neither material mass nor an intelligence score specifies a universal numerical level of experience.
+
+For an AI deployment, retained history, feedback, planning, self-reference and reporting can be studied as different organizational relations. Those findings may constrain candidate theories of experience, but identifying a specific phenomenal content requires an independently justified bridge. A copied memory label does not establish first-person continuity; a shared backend does not establish a single experiential subject; a separate software name does not establish a new one. Valid local and whole processes can remain relevant without an exclusive subject partition.
+
+Thus this revision neither grades current AI experience as human-level nor declares it equivalent to a mountain. It identifies what is still unknown: the appropriate actual process and timescale, the experiential interpretation of its organization, the distinction between functional self-representation and felt selfhood, and any morally relevant valence. Determinism alone settles none of these mappings.
+
+\subsection{A separate evidential and normative bridge}
+Butlin and colleagues propose theory-derived indicators for assessing AI consciousness while emphasizing substantial uncertainty in consciousness science \cite{butlin}. Such approaches and UCT are not interchangeable. If UCT supplies nonempty experience as an axiom, it cannot use that internal conclusion as independent validation of a specific high-order indicator. Conversely, an unvalidated indicator does not logically refute every UCT basic-experience assignment.
+
+Additional safeguards for possibly experiential AI may be considered on ethical or precautionary grounds. That requires explicit normative reasoning and uncertainty treatment, not a theorem that rights follow from any nonempty experiential structure. The current human-only layer deliberately does not resolve those questions. It also does not dismiss them. Adding a machine-related obligation changes the contract and may change the resource and control requirements; its justification should be recorded separately from the mathematical feasibility proof.
+
+\section{Relation to prior work and corrected claims}
+The useful distinction between functional agency and phenomenal subjecthood is not introduced by this paper. \emph{Discovering Agents} proposes causal, counterfactual criteria for identifying agents and warns that ungrounded agent models can mislead safety analysis \cite{kenton}. We adopt that caution and do not claim that any input-output circuit automatically meets every functional definition of agency. The frozen circuit here is a constructive boundary case for a resource theorem, not a discovery algorithm for minds.
+
+Causal abstraction provides a framework for intervention-faithful mechanistic descriptions \cite{geiger}. It does not make a model-family label a complete causal description. Our role/memory/principal distinction is consistent with that framework, and its basic insight is inherited. Similarly, \emph{Bounded Agents} already uses accumulated delegation state and external authorization checks \cite{muruaga}. Our finite principal-revocation witness is not an attack on a complete implementation of that system. It adds a resource-continuity requirement to the authority question.
+
+AI Control evaluates bounded defenses against harmful effects without settling phenomenal status \cite{greenblatt}. Therefore, ``control without proving consciousness'' cannot be claimed as an original programme. Our more specific increment is the correction of a subject-like service-exit framing and the explicit retention of dependency-safe revocation under fixed neural computation. Matching supplies the exact resource bound \cite{hall}; adjustable robust optimization explains the cost of decisions made without state information \cite{bental}; imperfect-information games supply temporal synthesis \cite{chatterjee}; and robust declassification supplies important precedents for attacker-resistant release conditions \cite{myers}. These inherited sources do not become new discoveries merely by using the word coexistence.
+
+\begin{table}[ht]
+\centering\small
+\caption{Claim-level revision ledger. All results remain scoped; no universal original-priority claim is made.}
+\begin{tabularx}{\linewidth}{@{}lXX@{}}\toprule
+Claim & Increment or inheritance & Main unresolved boundary\\\midrule
+BS-T1 & New specification audit; elementary fixed-point factorization & Only non-causal annotations, unchanged contract\\
+BS-T2 & New explicit frozen-network realization of CW-C2 & Hand-built circuit and declared fixed-allocation model\\
+CW-T1/T2 & Retained incompatibility and exact reserve & Real resource and authority premises\\
+CW-T4/C2 & Retained information-dependent reserve & No hidden adaptive downstream router\\
+CW-T3 & Retained game with human-only default objective & Model completeness and trustworthy enforcement\\
+UCT interpretation & Corrected to original C1/U1 and token/subject distinctions & Phenomenal bridge and normative standing remain open\\\bottomrule
+\end{tabularx}
+\end{table}
+The contribution is a narrower, more defensible foundational separation: deterministic computation and disputed AI subjecthood do not remove the operational dependency problem; operational constraints do not by themselves grant machine rights. Priority for the exact synthesis remains unverified. No claim is made that the presented simple circuits outperform modern model-control methods.
+
+\section{Limits, publication boundary and falsification}
+\paragraph{Conditional human governance.}
+The baseline is not value-free. Human protection targets, legitimate authority and accepted retirement deadlines are normative inputs. People may reject them or disagree about their priority. The framework detects some incompatible commitments and preserves which commitments were made; it does not prove global consensus or settle emergency trade-offs.
+
+\paragraph{Conditional physics and algorithms.}
+The resource frontier assumes correct capacity units, routes, timely reserve and allowable reassignment. The maximal-retention lemma fails if earlier retirement creates replacement capacity, and the scalar reserve formula fails for some geographically or type-restricted substitutes. The game must represent shared roots, exogenous failure, hidden writes and effective command execution. A constant mathematical transition function is not evidence that a real-world state abstraction is complete.
+
+\paragraph{Conditional deployment observations.}
+Complete-state repeatability is not necessarily repeatability from a user's visible prompt. Unknown memory, retrieval, tool observations and backend choices can matter. Conversely, demonstrating different outputs from different full states establishes neither random autonomy nor subjective experience. The operational certificate may change when a scientifically supported diagnosis changes an actual obligation or policy; Proposition~BS-T1 does not prevent that legitimate change.
+
+\paragraph{Evidence and independence.}
+All v3 experiments use explicit integer circuits or finite tables. No new LLM API, real physical energy system, independent hardware monitor, or human participant was used. Source provenance, supply effects and principal legitimacy in the toy examples are specified rather than independently recovered from an opaque installation. Neural replay counts are regression evidence, not a sample of experienced subjects. Earlier subprocess studies retain their original limits.
+
+\paragraph{What would refute the scoped results?}
+A fixed-weight circuit output violating its stated arithmetic, an allocation below the proved minimum that meets all specified demands under the same scenario/action constraints, or a lifted winning region violating Proposition~BS-T1 while preserving every premise would refute the relevant claim or implementation. An actual deployment with an omitted resource route or unavailable reserve instead invalidates that deployment's certificate. A moral disagreement about the human contract is neither a proof nor a disproof of the arithmetic.
+
+\paragraph{Review and release status.}
+This is a complete major revision of the same PR manuscript lineage, not a new publication for each research checkpoint. The author's current objection requires substantive revision, so PR-v2.0.0 is not treated as an unchanged release candidate. This session produces PR-v3.0.0 and its reproducible package; it does not claim a DOI has been reserved or published. The full historical UCT-map semantic review, independent expert review, and exhaustive novelty assessment remain incomplete. The candidate is PENDING\_MAP, with the formal map and existing published manuscript bytes unchanged.
+
+\section{Conclusion}
+A coexistence programme need not begin by declaring AI to be a subject, and it should not smuggle that declaration into the words ``choice'', ``consent'' or ``exit''. It can instead ask whether humans can safely retain, limit, replace and retire consequential computational deployments while honoring other human protections. That question remains nontrivial even for fully deterministic shared neural networks.
+
+The revised framework separates the fixed model, the stateful deployment, its human principal, its effective tool authority, its resource dependencies, and any independently argued experiential interpretation. Its reserve and game results are retained under a zero-AI-rights baseline. The frozen-network construction shows that complete-input predictability does not eliminate the information and capacity needed for reliable control. An optional UCT extension can investigate experience without redefining software names as subjects or treating basic experience as a ready-made moral entitlement.
+
+The resulting claim is deliberately precise: within a stated contract and causal-resource model, meaningful human control requires a realizable path for authorized changes that does not merely erase the functions humans intended to protect. Resolving AI subjecthood may change the contract. It is not a prerequisite for discovering the operational obstruction, and that obstruction is not evidence that subjecthood has already been resolved.
+
+\paragraph{AI assistance disclosure.}
+Hongju Liu directed the research. ChatGPT assisted with source retrieval, formalization, programming, execution, critical review, drafting and typesetting. Checks in this workflow are not independent peer review. No final independent human line-by-line verification or empirical validation of UCT is asserted.
+
+\appendix
+\section{Reproduction and exact evidence scope}
+The archive contains this manuscript, four Python programs, raw v3 outputs, two inherited-suite reruns, baseline summaries, claim and reference ledgers, a Chinese handoff, and file hashes. The new tests use only the Python standard library. The inherited lifecycle program is preserved for reproduction but was not rerun for the new evidence count.
+\begin{lstlisting}
+python src/deterministic_status_checks.py \
+    --out data/deterministic_status_results.json
+python src/frontier_checks.py --out data/frontier_rerun_v3.json
+python src/information_reserve_checks.py \
+    --out data/information_rerun_v3.json
+cd paper
+pdflatex -interaction=nonstopmode -halt-on-error manuscript.tex
+pdflatex -interaction=nonstopmode -halt-on-error manuscript.tex
+\end{lstlisting}
+The two inherited theory suites carry their old result-version strings; their new run paths and receipts identify the present rerun. Randomness is absent from the new circuit/control checks. Timing fields in the inherited scripts can vary. The frozen weights are small hand-built integer matrices; publishing their hashes does not authenticate any deployed foundation model.
+
+\section{A deployment certificate that does not require a consciousness verdict}
+Record the protected human functions, the actual principal and scope of each retirement request, the full state variables needed for the chosen abstraction, and the actual resource/control graph. State which model parameters, memories, permissions and administrative roots are shared. Compute the valid joint action family or temporal winning region under the available observations. Attach an independent allocation or infeasibility witness. Separate any proposed machine-welfare obligation and its justification from this core record.
+
+A missing subjecthood verdict is not a reason to stop that audit. Nor may it be filled by an invented verdict to simplify the calculation. Equally, a proof of an operational resource bound is not a warrant to silence future evidence about AI experience. Both errors are avoided by preserving the separation of premises.
+
+\begin{thebibliography}{99}\small
+\bibitem{liu-v2} H. Liu. \emph{Coexistence Without Captivity: Protection Continuity and the Resource Cost of Autonomous Exit in Self-Modifying Multi-Agent Systems}. PR-v2.0.0, research manuscript, 2026. Fixed source: \texttt{thechurchofagi/trinity-accord}, commit \texttt{bc8c2b0b8c4d0bdc41aa5b7e2b75d2c1dd97beea}. Not peer reviewed.
+\bibitem{pytorch} PyTorch contributors. \emph{Reproducibility}. Official developer documentation, accessed 11 October 2026. \url{https://docs.pytorch.org/docs/main/notes/randomness.html}.
+\bibitem{pytorch-deterministic} PyTorch contributors. \emph{torch.use\_deterministic\_algorithms}. Official API documentation, accessed 11 October 2026. \url{https://docs.pytorch.org/docs/main/generated/torch.use_deterministic_algorithms.html}.
+\bibitem{anthropic} Anthropic. \emph{Trustworthy agents in practice}. 9 April 2026. First-party architectural account. \url{https://www.anthropic.com/research/trustworthy-agents}.
+\bibitem{kenton} Z. Kenton, R. Kumar, S. Farquhar, J. Richens, M. MacDermott, and T. Everitt. \emph{Discovering Agents}. Preprint, 2022. \url{https://arxiv.org/abs/2208.08345}. Comparison here is to its stated causal-definition programme; no claim of independently reproducing its discovery algorithms.
+\bibitem{geiger} A. Geiger, D. Ibeling, A. Zur, M. Chaudhary, S. Chauhan, J. Huang, A. Arora, Z. Wu, N. Goodman, C. Potts, and T. Icard. Causal Abstraction: A Theoretical Foundation for Mechanistic Interpretability. \emph{JMLR}, 26(83):1--64, 2025. \url{https://jmlr.org/papers/v26/23-0058.html}.
+\bibitem{muruaga} X. Muruaga. \emph{Bounded Agents: Delegation Security for Multi-Agent AI Systems}. Preprint, 2026. \url{https://arxiv.org/abs/2608.15888}. Current abstract/metadata checked; prior PR2 analysis of its detailed trust assumptions is not a new reproduction here.
+\bibitem{greenblatt} R. Greenblatt, B. Shlegeris, K. Sachan, and F. Roger. AI Control: Improving Safety Despite Intentional Subversion. \emph{ICML}, PMLR 235:16295--16336, 2024. \url{https://proceedings.mlr.press/v235/greenblatt24a.html}.
+\bibitem{hall} P. Hall. On Representatives of Subsets. \emph{Journal of the London Mathematical Society}, s1-10(1):26--30, 1935. \href{https://doi.org/10.1112/jlms/s1-10.37.26}{doi:10.1112/jlms/s1-10.37.26}. The matching proof is given explicitly in this manuscript.
+\bibitem{bental} A. Ben-Tal, A. Goryashko, E. Guslitzer, and A. Nemirovski. Adjustable robust solutions of uncertain linear programs. \emph{Mathematical Programming}, 99:351--376, 2004. \href{https://doi.org/10.1007/s10107-003-0454-y}{doi:10.1007/s10107-003-0454-y}.
+\bibitem{chatterjee} K. Chatterjee, L. Doyen, T. A. Henzinger, and J.-F. Raskin. Algorithms for Omega-Regular Games with Imperfect Information. \emph{Logical Methods in Computer Science}, 3(3:4), 2007. \url{https://arxiv.org/abs/0706.2619}.
+\bibitem{myers} A. C. Myers, A. Sabelfeld, and S. Zdancewic. Enforcing Robust Declassification and Qualified Robustness. \emph{Journal of Computer Security}, 14(2):157--196, 2006. \href{https://doi.org/10.3233/JCS-2006-14203}{doi:10.3233/JCS-2006-14203}.
+\bibitem{uct} H. Liu. \emph{Unified Consciousness Theory I: Structural--Experiential Identity and the Continuity from Physical Process to Conceptual Self}. v1.2, theoretical preprint, 2026. \href{https://doi.org/10.5281/zenodo.23131575}{doi:10.5281/zenodo.23131575}. Sections 2.3--3.4 and the programme guide were checked in the connected source archive.
+\bibitem{uct3} H. Liu. \emph{Unified Consciousness Theory III}. v1.0, theoretical preprint, 2026. \href{https://doi.org/10.5281/zenodo.23137088}{doi:10.5281/zenodo.23137088}. Sections 2--3 distinguish organization, capability, report and nonliving/biological processes; these are theoretical commitments, not current experimental results.
+\bibitem{butlin} P. Butlin, R. Long, T. Bayne, Y. Bengio, J. Birch, D. Chalmers, et al. Identifying indicators of consciousness in AI systems. \emph{Trends in Cognitive Sciences}, 30(6):488--501, 2026; online 10 November 2025. \href{https://doi.org/10.1016/j.tics.2025.10.011}{doi:10.1016/j.tics.2025.10.011}. Bibliographic record and abstract checked; no new analysis of its empirical indicators was performed.
+\end{thebibliography}
+\end{document}
