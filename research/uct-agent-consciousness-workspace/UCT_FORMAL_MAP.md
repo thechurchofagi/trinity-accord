@@ -2,7 +2,11 @@
 
 [总览](UCT_FORMAL_MAP.md) · [全部候选](PENDING_RESEARCH.md) · [当前状态](CURRENT_STATE.json) · [统一登记](UNIFIED_RESEARCH_INDEX.json) · [审查](UCT_FORMAL_AUDIT.md)
 
-整合版本 **UCT-INTEGRATION-v1.0.0**。正式科学图 **UCT-MAP-v1.1.2**；最新科学研究 **A3V20261010**；最新停用应用 **A4P20261011**；发表覆盖 **UCT-PUB-v1.0.33**。
+整合版本 **UCT-INTEGRATION-v1.0.0**。正式科学图 **UCT-MAP-v1.1.2**；最新科学研究 **A3V20261010**；最新停用应用 **A4Q20261011**；发表覆盖 **UCT-PUB-v1.0.33**。
+
+### A4Q 停用应用边界
+
+A4Q 不新增正式对象。它把公开UR接口分成内部状态消费者`rho_int`、外部命令`rho_cmd`和RTDE状态—外部消费者—反向命令复合路线`rho_ext`。公开字段方向没有暴露`rho_int`的原生锚点替换端口；切断ROS命令控制器只切`rho_cmd`。`rho_ext`可在自定义消费者参数上前瞻切断/救援，但独立外部几何、完整控制器闭合、当前事件来源、包跳过时序及实际同实例均未安装。因此A4P八项前提没有一项在实际token上获准，状态为`NOT_INSTALLED`而非路线/体验缺失。正式增量 **0/0/0**；C1/U1、R157、R159与有效R173不变。
 
 ### A4P 停用应用边界
 

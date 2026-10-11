@@ -1,0 +1,24 @@
+{
+  "schema": "a4q-formal-audit-summary/1",
+  "graph_version": "UCT-INTEGRATION-v1.0.0",
+  "completed_counts": {"nodes": 913, "rules": 424, "context_links": 261},
+  "pending_disabled_objects": 727,
+  "suspended_historical_rules": 10,
+  "checks": {
+    "all_of_interpreted_as_and": true,
+    "active_dependency_graph_acyclic": true,
+    "unresolved_deductive_references": 0,
+    "all_pending_disabled": true,
+    "a4q_adds_no_completed_graph_object": true,
+    "native_command_and_external_composite_route_grains_separated": true,
+    "public_documentation_not_promoted_to_actuality": true,
+    "h_cf_remains_open": true,
+    "c1_and_u1_status_unchanged": true,
+    "full_semantic_reproof": false
+  },
+  "schema_debt_retained": {
+    "rules_without_local_and_annotation": 81,
+    "context_links_without_two_completed_node_endpoints": 22
+  },
+  "limit": "Restored-map structural check plus bounded C1/R157/R159/R173/A4D-A4P review; SCU-AUDIT-DEPTH remains AUDIT_INCOMPLETE."
+}

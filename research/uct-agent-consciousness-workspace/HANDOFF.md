@@ -2,15 +2,17 @@
 
 [总览](UCT_FORMAL_MAP.md) · [全部候选](PENDING_RESEARCH.md) · [当前状态](CURRENT_STATE.json) · [统一登记](UNIFIED_RESEARCH_INDEX.json) · [审查](UCT_FORMAL_AUDIT.md)
 
-正式科学接续仍为 **A3V20261010**；最新停用应用为 **A4P20261011**。
+正式科学接续仍为 **A3V20261010**；最新停用应用为 **A4Q20261011**。
 
-[A4P 中文交接](records/A4P20261011_Anchor_Route_Intervention_Contract/HANDOFF_ZH.md) · [英文研究](records/A4P20261011_Anchor_Route_Intervention_Contract/RESEARCH_NOTE.md) · [干预合同](records/A4P20261011_Anchor_Route_Intervention_Contract/INTERVENTION_CONTRACT.md) · [形式审查](records/A4P20261011_Anchor_Route_Intervention_Contract/FORMAL_AUDIT.md)
+[A4Q 中文交接](records/A4Q20261011_Public_Interface_Installability_Audit/HANDOFF_ZH.md) · [英文研究](records/A4Q20261011_Public_Interface_Installability_Audit/RESEARCH_NOTE.md) · [公开接口合同](records/A4Q20261011_Public_Interface_Installability_Audit/PUBLIC_INTERFACE_CONTRACT.md) · [端口时序表](records/A4Q20261011_Public_Interface_Installability_Audit/PORT_TIMING_TABLE.csv) · [形式审查](records/A4Q20261011_Public_Interface_Installability_Audit/FORMAL_AUDIT.md)
 
-当前结果：四条件锚点—路线设计在32个世界中产生7个目标签名世界，包含路线使用0/1；干预感知隐藏控制器能复制原生—切断—救援模式。只有控制器闭合且切断/救援忠实时，目标纤维才唯一指向路线使用。故得到的是有明确失败条件的实验合同，不是实际 `EnactedFrameBind` 或 `H_cf`。
+当前结果：Universal Robots 的公开 RTDE/ROS 2/Client Library 边界把实际关节/TCP状态作为输出、运动目标作为另一条命令输入；停用ROS命令控制器切的是外部命令路线，不能冒充内部锚点消费者切断。若自定义外部控制器读取`actual_q`再回送命令，可形成可同参数切断/救援的复合路线，但公开文档仍不能联合闭合外部几何、控制器清单、当前事件来源与实际同实例八项前提。故状态是`NOT_INSTALLED`，不是路线不存在或体验否定。
 
-下一具体问题：选择一个公开、可核查的具身装置或人体工具接口，把外部几何固定、承载者锚扰动、路线输入切断/同接口救援与备用控制器清单落实到一张实际端口—时序表。若无法保持同一事件和路线粒度，报告不可安装并停止。
+下一具体问题：寻找真正公开的传感器—消费者内部拼接端口，或只实现一个有外部跟踪、同参数切断/救援、后仲裁事件见证及完整控制器清单的`rho_ext`复合路线。若路线粒度、同事件时序或独立几何不能固定，停止，不进入`H_cf`。
 
-[上一轮 A4O 交接](records/A4O20261011_Enacted_Frame_Paradigm_Triage/HANDOFF_ZH.md)
+[上一轮 A4P 交接](records/A4P20261011_Anchor_Route_Intervention_Contract/HANDOFF_ZH.md)
+
+[A4O 交接](records/A4O20261011_Enacted_Frame_Paradigm_Triage/HANDOFF_ZH.md)
 
 [既有 A3V 科学交接](records/A3V20261010_Concurrent_Liveness_and_Familiarity/HANDOFF_ZH.md) · [地图整理交接](records/NAV20261010_Map_Integration/HANDOFF_ZH.md)
 

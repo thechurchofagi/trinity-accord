@@ -1,0 +1,12 @@
+{
+  "schema": "uct-map-extension/1.0",
+  "record": "A4Q20261011",
+  "status": "DISABLED_APPLICATION_NO_CANONICAL_DELTA",
+  "nodes_added": 0,
+  "rules_added": 0,
+  "context_links_added": 0,
+  "canonical_counts_after": {"nodes": 913, "active_rules": 424, "context_links": 261},
+  "pending_objects_after": 727,
+  "suspended_historical_rules_after": 10,
+  "reason": "Public documentation does not install one actual bearer/event/route satisfying all eight A4P premises, a complete K grounding, or an independent H_cf bridge."
+}

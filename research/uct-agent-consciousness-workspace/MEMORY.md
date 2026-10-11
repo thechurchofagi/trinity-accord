@@ -6,6 +6,10 @@ The full prior memory is preserved at [historical memory](integration/UCT-INTEGR
 
 Scientific continuation and next question live in CURRENT_STATE.json. All pending source documents, effective corrections and family membership live in UNIFIED_RESEARCH_INDEX.json; history never silently becomes an established premise. Publication, storage, conditional validity, actual support and phenomenal support remain separate states.
 
+## 最新应用 A4Q20261011
+
+A4Q 把 A4P 合同落实到 Universal Robots 公开 RTDE/ROS 2/Client Library 边界。`actual_q`/TCP是控制器输出，反向接口输入运动目标；停止ROS命令控制器只切外部命令路线，不能冒充内部锚点消费者切断。自定义外部消费者可形成`actual_q -> C_ext -> command`复合路线，并在同一参数上前瞻切断/救援，但公开文档没有闭合独立外部几何、控制器清单、后仲裁事件来源、包丢失时序和实际同实例八项前提。结论为`NOT_INSTALLED`，不是路线不存在或体验否定；正式图0/0/0，全部OPEN保留。[交接](records/A4Q20261011_Public_Interface_Installability_Audit/HANDOFF_ZH.md)。
+
 ## 最新应用 A4P20261011
 
 A4P 把 A4O 的缺口转成同事件锚点—路线干预合同：固定外部目标／工具状态，比较无锚扰动、锚扰动原生、路线锚输入切断和同接口救援。32世界中目标签名的无限制纤维含7个世界且同时含路线使用0/1；干预感知隐藏控制器可复制完整签名。只有控制器闭合且切断／救援忠实时，闭合目标纤维才唯一指向路线使用。该结果是停用的有限条件证书，不是实际安装或`H_cf`证据；正式图0/0/0，全部OPEN保留。[交接](records/A4P20261011_Anchor_Route_Intervention_Contract/HANDOFF_ZH.md)。

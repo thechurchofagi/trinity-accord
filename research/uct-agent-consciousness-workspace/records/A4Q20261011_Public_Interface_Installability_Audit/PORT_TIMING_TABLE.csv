@@ -1,0 +1,9 @@
+premise,stock_internal_route,external_composite_route,document_evidence,current_status
+P_same,"native consumer and anchor port not named","composite bearer and C_ext can be declared but are not installed","RTDE and ReverseInterface expose different directions","NOT_DISCHARGED"
+P_ext,"internal TCP estimate is not independent","independent external tracker required","TCP broadcaster uses internal kinematics/sensors/calibration","EXTERNAL_EXTENSION_REQUIRED"
+P_anchor,"actual_q observable but not a native write port","physical perturbation plus independent sign/time check possible","actual_q is RTDE output","PROSPECTIVE_NOT_INSTALLED"
+P_block,"ROS controller stop cuts command route","cut actual_q after receipt and before C_ext consumption","controller claiming semantics","CUSTOM_INSTRUMENTATION_REQUIRED"
+P_rescue,"motion command is not native anchor substitution","substitute at the same C_ext argument while native feed remains cut","ReverseInterface command modes are downstream","CUSTOM_INSTRUMENTATION_REQUIRED"
+P_closed,"command-resource exclusivity is insufficient","internal and external writers/controllers remain to inventory","safety scaling/planners/URScript paths documented","NOT_DISCHARGED"
+P_event,"no native source-specific post-arbitration witness documented","fresh challenge and post-consumer/pre-plant witness required","timestamp/control_step/status and timeouts are only partial","NOT_DISCHARGED"
+P_readout,"joint/TCP outputs exist but may skip","freeze frame/tolerance/skip policy and add independent readout","RTDE latest-value behavior","CONDITIONAL_SUPPORT"

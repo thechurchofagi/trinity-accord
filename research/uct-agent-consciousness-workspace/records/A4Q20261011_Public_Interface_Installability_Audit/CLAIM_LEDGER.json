@@ -1,0 +1,59 @@
+{
+  "schema": "uct-claim-ledger/1.0",
+  "record": "A4Q20261011",
+  "result_version": "A4Q-PIIA-v0.1.0",
+  "claims": [
+    {
+      "id": "A4Q-C01",
+      "type": "document_grounded_port_direction_result",
+      "statement": "Within the inspected public UR interface, actual joint/TCP state is documented as controller output and no stock substitution input for actual_q at the native internal consumer is documented.",
+      "domain": "official public RTDE, Client Library and ROS 2 driver documentation retrieved 2026-10-11",
+      "all_of": ["published field directions", "published command modes", "fixed public-interface scope"],
+      "proof_or_source": ["SOURCE_SCOPE.md", "PUBLIC_INTERFACE_CONTRACT.md §2"],
+      "counterexample_or_limit": "A vendor-only, research or later public pre-estimator splice would escape or refute this scoped result; undocumented absence is not asserted.",
+      "status": "PENDING_CHECKPOINT_DISABLED"
+    },
+    {
+      "id": "A4Q-C02",
+      "type": "route_grain_nonidentification",
+      "statement": "Cutting a ROS command controller cuts rho_cmd and does not discharge A4P P_block for the distinct native actual_q-to-internal-consumer route rho_int.",
+      "domain": "the route grains declared in A4Q",
+      "all_of": ["rho_int distinct from rho_cmd", "cut localized to command resource", "P_same forbids post-outcome route relabeling"],
+      "proof_or_source": ["PUBLIC_INTERFACE_CONTRACT.md §4", "A4P INTERVENTION_CONTRACT.md §5"],
+      "counterexample_or_limit": "If the selected target route were explicitly rho_cmd, the cut could test command contribution, but not anchor consumption merely from that fact.",
+      "status": "PENDING_CHECKPOINT_DISABLED"
+    },
+    {
+      "id": "A4Q-C03",
+      "type": "prospective_composite_route_schema",
+      "statement": "A custom external controller that consumes RTDE actual_q and returns a reverse-interface command can define rho_ext, at whose actual_q argument same-consumer block and rescue are prospectively meaningful.",
+      "domain": "a future pinned composite robot-controller-PC bearer",
+      "all_of": ["actual RTDE state receipt", "declared C_ext consumer", "same-argument block/rescue", "returned command path", "all A4P premises"],
+      "proof_or_source": ["PUBLIC_INTERFACE_CONTRACT.md §§1,4-5"],
+      "counterexample_or_limit": "No custom consumer, hardware, external tracker or trial is installed here; success on rho_ext would not establish rho_int.",
+      "status": "OPEN_PROSPECTIVE_APPLICATION"
+    },
+    {
+      "id": "A4Q-C04",
+      "type": "controller_closure_separation",
+      "statement": "Single ROS command-interface ownership is weaker than A4P P_closed because it does not by itself inventory internal safety/scaling, URScript/native planning, external process, human/manual and physical disturbance paths.",
+      "domain": "the declared composite UR device boundary",
+      "all_of": ["ROS resource arbitration scope", "A4D-A4G complete-writer/control requirements", "listed non-ROS causal paths"],
+      "proof_or_source": ["RESEARCH_NOTE.md §3", "A4D-A4G protocols", "SOURCE_SCOPE.md"],
+      "counterexample_or_limit": "A complete pinned inventory plus negative controls could discharge P_closed for one event; no universal impossibility is claimed.",
+      "status": "PENDING_CHECKPOINT_DISABLED"
+    },
+    {
+      "id": "A4Q-C05",
+      "type": "scoped_noninstallation",
+      "statement": "On the document-only evidence in A4Q, no actual token jointly discharges the eight A4P premises for rho_int or rho_ext; the correct status is NOT_INSTALLED.",
+      "domain": "A4Q evidence package only",
+      "all_of": ["eight-premise audit", "no hardware trial", "no hidden premise import"],
+      "proof_or_source": ["INTERFACE_AUDIT.json", "EXACT_RESULTS.json", "PORT_TIMING_TABLE.csv"],
+      "counterexample_or_limit": "A future actual rho_ext package meeting every premise would overturn present noninstallation for that route only.",
+      "status": "PENDING_CHECKPOINT_DISABLED"
+    }
+  ],
+  "formal_graph_delta": {"nodes": 0, "rules": 0, "context_links": 0},
+  "phenomenal_assignments": 0
+}

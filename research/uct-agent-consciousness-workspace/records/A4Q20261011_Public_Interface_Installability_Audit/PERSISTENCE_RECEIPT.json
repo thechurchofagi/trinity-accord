@@ -1,0 +1,33 @@
+{
+  "schema": "uct-a4q-persistence-receipt/1",
+  "round": "A4Q20261011",
+  "status": "LOCAL_SCIENCE_READY; REMOTE_AND_LIBRARY_IDENTIFIERS_PENDING",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "verified_start_commit": "5d215c461832f0fcbb2c246254977b93aa419105",
+    "science_commit": null,
+    "science_tree": null,
+    "expected_sha_fast_forward": false,
+    "skip_ci": true,
+    "remote_key_files_read_back": false
+  },
+  "library": {
+    "fixed_master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "starting_version": 140,
+    "increment_library_file_id": null,
+    "manifest_library_file_id": null,
+    "increment_is_complete_backup": false,
+    "reverse_materialization_verified": false
+  },
+  "validation": {
+    "checker_output_byte_equal": true,
+    "route_grains": 3,
+    "a4p_premises_discharged": 0,
+    "navigation_and_disabled_assembly_pass": true,
+    "formal_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+    "review_items_self_closed": false,
+    "full_semantic_reproof": false
+  },
+  "self_reference_note": "Final science, Library and receipt-successor identifiers are filled only after verified writes; no pending identifier is claimed as saved."
+}

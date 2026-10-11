@@ -1,0 +1,30 @@
+{
+  "schema": "uct-a4q-public-interface-audit/1.0",
+  "record": "A4Q20261011",
+  "interface": "Universal Robots e-Series public RTDE / ROS 2 driver / UR Client Library boundary",
+  "evidence_date": "2026-10-11",
+  "actual_hardware_trial": false,
+  "routes": {
+    "rho_int": "internal sensed or calibrated state to native internal consumer",
+    "rho_cmd": "external motion target to robot controller",
+    "rho_ext": "RTDE actual_q to custom external consumer to reverse command path"
+  },
+  "premises": [
+    {"id":"P_same","discharged":false,"status":"DEFINED_NOT_INSTALLED"},
+    {"id":"P_ext","discharged":false,"status":"EXTERNAL_MEASUREMENT_REQUIRED"},
+    {"id":"P_anchor","discharged":false,"status":"PHYSICAL_INTERVENTION_REQUIRED"},
+    {"id":"P_block","discharged":false,"status":"CUSTOM_CLIENT_REQUIRED"},
+    {"id":"P_rescue","discharged":false,"status":"CUSTOM_CLIENT_REQUIRED"},
+    {"id":"P_closed","discharged":false,"status":"PUBLIC_DOCUMENTATION_INSUFFICIENT"},
+    {"id":"P_event","discharged":false,"status":"POST_ARBITRATION_WITNESS_REQUIRED"},
+    {"id":"P_readout","discharged":false,"status":"CONDITIONAL_TELEMETRY_SUPPORT"}
+  ],
+  "route_results": {
+    "rho_int": "NOT_INSTALLABLE_THROUGH_INSPECTED_STOCK_PUBLIC_PORTS",
+    "rho_cmd": "WRONG_ROUTE_FOR_ANCHOR_CONSUMPTION_CLAIM",
+    "rho_ext": "PROSPECTIVE_INSTALLABLE_SCHEMA_NOT_ACTUALLY_INSTALLED"
+  },
+  "all_eight_premises_discharged": false,
+  "formal_map_promotion": false,
+  "phenomenal_assignment": false
+}

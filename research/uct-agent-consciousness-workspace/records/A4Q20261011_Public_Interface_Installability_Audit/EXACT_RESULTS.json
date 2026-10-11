@@ -1,0 +1,14 @@
+{
+  "checks": {
+    "exact_eight_premises": true,
+    "joint_installation_false": true,
+    "no_document_only_discharge": true,
+    "no_map_promotion": true,
+    "no_phenomenal_assignment": true,
+    "route_grains_distinct": true
+  },
+  "input": "INTERFACE_AUDIT.json",
+  "interpretation": "The public-document audit discharges no A4P premise on an actual token; it separates a stock internal-route failure from a prospective external composite route.",
+  "pass": true,
+  "schema": "uct-a4q-interface-check/1.0"
+}

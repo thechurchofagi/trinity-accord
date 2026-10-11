@@ -1148,3 +1148,14 @@ A4G应用保持停用，正式图增量0/0/0。C1/U1未改；硬件来源坐标�
 - `SCU-AUDIT-DEPTH`: **AUDIT_INCOMPLETE**. The effective inventory and affected C1/R157/R159/R173/A4D–A4O neighborhood were checked; all historical proofs were not reconstructed.
 - Substantive result: a `0,1,0,1` anchor/native/block/rescue signature is non-identifying in the open controller model but conditionally identifies route contribution when the eight same-event closure and fidelity premises jointly hold. This remains a disabled design, not physical or phenomenal evidence.
 - Evidence: `records/A4P20261011_Anchor_Route_Intervention_Contract/REVIEW_RESPONSE.md`, `INTERVENTION_CONTRACT.md`, `EXACT_RESULTS.json`, `FORMAL_AUDIT.md`, `GAP_LEDGER.md`.
+
+## A4Q20261011 research response (does not close supervision items)
+
+- `QC-20261008-10`: **ACKNOWLEDGED/OPEN**. The public-interface audit stops at organizational installability; `H_cf` identity, direction and measurement remain uncalibrated.
+- `IA-QC11`: **OPEN**. Robot, controller, safety system, external PC, custom consumer, external tracker, anchor, event and route are typed, but no actual token jointly installs them.
+- `QC-20261008-12`: **OPEN**. Command-route cut/rescue does not identify native internal anchor consumption; the prospective external composite route still requires all eight A4P premises.
+- `QC-20261008-13`: **OPEN**. Public field directions and nominal timestamps do not bind an actual same-instance consumer port or issue–consume–arbitrate–plant chronology; packet skipping is preserved as a counterexample.
+- `SCU-OPEN-R191-NORMALIZATION`: **OPEN**. No R191 normalization is attempted or used.
+- `SCU-AUDIT-DEPTH`: **AUDIT_INCOMPLETE**. The 913/424/261 assembly was structurally checked and the C1/R157/R159/R173/A4D–A4P neighborhood reviewed; all historical proofs were not reconstructed.
+- Substantive result: the inspected stock public ports do not expose a native `actual_q` substitution splice. A custom `actual_q -> C_ext -> command` route is prospectively instrumentable but remains uninstalled because independent geometry, controller closure, current-event/source evidence and actual binding are absent. No item is self-closed.
+- Evidence: `records/A4Q20261011_Public_Interface_Installability_Audit/REVIEW_RESPONSE.md`, `PUBLIC_INTERFACE_CONTRACT.md`, `PORT_TIMING_TABLE.csv`, `INTERFACE_AUDIT.json`, `FORMAL_AUDIT.md`, `GAP_LEDGER.md`.

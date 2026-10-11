@@ -1,0 +1,35 @@
+{
+  "schema": "a4q-validation/1",
+  "round": "A4Q20261011",
+  "status": "PASS_ARTIFACT_AND_STRUCTURAL_CHECKS_WITH_DECLARED_SEMANTIC_LIMITS",
+  "checks": {
+    "checker_output_byte_equals_exact_results": true,
+    "a4p_premises_listed": 8,
+    "a4p_premises_discharged_on_actual_token": 0,
+    "route_grains_distinguished": 3,
+    "native_internal_route_public_splice_documented": false,
+    "external_composite_route_prospective_only": true,
+    "phenomenal_assignments": 0,
+    "physical_installations": 0,
+    "completed_nodes": 913,
+    "completed_rules": 424,
+    "completed_context_links": 261,
+    "pending_objects_disabled": 727,
+    "suspended_historical_rules": 10,
+    "unresolved_deductive_references": 0,
+    "active_dependency_cycles": 0,
+    "all_of_interpreted_as_and": true,
+    "navigation_and_disabled_assembly_pass": true,
+    "latest_followup_pointer_match": true,
+    "scientific_promotion": false,
+    "full_semantic_reproof": false
+  },
+  "hashes": {
+    "checker_sha256": "ee252dbdedb09aa29e2205a136b998e515b505ca6bdda2c64119b50397dc4b6f",
+    "checker_stdout_sha256": "dce507b54912ec5ddc5b3e777da2a845b8e2a9ba65207e2df67f7689331292a5",
+    "exact_results_sha256": "dce507b54912ec5ddc5b3e777da2a845b8e2a9ba65207e2df67f7689331292a5",
+    "review_ledger_sha256": "8577ad7049fea0c246ffe98c77ce6cb99d27da2602e8f56705828f1a90180841",
+    "unified_map_gzip_sha256": "b37711fb7dbaca9b728feb38e7cb14abf4f63a9571035b40c048a97472df35be"
+  },
+  "limit": "A public-document interface audit and prospective composite-route recipe only; not evidence of an actual robot event, native internal anchor use, complete controller closure, complete K, C1, H_cf, report validity or a global semantic proof."
+}
