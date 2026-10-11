@@ -9,3 +9,7 @@
 7. Recorded the failed stronger claim, gap impact, review responses, zero-delta map application, source scope and publication HOLD.
 8. Performed selection, result and pre-save direction checks. C1/U1 remain unchanged; no basal threshold or assistant-consciousness verdict.
 9. Limitation: selected exec-server websocket was unavailable. Local repository scripts, all-layer validator, ZIP creation, SHA256 packaging and Library replacement/upload were not run. GitHub persistence proceeded through Git data APIs with an expected-SHA lease.
+
+## Persistence closeout
+
+GitHub science commit `d1afebca8a5acec352d34e338606f084333e05ed` was read back as identical to the target branch; key blobs and 32/4/1 assertions were verified. Library update and local validation/package steps were not run because the selected exec environment failed to connect. No dual-persistence claim is made.

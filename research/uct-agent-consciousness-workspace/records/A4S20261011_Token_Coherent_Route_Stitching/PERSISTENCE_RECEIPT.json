@@ -1,0 +1,55 @@
+{
+  "schema": "uct-persistence-receipt/1.0",
+  "round": "A4S20261011",
+  "version": "A4S-TCRS-v0.1.0",
+  "github": {
+    "status": "VERIFIED",
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "round_record_checkpoint": "73fdffbcd4c281ead157e801fcc743a1d51a1f09",
+    "science_commit": "d1afebca8a5acec352d34e338606f084333e05ed",
+    "science_tree": "e4d03704c34218a30830945e4688b5f0bf66f7a1",
+    "expected_parent": "73fdffbcd4c281ead157e801fcc743a1d51a1f09",
+    "readback": {
+      "branch_identical_to_science_commit": true,
+      "key_blobs": {
+        "token_contract": "4c10cd5506be0d9137d1d080a15b694b4a84357d",
+        "exact_results": "a56ce13e27ca4596deb50d73ee283ae5901d3424",
+        "formal_audit": "bf866269410b624c7a6bb899eb43b2a9cdd8efe9",
+        "handoff_before_receipt_append": "feb8adde2a38552c68a8d9c027bdb304adf6442b",
+        "current_state": "375c4d745b24e0b4f997e8099b41469b8d8c5add"
+      },
+      "exact_assertions": {
+        "worlds_32": true,
+        "local_three_4": true,
+        "coherent_1": true
+      },
+      "current_latest": "A4S20261011"
+    }
+  },
+  "library": {
+    "status": "NOT_UPDATED_TRANSIENT_EXEC_ENVIRONMENT_FAILURE",
+    "fixed_master_library_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "fixed_master_last_verified_version": 144,
+    "fixed_master_file_id": "file_00000000b3ac81f79850933fbaa45987",
+    "a4s_increment_package": null,
+    "manifest": null,
+    "sha256": null,
+    "statement": "No A4S Library backup is claimed. The existing R156 full working-set snapshot remains a historical baseline, not a backup of A4S."
+  },
+  "local_execution": {
+    "selected_exec_environment": "FAILED_TO_CONNECT_WEBSOCKET",
+    "package_created": false,
+    "sha256_computed": false,
+    "repo_validator_run": false,
+    "v8_tool_orchestration_enumeration_run": true
+  },
+  "recovery": [
+    "Verify the branch head containing this receipt and read A4S HANDOFF_ZH.md.",
+    "Materialize the GitHub A4S delta in a working exec environment.",
+    "Update the fixed master Library file from verified version 144 using expected-current-version semantics.",
+    "Create an explicitly labelled A4S incremental ZIP relative to the R156 full working-set baseline, plus manifest and SHA256.",
+    "Read back Library identities/versions and run the repository all-layer validators."
+  ],
+  "truth_boundary": "GitHub persistence is verified. Dual persistence is not complete."
+}

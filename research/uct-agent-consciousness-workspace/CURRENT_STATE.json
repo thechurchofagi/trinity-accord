@@ -1393,7 +1393,16 @@
   "next_priority_before_A4S": "Instantiate one actual same-event three-link trial: independently perturb and close bypasses for physical-anchor sampling, current-consumer use and post-arbitration plant write while holding bearer, event, signature and route fixed. Stop before H_cf if any link or closure cannot be bound to that same instance.",
   "next_priority_after_A4S": "A4S next: specify and attack a physically testable same-occurrence/lineage criterion at sampler→consumer and consumer→writer boundaries in one actual bearer, without treating value equality, software identifiers, or abstract port matching as physical token identity; retain H_cf calibration as OPEN.",
   "latest_activity_persistence_after_A4S_science": {
-    "github": "PENDING_SCIENCE_COMMIT_IN_THIS_TREE",
-    "library": "PENDING_EXEC_SERVER_UNAVAILABLE"
+    "github": {
+      "status": "VERIFIED",
+      "science_commit": "d1afebca8a5acec352d34e338606f084333e05ed",
+      "science_tree": "e4d03704c34218a30830945e4688b5f0bf66f7a1",
+      "readback": "IDENTICAL"
+    },
+    "library": {
+      "status": "PENDING_TRANSIENT_EXEC_ENVIRONMENT_FAILURE",
+      "last_verified_master_version": 144
+    },
+    "receipt": "records/A4S20261011_Token_Coherent_Route_Stitching/PERSISTENCE_RECEIPT.json"
   }
 }
