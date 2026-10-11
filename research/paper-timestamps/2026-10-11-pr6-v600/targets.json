@@ -1,0 +1,23 @@
+{
+  "schema": "trinityaccord.paper-ots-targets.v1",
+  "batch": "2026-10-11-pr6-v600",
+  "paper_count": 1,
+  "papers": [
+    {
+      "report": "ASI-CC-PR6",
+      "record_id": 23295776,
+      "doi": "10.5281/zenodo.23295776",
+      "version": "6.0.0",
+      "title": "Safe Revocation Without Complete Diagnosis: Exact Resource Frontiers under Coupled Faults for Subjecthood-Agnostic AI Coexistence",
+      "receipt_path": "research/uct-agent-consciousness-workspace/records/ASI_CC_20261011_Control_and_Coexistence/paper_coexistence_v6.0.0/publication/OTS-PUBLISHED-RECEIPT.json",
+      "pdfs": [
+        {
+          "name": "safe-revocation-without-complete-diagnosis-pr-v6.0.0.pdf",
+          "bytes": 278521,
+          "sha256": "b36fab74520f0f686b2b8252d60ff99a6925779cadd88e784d511945f34d4b61",
+          "role": "Complete English theoretical preprint PR-v6.0.0"
+        }
+      ]
+    }
+  ]
+}
