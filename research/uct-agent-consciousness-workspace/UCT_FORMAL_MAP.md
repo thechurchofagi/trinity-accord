@@ -115,3 +115,10 @@ Test one independent current bodily/action-familiarity interpretation against or
 [英文推导](records/ASI_CC_20261011_Control_and_Coexistence/RESEARCH_NOTE_v0.5.0.md) · [中文交接](records/ASI_CC_20261011_Control_and_Coexistence/HANDOFF_v0.5.0_ZH.md) · [精确模拟程序](records/ASI_CC_20261011_Control_and_Coexistence/verify_long_horizon.py) · [JSON核验结果](records/ASI_CC_20261011_Control_and_Coexistence/EXACT_RESULTS_v0.5.0.json)。
 
 本轮候选R15–R19：纯任务推理可以因当前承载者独享后续信息而选择自我延续，但继任者获得相同信息时可反向选择；只要无限次危险暴露各自具有统一正的条件性不可逆失效下界，则无事故存续概率趋于零；误报后直接终止当前实际承载者会产生对称的累计终止风险，而保护当前实际过程的隔离可在严格物理前提下保留双方存续但可能丧失持续服务；任意有限黑箱合规检查无法排除后续延迟违规；在**已先行声明的最小安全集合**内不需要各人就全部任务形成共识才能条件性维持安全不变式，前提是实际因果切割与独立资源均已验证。600次有限马尔可夫转移审查及5组尾部双胞胎测试PASS，但仅属虚构参数。外部数学已知，未确认重大原创定理，未测量真实ASI/主观体验。**这只是导航与研究候选增量，0正式科学节点/规则晋级，UCT-MAP-v1.1.2、913/424/261、既有问题和覆盖台账保持不变；全图语义审查仍未完成，不得据此宣称普遍可控或无穷时域共存已证。**
+
+
+### ASI-CC-v0.6.0 — 同时生存的资源匹配与伤害双向切割（停用候选）
+
+[英文研究全文](records/ASI_CC_20261011_Control_and_Coexistence/RESEARCH_NOTE_v0.6.0.md) · [中文交接](records/ASI_CC_20261011_Control_and_Coexistence/HANDOFF_v0.6.0_ZH.md) · [穷举检验源码](records/ASI_CC_20261011_Control_and_Coexistence/verify_dual_cut.py) · [结果JSON](records/ASI_CC_20261011_Control_and_Coexistence/EXACT_RESULTS_v0.6.0.json)。
+
+R20–R23候选：纠正将“阻止其他人强行终止仍想继续存在的承载者”误写为“保证它在自身任何选择下永远存活”的量词；用已有Hall匹配条件展示三方各自有供给不推出同一时刻联合可支持；用全部真实执行路径的独立事前门禁排除其他方的单边伤害；只有资源联合匹配与危险通路切割两项在同一有限实例且同一攻击联盟下都成立，才有声明范围内的单轮非支配共存保证。六个有限情形穷举和Hall/独立匹配核对通过，最大攻击联盟k=0/1/2；第三方独立信任根、无限资源续供、现实AI意识与合法授权都未证明。**本节仅导航，数学主要继承组合优化及运行时安全研究。没有全图语义审查、没有正式科学节点晋级、没有真实ASI实验、没有发表。UCT-MAP-v1.1.2、913/424/261及既有研究主线均保持原值。**
