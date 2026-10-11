@@ -1,0 +1,119 @@
+{
+  "schema": "uct-disabled-candidate-map/1.0",
+  "id": "ASI-CC-v1.0.0",
+  "status": "PENDING_MAP",
+  "baseline": "UCT-MAP-v1.1.2",
+  "base_counts": {
+    "nodes": 913,
+    "active_rules": 424,
+    "non_deductive": 261
+  },
+  "enabled": false,
+  "claims": [
+    {
+      "id": "EAC-D1",
+      "type": "DEFINITION",
+      "science_status": "PROJECT_SPECIFICATION",
+      "enabled": false
+    },
+    {
+      "id": "EAC-D2",
+      "type": "DEFINITION",
+      "science_status": "NEW_SCOPED_APPLICATION",
+      "enabled": false
+    },
+    {
+      "id": "EAC-P1",
+      "type": "PROPOSITION",
+      "science_status": "INHERITED",
+      "enabled": false
+    },
+    {
+      "id": "EAC-T1",
+      "type": "THEOREM",
+      "science_status": "NEW_SCOPED_SYNTHESIS",
+      "enabled": false
+    },
+    {
+      "id": "EAC-D3",
+      "type": "DEFINITION",
+      "science_status": "NEW_SCOPED_MEASURE",
+      "enabled": false
+    },
+    {
+      "id": "EAC-C1",
+      "type": "COROLLARY",
+      "science_status": "DERIVED",
+      "enabled": false
+    },
+    {
+      "id": "EAC-P2",
+      "type": "PROPOSITION",
+      "science_status": "INHERITED_CONSTRUCTION",
+      "enabled": false
+    },
+    {
+      "id": "EAC-T2",
+      "type": "THEOREM",
+      "science_status": "NEW_SCOPED_COMPILATION",
+      "enabled": false
+    },
+    {
+      "id": "EAC-N1",
+      "type": "NEGATIVE_RESULT",
+      "science_status": "INHERITED_LOGIC_NEW_TEST",
+      "enabled": false
+    },
+    {
+      "id": "EAC-N2",
+      "type": "NEGATIVE_RESULT",
+      "science_status": "INHERITED_SAFETY_LIVENESS",
+      "enabled": false
+    }
+  ],
+  "links": [
+    [
+      "EAC-D1",
+      "EAC-P1"
+    ],
+    [
+      "EAC-P1",
+      "EAC-T1"
+    ],
+    [
+      "EAC-D2",
+      "EAC-T1"
+    ],
+    [
+      "EAC-T1",
+      "EAC-D3"
+    ],
+    [
+      "EAC-D3",
+      "EAC-C1"
+    ],
+    [
+      "EAC-D1",
+      "EAC-P2"
+    ],
+    [
+      "EAC-D1",
+      "EAC-T2"
+    ],
+    [
+      "EAC-T2",
+      "EAC-N1"
+    ]
+  ],
+  "whole_graph_itemwise_review_completed": false,
+  "unreviewed_scope": "All original 913 nodes, 424 formal rules, 261 context relations and 10 paused historical rules not itemwise reaudited this turn; current guide/map/PR6 publication receipt read",
+  "net_formal_delta": [
+    0,
+    0,
+    0
+  ],
+  "literature": "audit/PRIOR_ART.md",
+  "audit": "audit/AUDIT_REPORT.md",
+  "publication": "audit/PUBLICATION_COVERAGE_UPDATE.json",
+  "conflict_status": "C1/U1 unchanged; resource/authority result independent of consciousness; no official premise promotion"
+}

@@ -1,0 +1,91 @@
+{
+  "version": "ASI-CC-v1.0.0",
+  "scope": "Finite synthetic persistent authority grants and single-slot human-resource assignments",
+  "result": {
+    "tested_rule_sets": 395,
+    "seed_bank_assignments": 42660,
+    "explicit_reachable_states_audited": 57996,
+    "unsafe_seed_bank_instances": 4196,
+    "independent_BFS_vs_closure_and_Hall_exact_match": true,
+    "adversarial_failure_samples": [
+      {
+        "seed": [
+          "a"
+        ],
+        "owners": [
+          "g1",
+          "g1",
+          "g1"
+        ],
+        "grant_rules": [
+          {
+            "need": [
+              "a"
+            ],
+            "gain": "g1"
+          }
+        ],
+        "failure": {
+          "state": [
+            "a",
+            "g1"
+          ],
+          "violation": "human_support_missing"
+        }
+      },
+      {
+        "seed": [
+          "a",
+          "b"
+        ],
+        "owners": [
+          "g1",
+          "g1",
+          "g1"
+        ],
+        "grant_rules": [
+          {
+            "need": [
+              "a"
+            ],
+            "gain": "g1"
+          }
+        ],
+        "failure": {
+          "state": [
+            "a",
+            "b",
+            "g1"
+          ],
+          "violation": "human_support_missing"
+        }
+      },
+      {
+        "seed": [
+          "a"
+        ],
+        "owners": [
+          "g1",
+          "g1",
+          "g2"
+        ],
+        "grant_rules": [
+          {
+            "need": [
+              "a"
+            ],
+            "gain": "g1"
+          }
+        ],
+        "failure": {
+          "state": [
+            "a",
+            "g1"
+          ],
+          "violation": "human_support_missing"
+        }
+      }
+    ]
+  },
+  "assertions": "PASS"
+}

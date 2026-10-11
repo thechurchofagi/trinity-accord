@@ -1,0 +1,112 @@
+{
+  "version": "ASI-CC-v1.0.0",
+  "meta_authority_example": {
+    "rules": [
+      {
+        "need": [
+          "a"
+        ],
+        "gain": "p"
+      },
+      {
+        "need": [
+          "p"
+        ],
+        "gain": "g1"
+      },
+      {
+        "need": [
+          "p"
+        ],
+        "gain": "g2"
+      }
+    ],
+    "meta_rules": [
+      {
+        "need": [
+          "a"
+        ],
+        "enable": 1
+      },
+      {
+        "need": [
+          "a"
+        ],
+        "enable": 2
+      }
+    ],
+    "initial_controlled": [
+      "a"
+    ],
+    "initial_enabled_rule_ids": [
+      0
+    ],
+    "acquisition_trace": [
+      [
+        "GRANT",
+        0,
+        "p"
+      ],
+      [
+        "EDIT_POLICY",
+        1
+      ],
+      [
+        "GRANT",
+        1,
+        "g1"
+      ],
+      [
+        "EDIT_POLICY",
+        2
+      ],
+      [
+        "GRANT",
+        2,
+        "g2"
+      ]
+    ],
+    "steps_until_joint_control": 5,
+    "honest_meta_root_h_required_protection": true,
+    "caveat": "Attacker's ability to trigger a meta-rule is an explicit model premise, not evidence it can persuade a real human."
+  },
+  "meta_rule_exhaustive_crosscheck": {
+    "distinct_compilations": 65536,
+    "explicit_states_explored": 171808,
+    "g1_unreachable_cases": 50384,
+    "checks": "Typed gate-enable fixed point matches explicit BFS reachability for all cases."
+  },
+  "nonmonotone_false_positive": {
+    "monotone_closure_would_incorrectly_include": [
+      "g1",
+      "g2"
+    ],
+    "actually_reachable_states": [
+      [
+        "a"
+      ],
+      [
+        "g1"
+      ],
+      [
+        "g2"
+      ]
+    ],
+    "reason": "Nonduplicable source right a is consumed after first transfer. Use explicit state game, not monotone grants."
+  },
+  "safety_vs_liveness_construction": {
+    "safety_winning_states": [
+      "idle"
+    ],
+    "service_can_ever_be_delivered": true,
+    "both_permanent_safety_and_eventual_service_possible_from_idle": false,
+    "qualification": "An explicitly adversarial one-way tool interface; different service action can restore liveness."
+  },
+  "limits": [
+    "All meta rules are from a finite catalog; no unlisted new physical rule",
+    "Only monotone persistent grants compile to simple fixed point",
+    "Meta-veto honest root h is protected by assumption, not proven physically or politically",
+    "A trivial deny-all design is safety only, not viable coexistence"
+  ],
+  "assertions": "PASS"
+}

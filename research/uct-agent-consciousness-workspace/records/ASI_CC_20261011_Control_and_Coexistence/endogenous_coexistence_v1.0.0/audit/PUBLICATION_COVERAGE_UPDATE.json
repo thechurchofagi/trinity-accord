@@ -1,0 +1,30 @@
+{
+  "schema": "uct-scoped-research-publication-delta/1.0",
+  "base": "UCT-PUB-v1.0.33",
+  "research_id": "ASI-CC-v1.0.0",
+  "published_work_benchmark": "PR-v6.0.0",
+  "existing_doi": "10.5281/zenodo.23295776",
+  "already_disclosed_claims": "PR6 CB-D1/CB-P1/CB-L1/CB-L2/CB-T1/CB-C1/CB-C2/CB-T2/CB-T3/CB-E1 and supporting evidence—none newly claimed",
+  "new_public_works": 0,
+  "new_doi": false,
+  "ots_action": false,
+  "arweave_action": false,
+  "claims_proposed_not_yet_published": [
+    "EAC-D1",
+    "EAC-D2",
+    "EAC-P1",
+    "EAC-T1",
+    "EAC-D3",
+    "EAC-C1",
+    "EAC-P2",
+    "EAC-T2",
+    "EAC-N1",
+    "EAC-N2"
+  ],
+  "new_application": "Endogenous coalition-closed same-history guard/human-service resilience threshold, typed policy-enable reasoning, nonmonotone counterexample; mathematical basis inherited",
+  "global_priority_verified": false,
+  "whole_corpus_audit": false,
+  "formal_map_promotion": false,
+  "publication_decision": "HOLD_CANDIDATE_PAPER; seek independent novelty/scope audit; no unrequested Zenodo change",
+  "no_published_bytes_changed": true
+}

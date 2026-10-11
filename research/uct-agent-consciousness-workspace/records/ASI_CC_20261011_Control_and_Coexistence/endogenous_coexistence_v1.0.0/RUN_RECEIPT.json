@@ -1,0 +1,63 @@
+{
+  "version": "ASI-CC-v1.0.0",
+  "date_utc": "2026-10-11T10:51:52.294420+00:00",
+  "python": "3.13.5",
+  "tests": [
+    "fixed-point vs BFS",
+    "typed meta-policy compiled closure vs explicit states",
+    "Hall matching vs independent allocation",
+    "monotone vs nonmonotone negative control",
+    "safety vs liveness negative control"
+  ],
+  "executed_scripts": [
+    "src/authority_closure.py",
+    "src/institution_mutation.py",
+    "src/joint_oracle.py"
+  ],
+  "crosscheck_different_python_hash_seeds": [
+    1,
+    9
+  ],
+  "complete_json_semantic_equality": true,
+  "output_checks": [
+    {
+      "file": "closure_results.json",
+      "pass": true,
+      "bytes": 10799,
+      "sha256": "69fd940cfdf17be1903acd9423457330062bfd3b3c3a704f3c1b136f16b3786b"
+    },
+    {
+      "file": "mutation_results.json",
+      "pass": true,
+      "bytes": 2454,
+      "sha256": "946366a8332012830df66a8a9370ee513d89b4f58a4857dd3b7576d4a60eefdd"
+    },
+    {
+      "file": "joint_oracle_results.json",
+      "pass": true,
+      "bytes": 1738,
+      "sha256": "1bdfeaa8bf2d3a3d6d7388d642fdd8ba82d7db32796ad6ad07952d6583be0efa"
+    }
+  ],
+  "counts": {
+    "rule_sets": 12951,
+    "seed_comparisons": 207216,
+    "guard_subset_comparisons": 3315456,
+    "meta_rule_configurations": 65536,
+    "meta_states": 171808,
+    "joint_bank_seed_cases": 42660,
+    "joint_intermediate_states": 57996
+  },
+  "negative_controls": [
+    "Repaired gate still resource unsafe",
+    "Consuming rights invalidates monotone closure",
+    "Deny all safe not useful service"
+  ],
+  "not_evidence_of": [
+    "actual AI controlled root",
+    "real physical hardware",
+    "machine subjective experience",
+    "worldwide original priority"
+  ],
+  "status": "PASS"
+}

@@ -1,0 +1,158 @@
+{
+  "schema": "asi-cc-endogenous-research-candidate/1.0",
+  "id": "ASI-CC-v1.0.0",
+  "date": "2026-10-11",
+  "author": "Hongju Liu",
+  "title": "When the Guardians Can Be Acquired: Endogenous Coalition Capture and Necessary Conditions for Multi-Agent Coexistence Without Presupposed AI Subjecthood",
+  "status": "COMPLETE_CONDITIONAL_CANDIDATE_PENDING_MAP",
+  "published": false,
+  "doi": null,
+  "peer_reviewed": false,
+  "baseline_doi": "10.5281/zenodo.23295776",
+  "baseline_publication_work": "PR-v6.0.0 Safe Revocation Without Complete Diagnosis",
+  "authoritative_graph": "UCT-MAP-v1.1.2",
+  "counts": {
+    "nodes": 913,
+    "valid_rules": 424,
+    "non_deductive": 261
+  },
+  "formal_graph_delta": {
+    "nodes": 0,
+    "rules": 0,
+    "relations": 0
+  },
+  "publication_coverage_base": "UCT-PUB-v1.0.33",
+  "latest_claims": [
+    {
+      "id": "EAC-D1",
+      "kind": "DEFINITION",
+      "statement": "Actual-root persistent hypergraph authorization model",
+      "status": "PROJECT_SPECIFICATION",
+      "priority": "NOT_A_NEW_GENERAL_SECURITY_MODEL",
+      "enabled": false
+    },
+    {
+      "id": "EAC-D2",
+      "kind": "DEFINITION",
+      "statement": "Joint human-negative-right and human-resource protection condition",
+      "status": "NEW_SCOPED_APPLICATION",
+      "priority": "PRIORITY_UNVERIFIED",
+      "enabled": false
+    },
+    {
+      "id": "EAC-P1",
+      "kind": "PROPOSITION",
+      "statement": "Monotone reachable roots exactly the least fixed point",
+      "status": "INHERITED",
+      "priority": "CLASSICAL_ACCESS_CONTROL_REACHABILITY",
+      "enabled": false
+    },
+    {
+      "id": "EAC-T1",
+      "kind": "THEOREM",
+      "statement": "Guard and Hall conditions jointly characterize bounded protection against all seeds in finite monotone schema",
+      "status": "NEW_SCOPED_SYNTHESIS",
+      "priority": "GLOBAL_EXACT_PRIORITY_UNVERIFIED",
+      "enabled": false
+    },
+    {
+      "id": "EAC-D3",
+      "kind": "DEFINITION",
+      "statement": "Endogenous coexistence initiating-coalition radius",
+      "status": "NEW_SCOPED_MEASURE",
+      "priority": "PRIORITY_UNVERIFIED",
+      "enabled": false
+    },
+    {
+      "id": "EAC-C1",
+      "kind": "COROLLARY",
+      "statement": "f-robust iff endogenous radius exceeds f",
+      "status": "DERIVED",
+      "priority": "ELEMENTARY",
+      "enabled": false
+    },
+    {
+      "id": "EAC-P2",
+      "kind": "PROPOSITION",
+      "statement": "Unbounded static guard count / one-seed dynamic acquisition gap",
+      "status": "INHERITED_CONSTRUCTION",
+      "priority": "ACCESS_CONTROL_PRECEDENTS",
+      "enabled": false
+    },
+    {
+      "id": "EAC-T2",
+      "kind": "THEOREM",
+      "statement": "Typed enable-token compilation for monotone finite policy edits",
+      "status": "NEW_SCOPED_COMPILATION",
+      "priority": "PRIORITY_UNVERIFIED",
+      "enabled": false
+    },
+    {
+      "id": "EAC-N1",
+      "kind": "NEGATIVE_RESULT",
+      "statement": "Consumable rights invalidate cumulative closure",
+      "status": "INHERITED_LOGIC_NEW_TEST",
+      "priority": "EXPLICIT_COUNTEREXAMPLE",
+      "enabled": false
+    },
+    {
+      "id": "EAC-N2",
+      "kind": "NEGATIVE_RESULT",
+      "statement": "Pure safety can conflict with promised eventual useful service",
+      "status": "INHERITED_SAFETY_LIVENESS",
+      "priority": "EXPLICIT_COUNTEREXAMPLE",
+      "enabled": false
+    }
+  ],
+  "dependencies": [
+    [
+      "EAC-D1",
+      "EAC-P1"
+    ],
+    [
+      "EAC-P1",
+      "EAC-T1"
+    ],
+    [
+      "EAC-D2",
+      "EAC-T1"
+    ],
+    [
+      "EAC-T1",
+      "EAC-D3"
+    ],
+    [
+      "EAC-D3",
+      "EAC-C1"
+    ],
+    [
+      "EAC-D1",
+      "EAC-P2"
+    ],
+    [
+      "EAC-D1",
+      "EAC-T2"
+    ],
+    [
+      "EAC-T2",
+      "EAC-N1"
+    ]
+  ],
+  "paper": "paper/manuscript.tex",
+  "programs": [
+    "src/authority_closure.py",
+    "src/institution_mutation.py",
+    "src/joint_oracle.py"
+  ],
+  "data": [
+    "data/closure_results.json",
+    "data/mutation_results.json",
+    "data/joint_oracle_results.json"
+  ],
+  "audit": "audit/AUDIT_REPORT.md",
+  "handoff": "HANDOFF_ZH.md",
+  "full_priorities_checked": false,
+  "real_world_preconditions_measured": false,
+  "whole_graph_semantic_audit": false,
+  "merge_policy": "DISABLED; navigation only; preserve UCT C1/U1 and published PR6 bytes"
+}

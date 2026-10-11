@@ -1,0 +1,14 @@
+# Prior-art audit, ASI-CC-v1.0.0, 2026-10-11
+
+This is a targeted comparison, not a global novelty certification. Report only checked abstract/text scope for sources read from current web/GitHub; do not claim all mathematical proofs of competitors were rederived.
+
+- HRU, Harrison/Ruzzo/Ullman (Communications ACM 19(8), 1976): canonical safety/reachability question for systems where rights change, with undecidability in the unrestricted model. This paper does NOT rediscover the safety problem or claim a general algorithm.
+- Ou/Govindavajhala/Appel, MulVAL (USENIX Security 2005): multi-host, multistage privilege graph and Datalog rule closure already developed. Our new quantity is an application combining hostile initiating coalition with human service Hall constraints and the *same reached authority state*, not Datalog itself.
+- Sasturkar/Yang/Stoller/Ramakrishnan, administrative RBAC (CSFW 2006): cooperative/hostile administrators may change effective roles; reachability and complexity precede this work. The compiled meta-rule result is limited to a persistent monotone subclass.
+- Greif/Laitin (APSR 2004) and Lagunoff (GEB 2009): endogenous institutional change is an old research domain. The article treats editable rules as a finite capability schema; no political prediction or social choice solution.
+- Turner et al. (NeurIPS 2021): conditional instrumental power-seeking tendency. Our proofs need no objective function or belief about the motives of any future AI. We do not refute their MDP theorem.
+- Zhu/Wang (arXiv 2610.00347, Sep/Oct 2026): highly pertinent authorization succession under self-modifying, forking populations. Population-safe authority conservation for registered effects has already been described; root/coalition closure and residual human-resource matching are scoped joint proof obligations.
+- PR-v6.0.0 Liu, DOI 10.5281/zenodo.23295776, already published 2026-10-11: exact shared diagnostic/bank fault-budget formulas in a single episode. Those claims are NOT new here. The present study adds an explicit question about whether future permitted rule edits change the effect-source boundaries assumed by any fixed episode certificate.
+- Butlin et al., Trends in Cognitive Sciences 2026, DOI 10.1016/j.tics.2025.10.011: theory-derived indicators and uncertainty; no subjective experience tests are run or inferred from permission/consensus models.
+
+**Novelty ledger:** EAC-P1=INHERITED proof; EAC-T1=NEW_SCOPED_APPLICATION/INHERITED_MATH; EAC-D3=PROPOSED_MEASURE; EAC-P2=INHERITED_MULTISTAGE_COUNTEREXAMPLE; EAC-T2=NEW_SCOPED_COMPILATION/PRIORITY_UNVERIFIED; EAC-C1=DEFINITIONAL; nonmonotone and safety/liveness negative witnesses=INHERITED_LOGIC applied to the precise model. No unsupported claim of a world-first or classic general theory. Research useful as a falsifiable joint-certificate and specification boundary; does not supersede older peer-reviewed security literature.

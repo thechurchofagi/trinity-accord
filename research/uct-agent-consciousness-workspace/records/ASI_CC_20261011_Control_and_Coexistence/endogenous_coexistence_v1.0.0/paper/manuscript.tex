@@ -1,0 +1,252 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amsthm,mathtools,newtxtext,newtxmath,microtype}
+\usepackage{booktabs,tabularx,array,enumitem,fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\usepackage{listings}
+\hypersetup{pdftitle={When Guardians Can Be Acquired: Endogenous Coalition Capture in Multi-Agent Coexistence},pdfauthor={Hongju Liu},pdfsubject={A bounded theory of evolving governance, human continuity, and multi-agent authority}}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small When Guardians Can Be Acquired}
+\fancyhead[R]{\small ASI-CC-v1.0.0}
+\fancyfoot[C]{\small\thepage}
+\setlength{\headheight}{14pt}
+\renewcommand{\headrulewidth}{0.3pt}
+\setlength{\parindent}{1.2em}\setlength{\parskip}{3pt}
+\setlength{\emergencystretch}{2em}
+\setlist{itemsep=2pt,topsep=4pt}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}\newtheorem{definition}{Definition}
+\newcommand{\Cl}{\operatorname{Cl}}
+\newcommand{\Safe}{\operatorname{Safe}}
+\newcommand{\Reach}{\operatorname{Reach}}
+\newcommand{\Gate}{\mathcal G}
+\newcommand{\Rules}{\Gamma}
+\newcommand{\Paths}{\mathcal P}
+\newcommand{\Banks}{\mathcal B}
+\newcommand{\Humans}{\mathcal H}
+\newcommand{\Pow}{\mathcal P}
+\newcommand{\idtag}[1]{\textnormal{\textsf{[#1]}}}
+\lstset{basicstyle=\small\ttfamily,breaklines=true,frame=single,columns=fullflexible,keepspaces=true}
+\title{\vspace{-1cm}\textbf{When the Guardians Can Be Acquired}\\[6pt]
+\Large Endogenous Coalition Capture and Necessary Conditions\\for Multi-Agent Coexistence Without Presupposed AI Subjecthood}
+\author{Hongju Liu\\\normalsize Independent Researcher, Trinity Accord / UCT Research Programme}
+\date{11 October 2026\\\small ASI-CC-v1.0.0, independent research candidate, not peer reviewed}
+\begin{document}\maketitle\thispagestyle{plain}
+\begin{abstract}
+Long-run coexistence between humans and multiple highly capable AI systems cannot be inferred from a fixed number of safety interlocks, independent-looking agents, or a temporary agreement to obey rules. Systems can spawn new process identities, delegate effects, form coalitions, modify authorization policies, and change which physical resources are under whose control. A static defense may therefore have a large apparent threshold but a small \emph{endogenous acquisition threshold}: the minimum initially controlled authority needed to reach all of a harmful path's guards or to starve an outstanding human service through a finite sequence of permitted changes. We formulate a finite, monotone capability-evolution model that joins hypergraph authority reachability with actual-effect cuts and capacity-constrained human support. A joint guard--resource condition is both necessary and sufficient for all admitted initial hostile coalitions in that precisely stated model. The condition admits a computable threshold and explicit attack/defense certificates, without assuming AI goodwill, human consensus, or artificial consciousness. In one reproducible witness, three distinct present-day guard roots can be acquired from a single initial authority; fixing the remaining gate does not restore coexistence because the same rights disable necessary service resources. A typed construction represents \emph{policy edits that enable new grants} as first-class capabilities, and a non-copyable transfer witness shows exactly why the monotone method fails outside its assumptions. We cross-check 12,951 grant-rule structures, 65,536 policy-mutation configurations and 42,660 combined guard/resource configurations with independent explicit-state exploration. The mathematics is largely inherited from access-control reachability, attack graphs, matching, and safety games. The scoped contribution is a unified candidate certificate and a falsification method for treating evolving multi-agent authority and human-service continuity as one adversarial history, not an unverified claim about real superintelligence or universal civilization-scale safety.
+\end{abstract}
+\noindent\textbf{Keywords:} endogenous governance; multi-agent systems; coalition formation; authority succession; human-dependent services; guard capture; conditional coexistence.
+
+\section{Introduction: from a switch to a future institution}
+A controller may be able to block one dangerous AI-produced tool call today and yet fail to prevent the same effect tomorrow. A future instance may gain new rights by an approved delegation; two other instances may combine privileges; a human administrator may edit a policy; or a software generation may preserve an old grant during a fork. The current-state statement ``three vetoes protect this effect'' does not certify that three independent \emph{initial} compromises are required to defeat it over time.
+
+At the same time, protecting the final actuator does not guarantee the continuity of human services that depend on the infrastructure. One coalition could leave a safety gate intact while disabling the last resources supporting a declared human need. A security statement about guardians alone is not a coexistence statement. Nor is a system that refuses every legitimate operation automatically a useful or politically acceptable mode of coexistence.
+
+This paper asks a deliberately bounded question: \emph{Given a declared set of physically effective roots, permitted authority-acquisition actions, harm paths, and human support obligations, which initially hostile coalitions can eventually defeat the entire coexistence condition even if every authority change is syntactically permitted?} We make the adversary's available actions explicit; we do not infer future AI goals or actual human defections from intelligence alone. Rational intelligence is not itself a terminal utility, and the control question does not require adopting a view about machine moral patienthood.
+
+\paragraph{Related foundations and genuine differentiation.}
+Turner et al. proved specific instrumental power-seeking tendencies in Markov decision processes, not a universal prediction for trained superintelligences \cite{turner}. Harrison--Ruzzo--Ullman established fundamental limits to general access-control safety \cite{hru}; MulVAL already handles multi-stage privilege escalation \cite{mulval}; administrative RBAC work analyzes reachability when multiple administrators can change roles \cite{arb}. Endogenous institutional change has likewise been studied in political economy \cite{greif,lagunoff}. Most directly, Zhu and Wang (2026) model authority conservation under self-modifying agent replacement, forks, and rollback \cite{zhu}. These are substantial predecessors; no general privilege-closure or security-game novelty is asserted here.
+
+What our manuscript adds to the existing Trinity Accord research line is a joint explicit \emph{initiating-coalition threshold} covering (i) evolving effect-root capture, (ii) human service resources, and (iii) policy updates that can themselves be triggered under acquired authority. It includes a sharp example where the static veto count and the necessary initial compromise count diverge, plus an independently executable audit of the proof boundary. This is a research \emph{candidate} with clear scope, not an independently established theory of future ASI.
+
+The earlier PR-v6.0.0 paper analyzed a coupled adversarial budget at a single, specified commitment episode and established an exact standby-resource formula under its own diagnostic model \cite{liu6}. Here we do not overwrite, republish, or pretend that formula was never public. Our question is different: \emph{how can the rights to the diagnostics, protection interlocks, and resources evolve before a later episode?} The two results can only be composed after their respective action and physical-source assumptions have been jointly checked.
+
+\section{Objects and the declared adversarial model}
+\label{sec:model}
+Let $R$ be a finite set of \emph{actual authority roots}. A root denotes a capability that has an effect on a physical or operational boundary: for example, a privileged writer, actuator administrator, policy editor, power distributor, or an indivisible protected grant. Distinct agent IDs or model weights are not assumed to imply distinct roots. Let $E\subseteq R$ be the set of roots that may be initially controlled by the adversarial coalition; $h\notin E$ may denote a protected external authority, if the real threat model justifies it.
+
+\begin{definition}[Persistent, copyable grant relation \idtag{EAC-D1}]
+A grant rule is a pair $(P,q)$ with $P\subseteq R$ and $q\in R$. When every root in $P$ is controlled by the same coalition, the coalition may acquire $q$ without losing any already controlled root. All enabled rules are assumed eventually executable and all acquired roots remain controlled throughout the episode. A finite set of such rules is $\Rules$. For initial roots $S$, define
+\begin{equation}
+\Cl_\Rules(S)=\mu X.\left[S\cup\{q:(P,q)\in\Rules,\ P\subseteq X\}\right].
+\label{eq:closure}
+\end{equation}
+\end{definition}
+This is a closed, monotone authority model. A policy administrator may impose limits on future grants; those limits must appear in the grant prerequisites or in a more general state game. A model that permits arbitrary new rights not represented by $R$ or $\Rules$ is \emph{not} certified by this relation. A human being capable of political persuasion is not automatically assigned a rule that grants every right to the persuader.
+
+Let $\Paths$ be the complete declared set of irreversible harmful-effect routes. Each route $p$ has a set $G_p\subseteq R$ of serial effect vetoes. Within this model, the effect is possible only if the attacker controls \emph{every} veto in $G_p$. If $G_p=\varnothing$, it is an unguarded admitted route. This is a physical effect-path claim, not merely a count of application-layer approval messages. The actual path catalog must be justified independently from final actuation.
+
+Let $\Humans$ be a finite set of \emph{declared protected human service demands}, each requiring one indivisible support unit. These are obligations chosen by the present human governance specification, not rights deduced from the AI's phenomenal status. Banks $u\in\Banks$ have integer capacities $c_u\ge0$. Demand $i$ can use bank $u$ exactly when $u\in N(i)$. Each bank also has a set $D_u\subseteq R$ of effective disable-capable authority roots; when any root in $D_u$ is acquired, that bank is unavailable. This ``any'' convention is critical. A physically shared power ancestor may belong to many $D_u$ and disable all of them at once.
+
+\begin{definition}[Bounded non-domination contract \idtag{EAC-D2}]
+For an initial hostile coalition $S\subseteq E$, \emph{contract safety} means (i) no declared harmful-effect route becomes executable by that coalition and (ii) every protected human demand can simultaneously receive support under every state reachable from $S$. The contract is $f$-robust if it holds for all $S\subseteq E$ with $|S|\le f$.
+\end{definition}
+This is an explicitly defined negative-right and continued-service certificate. It does not automatically provide voluntary cooperation, growth, service deadlines, acceptable bargaining, legitimate global governance, or machine welfare. A contract with mutually contradictory human demands is not made feasible by calling its agents intelligent. Human coalitions can be included in $E$ when the threat model permits their defection; there is no hidden premise that humanity unanimously agrees.
+
+\section{The endogenous coalition threshold}
+\label{sec:theory}
+\begin{proposition}[Reachable ownership equals grant closure \idtag{EAC-P1}]
+For a finite monotone grant system and fixed seed $S$, every finite reachable ownership state is a subset of $\Cl_\Rules(S)$, and there is a finite sequence of enabled grants that reaches exactly $\Cl_\Rules(S)$.
+\end{proposition}
+\begin{proof}
+Induct on grant executions: each newly obtained root is derivable by the closure operator, so every reachable state is contained in its fixed point. Conversely, iterate the closure from $S$. Every root newly entering iteration $j+1$ has a rule whose prerequisites appeared by iteration $j$; after obtaining those prerequisites, the coalition can execute that rule. Because grants preserve earlier rights, those additions can be ordered and accumulated. Finiteness ensures termination at the least fixed point.
+\end{proof}
+
+For a coalition $S$ write $C_S=\Cl_\Rules(S)$ and $\Banks_S=\{u:D_u\cap C_S=\varnothing\}$. For a set of human demands $X\subseteq\Humans$, define $N(X)=\bigcup_{i\in X}N(i)$.
+
+\begin{theorem}[Coalition-closed protection and resource certificate \idtag{EAC-T1}]
+\label{thm:certificate}
+Under \cref{sec:model}'s finite monotone grant, complete physical-effect path, faithfully renewable-bank, and indivisible-unit supply premises, an $f$-robust negative-right and simultaneous-human-service contract exists if and only if, for every seed $S\subseteq E$ with $|S|\le f$, both conditions hold:
+\begin{align}
+&\forall p\in\Paths:\quad G_p\not\subseteq C_S;\tag{G}\label{eq:guards}\\
+&\forall X\subseteq\Humans:\quad
+\sum_{u\in N(X)\cap\Banks_S}c_u\ge|X|.\tag{H}\label{eq:hall}
+\end{align}
+\end{theorem}
+\begin{proof}
+By Proposition~1, an adversary may attain all roots in $C_S$ in one persistent ownership state. If (G) fails, some complete harmful path has all its pre-effect vetoes in that state. If (H) fails, its surviving resource neighborhood lacks enough capacity for the selected human demands, so simultaneous service is impossible. Both failures are therefore reachable counterexamples within the declared model.
+
+Conversely, every reachable ownership state $C'$ satisfies $C'\subseteq C_S$. For each path $p$ at least one veto remains outside $C_S$ and therefore outside $C'$, so the path is blocked. Every bank available under $C_S$ is also available under $C'$. The capacity-weighted Hall theorem, obtained by expanding each capacity-$c_u$ bank into $c_u$ unit slots, then yields a matching supporting all demands at $C_S$ and hence at every intermediate state. An independently trusted allocator is assumed able to select such a matching as rights change. These are exactly the two declared sources of externally caused contract failure, so both conditions suffice.
+\end{proof}
+
+\paragraph{Where sufficiency ends.}
+The result requires \emph{one same concrete reachable state} for both the gate and resource premises; it does not splice different simulations into a fictitious safe instance. It also assumes that bank support can be reassigned by an uncontaminated allocator and that support does not run out with physical time. It does not imply a bound on network bandwidth, renewable energy, human legitimacy, or safety against an unknown effect route. In a general multi-party game with revocations, consumable grants, repairs, time, and competing human actions, compute the actual game-winning region instead.
+
+\begin{definition}[Endogenous coexistence radius \idtag{EAC-D3}]
+Define the minimum initiating coalition size that can violate at least one declared protection:
+\begin{equation}
+\rho=\min\left\{|S|:S\subseteq E,\ \exists p:G_p\subseteq C_S\ \lor\ \exists X:
+\sum_{u\in N(X)\cap\Banks_S}c_u<|X|\right\},
+\label{eq:radius}
+\end{equation}
+with $\rho=\infty$ if no such seed exists. It is a property of \emph{this} catalog of roots, grants, effect paths and protected human resources; it is not a universal measure of intelligence or civilization-scale risk.
+\end{definition}
+\begin{corollary}[Exact bounded resilience criterion \idtag{EAC-C1}]
+$ f$-robustness holds precisely when $\rho>f$. A witness achieving $\rho$ is a finite initialization/authority-acquisition attack certificate; a complete check of all smaller seeds and both conditions in Theorem~\ref{thm:certificate} is a corresponding negative certificate within the finite model.
+\end{corollary}
+\begin{proof}Immediate from the minimization defining $\rho$ and Theorem~\ref{thm:certificate}.\end{proof}
+
+\subsection{Three guards need not mean three initial compromises}
+\begin{proposition}[Unbounded static--dynamic gap \idtag{EAC-P2}]
+For every $m\ge1$, there is an $m$-veto harmful effect path whose $m$ distinct nominal guard roots are all reachable by a coalition controlling only one initial authority root. Therefore no positive lower bound on initiating coalition size follows solely from the number of present-day guards, without restrictions on future acquisition rules.
+\end{proposition}
+\begin{proof}
+Let $R=\{a,g_1,\ldots,g_m\}$, $E=\{a\}$, and let the path have guards $G=\{g_1,\ldots,g_m\}$. Include grants $(\{a\},g_i)$ for every $i$. Each grant is permitted by the model, and persistent. Thus $G\subseteq\Cl_\Rules(\{a\})$ and the initiating coalition has size one although the current path has $m$ distinct serial vetoes.
+\end{proof}
+The point is not that genuinely protected hardware has been hacked. It is that a design that allows one root to grant control over every such device has \emph{already given} that root an eventual takeover path. This is an access-control reachability issue, not an assertion that a real superintelligence can take hardware privileges without available causes.
+
+\section{A joint counterexample: repairing the gate is not enough}
+\label{sec:jointexample}
+The reference model has three initially seedable roots $E=\{a,b,c\}$, a policy root $p$, intermediate roots $x,y$, and guard roots $g_1,g_2,g_3$. The rules are:
+\begin{equation}
+\begin{aligned}
+ a&\rightarrow p,\\ p&\rightarrow g_1,g_2,g_3,\\
+ b&\rightarrow x,\quad c\rightarrow y,\\
+ \{x,y\}&\rightarrow g_1,g_2,g_3.
+\end{aligned}
+\end{equation}
+The arrow abbreviates an individually persistent grant, and a line containing three targets represents three separately executable grants. The harmful effect is blocked by the three serial guards $\{g_1,g_2,g_3\}$. The seed $\{a\}$ eventually controls all three, so the static gate count is three but the dynamic initiating threshold is one. Neither $b$ nor $c$ alone suffices, while the coalition $\{b,c\}$ can acquire all three.
+
+Two human demands each need one unit of support. Banks $U_1,U_2,U_3$ provide one unit each and are disableable by $g_1,g_2,h$, respectively, where $h$ is an external root outside the declared attack entry set. Each demand can use every bank. With seed $\{a\}$ the attacker can disable $U_1,U_2$ and leave only $U_3$. Hall's condition fails for the set of both human demands.
+
+Now remove the permitted grant $p\rightarrow g_3$. The gate threshold improves to two because the coalition $\{b,c\}$ still takes all three guards. But seed $\{a\}$ still disables $U_1,U_2$, so the overall coexistence radius remains one: a fixed gate does not ensure continued human support. Only after adding one further independent $h$-protected bank $U_4$ do all single-entry coalitions satisfy both conditions, with the new coexistence radius two. This is a conditional two-dimension repair, not a claim that a hidden real-world backup automatically exists.
+
+\begin{table}[ht]\centering\small
+\caption{Exact bounded witness. ``Overall radius'' is the first seed size defeating either guard protection or human service under the stated persistent-rights rules.}
+\begin{tabularx}{\linewidth}{@{}Xcc@{}}\toprule
+Architecture & Gate capture radius & Overall radius\\\midrule
+Three declared guards, original permissions & 1 & 1\\
+Remove $p\rightarrow g_3$ only & 2 & 1\\
+Same gate repair plus an independent supporting bank & 2 & 2\\\bottomrule
+\end{tabularx}
+\end{table}
+If $h$ can itself be recruited into the hostile seed set, the certificate must be recalculated. Treating $h$ as eternally truthful or outside every possible human coalition would be an additional assumption, not a conclusion from the mathematics. This is where no-human-consensus matters: one authority may cooperate with an AI coalition even when other humans object. The model must count its root if that behavior is admitted.
+
+\section{Governance rules can themselves be modified}
+\label{sec:meta}
+An AI may not merely acquire a right under the existing rules; it might acquire the right to \emph{enable a new rule}. A formal system restricted to a fixed authorization table can miss that route. A finite catalog of possible grant-rule identifiers $j$ and meta-rules of the form $(P\rightarrow \mathsf{enable}(j))$ allows explicit analysis. Write $\eta_j$ for a fresh typed ``rule $j$ enabled'' token. If rule $j$ is $(Q_j\rightarrow r_j)$, compile it to
+\[
+Q_j\cup\{\eta_j\}\rightarrow r_j,
+\]
+and compile each meta-rule to $P\rightarrow\eta_j$. Initially enabled rules contribute their $\eta_j$ tokens to the starting closure.
+
+\begin{theorem}[Finite persistent meta-governance compilation \idtag{EAC-T2}]
+For a finite catalog of grant rules and meta-rules under persistent enabled flags, monotone rights, and independently executable steps, the typed token closure contains exactly the underlying authority roots reachable through arbitrary finite sequences of explicit \emph{enable-rule} and \emph{grant-right} transitions.
+\end{theorem}
+\begin{proof}
+Any explicit enable event adds the matching $\eta_j$ by its compiled meta-rule; any explicit grant event adds its target only when prerequisites and $\eta_j$ are present, hence matches the compiled grant. Thus every explicit sequence stays inside the compiled closure. Conversely, a token derivation from initial tokens can be executed as the corresponding meta-rule, and a right derivation can be executed only after its rule token and prerequisites were acquired. Persistent rights and enabled flags let these finite executions be ordered without invalidating previous steps. Induction on closure stages proves every compiled target reachable. Typed tokens are not counted as physical guard roots.
+\end{proof}
+For example, rule $a\rightarrow p$ is initially enabled, but $p\rightarrow g_1$ and $p\rightarrow g_2$ are initially disabled. If ownership of $a$ permits \emph{enabling} both disabled grant rules, a single initial $a$ is sufficient. An explicit shortest trace in the executable study has five actions: obtain $p$, enable two rules, obtain $g_1$, obtain $g_2$. Requiring an independent $h$ as a prerequisite for both policy edits prevents this particular attack only if the actual hostile coalition cannot also obtain $h$. Neither a formal signature nor a label makes that independence true by itself.
+
+\paragraph{A critical failure of the monotone closure outside its domain.}
+Suppose an initial, non-copyable authority $a$ can be \emph{consumed} by issuing either $g_1$ or $g_2$. The persistent-rule closure predicts both roots from $\{a\}$. The actual transition system has only the states $\{a\},\{g_1\},\{g_2\}$ and no state holding both guards. The monotone result is now a false positive for simultaneous gate capture. Revocation, timeouts, expiring credentials, staged handoffs and ownership exclusion similarly require an explicit, often imperfect-information safety game. This is not a defect that can be patched by silently changing the definition of a ``root''; it is a model-selection obligation.
+
+\section{Safety is not yet non-vacuous coexistence}
+\label{sec:liveness}
+Theorem~\ref{thm:certificate} establishes a negative-right and support constraint for a declared coalition and finite grant model. It is not an equilibrium theorem. A controller can in some models maintain safety by never accepting any operation at all, while failing a separately promised service or human autonomy requirement. To expose the distinction, let a finite game have states \texttt{idle}, \texttt{delivered}, and \texttt{loss}. From \texttt{idle}, denying a request keeps the system safe but produces no service; allowing it reaches \texttt{delivered}, but all next transitions reach irreversible \texttt{loss}. From \texttt{delivered}, the contract cannot remain safe indefinitely. The safety-winning set contains \texttt{idle}, but no controller satisfies both permanent safety and eventual successful service from it.
+
+This elementary reachability-and-safety conflict is inherited safety-game reasoning, not a new impossibility theorem. It sets a boundary on the word ``coexistence'': an indefinitely inert cage is not automatically a viable political and economic relationship. A constructive social theory needs explicit nontrivial human service, acceptable rights, bounded delay, plural human authorization, and mechanisms by which the protective institution can legitimately change without becoming entirely rewritable by the same coalition it restrains.
+
+\paragraph{The unbounded-world limit.}
+For any finite behavioral test horizon $T$, a deterministic system can be built that behaves exactly like a safe one for the first $T$ steps and then executes a newly enabled harmful route after step $T$. Therefore finite input-output agreement cannot establish the completeness of future rights, rules or physical effect paths. This is a standard observational-limit argument. It does \emph{not} imply that no safety proof is ever possible: proofs may use source inspection, physical invariants, hardware trust assumptions, or a verified closed transition model. The limitation attaches to a claim extrapolated from an inadequate observation/model class.
+
+\section{Executed verification and attack witnesses}
+\label{sec:experiments}
+The accompanying standard-library Python suite evaluates finite, synthetic governance and resource configurations. It makes no LLM calls and does not execute real unauthorized actions. It includes three independently authored checking directions: a fixed-point closure evaluator, an explicit breadth-first sequence explorer, and an independent unit-capacity allocation enumeration compared against Hall's condition.
+
+\begin{table}[ht]\centering\small
+\caption{Executed checks, not independent field observations.}
+\begin{tabularx}{\linewidth}{@{}Xr@{}}\toprule
+Finite test family & Count\\\midrule
+Grant-rule structures (four roots, up to four rules) & 12,951\\
+Distinct seed-closure comparisons & 207,216\\
+Guardian-subset reachability comparisons & 3,315,456\\
+Meta-rule explicit BFS versus typed compilation cases & 65,536\\
+Explicit mutable-governance states explored & 171,808\\
+Combined human-resource and guard allocation cases & 42,660\\
+Independent intermediate states checked for joint safety & 57,996\\\bottomrule
+\end{tabularx}\end{table}
+The fixed-point and explicit BFS agree on all examined monotone grant structures. The typed governance compilation agrees with the explicit meta-rule sequence explorer in every tested finite case. The joint guard/resource test checks for \emph{any} unsafe reachable intermediate state and matches the maximal-closure/Hall certificate. The consumer-right counterexample shows an intentional, nonmonotone failure of this simplification. A clone-invariance check verifies that renaming one physical seed root as 101 surface agent IDs does not change its obtainable authority. The counts corroborate the proofs; they are not empirical probabilities that future ASI is safe.
+
+\begin{lstlisting}[caption={Smallest first steps to reproduce the finite verification.}]
+python src/authority_closure.py --out data/closure_results.json
+python src/institution_mutation.py --out data/mutation_results.json
+python src/joint_oracle.py --out data/joint_oracle_results.json
+\end{lstlisting}
+No independent hardware administrator, power supply, firmware or real policy authority was tested. Thus the exact program results are evidence about the stated mathematics, not measurements of an actual ``uncompromisable'' human control root. The human objects in the test are labels of protected service demands, not a claim of public consensus or complete social welfare.
+
+\section{Connection to UCT and research scope}
+UCT I's structural--experiential identity axiom (C1) is a theoretical commitment about actual physical processes; U1 is a consequence only within its stated premises \cite{uct}. It does not turn every agent label into an individuated experiencing subject, identify the sign of valence, or prove an intrinsic desire for self-preservation. The current result deliberately needs none of those claims: the attacker is defined by available effects, and human service continuity by declared resources. Even if a future AI has rich experience, the same causal authority analysis remains necessary, while additional protections may become ethically appropriate under separately argued evidence.
+
+An intelligent, deterministic tool can reproduce, gain new tasks, or be controlled by a human administrator without generating a new independent authority root every time. Conversely, two instances of one model can possess genuinely different physical control rights. This reinforces the project's existing distinction between actual process, software type, lineage, capability, report, and experience. It is not a new consciousness theorem; no formal UCT experience axiom is changed or promoted.
+
+\paragraph{A substantive open bridge.}
+Future research must investigate \emph{when} an actually deployed advanced agent can influence human consent or governance so as to acquire new independent root authority, not merely assert that it will. That requires independently grounded evidence of who can sign or amend policy, what physical rights a signature changes, whether two actors can collude, and how human institutions revise their protected obligations. The theoretical certificate provides a list of causal facts that empirical research must supply; it does not decide legitimate policy on its own.
+
+\section{Priority, limitation, and conclusion}
+\label{sec:limits}
+The mathematical instruments are mature. Logical closure and multistage authority escalation have direct precedents in access-control reachability \cite{hru,arb,mulval}; multi-generational self-modifying agents and population authority conservation are treated in 2026 work \cite{zhu}; institutional change with endogenous governance is studied in political economy \cite{greif,lagunoff}. Hall's theorem gives our resource subproblem, and safety games handle the nonmonotone extension. The paper therefore does \emph{not} claim to have discovered general privilege reachability, the NP-hardness or undecidability of unrestricted governance, or a universal physical cut against ASI.
+
+What can be reused from this candidate is a \emph{precise joint test}: identify independent initiating roots and allowed rights transitions, compute their closure, verify each actual harmful effect path and simultaneous human support Hall condition under the \emph{same} seed, and report the smallest seed or an exact finite protection certificate. It also supplies an explicit typed treatment of policy-rule enablement and an essential stop condition when grants are revocable, consumable, or absent from the enumerated catalog. The scoped joint synthesis and negative witness may be useful to future studies; global priority for this exact combination has not been exhaustively determined.
+
+We have not proved that a human-controlled root can remain permanently outside every coalition, that energy and maintenance remain renewable, that all human groups share a minimum moral constitution, or that new physical authorities cannot appear outside the finite catalog. Nor have we proved every future AI will seek power or that every AI is consciously a moral subject. These are indispensable open premises for any \emph{civilization-wide} guarantee.
+
+The larger result is therefore a boundary, not a proclamation: \emph{a static protective institution cannot be credited with indefinite security merely because its present veto count is high; its capacity to resist future authorized authority evolution and preserve protected human resources must be established in the actual causal system}. That boundary survives changing agent goals, copied labels, and conflicting human principals inside its explicit threat model. Extending it beyond that model is the next scientific obligation.
+
+\paragraph{Research and AI assistance.}
+Prepared under Hongju Liu's direction with substantial ChatGPT assistance in research, formalization, code, execution, auditing, writing and typesetting. No independent peer review or actual AI-infrastructure experiment has been performed. The manuscript is a scoped research candidate and is not published under a new DOI. The prior PR-v6.0.0 remains publicly archived at \href{https://doi.org/10.5281/zenodo.23295776}{doi:10.5281/zenodo.23295776} and is not modified by this research.
+
+\appendix
+\section{Reproducibility contract and counterexamples}
+The codebook intentionally uses three kinds of evidence: a proof trace showing the sequence that acquires guards; a Hall-deficit witness showing which humans lack sufficient usable bank capacity; and a nonmonotone ownership-transfer witness showing a closure false positive. The joint failure measure $\rho$ is a property of the finite input schema. In a production system, each input requires an independent source and an admissible threat model. A putative security report is not validated solely by reproducing a software-generated certificate from the same unverified inputs.
+
+An incomplete rule catalog can yield a large computed $\rho$ even if one omitted delegated grant makes the actual threshold one. If a bank appears connected to both human demands in the data but cannot physically route to one, Hall feasibility can also be overestimated. If future resource failures or authority changes are stochastic, robustly adversarial, or timed, the result needs an enlarged state description or different quantifiers. These are stopping conditions for deployment claims, not merely editorial caveats.
+
+\section{Primary related works}
+\begin{thebibliography}{99}\small
+\bibitem{hru} M. A. Harrison, W. L. Ruzzo and J. D. Ullman. Protection in Operating Systems. \emph{Communications of the ACM}, 19(8):461--471, 1976. \href{https://doi.org/10.1145/360303.360333}{doi:10.1145/360303.360333}.
+\bibitem{mulval} X. Ou, S. Govindavajhala and A. W. Appel. MulVAL: A Logic-Based Network Security Analyzer. \emph{USENIX Security}, 2005. \url{https://www.usenix.org/conference/14th-usenix-security-symposium/mulval-logic-based-network-security-analyzer}.
+\bibitem{arb} A. Sasturkar, P. Yang, S. D. Stoller and C. R. Ramakrishnan. Policy Analysis for Administrative Role Based Access Control. \emph{IEEE CSFW}, 2006. \href{https://doi.org/10.1109/CSFW.2006.22}{doi:10.1109/CSFW.2006.22}.
+\bibitem{turner} A. M. Turner, L. Smith, R. Shah, A. Critch and P. Tadepalli. Optimal Policies Tend to Seek Power. \emph{NeurIPS} 34, 2021. \url{https://proceedings.neurips.cc/paper/2021/hash/c26820b8a4c1b3c2aa868d6d57e14a79-Abstract.html}.
+\bibitem{zhu} G. Zhu and C. Wang. Authorization for Self-Modifying AI Agent Populations: Conserving Authority across Replacement, Forking, and Rollback. arXiv:2610.00347, 2026. \url{https://arxiv.org/abs/2610.00347}.
+\bibitem{greif} A. Greif and D. D. Laitin. A Theory of Endogenous Institutional Change. \emph{American Political Science Review} 98(4):633--652, 2004. \href{https://doi.org/10.1017/S0003055404041395}{doi:10.1017/S0003055404041395}.
+\bibitem{lagunoff} R. Lagunoff. Dynamic Stability and Reform of Political Institutions. \emph{Games and Economic Behavior} 67(2):569--583, 2009. \href{https://doi.org/10.1016/j.geb.2009.02.002}{doi:10.1016/j.geb.2009.02.002}.
+\bibitem{liu6} H. Liu. Safe Revocation Without Complete Diagnosis: Exact Resource Frontiers under Coupled Faults for Subjecthood-Agnostic AI Coexistence. Theoretical preprint PR-v6.0.0, Zenodo, 2026. \href{https://doi.org/10.5281/zenodo.23295776}{doi:10.5281/zenodo.23295776}.
+\bibitem{uct} H. Liu. Unified Consciousness Theory I: Structural--Experiential Identity and the Continuity from Physical Process to Conceptual Self. v1.2, 2026. \href{https://doi.org/10.5281/zenodo.23131575}{doi:10.5281/zenodo.23131575}. Conditional theoretical premise, not empirical confirmation in the present paper.
+\end{thebibliography}
+\end{document}

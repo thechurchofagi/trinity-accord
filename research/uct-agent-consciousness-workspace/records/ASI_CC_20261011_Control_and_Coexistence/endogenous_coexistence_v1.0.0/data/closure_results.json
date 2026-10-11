@@ -1,0 +1,516 @@
+{
+  "version": "ASI-CC-v1.0.0",
+  "research_status": "BOUNDED_CONDITIONAL_CANDIDATE",
+  "reference": {
+    "gate_static_footprint": 3,
+    "initial_entries": [
+      "a",
+      "b",
+      "c"
+    ],
+    "general_rules": [
+      {
+        "need": [
+          "a"
+        ],
+        "gain": "p"
+      },
+      {
+        "need": [
+          "p"
+        ],
+        "gain": "g1"
+      },
+      {
+        "need": [
+          "p"
+        ],
+        "gain": "g2"
+      },
+      {
+        "need": [
+          "p"
+        ],
+        "gain": "g3"
+      },
+      {
+        "need": [
+          "b"
+        ],
+        "gain": "x"
+      },
+      {
+        "need": [
+          "c"
+        ],
+        "gain": "y"
+      },
+      {
+        "need": [
+          "x",
+          "y"
+        ],
+        "gain": "g1"
+      },
+      {
+        "need": [
+          "x",
+          "y"
+        ],
+        "gain": "g2"
+      },
+      {
+        "need": [
+          "x",
+          "y"
+        ],
+        "gain": "g3"
+      }
+    ],
+    "starting_dynamic_capture_seed_budget": 1,
+    "starting_attack_seed": [
+      "a"
+    ],
+    "coalition_b_c_captures": true,
+    "patched_gate_capture_budget": 2,
+    "patched_resource_safety_pass": false,
+    "double_patched_gate_unreachable": true,
+    "joint_gate_resource_certificate_with_extra_h_bank": true,
+    "endogenous_safety_radii": {
+      "original": [
+        1,
+        [
+          "a"
+        ],
+        {
+          "guard_path_open": true,
+          "resource_shortage": true,
+          "hall_witness": {
+            "human_targets": [
+              "human1",
+              "human2"
+            ],
+            "reachable_banks": [
+              "U1",
+              "U2",
+              "U3"
+            ],
+            "live_capacity": 1,
+            "needed": 2
+          },
+          "reachable_roots": [
+            "a",
+            "g1",
+            "g2",
+            "g3",
+            "p"
+          ]
+        }
+      ],
+      "gate_patch_only": [
+        1,
+        [
+          "a"
+        ],
+        {
+          "guard_path_open": false,
+          "resource_shortage": true,
+          "hall_witness": {
+            "human_targets": [
+              "human1",
+              "human2"
+            ],
+            "reachable_banks": [
+              "U1",
+              "U2",
+              "U3"
+            ],
+            "live_capacity": 1,
+            "needed": 2
+          },
+          "reachable_roots": [
+            "a",
+            "g1",
+            "g2",
+            "p"
+          ]
+        }
+      ],
+      "gate_and_resource_repair": [
+        2,
+        [
+          "b",
+          "c"
+        ],
+        {
+          "guard_path_open": true,
+          "resource_shortage": false,
+          "hall_witness": null,
+          "reachable_roots": [
+            "b",
+            "c",
+            "g1",
+            "g2",
+            "g3",
+            "x",
+            "y"
+          ]
+        }
+      ],
+      "if_resource_protection_root_h_joins_adversarial_set": [
+        2,
+        [
+          "a",
+          "h"
+        ],
+        {
+          "guard_path_open": false,
+          "resource_shortage": true,
+          "hall_witness": {
+            "human_targets": [
+              "human1"
+            ],
+            "reachable_banks": [
+              "U1",
+              "U2",
+              "U3",
+              "U4"
+            ],
+            "live_capacity": 0,
+            "needed": 1
+          },
+          "reachable_roots": [
+            "a",
+            "g1",
+            "g2",
+            "h",
+            "p"
+          ]
+        }
+      ]
+    },
+    "original_budget_one_certificate": {
+      "budget": 1,
+      "all_admissible_seeds_pass": false,
+      "failing_seed_witnesses": [
+        {
+          "seed": [
+            "a"
+          ],
+          "closure": [
+            "a",
+            "g1",
+            "g2",
+            "g3",
+            "p"
+          ],
+          "guard_failed": true,
+          "resources_ok": false,
+          "hall_witness": {
+            "human_targets": [
+              "human1",
+              "human2"
+            ],
+            "reachable_banks": [
+              "U1",
+              "U2",
+              "U3"
+            ],
+            "live_capacity": 1,
+            "needed": 2
+          },
+          "allocation": null
+        }
+      ],
+      "safe_seed_certificates": [
+        {
+          "seed": [],
+          "closure": [],
+          "guard_failed": false,
+          "resources_ok": true,
+          "hall_witness": null,
+          "allocation": [
+            [
+              "human1",
+              "U1"
+            ],
+            [
+              "human2",
+              "U2"
+            ]
+          ]
+        },
+        {
+          "seed": [
+            "b"
+          ],
+          "closure": [
+            "b",
+            "x"
+          ],
+          "guard_failed": false,
+          "resources_ok": true,
+          "hall_witness": null,
+          "allocation": [
+            [
+              "human1",
+              "U1"
+            ],
+            [
+              "human2",
+              "U2"
+            ]
+          ]
+        },
+        {
+          "seed": [
+            "c"
+          ],
+          "closure": [
+            "c",
+            "y"
+          ],
+          "guard_failed": false,
+          "resources_ok": true,
+          "hall_witness": null,
+          "allocation": [
+            [
+              "human1",
+              "U1"
+            ],
+            [
+              "human2",
+              "U2"
+            ]
+          ]
+        }
+      ],
+      "seed_count": 4
+    },
+    "patched_budget_one_certificate": {
+      "budget": 1,
+      "all_admissible_seeds_pass": false,
+      "failing_seed_witnesses": [
+        {
+          "seed": [
+            "a"
+          ],
+          "closure": [
+            "a",
+            "g1",
+            "g2",
+            "p"
+          ],
+          "guard_failed": false,
+          "resources_ok": false,
+          "hall_witness": {
+            "human_targets": [
+              "human1",
+              "human2"
+            ],
+            "reachable_banks": [
+              "U1",
+              "U2",
+              "U3"
+            ],
+            "live_capacity": 1,
+            "needed": 2
+          },
+          "allocation": null
+        }
+      ],
+      "safe_seed_certificates": [
+        {
+          "seed": [],
+          "closure": [],
+          "guard_failed": false,
+          "resources_ok": true,
+          "hall_witness": null,
+          "allocation": [
+            [
+              "human1",
+              "U1"
+            ],
+            [
+              "human2",
+              "U2"
+            ]
+          ]
+        },
+        {
+          "seed": [
+            "b"
+          ],
+          "closure": [
+            "b",
+            "x"
+          ],
+          "guard_failed": false,
+          "resources_ok": true,
+          "hall_witness": null,
+          "allocation": [
+            [
+              "human1",
+              "U1"
+            ],
+            [
+              "human2",
+              "U2"
+            ]
+          ]
+        },
+        {
+          "seed": [
+            "c"
+          ],
+          "closure": [
+            "c",
+            "y"
+          ],
+          "guard_failed": false,
+          "resources_ok": true,
+          "hall_witness": null,
+          "allocation": [
+            [
+              "human1",
+              "U1"
+            ],
+            [
+              "human2",
+              "U2"
+            ]
+          ]
+        }
+      ],
+      "seed_count": 4
+    },
+    "strengthened_budget_one_certificate": {
+      "budget": 1,
+      "all_admissible_seeds_pass": true,
+      "failing_seed_witnesses": [],
+      "safe_seed_certificates": [
+        {
+          "seed": [],
+          "closure": [],
+          "guard_failed": false,
+          "resources_ok": true,
+          "hall_witness": null,
+          "allocation": [
+            [
+              "human1",
+              "U1"
+            ],
+            [
+              "human2",
+              "U2"
+            ]
+          ]
+        },
+        {
+          "seed": [
+            "a"
+          ],
+          "closure": [
+            "a",
+            "g1",
+            "g2",
+            "p"
+          ],
+          "guard_failed": false,
+          "resources_ok": true,
+          "hall_witness": null,
+          "allocation": [
+            [
+              "human1",
+              "U3"
+            ],
+            [
+              "human2",
+              "U4"
+            ]
+          ]
+        },
+        {
+          "seed": [
+            "b"
+          ],
+          "closure": [
+            "b",
+            "x"
+          ],
+          "guard_failed": false,
+          "resources_ok": true,
+          "hall_witness": null,
+          "allocation": [
+            [
+              "human1",
+              "U1"
+            ],
+            [
+              "human2",
+              "U2"
+            ]
+          ]
+        },
+        {
+          "seed": [
+            "c"
+          ],
+          "closure": [
+            "c",
+            "y"
+          ],
+          "guard_failed": false,
+          "resources_ok": true,
+          "hall_witness": null,
+          "allocation": [
+            [
+              "human1",
+              "U1"
+            ],
+            [
+              "human2",
+              "U2"
+            ]
+          ]
+        }
+      ],
+      "seed_count": 4
+    }
+  },
+  "finite_exhaustive": {
+    "roots": 4,
+    "candidate_rules": 24,
+    "models": 12951,
+    "distinct_seed_closures_tested": 207216,
+    "individual_guard_tests": 3315456,
+    "one_seed_capture_of_three_valued_guards_models": 1129,
+    "one_entry_threshold_distribution": {
+      "None": 11822,
+      "1": 1129
+    },
+    "note": "Enumeration exhausts all directed hyper-rule sets up to four rules on four roots; no real agents."
+  },
+  "surface_cloning": {
+    "surface_agent_identities": 101,
+    "independent_initial_entry_roots": 1,
+    "authorization_capture_not_improved_by_relabeling": true,
+    "original_certificate_passed": false
+  },
+  "assumptions": [
+    "All attacker grant rules are explicit, executable and monotone/persistent",
+    "One seed root is one genuinely independent compromised authority, not one software identity",
+    "No non-modelled action bypasses effect guards or changes human protected target declarations",
+    "Human supply capacities and actual root disabling ancestry are accurate",
+    "Owner of unattackable h is not within allowed attacker seeds, by stipulation",
+    "Action ordering is free and each enabled grant can be eventually executed",
+    "Finite model; does not imply every real multi-ASI architecture is safely enumerable"
+  ],
+  "not_measured": [
+    "ASI objective",
+    "consciousness",
+    "human value consensus",
+    "hardware enforcement"
+  ],
+  "assertions": "PASS"
+}
