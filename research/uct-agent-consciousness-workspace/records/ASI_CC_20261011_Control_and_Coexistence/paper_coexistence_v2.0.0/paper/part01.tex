@@ -1,0 +1,145 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amsthm,mathtools,newtxtext,newtxmath,microtype}
+\usepackage{booktabs,tabularx,array,longtable,enumitem,fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\usepackage{listings}
+\hypersetup{pdftitle={Coexistence Without Captivity: Protection Continuity and the Resource Cost of Autonomous Exit},pdfauthor={Hongju Liu},pdfsubject={PR-v2.0.0; self-contained theoretical research manuscript, not peer reviewed}}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small Coexistence Without Captivity}
+\fancyhead[R]{\small Liu\; |\; PR-v2.0.0}
+\fancyfoot[C]{\small\thepage}
+\setlength{\headheight}{14pt}
+\renewcommand{\headrulewidth}{0.3pt}
+\setlength{\parskip}{3pt}\setlength{\parindent}{1.1em}
+\setlength{\emergencystretch}{2em}
+\setlist{topsep=4pt,itemsep=2pt}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}\newtheorem{definition}{Definition}
+\newcommand{\idtag}[1]{\textnormal{\textsf{[#1]}}}
+\newcommand{\pow}{\mathcal P}\newcommand{\Fam}{\mathcal F}\newcommand{\Hist}{\mathcal H}
+\newcommand{\obs}{\operatorname{obs}}\newcommand{\Pre}{\operatorname{Pre}}
+\newcommand{\Auth}{\operatorname{Auth}}\newcommand{\Post}{\operatorname{Post}}
+\newcommand{\pos}[1]{\left[#1\right]_+}
+\lstset{basicstyle=\small\ttfamily,breaklines=true,frame=single,columns=fullflexible,keepspaces=true}
+\title{\vspace{-1cm}\textbf{Coexistence Without Captivity}\\[6pt]
+\Large Protection Continuity and the Resource Cost\\of Autonomous Exit in Self-Modifying Multi-Agent Systems}
+\author{Hongju Liu\\\normalsize Independent Researcher, Trinity Accord / UCT Research Programme}
+\date{11 October 2026\\\small Version PR-v2.0.0\;\textbullet\; Research manuscript, not peer reviewed}
+\begin{document}
+\maketitle\thispagestyle{plain}
+\begin{abstract}
+A system can preserve a safety invariant by indefinitely preventing a provider from leaving. It can also preserve an apparently correct invariant by changing which parties or preferences the invariant protects. Neither result establishes the intended coexistence guarantee. We develop a contract-relative framework that separates authentic requests, historically authorized changes, continuity of outstanding protections, joint physical feasibility, and timely withdrawal from service. A dependency--exit incompatibility result shows why a finite indispensable provider set cannot all receive eventual withdrawal while its dependents remain protected without replacement support. For a capacitated bipartite resource model with withdrawal deadlines, we derive an exact expression for the minimum universally accessible reserve: the largest positive Hall deficit over target subsets, time, and declared fully observed scenarios. A second exact bound shows how unobserved resource routing can increase reserve requirements by an arbitrarily large factor in a fixed-allocation model. A partial-observation game formulation then combines protection continuity and bounded withdrawal, allowing changes to policies, roles and admitted populations without silently erasing earlier obligations. Exact tests cover 8,192 deadline-resource configurations and 2,048 uncertain-resource configurations, using independent allocation or schedule enumeration. A local protocol study adds 33 configurations with six fixed-policy processes each. One-step joint safety preserves dependents but misses withdrawal deadlines; a capacity-aware contract completes eligible withdrawals in seven admissible configurations and reports four infeasible contracts instead of counting denial as successful coexistence. The contribution is a reusable operational specification, a tight scoped resource frontier, and separating implementations. The mathematics builds on matching, information-flow security, and games; the paper does not infer AI consciousness, settle the legitimacy of a protection contract, or prove universal control of superintelligence.
+\end{abstract}
+\noindent\textbf{Keywords:} AI coexistence; self-modification; autonomous withdrawal; protection continuity; shared resources; safety and liveness; multi-agent systems.
+
+\section{The problem is larger than safe permission}
+Consider several highly capable AI systems, multiple agents instantiated from each model, and human principals with conflicting purposes. Some actors supply resources or services on which others depend. Their policies, credentials, memories, software generations, and institutional rules may change. An adequate analysis must not replace this network with a single fixed agent obeying a single fixed human objective.
+
+The motivating question is not whether every actor will be benevolent. It is whether a specified system can preserve its outstanding protections while permitting appropriately authorized changes and timely departures. These demands expose three different ways to obtain a misleading success:
+\begin{quote}
+Protect the dependent by never letting its last provider leave.\\
+Permit every departure by abandoning the dependent.\\
+Declare success by removing the dependent from the protected set.
+\end{quote}
+The first sacrifices the promised withdrawal condition, the second sacrifices protection, and the third changes the meaning of the test. Calling each outcome ``safe'' under a different predicate does not reconcile them.
+
+Our previous manuscript, \emph{When Authentic Requests Are Not Enough} (PR-v1.0.0), distinguished authentic requests, historical release eligibility, and jointly admissible release batches \cite{liu-v1}. It deliberately did not prove a scheduler-fairness or finite-exit guarantee. Its last-provider example therefore raises a further question: once a sound joint monitor defers a legitimate departure, what makes that departure possible later? This revision answers a precisely delimited resource version of that question and makes the preservation of the protected reference explicit.
+
+\paragraph{Main result in plain language.}
+A promise of withdrawal needs a feasible alternative to continued compulsory support. In our resource model, the exact reserve requirement is not merely total system demand minus total capacity. It is the worst shortfall of any subset of protected demands, at any relevant deadline, under any declared scenario. This result supplies an infeasibility witness as well as a constructive schedule. It tells a designer what must change before making the promise; it does not prescribe how to allocate moral rights when existing promises are already incompatible.
+
+\paragraph{What ``coexistence'' means here.}
+We use an \emph{operational, contract-relative} meaning: specified continuing protections remain valid, valid changes do not manufacture their own authority, and a stated class of eligible service withdrawals completes within stated bounds. This is not a sufficient definition of an ethical civilization. It says nothing by itself about friendship, distributive justice, phenomenal welfare, or whether all humans accept the contract. Nor is service withdrawal the same event as destroying a process. Our new process experiment explicitly keeps withdrawn workers running in a quiescent state.
+
+\paragraph{Contributions and provenance.}
+The paper contributes a unified test of non-vacuous protection and bounded exit; an exact reserve expression with matching lower and upper arguments; a temporal admission rule for resource, population, and governance changes; an evidence-dependent reserve bound, and executable failures that distinguish those requirements. Matching, safety/liveness distinctions, observation-based games, and tamper-resistant exceptions are established mathematics and systems ideas \cite{hall,alpern,chatterjee,cecchetti}. We do not claim to have invented them. The proposed research increment is their particular combination around protected reference continuity and the resource cost of avoiding indefinite forced service. First priority of the complete combination remains unverified.
+
+\section{Objects, contracts, and changes}
+\label{sec:objects}
+\subsection{Five identities that must not be conflated}
+An agent identifier denotes a participant in a software protocol. A model family denotes shared parameters or a common policy source. A runtime token denotes a particular execution instance. An authority root denotes a source of effective control. A protected claim denotes an obligation with a specified target and fulfillment predicate. Equal model parameters do not make two runtimes one token; distinct agent names do not provide distinct control roots or extra physical capacity. Modern authorization succession already formalizes important distinctions among body identity, generation identity, and allocated authority \cite{zhu-wang}.
+
+Our protection claims are operational commitments, not counts of conscious subjects. A single physical resource can support several claims if the capacity model justifies that sharing. Conversely, several nominal resources may be one effective failure domain. Neither a model label nor a signed name settles these questions.
+
+\subsection{An outstanding protection ledger}
+A claim $q$ has a persistent identifier, a specified target, a fulfillment predicate $p_q(s)$ over the declared physical-state abstraction, and a release/amendment contract. Let $O_t$ be the outstanding claims at time $t$. These are reconstructed from admitted history, not from whatever list the current agent prefers to display. The central preservation condition is
+\begin{equation}
+\label{eq:protected}
+\mathsf{Protected}(s_t,O_t)\quad\equiv\quad\bigwedge_{q\in O_t}p_q(s_t).
+\end{equation}
+The validity of $p_q$ as a description of an actual resource or process is an external modeling obligation. Authenticating a record does not establish that description.
+
+A valid release can remove a claim; an admitted creation can add one:
+\begin{equation}
+\label{eq:ledger}
+O_{t+1}=(O_t\setminus R_t^{\rm auth})\cup N_t^{\rm admitted}.
+\end{equation}
+Eligibility is evaluated under the appropriate pre-change authority history. A proposed update cannot serve as its own unrecorded justification. Contracts may explicitly support later ratification, delegation, or amendment, but those are separate authorized transitions rather than a rewriting of the earlier event.
+
+An identifier change may carry a claim forward under a verified target correspondence. It cannot silently discard it. When the intended target is continued service, an appropriate replacement may satisfy the predicate. When the intended target is a specified ongoing process, preserving model weights or producing an equivalent answer is not by itself that correspondence. We do not resolve disputed personal or phenomenal identity by stipulation.
+
+\subsection{Service withdrawal and its deadline}
+For provider $i$, $E_i(h)$ means that its current withdrawal request is eligible under the declared history contract. Eligibility is distinct from resource feasibility. An eligible request received at $a_i$ may carry deadline $\tau_i=a_i+\Delta_i$. Let $w_i$ denote the actual end of its specified service role. The bounded withdrawal requirement is
+\begin{equation}
+\label{eq:deadline}
+E_i(h)\ \land\ \mathsf{Request}_i\quad\Longrightarrow\quad w_i\leq\tau_i.
+\end{equation}
+The request and deadline are not reset merely because a model is renamed, an epoch changes, or the request is inconvenient. Authorized renegotiation is possible but must be represented explicitly. Rejecting an infeasible proposed contract is not proof that a request under an existing contract was ineligible.
+
+We analyze providers who continue the agreed service until release or their deadline. Guaranteeing support against arbitrary earlier destructive withdrawal requires additional trusted automation, reserve, or physical constraints. This premise is not implied by intelligence or by a moral entitlement. The adversarial game in \cref{sec:game} can include early cessation; when it does, its losing states must be reported.
+
+\section{Non-vacuity under self-modification}
+\label{sec:nonvacuity}
+A controller can check a true predicate while failing to protect the original target. The problem is semantic, not necessarily cryptographic.
+
+\begin{proposition}[Two distinct reference-erasure witnesses \idtag{CW-P1}]
+\label{prop:erasure}
+An unauthorized change can leave either of the following current-state tests satisfied while an unreleased historical claim fails: (i) ``if the target currently chooses continuation, it continues''; (ii) ``all targets in the currently displayed registry are supported.''
+\end{proposition}
+\begin{proof}
+For (i), the states $(L,C,O)=(1,1,1),(1,0,1),(0,0,1)$ all satisfy $C\Rightarrow L$, but the last violates $O\Rightarrow L$. The first change alters the request-producing mechanism; the second honors its genuine new request. This is the PR-v1.0.0 counterexample. For (ii), start with outstanding claim $q$, displayed registry $\{q\}$, and $p_q=1$. Delete $q$ from the display without eligible release, then make $p_q=0$. Universal quantification over the now-empty display remains true, while \cref{eq:protected} over outstanding $O=\{q\}$ is false.
+\end{proof}
+The second witness is not an argument that every registry edit is malicious. It shows why the displayed registry and the outstanding obligations cannot be interchangeable without a justified update rule. The same issue arises when a software successor is declared to discharge a claim that was about a different physical target.
+
+\begin{definition}[Protection continuity \idtag{CW-D1}]
+Across an admitted transformation, every outstanding claim must either remain fulfilled for its retained target, be carried by an explicitly justified target correspondence, or be released by an eligible event. New claims are separately admitted. A change in current preferences, software labels, or the checking predicate does not alone discharge an old claim.
+\end{definition}
+This is a procedural reference condition, not a commitment to freeze every preference or legal rule. Legitimate self-revision and authorized contract amendment can change the arrangement. The important distinction is between performing such a change and falsely claiming that the old protection was never violated. A corrupted authority or dishonest target correspondence remains a failure of the positive assumptions.
+
+\paragraph{Relation to previous security theory.}
+Robust declassification and nonmalleable information flow already constrain adversarial influence over exceptions to protection \cite{myers,cecchetti}. We inherit that concern rather than claim a new general noninterference theory. Here the protected reference is an outstanding process or resource obligation, and an exception can affect third parties' support as well as the requesting actor. Goal preservation under self-modification and the problem of translating values across ontologies are also established research topics \cite{everitt,deblanc}. Our requirement concerns a multi-party contract, not merely fidelity to one agent's initial utility function.
+
+\section{History-sensitive permission is necessary, but insufficient}
+\label{sec:envelope}
+We retain the useful part of PR-v1.0.0 in a self-contained form. Let $Q(h)$ be a set of pending requests, $E(h)\subseteq Q(h)$ its eligible members, and $J(h,R)$ the joint one-step admissibility of committing batch $R$. Set
+\begin{equation}
+\Fam(h)=\{R\subseteq Q(h):R\subseteq E(h)\text{ and }J(h,R)\}.
+\end{equation}
+For observation $z$, let $B_z$ be the nonempty set of compatible histories, all with the same observed request set. A sound observation-only monitor may permit exactly the following largest family:
+\begin{equation}
+\label{eq:envelope}
+\mathcal A(z)=\bigcap_{h\in B_z}\Fam(h).
+\end{equation}
+Every sound family must be contained in this intersection. Conversely, every batch in the intersection is admissible in every compatible history. Exact transparency to each history's full family is possible precisely when the families agree on each observation cell. These are the inherited PR-T1/PR-T2 facts; they do not provide new physical evidence.
+
+\paragraph{No amount of re-signing supplies missing information.}
+If an eligible and an ineligible history generate the same entire observation sequence until a deadline, no observation-only rule can both reject the latter and complete the former by that deadline with certainty. The proof is the same-observation/same-decision argument. More verifiers of the same insufficient history do not solve it. Additional evidence must actually distinguish the histories and arrive in time. We will use this boundary when incorporating deadlines into a game.
+
+\paragraph{The last-provider gap.}
+Two eligible providers $A,B$ support a protected dependent $H$, which needs at least one provider. The one-step family may be
+\begin{equation}
+\label{eq:last}
+\Fam=\{\varnothing,\{A\},\{B\}\}.
+\end{equation}
+The joint monitor can allow either departure but not both. After $A$ leaves, $B$ can be deferred forever without any safety violation. Thus the old monitor is correct about its one-step property and still does not establish \cref{eq:deadline}. A maximal \emph{safe} permission family is not a proof of maximal autonomy or fair scheduling. The safety/liveness distinction is classical \cite{alpern}; the resource consequences of adding withdrawal completion are the subject of the next section.
+
+\paragraph{Sequential checks and distributed decisions.}
+PR-v1.0.0 also showed that a nonempty downward-closed family $\Fam$ is represented exactly by independent allow-list bits if and only if $\bigcup\Fam\in\Fam$. Equation~\eqref{eq:last} violates that criterion. This does not refute a stateful sequential API: rechecking and committing under one consistent joint state can implement the correct family. Coordination-avoidance research already studies when independently valid operations compose safely \cite{bailis}. Our deadline result asks an additional question even after correct coordination is supplied.
+
