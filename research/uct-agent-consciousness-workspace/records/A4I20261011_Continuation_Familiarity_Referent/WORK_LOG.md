@@ -13,6 +13,7 @@
 11. Re-ran the exact checker; its parsed JSON is identical to `EXACT_RESULTS.json` (byte formatting differs only in pretty-print layout). Canonical navigation/disabled-assembly validation passed with 913 completed nodes, 424 completed rules, 38 pending checkpoints, zero unresolved deductive references, no scientific promotion and no full semantic reproof.
 12. The first authenticated Git ref update succeeded, but remote readback exposed a truncated `UNIFIED_RESEARCH_INDEX.json`; base64 output had exceeded the command-output budget. Only that blob differed. Re-uploaded it with an explicit encoded-length guard and expected blob SHA, creating repair successor `95b0904522e37ab2a161ea12d6ea0ab34350a23f`. Full remote/local science-tree comparison then passed.
 13. Replaced the same Library manifest identity with version 1 so the failure and required repair successor are recoverable. Reverse materialization and SHA256 `14d012a1...75b2a` passed.
+14. Replaced the same fixed master identity from v124 to v125 with the verified repair commit, Library identities, hashes and recovery order. Prepared this final Git receipt as its expected-SHA successor; the next fixed-master version records that exact commit SHA.
 
 ## Failed or deliberately withheld
 

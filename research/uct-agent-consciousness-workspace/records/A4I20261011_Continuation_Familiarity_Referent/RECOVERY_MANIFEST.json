@@ -6,6 +6,7 @@
   "verified_science_tree_commit": "95b0904522e37ab2a161ea12d6ea0ab34350a23f",
   "master_library_id": "libfile_4175a81748fc819187fa8f5771f056fa",
   "master_science_version": 124,
+  "master_final_confirmation_version_before_final_git_receipt": 125,
   "increment": {
     "library_id": "libfile_fd0f683133488191a36b1193774f2feb",
     "file": "UCT_A4I_Increment_20261011.zip",
@@ -23,7 +24,7 @@
   },
   "steps": [
     "Read the latest fixed master handoff version.",
-    "Fetch the remote branch and require 95b0904522e37ab2a161ea12d6ea0ab34350a23f or a verified fast-forward successor; the initial 1e9042e commit alone contains a truncated unified index.",
+    "Fetch the remote branch and require a verified fast-forward successor of 95b0904522e37ab2a161ea12d6ea0ab34350a23f containing this final receipt; the initial 1e9042e commit alone contains a truncated unified index.",
     "Read A4I HANDOFF_ZH, RESEARCH_NOTE, QUESTION_CONTRACT, CLAIM_LEDGER, GAP_LEDGER, FORMAL_AUDIT, REVIEW_RESPONSE and VALIDATION.",
     "Reverse-materialize and verify the increment and manifest hashes before extracting only missing files.",
     "Run check_question_contract.py and validate_current_map.py; do not interpret either PASS as phenomenal truth or global semantic proof."
