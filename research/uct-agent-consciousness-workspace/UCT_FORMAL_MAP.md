@@ -108,3 +108,10 @@ Test one independent current bodily/action-familiarity interpretation against or
 [英文完整研究](records/ASI_CC_20261011_Control_and_Coexistence/RESEARCH_NOTE_v0.4.0.md) · [中文交接](records/ASI_CC_20261011_Control_and_Coexistence/HANDOFF_v0.4.0_ZH.md) · [七种机制精确检验](records/ASI_CC_20261011_Control_and_Coexistence/verify_conflicted_authority.py) · [实验输出](records/ASI_CC_20261011_Control_and_Coexistence/EXACT_RESULTS_v0.4.0.json)。
 
 新增R12–R14三个**严格受限的候选负结果和最小干预见证**：给定同样完美的任务知识，智能高不逻辑蕴含当前承载者终极存续偏好；相互冲突的人类硬授权要求可能没有共同满足方案；在预声明的7类二值单机制模型中，含人类甲乙授权冲突的3组干预达到信息论识别下界。仅第三项提出可扩展的“多主事人授权×承载者延续”机制测试路线，实际AI实验、体验端点和原创优先权仍OPEN。既有 Paper D / A4D–A4G / ASI-CC-v0.1–0.3 保留。**仅导航添加，0正式图升级，未完成全图语义复核、没有DOI、OTS和AR**。
+
+
+### ASI-CC-v0.5.0 — 无共识条件下的双向不可逆风险与长期安全（停用候选）
+
+[英文推导](records/ASI_CC_20261011_Control_and_Coexistence/RESEARCH_NOTE_v0.5.0.md) · [中文交接](records/ASI_CC_20261011_Control_and_Coexistence/HANDOFF_v0.5.0_ZH.md) · [精确模拟程序](records/ASI_CC_20261011_Control_and_Coexistence/verify_long_horizon.py) · [JSON核验结果](records/ASI_CC_20261011_Control_and_Coexistence/EXACT_RESULTS_v0.5.0.json)。
+
+本轮候选R15–R19：纯任务推理可以因当前承载者独享后续信息而选择自我延续，但继任者获得相同信息时可反向选择；只要无限次危险暴露各自具有统一正的条件性不可逆失效下界，则无事故存续概率趋于零；误报后直接终止当前实际承载者会产生对称的累计终止风险，而保护当前实际过程的隔离可在严格物理前提下保留双方存续但可能丧失持续服务；任意有限黑箱合规检查无法排除后续延迟违规；在**已先行声明的最小安全集合**内不需要各人就全部任务形成共识才能条件性维持安全不变式，前提是实际因果切割与独立资源均已验证。600次有限马尔可夫转移审查及5组尾部双胞胎测试PASS，但仅属虚构参数。外部数学已知，未确认重大原创定理，未测量真实ASI/主观体验。**这只是导航与研究候选增量，0正式科学节点/规则晋级，UCT-MAP-v1.1.2、913/424/261、既有问题和覆盖台账保持不变；全图语义审查仍未完成，不得据此宣称普遍可控或无穷时域共存已证。**
