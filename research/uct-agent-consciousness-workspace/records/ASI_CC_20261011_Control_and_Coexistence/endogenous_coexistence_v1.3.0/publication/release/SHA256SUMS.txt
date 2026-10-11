@@ -1,0 +1,5 @@
+16357a609238a789b2babdd426e73536489f9a3dfe30070a1a891b5ba6aa6a4b  when-revocation-does-not-restore-safety-v1.3.0.pdf
+c7edff33ca746d47ebf77e7648ed4f3b8160ecea1e1e7c00c5196912b809b6fc  reproducibility-v1.3.0.zip
+8f68cbdcf7285eeacabcc9ad4078a9d2db90c2192d9ca4ce2fdc85018c996def  when-revocation-does-not-restore-safety-v1.3.0.tex
+e9ab57f85a937275c5e5d80c4b91582a413d92f3eb2dc74e049bb5e6830b8ded  README-LICENSE.txt
+cf1cc4cb490cbe039ea39c5571fbf7db899b731719e71a51594e9db9c1fce191  REVIEW-AND-SOURCES.md

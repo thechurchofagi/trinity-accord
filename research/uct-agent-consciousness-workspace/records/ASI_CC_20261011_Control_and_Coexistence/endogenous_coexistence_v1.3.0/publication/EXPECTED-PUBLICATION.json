@@ -1,0 +1,75 @@
+{
+  "schema": "rac13-freeze/1",
+  "status": "FROZEN_NOT_YET_PUBLISHED",
+  "paper_id": "ASI-CC-v1.3.0",
+  "title": "When Revocation Does Not Restore Safety: Exact Admission Across Asynchronous Policy Changes in Multi-Agent Systems",
+  "work_family": "When Revocation Does Not Restore Safety",
+  "metadata": {
+    "title": "When Revocation Does Not Restore Safety: Exact Admission Across Asynchronous Policy Changes in Multi-Agent Systems",
+    "creators": [
+      {
+        "name": "Liu, Hongju",
+        "affiliation": "Independent Researcher, Shenzhen, China"
+      }
+    ],
+    "upload_type": "publication",
+    "publication_type": "preprint",
+    "publication_date": "2026-10-11",
+    "version": "1.3.0",
+    "language": "eng",
+    "access_right": "open",
+    "license": "cc-by-4.0",
+    "description": "A conditional exact unit-service admission theorem for inherited committed effects and independently timed in-flight effects. Includes constructive sharpness, finite/sparse computation, a specified unbounded count-abstraction gap, and controlled SQLite protocol tests. Main methods inherit network calculus and escrow; global priority and production safety are not established. Substantially AI-assisted research under Hongju Liu direction; not independently peer reviewed.",
+    "keywords": [
+      "multi-agent systems",
+      "revocation",
+      "network calculus",
+      "asynchronous operations",
+      "admission control",
+      "policy revision"
+    ]
+  },
+  "source_pdf_sha256": "16357a609238a789b2babdd426e73536489f9a3dfe30070a1a891b5ba6aa6a4b",
+  "source_reproducibility_sha256": "c7edff33ca746d47ebf77e7648ed4f3b8160ecea1e1e7c00c5196912b809b6fc",
+  "files": [
+    {
+      "name": "when-revocation-does-not-restore-safety-v1.3.0.pdf",
+      "bytes": 262714,
+      "sha256": "16357a609238a789b2babdd426e73536489f9a3dfe30070a1a891b5ba6aa6a4b"
+    },
+    {
+      "name": "reproducibility-v1.3.0.zip",
+      "bytes": 407200,
+      "sha256": "c7edff33ca746d47ebf77e7648ed4f3b8160ecea1e1e7c00c5196912b809b6fc"
+    },
+    {
+      "name": "when-revocation-does-not-restore-safety-v1.3.0.tex",
+      "bytes": 45244,
+      "sha256": "8f68cbdcf7285eeacabcc9ad4078a9d2db90c2192d9ca4ce2fdc85018c996def"
+    },
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 1327,
+      "sha256": "e9ab57f85a937275c5e5d80c4b91582a413d92f3eb2dc74e049bb5e6830b8ded"
+    },
+    {
+      "name": "REVIEW-AND-SOURCES.md",
+      "bytes": 1613,
+      "sha256": "cf1cc4cb490cbe039ea39c5571fbf7db899b731719e71a51594e9db9c1fce191"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 500,
+      "sha256": "95b716418336d10b1fa5a05861bf29e42d58d41a65c0d067612c14763fba1875"
+    }
+  ],
+  "file_count": 6,
+  "public_record_id": null,
+  "doi": null,
+  "previous_unpublished_versions": [
+    "ASI-CC-v1.1.0",
+    "ASI-CC-v1.2.0"
+  ],
+  "separate_published_PR6": "10.5281/zenodo.23295776",
+  "peer_reviewed": false
+}

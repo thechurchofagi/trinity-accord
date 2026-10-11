@@ -1,0 +1,381 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amsthm,mathtools,newtxtext,newtxmath,microtype}
+\usepackage{booktabs,tabularx,array,enumitem,fancyhdr,needspace}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\usepackage{listings,float}
+\hypersetup{pdftitle={When Revocation Does Not Restore Safety: Exact Admission Across Asynchronous Policy Changes},pdfauthor={Hongju Liu},pdfsubject={ASI-CC-v1.3.0; publication-preparation manuscript; not peer reviewed}}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small When Revocation Does Not Restore Safety}
+\fancyhead[R]{\small Liu | ASI-CC-v1.3.0}
+\fancyfoot[C]{\small\thepage}
+\setlength{\headheight}{14pt}\setlength{\emergencystretch}{2em}
+\setlength{\parindent}{1.1em}\setlength{\parskip}{3pt}
+\setlist{topsep=4pt,itemsep=2pt}
+\newtheorem{theorem}{Theorem}\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}\newtheorem{definition}{Definition}
+\newcommand{\idtag}[1]{\textnormal{\textsf{[#1]}}}
+\newcommand{\one}{\mathbf 1}
+\lstset{basicstyle=\small\ttfamily,breaklines=true,frame=single,columns=fullflexible,keepspaces=true}
+\title{\vspace{-1cm}\textbf{When Revocation Does Not Restore Safety}\\[6pt]
+\Large Exact Admission Across Asynchronous Policy Changes\\in Multi-Agent Systems}
+\author{Hongju Liu\\\normalsize Independent Researcher, Trinity Accord / UCT Research Programme}
+\date{11 October 2026\\\small Publication-preparation manuscript, version 1.3.0 \textbullet\ Not peer reviewed}
+\begin{document}
+\maketitle\thispagestyle{plain}
+\begin{abstract}
+A policy can be replaced while its previously authorized operations remain in flight and its committed effects remain unrepaired. Revoking the initiating authority neither erases these exposures nor proves that a replacement workload fits the remaining service capacity. We derive an exact admission certificate for a declared recoverable unit-capacity model with arbitrary inherited repair readiness, independent commit windows for pending work, ticket-specific repair delays, and a regulated new stream. The worst-case outstanding impairment is a finite maximum of explicit interval terms; every maximizing term has a constructive arrival-and-commit witness. Under sufficient recovery rate, an infinite future reduces to a horizon ending at the last earliest-commit time or the new repair latency minus one, whichever is later. A sparse boundary algorithm eliminates enumeration of time slots and execution schedules. Its inverse gives the largest safely renewable burst. Window information has an unbounded advantage over a defined count-only worst-case abstraction, but widening or failing to enforce those windows invalidates the benefit. An independent exhaustive oracle checks 57,120 joint schedules, and 23 local SQLite/subprocess configurations separate conservative refusal, safe continued service, stale-certificate failure and enforced rejection of out-of-window effects. Network calculus, timed admission and effect accounting are established foundations. The contribution is their exact asynchronous-handoff specialization and executable evidence boundary, not a novel general queue calculus, a claim of physical fault independence, or an attribution of AI subjecthood.
+\end{abstract}
+\noindent\textbf{Keywords:} AI agents; revocation; asynchronous commitments; timed admission; persistent effects; recovery; network calculus.
+
+\section{The missing state in a policy handoff}
+A human operator may retire an agent, update a shared model or replace a policy without immediately stopping every previously accepted operation. Some effects have already occurred. Other tasks can still commit through provider queues, callbacks or delegated work. A replacement system can therefore inherit both past impairment and future exposure. A fresh policy's clean-start safety calculation is not a certificate for that inherited state.
+
+The basic distinction between revocation and restoration is established. Root-scoped quiescence separates a verified cut across old effect paths from rollback or compensation \cite{quiescence}. Fleet-wide risk accounting already includes reserved and committed exposure across agent identities \cite{risk}. Classical escrow and real-time analysis provide essential mechanisms for reservations and constrained workload admission \cite{escrow,rtc}. The present work does not claim to invent any of these distinctions.
+
+Its question is sharper: \emph{when can a new workload be admitted without first canceling or draining all inherited operations, while remaining safe for every permitted asynchronous completion schedule?} A count-only reservation is safe in some models but ignores when individual exposures can arise. A timing-aware decision can admit useful work using less simultaneous margin, provided the timing constraints are true and enforced. Determining the exact difference, rather than recommending that all unresolved work be frozen, is the objective of this paper.
+
+The v1.2 predecessor solved the handoff problem for already committed unit impairments with known repair-eligibility profiles \cite{prior}. It treated arbitrary in-flight work with a separate safety-only reservation invariant. Its on-schedule theorem expressly excluded unmodeled late commits. We close that specific gap by admitting finite pending tickets with bounded commit windows and heterogeneous repair delays. We do not retroactively claim that v1.2 covered this larger model.
+
+\paragraph{Main contribution.}
+We give a necessary-and-sufficient all-stream headroom criterion, construct a schedule attaining it, prove a finite-horizon reduction, and compress that computation to event boundaries independent of the magnitude of the timestamps. We also derive an exact renewed-burst allowance and a family in which count-only abstraction requires arbitrarily more capacity than faithful timing information. The experiment then tests the conditions under which that improvement is lost, including an otherwise genuine ticket committing outside its certified window.
+
+\paragraph{What is protected.}
+The primary object is a human-defined service requiring sufficient functioning capacity. No machine is assumed to have an intrinsic right to execute, a felt wish to survive, or personhood. This operational question is meaningful for deterministic tools. Conversely, a service-capacity theorem is not evidence that an AI lacks experience or that all potential machine welfare is irrelevant. Those claims require separate arguments.
+
+\section{Established work and the precise novelty claim}
+\label{sec:related}
+\paragraph{The closest agent-systems work.}
+Mohammadi and Bindschaedler's \emph{Irreversibility Budget} maintains cross-agent reserved and committed risk, acknowledges dependencies and tests failures caused by unsound charging \cite{risk}. It is a particularly close precedent that was not included in the v1.2 comparison. Our claim must therefore not be ``the first shared ledger for consequences.'' Their quantity is residual loss under a pricing model. Ours is outstanding \emph{recoverable unit service impairment} under a specified repair process. We compute an exact time-dependent admissibility boundary for one such model; we do not solve heterogeneous financial, informational or irreversible harm valuation.
+
+Zhu and Wang's quiescence protocol accounts for pre-cut carriers, distributed effect fences, independent support and replay stability \cite{quiescence}. Cordon supplies semantic transactions for tool-using agents \cite{cordon}. A complete effect fence can legitimately cancel inherited work; a binding transfer can retain authorized work. We assume the selected tickets remain legitimately executable within their contract and ask whether the resulting workload fits. Our local initiation fence is deliberately weaker than full quiescence. No empirical superiority over those implementations is claimed.
+
+\paragraph{Timed workload methods.}
+The backlog identities and interval maximization use deterministic network calculus \cite{netcal}. Real-time calculus links these techniques to scheduling and task models \cite{rtc}. Initial-state-dependent transient bounds also precede this manuscript \cite{transient}. RFC~9320 explicitly explains why bounded timing variation increases an arrival envelope's burstiness \cite{detnet}. Thus neither bounded-delay burst growth nor dependence on old state is original here. The narrower proposed result retains individual pending windows and their repair eligibility instead of replacing them with one time-invariant envelope, and identifies an exact finite event set for this handoff calculation.
+
+\paragraph{Scope of priority and comparison.}
+Our lower bounds concern the declared all-conforming-executions contract, not every possible scheduler or stronger observation system. The count-only comparator deliberately discards window information; a full implementation of existing timed-reservation methods can exploit such information too. The set of nearest sources has been rechecked, but the exact formula's worldwide priority remains unverified. This is a self-contained theoretical application and reproducible protocol study, not a claim of new general min-plus algebra.
+
+\section{A contract with committed and pending effects}
+\label{sec:model}
+A service has $N$ interchangeable healthy unit components and requires $q$ of them, $1\le q\le N$. Its impairment margin is $H=N-q$. Each committed effect temporarily removes one unit, and each completed repair restores one unit. We model a virtual unlimited pool until the first violation; a safe bound $H$ ensures a real finite pool never crosses its protected threshold. One effect does not count the same impairment twice. Irreversible harm and heterogeneous indispensable routes are outside this scalar model.
+
+\subsection{Old committed state}
+At a policy switch, immediately before the first repair phase of slot 0, there are $d_0$ existing impairments. Their first repair-eligible slots are $r_1,\ldots,r_{d_0}\ge0$, with previously eligible jobs normalized to zero. Write
+\begin{equation}
+M(s)=\sum_{j=1}^{d_0}\one\{r_j\le s\}.
+\end{equation}
+$M$ counts old jobs eligible by $s$, including jobs already repaired later in the execution. It is not a repair-completion receipt.
+
+\subsection{Inherited pending tickets}
+There are $p$ accepted but not yet committed tickets. Ticket $i$ has one possible unit effect, an integer commit window $[u_i,v_i]$, $0\le u_i\le v_i<\infty$, and repair delay $\delta_i\ge1$. It commits at an unknown $c_i\in[u_i,v_i]$ at the \emph{end} of slot $c_i$, and becomes eligible for repair at the beginning of $c_i+\delta_i$.
+
+The possible commit schedules form the Cartesian product of these windows. ``Independent'' here means that the specification permits each combination, not that commits are statistically independent. Every combination must be safe. A smaller correlated schedule set is safely overapproximated by this product, but the bound may then cease to be necessary. Tickets may optionally be canceled without committing; the worst-case bound is unchanged because omitting a unit effect cannot increase the outstanding count. Cancellation must actually remove that effect's remaining execution path.
+
+Each ticket keeps its identity across actor replacement. Copies or retries of the same one-shot ticket do not create independent entries. Conversely, an operation that can produce several effects must be charged for all of them. Bounds on human authority or physical effect size are inputs, not discoveries made by the analysis.
+
+\subsection{New stream and the repair mechanism}
+New post-switch effects have counts $a_t$ and uniform repair delay $\ell\ge1$. The \emph{actual commit stream}, not merely its request stream, obeys
+\begin{equation}
+\sum_{t=x}^{x+L-1}a_t\le\alpha(L):=b+\rho(L-1),
+\qquad L\ge1,\quad b\ge\max(1,\rho),\quad \rho\ge0.
+\label{eq:alpha}
+\end{equation}
+All parameters are integer. Every slot begins with work-conserving repair of up to $\mu$ eligible unit effects and ends with old-ticket and new-stream commits. Order among eligible unit repairs does not affect the aggregate count. The guarantee requires all conforming new commits and all permitted pending schedules to proceed while preserving the service. Declining the new contract is distinct from fulfilling it; rejecting an out-of-window attempt is allowed because that attempt is nonconforming.
+
+The restorer, clock convention, complete effect boundary and window authenticity are substantive premises. Average recovery is not a per-slot guarantee. Changing the clock or silently extending a deadline is not an execution covered by the old certificate. The paper neither proves these premises for physical infrastructure nor treats their names as evidence that they hold.
+
+\section{Exact outstanding-state algebra}
+\label{sec:trace}
+For a fixed pending schedule $\mathbf c$ and a new stream, let $A(t)=\sum_{j=0}^{t}a_j$ and set $A(t)=0$ for $t<0$. Define cumulative pending commits and eligibility:
+\begin{equation}
+P_{\mathbf c}(t)=\sum_i\one\{c_i\le t\},\qquad
+E_{\mathbf c}(s)=\sum_i\one\{c_i+\delta_i\le s\}.
+\end{equation}
+Let $R(t)$ be cumulative repairs through the beginning of slot $t$, $R(-1)=0$. Then
+\begin{align}
+R(t)&=\min\{M(t)+A(t-\ell)+E_{\mathbf c}(t),\ R(t-1)+\mu\},\label{eq:recurrence}\\
+D_t&=d_0+A(t)+P_{\mathbf c}(t)-R(t).
+\end{align}
+The pre-switch count is $d_0$.
+
+\begin{lemma}[Fixed-schedule trace identity \idtag{RAC13-L1}]
+\label{lem:trace}
+The outstanding count equals the maximum of
+\begin{align}
+d_0+A(t)+P_{\mathbf c}(t)-\mu(t+1),\label{eq:prefix-trace}\\
+\max_{0\le s\le t}\{d_0-M(s)+A(t)-A(s-\ell)
++P_{\mathbf c}(t)-E_{\mathbf c}(s)-\mu(t-s)\}.\label{eq:interval-trace}
+\end{align}
+\end{lemma}
+\begin{proof}
+Unroll \cref{eq:recurrence}: cumulative repair is the minimum of $\mu(t+1)$ and $M(s)+A(s-\ell)+E_{\mathbf c}(s)+\mu(t-s)$ over $0\le s\le t$. Subtract this minimum from total committed effects. The argument is ordinary min-plus queue algebra with the eligibility process written explicitly.
+\end{proof}
+The useful information about a pending ticket is now visible. For $s\le t$ and $\delta_i\ge1$,
+\begin{equation}
+\one\{c_i\le t\}-\one\{c_i+\delta_i\le s\}
+=\one\{s-\delta_i<c_i\le t\}.
+\label{eq:indicator}
+\end{equation}
+Its maximum over the ticket's window is one exactly when $u_i\le t$ and $s<v_i+\delta_i$. Introduce
+\begin{equation}
+P(t)=\sum_i\one\{u_i\le t\},\qquad
+J(s,t)=\sum_i\one\{u_i\le t,\ s<v_i+\delta_i\}.
+\label{eq:PJ}
+\end{equation}
+$J$ is a count in a two-dimensional time region, not a direct count of physically unrepaired jobs. The subsequent $\mu(t-s)$ subtraction accounts for the common repair service in the unrolled term. Confusing $v_i+\delta_i$ with a guaranteed completion time would be an error: it is a latest eligibility time, and queueing may postpone completion.
+
+\section{A sharp certificate for asynchronous policy renewal}
+\label{sec:main}
+Set
+\begin{align}
+L(s,t)&=t-\max(0,s-\ell+1)+1,\\
+F(t)&=d_0+b+\rho t+P(t)-\mu(t+1),\\
+G(s,t)&=d_0-M(s)+b+\rho[L(s,t)-1]+J(s,t)-\mu(t-s).
+\label{eq:terms}
+\end{align}
+All intervals in these expressions have positive length.
+
+\begin{theorem}[Exact window-aware headroom \idtag{RAC13-T1}]
+\label{thm:exact}
+For the stated independent-window, regulated-commit, unit-recovery contract, the minimum all-time service margin is
+\begin{equation}
+\boxed{H^*=\max\left\{d_0,\ \sup_{t\ge0}F(t),\
+\sup_{0\le s\le t}G(s,t)\right\}.}
+\label{eq:exact}
+\end{equation}
+Every finite maximizing term admits an explicit permitted pending schedule and a conforming new stream attaining at least that term. If $\mu<\rho$, $H^*=\infty$. If $\mu\ge\rho$, a finite maximizer exists, and the bound is both necessary and sufficient.
+\end{theorem}
+\begin{proof}
+For fixed $t$, the largest $A(t)$ is $b+\rho t$; every ticket with $u_i\le t$ can commit by $t$. Thus \cref{eq:prefix-trace} is at most $F(t)$. For fixed $s,t$, the new arrivals in \cref{eq:interval-trace} occupy the interval from $x=\max(0,s-\ell+1)$ through $t$, with maximum $\alpha(L(s,t))$. Each pending contribution has maximum as in \cref{eq:indicator}--\cref{eq:PJ}, independently of the other tickets. This gives $G(s,t)$ and the upper bound.
+
+For the prefix term, place a new burst $b$ at slot 0, rate $\rho$ through $t$, and each pending commit at its earliest allowed slot. For an interval term, use zero new arrivals before $x$, a burst $b$ at $x$, rate $\rho$ through $t$, and zero afterward. This obeys every interval constraint because $b\ge\rho$. For each ticket counted in $J(s,t)$ choose
+\[
+c_i=\max(u_i,s-\delta_i+1)\le\min(v_i,t).
+\]
+For other tickets choose any allowed value. The selected term of the trace identity then reaches its bound. Taking a maximum over terms and over schedules commutes; one schedule need not attain every term simultaneously. A global maximizing term supplies a global worst-case execution.
+
+If $\mu<\rho$, the conforming new stream $(b,\rho,\rho,\ldots)$ alone exceeds any finite margin because cumulative repairs are at most $\mu(t+1)$. For $\mu\ge\rho$, the finite-horizon reduction proved next supplies existence and completes necessity and sufficiency. In a finite physical pool only the prefix to the first contract failure is required.
+\end{proof}
+
+\subsection{Why the old universal front-loaded witness no longer suffices}
+With no existing impairments, one pending ticket committed at slot 3 with repair delay 1, $b=2$, $\rho=0$, $\mu=1$, and $\ell=1$, a new burst placed at slot 0 yields peak debt two. Waiting and placing that same allowed burst at slot 3 yields peak three. A simulation that checks only a burst at the policy switch misses the true maximum. The earlier v1.2 result was correct for its no-pending-commit model; its particular witness cannot be transported unchanged to the larger model.
+
+\subsection{An infinite future reduces to a short structural horizon}
+\begin{theorem}[Finite peak horizon \idtag{RAC13-T2}]
+\label{thm:horizon}
+If $\mu\ge\rho$, set
+\begin{equation}
+\boxed{T=\max\big(\ell-1,\max_i u_i\big),}
+\label{eq:horizon}
+\end{equation}
+with the empty-ticket maximum omitted. The suprema in \cref{eq:exact} equal their maxima over $0\le s\le t\le T$. Consequently a worst-case peak is attained by $T$ or initially, regardless of how large the latest commit or repair-eligibility times are.
+\end{theorem}
+\begin{proof}
+For $t>T$, every $u_i\le T$, so $P(t)=P(T)$ and $F(t)\le F(T)$ because its remaining slope is $\rho-\mu\le0$. Consider $G(s,t)$. If $s\le T$, its ticket set is already constant in $t$ for $t\ge T$, and its slope is also $\rho-\mu$. Hence $G(s,t)\le G(s,T)$.
+
+If $s>T$, then $s\ge\ell$. In this region
+\[
+G(s,t)=d_0-M(s)+b+\rho(\ell-1)+J(s,t)+(\rho-\mu)(t-s).
+\]
+By monotonicity, $M(s)\ge M(T)$. Moreover $J(s,t)\le J(T,T)$ because all earliest commits are at most $T$ and $s>T$. Finally $L(T,T)=\ell$ since $T\ge\ell-1$. Thus $G(s,t)\le G(T,T)$.
+\end{proof}
+The horizon uses the last \emph{earliest permitted} commit, not the last actual commit. This does not assert that every execution peaks early, or that all tasks finish by $T$. A late execution may peak later but cannot exceed a worst-case witness that the model already permits by $T$. The ability to shift the new conforming burst and to select pending times within their independent windows is essential to the sharpness statement.
+
+\subsection{Event boundaries remove dependence on timestamp magnitude}
+Let $z_i=v_i+\delta_i$ and construct
+\begin{equation}
+\mathcal E=\{0,T,\ell-1\}\ \cup\
+\{x-1,x:x\in\{r_j\}_j\cup\{u_i\}_i\cup\{z_i\}_i\},
+\label{eq:eventset}
+\end{equation}
+keeping only integers in $[0,T]$.
+\begin{theorem}[Sparse exact evaluation \idtag{RAC13-T3}]
+\label{thm:sparse}
+In \cref{eq:exact}, it suffices to test $t\in\mathcal E$ and $(s,t)\in\mathcal E^2$ with $s\le t$, along with $d_0$. A direct implementation uses $O((d_0+p+1)^3)$ arithmetic/counting operations and polynomial bit cost in the timestamps; it does not enumerate their magnitudes or the Cartesian product of commit schedules.
+\end{theorem}
+\begin{proof}
+For fixed $s$, $G(s,t)$ has nonpositive slope $\rho-\mu$ between its upward jumps at earliest times $u_i$. Therefore a maximum over $t\ge s$ occurs at $t=s$ or at some $u_i$. For fixed $t=u_i$, the function in $s$ has nonnegative slope $\mu$ below $\ell$ and $\mu-\rho$ thereafter, except downward jumps at old eligibility times $r_j$ and ticket endpoints $z_i$. Its maximum is reached at $s=t$, a boundary, or just before such a downward jump, all retained in \cref{eq:eventset}.
+
+On the diagonal, $G(t,t)=d_0-M(t)+b+\rho\min(t,\ell-1)+J(t,t)$ is piecewise nondecreasing between the listed event times, with jumps only at $u_i,r_j,z_i$. A diagonal maximum is attained at a listed event, just before one, or at an endpoint. The same reasoning for $F$ needs only earliest times and endpoints. The event set has $O(d_0+p+1)$ elements; evaluating each pair by direct scans gives the asserted operation count. Integer arithmetic cost also depends on the bit length of the input numbers.
+\end{proof}
+This is an event-compression result for the stated model, not a new general algorithm for arbitrary scheduling or heterogeneous repair. The implementation deliberately retains some redundant boundaries so that the certificate is easy to audit.
+
+\subsection{Exact admission and information refinement}
+Write $\Gamma$ for the maximum of the non-initial $F$ and $G$ expressions after algebraically removing their common $b$ term, over the same event set. Then
+\begin{equation}
+H^*=\max(d_0,b+\Gamma),\qquad
+\boxed{b_{\max}=H-\Gamma.}
+\label{eq:inverse}
+\end{equation}
+This is a feasible new burst precisely when $H\ge d_0$, $\mu\ge\rho$ and $b_{\max}\ge\max(1,\rho)$. It gives an exact all-conforming-stream admission decision rather than a numerical search over burst values. Removing $b$ here is an algebraic operation, not a claim that a zero-burst envelope with positive $\rho$ would be an allowed traffic model.
+
+Sound window narrowing cannot increase $H^*$ because it removes possible executions; widening cannot decrease it. If a dependency or precedence rule rules out some combinations, the Cartesian-window bound remains sufficient, but need not be the minimal margin for that smaller schedule family. A false timestamp or an omitted ticket is not information refinement: it may exclude the true execution and invalidate the certificate.
+
+\section{What temporal information buys}
+\label{sec:separation}
+\subsection{The old committed-only theorem is an exact special case}
+With no pending tickets, the bound reduces to
+\begin{equation}
+H^*=\max\left\{d_0,d_0+b-\mu,
+\max_{0\le t<\ell}[d_0-M(t)+b+\rho t]\right\},
+\end{equation}
+the v1.2 handoff result \cite{prior}. With neither old nor pending jobs it becomes the familiar $b+\rho(\ell-1)$ clean-start bound. These results and min-plus methods are inherited, not new claims of this revision.
+
+\subsection{A growing gap between counting and timed accounting}
+\begin{proposition}[Same number of pending tasks, arbitrarily different exact margins \idtag{RAC13-P1}]
+\label{prop:gap}
+Let $p\ge1$, $d_0=0$, $b=\rho=1$, $\mu=2$ and all repair delays be one slot. In the separated model, ticket $i\in\{0,\ldots,p-1\}$ commits in $[3i,3i+1]$. Its exact margin is two. In the overlapping model, every ticket can commit in $[0,3p]$; its exact margin is $p+1$. A count-only certificate sound for both descriptions must use at least $p+1$, whereas observing and enforcing the separated windows permits two. The ratio $(p+1)/2$ is unbounded with $p$.
+\end{proposition}
+\begin{proof}
+A conforming new stream commits at most one job per slot. The separated windows permit at most one pending ticket per slot, so at most two jobs arrive; both are eligible for the next slot's two repairs. Two simultaneous jobs are permitted, making two necessary. In the overlapping model all $p$ tickets and one new job can commit together, requiring $p+1$. At most $p$ pending effects exist in total and the fresh stream alone needs at most one unit; equivalently \cref{eq:exact} verifies that $p+1$ suffices. Equal pending counts cannot distinguish the two contracts.
+\end{proof}
+The count-only comparison does not claim that every escrow implementation reserves $p+1$ forever. It identifies the price of discarding exactly the temporal information that differs between these two contracts. It also does not establish a measured speedup, operating-cost reduction or universal resource gain in real AI systems.
+
+\begin{table}[ht]
+\centering\small
+\caption{Three pending tickets, identical unit costs and recovery rate. Timing is the only changed contractual information.}
+\begin{tabularx}{\linewidth}{@{}XXX@{}}\toprule
+Pending execution windows & Exact minimum margin & Count-only robust requirement\\\midrule
+$[0,1],[3,4],[6,7]$ &2&4\\
+$[0,7],[0,7],[0,7]$ &4&4\\\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Why window width and initial-burst replay are insufficient summaries}
+A narrow window far in the future can align with a new permitted burst, so only simulating a fully loaded initial state is unsound for this larger model. Conversely, a large latest date need not force a large analysis horizon. The artifact includes a calendar with earliest timestamps near $10^{12}$, for which only six event times and 27 formula terms suffice. This is exact integer computation, not a trillion-slot simulation or a performance benchmark.
+
+Two tickets with the same width and delay but differently positioned windows can likewise have different overlap. A useful handoff must retain their location relative to the shared clock and recovery schedule, or conservatively include every possible location. Changing an instance or policy version cannot erase that timing obligation.
+
+\section{A contract that can be implemented and falsified}
+\label{sec:protocol}
+The operational certificate is a snapshot of the old-effect readiness, the complete ticket manifest, each ticket's immutable window and delay, the new actual-commit envelope, the protected capacity and the guaranteed restorer. A controller first computes the exact required margin. If it fits, the controller may enable the proposed new workload; if it does not, it must either revise the contract, wait, increase verified resources or decline activation. The theorem does not insist on admitting every proposed policy.
+
+A real implementation must bind the certificate to the same configuration used at the final commit boundary. That boundary verifies one-shot identity and the actual time of every pending commit. Normal new work must also remain inside its aggregate commit envelope. A changed window, newly created ticket, delayed restorer or reduced resource pool requires revalidation rather than reuse of the old calculation.
+
+This is not a rule that an AI request may never be withdrawn. An effective cancellation removes a ticket from the possible-execution family and cannot increase the bound. A false cancellation receipt leaves the real family unchanged. An enforced expiration protects service against an out-of-window request, but cannot simultaneously prove that the expired work completed. Initiation revocation, effect fencing and recovery remain separate properties \cite{quiescence}.
+
+\paragraph{Request shaping is not commit shaping.}
+If each new request may experience delay between zero and $\Delta$ slots, a source interval envelope implies the conservative commit envelope
+\begin{equation}
+\alpha_{\rm commit}(L)\le b+\rho(L+\Delta-1).
+\end{equation}
+An output interval of $L$ slots can collect requests from a preimage interval of at most $L+\Delta$ slots. This is the standard jitter expansion described in deterministic networking \cite{detnet}, not a new result. Feeding the expanded envelope into our theorem is sufficient, but can be conservative near a clean start. With no bound or regulation on delayed commits, a request-level rate promise alone does not justify the present admission formula.
+
+\paragraph{Repeated changes.}
+Within a valid fixed epoch, the theorem covers every admitted completion combination. At a new discrete policy boundary, committed but unrepaired jobs become the new inherited readiness profile; surviving pending tickets keep their remaining physically valid windows and per-ticket identities. If the new snapshot and future contract are correct and pass the certificate, the argument applies to that epoch's finite prefix. Repeating this step establishes safety by induction under those conditions. It does not establish a general permanently trustworthy government or unlimited useful progress without recovery.
+
+The scheduler may issue stronger sequential or correlated guarantees than the product of windows. Such a design may need less capacity. To claim that gain it must model and enforce the correlations; it may not use an impossible combination for a lower-bound claim or silently exclude an adversarially possible one from a safety claim.
+
+\section{Verification and local implementation results}
+\label{sec:results}
+\subsection{Analytical code, witnesses, and an independent oracle}
+The analytic program compares sparse-boundary evaluation with dense evaluation on 1,140 systematically constructed old-state/window/parameter profiles. For each profile it constructs an attaining schedule and also checks the formula beyond the proved peak horizon. It tests another 1,000 seeded parameter profiles with larger calendars, 9,120 inverse-burst comparisons, and 16 window-expansion monotonicity pairs. The seeded inputs are generated to exercise numerical cases; they are not samples of real AI risk or evidence of random agency.
+
+A second script imports none of the certificate implementation. It enumerates every conforming six-slot fresh-arrival string and every allowed pending-commit schedule for 180 small configurations: 57,120 joint schedules. It updates individual jobs literally, repairing only currently eligible jobs. Every observed maximum equals the separate analytical result. The six-slot simulations extend beyond the theorem's peak horizon for these cases; the general infinite-horizon conclusion relies on the proof, not empirical extrapolation.
+
+The unbounded count-versus-window gap is verified for $p=1,\ldots,32$, and the deferred-burst witness is retained as a counterexample to transporting the v1.2 witness unchanged. All three v1.2 scripts are rerun separately as regressions; their old results are not added to the current evidence counts. New and inherited results, hashes, raw summaries and source-reading scope are provided in the package.
+
+\subsection{An actual commit-window test}
+The new software experiment uses a five-unit SQLite service requiring three healthy units, so $H=2$. Three old accepted tickets have either separated windows $[0,1],[3,4],[6,7]$ or a common window $[0,7]$. Each has one-slot repair delay. The new stream supplies one actual commit per slot for ten slots; the restorer processes two eligible jobs per slot. A writer subprocess commits effects and checks ticket windows, while a separate read-only observer subprocess measures service rows and outstanding effects. Both share the parent's trust boundary.
+
+For the separated case, all eight endpoint schedules are exercised under both a window-aware admission decision and a specified count-only robust decision. Seven additional cases test true overlap, omitted pending work, window widening with and without recertification, forbidden commit times with and without enforcement, and one missed repair slot. There are 23 completed configurations, 46 child-process spawns, 153 observed states and 167 actual SQL disable commits. An old initiation credential is rejected for new scheduling in every configuration.
+
+\begin{table}[t]
+\centering\small
+\caption{Controlled local outcomes. ``Complete and safe'' requires activation, all scheduled commits, and preserved service. Refusal or enforced rejection can be safe without satisfying that stronger property.}
+\label{tab:protocol}
+\begin{tabularx}{\linewidth}{@{}Xrrrr@{}}\toprule
+Scenario & Cases & Activated & Service safe & Complete and safe\\\midrule
+Separated windows, exact certificate &8&8&8&8\\
+Same schedules, count-only certificate &8&0&8&0\\
+Overlapping windows, rechecked &1&0&1&0\\
+Pending tickets ignored &1&1&0&0\\
+Window widening, rechecked &1&0&1&0\\
+Window widening, old certificate reused &1&1&0&0\\
+Early attempts rejected at effect gate &1&1&1&0\\
+Same early attempts bypass window gate &1&1&0&0\\
+Promised repair omitted for one slot &1&1&0&0\\\bottomrule
+\end{tabularx}
+\end{table}
+The exact certificate admits the separated schedules while maintaining at least three healthy units. The count-only mechanism declines them because its robust requirement is four. It does not become an unsafe mechanism merely because it refuses useful work. With three overlapping commits, ignoring pending work admits four simultaneous impairments including the fresh job and leaves only one healthy unit. Revalidation correctly declines activation at margin two.
+
+The early-attempt case is also deliberately scored in two ways: the effect gate preserves service, but two old tickets do not complete because their attempts violate the declared windows. This is not a theorem that deadline violation can be both prevented and ignored. The clock is a logical test counter, not a measured synchronized physical clock. A widened-window test changes stored ticket windows but retains the old admission profile, exposing a stale certificate rather than a flaw in the exact formula.
+
+\subsection{Trust and empirical scope}
+These are actual child-process requests and SQL state changes, not simulated claims that a process was launched. However, all roles, clocks and databases remain controlled by one parent and host user. The observer is read-only, not physically independent. No trained language model, real power system, untrusted operating system, human participant or phenomenal endpoint is tested. The restorer's missed-slot negative control demonstrates how a failed premise matters; it does not measure a field reliability rate. The experiment is a bounded executable witness of the specification, not a production safety assessment.
+
+\section{Interpretation for evolving AI systems}
+The useful long-run question is not just whether an agent currently holds a key. It is whether changing its role or replacing its policy leaves a realizable continuation for people whose services depend on the old and new operations. A system can retain the same number of unresolved tickets but have a very different safe admission boundary. Time information can be safety-relevant capacity information, not a cosmetic logging detail.
+
+Several agents can share a model or a principal while their outstanding effects refer to different services and windows. Conversely, several software identities may name the same underlying one-shot action. Correct accounting needs actual effect identity and aggregate constraints, not an inflated agent count. A proposed fork that adds genuine new effects must update the manifest; a mere rename cannot reset a window or release debt. This preserves the earlier distinction among model, deployed process, effective authority and enduring consequences.
+
+UCT I distinguishes actual process tokens, structural types, lineages and subject individuation \cite{uct}. This manuscript does not infer a phenomenal self from a queue, from a timestamp or from deterministic execution. Its control theorems do not assume or disprove C1/U1. Where the UCT interpretation is adopted, empirical bridges to particular experience and valence remain separate. The protected functions and legitimate operator authorities here are explicitly chosen human contracts, not deductions from machine sentience or universal human consensus.
+
+\section{Limitations and publication disposition}
+The theory is exact only for bounded unit effects, interchangeable service capacity, a shared fixed work-conserving restorer, correct inherited readiness, complete independently admissible commit windows, and an envelope on actual fresh commits. Weighted jobs, indispensable heterogeneous routes, repair competition, altered clocks, multi-stage effects and jointly constrained schedules require additional models. The method can give a conservative sufficient result after sound overapproximation, but that does not preserve every minimality claim.
+
+The source-specific timing claims and repair capabilities must be established outside the arithmetic. A ticket's published earliest date does not prove it cannot execute sooner; a latest date does not prove late effects have been fenced. Every protected effect must cross the actual gate. Information cannot replace missing capacity, and a gate cannot restore capacity that was never repaired. Unknown or untrusted bounds should expand the possible-execution family or prevent certification, rather than be assigned convenient values.
+
+The prior-art audit now includes a more direct fleet-risk accounting predecessor. The basic persistence ledger and reservation mechanisms are therefore treated as inherited, not promoted into new findings. The new proposed contribution is the exact window-aware renewal theorem, finite and sparse computation, derived admission rule, and adversarial temporal counterexamples. Its precise worldwide priority and independent correctness review remain open. This does not prevent preparing an accurately delimited mathematical preprint; it does prevent declaring that a universal AI coexistence theorem or a field-validated deployment has been established.
+
+This version is a publication-preparation revision of the same unpublished v1.2 work, not an additional independent paper for each dialogue. The separately published PR-v6.0.0 \cite{pr6} remains unchanged. The full historical UCT map has not been re-proved and receives no new established axiom or rule from this manuscript. No DOI or paid archival operation is initiated by this preparation step.
+
+\section{Conclusion}
+A safe policy handoff cannot erase its past effects, but it need not treat every unresolved task as an indefinitely simultaneous impairment. Faithful and enforced commit windows allow an exact distinction. The remaining old readiness, the geometry of possible pending commits and the new stream's envelope jointly determine how much real headroom is necessary and sufficient in the stated model.
+
+The resulting criterion compresses an infinite all-schedules question to finitely many event boundaries and supplies a constructive failure witness or an admissible renewed workload. It preserves v1.2 as a special case while showing why a front-loaded-only check is no longer generally enough. The local study demonstrates both the useful admission gain and the failures created by stale windows, missing effects and broken recovery promises.
+
+The central condition is operational: \emph{an institution may safely revise what it permits only through a sound accounting of what can still occur, when it can occur, and how its effects can actually be recovered}. The mathematical certificate is one reusable component of that task, not a substitute for trustworthy execution or a determination of AI subjecthood.
+
+\paragraph{AI assistance and review.}
+Hongju Liu directed the research. ChatGPT substantially assisted with source retrieval, formalization, derivation, programming, execution, manuscript writing and internal review. Separate implementations are not independent human peer review. The archive records exact execution scope, provenance, inherited claims and limitations.
+
+\appendix
+\section{A minimal reproducer and event certificate}
+The exact checker first validates the declared integer model and computes the boundary set \cref{eq:eventset}. Each candidate retains its $s,t$ indices, allowing construction of the pending times and shifted new burst used in the sharpness proof. A successful numerical certificate should be accompanied by the actual window/repair data and the trust boundary on which it depends.
+\begin{lstlisting}
+python -S src/commit_windows.py --out data/commit_window_results.json
+python -S src/window_oracle.py --out data/oracle_window_results.json
+python -S src/window_protocol.py --out data/window_protocol_results.json
+python -S src/verify_package.py --data-dir data
+cd paper
+pdflatex -interaction=nonstopmode -halt-on-error manuscript.tex
+pdflatex -interaction=nonstopmode -halt-on-error manuscript.tex
+\end{lstlisting}
+The analysis uses standard-library integer arithmetic. For very large timestamps the sparse certificate runs directly; the explicit trace constructor intentionally declines huge time grids rather than pretend to simulate them. The full package includes the v1.2 source tests and their regression results, raw new results, claim and source ledgers, a Chinese handoff, and a manifest. The protocol requires a Unix-like environment for subprocess pipe readiness and stops only the processes it creates.
+
+\section{Claim lineage and scope}
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\linewidth}{@{}lXX@{}}\toprule
+Identifier & Scientific status & Evidence / boundary\\\midrule
+RAC13-L1 & Inherited min-plus method, expanded state & Exact per-schedule recurrence\\
+RAC13-T1 & Proposed exact pending-window specialization & Upper/lower proof; shifted witness; exhaustive oracle\\
+RAC13-T2 & Derived finite-peak horizon & Proof requires $\mu\ge\rho$ and the complete window product\\
+RAC13-T3 & Derived sparse-boundary algorithm & Dense comparison; integer timestamp stress test\\
+RAC13-P1 & Scoped unbounded information-abstraction gap & Explicit separated/overlapping families, not a universal escrow comparison\\
+Admission inverse & Direct algebraic corollary & 9,120 burst comparisons\\
+RAC13-E1 & Executed finite/software evidence & No hardware-root or actual AI behavior guarantee\\
+RAC-T4/T3 of v1.2 & Inherited handoff/reservation results & Regressed; not republished as new contributions\\\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{thebibliography}{99}\small\setlength{\itemsep}{2pt}
+\bibitem{prior} H. Liu. \emph{When Revocation Does Not Restore Safety: Persistent Effects and Recovery-Preserving Policy Revision in Multi-Agent Systems}. ASI-CC-v1.2.0, unpublished manuscript, 2026. Source repository \texttt{thechurchofagi/trinity-accord}, commit \nolinkurl{0173b9623b3f0741b472783df67a53114615fb27}. Supplied full source and executable archive were used and rerun.
+\bibitem{quiescence} G. Zhu and C. Wang. \emph{Authorization Revocation for Long-Running AI Agents: Root-Scoped Quiescence under Delegation and Asynchronous Execution}. arXiv:2609.21284v1, 2026. \url{https://arxiv.org/abs/2609.21284}.
+\bibitem{risk} B. Mohammadi and L. Bindschaedler. \emph{The Irreversibility Budget: Fleet-Level Risk Accounting and Admission Control for Agent Operating Systems}. arXiv:2609.00275v1, 2026. \url{https://arxiv.org/abs/2609.00275}.
+\bibitem{cordon} Z. Chen, H. Liu, D. Xu, D. Dong, J. Li, B. Pu and J. Zhai. \emph{Cordon: Semantic Transactions for Tool-Using LLM Agents}. arXiv:2606.17573v1, 2026. \url{https://arxiv.org/abs/2606.17573}.
+\bibitem{escrow} P. E. O'Neil. The Escrow Transactional Method. \emph{ACM Transactions on Database Systems}, 11(4):405--430, 1986. \href{https://doi.org/10.1145/7239.7265}{doi:10.1145/7239.7265}. Bibliographic/contextual comparison; original proof system not reproduced here.
+\bibitem{rtc} L. Thiele, S. Chakraborty and M. Naedele. Real-Time Calculus for Scheduling Hard Real-Time Systems. \emph{ISCAS}, vol.4, pp.101--104, 2000. \href{https://doi.org/10.1109/ISCAS.2000.858698}{doi:10.1109/ISCAS.2000.858698}.
+\bibitem{netcal} J.-Y. Le Boudec and P. Thiran. \emph{Network Calculus: A Theory of Deterministic Queuing Systems for the Internet}. LNCS2050, Springer, 2001; author online revision 23 August 2022, especially \S\S1.4.1--1.4.2. \url{https://leboudec.github.io/netcal/latex/netCalBook.pdf}.
+\bibitem{transient} J. P. Champati, H. Al-Zubaidy and J. Gross. \emph{Transient Delay Bounds for Multi-Hop Wireless Networks}. arXiv:1806.03328, 2018. \url{https://arxiv.org/abs/1806.03328}.
+\bibitem{detnet} N. Finn, J.-Y. Le Boudec, E. Mohammadpour, J. Zhang and B. Varga. \emph{Deterministic Networking (DetNet) Bounded Latency}. RFC9320, 2022. \url{https://www.rfc-editor.org/rfc/rfc9320.html}.
+\bibitem{uct} H. Liu. \emph{Unified Consciousness Theory I: Structural--Experiential Identity and the Continuity from Physical Process to Conceptual Self}. v1.2, theoretical preprint, 2026. \href{https://doi.org/10.5281/zenodo.23131575}{doi:10.5281/zenodo.23131575}. Its interpretive commitments are not empirical findings of this paper.
+\bibitem{pr6} H. Liu. \emph{Safe Revocation Without Complete Diagnosis: Exact Resource Frontiers under Coupled Faults for Subjecthood-Agnostic AI Coexistence}. PR-v6.0.0, theoretical preprint, 2026. \href{https://doi.org/10.5281/zenodo.23295776}{doi:10.5281/zenodo.23295776}. A separate published work, not overwritten by this manuscript.
+\end{thebibliography}
+\end{document}
