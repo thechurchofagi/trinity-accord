@@ -1,0 +1,16 @@
+{
+  "schema": "uct-a4t-audit-summary/1.0",
+  "round": "A4T20261012",
+  "root_graph_sha256": "40d17cd5f61ebcc1bfcea65eb59c3c730208bcfcf69ba92e2f615a993584e3ce",
+  "root_counts": {"nodes": 584, "rules": 284, "context_links": 178},
+  "effective_counts": {"nodes": 913, "rules": 424, "context_links": 261},
+  "pending_disabled_objects": 727,
+  "suspended_historical_rules": 10,
+  "scientific_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+  "structural_checks_passed": true,
+  "all_of_read_as_and": true,
+  "typed_boundary_alternatives": ["Relay", "Transduce"],
+  "joint_satisfiability_witnesses": [["I", "I"], ["I", "T"], ["T", "I"], ["T", "T"]],
+  "direction_firewalls": ["value equality does not imply lineage", "finite evidence is not ontic lineage", "route existence does not imply unique owner", "route organization does not identify H_cf or report"],
+  "status": "FRESH_STRUCTURAL_PASS_BOUNDED_SEMANTIC_PASS_FULL_DEPTH_INCOMPLETE"
+}

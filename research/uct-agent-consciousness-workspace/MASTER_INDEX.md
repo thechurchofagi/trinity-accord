@@ -1,5 +1,15 @@
 # UCT 主索引
 
+## Current follow-up application: A4T20261012
+
+- [Research note](records/A4T20261012_Transductive_Lineage_Route/RESEARCH_NOTE.md)
+- [Transductive-lineage contract](records/A4T20261012_Transductive_Lineage_Route/TRANSDUCTIVE_LINEAGE_CONTRACT.md)
+- [Proof and exact results](records/A4T20261012_Transductive_Lineage_Route/PROOF.md), [JSON](records/A4T20261012_Transductive_Lineage_Route/EXACT_RESULTS.json)
+- [Formal audit](records/A4T20261012_Transductive_Lineage_Route/FORMAL_AUDIT.md)
+- [Chinese handoff](records/A4T20261012_Transductive_Lineage_Route/HANDOFF_ZH.md)
+
+Status: disabled internal correction; strict identity replaced by relay-or-transduction lineage; zero formal-graph delta; manuscript HOLD.
+
 ## Current follow-up application: A4S20261011
 
 - [Research note](records/A4S20261011_Token_Coherent_Route_Stitching/RESEARCH_NOTE.md)

@@ -1,0 +1,26 @@
+{
+  "schema": "uct-map-extension/1.0",
+  "id": "A4T20261012",
+  "version": "A4T-TLR-v0.1.0",
+  "base": "UCT-MAP-v1.1.2",
+  "enabled": false,
+  "merge_status": "DISABLED_CANDIDATE_LAYER",
+  "scientific_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+  "candidate_nodes": [
+    {"id": "A4T-C1", "kind": "CORRECTION_FINITE_COUNTEREXAMPLE", "status": "PROVED_IN_DECLARED_MODEL_DISABLED", "source": "records/A4T20261012_Transductive_Lineage_Route/CLAIM_LEDGER.json"},
+    {"id": "A4T-C2", "kind": "CONDITIONAL_RESULT", "status": "INHERITED_GRAPH_APPLICATION_DISABLED", "source": "records/A4T20261012_Transductive_Lineage_Route/CLAIM_LEDGER.json"},
+    {"id": "A4T-C3", "kind": "FINITE_COUNTEREXAMPLE", "status": "EXACT_MODEL_RESULT_DISABLED", "source": "records/A4T20261012_Transductive_Lineage_Route/CLAIM_LEDGER.json"},
+    {"id": "A4T-C4", "kind": "EPISTEMIC_CONTRACT", "status": "OPEN_APPLICATION", "source": "records/A4T20261012_Transductive_Lineage_Route/CLAIM_LEDGER.json"},
+    {"id": "A4T-C5", "kind": "INHERITED_UCT_SCOPE_APPLICATION", "status": "INHERITED_APPLICATION", "source": "records/A4T20261012_Transductive_Lineage_Route/CLAIM_LEDGER.json"},
+    {"id": "A4T-C6", "kind": "UCT_CONDITIONAL_INTERPRETATION", "status": "H_CF_OPEN", "source": "records/A4T20261012_Transductive_Lineage_Route/CLAIM_LEDGER.json"}
+  ],
+  "candidate_rule": {
+    "id": "a4t_lineage_route",
+    "all_of": ["A4T:L_s", "A4T:BoundaryStitch_sc", "A4T:L_c", "A4T:BoundaryStitch_cw", "A4T:L_w"],
+    "typed_alternative_routes": {"A4T:BoundaryStitch_sc": ["A4T:Relay_sc", "A4T:Transduce_sc"], "A4T:BoundaryStitch_cw": ["A4T:Relay_cw", "A4T:Transduce_cw"]},
+    "conclusion": "A4T:ACTUAL_LINEAGE_ROUTE",
+    "status": "DISABLED_MODEL_RELATIVE"
+  },
+  "forbidden_edges": ["value_equality -> A4T:ACTUAL_LINEAGE_ROUTE", "A4T:E_lineage -> A4T:Transduce", "A4T:ACTUAL_LINEAGE_ROUTE -> unique_owner", "A4T:ACTUAL_LINEAGE_ROUTE -> A4T:H_cf", "A4T:ACTUAL_LINEAGE_ROUTE -> report", "A4T:ACTUAL_LINEAGE_ROUTE -> basal_experience_gate"],
+  "open": ["actual relay/transduction evidence", "alternate-path closure", "branch/merge contribution scope", "H_cf calibration", "full historical semantic audit"]
+}

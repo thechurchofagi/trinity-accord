@@ -1,5 +1,9 @@
 # UCT durable memory
 
+## A4T20261012 latest memory
+
+A4S's `SameOcc` repair is too strong if read as strict numerical identity across every transducer. A4T replaces it with a typed boundary stitch: actual relay of one occurrence or an actual conversion edge to a distinct successor. Exact finite model: 36 worlds; four coherent boundary-mode pairs; strict identity accepts one and falsely rejects three; the both-values-equal fiber contains four route and five nonroute worlds. Formal delta 0/0/0; physical installation and `H_cf` remain open. Next: install one source-side event-incidence/intervention test on an actual sampler→consumer boundary while independently closing replay paths.
+
 ## A4S20261011 latest memory
 
 A4R's three local actual links require shared boundary occurrences. With independently quantified boundaries, all three links can be true while a sample or command is replaced by a value-equal duplicate. A4S adds (X_{sc}) and (X_{cw}): 32 worlds, four all-link worlds, one coherent route, three counterexamples. Preserve C1/U1, nested/overlapping processes and the open (H_{cf}) bridge. Next: operational physical evidence for same occurrence/lineage across ports. GitHub saved path: `records/A4S20261011_Token_Coherent_Route_Stitching/`; Library pending due exec-server failure.

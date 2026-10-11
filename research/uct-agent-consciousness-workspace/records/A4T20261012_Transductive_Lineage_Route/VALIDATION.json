@@ -1,0 +1,32 @@
+{
+  "schema": "uct-a4t-validation/1.0",
+  "exact_model": {
+    "status": "PASS",
+    "valid_worlds": 36,
+    "boundary_mode_pairs": 9,
+    "coherent_boundary_modes": 4,
+    "strict_identity_modes": 1,
+    "coherent_strict_false_negatives": 3,
+    "all_value_equal_fiber": {
+      "worlds": 9,
+      "route_worlds": 4,
+      "nonroute_worlds": 5
+    }
+  },
+  "navigation": {
+    "status": "PASS_NAVIGATION_AND_DISABLED_ASSEMBLY",
+    "pending_checkpoints": 38,
+    "families": 7,
+    "completed_nodes": 913,
+    "completed_rules": 424,
+    "completed_context_links": 261,
+    "unresolved_deductive_references": 0
+  },
+  "formal_delta": {
+    "nodes": 0,
+    "rules": 0,
+    "contexts": 0,
+    "scientific_promotion": false
+  },
+  "scope_warning": "Code and DAG checks establish only the declared finite arithmetic and structural consistency; they do not establish theory truth, an actual physical installation, H_cf, or a full historical semantic reproof."
+}

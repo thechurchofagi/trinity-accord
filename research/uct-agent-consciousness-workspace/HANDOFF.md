@@ -1,5 +1,15 @@
 # 当前交接
 
+## Latest verified follow-up — A4T transductive lineage route
+
+A4T corrects A4S's strict numerical-identity reading for physical transducers. One end-to-end bodily/action route may cross a boundary either by relaying one actual occurrence or by an actual conversion that consumes it and produces a distinct successor. In the exact 36-world model, four boundary-mode pairs contain a route; strict identity accepts only one, while the all-value-equal fiber still contains four route and five nonroute worlds.
+
+Deliverables: `records/A4T20261012_Transductive_Lineage_Route/`. The six-part evidence contract requires fixed physical bindings, event incidence, source intervention, finite alternate-path closure and branch/merge accounting. No actual hardware, complete `K` or `H_cf` calibration is supplied. C1/U1, process pluralism and every OPEN/ACKNOWLEDGED review item remain unchanged.
+
+Next exact task: choose one accessible sampler→consumer interface and test whether a source-side event trace plus controlled input substitution identifies a directed conversion edge while replay/buffer/fan-in paths are independently inventoried and challenged. Stop before `H_cf` if the edge or closure cannot be warranted.
+
+---
+
 ## Latest verified follow-up — A4S token-coherent route stitching
 
 A4S corrects A4R's conditional sufficiency: three actual local links do not compose into one route when adjacent links may use different value-equal occurrences. Two explicit stitches yield a five-predicate model with 32 worlds, 4 all-local-link worlds, 1 coherent route and 3 fork counterexamples. Candidate only; 0/0/0 graph delta; (H_{cf}), actual installation and fresh all-layer programmatic audit remain OPEN. See [A4S handoff](records/A4S20261011_Token_Coherent_Route_Stitching/HANDOFF_ZH.md). Library synchronization is pending because the selected exec environment was unavailable.

@@ -1,0 +1,10 @@
+{
+  "schema": "uct-publication-coverage-update/1.0",
+  "round": "A4T20261012",
+  "coverage_change": "NONE",
+  "new_claims": ["A4T-C1", "A4T-C2", "A4T-C3", "A4T-C4", "A4T-C5", "A4T-C6"],
+  "published_coverage": "NOT_CLAIMED",
+  "originality": "INTERNAL_CORRECTION_AND_STANDARD_GRAPH_APPLICATION; EXTERNAL_PRIORITY_UNVERIFIED",
+  "manuscript_decision": "HOLD",
+  "reason": "Bounded correction belongs in the existing bodily/action route family and lacks actual installation or phenomenal calibration."
+}

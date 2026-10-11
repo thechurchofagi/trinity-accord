@@ -1,3 +1,11 @@
+# A4T20261012 researcher response — transductive lineage correction
+
+The latest ledger and all carried OPEN/ACKNOWLEDGED items were read before selection, after result formation and before save. A4T corrects A4S's over-strong strict numerical-identity reading: physical transducers can preserve an actual directed route by consuming one occurrence and producing a distinct successor. Exact finite evidence is 36 worlds, four coherent boundary modes, three strict-identity false negatives, and a both-values-equal fiber with four route and five nonroute worlds.
+
+`QC-20261008-10` remains ACKNOWLEDGED/OPEN; `IA-QC11`, `QC-20261008-12/13` and `SCU-OPEN-R191-NORMALIZATION` remain OPEN; `SCU-AUDIT-DEPTH` remains AUDIT_INCOMPLETE. The six-part evidence contract is not a physical installation or phenomenal calibration. C1/U1, basal-experience boundaries, nested/overlapping/branching/merging processes and the no-current-assistant-verdict boundary are unchanged. Evidence: [response](records/A4T20261012_Transductive_Lineage_Route/REVIEW_RESPONSE.md), [contract](records/A4T20261012_Transductive_Lineage_Route/TRANSDUCTIVE_LINEAGE_CONTRACT.md), [exact results](records/A4T20261012_Transductive_Lineage_Route/EXACT_RESULTS.json), [gaps](records/A4T20261012_Transductive_Lineage_Route/GAP_LEDGER.md), [audit](records/A4T20261012_Transductive_Lineage_Route/FORMAL_AUDIT.md).
+
+---
+
 # A4M20261011 researcher response — coupled formation without factorial independence
 
 ## A4S20261011 researcher response

@@ -1,5 +1,9 @@
 # UCT 地图审查状态
 
+## A4T20261012 audit addendum
+
+A4T corrects A4S's strict-identity overreach without changing the completed graph. Fresh root parsing and restored integrated traversal covered 584/284/178 root objects and 913/424/261 effective completed objects, with 727 pending objects disabled and 10 historical rules suspended. The candidate five-way `all_of` remains conjunctive; each boundary stitch has typed relay/transduction alternatives with identical bindings. Four joint witnesses and the 4-route/5-nonroute equal-value fiber were checked exactly. Value, evidence, ontic lineage, route, exclusive owner and `H_cf` are not conflated. Scientific delta 0/0/0; full historical-depth audit remains incomplete. Full record: [A4T audit](records/A4T20261012_Transductive_Lineage_Route/FORMAL_AUDIT.md).
+
 ## A4S20261011 audit addendum
 
 A4S found a hidden occurrence-identity premise in the A4R route composition. Root graph JSON was fetched and parsed (584 nodes, 284 rules, 178 context links); relevant C1/U1/P3/P6/R159 nodes were reviewed. The disabled five-premise candidate is jointly satisfiable and has three exact noncomposition countermodels. No graph promotion occurred. Fresh local all-layer validation was blocked by exec-server failure, so status is **MANUAL_COMPATIBILITY_PASS / AUDIT_INCOMPLETE**, not a global proof. Full record: [A4S audit](records/A4S20261011_Token_Coherent_Route_Stitching/FORMAL_AUDIT.md).

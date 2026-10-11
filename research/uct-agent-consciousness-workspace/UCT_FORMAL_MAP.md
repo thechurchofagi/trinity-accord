@@ -1,5 +1,9 @@
 # UCT 统一研究地图
 
+## A4T disabled correction — transductive lineage routes
+
+A4T adds no formal object. It corrects the disabled A4S boundary contract: numerical occurrence identity is sufficient for a relay but not necessary at a transducer. The candidate top-level conjunction is `L_s AND BoundaryStitch_sc AND L_c AND BoundaryStitch_cw AND L_w`, where each stitch has the typed alternatives `Relay OR Transduce` on one fixed actual binding. The 36-world model has four coherent boundary-mode pairs, only one strict-identity pair, and an all-value-equal fiber containing four route and five nonroute worlds. Evidence, ontic lineage, exclusive ownership and `H_cf` remain separate. Map delta: **0 nodes / 0 rules / 0 contexts**.
+
 ## A4S disabled application layer — token-coherent route stitching
 
 - Stable claims: A4S-C1 through A4S-C5.
