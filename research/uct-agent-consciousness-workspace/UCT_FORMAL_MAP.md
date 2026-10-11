@@ -1,3 +1,9 @@
+# A4X20261012 disabled addendum — redundant same-event port participation
+
+A4X adds no completed node, rule or context (0/0/0). At one predeclared consumer boundary, disabled `SEPP_i` is `BIND AND LINEAGE AND READ AND FROZEN AND FACTORIAL AND CONTINGENT-SENSITIVITY AND EXCLUSION`. Actual route occurrence/read is not inferred from counterfactual response tables, and contingent sensitivity does not replace actual binding. Of 16 Boolean consumers, four match the A4W diagonal; AND/OR depend on both ports under a declared contingency, projections on one, while universal two-port but-for at every normal row accepts none. An upstream dual-port compiler followed by a one-port consumer blocks end-to-end functional dependence from being assigned to the wrong consumer. Joint target participation remains a disabled `ConcurrentBCR2 AND SEPP_1 AND SEPP_2`; C1/R157 transport is conditional and `B_pc^family/H_cf` remain open. See [A4X audit](records/A4X20261012_Redundant_Port_Participation/FORMAL_AUDIT.md).
+
+---
+
 # A4W20261012 disabled addendum — overlapping bearer-centred routes
 
 A4W adds no completed node, rule or context (0/0/0). Its disabled candidate `ConcurrentBCR2` binds two A4V `BearerCentredRoute` tuples in one fixed process/event/target organization; overlap is permitted. For a named target `tau`, `JointlyCentred_tau` additionally requires `Participates_tau(r1,m,e) AND Participates_tau(r2,m,e)`. The relation is non-exclusive and introduces no owner selector. Exact enumeration of 16 Boolean merger functions gives four normal-diagonal-correct functions: two projections plus symmetric AND/OR, so output correctness and two local routes do not entail both participation edges. C1/R157 can transport only an actual complete relation; `B_pc^family`, `H_cf`, report and subject count remain open. See [A4W audit](records/A4W20261012_Overlapping_Bearer_Centres/FORMAL_AUDIT.md).

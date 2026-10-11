@@ -107,32 +107,32 @@
     }
   },
   "latest_followup_application": {
-    "id": "A4W20261012",
-    "version": "A4W-OCF-v0.1.0",
-    "status": "EXACT_SELECTOR_MERGER_CLASSIFICATION_WITH_OPEN_ACTUAL_AND_PHENOMENAL_BRIDGES",
+    "id": "A4X20261012",
+    "version": "A4X-RPP-v0.1.0",
+    "status": "EXACT_REDUNDANT_PORT_CLASSIFICATION_WITH_OPEN_ACTUAL_AND_PHENOMENAL_BRIDGES",
     "enabled_as_established_premises": false,
-    "source": "records/A4W20261012_Overlapping_Bearer_Centres/RESEARCH_NOTE.md",
-    "handoff": "records/A4W20261012_Overlapping_Bearer_Centres/HANDOFF_ZH.md",
-    "work_log": "records/A4W20261012_Overlapping_Bearer_Centres/WORK_LOG.md",
-    "claim_ledger": "records/A4W20261012_Overlapping_Bearer_Centres/CLAIM_LEDGER.json",
-    "map_extension": "records/A4W20261012_Overlapping_Bearer_Centres/MAP_EXTENSION.json",
-    "exact_results": "records/A4W20261012_Overlapping_Bearer_Centres/EXACT_RESULTS.json",
+    "source": "records/A4X20261012_Redundant_Port_Participation/RESEARCH_NOTE.md",
+    "handoff": "records/A4X20261012_Redundant_Port_Participation/HANDOFF_ZH.md",
+    "work_log": "records/A4X20261012_Redundant_Port_Participation/WORK_LOG.md",
+    "claim_ledger": "records/A4X20261012_Redundant_Port_Participation/CLAIM_LEDGER.json",
+    "map_extension": "records/A4X20261012_Redundant_Port_Participation/MAP_EXTENSION.json",
+    "exact_results": "records/A4X20261012_Redundant_Port_Participation/EXACT_RESULTS.json",
     "parent_science": "A3V20261010",
-    "parent_followup": "A4V20261012",
+    "parent_followup": "A4W20261012",
     "completed_map": "UCT-MAP-v1.1.2",
     "scientific_delta": {
       "nodes": 0,
       "rules": 0,
       "contexts": 0
     },
-    "finite_worlds": 8,
     "merge_functions": 16,
     "normal_output_correct": 4,
+    "dual_port_contingently_relevant": 2,
     "one_input_projections": 2,
-    "symmetric_two_input_merges": 2,
+    "universal_two_port_but_for_on_all_normal_rows": 0,
     "independent_h_validation": false,
-    "actual_route_use_instantiated": false,
-    "standalone_manuscript": "HOLD"
+    "standalone_manuscript": "HOLD_MERGE_WITH_A4V_A4W_FAMILY",
+    "actual_route_use_instantiated": false
   },
   "followup_applications": [
     {
@@ -237,7 +237,11 @@
       "parent_science": "A3V20261010",
       "parent_followup": "A4V20261012",
       "completed_map": "UCT-MAP-v1.1.2",
-      "scientific_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+      "scientific_delta": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0
+      },
       "finite_worlds": 8,
       "merge_functions": 16,
       "normal_output_correct": 4,
@@ -246,6 +250,34 @@
       "independent_h_validation": false,
       "actual_bodily_installation": false,
       "standalone_manuscript": "HOLD"
+    },
+    {
+      "id": "A4X20261012",
+      "version": "A4X-RPP-v0.1.0",
+      "status": "EXACT_REDUNDANT_PORT_CLASSIFICATION_WITH_OPEN_ACTUAL_AND_PHENOMENAL_BRIDGES",
+      "enabled_as_established_premises": false,
+      "source": "records/A4X20261012_Redundant_Port_Participation/RESEARCH_NOTE.md",
+      "handoff": "records/A4X20261012_Redundant_Port_Participation/HANDOFF_ZH.md",
+      "work_log": "records/A4X20261012_Redundant_Port_Participation/WORK_LOG.md",
+      "claim_ledger": "records/A4X20261012_Redundant_Port_Participation/CLAIM_LEDGER.json",
+      "map_extension": "records/A4X20261012_Redundant_Port_Participation/MAP_EXTENSION.json",
+      "exact_results": "records/A4X20261012_Redundant_Port_Participation/EXACT_RESULTS.json",
+      "parent_science": "A3V20261010",
+      "parent_followup": "A4W20261012",
+      "completed_map": "UCT-MAP-v1.1.2",
+      "scientific_delta": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0
+      },
+      "merge_functions": 16,
+      "normal_output_correct": 4,
+      "dual_port_contingently_relevant": 2,
+      "one_input_projections": 2,
+      "universal_two_port_but_for_on_all_normal_rows": 0,
+      "independent_h_validation": false,
+      "standalone_manuscript": "HOLD_MERGE_WITH_A4V_A4W_FAMILY",
+      "actual_route_use_instantiated": false
     }
   ],
   "scoped_foundational_reviews": [

@@ -1,0 +1,21 @@
+{
+  "id": "A4X20261012",
+  "version": "A4X-RPP-v0.1.0",
+  "title": "Redundant same-event port participation",
+  "type": "DISABLED_SCOPED_FOLLOWUP_APPLICATION",
+  "status": "EXACT_REDUNDANT_PORT_CLASSIFICATION_WITH_OPEN_ACTUAL_AND_PHENOMENAL_BRIDGES",
+  "parent_science": "A3V20261010",
+  "parent_followups": ["R15720261009", "R15920261009", "R18120261008", "A4M20261011", "A4N20261011", "A4V20261012", "A4W20261012"],
+  "domain": "One fixed P/I/K/event/target/consumer binding with two named route-to-port occurrences and a declared challenge family",
+  "all_of": ["BIND", "LINEAGE", "READ", "FROZEN", "FACTORIAL", "CONTINGENT-SENSITIVITY", "EXCLUSION"],
+  "joint_target_all_of": ["CONCURRENT-BCR2", "SEPP-1", "SEPP-2"],
+  "conditional_conclusion": "A named two-port consumer can support non-exclusive participation by both redundant routes without either route being individually but-for necessary at every actual normal value; the claim is consumer-boundary indexed.",
+  "open_bridge": "C1/R157 transport is conditional; B_pc^family, H_cf, measurement, report and subject count remain open.",
+  "proof_role": "All 16 Boolean consumers are classified: four diagonal-correct, two dual-port contingent mechanisms, two projections, and zero satisfying universal two-port but-for on every normal row.",
+  "counterexamples": ["diagonal-only compiled identity", "projection U/V", "passive recorder", "stale copy", "intervention-aware hidden controller", "upstream two-port compiler feeding one-port consumer"],
+  "scientific_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+  "enabled_as_established_premises": false,
+  "actual_token_installed": false,
+  "independent_h_validation": false,
+  "standalone_manuscript": "HOLD_MERGE_WITH_A4V_A4W_FAMILY"
+}

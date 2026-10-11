@@ -1,5 +1,9 @@
 # UCT durable memory
 
+## A4X20261012 latest memory
+
+A4X refines A4W's open target-participation edge at one named consumer boundary. Disabled `SEPP_i` requires `BIND AND LINEAGE AND READ AND FROZEN AND FACTORIAL AND CONTINGENT-SENSITIVITY AND EXCLUSION`; actual event lineage/read and counterfactual mechanism evidence cannot replace one another. Among all 16 Boolean consumers, four are diagonal-correct, exactly AND/OR are contingent on both ports, and zero make both ports individually but-for necessary at every normal row. Both off-diagonal challenges are needed to exclude both unknown projections. An upstream two-port compiler feeding one-port `m` locates participation upstream, not at `m`. C1/R157 transport remains conditional; `B_pc^family`, `H_cf`, actual installation, report and subject count remain open. Formal delta 0/0/0. Next: bound intervention-dependent hidden-mode twins without entering unbounded controller enumeration.
+
 ## A4W20261012 latest memory
 
 A4W permits two same-event `BearerCentredRoute` tuples in one fixed organization without an exclusive owner. In the exact model both decoded coordinates equal the target, so normal operation visits only merger inputs `(0,0)` and `(1,1)`. Of 16 Boolean mergers, four are output-correct: two one-input projections and two symmetric two-input mergers (AND/OR). Therefore two local centres do not entail that a named downstream target is jointly centred. The stronger disabled claim requires non-exclusive `Participates_tau(r_i,m,e)` edges for both routes; off-diagonal challenges and an independently grounded consumer are needed to distinguish projection from merger. Conditional C1/R157 transport, `B_pc^family`, `H_cf`, conceptual self, report and subject count remain separate/open. Formal delta 0/0/0; next define same-event causal participation for redundant two-route consumption without universal but-for necessity.

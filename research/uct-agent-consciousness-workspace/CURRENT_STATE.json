@@ -106,10 +106,10 @@
     "latest_followup_application": "records/A4W20261012_Overlapping_Bearer_Centres/PUBLICATION_COVERAGE_UPDATE.json"
   },
   "latest_activity": {
-    "id": "A4W20261012",
+    "id": "A4X20261012",
     "type": "FOLLOWUP_APPLICATION",
-    "status": "DISABLED_OVERLAPPING_BEARER_CENTRES_APPLICATION",
-    "source": "records/A4W20261012_Overlapping_Bearer_Centres/RESEARCH_NOTE.md"
+    "status": "DISABLED_REDUNDANT_PORT_PARTICIPATION_APPLICATION",
+    "source": "records/A4X20261012_Redundant_Port_Participation/RESEARCH_NOTE.md"
   },
   "latest_pending_research": {
     "id": "A3V20261010",
@@ -123,7 +123,7 @@
     "evidence_status": "BOUNDED_PRIMARY_SOURCE_APPLICATION_STOP_AND_R173_SCOPE_RETURN; ACTUAL_PREMISES_AND_H_OPEN"
   },
   "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 effective objects retain a fresh per-ID structural traversal. A4W manually rechecked C1/U1, P3/P6, R157, R159, effective R173, R181, A4M, A4N and A4V. Deep full-history semantics remain AUDIT_INCOMPLETE.",
-  "next_priority": "A4W next: define a same-event causal participation criterion under redundant two-route consumption that distinguishes an actual two-port merger from a compiled one-port equivalent without requiring universal but-for necessity. Apply it to one physically auditable consumer if available; otherwise preserve NOT_INSTALLED and stop before H_cf. Do not introduce a unique owner.",
+  "next_priority": "A4X next: at one fixed consumer boundary, test whether intervention-dependent hidden internal modes can reproduce every finite port challenge while preserving apparent lineage, and identify the minimum independently recorded mechanism state that blocks the twin. Stop if this becomes unbounded controller enumeration; return to B_pc^family/H_cf.",
   "latest_activity_persistence_after_A4W_science": {
     "science_commit": "0eddd9c06670a7357a8be5e38efc8af1f335405f",
     "science_tree": "f840be3dc13e384d8074f3e34500ea637fd42ced",
@@ -583,32 +583,32 @@
     }
   },
   "latest_followup_application": {
-    "id": "A4W20261012",
-    "version": "A4W-OCF-v0.1.0",
-    "status": "EXACT_SELECTOR_MERGER_CLASSIFICATION_WITH_OPEN_ACTUAL_AND_PHENOMENAL_BRIDGES",
+    "id": "A4X20261012",
+    "version": "A4X-RPP-v0.1.0",
+    "status": "EXACT_REDUNDANT_PORT_CLASSIFICATION_WITH_OPEN_ACTUAL_AND_PHENOMENAL_BRIDGES",
     "enabled_as_established_premises": false,
-    "source": "records/A4W20261012_Overlapping_Bearer_Centres/RESEARCH_NOTE.md",
-    "handoff": "records/A4W20261012_Overlapping_Bearer_Centres/HANDOFF_ZH.md",
-    "work_log": "records/A4W20261012_Overlapping_Bearer_Centres/WORK_LOG.md",
-    "claim_ledger": "records/A4W20261012_Overlapping_Bearer_Centres/CLAIM_LEDGER.json",
-    "map_extension": "records/A4W20261012_Overlapping_Bearer_Centres/MAP_EXTENSION.json",
-    "exact_results": "records/A4W20261012_Overlapping_Bearer_Centres/EXACT_RESULTS.json",
+    "source": "records/A4X20261012_Redundant_Port_Participation/RESEARCH_NOTE.md",
+    "handoff": "records/A4X20261012_Redundant_Port_Participation/HANDOFF_ZH.md",
+    "work_log": "records/A4X20261012_Redundant_Port_Participation/WORK_LOG.md",
+    "claim_ledger": "records/A4X20261012_Redundant_Port_Participation/CLAIM_LEDGER.json",
+    "map_extension": "records/A4X20261012_Redundant_Port_Participation/MAP_EXTENSION.json",
+    "exact_results": "records/A4X20261012_Redundant_Port_Participation/EXACT_RESULTS.json",
     "parent_science": "A3V20261010",
-    "parent_followup": "A4V20261012",
+    "parent_followup": "A4W20261012",
     "completed_map": "UCT-MAP-v1.1.2",
     "scientific_delta": {
       "nodes": 0,
       "rules": 0,
       "contexts": 0
     },
-    "finite_worlds": 8,
     "merge_functions": 16,
     "normal_output_correct": 4,
+    "dual_port_contingently_relevant": 2,
     "one_input_projections": 2,
-    "symmetric_two_input_merges": 2,
+    "universal_two_port_but_for_on_all_normal_rows": 0,
     "independent_h_validation": false,
     "actual_bodily_installation": false,
-    "standalone_manuscript": "HOLD"
+    "standalone_manuscript": "HOLD_MERGE_WITH_A4V_A4W_FAMILY"
   },
   "next_priority_before_FAM": "Independent signed fallible bodily-familiarity endpoint comparing familiar singleton retained route versus unfamiliar presently congruent route at fixed actual frame consumer/grain; separate cue familiarity, response fluency, ownership report and agency judgment. No more SPC expansion after named PMd feasibility stop.",
   "followup_applications": [
@@ -1253,7 +1253,11 @@
       "parent_science": "A3V20261010",
       "parent_followup": "A4N20261011",
       "completed_map": "UCT-MAP-v1.1.2",
-      "scientific_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+      "scientific_delta": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0
+      },
       "finite_worlds": 256,
       "perfect_output_pairs": 4,
       "bearer_centred_pairs": 2,
@@ -1276,7 +1280,11 @@
       "parent_science": "A3V20261010",
       "parent_followup": "A4V20261012",
       "completed_map": "UCT-MAP-v1.1.2",
-      "scientific_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+      "scientific_delta": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0
+      },
       "finite_worlds": 8,
       "merge_functions": 16,
       "normal_output_correct": 4,

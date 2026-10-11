@@ -1,0 +1,54 @@
+{
+  "schema": "uct-a4x-gap-ledger/1.0",
+  "round": "A4X20261012_Redundant_Port_Participation",
+  "gaps": [
+    {
+      "id": "A4X-G01",
+      "location": "SEPP actual-event layer",
+      "impact": ["A4X-C1", "A4X-U1", "A4W JointlyCentred_tau"],
+      "counterexample": "equal stale or copied route value reaches a port while the live route occurrence is absent",
+      "fixed": "LINEAGE and READ are separate required clauses",
+      "unresolved": "no physical token jointly grounds them"
+    },
+    {
+      "id": "A4X-G02",
+      "location": "factorial challenge evidence",
+      "impact": ["A4X-T1", "application of A4X-C1"],
+      "counterexample": "normal diagonal alone admits both projections and both dual-port mergers",
+      "fixed": "both off-diagonal rows are required when projection identity is unknown",
+      "unresolved": "a concrete device may not permit independent reachability without changing mechanism or event grain"
+    },
+    {
+      "id": "A4X-G03",
+      "location": "mechanism freeze and exclusion",
+      "impact": ["A4X-C1", "QC-20261008-12", "QC-20261008-13"],
+      "counterexample": "hidden controller reads intervention labels and fabricates the expected off-diagonal table",
+      "fixed": "FROZEN and EXCLUSION are explicit non-optional premises",
+      "unresolved": "finite alternate-path closure is not installed"
+    },
+    {
+      "id": "A4X-G04",
+      "location": "consumer boundary",
+      "impact": ["A4X-P1", "route-to-target attribution"],
+      "counterexample": "upstream AND compiler feeds an identity one-port consumer",
+      "fixed": "claim is indexed to a predeclared consumer occurrence m and ports",
+      "unresolved": "boundary selection remains application-specific and cannot be inferred from end-to-end behavior"
+    },
+    {
+      "id": "A4X-G05",
+      "location": "causal semantics",
+      "impact": ["terminology and scope of A4X-C1"],
+      "counterexample": "different general accounts of actual causation may classify overdetermination differently",
+      "fixed": "SEPP is called bounded mechanism-bound participation, not a universal actual-cause definition",
+      "unresolved": "no equivalence to Halpern-Pearl or other general causation definitions is claimed"
+    },
+    {
+      "id": "A4X-G06",
+      "location": "phenomenal interpretation",
+      "impact": ["B_pc^family", "H_cf", "QC-20261008-10", "IA-QC11"],
+      "counterexample": "same organizational certificate with no independently fixed phenomenal endpoint",
+      "fixed": "C1/R157 transport and B_pc^family/H_cf are explicitly separated",
+      "unresolved": "actual complete K and phenomenal calibration remain absent"
+    }
+  ]
+}

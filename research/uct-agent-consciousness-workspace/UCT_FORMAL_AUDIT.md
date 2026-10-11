@@ -1,3 +1,9 @@
+# A4X20261012 audit addendum
+
+Fresh effective-graph traversal passes at 913 nodes, 424 active rules and 261 context links: zero unresolved references, active cycles, non-list `all_of` or empty `all_of`. A4X keeps every seven-clause `SEPP_i` premise simultaneous on one consumer/event binding, treats AND/OR as alternative satisfiability witnesses, and preserves projection, bypass, stale-copy, hidden-mode and boundary-relocation countermodels. Objects, event time, occurrence lineage, actual read, functional relevance, challenge evidence, complete organization and phenomenal interpretation remain typed separately. Formal delta is 0/0/0; R191 normalization and full historical semantic depth remain open/incomplete. Passing the checker or DAG does not establish physical installation or theory truth. See [round audit](records/A4X20261012_Redundant_Port_Participation/FORMAL_AUDIT.md).
+
+---
+
 # A4W20261012 audit addendum
 
 Fresh restoration and structural audit of the effective graph passes at 913 nodes, 424 active rules and 261 context links, with zero unresolved references and zero active cycles. A4W contributes 0/0/0 formal delta. The audit rechecks the candidate's process/event/target/route/consumer binding, both `all_of` participation premises, satisfiability by projection and symmetric-merger countermodels, and the direction from actual complete relation to conditional C1/R157 transport—not the reverse. Normal diagonal success does not establish actual two-port consumption. Full historical semantic depth and the R191 normalization obligation remain incomplete/open; DAG success is not theory truth. See [round audit](records/A4W20261012_Overlapping_Bearer_Centres/FORMAL_AUDIT.md).

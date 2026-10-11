@@ -1207,3 +1207,14 @@ A4G应用保持停用，正式图增量0/0/0。C1/U1未改；硬件来源坐标�
 - `SCU-AUDIT-DEPTH`: **AUDIT_INCOMPLETE**. The 913/424/261 assembly and affected C1/U1, R157/R159/effective R173 and A4D–A4Q neighborhood were checked; all historical proofs were not reconstructed.
 - Substantive result: three local positive tests do not identify the actual anchor route; only the explicitly bypass-closed finite submodel leaves the full three-link conjunction. This is a disabled conditional certificate, not physical or phenomenal evidence.
 - Evidence: `records/A4R20261011_Three_Link_Anchor_Route_Certificate/REVIEW_RESPONSE.md`, `THREE_LINK_CONTRACT.md`, `EXACT_RESULTS.json`, `FORMAL_AUDIT.md`, `GAP_LEDGER.md`.
+
+## A4X20261012 research response (does not close supervision items)
+
+- `QC-20261008-10`: **ACKNOWLEDGED/OPEN**. The consumer-boundary contract supplies no independent identity, sign or calibration for `H_cf`.
+- `IA-QC11`: **OPEN**. Actual event, route lineage, named ports, consumer, challenge family and complete signature are typed but not physically installed in one token.
+- `QC-20261008-12`: **OPEN**. `LINEAGE/READ` are distinct from response-table evidence; projection, passive-recording, stale-copy and hidden-mode twins remain explicit.
+- `QC-20261008-13`: **OPEN**. Same-instance port bindings and chronology are declared but not installed.
+- `SCU-OPEN-R191-NORMALIZATION`: **OPEN**. No R191 normalization is used.
+- `SCU-AUDIT-DEPTH`: **AUDIT_INCOMPLETE**. The 913/424/261 effective graph was structurally retraversed and affected semantics reviewed, not globally re-proved.
+- Substantive result: universal per-normal-row two-port but-for necessity rejects every diagonally correct Boolean consumer, whereas actual lineage/read plus frozen, independently reachable and exclusion-controlled contingent sensitivity distinguishes AND/OR from projections at the declared boundary. This is a disabled organizational criterion, not a general actual-causation theorem, physical installation or phenomenal result.
+- Evidence: `records/A4X20261012_Redundant_Port_Participation/REVIEW_RESPONSE.md`, `REDUNDANT_PORT_PARTICIPATION_CONTRACT.md`, `MODEL_PROOF.md`, `EXACT_RESULTS.json`, `FORMAL_AUDIT.md`, `GAP_LEDGER.json`.

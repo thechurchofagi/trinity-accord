@@ -1,3 +1,9 @@
+# A4X20261012 — redundant same-event port participation
+
+[Research note](records/A4X20261012_Redundant_Port_Participation/RESEARCH_NOTE.md) · [contract](records/A4X20261012_Redundant_Port_Participation/REDUNDANT_PORT_PARTICIPATION_CONTRACT.md) · [proof](records/A4X20261012_Redundant_Port_Participation/MODEL_PROOF.md) · [exact results](records/A4X20261012_Redundant_Port_Participation/EXACT_RESULTS.json) · [claims](records/A4X20261012_Redundant_Port_Participation/CLAIM_LEDGER.json) · [gaps](records/A4X20261012_Redundant_Port_Participation/GAP_LEDGER.json) · [audit](records/A4X20261012_Redundant_Port_Participation/FORMAL_AUDIT.md) · [Chinese handoff](records/A4X20261012_Redundant_Port_Participation/HANDOFF_ZH.md). Disabled 0/0/0 application: actual route lineage/read is separated from contingent port sensitivity and challenge fidelity; exact Boolean classification rejects universal per-row two-port but-for as a redundancy gate. No actual or phenomenal installation is claimed.
+
+---
+
 # A4W20261012 — overlapping bearer centres
 
 [Research note](records/A4W20261012_Overlapping_Bearer_Centres/RESEARCH_NOTE.md) · [contract](records/A4W20261012_Overlapping_Bearer_Centres/OVERLAPPING_CENTRES_CONTRACT.md) · [proof](records/A4W20261012_Overlapping_Bearer_Centres/MODEL_PROOF.md) · [exact results](records/A4W20261012_Overlapping_Bearer_Centres/EXACT_RESULTS.json) · [claims](records/A4W20261012_Overlapping_Bearer_Centres/CLAIM_LEDGER.json) · [gaps](records/A4W20261012_Overlapping_Bearer_Centres/GAP_LEDGER.json) · [audit](records/A4W20261012_Overlapping_Bearer_Centres/FORMAL_AUDIT.md) · [Chinese handoff](records/A4W20261012_Overlapping_Bearer_Centres/HANDOFF_ZH.md). Disabled 0/0/0 application: local multiple centres are coherent; joint centring of one target requires non-exclusive actual participation by both routes. No actual or phenomenal installation is claimed.

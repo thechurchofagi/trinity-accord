@@ -1,0 +1,240 @@
+{
+  "all_functions": 16,
+  "both_ports_but_for_on_every_normal_row": 0,
+  "dual_port_contingently_relevant": 2,
+  "full_factorial_rows": [
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      1
+    ]
+  ],
+  "normal_correct": [
+    {
+      "bits_00_01_10_11": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "both_ports_but_for_on_every_normal_row": false,
+      "depends_on_u": true,
+      "depends_on_v": true,
+      "name": "AND",
+      "normal_correct": true,
+      "normal_rows": [
+        {
+          "inputs": [
+            0,
+            0
+          ],
+          "output": 0,
+          "u_actual_but_for": false,
+          "v_actual_but_for": false
+        },
+        {
+          "inputs": [
+            1,
+            1
+          ],
+          "output": 1,
+          "u_actual_but_for": true,
+          "v_actual_but_for": true
+        }
+      ],
+      "projection_disagreement_rows": {
+        "PROJECTION_U": [
+          [
+            1,
+            0
+          ]
+        ],
+        "PROJECTION_V": [
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      "representable_from_u_alone": false,
+      "representable_from_v_alone": false,
+      "table_id": 8,
+      "u_contingency_witness_sibling_v": [
+        1
+      ],
+      "v_contingency_witness_sibling_u": [
+        1
+      ]
+    },
+    {
+      "bits_00_01_10_11": [
+        0,
+        1,
+        0,
+        1
+      ],
+      "both_ports_but_for_on_every_normal_row": false,
+      "depends_on_u": false,
+      "depends_on_v": true,
+      "name": "PROJECTION_V",
+      "normal_correct": true,
+      "normal_rows": [
+        {
+          "inputs": [
+            0,
+            0
+          ],
+          "output": 0,
+          "u_actual_but_for": false,
+          "v_actual_but_for": true
+        },
+        {
+          "inputs": [
+            1,
+            1
+          ],
+          "output": 1,
+          "u_actual_but_for": false,
+          "v_actual_but_for": true
+        }
+      ],
+      "representable_from_u_alone": false,
+      "representable_from_v_alone": true,
+      "table_id": 10,
+      "u_contingency_witness_sibling_v": [],
+      "v_contingency_witness_sibling_u": [
+        0,
+        1
+      ]
+    },
+    {
+      "bits_00_01_10_11": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "both_ports_but_for_on_every_normal_row": false,
+      "depends_on_u": true,
+      "depends_on_v": false,
+      "name": "PROJECTION_U",
+      "normal_correct": true,
+      "normal_rows": [
+        {
+          "inputs": [
+            0,
+            0
+          ],
+          "output": 0,
+          "u_actual_but_for": true,
+          "v_actual_but_for": false
+        },
+        {
+          "inputs": [
+            1,
+            1
+          ],
+          "output": 1,
+          "u_actual_but_for": true,
+          "v_actual_but_for": false
+        }
+      ],
+      "representable_from_u_alone": true,
+      "representable_from_v_alone": false,
+      "table_id": 12,
+      "u_contingency_witness_sibling_v": [
+        0,
+        1
+      ],
+      "v_contingency_witness_sibling_u": []
+    },
+    {
+      "bits_00_01_10_11": [
+        0,
+        1,
+        1,
+        1
+      ],
+      "both_ports_but_for_on_every_normal_row": false,
+      "depends_on_u": true,
+      "depends_on_v": true,
+      "name": "OR",
+      "normal_correct": true,
+      "normal_rows": [
+        {
+          "inputs": [
+            0,
+            0
+          ],
+          "output": 0,
+          "u_actual_but_for": true,
+          "v_actual_but_for": true
+        },
+        {
+          "inputs": [
+            1,
+            1
+          ],
+          "output": 1,
+          "u_actual_but_for": false,
+          "v_actual_but_for": false
+        }
+      ],
+      "projection_disagreement_rows": {
+        "PROJECTION_U": [
+          [
+            0,
+            1
+          ]
+        ],
+        "PROJECTION_V": [
+          [
+            1,
+            0
+          ]
+        ]
+      },
+      "representable_from_u_alone": false,
+      "representable_from_v_alone": false,
+      "table_id": 14,
+      "u_contingency_witness_sibling_v": [
+        0
+      ],
+      "v_contingency_witness_sibling_u": [
+        0
+      ]
+    }
+  ],
+  "normal_correct_functions": 4,
+  "normal_diagonal": [
+    [
+      0,
+      0
+    ],
+    [
+      1,
+      1
+    ]
+  ],
+  "not_tested": [
+    "actual port binding, read occurrence, lineage or mechanism freeze",
+    "faithfulness of physical interventions or alternate-path exclusion",
+    "general actual-causation definitions",
+    "physical installation, complete organization or phenomenal identity"
+  ],
+  "one_port_projections": 2,
+  "result": "Within the declared Boolean family, diagonal success leaves four functions. Full port-specific contingent sensitivity retains AND/OR and rejects both projections; universal actual-row but-for necessity rejects every correct function.",
+  "schema": "uct-a4x-redundant-port-participation-exact/1.0",
+  "scope": "all deterministic Boolean two-port consumers with A4W diagonal correctness"
+}

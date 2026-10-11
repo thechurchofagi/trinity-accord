@@ -1,4 +1,10 @@
-# A4W20261012 current handoff — overlapping bearer centres
+# A4X20261012 current handoff — redundant same-event port participation
+
+[English note](records/A4X20261012_Redundant_Port_Participation/RESEARCH_NOTE.md) · [contract](records/A4X20261012_Redundant_Port_Participation/REDUNDANT_PORT_PARTICIPATION_CONTRACT.md) · [proof](records/A4X20261012_Redundant_Port_Participation/MODEL_PROOF.md) · [exact results](records/A4X20261012_Redundant_Port_Participation/EXACT_RESULTS.json) · [formal audit](records/A4X20261012_Redundant_Port_Participation/FORMAL_AUDIT.md) · [Chinese handoff](records/A4X20261012_Redundant_Port_Participation/HANDOFF_ZH.md). A4X requires actual same-event lineage/read plus frozen, independently reachable and exclusion-controlled port challenges. Four diagonal-correct consumers split into AND/OR versus two projections; universal per-row two-port but-for accepts none. The contract is consumer-boundary indexed, disabled and 0/0/0; actual installation and phenomenal bridges remain open. Next: test the minimum independent mechanism-state witness needed to block intervention-dependent hidden-mode twins, with an explicit stop before unbounded controller enumeration.
+
+---
+
+# A4W20261012 previous handoff — overlapping bearer centres
 
 [English note](records/A4W20261012_Overlapping_Bearer_Centres/RESEARCH_NOTE.md) · [Chinese handoff](records/A4W20261012_Overlapping_Bearer_Centres/HANDOFF_ZH.md) · [exact results](records/A4W20261012_Overlapping_Bearer_Centres/EXACT_RESULTS.json) · [formal audit](records/A4W20261012_Overlapping_Bearer_Centres/FORMAL_AUDIT.md). Sixteen downstream Boolean mergers split into four normal-output-correct functions: two projections and two symmetric mergers. This proves neither a unique owner nor joint target participation. The latter requires both non-exclusive actual participation edges; actual installation and all phenomenal bridges remain open. Formal graph delta 0/0/0; all reviewer items retain their prior open/incomplete state. Next: define an evidence criterion for redundant same-event consumption that does not require each route to be individually but-for necessary.
 

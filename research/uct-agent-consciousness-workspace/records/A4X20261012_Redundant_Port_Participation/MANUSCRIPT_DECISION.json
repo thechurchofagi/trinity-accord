@@ -1,0 +1,8 @@
+{
+  "round": "A4X20261012_Redundant_Port_Participation",
+  "decision": "HOLD_MERGE_WITH_A4V_A4W_FAMILY",
+  "reason": "The consumer-boundary contract, universal-but-for negative result and compiler countermodel are reusable, but the mathematics is elementary/prior-art-adjacent, no physical token is installed, and the result is best integrated with the bearer-centred-route family rather than split into a paper.",
+  "publication_change": false,
+  "formal_graph_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+  "priority_claim": "NONE"
+}

@@ -1,0 +1,61 @@
+{
+  "schema": "uct-a4x-claim-ledger/1.0",
+  "round": "A4X20261012_Redundant_Port_Participation",
+  "claims": [
+    {
+      "id": "A4X-C1",
+      "type": "DEFINITION_DISABLED",
+      "statement": "SEPP_i is the same-binding conjunction BIND_i AND LINEAGE_i AND READ_i AND FROZEN_m AND FACTORIAL_J AND CONTINGENT_SENSITIVITY_i AND EXCLUSION_J at one named consumer boundary.",
+      "domain": "candidate actual two-route consumers with a declared intervention family",
+      "premises": ["all seven contract clauses on one P/I/K/e/tau/m/port binding"],
+      "proof_or_source": "REDUNDANT_PORT_PARTICIPATION_CONTRACT.md",
+      "counterexamples": ["passive recorder", "stale copy", "intervention-aware bypass", "boundary relocation"],
+      "status": "DISABLED_NOT_INSTALLED",
+      "thought_experiment_role": "fixes output while varying actual port organization"
+    },
+    {
+      "id": "A4X-T1",
+      "type": "FINITE_EXACT_RESULT",
+      "statement": "Among the four diagonally correct deterministic Boolean two-port consumers, exactly AND and OR depend on both ports under declared contingencies; the other two are projections.",
+      "domain": "all 16 deterministic Boolean functions h:{0,1}^2->{0,1}",
+      "premises": ["h(0,0)=0", "h(1,1)=1", "functional dependence defined by one-port changes at fixed sibling value"],
+      "proof_or_source": "MODEL_PROOF.md A4X-T1; check_redundant_participation.py",
+      "counterexamples": ["projection U", "projection V"],
+      "status": "PROVED_FINITE_SCOPE",
+      "thought_experiment_role": "separates two-port mechanisms from one-port projections off the normal diagonal"
+    },
+    {
+      "id": "A4X-T2",
+      "type": "NEGATIVE_RESULT",
+      "statement": "Requiring both ports to be individually but-for necessary at every normal diagonal row rejects all four diagonally correct Boolean consumers.",
+      "domain": "the A4W Boolean merger family",
+      "premises": ["actual-row but-for is evaluated by flipping one port at a time"],
+      "proof_or_source": "MODEL_PROOF.md A4X-T2; exact enumeration",
+      "counterexamples": ["AND at 00", "OR at 11", "both projections"],
+      "status": "PROVED_FINITE_SCOPE",
+      "thought_experiment_role": "shows why universal simple but-for is an invalid participation gate for redundancy"
+    },
+    {
+      "id": "A4X-P1",
+      "type": "BOUNDARY_COUNTERMODEL",
+      "statement": "Dual-port dependence of a composite does not establish dual-port participation at a named downstream one-port consumer; participation may reside at an upstream compiler.",
+      "domain": "q(u,v) feeding one-port m(w)",
+      "premises": ["consumer boundary is fixed before comparison"],
+      "proof_or_source": "MODEL_PROOF.md A4X-P1",
+      "counterexamples": ["q=AND; m=identity"],
+      "status": "PROVED_BY_COUNTERMODEL",
+      "thought_experiment_role": "prevents abstract functional equivalence from erasing actual consumer location"
+    },
+    {
+      "id": "A4X-U1",
+      "type": "CONDITIONAL_UCT_APPLICATION",
+      "statement": "Only if ConcurrentBCR2 and both SEPP relations are independently actual in one complete binding may C1/R157 transport that non-exclusive family as experience-internal structure; B_pc^family and H_cf remain open.",
+      "domain": "one complete actual UCT token and correctly sorted relations",
+      "premises": ["A:C1", "R157 transport premises", "actual ConcurrentBCR2", "actual SEPP_1", "actual SEPP_2"],
+      "proof_or_source": "ordinary relation preservation under the fixed UCT premises",
+      "counterexamples": ["finite table only", "compiled one-port endpoint", "uncalibrated report"],
+      "status": "CONDITIONAL_OPEN_APPLICATION",
+      "thought_experiment_role": "keeps bodily/action mineness inside experience without adding an owner or basal gate"
+    }
+  ]
+}
