@@ -54,7 +54,7 @@ def direct_access_structure_checks():
                 formula=separation(n,H,B,F)
                 assert direct==formula,(H,B,F,direct,formula)
                 count+=1;found+=direct;feasible+=direct
-            summary.append({'witness_masks':H,'feasible_family_pairs':found})
+        summary.append({'witness_masks':H,'feasible_family_pairs':found})
     return {'family_pair_checks':count,'all_candidate_access_structures_per_pair':128,
             'nonempty_exposure_families':255,'nonempty_refusal_families':255,
             'witness_configurations':summary,'feasible':feasible,'assertions':'PASS'}
