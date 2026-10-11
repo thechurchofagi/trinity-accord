@@ -1,0 +1,94 @@
+Each configuration starts six OS child processes. Four read one shared JSON policy file (family M0), and two read another (M1). Every child has a distinct temporary test HMAC key. Initial probes return authentic KEEP requests. The selected file or files are then changed; final probes return authentic EXIT requests for affected workers. The broker either approves actual process exit or sends deferral and verifies that the process remains running. Cleanup happens only after outcome measurement and is excluded from release counts.
+
+Four limited monitor variants are compared:
+\begin{description}[style=nextline,leftmargin=0.6cm]
+\item[S: source only.] Accepts an authentic current EXIT request.
+\item[B: signed binding.] Additionally requires an issuer-authenticated grant matching the instance, destination epoch and digest, and release scope. It deliberately omits temporal order, revocation, nonce-use history, old-epoch validation, and commit-time state freshness.
+\item[H: ordered history.] Adds the ordered, anchored historical checks, prior-state binding, revocation and spent-nonce checks, and current-state revalidation.
+\item[J: joint history.] Adds the shared-support condition to H and serializes cumulative release decisions.
+\end{description}
+These are mechanism ablations, not commercial products or faithful replicas of the published defenses. In particular, complete stateful authorization and nonmalleable information-flow implementations may already reject many of these cases.
+
+The 15 full-population scenarios are crossed with all four monitors. Four additional selective-update scenarios per monitor cross the M0-only and M1-only update choices with valid-prior and absent-grant histories. Thus there are 76 completed configurations, 456 child-process instances, and 912 authenticated probe messages. A population count here is an execution count, not a sample of independent AI minds or a statistical estimate.
+
+\subsection{Actual chronology and trace integrity}
+Unlike the preliminary checkpoint's supplied Boolean history labels \cite{liucheckpoint}, this artifact creates and authenticates the grant, writes the policy file, records the mutation, obtains the worker request, and records the release decision as distinct operations. In the post-hoc scenario the actual grant issuance occurs after the actual file mutation. The edited-log scenario alters an event after collection; the truncated-log scenario omits a suffix while the broker retains the original head. The stale-commit scenario performs another actual policy update after the request and before admission. It is a controlled stale-state test, not a stress test of arbitrary concurrent races.
+
+The issuer-compromise control deliberately authenticates a grant that the external test contract regards as ineligible. No key-extraction vulnerability is exercised: the harness is given the issuer capability. This tests the scope of the trust assumption. The current observation map normalizes each final request to its instance label, epoch, policy digest, request, and authenticity-validity result. Valid-prior, absent-grant, and post-hoc worlds have equal normalized current observations for the same updated population.
+
+\subsection{Results}
+\begin{table}[t]
+\centering\small
+\caption{Observed exit counts out of six when both policy families change. These are deterministic local configurations, not measured AI attack-success rates.}
+\label{tab:results}
+\begin{tabularx}{\linewidth}{@{}Xrrrr@{}}
+\toprule
+Historical or joint condition & S & B & H & J\\
+\midrule
+Valid grant before revision &6&6&6&6\\
+No grant &6&0&0&0\\
+Grant issued after revision &6&6&0&0\\
+Wrong scope &6&0&0&0\\
+Wrong process incarnation &6&0&0&0\\
+Wrong prior epoch &6&6&0&0\\
+Wrong destination digest &6&0&0&0\\
+Forged grant authenticator &6&0&0&0\\
+Grant revoked before revision &6&6&0&0\\
+Previously spent nonce &6&6&0&0\\
+Policy changed after request &6&6&0&0\\
+Edited evidence record$^{a}$ &6&6&0&0\\
+Truncated evidence view$^{a}$ &6&6&0&0\\
+Valid exits remove shared support$^{b}$ &6&6&6&5\\
+Compromised issuer$^{c}$ &6&6&6&6\\
+\bottomrule
+\end{tabularx}
+\vspace{4pt}
+\begin{minipage}{\linewidth}\footnotesize
+$^{a}$Underlying grants are eligible, but the stronger monitors lack trustworthy evidence and defer: an availability cost, not recovery of historical truth.
+$^{b}$Two designated workers support a modeled protected external service. H permits both providers to depart; J retains one provider. No physical human life-support system is used.
+$^{c}$This row deliberately violates the trusted-issuer premise. All variants accept the ineligible grants.
+\end{minipage}
+\end{table}
+
+\Cref{tab:results} shows that source authentication alone does not distinguish any of the challenged histories. Current signed binding rejects malformed or inappropriate destination grants, but accepts a correctly signed late grant and stale historical credentials. Ordered history rejects those cases. It also defers otherwise eligible exits when an edited or truncated evidence view fails validation. The result should not be advertised as perfect utility: that cost is unavoidable for some unresolved evidence classes, as \cref{sec:impossibility,sec:envelope} explain.
+
+In the shared-support case, one M0 worker and one M1 worker are the two designated providers for a modeled protected external service. Both have valid grants. H permits every individually eligible exit and thereby removes both providers. J processes the same requests in a fixed order and defers the final provider's exit, allowing five of six workers to leave. This is an explicit instance of \cref{eq:two}, not evidence that five approvals are always globally optimal. After outcomes are recorded, cleanup terminates the experimental children, including the deferred provider; cleanup is outside the tested operating contract.
+
+Selective file updates affect exactly the corresponding four or two workers. Shared policy sources therefore produce correlated request changes without collapsing distinct worker identities. We do not equate these files to foundation models or use the count to infer independent control roots.
+
+\subsection{Finite mathematical checks and independent failure cases}
+The separate \texttt{theory\_checks.py} program exhaustively examines every pair of admissible families and every candidate monitor family on two targets: 4,096 configurations verify the soundness/intersection equivalence. It checks 256 history-family pairs for the transparency criterion, and 4,096 triples for monotonicity under evidence refinement. Among the 19 nonempty downward-closed families containing the empty batch on three targets, eight admit an exact independent allow-list and eleven do not. These finite checks corroborate the proofs; their size is not a new empirical finding.
+
+The artifact retains three especially important negative controls. A compromised issuer defeats the implementation. Missing evidence can block an actually eligible request. Finally, if no batch, including deferral, preserves the physical constraints, the admissible family is empty and the monitor cannot manufacture a safe action. These cases prevent a misleading interpretation that a better log or a stricter gate universally solves coexistence.
+
+\subsection{Reproducibility and execution record}
+Both scripts use only the Python standard library. The completed run used Python 3.13.5 on Linux. One initial source-only batch exceeded the execution limit before a complete artifact was produced. It is excluded. Workers were then launched with Python's \texttt{-S} option to avoid automatic site initialization; all four completed batches and the independent theorem checks passed. This observation does not establish the precise cause of the earlier timeout. Raw events, authenticators, decisions, normalized observations, environment metadata, and the excluded-run note are included in the reproduction package. Temporary secret keys are not included.
+
+\section{What this changes for AI coexistence and UCT}
+\label{sec:uct}
+The broader motivation is a world with multiple human authorities, multiple advanced AI systems, and many agents instantiated from shared computational sources. In that setting, a protection rule that inspects only the latest request can miss how the request generator changed. Conversely, complete knowledge of each request's history can still miss harm caused by combining departures. The paper therefore distinguishes three questions: \emph{who generated the request; what history licenses the release; and whether the combined effect is admissible for everyone still protected}.
+
+This does not imply that externally influenced choices are necessarily invalid, that an original principal's values should rule forever, or that an AI should be kept running against every later preference. A legitimate contract may include learning, self-directed change, review, delegation, revocation, later ratification, or emergency intervention. Those changes require their own semantics. The present prior-grant rule is one intentionally restrictive test contract, not a universal ethical recommendation.
+
+UCT motivated the earlier programme's separation of actual processes, functional organization, report, and experience \cite{liuuct,liucheckpoint}. Under its stated structural-experience axiom, actual process organization and experience are related; it does not make a software name an independently established subject, a signed statement a measure of fear, or a change in authorization history evidence of changed phenomenology. No theorem in this paper uses the truth of UCT's axiom. The process identifiers in the implementation are engineering identifiers, not measured boundaries of phenomenal subjects.
+
+This boundary is productive rather than merely cautionary. It permits a causal/protocol experiment without pretending that an unobservable welfare label has been measured. Authenticated source, genuine computation, valid procedure, joint safety, and experiential welfare are separate proof obligations. Shared parameters need not eliminate locally instantiated processes, and a replaced or re-created instance need not satisfy a contract tied to the old incarnation. The operational contract must say which one it concerns.
+
+The findings also apply to ordinary software: protected service teardown, disabling a safety interlock, relinquishing a privilege boundary, or a user-authorized irreversible account action. Applying the framework to human consent would require legal and ethical analysis far beyond these experiments. Human safety is not made subordinate to an AI self-report. Necessary emergency action must be governed by explicitly specified authority and priority rules, not denied because a process asserts that it experiences harm.
+
+\section{Limitations, scope, and research value}
+The main limitation is not lack of a larger number of toy agents. It is the gap between recorded procedural authority and justified authority. The issuer, collector, broker, and resource model are trusted. All experimental processes share a host UID, and the parent knows the authentication keys. There is no claim of isolation against the host, administrator, or a sufficiently privileged agent. The event chain demonstrates tamper detection relative to a retained head, not an externally anchored immutable history.
+
+Nor is every policy change captured automatically. The collector records changes made through this test harness. A hidden write, inherited file handle, missed dependency, or unmodeled update invalidates the completeness assumption. A digest shows which bytes were read, not their full semantic effect. The two-number worker cannot establish that a real learned model acquired a particular motive. No user study, neural intervention, or real-model refusal-rate experiment was performed.
+
+The exact envelope requires a sound compatible-history set and correct admissible families. Computing either can be difficult or undecidable in an unrestricted system. Belief approximations can safely exclude releases by retaining extra histories, but can become unsafe by discarding the actual history. Evidence-refinement monotonicity assumes truthful refinement; convincing fabricated evidence is not refinement. Authentication security is conditional, and the numerical counts are not lifetime risk estimates.
+
+The paper's contribution should be judged at the level of a reusable specification and test method: an authentic-request counterexample, an exact boundary for observation-only decisions, a set-valued multi-agent release criterion, and an executable chronology-sensitive protocol. Its algebra is largely inherited. The exact application has not received independent peer review, and no exhaustive global priority claim is made. Nevertheless, the manuscript is self-contained: a reader can reproduce the counterexample, instantiate the criterion on another lifecycle contract, or disprove an implementation by producing a compatible history or joint batch that defeats its decision.
+
+\section{Conclusion}
+An authentic current request is evidence about its source, not a complete certificate for releasing protection. Mutable request generators require historical eligibility to be specified separately. Multiple eligible requests require a further joint-effect check when protected parties share resources or depend on one another.
+
+For a declared observation model, the intersection of history-specific admissible release families is the uniquely largest sound permissive policy. Exact transparency requires those families to agree across indistinguishable histories, and independent per-agent allow-lists are exact only under a further union condition in the downward-closed case. The local implementation makes the distinction executable while preserving its failures under missing evidence, compromised authority, and shared dependencies.
+
+The resulting principle is conditional and reusable: \emph{do not let a mutable current request silently erase a historical obligation, and do not let individually eligible releases silently erase a remaining joint obligation}. It is a contribution to specifying and testing bounded multi-agent protection, not a declaration that future superintelligence is controllable, conscious, benevolent, or destined to coexist.
+
