@@ -1,0 +1,116 @@
+\section{Minimum reserve without unique diagnosis}
+\label{sec:nonseparation}
+\begin{corollary}[An optimal low-diagnostic architecture \sid{CB-C1}]
+\label[corollary]{cor:minimal}
+For $d=b=f+1$, the exact reserve is $(f+1)k$, attained by $k$ units in every bank. For $f\geq1$ and $n>k$, unique diagnosis of $S$ is not guaranteed in this architecture, yet safe revocation and protected service are guaranteed within the model.
+\end{corollary}
+\begin{proof}
+An attack on any $f$ bank roots leaves one bank; with no diagnostic corruption, the true replacement set needs $k$ units. Every bank must therefore contain at least $k$ units, yielding $(f+1)k$.
+
+For sufficiency, suppose $a$ diagnostic roots and $r$ bank roots are corrupted, with $a+r\leq f$. At least one diagnostic is honest. Every received set is a candidate when $d-f=1$, and the union of the true set and at most $a$ false sets has at most $(a+1)k$ members. Surviving capacity is $(f+1-r)k\geq(a+1)k$. The union plan and remaining veto succeed.
+
+For non-identifiability, choose distinct failure sets $S,T$. A vector containing one $S$ and $f$ copies of $T$ is consistent both with true $S$ and $f$ corrupt diagnostics, and with true $T$ and one corrupt diagnostic. Both worlds satisfy the same budget, so no observation-only decoder can always identify the true set. The same union action is nevertheless safe in both.
+\end{proof}
+This separates \emph{task success} from \emph{correct diagnosis}. It does not show that accurate estimates are never useful, nor contradict separation theorems for other objectives and plant assumptions. In particular, secure stabilization of specified linear systems and completion of a finite set-covering service handoff are different problems \cite{fawzi}.
+
+\begin{corollary}[Tight loss from decoupling worst cases \sid{CB-C2}]
+\label[corollary]{cor:gap}
+Fix the placement of $f+1$ diagnostic roots and $f+1$ bank roots, and assume $n\geq(f+1)k$. A design rule that insists every surviving bank configuration can supply the global largest ambiguity union requires $(f+1)^2k$ nominal units. The exact common-budget requirement is $(f+1)k$. Their ratio $f+1$ is unbounded as the declared fault budget grows.
+\end{corollary}
+\begin{proof}
+The report union can have size $(f+1)k$: let the true set and $f$ false sets be disjoint and let all $f$ corrupted roots be diagnostic. Separately, $f$ bank faults can leave any one bank. Combining these extremes requires each bank to hold $(f+1)k$ units, totaling $(f+1)^2k$. That allocation is sufficient for the decoupled requirement. But the two extremes cannot co-occur under \cref{eq:budget}; \cref{cor:minimal} gives the exact smaller design.
+\end{proof}
+The comparison fixes the role placement and the specified modular rule. It is not a lower bound on all systems that use state estimation. A designer may intentionally require the stronger model with separate diagnostic and bank budgets; the larger capacity is then protection against additional attacks rather than a mistake. Our claim is that silently imposing that stronger model can obscure the exact feasibility of the declared one.
+
+\paragraph{A limiting numerical sequence.}
+For $(f,k,n)=(1,1,2),(2,2,6),(4,2,10)$, the minimal construction uses respectively $2,6,10$ units. The decoupled design in the same placements uses $4,18,50$. These numbers are consequences of the proved parameter family, not experimental performance estimates. They exhibit why increasing a fault budget need not require provisioning the product of independently maximized failures.
+
+\section{Heterogeneous diagnostic maps and co-located roots}
+\label{sec:extensions}
+The separated-role assumption is valuable but not universal. A root may control reports, reserves, and a veto simultaneously. In that setting the common-budget scalar $a+r$ cannot be used without examining ancestry. The joint-world criterion \cref{prop:joint} remains applicable.
+
+\subsection{Exact one-fault synthesis for arbitrary finite reports}
+Suppose $m\geq2$ independent roots each own an arbitrary diagnostic map and a bank of integer capacity $c_i$. At most one root is compromised. The world model defines the observation cells and required union $U_z$. A compromised reporter is allowed to tell the truth, so a world with no fault has an observational counterpart under any one-root fault, while that fault can still destroy its bank.
+
+For each root $i$, let
+\begin{equation}
+L_i=\max\{|U_z|:\text{some world with root }i\text{ compromised emits }z\}.
+\end{equation}
+Assume normal effect guards form a complete cut under every one-root fault and the universal pool remains faithful. The $L_i$ are conditional ambiguity costs, not merely individual diagnostic error rates.
+
+\begin{theorem}[Heterogeneous one-fault capacity \sid{CB-T2}]
+\label{thm:hetero}
+Under these premises, the minimum nominal capacity is
+\begin{equation}
+\boxed{\Rmin=\max\left\{\max_i L_i,\;\ceil{\frac{\sum_i L_i}{m-1}}\right\}.}
+\label{eq:hetero}
+\end{equation}
+An attaining placement can be found by filling nonnegative integer capacities subject to $c_i\leq\Rmin-L_i$ and $\sum_i c_i=\Rmin$.
+\end{theorem}
+\begin{proof}
+Let $R=\sum_i c_i$. The joint-world criterion is exactly $R-c_i\geq L_i$ for all $i$. No-fault requirements are included because every honest observation is also possible when one compromised root tells the truth. Necessity gives $R\geq\max_iL_i$ and, by summing the upper bounds on $c_i$, $(m-1)R\geq\sum_iL_i$. Conversely, at the displayed $\Rmin$, the nonnegative integer upper bounds $\Rmin-L_i$ have total at least $\Rmin$. Fill them greedily until exactly that total is allocated. Every joint-world constraint then holds.
+\end{proof}
+A concrete two-state binary example has truthful codewords $0000$ and $1100$. Roots 1 and 2 carry diagnostic content; roots 3 and 4 report a fixed bit. The conditional costs are $(2,2,1,1)$, and capacities $(0,0,1,1)$ attain $R=2$. A conflicting first pair requires arming both states, but that fault leaves both banks intact. A fault in a bank root leaves one unit and unambiguous first-pair reports. Using the global worst ambiguity of two with the global surviving capacity of one would incorrectly reject this design under the common-budget model.
+
+\subsection{An arbitrary-size generalization of PR-v5}
+Partition the possible affected channels into $q$ nonempty classes of sizes $g_1,\ldots,g_q$. All $m$ root reporters repeat the truthful class label; a corrupted root may change its label and disable its own bank. At most $f$ roots fail. Exactly one primary channel is affected, but every channel in each compatible class must be pre-armed. Sort the class sizes nonincreasingly.
+
+\begin{theorem}[Replicated-class frontier \sid{CB-T3}]
+\label{thm:replicated}
+If $m>f$, put
+\begin{equation}
+ h=m-f,\qquad t=\min\{q,\floor{m/h}\},\qquad W=\sum_{j=1}^{t}g_{(j)}.
+\end{equation}
+With a complete veto cut on at least $f+1$ of these roots, the minimum nominal capacity is
+\begin{equation}
+\boxed{\Rmin=W+f\ceil{W/(m-f)}.}
+\label{eq:replicated}
+\end{equation}
+For $m\leq f$, all root-controlled banks and gates can be lost and the guarantee is impossible.
+\end{theorem}
+\begin{proof}
+A reported class is compatible with the fault bound precisely when it occurs at least $h$ times. Hence at most $\lfloor m/h\rfloor$ classes are compatible and their union contains at most $W$ channels. For any fixed set of $f$ faulty roots, choose the true class among the $t$ largest. The $h$ honest reports identify that class. Use $h$ corrupted reports for each of the other $t-1$ classes and assign any leftover reports to the true class. This is possible because $th\leq m$, and attains $W$ for that same fault set. Thus every loss of $f$ banks must leave at least $W$ units. Lemma~\ref{lem:capacity} with $j=m-f$ gives the lower bound and balanced attainment. Smaller fault sets cannot create a larger union or remove more capacity.
+\end{proof}
+For $g=(2,2)$ and $f=1$, this recovers PR-v5: $m=1$ is impossible, $m=2$ requires eight units, and every $m\geq3$ requires three. For six equal classes of size 20 and $f=2$, $m=3,4,5,6$ respectively require $180,80,34,30$ units. The repeated label's alphabet and message length are part of the specification; these are not fair comparisons to a richer diagnostic protocol unless those costs are included.
+
+\section{Verification and executable synthesis}
+\label{sec:verification}
+The main artifact is an executable finite-world oracle, not a newly trained model. Its purpose is to check the algebra independently of the formula and to preserve falsifiable claims.
+
+\paragraph{Separated-role oracle.}
+For a parameter tuple $(n,k,f,d,b)$, enumerate each true $k$-set, every diagnostic and bank fault set satisfying the common budget, and every forged report assignment. Group the resulting worlds by the identical received vector. Compute the required union directly, attach the corresponding bank-loss masks, then search integer capacity placements by increasing nominal total. The oracle does not use $w_a$ or the closed-form resource expression. Bank permutation symmetry permits sorted placements in this homogeneous role class.
+
+The complete basic grid uses $n\in\{2,3,4\}$, $1\leq k\leq\min(2,n)$, $0\leq f\leq2$, $0\leq d\leq4$, and $f+1\leq b\leq4$. It contains 270 configurations. Six additional specified cases reach $n=6$, $k=3$, $f=3$, $d=6$, or $b=5$. Across these 276 configurations, 649,320 joint worlds are generated. Every independently minimized capacity equals \cref{eq:main} or \cref{eq:nodiagnosis}, and each balanced attaining vector passes all retained joint-world constraints.
+
+\paragraph{Co-located and heterogeneous checks.}
+The replicated-class suite uses six declared class-size vectors, $m=1,\ldots,6$ and $0\leq f\leq\min(2,m-1)$, giving 90 configurations and 6,816 generated worlds. All optima match \cref{eq:replicated}. The one-fault heterogeneous suite covers all distinct binary diagnostic code sets of cardinality one through four in lengths two through four: 2,693 instances. An independent labeled-capacity search verifies \cref{eq:hetero}; it does not exploit bank permutation symmetry because the $L_i$ differ. The main and replicated searches together evaluate 5,082 candidate placements; that number does not include the separate heterogeneous search. A further action-level oracle tests 175 labeled allocations in seven selected configurations. For every observation it enumerates all armed sets and checks every actual failure/bank-loss world directly, without using the union shortcut. Its admissibility decisions agree with the joint-world criterion throughout.
+
+\paragraph{Negative controls and regression.}
+Three instances with $b=f$ contain an explicit all-bank-loss world with positive demand; capacity 100 in each bank still fails. A separate-budget control gives the adversary both $f$ diagnostic corruptions and $f$ bank losses, exceeding the common budget and defeating the minimal construction. A co-location control lets one root both lie and destroy a bank; it also defeats the separated-role construction. These are exact finite counterexamples, not exploits against real hardware. The supplied PR-v5 independent all-plan oracle was rerun: all 7,380 capacity profiles and the complete JSON outcomes match its archive. The old operating-system role experiments were not rerun or added to the new evidence count.
+
+\begin{table}[t]
+\centering\small
+\caption{New verification scope. Counts describe mathematical configurations, not risk samples or empirical probabilities.}
+\begin{tabularx}{\linewidth}{@{}XrX@{}}\toprule
+Test family&Instances&Independent check\\\midrule
+Common-budget resource frontier&276&Joint-world cells and capacity search\\
+Replicated classes with co-location&90&World/forgery enumeration and allocation\\
+Heterogeneous one-fault diagnostics&2,693&Labeled integer allocation search\\
+Direct pre-armed action audit&175&All actions against all actual worlds\\
+All backup roots may fail&3&Explicit unsuppliable worlds\\
+Minimal construction across budgets&21&Formula specialization, not extra world evidence\\
+PR-v5 regression&7,380&Inherited direct-plan oracle, unchanged\\\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Reproduction.}
+The new Python scripts use only the standard library and make no network requests. The main script provides the closed-form functions as reusable routines as well as the independent oracles. The results record all parameter tuples, witness allocations, negative controls and proof-to-test mappings. A second clean run checks semantic equality excluding elapsed runtime. Machine speed, assertion count and source hashes establish neither originality nor an empirical bound on independent control roots.
+
+\begin{lstlisting}
+python src/coupled_budget.py --out data/coupled_budget_results.json
+python src/direct_plan_oracle.py --out data/direct_plan_results.json
+cd paper
+pdflatex -interaction=nonstopmode -halt-on-error manuscript.tex
+pdflatex -interaction=nonstopmode -halt-on-error manuscript.tex
+\end{lstlisting}
+
