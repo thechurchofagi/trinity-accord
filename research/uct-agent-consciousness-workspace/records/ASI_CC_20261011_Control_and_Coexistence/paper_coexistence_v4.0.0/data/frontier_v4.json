@@ -1,0 +1,1461 @@
+{
+  "version": "PR-v4.0.0",
+  "scope": "Exact finite constructed relations and dependency isolation; no model evaluation",
+  "general_relation": {
+    "tables": 5776,
+    "partition_equivalence_checks": 52890,
+    "message_count_distribution": {
+      "1": 2416,
+      "2": 3168,
+      "3": 192
+    },
+    "pairwise_checks_miss_global_failure_tables": 192,
+    "first_pairwise_counterexample": {
+      "n": 3,
+      "m": 4,
+      "rows": [
+        3,
+        5,
+        6
+      ],
+      "minimal_bad_cells": [
+        7
+      ],
+      "messages": 2
+    },
+    "duplicate_action_columns_preserve_optimum": true,
+    "unresolvable_sensor_cell_control": true
+  },
+  "dependency_frontier": {
+    "single_fault_cases": [
+      {
+        "n": 2,
+        "r": 1,
+        "M_star": 2,
+        "bits": 1,
+        "codebook": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      {
+        "n": 2,
+        "r": 2,
+        "M_star": 1,
+        "bits": 0,
+        "codebook": [
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      {
+        "n": 3,
+        "r": 1,
+        "M_star": 3,
+        "bits": 2,
+        "codebook": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ]
+      },
+      {
+        "n": 3,
+        "r": 2,
+        "M_star": 2,
+        "bits": 1,
+        "codebook": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ]
+        ]
+      },
+      {
+        "n": 3,
+        "r": 3,
+        "M_star": 1,
+        "bits": 0,
+        "codebook": [
+          [
+            0,
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "n": 4,
+        "r": 1,
+        "M_star": 4,
+        "bits": 2,
+        "codebook": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ]
+        ]
+      },
+      {
+        "n": 4,
+        "r": 2,
+        "M_star": 2,
+        "bits": 1,
+        "codebook": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      {
+        "n": 4,
+        "r": 3,
+        "M_star": 2,
+        "bits": 1,
+        "codebook": [
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            0,
+            1,
+            3
+          ]
+        ]
+      },
+      {
+        "n": 4,
+        "r": 4,
+        "M_star": 1,
+        "bits": 0,
+        "codebook": [
+          [
+            0,
+            1,
+            2,
+            3
+          ]
+        ]
+      },
+      {
+        "n": 5,
+        "r": 1,
+        "M_star": 5,
+        "bits": 3,
+        "codebook": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ]
+        ]
+      },
+      {
+        "n": 5,
+        "r": 2,
+        "M_star": 3,
+        "bits": 2,
+        "codebook": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            3,
+            4
+          ]
+        ]
+      },
+      {
+        "n": 5,
+        "r": 3,
+        "M_star": 2,
+        "bits": 1,
+        "codebook": [
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            0,
+            3,
+            4
+          ]
+        ]
+      },
+      {
+        "n": 5,
+        "r": 4,
+        "M_star": 2,
+        "bits": 1,
+        "codebook": [
+          [
+            0,
+            1,
+            2,
+            3
+          ],
+          [
+            0,
+            1,
+            2,
+            4
+          ]
+        ]
+      },
+      {
+        "n": 5,
+        "r": 5,
+        "M_star": 1,
+        "bits": 0,
+        "codebook": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        ]
+      },
+      {
+        "n": 6,
+        "r": 1,
+        "M_star": 6,
+        "bits": 3,
+        "codebook": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ]
+        ]
+      },
+      {
+        "n": 6,
+        "r": 2,
+        "M_star": 3,
+        "bits": 2,
+        "codebook": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            4,
+            5
+          ]
+        ]
+      },
+      {
+        "n": 6,
+        "r": 3,
+        "M_star": 2,
+        "bits": 1,
+        "codebook": [
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            3,
+            4,
+            5
+          ]
+        ]
+      },
+      {
+        "n": 6,
+        "r": 4,
+        "M_star": 2,
+        "bits": 1,
+        "codebook": [
+          [
+            0,
+            1,
+            2,
+            3
+          ],
+          [
+            0,
+            1,
+            4,
+            5
+          ]
+        ]
+      },
+      {
+        "n": 6,
+        "r": 5,
+        "M_star": 2,
+        "bits": 1,
+        "codebook": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          [
+            0,
+            1,
+            2,
+            3,
+            5
+          ]
+        ]
+      },
+      {
+        "n": 6,
+        "r": 6,
+        "M_star": 1,
+        "bits": 0,
+        "codebook": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        ]
+      },
+      {
+        "n": 7,
+        "r": 1,
+        "M_star": 7,
+        "bits": 3,
+        "codebook": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ]
+        ]
+      },
+      {
+        "n": 7,
+        "r": 2,
+        "M_star": 4,
+        "bits": 2,
+        "codebook": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            6
+          ]
+        ]
+      },
+      {
+        "n": 7,
+        "r": 3,
+        "M_star": 3,
+        "bits": 2,
+        "codebook": [
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            0,
+            1,
+            3
+          ],
+          [
+            4,
+            5,
+            6
+          ]
+        ]
+      },
+      {
+        "n": 7,
+        "r": 4,
+        "M_star": 2,
+        "bits": 1,
+        "codebook": [
+          [
+            0,
+            1,
+            2,
+            3
+          ],
+          [
+            0,
+            4,
+            5,
+            6
+          ]
+        ]
+      },
+      {
+        "n": 7,
+        "r": 5,
+        "M_star": 2,
+        "bits": 1,
+        "codebook": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          [
+            0,
+            1,
+            2,
+            5,
+            6
+          ]
+        ]
+      },
+      {
+        "n": 7,
+        "r": 6,
+        "M_star": 2,
+        "bits": 1,
+        "codebook": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            6
+          ]
+        ]
+      },
+      {
+        "n": 7,
+        "r": 7,
+        "M_star": 1,
+        "bits": 0,
+        "codebook": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        ]
+      },
+      {
+        "n": 8,
+        "r": 1,
+        "M_star": 8,
+        "bits": 3,
+        "codebook": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ],
+          [
+            7
+          ]
+        ]
+      },
+      {
+        "n": 8,
+        "r": 2,
+        "M_star": 4,
+        "bits": 2,
+        "codebook": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            6,
+            7
+          ]
+        ]
+      },
+      {
+        "n": 8,
+        "r": 3,
+        "M_star": 3,
+        "bits": 2,
+        "codebook": [
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            0,
+            3,
+            4
+          ],
+          [
+            5,
+            6,
+            7
+          ]
+        ]
+      },
+      {
+        "n": 8,
+        "r": 4,
+        "M_star": 2,
+        "bits": 1,
+        "codebook": [
+          [
+            0,
+            1,
+            2,
+            3
+          ],
+          [
+            4,
+            5,
+            6,
+            7
+          ]
+        ]
+      },
+      {
+        "n": 8,
+        "r": 5,
+        "M_star": 2,
+        "bits": 1,
+        "codebook": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          [
+            0,
+            1,
+            5,
+            6,
+            7
+          ]
+        ]
+      },
+      {
+        "n": 8,
+        "r": 6,
+        "M_star": 2,
+        "bits": 1,
+        "codebook": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          [
+            0,
+            1,
+            2,
+            3,
+            6,
+            7
+          ]
+        ]
+      },
+      {
+        "n": 8,
+        "r": 7,
+        "M_star": 2,
+        "bits": 1,
+        "codebook": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            7
+          ]
+        ]
+      },
+      {
+        "n": 8,
+        "r": 8,
+        "M_star": 1,
+        "bits": 0,
+        "codebook": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        ]
+      },
+      {
+        "n": 9,
+        "r": 1,
+        "M_star": 9,
+        "bits": 4,
+        "codebook": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ],
+          [
+            7
+          ],
+          [
+            8
+          ]
+        ]
+      },
+      {
+        "n": 9,
+        "r": 2,
+        "M_star": 5,
+        "bits": 3,
+        "codebook": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            7,
+            8
+          ]
+        ]
+      },
+      {
+        "n": 9,
+        "r": 3,
+        "M_star": 3,
+        "bits": 2,
+        "codebook": [
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            3,
+            4,
+            5
+          ],
+          [
+            6,
+            7,
+            8
+          ]
+        ]
+      },
+      {
+        "n": 9,
+        "r": 4,
+        "M_star": 3,
+        "bits": 2,
+        "codebook": [
+          [
+            0,
+            1,
+            2,
+            3
+          ],
+          [
+            0,
+            1,
+            2,
+            4
+          ],
+          [
+            5,
+            6,
+            7,
+            8
+          ]
+        ]
+      },
+      {
+        "n": 9,
+        "r": 5,
+        "M_star": 2,
+        "bits": 1,
+        "codebook": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          [
+            0,
+            5,
+            6,
+            7,
+            8
+          ]
+        ]
+      },
+      {
+        "n": 9,
+        "r": 6,
+        "M_star": 2,
+        "bits": 1,
+        "codebook": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          [
+            0,
+            1,
+            2,
+            6,
+            7,
+            8
+          ]
+        ]
+      },
+      {
+        "n": 9,
+        "r": 7,
+        "M_star": 2,
+        "bits": 1,
+        "codebook": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            7,
+            8
+          ]
+        ]
+      },
+      {
+        "n": 9,
+        "r": 8,
+        "M_star": 2,
+        "bits": 1,
+        "codebook": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            8
+          ]
+        ]
+      },
+      {
+        "n": 9,
+        "r": 9,
+        "M_star": 1,
+        "bits": 0,
+        "codebook": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ]
+        ]
+      }
+    ],
+    "two_fault_covering_cases": [
+      {
+        "n": 3,
+        "k": 2,
+        "r": 2,
+        "M_star": 3,
+        "codebook": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "simple_counting_lower_bound": 3
+      },
+      {
+        "n": 3,
+        "k": 2,
+        "r": 3,
+        "M_star": 1,
+        "codebook": [
+          [
+            0,
+            1,
+            2
+          ]
+        ],
+        "simple_counting_lower_bound": 1
+      },
+      {
+        "n": 4,
+        "k": 2,
+        "r": 2,
+        "M_star": 6,
+        "codebook": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "simple_counting_lower_bound": 6
+      },
+      {
+        "n": 4,
+        "k": 2,
+        "r": 3,
+        "M_star": 3,
+        "codebook": [
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            0,
+            1,
+            3
+          ],
+          [
+            0,
+            2,
+            3
+          ]
+        ],
+        "simple_counting_lower_bound": 2
+      },
+      {
+        "n": 4,
+        "k": 2,
+        "r": 4,
+        "M_star": 1,
+        "codebook": [
+          [
+            0,
+            1,
+            2,
+            3
+          ]
+        ],
+        "simple_counting_lower_bound": 1
+      },
+      {
+        "n": 5,
+        "k": 2,
+        "r": 2,
+        "M_star": 10,
+        "codebook": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "simple_counting_lower_bound": 10
+      },
+      {
+        "n": 5,
+        "k": 2,
+        "r": 3,
+        "M_star": 4,
+        "codebook": [
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            0,
+            1,
+            3
+          ],
+          [
+            0,
+            1,
+            4
+          ],
+          [
+            2,
+            3,
+            4
+          ]
+        ],
+        "simple_counting_lower_bound": 4
+      },
+      {
+        "n": 5,
+        "k": 2,
+        "r": 4,
+        "M_star": 3,
+        "codebook": [
+          [
+            0,
+            1,
+            2,
+            3
+          ],
+          [
+            0,
+            1,
+            2,
+            4
+          ],
+          [
+            0,
+            1,
+            3,
+            4
+          ]
+        ],
+        "simple_counting_lower_bound": 2
+      },
+      {
+        "n": 5,
+        "k": 2,
+        "r": 5,
+        "M_star": 1,
+        "codebook": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        ],
+        "simple_counting_lower_bound": 1
+      },
+      {
+        "n": 6,
+        "k": 2,
+        "r": 2,
+        "M_star": 15,
+        "codebook": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            5
+          ]
+        ],
+        "simple_counting_lower_bound": 15
+      },
+      {
+        "n": 6,
+        "k": 2,
+        "r": 3,
+        "M_star": 6,
+        "codebook": [
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            0,
+            1,
+            3
+          ],
+          [
+            0,
+            4,
+            5
+          ],
+          [
+            1,
+            4,
+            5
+          ],
+          [
+            2,
+            3,
+            4
+          ],
+          [
+            2,
+            3,
+            5
+          ]
+        ],
+        "simple_counting_lower_bound": 5
+      },
+      {
+        "n": 6,
+        "k": 2,
+        "r": 4,
+        "M_star": 3,
+        "codebook": [
+          [
+            0,
+            1,
+            2,
+            3
+          ],
+          [
+            0,
+            1,
+            4,
+            5
+          ],
+          [
+            2,
+            3,
+            4,
+            5
+          ]
+        ],
+        "simple_counting_lower_bound": 3
+      },
+      {
+        "n": 6,
+        "k": 2,
+        "r": 5,
+        "M_star": 3,
+        "codebook": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          [
+            0,
+            1,
+            2,
+            3,
+            5
+          ],
+          [
+            0,
+            1,
+            2,
+            4,
+            5
+          ]
+        ],
+        "simple_counting_lower_bound": 2
+      },
+      {
+        "n": 6,
+        "k": 2,
+        "r": 6,
+        "M_star": 1,
+        "codebook": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        ],
+        "simple_counting_lower_bound": 1
+      }
+    ],
+    "C_6_3_2": {
+      "value": 6,
+      "failing_codebooks_with_at_most_five_blocks": 21700,
+      "six_block_witness": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          0,
+          1,
+          3
+        ],
+        [
+          0,
+          4,
+          5
+        ],
+        [
+          1,
+          4,
+          5
+        ],
+        [
+          2,
+          3,
+          4
+        ],
+        [
+          2,
+          3,
+          5
+        ]
+      ]
+    },
+    "pairwise_counterexample": {
+      "worlds": 3,
+      "backup_capacity": 2,
+      "all_pairs": true,
+      "all_three": false
+    }
+  },
+  "deadline_channel": {
+    "cases": 704,
+    "n8_r2_one_bit_per_round": [
+      {
+        "n": 8,
+        "r": 2,
+        "bits_per_round": 1,
+        "available_rounds": 0,
+        "possible": false
+      },
+      {
+        "n": 8,
+        "r": 2,
+        "bits_per_round": 1,
+        "available_rounds": 1,
+        "possible": false
+      },
+      {
+        "n": 8,
+        "r": 2,
+        "bits_per_round": 1,
+        "available_rounds": 2,
+        "possible": true
+      },
+      {
+        "n": 8,
+        "r": 2,
+        "bits_per_round": 1,
+        "available_rounds": 3,
+        "possible": true
+      }
+    ],
+    "interpretation": "Fixed noiseless transcript alphabet and no precommit service gap; no claim about continuous-time energy."
+  },
+  "python": "3.13.5",
+  "elapsed_seconds": 0.181603,
+  "assertions": "PASS"
+}

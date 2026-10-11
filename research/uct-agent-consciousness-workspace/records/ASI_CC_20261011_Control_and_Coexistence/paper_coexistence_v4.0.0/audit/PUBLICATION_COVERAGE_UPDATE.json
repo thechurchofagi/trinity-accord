@@ -1,0 +1,28 @@
+{
+  "baseline": "UCT-PUB-v1.0.33",
+  "version": "PR-v4.0.0-COVERAGE-DELTA",
+  "nondeductive": true,
+  "new_verified_published_works": 0,
+  "new_doi": false,
+  "published_byte_changes": false,
+  "whole_corpus_review_completed": false,
+  "inherited_claims": [
+    "PR1 history and joint-release distinctions",
+    "PR2/CW resource and observation kernels",
+    "PR3/BS subject-neutral deterministic setting"
+  ],
+  "new_candidates": [
+    "ER-T1",
+    "ER-T2",
+    "ER-P1",
+    "ER-T3",
+    "ER-C1",
+    "ER-P2",
+    "ER-C2",
+    "ER-E1"
+  ],
+  "literature": "audit/PRIOR_ART_REVIEW.md",
+  "global_priority": "UNVERIFIED_FOR_EXACT_APPLICATION",
+  "decision": "COMPLETE_REVISION_FOR_CRITICAL_REVIEW;NO_AUTOMATIC_PUBLICATION",
+  "formal_admission": "DISABLED;PENDING_MAP"
+}

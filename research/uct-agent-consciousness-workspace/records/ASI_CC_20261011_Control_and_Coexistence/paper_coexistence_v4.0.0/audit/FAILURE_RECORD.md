@@ -1,0 +1,5 @@
+# Recorded failure and correction — PR-v4.0.0
+
+The first local protocol invocation stopped at an assertion after part of the single-loss scenarios. The assertion guessed that five triples on six targets could cover fourteen of the fifteen target pairs. Exhaustive enumeration found that the maximum is thirteen, with a witness {{0,1,2},{0,1,3},{0,2,4},{1,4,5},{2,3,5}} leaving {0,5} and {3,4} uncovered. The guessed value and dependent expected outcome were corrected to thirteen before the complete rerun. No completed result file existed for the first invocation; the partial cases are excluded from final counts.
+
+The earlier shell pipeline did not use pipefail and therefore reported a successful shell return despite the Python assertion failure. The rerun uses pipefail and checks the output JSON. This was a test-expectation error, not evidence against the separately proved C(6,3,2)=6 result. The six-block covering witness and independent exclusion of all codebooks with at most five blocks were already correct.
