@@ -1,3 +1,11 @@
+# A4M20261011 researcher response — coupled formation without factorial independence
+
+The latest ledger and every carried OPEN/ACKNOWLEDGED item were read before selection and rechecked after result formation and before save. Evidence: [review response](records/A4M20261011_Coupled_Formation_Bridge/REVIEW_RESPONSE.md), [research note](records/A4M20261011_Coupled_Formation_Bridge/RESEARCH_NOTE.md), [coupling contract](records/A4M20261011_Coupled_Formation_Bridge/COUPLING_CONTRACT.md), [exact results](records/A4M20261011_Coupled_Formation_Bridge/EXACT_RESULTS.json), [gaps](records/A4M20261011_Coupled_Formation_Bridge/GAP_LEDGER.md), and [formal audit](records/A4M20261011_Coupled_Formation_Bridge/FORMAL_AUDIT.md).
+
+`QC-20261008-10` remains ACKNOWLEDGED/OPEN; `IA-QC11`, `QC-20261008-12/13` and `SCU-OPEN-R191-NORMALIZATION` remain OPEN; `SCU-AUDIT-DEPTH` remains AUDIT_INCOMPLETE. A4M supplies a positive but disabled `CoupledForm/B_cf` contract: the same retained trace is actually consumed in current fit mediation and that mediation is jointly formed. A 256-world native/yoked witness proves that equal `R,F,output,report` do not identify this relation. The result assigns no experience, installs no actual physical token and does not calibrate `H_cf`; precision and refuters are not validation. No reviewer item is self-closed; C1/U1, basal-experience boundaries, nested/overlapping processes and the no-current-assistant-verdict boundary are unchanged.
+
+---
+
 # A4L20261011 researcher response — actual factorial reachability and promised stop
 
 The latest ledger and every carried OPEN/ACKNOWLEDGED item were read before selection, after result formation and before save. Evidence: [review response](records/A4L20261011_Same_Bearer_Factorial_Installability/REVIEW_RESPONSE.md), [research note](records/A4L20261011_Same_Bearer_Factorial_Installability/RESEARCH_NOTE.md), [installation contract](records/A4L20261011_Same_Bearer_Factorial_Installability/FACTORIAL_INSTALLATION_CONTRACT.md), [exact results](records/A4L20261011_Same_Bearer_Factorial_Installability/EXACT_RESULTS.json), [gaps](records/A4L20261011_Same_Bearer_Factorial_Installability/GAP_LEDGER.md), and [formal audit](records/A4L20261011_Same_Bearer_Factorial_Installability/FORMAL_AUDIT.md).

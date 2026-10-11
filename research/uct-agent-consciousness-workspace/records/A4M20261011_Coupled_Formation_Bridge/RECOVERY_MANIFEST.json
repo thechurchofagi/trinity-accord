@@ -1,0 +1,13 @@
+{
+  "schema": "uct-recovery-manifest/1",
+  "round": "A4M20261011",
+  "status": "PRE_PERSISTENCE",
+  "baseline_remote_commit": "8bc702d52df0fef9cf8a8490678bd58b62369071",
+  "science_commit": null,
+  "receipt_commit": null,
+  "increment": {"filename": "UCT_A4M_Increment_20261011.zip", "file_count": null, "size_bytes": null, "sha256": null, "library_file_id": null, "is_complete_backup": false},
+  "increment_manifest": {"filename": "UCT_A4M_Increment_20261011_MANIFEST.json", "size_bytes": null, "sha256": null, "library_file_id": null},
+  "master": {"library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa", "version": null, "sha256": null, "reverse_materialized_byte_equal": false},
+  "restore_order": ["read fixed master latest version", "fetch latest verified remote branch", "require science/receipt commit or verified fast-forward successor", "inspect A4M handoff, contract, claim/gap/review/formal ledgers and exact results", "verify increment and manifest hashes", "rerun exact checker and navigation validation"],
+  "warning": "The ZIP is a round increment only, not a complete repository, complete working set or full history."
+}

@@ -2,13 +2,13 @@
 
 [总览](UCT_FORMAL_MAP.md) · [全部候选](PENDING_RESEARCH.md) · [当前状态](CURRENT_STATE.json) · [统一登记](UNIFIED_RESEARCH_INDEX.json) · [审查](UCT_FORMAL_AUDIT.md)
 
-正式科学接续仍为 **A3V20261010**；最新停用应用为 **A4L20261011**。
+正式科学接续仍为 **A3V20261010**；最新停用应用为 **A4M20261011**。
 
-[A4L 中文交接](records/A4L20261011_Same_Bearer_Factorial_Installability/HANDOFF_ZH.md) · [英文研究](records/A4L20261011_Same_Bearer_Factorial_Installability/RESEARCH_NOTE.md) · [安装合同](records/A4L20261011_Same_Bearer_Factorial_Installability/FACTORIAL_INSTALLATION_CONTRACT.md) · [形式审查](records/A4L20261011_Same_Bearer_Factorial_Installability/FORMAL_AUDIT.md)
+[A4M 中文交接](records/A4M20261011_Coupled_Formation_Bridge/HANDOFF_ZH.md) · [英文研究](records/A4M20261011_Coupled_Formation_Bridge/RESEARCH_NOTE.md) · [耦合合同](records/A4M20261011_Coupled_Formation_Bridge/COUPLING_CONTRACT.md) · [形式审查](records/A4M20261011_Coupled_Formation_Bridge/FORMAL_AUDIT.md)
 
-当前决定：A4J/A4K 的关系使用×当下适配纯候选比较在现有记录中没有同一不变量切片的实际四格与双重独立见证，因此标记 `NOT_INSTALLED_TERMINATE_CURRENT_CANDIDATE_COMPARISON`，不再增加校准/证书层。
+当前结果：在 `R` 与 `F` 必然共变时，原生共同形成与外接/yoked组织可以具有相同 `R=F=1`、输出和报告，却在“同一保留痕迹是否实际中介当前适配且共同形成”这一高阶关系上不同。该 `CoupledForm` 候选在 C1 下可条件性获得体验内结构对应，但 `H_cf` 的“作为此身体既定行动方式而展开”解释仍是开放桥接，不是已校准现象结论。
 
-下一具体问题：用一个严格思想实验检验混合、非排他的体验内部桥接——当保留关系使用与当下适配必然共变时，固定实际承载者、事件、回应含义和基础体验，改变二者耦合的形成方式；明确所解释的体验差异与可否决反例，不要求虚假的因子独立。
+下一具体问题：检验 `B_cf` 的身体特异性。保持已学习的路线—适配耦合、输出和回应含义，改变是否存在独立落地的身体框架绑定，构造身体回路与工具回路对照；若身体绑定、实际中介或 `H_cf` 端点不能独立建立，立即停止，不用命名补洞。
 
 [既有 A3V 科学交接](records/A3V20261010_Concurrent_Liveness_and_Familiarity/HANDOFF_ZH.md) · [地图整理交接](records/NAV20261010_Map_Integration/HANDOFF_ZH.md)
 

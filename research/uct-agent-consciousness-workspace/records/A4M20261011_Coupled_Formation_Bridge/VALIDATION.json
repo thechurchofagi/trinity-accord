@@ -1,0 +1,32 @@
+{
+  "schema": "a4m-validation/1",
+  "round": "A4M20261011",
+  "status": "PASS_ARTIFACT_AND_STRUCTURAL_CHECKS_WITH_DECLARED_SEMANTIC_LIMITS",
+  "checks": {
+    "checker_output_semantically_equals_exact_results": true,
+    "world_count": 256,
+    "marginal_keys_with_both_coupling_values": 4,
+    "native_yoked_full_marginal_twin": true,
+    "copied_trace_lineage_failure_retained": true,
+    "phenomenal_assignments": 0,
+    "completed_nodes": 913,
+    "completed_rules": 424,
+    "completed_context_links": 261,
+    "pending_objects_disabled": 727,
+    "suspended_historical_rules": 10,
+    "unresolved_deductive_references": 0,
+    "active_dependency_cycles": 0,
+    "all_of_interpreted_as_and": true,
+    "navigation_and_disabled_assembly_pass": true,
+    "current_scientific_pointer_match": true,
+    "scientific_promotion": false,
+    "full_semantic_reproof": false
+  },
+  "hashes": {
+    "checker_sha256": "e592782e2984bdd34bb6909074e7defddd2f982bb1dbfd9346dde7e872709753",
+    "checker_stdout_sha256": "c0164241ec9a55d35295c79f893c567540675c22191118f3be11e838bc99a5e5",
+    "exact_results_sha256": "a5bb7dcee2ab8f952b781c07dc527ad81d83867e323af442dfcab60dc004abb5",
+    "unified_map_gzip_sha256": "b37711fb7dbaca9b728feb38e7cb14abf4f63a9571035b40c048a97472df35be"
+  },
+  "limit": "Artifact consistency and finite organizational non-identification only; not physical installation, H_cf calibration, C1 evidence or global semantic proof."
+}

@@ -81,3 +81,11 @@ A4C式行动重放仍不能识别实际执行器写入器：允许旁路及时�
 - Exact rational examples include disjoint relation/fit regions, a genuine overlap interval `[4/5,22/15]`, and the hard obstruction that `0` in the endpoint-orientation interval puts `(0,0)` in both regions.
 - No actual first-stage, gain or endpoint-orientation intervals exist in the record. Application therefore stops at organizational/judgment consequences; formal delta 0/0/0 and all review items remain open.
 - Next: return to one actually installable same-bearer 2x2 relation-use × current-fit manipulation, or terminate this candidate comparison rather than add more calibration layers.
+
+## A4M20261011 — coupled formation after the factorial stop
+
+- A4L's lack of an installed `R×F` crossing does not eliminate every mixed relation. `CoupledForm` requires effective RetBind, actual current trace use, present fit participation, same-trace mediation, joint formation and same-event order together.
+- A 256-world exact model contains a native/yoked pair with equal `(R,F,output,report)=(1,1,1,1)` and different coupling values. Marginal covariance and successful report therefore do not identify the higher-order relation.
+- Conditional C1/R157 transport places a grounded relation inside experiential structure. `B_cf` separately interprets it as fit unfolding through an already established body/action manner; the interpretation and its measurement remain OPEN.
+- `B_cf` has sufficiency, sensitivity and body-specificity refuters. No actual human/robot token or `H_cf` calibration was supplied; formal delta 0/0/0 and all review items remain open.
+- Next: attack body specificity with a matched tool-loop comparison while holding route-to-fit coupling, output and response meaning fixed. Stop if body binding, actual mediation or target calibration cannot be independently grounded.

@@ -50,3 +50,7 @@ The effective restored inventory remains 913/424/261 with 727 pending objects di
 ## A4K20261011 scoped audit addendum
 
 The effective restored inventory remains 913/424/261 with 727 pending objects disabled and 10 historical rules suspended; A4K adds 0/0/0. Fresh structural traversal again reads every `all_of` conjunctively. Interval first stages, readout orientation, pure gain, actual route use, complete bearer organization, selected experience and delayed report remain distinct types. The common-scale region is a disabled method object and does not satisfy any R157/R173 premise. The dependence correction, overlap witness and zero-orientation failure are retained; they are not a global semantic proof. Full historical-depth audit and R191 normalization remain open.
+
+## A4M20261011 scoped audit addendum
+
+The effective inventory remains 913/424/261 with 727 pending objects disabled and 10 historical rules suspended; A4M adds 0/0/0. A fresh full structural traversal found zero unresolved deductive references and zero cycles, while the bounded semantic review covered C1/U1, R157, R159, effective R173, A4H and A4L. `CoupledForm` requires every declared conjunct in one actual `P/H0/I0/K` binding; equal `R,F,output,report` does not discharge same-trace mediation or joint formation. C1 transport and `B_cf` interpretation remain separate. Full historical-depth audit, R191 normalization, physical installation and selected-target calibration remain open.

@@ -88,7 +88,7 @@
   ],
   "current_guide": "RESEARCH_MASTER_GUIDE.md v2.3",
   "complete_map_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
-  "review_ledger_sha256": "16b8aa531560b32e81eb85022ef4ba697d9ed7a05e7ee95bbb3038eb843bb7b4",
+  "review_ledger_sha256": "694c15bf74c97f29b5f035cc27fae89e39e0d18d4bbaf80f69eebea74c6d292b",
   "counts": {
     "nodes": 913,
     "active_conditional_rules": 424,
@@ -100,10 +100,10 @@
   "publication_coverage": {
     "version": "UCT-PUB-v1.0.33",
     "entry": "PUBLICATION_COVERAGE.json",
-    "latest_update": "records/A4L20261011_Same_Bearer_Factorial_Installability/PUBLICATION_COVERAGE_UPDATE.json",
+    "latest_update": "records/A4M20261011_Coupled_Formation_Bridge/PUBLICATION_COVERAGE_UPDATE.json",
     "nondeductive": true,
     "latest_originality_review": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/PUBLICATION_COVERAGE_UPDATE.json",
-    "latest_followup_application": "records/A4L20261011_Same_Bearer_Factorial_Installability/PUBLICATION_COVERAGE_UPDATE.json"
+    "latest_followup_application": "records/A4M20261011_Coupled_Formation_Bridge/PUBLICATION_COVERAGE_UPDATE.json"
   },
   "latest_activity": {
     "id": "A3V20261010",
@@ -128,7 +128,7 @@
     "evidence_status": "BOUNDED_PRIMARY_SOURCE_APPLICATION_STOP_AND_R173_SCOPE_RETURN; ACTUAL_PREMISES_AND_H_OPEN"
   },
   "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 completed objects retain the verified per-ID traversal, and A4L manually rechecked C1/U1, R157, effective R173, disabled R199 and A4A/A4H-A4K. Deep full-history semantics remain AUDIT_INCOMPLETE.",
-  "next_priority": "Test one mixed, non-exclusive experience-internal bridge for the case where retained-relation use and present fit necessarily covary. Hold actual bearer, event, response meaning and basal experience fixed; vary the formation of their coupling, state the claimed experiential difference, and specify a refuting countercase without assuming factorial independence.",
+  "next_priority": "Test whether the body/action specificity clause of B_cf survives a matched tool-loop countercase: keep the same learned route-to-fit coupling, output and response meaning while varying only independently grounded body-frame binding. Predeclare the H_cf interpretation and stop if body binding, actual mediation or endpoint calibration cannot be independently established.",
   "latest_scoped_review": {
     "audit": "records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_AUDIT.md",
     "per_id_structure": "records/CTD20261010_Cross_Task_Intervention_v02/governance/BASELINE_PER_ID_STRUCTURE.json.gz",
@@ -197,16 +197,9 @@
     "role": "Historical unresolved audit-debt record; old numbers are not newly measured current unread totals."
   },
   "latest_activity_persistence": {
-    "status": "A4H_SCIENCE_AND_WORKSPACE_INCREMENT_VERIFIED_FINAL_RECEIPT_SUCCESSOR_ID_IN_MASTER",
-    "receipt": "records/A4H20261011_Compositional_Action_Familiarity/PERSISTENCE_RECEIPT.json",
-    "recovery_manifest": "records/A4H20261011_Compositional_Action_Familiarity/RECOVERY_MANIFEST.json",
-    "science_commit": "aab9f0c7b43def56f85f50079a0ae5dcfb61a65f",
-    "master_verified_science_version": 122,
-    "increment_id": "libfile_469789e86d9881919f183108d9b3d72b",
-    "increment_sha256": "ff12d626beab8b05743f1fbf42cbc4e8206383c0a33b82002d6aaa0ff25f3ba9",
-    "manifest_id": "libfile_bc11447d9f308191a979d5cacb23e48a",
-    "manifest_sha256": "679f2599e39b6cc5dc330613438311ff142e88436c1cca5be3ba69f3a400952a",
-    "final_master_confirmation": "read latest fixed master after receipt successor verification"
+    "status": "A4M_LOCAL_SCIENCE_CHECKPOINT; REMOTE_AND_LIBRARY_PERSISTENCE_PENDING",
+    "receipt": "records/A4M20261011_Coupled_Formation_Bridge/PERSISTENCE_RECEIPT.json",
+    "recovery_manifest": "records/A4M20261011_Coupled_Formation_Bridge/RECOVERY_MANIFEST.json"
   },
   "concurrent_research_preserved": {
     "id": "EIP20261010",
@@ -228,7 +221,7 @@
     "map_replacement": false,
     "actual_application_established": false
   },
-  "latest_persistence_receipt": "records/A4K20261011_Uncertainty_Bounded_Prediction_Regions/PERSISTENCE_RECEIPT.json",
+  "latest_persistence_receipt": "records/A4M20261011_Coupled_Formation_Bridge/PERSISTENCE_RECEIPT.json",
   "previous_latest_research_before_CTD": {
     "id": "A3L20261010",
     "result_version": "A3L-RESULT-v0.1.0",
@@ -545,24 +538,26 @@
     }
   },
   "latest_followup_application": {
-    "id": "A4L20261011",
-    "version": "A4L-FACTORIAL-INSTALLABILITY-v0.1.0",
-    "status": "DISABLED_SCOPED_FACTORIAL_INSTALLABILITY_AND_CURRENT_CANDIDATE_TERMINATION",
+    "id": "A4M20261011",
+    "version": "A4M-COUPLED-FORMATION-v0.1.0",
+    "status": "DISABLED_SCOPED_COUPLED_FORMATION_BRIDGE_AND_EXACT_MARGINAL_TWIN",
     "enabled_as_established_premises": false,
-    "source": "records/A4L20261011_Same_Bearer_Factorial_Installability/RESEARCH_NOTE.md",
-    "handoff": "records/A4L20261011_Same_Bearer_Factorial_Installability/HANDOFF_ZH.md",
-    "work_log": "records/A4L20261011_Same_Bearer_Factorial_Installability/WORK_LOG.md",
-    "claim_ledger": "records/A4L20261011_Same_Bearer_Factorial_Installability/CLAIM_LEDGER.json",
-    "map_extension": "records/A4L20261011_Same_Bearer_Factorial_Installability/MAP_EXTENSION.json",
-    "exact_results": "records/A4L20261011_Same_Bearer_Factorial_Installability/EXACT_RESULTS.json",
+    "source": "records/A4M20261011_Coupled_Formation_Bridge/RESEARCH_NOTE.md",
+    "handoff": "records/A4M20261011_Coupled_Formation_Bridge/HANDOFF_ZH.md",
+    "work_log": "records/A4M20261011_Coupled_Formation_Bridge/WORK_LOG.md",
+    "claim_ledger": "records/A4M20261011_Coupled_Formation_Bridge/CLAIM_LEDGER.json",
+    "map_extension": "records/A4M20261011_Coupled_Formation_Bridge/MAP_EXTENSION.json",
+    "exact_results": "records/A4M20261011_Coupled_Formation_Bridge/EXACT_RESULTS.json",
     "parent_science": "A3V20261010",
-    "parent_followup": "A4K20261011",
+    "parent_followup": "A4L20261011",
     "completed_map": "UCT-MAP-v1.1.2",
-    "scientific_delta": {"nodes": 0, "rules": 0, "contexts": 0},
-    "crossing_rank_criterion": true,
-    "structural_coupling_obstruction": true,
-    "label_echo_countermodel": true,
-    "current_candidate_decision": "NOT_INSTALLED_TERMINATE_CURRENT_CANDIDATE_COMPARISON",
+    "scientific_delta": {
+      "nodes": 0,
+      "rules": 0,
+      "contexts": 0
+    },
+    "coupled_formation_contract": true,
+    "native_yoked_marginal_twin": true,
     "independent_h_validation": false,
     "actual_bodily_installation": false,
     "standalone_manuscript": "HOLD"
@@ -965,7 +960,11 @@
       "parent_science": "A3V20261010",
       "parent_followup": "A4J20261011",
       "completed_map": "UCT-MAP-v1.1.2",
-      "scientific_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+      "scientific_delta": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0
+      },
       "exact_common_scale_region": true,
       "cartesian_dependence_correction": true,
       "orientation_zero_stop": true,
@@ -988,11 +987,40 @@
       "parent_science": "A3V20261010",
       "parent_followup": "A4K20261011",
       "completed_map": "UCT-MAP-v1.1.2",
-      "scientific_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+      "scientific_delta": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0
+      },
       "crossing_rank_criterion": true,
       "structural_coupling_obstruction": true,
       "label_echo_countermodel": true,
       "current_candidate_decision": "NOT_INSTALLED_TERMINATE_CURRENT_CANDIDATE_COMPARISON",
+      "independent_h_validation": false,
+      "actual_bodily_installation": false,
+      "standalone_manuscript": "HOLD"
+    },
+    {
+      "id": "A4M20261011",
+      "version": "A4M-COUPLED-FORMATION-v0.1.0",
+      "status": "DISABLED_SCOPED_COUPLED_FORMATION_BRIDGE_AND_EXACT_MARGINAL_TWIN",
+      "enabled_as_established_premises": false,
+      "source": "records/A4M20261011_Coupled_Formation_Bridge/RESEARCH_NOTE.md",
+      "handoff": "records/A4M20261011_Coupled_Formation_Bridge/HANDOFF_ZH.md",
+      "work_log": "records/A4M20261011_Coupled_Formation_Bridge/WORK_LOG.md",
+      "claim_ledger": "records/A4M20261011_Coupled_Formation_Bridge/CLAIM_LEDGER.json",
+      "map_extension": "records/A4M20261011_Coupled_Formation_Bridge/MAP_EXTENSION.json",
+      "exact_results": "records/A4M20261011_Coupled_Formation_Bridge/EXACT_RESULTS.json",
+      "parent_science": "A3V20261010",
+      "parent_followup": "A4L20261011",
+      "completed_map": "UCT-MAP-v1.1.2",
+      "scientific_delta": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0
+      },
+      "coupled_formation_contract": true,
+      "native_yoked_marginal_twin": true,
       "independent_h_validation": false,
       "actual_bodily_installation": false,
       "standalone_manuscript": "HOLD"
@@ -1163,5 +1191,18 @@
     "library_increment_sha256": "b5e5ace46e63aa28f2c1feb804718e7d4de86a2230b961d7b9604412732b5921",
     "library_manifest_id": "libfile_2567b5e396b081919f77a14ddc745da3",
     "library_manifest_sha256": "1af3a7bf6302b273fa319d7b71879781aeea928ae602ee380e5e465902c7d1b2"
+  },
+  "next_priority_after_A4M": "Test whether the body/action specificity clause of B_cf survives a matched tool-loop countercase: keep the same learned route-to-fit coupling, output and response meaning while varying only independently grounded body-frame binding. Predeclare the H_cf interpretation and stop if body binding, actual mediation or endpoint calibration cannot be independently established.",
+  "latest_activity_persistence_before_A4M": {
+    "status": "A4H_SCIENCE_AND_WORKSPACE_INCREMENT_VERIFIED_FINAL_RECEIPT_SUCCESSOR_ID_IN_MASTER",
+    "receipt": "records/A4H20261011_Compositional_Action_Familiarity/PERSISTENCE_RECEIPT.json",
+    "recovery_manifest": "records/A4H20261011_Compositional_Action_Familiarity/RECOVERY_MANIFEST.json",
+    "science_commit": "aab9f0c7b43def56f85f50079a0ae5dcfb61a65f",
+    "master_verified_science_version": 122,
+    "increment_id": "libfile_469789e86d9881919f183108d9b3d72b",
+    "increment_sha256": "ff12d626beab8b05743f1fbf42cbc4e8206383c0a33b82002d6aaa0ff25f3ba9",
+    "manifest_id": "libfile_bc11447d9f308191a979d5cacb23e48a",
+    "manifest_sha256": "679f2599e39b6cc5dc330613438311ff142e88436c1cca5be3ba69f3a400952a",
+    "final_master_confirmation": "read latest fixed master after receipt successor verification"
   }
 }

@@ -2,11 +2,11 @@
 
 [总览](UCT_FORMAL_MAP.md) · [全部候选](PENDING_RESEARCH.md) · [当前状态](CURRENT_STATE.json) · [统一登记](UNIFIED_RESEARCH_INDEX.json) · [审查](UCT_FORMAL_AUDIT.md)
 
-整合版本 **UCT-INTEGRATION-v1.0.0**。正式科学图 **UCT-MAP-v1.1.2**；最新科学研究 **A3V20261010**；最新停用应用 **A4L20261011**；发表覆盖 **UCT-PUB-v1.0.33**。
+整合版本 **UCT-INTEGRATION-v1.0.0**。正式科学图 **UCT-MAP-v1.1.2**；最新科学研究 **A3V20261010**；最新停用应用 **A4M20261011**；发表覆盖 **UCT-PUB-v1.0.33**。
 
-### A4L 停用应用边界
+### A4M 停用应用边界
 
-A4L 不新增正式对象。它要求同承载者的 `R×F` 2×2 在一个固定承载者、事件、消费者、构成路线、回应编码、时窗和签名切片内，实际且由独立结果前见证覆盖四格。`F=g(R)` 时最多两格；标签回声不算实际覆盖；改变切片的补偿器不能填补原比较。当前 A4A/A4H–A4K 记录没有实际四格，故候选比较终止于 `NOT_INSTALLED`。正式增量 **0/0/0**；C1/U1、R157、有效 R173 与停用 R199 的原范围和状态不变。
+A4M 不新增正式对象。它在 A4L 终止未安装纯 `R×F` 比较后，定义一个更高阶的停用应用关系：同一保留痕迹被当前消费者使用、参与当下适配，并且这条中介关系在同一形成史中共同形成。256世界的原生/外接双胞胎在 `R,F,输出,报告` 上相同而耦合关系不同；因此边际共变不识别、也不排除该关系。C1/R157 只条件性运输落地关系；`B_cf/H_cf`语义及测量仍OPEN。正式增量 **0/0/0**；C1/U1、R157、R159与有效R173的原范围和状态不变。
 
 ## 三层结构
 
@@ -40,9 +40,9 @@ A4L 不新增正式对象。它要求同承载者的 `R×F` 2×2 在一个固定
 
 ## 当前收束点
 
-Test one mixed, non-exclusive experience-internal bridge for the case where retained-relation use and present fit necessarily covary. Hold the actual bearer, event, response meaning and basal experience fixed; vary the formation of their coupling, state the claimed experiential difference, and specify a refuting countercase without assuming factorial independence.
+Test the body/action specificity of `B_cf` with a matched tool-loop countercase. Hold learned route-to-fit coupling, output and response meaning fixed; vary independently grounded body-frame binding. Stop if body binding, actual mediation or the `H_cf` endpoint cannot be independently established.
 
-通俗地说：A4L 已按停止规则终止未安装的纯候选 2×2。下一步回到正面解释：关系使用与当下适配可以在一次体验中重叠共变；需要说明这种耦合本身解释什么、什么反例会推翻它，而不是继续增加校验证书。
+通俗地说：A4M 已把混合解释从“两个量一起高”推进到一条可错的关系——过去形成的身体行动路线是否在此刻亲自参与了适配。下一步用身体回路/工具回路攻击其身体特异性；若无法独立区分，就保留失败，不用“我感”命名制造结果。
 
 [正式图 424 条推导路线](integration/UCT-INTEGRATION-v1.0.0/COMPLETED_RULE_ROUTES.md)
 

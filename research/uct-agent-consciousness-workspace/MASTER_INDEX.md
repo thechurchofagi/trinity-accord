@@ -13,7 +13,7 @@
 
 研究按问题家族阅读；轮次编号用于追溯。精确主张和论文覆盖仍以各自台账为准。
 
-- **当前应用 A4L：** [正文](records/A4L20261011_Same_Bearer_Factorial_Installability/RESEARCH_NOTE.md) · [同承载者因子安装合同](records/A4L20261011_Same_Bearer_Factorial_Installability/FACTORIAL_INSTALLATION_CONTRACT.md) · [精确结果](records/A4L20261011_Same_Bearer_Factorial_Installability/EXACT_RESULTS.json) · [缺口](records/A4L20261011_Same_Bearer_Factorial_Installability/GAP_LEDGER.md) · [形式审查](records/A4L20261011_Same_Bearer_Factorial_Installability/FORMAL_AUDIT.md) · [交接](records/A4L20261011_Same_Bearer_Factorial_Installability/HANDOFF_ZH.md)。现有记录无实际四格，A4J/A4K 候选比较已按停止规则终止；0正式图增量，成稿HOLD。
+- **当前应用 A4M：** [正文](records/A4M20261011_Coupled_Formation_Bridge/RESEARCH_NOTE.md) · [耦合合同](records/A4M20261011_Coupled_Formation_Bridge/COUPLING_CONTRACT.md) · [精确结果](records/A4M20261011_Coupled_Formation_Bridge/EXACT_RESULTS.json) · [缺口](records/A4M20261011_Coupled_Formation_Bridge/GAP_LEDGER.md) · [形式审查](records/A4M20261011_Coupled_Formation_Bridge/FORMAL_AUDIT.md) · [交接](records/A4M20261011_Coupled_Formation_Bridge/HANDOFF_ZH.md)。原生/外接边际双胞胎表明 `R,F,输出,报告` 不识别共同形成关系；`B_cf` 为正面但未校准的停用桥接，0正式图增量，成稿HOLD。
 
 原创性复核：[NOV20261010](records/NOV20261010_Prior_Art_and_Bodily_Familiarity/HANDOFF_ZH.md)，仅前例/范围元数据，独立成稿HOLD；科学接续仍A3V。
 

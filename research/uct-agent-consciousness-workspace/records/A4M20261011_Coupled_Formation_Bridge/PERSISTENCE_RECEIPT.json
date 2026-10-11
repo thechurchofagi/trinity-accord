@@ -1,0 +1,9 @@
+{
+  "schema": "uct-persistence-receipt/1",
+  "round": "A4M20261011",
+  "status": "LOCAL_SCIENCE_CHECKPOINT_ONLY_REMOTE_AND_LIBRARY_PENDING",
+  "local_checkpoint": "3588c8697a5ae0131e5201b599871cf0d9a1a297",
+  "github": {"science_commit": null, "receipt_commit": null, "verified": false},
+  "library": {"master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa", "master_version": null, "increment_library_file_id": null, "manifest_library_file_id": null, "reverse_materialized_byte_equal": false},
+  "failure_policy": "Do not claim dual save until remote commit/tree and Library reverse materialization are verified."
+}
