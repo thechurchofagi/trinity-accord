@@ -1,0 +1,23 @@
+{
+  "batch": "2026-10-11-rac13-v130",
+  "files": [
+    {
+      "bitcoin_heights": [],
+      "bytes": 262714,
+      "doi": "10.5281/zenodo.23299153",
+      "name": "when-revocation-does-not-restore-safety-v1.3.0.pdf",
+      "pending_calendar_attestations": 4,
+      "proof": "research/paper-timestamps/2026-10-11-rac13-v130/proofs/ASI-CC-RAC13/when-revocation-does-not-restore-safety-v1.3.0.pdf.ots",
+      "proof_sha256": "10adc5907e57f347a2f81fcbd804213b31c686ccc5cb586f063d14b687a2ef54",
+      "report": "ASI-CC-RAC13",
+      "role": "Frozen English theoretical preprint ASI-CC-v1.3.0",
+      "sha256": "16357a609238a789b2babdd426e73536489f9a3dfe30070a1a891b5ba6aa6a4b",
+      "state": "PENDING_BITCOIN"
+    }
+  ],
+  "paper_count": 1,
+  "pdf_count": 1,
+  "schema": "trinityaccord.paper-ots-status.v1",
+  "state": "WAITING",
+  "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
+}
