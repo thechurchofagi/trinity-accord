@@ -1,0 +1,10 @@
+{
+  "schema": "asi-cc-pr6-ots-init-authorization/1",
+  "paper_id": "PR-v6.0.0",
+  "doi": "10.5281/zenodo.23295776",
+  "record_id": 23295776,
+  "published_pdf_sha256": "b36fab74520f0f686b2b8252d60ff99a6925779cadd88e784d511945f34d4b61",
+  "status": "AUTHORIZED_ONE_INITIAL_CALENDAR_STAMP",
+  "paid_arweave_upload": false,
+  "note": "Submit only exact DOI published PDF to OTS calendar. Bitcoin confirmation may remain pending; Arweave separate later guarded step."
+}
