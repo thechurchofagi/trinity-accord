@@ -181,3 +181,10 @@ A4K adds no formal object. It propagates pre-outcome first-stage, pure-gain and 
 本轮针对 PR4 已有虚假诊断/门禁旁路负控推进 *实际权限根* 维度，不把旧反例重新冒充发现。RT-D1/T1/P1/T2/E1均为声明模型的停用候选：允许上级权限根同时腐蚀签名有效的诊断、预装备份和实际串联否决门禁；在四条人类保护服务路线有一条故障、最多一处真实根遭攻击、每个正常根仅提供二值分组信号、无后提交自适应路由、通用备份与完整效果截集下，最小名义备用容量：1根无法保证；2根8单位；3根及以上3单位。根与软件智能体ID不同，不要求任何AI被预先确认为主体或具有自有退出权。独立穷举7380容量配置、5432资源根测试、408本地模拟攻击协议/3156HMAC鉴别消息；这些程序的全部工作人员共用宿主管理权，**没有验证真实电源、固件、物理独立根、未知旁路、前沿大模型或意识体验**。2014 Fawzi等以及2026假传感器/模型监视攻击都有明确前例，底层编码/容错手段继承，精确应用优先权未完全核定。论文属可独立审查修订稿，非普适超级智能定理。
 
 **仅导航更新，0项正式科学晋级**。权威 UCT-MAP-v1.1.2 (913/424/261)、UCT-PUB-v1.0.33覆盖基线、原科学收束点和未闭合QC均保留。全图逐项语义复审未完成，保持 PENDING_MAP；无新 DOI/OTS/Arweave。
+
+
+### PR-v6.0.0 公共 DOI 发表事实（导航与覆盖元数据；非科学晋级）
+
+[DOI](https://doi.org/10.5281/zenodo.23295776) · [Zenodo正式记录](https://zenodo.org/records/23295776) · [已核验的发表收据](records/ASI_CC_20261011_Control_and_Coexistence/paper_coexistence_v6.0.0/publication/PUBLICATION_COMPLETION.json) · [已公开主张覆盖增量](records/ASI_CC_20261011_Control_and_Coexistence/paper_coexistence_v6.0.0/publication/PUBLICATION_COVERAGE_UPDATE.json) · [发布及存证工作日志](records/ASI_CC_20261011_Control_and_Coexistence/paper_coexistence_v6.0.0/publication/WORK_LOG_PUBLISH.md) · [交接](records/ASI_CC_20261011_Control_and_Coexistence/paper_coexistence_v6.0.0/publication/HANDOFF_PUBLISH_ZH.md)。
+
+**事实**：2026-10-11，Hongju Liu 的理论预印本 *Safe Revocation Without Complete Diagnosis* PR-v6.0.0（14页）在 Zenodo 正式发表，DOI 10.5281/zenodo.23295776，公开6件资产逐字节哈希回读通过，DOI解析通过。OTS 已初始日历提交（4个 pending，尚无 Bitcoin 高度）；Arweave 未提交，主分支隔离预算的 OTS/Arweave 守护工作流已启动。此处仅标记 DOI 公开事实；发表不蕴涵外部同行评审、全球原创优先权或实际AI意识/硬件独立性的证明。PR-v1至v5源历史继续保留。基础发布覆盖台账 UCT-PUB-v1.0.33 未按全球语料重新核定，新的 DOI 单篇覆盖用独立增量保全；正式 UCT-MAP-v1.1.2 的913/424/261和全部QC完全不动。
