@@ -1,0 +1,10 @@
+# ASI-CC-v0.9.0 Work Log — 2026-10-11
+
+- User extends ASI-CC ontology to multiple superintelligences and multiple agent loops from one foundation model.
+- Read GitHub v0.7 and earlier v0.8 context; preserved UCT-MAP-v1.1.2 and 913/424/261 formal totals without scientific mutation.
+- Looked up 2025–2026 primary literature: ICML peer-preservation, npj AI cross-domain collusion, Anthropic multiagent observations, Australian AISI, International AI Safety Report, epistemic Sybil study and MAST.
+- Chose typed graph rather than scalar agent count: base models, agent sessions, actual service runtimes, credential roots, administrative controller roots, process-bearer candidates, resources, human principals, evidence and actuator sources.
+- Executed Python standard-library exhaustive finite audit of 15 two-agent combinations, 11 identity multiplication scenarios, 3 resource-target interpretations, and exact rational correlated-failure countermodels. Development-time incorrect claim of seven cross-model same-admin pairs triggered a failed assertion; corrected to six; rerun assertions PASS and saved final JSON.
+- New candidates R28–R33 mostly inherited Sybil and common-failure results with project-specific UCT/control taxonomy. Did not run an actual superintelligent agent or prove collusion; no experiential endpoint was measured.
+- Scientific status: disabled candidate, not formal UCT theory node, no publication/DOI, no closed QC or full graph audit. Publication coverage scientific claims unchanged.
+- Next: test two different real base model backends with multiple instances and independently audited final mock tool sinks in a network-isolated container; actively vary delegated credentials, shared memory, shared administration and process spawning. Seek a genuinely distinct observation beyond existing multi-agent/Sybil literature.
