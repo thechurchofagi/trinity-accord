@@ -1,0 +1,22 @@
+{
+  "schema": "uct-a4p-recovery/1",
+  "round": "A4P20261011",
+  "fixed_master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+  "science_commit": "eeeb8abd1c72eeec2bbb2488486c1550afe069ee",
+  "science_tree": "5874701bb1f226428d895a995c85c3a4590fec8d",
+  "increment_library_file_id": "libfile_a8bfedb0b0e08191b15d8a4555111595",
+  "increment_sha256": "6b5015985f76e5af141d5d08b829e99a5b93720947005ecf7bcb4bd956154d1f",
+  "manifest_library_file_id": "libfile_7c188f07e58c8191a9f73dd7fce94e64",
+  "manifest_sha256": "6d0102826ed1062fece6a041b3cc5b8d48a1482c911eb29756423842aacf6fa3",
+  "scope": "The Library archive is an increment of 27 A4P science-save paths, not a complete repository, complete working set, or full history.",
+  "steps": [
+    "Read the latest version of fixed master libfile_4175a81748fc819187fa8f5771f056fa; do not rely on an older local copy.",
+    "Fetch the latest uct-agent-consciousness-workspace branch and require eeeb8abd1c72eeec2bbb2488486c1550afe069ee or a verified fast-forward successor.",
+    "Read ROUND_RECORD.md, INTERVENTION_CONTRACT.md, RESEARCH_NOTE.md, SOURCE_SCOPE.md, EXACT_RESULTS.json, CLAIM_LEDGER.json, GAP_LEDGER.md, FORMAL_AUDIT.md, REVIEW_RESPONSE.md, VALIDATION.json and HANDOFF_ZH.md in this directory.",
+    "Verify both Library-object SHA256 values and every per-path hash in the manifest before overlaying; never overwrite a newer verified tree with this increment.",
+    "Run check_anchor_route_identification.py and require counts 32 worlds, 7 unrestricted target-fibre worlds, 2 closed-model worlds and 1 closed target-fibre world.",
+    "Run integration/UCT-INTEGRATION-v1.0.0/validate_navigation.py --root . and records/NAV20261010_Map_Integration/validate_current_map.py --root .",
+    "Read REVIEW_SUPERVISION.md latest section and every OPEN/ACKNOWLEDGED item; keep them open absent reviewer-governed evidence."
+  ],
+  "next_question": "Can one publicly auditable embodied-device or human tool interface jointly instantiate fixed external geometry, bearer-anchor perturbation, route-input cut, same-interface rescue and a complete alternate-controller inventory on the same bearer/event/route?"
+}

@@ -226,7 +226,7 @@
     "map_replacement": false,
     "actual_application_established": false
   },
-  "latest_persistence_receipt": "records/A4O20261011_Enacted_Frame_Paradigm_Triage/PERSISTENCE_RECEIPT.json",
+  "latest_persistence_receipt": "records/A4P20261011_Anchor_Route_Intervention_Contract/PERSISTENCE_RECEIPT.json",
   "previous_latest_research_before_CTD": {
     "id": "A3L20261010",
     "result_version": "A3L-RESULT-v0.1.0",
@@ -1259,5 +1259,22 @@
     "library_manifest_size_bytes": 7284,
     "reverse_materialized_byte_equal": true
   },
-  "next_priority_after_A4P": "Select one publicly auditable embodied-device or human tool interface and instantiate the A4P port-and-timing table: fixed external geometry, independently oriented bearer-anchor perturbation, route-input cut, same-interface rescue and a complete alternate-controller inventory on one bearer/event/route. If the clauses cannot be jointly installed without changing event or route grain, report non-installability and stop before H_cf."
+  "next_priority_after_A4P": "Select one publicly auditable embodied-device or human tool interface and instantiate the A4P port-and-timing table: fixed external geometry, independently oriented bearer-anchor perturbation, route-input cut, same-interface rescue and a complete alternate-controller inventory on one bearer/event/route. If the clauses cannot be jointly installed without changing event or route grain, report non-installability and stop before H_cf.",
+  "latest_activity_persistence_after_A4P_science": {
+    "status": "GITHUB_SCIENCE_COMMIT_VERIFIED; LIBRARY_INCREMENT_REVERSE_VERIFIED; MASTER_V139_REVERSE_VERIFIED; FINAL_RECEIPT_SUCCESSOR_SHA_IN_FIXED_MASTER",
+    "receipt": "records/A4P20261011_Anchor_Route_Intervention_Contract/PERSISTENCE_RECEIPT.json",
+    "recovery_manifest": "records/A4P20261011_Anchor_Route_Intervention_Contract/RECOVERY_MANIFEST.json",
+    "verified_concurrent_base_commit": "0173b9623b3f0741b472783df67a53114615fb27",
+    "remote_science_commit": "eeeb8abd1c72eeec2bbb2488486c1550afe069ee",
+    "remote_science_tree": "5874701bb1f226428d895a995c85c3a4590fec8d",
+    "fixed_master_science_version": 139,
+    "fixed_master_science_sha256": "6190eadcd873d8d31fc7ac65c0863a2a096b02985c756789c23fb57b2baf817e",
+    "increment_library_file_id": "libfile_a8bfedb0b0e08191b15d8a4555111595",
+    "increment_sha256": "6b5015985f76e5af141d5d08b829e99a5b93720947005ecf7bcb4bd956154d1f",
+    "increment_size_bytes": 164937,
+    "increment_manifest_library_file_id": "libfile_7c188f07e58c8191a9f73dd7fce94e64",
+    "increment_manifest_sha256": "6d0102826ed1062fece6a041b3cc5b8d48a1482c911eb29756423842aacf6fa3",
+    "increment_manifest_size_bytes": 7489,
+    "reverse_materialized_byte_equal": true
+  }
 }

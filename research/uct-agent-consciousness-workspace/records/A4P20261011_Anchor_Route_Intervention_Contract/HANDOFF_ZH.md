@@ -18,6 +18,10 @@ A4O 没找到同时满足六项条件的一手范式；A4P 不再扩大文献拼
 
 下一具体问题：选择一个公开、可核查的具身装置或人体工具接口，把外部几何固定、承载者锚扰动、路线输入切断／同接口救援和备用控制器清单落实到一张实际端口—时序表；若无法同时保持同一事件与路线粒度，就报告不可安装并停止，不进入体验端点比较。
 
+## 保存状态
+
+GitHub科学提交 `eeeb8abd1c72eeec2bbb2488486c1550afe069ee` 已从并发后继 `0173b9623b3f0741b472783df67a53114615fb27` 以 expected-SHA 正常快进；远端树 `5874701bb1f226428d895a995c85c3a4590fec8d` 与本地科学内容树相同，关键文件已回读。27路径增量 `libfile_a8bfedb0b0e08191b15d8a4555111595`（164937字节，SHA256 `6b501598…`）及清单 `libfile_7c188f07e58c8191a9f73dd7fce94e64`（7489字节，SHA256 `6d010282…`）已反向物化、逐字节比较相等；它们不是完整备份。固定主交接同一身份科学检查点为v139。最终Git收据提交SHA及固定主交接终版由其下一版本记录。
+
 ## 恢复
 
-先读取固定主交接最新版本和远端分支头，再读本目录的 `ROUND_RECORD.md`、`INTERVENTION_CONTRACT.md`、`RESEARCH_NOTE.md`、`EXACT_RESULTS.json`、`CLAIM_LEDGER.json`、`GAP_LEDGER.md`、`FORMAL_AUDIT.md`、`REVIEW_RESPONSE.md` 与 `SOURCE_SCOPE.md`；重跑 `check_anchor_route_identification.py`，要求32世界、7世界无限制目标纤维、2世界闭合模型和1世界闭合目标纤维。Git与工作空间保存身份以本文件后续收据段及固定主交接最新版本为准。
+先读取固定主交接最新版本和远端分支头，再读本目录的 `ROUND_RECORD.md`、`INTERVENTION_CONTRACT.md`、`RESEARCH_NOTE.md`、`EXACT_RESULTS.json`、`CLAIM_LEDGER.json`、`GAP_LEDGER.md`、`FORMAL_AUDIT.md`、`REVIEW_RESPONSE.md`、`PERSISTENCE_RECEIPT.json` 与 `RECOVERY_MANIFEST.json`；重跑 `check_anchor_route_identification.py`，要求32世界、7世界无限制目标纤维、2世界闭合模型和1世界闭合目标纤维。Git与工作空间保存身份以固定主交接最新版本为准。
