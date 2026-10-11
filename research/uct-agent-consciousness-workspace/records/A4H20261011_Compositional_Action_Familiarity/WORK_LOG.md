@@ -7,3 +7,5 @@
 6. Restore index conservatively by stable ID from current state; run whole-map structural and canonical-navigation checks.
 7. Dual-save final confirmation pending tool receipts; no uninterrupted-persistence claim.
 8. Both structural traversal and canonical navigation passed; effective science unchanged. All followups FAM through A4H now parse in repaired index; TJR/REV and concurrent manuscript preserved.
+9. Science integration saved ataab9f0c7b43def56f85f50079a0ae5dcfb61a65f by expected-SHA update; fetched key files and compared full bytes.
+10. Saved ZIP and manifest plus same-ID master v122; reverse-materialized both new artifacts and verified exact bytes/SHA256. Staged final receipt successor; its exact identity goes in subsequent master confirmation.

@@ -1,0 +1,29 @@
+{
+  "schema": "a4h-recovery/1",
+  "science_commit": "aab9f0c7b43def56f85f50079a0ae5dcfb61a65f",
+  "baseline": "2e27c1e5cdcb64b2b713375fc1ea2303e7ec969c",
+  "package": {
+    "name": "UCT_A4H_Increment_20261011.zip",
+    "bytes": 164368,
+    "sha256": "ff12d626beab8b05743f1fbf42cbc4e8206383c0a33b82002d6aaa0ff25f3ba9",
+    "library_file_id": "libfile_469789e86d9881919f183108d9b3d72b",
+    "file_id": "file_0000000048d081fdafdc8dfb785d1403"
+  },
+  "manifest": {
+    "name": "UCT_A4H_Increment_Manifest.md",
+    "bytes": 5571,
+    "sha256": "679f2599e39b6cc5dc330613438311ff142e88436c1cca5be3ba69f3a400952a",
+    "library_file_id": "libfile_bc11447d9f308191a979d5cacb23e48a",
+    "file_id": "file_000000000500820c9153bd72b0b5a709"
+  },
+  "master_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+  "science_master_version": 122,
+  "steps": [
+    "Read fixed master current version and latest remote branch head. Prefer any verified successor; do not reset to this checkpoint.",
+    "Use complete repository at baseline or later. Check the two package hashes. This increment cannot recreate all earlier history alone.",
+    "Recover missing A4H files only; retain concurrent ASI_CC manuscript. Final receipt metadata is on Git branch and fixed master, not in the ZIP.",
+    "Run check_composition.py:8 queries,4 different supports,16 relabeling checks,0 H assignments.",
+    "Run validate_current_map.py --root research/uct-agent-consciousness-workspace; preserve all disabled candidates and OPEN audit items.",
+    "Confirm UNIFIED_RESEARCH_INDEX.json is valid UTF-8/JSON; compare its revision with INDEX_REPAIR.json before any reconstruction. Do not blindly rerun integrate_checkpoint.py on a newer head."
+  ]
+}

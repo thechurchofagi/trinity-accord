@@ -1,0 +1,54 @@
+{
+  "schema": "a4h-persistence/1",
+  "round": "A4H20261011",
+  "github": {
+    "baseline": "2e27c1e5cdcb64b2b713375fc1ea2303e7ec969c",
+    "first_science_checkpoint": "435dacd0d1206e8a5d4b7f69ba114384f2ac2300",
+    "science_commit": "aab9f0c7b43def56f85f50079a0ae5dcfb61a65f",
+    "science_tree": "b2a36d5998a0250d2c91938482fd1027b2057b1a",
+    "verified_remote_full_bytes": [
+      "CURRENT_STATE.json",
+      "UNIFIED_RESEARCH_INDEX.json",
+      "REVIEW_SUPERVISION.md",
+      "records/A4H20261011_Compositional_Action_Familiarity/RESEARCH_NOTE.md",
+      "records/A4H20261011_Compositional_Action_Familiarity/EXACT_RESULTS.json"
+    ],
+    "final_receipt_commit": "Expected-SHA successor of science commit; exact returned SHA recorded in the fixed master subsequent confirmation",
+    "force": false,
+    "ci_or_publication_requested": false
+  },
+  "workspace": {
+    "fixed_master_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "verified_science_version": 122,
+    "final_confirmation": "pending until exact successor is verified; inspect fixed master latest version",
+    "increment": {
+      "name": "UCT_A4H_Increment_20261011.zip",
+      "bytes": 164368,
+      "sha256": "ff12d626beab8b05743f1fbf42cbc4e8206383c0a33b82002d6aaa0ff25f3ba9",
+      "library_file_id": "libfile_469789e86d9881919f183108d9b3d72b",
+      "file_id": "file_0000000048d081fdafdc8dfb785d1403"
+    },
+    "manifest": {
+      "name": "UCT_A4H_Increment_Manifest.md",
+      "bytes": 5571,
+      "sha256": "679f2599e39b6cc5dc330613438311ff142e88436c1cca5be3ba69f3a400952a",
+      "library_file_id": "libfile_bc11447d9f308191a979d5cacb23e48a",
+      "file_id": "file_000000000500820c9153bd72b0b5a709"
+    },
+    "reverse_materialization_byte_and_hash_verified": true
+  },
+  "scope": {
+    "file_count": 27,
+    "kind": "scoped increment, not complete working set/repository/history",
+    "baseline_required": "2e27c1e5cdcb64b2b713375fc1ea2303e7ec969c",
+    "included": "All A4H science files and changed entry files",
+    "not_in_increment": [
+      "final PERSISTENCE_RECEIPT.json",
+      "RECOVERY_MANIFEST.json",
+      "final handoff/work-log/current-state receipt updates",
+      "final receipt commit"
+    ],
+    "local_loss": "A4H-G06; initial science recovered from checkpoint, audit documents reconstructed",
+    "index_repair": "A4H-G00; valid source plus stable-ID merge; original corruption retained in Git history"
+  }
+}

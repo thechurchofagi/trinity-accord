@@ -197,9 +197,16 @@
     "role": "Historical unresolved audit-debt record; old numbers are not newly measured current unread totals."
   },
   "latest_activity_persistence": {
-    "status": "A4H_SCIENCE_CHECKPOINT_VERIFIED_FINAL_DUAL_SAVE_PENDING",
-    "checkpoint": "435dacd0d1206e8a5d4b7f69ba114384f2ac2300",
-    "receipt": "records/A4H20261011_Compositional_Action_Familiarity/PERSISTENCE_RECEIPT.json"
+    "status": "A4H_SCIENCE_AND_WORKSPACE_INCREMENT_VERIFIED_FINAL_RECEIPT_SUCCESSOR_ID_IN_MASTER",
+    "receipt": "records/A4H20261011_Compositional_Action_Familiarity/PERSISTENCE_RECEIPT.json",
+    "recovery_manifest": "records/A4H20261011_Compositional_Action_Familiarity/RECOVERY_MANIFEST.json",
+    "science_commit": "aab9f0c7b43def56f85f50079a0ae5dcfb61a65f",
+    "master_verified_science_version": 122,
+    "increment_id": "libfile_469789e86d9881919f183108d9b3d72b",
+    "increment_sha256": "ff12d626beab8b05743f1fbf42cbc4e8206383c0a33b82002d6aaa0ff25f3ba9",
+    "manifest_id": "libfile_bc11447d9f308191a979d5cacb23e48a",
+    "manifest_sha256": "679f2599e39b6cc5dc330613438311ff142e88436c1cca5be3ba69f3a400952a",
+    "final_master_confirmation": "read latest fixed master after receipt successor verification"
   },
   "concurrent_research_preserved": {
     "id": "EIP20261010",
