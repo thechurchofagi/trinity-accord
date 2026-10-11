@@ -8,7 +8,7 @@
   "increment_manifest_library_file_id": "libfile_06c679f9b5008191b506090a1abf1a52",
   "fixed_master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
   "fixed_master_science_version": 152,
-  "fixed_master_final_receipt_version": 153,
+  "fixed_master_final_receipt_version": 154,
   "recovery_steps": [
     "Fetch the branch and verify the baseline or a descendant containing it.",
     "If Git science commit is unavailable, materialize both Library increment and manifest and verify their recorded SHA-256 values.",
@@ -16,6 +16,6 @@
     "Validate all per-path sizes and SHA-256 values listed in the increment manifest.",
     "Run the A4W exact checker, jq validation, integration navigation validator, and fresh effective-map audit.",
     "Confirm the resulting science tree is f840be3dc13e384d8074f3e34500ea637fd42ced.",
-    "Read fixed master v153 for the receipt-successor commit; do not treat this incremental package as a complete backup."
+    "Read fixed master v154 for the receipt-successor/navigation-correction commit; do not treat this incremental package as a complete backup."
   ]
 }

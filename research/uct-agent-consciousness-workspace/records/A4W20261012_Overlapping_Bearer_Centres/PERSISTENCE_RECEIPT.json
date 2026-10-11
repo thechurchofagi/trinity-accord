@@ -8,8 +8,8 @@
     "science_commit": "0eddd9c06670a7357a8be5e38efc8af1f335405f",
     "science_tree": "f840be3dc13e384d8074f3e34500ea637fd42ced",
     "science_commit_verified_by_ref_commit_and_file_readback": true,
-    "receipt_successor_commit": "RECORDED_IN_FIXED_MASTER_HANDOFF_V153_AFTER_FAST_FORWARD",
-    "receipt_successor_tree": "FILLED_BY_REMOTE_VERIFICATION_IN_FIXED_MASTER_HANDOFF_V153"
+    "receipt_successor_commit": "RECORDED_IN_FIXED_MASTER_HANDOFF_V154_AFTER_NAVIGATION_CORRECTION",
+    "receipt_successor_tree": "FILLED_BY_REMOTE_VERIFICATION_IN_FIXED_MASTER_HANDOFF_V154"
   },
   "library": {
     "fixed_master": {
@@ -19,7 +19,7 @@
       "size_bytes": 138282,
       "sha256": "77897164fb54df66758efd02a9e83ea3623a648571d48e151e7ea4ce248804ec",
       "reverse_materialized_byte_equal": true,
-      "final_version_after_receipt": 153
+      "final_version_after_receipt": 154
     },
     "science_increment": {
       "classification": "INCREMENT_NOT_COMPLETE_REPOSITORY_OR_WORKING_SET",
@@ -42,7 +42,7 @@
   },
   "limits": [
     "The Library archive is an increment from the verified baseline to the science tree, not a complete repository, complete working set, or all history.",
-    "The science commit precedes this receipt by design; the fixed master handoff v153 records the verified receipt-successor commit and tree to avoid self-reference.",
+    "The science commit precedes this receipt by design; the fixed master handoff v154 records the verified receipt-successor/navigation-correction commit and tree to avoid self-reference.",
     "Persistence verification does not promote the disabled scientific claims."
   ]
 }
