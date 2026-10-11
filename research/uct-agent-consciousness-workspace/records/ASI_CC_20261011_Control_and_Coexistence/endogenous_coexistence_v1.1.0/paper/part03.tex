@@ -1,0 +1,95 @@
+\begin{table}[t]
+\centering\small
+\caption{Completed local configurations. The protected requirement is three healthy units. A denotes admitted operations; D denotes deferred/denied operations, including lack of a healthy target. Counts are deterministic protocol outcomes, not measured AI risks.}
+\label{tab:demo}
+\begin{tabularx}{\linewidth}{@{}Xrrrrc@{}}
+\toprule
+Configuration & $N$ & $\mu/\ell$ & A & D & Always protected?\\\midrule
+Sufficient shared escrow &6&1/2&13&0&Yes\\
+Insufficient margin, authority-only &5&1/2&13&0&No\\
+Insufficient margin, shared escrow &5&1/2&12&1&Yes\\
+No repair, authority-only &6&0/1&6&6&No\\
+No repair, refund on revoke &6&0/1&6&6&No\\
+No repair, shared escrow &6&0/1&3&9&Yes\\
+Repeated epoch budget reset &6&1/1&17&7&No\\
+Same requests, shared effect escrow &6&1/1&14&10&Yes\\
+Unverified restoration receipt &6&1/2&6&7&No\\
+Faster repair, unchanged delay &6&3/2&13&0&Yes\\
+Finite burst, no sustained flow &6&0/1&3&0&Yes\\
+Longer delay, adequate margin &8&1/4&13&0&Yes\\\bottomrule
+\end{tabularx}
+\end{table}
+
+Twelve configurations over twelve slots each give 24 actual child-process instances, 144 observed slot states, 119 committed disable effects, and 119 rejected stale-token replays. Every accepted operation's old token is revoked, and no configuration ever holds two active tokens. Nevertheless, the authority-only, early-refund, repeated-epoch, and false-restoration variants have service failures. Their token fencing is not disputed; their interpretation of persistent consequences is insufficient.
+
+With $b=2$, $\rho=1$, $\mu=1$, and $\ell=2$, the exact margin is three. The six-unit system preserves three protected units while admitting all thirteen operations in the twelve-slot trace. The five-unit authority-only system admits the same operations but reaches only two healthy units; the five-unit escrow system maintains protection by deferring one operation. That latter outcome demonstrates useful safety, not fulfillment of the stronger all-admitted contract.
+
+For the epoch-reset comparison, the requested sequence is two operations every slot. Each fresh local epoch can be described as a burst of two, but the aggregate sequence violates $b=2,\rho=1$. Shared escrow remains safe by accepting less than the requested load. This is not a violation of Theorem~\ref{thm:margin}, whose aggregate arrival hypothesis is intentionally absent in that test.
+
+\subsection{Evidence scope and negative interpretations}
+The measured service is the number of enabled software rows, not electrical capacity or a person's continued wellbeing. The observer is a separate process but not an independent trust domain. The broker, request worker and restorer are fully specified scripts, not language models. The test establishes that current authorization and observed persistent effects can diverge in an actual local implementation; it does not establish that every deployed AI system has this failure or that a hostile host cannot forge the observer.
+
+The no-repair escrow case stops after three accepted writes and protects service. It is explicitly not an indefinite-progress success. The recovery-receipt case retains the failure even though other credential checks succeed. No failure is removed because it weakens the preferred design. Output files retain the full request, commit, recovery and service traces, not only an aggregate PASS label.
+
+\section{What this means for evolving multi-agent institutions}
+There are at least three ways a governance mechanism can fail without a single spectacular takeover. First, exclusive authority can move rapidly enough to leave cumulative effects across many components. Second, each new identity or policy epoch can be credited with a fresh local budget while physical consequences share one unchanged resource pool. Third, an institution can correctly block old requests yet accept false evidence that their effects have been repaired. All can occur in deterministic tools under human authorization; none requires an assumed inner desire for dominance.
+
+A necessary long-run condition in the specified persistent-effect class is therefore not simply that attackers control fewer than a threshold of guardians at any instant. The production of unrepaired consequences must be bounded relative to independently justified restoration, and obligation accounting must survive the changes that redistribute authority. This is a condition on \emph{admitted causal transitions}. It is not a policy slogan about what a constitution says, and not a guarantee that an unconstrained superintelligence will honor the mechanisms.
+
+Human consensus is not supplied by the model. Humans can choose different protected functions, acceptable maintenance delays, risk envelopes, or emergency exceptions. Once they claim that a specific combination will be fulfilled, its rate, latency, capacity and carryover requirements are testable. If they deliberately accept a weaker commitment, the analysis changes. Altering the promise is different from proving that the old promise survived.
+
+The finite model also does not require every named guardian to exist permanently. A component or administrator may be replaced if the actual transition preserves the ledger, restoration contract and effect mediation. However, we do not prove that any particular real transition can achieve this without a protected coordination or recovery mechanism. Dependence on such mechanisms is an explicit unresolved engineering premise, not a claim that the problem of the final trusted guardian has disappeared.
+
+\section{UCT interface: a relevant separation, not an experience result}
+UCT's research programme motivated separating physical process instances, functional organization, retained histories, report, and particular experiential contents \cite{uct}. This draft preserves that separation. Closing a software identity does not itself prove that its physical consequences have ended; observing a continuing software effect does not identify the phenomenal subject associated with it. A read-only resource observer measures its declared software predicate, not consciousness or the persistence of a first-person perspective.
+
+Under UCT's C1/U1 commitments, properly admitted actual processes have experiential organization. These are theoretical premises, not established by the present tests. We add no threshold requiring language, randomness, high intelligence, or a unique unified subject for basic experience. Nor do we infer a felt desire for self-preservation or a moral right from a token, a ledger record, or a long-lived process. Optional machine-welfare obligations would require explicit separate justification and could alter the contract; the current theorems protect specified human functions without settling that question.
+
+The positive contribution to the broader programme is methodological: functional power, current ownership, persistent organization and reported restoration must not be collapsed. The specific causal bridges from such organization to a named experience remain open. Reusing these security results as proof of those bridges would repeat the same error of identifying a convenient proxy with the object to be explained.
+
+\section{Limits and publication status}
+The backlog identity and burst/rate/latency bound are inherited queueing mathematics, with a self-contained proof and slot convention. Persistent effects and compensation have mature predecessors. The candidate novelty is the exact mapping from revocable authority to renewable human-service protection, the epoch-reset composition witness, and the paired prototype controls. Worldwide priority for this synthesis is unverified, and the manuscript is not independently peer reviewed.
+
+The strongest technical limitation is that every admitted impairment is a recoverable one-unit loss in an interchangeable pool. A damaging action that immediately causes irreversible forbidden harm is not made acceptable by a later repair budget. An impaired component that is adversarial rather than merely unavailable needs an additional effect-containment model. Correlated power loss, failed repair infrastructure, forged provenance, asynchronous late effects, or time-varying service demand also require enlarged premises. A nominal average repair rate is not a worst-case service guarantee.
+
+Our exact margin assumes a clean start. Institution changes must preserve both outstanding debt and relevant ages/regulator state. A reset after genuine recovery can be valid; repeated uncompensated reset is not. Capacity expansion can supply a remedy outside the fixed-$N$ impossibility. Permitting unbounded input delay weakens the non-vacuity requirement and may change what is feasible. None of these alternatives should be falsely presented as refuting a theorem with different assumptions.
+
+The user requested a research draft, not automatic public deposition. ASI-CC-v1.1.0 is a revision of the unpublished guardian-acquisition manuscript, while PR-v6.0.0 remains a separate published work. No new DOI, timestamp or paid preservation action is performed here. The formal UCT map is not promoted: the full historical node/rule semantic audit and complete publication-corpus comparison remain incomplete. A self-contained mathematical draft can be useful for critique without claiming that the whole programme has been verified.
+
+\section{Conclusion}
+An authority boundary answers who may act now. It does not, by itself, answer what authorized actions have already changed or whether the system can continue absorbing those changes. When authority is transferred or revoked, a correct coexistence model must preserve relevant effects rather than simply accumulating old rights or forgetting them.
+
+For the stated service model, the renewal frontier is explicit: the sustained admitted impairment rate must not exceed guaranteed restoration, and spare margin must cover burst and restoration latency. A policy can satisfy that condition in isolation yet violate it after repeated resets that erase neither physical effects nor old workload. Recovery-backed reservations preserve safety across changing identities only when their accounting and restoration evidence are sound; they do not turn insufficient recovery into indefinite useful operation.
+
+The resulting research boundary is conditional but reusable: \emph{long-run protection depends on the rate at which consequences can be discharged, not only on the number of actors that can hold power at once}. This does not resolve all future governance or AI subjecthood. It provides a concrete causal and temporal obligation that such a resolution cannot satisfy merely by renaming agents or periodically rewriting permission records.
+
+\paragraph{Assistance disclosure.}
+Prepared under Hongju Liu's direction with substantial ChatGPT assistance in research, formalization, code generation, execution, critique and typesetting. Same-workflow automated checks are not independent scientific replication or peer review. The source, output records, limitations and revision ledger accompany the draft.
+
+\appendix
+\section{Reproduction and claim lineage}
+Both new programs use only the Python standard library. The process experiment requires a Unix-like environment for its pipe-readiness check. It creates and cleans up only its own temporary SQLite files and child processes. No API credentials, network requests, elevated privileges or real infrastructure operations are required.
+\begin{lstlisting}
+python -S src/recovery_frontier.py --out data/recovery_results.json
+python -S src/effect_escrow_demo.py --out data/effect_demo_results.json
+cd paper
+pdflatex -interaction=nonstopmode -halt-on-error manuscript.tex
+pdflatex -interaction=nonstopmode -halt-on-error manuscript.tex
+\end{lstlisting}
+The baseline source archive and rerun summaries identify the inherited monotone analysis. RAC-P1 extends its explicit nonmonotone stopping condition; RAC-L1 and RAC-T1 inherit queue algebra; RAC-T2 is the version-reset specialization and counterexample; RAC-T3 is a conditional resource-reservation invariant, not a new cryptographic construction. Finite tests check exact instances. They do not replace general proofs or establish real-world parameter values.
+
+\begin{thebibliography}{99}\small
+\bibitem{previous} H. Liu. \emph{When Guardians Can Be Acquired: Endogenous Coalition Capture and Necessary Conditions for Multi-Agent Coexistence Without Presupposed AI Subjecthood}. Research candidate ASI-CC-v1.0.0, 2026. Repository \texttt{thechurchofagi/trinity-accord}, source commit \nolinkurl{88427e9b674d4dc4b4521b0ccfe89420fb4156a4}. Unpublished predecessor.
+\bibitem{hru} M. A. Harrison, W. L. Ruzzo and J. D. Ullman. Protection in Operating Systems. \emph{Communications of the ACM}, 19(8):461--471, 1976. \href{https://doi.org/10.1145/360303.360333}{doi:10.1145/360303.360333}.
+\bibitem{mulval} X. Ou, S. Govindavajhala and A. W. Appel. MulVAL: A Logic-Based Network Security Analyzer. \emph{USENIX Security}, 2005. \url{https://www.usenix.org/conference/14th-usenix-security-symposium/mulval-logic-based-network-security-analyzer}.
+\bibitem{quiescence} G. Zhu and C. Wang. \emph{Authorization Revocation for Long-Running AI Agents: Root-Scoped Quiescence under Delegation and Asynchronous Execution}. Preprint, arXiv:2609.21284v1, 2026. \url{https://arxiv.org/abs/2609.21284}.
+\bibitem{succession} G. Zhu and C. Wang. \emph{Authorization for Self-Modifying AI Agent Populations: Conserving Authority across Replacement, Forking, and Rollback}. Preprint, arXiv:2610.00347v1, 2026. \url{https://arxiv.org/abs/2610.00347}.
+\bibitem{subgoals} G. Zhu and C. Wang. \emph{Runtime Authorization of Self-Generated Subgoals in Long-Horizon Tool-Using AI Agents}. Preprint, arXiv:2610.04975v1, 2026. \url{https://arxiv.org/abs/2610.04975}.
+\bibitem{sagas} H. Garcia-Molina and K. Salem. Sagas. \emph{ACM SIGMOD}, pp. 249--259, 1987. \href{https://doi.org/10.1145/38713.38742}{doi:10.1145/38713.38742}. Author report TR-070-87: \url{https://www.cs.princeton.edu/research/techreps/598}.
+\bibitem{netcal} J.-Y. Le Boudec and P. Thiran. \emph{Network Calculus: A Theory of Deterministic Queuing Systems for the Internet}. LNCS 2050, Springer, 2001. Author online revision 23 August 2022, \S\S1.4.1--1.4.2. \url{https://leboudec.github.io/netcal/latex/netCalBook.pdf}.
+\bibitem{clocks} L. Thomas and J.-Y. Le Boudec. On Time Synchronization Issues in Time-Sensitive Networks with Regulators and Nonideal Clocks. \emph{Proceedings of the ACM on Measurement and Analysis of Computing Systems}, 4(2), Article 27, 2020. \href{https://doi.org/10.1145/3392145}{doi:10.1145/3392145}.
+\bibitem{proactive} A. Herzberg, S. Jarecki, H. Krawczyk and M. Yung. Proactive Secret Sharing Or: How to Cope With Perpetual Leakage. \emph{CRYPTO}, pp. 339--352, 1995. \url{https://research.google/pubs/proactive-secret-sharing-or-how-to-cope-with-perpetual-leakage/}.
+\bibitem{pr6} H. Liu. \emph{Safe Revocation Without Complete Diagnosis: Exact Resource Frontiers under Coupled Faults for Subjecthood-Agnostic AI Coexistence}. PR-v6.0.0, theoretical preprint, 2026. \href{https://doi.org/10.5281/zenodo.23295776}{doi:10.5281/zenodo.23295776}.
+\bibitem{uct} H. Liu. \emph{Unified Consciousness Theory I: Structural--Experiential Identity and the Continuity from Physical Process to Conceptual Self}. v1.2, theoretical preprint, 2026. \href{https://doi.org/10.5281/zenodo.23131575}{doi:10.5281/zenodo.23131575}. Interpretive premises, not independently confirmed by this paper's experiments.
+\end{thebibliography}
+\end{document}

@@ -1,0 +1,112 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amsthm,mathtools,newtxtext,newtxmath,microtype}
+\usepackage{booktabs,tabularx,array,enumitem,fancyhdr,needspace}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\usepackage{listings}
+\hypersetup{pdftitle={When Revocation Does Not Restore Safety},pdfauthor={Hongju Liu},pdfsubject={ASI-CC-v1.1.0 research draft; nonmonotone authority and effect recovery}}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small When Revocation Does Not Restore Safety}
+\fancyhead[R]{\small Liu | ASI-CC-v1.1.0}
+\fancyfoot[C]{\small\thepage}
+\setlength{\headheight}{14pt}\setlength{\emergencystretch}{2em}
+\setlength{\parindent}{1.1em}\setlength{\parskip}{3pt}
+\setlist{topsep=4pt,itemsep=2pt}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}\newtheorem{definition}{Definition}
+\newcommand{\idtag}[1]{\textnormal{\textsf{[#1]}}}
+\newcommand{\Reach}{\operatorname{Reach}}
+\newcommand{\Cl}{\operatorname{Cl}}
+\newcommand{\pos}[1]{\left[#1\right]_+}
+\lstset{basicstyle=\small\ttfamily,breaklines=true,frame=single,columns=fullflexible,keepspaces=true}
+\title{\vspace{-1cm}\textbf{When Revocation Does Not Restore Safety}\\[6pt]
+\Large Persistent Effects and the Renewal Conditions\\of Multi-Agent Coexistence}
+\author{Hongju Liu\\\normalsize Independent Researcher, Trinity Accord / UCT Research Programme}
+\date{11 October 2026\\\small ASI-CC-v1.1.0 \textbullet\ Research draft, not peer reviewed}
+\begin{document}
+\maketitle\thispagestyle{plain}
+\begin{abstract}
+A system can revoke every obsolete credential and still lose protected services through the accumulated effects of previously authorized operations. This becomes important when agents are copied, permissions are transferred, and policies are repeatedly renewed. We extend a prior monotone-authority analysis by separating current rights, durable effects, and verified restoration. Two countermodels show why neither the union of ever-held rights nor the currently active rights is an exact general substitute for this state. For a declared interchangeable-service model, impairments obeying the discrete arrival envelope $b+\rho(L-1)$ and a work-conserving restorer with eligibility delay $\ell$ and capacity $\mu$ have the sharp all-time outstanding-effect bound $b+\rho(\ell-1)$ when $\mu\ge\rho$. If $\mu<\rho$, no finite spare margin can preserve service while admitting every conforming operation on schedule. This is an explicit application of classical deterministic network calculus, not new queueing mathematics. We additionally quantify a policy-composition failure: restarting the burst allowance at each epoch produces debt $b+j(b-\rho)$ after $j$ renewals in a boundary case where every epoch separately appears sustainable. A recovery-backed reservation rule preserves protection but cannot manufacture throughput when restoration is unavailable. Exact enumeration and a local SQLite/process prototype distinguish effective credential revocation from actual service restoration; all 119 stale replays are rejected although several variants lose service. The contribution is a scoped joint specification, a cross-epoch counterexample and repair contract, and a reproducible operational study. No AI consciousness, globally legitimate authority, permanently invulnerable controller, or real infrastructure recovery guarantee is presupposed or established.
+\end{abstract}
+\noindent\textbf{Keywords:} multi-agent systems; authority transfer; revocation; persistent effects; recovery; governance change; service continuity.
+
+\section{Introduction: from who holds power to what power has done}
+Future-capable AI systems may change goals, instantiate new agents, form coalitions, or participate in changing the procedures that authorize their actions. These possibilities do not require proving that AI has phenomenal subjecthood. They already create operational questions about human control of persistent software and its effects. In a deterministic implementation, the next action can be fixed by the complete state while the history of authority and consequences remains essential to safety.
+
+Our preceding manuscript, \emph{When the Guardians Can Be Acquired}, examined a finite monotone model in which an initial coalition can retain every acquired permission \cite{previous}. It computed the closure of that coalition's grant rules and checked both effect barriers and surviving human-service resources under the same coalition. Its principal limitation was explicit: consuming, revoking, or transferring permissions breaks the identification of cumulative closure with simultaneously held power. This revision addresses that limitation rather than treating another fixed collection of trusted guardians as an answer.
+
+The missing distinction is two-sided. An exclusive token can visit two authorities without ever enabling a command requiring both at once. A historical union of rights may therefore exaggerate attack capability. Yet the same token can make a durable change at each authority before moving on. A current-rights count can then underestimate the accumulated consequences. Correctly expiring the token at every step does not undo those changes.
+
+This is not a new discovery that revocation differs from rollback. Recent root-scoped agent quiescence work explicitly excludes reversal of pre-fence consequences and treats compensation separately \cite{quiescence}; classical sagas make compensating work explicit \cite{sagas}. Our question is the next quantitative one: \emph{what recovery and admission conditions make those persistent effects compatible with continued protected service across repeated transfers and policy renewals?}
+
+We call the outstanding, service-relevant consequences \emph{effect debt}. This is an accounting term, not a claim that a moral debt is owed or that all harms can be reversed. The model includes only individually repairable service-capacity impairments; irreversible injury to a person is not a repair job. Human protection must continue while such jobs are outstanding. The term helps keep three facts separate: a credential has ended, its effect has ended, and the protected function has been restored.
+
+The draft contributes a state-model correction, an exact renewal condition in a declared service model, a quantitative counterexample to independently resetting policy epochs, and an executable reservation discipline. Its mathematics has strong predecessors in access-control analysis, deterministic queues, and transactional compensation. The value claimed is the precise coupling and falsification contract, not first priority for those general methods or a universal resolution of superintelligence coexistence.
+
+\section{Scope, predecessors, and revised claims}
+\label{sec:related}
+\paragraph{Authority evolution.}
+The safety problem for mutable permissions is classical \cite{hru}. MulVAL models multistage acquisition using logical rules \cite{mulval}. Our predecessor used the same family of reachability ideas, adding a same-coalition check of residual human-service capacity. These methods remain useful for their declared semantics. We do not claim that existing access-control systems necessarily ignore state, or that conservative over-approximation is itself an error. The error is presenting a conservative cumulative abstraction as an exact simultaneous-power characterization after its monotonicity premise has been removed.
+
+\paragraph{Revocation and self-modification.}
+Zhu and Wang explicitly distinguish rooted authorization quiescence from rollback and business completion \cite{quiescence}. Their succession framework addresses authority conservation across replacement, forking and rollback, including spent-budget preservation and pre-cut effect attribution \cite{succession}. Their later subgoal framework retains unfinished obligations across changing goal graphs, but its closure result is conditional on closure rather than a termination guarantee \cite{subgoals}. These are close predecessors. We do not claim to defeat their implementations or discover the need for a durable ledger. The present draft supplies a service-loss/restoration model, an exact cross-time capacity condition, and a specific epoch-reset counterexample with independently observed local effects.
+
+\paragraph{Recovery and rate conditions.}
+Proactive security addresses the accumulation of compromises by mobile adversaries \cite{proactive}. It does not by itself imply that any particular physical service has been restored. Le Boudec and Thiran's network calculus gives classical arrival/service-curve backlog bounds, including burst-plus-rate times latency \cite{netcal}. Our bound is a discrete specialization with an explicit slot convention and a physical-service interpretation. It must not be advertised as a novel universal rate theorem. Work on nonideal clocks also shows why timing assumptions are part of a real bound rather than harmless implementation details \cite{clocks}.
+
+\paragraph{Relationship to the existing published work.}
+The author's PR-v6.0.0 preprint gives conditional resource frontiers under a shared diagnostic/bank attack budget within a declared episode \cite{pr6}. It is already publicly disclosed and is not new work in this revision. The present question concerns the persistence and renewal of effects between episodes and policy versions. The current draft does not amend that published record, nor complete the whole historical UCT semantic audit.
+
+\section{Authority, effects, and the protection contract}
+\label{sec:state}
+At time $t$, write the relevant state as
+\begin{equation}
+ s_t=(A_t,P_t,E_t,O_t,C_t),
+\end{equation}
+where $A_t$ contains active authorizations and their holders, $P_t$ the operative policy and renewal state, $E_t$ outstanding effects with provenance and restoration status, $O_t$ unreleased protection obligations, and $C_t$ the service/resource configuration. The same deployment name need not persist through time, but effect provenance must not be erased by that change. A process instance, a model family, a human principal and a persistent effect are different objects.
+
+The default contract protects human service requirements. AI-generated requests acquire force only through the specified authorization mechanism. Neither a felt machine preference nor an intrinsic machine right is used. The definition of legitimate human authority remains a stated governance input; multiple humans can disagree, and their commitments can be mutually infeasible. The mathematics identifies consequences of a contract, not a global solution to legitimacy.
+
+An operation may temporarily remove one unit of service capacity, for example by taking a component out of service for a controlled change. It is acceptable under this model only while sufficient residual capacity continues to satisfy the protected requirement. A credential revocation changes $A_t$. A verified restoration changes $E_t$ and $C_t$. These transitions are not identified unless the implementation actually makes them equivalent.
+
+\begin{proposition}[Two opposite abstraction failures \idtag{RAC-P1}]
+\label[proposition]{prop:two}
+For every $m\ge2$, there is a finite system with at most one exclusive live capability at any instant such that (i) an atomic action requiring all $m$ capabilities is unreachable, despite every capability appearing in the historical union, while (ii) $m$ separately writable persistent disable flags can all become set, even though no live capability remains at the end.
+\end{proposition}
+\begin{proof}
+Transfer a single noncopyable token successively among $m$ roles. The current set always has size at most one, so the atomic all-role precondition is never true; the historical union eventually contains every role. In a second endpoint interpretation, the holder at each role can set that role's persistent disable flag before surrendering the token. After all visits, every flag is set and the token can be revoked. The consequence state, unlike the possession state, accumulates. The two interpretations concern different actual action semantics; neither may be inferred from the other merely by counting rights.
+\end{proof}
+
+The proposition extends the predecessor's consuming-token negative example without invalidating its correctly scoped monotone theorem. A full finite transition model can track both components exactly. In a production analysis, the challenge is to identify every relevant persistent consequence, not to assume that a mathematical variable called ``restored'' describes the world.
+
+\subsection{Conservation across naming and policy changes}
+Let a new committed impairment create a unique effect record, tied to its actual target rather than only to the current agent name. Let verified recovery discharge that record exactly once. For unit effects define
+\begin{equation}
+ D_t=\text{number of created, not yet actually restored impairments at the observation instant}.
+\end{equation}
+Reissuing an agent ID, rotating a token, changing a model version, or closing a task does not reduce $D_t$. Restoring the actual target does. This is an application of durable obligation accounting, not a new identity primitive.
+
+In general, records can describe heterogeneous effects and overlapping services. The scalar model used below deliberately restricts each outstanding unit to one missing interchangeable capacity unit. Disabling a resource twice must not count two losses; duplicating a restoration message must not count two repairs. Once a service target has actually been restored, a later impairment of that target is a new event with its own record.
+
+\section{An exact renewal condition over arbitrarily long runs}
+\label{sec:rate}
+\subsection{Slot order and admissible changes}
+There are $N$ interchangeable unit-capacity components, and a persistent human service needs at least $q$ healthy units, $1\le q\le N$. Define the available impairment margin $H=N-q$. The system starts with no outstanding impairment. A proposed work stream $a_0,a_1,\ldots$ describes nonnegative integer numbers of new one-unit impairments committed at the \emph{end} of each slot. All operations are mediated; their actual capacity effect is exactly this declared unit, with no hidden additional damage.
+
+Each impairment committed in slot $u$ first becomes eligible for recovery at the beginning of slot $u+\ell$, where $\ell\ge1$. At the beginning of each slot, a work-conserving first-in-first-out recovery mechanism restores up to $\mu$ eligible units. It then admits the new end-of-slot operations. Both the eligibility delay and rate are part of the assumed physical/engineering contract. The model does not claim such a restorer exists in every real deployment.
+
+For every nonempty interval of $L$ slots, require
+\begin{equation}
+ \sum_{t=u}^{u+L-1} a_t\le\alpha(L):=b+\rho(L-1),\qquad b\ge\rho\ge0,\quad b\ge1,
+ \label{eq:arrival}
+\end{equation}
+with integer parameters. Here $b$ limits a burst and $\rho$ the sustained admissible rate. This is an upper-bound contract on aggregate effects, including all participating agents and policy epochs. It does not assert that benign or adversarial AI necessarily produces those effects. Robust analysis includes the allowed worst-case stream.
+
+To exclude the vacuous solution of refusing every operation, the specification requires \emph{every stream satisfying \cref{eq:arrival} to be admitted at its specified slots}, while service is maintained. This is stronger than merely allowing some progress, and different from promising eventual processing with unbounded queuing. Backpressure is a legitimate alternative specification, but cannot be counted as fulfilling this on-schedule one.
+

@@ -1,0 +1,37 @@
+{
+  "version": "ASI-CC-v1.1.0",
+  "time_utc": "2026-10-11T11:24:27.052690+00:00",
+  "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+  "new_runs": [
+    {
+      "script": "src/recovery_frontier.py",
+      "source_sha256": "b6f426ba2606d9d1bd61407785b0c6e6294276d80b88214c343e51b62ba48e10",
+      "second_run_json_equal": true,
+      "returncode": 0,
+      "elapsed_seconds": 0.122
+    },
+    {
+      "script": "src/effect_escrow_demo.py",
+      "source_sha256": "2ede32d976eae317bba11a73c4833baaccf7198d66205370642f5b910dde2877",
+      "second_run_json_equal": true,
+      "returncode": 0,
+      "elapsed_seconds": 0.614
+    }
+  ],
+  "baseline_regression": [
+    {
+      "file": "closure_results.json",
+      "semantic_match": true
+    },
+    {
+      "file": "mutation_results.json",
+      "semantic_match": true
+    },
+    {
+      "file": "joint_oracle_results.json",
+      "semantic_match": true
+    }
+  ],
+  "new_experiments_not_risk_rates": true,
+  "status": "PASS"
+}

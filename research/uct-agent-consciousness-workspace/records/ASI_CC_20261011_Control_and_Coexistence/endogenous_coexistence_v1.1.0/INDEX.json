@@ -1,0 +1,89 @@
+{
+  "schema": "uct-endogenous-candidate/1.1",
+  "id": "ASI-CC-v1.1.0",
+  "date": "2026-10-11",
+  "author": "Hongju Liu",
+  "title": "When Revocation Does Not Restore Safety: Persistent Effects and the Renewal Conditions of Multi-Agent Coexistence",
+  "pages": 12,
+  "status": "COMPLETE_ENGLISH_RESEARCH_DRAFT",
+  "published": false,
+  "doi": null,
+  "peer_reviewed": false,
+  "baseline_commit": "1c88e643dfd67585bd6a60cb440b11526bf11151",
+  "predecessor_source_commit": "88427e9b674d4dc4b4521b0ccfe89420fb4156a4",
+  "predecessor": "ASI-CC-v1.0.0 When Guardians Can Be Acquired",
+  "already_published_pr6_doi": "10.5281/zenodo.23295776",
+  "formal_map": "UCT-MAP-v1.1.2",
+  "coverage_baseline": "UCT-PUB-v1.0.33",
+  "formal_graph_delta": {
+    "nodes": 0,
+    "rules": 0,
+    "relations": 0
+  },
+  "map_status": "PENDING_MAP",
+  "whole_graph_semantic_audit": false,
+  "global_priority_verified": false,
+  "claims": [
+    {
+      "id": "RAC-P1",
+      "type": "COUNTEREXAMPLE",
+      "status": "INHERITED_NONMONOTONE_WARNING_PLUS_DURABLE_EFFECT_EXTENSION",
+      "statement": "Historical-right union and current-right count can err in opposite directions when effects persist.",
+      "enabled": false
+    },
+    {
+      "id": "RAC-L1",
+      "type": "LEMMA",
+      "status": "INHERITED_DISCRETE_QUEUE_IDENTITY",
+      "statement": "Exact outstanding effect count under delayed work-conserving restoration.",
+      "enabled": false
+    },
+    {
+      "id": "RAC-T1",
+      "type": "THEOREM",
+      "status": "CLASSICAL_NETWORK_CALCULUS_APPLICATION",
+      "statement": "On-schedule service margin b+rho*(ell-1) iff mu>=rho; overloaded guaranteed admission has no finite all-time margin.",
+      "enabled": false
+    },
+    {
+      "id": "RAC-T2",
+      "type": "PROPOSITION",
+      "status": "SCOPED_VERSION_RESET_RESULT_PRIORITY_UNVERIFIED",
+      "statement": "Fresh local burst budgets across epochs yield actual debt b+j*(b-rho) in the stated boundary case.",
+      "enabled": false
+    },
+    {
+      "id": "RAC-T3",
+      "type": "THEOREM",
+      "status": "CONDITIONAL_RESERVATION_INVARIANT_APPLICATION",
+      "statement": "Effect-backed aggregate ledger preserves service and permits all conforming scheduled input at the proved margin under stated premises.",
+      "enabled": false
+    },
+    {
+      "id": "RAC-E1",
+      "type": "EXECUTED_EVIDENCE",
+      "status": "LOCAL_SOFTWARE_AND_FINITE_MATH",
+      "statement": "12 SQLite/process scenarios,119 successful revocations plus persistent-effect failures, and independent backlog checks.",
+      "enabled": false
+    }
+  ],
+  "paper": "paper/manuscript.tex",
+  "scripts": [
+    "src/recovery_frontier.py",
+    "src/effect_escrow_demo.py"
+  ],
+  "results": [
+    "data/recovery_results.json",
+    "data/effect_demo_results.json"
+  ],
+  "work_log": "audit/WORK_LOG.md",
+  "handoff": "HANDOFF_ZH.md",
+  "coverage": "audit/PUBLICATION_COVERAGE_UPDATE.json",
+  "actual_evidence_scope": "Finite exact models and controlled SQLite subprocesses;no LLM,physical power,independent trusted root,or phenomenal measure",
+  "publication_actions": {
+    "DOI": false,
+    "OTS": false,
+    "Arweave": false,
+    "old_publication_bytes_changed": false
+  }
+}

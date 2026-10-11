@@ -1,0 +1,52 @@
+{
+  "schema": "disabled-uct-research-extension/1.0",
+  "id": "ASI-CC-v1.1.0",
+  "formal_baseline": "UCT-MAP-v1.1.2",
+  "counts_unchanged": [
+    913,
+    424,
+    261
+  ],
+  "enabled": false,
+  "merge_order": [],
+  "status": "PENDING_MAP/AUDIT_INCOMPLETE",
+  "claims": [
+    "RAC-P1",
+    "RAC-L1",
+    "RAC-T1",
+    "RAC-T2",
+    "RAC-T3",
+    "RAC-E1"
+  ],
+  "dependencies": [
+    [
+      "EAC-N1@ASI-CC-v1.0.0",
+      "RAC-P1"
+    ],
+    [
+      "RAC-L1",
+      "RAC-T1"
+    ],
+    [
+      "RAC-L1",
+      "RAC-T2"
+    ],
+    [
+      "RAC-T1",
+      "RAC-T3"
+    ],
+    [
+      "RAC-P1",
+      "RAC-E1"
+    ],
+    [
+      "RAC-T3",
+      "RAC-E1"
+    ]
+  ],
+  "audited_scope": "New local definitions/proofs/cases and preserved guide interpretation only",
+  "unreviewed_scope": "All historical913nodes,424rules,261contexts have not received a new full itemwise semantic pass;no formal admission.",
+  "existing_open_QC": "UNCHANGED",
+  "no_new_experience_axiom": true,
+  "coverage": "PUBLICATION_COVERAGE_UPDATE.json"
+}

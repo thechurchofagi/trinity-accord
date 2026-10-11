@@ -1,0 +1,55 @@
+{
+  "schema": "uct-scoped-coverage-delta/1.1",
+  "version": "ASI-CC-v1.1.0",
+  "baseline": "UCT-PUB-v1.0.33",
+  "new_publications": 0,
+  "predecessor_status": "unpublished working manuscript; source revision retained",
+  "published_PR6": "10.5281/zenodo.23295776, already public; not counted as new",
+  "claims": [
+    {
+      "id": "RAC-P1",
+      "type": "COUNTEREXAMPLE",
+      "status": "INHERITED_NONMONOTONE_WARNING_PLUS_DURABLE_EFFECT_EXTENSION",
+      "statement": "Historical-right union and current-right count can err in opposite directions when effects persist.",
+      "enabled": false
+    },
+    {
+      "id": "RAC-L1",
+      "type": "LEMMA",
+      "status": "INHERITED_DISCRETE_QUEUE_IDENTITY",
+      "statement": "Exact outstanding effect count under delayed work-conserving restoration.",
+      "enabled": false
+    },
+    {
+      "id": "RAC-T1",
+      "type": "THEOREM",
+      "status": "CLASSICAL_NETWORK_CALCULUS_APPLICATION",
+      "statement": "On-schedule service margin b+rho*(ell-1) iff mu>=rho; overloaded guaranteed admission has no finite all-time margin.",
+      "enabled": false
+    },
+    {
+      "id": "RAC-T2",
+      "type": "PROPOSITION",
+      "status": "SCOPED_VERSION_RESET_RESULT_PRIORITY_UNVERIFIED",
+      "statement": "Fresh local burst budgets across epochs yield actual debt b+j*(b-rho) in the stated boundary case.",
+      "enabled": false
+    },
+    {
+      "id": "RAC-T3",
+      "type": "THEOREM",
+      "status": "CONDITIONAL_RESERVATION_INVARIANT_APPLICATION",
+      "statement": "Effect-backed aggregate ledger preserves service and permits all conforming scheduled input at the proved margin under stated premises.",
+      "enabled": false
+    },
+    {
+      "id": "RAC-E1",
+      "type": "EXECUTED_EVIDENCE",
+      "status": "LOCAL_SOFTWARE_AND_FINITE_MATH",
+      "statement": "12 SQLite/process scenarios,119 successful revocations plus persistent-effect failures, and independent backlog checks.",
+      "enabled": false
+    }
+  ],
+  "full_prior_corpus_check": false,
+  "prior_art": "PRIOR_ART_REVIEW.md",
+  "decision": "COMPLETE_SCOPED_DRAFT_FOR_CRITIQUE;NO_PUBLICATION_ACTION"
+}

@@ -1,0 +1,129 @@
+\subsection{Exact effect backlog}
+\begin{lemma}[Discrete delayed-recovery identity \idtag{RAC-L1}]
+\label[lemma]{lem:backlog}
+For the specified ideal recovery mechanism and a nonnegative input stream, the outstanding effect count after slot $t$ is
+\begin{equation}
+ D_t=\max_{0\le u\le t}\left\{\sum_{s=u}^{t} a_s-\mu\max(0,t-u+1-\ell)\right\}.
+ \label{eq:backlog}
+\end{equation}
+The expression is nonnegative because the term $u=t$ is $a_t$.
+\end{lemma}
+\begin{proof}
+Write $A(t)=\sum_{s=0}^t a_s$, with $A(t)=0$ for $t<0$, and $R(t)$ for cumulative recoveries through the start of slot $t$. Work conservation and the eligibility rule give
+\[
+ R(t)=\min\{A(t-\ell),\ R(t-1)+\mu\},\qquad R(-1)=0.
+\]
+For $t<\ell$, no effect is recoverable and $D_t=A(t)$. For later slots, unrolling this recurrence and subtracting it from $A(t)$ gives the maximum over $0\le u\le t-\ell+1$ of $A(t)-A(u-1)-\mu(t-u+1-\ell)$. Adding larger $u$ cannot exceed the term at $u=t-\ell+1$, since arrivals are nonnegative and those added terms have no service subtraction. This yields \cref{eq:backlog}; the no-recovery initial slots have the same formula.
+\end{proof}
+
+\begin{theorem}[Sharp service margin under continuous admission \idtag{RAC-T1}]
+\label{thm:margin}
+For the interchangeable-capacity contract, a clean initial state, and the specified recovery mechanism:
+\begin{enumerate}[label=(\roman*)]
+\item If $\mu\ge\rho$, the smallest impairment margin guaranteeing every conforming stream is
+\begin{equation}
+ \boxed{H^*=b+\rho(\ell-1).}
+ \label{eq:margin}
+\end{equation}
+Equivalently, $N\ge q+b+\rho(\ell-1)$ is necessary and sufficient within this model.
+\item If $\mu<\rho$, no finite margin can guarantee service while admitting every conforming operation on schedule for an unbounded run.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+By \cref{lem:backlog}, for an interval of length $L$ the candidate debt is at most
+\[
+ b+\rho(L-1)-\mu\max(0,L-\ell).
+\]
+If $\mu\ge\rho$, this expression grows up to $L=\ell$ and does not increase thereafter. Its maximum is $b+\rho(\ell-1)$, proving sufficiency. Necessity is attained by $a_0=b$ and $a_t=\rho$ for $t\ge1$, which satisfies every interval constraint. Before any recovery, at slot $\ell-1$, debt reaches exactly that amount.
+
+If $\mu<\rho$, use the same stream. For $t\ge\ell-1$, it has
+\begin{equation}
+ D_t=b+\rho(\ell-1)+(\rho-\mu)(t-\ell+1),
+ \label{eq:growth}
+\end{equation}
+which eventually exceeds every finite $H$. In a finite physical pool, this virtual calculation is needed only until the first failure: before that prefix, one can choose currently healthy components for the required one-unit effects; if an incoming batch cannot be completed, the on-schedule admission promise already fails. Continuing the virtual debt beyond exhaustion is not a claim about negative physical capacity.
+\end{proof}
+
+The theorem is a discrete queueing result applied to persistent service impairments. In continuous network calculus, the analogous burst/rate/latency expression is classical \cite{netcal}. Our $\ell-1$ rather than $\ell$ is due to the precise beginning-of-slot repair and end-of-slot admission convention. It should not be transferred to a different timing model without adjustment.
+
+The theorem concerns \emph{guaranteed} recovery, not its nominal nameplate or time-averaged rate. If an adversary can indefinitely stop repairs, the premise fails. If repair is faster than the modeled rate, the expression remains sufficient but need not remain necessary for the actual installation. Better replicas, extra resources, or physical substitution may change $N$, $\ell$ or $\mu$; they do not violate the theorem by changing its inputs.
+
+\subsection{A capacity limit that must recur, not merely hold once}
+When $\rho>0$, static headroom only absorbs a finite transient if recovery cannot keep up. At the boundary $\mu=\rho$, any finite latency adds a finite but nonzero burden to the initial burst. A system with at most one active authority can still generate this workload by performing operations serially, revoking each token before the next. Thus a current-coalition cardinality bound is not a substitute for a rate and outstanding-effect bound.
+
+If $\rho=0$ and $\mu=0$, the contract allows only a finite total of $b$ effects and $H=b$ is sufficient. This special case is safe but not a claim of indefinite positive-rate useful work. If requests may be deferred, a limiter can preserve safety even during overload, but with reduced admission or unbounded waiting. Neither result contradicts part (ii), which fixes the on-schedule requirement.
+
+\section{Institutions can renew permissions faster than effects disappear}
+\label{sec:epochs}
+An institution can preserve the text of its safety policy while restarting the accounting state underneath it. Suppose each new agent generation, task epoch, or policy version receives a fresh allowance $(b,\rho)$, ignoring outstanding effects of earlier epochs. Each isolated epoch may satisfy its own version-local contract; their common physical service may not satisfy the aggregate one.
+
+\begin{proposition}[An exact epoch-reset accumulation \idtag{RAC-T2}]
+\label[proposition]{prop:reset}
+Let $b>\rho\ge0$, $\mu=\rho$, and $\ell=1$. Every epoch has $h\ge1$ slots, admits $b$ effects in its first slot and $\rho$ in each later slot, and resets its burst allowance on renewal. Every epoch separately obeys \cref{eq:arrival}. In the continuously running physical system, after the first slot of epoch $j$ (indexing from $j=0$),
+\begin{equation}
+ \boxed{D_{jh}=b+j(b-\rho).}
+ \label{eq:reset}
+\end{equation}
+Hence every finite margin is eventually exceeded if the renewals continue and no extra recovery or admission delay is introduced.
+\end{proposition}
+\begin{proof}
+At $t=0$ the debt is $b$. In ordinary slots, $\rho$ recoveries followed by $\rho$ new effects leave it unchanged. At every later first slot, $\rho$ recoveries followed by $b$ effects increase it by $b-\rho$. The backlog is always at least $b$, so recovery is not starved of eligible work after initialization. Induction gives \cref{eq:reset}. Each separate epoch has a single burst followed by its sustainable rate and therefore satisfies its isolated interval constraints.
+\end{proof}
+
+For a fixed epoch length, the long-run input rate becomes $\rho+(b-\rho)/h$, not $\rho$. This is not a mysterious failure of an otherwise sound rate theorem: resetting its initial condition changed the aggregate traffic contract. The proposition quantifies one form of policy-composition failure. It does not forbid a properly authorized revision from changing the service promise; such a change must be explicit, not represented as fulfillment of the old promise.
+
+For example, $b=3$, $\rho=\mu=1$, and epochs of four slots produce epoch-start debts $3,5,7,9,\ldots$. Waiting longer between resets does not help in this trace if the intervening work uses the whole recovery rate. Actual idle time that permits additional recovery, an increased recovery rate, or a larger admitted margin changes the conclusion. This is why the claim is about \emph{uncompensated} repeated resets, not about all periodic governance.
+
+A separate initial-state error occurs even without repeated resets. Two old mature debts remain when a new profile $b=\rho=\mu=1$, $\ell=1$ is declared. Its clean-start bound is one, but one repair followed by one new effect leaves two outstanding. A valid revision must carry over the actual debt and age distribution, not simply apply a clean-start certificate to an old installation.
+
+\section{Recovery-backed reservations: a safety rule with an honest progress boundary}
+\label{sec:escrow}
+Let $\widehat D_t$ be an accounted upper bound on actual outstanding impairment, and $P_t$ the capacity reserved for accepted but not yet fully reflected in-flight effects. A mediated operation with worst-case one-unit impairment may be admitted only when
+\begin{equation}
+ \widehat D_t+P_t+1\le H.
+ \label{eq:escrow}
+\end{equation}
+Acceptance reserves the unit before the effect commits. Commit transfers the reservation to an outstanding effect record without refunding it. Revocation, fork, task completion or policy renaming does not refund it. A record is discharged only when the corresponding capacity is actually restored, or when an authorized cancellation is verified to have prevented the effect. Shared physical exposure requires shared accounting across identities.
+
+\begin{theorem}[Conditional protection and non-vacuous operation \idtag{RAC-T3}]
+\label{thm:escrow}
+Assume complete mediation of all relevant effects, sound one-unit exposure bounds, atomic reservation/commit updates, unique effect identifiers, authentic and sound discharge evidence, and no unrelated capacity loss. If initially $\widehat D+P\le H$ and actual impairment is at most $\widehat D+P$, rule~\eqref{eq:escrow} preserves at least $q$ healthy units under arbitrary token transfers, revocations and identity changes that preserve this ledger. Moreover, under the clean-start profile of Theorem~\ref{thm:margin}, $H\ge H^*$ permits every conforming scheduled request without deferral.
+\end{theorem}
+\begin{proof}
+Reservation increases the exposure bound only after checking the remaining margin. Commit moves a unit between reserved and outstanding states without increasing their sum. A valid discharge removes only exposure that is no longer physically present or possible. The named administrative transitions leave the outstanding exposure intact. Induction therefore preserves the upper bound and the service margin. For the second statement, proceed through a conforming stream: the exact all-admitted queue never exceeds $H^*$, so before each corresponding new unit there is sufficient margin for the same update. A first rejection would contradict that bound. This is a conditional feasibility statement, not a guarantee that an arbitrary scheduler will choose to admit enabled work.
+\end{proof}
+
+The rule is a standard resource-reservation/compensation discipline applied to effects instead of currently live credentials. It does not solve dishonest recovery evidence. A process can truthfully sign ``recovered'' while its sensor is wrong or its restoration code has failed. It also does not create restoration capacity: with no repair and repeated impairments, the sound policy eventually refuses work. Calling that a successful always-available coexistence solution would substitute a weaker specification.
+
+The prototype below commits operations synchronously and therefore has $P=0$ between calls. It validates persistent debt, not the full distributed in-flight reservation theorem. Asynchronous queues, callbacks and ambiguous external commits need the extra $P$ term and a provenance protocol, an issue already addressed in related quiescence work \cite{quiescence}. A late external effect not included in either ledger violates the complete-mediation premise.
+
+\subsection{Coalitions and rule edits}
+Two principals sharing a protected pool cannot each spend the entire impairment allowance independently. An aggregate arrival envelope or an atomic aggregate exposure ledger is required. Separate budgets are valid only if their aggregate effects are jointly bounded for the same physical service. Similarly, an amendment disabling the escrow check, restarting debt at zero, or accepting unverified restoration is a transition that changes the certificate's premises. It cannot be exempted because it is called a constitutional update rather than a tool call.
+
+The condition is not that the same named person or machine must remain in charge forever. The obligation is that every admitted authority transition preserve sufficient actual accounting, enforcement and restoration capacity. The paper does not prove that such preservation can be achieved against arbitrary real-world takeover of all those mechanisms. A rotating implementation may realize the invariant; a permanently named institution may fail it. Either requires evidence, not an inference from its name.
+
+\section{Beyond one pooled capacity counter}
+\label{sec:heterogeneous}
+If protected demands have different resource access, total debt alone is not sufficient. Suppose target $A$ can use only bank1, while target $B$ can use banks2 and3. Each needs one unit. Initially the system has three units for two demands, a nominal margin of one. Losing bank1 creates exactly one debt and leaves two total units, yet target $A$ is unsupported.
+
+For a declared bipartite resource graph, the retained static requirement is Hall's capacitated condition at each actual state:
+\begin{equation}
+ \sum_{u\in N(X)} c_u(t)\ge d(X)\quad\text{for every nonempty protected subset }X.
+ \label{eq:hall}
+\end{equation}
+If each relevant neighborhood has a verified bound on its own unrecovered capacity loss, it can be compared with that neighborhood's margin. This is a sufficient use of the scalar reasoning, not a general independent-repair decomposition. One shared repair worker cannot simultaneously supply separate full-rate guarantees to every neighborhood merely because each guarantee is individually plausible. All source and recovery assumptions must hold for the same system and time.
+
+A universal multiple-resource optimal scheduling theorem is not claimed here. The pooled result is exact because every healthy unit can replace every other, each impairment consumes one unit, and recovery returns the same amount. Irreplaceable functions, irreversible effects, nonlinear losses, correlated outages and recovery jobs needing more resources must use a richer model. This limitation keeps the extension compatible with the previous same-coalition, same-state joint-resource check rather than silently discarding it.
+
+\section{Executed evidence}
+\label{sec:experiments}
+\subsection{Independent mathematical views}
+The new program \texttt{recovery\_frontier.py} compares a timestamped FIFO queue with the interval-max formula in \cref{eq:backlog}. It checks all $3^6$ six-slot arrival sequences over $\{0,1,2\}$ for four repair capacities and four delays: 11,664 trace comparisons. It then checks 11,684 conforming parameter/stream cases, 665 tight frontier profiles, and 105 overload profiles with independently calculated first-violation times. Another 100 profiles confirm the epoch-reset formula. General results follow from the proofs, not these finite counts.
+
+The code preserves both authority countermodels for two through six roles, a version-local burst-reset trace, and the stale initial-state example. There is no stochastic sampling, model training, or inference of an agent's internal goals. Three scripts from the predecessor were rerun; after removing timing/interpreter fields their outputs match the archived data. Those historical results are not added to the new evidence totals.
+
+\subsection{Local persistent-effect prototype}
+The prototype uses an actual SQLite database with separate resource-state and outstanding-effect tables. A request worker emits fixed disable requests with a broker-issued token. The broker permits at most one current token, commits a resource update, immediately revokes the token, and rejects a real replay from the same worker. A separate read-only observer process queries the resource table to measure remaining service capacity. Each configuration starts fresh workers and a fresh database; all share the same host user, so this is not an independent administrative or hardware trust boundary.
+
+At the start of a logical slot, up to $\mu$ eligible effect records are selected in order. Honest recovery changes the actual resource row and discharges the ledger item. The negative recovery variant discharges the ledger without restoring the row. This is an intentionally supplied faulty-receipt scenario, not a successful exploit against a real attestation service. At the end of the slot, proposed writes are admitted according to one of the following rules: current authority only, refund on revocation, version-local escrow, or cross-version effect escrow. Every new operation uses a fresh agent label; every epoch is version-labeled.
+
