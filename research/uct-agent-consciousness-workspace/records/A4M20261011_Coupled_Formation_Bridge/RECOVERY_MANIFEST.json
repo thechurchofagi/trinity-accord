@@ -1,13 +1,43 @@
 {
   "schema": "uct-recovery-manifest/1",
   "round": "A4M20261011",
-  "status": "PRE_PERSISTENCE",
-  "baseline_remote_commit": "8bc702d52df0fef9cf8a8490678bd58b62369071",
-  "science_commit": null,
-  "receipt_commit": null,
-  "increment": {"filename": "UCT_A4M_Increment_20261011.zip", "file_count": null, "size_bytes": null, "sha256": null, "library_file_id": null, "is_complete_backup": false},
-  "increment_manifest": {"filename": "UCT_A4M_Increment_20261011_MANIFEST.json", "size_bytes": null, "sha256": null, "library_file_id": null},
-  "master": {"library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa", "version": null, "sha256": null, "reverse_materialized_byte_equal": false},
-  "restore_order": ["read fixed master latest version", "fetch latest verified remote branch", "require science/receipt commit or verified fast-forward successor", "inspect A4M handoff, contract, claim/gap/review/formal ledgers and exact results", "verify increment and manifest hashes", "rerun exact checker and navigation validation"],
-  "warning": "The ZIP is a round increment only, not a complete repository, complete working set or full history."
+  "recovery_order": [
+    "Read the latest version of Library file libfile_4175a81748fc819187fa8f5771f056fa.",
+    "Fetch branch uct-agent-consciousness-workspace and require science commit 01a602d4e46c926332d03fe13360918df6d8a69d or a verified fast-forward successor.",
+    "Read HANDOFF_ZH.md, COUPLING_CONTRACT.md, RESEARCH_NOTE.md, EXACT_RESULTS.json, CLAIM_LEDGER.json, GAP_LEDGER.md, FORMAL_AUDIT.md, REVIEW_RESPONSE.md, VALIDATION.json, WORK_LOG.md and PERSISTENCE_RECEIPT.json in the A4M record.",
+    "Verify the 29-file increment ZIP and manifest by their exact SHA256 values before use; do not overlay them on a newer verified branch.",
+    "Run check_coupled_formation.py and require the native/yoked, marginal-key and copied-trace checks with zero phenomenal assignments.",
+    "Run records/NAV20261010_Map_Integration/validate_current_map.py --root research/uct-agent-consciousness-workspace and retain all OPEN/AUDIT_INCOMPLETE states."
+  ],
+  "verified_science": {
+    "base_commit": "8bc702d52df0fef9cf8a8490678bd58b62369071",
+    "first_block_commit": "a3aa1bdd6e1e04b4f702d4685312ae36bac07dba",
+    "commit": "01a602d4e46c926332d03fe13360918df6d8a69d",
+    "tree": "8c31590f15a5ae10bc019d6d22cfb9301f9060b6"
+  },
+  "increment": {
+    "library_file_id": "libfile_40fbda1f1ee88191a394542b618e5d2e",
+    "sha256": "555055f96dabeac7c657725ee6ccfd89dc1e829a0f19c9dc7a7919dd77e93205",
+    "size_bytes": 163349,
+    "file_count": 29,
+    "complete_snapshot": false
+  },
+  "manifest": {
+    "library_file_id": "libfile_334589ecfcb481918191bcb11c19eac5",
+    "sha256": "0be4af120c7fded0aa66bc0bfe9b8e9d0c1fa44d6a0d6307623b0a4c2e217682",
+    "size_bytes": 7284
+  },
+  "master": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "science_version": 133,
+    "science_version_sha256": "b627fd97948001994b8b262ca4b6e8dc70f4422178bde90132e8d7417fa3a7be",
+    "science_version_reverse_materialized_byte_equal": true,
+    "final_confirmation_version": "recorded_after_final_remote_commit"
+  },
+  "not_completed": [
+    "Independent grounding of body-frame binding in a matched tool-loop countercase",
+    "Actual installation of same-trace mediation in a human or robot",
+    "Independent phenomenal identity or signed judgment-to-experience calibration",
+    "Global deep semantic proof of the complete historical map"
+  ]
 }

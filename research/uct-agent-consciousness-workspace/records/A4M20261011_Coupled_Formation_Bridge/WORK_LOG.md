@@ -1,5 +1,15 @@
 # A4M work log
 
+
+## Persistence and final direction check
+
+- Plain HTTPS `git push` failed for lack of interactive credentials and changed no remote state; the failure is preserved rather than reported as success.
+- Created two protected Git object commits and moved the branch by expected-SHA only after both server-side tree SHAs exactly matched the validated local trees. Verified science head: `01a602d4e46c926332d03fe13360918df6d8a69d`; tree: `8c31590f15a5ae10bc019d6d22cfb9301f9060b6`.
+- Created a 29-file science increment and SHA256 manifest. Uploaded them as `libfile_40fbda1f1ee88191a394542b618e5d2e` and `libfile_334589ecfcb481918191bcb11c19eac5`; reverse materialization and byte comparison passed.
+- Replaced the fixed master handoff under the same identity as v133 and reverse-materialized it byte-equal (SHA256 `b627fd97948001994b8b262ca4b6e8dc70f4422178bde90132e8d7417fa3a7be`).
+- Re-read the A4M review response and open review statuses before the receipt save. No review item was self-closed.
+
+Final direction check: PASS WITH OPEN BRIDGE. A4M supplies one bounded positive explanatory candidate and explicit refuters, while preserving C1/U1, phenomenal neutrality, non-exclusive nesting and the difference between actual organization, finite judgment and report. The next task returns directly to body specificity rather than extending control or certificate machinery.
 Date: 2026-10-11
 
 ## Ordered read and selection

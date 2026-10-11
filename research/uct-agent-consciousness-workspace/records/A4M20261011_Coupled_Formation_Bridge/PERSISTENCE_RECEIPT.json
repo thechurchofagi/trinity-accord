@@ -1,9 +1,58 @@
 {
   "schema": "uct-persistence-receipt/1",
   "round": "A4M20261011",
-  "status": "LOCAL_SCIENCE_CHECKPOINT_ONLY_REMOTE_AND_LIBRARY_PENDING",
-  "local_checkpoint": "3588c8697a5ae0131e5201b599871cf0d9a1a297",
-  "github": {"science_commit": null, "receipt_commit": null, "verified": false},
-  "library": {"master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa", "master_version": null, "increment_library_file_id": null, "manifest_library_file_id": null, "reverse_materialized_byte_equal": false},
-  "failure_policy": "Do not claim dual save until remote commit/tree and Library reverse materialization are verified."
+  "status": "SCIENCE_COMMIT_AND_LIBRARY_INCREMENT_VERIFIED; MASTER_V133_REVERSE_VERIFIED; FINAL_METADATA_COMMIT_IS_EXPECTED_SHA_SUCCESSOR",
+  "local_checkpoints": [
+    "3588c8697a5ae0131e5201b599871cf0d9a1a297",
+    "135d0f8b27641411206696ad8b38efd95333a326"
+  ],
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "base_commit": "8bc702d52df0fef9cf8a8490678bd58b62369071",
+    "first_block_commit": "a3aa1bdd6e1e04b4f702d4685312ae36bac07dba",
+    "science_commit": "01a602d4e46c926332d03fe13360918df6d8a69d",
+    "science_tree": "8c31590f15a5ae10bc019d6d22cfb9301f9060b6",
+    "changed_paths": 29,
+    "expected_sha_update": true,
+    "remote_tree_byte_equivalent": true,
+    "remote_key_files_hash_verified": true,
+    "storage_commit_messages_have_skip_ci": true
+  },
+  "library": {
+    "master_handoff_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "master_science_version": 133,
+    "master_science_sha256": "b627fd97948001994b8b262ca4b6e8dc70f4422178bde90132e8d7417fa3a7be",
+    "master_science_size_bytes": 89866,
+    "master_science_reverse_materialized_byte_equal": true,
+    "increment": {
+      "library_file_id": "libfile_40fbda1f1ee88191a394542b618e5d2e",
+      "file_id": "file_000000003c4481f7896cd131b2bfcabe",
+      "filename": "UCT_A4M_Science_Increment_20261011.zip",
+      "sha256": "555055f96dabeac7c657725ee6ccfd89dc1e829a0f19c9dc7a7919dd77e93205",
+      "size_bytes": 163349,
+      "file_count": 29,
+      "scope": "increment_only"
+    },
+    "manifest": {
+      "library_file_id": "libfile_334589ecfcb481918191bcb11c19eac5",
+      "file_id": "file_00000000a03481f79da65ceb8a63c373",
+      "filename": "UCT_A4M_Science_Increment_Manifest.json",
+      "sha256": "0be4af120c7fded0aa66bc0bfe9b8e9d0c1fa44d6a0d6307623b0a4c2e217682",
+      "size_bytes": 7284
+    },
+    "reverse_materialized": true,
+    "byte_equal": true,
+    "hashes_reverified": true
+  },
+  "preserved_failures": [
+    "Plain HTTPS git push lacked interactive credentials; no remote state was changed by it."
+  ],
+  "limits": {
+    "complete_repository_backup": false,
+    "complete_history_backup": false,
+    "formal_scientific_promotion": false,
+    "phenomenal_validation": false
+  },
+  "self_reference_note": "The final metadata commit cannot contain its own SHA. Its exact SHA is recorded in the protected successor version of the fixed master handoff after remote readback."
 }
