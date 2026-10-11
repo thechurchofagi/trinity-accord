@@ -1,0 +1,100 @@
+name: Publish ASI-CC-v1.3.0 Zenodo DOI (frozen PDF and reproducibility)
+
+on:
+  push:
+    branches:
+      - research/revocation-admission-v130-20261011
+    paths:
+      - research/uct-agent-consciousness-workspace/records/ASI_CC_20261011_Control_and_Coexistence/endogenous_coexistence_v1.3.0/publication/PUBLISH-AUTHORIZATION.json
+
+permissions:
+  contents: write
+
+concurrency:
+  group: rac13-zenodo-publication-one-title-version
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[rac13-publish]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+      PUBLICATION_DIR: research/uct-agent-consciousness-workspace/records/ASI_CC_20261011_Control_and_Coexistence/endogenous_coexistence_v1.3.0/publication
+    steps:
+      - name: Checkout exactly authorized source commit
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - name: Set up frozen asset verifier
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends poppler-utils
+          python3 -m pip install --disable-pip-version-check requests==2.32.3
+      - name: Verify publication authorization and every frozen byte
+        run: |
+          set -euo pipefail
+          test -n "$ZENODO_ACCESS_TOKEN"
+          python3 "$PUBLICATION_DIR/scripts/publish_zenodo.py" verify
+      - name: Create or recover exactly one Zenodo deposit and verify public bytes
+        run: |
+          set -euo pipefail
+          python3 "$PUBLICATION_DIR/scripts/publish_zenodo.py" publish
+      - name: Independently check DOI resolution
+        if: success()
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,os,requests,time
+          from pathlib import Path
+          p=Path(os.environ['PUBLICATION_DIR'])
+          rec=json.loads((p/'PUBLICATION-RECEIPT.json').read_text())
+          target='https://zenodo.org/records/'+str(rec['record_id'])
+          receipt={'doi':rec['doi'],'record_id':rec['record_id'],'status':'PENDING','authenticated':False}
+          for k in range(8):
+              try:
+                  r=requests.get('https://doi.org/'+rec['doi'],timeout=22,allow_redirects=True)
+                  receipt.update(http_status=r.status_code,final_url=r.url)
+                  if r.status_code==200 and target in r.url:
+                      receipt['status']='RESOLVER_PASS'; break
+              except requests.RequestException as e:receipt['error_type']=type(e).__name__
+              time.sleep(min(2+k,8))
+          (p/'DOI-RESOLUTION.json').write_text(json.dumps(receipt,indent=2)+'\n')
+          print(json.dumps(receipt,indent=2))
+          PY
+      - name: Preserve independent attempt and public verification artifacts
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: rac13-zenodo-publication-${{ github.run_id }}
+          path: |
+            ${{ env.PUBLICATION_DIR }}/EXPECTED-PUBLICATION.json
+            ${{ env.PUBLICATION_DIR }}/PUBLISH-AUTHORIZATION.json
+            ${{ env.PUBLICATION_DIR }}/PUBLICATION-ATTEMPT.json
+            ${{ env.PUBLICATION_DIR }}/PUBLICATION-RECEIPT.json
+            ${{ env.PUBLICATION_DIR }}/DOI-RESOLUTION.json
+          retention-days: 90
+          if-no-files-found: warn
+      - name: Persist status in dedicated branch without modifying older papers
+        if: always()
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          for file in PUBLICATION-ATTEMPT.json PUBLICATION-RECEIPT.json DOI-RESOLUTION.json; do
+            if test -f "$PUBLICATION_DIR/$file"; then git add "$PUBLICATION_DIR/$file"; fi
+          done
+          if git diff --cached --quiet; then exit 0; fi
+          git diff --cached --check
+          git commit -m 'research: record RAC13 exact Zenodo publication state [skip ci]'
+          for trial in 1 2 3; do
+            if git push origin HEAD:research/revocation-admission-v130-20261011; then exit 0; fi
+            git fetch origin research/revocation-admission-v130-20261011
+            git rebase origin/research/revocation-admission-v130-20261011
+          done
+          echo 'Publication outcome may be uncertain; recover retained artifact and ID, never create a duplicate record' >&2
+          exit 1
