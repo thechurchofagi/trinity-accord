@@ -1,0 +1,59 @@
+{
+  "schema": "uct-persistence-receipt/1.0",
+  "round": "A4T20261012",
+  "version": "A4T-TLR-v0.1.0",
+  "github": {
+    "status": "SCIENCE_COMMIT_VERIFIED; RECEIPT_SUCCESSOR_EXPECTED",
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "round_record_checkpoint": "e388f1ca04efff0a87f5a035731d4cd07b214b5d",
+    "core_result_checkpoint": "fd33106de4b41d14e584710d5de1229ef2f736b7",
+    "science_commit": "547c8471de28ad8c729d278d4a0f0f9fd6bd2cc9",
+    "science_tree": "51b66b731cf2573195d86de33bf6d4327dd1527c",
+    "receipt_parent": "547c8471de28ad8c729d278d4a0f0f9fd6bd2cc9",
+    "receipt_commit": null,
+    "receipt_commit_note": "The receipt successor cannot contain its own SHA; the fixed master handoff version after this file records the verified successor.",
+    "readback": {
+      "branch_identical_to_science_commit_before_receipt": true,
+      "science_tree_matches_local": true,
+      "key_blobs": {
+        "contract": "99dd7b579ec601dca935953a149c67fdfff8faf4",
+        "exact_results": "3a5400053634ddde93e6b7b1099ae0102c64067b",
+        "formal_audit": "8ee085f9000ebd451c698f2f61ee356ba820bc39",
+        "handoff_before_receipt_append": "52fd2ca6847316124ddf8510bc49769a7ae6f143",
+        "current_state_before_receipt_append": "ba99347455a06dc839eb1cd857a6f1b85968e20c"
+      }
+    }
+  },
+  "library": {
+    "status": "VERIFIED",
+    "fixed_master_library_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "fixed_master_verified_version_before_receipt_successor": 146,
+    "fixed_master_file_id": "file_000000000cc481f784403c0570e7ce91",
+    "fixed_master_sha256": "902556e366a3e3a5b92109dbbc54b7c73bf73eb5ffc53907fae6e4df04280b89",
+    "increment": {
+      "name": "UCT_A4T_Science_Increment_20261012.zip",
+      "library_file_id": "libfile_2e0472658df48191b24a315ec24b9884",
+      "file_id": "file_00000000fb5081f58fbdf68cdd410ca3",
+      "bytes": 222168,
+      "sha256": "2025919d192f7c4a7f1f767239e3cbcfd07edb641b3dcefbdd9e7f55a45bd89d",
+      "scope": "34 Git paths from the A4S receipt head to the A4T science head; not a full backup"
+    },
+    "manifest": {
+      "name": "UCT_A4T_Science_Increment_Manifest.json",
+      "library_file_id": "libfile_7b67fc8949d48191a15b6aa5d5099c92",
+      "file_id": "file_000000003a9081f985d8dbdcc190deca",
+      "bytes": 8819,
+      "sha256": "66245567ae3086a49f25d98a5273e177c4c656c15fe83d6bc1579a2c22d2a0fb"
+    },
+    "reverse_materialization_byte_equal": true
+  },
+  "validation": {
+    "exact_checker": "PASS_36_9_4_1_3_AND_EQUAL_FIBER_4_5",
+    "navigation": "PASS_38_PENDING_0_UNRESOLVED",
+    "integrated_structure": "PASS_913_424_261",
+    "semantic_reproof": false,
+    "actual_installation": false
+  },
+  "truth_boundary": "Science content and Library increment are verified. The fixed master version after the receipt successor is the authority for the final branch-head SHA; no actual installation or H_cf claim is made."
+}

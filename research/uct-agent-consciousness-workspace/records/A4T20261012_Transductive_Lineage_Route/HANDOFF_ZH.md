@@ -41,7 +41,7 @@ QC-20261008-10、IA-QC11、QC-20261008-12、QC-20261008-13、SCU-OPEN-R191-NORMA
 
 ## 恢复与下一题
 
-核心结果检查点为 `fd33106de4b41d14e584710d5de1229ef2f736b7`；最终导航、交接与持久化回执提交将在本文件后续补记。若中断，从远端分支最新头恢复，先读固定主交接最新版本，再运行：
+核心结果检查点为 `fd33106de4b41d14e584710d5de1229ef2f736b7`，已核验科学提交为 `547c8471de28ad8c729d278d4a0f0f9fd6bd2cc9`、树为 `51b66b731cf2573195d86de33bf6d4327dd1527c`。固定主交接同一身份已核验到 v146；A4T 34路径科学增量与清单的 Library ID 分别为 `libfile_2e0472658df48191b24a315ec24b9884`、`libfile_7b67fc8949d48191a15b6aa5d5099c92`，两者已反向逐字节核验。最终收据后继自身 SHA 由固定主交接下一版本记录。若中断，从远端分支最新头恢复，先读固定主交接最新版本，再运行：
 
 1. `python records/A4T20261012_Transductive_Lineage_Route/check_lineage_contract.py`
 2. `python integration/UCT-INTEGRATION-v1.0.0/validate_navigation.py --root .`

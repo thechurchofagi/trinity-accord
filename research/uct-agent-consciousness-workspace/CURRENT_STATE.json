@@ -124,6 +124,18 @@
   },
   "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 effective objects retain the fresh structural traversal. A4T manually rechecked C1/U1, P3/P6, R157, R159, effective R173, A4R and A4S. Deep full-history semantics remain AUDIT_INCOMPLETE.",
   "next_priority": "A4T next: select one accessible sampler→consumer interface and test a source-side event-incidence plus controlled-input lineage witness while independently inventorying and challenging replay, buffer and fan-in paths; stop before H_cf if the directed edge or closure is not warranted.",
+  "latest_activity_persistence_after_A4T_science": {
+    "science_commit": "547c8471de28ad8c729d278d4a0f0f9fd6bd2cc9",
+    "science_tree": "51b66b731cf2573195d86de33bf6d4327dd1527c",
+    "receipt": "records/A4T20261012_Transductive_Lineage_Route/PERSISTENCE_RECEIPT.json",
+    "recovery_manifest": "records/A4T20261012_Transductive_Lineage_Route/RECOVERY_MANIFEST.json",
+    "fixed_master_library_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "fixed_master_verified_version_before_receipt_successor": 146,
+    "increment_library_id": "libfile_2e0472658df48191b24a315ec24b9884",
+    "manifest_library_id": "libfile_7b67fc8949d48191a15b6aa5d5099c92",
+    "increment_scope": "34 paths; not a full repository or working-set backup",
+    "reverse_materialization_byte_equal": true
+  },
   "latest_scoped_review": {
     "audit": "records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_AUDIT.md",
     "per_id_structure": "records/CTD20261010_Cross_Task_Intervention_v02/governance/BASELINE_PER_ID_STRUCTURE.json.gz",

@@ -1,0 +1,36 @@
+{
+  "schema": "uct-recovery-manifest/1.0",
+  "round": "A4T20261012",
+  "verified_science_commit": "547c8471de28ad8c729d278d4a0f0f9fd6bd2cc9",
+  "verified_science_tree": "51b66b731cf2573195d86de33bf6d4327dd1527c",
+  "expected_receipt_parent": "547c8471de28ad8c729d278d4a0f0f9fd6bd2cc9",
+  "fixed_master": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "minimum_verified_version": 146,
+    "final_version_note": "Read the newest version; the next version records the receipt-successor SHA."
+  },
+  "increment": {
+    "base_commit": "149266b5f93d0d87a356b90c15d060716b10d3c2",
+    "final_commit": "547c8471de28ad8c729d278d4a0f0f9fd6bd2cc9",
+    "path_count": 34,
+    "archive_library_file_id": "libfile_2e0472658df48191b24a315ec24b9884",
+    "archive_sha256": "2025919d192f7c4a7f1f767239e3cbcfd07edb641b3dcefbdd9e7f55a45bd89d",
+    "manifest_library_file_id": "libfile_7b67fc8949d48191a15b6aa5d5099c92",
+    "manifest_sha256": "66245567ae3086a49f25d98a5273e177c4c656c15fe83d6bc1579a2c22d2a0fb",
+    "scope": "increment only; not a complete repository, working set, or history"
+  },
+  "recovery_order": [
+    "Read the latest fixed master handoff using its stable Library ID.",
+    "Fetch the branch and prefer the verified receipt successor named by the latest fixed master, or a verified fast-forward descendant.",
+    "Read ROUND_RECORD.md, TRANSDUCTIVE_LINEAGE_CONTRACT.md, RESEARCH_NOTE.md, PROOF.md, EXACT_RESULTS.json, CLAIM_LEDGER.json, GAP_LEDGER.md, FORMAL_AUDIT.md, REVIEW_RESPONSE.md, VALIDATION.json, HANDOFF_ZH.md and PERSISTENCE_RECEIPT.json.",
+    "Use the increment only on the exact base commit when Git recovery is unavailable; never overwrite a newer tree.",
+    "Verify archive and per-path hashes, then rerun check_lineage_contract.py and validate_navigation.py."
+  ],
+  "remaining_open": [
+    "actual sampler-to-consumer lineage evidence",
+    "finite replay, buffer and fan-in closure",
+    "complete physical signature and contribution accounting",
+    "H_cf calibration",
+    "full historical-depth semantic audit"
+  ]
+}
