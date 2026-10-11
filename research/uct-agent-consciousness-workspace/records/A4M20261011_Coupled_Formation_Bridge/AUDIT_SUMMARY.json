@@ -1,0 +1,22 @@
+{
+  "schema": "a4m-formal-audit-summary/1",
+  "graph_version": "UCT-INTEGRATION-v1.0.0",
+  "completed_counts": {"nodes": 913, "rules": 424, "context_links": 261},
+  "pending_disabled_objects": 727,
+  "suspended_historical_rules": 10,
+  "checks": {
+    "all_completed_ids_structurally_traversed": true,
+    "all_of_interpreted_as_and": true,
+    "active_dependency_graph_acyclic": true,
+    "unresolved_deductive_references": 0,
+    "all_pending_disabled": true,
+    "a4m_adds_no_completed_graph_object": true,
+    "a4m_does_not_discharge_r157_or_r173_actuality": true,
+    "b_cf_remains_open": true,
+    "c1_and_u1_status_unchanged": true,
+    "full_semantic_reproof": false
+  },
+  "schema_debt_retained": {"rules_without_local_and_annotation": 81, "context_links_without_two_completed_node_endpoints": 22},
+  "hashes": {"unified_map_gzip_sha256": "b37711fb7dbaca9b728feb38e7cb14abf4f63a9571035b40c048a97472df35be"},
+  "limit": "Fresh full structural traversal plus bounded C1/R157/R159/R173/A4H/A4L semantic audit; SCU-AUDIT-DEPTH remains AUDIT_INCOMPLETE."
+}

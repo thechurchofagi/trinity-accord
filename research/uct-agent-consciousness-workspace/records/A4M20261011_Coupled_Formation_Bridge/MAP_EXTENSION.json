@@ -1,0 +1,11 @@
+{
+  "schema": "uct-disabled-application/1",
+  "id": "A4M20261011",
+  "version": "A4M-COUPLED-FORMATION-v0.1.0",
+  "enabled": false,
+  "nodes": [],
+  "rules": [],
+  "context_links": [],
+  "counts": {"nodes": 0, "rules": 0, "contexts": 0},
+  "reason": "CoupledForm is a disabled application-level selector and B_cf is an open interpretation bridge. The finite countermodel assigns no experience and no actual physical token is installed."
+}

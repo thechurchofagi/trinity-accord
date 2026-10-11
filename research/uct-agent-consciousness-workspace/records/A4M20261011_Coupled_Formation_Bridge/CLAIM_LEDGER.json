@@ -1,0 +1,66 @@
+{
+  "schema": "uct-claim-ledger/1",
+  "round": "A4M20261011",
+  "claims": [
+    {
+      "id": "A4M-C1",
+      "type": "DEFINITION_AND_APPLICATION_CONTRACT",
+      "statement": "CoupledForm is the same-instance relation in which a same-lineage retained body/action route is currently used, the same trace-use occurrence mediates present fit, and that mediation was jointly formed in the declared history.",
+      "domain": "One admitted actual P/H0/I0/K binding with body/action coordinate, event and consumer fixed.",
+      "all_premises": ["effective R173 RetBind", "current consumer trace use", "actual present fit participation", "same-trace mediation", "joint formation history", "same-event order", "independent K grounding and sorted witnesses"],
+      "proof": "Definition with explicit conjunctive typing; no existence assertion follows from the definition.",
+      "counterexamples_limits": "Stored or copied values, high performance, empirical R-F covariance and reports do not satisfy the relation without all conjuncts.",
+      "status": "DISABLED_APPLICATION_DEFINITION"
+    },
+    {
+      "id": "A4M-C2",
+      "type": "EXACT_FINITE_NEGATIVE_RESULT",
+      "statement": "The marginal view (R,F,output,report) does not identify CoupledForm: the native and yoked worlds agree at (1,1,1,1) and differ only in the required mediation/formation relation.",
+      "domain": "The declared 256-world Boolean witness class.",
+      "all_premises": ["Boolean finite model", "R and F retain the declared meanings", "native/yoked assignments in EXACT_RESULTS.json"],
+      "proof": "Direct enumeration and the displayed two-world counterexample; four marginal keys admit both coupling values.",
+      "counterexamples_limits": "This is not a universal biological impossibility or a claim that no richer view identifies the relation.",
+      "status": "DISABLED_EXACT_FINITE_RESULT"
+    },
+    {
+      "id": "A4M-C3",
+      "type": "CORRECTION",
+      "statement": "Failure to install an independent R by F factorial does not entail that every mixed organizational bridge is undefined; a higher-order coupling relation may differ while R and F necessarily covary.",
+      "domain": "A4L's terminated pure-candidate comparison and the A4M witness class.",
+      "all_premises": ["A4L termination is installation-specific rather than universal", "CoupledForm is not defined as the marginal conjunction", "A4M-C2 witness"],
+      "proof": "The native/yoked pair has fixed R=F=1 and distinct C, so C is not eliminated by absence of independent marginal variation.",
+      "counterexamples_limits": "A proposed coupling relation still needs physical grounding and may fail to exist in a particular bearer.",
+      "status": "DISABLED_APPLICATION_CORRECTION"
+    },
+    {
+      "id": "A4M-C4",
+      "type": "CONDITIONAL_C1_APPLICATION",
+      "statement": "If every CoupledForm primitive is independently grounded in one complete actual signature and all R157/effective-R173 same-instance premises hold, C1 transports that relation to an experience-internal structural counterpart.",
+      "domain": "One admitted actual token P/H0/I0/K/D/Phi/h.",
+      "all_premises": ["A:C1", "R157 selector and parameter-transport contract", "effective R173 path and RetBind", "A4M-C1 complete K grounding", "one common binding"],
+      "proof": "Inherited formula preservation under the C1 isomorphism; every conjunction and quantified witness is transported in the same signature.",
+      "counterexamples_limits": "It does not transport external archives or labels and does not supply familiar-mineness semantics or measurement.",
+      "status": "DISABLED_CONDITIONAL_APPLICATION"
+    },
+    {
+      "id": "A4M-C5",
+      "type": "PROPOSED_BRIDGE",
+      "statement": "B_cf interprets the transported CoupledForm relation as positively relevant to the selected character that present fit unfolds through an already established body/action manner.",
+      "domain": "Predeclared selected target H_cf; partial/graded values permitted; no universal necessity claim.",
+      "all_premises": ["A4M-C4", "independently fixed H_cf semantics", "fallible independent measurement bridge", "declared tolerance/error model", "body/action specificity"],
+      "proof": "No proof of truth is claimed; the contract states explanatory content and three independent refuter forms.",
+      "counterexamples_limits": "Sufficiency-fiber contrast, native/yoked target invariance, or matched external-tool target under a body-specific claim can refute the declared bridge.",
+      "status": "OPEN_DISABLED_BRIDGE"
+    },
+    {
+      "id": "A4M-C6",
+      "type": "BOUNDARY",
+      "statement": "Coupled formation is not an additive decomposition, exclusive owner, basal-experience condition, report, self-model, generic fluency or complete explanation of ownership/agency/familiarity.",
+      "domain": "UCT interpretation of A4M-C1 through A4M-C5.",
+      "all_premises": ["C1 axiom status", "R157 semantic residual", "UCT I body/self distinctions", "TA25 selected-target discipline"],
+      "proof": "Concept, scope, quantifier and inference-direction audit.",
+      "counterexamples_limits": "Later applications may add named interoceptive/affective relations but must not silently revise this bridge after outcomes.",
+      "status": "OPEN_BOUNDARY_RETAINED"
+    }
+  ]
+}

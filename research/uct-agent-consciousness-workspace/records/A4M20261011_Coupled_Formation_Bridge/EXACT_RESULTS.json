@@ -1,0 +1,76 @@
+{
+  "schema": "uct-a4m-exact-results/1",
+  "model_scope": "stipulated finite Boolean organizational witness; no phenomenal assignments",
+  "world_count": 256,
+  "definition": {
+    "R": "same_lineage_trace AND target_consumer_reads_trace AND ordered_same_event",
+    "F": "present_fit",
+    "C": "R AND fit_generator_reads_same_trace AND joint_formation AND F",
+    "observed_marginal_view": ["R", "F", "O", "J"]
+  },
+  "named_worlds": [
+    {
+      "name": "native_coformation",
+      "same_lineage_trace": 1,
+      "target_consumer_reads_trace": 1,
+      "fit_generator_reads_same_trace": 1,
+      "joint_formation": 1,
+      "ordered_same_event": 1,
+      "present_fit": 1,
+      "matched_output": 1,
+      "matched_report": 1,
+      "R": 1,
+      "F": 1,
+      "C": 1,
+      "O": 1,
+      "J": 1
+    },
+    {
+      "name": "yoked_marginal_twin",
+      "same_lineage_trace": 1,
+      "target_consumer_reads_trace": 1,
+      "fit_generator_reads_same_trace": 0,
+      "joint_formation": 0,
+      "ordered_same_event": 1,
+      "present_fit": 1,
+      "matched_output": 1,
+      "matched_report": 1,
+      "R": 1,
+      "F": 1,
+      "C": 0,
+      "O": 1,
+      "J": 1
+    },
+    {
+      "name": "copied_trace",
+      "same_lineage_trace": 0,
+      "target_consumer_reads_trace": 1,
+      "fit_generator_reads_same_trace": 1,
+      "joint_formation": 1,
+      "ordered_same_event": 1,
+      "present_fit": 1,
+      "matched_output": 1,
+      "matched_report": 1,
+      "R": 0,
+      "F": 1,
+      "C": 0,
+      "O": 1,
+      "J": 1
+    }
+  ],
+  "marginal_keys_with_both_coupling_values": {
+    "(1, 1, 0, 0)": [0, 1],
+    "(1, 1, 0, 1)": [0, 1],
+    "(1, 1, 1, 0)": [0, 1],
+    "(1, 1, 1, 1)": [0, 1]
+  },
+  "checks": {
+    "native_and_yoked_match_R_F_output_report": true,
+    "native_and_yoked_differ_in_coupling": true,
+    "coupling_implies_R_and_F_in_this_model": true,
+    "R_and_F_do_not_imply_coupling": true,
+    "copied_value_does_not_supply_same_lineage_R": true,
+    "no_experience_value_assigned": true
+  },
+  "status": "PASS_WITH_DECLARED_FINITE_SCOPE"
+}
