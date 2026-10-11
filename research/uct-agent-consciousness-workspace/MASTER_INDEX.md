@@ -13,7 +13,7 @@
 
 研究按问题家族阅读；轮次编号用于追溯。精确主张和论文覆盖仍以各自台账为准。
 
-- **当前应用 A4M：** [正文](records/A4M20261011_Coupled_Formation_Bridge/RESEARCH_NOTE.md) · [耦合合同](records/A4M20261011_Coupled_Formation_Bridge/COUPLING_CONTRACT.md) · [精确结果](records/A4M20261011_Coupled_Formation_Bridge/EXACT_RESULTS.json) · [缺口](records/A4M20261011_Coupled_Formation_Bridge/GAP_LEDGER.md) · [形式审查](records/A4M20261011_Coupled_Formation_Bridge/FORMAL_AUDIT.md) · [交接](records/A4M20261011_Coupled_Formation_Bridge/HANDOFF_ZH.md)。原生/外接边际双胞胎表明 `R,F,输出,报告` 不识别共同形成关系；`B_cf` 为正面但未校准的停用桥接，0正式图增量，成稿HOLD。
+- **当前应用 A4N：** [正文](records/A4N20261011_Enacted_Frame_Specificity/RESEARCH_NOTE.md) · [框架合同](records/A4N20261011_Enacted_Frame_Specificity/FRAME_SPECIFICITY_CONTRACT.md) · [精确结果](records/A4N20261011_Enacted_Frame_Specificity/EXACT_RESULTS.json) · [缺口](records/A4N20261011_Enacted_Frame_Specificity/GAP_LEDGER.md) · [形式审查](records/A4N20261011_Enacted_Frame_Specificity/FORMAL_AUDIT.md) · [交接](records/A4N20261011_Enacted_Frame_Specificity/HANDOFF_ZH.md)。器官成员资格与实际行动框架绑定在固定耦合路线下逻辑独立；工具可被纳入框架，故工具标签不能充当负对照。`H_cf`仍未校准，0正式图增量，成稿HOLD。
 
 原创性复核：[NOV20261010](records/NOV20261010_Prior_Art_and_Bodily_Familiarity/HANDOFF_ZH.md)，仅前例/范围元数据，独立成稿HOLD；科学接续仍A3V。
 

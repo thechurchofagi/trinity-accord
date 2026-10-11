@@ -1,0 +1,12 @@
+{
+  "schema": "uct-disabled-application/1",
+  "id": "A4N20261011",
+  "version": "A4N-ENACTED-FRAME-v0.1.0",
+  "enabled": false,
+  "nodes": [],
+  "rules": [],
+  "context_links": [],
+  "counts": {"nodes": 0, "rules": 0, "contexts": 0},
+  "reason": "A4N repairs the scope of a disabled A4M bridge and supplies a finite logical counterexample. No physical frame installation, phenomenal endpoint or new completed-map deduction is established."
+}
+

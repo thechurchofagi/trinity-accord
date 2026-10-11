@@ -1,0 +1,121 @@
+{
+  "schema": "a4n-frame-specificity-results/1",
+  "status": "PASS_BOUNDED_LOGICAL_CHECK_NO_PHENOMENAL_ASSIGNMENTS",
+  "world_count": 64,
+  "fixed_view": {
+    "coupled_form": 1,
+    "retained_use": 1,
+    "present_fit": 1,
+    "output": 1,
+    "report_code": 1
+  },
+  "counterexample_square": [
+    {
+      "case": "native_limb",
+      "member": 1,
+      "anchor": 1,
+      "remap": 1,
+      "perturbation_dependence": 1,
+      "same_route_use": 1,
+      "ordered": 1,
+      "enacted_frame_bind": 1,
+      "coupled_form": 1,
+      "retained_use": 1,
+      "present_fit": 1,
+      "output": 1,
+      "report_code": 1
+    },
+    {
+      "case": "incorporated_tool",
+      "member": 0,
+      "anchor": 1,
+      "remap": 1,
+      "perturbation_dependence": 1,
+      "same_route_use": 1,
+      "ordered": 1,
+      "enacted_frame_bind": 1,
+      "coupled_form": 1,
+      "retained_use": 1,
+      "present_fit": 1,
+      "output": 1,
+      "report_code": 1
+    },
+    {
+      "case": "external_tool",
+      "member": 0,
+      "anchor": 0,
+      "remap": 0,
+      "perturbation_dependence": 0,
+      "same_route_use": 0,
+      "ordered": 1,
+      "enacted_frame_bind": 0,
+      "coupled_form": 1,
+      "retained_use": 1,
+      "present_fit": 1,
+      "output": 1,
+      "report_code": 1
+    },
+    {
+      "case": "anatomical_label_only",
+      "member": 1,
+      "anchor": 0,
+      "remap": 0,
+      "perturbation_dependence": 0,
+      "same_route_use": 0,
+      "ordered": 1,
+      "enacted_frame_bind": 0,
+      "coupled_form": 1,
+      "retained_use": 1,
+      "present_fit": 1,
+      "output": 1,
+      "report_code": 1
+    }
+  ],
+  "member_fibres_over_frame": {
+    "0": [
+      0,
+      1
+    ],
+    "1": [
+      0,
+      1
+    ]
+  },
+  "frame_fibres_over_member": {
+    "0": [
+      0,
+      1
+    ],
+    "1": [
+      0,
+      1
+    ]
+  },
+  "member_recovers_frame": false,
+  "frame_recovers_member": false,
+  "single_conjunct_failures": [
+    {
+      "missing": "anchor",
+      "enacted_frame_bind": 0
+    },
+    {
+      "missing": "remap",
+      "enacted_frame_bind": 0
+    },
+    {
+      "missing": "perturbation_dependence",
+      "enacted_frame_bind": 0
+    },
+    {
+      "missing": "same_route_use",
+      "enacted_frame_bind": 0
+    },
+    {
+      "missing": "ordered",
+      "enacted_frame_bind": 0
+    }
+  ],
+  "phenomenal_assignments": 0,
+  "physical_installations": 0,
+  "interpretation": "Organism membership and enacted-frame binding are logically independent in the declared model; toolhood alone cannot witness absence of frame binding."
+}

@@ -2,13 +2,13 @@
 
 [总览](UCT_FORMAL_MAP.md) · [全部候选](PENDING_RESEARCH.md) · [当前状态](CURRENT_STATE.json) · [统一登记](UNIFIED_RESEARCH_INDEX.json) · [审查](UCT_FORMAL_AUDIT.md)
 
-正式科学接续仍为 **A3V20261010**；最新停用应用为 **A4M20261011**。
+正式科学接续仍为 **A3V20261010**；最新停用应用为 **A4N20261011**。
 
-[A4M 中文交接](records/A4M20261011_Coupled_Formation_Bridge/HANDOFF_ZH.md) · [英文研究](records/A4M20261011_Coupled_Formation_Bridge/RESEARCH_NOTE.md) · [耦合合同](records/A4M20261011_Coupled_Formation_Bridge/COUPLING_CONTRACT.md) · [形式审查](records/A4M20261011_Coupled_Formation_Bridge/FORMAL_AUDIT.md)
+[A4N 中文交接](records/A4N20261011_Enacted_Frame_Specificity/HANDOFF_ZH.md) · [英文研究](records/A4N20261011_Enacted_Frame_Specificity/RESEARCH_NOTE.md) · [框架合同](records/A4N20261011_Enacted_Frame_Specificity/FRAME_SPECIFICITY_CONTRACT.md) · [形式审查](records/A4N20261011_Enacted_Frame_Specificity/FORMAL_AUDIT.md)
 
-当前结果：在 `R` 与 `F` 必然共变时，原生共同形成与外接/yoked组织可以具有相同 `R=F=1`、输出和报告，却在“同一保留痕迹是否实际中介当前适配且共同形成”这一高阶关系上不同。该 `CoupledForm` 候选在 C1 下可条件性获得体验内结构对应，但 `H_cf` 的“作为此身体既定行动方式而展开”解释仍是开放桥接，不是已校准现象结论。
+当前结果：工具/器官标签不能检验 A4M 的身体特异性。64世界与四例方阵在固定 `CoupledForm`、保留使用、适配、输出和报告下，实现了解剖成员资格与承载者中心行动框架绑定的四种组合；纳入行动框架的工具可 `Member=0,Frame=1`，仅有解剖标签的回路可 `Member=1,Frame=0`。因此 A4M 第三类反例已修正为：只有独立证明工具回路缺少实际框架绑定时，才是负对照。
 
-下一具体问题：检验 `B_cf` 的身体特异性。保持已学习的路线—适配耦合、输出和回应含义，改变是否存在独立落地的身体框架绑定，构造身体回路与工具回路对照；若身体绑定、实际中介或 `H_cf` 端点不能独立建立，立即停止，不用命名补洞。
+下一具体问题：寻找一个一手人体或具身装置范式，能在固定外部目标/工具状态下独立扰动承载者姿态锚，并检验同一已学习路线是否实际使用在线重映射；比较肢体、纳入框架工具和未纳入工具。若现有范式只给输出/报告或没有同路线使用证据，保留停止，不进入 `H_cf` 比较。
 
 [既有 A3V 科学交接](records/A3V20261010_Concurrent_Liveness_and_Familiarity/HANDOFF_ZH.md) · [地图整理交接](records/NAV20261010_Map_Integration/HANDOFF_ZH.md)
 

@@ -1,0 +1,20 @@
+{
+  "schema": "a4n-source-hashes/1",
+  "fixed_sources": [
+    {"path": "records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md", "sha256": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4"},
+    {"path": "records/R153_Complete_Formal_Map_20261007/sources/experience-intelligence-self-v1.0.md", "sha256": "694856862f75834024cd3e71ffdba95a6be4601c2832285902f7905907e3039c"},
+    {"path": "records/R159_Body_Frame_and_Referent_20261007/Body_Frame_Referent_and_Coupling_v0_1.md", "sha256": "57a161dbc2d0a3c0d8d7f9102d5001cef3d9ea665166d472758873a8e5ec6422"},
+    {"path": "records/R173_Familiar_Mineness_and_Retentive_History_20261008/Familiar_Mineness_Retentive_History_v0_1.md", "sha256": "20325c5a191ddd0be04ebac3c3e9de2c37fb1134488f07015cff080620f864fa"},
+    {"path": "records/A4H20261011_Compositional_Action_Familiarity/RESEARCH_NOTE.md", "sha256": "262354af0b48d314a36d663b259d7378c0374e948a504a5a500341c955007e50"},
+    {"path": "records/A4M20261011_Coupled_Formation_Bridge/COUPLING_CONTRACT.md", "sha256": "cd14fec4e8738f671b4497d88d50b40afc0c181016dc49b9368023e9f304033b"},
+    {"path": "records/A4M20261011_Coupled_Formation_Bridge/RESEARCH_NOTE.md", "sha256": "c42010035b8a4ec5ca6508f02e84a4d6b144e529c15a6c9ce7947fdd145f8943"}
+  ],
+  "a4n_artifacts": [
+    {"path": "records/A4N20261011_Enacted_Frame_Specificity/check_frame_specificity.py", "sha256": "a5cd8ab766cd0ff5017089e8eec87870e550719f1ea56f230fb2786e337e730c"},
+    {"path": "records/A4N20261011_Enacted_Frame_Specificity/EXACT_RESULTS.json", "sha256": "e6f4be48b182de89ba34bbc33b0fdcde87a8fa05f13b42350b0234e25086e72d"},
+    {"path": "records/A4N20261011_Enacted_Frame_Specificity/FRAME_SPECIFICITY_CONTRACT.md", "sha256": "3ca32970335a6abfa1f44c849fb53b12523bac5eaad4999a0b5b9a0e95f031dc"},
+    {"path": "records/A4N20261011_Enacted_Frame_Specificity/RESEARCH_NOTE.md", "sha256": "440bcfb4eda2300bcf8b570efbb29f3bcd84cea80d0289fb725efa094f2197ce"}
+  ],
+  "note": "Hashes bind the read fixed sources and the pre-integration A4N scientific core. Later persistence metadata and navigation edits have separate manifests."
+}
+

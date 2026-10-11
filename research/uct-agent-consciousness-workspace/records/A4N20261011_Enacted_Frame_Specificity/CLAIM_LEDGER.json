@@ -1,0 +1,72 @@
+{
+  "schema": "a4n-claims/1",
+  "enabled_as_established_premises": false,
+  "claims": [
+    {
+      "id": "A4N-C01",
+      "type": "definition_and_application_contract",
+      "statement": "On one fixed actual bearer/event/signature, EnactedFrameBind is the conjunction of a grounded current bearer-state anchor, online target remapping, independently admissible bearer-state perturbation dependence, use of that remapping by the same route that mediates present fit, and correct same-event ordering.",
+      "domain": "One predeclared bodily/action comparison using the A4M CoupledForm contract; not a universal necessary condition for experience or every bodily quality.",
+      "all_of": [
+        "BearerStateAnchor",
+        "OnlineTargetRemap",
+        "BearerPerturbationDependence",
+        "SameRouteUsesFrame",
+        "OrderedWithinEvent"
+      ],
+      "proof_or_source": "FRAME_SPECIFICITY_CONTRACT.md §2; definition plus independent physical-grounding obligations.",
+      "counterexamples_limits": "A body/tool label, parallel unused body monitor, post-response transform or endpoint match does not satisfy the conjunction. No physical installation is supplied.",
+      "status": "DECLARED_DISABLED_APPLICATION_CONTRACT",
+      "thought_experiment_role": "Fixes what varies in all four inherited thought-experiment families."
+    },
+    {
+      "id": "A4N-C02",
+      "type": "exact_finite_counterexample",
+      "statement": "Within a declared class that fixes CoupledForm, retained use, present fit, output and report code, organism membership and EnactedFrameBind are logically independent: all four Boolean combinations occur.",
+      "domain": "The four selected worlds in the 64-world primitive model; no phenomenal values or biological realization.",
+      "all_of": [
+        "fixed generic route-to-fit coupling",
+        "fixed output and response code",
+        "membership typed as an external anatomical relation",
+        "frame binding computed from all five conjuncts"
+      ],
+      "proof_or_source": "check_frame_specificity.py and EXACT_RESULTS.json; the square is (member,frame)={(0,0),(0,1),(1,0),(1,1)} and every fixed marginal tuple is identical.",
+      "counterexamples_limits": "Restricting the admissible class to normal limbs or stipulating membership/frame equivalence would remove the square but would be an extra premise. Logical possibility is not actual feasibility.",
+      "status": "PROVED_FINITE_NO_MATH_NOVELTY",
+      "thought_experiment_role": "Incorporated tool refutes membership necessity; anatomical-label-only loop refutes membership sufficiency."
+    },
+    {
+      "id": "A4N-C03",
+      "type": "scope_correction",
+      "statement": "A4M's body-specificity refuter is valid only when the external-tool case independently lacks EnactedFrameBind. Extra-organismic location or toolhood alone does not establish that absence; an incorporated tool is a frame-invariance case.",
+      "domain": "A4M B_cf within R159's internal-token/external-referent typing.",
+      "all_of": [
+        "R159 permits external referents for internal frame relations",
+        "A4M CoupledForm remains fixed",
+        "A4N-C01 grounding assessed independently"
+      ],
+      "proof_or_source": "R159 §§3–6; FRAME_SPECIFICITY_CONTRACT.md §§3–5; counterexample A4N-C02.",
+      "counterexamples_limits": "Does not show that any real tool is incorporated or that frame binding is sufficient for H_cf.",
+      "status": "SCOPED_REPAIR_NO_NEW_FORMAL_RULE",
+      "thought_experiment_role": "Prevents a substrate label from deciding the body/tool comparison."
+    },
+    {
+      "id": "A4N-C04",
+      "type": "open_bridge_and_stop_result",
+      "statement": "With H_cf frozen exactly as in A4M, enacted-frame sensitivity/sufficiency can be tested only after independent actual frame grounding, same-route mediation and endpoint calibration. Those premises are absent, so no H_cf or B_cf verdict is licensed.",
+      "domain": "Selected A4M H_cf application; not complete phenomenology or basal experience.",
+      "all_of": [
+        "fixed target semantics",
+        "actual A4M mediation",
+        "actual A4N frame relation",
+        "independently calibrated endpoint",
+        "predeclared error/tolerance model"
+      ],
+      "proof_or_source": "RESEARCH_NOTE.md §§2,5–6 and FRAME_SPECIFICITY_CONTRACT.md §§5–6.",
+      "counterexamples_limits": "Checker PASS, output equality and lack of observed difference do not discharge any missing premise.",
+      "status": "STOPPED_OPEN_BRIDGE_NO_PHENOMENAL_ASSIGNMENT",
+      "thought_experiment_role": "Defines how future limb/incorporated/external comparisons could refute finite bridges without isolating C1."
+    }
+  ]
+}
+

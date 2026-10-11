@@ -6,6 +6,10 @@ The full prior memory is preserved at [historical memory](integration/UCT-INTEGR
 
 Scientific continuation and next question live in CURRENT_STATE.json. All pending source documents, effective corrections and family membership live in UNIFIED_RESEARCH_INDEX.json; history never silently becomes an established premise. Publication, storage, conditional validity, actual support and phenomenal support remain separate states.
 
+## 最新应用 A4N20261011
+
+A4M 的“工具回路缺少身体框架”不能由工具标签推出：R159 已允许内部身体框架绑定指向器官外对象。A4N 定义停用的 `EnactedFrameBind` 合取（承载者状态锚、在线重映射、固定外部状态下的承载者扰动依赖、同一路线使用及事件内时序），并在固定 `CoupledForm/R/F/输出/报告` 的四例方阵中实现 `Member×Frame` 全四格。纳入框架的工具是正面不变性案例，只有独立证明框架缺失的工具才是负对照。没有实际装置或 `H_cf` 校准，故按停止规则不作体验结论；正式图0/0/0，全部OPEN保留。[交接](records/A4N20261011_Enacted_Frame_Specificity/HANDOFF_ZH.md)。
+
 ## 最新应用 A4L20261011
 
 同承载者“关系使用 × 当下适配”的 2×2 必须在一个固定承载者/事件/消费者/路线/回应切片内实际覆盖四格，并由独立结果前见证绑定；四个分配标签不等于四个组织状态。精确模型显示 `F=R` 只有两格、标签回声无有效四格、改变路线的补偿器拆成不同切片，而保持不变量的补偿器才在逻辑上可行。当前档案没有实际四格安装，故 A4J/A4K 候选比较按承诺终止，不再追加校准层；正式图 0/0/0，C1/U1与全部OPEN不变。[交接](records/A4L20261011_Same_Bearer_Factorial_Installability/HANDOFF_ZH.md)。

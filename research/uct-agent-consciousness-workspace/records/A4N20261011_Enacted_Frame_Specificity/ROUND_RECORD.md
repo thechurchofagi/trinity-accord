@@ -1,0 +1,11 @@
+# A4N round record — enacted-frame specificity beyond the organism/tool label
+
+Date: 2026-10-11
+
+1. **User goal.** Continue the UCT experience–intelligence–self investigation from verified A4M, make one substantive advance on the bodily/action specificity of its open `B_cf` bridge, preserve C1 and the basal-experience boundary, answer the live review ledger, audit the formal map, and leave recoverable GitHub and workspace copies.
+2. **One concrete unresolved question.** If learned route-to-fit coupling, actual current mediation, output and response meaning are fixed, is the selected `H_cf` proposal specific to an independently grounded bearer-centred action frame, or does it merely track an organism/tool label that fails under tool incorporation?
+3. **Relevant nodes and fixed sources.** A:C1/U1; R157 selector transport and semantic residual; R159 `Anchor–Bind–Use` and external-referent typing; effective R173 retentive binding; A4H relational familiarity; A4M `CoupledForm`, `B_cf` and body-specificity refuter; *UCT I v1.2* §§8.12–8.14, 10–12 and 14.6–14.9; *Experience, Intelligence, and Self Within Experience* §§2–6; current review items `QC-20261008-10`, `IA-QC11`, `QC-20261008-12/13`, `SCU-OPEN-R191-NORMALIZATION` and `SCU-AUDIT-DEPTH`.
+4. **Planned addition or correction.** Predeclare `H_cf` unchanged from A4M; define a strictly organizational `EnactedFrameBind` candidate using an actual bearer-state anchor, online coordinate remapping and same-route use; construct limb/incorporated-tool/external-tool/anatomical-label countercases that separate frame binding from organism membership; sharpen or withdraw A4M's third refuter if the contrast is only a substrate label; stop without a bridge verdict if frame binding, actual mediation or the endpoint is not independently established.
+5. **Deliverable.** English research note and specificity contract; exact finite checker/results; stable claim, gap and review ledgers; source scope/hashes; formal-map audit; publication hold; Chinese handoff; recovery manifest and persistence receipt.
+
+Direction check at selection: PASS. The target is the positive content and falsifiability of one experience-internal bodily/action bridge. The finite check is bounded to a typing error in that bridge and will not become a generic tool-control or certificate program.

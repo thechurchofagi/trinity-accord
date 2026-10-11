@@ -1,0 +1,33 @@
+{
+  "schema": "a4n-validation/1",
+  "round": "A4N20261011",
+  "status": "PASS_ARTIFACT_AND_STRUCTURAL_CHECKS_WITH_DECLARED_SEMANTIC_LIMITS",
+  "checks": {
+    "checker_output_semantically_equals_exact_results": true,
+    "primitive_world_count": 64,
+    "membership_frame_all_four_combinations": true,
+    "fixed_coupled_route_output_and_report": true,
+    "each_frame_conjunct_is_required_by_definition": true,
+    "phenomenal_assignments": 0,
+    "physical_installations": 0,
+    "completed_nodes": 913,
+    "completed_rules": 424,
+    "completed_context_links": 261,
+    "pending_objects_disabled": 727,
+    "suspended_historical_rules": 10,
+    "unresolved_deductive_references": 0,
+    "active_dependency_cycles": 0,
+    "all_of_interpreted_as_and": true,
+    "navigation_and_disabled_assembly_pass": true,
+    "current_scientific_pointer_match": true,
+    "scientific_promotion": false,
+    "full_semantic_reproof": false
+  },
+  "hashes": {
+    "checker_sha256": "a5cd8ab766cd0ff5017089e8eec87870e550719f1ea56f230fb2786e337e730c",
+    "checker_stdout_sha256": "648027aaf9bf08149c234c03d7804865a19ae9acd1908e63226a7c482851b573",
+    "exact_results_sha256": "e6f4be48b182de89ba34bbc33b0fdcde87a8fa05f13b42350b0234e25086e72d",
+    "unified_map_gzip_sha256": "b37711fb7dbaca9b728feb38e7cb14abf4f63a9571035b40c048a97472df35be"
+  },
+  "limit": "Logical typing and navigation consistency only; not actual tool incorporation, same-route physical mediation, H_cf calibration, evidence for C1 or global semantic proof."
+}

@@ -1109,3 +1109,20 @@ A4G应用保持停用，正式图增量0/0/0。C1/U1未改；硬件来源坐标�
 - `SCU-OPEN-R191-NORMALIZATION`: OPEN. No normalization attempted or used.
 - `SCU-AUDIT-DEPTH`: AUDIT_INCOMPLETE. The 913/424/261 assembly was structurally retraversed; manual semantics remain bounded to C1/R157/R173/R199 and A4A/A4H–A4J.
 - Evidence: `records/A4K20261011_Uncertainty_Bounded_Prediction_Regions/REVIEW_RESPONSE.md`, `FORMAL_AUDIT.md`, `GAP_LEDGER.md`.
+
+## A4M20261011 research response (does not close supervision items)
+
+- `QC-20261008-10`: ACKNOWLEDGED/OPEN. `B_cf` has fixed positive content and refuters but no calibrated `H_cf` endpoint.
+- `IA-QC11`, `QC-20261008-12`, `QC-20261008-13`: OPEN. Same-lineage trace, same-route mediation, joint formation and response evidence remain distinct; no complete actual installation exists.
+- `SCU-OPEN-R191-NORMALIZATION`: OPEN. No normalization was assumed complete.
+- `SCU-AUDIT-DEPTH`: AUDIT_INCOMPLETE. The affected C1/R157/R159/R173/A4H/A4L neighborhood was checked, not all historical source proofs.
+- Evidence: `records/A4M20261011_Coupled_Formation_Bridge/REVIEW_RESPONSE.md`, `FORMAL_AUDIT.md`, `GAP_LEDGER.md`.
+
+## A4N20261011 research response (does not close supervision items)
+
+- `QC-20261008-10`: ACKNOWLEDGED/OPEN. `H_cf` is frozen from A4M; no phenomenal identity, sign or measurement calibration is supplied.
+- `IA-QC11`, `QC-20261008-12`, `QC-20261008-13`: OPEN. Anatomical membership, bearer-state anchor, online remapping, perturbation evidence, same-route use, actual organization and report are separately typed; no actual token jointly installs them.
+- `SCU-OPEN-R191-NORMALIZATION`: OPEN. No R191 normalization is used as a discharged premise.
+- `SCU-AUDIT-DEPTH`: AUDIT_INCOMPLETE. The 913/424/261 assembly is structurally retraversed and affected semantics reviewed, not globally re-proved.
+- Substantive repair: an external tool can be incorporated into an actual bearer-centred frame, so toolhood alone is not A4M's body-specificity refuter. A valid negative control needs independently grounded absence of `EnactedFrameBind` while generic `CoupledForm` remains actual.
+- Evidence: `records/A4N20261011_Enacted_Frame_Specificity/REVIEW_RESPONSE.md`, `FORMAL_AUDIT.md`, `GAP_LEDGER.md`.

@@ -2,11 +2,11 @@
 
 [总览](UCT_FORMAL_MAP.md) · [全部候选](PENDING_RESEARCH.md) · [当前状态](CURRENT_STATE.json) · [统一登记](UNIFIED_RESEARCH_INDEX.json) · [审查](UCT_FORMAL_AUDIT.md)
 
-整合版本 **UCT-INTEGRATION-v1.0.0**。正式科学图 **UCT-MAP-v1.1.2**；最新科学研究 **A3V20261010**；最新停用应用 **A4M20261011**；发表覆盖 **UCT-PUB-v1.0.33**。
+整合版本 **UCT-INTEGRATION-v1.0.0**。正式科学图 **UCT-MAP-v1.1.2**；最新科学研究 **A3V20261010**；最新停用应用 **A4N20261011**；发表覆盖 **UCT-PUB-v1.0.33**。
 
-### A4M 停用应用边界
+### A4N 停用应用边界
 
-A4M 不新增正式对象。它在 A4L 终止未安装纯 `R×F` 比较后，定义一个更高阶的停用应用关系：同一保留痕迹被当前消费者使用、参与当下适配，并且这条中介关系在同一形成史中共同形成。256世界的原生/外接双胞胎在 `R,F,输出,报告` 上相同而耦合关系不同；因此边际共变不识别、也不排除该关系。C1/R157 只条件性运输落地关系；`B_cf/H_cf`语义及测量仍OPEN。正式增量 **0/0/0**；C1/U1、R157、R159与有效R173的原范围和状态不变。
+A4N 不新增正式对象。它修正 A4M 的身体特异性反例：R159 已允许内部身体框架关系指向器官外对象，故工具可被纳入实际承载者中心行动框架。64世界/四例方阵在 `CoupledForm`、保留使用、适配、输出和报告相同下，实现了解剖成员资格与 `EnactedFrameBind` 的四种组合；两者互不推出。只有独立落地为框架缺失的工具回路才是负对照。无实际装置或 `H_cf` 校准，停止规则已触发。正式增量 **0/0/0**；C1/U1、R157、R159与有效R173的原范围和状态不变。
 
 ## 三层结构
 
@@ -40,9 +40,9 @@ A4M 不新增正式对象。它在 A4L 终止未安装纯 `R×F` 比较后，定
 
 ## 当前收束点
 
-Test the body/action specificity of `B_cf` with a matched tool-loop countercase. Hold learned route-to-fit coupling, output and response meaning fixed; vary independently grounded body-frame binding. Stop if body binding, actual mediation or the `H_cf` endpoint cannot be independently established.
+Find one primary human or embodied-device paradigm that independently perturbs the bearer's pose anchor while external target/tool state is fixed, and tests whether the same learned route actually uses the online remapping. Compare limb, incorporated-tool and non-incorporated-tool cases. Stop before `H_cf` comparison if same-route use or the endpoint is not independently established.
 
-通俗地说：A4M 已把混合解释从“两个量一起高”推进到一条可错的关系——过去形成的身体行动路线是否在此刻亲自参与了适配。下一步用身体回路/工具回路攻击其身体特异性；若无法独立区分，就保留失败，不用“我感”命名制造结果。
+通俗地说：A4N 证明“这是工具”不等于“它不在身体行动框架里”。下一步必须找到能把承载者姿态锚与工具/目标状态分开扰动、并能证明同一路线确实读取重映射的实际范式；只有组织证据先成立，才讨论体验端点。
 
 [正式图 424 条推导路线](integration/UCT-INTEGRATION-v1.0.0/COMPLETED_RULE_ROUTES.md)
 
