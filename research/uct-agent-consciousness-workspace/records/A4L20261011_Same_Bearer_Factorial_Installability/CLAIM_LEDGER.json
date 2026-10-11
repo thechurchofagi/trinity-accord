@@ -1,0 +1,66 @@
+{
+  "schema": "uct-claim-ledger/1",
+  "round": "A4L20261011",
+  "claims": [
+    {
+      "id": "A4L-C1",
+      "type": "CONDITIONAL_METHOD_RESULT",
+      "statement": "Within one frozen bearer/event/consumer/route/response/time/signature slice K, a valid Boolean relation-use by present-fit 2x2 exists iff independently witnessed valid actual tokens realize all four values in the image of (R,F).",
+      "domain": "Actual event tokens in one declared invariant slice with Boolean R and F.",
+      "all_premises": ["same frozen K", "assignment-to-actual fidelity", "pre-outcome witness-to-actual fidelity", "witness independence from assignment labels and response endpoint"],
+      "proof": "The codomain {0,1}^2 has four elements; a valid full crossing is exactly surjectivity onto that codomain, equivalently image cardinality four.",
+      "counterexamples_limits": "Four trial labels can coexist with one actual state; non-Boolean or graded factors need a revised criterion.",
+      "status": "DISABLED_CONDITIONAL_RESULT"
+    },
+    {
+      "id": "A4L-C2",
+      "type": "NEGATIVE_RESULT",
+      "statement": "If present fit is a single-valued Boolean function of retained-relation use throughout one invariant slice, at most two actual factor pairs are reachable, so the full 2x2 is not installed there.",
+      "domain": "A4L-C1 slice with F=g(R).",
+      "all_premises": ["one fixed K", "Boolean R", "Boolean F", "single-valued within-slice dependence"],
+      "proof": "The graph of a function from a two-element domain has at most two ordered pairs.",
+      "counterexamples_limits": "An admissible compensator may break the dependence; this is not a universal impossibility claim.",
+      "status": "DISABLED_NEGATIVE_RESULT"
+    },
+    {
+      "id": "A4L-C3",
+      "type": "CORRECTION",
+      "statement": "A compensator that changes the enacted event, current consumer, constitutive route or response meaning does not fill a missing cell in the original slice; pooling across the changed invariant slices is a different comparison.",
+      "domain": "Prospective A4J/A4K same-bearer installation.",
+      "all_premises": ["factor comparison is slice-relative", "K contains the named invariants", "no post-outcome referent rescue"],
+      "proof": "Changed K partitions tokens into different domains; surjectivity must hold within one domain.",
+      "counterexamples_limits": "An invariant-preserving compensator can be admissible but still needs off-target accounting.",
+      "status": "DISABLED_APPLICATION_CORRECTION"
+    },
+    {
+      "id": "A4L-C4",
+      "type": "NEGATIVE_RESULT",
+      "statement": "Assignment or questionnaire labels cannot establish factorial fidelity: four nominal cells can coexist with one actual (R,F) state when witnesses echo labels rather than the event.",
+      "domain": "Finite same-event evidence contract.",
+      "all_premises": ["actual states distinguished from assignments", "witness ancestry declared", "response endpoint excluded as the sole fidelity source"],
+      "proof": "The exact label-echo model has four assignments, one actual image value and no valid witnessed crossing.",
+      "counterexamples_limits": "Independent noisy witnesses can be used with a declared error model; perfection is not required by this finite counterexample.",
+      "status": "DISABLED_NEGATIVE_RESULT"
+    },
+    {
+      "id": "A4L-C5",
+      "type": "APPLICATION_DECISION",
+      "statement": "The current archive contains no actual physical same-bearer four-cell installation with independent pre-outcome R and F fidelity; the active pure-candidate factorial comparison is terminated at NOT_INSTALLED rather than extended with more calibration layers.",
+      "domain": "A4A and A4H-A4K records at the verified A4L baseline.",
+      "all_premises": ["bounded record audit", "software/finite models are not physical bearer admissions", "questions and intervals are not actual factor states"],
+      "proof": "Artifact-level inspection finds zero admitted physical tokens and therefore zero valid actual cells under A4L-C1.",
+      "counterexamples_limits": "A future bounded apparatus could open a new application; termination is record- and candidate-specific.",
+      "status": "CURRENT_APPLICATION_TERMINATED_NOT_INSTALLED"
+    },
+    {
+      "id": "A4L-C6",
+      "type": "BOUNDARY",
+      "statement": "Factorial installability, retained-relation use, present fit, J_cont, H_cont, complete organization and basal experience remain distinct; A4L neither calibrates mineness nor alters C1/U1.",
+      "domain": "UCT interpretation of A4L-C1 through A4L-C5.",
+      "all_premises": ["C1 interpretive status", "R157 semantic residual", "effective R173 same-instance conjunction", "A4I target/report distinction"],
+      "proof": "Concept, quantifier, scope and inference-direction audit.",
+      "counterexamples_limits": "A later actual application still needs complete bearer binding and an independently justified phenomenal bridge.",
+      "status": "OPEN_BOUNDARY_RETAINED"
+    }
+  ]
+}

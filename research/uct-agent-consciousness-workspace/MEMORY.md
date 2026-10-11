@@ -6,6 +6,10 @@ The full prior memory is preserved at [historical memory](integration/UCT-INTEGR
 
 Scientific continuation and next question live in CURRENT_STATE.json. All pending source documents, effective corrections and family membership live in UNIFIED_RESEARCH_INDEX.json; history never silently becomes an established premise. Publication, storage, conditional validity, actual support and phenomenal support remain separate states.
 
+## 最新应用 A4L20261011
+
+同承载者“关系使用 × 当下适配”的 2×2 必须在一个固定承载者/事件/消费者/路线/回应切片内实际覆盖四格，并由独立结果前见证绑定；四个分配标签不等于四个组织状态。精确模型显示 `F=R` 只有两格、标签回声无有效四格、改变路线的补偿器拆成不同切片，而保持不变量的补偿器才在逻辑上可行。当前档案没有实际四格安装，故 A4J/A4K 候选比较按承诺终止，不再追加校准层；正式图 0/0/0，C1/U1与全部OPEN不变。[交接](records/A4L20261011_Same_Bearer_Factorial_Installability/HANDOFF_ZH.md)。
+
 ## 最新应用 A3W20261010
 
 基本自我熟悉与某种行动方式的已熟悉感H_way须分开。A3N问句已有，本轮只补题意、不适用、虚假熟悉与FAM来源/练习反例；理解题意和按键一致仍不能证明H真值可靠性。正式图、38候选和全部OPEN保留；[交接](records/A3W20261010_Action_Familiarity_Endpoint/HANDOFF_ZH.md)。

@@ -2,7 +2,11 @@
 
 [总览](UCT_FORMAL_MAP.md) · [全部候选](PENDING_RESEARCH.md) · [当前状态](CURRENT_STATE.json) · [统一登记](UNIFIED_RESEARCH_INDEX.json) · [审查](UCT_FORMAL_AUDIT.md)
 
-整合版本 **UCT-INTEGRATION-v1.0.0**。正式科学图 **UCT-MAP-v1.1.2**；最新科学研究 **A3V20261010**；发表覆盖 **UCT-PUB-v1.0.33**。
+整合版本 **UCT-INTEGRATION-v1.0.0**。正式科学图 **UCT-MAP-v1.1.2**；最新科学研究 **A3V20261010**；最新停用应用 **A4L20261011**；发表覆盖 **UCT-PUB-v1.0.33**。
+
+### A4L 停用应用边界
+
+A4L 不新增正式对象。它要求同承载者的 `R×F` 2×2 在一个固定承载者、事件、消费者、构成路线、回应编码、时窗和签名切片内，实际且由独立结果前见证覆盖四格。`F=g(R)` 时最多两格；标签回声不算实际覆盖；改变切片的补偿器不能填补原比较。当前 A4A/A4H–A4K 记录没有实际四格，故候选比较终止于 `NOT_INSTALLED`。正式增量 **0/0/0**；C1/U1、R157、有效 R173 与停用 R199 的原范围和状态不变。
 
 ## 三层结构
 
@@ -36,9 +40,9 @@
 
 ## 当前收束点
 
-Test one independent current bodily/action-familiarity interpretation against origin-recognition and agency countercases; establish a remaining actual retentive relation and realizable matched controls before claiming a pure familiarity contrast. Do not add an assumed coordinate or expand SPC.
+Test one mixed, non-exclusive experience-internal bridge for the case where retained-relation use and present fit necessarily covary. Hold the actual bearer, event, response meaning and basal experience fixed; vary the formation of their coupling, state the claimed experiential difference, and specify a refuting countercase without assuming factorial independence.
 
-通俗地说：固定实际身体路线，区分“保留历史带来的熟悉”与“当下协调、提示熟悉或动作流畅”。最新 A3V 保留 R173 无需双政策竞争的适用路线；不能把选择器证书失败变成无体验或无熟悉感。
+通俗地说：A4L 已按停止规则终止未安装的纯候选 2×2。下一步回到正面解释：关系使用与当下适配可以在一次体验中重叠共变；需要说明这种耦合本身解释什么、什么反例会推翻它，而不是继续增加校验证书。
 
 [正式图 424 条推导路线](integration/UCT-INTEGRATION-v1.0.0/COMPLETED_RULE_ROUTES.md)
 

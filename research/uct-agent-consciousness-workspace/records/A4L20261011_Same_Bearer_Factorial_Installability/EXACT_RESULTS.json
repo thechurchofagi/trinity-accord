@@ -1,0 +1,102 @@
+{
+  "canonical_payload_sha256": "7a8ad1233ebe48d962845590cf2449f922c6ef085c31107fa55b17908c1592b8",
+  "criterion": "A valid same-bearer 2x2 exists only if one frozen invariant slice contains independently witnessed valid tokens for all four actual (relation_use,present_fit) values.",
+  "current_repository_application": {
+    "decision": "NOT_INSTALLED_TERMINATE_CURRENT_CANDIDATE_COMPARISON",
+    "physical_same_bearer_tokens_admitted": 0,
+    "reason": "A4A and A4H-A4K provide formation, finite-model, question, prediction and interval contracts, but no one actual bearer supplies four invariant-preserving cells with independent pre-outcome relation-use and fit witnesses.",
+    "valid_actual_cells": []
+  },
+  "phenomenal_assignments": 0,
+  "scenarios": {
+    "admissible_invariant_preserving_compensator": {
+      "any_full_actual_cross": true,
+      "any_full_valid_cross": true,
+      "per_slice": [{
+        "actual_image": [[0, 0], [0, 1], [1, 0], [1, 1]],
+        "actual_image_size": 4,
+        "full_actual_cross": true,
+        "full_valid_cross": true,
+        "invariant_key": ["K0", "K0", "K0", "K0", "K0"],
+        "token_count": 4,
+        "valid_image": [[0, 0], [0, 1], [1, 0], [1, 1]],
+        "valid_image_size": 4
+      }],
+      "slice_count": 1
+    },
+    "comparison_breaking_compensator": {
+      "any_full_actual_cross": false,
+      "any_full_valid_cross": false,
+      "per_slice": [
+        {
+          "actual_image": [[0, 0], [1, 0]],
+          "actual_image_size": 2,
+          "full_actual_cross": false,
+          "full_valid_cross": false,
+          "invariant_key": ["K0", "K0", "K0", "K0", "K0"],
+          "token_count": 2,
+          "valid_image": [[0, 0], [1, 0]],
+          "valid_image_size": 2
+        },
+        {
+          "actual_image": [[0, 1], [1, 1]],
+          "actual_image_size": 2,
+          "full_actual_cross": false,
+          "full_valid_cross": false,
+          "invariant_key": ["K1", "K1", "K1", "K1", "K1"],
+          "token_count": 2,
+          "valid_image": [[0, 1], [1, 1]],
+          "valid_image_size": 2
+        }
+      ],
+      "slice_count": 2
+    },
+    "free_cross_with_independent_fidelity": {
+      "any_full_actual_cross": true,
+      "any_full_valid_cross": true,
+      "per_slice": [{
+        "actual_image": [[0, 0], [0, 1], [1, 0], [1, 1]],
+        "actual_image_size": 4,
+        "full_actual_cross": true,
+        "full_valid_cross": true,
+        "invariant_key": ["K0", "K0", "K0", "K0", "K0"],
+        "token_count": 4,
+        "valid_image": [[0, 0], [0, 1], [1, 0], [1, 1]],
+        "valid_image_size": 4
+      }],
+      "slice_count": 1
+    },
+    "label_echo_without_actual_manipulation": {
+      "any_full_actual_cross": false,
+      "any_full_valid_cross": false,
+      "per_slice": [{
+        "actual_image": [[0, 0]],
+        "actual_image_size": 1,
+        "full_actual_cross": false,
+        "full_valid_cross": false,
+        "invariant_key": ["K0", "K0", "K0", "K0", "K0"],
+        "token_count": 4,
+        "valid_image": [],
+        "valid_image_size": 0
+      }],
+      "slice_count": 1
+    },
+    "structural_coupling_fit_equals_relation": {
+      "any_full_actual_cross": false,
+      "any_full_valid_cross": false,
+      "per_slice": [{
+        "actual_image": [[0, 0], [1, 1]],
+        "actual_image_size": 2,
+        "full_actual_cross": false,
+        "full_valid_cross": false,
+        "invariant_key": ["K0", "K0", "K0", "K0", "K0"],
+        "token_count": 4,
+        "valid_image": [[0, 0], [1, 1]],
+        "valid_image_size": 2
+      }],
+      "slice_count": 1
+    }
+  },
+  "schema": "a4l-factorial-installability/1",
+  "scope": "Finite same-bearer invariant-slice and fidelity checks; no physical, human, AI, or phenomenal installation."
+}

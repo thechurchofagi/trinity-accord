@@ -1,0 +1,25 @@
+{
+  "schema": "a4l-formal-audit-summary/1",
+  "graph_version": "UCT-INTEGRATION-v1.0.0",
+  "completed_counts": {"nodes": 913, "rules": 424, "context_links": 261},
+  "pending_disabled_objects": 727,
+  "suspended_historical_rules": 10,
+  "checks": {
+    "all_completed_ids_structurally_traversed": true,
+    "all_of_interpreted_as_and": true,
+    "active_dependency_graph_acyclic": true,
+    "all_pending_disabled": true,
+    "navigation_and_disabled_assembly_pass": true,
+    "a4l_adds_no_completed_graph_object": true,
+    "a4l_does_not_fire_r157_or_r173": true,
+    "disabled_r199_not_used_as_established_premise": true,
+    "c1_and_u1_status_unchanged": true,
+    "full_semantic_reproof": false
+  },
+  "schema_debt_retained": {"rules_without_local_and_annotation": 81, "context_links_without_two_completed_node_endpoints": 22},
+  "hashes": {
+    "unified_map_gzip_sha256": "b37711fb7dbaca9b728feb38e7cb14abf4f63a9571035b40c048a97472df35be",
+    "per_id_audit_gzip_sha256": "b6a527ca9a862d5a92d5c82f1480c9761f688bcbcd45e0e3b29ba12519469861"
+  },
+  "limit": "Fresh navigation plus unchanged full per-ID structural traversal and bounded semantic audit; SCU-AUDIT-DEPTH remains AUDIT_INCOMPLETE."
+}

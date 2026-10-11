@@ -1,0 +1,33 @@
+{
+  "schema": "a4l-validation/1",
+  "round": "A4L20261011",
+  "status": "PASS_ARTIFACT_AND_STRUCTURAL_CHECKS_WITH_RECORDED_INITIAL_INVOCATION_FAILURE_AND_SEMANTIC_LIMITS",
+  "checks": {
+    "exact_results_semantically_match_checker": true,
+    "free_cross_valid": true,
+    "structural_coupling_has_two_actual_cells": true,
+    "label_echo_has_zero_valid_witnessed_cells": true,
+    "comparison_breaking_compensator_has_no_full_slice": true,
+    "invariant_preserving_compensator_has_one_full_slice": true,
+    "current_physical_tokens_admitted": 0,
+    "phenomenal_assignments": 0,
+    "completed_nodes": 913,
+    "completed_rules": 424,
+    "completed_context_links": 261,
+    "pending_objects_disabled": 727,
+    "suspended_historical_rules": 10,
+    "all_of_interpreted_as_and": true,
+    "corrected_navigation_invocation_pass": true,
+    "scientific_promotion": false,
+    "full_semantic_reproof": false
+  },
+  "recorded_failure": "The first navigation command omitted --root and raised FileNotFoundError for UNIFIED_RESEARCH_INDEX.json; the corrected rooted invocation passed.",
+  "hashes": {
+    "checker_sha256": "17b2db9f5ce4db0c60ae866852c442dab242225097227c2cd0068a3a42510af9",
+    "checker_stdout_sha256": "a97009a53999a07a9e59cf79c6102d2255610cfd31876fe581315a165c7749f4",
+    "exact_results_sha256": "c95dea2c2b52747b22b810e685ca9845f4838f54b74d157174352a7f1a80cebe",
+    "unified_map_gzip_sha256": "b37711fb7dbaca9b728feb38e7cb14abf4f63a9571035b40c048a97472df35be",
+    "per_id_audit_gzip_sha256": "b6a527ca9a862d5a92d5c82f1480c9761f688bcbcd45e0e3b29ba12519469861"
+  },
+  "limit": "Artifact consistency and finite reachability only; not actual installation, H_cont calibration, C1 evidence or global semantic proof."
+}

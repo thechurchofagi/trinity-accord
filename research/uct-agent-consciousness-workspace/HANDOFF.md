@@ -2,11 +2,15 @@
 
 [总览](UCT_FORMAL_MAP.md) · [全部候选](PENDING_RESEARCH.md) · [当前状态](CURRENT_STATE.json) · [统一登记](UNIFIED_RESEARCH_INDEX.json) · [审查](UCT_FORMAL_AUDIT.md)
 
-科学接续：**A3V20261010**。
+正式科学接续仍为 **A3V20261010**；最新停用应用为 **A4L20261011**。
 
-[最新科学交接](records/A3V20261010_Concurrent_Liveness_and_Familiarity/HANDOFF_ZH.md) · [本轮地图整理交接](records/NAV20261010_Map_Integration/HANDOFF_ZH.md)
+[A4L 中文交接](records/A4L20261011_Same_Bearer_Factorial_Installability/HANDOFF_ZH.md) · [英文研究](records/A4L20261011_Same_Bearer_Factorial_Installability/RESEARCH_NOTE.md) · [安装合同](records/A4L20261011_Same_Bearer_Factorial_Installability/FACTORIAL_INSTALLATION_CONTRACT.md) · [形式审查](records/A4L20261011_Same_Bearer_Factorial_Installability/FORMAL_AUDIT.md)
 
-下一科学问题：Test one independent current bodily/action-familiarity interpretation against origin-recognition and agency countercases; establish a remaining actual retentive relation and realizable matched controls before claiming a pure familiarity contrast. Do not add an assumed coordinate or expand SPC.
+当前决定：A4J/A4K 的关系使用×当下适配纯候选比较在现有记录中没有同一不变量切片的实际四格与双重独立见证，因此标记 `NOT_INSTALLED_TERMINATE_CURRENT_CANDIDATE_COMPARISON`，不再增加校准/证书层。
+
+下一具体问题：用一个严格思想实验检验混合、非排他的体验内部桥接——当保留关系使用与当下适配必然共变时，固定实际承载者、事件、回应含义和基础体验，改变二者耦合的形成方式；明确所解释的体验差异与可否决反例，不要求虚假的因子独立。
+
+[既有 A3V 科学交接](records/A3V20261010_Concurrent_Liveness_and_Familiarity/HANDOFF_ZH.md) · [地图整理交接](records/NAV20261010_Map_Integration/HANDOFF_ZH.md)
 
 正式图 UCT-MAP-v1.1.2，发表覆盖 UCT-PUB-v1.0.33。导航版本 UCT-INTEGRATION-v1.0.0 统一了 38 个候选及修正；没有把它们升级为成立的科学前提。历史保存、发表和审查状态请分别查 CURRENT_STATE.json、PUBLICATION_COVERAGE.json 和 REVIEW_SUPERVISION.md。
 

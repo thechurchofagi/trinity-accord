@@ -1,0 +1,22 @@
+{
+  "schema": "a4l-source-hashes/1",
+  "files": {
+    "RESEARCH_MASTER_GUIDE.md": "b2cc18778621b1f4d8a0e3ac25755f126442bbfbd5b65398f05f16211a1fe0c3",
+    "AGENTS.md": "6bd0e94b8e3a2ce1b44b7c673f81748770590dc1a43206b32c587a53c5acc962",
+    "records/R128_Unified_Formal_Map_Audit_20261006/sources/A_UCT_I_v1_2.md": "2e4469afbd1d1862463cc36396dd6e2b50c418f22d6f0fd584bbae33bfedc6f4",
+    "records/REV20261010_Retained_Premise_Revision/inputs/TA25.md": "b876dd6c82477fe2a73267af7df40ffc1f0c16c19109ea0c84ac3d9fe8288947",
+    "records/A4A20261011_Formation_Intervention/RESEARCH_NOTE.md": "613d009eb083bdad98e7474472b415646b35bfd79dbe61cdc11edf5b109d9e7e",
+    "records/A4H20261011_Compositional_Action_Familiarity/RESEARCH_NOTE.md": "262354af0b48d314a36d663b259d7378c0374e948a504a5a500341c955007e50",
+    "records/A4I20261011_Continuation_Familiarity_Referent/RESEARCH_NOTE.md": "20469ea40512c22425e057d42fb62eeb18e854f72d3ec04c2703972fd53565b5",
+    "records/A4J20261011_Cross_Perturbation_Predictions/RESEARCH_NOTE.md": "bd2a9b94e22477ffba09a56b0c164052a8534f5abc6f8fa86cf2291e779f9fed",
+    "records/A4K20261011_Uncertainty_Bounded_Prediction_Regions/RESEARCH_NOTE.md": "ec2df16c49bd4176942ff1abe4e0d2fcb5786501499c73623031f6b1d1ced9cd",
+    "integration/UCT-INTEGRATION-v1.0.0/UNIFIED_MAP.json.gz": "b37711fb7dbaca9b728feb38e7cb14abf4f63a9571035b40c048a97472df35be",
+    "records/A4L20261011_Same_Bearer_Factorial_Installability/check_factorial_installability.py": "17b2db9f5ce4db0c60ae866852c442dab242225097227c2cd0068a3a42510af9",
+    "records/A4L20261011_Same_Bearer_Factorial_Installability/EXACT_RESULTS.json": "c95dea2c2b52747b22b810e685ca9845f4838f54b74d157174352a7f1a80cebe"
+  },
+  "external_sources": [
+    {"doi": "10.1111/rssb.12085", "access": "publisher/arXiv abstract and bibliographic record"},
+    {"doi": "10.1080/01621459.2020.1765783", "access": "publisher/arXiv abstract and bibliographic record"},
+    {"doi": "10.1007/s10985-021-09530-8", "access": "publisher/PMC abstract and bibliographic record"}
+  ]
+}
