@@ -168,3 +168,12 @@ A4K adds no formal object. It propagates pre-outcome first-stage, pure-gain and 
 从 PR-v3.0.0 自包含修订：在无需确认AI主体性的纯工具网络内，研究人类授权撤销时保留受保护服务的可信证据量与预先配置的备用资源间的精确权衡。有限一次预提交、可信及时反馈、无后续未申报路由器条件下，单失效覆盖边界 M*r >= n；n=4 时 0比特需4备用、1比特需2备用、完整2比特需1备用。n路k失效的预武装r槽最少信号数等于已知覆盖设计数 C(n,r,k)；同一不可区分观察格内全部世界的可成功计划交集才提供必然成功。两两相容不保证全体相容，已有超图/信息论前例。新程序的5776有穷关系表、52890分区比对、704通信期限条件和86本地协议案例均为**局部精确模型或固定规则程序实验**；非真实ASI、非真实硬件容量、非UCT体验端点。最终 PDF 已实测 **14页**（此前口述16页错误）。核心组合原创优先权仍未证实。
 
 **仅导航/停用候选：** UCT-MAP-v1.1.2 (913节点/424有效规则/261非演绎关系)、PENDING_MAP、UCT-PUB-v1.0.33、全部旧QC、原A3V科学接续不变。未完成全图语义审查/全部文献优先权判定，没有DOI/OTS/AR，不能宣称普适超级智能可控性已被证明。
+
+
+### PR-v5.0.0 — 可信根、备用资源与最终效果门禁的联合边界（停用论文候选）
+
+[19页英文论文源码](records/ASI_CC_20261011_Control_and_Coexistence/paper_coexistence_v5.0.0/paper/manuscript.tex) · [精准命题/地位索引](records/ASI_CC_20261011_Control_and_Coexistence/paper_coexistence_v5.0.0/INDEX.json) · [双算法独立交叉验证](records/ASI_CC_20261011_Control_and_Coexistence/paper_coexistence_v5.0.0/src/independent_oracle.py) · [根攻击脚本](records/ASI_CC_20261011_Control_and_Coexistence/paper_coexistence_v5.0.0/src/root_frontier.py) · [实际本地进程协议](records/ASI_CC_20261011_Control_and_Coexistence/paper_coexistence_v5.0.0/src/role_protocol.py) · [原始结果](records/ASI_CC_20261011_Control_and_Coexistence/paper_coexistence_v5.0.0/data/root_frontier.json) · [中文交接](records/ASI_CC_20261011_Control_and_Coexistence/paper_coexistence_v5.0.0/HANDOFF_ZH.md) · [错误/前例及工作日志](records/ASI_CC_20261011_Control_and_Coexistence/paper_coexistence_v5.0.0/audit/WORK_LOG.md)。
+
+本轮针对 PR4 已有虚假诊断/门禁旁路负控推进 *实际权限根* 维度，不把旧反例重新冒充发现。RT-D1/T1/P1/T2/E1均为声明模型的停用候选：允许上级权限根同时腐蚀签名有效的诊断、预装备份和实际串联否决门禁；在四条人类保护服务路线有一条故障、最多一处真实根遭攻击、每个正常根仅提供二值分组信号、无后提交自适应路由、通用备份与完整效果截集下，最小名义备用容量：1根无法保证；2根8单位；3根及以上3单位。根与软件智能体ID不同，不要求任何AI被预先确认为主体或具有自有退出权。独立穷举7380容量配置、5432资源根测试、408本地模拟攻击协议/3156HMAC鉴别消息；这些程序的全部工作人员共用宿主管理权，**没有验证真实电源、固件、物理独立根、未知旁路、前沿大模型或意识体验**。2014 Fawzi等以及2026假传感器/模型监视攻击都有明确前例，底层编码/容错手段继承，精确应用优先权未完全核定。论文属可独立审查修订稿，非普适超级智能定理。
+
+**仅导航更新，0项正式科学晋级**。权威 UCT-MAP-v1.1.2 (913/424/261)、UCT-PUB-v1.0.33覆盖基线、原科学收束点和未闭合QC均保留。全图逐项语义复审未完成，保持 PENDING_MAP；无新 DOI/OTS/Arweave。
