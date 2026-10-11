@@ -1,0 +1,9 @@
+# ASI-CC v0.7.0 Work Log — 2026-10-11
+
+- Baseline: inspected v0.6.0 scientific note/handoff, UCT-MAP-v1.1.2 and the independent research guide norms; v0.1.0 through v0.6.0 preserved.
+- Author's continuation: test dynamic evolving human/AI permissions and sustainable resources, not merely snapshot Hall conditions or verbal promises.
+- Verified external precedents: 2025 authenticated delegation; August 2026 *Bounded Agents* (composition closure); 2026 *Unfireable Safety Kernel* (external reference monitoring); 2026 agent identity governance; 2018 safe RL shielding; UCT Paper D & A4G.
+- New disabled candidate IDs R24–R27 (time-closed winning set, invariant under delegation, two independent failure witnesses, provenance-level bounded local test). Mathematics inherited. No first-priority universal ASI theorem claimed.
+- Actually ran executable Linux-specific test suite on isolated fictional JSON sink, with OS-level Unix socket SO_PEERCRED authentication and dropped uids. PASS: per-action composition failure; effective stateful gate; dynamic delegated right safely restricted; denied unauthorized role; 4 exogenous ticks depleting fuel; OS direct-file bypass blocked; deliberately compromised root re-enabled direct write. Exact finite winning kernel computed. Not a frontier LLM or physical device test.
+- Formal map effect: navigation-only v0.7.0 candidate. No new formal graph node/rule/context, no admission, no full UCT semantic audit. Existing UCT research and publication coverage unchanged.
+- Conclusion: practical proof obligations for time-changing permissions and genuine nondepletion are stricter than snapshot existence; refer to nearest known APC paper before claiming originality. Publication decision HOLD.
