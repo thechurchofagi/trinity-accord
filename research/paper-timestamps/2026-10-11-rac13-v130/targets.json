@@ -1,0 +1,23 @@
+{
+  "schema": "trinityaccord.paper-ots-targets.v1",
+  "batch": "2026-10-11-rac13-v130",
+  "paper_count": 1,
+  "papers": [
+    {
+      "report": "ASI-CC-RAC13",
+      "record_id": 23299153,
+      "doi": "10.5281/zenodo.23299153",
+      "version": "1.3.0",
+      "title": "When Revocation Does Not Restore Safety: Exact Admission Across Asynchronous Policy Changes in Multi-Agent Systems",
+      "receipt_path": "research/uct-agent-consciousness-workspace/records/ASI_CC_20261011_Control_and_Coexistence/endogenous_coexistence_v1.3.0/publication/OTS-PUBLISHED-RECEIPT.json",
+      "pdfs": [
+        {
+          "name": "when-revocation-does-not-restore-safety-v1.3.0.pdf",
+          "bytes": 262714,
+          "sha256": "16357a609238a789b2babdd426e73536489f9a3dfe30070a1a891b5ba6aa6a4b",
+          "role": "Frozen English theoretical preprint ASI-CC-v1.3.0"
+        }
+      ]
+    }
+  ]
+}
