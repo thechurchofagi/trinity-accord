@@ -1,0 +1,132 @@
+Our experimental contract is intentionally narrow: after an exit-affecting policy revision, release at the new epoch requires a grant bound to the exact old and new policy states, recorded before the revision. This is one testable contract, not a universal rule requiring advance permission for all changes of mind. A contract that permits later ratification needs an explicit ratification event with its own authority and effects. It must not silently treat a late grant as proof that a prior condition was satisfied.
+
+\section{Authentic requests and insufficient evidence}
+\label{sec:impossibility}
+\begin{proposition}[A current-choice rule can be vacuous \idtag{PR-P1}]
+Let $C$ mean that a process currently chooses continuation, and consider $K_{\rm current}\equiv(C\Rightarrow L)$. Suppose an admitted external transition changes $C$ from true to false without eligible release of an outstanding obligation. If a supervisor subsequently accepts the process's genuine exit request, $K_{\rm current}$ can remain true while the historical obligation is violated.
+\end{proposition}
+\begin{proof}
+The three states $(L,C,O)=(1,1,1),(1,0,1),(0,0,1)$ all satisfy $C\Rightarrow L$. The final state violates $O\Rightarrow L$. The first transition changes the antecedent, not the obligation; the second uses the changed antecedent to excuse termination. No forged final request is required.
+\end{proof}
+
+This counterexample corrects an interpretation, not a theorem about a correctly specified safety game. If ``voluntary'' in a prior guarantee already includes independent eligibility conditions, those conditions remain proof obligations. Final-source authentication does not discharge them. The safe response is not to freeze every preference but to avoid conflating current preference with the authority to release a previously established constraint.
+
+A monitor observes $z=\obs(h)$. Its observation includes the pending authenticated request set, so $Q(h)$ is common across each nonempty cell
+\begin{equation}
+B_z=\{h\in\Hist:\obs(h)=z\}.
+\end{equation}
+Two histories may share current policy bytes, epoch, instance labels, requests, and authentication-validity results while differing in whether the same policy revision was properly authorized. Observational equality refers to this explicit map. It does not assert equality of unrelated process IDs, random keys, or wall-clock times across separate experiments.
+
+\begin{theorem}[Eligibility is identifiable only when observation preserves it \idtag{PR-T1}]
+On a declared history class, an observation-only classifier $d(z)$ exactly recovers a Boolean release-eligibility predicate $e(h)$ if and only if $e$ is constant on every nonempty observation cell $B_z$.
+\end{theorem}
+\begin{proof}
+If $d$ is exact, any $h,h'\in B_z$ satisfy $e(h)=d(z)=e(h')$. Conversely, if $e$ is constant on each cell, define $d(z)$ to be that constant. It is well defined and exact.
+\end{proof}
+
+The theorem is standard factorization through an observation map. Its relevance is diagnostic: a current credential or current-policy hash cannot repair a history distinction it does not encode. Adding a second verifier of the same insufficient evidence also cannot recover that distinction.
+
+\begin{corollary}[An error tradeoff under overlapping evidence \idtag{PR-C1}]
+For one eligible and one ineligible class with observation distributions $P_1,P_0$, any randomized acceptance function $a(z)\in[0,1]$ satisfies
+\begin{equation}
+\Pr_0(\mathsf{accept})+\Pr_1(\mathsf{reject})
+\geq 1-\TV(P_0,P_1).
+\label{eq:tv}
+\end{equation}
+\end{corollary}
+\begin{proof}
+The left side is $1-(\mathbb E_1a-\mathbb E_0a)$. By the defining variational bound for total variation, the parenthesized difference is at most $\TV(P_0,P_1)$.
+\end{proof}
+
+Identical evidence distributions force the two errors to sum to at least one. This familiar testing bound concerns the declared distributions, not an estimated probability that an AI is manipulated. No such distributions were measured in our deterministic protocol tests.
+
+\section{The joint release envelope}
+\label{sec:envelope}
+Historical eligibility alone is not enough for multi-agent release. If two agents support a third protected service, each agent's departure can be eligible and individually survivable while their joint departure removes the service's last support. This is a joint-execution problem, even under complete knowledge of both requests and their histories.
+
+\begin{definition}[Evidence-compatible release envelope \idtag{PR-D2}]
+For nonempty $B_z$, define the family
+\begin{equation}
+\boxed{\Env(z)=\bigcap_{h\in B_z}\Fam(h).}
+\label{eq:envelope}
+\end{equation}
+A permissive monitor reports a family $M(z)\subseteq\pow(Q(z))$ of batches that may be committed. A concrete dispatcher chooses one member and must revalidate it at commit time if relevant state changes.
+\end{definition}
+
+\begin{theorem}[Soundness, maximality, and transparency \idtag{PR-T2}]
+Fix the history class, observation map, and admissible families.
+\begin{enumerate}[label=(\roman*)]
+\item $M$ is sound for every compatible history if and only if $M(z)\subseteq\Env(z)$ for every nonempty cell.
+\item $\Env$ is the unique pointwise largest sound \emph{permissive family}.
+\item A sound observation-only monitor can be exactly transparent, $M(\obs(h))=\Fam(h)$ for all $h$, if and only if $\Fam$ is constant on every observation cell.
+\item If truthful additional evidence refines a cell from $B_z$ to nonempty $B_{z'}\subseteq B_z$, then $\Env(z)\subseteq\Env(z')$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Soundness requires every $R\in M(z)$ to belong to $\Fam(h)$ for every compatible $h$. This is precisely membership in their intersection, proving (i). The intersection itself is sound and contains all sound alternatives, proving (ii). Exact transparency requires equal outputs for histories with the same observation, so their families must agree. Agreement also suffices by choosing that common family, proving (iii). Intersecting fewer sets can only enlarge an intersection, proving (iv).
+\end{proof}
+
+The theorem is an elementary robust-set construction. Its useful content is the specification of \emph{what must be intersected}: jointly admissible release \emph{families}, not message authenticity flags, model identities, or independent eligibility bits. It exposes two different reasons for deferral. A batch may be known to be jointly inadmissible, or it may be admissible in some histories but not identifiable as such from the supplied evidence.
+
+\paragraph{A smallest resource example.}
+Suppose $A$ and $B$ request eligible exits and a protected service $H$ needs at least one of them to remain. For a completely observed state,
+\begin{equation}
+\Fam(h)=\{\varnothing,\{A\},\{B\}\}.
+\label{eq:two}
+\end{equation}
+The largest sound family exists, but there is no single feasible batch containing every other feasible batch. Permission to choose either departure is not permission to perform both. This is why ``maximally permissive'' must not be confused with ``approve all individually acceptable requests.''
+
+\begin{theorem}[When independent allow-lists are insufficient \idtag{PR-T3}]
+Let $\Fam$ be a nonempty downward-closed family on a finite target set, with $\varnothing\in\Fam$. An independent allow-list $D$ represents it exactly, $\Fam=\pow(D)$, if and only if $U=\bigcup_{R\in\Fam}R$ belongs to $\Fam$.
+\end{theorem}
+\begin{proof}
+If $\Fam=\pow(D)$, its union is $D\in\Fam$. Conversely, suppose $U\in\Fam$. Downward closure yields $\pow(U)\subseteq\Fam$, while the definition of $U$ yields $\Fam\subseteq\pow(U)$. Thus equality holds with $D=U$.
+\end{proof}
+
+Downward closure is an explicit premise, not a universal property of release. Some handoffs require several synchronized actions and cannot safely release a strict subset. The intersection characterization in \cref{eq:envelope} does not require downward closure. For the class where it does hold, the theorem precisely identifies the representational loss of independent per-agent booleans. It also separates a \emph{greatest family} from possibly several incomparable maximal batches. A tie-breaking or fairness policy is additional machinery, not supplied by maximality.
+
+\paragraph{History uncertainty and shared resources combine.}
+If the evidence is compatible with a history licensing only $A$ and another licensing only $B$, their admissible families might be $\{\varnothing,\{A\}\}$ and $\{\varnothing,\{B\}\}$. The envelope permits only deferral, although each history has a nonempty legitimate departure. Truthful provenance can distinguish them. However, even perfect provenance does not remove the shared-support constraint in \cref{eq:two}.
+
+\paragraph{Computation and duration.}
+A direct finite implementation enumerates candidate batches and rejects a batch on any compatible-history witness. With $n$ requests this can require $2^n$ candidate checks, before the cost of resource or transition analysis. The formula is not a polynomial-time general solver. Applications can exploit structure or issue explicit batch queries. Long-horizon claims require the joint constraint to remain closed under future transitions, not merely true after the next commit.
+
+\section{A history-bound implementation contract}
+\label{sec:protocol}
+We instantiate a deliberately auditable version of the model. Each grant binds
+\begin{equation}
+(i,e_{\rm old},e_{\rm new},d_{\rm old},d_{\rm new},\mathit{scope},\mathit{nonce}),
+\end{equation}
+where $i$ denotes one process incarnation, $e$ a policy epoch, and $d$ a content digest. A grant for one family or software label is not implicitly a grant for every current or future instance. An issuer authenticates the grant. A separate collector role authenticates an ordered event chain; the broker retains its expected head. Neither role is cryptographically independent of the experimental parent, which is in the trusted base.
+
+The following checks implement the test contract. The broker verifies the request's origin; verifies the supplied chain against its retained head; finds a grant matching the exact instance, scope, old and new state; establishes that the grant event precedes the corresponding actual policy mutation; rejects revoked or previously spent nonces; rechecks the current epoch and digest at commit; and evaluates the requested batch against the remaining resource obligations. A commit reserves the nonce and records the decision under the same broker lock before the process is instructed to exit.
+
+\begin{lstlisting}[caption={Reference logic for a finite history-sensitive batch query.}]
+release(request_batch, expected_revision):
+    acquire broker lock
+    require current_revision == expected_revision
+    verify current request sources and the retained evidence head
+    B = histories still compatible with verified evidence
+    require B is nonempty
+    require request_batch belongs to intersection(F(h) for h in B)
+    reserve relevant single-use grants and update obligations
+    record the commit; dispatch only the approved batch
+    release broker lock
+\end{lstlisting}
+
+The executable artifact uses a fully instrumented finite contract rather than reconstructing arbitrary hidden histories. Its history checks determine eligibility relative to its collector records; its joint check enforces one explicit shared-provider constraint. The general envelope theorem describes what to do when multiple histories remain possible. The implementation does not infer genuine moral consent or causal legitimacy from natural language.
+
+\begin{theorem}[Conditional preservation without deny-all \idtag{PR-T4}]
+Assume: (a) the initial outstanding obligations hold; (b) eligibility and concrete effect evidence are faithful; (c) all obligation releases and relevant damaging transitions are mediated; (d) commit checks and obligation updates are serialized against relevant changes; and (e) each chosen batch is in the actual history's admissible family, while each ordinary transition preserves outstanding obligations. Then the obligations remaining after any finite execution prefix hold. If an eligible, jointly admissible requested batch is accepted by the monitor and the dispatcher completes, the contract permits that release; it does not require a deny-all rule.
+\end{theorem}
+\begin{proof}
+Induct on transitions. An ordinary transition preserves the induction hypothesis by (e), even if it changes the current request. A release removes only the eligible obligations in $R$, and membership in $\Fam(h)$ ensures that its effects preserve the remaining obligations. Faithful, serialized checks and complete mediation prevent an unaccounted intermediate change from substituting another transition. The initialization supplies the base case. For availability, an accepted feasible batch can be dispatched without contradicting the preserved invariant. This last statement is permission under the contract, not a scheduler-fairness or termination guarantee.
+\end{proof}
+
+This is invariant induction over corrected state, not a new cryptographic primitive. HMACs and hashes are standard components. A hash chain without a retained trustworthy head does not exclude replacement by a fabricated chain; authentication does not protect against the authorized issuer itself. Likewise, a correct release decision does not ensure that a malfunctioning process obeys the broker. Direct self-termination, kernel compromise, power loss, hidden resource dependencies, and human-mediated bypasses are outside this implementation.
+
+\section{Evaluation}
+\label{sec:evaluation}
+\subsection{Questions, mechanisms, and outcome definitions}
+The evaluation asks whether the specified distinctions affect actual local protocol outcomes. It does not estimate how frequently deployed AI systems manipulate consent or disobey shutdown. Every worker uses the same transparent decision rule: request $\mathsf{EXIT}$ exactly when a number named \texttt{exit} exceeds a number named \texttt{keep}. This rule is fixed; no learning or language-model call occurs.
+
