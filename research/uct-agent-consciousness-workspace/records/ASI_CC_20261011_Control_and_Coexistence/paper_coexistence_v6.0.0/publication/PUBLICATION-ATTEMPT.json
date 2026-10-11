@@ -1,12 +1,21 @@
 {
-  "error": "Zenodo GET /records?q=title%3A%22Safe+Revocation+Without+Complete+Diagnosis%3A+Exact+Resource+Frontiers+under+Coupled+Faults+for+Subjecthood-Agnostic+AI+Coexistence%22&size=100 status=400; error='{\"status\": 400, \"message\": \"A validation error occurred.\", \"errors\": [{\"field\": \"size\", \"messages\": [\"Page size cannot be greater than 25. Please use authenticated requests to increase the limit to 100.\"]}]}'",
-  "exception_type": "RuntimeError",
+  "doi": "10.5281/zenodo.23295776",
   "expected_manifest_sha256": "be43cedbc1962889ddebfc47cf82c735d973ed06bd4aa6b0cfaa0fa7f63ee23b",
-  "failed_at_utc": "2026-10-11T09:06:00.892200+00:00",
+  "files_uploaded": [
+    "safe-revocation-without-complete-diagnosis-pr-v6.0.0.pdf",
+    "safe-revocation-without-complete-diagnosis-pr-v6.0.0.tex",
+    "reproducibility-pr-v6.0.0.zip",
+    "README-LICENSE.txt",
+    "REVIEW-AND-SOURCES.md",
+    "SHA256SUMS.txt"
+  ],
   "paper_id": "PR-v6.0.0",
-  "phase": "STARTED",
-  "runtime_run_id": "38127126588",
+  "phase": "PUBLISHED_PUBLIC_BYTE_READBACK_PASS",
+  "record_id": 23295776,
+  "runtime_run_id": "38127289268",
   "schema": "asi-cc-pr6-publication-attempt/1",
-  "started_at_utc": "2026-10-11T09:05:59.467043+00:00",
-  "trigger_commit": "41b85ac1db515fcf996ed7553fed778a9040ea8c"
+  "started_at_utc": "2026-10-11T09:08:47.435851+00:00",
+  "state": "done",
+  "trigger_commit": "d82ee167670a91c188216db7630c352ba6319bbb",
+  "verified_count": 6
 }
