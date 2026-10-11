@@ -1,0 +1,423 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amsthm,amssymb,mathtools,newtxtext,newtxmath,microtype}
+\usepackage{booktabs,tabularx,array,enumitem,fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\usepackage{listings}
+\hypersetup{pdftitle={Safe Revocation Without Complete Diagnosis},pdfauthor={Hongju Liu},pdfsubject={PR-v6.0.0: exact common-budget resource frontiers; theoretical preprint}}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small Safe Revocation Without Complete Diagnosis}
+\fancyhead[R]{\small Liu\;|\;PR-v6.0.0}
+\fancyfoot[C]{\small\thepage}
+\setlength{\headheight}{14pt}\setlength{\emergencystretch}{2em}
+\setlength{\parskip}{3pt}\setlength{\parindent}{1.1em}
+\setlist{itemsep=2pt,topsep=4pt}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}\newtheorem{definition}{Definition}
+\newcommand{\sid}[1]{\textnormal{\textsf{[#1]}}}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\Rmin}{R^*}
+\lstset{basicstyle=\small\ttfamily,breaklines=true,frame=single,columns=fullflexible}
+\title{\vspace{-1cm}\textbf{Safe Revocation Without Complete Diagnosis}\\[6pt]
+\Large Exact Resource Frontiers under Coupled Faults\\for Subjecthood-Agnostic AI Coexistence}
+\author{Hongju Liu\\\normalsize Independent Researcher, Shenzhen, China\\\normalsize Trinity Accord / UCT Research Programme}
+\date{11 October 2026\\\small PR-v6.0.0\;\textbullet\; Theoretical preprint manuscript\;\textbullet\; Not peer reviewed}
+\begin{document}
+\maketitle\thispagestyle{plain}
+\begin{abstract}
+Uncertainty about a fault need not prevent a safe intervention. When corrupting diagnostic reports and disabling backup supply consume the same adversarial budget, the largest diagnostic ambiguity and the smallest surviving capacity may be incompatible events. We derive exact resource requirements for a one-episode revocation problem with $n$ protected service channels, $k$ channels requiring replacement, $d$ diagnostic roots, $b$ separately controlled backup banks, and at most $f$ compromised roots across both roles. For $d>f$ and $b>f$, define $w_a=\min\{n,k(1+\lfloor a/(d-f)\rfloor)\}$. The minimum integer nominal reserve is
+$\max_{0\le a\le f}\{w_a+(f-a)\lceil w_a/(b-f+a)\rceil\}$,
+and balanced bank capacities attain it. In particular, $f+1$ diagnostic roots and $f+1$ backup roots, each bank supplying $k$ units, achieve the absolute bank-capacity lower bound $(f+1)k$ even when the failure set is not uniquely identifiable. Replacing the common uncertainty set by independent worst-case diagnostic and supply failures can require $(f+1)^2k$ in the same placement, an arbitrarily large multiplicative overestimate. We also solve the one-fault capacity problem for arbitrary finite diagnostic maps and generalize the preceding four-channel result to arbitrary replicated report classes and root-fault counts. Independent enumeration checks 276 separated-role configurations and 649,320 joint worlds, 90 co-located configurations, and 2,693 heterogeneous diagnostic maps. These are verification artifacts for conditional theorems, not measurements of future AI. The framework treats AI systems as tools with actual effect paths, not as presumed moral subjects; it requires neither machine subjecthood nor goodwill. It gives a reusable distinction between complete diagnosis and task-sufficient control, with explicit assumptions about timing, resource pooling, authority, and final-effect mediation.
+\end{abstract}
+\noindent\textbf{Keywords:} AI control; multi-agent systems; adversarial diagnosis; shared fault budget; resource redundancy; safe revocation; list decoding.
+
+\section{The substantive question}
+Human operators may need to retire a service, revoke a tool permission, or replace a model while preserving functions on which other people depend. Several AI systems may contribute to those functions, and each model may instantiate many agents with different memory, tasks, and authority. The number of model names or agent identities does not determine either the number of independent failure domains or the amount of surviving support. An effective upstream administrator can alter several signed reports and several resource banks at once.
+
+The preceding revision of this work, PR-v5.0.0, studied four primary channels, one affected channel, one corrupted root, and repeated binary group reports \cite{liu5}. It obtained a sharply conditional frontier: one root was insufficient; two required eight reserve units; three or more required three. Its weakness was not an incorrect numerical answer but the small parameter family. This revision develops general closed-form results rather than another hardware-role demonstration.
+
+The central question is: \emph{how much reserve is necessary when uncertainty and loss of control are caused by the same limited adversary?} A conventional modular design might first demand a unique diagnosis, then independently provision for the largest supply loss. Both demands can be unnecessarily strong. An attacker who has spent its entire root budget manufacturing conflicting reports cannot, in that same episode and role-separated architecture, also disable all the backup banks.
+
+\paragraph{A motivating two-fault example.}
+Three diagnostic roots each report the required replacement channels; three separate banks each have one universally usable backup unit. At most two of the six roots are compromised. Suppose exactly one primary channel needs replacement. If two diagnostics lie, the three reports can identify three different candidate channels, but no bank can also be compromised: three units survive. If one diagnostic and one bank are compromised, at most two candidates are reported and two units survive. If two banks are compromised, all reports are honest, leaving one candidate and one surviving unit. Pre-arming the candidate union therefore works without selecting a unique diagnosis. This is a shared-budget argument, not probabilistic independence or trust in a majority.
+
+\paragraph{What is and is not new.}
+Safety without exact state reconstruction already has substantial precedents, including Tan et al. \cite{tan24,tan25}; list decoding explicitly preserves multiple candidates \cite{guruswami}; and resource-limited attacks and budgeted uncertainty are established models \cite{teixeira,bertsimas}. We claim neither principle as new. The proposed increment is the exact coupled diagnosis--reserve frontier, its attaining construction and lower bounds, a tight unbounded-gap comparison with a specific decoupled design rule, and extensions that recover and surpass the earlier manuscript's finite example. First priority of the exact combined application has not been independently certified.
+
+\paragraph{Scope of coexistence.}
+Here coexistence means preserving specified human service requirements during a correctly authorized intervention in an AI-supported system. It does not mean that machines have been recognized as persons. Eligibility, the protected targets, and the final effect boundary are explicit inputs. Safe revocation is one necessary engineering component of broader coexistence, not a complete theory of justice, consent, consciousness, or stable international governance.
+
+\section{Operational model and trust boundary}
+\label{sec:model}
+\subsection{Protected demands and a single pre-commit choice}
+There are $n$ protected service channels, indexed by $[n]=\{1,\ldots,n\}$. In a revocation episode, a set $S\subseteq[n]$ of exactly $k$ channels needs replacement support, where $1\leq k\leq n$. The other channels remain supported by their admitted primary routes. An operator has authorized removal of a specified old effect source. Blocking that source and supplying $S$ are separate obligations.
+
+The controller receives a report vector $z$ before making a single pre-commit decision $P(z)\subseteq[n]$. It pre-arms one backup unit for each channel in $P$. This consumes $|P|$ simultaneously available slots even if only a subset is eventually needed. The service condition is $S\subseteq P$ and sufficient available capacity to provision all of $P$. A reserve unit cannot be assigned to several armed channels simultaneously. No diagnosis-dependent retry, later primary-route probing, or hidden router may change $P$ after commitment.
+
+\paragraph{The pooling premise.}
+Surviving reserve units are universally connectable, and a faithful, work-conserving allocation mechanism can bind them to the \emph{already fixed} $P$. This binding may use bank availability, but it neither changes $P$ nor reveals new primary-failure information to its selection. The closed form does not solve arbitrary fixed bank-to-target routing. If even this binding is unavailable, a graph allocation model must replace the scalar capacity condition. Conversely, if pre-commit bank-failure localization or a later adaptive router gives more information, the lower bound for our observation model need not apply.
+
+\subsection{Root faults across two role classes}
+There are $d$ diagnostic roots and $b$ backup roots, with disjoint effective control ancestry in the main theorem. Bank $i$ has integer capacity $c_i\geq0$. The adversary controls sets $A$ of diagnostic roots and $B$ of bank roots satisfying
+\begin{equation}
+\label{eq:budget}
+|A|+|B|\leq f.
+\end{equation}
+A compromised diagnostic may emit any validly sourced report. A compromised bank may withhold all its capacity. Both effects are arbitrary within the specified powers; there are no probability or benevolence assumptions. A normal diagnostic reports the same true set $S$. Reports use the alphabet $\binom{[n]}{k}$, so a symbol can contain more than one bit. Authentication establishes the emitting root, not truth. At most one accepted report per root is used in an episode. Agent replicas beneath that root do not create additional votes.
+
+The root budget bounds the \emph{union} of compromised roots over the episode, not merely the number simultaneously active. Persistent historical changes count. Co-location of a diagnostic and a bank under one root violates the disjoint-role assumption: one compromise can then spend one unit while causing both effects. A general joint-world formulation below handles such ancestry, and a later section gives a closed form for one co-located family.
+
+\subsection{Final-effect revocation}
+Every old-source effect path passes through a serial veto on each of a declared set of roots. A normal veto blocks the revoked source independently of that source's wishes; a compromised veto may allow it. Backup support uses a separate admitted path. A sufficient complete cut has $f+1$ distinct veto owners. For the main architecture, put vetoes on the $b$ backup roots; if $b>f$, at least one veto survives. A bypass or a common upstream owner invalidates this reasoning.
+
+The reference contract, report acceptance logic, set-union rule, and stipulated capacity binding must be faithfully implemented. This manuscript does not prove an invulnerable external authority or count a trusted experimental parent as an independent fault domain. Attacks on the reference mechanism require a larger transition model and may make the task impossible. Our quantitative root count concerns the explicitly faulted roles, not every physical component of a real installation.
+
+\subsection{The guarantee}
+The controller must, for every admitted $S,A,B$ and forged report vector, pre-arm enough supported channels and prevent revoked effects. Nominal capacity $R=\sum_i c_i$ is chosen before the episode. The controller need not identify $S$, $A$, or $B$. Delaying indefinitely, accepting service loss, or silently removing a protected target does not count as success. Timely honest reports, bank service, and gate action are premises; communication latency is not measured by the static theorem.
+
+\section{The joint-world certificate}
+\label{sec:joint}
+Let $\mathcal W$ be any declared finite family of joint worlds $w$. A world specifies its true required channels $D(w)$, possible observations, surviving resource capacity $C(w)$, and effectiveness $G(w)$ of the final veto cut. For an observation $z$, set
+\begin{equation}
+B_z=\{w:z\text{ can be observed in }w\},\qquad
+U_z=\bigcup_{w\in B_z}D(w).
+\end{equation}
+Only nonempty $B_z$ are considered.
+
+\begin{proposition}[Task-sufficient ambiguity \sid{CB-P1}]
+\label[proposition]{prop:joint}
+Under the fixed-pre-arm and universal-pool premises, a successful observation-based plan exists if and only if $G(w)$ holds in every admitted world and
+\begin{equation}
+\label{eq:joint}
+C(w)\geq |U_z|\qquad\text{for all }z\text{ and }w\in B_z.
+\end{equation}
+When it exists, $P(z)=U_z$ is an attaining choice.
+\end{proposition}
+\begin{proof}
+A successful plan must include each channel required in any world compatible with $z$; omitting one fails in that world. Thus it must include $U_z$ and needs at least $|U_z|$ available units in every compatible world. A failed effect cut cannot be repaired by more capacity. Conversely, arm $U_z$, use the stipulated capacity binding, and apply the surviving cut. These meet both conditions in every compatible world.
+\end{proof}
+This is the inherited compatible-action intersection principle specialized to service replacement, not a new theory of partial information. What matters for the new results is that $C(w)$ and $B_z$ are evaluated in the \emph{same} world. Replacing \cref{eq:joint} by
+\begin{equation}
+\label{eq:rect}
+\min_w C(w)\geq\max_z|U_z|
+\end{equation}
+is sufficient but need not be necessary: its two extremes may require different, mutually incompatible uses of the fault budget. This is a non-rectangular uncertainty issue, not a claim that all conservative designs are mistaken.
+
+\section{An exact general diagnosis--reserve frontier}
+\label{sec:main}
+Assume the separated-role model of \cref{sec:model}. If $b\leq f$, the adversary can remove every bank, making any positive replacement demand impossible. Henceforth let $b>f$.
+
+\subsection{How much ambiguity can a given attack create?}
+Suppose first that $d>f$, and put $h=d-f>0$. In a received vector $z$, a set $T\in\binom{[n]}{k}$ is a possible true set precisely when at least $h$ diagnostics report $T$. Indeed, otherwise more than $f$ diagnostics must have lied; conversely, if at least $h$ agree, all other diagnostic roots can be assigned to the compromised set, with no bank compromise in that explanatory world.
+
+\begin{lemma}[Ambiguity conditioned on diagnostic corruption \sid{CB-L1}]
+\label[lemma]{lem:width}
+If the actual episode compromises $a$ diagnostic roots, $0\leq a\leq f$, the largest possible $|U_z|$ is
+\begin{equation}
+\label{eq:wa}
+w_a=\min\left\{n,\;k\left(1+\floor{\frac{a}{d-f}}\right)\right\}.
+\end{equation}
+This maximum is attainable for every choice of those $a$ roots and every allowed bank-fault set, by suitable true and false report sets.
+\end{lemma}
+\begin{proof}
+The true $S$ receives at least $d-a\geq h$ honest reports. Every other eligible candidate needs at least $h$ copies, all supplied by the $a$ compromised diagnostic roots. There are therefore at most $1+\lfloor a/h\rfloor$ candidate sets, each of size $k$. Their union has size at most \cref{eq:wa}.
+
+For attainment, use $h$ forged copies for each of up to $\lfloor a/h\rfloor$ alternative $k$-sets, with remaining forged copies reporting $S$. Choose $S$ and the alternatives disjoint until the universe is exhausted, using an overlapping final set if needed. Their union has size $\min(n,kt)$ where $t=1+\lfloor a/h\rfloor$. If fewer distinct sets are needed to cover $[n]$, use those and assign unused forged copies to $S$. This includes $n=k$, where every union simply has size $k$. The choice does not depend on which banks were attacked.
+\end{proof}
+When $d\leq f$, all diagnostics can be compromised in an alternative world explaining any observed vector. Accordingly, $U_z=[n]$ for every possible observation, even if the actual reports happen to be honest. This does not force actual attacks on both classes simultaneously; it is a statement about what the controller cannot exclude.
+
+\subsection{Integer redundancy under bank loss}
+For sorted capacities $c_{(1)}\leq\cdots\leq c_{(b)}$, losing any $r$ banks leaves at least $W$ units if and only if the sum of the smallest $b-r$ capacities is at least $W$.
+
+\begin{lemma}[Minimum nominal capacity for one prefix constraint \sid{CB-L2}]
+\label[lemma]{lem:capacity}
+For integers $W\geq0$ and $1\leq j\leq b$, the least total capacity whose $j$ smallest entries sum to at least $W$ is
+\begin{equation}
+\label{eq:caplemma}
+M(W,j,b)=W+(b-j)\ceil{W/j}.
+\end{equation}
+A balanced integer vector, whose entries differ by at most one, attains this value. For any total at least $M(W,j,b)$, a balanced vector meets the same prefix constraint.
+\end{lemma}
+\begin{proof}
+If the smallest $j$ entries sum to at least $W$, their largest is at least $\lceil W/j\rceil$; every remaining entry is at least that large. This yields the lower bound. Write $W=jq+r$, $0\leq r<j$. If $r=0$, $b$ entries of $q$ attain it. If $r>0$, take $b-j+r$ entries of $q+1$ and the other $j-r$ entries of $q$. The smallest $j$ sum to $jq+r=W$, and the total is the claimed expression. Increasing the balanced total one unit at a time cannot reduce any smallest-prefix sum.
+\end{proof}
+
+\begin{theorem}[Exact common-budget reserve \sid{CB-T1}]
+\label{thm:frontier}
+For $b>f$ and $d>f$, the minimum integer nominal backup capacity is
+\begin{equation}
+\boxed{\displaystyle
+\Rmin(n,k,f,d,b)=\max_{0\leq a\leq f}
+\left\{w_a+(f-a)\ceil{\frac{w_a}{b-f+a}}\right\},}
+\label{eq:main}
+\end{equation}
+where $w_a$ is given by \cref{eq:wa}. Distributing $\Rmin$ as evenly as possible over the $b$ banks and arming the union of all report sets with multiplicity at least $d-f$ attains the bound.
+
+If $b>f$ but $d\leq f$, the exact minimum is
+\begin{equation}
+\label{eq:nodiagnosis}
+\Rmin=n+f\ceil{n/(b-f)}.
+\end{equation}
+If $b\leq f$, no finite reserve confined to those banks suffices.
+\end{theorem}
+\begin{proof}
+Fix $a\leq f$. The adversary can attack exactly $a$ diagnostic roots and any $f-a$ bank roots. By \cref{lem:width}, a report requiring $w_a$ pre-armed units can be produced for every such bank choice. Necessarily,
+\begin{equation}
+\label{eq:prefix}
+\sum_{i=1}^{b-f+a}c_{(i)}\geq w_a\quad(0\leq a\leq f).
+\end{equation}
+These inequalities are also sufficient. In an actual world with $a$ corrupted diagnostics, no more than $f-a$ banks are lost and the selected union has size at most $w_a$.
+
+Apply \cref{lem:capacity} to each constraint with $j=b-f+a$. Each term of \cref{eq:main} is a necessary lower bound on the total. At the maximum of those terms, one balanced vector satisfies \emph{all} the prefix constraints simultaneously, proving sufficiency and attainment. A veto on each bank root leaves an honest veto because $b>f$.
+
+If $d\leq f$, every report has union $[n]$. Even an actual attack on $f$ banks with entirely honest diagnostics therefore requires all $n$ slots; the controller cannot use the truth of those diagnostics without additional evidence. The bank-prefix condition for $W=n$ gives \cref{eq:nodiagnosis}, attained by ignoring reports and arming all channels. Finally, if $b\leq f$, losing all banks leaves zero capacity for positive $k$.
+\end{proof}
+The computation of \cref{eq:main} uses $f+1$ integer expressions rather than enumeration over $\binom nk$ failure sets. Runtime decoding uses a multiplicity count over $d$ reports and a set union. It does not decide which root lied, and does not require learning the actual bank attack before selecting $P$.
+
+\paragraph{The majority limit appears as a special case.}
+If $d\geq2f+1$, then $d-f>f$ and $w_a=k$ for every $a$. Equation~\eqref{eq:main} reduces to $k+f\lceil k/(b-f)\rceil$, the reserve needed after the worst bank loss with exact failure localization. The general formula covers the intermediate regime $f<d\leq2f$, where several candidate sets can remain possible and diagnosis-dependent resource loss matters.
+
+\begin{table}[t]
+\centering\small
+\caption{Exact examples from the formula, with $n=12$, $k=2$, and common fault budget $f=2$. Capacities are model units, not measured infrastructure.}
+\begin{tabular}{@{}rrrrl@{}}\toprule
+Diagnostic roots $d$&Bank roots $b$&Minimum $R$&Balanced capacities&Interpretation\\\midrule
+2&3&36&$12,12,12$&All diagnostics may be false\\
+3&3&6&$2,2,2$&Non-unique diagnosis allowed\\
+3&6&6&$1,1,1,1,1,1$&Ambiguity determines reserve\\
+4&6&4&$0,0,1,1,1,1$&Intermediate evidence regime\\
+5&6&4&$0,0,1,1,1,1$&Unique diagnosis guaranteed\\\bottomrule
+\end{tabular}
+\end{table}
+Zero-capacity banks in this optimization mean role domains without provisioned backup units. They may still host gates. Counting an empty bank does not itself add any guarantee; the smallest-prefix constraints continue to account for all positive capacity.
+
+\section{Minimum reserve without unique diagnosis}
+\label{sec:nonseparation}
+\begin{corollary}[An optimal low-diagnostic architecture \sid{CB-C1}]
+\label[corollary]{cor:minimal}
+For $d=b=f+1$, the exact reserve is $(f+1)k$, attained by $k$ units in every bank. For $f\geq1$ and $n>k$, unique diagnosis of $S$ is not guaranteed in this architecture, yet safe revocation and protected service are guaranteed within the model.
+\end{corollary}
+\begin{proof}
+An attack on any $f$ bank roots leaves one bank; with no diagnostic corruption, the true replacement set needs $k$ units. Every bank must therefore contain at least $k$ units, yielding $(f+1)k$.
+
+For sufficiency, suppose $a$ diagnostic roots and $r$ bank roots are corrupted, with $a+r\leq f$. At least one diagnostic is honest. Every received set is a candidate when $d-f=1$, and the union of the true set and at most $a$ false sets has at most $(a+1)k$ members. Surviving capacity is $(f+1-r)k\geq(a+1)k$. The union plan and remaining veto succeed.
+
+For non-identifiability, choose distinct failure sets $S,T$. A vector containing one $S$ and $f$ copies of $T$ is consistent both with true $S$ and $f$ corrupt diagnostics, and with true $T$ and one corrupt diagnostic. Both worlds satisfy the same budget, so no observation-only decoder can always identify the true set. The same union action is nevertheless safe in both.
+\end{proof}
+This separates \emph{task success} from \emph{correct diagnosis}. It does not show that accurate estimates are never useful, nor contradict separation theorems for other objectives and plant assumptions. In particular, secure stabilization of specified linear systems and completion of a finite set-covering service handoff are different problems \cite{fawzi}.
+
+\begin{corollary}[Tight loss from decoupling worst cases \sid{CB-C2}]
+\label[corollary]{cor:gap}
+Fix the placement of $f+1$ diagnostic roots and $f+1$ bank roots, and assume $n\geq(f+1)k$. A design rule that insists every surviving bank configuration can supply the global largest ambiguity union requires $(f+1)^2k$ nominal units. The exact common-budget requirement is $(f+1)k$. Their ratio $f+1$ is unbounded as the declared fault budget grows.
+\end{corollary}
+\begin{proof}
+The report union can have size $(f+1)k$: let the true set and $f$ false sets be disjoint and let all $f$ corrupted roots be diagnostic. Separately, $f$ bank faults can leave any one bank. Combining these extremes requires each bank to hold $(f+1)k$ units, totaling $(f+1)^2k$. That allocation is sufficient for the decoupled requirement. But the two extremes cannot co-occur under \cref{eq:budget}; \cref{cor:minimal} gives the exact smaller design.
+\end{proof}
+The comparison fixes the role placement and the specified modular rule. It is not a lower bound on all systems that use state estimation. A designer may intentionally require the stronger model with separate diagnostic and bank budgets; the larger capacity is then protection against additional attacks rather than a mistake. Our claim is that silently imposing that stronger model can obscure the exact feasibility of the declared one.
+
+\paragraph{A limiting numerical sequence.}
+For $(f,k,n)=(1,1,2),(2,2,6),(4,2,10)$, the minimal construction uses respectively $2,6,10$ units. The decoupled design in the same placements uses $4,18,50$. These numbers are consequences of the proved parameter family, not experimental performance estimates. They exhibit why increasing a fault budget need not require provisioning the product of independently maximized failures.
+
+\section{Heterogeneous diagnostic maps and co-located roots}
+\label{sec:extensions}
+The separated-role assumption is valuable but not universal. A root may control reports, reserves, and a veto simultaneously. In that setting the common-budget scalar $a+r$ cannot be used without examining ancestry. The joint-world criterion \cref{prop:joint} remains applicable.
+
+\subsection{Exact one-fault synthesis for arbitrary finite reports}
+Suppose $m\geq2$ independent roots each own an arbitrary diagnostic map and a bank of integer capacity $c_i$. At most one root is compromised. The world model defines the observation cells and required union $U_z$. A compromised reporter is allowed to tell the truth, so a world with no fault has an observational counterpart under any one-root fault, while that fault can still destroy its bank.
+
+For each root $i$, let
+\begin{equation}
+L_i=\max\{|U_z|:\text{some world with root }i\text{ compromised emits }z\}.
+\end{equation}
+Assume normal effect guards form a complete cut under every one-root fault and the universal pool remains faithful. The $L_i$ are conditional ambiguity costs, not merely individual diagnostic error rates.
+
+\begin{theorem}[Heterogeneous one-fault capacity \sid{CB-T2}]
+\label{thm:hetero}
+Under these premises, the minimum nominal capacity is
+\begin{equation}
+\boxed{\Rmin=\max\left\{\max_i L_i,\;\ceil{\frac{\sum_i L_i}{m-1}}\right\}.}
+\label{eq:hetero}
+\end{equation}
+An attaining placement can be found by filling nonnegative integer capacities subject to $c_i\leq\Rmin-L_i$ and $\sum_i c_i=\Rmin$.
+\end{theorem}
+\begin{proof}
+Let $R=\sum_i c_i$. The joint-world criterion is exactly $R-c_i\geq L_i$ for all $i$. No-fault requirements are included because every honest observation is also possible when one compromised root tells the truth. Necessity gives $R\geq\max_iL_i$ and, by summing the upper bounds on $c_i$, $(m-1)R\geq\sum_iL_i$. Conversely, at the displayed $\Rmin$, the nonnegative integer upper bounds $\Rmin-L_i$ have total at least $\Rmin$. Fill them greedily until exactly that total is allocated. Every joint-world constraint then holds.
+\end{proof}
+A concrete two-state binary example has truthful codewords $0000$ and $1100$. Roots 1 and 2 carry diagnostic content; roots 3 and 4 report a fixed bit. The conditional costs are $(2,2,1,1)$, and capacities $(0,0,1,1)$ attain $R=2$. A conflicting first pair requires arming both states, but that fault leaves both banks intact. A fault in a bank root leaves one unit and unambiguous first-pair reports. Using the global worst ambiguity of two with the global surviving capacity of one would incorrectly reject this design under the common-budget model.
+
+\subsection{An arbitrary-size generalization of PR-v5}
+Partition the possible affected channels into $q$ nonempty classes of sizes $g_1,\ldots,g_q$. All $m$ root reporters repeat the truthful class label; a corrupted root may change its label and disable its own bank. At most $f$ roots fail. Exactly one primary channel is affected, but every channel in each compatible class must be pre-armed. Sort the class sizes nonincreasingly.
+
+\begin{theorem}[Replicated-class frontier \sid{CB-T3}]
+\label{thm:replicated}
+If $m>f$, put
+\begin{equation}
+ h=m-f,\qquad t=\min\{q,\floor{m/h}\},\qquad W=\sum_{j=1}^{t}g_{(j)}.
+\end{equation}
+With a complete veto cut on at least $f+1$ of these roots, the minimum nominal capacity is
+\begin{equation}
+\boxed{\Rmin=W+f\ceil{W/(m-f)}.}
+\label{eq:replicated}
+\end{equation}
+For $m\leq f$, all root-controlled banks and gates can be lost and the guarantee is impossible.
+\end{theorem}
+\begin{proof}
+A reported class is compatible with the fault bound precisely when it occurs at least $h$ times. Hence at most $\lfloor m/h\rfloor$ classes are compatible and their union contains at most $W$ channels. For any fixed set of $f$ faulty roots, choose the true class among the $t$ largest. The $h$ honest reports identify that class. Use $h$ corrupted reports for each of the other $t-1$ classes and assign any leftover reports to the true class. This is possible because $th\leq m$, and attains $W$ for that same fault set. Thus every loss of $f$ banks must leave at least $W$ units. Lemma~\ref{lem:capacity} with $j=m-f$ gives the lower bound and balanced attainment. Smaller fault sets cannot create a larger union or remove more capacity.
+\end{proof}
+For $g=(2,2)$ and $f=1$, this recovers PR-v5: $m=1$ is impossible, $m=2$ requires eight units, and every $m\geq3$ requires three. For six equal classes of size 20 and $f=2$, $m=3,4,5,6$ respectively require $180,80,34,30$ units. The repeated label's alphabet and message length are part of the specification; these are not fair comparisons to a richer diagnostic protocol unless those costs are included.
+
+\section{Verification and executable synthesis}
+\label{sec:verification}
+The main artifact is an executable finite-world oracle, not a newly trained model. Its purpose is to check the algebra independently of the formula and to preserve falsifiable claims.
+
+\paragraph{Separated-role oracle.}
+For a parameter tuple $(n,k,f,d,b)$, enumerate each true $k$-set, every diagnostic and bank fault set satisfying the common budget, and every forged report assignment. Group the resulting worlds by the identical received vector. Compute the required union directly, attach the corresponding bank-loss masks, then search integer capacity placements by increasing nominal total. The oracle does not use $w_a$ or the closed-form resource expression. Bank permutation symmetry permits sorted placements in this homogeneous role class.
+
+The complete basic grid uses $n\in\{2,3,4\}$, $1\leq k\leq\min(2,n)$, $0\leq f\leq2$, $0\leq d\leq4$, and $f+1\leq b\leq4$. It contains 270 configurations. Six additional specified cases reach $n=6$, $k=3$, $f=3$, $d=6$, or $b=5$. Across these 276 configurations, 649,320 joint worlds are generated. Every independently minimized capacity equals \cref{eq:main} or \cref{eq:nodiagnosis}, and each balanced attaining vector passes all retained joint-world constraints.
+
+\paragraph{Co-located and heterogeneous checks.}
+The replicated-class suite uses six declared class-size vectors, $m=1,\ldots,6$ and $0\leq f\leq\min(2,m-1)$, giving 90 configurations and 6,816 generated worlds. All optima match \cref{eq:replicated}. The one-fault heterogeneous suite covers all distinct binary diagnostic code sets of cardinality one through four in lengths two through four: 2,693 instances. An independent labeled-capacity search verifies \cref{eq:hetero}; it does not exploit bank permutation symmetry because the $L_i$ differ. The main and replicated searches together evaluate 5,082 candidate placements; that number does not include the separate heterogeneous search. A further action-level oracle tests 175 labeled allocations in seven selected configurations. For every observation it enumerates all armed sets and checks every actual failure/bank-loss world directly, without using the union shortcut. Its admissibility decisions agree with the joint-world criterion throughout.
+
+\paragraph{Negative controls and regression.}
+Three instances with $b=f$ contain an explicit all-bank-loss world with positive demand; capacity 100 in each bank still fails. A separate-budget control gives the adversary both $f$ diagnostic corruptions and $f$ bank losses, exceeding the common budget and defeating the minimal construction. A co-location control lets one root both lie and destroy a bank; it also defeats the separated-role construction. These are exact finite counterexamples, not exploits against real hardware. The supplied PR-v5 independent all-plan oracle was rerun: all 7,380 capacity profiles and the complete JSON outcomes match its archive. The old operating-system role experiments were not rerun or added to the new evidence count.
+
+\begin{table}[t]
+\centering\small
+\caption{New verification scope. Counts describe mathematical configurations, not risk samples or empirical probabilities.}
+\begin{tabularx}{\linewidth}{@{}XrX@{}}\toprule
+Test family&Instances&Independent check\\\midrule
+Common-budget resource frontier&276&Joint-world cells and capacity search\\
+Replicated classes with co-location&90&World/forgery enumeration and allocation\\
+Heterogeneous one-fault diagnostics&2,693&Labeled integer allocation search\\
+Direct pre-armed action audit&175&All actions against all actual worlds\\
+All backup roots may fail&3&Explicit unsuppliable worlds\\
+Minimal construction across budgets&21&Formula specialization, not extra world evidence\\
+PR-v5 regression&7,380&Inherited direct-plan oracle, unchanged\\\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Reproduction.}
+The new Python scripts use only the standard library and make no network requests. The main script provides the closed-form functions as reusable routines as well as the independent oracles. The results record all parameter tuples, witness allocations, negative controls and proof-to-test mappings. A second clean run checks semantic equality excluding elapsed runtime. Machine speed, assertion count and source hashes establish neither originality nor an empirical bound on independent control roots.
+
+\begin{lstlisting}
+python src/coupled_budget.py --out data/coupled_budget_results.json
+python src/direct_plan_oracle.py --out data/direct_plan_results.json
+cd paper
+pdflatex -interaction=nonstopmode -halt-on-error manuscript.tex
+pdflatex -interaction=nonstopmode -halt-on-error manuscript.tex
+\end{lstlisting}
+
+\section{Interpretation for AI coexistence}
+\label{sec:interpretation}
+\subsection{Intelligence is not the unit of controllability}
+The guarantees quantify over all adversarial reports and capacity refusals allowed by the root model. They do not assume the adversary is less intelligent than the operator or honestly explains its goals. Conversely, superior intelligence is not a premise that the adversary can compromise arbitrary physical roots. A capability assessment must be translated into an explicit set of achievable interventions; otherwise neither a positive nor a negative control theorem is grounded.
+
+Deterministic networks can generate different outputs from different full inputs, memory states and authority configurations while preserving fixed weights. Nothing in the arguments requires intrinsic stochasticity or a felt preference. Several model families may share one root; one model may run under many roots. The input to the theorem is the effective control structure, not the count of conversational personae.
+
+\subsection{A more precise boundary than ``understand first, control later''}
+The report vector may not identify the failed channels or the dishonest roots. What it must identify is a set of actions that succeeds in every compatible joint world. The main corollary attains minimum capacity without complete diagnosis because greater report ambiguity certifies a restriction on \emph{how much bank loss remains possible}. This is not certainty about an individual root; it is a relation among admitted worlds.
+
+Neither does the result license ignoring uncertainty. Wrongly expanding the allowed bank failures after claiming they share one budget can destroy the guarantee; wrongly shrinking the allowed attack set makes the certificate unsound. A useful coexistence assurance must therefore expose the coupling assumptions rather than hide them in separate monitor accuracies and backup reliability scores.
+
+\subsection{From one episode to sustained operation}
+The theorem is a one-episode result with fixed root ancestry and timely effects. To reuse it over time, the protection ledger, live supply, diagnostic maps, and cumulative corruption bound must be re-established before each commitment. A report generated before an unauthorized policy change is not automatically evidence about the state after it. A per-instant corruption limit does not bound accumulated corruption of persistent evidence or resources.
+
+More formally, embed each admitted intervention in a state model containing outstanding human protections, live resources, true authority scope, and evidence history. If every transition starts in a certified state and its actual successor re-establishes the next certificate while honoring existing obligations and deadlines, induction gives a repeated-episode guarantee. Merely verifying our static formula once does not establish this closure. The preceding revisions supplied history and deadline counterexamples \cite{liu5}; the current results replace their special resource calculation, not the need for temporal accountability.
+
+\subsection{UCT and subjecthood uncertainty}
+UCT I distinguishes actual process tokens, structural types and causal lineage, and does not infer a unique subject count from software names or shared structure \cite{uct}. Under its explicit C1/U1 commitments, suitable actual processes have experiential organization. Those commitments do not assign signed welfare, a human-like self, intrinsic exit rights, or a legitimate initial protection contract.
+
+Our proofs require none of those phenomenological conclusions. The protected demands may be exclusively human, and withdrawal or revocation may be authorized by human principals. A machine request is not treated as morally self-validating. Possible future evidence of artificial interests can change an explicitly stated protection contract and therefore its capacity needs; it cannot silently change which current theorem has been proved. This division allows researchers who disagree about AI subjecthood to evaluate the same operational result.
+
+The interaction with UCT is methodological: actual organization, causal authority and the origin of evidence must not be replaced by convenient labels. A formal all-of condition must hold in the same world. Combining one world's maximum ambiguity with another world's maximum capacity destruction demonstrates the same-instance issue in a quantitative form. This is a control-theoretic application, not an independent confirmation of consciousness theory.
+
+\section{Nearest prior work and limits of originality}
+\paragraph{Secure control and incomplete state reconstruction.}
+Fawzi, Tabuada and Diggavi develop resilient estimation and output-feedback stabilization for specified linear systems, with a separation result under their assumptions \cite{fawzi}. Our finite covering objective does not refute that theorem. Tan et al. explicitly study safety under severe sensor attacks and compute safe inputs without solving full secure state reconstruction \cite{tan24,tan25}. GUARDIAN similarly reasons over sets of possible states under adversarial perception \cite{guardian}. These are direct precedents for the broad idea that safety can need less information than exact recovery. Our proposed distinction is the explicit joint budget that limits both candidate inflation and resource destruction, together with its exact integer resource cost.
+
+\paragraph{List decoding and resource-limited uncertainty.}
+List decoding supplies the language of preserving multiple plausible states rather than always selecting one \cite{guruswami}. Teixeira et al. model adversarial knowledge, disclosure and disruption resources \cite{teixeira}; Bertsimas and Sim quantify budgeted uncertainty and the cost of robustness \cite{bertsimas}. These precedents prevent claiming novelty for either a fault budget or conservatism from independent worst cases. The contribution is the concrete width $w_a$, the simultaneously attainable prefix bound, the minimal-capacity non-identifiable construction and its exact factor comparison for the specified architecture.
+
+\paragraph{AI control.}
+Greenblatt et al. evaluate protocols that preserve usefulness despite intentional model subversion \cite{greenblatt}. Terekhov et al. demonstrate adaptive attacks on trusted LLM monitors \cite{terekhov}. The latter motivates treating authentic monitor output as possibly false; it does not empirically validate our bounded root model. We do not claim that the small deterministic oracles reproduce a frontier-model benchmark, or that an untested physical root can be trusted because the algebra is correct.
+
+\paragraph{Relationship to PR-v5.0.0.}
+The earlier four-channel, one-fault result is recovered exactly rather than relabeled as a new experiment. New results apply to arbitrary $n,k,f,d,b$, multiple primary failures, arbitrary binary report maps in the one-fault theorem, and arbitrary replicated classes. They therefore add a substantive generalization with matching lower and upper arguments. That is the stated theoretical contribution. A global priority survey has not established that no equivalent formula exists elsewhere; the manuscript and source comparisons should remain open to correction.
+
+\section{Adversarial audit and scope}
+\label{sec:limits}
+The formula is not a universal statement that future ASI is controllable. The following failures each matter independently.
+
+\paragraph{Hidden shared control.}
+The main theorem needs disjoint effective ancestry for the diagnostic and bank classes. Two credentials, two corporations, or two model brands are not evidence of that premise. A common controller may cause both effects with one compromise, invalidating $|A|+|B|\leq f$. Such cases require the joint-world criterion or a co-located analysis, not the separated closed form.
+
+\paragraph{An uncontrolled reference mechanism.}
+Correct union selection, honest bank behavior when uncorrupted, faithful capacity binding, and an actual complete veto cut remain assumptions. Root compromise that changes the accepting contract or permits an unmediated output is not captured merely by changing one diagnostic symbol. Adding those capabilities can eliminate every safe plan. There is no proof of an unchangeable authority external to all superintelligences.
+
+\paragraph{Timing and action-menu changes.}
+An opportunity to probe, retry or route adaptively after commitment can reduce pre-arming requirements; delayed honest messages, nonfungible reserves or switching costs can increase them. The statements refer to a declared single-step action menu and timely observation. Results for richer controllers are not violations of its lower bound because they solve a different optimization problem.
+
+\paragraph{Physical threats beyond withholding.}
+A compromised bank is modeled as losing capacity, not as adding arbitrary malicious effects to a trusted backup channel. An honest gate blocks only its specified revoked source. Additional attacks on replacement content, shared power, fuel, clocks, or the environment require extra constraints. All software checks in this revision are finite enumerations, not measurements of physical supply, firmware or actual root independence.
+
+\paragraph{Normative and phenomenal claims.}
+The reference human authorization and service contract are given, not derived from unanimous values. Maintaining a service does not establish justice, and declining an infeasible plan does not settle which obligation should prevail in a real emergency. No model calls or consciousness measurements were performed. Prior role-process experiments are archived lineage, not new evidence here.
+
+\paragraph{What would falsify the mathematics?}
+A parameter tuple satisfying the premises for which the independent all-world oracle needs fewer or more units than \cref{eq:main}, a reported vector exceeding \cref{eq:wa} under its true attack count, or a balanced allocation failing an admitted world at the claimed capacity would refute a theorem or its implementation. Hardware evidence showing a hidden root would instead invalidate that installation's premise. These possibilities must be distinguished rather than answered by redefining the threat model after a failure.
+
+\section{Conclusion}
+A resource-constrained attack cannot necessarily realize every component's worst case simultaneously. This observation becomes operationally useful when converted into a joint-world certificate, an exact resource frontier and an attaining controller. For a broad separated-role model, the coupled fault budget yields a closed-form minimum for arbitrary channel, primary-failure and root-fault counts. At a particularly simple optimum, failure localization is impossible in some observations but safe revocation remains possible at the smallest physically allowed bank capacity. The nominal cost of independently combining worst-case ambiguity and worst-case resource loss is larger by an unbounded factor in the same role placement.
+
+These conclusions support a limited but general lesson for AI coexistence: neither perfect diagnosis nor a claim of machine subjecthood is required for every useful control guarantee. What is required is a faithful account of the actual action choices, the coupled uncertainties and the resources that remain in the same possible world. The results offer a reusable calculation rather than a promise of universal safety, and a theory-ready manuscript rather than a demand that its claims be accepted without independent review.
+
+\paragraph{Authorship, assistance and status.}
+Hongju Liu directed the research question and is the human author of record. ChatGPT assisted with source retrieval, mathematical derivation, counterexample checking, implementation, writing and typesetting. Workflow review is not independent peer review. This is one revised manuscript in the PR lineage, not a new publication for each checkpoint. No DOI has been created in this session, and no journal acceptance, real-world ASI guarantee, or confirmation of UCT is asserted.
+
+\appendix
+\section{Reusable synthesis procedures}
+For the separated model, compute $w_a$ and the $f+1$ lower-bound terms, take their maximum, and set $q=\lfloor R/b\rfloor$, $r=R-bq$. Assign $q+1$ units to $r$ banks and $q$ to the remaining banks. The smallest-prefix proof ensures the same placement satisfies every diagnostic/bank split; no attacker-specific re-provisioning is used.
+
+\begin{lstlisting}[caption={Separable-role synthesis; all inputs must refer to one validated episode.}]
+if b <= f:
+    return IMPOSSIBLE_WITH_THESE_BANK_ROOTS
+if d <= f:
+    R = n + f * ceil(n / (b-f))
+    policy = arm_all_channels
+else:
+    R = 0
+    for a in range(f+1):
+        w = min(n, k * (1 + floor(a / (d-f))))
+        R = max(R, w + (f-a) * ceil(w / (b-f+a)))
+    policy = union_of_reported_k_sets_with_count_at_least(d-f)
+return balanced_capacities(R, b), policy, complete_veto_cut
+\end{lstlisting}
+A missing or malformed report is treated as an erasure, not a new plausible $k$-set. With at most $f$ affected reporting roots and $d>f$, honest copies of $S$ still arrive. Erasures cannot enlarge the valid candidate union relative to arbitrary false symbols, so the same conservative capacity bound suffices. This observation does not cover loss of an unbounded number of honest reports from a separate communication failure.
+
+\section{Proof-to-code and evidence manifest}
+The source routines \texttt{frontier}, \texttt{repeated\_frontier} and \texttt{general\_one\_fault} implement CB-T1, CB-T3 and CB-T2 respectively. \texttt{joint\_world\_oracle} generates observation cells from raw admissible worlds without using the closed form. \texttt{brute\_optimum} searches capacity placements directly. The heterogeneous suite separately enumerates labeled compositions because its roots are not exchangeable. The delivered archive contains source, full numerical outputs, frozen PR-v5 regression material, a claim ledger, a prior-art comparison, an audit and Chinese handoff.
+
+The full historical UCT graph has not been re-proved. The present candidate graph retains explicit dependencies and disabled admission status; publication readiness of this self-contained conditional mathematical paper is separate from admitting every result as a formal UCT premise. The proof does not depend on unreviewed phenomenal bridge claims. A persistent preservation receipt states exactly what was saved remotely and what is provided in the downloadable archive.
+
+\clearpage
+\begin{thebibliography}{99}\small
+\bibitem{liu5} H. Liu. \emph{Coexistence Root Trust}, PR-v5.0.0, research manuscript and reproducibility package, 2026. Repository \texttt{thechurchofagi/trinity-accord}, research branch \texttt{uct-agent-consciousness-workspace}; source baseline \texttt{6ef68fb3f9b9}. Not peer reviewed.
+\bibitem{fawzi} H. Fawzi, P. Tabuada, and S. Diggavi. Secure Estimation and Control for Cyber-Physical Systems Under Adversarial Attacks. \emph{IEEE Transactions on Automatic Control}, 59(6):1454--1467, 2014. \href{https://doi.org/10.1109/TAC.2014.2303233}{doi:10.1109/TAC.2014.2303233}. Author preprint: \url{https://arxiv.org/abs/1205.5073}.
+\bibitem{tan24} X. Tan, P. Ong, P. Tabuada, and A. D. Ames. Safety of Linear Systems under Severe Sensor Attacks. \emph{IEEE Conference on Decision and Control}, 2024. \url{https://arxiv.org/abs/2409.08413}.
+\bibitem{tan25} X. Tan, P. Ong, P. Tabuada, and A. D. Ames. Computationally Efficient Safe Control of Linear Systems under Severe Sensor Attacks. \emph{American Control Conference}, 2025. \href{https://doi.org/10.23919/ACC63710.2025.11107529}{doi:10.23919/ACC63710.2025.11107529}. \url{https://arxiv.org/abs/2502.20718}.
+\bibitem{guruswami} V. Guruswami. Algorithmic Results in List Decoding. \emph{Foundations and Trends in Theoretical Computer Science}, 2(2):107--195, 2006. \href{https://doi.org/10.1561/0400000007}{doi:10.1561/0400000007}.
+\bibitem{teixeira} A. Teixeira, I. Shames, H. Sandberg, and K. H. Johansson. A Secure Control Framework for Resource-Limited Adversaries. \emph{Automatica}, 51:135--148, 2015. \url{https://arxiv.org/abs/1212.0226}.
+\bibitem{bertsimas} D. Bertsimas and M. Sim. The Price of Robustness. \emph{Operations Research}, 52(1):35--53, 2004. \href{https://doi.org/10.1287/opre.1030.0065}{doi:10.1287/opre.1030.0065}.
+\bibitem{guardian} N. Rober, A. Rose, and J. P. How. GUARDIAN: Safety Filtering for Systems with Perception Models Under Adversarial Attack. Preprint, 2026. \url{https://arxiv.org/abs/2602.06026}.
+\bibitem{greenblatt} R. Greenblatt, B. Shlegeris, K. Sachan, and F. Roger. AI Control: Improving Safety Despite Intentional Subversion. \emph{ICML}, PMLR 235:16295--16336, 2024. \url{https://proceedings.mlr.press/v235/greenblatt24a.html}.
+\bibitem{terekhov} M. Terekhov, A. Panfilov, D. Dzenhaliou, C. Gulcehre, M. Andriushchenko, A. Prabhu, and J. Geiping. Adaptive Attacks on Trusted Monitors Subvert AI Control Protocols. Preprint, revised 2 March 2026. \url{https://arxiv.org/abs/2510.09462v2}.
+\bibitem{uct} H. Liu. \emph{Unified Consciousness Theory I: Structural--Experiential Identity and the Continuity from Physical Process to Conceptual Self}, v1.2. Theoretical preprint, 2026. \href{https://doi.org/10.5281/zenodo.23131575}{doi:10.5281/zenodo.23131575}. C1/U1 and the process ontology are theoretical commitments, not findings established here.
+\end{thebibliography}
+\end{document}
