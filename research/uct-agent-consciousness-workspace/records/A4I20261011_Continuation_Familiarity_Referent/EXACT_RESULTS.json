@@ -1,0 +1,32 @@
+{
+  "all_signatures_distinct": true,
+  "pairwise_hamming_distances": {
+    "ease_substitution__vs__practice_memory_substitution": 4,
+    "ease_substitution__vs__target_or_memory": 4,
+    "practice_memory_substitution__vs__target_or_memory": 2,
+    "target_content__vs__ease_substitution": 4,
+    "target_content__vs__practice_memory_substitution": 4,
+    "target_content__vs__target_or_memory": 2
+  },
+  "phenomenal_assignments": 0,
+  "policy_signatures": {
+    "ease_substitution": "11001100",
+    "practice_memory_substitution": "01010101",
+    "target_content": "00001111",
+    "target_or_memory": "01011111"
+  },
+  "rows": [
+    {"intended_content_in_vignette": 0, "effort_high": 0, "remembers_practice": 0, "policy_outputs": {"target_content": 0, "ease_substitution": 1, "practice_memory_substitution": 0, "target_or_memory": 0}},
+    {"intended_content_in_vignette": 0, "effort_high": 0, "remembers_practice": 1, "policy_outputs": {"target_content": 0, "ease_substitution": 1, "practice_memory_substitution": 1, "target_or_memory": 1}},
+    {"intended_content_in_vignette": 0, "effort_high": 1, "remembers_practice": 0, "policy_outputs": {"target_content": 0, "ease_substitution": 0, "practice_memory_substitution": 0, "target_or_memory": 0}},
+    {"intended_content_in_vignette": 0, "effort_high": 1, "remembers_practice": 1, "policy_outputs": {"target_content": 0, "ease_substitution": 0, "practice_memory_substitution": 1, "target_or_memory": 1}},
+    {"intended_content_in_vignette": 1, "effort_high": 0, "remembers_practice": 0, "policy_outputs": {"target_content": 1, "ease_substitution": 1, "practice_memory_substitution": 0, "target_or_memory": 1}},
+    {"intended_content_in_vignette": 1, "effort_high": 0, "remembers_practice": 1, "policy_outputs": {"target_content": 1, "ease_substitution": 1, "practice_memory_substitution": 1, "target_or_memory": 1}},
+    {"intended_content_in_vignette": 1, "effort_high": 1, "remembers_practice": 0, "policy_outputs": {"target_content": 1, "ease_substitution": 0, "practice_memory_substitution": 0, "target_or_memory": 1}},
+    {"intended_content_in_vignette": 1, "effort_high": 1, "remembers_practice": 1, "policy_outputs": {"target_content": 1, "ease_substitution": 0, "practice_memory_substitution": 1, "target_or_memory": 1}}
+  ],
+  "schema": "a4i-question-contract/1",
+  "scope": "Logical/comprehension-policy separation only; no human feasibility, truth calibration, or H_way measurement.",
+  "target_vs_effort_distance": 4,
+  "target_vs_memory_distance": 4
+}

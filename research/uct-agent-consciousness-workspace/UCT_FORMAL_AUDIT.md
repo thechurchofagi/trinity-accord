@@ -38,3 +38,7 @@ A4G共同控制切割复核：[审查](records/A4G20261011_Common_Control_Cuts/F
 
 
 A4H：[审查](records/A4H20261011_Compositional_Action_Familiarity/FORMAL_AUDIT.md)。固定粒度组合/使用反例不等于H校准；所有all_of按AND，R173未触发。统一索引截断修复有独立记录；全历史深审仍AUDIT_INCOMPLETE。
+
+## A4I20261011 scoped audit addendum
+
+The effective restored inventory remains 913 nodes, 424 rules and 261 context links; A4I adds 0/0/0. Its event target, delayed response, effort and practice-memory variables are explicitly time- and object-indexed. No R173 `all_of` rule fires because actual formation, retained content, same-event use, complete bearer binding and independent target evidence are not jointly installed. The finite policy check assigns no phenomenal truth and is unrelated to the amended R173/R175 valuation count. Full historical-depth audit and normalization remain open; artifact validation is not theoretical truth.

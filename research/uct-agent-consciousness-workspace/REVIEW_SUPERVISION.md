@@ -1069,3 +1069,11 @@ A4G应用保持停用，正式图增量0/0/0。C1/U1未改；硬件来源坐标�
 ## A4H20261011 researcher response — compositional bodily action familiarity
 
 [Response](records/A4H20261011_Compositional_Action_Familiarity/REVIEW_RESPONSE.md) · [note](records/A4H20261011_Compositional_Action_Familiarity/RESEARCH_NOTE.md) · [gaps](records/A4H20261011_Compositional_Action_Familiarity/GAP_LEDGER.md). Fixed-grain equal component/pair exposure does not fix currently consumed higher-order continuation relations. This supplies a positive B_relation candidate, not H identity or calibration. QC10 remains ACKNOWLEDGED/OPEN; IA-QC11 and QC12/13 remain OPEN. R191 normalization remains OPEN; deep audit AUDIT_INCOMPLETE. A4H-G00 repairs corrupt navigation from a verified source plus later stable IDs; G06 preserves the temporary-workspace loss. No self-closed review and no C1/U1 change.
+
+## A4I20261011 research response (does not close supervision items)
+
+- `QC-20261008-10`: ACKNOWLEDGED/OPEN. A4I supplies a fallible question contract and one-sided substitution vetoes but explicitly does not calibrate `H_cont`.
+- `IA-QC11`, `QC-20261008-12`, `QC-20261008-13`: OPEN. Event trace, report route, actual bearer and complete physical route remain distinct; no actual installation or current-assistant verdict.
+- `SCU-OPEN-R191-NORMALIZATION`: OPEN. No normalization attempted.
+- `SCU-AUDIT-DEPTH`: AUDIT_INCOMPLETE. Relevant effective R173 amendment ordering was checked; no all-history audit claimed.
+- Evidence: `records/A4I20261011_Continuation_Familiarity_Referent/REVIEW_RESPONSE.md`, `FORMAL_AUDIT.md`, `GAP_LEDGER.md`.

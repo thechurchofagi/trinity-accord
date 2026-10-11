@@ -1,0 +1,15 @@
+{
+  "schema": "uct-publication-coverage-update/1",
+  "round": "A4I20261011",
+  "coverage_version_before": "UCT-PUB-v1.0.33",
+  "coverage_version_after": "UCT-PUB-v1.0.33",
+  "new_claims_published": false,
+  "standalone_manuscript": "HOLD",
+  "reason": "The event/practice-memory correction, one-sided vetoes and finite policy check are disabled methodological applications without participant data, actual route evidence or independently calibrated H_cont.",
+  "prior_art_credit": [
+    "motor-sequence learning and perceived effort",
+    "explicit/implicit sequence knowledge debates",
+    "sensorimotor contributions to memory familiarity",
+    "elementary Boolean policy enumeration"
+  ]
+}

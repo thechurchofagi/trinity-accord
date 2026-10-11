@@ -1,0 +1,11 @@
+{
+  "schema": "uct-disabled-application/1",
+  "id": "A4I20261011",
+  "version": "A4I-REFERENT-v0.1.0",
+  "enabled": false,
+  "nodes": [],
+  "rules": [],
+  "context_links": [],
+  "counts": {"nodes": 0, "rules": 0, "contexts": 0},
+  "reason": "Question-contract repair and finite comprehension-policy check do not establish H_cont identity, signed reliability, actual route use or a new formal theorem."
+}

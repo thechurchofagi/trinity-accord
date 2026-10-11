@@ -53,3 +53,11 @@ A4C式行动重放仍不能识别实际执行器写入器：允许旁路及时�
 
 ## A4H20261011
 熟悉成分/相邻对的计数不能代替当前使用的高阶接续关系。三候选均未校准H；不再无界扩展来源证书。索引修复及本地恢复记录见records/A4H20261011_Compositional_Action_Familiarity。
+
+## A4I20261011 — event-referent repair for continuation familiarity
+
+- A delayed report cannot be memory-free: it requires a short-lived event-retention/report route. This does not identify its target with explicit recollection that practice occurred.
+- Candidate question now fixes bearer/event/body/grain and separates `J_cont` from effort, practice memory, component familiarity, source, agency and ownership; “cannot distinguish” is retained.
+- Three one-sided vetoes: effort substitution, practice-memory substitution and event drift. Passing them is content admissibility, not signed `H_cont` calibration.
+- Exact eight-vignette policy check: all four declared signatures differ; target versus pure effort and target versus pure practice-memory differ in 4/8 cells. Phenomenal assignments: 0.
+- Formal delta 0/0/0; C1 unchanged; no R173 route fires. Next: two-intervention `B_relation`/`B_fit` prediction table with cross-effects and stop conditions.

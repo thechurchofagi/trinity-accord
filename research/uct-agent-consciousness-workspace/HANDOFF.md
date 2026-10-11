@@ -47,3 +47,11 @@
 
 ## A4H20261011 接续
 [中文交接](records/A4H20261011_Compositional_Action_Familiarity/HANDOFF_ZH.md)。固定粒度比较熟悉成分与当前接续关系，返回体验内候选解释。最新优先级见CURRENT_STATE；损坏索引修复与本地维护丢失见GAP_LEDGER，双份状态见固定主交接与收据。
+
+## Current continuation: A4I20261011
+
+A4I repairs the A4H measurement question. A report about a just-enacted continuation necessarily relies on an event-retention/report route, but that route is not the same target as explicit recollection or recognition of prior practice. The candidate item fixes the last continuation event and gives separate effort/practice-memory measures plus an abstention response.
+
+Deliverables: `records/A4I20261011_Continuation_Familiarity_Referent/`. Claims remain disabled; formal delta is 0/0/0; no participant, actual route, signed phenomenal endpoint or complete physical installation is supplied. Supervision items remain open as listed in `REVIEW_RESPONSE.md`.
+
+Next exact task: build a two-intervention prediction table for relation perturbation and fit/effort perturbation, including cross-effects and stop conditions. Do not purify the contrast by adjusting for post-formation effort.

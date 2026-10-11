@@ -128,7 +128,7 @@
     "evidence_status": "BOUNDED_PRIMARY_SOURCE_APPLICATION_STOP_AND_R173_SCOPE_RETURN; ACTUAL_PREMISES_AND_H_OPEN"
   },
   "review_status_scope": "Completed v1.1.2 unchanged; A3V1598 frozen objects and1608 review IDs structurally traversed; affected all_of/typing and unlinked R199/SPC scope manually checked; deep full-map semantics AUDIT_INCOMPLETE.",
-  "next_priority": "Test a bounded, independently interpreted continuation-familiarity question that distinguishes familiar components from an unfamiliar conjunction without substituting effort or remembered practice. Compare B_summary/B_relation/B_fit at fixed grain. Reopen actuator provenance only with an actual apparatus and a specific blocked mainline inference.",
+  "next_priority": "Construct a two-intervention prediction table for one relation perturbation and one fit/effort perturbation. State signed B_relation and B_fit predictions, allowed cross-effects and stop conditions without assuming either manipulation is selective or using post-treatment covariate adjustment.",
   "latest_scoped_review": {
     "audit": "records/CTD20261010_Cross_Task_Intervention_v02/governance/MAP_AUDIT.md",
     "per_id_structure": "records/CTD20261010_Cross_Task_Intervention_v02/governance/BASELINE_PER_ID_STRUCTURE.json.gz",
@@ -545,18 +545,18 @@
     }
   },
   "latest_followup_application": {
-    "id": "A4H20261011",
-    "version": "A4H-COMPOSITION-v0.1.0",
-    "status": "DISABLED_SCOPED_POSITIVE_CANDIDATE_AND_FINITE_WITNESS",
+    "id": "A4I20261011",
+    "version": "A4I-REFERENT-v0.1.0",
+    "status": "DISABLED_SCOPED_REFERENT_REPAIR_AND_FINITE_POLICY_CHECK",
     "enabled_as_established_premises": false,
-    "source": "records/A4H20261011_Compositional_Action_Familiarity/RESEARCH_NOTE.md",
-    "handoff": "records/A4H20261011_Compositional_Action_Familiarity/HANDOFF_ZH.md",
-    "work_log": "records/A4H20261011_Compositional_Action_Familiarity/WORK_LOG.md",
-    "claim_ledger": "records/A4H20261011_Compositional_Action_Familiarity/CLAIM_LEDGER.json",
-    "map_extension": "records/A4H20261011_Compositional_Action_Familiarity/MAP_EXTENSION.json",
-    "exact_results": "records/A4H20261011_Compositional_Action_Familiarity/EXACT_RESULTS.json",
+    "source": "records/A4I20261011_Continuation_Familiarity_Referent/RESEARCH_NOTE.md",
+    "handoff": "records/A4I20261011_Continuation_Familiarity_Referent/HANDOFF_ZH.md",
+    "work_log": "records/A4I20261011_Continuation_Familiarity_Referent/WORK_LOG.md",
+    "claim_ledger": "records/A4I20261011_Continuation_Familiarity_Referent/CLAIM_LEDGER.json",
+    "map_extension": "records/A4I20261011_Continuation_Familiarity_Referent/MAP_EXTENSION.json",
+    "exact_results": "records/A4I20261011_Continuation_Familiarity_Referent/EXACT_RESULTS.json",
     "parent_science": "A3V20261010",
-    "parent_followup": "A4G20261011",
+    "parent_followup": "A4H20261011",
     "completed_map": "UCT-MAP-v1.1.2",
     "scientific_delta": {
       "nodes": 0,
@@ -565,6 +565,7 @@
     },
     "independent_h_validation": false,
     "actual_bodily_installation": false,
+    "question_wording_piloted": false,
     "standalone_manuscript": "HOLD"
   },
   "next_priority_before_FAM": "Independent signed fallible bodily-familiarity endpoint comparing familiar singleton retained route versus unfamiliar presently congruent route at fixed actual frame consumer/grain; separate cue familiarity, response fluency, ownership report and agency judgment. No more SPC expansion after named PMd feasibility stop.",
@@ -895,6 +896,31 @@
       "independent_h_validation": false,
       "actual_bodily_installation": false,
       "standalone_manuscript": "HOLD"
+    },
+    {
+      "id": "A4I20261011",
+      "version": "A4I-REFERENT-v0.1.0",
+      "status": "DISABLED_SCOPED_REFERENT_REPAIR_AND_FINITE_POLICY_CHECK",
+      "enabled_as_established_premises": false,
+      "source": "records/A4I20261011_Continuation_Familiarity_Referent/RESEARCH_NOTE.md",
+      "handoff": "records/A4I20261011_Continuation_Familiarity_Referent/HANDOFF_ZH.md",
+      "work_log": "records/A4I20261011_Continuation_Familiarity_Referent/WORK_LOG.md",
+      "claim_ledger": "records/A4I20261011_Continuation_Familiarity_Referent/CLAIM_LEDGER.json",
+      "map_extension": "records/A4I20261011_Continuation_Familiarity_Referent/MAP_EXTENSION.json",
+      "exact_results": "records/A4I20261011_Continuation_Familiarity_Referent/EXACT_RESULTS.json",
+      "parent_science": "A3V20261010",
+      "parent_followup": "A4H20261011",
+      "completed_map": "UCT-MAP-v1.1.2",
+      "scientific_delta": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0
+      },
+      "referent_repair_complete": true,
+      "independent_h_validation": false,
+      "actual_bodily_installation": false,
+      "question_wording_piloted": false,
+      "standalone_manuscript": "HOLD"
     }
   ],
   "next_priority_before_A3W": "Test one independent current bodily/action-familiarity interpretation against origin-recognition and agency countercases; establish a remaining actual retentive relation and realizable matched controls before claiming a pure familiarity contrast. Do not add an assumed coordinate or expand SPC.",
@@ -984,6 +1010,7 @@
   },
   "next_priority_before_A4H": "On one accessible actuator, draw the final post-arbitration command/energy paths and separately enumerate every common power, reset, clock, bus, DMA, logger and human-control ancestor of the source witnesses. Attempt to make an admitted alternative writer realize the target's complete witness vector; if it can, redesign or stop source attribution. Keep complete-K admission and H_way validation separate.",
   "next_priority_after_A4H": "Test a bounded, independently interpreted continuation-familiarity question that distinguishes familiar components from an unfamiliar conjunction without substituting effort or remembered practice. Compare B_summary/B_relation/B_fit at fixed grain. Reopen actuator provenance only with an actual apparatus and a specific blocked mainline inference.",
+  "next_priority_after_A4I": "Construct a two-intervention prediction table for one relation perturbation and one fit/effort perturbation. State signed B_relation and B_fit predictions, allowed cross-effects and stop conditions without assuming either manipulation is selective or using post-treatment covariate adjustment.",
   "latest_activity_persistence_before_A4H": {
     "status": "A4G_GITHUB_SCIENCE_INTEGRATION_AND_WORKSPACE_MASTER_V120_INCREMENT_CONFIRMED; FINAL_METADATA_COMMIT_IS_EXPECTED_SHA_SUCCESSOR_AND_MASTER_V121_CONFIRMATION",
     "receipt": "records/A4G20261011_Common_Control_Cuts/PERSISTENCE_RECEIPT.json",

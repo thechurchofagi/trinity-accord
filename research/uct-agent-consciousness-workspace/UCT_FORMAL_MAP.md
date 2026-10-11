@@ -147,3 +147,7 @@ R20–R23候选：纠正将“阻止其他人强行终止仍想继续存在的�
 
 ### A4H：固定粒度的熟悉成分与组合
 [研究](records/A4H20261011_Compositional_Action_Familiarity/RESEARCH_NOTE.md)把已练成分/相邻对与当前使用的高阶接续关系分开，比较三项体验解释候选。有限例子不赋予H真值；0/0/0正式图增量，来源证书支线暂止。
+
+## A4I20261011 disabled referent repair
+
+A4I introduces no formal object. It distinguishes the enacted target `H_cont(x)` from a later judgment `J_cont(x,tr)`, judged effort `E(x,tr)` and explicit practice memory `M_pr(x,tr)`. The distinction prevents a report-lag premise from being misread as target identity. The eight-row checker belongs to a stipulated comprehension-policy space and is not the historical R173 valuation space. Map delta: **0 nodes / 0 rules / 0 contexts**; `A:C1`, `A:U1`, R157, effective R173 and R199 retain their prior scopes and statuses.
