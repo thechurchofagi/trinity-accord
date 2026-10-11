@@ -1,0 +1,67 @@
+The scalar theorem assumes interchangeable unit capacity. In a heterogeneous network, equal counts can conceal an indispensable damaged route even when total remaining capacity looks sufficient. The actual service predicate then needs connectivity, matching or other joint-resource constraints; the present formula cannot certify it by substituting a scalar name. Effects with unequal repair times or costs require a corresponding model. Irreversible harm is outside the repairable model, and repairing one service must not secretly harm another omitted obligation.
+
+Timing is equally substantive. Repair age must survive migration or be conservatively redefined according to the new actual process. Repeated pauses, a reset maturity clock or an untrusted receipt can destroy a nominal rate guarantee. The exact no-deferral theorem does not license asynchronous commits to bunch arbitrarily. The safety-only reservation contract handles bounded exposure but cannot create restoration or ensure every queued action eventually completes.
+
+This is the completed author-final manuscript ASI-CC-v1.2.0, replacing the v1.1.0 draft within the same unpublished work family. ``Final'' marks the requested document stage, not immunity to scientific correction, journal acceptance or independent peer review. No DOI, timestamp or paid preservation action is initiated by preparing this revision. The previously published PR-v6.0.0 remains unchanged. The formal UCT map is not promoted: a full item-by-item semantic audit of that broader programme and a complete worldwide prior-art census have not been completed. Those unresolved claims are not prerequisites to stating the self-contained conditional results accurately.
+
+\section{Conclusion}
+Permission can be revoked faster than its consequences can be repaired. A replacement policy must therefore inherit more than names, credentials and a scalar count. In the stated service model, the amount and readiness of old impairments determine the exact headroom needed to admit a new burst/rate contract. The worst-case infinite-horizon handoff question reduces to a finite maturity window, and its inverse yields a precise renewed-burst allowance.
+
+For asynchronous systems, unresolved accepted work must also retain exposure until an actual commit, verified cancellation or genuine restoration settles it. Late delivery, restarted processes and duplicate acknowledgments do not themselves create new safe capacity. The local protocol demonstrates both useful cancellation/recovery and the failures produced by refunding too early.
+
+The resulting principle is specific enough to be reused: \emph{a policy revision preserves safety only through a sound transition from the consequences and repair commitments it inherits, not merely because its fresh-start rules are safe}. It constrains a class of long-run human--AI coexistence promises without assuming machine subjecthood, invulnerable regulators or a solved general theory of future civilization.
+
+\paragraph{Assistance and reproducibility.}
+Hongju Liu directed this research. ChatGPT substantially assisted with source review, derivation, programming, execution, critique and typesetting. Checks from this workflow are not independent peer review. The package records source access scope, predecessor overlap, raw results, failures/corrections, code hashes and the final document verification.
+
+\appendix
+\section{A sharpness trace that a reader can check by hand}
+Let $d_0=2$, $b=2$, $\rho=\mu=1$, $\ell=2$. With both old jobs mature at the switch, the first repair leaves one old impairment and the initial burst adds two: $D_0=3$. At the next slot another old job is repaired and one new effect is added, leaving $D_1=3$. Thereafter one eligible unit is repaired and one arrives, so the debt remains three.
+
+With both old jobs first eligible at slot 2, no repair occurs at slots 0 or 1. Thus $D_0=2+2=4$ and $D_1=2+2+1=5$. At slot 2, one unit can be repaired and one arrives, leaving five. The identical fresh policy and identical old-effect count have different actual capacity requirements. They differ in the admissible repair schedule, not in an invented moral label or stochastic model response.
+
+For this fixed $\ell$, only old readiness through slot 1 affects the worst-case peak. Changing the old jobs' release times from $(2,2)$ to $(100,100)$ does not change the required margin of five, because new repair service can at least match the new arrival rate after the first two slots. It does change when the old debt can clear. The theorem's safety bound therefore does not imply prompt removal of every old effect or a fairness bound on individual jobs.
+
+\section{Executable recipe and claim-level evidence}
+The exact-margin program performs ordinary integer computations. For a supplied inherited profile, count $M(0),\ldots,M(\ell-1)$, evaluate \cref{eq:switch}, and compare it with the actual margin. With fixed new $\rho,\mu,\ell$, evaluate \cref{eq:burst} to decide whether any positive burst allowance in the parameter class is available. Reject an unsupported claim rather than replacing a missing maturity record with a guessed value.
+\begin{lstlisting}
+python -S src/switch_frontier.py --out data/switch_results.json
+python -S src/switch_oracle.py --out data/oracle_results.json
+python -S src/inflight_protocol.py --out data/inflight_results.json
+python -S baseline/recovery_frontier.py --out data/baseline_recovery_rerun.json
+python -S baseline/effect_escrow_demo.py --out data/baseline_effect_rerun.json
+cd paper
+pdflatex -interaction=nonstopmode -halt-on-error manuscript.tex
+pdflatex -interaction=nonstopmode -halt-on-error manuscript.tex
+\end{lstlisting}
+All programs use the Python standard library. The process test needs a Unix-like environment for pipe readiness; it stops only its own child processes and uses temporary databases. It requires no network, provider API key, GPU or elevated privilege. Baseline outputs retain their old version label, with rerun paths and receipts recording their use in this revision.
+
+\begin{table}[ht]
+\centering\small
+\caption{Claim lineage and finite evidence. No entry is promoted to an established UCT axiom by appearing here.}
+\begin{tabularx}{\linewidth}{@{}lXX@{}}\toprule
+ID & Contribution status & Evidence\\ \midrule
+RAC-P1 & Prior abstraction counterexample retained & Explicit exclusive-token constructions in predecessor\\
+RAC-T1/T2 & Classical clean-start application and prior epoch-reset result & Prior scripts rerun; proofs and specialization retained\\
+RAC-L2/T4 & New handoff specialization; inherited min-plus algebra & General proof; per-job/recurrence identity; separate arrival oracle\\
+RAC-C1/C2 & Derived inverse allowance and readiness uncertainty & Algebraic proof; 52,920 burst comparisons\\
+RAC-T5 & Conditional repeated-switch composition & Invariant induction; fixed model at each accepted boundary\\
+RAC-T3 & Reservation invariant clarified for asynchronous scope & Eleven new protocol scenarios, including failed/duplicate settlement\\ \bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{thebibliography}{99}\fontsize{9.5}{11}\selectfont\setlength{\itemsep}{2pt}\setlength{\parskip}{0pt}
+\bibitem{draft} H. Liu. \emph{When Revocation Does Not Restore Safety: Persistent Effects and the Renewal Conditions of Multi-Agent Coexistence}. ASI-CC-v1.1.0, unpublished research draft, 2026. Repository \texttt{thechurchofagi/trinity-accord}, source commit \nolinkurl{60b3bab757350030fe12899be38e6c6514c1c73f}.
+\bibitem{guardians} H. Liu. \emph{When the Guardians Can Be Acquired: Endogenous Coalition Capture and Necessary Conditions for Multi-Agent Coexistence Without Presupposed AI Subjecthood}. ASI-CC-v1.0.0, unpublished research candidate, 2026. Source commit \nolinkurl{88427e9b674d4dc4b4521b0ccfe89420fb4156a4} in the same repository.
+\bibitem{quiescence} G. Zhu and C. Wang. \emph{Authorization Revocation for Long-Running AI Agents: Root-Scoped Quiescence under Delegation and Asynchronous Execution}. arXiv:2609.21284v1, 2026. \url{https://arxiv.org/abs/2609.21284}.
+\bibitem{succession} G. Zhu and C. Wang. \emph{Authorization for Self-Modifying AI Agent Populations: Conserving Authority across Replacement, Forking, and Rollback}. arXiv:2610.00347v1, 2026. \url{https://arxiv.org/abs/2610.00347}.
+\bibitem{subgoals} G. Zhu and C. Wang. \emph{Runtime Authorization of Self-Generated Subgoals in Long-Horizon Tool-Using AI Agents}. arXiv:2610.04975v1, 2026. \url{https://arxiv.org/abs/2610.04975}.
+\bibitem{sagas} H. Garcia-Molina and K. Salem. Sagas. \emph{ACM SIGMOD}, pp.249--259, 1987. \href{https://doi.org/10.1145/38713.38742}{doi:10.1145/38713.38742}. Author report TR-070-87: \url{https://www.cs.princeton.edu/research/techreps/598}.
+\bibitem{escrow} P. E. O'Neil. The Escrow Transactional Method. \emph{ACM Transactions on Database Systems}, 11(4):405--430, 1986. \href{https://doi.org/10.1145/7239.7265}{doi:10.1145/7239.7265}.
+\bibitem{netcal} J.-Y. Le Boudec and P. Thiran. \emph{Network Calculus: A Theory of Deterministic Queuing Systems for the Internet}. LNCS2050, Springer, 2001; author online revision 23 August 2022. \S\S1.4.1--1.4.2. \url{https://leboudec.github.io/netcal/latex/netCalBook.pdf}.
+\bibitem{transient} J. P. Champati, H. Al-Zubaidy and J. Gross. \emph{Transient Delay Bounds for Multi-Hop Wireless Networks}. arXiv:1806.03328v1, 2018. \url{https://arxiv.org/abs/1806.03328}. Cited as a predecessor for initial-state-aware analysis, not as the same model or a defeated bound.
+\bibitem{clocks} L. Thomas and J.-Y. Le Boudec. On Time Synchronization Issues in Time-Sensitive Networks with Regulators and Nonideal Clocks. \emph{Proceedings of the ACM on Measurement and Analysis of Computing Systems}, 4(2), Article27, 2020. \href{https://doi.org/10.1145/3392145}{doi:10.1145/3392145}.
+\bibitem{pr6} H. Liu. \emph{Safe Revocation Without Complete Diagnosis: Exact Resource Frontiers under Coupled Faults for Subjecthood-Agnostic AI Coexistence}. PR-v6.0.0, theoretical preprint, 2026. \href{https://doi.org/10.5281/zenodo.23295776}{doi:10.5281/zenodo.23295776}.
+\bibitem{uct} H. Liu. \emph{Unified Consciousness Theory I: Structural--Experiential Identity and the Continuity from Physical Process to Conceptual Self}. v1.2, theoretical preprint, 2026. \href{https://doi.org/10.5281/zenodo.23131575}{doi:10.5281/zenodo.23131575}. The framework's interpretive commitments are not empirically established by the current protocol tests.
+\end{thebibliography}
+\end{document}

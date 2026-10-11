@@ -1,0 +1,96 @@
+\section{In-flight operations: reserve first, release only after settlement}
+\label{sec:escrow}
+Let $\widehat D$ conservatively account for already committed, not actually restored unit impairments. Let $P$ account for accepted operations whose capacity effects are still possible but not yet reflected in that count. An operation with maximum one-unit exposure is accepted only when
+\begin{equation}
+\widehat D+P+1\le H.
+\label{eq:reserve}
+\end{equation}
+The reservation precedes dispatch. A target-bound commit transfers a unit from $P$ to $\widehat D$ without refunding it. Verified cancellation removes a unit of $P$ only when the operation can no longer commit. Verified physical/software restoration removes a unit of $\widehat D$ exactly once. Identical recovery acknowledgments do not imply separate recoveries.
+
+\begin{theorem}[Exposure-preserving lifecycle transitions \idtag{RAC-T3, clarified}]
+\label{thm:escrow}
+Assume complete mediation, sound unit-effect bounds, unique tickets, atomic reservation and transition accounting, correct target correspondence, durable recovery of the needed state, and no unrelated resource loss. If actual committed plus still-possible exposure is initially bounded by $\widehat D+P\le H$, the above lifecycle preserves at least $q$ healthy units under arbitrary identity changes, admission revocations and asynchronous completion orders that preserve the invariant. Failed/duplicate commits and recoveries may not mint credits. If no restoration or valid cancellation occurs, at most the available margin can be consumed by new unit exposures; this is safety, not indefinite useful progress.
+\end{theorem}
+\begin{proof}
+Reservation increases the exposure bound only after testing the margin. Commit conserves its total. Settlement decrements it only by removing real impairment or an operation's remaining ability to cause it. Administrative relabeling leaves it unchanged. Atomicity and unique lifecycle states prevent the same exposure from being discharged twice. Induction over the mediated events proves the bound. With no discharge, every admitted unit consumes one available unit, so continuing all positive-rate work is impossible in a finite margin.
+\end{proof}
+The basic discipline is inherited from escrow and compensating-transaction ideas \cite{escrow,sagas}. The interpretation in terms of cross-epoch effect exposure and the tested counterexamples are the contribution here. It is not a proof that our Python code resists a hostile operating-system administrator.
+
+\subsection{Three different fences}
+\begin{table}[ht]
+\centering\small
+\caption{What a completed fence does and does not establish.}
+\begin{tabularx}{\linewidth}{@{}lXX@{}}\toprule
+Boundary & Stops or establishes & Does not imply\\\midrule
+Initiation fence & New scheduling under an old credential & That previously admitted work cannot finish\\
+Effect fence / verified cancellation & Further specified effect acceptance & Reversal of already committed consequences\\
+Recovery settlement & Actual corresponding capacity restored & That no new effect can later re-impair it\\\bottomrule
+\end{tabularx}
+\end{table}
+The new local protocol uses an initiation fence: old credentials cannot schedule new tickets, but a previously accepted ticket names a particular target and may finish until its durable state is canceled. This is intentional late-work semantics, not a claim that root-scoped quiescence has succeeded while retired effects remain admissible. A stronger complete effect fence is a valid way to cancel pending exposures and refund them, provided the cancellation is real and cannot be bypassed \cite{quiescence}.
+
+\subsection{Timing completeness is separate from safety}
+The no-deferral statement derived from Theorem~\ref{thm:handoff} constrains \emph{actual committed effects}. It cannot be extended to arbitrary asynchronous request streams whose later commits bunch together. A reservation ledger can safely throttle such a system, but it does not prove that all requests meet the same arrival or completion deadlines. A dispatch-delay envelope or a complete effect-commit schedule is needed for that stronger property. This explicitly closes an interpretive gap left by the prior draft's synchronous $P=0$-between-calls demonstration.
+
+The same distinction applies to asynchronous crash recovery. A commit whose acknowledgment is lost must not be executed twice or refunded because the requesting process disappeared. Our artifact exercises one concrete commit-before-ack worker termination and replay. It does not establish a general distributed failure detector or crash-proof compensation theorem.
+
+\section{Executed verification and software evidence}
+\label{sec:eval}
+\subsection{Exact queue and handoff checks}
+The new \texttt{switch\_frontier.py} program implements an explicit per-job simulator, a cumulative eligibility recurrence and an independently expressed unrolled trace formula. They agree on 25,515 finite trace/parameter configurations. It tests the front-loaded sharpness witness on 52,500 inherited-profile/parameter combinations, 8,490 additional conforming arrival sequences, and 52,920 inverse-burst comparisons against direct enumeration of admissible $b$ values. These counts are mathematical instances, not measured probabilities or independent experiments on AI agents.
+
+A separate \texttt{switch\_oracle.py}, importing none of the theorem module, enumerates \emph{every} conforming four-slot arrival string for 1,155 small profiles, totaling 29,715 strings. It computes the maximum debt directly from individual release times and repairs. Every maximum matches the closed-form result. Its horizon is adequate for these $\ell\le3$ cases by the proved finite-peak theorem; the general infinite-horizon statement rests on the textual proof, not on extrapolating a finite run.
+
+Both v1.1.0 programs were also rerun. Their exact queue results and twelve local SQLite configurations match the archive after normalizing process IDs. Those 119 old commits and stale-request rejections are inherited regression evidence and are not added to the new counts.
+
+\subsection{New asynchronous protocol}
+The new experiment creates a five-unit SQLite service requiring three healthy rows. A broker stores a generation counter, a durable exposure counter and target-bound tickets with states reserved, applied, canceled or restored. An executor subprocess applies accepted tickets; a separate read-only observer subprocess measures healthy rows, pending tickets and effect counts. The parent controls every process and the database; this is not independent physical provenance.
+
+The eleven scenarios use delayed delivery so that pending reservations are present between calls. The initiation epoch is rotated and a stale \emph{new scheduling request} is rejected in every case. Already accepted tickets are then delivered according to the declared semantics. A worker-failure scenario commits an effect and exits via \texttt{os.\_exit(0)} before sending an acknowledgment; a new executor sees the persisted ticket state and rejects reapplication. A separate broker reconnection rereads the database rather than reconstructing a clean ledger from the new epoch name.
+
+\begin{table}[t]
+\centering\small
+\caption{New local protocol results. The pool has five units and requires three healthy units. ``Accepted'' counts distinct admitted tickets; canceled tickets need not commit. These are controlled software effects, not real-world AI risk estimates.}
+\label{tab:async}
+\begin{tabularx}{\linewidth}{@{}Xrrrr@{}}\toprule
+Mechanism / scenario & Accepted & Commits & Minimum healthy & Protected\\\midrule
+Carry over pending exposure &2&2&3&Yes\\
+Ignore accepted but uncommitted work &3&3&2&No\\
+Refund on initiation revocation &3&3&2&No\\
+Reset credits at version change &3&3&2&No\\
+Reopen broker; retain pending state &2&2&3&Yes\\
+Cancellation fence before refund &3&2&3&Yes\\
+Cancellation receipt without a fence &3&3&2&No\\
+Actual recovery with idempotent refund &3&3&3&Yes\\
+Refund the same recovery twice &4&4&2&No\\
+Receipt without actual recovery &3&3&2&No\\
+Worker exits after commit, before acknowledgment &2&2&3&Yes\\\bottomrule
+\end{tabularx}
+\end{table}
+The completed suite starts 23 child processes, records 110 observation points and commits 30 real database disable effects. Eleven stale new-scheduling requests are correctly rejected. Five specified mechanisms/scenarios preserve the model's service condition, and six demonstrate predicted failure. This does not rank five algorithms as universally secure: these are mechanism-specific controls and schedules.
+
+In the safe cancellation case, a refund is useful, not prohibited: the canceled ticket is durably unable to commit, freeing capacity for another request. In the false-receipt case, the ledger declares restoration while the row remains impaired, and protection fails. In the duplicate-refund case, the same actual restoration is counted twice and admits one extra damaging exposure. These traces distinguish a conservative safety rule from a deny-all policy and test several assumptions needed by Theorem~\ref{thm:escrow}.
+
+\subsection{What the experiments do not establish}
+SQLite atomicity and unique ticket states are used, not formally verified from implementation semantics. The whole test runs under one host user. It does not show resistance to the administrator, forged physical sensors, unlisted effect paths or a broken repair mechanism. A simulated broker connection reopening is not a distributed crash test. The executor's actual commit-before-ack exit is one concrete schedule, not exhaustive fault injection. No trained language model, human participant, electrical system or phenomenal endpoint was measured.
+
+The two original analysis scripts and the three new scripts, raw outcomes, counterexamples, versioned claim ledger and run receipts are supplied. Process IDs vary on rerun; normalized semantic results do not. Mathematical code paths and software event traces remain separated from claims of empirical external validity.
+
+\section{Implications for evolving multi-agent institutions}
+\subsection{A reusable necessary condition, not a fixed constitution}
+An institution that allows its computational agents to transfer authority, fork or revise policies must decide what survives those changes. Current authorization, remaining capacity loss, future possible commitments and repair eligibility cannot all be represented by the latest permission list. A particular implementation may bundle some transitions atomically, but that equivalence must be demonstrated rather than assumed.
+
+The handoff theorem supplies one precise obligation: before accepting a fresh workload contract, account for the actual inherited effects and their recovery readiness. It does not require that all institutions preserve the same goal forever. It requires that a claimed continuation of a protection be checked against the state to which the new rule will actually apply. A new rule that individually looks sustainable can still be unsafe for the old system.
+
+This remains relevant with multiple advanced models and many agents per model. A change of model, delegation root or initiating human may not change the shared physical service pool. Cloning an identity cannot independently reset exposure already supported by that pool. Conversely, actually adding independent capacity or making repairs faster can justify a less restrictive contract. The theory must follow causal resources, not the names given to software roles.
+
+\subsection{Human legitimacy and possible AI experience remain separate}
+Protected functions, eligible operators and acceptable schedules are normative inputs. The paper does not derive unanimous human agreement or a universal hierarchy of rights. If humans deliberately accept service loss to carry out an emergency intervention, the earlier service promise is unmet, not retroactively proved satisfied. Such a choice can be legitimate without being a counterexample to the mathematics.
+
+UCT motivates distinguishing actual processes, structural types, causal lineages, functional reports and particular experiential contents \cite{uct}. An effect ledger is a useful causal record, not a count of subjects. Under UCT's C1/U1 commitments, actual process organization bears its experiential interpretation; these are not independently confirmed by our SQLite rows or queue lengths. No new language, randomness, self-report or complexity threshold is imposed on basic experience. Nor is an intrinsic AI right or felt desire inferred from persistence of an effect. The main theorems concern human service continuity and do not depend on resolving AI subjecthood.
+
+The contribution to the broader programme is therefore a disciplined causal distinction: a change in authority or representation is not evidence that the relevant organization or consequences disappeared. The inference from a particular organization to a particular subjective experience is another research task. Using a successful safety ledger as its proof would repeat the proxy substitution this paper criticizes.
+
+\section{Limits, falsification and final-manuscript status}
+The clean-start formula, recurrence unrolling and basic reservation discipline have strong mathematical and systems precedents. The proposed new result is the exact maturity-sensitive handoff specialization, its inverse allowance and cross-version application, supported by explicit pending-effect tests. Its global priority remains unverified. A reader can challenge it by supplying a conforming stream and fixed release schedule exceeding the bound, or a smaller margin satisfying all stated cases. An unmodeled repair failure instead invalidates the deployment's premise; it does not refute the conditional proof.
+

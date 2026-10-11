@@ -1,0 +1,40 @@
+{
+  "schema": "uct-scoped-publication-delta/1",
+  "coverage_baseline": "UCT-PUB-v1.0.33",
+  "candidate": "ASI-CC-v1.2.0",
+  "predecessor_draft": "ASI-CC-v1.1.0",
+  "new_verified_published_works": 0,
+  "new_doi": false,
+  "current_manuscript_final": true,
+  "previous_published_PR6": "10.5281/zenodo.23295776",
+  "old_publication_bytes_changed": false,
+  "claim_inventory": "audit/CLAIM_LEDGER.json",
+  "inherited": [
+    "RAC-P1",
+    "RAC-L1",
+    "RAC-T1",
+    "RAC-T2"
+  ],
+  "substantially_clarified": [
+    "RAC-T3"
+  ],
+  "new_candidate": [
+    "RAC-L2",
+    "RAC-T4",
+    "RAC-C1",
+    "RAC-C2",
+    "RAC-T5",
+    "RAC-E2",
+    "RAC-N3"
+  ],
+  "scope_compared": [
+    "v1.1 full source and local archive",
+    "v1.0 source/claim summary",
+    "published PR6 declared contribution and DOI record from current repository",
+    "selected primary external prior work"
+  ],
+  "full_corpus_reconciliation_completed": false,
+  "global_priority_verified": false,
+  "formal_map_changed": false,
+  "decision": "AUTHOR_FINAL_WITH_EXACT_SCOPE;DOI_NOT_INITIATED"
+}

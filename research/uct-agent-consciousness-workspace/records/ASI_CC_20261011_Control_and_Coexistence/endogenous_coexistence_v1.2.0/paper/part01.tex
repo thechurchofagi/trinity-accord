@@ -1,0 +1,94 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amsthm,mathtools,newtxtext,newtxmath,microtype}
+\usepackage{booktabs,tabularx,array,enumitem,fancyhdr,needspace}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\usepackage{listings}
+\hypersetup{pdftitle={When Revocation Does Not Restore Safety: Persistent Effects and Recovery-Preserving Policy Revision},pdfauthor={Hongju Liu},pdfsubject={Author-final research manuscript ASI-CC-v1.2.0; not peer reviewed}}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small When Revocation Does Not Restore Safety}
+\fancyhead[R]{\small Liu | ASI-CC-v1.2.0}
+\fancyfoot[C]{\small\thepage}
+\setlength{\headheight}{14pt}\setlength{\emergencystretch}{2em}
+\setlength{\parindent}{1.1em}\setlength{\parskip}{3pt}
+\setlist{topsep=4pt,itemsep=2pt}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}\newtheorem{definition}{Definition}
+\newcommand{\idtag}[1]{\textnormal{\textsf{[#1]}}}
+\newcommand{\pos}[1]{\left[#1\right]_+}
+\lstset{basicstyle=\small\ttfamily,breaklines=true,frame=single,columns=fullflexible,keepspaces=true}
+\title{\vspace{-1cm}\textbf{When Revocation Does Not Restore Safety}\\[6pt]
+\Large Persistent Effects and Recovery-Preserving Policy Revision\\in Multi-Agent Systems}
+\author{Hongju Liu\\\normalsize Independent Researcher, Trinity Accord / UCT Research Programme}
+\date{11 October 2026\\\small Author-final manuscript, version 1.2.0 \textbullet\ Not peer reviewed}
+\begin{document}
+\maketitle\thispagestyle{plain}
+\begin{abstract}
+Correctly revoking a credential does not remove the service effects of actions already accepted or committed. Repeated agent replacement and policy renewal can therefore preserve each local authorization rule while exhausting a shared human-service margin. We distinguish live authority, reserved future effects, committed impairments and verified recovery. For a specified interchangeable-capacity model, we retain the classical clean-start bound and derive an exact recovery-preserving handoff criterion for arbitrary inherited repair-eligibility profiles. With $d_0$ old unit impairments, $M(t)$ of them eligible by slot $t$, a new burst/rate envelope $(b,\rho)$, recovery capacity $\mu\ge\rho$, and new-effect delay $\ell$, the minimum all-time margin is $\max\{d_0,d_0+b-\mu,\max_{0\le t<\ell}(d_0-M(t)+b+\rho t)\}$. The worst case is attained at the initial state or in the first $\ell$ slots by one conforming stream. Its inverse gives the largest safe renewed burst; the old impairment count alone is generally insufficient. A cross-epoch certificate and a recovery-backed reservation invariant separate on-schedule admission from safety under arbitrary in-flight delays. Exact enumeration, a separate exhaustive arrival oracle and eleven new SQLite/subprocess cases test age-sensitive handoff, late commits, cancellation, duplicate refunds and commit-before-ack worker failure. The general methods inherit deterministic network calculus, compensation and escrow accounting; the contribution is a scoped handoff specialization and executable conservation contract. No machine subjecthood, physical restoration guarantee, universally legitimate authority or independent peer review is assumed or established.
+\end{abstract}
+\noindent\textbf{Keywords:} multi-agent safety; revocation; persistent effects; policy revision; recovery; admission control; network calculus.
+
+\section{Introduction}
+A permission rule asks whether an actor may initiate an operation now. A restoration rule asks whether the service consequences of previous operations have actually ended. These are different questions. A controller can answer the first correctly at every step while the second drifts toward a failure. The distinction matters when agents are copied, roles are transferred, policies are replaced and long-running operations survive their initiating process.
+
+Consider a software service backed by several interchangeable components. An authorized maintenance action temporarily removes one component from service. Its initiating token is then revoked. A new agent receives a new token and removes another component. If effects are not recovered quickly enough, the protected service eventually lacks capacity even though no stale token has been accepted. An institution can aggravate the problem by issuing a fresh allowance on each version change while keeping the same impaired physical or software resources.
+
+The starting observation is not new. Root-scoped authorization quiescence explicitly distinguishes fencing old-root effects from reversing consequences already committed \cite{quiescence}. Sagas treat compensation as an application-level activity \cite{sagas}; escrow transactions preserve constraints while long-lived work remains unresolved \cite{escrow}. The question developed here is quantitative and state-sensitive: \emph{what must a new policy know about inherited effects before it can truthfully promise continued protected service and on-schedule execution?}
+
+An earlier draft gave a clean-start burst/rate/latency margin and an epoch-reset counterexample \cite{draft}. It did not derive an exact admission certificate for an arbitrary inherited maturity profile, and its software test had no unresolved reservations between calls. This final author revision addresses both gaps. It does not introduce a new general theory of queues or claim that all existing authorization frameworks overlook outstanding obligations.
+
+The central technical result is a closed-form handoff margin. Two installations can have the same current rights, the same number of outstanding effects and the same proposed new policy, yet require different margins because their inherited effects become repairable at different times. The theorem identifies the exact finite maturity summary needed for its stated infinite-horizon guarantee. Its inverse determines how much burst capacity can actually be renewed. The operational implementation then treats accepted but not yet committed effects separately, so that revocation, cancellation, process replacement or duplicate acknowledgments cannot silently refund exposure that remains possible.
+
+Our default protection concerns human service functions. AI is not granted an intrinsic right to continue, a subjective desire to survive, or a moral debt by the term \emph{effect debt}. That term denotes service-relevant unresolved capacity exposure. Only recoverable, bounded unit impairments are within the quantitative model: an irreversible injury to a person is not made acceptable by adding repair credits. The results hold equally for deterministic tools and do not depend on whether an AI has phenomenal experience.
+
+\section{Related work and contribution boundary}
+\label{sec:related}
+\paragraph{Revocation is not rollback.}
+Zhu and Wang's root-scoped quiescence framework accounts for old-root carriers and final effect fences while expressly separating rollback and compensation \cite{quiescence}. Their authorization-succession work preserves authority constraints across replacement, forking and rollback \cite{succession}. Their subgoal framework carries resources and unfinished obligations across goal changes but does not infer unconditional termination from a closure property \cite{subgoals}. These are close predecessors. Our experiments do not reproduce or attack their complete implementations. In particular, the new protocol tests \emph{initiation fencing}, not their stronger root-scoped quiescence certificate.
+
+\paragraph{Persistent state, compensation and reservations.}
+Classical transaction work already provides the main accounting ideas \cite{sagas,escrow}. Here a reservation bounds the service capacity a previously accepted operation may still remove. Commit changes its state but not its exposure; recovery or verified cancellation discharges it. Neither unique identifiers nor a durable ledger are presented as new primitives. The additional question is how their actual carried state determines the admissibility of a replacement policy with a new traffic envelope and repair contract.
+
+\paragraph{Backlog and transient analysis.}
+The clean-start margin is a discrete instance of network-calculus backlog bounds and their tightness constructions \cite{netcal}. Initial-state-sensitive transient network analysis also has substantial prior art; for example, Champati et al. derive transient bounds depending on initial backlog and channel conditions \cite{transient}. We do not claim first discovery that initial conditions matter. Our result specializes to delayed unit restoration and expresses the exact handoff margin using the number of old jobs eligible within a finite initial window. Clock studies show why an actual delay or service-rate guarantee must be justified rather than read from an ideal counter \cite{clocks}.
+
+\paragraph{Manuscript lineage.}
+An earlier unpublished study concerned permissions that accumulate under monotone delegation and policy editing \cite{guardians}. Its nonmonotone counterexample warned against treating historically acquired rights as simultaneously held. The present manuscript preserves that warning and studies the opposite error: assuming a disappeared right implies a disappeared consequence. The separate published PR-v6.0.0 preprint concerns one-episode coupled diagnosis/backup budgets \cite{pr6}; its formulas are not rediscovered or amended here. The v1.1.0 draft of this manuscript supplied the clean-start queue and first local restoration tests \cite{draft}. New in this revision are the handoff theorem, its exact renewed-burst rule, the maturity-state distinction and the asynchronous reservation tests.
+
+These increments are proposed applications and a closed-form specialization of established methods. Global priority of the exact specialization has not been established, nor has an independent reviewer validated the proofs. Such limits should restrict the claim, not obscure which calculation and counterexample a future reader can reuse.
+
+\section{Operational objects and timing}
+\label{sec:model}
+\subsection{Authority, service, and causally outstanding exposure}
+Write the relevant state as $(A,P,E,O,C)$: active authority, policy state, effect records, unreleased human protection obligations and resource configuration. A model family, process instance, human principal and effect identity are different objects. Several agents may share weights or infrastructure without sharing every permission; changing an agent's name does not change an effect's actual target.
+
+\begin{proposition}[Two opposite permission abstractions \idtag{RAC-P1}]
+For every $m\ge2$, one exclusive transferable token can visit all $m$ roles without enabling an atomic operation requiring all roles concurrently. Yet if each visit may write one persistent disable flag, the same one-at-a-time possession can leave all $m$ flags set after the token is revoked.
+\end{proposition}
+\begin{proof}
+At every instant the active-holder set has size at most one, so the all-role atomic precondition is false. Its historical union eventually includes every role. In the persistent-write interpretation each visited role sets a distinct flag before transfer; these flags are not cleared by transfer or revocation. They all remain set at the end. The two endpoint semantics differ and must not be identified by a permission-count summary.
+\end{proof}
+This corrects misuse of an abstraction, not properly scoped reachability analysis. A full finite state model can represent both facts. Real deployment analysis must also identify the complete write/effect boundary, not simply declare a variable called ``restored.''
+
+Let a service have $N$ interchangeable unit components and require $q$ healthy units, $1\le q\le N$. The usable impairment margin is
+\begin{equation} H=N-q.\end{equation}
+Each committed unit effect removes one previously healthy component until recovery. Distinct records cannot count the same physical impairment twice. After a target is restored, a later impairment of that target is a new event. All relevant effects are assumed mediated, and there is no unrelated loss of capacity. These restrictive engineering premises make a precise resource theorem possible; they do not encompass arbitrary malicious behavior or irreversible harm.
+
+\subsection{The new policy's input and repair contract}
+Time is discrete. At the \emph{beginning} of each slot, a work-conserving restorer processes up to $\mu$ eligible unit effects. At the \emph{end} of slot $t$, $a_t$ new unit impairments commit. An effect committed in $t$ first becomes eligible at the beginning of $t+\ell$, with integer $\ell\ge1$. Eligibility means physically available for the specified repair, not already repaired. Among eligible jobs, any work-conserving order has the same aggregate count in this unit model.
+
+The aggregate actual commit stream obeys, for every nonempty interval of $L$ slots,
+\begin{equation}
+\sum_{t=u}^{u+L-1}a_t\le b+\rho(L-1),\qquad b\ge\rho\ge0,\quad b\ge1,
+\label{eq:envelope}
+\end{equation}
+with integer parameters. This regulates all relevant agents jointly, not each new identity independently. The strong contract requires every conforming operation to commit on schedule while protected service persists. Rejecting or delaying work can preserve safety under a weaker contract but does not fulfill this one.
+
+Nominal average recovery is insufficient: $\mu$ and $\ell$ describe a guaranteed work-conserving mechanism. If it can be paused, rerouted to other work, or adversarially disabled, those possibilities require a different service model. For a finite resource pool, an unlimited virtual queue is used only until the first service or scheduled-admission failure; no negative physical capacity is inferred.
+

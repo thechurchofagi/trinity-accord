@@ -1,0 +1,149 @@
+\subsection{Inherited effects at a policy switch}
+A policy switch occurs just before the repair phase of slot 0. Let $d_0$ old unit impairments still exist. Their first eligible repair slots relative to the switch are $r_1,\ldots,r_{d_0}\ge0$; already eligible jobs are normalized to $r_i=0$. Define
+\begin{equation}
+M(t)=\big|\{i:r_i\le t\}\big|,\qquad t\ge0.
+\label{eq:maturity}
+\end{equation}
+$M(t)$ is the number of \emph{initially inherited} jobs that have become eligible by $t$, including those that will have been repaired in the meantime. It is not the number of actual completed repairs. The finite list and the new repair contract jointly determine the dynamics.
+
+The exact handoff theorem assumes no additional unaccounted pre-switch effects can materialize later. Pending accepted work must first be quiesced, canceled with evidence, incorporated into a specified future commitment stream, or separately reserved. Section~\ref{sec:escrow} handles general pending exposure for safety, but does not pretend that arbitrary delayed commits obey the on-schedule envelope merely because their \emph{requests} did.
+
+\section{A sharp recovery-preserving handoff theorem}
+\label{sec:handoff}
+Let $A(t)=\sum_{u=0}^{t}a_u$, with $A(t)=0$ for $t<0$. Let $R(t)$ be cumulative repairs from the switch through the beginning of slot $t$, with $R(-1)=0$. The exact outstanding count after that slot's new commits is
+\begin{equation}
+D_t=d_0+A(t)-R(t).
+\end{equation}
+Before the first repair, the count is $d_0$.
+
+\begin{lemma}[Inherited-job recurrence \idtag{RAC-L2}]
+\label{lem:rec}
+For the declared timing and unit-service model,
+\begin{align}
+R(t)&=\min\{M(t)+A(t-\ell),\ R(t-1)+\mu\},\label{eq:rec}\\
+D_t&=\max\left\{d_0+A(t)-\mu(t+1),\right.\nonumber\\
+&\hspace{1.3cm}\left.\max_{0\le s\le t}\big[d_0-M(s)+A(t)-A(s-\ell)-\mu(t-s)\big]\right\}.
+\label{eq:generaltrace}
+\end{align}
+\end{lemma}
+\begin{proof}
+By time $t$, exactly $M(t)+A(t-\ell)$ jobs have become eligible. Previous repairs cannot exceed that cumulative number. A work-conserving slot repairs the smaller of the remaining eligible jobs and $\mu$, giving \cref{eq:rec}. Unrolling yields
+\[
+R(t)=\min\left\{\mu(t+1),\ \min_{0\le s\le t}[M(s)+A(s-\ell)+\mu(t-s)]\right\}.
+\]
+Subtracting from $d_0+A(t)$ proves \cref{eq:generaltrace}. This is min-plus queue algebra applied to explicit inherited release times, not a new generic queue identity.
+\end{proof}
+
+\begin{theorem}[Exact all-time handoff margin \idtag{RAC-T4}]
+\label{thm:handoff}
+Assume the finite inherited profile \cref{eq:maturity}, all actual future commits satisfying \cref{eq:envelope}, and the specified fixed recovery mechanism.
+\begin{enumerate}[label=(\roman*)]
+\item If $\mu\ge\rho$, the smallest margin guaranteeing protected service from the pre-switch state through every future slot while admitting all conforming commits on schedule is
+\begin{equation}
+\boxed{H^*_{\mathrm{switch}}=\max\left\{d_0,\ d_0+b-\mu,\
+\max_{0\le t<\ell}\big[d_0-M(t)+b+\rho t\big]\right\}.}
+\label{eq:switch}
+\end{equation}
+The worst case is attained by the single conforming stream $a_0=b$, $a_t=\rho$ for $t\ge1$, either before slot 0 or within slots $0,\ldots,\ell-1$.
+\item If $\mu<\rho$, no finite $H$ guarantees the strong all-admitted contract over unbounded time.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+The initial state requires $H\ge d_0$. For the first term of \cref{eq:generaltrace}, the envelope gives
+\[
+d_0+A(t)-\mu(t+1)\le d_0+b-\mu+(\rho-\mu)t\le d_0+b-\mu.
+\]
+For a fixed $s$ in the inner maximum, $A(t)-A(s-\ell)$ sums arrivals over an interval of length $t+1$ if $s<\ell$, and length $t-s+\ell$ otherwise. If $s<\ell$, its upper bound is
+\[
+d_0-M(s)+b+\rho s+(\rho-\mu)(t-s),
+\]
+maximized at $t=s$. If $s\ge\ell$, its upper bound is
+\[
+d_0-M(s)+b+\rho(\ell-1)+(\rho-\mu)(t-s)
+\le d_0-M(\ell-1)+b+\rho(\ell-1).
+\]
+The last inequality uses $M(s)\ge M(\ell-1)$ and $\mu\ge\rho$. Thus \cref{eq:switch} is sufficient.
+
+For sharpness, the stated burst-followed-by-rate stream satisfies every interval condition because $b\ge\rho$. At $t=0$, the first term of \cref{eq:generaltrace} equals $d_0+b-\mu$. For every $t<\ell$, no post-switch job is eligible, so $A(t)=b+\rho t$ and the $s=t$ term equals $d_0-M(t)+b+\rho t$. The initial $d_0$ is also attained. The same stream therefore realizes the maximum, establishing necessity and the finite peak window.
+
+If $\mu<\rho$, that stream gives $R(t)\le\mu(t+1)$ and hence $D_t\ge d_0+b-\mu+(\rho-\mu)t$, which exceeds any finite margin. Only the prefix up to the first failure is needed for a finite service pool.
+\end{proof}
+
+This theorem is the manuscript's principal new closed-form specialization. Its all-time quantifier should not be mistaken for a model-free claim: a later change to repair eligibility, service capacity or admission dynamics requires another valid transition certificate. The formula takes $O(\ell+d_0)$ time from an eligibility histogram, or $O(d_0\log d_0+\ell)$ from sorted release times; it need not enumerate future streams.
+
+\subsection{Connection to the clean-start bound}
+With $d_0=0$, \cref{eq:switch} reduces to
+\begin{equation}
+H^*_{\rm clean}=b+\rho(\ell-1),\qquad \mu\ge\rho.
+\label{eq:clean}
+\end{equation}
+This is RAC-T1 from the draft: the familiar burst/rate/latency backlog bound under the stated discrete order \cite{netcal,draft}. The $\ell-1$ term is not interchangeable with a continuous-time latency without changing the timing convention. With $\rho=\mu=0$, a finite total of at most $b$ new effects is permitted, but no positive-rate indefinite progress is promised.
+
+A simple safe bound for an unknown initial profile is $d_0+H^*_{\rm clean}$. It can be strictly conservative when old jobs are ready for immediate repair. The exact handoff result explains when that conservatism can be removed using sound information rather than by forgetting old work.
+
+\subsection{The largest safe renewed burst}
+\begin{corollary}[State-dependent renewal allowance \idtag{RAC-C1}]
+\label{cor:burst}
+Fix $H\ge d_0$, $\rho$, $\mu\ge\rho$ and $\ell$. Define
+\begin{equation}
+\boxed{b_{\max}=H-d_0+\min\left\{\mu,\
+\min_{0\le t<\ell}[M(t)-\rho t]\right\}.}
+\label{eq:burst}
+\end{equation}
+There exists an admissible new burst/rate contract in our parameter class exactly when $b_{\max}\ge\max(1,\rho)$. In that case every integer $b\in[\max(1,\rho),b_{\max}]$ is safe, and no larger burst has the all-stream guarantee.
+\end{corollary}
+\begin{proof}
+Rearrange each inequality in $H\ge H^*_{\mathrm{switch}}$. The term $d_0+b-\mu$ gives $b\le H-d_0+\mu$; each maturity term gives $b\le H-d_0+M(t)-\rho t$. Their minimum is \cref{eq:burst}. Sharpness follows from Theorem~\ref{thm:handoff}.
+\end{proof}
+A negative or too-small value is not a command to abandon the service. It says the proposed immediate all-admitted rate/burst contract cannot be issued in that state. Waiting for repair, admitting less work, increasing margin or providing faster recovery changes the calculation. These are constructive alternatives, not silent fulfillment of the original commitment.
+
+\subsection{Equal counts can require different decisions}
+Set $d_0=2$, $b=2$, $\rho=\mu=1$ and $\ell=2$. In one state both old effects are already eligible: $M(0)=M(1)=2$. In another neither is eligible until slot 2: $M(0)=M(1)=0$. The exact margins are respectively three and five.
+\begin{table}[ht]
+\centering\small
+\caption{Same old-effect count and same proposed policy; different true repair readiness. The values follow from the theorem and explicit job simulation.}
+\label{tab:ages}
+\begin{tabular}{@{}lcc@{}}\toprule
+Quantity & Old jobs ready now & Old jobs ready at slot 2\\\midrule
+Old impairment count $d_0$ &2&2\\
+$M(0),M(1)$ &(2,2)&(0,0)\\
+Exact required headroom &3&5\\
+First three post-slot debts under $(2,1,1,\ldots)$ &3,3,3&4,5,5\\
+Largest permitted $b$ at $H=3,\rho=1$ &2&None in the class\\\bottomrule
+\end{tabular}
+\end{table}
+A rule observing only the count and the new policy cannot both accept every feasible handoff and reject every infeasible one across this pair. This is an ordinary indistinguishability argument, not a new general information theorem. The contribution is the exact state distinction and its quantitative consequence. One need not preserve irrelevant names or the full past trajectory: for this decision, $d_0$ and $M(0),\ldots,M(\ell-1)$ suffice. This is not permission to discard effect identities or later release times needed by a subsequent policy with different parameters.
+
+\begin{corollary}[Incomplete maturity evidence \idtag{RAC-C2}]
+For a nonempty family of compatible inherited profiles with the same $d_0$, let $\underline M(t)$ be the smallest $M(t)$ among them. Replacing $M$ in \cref{eq:switch} by $\underline M$ gives the exact worst-case margin over that family. In particular, knowing only $d_0$ and allowing all finite eligibility times gives $d_0+b+\rho(\ell-1)$.
+\end{corollary}
+\begin{proof}
+The maximum over compatible profiles and the finite maximum over $t$ commute; each occurrence of $M(t)$ has coefficient $-1$. A profile realizing the smallest value at the maximizing $t$ is enough for sharpness; simultaneous minimization at all $t$ is unnecessary. Without readiness information, choose all old jobs eligible no earlier than $\ell$, which gives $\underline M(t)=0$ in the relevant window.
+\end{proof}
+A misleading receipt is not truthful refinement of this family. If the ledger overstates physical eligibility, the actual profile may be absent and the guarantee fails. Repeated copies of the same unsupported readiness assertion do not repair that omission.
+
+\section{Policy renewal must preserve consequences and recovery clocks}
+\label{sec:renewal}
+\subsection{Uncompensated reset of a local allowance}
+The draft's version-reset counterexample remains a useful separating test. Let $b>\rho$, $\mu=\rho$, $\ell=1$, and let each epoch of $h\ge1$ slots admit a fresh burst $b$ followed by rate $\rho$. Each epoch obeys its own fresh envelope. In the continuous system the debt after the first slot of epoch $j$ is
+\begin{equation}
+D_{jh}=b+j(b-\rho),\qquad j=0,1,\ldots .
+\label{eq:epoch}
+\end{equation}
+The initial debt is $b$; ordinary slots replace $\rho$ repairs by $\rho$ new effects; every renewal replaces those repairs by $b$ new effects. This induction proves the formula. The combined arrival stream is not constrained by the original single envelope. Resetting it has changed the aggregate contract, not disproved network calculus.
+
+The new handoff criterion detects this problem at its decision boundary. After previous work, the actual $d_0$ and maturity profile limit the next $b_{\max}$. At $\ell=1$, mature residual jobs leave $b_{\max}=H-d_0+\min(\mu,M(0))$. An institution cannot promise the original fresh burst indefinitely by changing only the version field.
+
+\subsection{Resetting recovery is a separate failure}
+Preserving the debt count while restarting all recovery clocks can also defeat protection. With one new effect per slot, $\mu=1$ and $\ell=2$, a persistent schedule has debts $1,2,2,2,\ldots$. If each epoch postpones every unfinished job's eligibility to two slots after the new epoch begins, none ever becomes eligible and the debts become $1,2,3,4,\ldots$.
+
+This is not a counterexample to Theorem~\ref{thm:handoff}: the assumed release schedule was repeatedly changed. It is a reason to include physical readiness or a conservative guarantee of it in the transition record. A valid institutional revision can change the restorer, but it must evaluate the actual new readiness commitments, not reset metadata while citing an old service guarantee.
+
+\begin{proposition}[Conditional composition across arbitrary discrete revisions \idtag{RAC-T5}]
+Suppose revisions occur at discrete slot boundaries. At each accepted revision: all outstanding committed impairments are carried into the new $d_0,M$; uncommitted exposures are settled or handled by a sound separate reservation rule; the new physical timing assumptions hold until the next revision; and the proposed actual-commit contract passes \cref{eq:switch}. Then every finite prefix of the repeated system preserves its declared human-service margin, provided each epoch's actual commits conform. The policy sequence need not have one fixed goal, identity, burst parameter or recovery rate.
+\end{proposition}
+\begin{proof}
+A valid initial certificate preserves the invariant until the next revision because the all-time bound includes every finite prefix. At that revision, the actual inherited state, rather than a clean fictitious state, is used for the next certificate. Repeat the argument by induction. Discrete time excludes infinitely many state transitions before one slot boundary. The conclusion is safety under the stated admitted sequence, not that every proposed revision or external demand can be accepted.
+\end{proof}
+This is invariant composition, not a permanently trustworthy constitutional mechanism. The non-vacuous contribution is the exact check that permits some revisions and forbids others in the same operating state. Altering which human functions are protected also requires explicit authority and a new contract; removing a target from a dashboard does not prove an outstanding promise was fulfilled.
+

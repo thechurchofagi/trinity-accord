@@ -1,0 +1,122 @@
+{
+  "schema": "uct-disabled-candidate-map/1",
+  "id": "ASI-CC-v1.2.0",
+  "baseline": "UCT-MAP-v1.1.2",
+  "baseline_commit": "65c54b07d159aa65f36533e9ca9f4bb3bfc77251",
+  "formal_counts_unchanged": {
+    "nodes": 913,
+    "rules": 424,
+    "context_links": 261
+  },
+  "status": "PENDING_MAP_AUDIT_INCOMPLETE",
+  "enabled": false,
+  "candidate_nodes": [
+    {
+      "id": "RAC-P1",
+      "type": "COUNTEREXAMPLE",
+      "status": "INHERITED_FROM_V1.1",
+      "enabled": false
+    },
+    {
+      "id": "RAC-L1",
+      "type": "LEMMA",
+      "status": "INHERITED_CLASSICAL_NETWORK_CALCULUS_APPLICATION",
+      "enabled": false
+    },
+    {
+      "id": "RAC-T1",
+      "type": "THEOREM",
+      "status": "INHERITED_CLASSICAL_NETWORK_CALCULUS_APPLICATION",
+      "enabled": false
+    },
+    {
+      "id": "RAC-T2",
+      "type": "PROPOSITION",
+      "status": "INHERITED_FROM_V1.1_SCOPED_RESET_RESULT",
+      "enabled": false
+    },
+    {
+      "id": "RAC-L2",
+      "type": "LEMMA",
+      "status": "NEW_SPECIFICATION_WITH_INHERITED_MIN_PLUS_METHOD",
+      "enabled": false
+    },
+    {
+      "id": "RAC-T4",
+      "type": "THEOREM",
+      "status": "PROPOSED_EXACT_HANDOFF_SPECIALIZATION_PRIORITY_UNVERIFIED",
+      "enabled": false
+    },
+    {
+      "id": "RAC-C1",
+      "type": "COROLLARY",
+      "status": "DERIVED_STATE_DEPENDENT_ALLOWANCE",
+      "enabled": false
+    },
+    {
+      "id": "RAC-C2",
+      "type": "COROLLARY",
+      "status": "DERIVED_ROBUST_HISTORY_REFINEMENT",
+      "enabled": false
+    },
+    {
+      "id": "RAC-T5",
+      "type": "PROPOSITION",
+      "status": "CONDITIONAL_COMPOSITION_INHERITED_INDUCTION",
+      "enabled": false
+    },
+    {
+      "id": "RAC-T3",
+      "type": "THEOREM",
+      "status": "CLARIFIED_ASYNCHRONOUS_SCOPE_OF_V1.1",
+      "enabled": false
+    },
+    {
+      "id": "RAC-E2",
+      "type": "EXECUTED_EVIDENCE",
+      "status": "NEW_LOCAL_IMPLEMENTATION_AND_DATA_NOT_REAL_AI",
+      "enabled": false
+    },
+    {
+      "id": "RAC-N3",
+      "type": "NEGATIVE_RESULT",
+      "status": "EXPLICIT_SCOPE_COUNTEREXAMPLE",
+      "enabled": false
+    }
+  ],
+  "dependencies": [
+    [
+      "RAC-L2",
+      "RAC-T4"
+    ],
+    [
+      "RAC-T4",
+      "RAC-C1"
+    ],
+    [
+      "RAC-T4",
+      "RAC-C2"
+    ],
+    [
+      "RAC-T4",
+      "RAC-T5"
+    ],
+    [
+      "RAC-T3",
+      "RAC-E2"
+    ],
+    [
+      "RAC-T4",
+      "RAC-N3"
+    ]
+  ],
+  "semantic_audit_scope": "Current manuscript and local claim/proof/evidence relations only; not all historical913nodes424rules261contexts",
+  "not_reexamined": "Every other historical UCT node and relation;global corpus coverage;all empirical phenomenal bridges",
+  "old_C1_U1": "UNCHANGED;NO_EXPERIENCE_THRESHOLD_ADDED",
+  "merge_order": [],
+  "formal_admission_changes": {
+    "nodes": 0,
+    "rules": 0,
+    "relations": 0
+  }
+}

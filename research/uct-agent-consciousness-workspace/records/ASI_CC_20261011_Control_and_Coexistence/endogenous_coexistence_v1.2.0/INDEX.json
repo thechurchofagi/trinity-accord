@@ -1,0 +1,54 @@
+{
+  "schema": "uct-endogenous-author-final/1.2",
+  "id": "ASI-CC-v1.2.0",
+  "author": "Hongju Liu",
+  "date": "2026-10-11",
+  "title": "When Revocation Does Not Restore Safety: Persistent Effects and Recovery-Preserving Policy Revision in Multi-Agent Systems",
+  "pages": 13,
+  "status": "AUTHOR_FINAL_COMPLETE",
+  "published": false,
+  "doi": null,
+  "peer_reviewed": false,
+  "baseline_commit": "65c54b07d159aa65f36533e9ca9f4bb3bfc77251",
+  "predecessor_source_commit": "60b3bab757350030fe12899be38e6c6514c1c73f",
+  "separate_published_PR6_doi": "10.5281/zenodo.23295776",
+  "formal_map": "UCT-MAP-v1.1.2",
+  "formal_counts_unchanged": [
+    913,
+    424,
+    261
+  ],
+  "publication_coverage_baseline": "UCT-PUB-v1.0.33",
+  "formal_admission": "PENDING_MAP_DISABLED",
+  "new_established_nodes": 0,
+  "whole_historical_semantic_audit": false,
+  "global_exact_priority_verified": false,
+  "claim_status": {
+    "RAC-P1/L1/T1/T2": "INHERITED",
+    "RAC-L2/T4": "PROPOSED_EXACT_HANDOFF_APPLICATION;INHERITED_QUEUE_METHODS",
+    "RAC-C1/C2": "DERIVED_INVERSE_AND_EVIDENCE_BOUND",
+    "RAC-T5": "CONDITIONAL_COMPOSITION",
+    "RAC-T3": "CLARIFIED_ASYNCHRONOUS_SCOPE",
+    "RAC-E2": "NEW_LOCAL_PROTOCOL_EVIDENCE",
+    "RAC-N3": "REPAIR_CLOCK_RESET_COUNTEREXAMPLE"
+  },
+  "paper": "paper/manuscript.tex",
+  "source_split": "Four partNN.tex files concatenate byte-for-byte to the final monolithic source",
+  "new_scripts": [
+    "src/switch_frontier.py",
+    "src/switch_oracle.py",
+    "src/inflight_protocol.py"
+  ],
+  "summary": "RESULTS_SUMMARY.json",
+  "handoff": "HANDOFF_ZH.md",
+  "work_log": "audit/WORK_LOG.md",
+  "prior_art": "audit/PRIOR_ART_REVIEW.md",
+  "coverage": "audit/PUBLICATION_COVERAGE_UPDATE.json",
+  "publication_actions": {
+    "DOI": false,
+    "OTS": false,
+    "Arweave": false,
+    "older_published_bytes_modified": false
+  },
+  "preservation_scope": "GitHub:full paper source and three executed scripts plus compact audit/metadata. Full raw results,13-page PDF and expanded audits supplied in the conversation research ZIP."
+}

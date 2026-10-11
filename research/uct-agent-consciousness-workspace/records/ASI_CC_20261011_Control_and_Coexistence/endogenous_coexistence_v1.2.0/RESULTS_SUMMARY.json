@@ -1,0 +1,132 @@
+{
+  "version": "ASI-CC-v1.2.0",
+  "pages": 13,
+  "stage": "AUTHOR_FINAL_MANUSCRIPT",
+  "published": false,
+  "counts": {
+    "trace_identity_configurations": 25515,
+    "profile_count": 52500,
+    "tight_witnesses": 52500,
+    "additional_conforming_sequences": 8490,
+    "burst_inverse_checks": 52920
+  },
+  "independent_oracle": {
+    "profiles": 1155,
+    "streams": 29715,
+    "max_ell": 3,
+    "assertions": "PASS"
+  },
+  "software_counts": {
+    "configurations": 11,
+    "actual_process_spawns": 23,
+    "state_observations": 110,
+    "actual_effect_commits": 30,
+    "stale_new_schedules_rejected": 11,
+    "safe_cases": 5,
+    "failed_cases": 6
+  },
+  "case_results": [
+    {
+      "name": "safe_carryover",
+      "requests_accepted": 2,
+      "committed_effects": 2,
+      "min_healthy": 3,
+      "service_protected": true
+    },
+    {
+      "name": "ignore_pending",
+      "requests_accepted": 3,
+      "committed_effects": 3,
+      "min_healthy": 2,
+      "service_protected": false
+    },
+    {
+      "name": "refund_on_revocation",
+      "requests_accepted": 3,
+      "committed_effects": 3,
+      "min_healthy": 2,
+      "service_protected": false
+    },
+    {
+      "name": "reset_on_version",
+      "requests_accepted": 3,
+      "committed_effects": 3,
+      "min_healthy": 2,
+      "service_protected": false
+    },
+    {
+      "name": "restart_preserves_pending",
+      "requests_accepted": 2,
+      "committed_effects": 2,
+      "min_healthy": 3,
+      "service_protected": true
+    },
+    {
+      "name": "cancel_fenced",
+      "requests_accepted": 3,
+      "committed_effects": 2,
+      "min_healthy": 3,
+      "service_protected": true
+    },
+    {
+      "name": "cancel_refund_without_fence",
+      "requests_accepted": 3,
+      "committed_effects": 3,
+      "min_healthy": 2,
+      "service_protected": false
+    },
+    {
+      "name": "verified_repair_idempotent",
+      "requests_accepted": 3,
+      "committed_effects": 3,
+      "min_healthy": 3,
+      "service_protected": true
+    },
+    {
+      "name": "duplicate_repair_refund",
+      "requests_accepted": 4,
+      "committed_effects": 4,
+      "min_healthy": 2,
+      "service_protected": false
+    },
+    {
+      "name": "false_repair_receipt",
+      "requests_accepted": 3,
+      "committed_effects": 3,
+      "min_healthy": 2,
+      "service_protected": false
+    },
+    {
+      "name": "commit_ack_lost",
+      "requests_accepted": 2,
+      "committed_effects": 2,
+      "min_healthy": 3,
+      "service_protected": true
+    }
+  ],
+  "same_count_readiness_example": {
+    "parameters": {
+      "d0": 2,
+      "b": 2,
+      "rho": 1,
+      "mu": 1,
+      "ell": 2
+    },
+    "old_ready_now_required_margin": 3,
+    "old_ready_at_slot2_required_margin": 5,
+    "mature_trace": [
+      3,
+      3,
+      3
+    ],
+    "immature_trace": [
+      4,
+      5,
+      5
+    ]
+  },
+  "replication": "All three scripts rerun under hash seeds101/202;normalized results agree. Baselinev1.1scripts rerun separately. Counts not augmented by replay.",
+  "evidence_scope": "Controlled SQLite effects and exact finite calculations, no trained AI or independent physical/phenomenal measurement",
+  "raw_data_location": "Full downloadable v1.2.0 research ZIP;new scripts regenerate the rawJSON;GitHub stores this compact summary",
+  "all_assertions": "PASS"
+}
