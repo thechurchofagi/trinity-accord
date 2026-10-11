@@ -2588,27 +2588,33 @@
     }
   ],
   "latest_followup_application": {
-    "id": "A4I20261011",
-    "version": "A4I-REFERENT-v0.1.0",
-    "status": "DISABLED_SCOPED_REFERENT_REPAIR_AND_FINITE_POLICY_CHECK",
+    "id": "A4J20261011",
+    "version": "A4J-CROSS-PERTURBATION-v0.1.0",
+    "status": "DISABLED_SCOPED_CROSS_PERTURBATION_PREDICTION_AND_STOP_RULE",
     "enabled_as_established_premises": false,
-    "source": "records/A4I20261011_Continuation_Familiarity_Referent/RESEARCH_NOTE.md",
-    "handoff": "records/A4I20261011_Continuation_Familiarity_Referent/HANDOFF_ZH.md",
-    "work_log": "records/A4I20261011_Continuation_Familiarity_Referent/WORK_LOG.md",
-    "claim_ledger": "records/A4I20261011_Continuation_Familiarity_Referent/CLAIM_LEDGER.json",
-    "map_extension": "records/A4I20261011_Continuation_Familiarity_Referent/MAP_EXTENSION.json",
-    "exact_results": "records/A4I20261011_Continuation_Familiarity_Referent/EXACT_RESULTS.json",
+    "source": "records/A4J20261011_Cross_Perturbation_Predictions/RESEARCH_NOTE.md",
+    "handoff": "records/A4J20261011_Cross_Perturbation_Predictions/HANDOFF_ZH.md",
+    "work_log": "records/A4J20261011_Cross_Perturbation_Predictions/WORK_LOG.md",
+    "claim_ledger": "records/A4J20261011_Cross_Perturbation_Predictions/CLAIM_LEDGER.json",
+    "map_extension": "records/A4J20261011_Cross_Perturbation_Predictions/MAP_EXTENSION.json",
+    "exact_results": "records/A4J20261011_Cross_Perturbation_Predictions/EXACT_RESULTS.json",
     "parent_science": "A3V20261010",
-    "parent_followup": "A4H20261011",
+    "parent_followup": "A4I20261011",
     "completed_map": "UCT-MAP-v1.1.2",
     "scientific_delta": {
       "nodes": 0,
       "rules": 0,
       "contexts": 0
     },
+    "strict_signature_counts": {
+      "both": 1,
+      "relation_only": 2,
+      "fit_only": 2,
+      "neither": 4
+    },
     "independent_h_validation": false,
     "actual_bodily_installation": false,
-    "question_wording_piloted": false,
+    "targeted_first_stages_installed": false,
     "standalone_manuscript": "HOLD"
   },
   "followup_applications": [
@@ -2962,6 +2968,36 @@
       "independent_h_validation": false,
       "actual_bodily_installation": false,
       "question_wording_piloted": false,
+      "standalone_manuscript": "HOLD"
+    },
+    {
+      "id": "A4J20261011",
+      "version": "A4J-CROSS-PERTURBATION-v0.1.0",
+      "status": "DISABLED_SCOPED_CROSS_PERTURBATION_PREDICTION_AND_STOP_RULE",
+      "enabled_as_established_premises": false,
+      "source": "records/A4J20261011_Cross_Perturbation_Predictions/RESEARCH_NOTE.md",
+      "handoff": "records/A4J20261011_Cross_Perturbation_Predictions/HANDOFF_ZH.md",
+      "work_log": "records/A4J20261011_Cross_Perturbation_Predictions/WORK_LOG.md",
+      "claim_ledger": "records/A4J20261011_Cross_Perturbation_Predictions/CLAIM_LEDGER.json",
+      "map_extension": "records/A4J20261011_Cross_Perturbation_Predictions/MAP_EXTENSION.json",
+      "exact_results": "records/A4J20261011_Cross_Perturbation_Predictions/EXACT_RESULTS.json",
+      "parent_science": "A3V20261010",
+      "parent_followup": "A4I20261011",
+      "completed_map": "UCT-MAP-v1.1.2",
+      "scientific_delta": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0
+      },
+      "strict_signature_counts": {
+        "both": 1,
+        "relation_only": 2,
+        "fit_only": 2,
+        "neither": 4
+      },
+      "independent_h_validation": false,
+      "actual_bodily_installation": false,
+      "targeted_first_stages_installed": false,
       "standalone_manuscript": "HOLD"
     }
   ],

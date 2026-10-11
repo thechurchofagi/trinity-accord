@@ -1,0 +1,26 @@
+{
+  "schema": "a4j-cross-perturbation-summary/1",
+  "scope": "Exact qualitative sign enumeration for two scoped pure candidates; no phenomenal assignment or actual installation.",
+  "sign_alphabet": [-1, 0, 1],
+  "strict": {
+    "independently_fixed_main_directions": {"dR_under_Z_R": -1, "dF_under_Z_F": -1},
+    "unrestricted_cross_effects": ["dF_under_Z_R", "dR_under_Z_F"],
+    "latent_cross_effect_worlds": 9,
+    "relation_prediction_set": [[-1, -1], [-1, 0], [-1, 1]],
+    "fit_prediction_set": [[-1, -1], [0, -1], [1, -1]],
+    "classification_counts_over_nine_observed_signatures": {"both": 1, "relation_only": 2, "fit_only": 2, "neither": 4},
+    "intersection": [[-1, -1]]
+  },
+  "weak": {
+    "targeted_candidate_effect_set": [-1, 0],
+    "classification_counts_over_nine_observed_signatures": {"both": 4, "relation_only": 2, "fit_only": 2, "neither": 1}
+  },
+  "unrestricted_without_signed_first_stages": {
+    "relation_prediction_set_equals_fit_prediction_set": true,
+    "common_set_size": 9,
+    "identification": false
+  },
+  "phenomenal_assignments": 0,
+  "script_sha256": "db641cac8ccad93aea72118729b9f75b17c94919e69a788f7a3a1807edde7642",
+  "canonical_stdout_sha256": "1590a900971ed019915c8662b91ff8b1fc9240b5aefd26f8b7ed477d3f946a6e"
+}

@@ -55,3 +55,11 @@ A4I repairs the A4H measurement question. A report about a just-enacted continua
 Deliverables: `records/A4I20261011_Continuation_Familiarity_Referent/`. Claims remain disabled; formal delta is 0/0/0; no participant, actual route, signed phenomenal endpoint or complete physical installation is supplied. Supervision items remain open as listed in `REVIEW_RESPONSE.md`.
 
 Next exact task: build a two-intervention prediction table for relation perturbation and fit/effort perturbation, including cross-effects and stop conditions. Do not purify the contrast by adjusting for post-formation effort.
+
+## Current continuation: A4J20261011
+
+A4J permits both interventions to have cross-effects. With independently signed target first stages and strict positive pure bridges, the nine `J_cont` total-effect signatures split into 1 shared, 2 relation-only, 2 fit-only and 4 neither. Without signed first stages, both prediction sets equal all nine signatures and the design stops as non-identifying.
+
+Deliverables: `records/A4J20261011_Cross_Perturbation_Predictions/`. Claims remain disabled; formal delta is 0/0/0; no participant, actual route, signed phenomenal endpoint or complete physical installation is supplied. No post-formation adjustment is used to manufacture selectivity.
+
+Next exact task: establish pre-outcome uncertainty-bounded first-stage and endpoint-orientation sign sets, or stop at the qualitative organizational comparison if they cannot be independently warranted.

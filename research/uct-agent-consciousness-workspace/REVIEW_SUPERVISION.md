@@ -1077,3 +1077,11 @@ A4G应用保持停用，正式图增量0/0/0。C1/U1未改；硬件来源坐标�
 - `SCU-OPEN-R191-NORMALIZATION`: OPEN. No normalization attempted.
 - `SCU-AUDIT-DEPTH`: AUDIT_INCOMPLETE. Relevant effective R173 amendment ordering was checked; no all-history audit claimed.
 - Evidence: `records/A4I20261011_Continuation_Familiarity_Referent/REVIEW_RESPONSE.md`, `FORMAL_AUDIT.md`, `GAP_LEDGER.md`.
+
+## A4J20261011 research response (does not close supervision items)
+
+- `QC-20261008-10`: ACKNOWLEDGED/OPEN. A4J supplies prospective signed prediction sets but keeps `J_cont` orientation as an explicit unvalidated premise.
+- `IA-QC11`, `QC-20261008-12`, `QC-20261008-13`: OPEN. First-stage signs, judgment effects, actual route use, complete bearer organization and phenomenal target are not interchanged; no physical installation or current-assistant verdict.
+- `SCU-OPEN-R191-NORMALIZATION`: OPEN. No normalization attempted.
+- `SCU-AUDIT-DEPTH`: AUDIT_INCOMPLETE. All 913/424/261 completed objects were structurally traversed; deep semantic review remained restricted to the affected C1/R157/R173/R199 and A4A/A4H/A4I neighborhood.
+- Evidence: `records/A4J20261011_Cross_Perturbation_Predictions/REVIEW_RESPONSE.md`, `FORMAL_AUDIT.md`, `GAP_LEDGER.md`.

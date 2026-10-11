@@ -42,3 +42,7 @@ A4H：[审查](records/A4H20261011_Compositional_Action_Familiarity/FORMAL_AUDIT
 ## A4I20261011 scoped audit addendum
 
 The effective restored inventory remains 913 nodes, 424 rules and 261 context links; A4I adds 0/0/0. Its event target, delayed response, effort and practice-memory variables are explicitly time- and object-indexed. No R173 `all_of` rule fires because actual formation, retained content, same-event use, complete bearer binding and independent target evidence are not jointly installed. The finite policy check assigns no phenomenal truth and is unrelated to the amended R173/R175 valuation count. Full historical-depth audit and normalization remain open; artifact validation is not theoretical truth.
+
+## A4J20261011 scoped audit addendum
+
+The effective restored inventory remains 913/424/261 with 727 pending objects disabled and 10 historical rules suspended; A4J adds 0/0/0. All completed IDs were structurally traversed and every `all_of` read conjunctively. The finite sign-set result allows cross-effects but requires independently signed targeted first stages and a scoped positive pure bridge; it does not install R157/R173's same-instance actual relation, semantic bridge or bearer premises. The shared `(-,-)` signature and fully unrestricted nine-signature equality are retained failures. Full historical-depth audit and R191 normalization remain open.

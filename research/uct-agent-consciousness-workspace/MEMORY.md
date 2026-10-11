@@ -61,3 +61,11 @@ A4C式行动重放仍不能识别实际执行器写入器：允许旁路及时�
 - Three one-sided vetoes: effort substitution, practice-memory substitution and event drift. Passing them is content admissibility, not signed `H_cont` calibration.
 - Exact eight-vignette policy check: all four declared signatures differ; target versus pure effort and target versus pure practice-memory differ in 4/8 cells. Phenomenal assignments: 0.
 - Formal delta 0/0/0; C1 unchanged; no R173 route fires. Next: two-intervention `B_relation`/`B_fit` prediction table with cross-effects and stop conditions.
+
+## A4J20261011 — cross-perturbation prediction sets
+
+- Cross-effects are allowed: relation-directed disruption may change fit, and fit/effort disruption may change retained-relation use.
+- If the targeted first stages are independently signed negative and the pure candidates are strictly positive, relation predicts `{(-,-),(-,0),(-,+)}` while fit predicts `{(-,-),(0,-),(+,-)}`.
+- Exact nine-signature classification: 1 both, 2 relation-only, 2 fit-only, 4 neither. Weak sensitivity enlarges overlap to 4.
+- With no independently warranted first-stage signs, both candidates allow all nine signatures: intervention names alone identify nothing.
+- No post-formation covariate adjustment, H truth assignment, actual bodily installation or formal-map promotion. Next: uncertainty-bounded pre-outcome sign calibration or a principled stop.

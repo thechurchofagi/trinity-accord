@@ -151,3 +151,7 @@ R20–R23候选：纠正将“阻止其他人强行终止仍想继续存在的�
 ## A4I20261011 disabled referent repair
 
 A4I introduces no formal object. It distinguishes the enacted target `H_cont(x)` from a later judgment `J_cont(x,tr)`, judged effort `E(x,tr)` and explicit practice memory `M_pr(x,tr)`. The distinction prevents a report-lag premise from being misread as target identity. The eight-row checker belongs to a stipulated comprehension-policy space and is not the historical R173 valuation space. Map delta: **0 nodes / 0 rules / 0 contexts**; `A:C1`, `A:U1`, R157, effective R173 and R199 retain their prior scopes and statuses.
+
+## A4J20261011 disabled cross-perturbation application
+
+A4J adds no formal object. It defines set-valued signed predictions for randomized relation- and fit-directed total effects while allowing both cross-effects. Strict independently signed targeted first stages yield one shared, two relation-only, two fit-only and four neither signatures; without signed first stages both candidates allow all nine. The result is a disabled method/application record, not `H_cont` calibration, actual `RetBind` installation or a C1 consequence. Map delta: **0/0/0**.

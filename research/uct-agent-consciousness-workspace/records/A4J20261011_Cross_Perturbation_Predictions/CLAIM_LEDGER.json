@@ -1,0 +1,56 @@
+{
+  "schema": "uct-claim-ledger/1",
+  "round": "A4J20261011",
+  "claims": [
+    {
+      "id": "A4J-C1",
+      "type": "NEGATIVE_RESULT",
+      "statement": "If no intervention-specific first-stage sign for R or F is independently warranted, unrestricted cross-effects make the B_relation+ and B_fit+ prediction sets both equal to {-1,0,+1}^2, so intervention labels alone do not identify the bridge.",
+      "domain": "Two-arm qualitative total-effect sign model with scoped pure positively oriented bridge candidates.",
+      "all_premises": ["fixed bearer/event/grain/estimand", "same sign alphabet", "unrestricted input sign sets", "no hidden selectivity premise"],
+      "proof": "Cartesian-product equality; exact nine-signature enumeration.",
+      "counterexamples_limits": "Does not cover independently bounded first stages, quantitative magnitudes, mixed bridges or actual human feasibility.",
+      "status": "DISABLED_CONDITIONAL_RESULT"
+    },
+    {
+      "id": "A4J-C2",
+      "type": "NEW_APPLICATION",
+      "statement": "With sign(tau_R(Z_R))=-1 and sign(tau_F(Z_F))=-1 established before inspecting J, while both cross-effects remain unrestricted, strict B_relation+ predicts {(-,-),(-,0),(-,+)} and strict B_fit+ predicts {(-,-),(0,-),(+,-)}.",
+      "domain": "Same fixed two-intervention contract and strict signed sensitivity.",
+      "all_premises": ["A4J-C1 typing", "targeted first stages nonzero and negative", "positive orientation of the relevant input-to-J sign", "pure candidate scope", "randomized total-effect estimand"],
+      "proof": "Substitution into the general prediction-set products; exact enumeration.",
+      "counterexamples_limits": "The shared (-,-) signature is inconclusive; weak sensitivity enlarges overlap; endpoint orientation is not currently calibrated.",
+      "status": "DISABLED_CONDITIONAL_RESULT"
+    },
+    {
+      "id": "A4J-C3",
+      "type": "CONDITIONAL_METHOD_RESULT",
+      "statement": "For independently warranted sign sets S_R and S_F, an observed signature distinguishes the scoped candidates exactly when it belongs to one candidate product set and not the other; global separation requires disjoint product sets.",
+      "domain": "Finite sign-set predictions for the declared intervention family.",
+      "all_premises": ["prediction sets frozen before outcome", "membership evaluated without post-treatment adjustment", "same outcome coding and population"],
+      "proof": "Definition of set-valued model compatibility.",
+      "counterexamples_limits": "Elementary set logic, not a novel general causal-identification theorem.",
+      "status": "DISABLED_CONDITIONAL_RESULT"
+    },
+    {
+      "id": "A4J-C4",
+      "type": "CORRECTION",
+      "statement": "An off-target intervention effect is part of the prospective total-effect signature, not automatically a confound to regress away; post-formation adjustment cannot be used to create the bridge contrast.",
+      "domain": "A4A/A4I formation and perturbation design family.",
+      "all_premises": ["post-treatment variables may be mediators/common effects", "primary estimand is randomized total effect"],
+      "proof": "Inherited A4A causal-role analysis plus the A4J prediction table.",
+      "counterexamples_limits": "A separately identified mediation analysis may be valid under additional restrictions; none is installed here.",
+      "status": "DISABLED_APPLICATION_CORRECTION"
+    },
+    {
+      "id": "A4J-C5",
+      "type": "BOUNDARY",
+      "statement": "The sign table does not calibrate H_cont, establish actual retained-relation use, or alter C1/U1; a neither signature rejects only the scoped pure candidates.",
+      "domain": "UCT interpretation of A4J-C1--C4.",
+      "all_premises": ["A4I referent distinction", "R157 semantic residual", "effective R173 same-instance conjuncts", "R199 complete-current-twin ceiling"],
+      "proof": "Typing and scope audit.",
+      "counterexamples_limits": "Actual complete organization and independently warranted phenomenal interpretation remain open.",
+      "status": "OPEN_BOUNDARY_RETAINED"
+    }
+  ]
+}

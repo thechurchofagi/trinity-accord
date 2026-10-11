@@ -47,3 +47,5 @@
 - [A4H：固定粒度的动作熟悉性组合问题](records/A4H20261011_Compositional_Action_Familiarity/RESEARCH_NOTE.md)；[交接](records/A4H20261011_Compositional_Action_Familiarity/HANDOFF_ZH.md)；[索引修复](records/A4H20261011_Compositional_Action_Familiarity/INDEX_REPAIR.json)。停用候选，非正式图晋级。
 
 - [A4I：接续熟悉感的事件指称保持](records/A4I20261011_Continuation_Familiarity_Referent/RESEARCH_NOTE.md)；[问句合同](records/A4I20261011_Continuation_Familiarity_Referent/QUESTION_CONTRACT.md)；[精确结果](records/A4I20261011_Continuation_Familiarity_Referent/EXACT_RESULTS.json)；[形式化审查](records/A4I20261011_Continuation_Familiarity_Referent/FORMAL_AUDIT.md)；[交接](records/A4I20261011_Continuation_Familiarity_Referent/HANDOFF_ZH.md)。修正“无记忆报告”为“事件指称保持的延迟判断”，三项单向否决，0正式图增量，成稿HOLD。
+
+- [A4J：允许交叉效应的两干预预测表](records/A4J20261011_Cross_Perturbation_Predictions/RESEARCH_NOTE.md)；[预测与停止合同](records/A4J20261011_Cross_Perturbation_Predictions/PREDICTION_CONTRACT.md)；[精确结果](records/A4J20261011_Cross_Perturbation_Predictions/EXACT_RESULTS.json)；[形式化审查](records/A4J20261011_Cross_Perturbation_Predictions/FORMAL_AUDIT.md)；[交接](records/A4J20261011_Cross_Perturbation_Predictions/HANDOFF_ZH.md)。严格表为1共享/2关系专属/2适配专属/4均拒绝；无独立一阶方向则九格全重叠。0正式图增量，成稿HOLD。

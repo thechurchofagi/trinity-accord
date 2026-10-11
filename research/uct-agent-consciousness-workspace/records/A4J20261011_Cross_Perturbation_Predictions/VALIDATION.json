@@ -1,0 +1,30 @@
+{
+  "schema": "a4j-validation/1",
+  "round": "A4J20261011",
+  "status": "PASS_ARTIFACT_AND_STRUCTURAL_CHECKS_WITH_SEMANTIC_LIMITS",
+  "checks": {
+    "exact_summary_matches_checker": true,
+    "strict_classification_counts": {"both": 1, "relation_only": 2, "fit_only": 2, "neither": 4},
+    "weak_classification_counts": {"both": 4, "relation_only": 2, "fit_only": 2, "neither": 1},
+    "unrestricted_sets_equal": true,
+    "phenomenal_assignments": 0,
+    "completed_nodes": 913,
+    "completed_rules": 424,
+    "completed_context_links": 261,
+    "pending_objects_disabled": 727,
+    "suspended_historical_rules": 10,
+    "all_completed_ids_structurally_traversed": true,
+    "all_of_interpreted_as_and": true,
+    "navigation_and_disabled_assembly_pass": true,
+    "scientific_promotion": false,
+    "full_semantic_reproof": false
+  },
+  "hashes": {
+    "checker_sha256": "db641cac8ccad93aea72118729b9f75b17c94919e69a788f7a3a1807edde7642",
+    "checker_stdout_sha256": "1590a900971ed019915c8662b91ff8b1fc9240b5aefd26f8b7ed477d3f946a6e",
+    "exact_results_sha256": "ab87e3d53e2a3bb4a774c354e8642f8159fa191d5a87597b2cb0cac9f1785640",
+    "per_id_audit_gzip_sha256": "b6a527ca9a862d5a92d5c82f1480c9761f688bcbcd45e0e3b29ba12519469861",
+    "restored_map_sha256": "e14388ac742889d32e8df6dc3dc171f62034d3cc1e5c53c44159ddbf421adcab"
+  },
+  "limit": "Artifact consistency and finite set logic only; not H_cont calibration, actual installation, C1 evidence or a global semantic proof."
+}

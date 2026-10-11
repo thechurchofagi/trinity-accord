@@ -1,0 +1,11 @@
+{
+  "schema": "uct-disabled-application/1",
+  "id": "A4J20261011",
+  "version": "A4J-CROSS-PERTURBATION-v0.1.0",
+  "enabled": false,
+  "nodes": [],
+  "rules": [],
+  "context_links": [],
+  "counts": {"nodes": 0, "rules": 0, "contexts": 0},
+  "reason": "The finite sign-set theorem is elementary and the UCT application lacks signed H_cont reliability, actual route installation and complete bearer binding. Stable A4J claims remain disabled records, not completed-map premises."
+}
