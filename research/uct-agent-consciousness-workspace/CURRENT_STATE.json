@@ -1011,6 +1011,19 @@
   "next_priority_before_A4H": "On one accessible actuator, draw the final post-arbitration command/energy paths and separately enumerate every common power, reset, clock, bus, DMA, logger and human-control ancestor of the source witnesses. Attempt to make an admitted alternative writer realize the target's complete witness vector; if it can, redesign or stop source attribution. Keep complete-K admission and H_way validation separate.",
   "next_priority_after_A4H": "Test a bounded, independently interpreted continuation-familiarity question that distinguishes familiar components from an unfamiliar conjunction without substituting effort or remembered practice. Compare B_summary/B_relation/B_fit at fixed grain. Reopen actuator provenance only with an actual apparatus and a specific blocked mainline inference.",
   "next_priority_after_A4I": "Construct a two-intervention prediction table for one relation perturbation and one fit/effort perturbation. State signed B_relation and B_fit predictions, allowed cross-effects and stop conditions without assuming either manipulation is selective or using post-treatment covariate adjustment.",
+  "latest_activity_persistence_after_A4I_science": {
+    "status": "GITHUB_SCIENCE_AND_LIBRARY_V124_INCREMENT_VERIFIED; FINAL_RECEIPT_PENDING",
+    "receipt": "records/A4I20261011_Continuation_Familiarity_Referent/PERSISTENCE_RECEIPT.json",
+    "recovery_manifest": "records/A4I20261011_Continuation_Familiarity_Referent/RECOVERY_MANIFEST.json",
+    "github_initial_science_commit": "1e9042eb087840908acc012826ae7631e645871c",
+    "github_verified_science_tree_commit": "95b0904522e37ab2a161ea12d6ea0ab34350a23f",
+    "library_master_science_version": 124,
+    "library_increment_id": "libfile_fd0f683133488191a36b1193774f2feb",
+    "library_increment_sha256": "b43aadd3a393fb9adb766d829702bf2acd1970a953d952b2aaf229c59804240d",
+    "library_manifest_id": "libfile_c599e9d43be88191b23c5b9980560f19",
+    "library_manifest_version": 1,
+    "library_manifest_sha256": "14d012a1e33def2069b8e0b475d982042e59429c1367a2f654d410c068975b2a"
+  },
   "latest_activity_persistence_before_A4H": {
     "status": "A4G_GITHUB_SCIENCE_INTEGRATION_AND_WORKSPACE_MASTER_V120_INCREMENT_CONFIRMED; FINAL_METADATA_COMMIT_IS_EXPECTED_SHA_SUCCESSOR_AND_MASTER_V121_CONFIRMATION",
     "receipt": "records/A4G20261011_Common_Control_Cuts/PERSISTENCE_RECEIPT.json",

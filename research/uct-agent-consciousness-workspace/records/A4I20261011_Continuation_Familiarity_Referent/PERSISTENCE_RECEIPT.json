@@ -1,0 +1,30 @@
+{
+  "schema": "uct-persistence-receipt/1",
+  "round": "A4I20261011",
+  "status": "SCIENCE_COMMIT_AND_LIBRARY_INCREMENT_VERIFIED; FINAL_GITHUB_RECEIPT_AND_MASTER_CONFIRMATION_PENDING",
+  "github": {
+    "branch": "uct-agent-consciousness-workspace",
+    "base_commit": "bc8c2b0b8c4d0bdc41aa5b7e2b75d2c1dd97beea",
+    "initial_science_commit": "1e9042eb087840908acc012826ae7631e645871c",
+    "verified_science_tree_commit": "95b0904522e37ab2a161ea12d6ea0ab34350a23f",
+    "initial_large_index_transport_truncated": true,
+    "repaired_unified_index_blob": "b0742acff3e254b1ad026fa4bc309ab695511dcc",
+    "full_tree_equal_after_repair": true,
+    "expected_sha_update": true,
+    "remote_science_files_verified": true
+  },
+  "library": {
+    "master_library_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "master_science_version": 124,
+    "increment_library_id": "libfile_fd0f683133488191a36b1193774f2feb",
+    "increment_sha256": "b43aadd3a393fb9adb766d829702bf2acd1970a953d952b2aaf229c59804240d",
+    "increment_bytes": 128882,
+    "manifest_library_id": "libfile_c599e9d43be88191b23c5b9980560f19",
+    "manifest_version": 1,
+    "manifest_sha256": "14d012a1e33def2069b8e0b475d982042e59429c1367a2f654d410c068975b2a",
+    "manifest_bytes": 5344,
+    "reverse_materialization_verified": true,
+    "scope": "23-file increment only; not a complete repository, worktree or history"
+  },
+  "remaining": "Write the exact final Git receipt commit into the fixed master handoff, then confirm both successors without unilateral review closure."
+}

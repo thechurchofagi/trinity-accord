@@ -62,4 +62,12 @@
 - **Impact:** the first local checkpoint was not itself a remote checkpoint.
 - **Counterexample:** HTTPS push requested credentials unavailable to the shell.
 - **Repair:** retain the local commit and use the authenticated repository API with expected-head update for the remote science checkpoint.
-- **Open premise:** resolved only when the remote commit and file contents are fetched and verified.
+- **Open premise:** direct shell credentials remain unavailable; authenticated repository writes are the required path.
+
+## A4I-G09 — large-index blob was truncated on first authenticated write
+
+- **Location:** initial remote science commit `1e9042e`, `UNIFIED_RESEARCH_INDEX.json`.
+- **Impact:** commit creation and ref update succeeded while one 164519-byte local file had a truncated base64 transport; “commit accepted” was not content verification.
+- **Counterexample:** the remote file failed JSON parsing although all smaller files matched.
+- **Repair:** recreated the blob with an explicit encoded-length check, obtaining the expected Git blob SHA `b0742ac...`; wrote expected-SHA successor `95b0904` and compared its full tree against the validated local science tree.
+- **Open premise:** none for the repaired science tree; the failed commit remains in history and must not be used alone for recovery.
