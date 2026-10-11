@@ -1,0 +1,23 @@
+{
+  "schema": "uct-recovery-manifest/1.0",
+  "round": "A5A20261012",
+  "authoritative_science_commit": "7fd1eaf1b77e700f54a0d4d1cc42993b70a42138",
+  "authoritative_science_tree": "7dc5a6480e7b41ce4465ccaed6e77044019b360a",
+  "baseline_commit": "2a9904882336a82236ae57c4d835ed92da8d6654",
+  "increment_library_file_id": "libfile_4ed047c419488191a1954f745a3247e0",
+  "increment_manifest_library_file_id": "libfile_1faafe5c08948191b504f2737e5a68ec",
+  "fixed_master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+  "fixed_master_science_version": 161,
+  "increment_path_count": 33,
+  "increment_is_complete_backup": false,
+  "recovery_steps": [
+    "Read the latest fixed master handoff and fetch the branch; prefer the verified science commit or a verified fast-forward descendant.",
+    "If the Git science commit is unavailable, materialize the Library increment and manifest and verify their recorded SHA-256 values.",
+    "Check out the exact baseline and extract the increment at the repository root; never apply it over a newer tree.",
+    "Validate all 33 path sizes and SHA-256 values listed in the increment manifest.",
+    "Run check_route_orbit_barrier.py, JSON validation, integration navigation validation and the fresh effective-map audit.",
+    "Require nine relations, five route-swap orbits, joint-target distribution 4/4/1, zero same-orbit joint/distributed contrasts, and science tree 7dc5a6480e7b41ce4465ccaed6e77044019b360a.",
+    "Do not treat the incremental package as a complete repository, working set or history."
+  ]
+}
+

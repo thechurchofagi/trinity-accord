@@ -157,6 +157,19 @@
     "increment_scope": "34 paths; not a full repository or working-set backup",
     "reverse_materialization_byte_equal": true
   },
+  "latest_activity_persistence_after_A5A_science": {
+    "science_commit": "7fd1eaf1b77e700f54a0d4d1cc42993b70a42138",
+    "science_tree": "7dc5a6480e7b41ce4465ccaed6e77044019b360a",
+    "receipt": "records/A5A20261012_Route_Orbit_Contrast_Barrier/PERSISTENCE_RECEIPT.json",
+    "recovery_manifest": "records/A5A20261012_Route_Orbit_Contrast_Barrier/RECOVERY_MANIFEST.json",
+    "fixed_master_library_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "fixed_master_verified_science_version_before_receipt_successor": 161,
+    "fixed_master_receipt_successor_target_version": 162,
+    "increment_library_id": "libfile_4ed047c419488191a1954f745a3247e0",
+    "manifest_library_id": "libfile_1faafe5c08948191b504f2737e5a68ec",
+    "increment_scope": "33 paths; not a full repository or working-set backup",
+    "reverse_materialization_byte_equal": true
+  },
   "latest_activity_persistence_after_A4X_science": {
     "science_commit": "f32d2a6daff634dfcc05f0d6aa5b4f8685c90e73",
     "science_tree": "f2631cdece223ba865f5aa244161114e30acb610",

@@ -1,0 +1,36 @@
+{
+  "schema": "uct-persistence-receipt/1.0",
+  "round": "A5A20261012",
+  "baseline_commit": "2a9904882336a82236ae57c4d835ed92da8d6654",
+  "authoritative_science_commit": "7fd1eaf1b77e700f54a0d4d1cc42993b70a42138",
+  "authoritative_science_tree": "7dc5a6480e7b41ce4465ccaed6e77044019b360a",
+  "branch": "uct-agent-consciousness-workspace",
+  "github": {
+    "expected_sha_fast_forward": true,
+    "commit_and_key_files_read_back": true,
+    "direct_shell_push_failure": "HTTPS credential prompt unavailable; no remote write occurred",
+    "authorized_repository_object_ref_path": "SUCCEEDED"
+  },
+  "library": {
+    "fixed_master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "fixed_master_science_version": 161,
+    "fixed_master_science_file_id": "file_00000000edc481f9b9758fb289a476dd",
+    "fixed_master_science_sha256": "635914b7c3dd5424a1ee70820edd67c6658a68b038cbbbd11a7b6b436e56bb8d",
+    "fixed_master_reverse_materialized_byte_equal": true,
+    "increment_library_file_id": "libfile_4ed047c419488191a1954f745a3247e0",
+    "increment_file_id": "file_000000001a1481fb8e5365af2fa70ab6",
+    "increment_size_bytes": 218605,
+    "increment_sha256": "98b93e907202aef65d73630a2a0087db48e54cf0d8588d000efe9dba8d718aab",
+    "increment_manifest_library_file_id": "libfile_1faafe5c08948191b504f2737e5a68ec",
+    "increment_manifest_file_id": "file_0000000065708230abf97405b66a5865",
+    "increment_manifest_size_bytes": 8496,
+    "increment_manifest_sha256": "1e8ba165814c520a72a2fb1ee053df4cb137c1493b8f6536f4a91b06ddb5a0dc",
+    "increment_and_manifest_reverse_materialized_byte_equal": true,
+    "increment_is_complete_backup": false,
+    "shared_prepared_replace_failure": "prepare_uploads omitted shared ownership marker; helper aborted before write",
+    "guarded_direct_replace_after_known_failure": "SUCCEEDED_AT_EXPECTED_VERSION_160"
+  },
+  "final_receipt_successor": "RECORDED_IN_FIXED_MASTER_NEXT_VERSION_TO_AVOID_SELF_REFERENCE",
+  "no_pr_ci_deploy_or_publication": true
+}
+
