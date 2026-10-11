@@ -1346,5 +1346,22 @@
     "library_manifest_sha256": "aadae9ef136f375da161368aad430c6f2722e71fc0cb23347fcbc91c12aedc8b",
     "library_manifest_size_bytes": 7961,
     "reverse_materialized_byte_equal": true
+  },
+  "latest_activity_persistence_after_A4R_science": {
+    "status": "GITHUB_SCIENCE_COMMIT_VERIFIED; LIBRARY_INCREMENT_REVERSE_VERIFIED; MASTER_V143_REVERSE_VERIFIED; FINAL_METADATA_COMMIT_IS_EXPECTED_SHA_SUCCESSOR",
+    "receipt": "records/A4R20261011_Three_Link_Anchor_Route_Certificate/PERSISTENCE_RECEIPT.json",
+    "recovery_manifest": "records/A4R20261011_Three_Link_Anchor_Route_Certificate/RECOVERY_MANIFEST.json",
+    "github_base_commit": "37ad207a115c91aceae13a79fbe3522eb61f722a",
+    "github_science_commit": "97daa088fcfebcf41f1997499d56bdaf3bb2070d",
+    "github_science_tree": "85f97b1283b65b4b4c1738c6d91613bb66f28a1b",
+    "library_master_science_version": 143,
+    "library_master_science_sha256": "ea97194b2720913568559c8a7e8bd42b3629ce32c8839d05147779fb8efb6ebc",
+    "library_increment_id": "libfile_8258ce29ba948191b83510a132e51eb0",
+    "library_increment_sha256": "c84011c8be35951f15997ac5a78956616160fa5c23ec811c8bdaf61befcf26be",
+    "library_increment_size_bytes": 169046,
+    "library_manifest_id": "libfile_78c13549ba588191a8ee7c0779fda37c",
+    "library_manifest_sha256": "c719abda8d931d93a8796668c9a7706dc05f8575ac8bc46903e1007ed3938043",
+    "library_manifest_size_bytes": 4396,
+    "reverse_materialized_byte_equal": true
   }
 }

@@ -1,16 +1,47 @@
 {
   "schema": "uct-a4r-persistence-receipt/1",
   "round": "A4R20261011",
-  "status": "PENDING_SCIENCE_AND_LIBRARY_PERSISTENCE",
-  "github": {},
-  "library": {},
+  "status": "SCIENCE_REMOTE_AND_LIBRARY_INCREMENT_VERIFIED; RECEIPT_SUCCESSOR_SHA_TO_BE_RECORDED_IN_FIXED_MASTER",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "verified_start_commit": "37ad207a115c91aceae13a79fbe3522eb61f722a",
+    "science_commit": "97daa088fcfebcf41f1997499d56bdaf3bb2070d",
+    "science_tree": "85f97b1283b65b4b4c1738c6d91613bb66f28a1b",
+    "initial_invalid_receipt_transport_commit": "868af2b49d4b2a99e8ab0b0a765825c6ca193e1c",
+    "initial_invalid_receipt_transport_failure": "A local invalid-revision diagnostic was accidentally transported as a path; the expected-SHA correction deletes that path and writes the five intended receipt files.",
+    "changed_paths": 29,
+    "expected_sha_fast_forward": true,
+    "skip_ci": true,
+    "remote_tree_byte_equal_to_local": true,
+    "remote_key_files_read_back": true
+  },
+  "library": {
+    "fixed_master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "starting_version": 142,
+    "science_version": 143,
+    "science_version_sha256": "ea97194b2720913568559c8a7e8bd42b3629ce32c8839d05147779fb8efb6ebc",
+    "increment_library_file_id": "libfile_8258ce29ba948191b83510a132e51eb0",
+    "increment_file_name": "UCT_A4R_Science_Increment_20261011.zip",
+    "increment_size_bytes": 169046,
+    "increment_sha256": "c84011c8be35951f15997ac5a78956616160fa5c23ec811c8bdaf61befcf26be",
+    "manifest_library_file_id": "libfile_78c13549ba588191a8ee7c0779fda37c",
+    "manifest_file_name": "UCT_A4R_Science_Increment_Manifest.json",
+    "manifest_size_bytes": 4396,
+    "manifest_sha256": "c719abda8d931d93a8796668c9a7706dc05f8575ac8bc46903e1007ed3938043",
+    "increment_is_complete_backup": false,
+    "reverse_materialization_verified": true
+  },
   "validation": {
     "checker_output_byte_equal": true,
     "finite_worlds": 64,
     "open_positive_fibre_worlds": 27,
     "closed_positive_fibre_worlds": 1,
+    "navigation_and_disabled_assembly_pass": true,
+    "json_parse_and_diff_check_pass": true,
     "formal_delta": {"nodes": 0, "rules": 0, "contexts": 0},
     "review_items_self_closed": false,
     "full_semantic_reproof": false
-  }
+  },
+  "self_reference_note": "This file cannot contain the SHA of the commit that first contains its own final bytes. The verified receipt-successor commit SHA and final fixed-master version are recorded in the next version of the same fixed master handoff."
 }
