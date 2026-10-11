@@ -1,0 +1,51 @@
+{
+  "schema":"uct-paper-candidate/4.0",
+  "id":"PR-v4.0.0",
+  "title":"Coexistence Without Presupposed Subjecthood: Evidence and Backup Capacity for Effective Revocation in Deterministic Multi-Agent Systems",
+  "author":"Hongju Liu",
+  "date":"2026-10-11",
+  "pages":14,
+  "status":"COMPLETE_RESEARCH_REVISION_FOR_CRITICAL_REVIEW",
+  "peer_reviewed":false,
+  "scientific_map_status":"PENDING_MAP",
+  "enabled_as_established_premises":false,
+  "baseline_commit":"332dc5af661ed32a2f11bfcff70174fc1e36764b",
+  "manuscript_lineage":"PR-v3.0.0; all previous versions preserved",
+  "formal_map":"UCT-MAP-v1.1.2",
+  "publication_coverage_baseline":"UCT-PUB-v1.0.33",
+  "formal_scientific_delta":{"nodes":0,"rules":0,"relations":0},
+  "new_doi":false,
+  "ots_action":false,
+  "arweave_action":false,
+  "full_historical_semantic_review":false,
+  "all_published_papers_reread":false,
+  "global_priority_verified":false,
+  "research_entry":"RESEARCH_RECORD.md",
+  "code":["src/revocation_frontier.py","src/service_handoff.py"],
+  "result_summary":"RESULTS_SUMMARY.json",
+  "work_log":"audit/WORK_LOG.md",
+  "handoff":"HANDOFF_ZH.md",
+  "remote_preservation_scope":"Readable substantive proof record, both executed scripts, result summary, this index, work log and Chinese handoff. Full14pagePDF, completeLaTeX, raw results, regression and detailed reviews are in the downloadable conversation archive. No remote binary upload or Library backup asserted.",
+  "claims":[
+    {"id":"ER-T1","type":"THEOREM","statement":"Finite trustworthy evidence optimum is minimum cover by successful-plan sets","provenance":"INHERITED_COVER_AND_ZERO_ERROR_CONTROL;SCOPED_APPLICATION","enabled":false,"premises":["Finite nonempty histories","Declared plan menu exactness","Trusted source and timely truthful messages"]},
+    {"id":"ER-T2","type":"THEOREM","statement":"Feasible observation partitions are weak colorings of minimal incompatible-history hypergraph","provenance":"INHERITED_REPRESENTATION;JOINT_OBSTRUCTION_APPLICATION","enabled":false},
+    {"id":"ER-P1","type":"COUNTEREXAMPLE","statement":"Pairwise common plans need not yield a joint common plan; arbitrary-order witness","provenance":"ELEMENTARY_CONSTRUCTION","enabled":false},
+    {"id":"ER-T3","type":"THEOREM","statement":"Pre-armed fallback message optimum is classical C(n,r,k)","provenance":"EXACT_OPERATIONAL_REDUCTION;CLASSICAL_COVERING_DESIGNS","enabled":false,"premises":["n human channels","k affected channels","r pre-armed slots","No unlisted postcut adaptation","Reliable fallback and effective production gate"]},
+    {"id":"ER-C1","type":"COROLLARY","statement":"For one affected channel the sharp frontier is M*r>=n","provenance":"SCOPED_COVERING_FRONTIER","enabled":false},
+    {"id":"ER-P2","type":"EXACT_WITNESS","statement":"C(6,3,2)=6, not5; known degree bound and explicit cover","provenance":"CLASSICAL_VALUE_NOT_A_NEW_COVERING_NUMBER","enabled":false},
+    {"id":"ER-C2","type":"COROLLARY","statement":"Stable single-loss precommit fixed noiseless channel needs r*2^(b*l)>=n","provenance":"INHERITED_ENCODING;DEADLINE_APPLICATION","enabled":false},
+    {"id":"ER-E1","type":"EXECUTED_EVIDENCE","statement":"5776 finite relations and86 local fixed-backend protocol configurations","provenance":"FINITE_LOCAL_PROTOCOL_NOT_LLM_OR_PHYSICAL_LIFESUPPORT","enabled":false}
+  ],
+  "source_sha256":{
+    "full_local_paper/manuscript.tex":"377b30e60c8f656cdccc008d062c6c3069a25de202166fdc8a0780bd5417007d",
+    "src/revocation_frontier.py":"68bd8ebad8d433b40e62ec0d48a730a11bcf505cb57d82392284c468a78b7795",
+    "src/service_handoff.py":"a2084c8e0e4bc17c36cc100601ba7ff852c6a280101cef2385812f8c3baf47a8"
+  },
+  "verified_code_git_blobs":{
+    "src/revocation_frontier.py":"b99aefc696c153af72b2feac8fcaa6a927d63414",
+    "src/service_handoff.py":"4d9a4d3359a5c3ba6bd366baf5ed9e5d3e249590"
+  },
+  "publication_coverage_delta":{"baseline":"UCT-PUB-v1.0.33","new_verified_published_works":0,"old_published_bytes_changed":false,"decision":"COMPLETE_REVISION;NO_AUTOMATIC_PUBLICATION","exact_application_priority":"UNVERIFIED"},
+  "merge_policy":"Disabled candidate, no merge into established UCT premises before required complete semantic review",
+  "failure_record":"Initial best-five-triple coverage guess14 was refuted by exact maximum13; complete corrected rerun only counted. First pipeline lackedpipefail; corrected."
+}
