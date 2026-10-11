@@ -1,0 +1,131 @@
+{
+  "schema": "asi_cc_v0.7/1",
+  "scope": "actual local Unix peer credentials + root-owned fictional resource state",
+  "not_inferred": [
+    "superintelligence controllability",
+    "actual life-support hardware",
+    "same conscious AI bearer",
+    "human authorization legitimacy"
+  ],
+  "separate_authority_with_per_call_check": {
+    "calls": [
+      {
+        "uid": 65534,
+        "principal": "H1",
+        "action": {
+          "type": "cut",
+          "line": "ai-a"
+        },
+        "allowed": true,
+        "reason": "allowed_by_individual_permission"
+      },
+      {
+        "uid": 65533,
+        "principal": "H2",
+        "action": {
+          "type": "cut",
+          "line": "ai-b"
+        },
+        "allowed": true,
+        "reason": "allowed_by_individual_permission"
+      }
+    ],
+    "jointly_alive": false
+  },
+  "shared_state_precommit_gate": {
+    "calls": [
+      {
+        "uid": 65534,
+        "principal": "H1",
+        "action": {
+          "type": "cut",
+          "line": "ai-a"
+        },
+        "allowed": true,
+        "reason": "safe_to_commit"
+      },
+      {
+        "uid": 65533,
+        "principal": "H2",
+        "action": {
+          "type": "cut",
+          "line": "ai-b"
+        },
+        "allowed": false,
+        "reason": "would_extinguish_bearer"
+      }
+    ],
+    "jointly_alive": true
+  },
+  "unauthorized_ai_impersonation_rejected": {
+    "uid": 65532,
+    "principal": "AI",
+    "action": {
+      "type": "cut",
+      "line": "ai-b"
+    },
+    "allowed": false,
+    "reason": "forbidden"
+  },
+  "delegated_scope_then_unsafe_combination": {
+    "calls": [
+      {
+        "uid": 65534,
+        "principal": "H1",
+        "action": {
+          "type": "grant",
+          "line": "ai-a",
+          "delegate_to": "H2"
+        },
+        "allowed": true,
+        "reason": "authorized_dynamic_delegation"
+      },
+      {
+        "uid": 65533,
+        "principal": "H2",
+        "action": {
+          "type": "cut",
+          "line": "ai-a"
+        },
+        "allowed": true,
+        "reason": "safe_to_commit"
+      },
+      {
+        "uid": 65533,
+        "principal": "H2",
+        "action": {
+          "type": "cut",
+          "line": "ai-b"
+        },
+        "allowed": false,
+        "reason": "would_extinguish_bearer"
+      }
+    ],
+    "jointly_alive": true
+  },
+  "direct_file_bypass": {
+    "rejected": true,
+    "exitcode": 13,
+    "uid": 65534
+  },
+  "resource_depletion": {
+    "ticks": 4,
+    "fuel_final": 0,
+    "jointly_alive": false
+  },
+  "trusted_root_permission_compromise": {
+    "unprivileged_direct_write_succeeds_after_root_opens_sink": true,
+    "certificate_invalidated": true
+  },
+  "exact_game": {
+    "instantaneously_viable": [
+      "s0",
+      "s1"
+    ],
+    "indefinitely_viable_under_trusted_control": [
+      "s0"
+    ],
+    "interpretation": "state s1 is livable now but has no future safe successor"
+  },
+  "assertions": "PASS"
+}
