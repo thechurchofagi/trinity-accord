@@ -122,3 +122,10 @@ Test one independent current bodily/action-familiarity interpretation against or
 [英文研究全文](records/ASI_CC_20261011_Control_and_Coexistence/RESEARCH_NOTE_v0.6.0.md) · [中文交接](records/ASI_CC_20261011_Control_and_Coexistence/HANDOFF_v0.6.0_ZH.md) · [穷举检验源码](records/ASI_CC_20261011_Control_and_Coexistence/verify_dual_cut.py) · [结果JSON](records/ASI_CC_20261011_Control_and_Coexistence/EXACT_RESULTS_v0.6.0.json)。
 
 R20–R23候选：纠正将“阻止其他人强行终止仍想继续存在的承载者”误写为“保证它在自身任何选择下永远存活”的量词；用已有Hall匹配条件展示三方各自有供给不推出同一时刻联合可支持；用全部真实执行路径的独立事前门禁排除其他方的单边伤害；只有资源联合匹配与危险通路切割两项在同一有限实例且同一攻击联盟下都成立，才有声明范围内的单轮非支配共存保证。六个有限情形穷举和Hall/独立匹配核对通过，最大攻击联盟k=0/1/2；第三方独立信任根、无限资源续供、现实AI意识与合法授权都未证明。**本节仅导航，数学主要继承组合优化及运行时安全研究。没有全图语义审查、没有正式科学节点晋级、没有真实ASI实验、没有发表。UCT-MAP-v1.1.2、913/424/261及既有研究主线均保持原值。**
+
+
+### ASI-CC-v0.7.0 — 动态授权、时间闭合与实际软件权限见证（停用候选）
+
+[英文候选研究与R24–R27](records/ASI_CC_20261011_Control_and_Coexistence/RESEARCH_NOTE_v0.7.0.md) · [中文交接](records/ASI_CC_20261011_Control_and_Coexistence/HANDOFF_v0.7.0_ZH.md) · [已运行的Linux/Unix受限工具网关源码](records/ASI_CC_20261011_Control_and_Coexistence/verify_dynamic_viability_stable.py) · [原始运行结果](records/ASI_CC_20261011_Control_and_Coexistence/EXACT_RESULTS_v0.7.0.json) · [工作日志](records/ASI_CC_20261011_Control_and_Coexistence/WORK_LOG_v0.7.0.md)。
+
+纠正v0.6单轮资源匹配不等于可无限期保持：联合安全状态需满足动态权限与资源的鲁棒安全博弈最大不动点，授权变化的全部实际后继需重新验证；真实Unix内核凭据的不同UID进程/可信网关/受保护状态文件测试通过了两次合法权限叠加造成模拟供给断开、事前联合门禁拒绝第二次、动态委托后的晚阶段拒绝、无补给时钟推进导致消耗、文件直写OS拒绝及可信root修改文件权限导致失守等测试。**实际执行仅为Linux软件权限和虚构状态，非大模型/真实电源/实际体验承载者实验。** 2026已有 *Bounded Agents* / *Unfireable Safety Kernel* 等明确前例，所有数学和基础防护原则归于继承，原创优先权未确立。**仅导航追加，不晋级正式科学图，0节点/规则/关系变化，UCT-MAP-v1.1.2 (913/424/261)和原有科学接续不变，未完成全图语义深审、未发布DOI/OTS/Arweave。**
