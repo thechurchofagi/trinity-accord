@@ -1,5 +1,9 @@
 # UCT 统一研究地图
 
+## A4U disabled application — epoch-bound ADC/DMA lineage
+
+A4U adds no formal object. On one fixed acquisition binding, its candidate contract is `BIND AND START AND SOURCE AND FIFO AND DMA AND WINDOW AND READ`. Only the joint seven-clause witness supports the conditional queue induction from the kth current-epoch conversion to the kth consumer-read slot. The 128-world checker leaves one complete world and 127 declared adversarial failures. A stale pre-start FIFO entry with repeated value shows that equal RAM payloads, terminal DMA status and an ex-post empty FIFO do not identify acquisition epoch or actual lineage. This is a scoped use of standard FIFO/DMA semantics, not a novel algorithm and not an actual hardware installation. No edge is added to basal experience, `H_cf`, conceptual self or report. Map delta: **0 nodes / 0 rules / 0 contexts**. Evidence: [contract](records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/EPOCH_LINEAGE_CONTRACT.md), [results](records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/EXACT_RESULTS.json), [gaps](records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/GAP_LEDGER.json), [audit](records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/FORMAL_AUDIT.md).
+
 ## A4T disabled correction — transductive lineage routes
 
 A4T adds no formal object. It corrects the disabled A4S boundary contract: numerical occurrence identity is sufficient for a relay but not necessary at a transducer. The candidate top-level conjunction is `L_s AND BoundaryStitch_sc AND L_c AND BoundaryStitch_cw AND L_w`, where each stitch has the typed alternatives `Relay OR Transduce` on one fixed actual binding. The 36-world model has four coherent boundary-mode pairs, only one strict-identity pair, and an all-value-equal fiber containing four route and five nonroute worlds. Evidence, ontic lineage, exclusive ownership and `H_cf` remain separate. Map delta: **0 nodes / 0 rules / 0 contexts**.

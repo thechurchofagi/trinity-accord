@@ -1,0 +1,11 @@
+# A4U Round Record — Epoch-Bound ADC–DMA Lineage
+
+1. **User goal.** Continue the UCT experience–intelligence–self program from actual organization, advancing the positive bodily/action-related route question without adding a basal experience gate or conflating organization, experience, mineness, conceptual self, and report.
+2. **One concrete unresolved question.** On one publicly documented sampler-to-consumer interface, what same-acquisition-epoch evidence is required to justify that a particular source conversion entered a particular consumed memory slot, rather than a stale, replayed, wrapped, or fan-in value-equal occurrence?
+3. **Related nodes and fixed sources.** UCT I v1.2 §§2.1–2.5, 4, and 8.11–8.14; `A:P3`, `A:P6`, `A:C1`, `A:U1`, `R157:COORDINATE_TRANSPORT`, `R159:ANCHOR_BINDING_CONTRACT`, `R173:RETENTIVE_BINDING_RELATION`; A4S occurrence stitching and A4T relay-or-transduction lineage; current supervision items `QC-20261008-10`, `IA-QC11`, `QC-20261008-12/13`, `SCU-OPEN-R191-NORMALIZATION`, and `SCU-AUDIT-DEPTH`.
+4. **Planned addition or correction.** Instantiate A4T against the official Raspberry Pi RP2040 ADC FIFO/DMA interface; distinguish a documented possible route from one actually executed occurrence; formalize an epoch-bound, order-preserving source-event-to-memory-slot contract; challenge it with stale FIFO, replay, DMA wrap, round-robin fan-in, and alternate-writer counterexamples; run one exact finite check. Stop before `H_cf` and keep the candidate disabled if actual same-instance evidence is absent.
+5. **Deliverable.** An English research note, source scope, epoch-lineage contract, exact checker/results, stable claim and gap ledgers, formal-map audit, review response, Chinese handoff, and recoverable dual-save manifest/receipt. Expected formal-map delta is 0/0/0 unless a genuinely new, fully scoped result survives the audit.
+
+## Direction check after topic selection
+
+PASS. The bounded task directly investigates how an actual bodily/action-relevant signal can enter a current consumer through a physical route. It does not substitute a score, report, self-model, or uniqueness condition for experience; it preserves C1 as UCT's consciousness-specific axiom and returns to the main line by stopping after one concrete interface and one finite counterexample family.

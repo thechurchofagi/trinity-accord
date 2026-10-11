@@ -1,0 +1,13 @@
+{
+  "schema": "uct-map-extension/1",
+  "id": "A4U20261012",
+  "version": "A4U-EAL-v0.1.0",
+  "status": "DISABLED_APPLICATION_ZERO_FORMAL_DELTA",
+  "enabled_as_established_premises": false,
+  "base_completed_map": "UCT-MAP-v1.1.2",
+  "nodes": [],
+  "rules": [],
+  "context_links": [],
+  "candidate_claims": "CLAIM_LEDGER.json",
+  "reason": "The conditional engineering application and finite counterexample clarify evidence obligations but do not discharge actual-token or phenomenal premises and do not warrant graph inflation."
+}

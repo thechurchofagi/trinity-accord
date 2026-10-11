@@ -1,0 +1,60 @@
+{
+  "schema": "uct-gap-ledger/1",
+  "round": "A4U20261012",
+  "gaps": [
+    {
+      "id": "A4U-G01",
+      "location": "START clause",
+      "impact": ["A4U-C2", "A4U-C5", "A4T route application"],
+      "counterexample": "A value-equal stale FIFO entry shifts every DMA slot while post-cleanup registers match.",
+      "repaired": "Known-empty state is required before the acquisition start, not merely after cleanup.",
+      "unresolved": "No actual board-side pre-start occurrence trace exists.",
+      "status": "OPEN"
+    },
+    {
+      "id": "A4U-G02",
+      "location": "SOURCE/FIFO clauses",
+      "impact": ["Source-channel attribution", "order map"],
+      "counterexample": "Unrecorded round-robin fan-in changes the source channel; overflow loses a conversion while preserving older FIFO content.",
+      "repaired": "Fixed source schedule or complete per-occurrence provenance and no-loss evidence are explicit premises.",
+      "unresolved": "Documentation describes controls but no actual run discharges them.",
+      "status": "OPEN"
+    },
+    {
+      "id": "A4U-G03",
+      "location": "DMA/WINDOW clauses",
+      "impact": ["FIFO-to-slot lineage", "consumer attribution"],
+      "counterexample": "Wrong DREQ/source, chain trigger, ring wrap, buffer reuse or another bus writer can replace the declared slot while preserving its value.",
+      "repaired": "Source address, DREQ, transfer count, destination window, chain and alternate-writer closure are conjuncts.",
+      "unresolved": "No physical bus-master inventory or trace is supplied.",
+      "status": "OPEN"
+    },
+    {
+      "id": "A4U-G04",
+      "location": "READ clause",
+      "impact": ["actual current use", "R173-related applications"],
+      "counterexample": "DMA arrival with no consumer read is availability, not use; a later read may observe reused content.",
+      "repaired": "An actual read after write and before overwrite is required.",
+      "unresolved": "No consumer instruction/bus trace is supplied.",
+      "status": "OPEN"
+    },
+    {
+      "id": "A4U-G05",
+      "location": "Phenomenal interpretation",
+      "impact": ["H_cf", "B_min", "QC-20261008-10"],
+      "counterexample": "The same organizational route can be described without any independently calibrated selected-experience endpoint.",
+      "repaired": "The round stops before H_cf and adds no C1-derived application rule.",
+      "unresolved": "Phenomenal target identity, direction and measurement remain open.",
+      "status": "OPEN"
+    },
+    {
+      "id": "A4U-G06",
+      "location": "Audit scope",
+      "impact": ["SCU-AUDIT-DEPTH", "global map confidence"],
+      "counterexample": "Acyclicity and reference checks cannot establish all historical semantics.",
+      "repaired": "A4U performs a scoped fresh review and makes a 0/0/0 graph change.",
+      "unresolved": "Full historical-depth semantic audit remains incomplete.",
+      "status": "AUDIT_INCOMPLETE"
+    }
+  ]
+}

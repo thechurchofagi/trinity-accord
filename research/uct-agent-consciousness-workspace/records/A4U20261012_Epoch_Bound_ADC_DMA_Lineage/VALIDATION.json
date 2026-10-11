@@ -1,0 +1,42 @@
+{
+  "round": "A4U20261012",
+  "result_version": "A4U-EAL-v0.1.0",
+  "exact_checker": {
+    "command": "python3 check_epoch_lineage.py",
+    "status": "PASS",
+    "worlds": 128,
+    "complete_contract_worlds": 1,
+    "declared_adversarial_failures": 127,
+    "ordered_queue_lengths": [1, 2, 3, 4, 5, 6, 7, 8]
+  },
+  "formal_audit": {
+    "command": "python3 audit_map.py <research-root> <restored-effective-graph.json>",
+    "status": "PASS_SCOPED_STRUCTURE_NOT_GLOBAL_THEORY_PROOF",
+    "effective_nodes": 913,
+    "active_rules": 424,
+    "context_links": 261,
+    "all_of_nonlist": 0,
+    "all_of_empty": 0,
+    "unresolved_references": 0,
+    "active_cycles": 0
+  },
+  "json_validation": {
+    "command": "jq empty CURRENT_STATE.json PUBLICATION_COVERAGE.json UNIFIED_RESEARCH_INDEX.json records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/*.json",
+    "status": "PASS"
+  },
+  "navigation_validation": {
+    "command": "python3 integration/UCT-INTEGRATION-v1.0.0/validate_navigation.py",
+    "status": "PASS_NAVIGATION_AND_DISABLED_ASSEMBLY"
+  },
+  "legacy_wrapper_validation": {
+    "command": "python3 records/NAV20261010_Map_Integration/validate_current_map.py",
+    "status": "FAIL_INHERITED_POINTER_CONTRACT",
+    "detail": "RESEARCH_SESSION_LOG_INDEX latest_work_log/latest_handoff already point to A4S while CURRENT_STATE latest_research remains A3V; the wrapper also assumes latest_activity equals latest_research and cannot represent the separate follow-up pointer. Core integration validator passes."
+  },
+  "limits": [
+    "No actual RP2040 board run",
+    "No complete physical-signature admission",
+    "No independent H_cf calibration",
+    "No full historical semantic reproof"
+  ]
+}

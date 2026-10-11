@@ -96,20 +96,20 @@
     "nondeductive_context_links": 261,
     "total_review_items": 1608
   },
-  "pending_note": "All prior pending identities retained. A4T adds a disabled 0/0/0 correction: an actual boundary stitch may be an identity relay or a directed transduction to a distinct successor; value equality does not identify either.",
+  "pending_note": "All prior pending identities retained. A4U adds a disabled 0/0/0 scoped application: an RP2040 ADC FIFO→DMA→RAM route is publicly specified as possible, but current-epoch lineage requires seven jointly bound run facts; equal payload and terminal state do not install them.",
   "publication_coverage": {
     "version": "UCT-PUB-v1.0.33",
     "entry": "PUBLICATION_COVERAGE.json",
-    "latest_update": "records/A4T20261012_Transductive_Lineage_Route/PUBLICATION_COVERAGE_UPDATE.json",
+    "latest_update": "records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/PUBLICATION_COVERAGE_UPDATE.json",
     "nondeductive": true,
     "latest_originality_review": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/PUBLICATION_COVERAGE_UPDATE.json",
-    "latest_followup_application": "records/A4T20261012_Transductive_Lineage_Route/PUBLICATION_COVERAGE_UPDATE.json"
+    "latest_followup_application": "records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/PUBLICATION_COVERAGE_UPDATE.json"
   },
   "latest_activity": {
-    "id": "A4T20261012",
+    "id": "A4U20261012",
     "type": "FOLLOWUP_APPLICATION",
-    "status": "DISABLED_TRANSDUCTIVE_LINEAGE_CORRECTION_AND_FINITE_COUNTEREXAMPLE",
-    "source": "records/A4T20261012_Transductive_Lineage_Route/RESEARCH_NOTE.md"
+    "status": "DISABLED_EPOCH_BOUND_ADC_DMA_LINEAGE_APPLICATION",
+    "source": "records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/RESEARCH_NOTE.md"
   },
   "latest_pending_research": {
     "id": "A3V20261010",
@@ -122,8 +122,8 @@
     "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
     "evidence_status": "BOUNDED_PRIMARY_SOURCE_APPLICATION_STOP_AND_R173_SCOPE_RETURN; ACTUAL_PREMISES_AND_H_OPEN"
   },
-  "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 effective objects retain the fresh structural traversal. A4T manually rechecked C1/U1, P3/P6, R157, R159, effective R173, A4R and A4S. Deep full-history semantics remain AUDIT_INCOMPLETE.",
-  "next_priority": "A4T next: select one accessible sampler→consumer interface and test a source-side event-incidence plus controlled-input lineage witness while independently inventorying and challenging replay, buffer and fan-in paths; stop before H_cf if the directed edge or closure is not warranted.",
+  "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 effective objects retain a fresh per-ID structural traversal. A4U manually rechecked C1/U1, P3/P6, R157, R159, effective R173 and the A4R→A4T route chain. Deep full-history semantics remain AUDIT_INCOMPLETE.",
+  "next_priority": "A4U next: on one real RP2040 run, bind a tagged input to pre-start drain completion, ADC channel/round-robin configuration, DMA source/count/destination/ring settings and consumer-read-before-reuse timing. If this bounded installation is unavailable, stop the instrumentation branch and return to the experience-internal bodily/action bridge; stop before H_cf in either case.",
   "latest_activity_persistence_after_A4T_science": {
     "science_commit": "547c8471de28ad8c729d278d4a0f0f9fd6bd2cc9",
     "science_tree": "51b66b731cf2573195d86de33bf6d4327dd1527c",
@@ -550,30 +550,28 @@
     }
   },
   "latest_followup_application": {
-    "id": "A4T20261012",
-    "version": "A4T-TLR-v0.1.0",
-    "status": "DISABLED_TRANSDUCTIVE_LINEAGE_CORRECTION_AND_FINITE_COUNTEREXAMPLE",
+    "id": "A4U20261012",
+    "version": "A4U-EAL-v0.1.0",
+    "status": "DISABLED_EPOCH_BOUND_ADC_DMA_LINEAGE_APPLICATION",
     "enabled_as_established_premises": false,
-    "source": "records/A4T20261012_Transductive_Lineage_Route/RESEARCH_NOTE.md",
-    "handoff": "records/A4T20261012_Transductive_Lineage_Route/HANDOFF_ZH.md",
-    "work_log": "records/A4T20261012_Transductive_Lineage_Route/WORK_LOG.md",
-    "claim_ledger": "records/A4T20261012_Transductive_Lineage_Route/CLAIM_LEDGER.json",
-    "map_extension": "records/A4T20261012_Transductive_Lineage_Route/MAP_EXTENSION.json",
-    "exact_results": "records/A4T20261012_Transductive_Lineage_Route/EXACT_RESULTS.json",
+    "source": "records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/RESEARCH_NOTE.md",
+    "handoff": "records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/HANDOFF_ZH.md",
+    "work_log": "records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/WORK_LOG.md",
+    "claim_ledger": "records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/CLAIM_LEDGER.json",
+    "map_extension": "records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/MAP_EXTENSION.json",
+    "exact_results": "records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/EXACT_RESULTS.json",
     "parent_science": "A3V20261010",
-    "parent_followup": "A4S20261011",
+    "parent_followup": "A4T20261012",
     "completed_map": "UCT-MAP-v1.1.2",
     "scientific_delta": {
       "nodes": 0,
       "rules": 0,
       "contexts": 0
     },
-    "finite_worlds": 36,
-    "coherent_boundary_modes": 4,
-    "strict_identity_modes": 1,
-    "coherent_non_strict_modes": 3,
-    "equal_value_route_worlds": 4,
-    "equal_value_nonroute_worlds": 5,
+    "finite_worlds": 128,
+    "complete_contract_worlds": 1,
+    "declared_adversarial_failures": 127,
+    "queue_lengths_checked": 8,
     "independent_h_validation": false,
     "actual_bodily_installation": false,
     "standalone_manuscript": "HOLD"
@@ -1176,6 +1174,33 @@
       "coherent_non_strict_modes": 3,
       "equal_value_route_worlds": 4,
       "equal_value_nonroute_worlds": 5,
+      "independent_h_validation": false,
+      "actual_bodily_installation": false,
+      "standalone_manuscript": "HOLD"
+    },
+    {
+      "id": "A4U20261012",
+      "version": "A4U-EAL-v0.1.0",
+      "status": "DISABLED_EPOCH_BOUND_ADC_DMA_LINEAGE_APPLICATION",
+      "enabled_as_established_premises": false,
+      "source": "records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/RESEARCH_NOTE.md",
+      "handoff": "records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/HANDOFF_ZH.md",
+      "work_log": "records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/WORK_LOG.md",
+      "claim_ledger": "records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/CLAIM_LEDGER.json",
+      "map_extension": "records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/MAP_EXTENSION.json",
+      "exact_results": "records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/EXACT_RESULTS.json",
+      "parent_science": "A3V20261010",
+      "parent_followup": "A4T20261012",
+      "completed_map": "UCT-MAP-v1.1.2",
+      "scientific_delta": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0
+      },
+      "finite_worlds": 128,
+      "complete_contract_worlds": 1,
+      "declared_adversarial_failures": 127,
+      "queue_lengths_checked": 8,
       "independent_h_validation": false,
       "actual_bodily_installation": false,
       "standalone_manuscript": "HOLD"

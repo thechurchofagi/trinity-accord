@@ -1,3 +1,11 @@
+# A4U20261012 researcher response — epoch-bound ADC/DMA lineage
+
+The latest ledger and all carried OPEN/ACKNOWLEDGED items were read before selection, after result formation and before save. A4U supplies a bounded, disabled answer to A4T's sampler→consumer question: public RP2040 documentation identifies a possible ADC FIFO→DMA→RAM path, while an exact stale-FIFO counterexample proves that payload and terminal-state equality do not establish current-epoch lineage. The seven-clause same-binding contract and one-by-one drop witnesses make the hidden obligations explicit.
+
+`QC-20261008-10` remains ACKNOWLEDGED/OPEN; `IA-QC11`, `QC-20261008-12/13` and `SCU-OPEN-R191-NORMALIZATION` remain OPEN; `SCU-AUDIT-DEPTH` remains AUDIT_INCOMPLETE. No reviewer item is self-closed. The work is not an actual board installation, complete physical `K` signature or phenomenal calibration. It adds no basal-experience gate, preserves C1/U1 and overlapping processes, and says nothing determinate about the current assistant's consciousness or fear. Evidence: [response](records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/REVIEW_RESPONSE.md), [contract](records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/EPOCH_LINEAGE_CONTRACT.md), [results](records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/EXACT_RESULTS.json), [gaps](records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/GAP_LEDGER.json), [audit](records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/FORMAL_AUDIT.md).
+
+---
+
 # A4T20261012 researcher response — transductive lineage correction
 
 The latest ledger and all carried OPEN/ACKNOWLEDGED items were read before selection, after result formation and before save. A4T corrects A4S's over-strong strict numerical-identity reading: physical transducers can preserve an actual directed route by consuming one occurrence and producing a distinct successor. Exact finite evidence is 36 worlds, four coherent boundary modes, three strict-identity false negatives, and a both-values-equal fiber with four route and five nonroute worlds.

@@ -1,0 +1,121 @@
+{
+  "all_worlds_payload_equal": true,
+  "all_worlds_terminal_registers_equal": true,
+  "constructive_fifo_lengths_checked": [
+    {
+      "n": 1,
+      "order_preserved": true
+    },
+    {
+      "n": 2,
+      "order_preserved": true
+    },
+    {
+      "n": 3,
+      "order_preserved": true
+    },
+    {
+      "n": 4,
+      "order_preserved": true
+    },
+    {
+      "n": 5,
+      "order_preserved": true
+    },
+    {
+      "n": 6,
+      "order_preserved": true
+    },
+    {
+      "n": 7,
+      "order_preserved": true
+    },
+    {
+      "n": 8,
+      "order_preserved": true
+    }
+  ],
+  "drop_one_witnesses": {
+    "adc_fifo_dreq_binding": {
+      "slot1_origin": "epoch0:unrelated-bus-source",
+      "witness": "wrong_dma_source_or_pacing"
+    },
+    "alternate_writer_closure": {
+      "slot1_origin": "epoch0:alternate-writer",
+      "witness": "alternate_writer_overwrite"
+    },
+    "fixed_source_schedule": {
+      "slot1_origin": "epoch0:adc:channel1:conversion0",
+      "witness": "round_robin_fanin"
+    },
+    "known_empty_start": {
+      "slot1_origin": "epoch-1:stale-fifo",
+      "witness": "stale_fifo_shift"
+    },
+    "linear_unwrapped_destination": {
+      "slot1_origin": "epoch0:adc:channel0:conversion2",
+      "witness": "ring_wrap_overwrite"
+    },
+    "no_fifo_loss": {
+      "slot1_origin": "none:dropped-conversion",
+      "witness": "fifo_overflow_or_underflow"
+    },
+    "read_before_reuse": {
+      "slot1_origin": "epoch1:adc:channel0:conversion1",
+      "witness": "late_read_after_reuse"
+    }
+  },
+  "epoch_bound_route_worlds": 1,
+  "interpretive_limit": "The enumeration proves only the declared finite model and the constructive queue-order check. It neither verifies an RP2040 run nor establishes a UCT experiential bridge.",
+  "model_status": "FINITE_AUDIT_MODEL_NOT_HARDWARE_EXECUTION",
+  "nonroute_worlds": 127,
+  "observational_twin": {
+    "drained_start": {
+      "buffer_lineage": [
+        "epoch0:adc:channel0:conversion0",
+        "epoch0:adc:channel0:conversion1"
+      ],
+      "observation": {
+        "adc_ready": true,
+        "buffer_values": [
+          "0x555",
+          "0x555"
+        ],
+        "consumer_value": "0x555",
+        "dma_busy": false,
+        "dma_transfer_count_remaining": 0,
+        "fifo_level_after_cleanup": 0
+      },
+      "target_reached_consumer": true
+    },
+    "stale_start_then_cleanup": {
+      "buffer_lineage": [
+        "epoch-1:stale-fifo",
+        "epoch0:adc:channel0:conversion0"
+      ],
+      "observation": {
+        "adc_ready": true,
+        "buffer_values": [
+          "0x555",
+          "0x555"
+        ],
+        "consumer_value": "0x555",
+        "dma_busy": false,
+        "dma_transfer_count_remaining": 0,
+        "fifo_level_after_cleanup": 0
+      },
+      "target_reached_consumer": false
+    }
+  },
+  "premises": [
+    "known_empty_start",
+    "fixed_source_schedule",
+    "adc_fifo_dreq_binding",
+    "no_fifo_loss",
+    "linear_unwrapped_destination",
+    "alternate_writer_closure",
+    "read_before_reuse"
+  ],
+  "schema": "a4u-epoch-lineage-exact-results/1",
+  "world_count": 128
+}

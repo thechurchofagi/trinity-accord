@@ -1,5 +1,9 @@
 # UCT durable memory
 
+## A4U20261012 latest memory
+
+A4U instantiates the A4T sampler-to-consumer question at the RP2040 ADC FIFO→DMA→RAM→consumer boundary. Public documentation warrants a possible route, not its use in any particular run. A current-epoch ordered-lineage conclusion is conditional on seven jointly bound facts: pre-start FIFO empty, acquisition start, fixed/tagged ADC source, ordered lossless FIFO use, DMA source/count/destination binding, no wrap/reuse/alternate writer in the window, and consumer read before reuse. A constant-payload stale-FIFO counterexample preserves final buffer values and terminal status while changing lineage. Exact checker: 128 binary worlds, one all-clause world and 127 declared adversarial failures; queue-order induction checked for N=1..8. Formal delta 0/0/0; actual run, complete `K`, and `H_cf` remain open. Next: instrument one real run with pre-start drain completion, captured channel configuration and buffer-read timing, or return to the experience-internal bodily/action bridge if that installation is unavailable.
+
 ## A4T20261012 latest memory
 
 A4S's `SameOcc` repair is too strong if read as strict numerical identity across every transducer. A4T replaces it with a typed boundary stitch: actual relay of one occurrence or an actual conversion edge to a distinct successor. Exact finite model: 36 worlds; four coherent boundary-mode pairs; strict identity accepts one and falsely rejects three; the both-values-equal fiber contains four route and five nonroute worlds. Formal delta 0/0/0; physical installation and `H_cf` remain open. Next: install one source-side event-incidence/intervention test on an actual sampler→consumer boundary while independently closing replay paths.

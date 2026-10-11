@@ -1,5 +1,9 @@
 # UCT 地图审查状态
 
+## A4U20261012 audit addendum
+
+A4U changes no completed-map object. Fresh root parsing and restored integrated traversal covered 584/284/178 root objects and 913/424/261 effective completed objects; all 913 effective nodes exposed the required concept/quantifier/scope fields, every active rule kept list-valued conjunctive `all_of`, references resolved and the active dependency graph remained acyclic. The disabled seven-premise contract is jointly satisfiable and the checker explicitly drops each premise in a countermodel family. Object, epoch, value, actual lineage, evidence, complete organization, limited view and phenomenal interpretation remain distinct. Passing code establishes only the enumerated finite checks and structural traversal, not physical installation or theory truth. Formal delta 0/0/0; full historical semantic depth remains `AUDIT_INCOMPLETE`. Full record: [A4U audit](records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/FORMAL_AUDIT.md).
+
 ## A4T20261012 audit addendum
 
 A4T corrects A4S's strict-identity overreach without changing the completed graph. Fresh root parsing and restored integrated traversal covered 584/284/178 root objects and 913/424/261 effective completed objects, with 727 pending objects disabled and 10 historical rules suspended. The candidate five-way `all_of` remains conjunctive; each boundary stitch has typed relay/transduction alternatives with identical bindings. Four joint witnesses and the 4-route/5-nonroute equal-value fiber were checked exactly. Value, evidence, ontic lineage, route, exclusive owner and `H_cf` are not conflated. Scientific delta 0/0/0; full historical-depth audit remains incomplete. Full record: [A4T audit](records/A4T20261012_Transductive_Lineage_Route/FORMAL_AUDIT.md).

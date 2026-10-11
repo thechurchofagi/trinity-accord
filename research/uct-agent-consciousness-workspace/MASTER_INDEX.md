@@ -1,5 +1,16 @@
 # UCT 主索引
 
+## Current follow-up application: A4U20261012
+
+- [Research note](records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/RESEARCH_NOTE.md)
+- [Epoch-lineage contract](records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/EPOCH_LINEAGE_CONTRACT.md)
+- [Exact checker](records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/check_epoch_lineage.py), [results](records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/EXACT_RESULTS.json)
+- [Source scope](records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/SOURCE_SCOPE.md)
+- [Formal audit](records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/FORMAL_AUDIT.md)
+- [Chinese handoff](records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/HANDOFF_ZH.md)
+
+Status: disabled scoped application; publicly specified possible route, not an actually installed run; zero formal-graph delta; manuscript HOLD.
+
 ## Current follow-up application: A4T20261012
 
 - [Research note](records/A4T20261012_Transductive_Lineage_Route/RESEARCH_NOTE.md)

@@ -1,0 +1,42 @@
+{
+  "a4u_joint_witness": {
+    "binding": "one P/A/D/B/C/e/K_view",
+    "premises": [
+      "BIND",
+      "START",
+      "SOURCE",
+      "FIFO",
+      "DMA",
+      "WINDOW",
+      "READ"
+    ],
+    "satisfiable_model": "known-empty fixed-channel loss-free DREQ-paced linear-buffer single-writer timely-read run"
+  },
+  "a4u_scientific_delta": {
+    "contexts": 0,
+    "nodes": 0,
+    "rules": 0
+  },
+  "all_rules_read_all_of_as_simultaneous_and": true,
+  "context_links_treated_as_nondeductive": true,
+  "deductive_cycles": [],
+  "effective_counts": {
+    "context_links": 261,
+    "nodes": 913,
+    "rules": 424
+  },
+  "nodes_without_scope_or_domain": [],
+  "per_node_fields_accessed": 913,
+  "root_counts": {
+    "context_links": 178,
+    "nodes": 584,
+    "rules": 284
+  },
+  "root_graph_sha256": "40d17cd5f61ebcc1bfcea65eb59c3c730208bcfcf69ba92e2f615a993584e3ce",
+  "rules_with_empty_all_of": [],
+  "rules_with_nonlist_all_of": [],
+  "schema": "a4u-map-audit/1",
+  "semantic_scope": "Fresh structural traversal plus bounded manual review of A:P3/A:P6/A:C1/A:U1/R157/R159/R173/A4S/A4T/A4U; not a full historical semantic reproof.",
+  "status": "FRESH_STRUCTURAL_PASS_BOUNDED_SEMANTIC_PASS_FULL_DEPTH_INCOMPLETE",
+  "unresolved_deductive_references": []
+}

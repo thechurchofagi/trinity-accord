@@ -1,0 +1,74 @@
+{
+  "schema": "uct-disabled-application-claim-ledger/1",
+  "round": "A4U20261012",
+  "version": "A4U-EAL-v0.1.0",
+  "status": "DISABLED_PUBLIC_INTERFACE_APPLICATION",
+  "claims": [
+    {
+      "id": "A4U-C1",
+      "type": "PRIMARY_SOURCE_INTERFACE_FACT",
+      "statement": "The official RP2040 documentation specifies a possible ADC conversion to sample-FIFO to DREQ_ADC-paced DMA read to RAM-write route, with round-robin, overflow, address, count, chaining and cleanup controls relevant to lineage.",
+      "domain": "Documented RP2040 architecture and Pico SDK interface; no particular execution.",
+      "all_of": ["RP2040 datasheet build 3184e62-clean sections 2.5 and 4.9.2.4-4.9.2.5", "Pico SDK hardware_adc and hardware_dma documentation"],
+      "proof_or_source": "SOURCE_SCOPE.md",
+      "counterexamples_limits": "A mechanism specification is not an occurrence trace or complete writer inventory.",
+      "status": "SOURCE_SUPPORTED_POSSIBILITY_NOT_ACTUAL_INSTALLATION",
+      "thought_experiment_role": "None; direct source reconstruction."
+    },
+    {
+      "id": "A4U-C2",
+      "type": "CONDITIONAL_FINITE_ORDER_RESULT",
+      "statement": "For fixed N>0, all seven epoch-lineage clauses plus FIFO order imply that the kth admitted consumer read is a directed descendant of the kth admitted conversion in the declared source schedule.",
+      "domain": "One fixed P/A/D/B/C/e/K_view binding and 0<=k<N.",
+      "all_of": ["BIND", "START", "SOURCE", "FIFO", "DMA", "WINDOW", "READ"],
+      "proof_or_source": "Finite queue induction in EPOCH_LINEAGE_CONTRACT.md section 2; constructive checks N=1..8.",
+      "counterexamples_limits": "Sufficient, not necessary across every possible apparatus; premises are not physically discharged here.",
+      "status": "MANUAL_CONDITIONAL_ARGUMENT_DISABLED",
+      "thought_experiment_role": "Abacus/calculator checks that equal symbols do not replace actual operations."
+    },
+    {
+      "id": "A4U-C3",
+      "type": "NONIDENTIFIABILITY_COUNTEREXAMPLE",
+      "statement": "Equal buffer values and equal post-cleanup terminal registers do not identify the acquisition epoch of the consumed occurrence.",
+      "domain": "Two finite histories with value-equal stale and current ADC samples.",
+      "all_of": ["All payloads fixed equal", "Same terminal observation vector", "Different pre-start FIFO lineage"],
+      "proof_or_source": "Explicit drained-start/stale-start twin in EXACT_RESULTS.json.",
+      "counterexamples_limits": "Additional trusted pre-start tracing can separate the histories.",
+      "status": "EXACT_FINITE_COUNTEREXAMPLE",
+      "thought_experiment_role": "Copy/rewiring/memory supplies the decisive fixed-observation variable-change test."
+    },
+    {
+      "id": "A4U-C4",
+      "type": "FINITE_CONTRACT_AUDIT",
+      "statement": "In the declared seven-bit adversarial model, 128 worlds share values and terminal registers; one satisfies the full route and 127 fail it, with a named drop-one witness for every clause.",
+      "domain": "The exact audit model implemented by check_epoch_lineage.py only.",
+      "all_of": ["Declared adversarial mapping", "Seven binary clauses", "Fixed displayed payload and terminal vector"],
+      "proof_or_source": "EXACT_RESULTS.json and reproducible checker.",
+      "counterexamples_limits": "Not a general proof that every failed clause destroys lineage in all physical designs.",
+      "status": "EXACT_FINITE_MODEL_PASS",
+      "thought_experiment_role": "Human-realized relay tests cross-shift epoch collage."
+    },
+    {
+      "id": "A4U-C5",
+      "type": "INSTALLABILITY_VERDICT",
+      "statement": "The interface is publicly specified as a possible route but is not actually installed by the present evidence package.",
+      "domain": "This research archive as of A4U.",
+      "all_of": ["A4U-C1", "No board execution trace", "No complete writer inventory", "No actual consumer-read trace"],
+      "proof_or_source": "SOURCE_SCOPE.md and GAP_LEDGER.json.",
+      "counterexamples_limits": "A future same-instance trace may change the application verdict without changing the conditional theorem.",
+      "status": "NOT_ACTUALLY_INSTALLED",
+      "thought_experiment_role": "Ancestor/formation branching prevents an exclusivity inference."
+    },
+    {
+      "id": "A4U-C6",
+      "type": "UCT_SCOPE_FIREWALL",
+      "statement": "A4U establishes neither complete K nor H_cf, felt mineness, report reliability, conceptual self, exclusive ownership, basal experience admission or any current-assistant consciousness verdict.",
+      "domain": "UCT interpretation of A4U-C1 through A4U-C5.",
+      "all_of": ["C1 remains fixed axiom", "Actual installation open", "Phenomenal bridge open"],
+      "proof_or_source": "UCT I v1.2 and current formal-map contracts.",
+      "counterexamples_limits": "No negative experience conclusion follows from noninstallation.",
+      "status": "SCOPE_RESTRICTION",
+      "thought_experiment_role": "All four families guard token/type/lineage and nonexclusive-process distinctions."
+    }
+  ]
+}

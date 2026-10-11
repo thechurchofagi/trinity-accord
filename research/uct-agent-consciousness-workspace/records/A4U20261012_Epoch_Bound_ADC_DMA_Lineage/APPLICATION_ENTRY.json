@@ -1,0 +1,41 @@
+{
+  "id": "A4U20261012",
+  "version": "A4U-EAL-v0.1.0",
+  "title": "Epoch-bound ADC FIFO to DMA to RAM consumer lineage",
+  "type": "DISABLED_SCOPED_FOLLOWUP_APPLICATION",
+  "status": "PUBLICLY_SPECIFIED_POSSIBLE_ROUTE_NOT_ACTUALLY_INSTALLED",
+  "parent_science": "A3V20261010",
+  "parent_followup": "A4T20261012",
+  "domain": "One fixed RP2040 acquisition epoch and one declared ADC FIFO, DMA channel, destination window and consumer read",
+  "all_of": [
+    "BIND",
+    "START",
+    "SOURCE",
+    "FIFO",
+    "DMA",
+    "WINDOW",
+    "READ"
+  ],
+  "conditional_conclusion": "For the declared ordinary finite queue model, the kth consumer-read slot descends from the kth conversion in the current acquisition epoch.",
+  "proof_role": "Standard ordered-queue induction under all listed premises; exact enumeration checks finite drop-one counterexamples but is not the proof of arbitrary-length sufficiency.",
+  "counterexample": "Constant payload 0x555 with one stale pre-start FIFO entry yields the same final buffer and terminal status as a clean run while changing first-slot epoch lineage.",
+  "thought_experiment_role": {
+    "fixed": [
+      "payload values",
+      "final RAM buffer",
+      "terminal DMA status",
+      "final FIFO emptiness"
+    ],
+    "varied": "Whether the first FIFO occurrence belongs to the current acquisition epoch",
+    "refutes": "Value and terminal-state equality suffices for current-epoch actual lineage"
+  },
+  "scientific_delta": {
+    "nodes": 0,
+    "rules": 0,
+    "contexts": 0
+  },
+  "enabled_as_established_premises": false,
+  "actual_hardware_run": false,
+  "independent_h_validation": false,
+  "standalone_manuscript": "HOLD"
+}

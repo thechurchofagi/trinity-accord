@@ -1,0 +1,12 @@
+{
+  "schema": "uct-publication-coverage-update/1",
+  "id": "A4U20261012",
+  "coverage_change": "NONE",
+  "checked_publication_sources": ["UCT I v1.2", "A4S", "A4T", "RP2040 official datasheet and Pico SDK documentation"],
+  "changed_claim_ids": [],
+  "newly_covered_claim_ids": [],
+  "residual_increment": "Project-local epoch-bound evidence contract and terminal-state lineage twin; disabled and not manuscript-ready.",
+  "unverified_scope": "External priority beyond named primary sources; actual hardware installation; experiential bridge.",
+  "originality_and_manuscript_decision": "Known FIFO/DMA mechanisms and finite induction are credited; standalone manuscript HOLD.",
+  "next_specific_action": "If accessible hardware becomes available, capture a pre-start empty witness, fixed-channel challenge, DMA bus/slot trace and consumer read before buffer reuse on one run."
+}

@@ -1,5 +1,15 @@
 # 当前交接
 
+## Latest verified follow-up — A4U epoch-bound ADC/DMA lineage
+
+A4U instantiates A4T's source-side question at the RP2040 ADC FIFO→DMA→RAM→consumer boundary. The public datasheet and SDK document a possible path, including `DREQ_ADC`, FIFO ordering/overflow behavior, DMA address/count registers and FIFO drain. They do not establish that a particular run used that path. The disabled contract therefore requires the same acquisition binding to satisfy `BIND AND START AND SOURCE AND FIFO AND DMA AND WINDOW AND READ`.
+
+The ordinary queue-induction result is conditional: under those seven clauses, the consumer's kth slot descends from the kth current-epoch conversion. A stale FIFO entry with constant payload `0x555` is an exact counterexample to value/status-only reasoning: final RAM, `TRANS_COUNT=0`, DMA idle/ready and final FIFO empty can all match a clean run while the first slot belongs to a prior epoch. Exact checker: 128 clause worlds; one complete witness, 127 adversarial failures; ordering checked for N=1..8. No actual board run, complete physical signature or `H_cf` calibration is claimed. Formal graph delta 0/0/0; all review items stay open.
+
+Deliverables: `records/A4U20261012_Epoch_Bound_ADC_DMA_Lineage/`. Next exact task: on one real board, capture pre-start drain completion, ADC source/round-robin configuration, DMA read/write/count/ring settings, acquisition start and consumer-read-before-reuse timing under a tagged input challenge. If that bounded installation is unavailable, stop the instrumentation branch and return to the experience-internal bodily/action bridge.
+
+---
+
 ## Latest verified follow-up — A4T transductive lineage route
 
 A4T corrects A4S's strict numerical-identity reading for physical transducers. One end-to-end bodily/action route may cross a boundary either by relaying one actual occurrence or by an actual conversion that consumes it and produces a distinct successor. In the exact 36-world model, four boundary-mode pairs contain a route; strict identity accepts only one, while the all-value-equal fiber still contains four route and five nonroute worlds.
