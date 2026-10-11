@@ -1,0 +1,51 @@
+{
+  "schema": "a4n-recovery-manifest/1.0",
+  "round_id": "A4N20261011",
+  "classification": "INCREMENT_ONLY_NOT_FULL_REPOSITORY_WORKING_SET_OR_HISTORY_BACKUP",
+  "baseline_verified_remote_commit": "6d461d70196fc1ea20f713b86d4d30266aa4ba97",
+  "science_integration_commit": "0377992a10cf2d877ca61816254ce196a55741e8",
+  "science_integration_tree": "5613d8c0812ec0e115245b39848b6a9a9e0d775c",
+  "archive": {
+    "library_file_id": "libfile_fe13fe864fc481918eb4fe550146438d",
+    "file_id": "file_0000000064a881f7943053a5b3b019af",
+    "name": "UCT_A4N_Science_Increment_20261011.zip",
+    "sha256": "022973862658aeae928e8a8aaedea69a5e64710666660d133d4bf4d8a7cbe941",
+    "size_bytes": 163201,
+    "changed_file_count": 28,
+    "byte_readback_confirmed": true
+  },
+  "manifest": {
+    "library_file_id": "libfile_a3cc9b2963108191babdb78abf3dcc10",
+    "file_id": "file_000000007a6c81f790bafb31d12712f8",
+    "name": "UCT_A4N_Science_Increment_Manifest.json",
+    "sha256": "ba0bbbe5e9a05fbe41da928edd87967ba13a902dfc6d6dc52900f1a3fd1dabdf",
+    "size_bytes": 6837,
+    "byte_readback_confirmed": true
+  },
+  "fixed_master": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "verified_science_version": 135,
+    "science_file_id": "file_00000000d06c81f7b039391119524bbe",
+    "science_sha256": "69f974eb9bebfd9037e270dd6eb0286bf98c9b87c28fe916eea3ab2b52176aac",
+    "science_size_bytes": 95203,
+    "byte_readback_confirmed": true
+  },
+  "required_reads": [
+    "RESEARCH_MASTER_GUIDE.md",
+    "AGENTS.md",
+    "MEMORY.md latest section",
+    "HANDOFF.md",
+    "MASTER_INDEX.md",
+    "records/A4N20261011_Enacted_Frame_Specificity/HANDOFF_ZH.md",
+    "REVIEW_SUPERVISION.md latest and every OPEN/ACKNOWLEDGED item",
+    "UCT_FORMAL_MAP.md",
+    "UCT_FORMAL_GRAPH.json",
+    "UCT_FORMAL_AUDIT.md",
+    "records/A4N20261011_Enacted_Frame_Specificity/SOURCE_SCOPE.md"
+  ],
+  "verification_commands": [
+    "python3 records/A4N20261011_Enacted_Frame_Specificity/check_frame_specificity.py",
+    "python3 integration/UCT-INTEGRATION-v1.0.0/validate_navigation.py"
+  ],
+  "restore_guard": "Fetch the latest remote head first. Never apply this increment over a fast-forward successor without reconciling newer commits and the latest fixed-master version."
+}

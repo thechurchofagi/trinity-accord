@@ -26,5 +26,5 @@ C1仍是意识特定解释性公设；基础体验没有新增身体框架、工
 
 ## 保存与恢复
 
-保存身份与反向核验结果完成后写入 `PERSISTENCE_RECEIPT.json` 和 `RECOVERY_MANIFEST.json`。恢复时先读固定主交接最新版本并获取远端最新头，再读本文件、`RESEARCH_NOTE.md`、`FRAME_SPECIFICITY_CONTRACT.md`、`CLAIM_LEDGER.json`、`GAP_LEDGER.md`、`FORMAL_AUDIT.md`、`REVIEW_RESPONSE.md` 和 `EXACT_RESULTS.json`，重跑 `check_frame_specificity.py` 与导航验证。增量包不是完整仓库、完整工作集或全部历史。
+远端科学提交 `0377992a10cf2d877ca61816254ce196a55741e8`（树 `5613d8c0812ec0e115245b39848b6a9a9e0d775c`）已按预期父提交快进。固定主交接 v135、28文件增量包 `libfile_fe13fe864fc481918eb4fe550146438d` 及清单 `libfile_a3cc9b2963108191babdb78abf3dcc10` 均已反向物化并逐字节核验；最终收据继任提交和主交接最终确认版本见 `PERSISTENCE_RECEIPT.json` 及固定主交接最新版本。恢复时先读固定主交接最新版本并获取远端最新头，再读本文件、`RESEARCH_NOTE.md`、`FRAME_SPECIFICITY_CONTRACT.md`、`CLAIM_LEDGER.json`、`GAP_LEDGER.md`、`FORMAL_AUDIT.md`、`REVIEW_RESPONSE.md` 和 `EXACT_RESULTS.json`，重跑 `check_frame_specificity.py` 与导航验证。增量包不是完整仓库、完整工作集或全部历史。
 

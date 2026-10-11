@@ -1,0 +1,47 @@
+{
+  "schema": "a4n-persistence-receipt/1.0",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "verified_parent": "6d461d70196fc1ea20f713b86d4d30266aa4ba97",
+    "round_record_checkpoint": "9ce1b4f78698304166a9b66965e79e4ba199a33e",
+    "local_science_checkpoint": "3dc9793dc3fccc16be5a7532df414dbcc05ff683",
+    "science_integration_commit": "0377992a10cf2d877ca61816254ce196a55741e8",
+    "science_integration_tree": "5613d8c0812ec0e115245b39848b6a9a9e0d775c",
+    "science_changed_file_count": 28,
+    "fast_forward_expected_sha_verified": true,
+    "remote_tree_matches_local_science_tree": true,
+    "status": "SCIENCE_INTEGRATION_CONFIRMED; RECEIPT_SUCCESSOR_PENDING_SELF_REFERENCE"
+  },
+  "workspace": {
+    "fixed_master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "fixed_master_previous_version": 134,
+    "fixed_master_science_version": 135,
+    "fixed_master_science_file_id": "file_00000000d06c81f7b039391119524bbe",
+    "fixed_master_science_sha256": "69f974eb9bebfd9037e270dd6eb0286bf98c9b87c28fe916eea3ab2b52176aac",
+    "fixed_master_science_size_bytes": 95203,
+    "fixed_master_science_byte_readback_confirmed": true,
+    "increment_library_file_id": "libfile_fe13fe864fc481918eb4fe550146438d",
+    "increment_file_id": "file_0000000064a881f7943053a5b3b019af",
+    "increment_manifest_library_file_id": "libfile_a3cc9b2963108191babdb78abf3dcc10",
+    "increment_manifest_file_id": "file_000000007a6c81f790bafb31d12712f8",
+    "increment_sha256": "022973862658aeae928e8a8aaedea69a5e64710666660d133d4bf4d8a7cbe941",
+    "increment_manifest_sha256": "ba0bbbe5e9a05fbe41da928edd87967ba13a902dfc6d6dc52900f1a3fd1dabdf",
+    "increment_size_bytes": 163201,
+    "increment_manifest_size_bytes": 6837,
+    "increment_file_count": 28,
+    "increment_and_manifest_byte_readback_confirmed": true,
+    "classification": "INCREMENT_ONLY_NOT_FULL_REPOSITORY_WORKING_SET_OR_HISTORY_BACKUP",
+    "status": "INCREMENT_MANIFEST_AND_FIXED_MASTER_V135_CONFIRMED"
+  },
+  "scope_note": "The increment freezes the 28 files changed by the A4N science tree relative to the verified parent. This receipt and its receipt successor are intentionally post-package and must be recovered from the remote branch or fixed master.",
+  "latest_completed_step": "A4N corrected the toolhood refuter with a five-conjunct enacted-frame contract, verified the four membership/frame combinations in 64 primitive worlds, audited the formal map without promotion, fast-forwarded the science tree, and byte-verified the fixed master, increment and manifest.",
+  "unfinished": [
+    "No primary human or embodied-device same-route frame-remapping paradigm has been selected or installed.",
+    "No actual H_cf endpoint calibration or phenomenal assignment has been established.",
+    "No complete physical signature or physical installation has been established.",
+    "Open supervision items and the full historical semantic audit remain unresolved."
+  ],
+  "preserved_failure": "The first local git-add command used a repository-root-relative path without the research prefix and failed before mutation; the corrected command produced the checkpoint.",
+  "resume": "Read the latest fixed master and fetch the current branch head before any edit; require 0377992 or a verified fast-forward successor; verify the increment and manifest hashes; read the A4N contract, note, ledgers, audit and review response; rerun check_frame_specificity.py and the navigation validator; then seek exactly one independently grounded bearer-pose-anchor perturbation paradigm and stop before H_cf if same-route use or target calibration is absent."
+}

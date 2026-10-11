@@ -197,9 +197,14 @@
     "role": "Historical unresolved audit-debt record; old numbers are not newly measured current unread totals."
   },
   "latest_activity_persistence": {
-    "status": "A4N_LOCAL_INTEGRATION_CHECKPOINT; REMOTE_AND_LIBRARY_PERSISTENCE_PENDING",
+    "status": "A4N_SCIENCE_REMOTE_AND_LIBRARY_INCREMENT_CONFIRMED; RECEIPT_SUCCESSOR_PENDING",
     "receipt": "records/A4N20261011_Enacted_Frame_Specificity/PERSISTENCE_RECEIPT.json",
-    "recovery_manifest": "records/A4N20261011_Enacted_Frame_Specificity/RECOVERY_MANIFEST.json"
+    "recovery_manifest": "records/A4N20261011_Enacted_Frame_Specificity/RECOVERY_MANIFEST.json",
+    "remote_science_commit": "0377992a10cf2d877ca61816254ce196a55741e8",
+    "remote_science_tree": "5613d8c0812ec0e115245b39848b6a9a9e0d775c",
+    "fixed_master_science_version": 135,
+    "increment_library_file_id": "libfile_fe13fe864fc481918eb4fe550146438d",
+    "increment_manifest_library_file_id": "libfile_a3cc9b2963108191babdb78abf3dcc10"
   },
   "concurrent_research_preserved": {
     "id": "EIP20261010",
