@@ -1048,6 +1048,22 @@
   "next_priority_after_A4H": "Test a bounded, independently interpreted continuation-familiarity question that distinguishes familiar components from an unfamiliar conjunction without substituting effort or remembered practice. Compare B_summary/B_relation/B_fit at fixed grain. Reopen actuator provenance only with an actual apparatus and a specific blocked mainline inference.",
   "next_priority_after_A4I": "Construct a two-intervention prediction table for one relation perturbation and one fit/effort perturbation. State signed B_relation and B_fit predictions, allowed cross-effects and stop conditions without assuming either manipulation is selective or using post-treatment covariate adjustment.",
   "next_priority_after_A4J": "Before observing the judgment outcome, determine whether relation-use, fit and judgment-orientation first stages can be bounded by independently justified sign-and-magnitude intervals. Propagate those intervals into separated or overlapping B_relation/B_fit prediction regions without post-treatment adjustment; if the bounds cannot be established, stop at the organizational level.",
+  "latest_activity_persistence_after_A4J_science": {
+    "status": "GITHUB_SCIENCE_COMMIT_VERIFIED; LIBRARY_INCREMENT_REVERSE_VERIFIED; MASTER_V127_CONFIRMED; FINAL_METADATA_COMMIT_IS_EXPECTED_SHA_SUCCESSOR",
+    "receipt": "records/A4J20261011_Cross_Perturbation_Predictions/PERSISTENCE_RECEIPT.json",
+    "recovery_manifest": "records/A4J20261011_Cross_Perturbation_Predictions/RECOVERY_MANIFEST.json",
+    "github_base_commit": "332dc5af661ed32a2f11bfcff70174fc1e36764b",
+    "github_science_commit": "3e8c7f96b65ee27bd91f0540ddb5157384701d92",
+    "github_science_tree": "8297f720517d0a9be4edfd7b7cc1ad8ce73c9cf0",
+    "library_master_science_version": 127,
+    "library_increment_id": "libfile_0828e3adfc6c8191b87ab4ac5a4d84bd",
+    "library_increment_sha256": "cb6b77a2807c989b2ddd573ed85db98c798c5f277fcb1876da350a3f0ebf477b",
+    "library_increment_size_bytes": 169616,
+    "library_manifest_id": "libfile_0fc22e51098481918e1828fc5e4a396b",
+    "library_manifest_sha256": "6fb0301b708e48e706034311defb59fc79f5d0c5403c1b1a16b3d7b4b93fb106",
+    "library_manifest_size_bytes": 5573,
+    "reverse_materialized_byte_equal": true
+  },
   "latest_activity_persistence_after_A4I_science": {
     "status": "GITHUB_SCIENCE_TREE_REPAIRED_AND_VERIFIED; LIBRARY_INCREMENT_REVERSE_VERIFIED; MASTER_V125_CONFIRMED; FINAL_GIT_RECEIPT_IS_CURRENT_SUCCESSOR",
     "receipt": "records/A4I20261011_Continuation_Familiarity_Referent/PERSISTENCE_RECEIPT.json",

@@ -9,3 +9,9 @@
 ## Direction check after selection
 
 This question directly tests whether a proposed experience-internal relation has a different prospective consequence from present fit, without purifying either manipulation after the fact. The bounded return condition is either a valid pre-outcome separation criterion or a proof that the proposed interventions cannot distinguish the candidates. No result here makes `J_cont` equal to `H_cont`, installs an actual route, selects an exclusive owner, or changes basal-experience admission.
+
+## Result and pre-save direction checks
+
+- **Result check:** the finite proof distinguishes the two scoped pure candidates only under independently signed target first stages; it preserves overlap, invalid-protocol and neither-candidate outcomes rather than forcing a winner.
+- **Pre-save check:** C1 remains a consciousness-specific explanatory postulate; no report, language, self-model, integration, recursion, prediction or control threshold was added to basal experience. Actual route, bearer, endpoint identity and evidence grade remain explicitly separate. All supervision items remain open at their prior status.
+- **Delivered:** all listed artifacts, verified remote science commit, fixed-master v127, and reverse-verified 25-file incremental recovery package plus manifest. The final metadata commit is a protected successor whose exact SHA is recorded in the fixed-master successor because a commit cannot contain its own SHA.

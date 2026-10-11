@@ -27,4 +27,8 @@
 
 ## 可恢复保存
 
-待最终写入：GitHub 基础头、科学提交、最终收据提交、固定主交接版本、A4J 增量包与清单的 Library ID/SHA/字节数。保存成功前不得据此段声称双份完成。
+GitHub 科学提交 `3e8c7f96b65ee27bd91f0540ddb5157384701d92` 已从基线 `332dc5af661ed32a2f11bfcff70174fc1e36764b` 以 expected-SHA 快进；提交、父提交、25个改变路径及树 `8297f720517d0a9be4edfd7b7cc1ad8ce73c9cf0` 已回读。最终收据提交是该提交或并发保留后继的 expected-SHA 后继；其 SHA 由固定主交接最终确认版本记录，因为提交不能包含自身 SHA。
+
+固定主交接同一 Library ID `libfile_4175a81748fc819187fa8f5771f056fa` 的科学保存版本为 v127。`UCT_A4J_Increment_20261011.zip` 为25文件增量，Library ID `libfile_0828e3adfc6c8191b87ab4ac5a4d84bd`，169616字节，SHA256 `cb6b77a2807c989b2ddd573ed85db98c798c5f277fcb1876da350a3f0ebf477b`；清单 Library ID `libfile_0fc22e51098481918e1828fc5e4a396b`，5573字节，SHA256 `6fb0301b708e48e706034311defb59fc79f5d0c5403c1b1a16b3d7b4b93fb106`。两者均已反向物化、逐字节相等且复核哈希。该增量不是完整仓库、完整工作集或全部历史，且不包含随后生成的收据文件。
+
+恢复时先读固定主交接最新版本与远端最新头，不得用本增量覆盖更新后分支；按 `RECOVERY_MANIFEST.json` 顺序复核，重跑检查器与导航校验，保留全部失败与开放前提。

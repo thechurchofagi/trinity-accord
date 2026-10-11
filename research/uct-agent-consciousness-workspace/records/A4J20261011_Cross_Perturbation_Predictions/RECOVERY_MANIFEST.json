@@ -1,0 +1,40 @@
+{
+  "schema": "uct-recovery-manifest/1",
+  "round": "A4J20261011",
+  "recovery_order": [
+    "Read the latest version of Library file libfile_4175a81748fc819187fa8f5771f056fa.",
+    "Fetch branch uct-agent-consciousness-workspace and require science commit 3e8c7f96b65ee27bd91f0540ddb5157384701d92 or a verified fast-forward successor.",
+    "Read HANDOFF_ZH.md, RESEARCH_NOTE.md, PREDICTION_CONTRACT.md, EXACT_RESULTS.json, CLAIM_LEDGER.json, GAP_LEDGER.md, FORMAL_AUDIT.md, REVIEW_RESPONSE.md, VALIDATION.json and PERSISTENCE_RECEIPT.json in the A4J record.",
+    "Verify the 25-file increment ZIP and manifest by their exact SHA256 values before using them; do not overlay them on a newer verified branch.",
+    "Run check_cross_perturbation.py and require strict counts 1/2/2/4, weak counts 4/2/2/1, unrestricted equality, and zero phenomenal assignments.",
+    "Run records/NAV20261010_Map_Integration/validate_current_map.py --root research/uct-agent-consciousness-workspace and retain all OPEN/AUDIT_INCOMPLETE states."
+  ],
+  "verified_science": {
+    "base_commit": "332dc5af661ed32a2f11bfcff70174fc1e36764b",
+    "commit": "3e8c7f96b65ee27bd91f0540ddb5157384701d92",
+    "tree": "8297f720517d0a9be4edfd7b7cc1ad8ce73c9cf0"
+  },
+  "increment": {
+    "library_file_id": "libfile_0828e3adfc6c8191b87ab4ac5a4d84bd",
+    "sha256": "cb6b77a2807c989b2ddd573ed85db98c798c5f277fcb1876da350a3f0ebf477b",
+    "size_bytes": 169616,
+    "file_count": 25,
+    "complete_snapshot": false
+  },
+  "manifest": {
+    "library_file_id": "libfile_0fc22e51098481918e1828fc5e4a396b",
+    "sha256": "6fb0301b708e48e706034311defb59fc79f5d0c5403c1b1a16b3d7b4b93fb106",
+    "size_bytes": 5573
+  },
+  "master": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "science_version": 127,
+    "final_confirmation_version": "recorded_after_final_remote_commit"
+  },
+  "not_completed": [
+    "Independent signed H_cont or J_cont-to-H_cont calibration",
+    "Actual same-event retained route and complete bearer installation",
+    "Pre-outcome uncertainty-bounded first-stage magnitude intervals",
+    "Global deep semantic proof of the complete historical map"
+  ]
+}

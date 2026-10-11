@@ -11,6 +11,8 @@
 9. Manually checked C1/U1, R157, effective R173, disabled R199, A4A, A4H and A4I for object/time/signature/actuality/evidence and inference direction.
 10. Preserved the inherited raw-auditor schema label and its 81/22 historical schema debts; did not report structural PASS as semantic proof.
 11. Publication coverage remains UCT-PUB-v1.0.33; no new manuscript or publication action is warranted.
+12. Saved and remotely read back science commit `3e8c7f96b65ee27bd91f0540ddb5157384701d92` with 25 changed paths and tree `8297f720517d0a9be4edfd7b7cc1ad8ce73c9cf0`.
+13. Created a 25-file incremental recovery ZIP and manifest; both were saved, reverse-materialized, byte-compared and hash-verified. The fixed master handoff retained its identity and advanced from v126 to v127.
 
 ## Failures and negative results
 
@@ -21,4 +23,4 @@
 
 ## Current completion and remaining work
 
-A4J-C1–C5 and the exact table are complete at disabled application scope. GitHub and Library persistence fields will be filled only after verified writes. The next question is whether pre-outcome calibration can supply uncertainty-bounded first-stage and endpoint-orientation intervals without conditioning on post-treatment variables.
+A4J-C1–C5 and the exact table are complete at disabled application scope. Science and incremental recovery writes are verified; the final metadata successor preserves receipts and recovery order, with its self SHA recorded only in the protected master-handoff successor. The next question is whether pre-outcome calibration can supply uncertainty-bounded first-stage and endpoint-orientation intervals without conditioning on post-treatment variables.
