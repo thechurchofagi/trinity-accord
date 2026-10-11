@@ -1,0 +1,33 @@
+{
+  "id": "A4H-G00",
+  "corrupt_sha256": "639a9f5ec3aa6eb757ea86d40f9b23a1f774cdea7762d84f55dc99b25205b3b8",
+  "corrupt_bytes": 150060,
+  "last_inspected_valid_commit": "e792283f086a914da0b289c1554b7c1342742820",
+  "valid_source_sha256": "7cd3e8f4ad31e0d766c6777612b1c70f216ff0230a878ad79770afbb04939c55",
+  "prior_ids": [
+    "FAM20261010",
+    "A3W20261010",
+    "A3X20261010",
+    "A3Y20261010"
+  ],
+  "reconstructed_followups": [
+    "FAM20261010",
+    "A3W20261010",
+    "A3X20261010",
+    "A3Y20261010",
+    "A3Z20261010",
+    "A4A20261011",
+    "A4B20261011",
+    "A4C20261011",
+    "A4D20261011",
+    "A4E20261011",
+    "A4F20261011",
+    "A4G20261011",
+    "A4H20261011"
+  ],
+  "source_for_later_entries": "CURRENT_STATE.json at recovery head2e27c1e5cdcb64b2b713375fc1ea2303e7ec969c",
+  "completed_map_modified": false,
+  "exact_corruption_cause": "OPEN; encoded truncated-output warning observed",
+  "history_preserved": true,
+  "repaired_index_sha256": "660e14ca1f1ddafddefa6a9b9f983abf11ebbede689c56655dc4369873f7b80f"
+}

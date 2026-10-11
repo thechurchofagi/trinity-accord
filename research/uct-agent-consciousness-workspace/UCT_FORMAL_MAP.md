@@ -143,3 +143,7 @@ R20–R23候选：纠正将“阻止其他人强行终止仍想继续存在的�
 [英文研究与R28–R33](records/ASI_CC_20261011_Control_and_Coexistence/RESEARCH_NOTE_v0.9.0.md) · [中文交接](records/ASI_CC_20261011_Control_and_Coexistence/HANDOFF_v0.9.0_ZH.md) · [精确穷举程序](records/ASI_CC_20261011_Control_and_Coexistence/verify_multi_asi_multiplicity.py) · [穷举结果](records/ASI_CC_20261011_Control_and_Coexistence/EXACT_RESULTS_v0.9.0.json) · [工作记录](records/ASI_CC_20261011_Control_and_Coexistence/WORK_LOG_v0.9.0.md)。
 
 本轮回应新增物理多样性约束：多个独立超级智能、同一权重模型下多个智能体、共享后端、不同根凭据、共同上级控制者和不完全重合的潜在实际过程。六代理两权重三后端三凭据根两上级管理根的虚构模型，对15种两两代理组合分别检查：不同ID15、不同模型8、不同凭据9、不同上级管理根5；6组不同模型但同一上级管理根，3组同模型但不同上级控制根。增殖表面身份不能产生独立控制；同权重模型不等于统一物理进程或单一体验主体；相关误差不宜用独立伯努利试验代替。当前实证只限封闭有限模拟和有理数数学，无真实超级智能/大模型调用，无独立体验端点、真实根权限和物理存续证明。Sybil、共同故障、跨模型串通和证据独立性已有直接前例（含2026 Epistemic Sybil Resistance、ICML同伴保护和国际AI安全报告），**不宣称首创普遍定理**。仅导航追加，不晋级正式科学图；UCT-MAP-v1.1.2/913/424/261、PUBLICATION_COVERAGE及原QC保持未变，完整全图语义审查未完成。
+
+
+### A4H：固定粒度的熟悉成分与组合
+[研究](records/A4H20261011_Compositional_Action_Familiarity/RESEARCH_NOTE.md)把已练成分/相邻对与当前使用的高阶接续关系分开，比较三项体验解释候选。有限例子不赋予H真值；0/0/0正式图增量，来源证书支线暂止。

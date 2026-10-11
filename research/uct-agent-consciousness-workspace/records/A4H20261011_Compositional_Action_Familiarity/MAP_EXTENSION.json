@@ -1,0 +1,14 @@
+{
+  "research_id": "A4H20261011",
+  "version": "A4H-COMPOSITION-v0.1.0",
+  "enabled_as_established_premises": false,
+  "nodes": [],
+  "rules": [],
+  "context_links": [],
+  "scientific_delta": {
+    "nodes": 0,
+    "rules": 0,
+    "contexts": 0
+  },
+  "claim_ledger": "CLAIM_LEDGER.json"
+}

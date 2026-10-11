@@ -43,3 +43,7 @@
 基础问题专线 TJR20261010：[交接](records/TJR20261010_Temporal_Joint_Realization/HANDOFF_ZH.md) · [正文](records/TJR20261010_Temporal_Joint_Realization/RESEARCH_NOTE.md) · [日志](records/TJR20261010_Temporal_Joint_Realization/WORK_LOG.md)。串行保留、联合读取与压缩的停用应用；原科学接续和身体熟悉感路线保留。原理多属继承，独立成稿HOLD，全图深审仍未完成。
 
 基础问题专线 REV20261010：[交接](records/REV20261010_Retained_Premise_Revision/HANDOFF_ZH.md) · [正文](records/REV20261010_Retained_Premise_Revision/RESEARCH_NOTE.md) · [日志](records/REV20261010_Retained_Premise_Revision/WORK_LOG.md)。承接 TJR，完成前提修改的精确信息条件与连续修改对照；0/0/0 停用应用，独立成稿 HOLD。原 A3V/A3Y 接续和全历史审查未完成状态保留。
+
+
+## A4H20261011 接续
+[中文交接](records/A4H20261011_Compositional_Action_Familiarity/HANDOFF_ZH.md)。固定粒度比较熟悉成分与当前接续关系，返回体验内候选解释。最新优先级见CURRENT_STATE；损坏索引修复与本地维护丢失见GAP_LEDGER，双份状态见固定主交接与收据。

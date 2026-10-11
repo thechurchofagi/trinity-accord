@@ -1,0 +1,72 @@
+{
+  "schema": "a4h-claims/1",
+  "enabled_as_established_premises": false,
+  "claims": [
+    {
+      "id": "A4H-C1",
+      "type": "exact_finite_counterexample",
+      "statement": "On a class containing cyclic A=00110011 and B=00010111, no function only of unigram and bigram count vectors recovers trigram support: those summaries agree but support differs at 000,010,101,111.",
+      "domain": "Declared binary cyclic training histories and fixed three-command grain.",
+      "all_of": [
+        "wraparound counts included",
+        "fixed alphabet",
+        "same ordered target query",
+        "comparison class admits both histories"
+      ],
+      "proof": "RESEARCH_NOTE §2 and check_composition.py",
+      "counterexample_boundary": "Independent restrictions admitting only one completion, or adding higher-order inputs, change the domain.",
+      "status": "PROVED_FINITE_NO_MATH_NOVELTY",
+      "thought_role": "Formation: equal exposure summaries do not fix retained relations."
+    },
+    {
+      "id": "A4H-C2",
+      "type": "executed_abstract_construction",
+      "statement": "At query010 the declared A/B consumers emit the same correct action using different internal paths. Bypass leaves B's stored carrier intact but removes its effective contribution.",
+      "domain": "episode() only; not complete physical organization.",
+      "all_of": [
+        "training-generated triple carrier",
+        "executed consumer lookup",
+        "generic fallback",
+        "bypass skips read",
+        "fixed output target"
+      ],
+      "proof": "Eight rows in EXACT_RESULTS.json",
+      "counterexample_boundary": "Storage without a reader is not use; program does not establish human body-frame grounding or timing.",
+      "status": "CHECKED_MODEL_NOT_PHENOMENAL_APPLICATION",
+      "thought_role": "Abacus/calculator and copying: storage, use and output separate."
+    },
+    {
+      "id": "A4H-C3",
+      "type": "proposed_positive_bridge",
+      "statement": "B_summary factors selected H_way through exposure summaries and fit; a strengthened signed B_relation predicts greater established character for an actually consumed retained continuation relation; B_fit factors the selected target only through present fit. These commitments are distinct and defeasible.",
+      "domain": "One independently fixed bodily continuation target; no universal mineness claim.",
+      "all_of": [
+        "fixed body/action/time grain",
+        "independent target semantics",
+        "actual same-instance route evidence",
+        "defended signed fallible J_H relation",
+        "intervention fidelity",
+        "direct-effect restrictions and genuine matching of all named bridge inputs"
+      ],
+      "proof": "RESEARCH_NOTE §§3–6 gives candidate comparison and prospective defeat tests, not established H values.",
+      "counterexample_boundary": "Proxy report policies survive; successful output does not match full fit; weak contribution claims imply no strict ranking.",
+      "status": "OPEN_DISABLED_CANDIDATE",
+      "thought_role": "Human realization: bearer-specific target not abstract-policy attribution."
+    },
+    {
+      "id": "A4H-C4",
+      "type": "scope_compatibility",
+      "statement": "A3O grain dependence is inherited; this witness fixes grain and varies content. R199 complete-clone continuation invariance and R157 semantic residual remain intact.",
+      "domain": "Affected UCT contracts.",
+      "all_of": [
+        "finite summary distinct from complete signature",
+        "external biography distinct from actual retained relation",
+        "transport distinct from phenomenal naming"
+      ],
+      "proof": "A3O §§1–2; R199 C1–C5; R157/R173 effective rules.",
+      "counterexample_boundary": "An H contrast from unused biography alone after complete organizational matching is not licensed.",
+      "status": "SCOPED_REVIEW_NO_NEW_RULE",
+      "thought_role": "Copy/swap distinguishes complete from summary twins."
+    }
+  ]
+}

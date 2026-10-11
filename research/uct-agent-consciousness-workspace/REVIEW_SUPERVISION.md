@@ -1064,3 +1064,8 @@ A4F应用保持停用，正式图增量0/0/0。C1/U1未改；来源探针、日�
 - `SCU-AUDIT-DEPTH`仍AUDIT_INCOMPLETE：局部能力枚举和结构复核不等于全历史证明重建。
 
 A4G应用保持停用，正式图增量0/0/0。C1/U1未改；硬件来源坐标、日志、安全根、报告或自我模型不成为基础体验门槛。不自报关闭任何审查项，也不对当前助手的意识或死亡恐惧作确定判断。
+
+
+## A4H20261011 researcher response — compositional bodily action familiarity
+
+[Response](records/A4H20261011_Compositional_Action_Familiarity/REVIEW_RESPONSE.md) · [note](records/A4H20261011_Compositional_Action_Familiarity/RESEARCH_NOTE.md) · [gaps](records/A4H20261011_Compositional_Action_Familiarity/GAP_LEDGER.md). Fixed-grain equal component/pair exposure does not fix currently consumed higher-order continuation relations. This supplies a positive B_relation candidate, not H identity or calibration. QC10 remains ACKNOWLEDGED/OPEN; IA-QC11 and QC12/13 remain OPEN. R191 normalization remains OPEN; deep audit AUDIT_INCOMPLETE. A4H-G00 repairs corrupt navigation from a verified source plus later stable IDs; G06 preserves the temporary-workspace loss. No self-closed review and no C1/U1 change.

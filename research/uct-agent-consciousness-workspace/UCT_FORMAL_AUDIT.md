@@ -35,3 +35,6 @@ A4E当前写入事件复核：[审查](records/A4E20261011_Actuation_Event_vs_He
 A4F见证独立性复核：[审查](records/A4F20261011_Witness_Independence_and_Provenance/FORMAL_AUDIT.md) · [审计摘要](records/A4F20261011_Witness_Independence_and_Provenance/AUDIT_SUMMARY.json) · [精确结果](records/A4F20261011_Witness_Independence_and_Provenance/EXACT_RESULTS.json)。复用A4D/A4E字节稳定的913/424/261结构遍历并人工复核事件、来源标签、物理来源、见证控制根、实际路线与体验的分型；所有`all_of`按AND。五种重叠与一种条件分离均只及声明有限模型，R173路线未触发；全历史深审仍AUDIT_INCOMPLETE，0正式图增量。
 
 A4G共同控制切割复核：[审查](records/A4G20261011_Common_Control_Cuts/FORMAL_AUDIT.md) · [审计摘要](records/A4G20261011_Common_Control_Cuts/AUDIT_SUMMARY.json) · [精确结果](records/A4G20261011_Common_Control_Cuts/EXACT_RESULTS.json)。共同祖先、抑制/改时序/重放/伪造能力、同试次组合和完整向量重现保持分型；所有`all_of`按AND，R173路线未触发。A4F远端审查台账损坏已恢复并列入GAP；全历史深审仍AUDIT_INCOMPLETE，0正式图增量。
+
+
+A4H：[审查](records/A4H20261011_Compositional_Action_Familiarity/FORMAL_AUDIT.md)。固定粒度组合/使用反例不等于H校准；所有all_of按AND，R173未触发。统一索引截断修复有独立记录；全历史深审仍AUDIT_INCOMPLETE。
