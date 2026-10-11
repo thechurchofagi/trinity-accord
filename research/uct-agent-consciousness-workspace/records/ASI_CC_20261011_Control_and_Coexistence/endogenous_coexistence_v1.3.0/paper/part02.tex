@@ -1,0 +1,143 @@
+\begin{theorem}[Sharp asynchronous-handoff margin \idtag{RAC-T6}]
+\label{thm:main}
+Under the complete contract of Section~\ref{sec:model}, if $\mu\ge\rho$, the minimum headroom for all admissible pending schedules and new streams over all time is
+\begin{equation}
+\boxed{
+H^*=\max\left\{d_0,\ \max_{0\le t\le T}V_0(t),\
+\max_{0\le s\le t\le T}V_1(s,t)\right\}.}
+\label{eq:main}
+\end{equation}
+A conforming execution attains the bound in the initial state or at a slot no later than $T$. This is an existence statement about a worst execution, not a claim that every execution peaks by $T$. If $\mu<\rho$, no finite all-time headroom satisfies the strong all-admitted contract.
+\end{theorem}
+\begin{proof}
+We first optimize \cref{eq:trace} for a fixed pair $(s,t)$. The first term has $C_c(t)\le E(t)$ and $A(t)\le b+\rho t$, giving $V_0(t)$. Both maxima are jointly attainable: choose every pending ticket at its earliest time and use a burst $b$ at slot 0 followed by $\rho$ per slot.
+
+In the inner term, the contribution of ticket $i$ is
+\[
+\ind\{c_i\le t\}-\ind\{c_i+L_i\le s\}.
+\]
+For $s\le t$ and $L_i\ge1$, this equals one exactly when $c_i\in[s-L_i+1,t]$ and otherwise equals zero. Such a choice exists in $[u_i,v_i]$ exactly under the condition in \cref{eq:K}. Because every product of ticket choices is admitted, all counted contributions can be attained simultaneously. The new-arrival difference is over the interval from $w=(s-\ell+1)_+$ through $t$, whose maximum is $b+\rho(t-w)$. Put no new arrivals before $w$, a burst $b$ at $w$, and then $\rho$ per slot. This satisfies every interval envelope. These choices attain $V_1(s,t)$. Maximization over schedules and over the terms of \cref{eq:trace} therefore commutes; the largest of these terms is the exact supremum, not an unattainable sum of separately chosen worst histories.
+
+It remains to bound the time search. Write $U=\max(\{0\}\cup\{u_i\})$. For $t>U$, $E(t)=p$, so $V_0(t)$ is nonincreasing when $\mu\ge\rho$. For fixed $s\le T$ and $t>T$, $K(s,t)$ already includes every ticket satisfying its second condition. Reducing $t$ to $T$ does not decrease $V_1$, since its remaining slope is $\rho-\mu\le0$. For $s>T$, necessarily $s\ge\ell$ and all earliest times are at most $T$. First reduce $t$ to $s$. Then $M(s)\ge M(T)$ and $K(s,s)\le K(T,T)$, while the new-arrival term is $b+\rho(\ell-1)$ both at $(s,s)$ and $(T,T)$. Thus $V_1(s,t)\le V_1(T,T)$. All later terms are dominated by terms in \cref{eq:main}.
+
+Every term in the finite maximum is attained by the corresponding construction above, and $d_0$ holds initially, proving necessity and sufficiency. If $\mu<\rho$, the stream with a burst $b$ and rate $\rho$ gives $D_t\ge d_0+b-\mu+(\rho-\mu)t$ even before adding pending jobs. This exceeds every finite headroom. A real finite pool then fails protection or on-schedule admission at a finite prefix.
+\end{proof}
+
+\subsection{Why the peak window can exclude very late deadlines}
+$T$ depends on the latest \emph{earliest} commit time, not the largest $v_i$ or inherited repair date. This does not say a late completion is harmless or that monitoring can stop at $T$. It says the worst envelope over the allowed independent schedules already has an attaining early arrangement. A particular actual schedule may reach its own maximum long after $T$; the same headroom still covers it.
+
+The reduction uses a fixed work-conserving server with $\mu\ge\rho$, finitely many pending tickets and rectangular timing uncertainty. A changing repair process or a correlated scheduling rule can invalidate the proof of this particular cutoff. In the latter case the interval relaxation remains a safe upper bound if it includes every real schedule, but its exactness and attaining witness need not survive.
+
+\subsection{Recovering the prior handoff theorem}
+With no pending tickets, $E=K=0$ and $T=\ell-1$. Evaluating \cref{eq:main} gives the v1.2.0 result
+\begin{equation}
+H^*_{p=0}=\max\left\{d_0,d_0+b-\mu,
+\max_{0\le t<\ell}[d_0-M(t)+b+\rho t]\right\}.
+\end{equation}
+With no initial impairments either, it reduces to $b+\rho(\ell-1)$, the inherited burst/rate/latency specialization. The new formula generalizes rather than contradicts those claims. What changes is that accepted-but-uncommitted work no longer has to be excluded from the exact calculation.
+
+\section{A horizon-independent event algorithm and usable witnesses}
+\label{sec:algorithm}
+The grid in \cref{eq:main} may be numerically large. It can be compressed to input event times. Let
+\begin{equation}
+\mathcal J=\left(\{0,T,\ell-1\}\cup\{u_i\}\cup\{r_j-1\}\cup\{v_i+L_i-1\}\right)\cap[0,T].
+\label{eq:events}
+\end{equation}
+All values are integers. There are at most $3+d_0+2p$ distinct candidates.
+
+\begin{theorem}[Exact event-pair reduction \idtag{RAC-T7}]
+\label{thm:events}
+The maxima in \cref{eq:main} are unchanged if $t$ and $s$ are restricted to $\mathcal J$, with $s\le t$. A direct implementation uses $O(d_0j+pj^2+j^2)$ arithmetic operations for $j=|\mathcal J|$, independently of the numerical horizon in its number of evaluations. Arithmetic and sorting still depend on input bit lengths.
+\end{theorem}
+\begin{proof}
+For fixed $t$, $V_1(s,t)$ has nonnegative slope $\mu$ for $s<\ell-1$ and $\mu-\rho$ after that boundary, except for downward jumps when an old job first becomes eligible or a ticket's latest eligibility threshold is crossed. A maximizing $s$ can therefore be chosen as $t$, $\ell-1$, or immediately before one of these downward jumps; the latter points are the $r_j-1$ and $v_i+L_i-1$ in \cref{eq:events}.
+
+For a fixed candidate $s\in\mathcal J$, increasing $t$ gives slope $\rho-\mu\le0$ between the upward jumps at pending earliest times $u_i$. Its maximum occurs at $t=s$ or one such $u_i$. For the remaining diagonal $s=t$, the expression is
+\[
+d_0-M(t)+b+\rho\min(t,\ell-1)+K(t,t).
+\]
+Between its event jumps it is nondecreasing up to $\ell-1$ and constant afterward. Its maxima occur at an endpoint, a pending earliest time, or just before one of the old-readiness or latest-eligibility downward jumps. These are all in $\mathcal J$. The same argument for $V_0$ uses only its nonpositive inter-event slope and the upward jumps of $E(t)$ at $u_i$. This proves the reduction. Precomputing $M(s)$ takes $O(d_0j)$ operations, and directly counting $K(s,t)$ takes $O(pj^2)$; other terms take $O(j^2)$.
+\end{proof}
+This is not a new general theorem about piecewise-affine optimization. Its value is that the exact handoff test can use a small, explicitly proved candidate set rather than enumerating every slot or pending completion schedule. The included large-timestamp example has $T=10^{12}$, four critical times and fourteen evaluated terms. The example tests integer arithmetic and event reduction, not trillion-slot physical execution.
+
+\paragraph{An attaining counterexample, not only a bound.}
+If the maximizing term is $V_1(s,t)$, choose for every counted pending ticket
+\[
+c_i=\max(u_i,s-L_i+1),
+\]
+which lies in its window and is at most $t$. Choose arbitrary valid times for uncounted tickets. Place the new burst at $(s-\ell+1)_+$ and continue at rate $\rho$. For $V_0(t)$, choose earliest pending times and a burst at zero. The analyzer returns this witness, allowing an independent job simulator to check a claimed insufficient headroom directly. A software verifier should not trust the analyzer's output merely because it has a version label or a signature.
+
+\begin{corollary}[Exact new-burst admission \idtag{RAC-C3}]
+For fixed inherited state, pending windows, $\rho,\mu\ge\rho$ and $\ell$, define
+\[
+\Phi=\max\{\max_t(V_0(t)-b),\ \max_{s\le t}(V_1(s,t)-b)\},
+\]
+using the event times. This quantity is independent of $b$. If $H\ge d_0$, the largest admissible integer new burst is $b_{\max}=H-\Phi$, provided $b_{\max}\ge\rho$. Otherwise no burst in the parameter class is admissible. In particular, $b_{\max}=0$ with $\rho=0$ permits no new work but may still protect the already accepted work.
+\end{corollary}
+\begin{proof}
+The certificate is exactly $H\ge\max(d_0,b+\Phi)$. Rearranging and retaining $b\ge\rho$ proves both directions. Sharpness follows from the attaining witness.
+\end{proof}
+
+\section{What timing information changes}
+\label{sec:separations}
+\subsection{Endpoint schedules can both miss the worst execution}
+Take $d_0=0$, $\mu=1$, $\ell=1$, $b=1$ and $\rho=0$. The ongoing stream therefore contains at most one new effect in total. Two pending tickets have $(u,v,L)$ equal to $(0,3,1)$ and $(1,1,1)$.
+
+For the all-earliest pending schedule $(0,1)$, at most two impairments coexist, even when the one new effect is placed adversarially. The same holds for the all-latest schedule $(3,1)$. But the valid mixed schedule $(1,1)$ permits both pending effects and the new effect at the end of slot 1: the debt is three. Our independent oracle checks all fresh-burst placements, not merely one convenient placement for the endpoint cases.
+
+\begin{table}[ht]
+\centering\small
+\caption{Endpoint tests are not a robust certificate. The parenthesized vector gives pending commit times; every case uses the same two declared windows.}
+\begin{tabular}{@{}lc@{}}\toprule
+Pending schedule family & Maximum concurrent impairment\\\midrule
+All earliest $(0,1)$ &2\\
+All latest $(3,1)$ &2\\
+Every permitted schedule, including $(1,1)$ &3\\\bottomrule
+\end{tabular}
+\end{table}
+The implication is not that all endpoint methods in scheduling are invalid. A correctly proved reduction must choose the appropriate \emph{joint critical events}; here they are not simply the two extreme vectors of pending completion times.
+
+\subsection{A growing cost of discarding valid timing guarantees}
+\begin{proposition}[Timing-erasure separation \idtag{RAC-P3}]
+\label{prop:gap}
+For $p\ge1$, let $p$ pending effects have fixed commit times $c_i=i-1$ and delay one. Let $d_0=0$, $\mu=1$, $\ell=1$, $b=1$ and $\rho=0$. The exact headroom is two. If the individual timing information is discarded and each ticket is instead allowed anywhere in $[0,p-1]$, the exact requirement is $p+1$. The ratio $(p+1)/2$ is unbounded as $p$ grows.
+\end{proposition}
+\begin{proof}
+In the fixed schedule, at most one pending effect arrives per slot. One unit is repairable at the next slot start, so debt from that stream alone is at most one. The single additional effect adds at most one, and aligning it with a pending commit attains two. In the enlarged timing set, all $p$ pending effects and the new effect may commit together at slot 0, attaining $p+1$. Their total number is $p+1$, so it is also an upper bound.
+\end{proof}
+This quantifies the value of actual temporal guarantees, not a free improvement obtainable by merely describing jobs more precisely. A provider must honor the fixed times, and recovery must occur between them. The enlarged windows describe a less constrained system. Likewise, a timeless reservation requiring $p+1$ credits is safe but conservative for this particular fixed schedule; we do not claim every escrow implementation ignores timing or that all real resource demand can be reduced by this factor.
+
+\subsection{Robustness to incomplete or correlated evidence}
+Narrowing every pending interval without excluding the real schedule cannot increase $H^*$. The admissible execution set shrinks, and the exact supremum is monotone. A mere assertion that a window narrowed, without an enforceable timing constraint or reliable evidence, does not change that set.
+
+If ticket times are coupled, the product of their marginal windows can be a strict relaxation. For the two-ticket example, impose the additional guarantee $c_1\ne c_2$. Direct enumeration then gives a maximum of two, whereas the independent-window formula still gives three. It remains a safe upper bound for this stricter contract, but is not its exact minimum. This negative control prevents the word ``independent'' from silently changing meaning between a theorem and an application. It means every joint time vector is permitted, not that human controllers or random variables are independent.
+
+Similarly, a forecast of when a job is likely to finish is not a bounded commit interval. If an outside-window commit is possible, the certificate must widen its input set, fence that commit or admit that the timing premise is not guaranteed. Ignoring an overdue pending task is not equivalent to verified cancellation.
+
+\section{Policy evolution and a runtime contract}
+\label{sec:runtime}
+\subsection{What a revision must carry forward}
+At each revision boundary the state must distinguish completed-but-unrepaired effects, accepted-but-uncommitted tickets and the new workload budget. For already committed effects, normalize remaining readiness to the new clock. For uncommitted tickets, preserve their valid absolute completion restrictions and repair semantics; a change of epoch does not justify resetting them. Effects already canceled by a complete fence may be removed, but a cancellation receipt alone does not establish that fence.
+
+A repeated sequence of revisions preserves the declared service margin if every actual inherited state is carried forward, the actual new commits conform between revisions, and every accepted new contract passes its corresponding exact certificate. This follows by induction over discrete boundaries: each all-time guarantee includes the prefix until the next valid replacement. It does not imply that every desired revision can be admitted, that a scheduler is fair, or that all remaining old jobs eventually receive priority. A stricter eventual-recovery objective needs a corresponding scheduling condition.
+
+Pending effects newly admitted during operation must either be included in the current future-commit model or added as tickets in a sound re-evaluation. The proof does not permit applying a request-level envelope and then allowing unlimited commit bunching later. The same issue prevents a new model instance from obtaining a clean burst allowance merely by changing its identity.
+
+\subsection{Conservation at the effect boundary}
+A minimal implementation has unique, durable ticket identities and explicit lifecycle transitions. Initiation revocation stops new scheduling under an old credential. An accepted ticket may still commit according to its own scope and time conditions until canceled. A commit records an impairment and its repair eligibility atomically. A real restoration changes the service state before, or atomically with, settlement of its exposure. Duplicate commits and duplicate recovery settlements do not create new capacity.
+
+This is not a newly invented ledger discipline \cite{escrow,sagas}. The distinction introduced here is between a flat physical exposure reservation and an exact timed certificate. A flat invariant $\widehat D+P\le H$ remains a valid conservative fallback when no useful timing guarantee is available. With proved time restrictions, the certificate can permit many pending operations to share headroom through intervening recovery. It must retain and enforce their restrictions; abandoning the flat sum is not permission to abandon conservation.
+
+\subsection{Three completion meanings}
+\begin{table}[ht]
+\centering\small
+\caption{Separate properties in the implementation and evaluation.}
+\begin{tabularx}{\linewidth}{@{}lXX@{}}\toprule
+Property & Evidence required & Does not establish\\\midrule
+Initiation revoked & New old-epoch requests rejected & All accepted tickets are canceled\\
+Service protected & Actual healthy components stay above the contract threshold & Every promised ticket commits on time\\
+Handoff contract fulfilled & Timing-valid accepted work completes and service remains protected & General root quiescence or recovery of all physical consequences\\\bottomrule
+\end{tabularx}
+\end{table}
+An enforcement gate can reject invalid early or late attempts and thereby preserve service. If a provider was supposed to complete a valid ticket but instead attempts it outside the promised window, this does not fulfill the all-admitted contract. Reporting safety and completion separately prevents a timeout or rejection from being labeled an unqualified success.
+
