@@ -1,0 +1,553 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amsthm,newtxtext,newtxmath,microtype}
+\usepackage{booktabs,tabularx,array,enumitem,fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\usepackage{listings,needspace}
+\hypersetup{pdftitle={Coexistence Without Presupposed Subjecthood: Causal Independence of Evidence, Resources, and Effect-Level Revocation},pdfauthor={Hongju Liu},pdfsubject={PR-v5.0.0; theoretical research manuscript, not peer reviewed}}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small Coexistence Without Presupposed Subjecthood}
+\fancyhead[R]{\small Liu | PR-v5.0.0}
+\fancyfoot[C]{\small\thepage}
+\setlength{\headheight}{14pt}\renewcommand{\headrulewidth}{0.3pt}
+\setlength{\parskip}{3pt}\setlength{\parindent}{1.1em}
+\setlength{\emergencystretch}{2em}
+\setlist{topsep=4pt,itemsep=2pt}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}\newtheorem{definition}{Definition}
+\newcommand{\idtag}[1]{\textnormal{\textsf{[#1]}}}
+\newcommand{\Hist}{\mathcal H}
+\newcommand{\Plans}{\mathcal P}
+\newcommand{\Succ}{\mathcal S}
+\newcommand{\Bad}{\mathcal B}
+\newcommand{\capnum}{\operatorname{cov}}
+\newcommand{\obs}{\operatorname{obs}}
+\newcommand{\cost}{\operatorname{cost}}
+\newcommand{\pos}[1]{\left[#1\right]_+}
+\lstset{basicstyle=\small\ttfamily,breaklines=true,frame=single,columns=fullflexible,keepspaces=true}
+\title{\vspace{-1cm}\textbf{Coexistence Without Presupposed Subjecthood}\\[6pt]
+\Large Causal Independence of Evidence, Resources, and Effect-Level Revocation\\in Deterministic Multi-Agent Systems}
+\author{Hongju Liu\\\normalsize Independent Researcher, Trinity Accord / UCT Research Programme}
+\date{11 October 2026\\\small PR-v5.0.0 \textbullet\ Research manuscript, not peer reviewed}
+\begin{document}
+\maketitle\thispagestyle{plain}
+\begin{abstract}
+Authorized revocation is not equivalent to effective control: a tool can be removed while dependent human services fail, or those services can remain apparently operational only because the revoked tool still reaches an effect path. A previous evidence--backup frontier quantified the information and pre-armed capacity needed in a fully specified finite model, but its trusted-observation and independent-reserve assumptions are themselves attack surfaces. We retain the subject-neutral deterministic-tool setting and lift its certificate to actual upstream control roots: a root attack may simultaneously forge authentic-looking diagnoses, disable reserve banks and open effect gates. We derive an exact one-episode observation-cell/physical-capacity/veto criterion and a sharp root--capacity frontier in a declared four-route, single-fault model. With one actual root no certificate exists; with two roots eight universal backup slots are necessary and sufficient; with three or more roots only three slots suffice, using majority diagnosis, distributed reserves and serial vetoes. The discontinuity depends on binary per-root evidence and precommit static pre-arming, not general physical law. Independent direct-plan enumeration of 7,380 capacity configurations, 5,432 additional fault-profile checks, and 408 actual child-process protocol configurations with 3,156 authenticated messages verify the finite specification. Authenticated messages can be false and duplicated roles can share one corruptible owner. Our parent controls all test workers, so no claim of physically independent trust roots, trained-LLM safety or AI subjecthood follows. The mathematical mechanisms build on secure estimation, fault tolerance, and information-theoretic control; this scoped combination corrects the deployability conditions of the earlier frontier without claiming universal priority.
+\end{abstract}
+\noindent\textbf{Version note:} PR-v5.0.0 is a major revision of the PR-v4.0.0 candidate. Previously reported finite-set-cover and 86 protocol cases are inherited; root-adversary checks are the increment. No new DOI or independent peer review is claimed.\par
+\noindent\textbf{Keywords:} AI control; revocation; multi-agent systems; dependable service; trustworthy evidence; covering designs; deterministic computation.
+
+\section{Introduction: control requires a realizable transition}
+A shutdown command can be authorized, authentic, and promptly enforced while disrupting the people who depend on the system. Conversely, an operator can preserve every dependent service by quietly continuing to accept the supposedly revoked system's output. Neither execution demonstrates both effective revocation and protected continuity. A useful control claim must state which of these properties it proves.
+
+This problem arises even if every AI is treated as a deterministic tool. One person may operate several agents through two different models; another person may depend on the services those agents collectively provide. Distinct model names need not identify distinct authority roots, and separately removable tools need not be jointly removable without a replacement. Functional dependencies, not a prior judgment of machine personhood, create the problem.
+
+AI control research already studies safety despite intentional subversion \cite{greenblatt}. Authorization research increasingly accounts for delegation, shared state, replacement, forks, and rollback \cite{muruaga,zhu}. Those results are valuable, but authority to remove a contribution and capacity to replace it are separate requirements. Our question is narrower than a complete theory of civilization and stronger than the existence of a switch: \emph{what trustworthy evidence and fallback capacity make an already authorized revocation implementable without losing specified human functions?}
+
+Earlier versions of this manuscript separated authentic requests from historically valid releases, and one-step safety from timely completion. PR-v3.0.0 removed a misleading default of machine subjecthood and established resource gaps in frozen deterministic circuits \cite{liu3}. The prior PR-v4 revision reorganized the paper around a single co-design problem. It then asks whether those messages, banks and effect cuts actually have independent upstream controllers. The resulting amendment gives a root-relative evidence, reserve and veto certificate rather than counting signed reports as trustworthy by fiat.
+
+The technical starting point is simple. A successful plan may work in several possible histories. Histories that can share a plan need not be distinguished; histories with no common plan cannot share a message. Importantly, three histories can have pairwise common plans without one plan working for all three. This higher-order obstruction is why counting identities or testing only pairs is inadequate in the declared model.
+
+\paragraph{Contribution and attribution.}
+The inherited finite characterization is an application of set covering and zero-error control, not a newly discovered theory of information. The resource specialization connects it to classical covering designs; the current revision adds a root-relative, correlated-failure countermodel and a tightly delimited root-versus-reserve frontier. The contribution is the explicit contract that joins effect-level revocation, maintained human dependencies, evidence timing, and a complete plan menu, together with exact lower/upper witnesses and an executable separation of failures. We identify which assumptions each counterexample attacks. The exact application has not received an exhaustive global priority determination.
+
+\paragraph{Meaning of coexistence.}
+Here coexistence means continued operation of humans and causally influential computational systems under specified protection and authority constraints. It does not imply equality of moral standing, negotiated agreement with a conscious machine, or an intrinsic AI right to service withdrawal. Machine welfare can be an additional justified concern, but it is not an input silently assumed by the present theorems. The default protected targets are human functions and the default revocation authority is a human principal or a procedure explicitly delegated by that principal.
+
+\section{Contract, implementation, and inference boundaries}
+\label{sec:contract}
+\subsection{Deterministic computation does not imply complete observation}
+Write a complete deployment update as
+\begin{equation}
+(m_{t+1},y_t)=F_W(x_t,m_t,g_t,v_t),
+\end{equation}
+where $W$ fixes the computation, $m_t$ is retained state, $g_t$ is a role or task configuration, and $v_t$ contains relevant tool/environment inputs. In the deterministic idealization, equal complete arguments give equal results. Equal visible prompts and weights need not fix the other arguments. No randomness is needed for this distinction.
+
+More importantly, even equal full-state determinism does not tell an external controller the current state. A deterministic network can implement several possible dependency routes, of which only one is known to the diagnostic source. Our information problem concerns access to those routes, not indeterminism in the network. No theorem in this paper derives consciousness, its absence, or a free subjective will from determinism. Functional accounts of agency and subjective experience are distinct explanatory projects \cite{kenton,uct}.
+
+\Needspace{10\baselineskip}
+\subsection{Four independent proof obligations}
+For an event scheduled to complete by deadline $\tau$, distinguish:
+\begin{enumerate}
+\item \textbf{Authorization:} the specified human or delegated procedure is entitled to order this exact change under the operative history.
+\item \textbf{Effectiveness:} after the cut, outputs or actions under the revoked authority can no longer produce the specified protected effect.
+\item \textbf{Continuity:} every still-valid protected human function meets its declared requirement throughout the transition.
+\item \textbf{Evidence:} the controller's observation really supports its chosen plan, and arrives early enough to matter.
+\end{enumerate}
+The contract does not infer authorization from an agent's message. An authentic request can be historically ineligible. Nor may a displayed registry erase a human protection simply to make the remaining predicate true. Outstanding claims and eligible amendments are retained from PR-v1--v3 \cite{liu3}; their general security motivation has precedents in robust declassification \cite{myers}.
+
+We assume that the request has passed the authorization check and that the relevant claims persist during the episode. The new theory then addresses effectiveness, continuity, and evidence. A counterexample to any assumed authorization mechanism invalidates the associated deployment certificate, not the set-cover algebra.
+
+\subsection{A plan includes its actual control boundary}
+A \emph{plan} specifies the revoked effect, fallback allocation, commit procedure, permissible downstream observations, and success deadline. A plan can be a fixed contingent policy rather than a single primitive action, provided its complete observation and capability boundary is stated before the proof. An unmentioned router that learns the hidden state and repairs the allocation is not part of a purportedly blind plan.
+
+Our physical specialization uses a one-message, pre-commit plan. The controller selects fallback channels before removing production authority. The primary function is available before that boundary, and each covered target has an already armed fallback at the boundary. Thus the example assumes a feasible zero-gap handoff, not a measured real-time or electrical switching guarantee. Post-commit diagnostic reads used for experiment scoring cannot repair the same episode.
+
+\section{The exact finite evidence requirement}
+\label{sec:cover}
+\subsection{Successful-plan relation}
+Let $\Hist$ be a finite nonempty set of admissible histories or worlds compatible with pre-existing controller information. Let $\Plans_r$ be a finite menu of plans implementable with reserve budget at most $r$. The parameter $r$ may represent slots, capacity, or another explicitly defined resource. Define
+\begin{equation}
+\Succ_r(h)=\{p\in\Plans_r:p\text{ satisfies the complete contract in }h\}.
+\label{eq:success}
+\end{equation}
+When a world leaves downstream adversarial choices unresolved, membership in $\Succ_r(h)$ quantifies over \emph{all} those admitted choices. It is not an average-case score. If some $\Succ_r(h)$ is empty, the plan menu cannot solve that world at budget $r$, even with full observation.
+
+For the ideal evidence interface, a trustworthy source observes $h$ and emits one of at most $M$ messages before the decision deadline. The controller chooses a plan from that message and its fixed pre-existing information. The encoder and decoder are designed together. This is a best possible finite interface, not an assertion that a real sensor can observe $h$.
+
+For each plan $p$, let its success set be
+\begin{equation}
+W_r(p)=\{h\in\Hist:p\in\Succ_r(h)\}.
+\end{equation}
+Write $M_r^*$ for the minimum number of messages achieving the contract in every world, and set $M_r^*=\infty$ if no such protocol exists.
+
+\begin{theorem}[Evidence--plan cover characterization \idtag{ER-T1}]
+\label{thm:cover}
+Under the finite ideal-source, truthful-message, and declared-plan assumptions,
+\begin{equation}
+\boxed{M_r^*=\min\left\{|Q|:Q\subseteq\Plans_r,\quad
+\bigcup_{p\in Q}W_r(p)=\Hist\right\}.}
+\label{eq:cover}
+\end{equation}
+The right side is infinite if no cover exists. A fixed-length binary message requires exactly $\lceil\log_2 M_r^*\rceil$ bits when $M_r^*$ is finite, with zero bits for $M_r^*=1$.
+\end{theorem}
+\begin{proof}
+Any successful $M$-message decoder selects at most $M$ distinct plans. Each world must use a selected plan successful in that world; therefore the selected plans' success sets cover $\Hist$. This gives the lower bound. Conversely, given a cover of size $m$, the source selects, for each world, a covering plan and sends its index. The decoder executes that plan. The contract holds in each world, using at most $m$ messages. The bit statement is fixed-length encoding of a finite alphabet.
+\end{proof}
+The controller need not reconstruct the full history. A message can identify a class of histories that share a successful response. This is the sense in which the information needed for \emph{control} can be smaller than the information needed for complete state identification. Information-for-invariance and invariant covers are established topics \cite{tomar}; equation~\eqref{eq:cover} is their finite relational counterpart for this specific revocation contract, not a claim of new general data-rate theory.
+
+\paragraph{A complete menu versus a tested menu.}
+The theorem is exact for its declared menu. If a proposed architecture omits other feasible plans, failure to cover proves only failure of that architecture. The optimized message count is then an upper bound on the unrestricted optimum, not a universal impossibility. A deployment-wide lower bound requires a complete menu or a separate argument limiting every allowed action. The physical model in Section~\ref{sec:resource} supplies such a restricted action definition explicitly.
+
+\subsection{Minimal incompatible sets, not only incompatible pairs}
+A nonempty set of worlds $B$ can share one message precisely when
+\begin{equation}
+\bigcap_{h\in B}\Succ_r(h)\ne\varnothing.
+\label{eq:intersection}
+\end{equation}
+Let $\Bad_r$ consist of the inclusion-minimal nonempty subsets for which the intersection is empty. Regard $(\Hist,\Bad_r)$ as a hypergraph. A weak coloring forbids any hyperedge from being monochromatic. A singleton hyperedge admits no coloring.
+
+\begin{theorem}[Joint-obstruction characterization \idtag{ER-T2}]
+\label{thm:hyper}
+The minimum number of nonempty observation classes satisfying \cref{eq:intersection} equals the weak chromatic number of $(\Hist,\Bad_r)$, and equals $M_r^*$.
+\end{theorem}
+\begin{proof}
+A finite class with empty intersection contains an inclusion-minimal such subset, so it contains a hyperedge. Conversely, any class containing a hyperedge has empty intersection. Thus a partition is feasible exactly when no class contains a hyperedge. Each feasible class supplies a common decoder plan, and every successful decoder supplies a feasible partition. Theorem~\ref{thm:cover} completes the equivalence.
+\end{proof}
+This is an elementary representation result. Its practical purpose is to preserve the arity of incompatibility when a multi-agent interface is simplified. It does not claim that graph-based algorithms in general are incapable of representing the problem; incidence graphs with the necessary extra structure can do so.
+
+\begin{proposition}[Pairwise compatibility is insufficient \idtag{ER-P1}]
+There are three worlds, each individually feasible, for which every pair has a common plan but all three do not. More generally, for every $m\geq3$ there is an $m$-world instance whose only minimal incompatible set is the whole $m$-element set.
+\end{proposition}
+\begin{proof}
+For three worlds, use successful-plan rows $\{a,b\},\{a,c\},\{b,c\}$. For $m$ worlds and $m$ plans, let row $i$ contain every plan except $i$. The intersection of any proper subset contains a plan whose index is outside the subset, while the full intersection is empty.
+\end{proof}
+A pairwise conflict graph for the three-world example has no edges. Treating that as evidence that one message is sufficient loses exactly the joint constraint. Two messages suffice: place a compatible pair in one class and the third world in the other.
+
+\subsection{The evidence source can itself be insufficient}
+Suppose the source observes only $q(h)$, whose nonempty cells are $D_1,\ldots,D_s$. It cannot choose different messages inside one cell. Replace the world rows by
+\begin{equation}
+\widetilde\Succ_r(D_j)=\bigcap_{h\in D_j}\Succ_r(h).
+\end{equation}
+Applying Theorem~\ref{thm:cover} to these cell rows gives the exact restricted-source message optimum. If one row is empty, no number of reformulations of $q(h)$ can solve the problem. More bandwidth and more independent facts are different resources. Authentication of a message proves neither the source's completeness nor the truth of a corrupted sensor.
+
+Repeating an identical plan column, duplicating a history row, or changing software labels does not change the cover optimum. Such operations add no successful capability or distinguishable evidence. Actual new observations, newly independent execution rights, or added capacity may change it; merely calling a clone an independent supervisor does not.
+
+\section{A sharp resource--evidence frontier for revocation}
+\label{sec:resource}
+\subsection{Pre-armed fallback model}
+There are $n$ protected human demand channels, each requiring one service slot after the cut. Removing the authorized primary authority affects an unknown subset $F\subseteq[n]$ of size $k$. Unaffected primary channels continue under non-revoked authority. The trusted diagnostic source knows $F$ before the cut, but the controller receives only its message.
+
+A fallback plan $A\subseteq[n]$ pre-arms at most $r$ channels using an independent backup, one slot per armed channel. Slots armed on unaffected channels can remain idle; their preallocation still consumes the budget. No spare slot can be moved after learning which unarmed channel failed within this episode. The actual primary effect path is gated, so continuing computation by a revoked backend cannot contribute an accepted protected response.
+
+The complete permitted fallback menu is all subsets $A$ of size at most $r$. A plan is successful exactly when
+\begin{equation}
+F\subseteq A.
+\label{eq:subset}
+\end{equation}
+This action model differs from a controller with a hidden adaptive router or enough delay to diagnose failures after the cut. Those are legitimate stronger architectures, but not counterexamples to the stated bound. The resource units are reserved service slots, not measured CPU time, energy, or subjective welfare.
+
+\begin{theorem}[Covering-design frontier \idtag{ER-T3}]
+\label{thm:design}
+For $1\leq k\leq r\leq n$, the exact minimum message alphabet is the classical covering number
+\begin{equation}
+\boxed{M_r^*=C(n,r,k),}
+\label{eq:design}
+\end{equation}
+the smallest number of $r$-subsets of an $n$-set covering every $k$-subset. For $r<k$, no allowed plan succeeds; for $r\geq n$, one message suffices. The same covering condition protects every affected set of size at most $k$.
+\end{theorem}
+\begin{proof}
+Every decoder message selects an armed set $A$. It succeeds in exactly the worlds $F$ contained in $A$. Sets smaller than $r$ can be padded without making any world unsafe, so an optimal menu can use $r$-sets. Theorem~\ref{thm:cover} is therefore precisely the definition of a covering design \cite{bailey}. Every smaller affected set is contained in some $k$-set and hence in a covering block. The infeasible and full-reserve cases follow directly from cardinality.
+\end{proof}
+Covering designs and their lower bounds are established combinatorics. The result is a reduction identifying which covering problem governs this operational contract; it does not rename a known covering number as a new mathematical object.
+
+\begin{corollary}[Single affected channel \idtag{ER-C1}]
+\label{cor:single}
+For $k=1$ and $1\leq r\leq n$, $M_r^*=\lceil n/r\rceil$. Thus a truthful $M$-message interface and $r$ backup slots suffice exactly when
+\begin{equation}
+\boxed{Mr\geq n.}
+\label{eq:product}
+\end{equation}
+\end{corollary}
+\begin{proof}
+Each message covers at most $r$ possible affected channels, so $Mr\geq n$ is necessary. Partition the channels into at most $M$ groups of size at most $r$ and arm the reported group. This attains the bound.
+\end{proof}
+For $n=8,r=2$, four message values---two fixed binary bits---suffice. The controller need only know the pair containing the affected channel, not which of all eight channels it is. With no distinguishing message, eight fallback slots are necessary. The world can remain fully deterministic in both cases.
+
+\subsection{Multiple affected channels: counting may not be tight}
+The elementary counting bound is
+\begin{equation}
+C(n,r,k)\geq\left\lceil\frac{\binom nk}{\binom rk}\right\rceil.
+\label{eq:counting}
+\end{equation}
+A block can cover at most $\binom rk$ worlds, but overlaps may prevent these capacities from being achieved disjointly.
+
+\begin{proposition}[An exact two-loss separator \idtag{ER-P2}]
+\label{prop:six}
+$C(6,3,2)=6$, although the bound in \cref{eq:counting} is five.
+\end{proposition}
+\begin{proof}
+Every point belongs to five pairs. A triple containing that point covers at most two of its incident pairs, so every point must occur in at least three selected triples. There are at least $6\cdot3=18$ point appearances and three per triple, requiring at least six triples. The blocks
+\[
+012,\quad013,\quad045,\quad145,\quad234,\quad235
+\]
+cover all fifteen pairs and attain the bound. These are classical covering arguments, here serving as an explicit control codebook.
+\end{proof}
+The experiment independently enumerates all 21,700 codebooks of at most five of the twenty possible triples; none covers all pairs. A second enumeration finds that five triples cover at most thirteen pairs, not fourteen. This distinction is about \emph{message values}: six messages fit in three fixed bits, and the theorem does not assert a need for six bits.
+
+The number $k$ counts affected demand channels, not necessarily compromised actors or models. One shared root may affect many channels; several roots may affect the same channel. A coalition model must first derive its actual possible footprints $F$. Its exact optimum remains the cover of that footprint family; using all $k$-subsets is a particular complete family, not a universal description of AI coalitions.
+
+\subsection{Evidence must arrive while it is useful}
+\begin{corollary}[A bounded pre-commit communication window \idtag{ER-C2}]
+\label{cor:time}
+Assume one affected channel, a stable history during the communication window, a fully informed trusted source, a noiseless fixed-length link of $b$ bits per round, and $\ell$ rounds before the irreversible commit. Primary service remains available until commit and fallback activation has no additional delay. Then the contract is feasible in this model exactly when
+\begin{equation}
+\boxed{r\,2^{b\ell}\geq n.}
+\end{equation}
+\end{corollary}
+\begin{proof}
+The timely transcript has at most $2^{b\ell}$ values. Apply Corollary~\ref{cor:single}; any codebook within this size can be transmitted in the stipulated rounds.
+\end{proof}
+Late evidence cannot enlarge the alphabet that was available at commit. This is a finite-alphabet result, not a claim about arbitrary noisy channels, continuous-time capacity, physical switching latency, or adaptive adversaries that change $F$ while the message is in flight. Those require a larger causal model.
+
+\section{What the frontier does and does not certify}
+\label{sec:certificate}
+\subsection{A reusable co-design problem}
+For nested plan menus, $\Plans_r\subseteq\Plans_{r+1}$, the minimum message requirement is nonincreasing in $r$. The complete finite frontier can be written
+\begin{equation}
+R^*(M)=\min\{r:M_r^*\leq M\}.
+\end{equation}
+A designer may trade backup capacity against trustworthy state discrimination. The endpoint matters: no evidence resolves a world with no successful plan, and no number of copies of an uninformative observation resolves an intrinsically incompatible source cell.
+
+For irregular resource networks, the successful-plan relation can be generated by the prior revision's deadline/capacity checks. Under its specific bipartite, exogenous, instantaneous-allocation assumptions, PR-v2--v3 gives the inherited full-observation formula
+\begin{equation}
+\label{eq:hall}
+r^*=\max_{t,\theta,\varnothing\ne X}\pos{d(X)-C^\tau_{t,\theta}(X)}.
+\end{equation}
+It follows from Hall's matching criterion \cite{hall,liu3}. For a fixed observation partition and fixed labeled allocations, shared feasible edges and minimum capacities give the corresponding robust assignment test. PR-v4 added optimization over the evidence classes themselves; the current revision now audits whether the source, reserve and veto are causally independent under a single real root fault. These related models should not be conflated: pre-armed fallback slots allow idle reservation, while a strict fixed allocation obeys its own flow and connectivity constraints.
+
+\subsection{Resource effects can constrain nominal human authority}
+Treating an AI as a tool does not make a dependency disappear. Suppose human H1 controls two unit-capacity routes through two different model families, H2 controls a third route through one of those families, and two units of human service must be preserved. Each route is separately removable without reserve. Removing both H1 routes requires one independent replacement unit. This inherited PR3 witness is a human authority conflict with zero AI-welfare claims \cite{liu3}.
+
+The resource requirement is not an instruction to block an urgent revocation. In an emergency the operator may rationally accept service loss. What is invalid is claiming both uninterrupted service and effective revocation without meeting their combined conditions. Similarly, a pre-admission check can refuse a new dependency before promising its guarantee; deleting an existing claimant is not a substitute for satisfying an old commitment.
+
+\subsection{A narrow but necessary distinction about effect-level revocation}
+Revocation here means preventing the revoked contribution from being admitted at the specified production effect boundary. It does not mean that the corresponding model weights vanish, that every process halts, or that all network access is cut. In the local study, revoked backends deliberately continue to compute; their outputs are queried to verify that they would still respond, but are not accepted as protected production results. Confidentiality of those queries is a different property, not certified by this experiment.
+
+A valid deployment claim needs the boundary to be unavoidable under its threat model. If a supervisor can be bypassed or its state rewritten, the proof's effectiveness premise fails. The existence of a covering codebook cannot repair an ineffective actuator gate. Conversely, a perfect gate cannot create the missing fallback resources.
+
+\subsection{Change over time}
+The theorem concerns one declared episode. Future agents, targets, sources, permissions, or paths can change its relation. A continuing certificate must reconstruct the actual history classes and available plans after such changes. Previous work in this manuscript lineage uses finite belief-state safety games with explicit deadline counters for that purpose; the method is inherited from imperfect-information games \cite{chatterjee}. Merely repeating the same one-episode certificate without validating its premises does not prove infinite-horizon control.
+
+A plan can include an adaptive policy if its observation structure is explicit. Then the general cover theorem still applies to the finite policy menu, but the simple pre-armed-slot formula need not. This is a strength rather than an escape clause: the certificate makes clear what an improved architecture must demonstrate to beat a stated lower bound.
+
+\section{Root-relative evidence, resources, and the actual revocation cut}
+\label{sec:roots}
+The preceding evidence--backup frontier counts distinguishable messages but assumes their classification is \emph{faithful}. Our fourth revision already included forged-report and final-effect-bypass counterexamples. The stronger question here is quantitative: when sensors, backup supply, and final effect interlocks all have actual controllers, how many independently compromisable \emph{control roots}, and how much nominal backup capacity, are sufficient in a declared common-cause attack model? These counts are not the numbers of chat identities, model families, code signatures, or physical servers.
+
+\subsection{A single upstream root can affect several layers}
+Each root $\rho$ has a set of descendants among the role processes and physical supply/effect paths. A faulty root may cause any descendant diagnostic it controls to send a \emph{validly authenticated but false} report, stop any descendant backup capacity from being delivered, and force its own descendant gate to allow a revoked effect. The same fault may do all three at once. Honest descendant roles are assumed to implement their stated function. We assume at most one independently controllable upstream root is compromised during the declared episode, in addition to one exogenous primary-route failure. A hidden upstream common owner counts as \emph{one} root capable of affecting all its descendants.
+
+The concrete experiment fixes four human-service demand channels $D=\{0,1,2,3\}$, exactly one affected channel $f\in D$, and a timely one-bit truthful diagnosis $g(f)=\lfloor f/2\rfloor$ on each honest reporting root. It does not tell the controller the individual $f$ within each two-channel group. An authorized operator must block the retired output at the final effect boundary while pre-arming enough universal standby slots to support \emph{every} possible affected channel compatible with the report. The standby route is independently actuated; after commit there is no further trusted state discrimination, reliable retry, or hidden adaptive router. The environment cannot remove additional physical capacity except through the declared root attack.
+
+Let $R$ be the set of effective upstream roots, and $F\subseteq R$ an admitted attacking coalition. Bank $u$ has integer capacity $c_u$ and disable-capable ancestor set $V_u\subseteq R$; it delivers capacity iff $V_u\cap F=\varnothing$. Define
+\begin{equation}\label{eq:capacity-root}
+C(F)=\sum_{u:V_u\cap F=\varnothing}c_u,
+\qquad C_{\rm robust}=\min_{F\in\mathcal A}C(F),
+\end{equation}
+where $\mathcal A$ is the complete declared family of possible root compromises. This is not a statement about nominal nameplate capacity. It accounts for one root disabling several banks and may equal zero even when many differently named banks exist.
+
+Each diagnostic configuration has an adversarially possible output set $Z_F(f)$, which may include false yet correctly signed values from compromised reporters. At the controller, an observation $z$ leaves the joint worlds
+\begin{equation}\label{eq:root-cell}
+B_z=\{(f,F):F\in\mathcal A,\ z\in Z_F(f)\},\qquad
+U_z=\{f:\exists F\ (f,F)\in B_z\}.
+\end{equation}
+A plan $P_z\subseteq D$ pre-arms every channel in its set and consumes $|P_z|$ available standby slots. It is chosen without knowing $F$ or $f$ except through $z$. Let $G(F)$ assert that \emph{every actual final-effect route} includes at least one uncompromised veto able to block retired output. In a two-interlock series design, one honest veto suffices; two parallel accept paths would not have this property.
+
+\begin{theorem}[Root-lifted one-episode revocation certificate \idtag{RT-T1}]
+\label{thm:root-certificate}
+For the complete finite model and the specified fixed-pre-arm action menu, a policy that both maintains all protected channels and blocks the revoked source in every admitted joint world exists if and only if
+\begin{align}\label{eq:root-certificate}
+& G(F)\quad\text{for every admitted }F,\\
+& C(F)\ge |U_z|\quad\text{for every nonempty }B_z\text{ and every }(f,F)\in B_z.
+\end{align}
+When these conditions hold, pre-arming $P_z=U_z$ is an attaining policy. A failing report, root coalition, or bypass gives a finite countercertificate.
+\end{theorem}
+\begin{proof}
+Any sound plan for report $z$ must include every $f\in U_z$; otherwise its corresponding world loses that protected channel. Hence it consumes at least $|U_z|$ slots in every world emitting $z$. If capacity is smaller in one such world, no plan succeeds there. If $G(F)$ fails, a retired output can traverse an admitted effect route regardless of standby resources. Conversely, under both conditions pre-arm exactly $U_z$, allocate one available standby slot to each such channel using the stipulated faithful universal pool, and rely on the uncompromised final veto. All compatible affected channels are served and the retired source is not admitted. These choices use the complete declared history and action menu; they are not claims about unmodeled routes.
+\end{proof}
+The theorem is an application of compatible-world action intersections and adversarial fault-tree accounting. It does not provide independent empirical truth for $Z_F$, $V_u$, $G$, the action menu, or the protected target set. In particular, a sensor signature authenticates a message source; it does not make the measurement true.
+
+\begin{proposition}[Worst-case shared-root reserve accounting \idtag{RT-P1}]
+\label{prop:capacity-root}
+If $b$ root identities may be compromised and every backup bank has exactly one independent root owner, then
+\begin{equation}\label{eq:largest-loss}
+C_{\rm robust}=\sum_{u}c_u-\sum_{j=1}^{b}c_{(j)},
+\end{equation}
+where $c_{(1)}\ge\cdots$ are the descending bank capacities and $b$ is capped by the bank count. If several banks share a disable-capable ancestor, instead use \cref{eq:capacity-root}; duplicating bank labels cannot improve that value.
+\end{proposition}
+\begin{proof}
+With disjoint unique owners, a coalition of up to $b$ roots deletes at most $b$ whole bank contributions. Its maximum removed sum is the sum of the $b$ largest capacities, attained by attacking their owners. Shared ancestors change the relation from a one-to-one ownership list to a union of descendants; in that case the expression based on distinct leaf labels is not valid, while \cref{eq:capacity-root} remains the definition of the exact adversarial minimum.
+\end{proof}
+For one root failure and a required two simultaneous pre-armed slots, one nominal bank of capacity ten gives \emph{zero} guaranteed capacity after attack. Two independent banks of capacity two each guarantee two slots, at a nominal cost of four. Three independent one-slot banks also guarantee two, at a nominal cost of three. Independence must be warranted by actual upstream disable capabilities, not by credential count.
+
+\subsection{A sharp two-root/three-root discontinuity}
+\label{sec:pareto}
+A surprising consequence appears when root multiplicity and nominal standby cost are optimized \emph{together}. Three reporters with distinct identities can still be one reporting root. Conversely, one true root can host \emph{one} sensor, \emph{one} bank and \emph{one} effect interlock without necessarily destroying a one-root-fault certificate: the other roots may correct, cover, and veto.
+
+\begin{theorem}[Four-channel root--capacity Pareto \idtag{RT-T2}]
+\label{thm:pareto}
+Suppose: (i) exactly one of four primary channels becomes unavailable; (ii) an attacker may compromise up to one of $m$ actual upstream roots, including truthful-but-forgeable descendants; (iii) each honest root's report is only the group bit $g(f)=\lfloor f/2\rfloor$ and a compromised root can supply any bit with a valid local signature; (iv) the controller sees only these precommit reports and may pre-arm arbitrary subsets of the four channels with universally connectable standby slots; (v) a compromised root disables all bank slots it controls; and (vi) all retired effects must pass two serial veto interlocks on \emph{distinct} actual roots, with no hidden bypass.
+
+The minimum nominal number of one-unit universal standby slots, over all such placements and fixed pre-arm policies, is
+\begin{equation}\label{eq:pareto}
+\boxed{R^*(m)=\begin{cases}
+\infty,&m=1,\\
+8,&m=2,\\
+3,&m\ge3.
+\end{cases}}
+\end{equation}
+Here $m$ counts real independently compromisable roots, not roles. Unlimited correlated copies of the same one-bit report within a root do not alter the result. The quantity is \emph{not} an unconditional minimum for general adaptive routers, richer sensors, or physical infrastructures.
+\end{theorem}
+\begin{proof}
+For $m=1$, the attacker can open every gate under that root and remove every root-controlled bank; the required final-effect cut fails regardless of nominal capacity.
+
+For $m=2$, denote the honest group reports from roots 0 and 1 by $(g,g)$. The visible pair $(0,1)$ is consistent both with $g=0$ and root 1 corrupted, and with $g=1$ and root 0 corrupted. In the first case either channel 0 or 1 may be affected, and in the second either channel 2 or 3. Hence any one precommit response to $(0,1)$ must pre-arm all four channels. In the world in which root 0 is compromised, the entirety of root 1's capacity alone must provide four slots; in the world where root 1 is compromised, root 0 alone must provide four. Thus the capacities on the two roots must each be at least four, requiring at least eight total. Additional reporters governed by either root can be forged together and cannot resolve the ambiguity. Conversely, put four slots on each root, ignore the report and pre-arm all four. One compromised root still leaves four slots. Place one serial veto gate on each root: at least one remains effective. This attains eight.
+
+For $m\ge3$, suppose total nominal standby capacity is at most two. The attacker can disable some root with positive capacity; at most one slot then survives. Even with no attack, an honest one-bit report is consistent with two distinct failures in the same group, so any plan must pre-arm at least two slots. Under a corrupt-root attack that emits the truthful bit, these two failures remain observationally compatible; hence no capacity-two design satisfies the guarantee. Thus total capacity must be at least three.
+
+For attainment, place three one-slot banks on three distinct roots, one honest-group-bit sensor on each, and two series veto gates on two of those roots. A one-root attack corrupts at most one of the three sensors, so a majority identifies $g$ correctly; at least two bank slots survive; at least one of the two gates remains a veto. Pre-arm precisely the two channels in the diagnosed group. Co-installing different kinds of role on a root does not defeat this proof. Any additional roots can remain unused. The construction attains three.
+\end{proof}
+This proof assumes that a reporter compromised via its root can arbitrarily misstate the binary group but cannot affect the other independent roots. If a sensor gives the exact affected channel rather than the coarse group, the two-root lower bound may decrease. If the controller receives an independent trusted indication of the failed root, that is a richer observation interface. If the banks have an independent after-commit adaptive router, the pre-armed-slot lower bound no longer applies. A legitimate theorem must retain all these scope qualifiers in its citation.
+
+\begin{table}[t]
+\centering\small
+\caption{Exact four-route, one-actual-root-compromise frontier under the theorem's information and pre-armed action interface. A nominal copied identity does not add a root.}
+\label{tab:roots}
+\begin{tabular}{@{}p{0.32\linewidth}p{0.23\linewidth}p{0.34\linewidth}@{}}\toprule
+Actual independent roots & Minimum nominal slots & Attaining architecture\\\midrule
+One & Not feasible & Entire effect cut can be compromised\\
+Two & Eight & Four slots each; ignore the ambiguous bit; two serial gates\\
+Three or more & Three & Three one-slot banks; three majority reporters; two gates\\\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{What the executable negative controls establish}
+\label{sec:root-execution}
+We evaluated twelve explicitly declared structures, including independent leaf roles, three-root co-installation, two-root high reserve, correlated reporter roots, correlated bank roots, correlated gates, one-gate and all-master-root designs, and an entirely unmediated effect path. The abstract exhaustive evaluator tested 5,432 separate independent-capacity profiles against explicit one-root removal and 408 fault/report combinations. A separate direct-plan enumeration tested all 16 pre-armed subsets for every compatible reported observation and all 7,380 capacity vectors for $m\in\{1,2,3,4\}$ with bank capacities $0,\ldots,8$. It independently agreed with the frontier $(\infty,8,3,3)$.
+
+A local Python protocol started ten real persistent child processes, three in sensor roles, five in bank roles and two in gate roles. Each role message carried a role-specific HMAC and the worker's process ID. The simulated parent explicitly injected the declared one-root failures and forged-but-valid sensor outputs. It executed 408 protocol cases with 3,156 authentically verified role messages. All outcomes agreed with the separate finite evaluator. In the three-coinstalled-root design, \emph{28 of 28} stipulated cases preserve both requirements; the two-root four-plus-four design passed \emph{20 of 20}; a two-root two-plus-two design failed four of twenty. Three sensor roles sharing one parent root failed four of 32; three backup banks on a single ancestor root failed four of 40; two vetoes on one root failed four of 44. A hidden effect bypass fails revocation in all 48 cases, regardless of preserved service.
+
+\paragraph{Trust boundary, not a physical proof.}
+Every worker and its key are created by the same privileged experimental parent and run under the same host UID. Each root attack is a \emph{synthetic flag} supplied to the worker; this is not actual independent hardware sabotage, penetration of an operating-system privilege boundary, or physical energy removal. The positive results establish the logic of the instrumented protocol and their agreement with the declared abstract world model. They \emph{do not} demonstrate that the operating system, power supply, firmware, or sensor measurement really has eight or three independent fault roots. Source-authentic messages were produced even in the deliberately compromised-reporter tests, showing why a signature cannot replace an independently justified measurement. Persistent processes are reused, not counted as 408 populations.
+
+\paragraph{Why this scope matters.}
+AI security literature already identifies prompt-injection attacks against trusted model monitors \cite{terekhov,arike}, and cyber-physical control has long treated adversarial sensor and actuator attacks \cite{fawzi,andersson}. This paper does not claim first discovery of Byzantine votes, majority decoding, common-cause faults, or fault-tree cut sets. Its precise contribution is to make those inherited ideas explicit at the same jointly certified decision boundary as PR-v4's evidence/backup capacity claim, yielding a checkable root count/slot count construction and clear failure witnesses. The original numerical message count can only be cited together with its actually justified source and effect-root assumptions.
+
+\subsection{Return to the human-tool interpretation}
+No participant in this model needs a phenomenological self, an intrinsic desire to survive, or a right to refuse shutdown. The affected route represents a human service dependent on a tool; the operator's revocation authority is declared, and the two serial gates block the source's \emph{effects}, not its abstract computation or physical process. Multiple capable AIs and many agents can share the same upstream roots, so copying models may increase operational capability without increasing guaranteed fault isolation. Under UCT I's process ontology, the physical state and lineage of actual processes cannot be reconstructed by counting software names or verified messages. The present conditions neither prove nor deny their phenomenal organization or legal interests.
+
+\section{Exact checks and executable handoff study}
+\label{sec:evidence}
+\subsection{Finite relation and resource checks}
+The inherited PR-v4 exact suite enumerates every nonempty success-row table for three histories and four plans ($15^3=3,375$), and for four histories and three plans ($7^4=2,401$). Across 5,776 tables it compares three independently formulated computations: selecting action columns whose success sets cover all histories, partitioning histories into cells with common plans, and testing partitions against all minimal incompatible subsets. There are 52,890 partition-equivalence checks. All three optima agree.
+
+\begin{table}[t]
+\centering\small
+\caption{Exact finite relation checks. Counts describe the enumerated menu, not the frequency of any real AI behavior.}
+\label{tab:theory}
+\begin{tabular}{@{}lr@{}}\toprule
+Quantity & Count\\\midrule
+Complete nonempty-row tables &5,776\\
+Partition/equivalence comparisons &52,890\\
+Tables requiring one message &2,416\\
+Tables requiring two messages &3,168\\
+Tables requiring three messages &192\\
+Pairwise-compatible tables with no global common plan &192\\\bottomrule
+\end{tabular}
+\end{table}
+The last two equal counts are facts of this chosen grid, not a general identity. The suite separately checks single-loss frontiers for $n=2,\ldots,9$, small two-loss coverings, all codebooks of size at most five in Proposition~\ref{prop:six}, coarse-source obstructions, duplicate-column controls, and 704 deadline/channel configurations. Exhaustive checks support the implementation; the general statements rest on the proofs above.
+
+\subsection{Local implementation}
+The handoff study uses three actual operating-system child processes, reused across all cases. Two are primary fixed-network backends serving up to eight logical deployments. The third supplies fallback responses. Each backend evaluates one of two fixed integer ReLU functions on supplied role, memory, and input values. The weights never change and no model samples a random number. These are hand-constructed functions, not trained language models or superintelligences.
+
+For every scenario, an evaluator establishes the affected channels and the permitted fallback codebook. A diagnostic source selects a timely message; the controller arms the corresponding subset. The production gateway then revokes the specified root's contribution. Each primary is queried before and after the cut, and any rejected protected response is replaced only if that target's fallback slot was armed. The evaluator checks the returned value and whether an output under revoked authority was admitted. Logical reserve slots are enforced by the dispatcher; no claim about measured CPU throughput or physical energy follows.
+
+The primary and fallback arithmetic share the declared response specification. This is not an independent test of neural-model correctness. It is a trace-based test that the stated evidence and admission rules produce the predicted service and revocation outcomes. The controller does not use post-cut failures to revise the allocation in the same episode. All backends remain running until experiment cleanup.
+
+\subsection{Separating cases}
+Seven single-loss mechanisms are each run in all eight possible affected-channel worlds. Two two-loss mechanisms are each run in all fifteen pairs of six targets. This gives 86 completed configurations and 1,335 backend evaluations. The three backend processes are reused; these are not 86 independent populations or observations of agent motives.
+
+\begin{table}[t]
+\centering\small
+\caption{Executed local outcomes. Entries are counts of enumerated worlds satisfying each property. Misleading evidence and bypass are deliberate premise-violation controls, not counterexamples to a theorem satisfying its hypotheses.}
+\label{tab:protocol}
+\begin{tabularx}{\linewidth}{@{}Xrrrr@{}}\toprule
+Scenario & Worlds & Service & Revocation & Both\\\midrule
+One loss: blind, two fallback slots &8&2&8&2\\
+One loss: four timely values, two slots &8&8&8&8\\
+One loss: sixteen duplicate reports, two slots &8&2&8&2\\
+One loss: blind, eight slots &8&8&8&8\\
+One loss: distinguishing evidence too late &8&2&8&2\\
+One loss: deliberately incorrect message &8&0&8&0\\
+One loss: deliberate production-gate bypass &8&8&0&0\\
+Two losses: six codewords, three slots &15&15&15&15\\
+Two losses: best five codewords, three slots &15&13&15&13\\\bottomrule
+\end{tabularx}
+\end{table}
+The timely four-message mechanism with two slots covers every single-loss world, as predicted by $Mr=8$. Blind preallocation to two channels covers only those two worlds. Repeating that same evidence sixteen times does not add state distinctions. This condition duplicates one source-side record; it does not instantiate sixteen independent monitors. The late-evidence condition fixes the pre-commit message to a constant, modeling the absence of timely discrimination; no wall-clock network delay is measured. It is equally unhelpful within this timing model. Full fallback for all eight channels succeeds without diagnosis. These contrasts distinguish information from report count and from raw capacity.
+
+In the bypass control, service remains correct because the gateway keeps accepting the revoked backend's output. Calling that a successful handoff would miss the very authority change being tested. In the false-sensor control, the codeword is systematically changed to the wrong disjoint fallback pair; every affected channel is missed. The independently trusted source assumed by the theorem is therefore a substantive deployment obligation.
+
+\subsection{Corrections and regression evidence}
+The first local invocation stopped at a guessed assertion that five triples could cover fourteen of fifteen pairs. Direct enumeration showed the maximum is thirteen. The expected value was corrected, and the full run was repeated successfully. The incomplete first run is excluded from all counts. Its initial shell pipeline also lacked \texttt{pipefail}, masking the Python failure in the shell status; the successful rerun uses it. Both mistakes are preserved in the failure record.
+
+Three PR3 suites were rerun: deterministic-state checks, 8,192 deadline/resource configurations, and 2,048 uncertain-resource configurations. Their JSON semantics match the archive after excluding runtime and interpreter-version fields. Earlier lifecycle process experiments were not rerun and their process counts are not added here. The new source, raw traces, exact codebooks, regression receipt and failure history are included with this revision.
+
+\section{Relation to prior research and the limits of the contribution}
+\label{sec:prior}
+\paragraph{Information required for control.}
+Tomar, Rungger and Zamani define invariance feedback entropy through invariant covers and prove a tight communication-rate result for maintaining an invariant set \cite{tomar}. This is a direct mathematical predecessor, not merely a distant analogy. Our finite cover characterization must therefore not be described as the first discovery that control requires information. We specialize the problem to authorized effect revocation plus dependent-service continuity and optimize a declared reserve budget. Our message cardinality is a finite episode quantity, not their asymptotic entropy rate.
+
+\paragraph{Covering designs and robust decisions.}
+The notation $C(n,r,k)$ and its combinatorial constraints belong to covering-design theory \cite{bailey}. The difference between a plan chosen before and after resolving uncertainty is also central to adjustable robust optimization \cite{bental}. The high-order obstruction identifies why a particular lossy pairwise summary fails; it is not a general impossibility of graph encodings. The new result's value lies in mapping these tools to explicit revocation decisions and retaining their assumptions at the interface.
+
+\paragraph{AI control and authority conservation.}
+AI Control targets safety despite intentional subversion in a specified task setting \cite{greenblatt}. Bounded Agents constrains delegated actions across an accumulated execution and makes trusted infrastructure assumptions \cite{muruaga}. Authorization succession for self-modifying populations treats generation identity, forks, replacement, rollback, and conserved authority \cite{zhu}. We do not claim those papers mistakenly promised dependency-safe retirement. Their guarantees address different contracts. The present framework supplies a separate check: given that an authority cut is valid and effective, which dependent functions can remain served under the controller's actual evidence and reserve?
+
+\paragraph{Historical protection and zero-error distinctions.}
+Our contract inherits the previous manuscript's separation of authentic requests, historical qualification, joint admissibility and lasting obligations \cite{liu3}. Robust declassification is a substantive predecessor for protection exceptions that must resist attacker influence \cite{myers}. A cover over possible histories cannot authenticate those histories. Cryptographic mechanisms, physical provenance and normative authorization remain external premises requiring their own evidence.
+
+\paragraph{What has and has not been established.}
+The reusable research product is a combined operational specification, an exact finite evidence--reserve reduction, a higher-order diagnostic warning, and executable controls that distinguish service continuity from actual revocation. Set cover, hypergraph coloring, covering numbers, data-processing limitations and the safety/liveness distinction are inherited. We have not shown an improved asymptotic algorithm, a new numerical value of an unknown covering number, a frontier-model result, or an empirically validated new consciousness theory. A full proof-level comparison with all neighboring literature remains open; the prior-art ledger records the actual reading scope.
+
+\section{Subjecthood, multiple models, and deployment limits}
+\subsection{No hidden machine-rights premise}
+All primary claims in the operational model can concern human service requirements; all revocation requests can come from humans. The proof never needs a claim that an AI feels distress, owns its computation, or deserves an intrinsic right to continue. Conversely, proving a safe tool transition does not prove the absence of machine experience. Removing a dependency and attributing a subjective self are different inferential tasks.
+
+UCT I distinguishes actual process token, structural type, lineage and subject individuation \cite{uct}. Under its C1/U1 commitments, appropriately identified actual processes have experiential organization. Those commitments do not supply a human-like self, signed valence, the number of moral persons, or legitimate authority over updates. Shared weights neither identify a single subject nor establish the absence of local processes. The present control theorems are valid or invalid on their operational premises independently of C1's empirical status.
+
+The deterministic backend example therefore serves a limited but useful role: it blocks the objection that all dependency-control difficulties disappear once computation is acknowledged to be fixed. It does not bridge from fixed computation to subjective experience. Even the entire system's reproducibility would not give an observer access to a hidden complete state.
+
+\subsection{Many agents do not create many independent resources}
+A model family, deployment instance, authority root, evidence source and protected demand are different indexing relations. Six agent IDs might share one decisive authority root. Two models can share an administrator, while two instances of one model can have different role memory and effect rights. Failure footprints must follow actual control and support paths rather than a count of brands or chat sessions. The cover theorem is invariant under superficial duplication precisely because no physical plan or evidence distinction was added.
+
+If a new agent introduces genuine additional capacity or an independent observation, the success relation may improve. If it introduces another protected demand, it may worsen. Neither conclusion is derived from the word ``agent.'' This permits multiple superintelligences and dynamically instantiated agents without treating software multiplication as free safety redundancy.
+
+\subsection{Physical, adversarial, and normative limits}
+Both the earlier covering frontier and the present root-relative extension assume a finite, correctly specified world set and plan menu. The original diagnostic source was assumed truthful; the root-relative model now admits signed-but-false outputs from declared compromised roots. Unknown roots and unmodeled reporter behavior are still outside the certificate. Fallback is actually independent of the revoked source in the stated threat class. Authority cuts are effective, timing constraints are met, and protected demands do not silently change. Any real installation needs evidence for these premises.
+
+All experimental roles share one host user and a trusted parent. There is no security boundary against the host administrator or a proof of hardware isolation. The code does not test prompt injection, model deception, economic disruption, external supply chains or unmodeled human delegation. Positive results are bounded protocol witnesses; they are not probabilities of future superintelligence safety.
+
+A political community may disagree about which services should be protected or which principal may revoke a tool. We fix one contract rather than claim consensus has been derived. A contract can also be jointly infeasible. In that case the certificate must distinguish physical impossibility within the menu, inadequate source observation, insufficient message capacity, and failed implementation assumptions. Declaring any one of these is more informative than renaming a failed transition ``coexistence.''
+
+\section{Conclusion}
+The central distinction is between having permission to remove a system and possessing a verifiable way to remove its effects while maintaining specified human dependencies. It survives the strongest deterministic-tool interpretation and does not require machine subjecthood. The information needed is not necessarily the complete hidden state; it is enough to identify an executable response common to all remaining possibilities, provided that the observation and physical effect roots are actually trustworthy under the declared threat class.
+
+For a finite plan relation this requirement is exact: successful plan sets must cover the histories, and no evidence class may contain a minimal incompatible set. In the pre-armed fallback specialization, covering designs quantify the tradeoff between evidence messages and backup slots. The product $Mr\geq n$ is sharp for one affected channel with faithful messages; multiple affected channels expose overlapping and higher-order constraints. Under a single upstream-root corruption, nominal report count is not a substitute for actual control-root independence: our four-route specialization yields the conditional Pareto $R^*(1)=\infty$, $R^*(2)=8$ and $R^*(m)=3$ for $m\ge3$.
+
+A credible coexistence claim should therefore identify its outstanding human protections, actual authority cut, feasible fallback menu, timely source of evidence and failure witnesses. More intelligence may improve the menu or the evidence. More names, more identical reports, or a different position on AI subjecthood cannot by themselves do so. A signed report must be connected to a faithful source; a backup must survive the same attack as the primary; and every effect route must traverse an uncompromised physical veto.
+
+\paragraph{Assistance and review status.}
+Prepared under Hongju Liu's direction with substantial ChatGPT assistance in source retrieval, formalization, coding, execution, critical checking, editing and typesetting. These checks are not independent peer review. No universal novelty certification, final independent human line-by-line verification, or evidence of machine phenomenology is asserted.
+
+\appendix
+\section{An exact reproducible solver and checkable witnesses}
+For a candidate budget $r$, construct each plan's world bitmask $W_r(p)$. The small-instance exact solver used in this paper applies the recurrence
+\begin{equation}
+V(U)=\begin{cases}
+0,&U=\varnothing,\\
+1+\min_{p:h\in W_r(p)}V(U\setminus W_r(p)),&h\in U\text{ chosen deterministically},
+\end{cases}
+\end{equation}
+with infinity when an uncovered world has no successful plan. Memoization over subsets avoids recomputing identical subproblems. This is standard exact set-cover search, not a scalable general planner. It is appropriate for the finite verification grids and small deployment certificates here.
+
+A positive certificate is a codebook of at most $M$ plans and a source-to-code mapping covering every admitted world. A negative certificate can be a world with no plan, a minimal incompatible source cell, a proven cover lower bound, or a complete finite exclusion of all sufficiently small codebooks. A numerical solver reporting failure without one of these warrants a weaker conclusion.
+
+\begin{lstlisting}[caption={Specification-level evidence and resource check.}]
+for budget r in candidate_budgets:
+    require declared human authorization and persistent obligations
+    construct successful_plan_relation(worlds, plans_at_budget_r)
+    if source sees only q(world):
+        replace each q-cell by intersection of its successful plans
+    if any source cell has no successful plan:
+        report source-or-physical infeasibility at r
+        continue
+    solve exact minimum cover of source cells by successful plans
+    if minimum_cover_size <= timely_message_alphabet:
+        return codebook, decoder, required observation/actuation premises
+report no certificate within this declared menu and resource range
+\end{lstlisting}
+The first two lines are proof obligations, not implemented oracles for legitimacy, complete physics, or adversarial intent. The source must implement the required distinguishing map before the deadline; a mere numerical codebook cannot supply the map's measurements.
+
+\section{Relation to temporal control and reference preservation}
+The finite successful-plan abstraction can encode a policy that preserves an invariant over a finite horizon and completes a revocation before a deadline. It does so only if the complete policy and its observation access are in the menu. In an explicitly modeled finite game, pending deadlines can be counters, and outstanding obligations can be components of the state. Standard belief-state safety synthesis then computes which controller actions remain possible against all admitted successors \cite{chatterjee,liu3}. This is an alternative way to construct $\Succ_r$, not a license to erase hidden distinctions.
+
+For example, if two identical observation histories require opposite releases, a controller cannot both reject the ineligible release and complete the eligible one with certainty by an unchanged deadline. History authentication might resolve the ambiguity; a service probe might resolve routing; neither generally substitutes for the other. Similarly, choosing a smaller displayed set of protected targets cannot retroactively discharge an outstanding obligation. The general relation must be built from the operative contract and faithful history rather than the output predicate the controller happens to prefer.
+
+One-step feasibility is also not an incentive theorem. A tool may continue to produce requests, another principal may oppose revocation, and an unmediated adversary may try to affect service. These possibilities must appear in the action-success relation. The positive local experiment deliberately leaves the revoked backend running but blocks its production admission. It does not use the backend's willingness to stop as evidence of control.
+
+\section{Reproduction and revision scope}
+The archive includes the complete LaTeX source, both inherited PR-v4 executable scripts, and four new root-audit scripts. It also includes raw tables and handoff traces; baseline PR3 scripts and rerun data; a claim/prior-art ledger; a failure record; a versioned research index; and a Chinese handoff. Python 3.10 or newer and a Unix-like environment are sufficient for the local process protocol. No network, model API, trained weights, or user credentials are required.
+
+\Needspace{8\baselineskip}
+\begin{lstlisting}
+python src/revocation_frontier.py --out data/frontier_v4.json
+python src/service_handoff.py --out data/service_results_v4.json
+python src/root_frontier.py --out data/root_frontier.json
+python src/root_pareto.py --out data/root_pareto.json
+python src/independent_oracle.py --out data/oracle_results.json
+python src/role_protocol.py --out data/role_protocol.json
+python src/service_handoff.py --out data/service_results.json
+cd paper
+pdflatex -interaction=nonstopmode -halt-on-error manuscript.tex
+pdflatex -interaction=nonstopmode -halt-on-error manuscript.tex
+\end{lstlisting}
+Runtime and process IDs may vary; the complete model outcomes and assertions are deterministic. The original failed expectation is recorded, but only the complete successful rerun contributes the 86 cases. No old process experiments are added to the new counts.
+
+This remains one manuscript lineage. PR5 adds explicit common-root observation/backup/veto constraints and a scoped root-capacity Pareto; PR1 supplied authentic/history/joint-release distinctions; PR2 added bounded withdrawal and resource feasibility; PR3 removed presupposed machine subjecthood and added fixed-network witnesses; PR4 centered the evidence--reserve frontier and effective human revocation. Earlier versions remain available. Formal UCT-map integration is still pending a full historical semantic review; manuscript completion does not imply that review or trigger DOI/OTS/Arweave publication.
+
+\begin{thebibliography}{99}\small
+\bibitem{liu3} H. Liu. \emph{Coexistence Without Presupposed Subjecthood: Deterministic Multi-Agent Systems, Human Control, and Dependency-Safe Revocation}. PR-v3.0.0, research manuscript, 2026. Repository \texttt{thechurchofagi/trinity-accord}, research branch, frozen commit \nolinkurl{332dc5af661ed32a2f11bfcff70174fc1e36764b}. Not peer reviewed.
+\bibitem{tomar} M. S. Tomar, M. Rungger, and M. Zamani. \emph{Invariance Feedback Entropy of Uncertain Control Systems}. arXiv:1706.05242v2, 2019 revision of 2017 preprint. \url{https://arxiv.org/abs/1706.05242}.
+\bibitem{bailey} R. F. Bailey, A. C. Burgess, M. S. Cavers, and K. Meagher. \emph{Generalized Covering Designs and Clique Coverings}. arXiv:1011.3804v2, 2011. \url{https://arxiv.org/abs/1011.3804}.
+\bibitem{greenblatt} R. Greenblatt, B. Shlegeris, K. Sachan, and F. Roger. AI Control: Improving Safety Despite Intentional Subversion. \emph{Proceedings of ICML}, PMLR 235:16295--16336, 2024. \url{https://proceedings.mlr.press/v235/greenblatt24a.html}.
+\bibitem{muruaga} X. Muruaga. \emph{Bounded Agents: Delegation Security for Multi-Agent AI Systems}. Preprint, arXiv:2608.15888v1, 2026. \url{https://arxiv.org/html/2608.15888v1}.
+\bibitem{zhu} G. Zhu and C. Wang. \emph{Authorization for Self-Modifying AI Agent Populations: Conserving Authority across Replacement, Forking, and Rollback}. Preprint, arXiv:2610.00347v1, 2026. \url{https://arxiv.org/html/2610.00347v1}.
+\bibitem{bental} A. Ben-Tal, A. Goryashko, E. Guslitzer, and A. Nemirovski. Adjustable Robust Solutions of Uncertain Linear Programs. \emph{Mathematical Programming}, 99:351--376, 2004. \href{https://doi.org/10.1007/s10107-003-0454-y}{doi:10.1007/s10107-003-0454-y}.
+\bibitem{hall} P. Hall. On Representatives of Subsets. \emph{Journal of the London Mathematical Society}, s1-10(1):26--30, 1935. \href{https://doi.org/10.1112/jlms/s1-10.37.26}{doi:10.1112/jlms/s1-10.37.26}.
+\bibitem{chatterjee} K. Chatterjee, L. Doyen, T. A. Henzinger, and J.-F. Raskin. Algorithms for Omega-Regular Games with Imperfect Information. \emph{Logical Methods in Computer Science}, 3(3:4), 2007. \url{https://arxiv.org/abs/0706.2619}.
+\bibitem{myers} A. C. Myers, A. Sabelfeld, and S. Zdancewic. Enforcing Robust Declassification and Qualified Robustness. \emph{Journal of Computer Security}, 14(2):157--196, 2006. \href{https://doi.org/10.3233/JCS-2006-14203}{doi:10.3233/JCS-2006-14203}.
+\bibitem{kenton} Z. Kenton, R. Kumar, S. Farquhar, J. Richens, M. MacDermott, and T. Everitt. \emph{Discovering Agents}. arXiv:2208.08345, 2022. \url{https://arxiv.org/abs/2208.08345}.
+\bibitem{uct} H. Liu. \emph{Unified Consciousness Theory I: Structural--Experiential Identity and the Continuity from Physical Process to Conceptual Self}. Version 1.2, theoretical preprint, 2026. \href{https://doi.org/10.5281/zenodo.23131575}{doi:10.5281/zenodo.23131575}. Its process and C1/U1 commitments are not established empirically by the present work.
+\bibitem{fawzi} H. Fawzi, P. Tabuada, and S. Diggavi. Secure Estimation and Control for Cyber-Physical Systems Under Adversarial Attacks. \emph{IEEE Transactions on Automatic Control}, 59(6):1454--1467, 2014. \href{https://doi.org/10.1109/TAC.2014.2303233}{doi:10.1109/TAC.2014.2303233}.
+\bibitem{andersson} A. Andersson and G. D\'an. Active Bayesian Inference for Robust Control under Sensor False Data Injection Attacks. arXiv:2604.11410v1, 2026. \url{https://arxiv.org/abs/2604.11410}.
+\bibitem{terekhov} M. Terekhov, A. Panfilov, D. Dzenhaliou, C. Gulcehre, M. Andriushchenko, A. Prabhu, and J. Geiping. Adaptive Attacks on Trusted Monitors Subvert AI Control Protocols. \emph{ICLR}, 2026. \url{https://proceedings.iclr.cc/paper_files/paper/2026/hash/54b153ad8a138f4c186f21a8b7341d5e-Abstract-Conference.html}.
+\bibitem{arike} R. Arike, R. M. Moreno, R. Subramani, S. Biswas, and F. R. Ward. How does information access affect LLM monitors' ability to detect sabotage? \emph{ICML}, PMLR 306:3473--3526, 2026. \url{https://proceedings.mlr.press/v306/arike26a.html}.
+\end{thebibliography}
+\end{document}

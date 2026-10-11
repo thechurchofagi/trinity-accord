@@ -1,0 +1,85 @@
+{
+  "schema": "uct-paper-candidate/5.0",
+  "id": "PR-v5.0.0",
+  "title": "Coexistence Without Presupposed Subjecthood: Causal Independence of Evidence, Resources, and Effect-Level Revocation in Multi-Agent Systems",
+  "author": "Hongju Liu",
+  "date": "2026-10-11",
+  "pages": 19,
+  "manuscript_status": "COMPLETE_CONDITIONAL_MAJOR_REVISION_FOR_INDEPENDENT_REVIEW",
+  "peer_reviewed": false,
+  "published": false,
+  "doi": null,
+  "ots": false,
+  "arweave": false,
+  "source_baseline": "PR-v4.0.0; prior versions preserved",
+  "authoritative_UCT_map": "UCT-MAP-v1.1.2",
+  "formal_scientific_node_delta": 0,
+  "formal_scientific_rule_delta": 0,
+  "formal_scientific_relation_delta": 0,
+  "publication_coverage_baseline": "UCT-PUB-v1.0.33",
+  "map_admission": "PENDING_MAP_DISABLED",
+  "paper": "paper/manuscript.tex",
+  "proof_code": [
+    "src/root_frontier.py",
+    "src/root_pareto.py",
+    "src/independent_oracle.py",
+    "src/role_protocol.py"
+  ],
+  "baseline_code": [
+    "src/revocation_frontier.py",
+    "src/service_handoff.py"
+  ],
+  "results": [
+    "data/root_frontier.json",
+    "data/root_pareto.json",
+    "data/oracle_results.json",
+    "data/role_protocol.json",
+    "data/frontier_v4_rerun.json",
+    "data/service_v4_rerun.json"
+  ],
+  "claims": [
+    {
+      "id": "RT-D1",
+      "type": "DEFINITION",
+      "status": "PROPOSED_SCOPED_ROOT_CAUSAL_MODEL",
+      "enabled": false
+    },
+    {
+      "id": "RT-T1",
+      "type": "THEOREM",
+      "status": "EXACT_FOR_PREARMED_FINITE_DECLARED_INTERFACE;INHERITED_OBSERVATION_LOGIC",
+      "enabled": false
+    },
+    {
+      "id": "RT-P1",
+      "type": "PROPOSITION",
+      "status": "INHERITED_FAULT_CAPACITY_ARITHMETIC;NEW_APPLICATION",
+      "enabled": false
+    },
+    {
+      "id": "RT-T2",
+      "type": "THEOREM",
+      "status": "EXACT_SCOPED_FOUR_ROUTE_ROOT_CAPACITY_CONSTRUCTION;GLOBAL_PRIORITY_UNVERIFIED",
+      "enabled": false
+    },
+    {
+      "id": "RT-E1",
+      "type": "EXECUTED_EVIDENCE",
+      "status": "LOCAL_OS_PROCESSES_WITH_SIMULATED_ROOT_ATTACKS_NOT_HARDWARE",
+      "enabled": false
+    }
+  ],
+  "status_limits": {
+    "full_UCT_formal_semantic_review": false,
+    "all_published_sources_reaudited": false,
+    "physical_independence_measured": false,
+    "real_frontier_LLM_experiment": false,
+    "phenomenal_endpoint_test": false
+  },
+  "work_log": "audit/WORK_LOG.md",
+  "prior_art": "audit/PRIOR_ART.md",
+  "negative_controls": "audit/FAILURES.md",
+  "coverage_delta": "audit/PUBLICATION_COVERAGE_UPDATE.json",
+  "handoff": "HANDOFF_ZH.md",
+  "originality_decision": "SCOPED_CONDITIONAL_INCREMENT_WORTH_INDEPENDENT_REVIEW;DO_NOT_CLAIM_UNIVERSAL_FOUNDATION"
+}

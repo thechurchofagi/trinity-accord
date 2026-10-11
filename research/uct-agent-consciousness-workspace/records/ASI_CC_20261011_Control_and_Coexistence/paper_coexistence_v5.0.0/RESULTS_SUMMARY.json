@@ -1,0 +1,50 @@
+{
+  "version": "PR-v5.0.0",
+  "scope": "Conditional exact finite architecture theorem and actual process HMAC role protocol; no physical-root assurance",
+  "physical_status": "Not measured; all role processes share one host administrator",
+  "paper_pages": 19,
+  "new_results": {
+    "root_lifted_observation_resource_veto_certificate": "RT-T1",
+    "root_capacities_min_over_compromise": "RT-P1",
+    "sharp_four_route_root_capacity": "RT-T2",
+    "root_capacity_pareto": {
+      "1": null,
+      "2": 8,
+      "3": 3,
+      "m>=3": 3
+    },
+    "case_conditions": "exactly one of four exogenous primary routes fails, at most one actual root compromised, binary group diagnostic per honest root, static prearmed universal standby, complete 2 serial veto effect cut"
+  },
+  "new_executed_evidence": {
+    "independent_capacity_profiles": 5432,
+    "observation_fault_protocol_cases": 408,
+    "capacity_vectors_crosschecked_twice": 7380,
+    "local_role_processes": 10,
+    "local_authenticated_messages": 3156,
+    "architectures_tested": 12,
+    "model_structures_pass": 4,
+    "model_structures_fail": 8,
+    "positive_coinstalled_three_roots": 28,
+    "positive_coinstalled_three_roots_total": 28,
+    "positive_two_roots_eight_slots": 20,
+    "positive_two_roots_eight_slots_total": 20,
+    "all_share_master_failed_joint": 8,
+    "hidden_bypass_all_revocation_failures": 48,
+    "v4_regression": "PR-v4 frontier and local protocol rerun: semantic match excluding elapsed_seconds and python"
+  },
+  "baseline": "PR-v4.0.0",
+  "uct_map": "UCT-MAP-v1.1.2",
+  "coverage": "UCT-PUB-v1.0.33",
+  "scientific_status": "DISABLED PENDING_MAP, theoretical scope, global priority unverified",
+  "publication_status": "UNPUBLISHED manuscript, no DOI or OTS or Arweave",
+  "file_scheme": "README.md, paper/manuscript.tex, src/*.py, data/*.json, audit/*.md, INDEX.json, MANIFEST.json",
+  "not_claimed": [
+    "measured independent hardware roots",
+    "universal ASI controllability",
+    "LLM subjective welfare",
+    "human consensus",
+    "new elementary coding/Byzantine theorem",
+    "publication readiness beyond independent critical review"
+  ],
+  "all_assertions": "PASS"
+}

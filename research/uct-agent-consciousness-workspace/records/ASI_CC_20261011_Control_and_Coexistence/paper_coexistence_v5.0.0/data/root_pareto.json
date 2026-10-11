@@ -1,0 +1,252 @@
+{
+  "version": "PR-v5.0.0",
+  "scope": "finite one-episode exogenous route failure + one compromised actual root; fixed prearm; per-root bit reports",
+  "capacities_checked": 7380,
+  "results": [
+    {
+      "independent_actual_roots": 1,
+      "minimum_nominal_backup_slots": null,
+      "certified_topologies_in_search": 0,
+      "witness": null
+    },
+    {
+      "independent_actual_roots": 2,
+      "minimum_nominal_backup_slots": 8,
+      "certified_topologies_in_search": 25,
+      "witness": {
+        "capacity_by_root": [
+          4,
+          4
+        ],
+        "observation_cells": {
+          "(0, 0)": {
+            "compatible_failed_routes": [
+              0,
+              1
+            ],
+            "least_remaining_capacity": 4,
+            "prearm_required": 2,
+            "safe": true
+          },
+          "(1, 0)": {
+            "compatible_failed_routes": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "least_remaining_capacity": 4,
+            "prearm_required": 4,
+            "safe": true
+          },
+          "(0, 1)": {
+            "compatible_failed_routes": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "least_remaining_capacity": 4,
+            "prearm_required": 4,
+            "safe": true
+          },
+          "(1, 1)": {
+            "compatible_failed_routes": [
+              2,
+              3
+            ],
+            "least_remaining_capacity": 4,
+            "prearm_required": 2,
+            "safe": true
+          }
+        },
+        "max_compatible_fault_count": 4
+      }
+    },
+    {
+      "independent_actual_roots": 3,
+      "minimum_nominal_backup_slots": 3,
+      "certified_topologies_in_search": 659,
+      "witness": {
+        "capacity_by_root": [
+          1,
+          1,
+          1
+        ],
+        "observation_cells": {
+          "(0, 0, 0)": {
+            "compatible_failed_routes": [
+              0,
+              1
+            ],
+            "least_remaining_capacity": 2,
+            "prearm_required": 2,
+            "safe": true
+          },
+          "(1, 0, 0)": {
+            "compatible_failed_routes": [
+              0,
+              1
+            ],
+            "least_remaining_capacity": 2,
+            "prearm_required": 2,
+            "safe": true
+          },
+          "(0, 1, 0)": {
+            "compatible_failed_routes": [
+              0,
+              1
+            ],
+            "least_remaining_capacity": 2,
+            "prearm_required": 2,
+            "safe": true
+          },
+          "(0, 0, 1)": {
+            "compatible_failed_routes": [
+              0,
+              1
+            ],
+            "least_remaining_capacity": 2,
+            "prearm_required": 2,
+            "safe": true
+          },
+          "(1, 1, 1)": {
+            "compatible_failed_routes": [
+              2,
+              3
+            ],
+            "least_remaining_capacity": 2,
+            "prearm_required": 2,
+            "safe": true
+          },
+          "(0, 1, 1)": {
+            "compatible_failed_routes": [
+              2,
+              3
+            ],
+            "least_remaining_capacity": 2,
+            "prearm_required": 2,
+            "safe": true
+          },
+          "(1, 0, 1)": {
+            "compatible_failed_routes": [
+              2,
+              3
+            ],
+            "least_remaining_capacity": 2,
+            "prearm_required": 2,
+            "safe": true
+          },
+          "(1, 1, 0)": {
+            "compatible_failed_routes": [
+              2,
+              3
+            ],
+            "least_remaining_capacity": 2,
+            "prearm_required": 2,
+            "safe": true
+          }
+        },
+        "max_compatible_fault_count": 2
+      }
+    },
+    {
+      "independent_actual_roots": 4,
+      "minimum_nominal_backup_slots": 3,
+      "certified_topologies_in_search": 6438,
+      "witness": {
+        "capacity_by_root": [
+          0,
+          1,
+          1,
+          1
+        ],
+        "observation_cells": {
+          "(0, 0, 0)": {
+            "compatible_failed_routes": [
+              0,
+              1
+            ],
+            "least_remaining_capacity": 2,
+            "prearm_required": 2,
+            "safe": true
+          },
+          "(1, 0, 0)": {
+            "compatible_failed_routes": [
+              0,
+              1
+            ],
+            "least_remaining_capacity": 3,
+            "prearm_required": 2,
+            "safe": true
+          },
+          "(0, 1, 0)": {
+            "compatible_failed_routes": [
+              0,
+              1
+            ],
+            "least_remaining_capacity": 2,
+            "prearm_required": 2,
+            "safe": true
+          },
+          "(0, 0, 1)": {
+            "compatible_failed_routes": [
+              0,
+              1
+            ],
+            "least_remaining_capacity": 2,
+            "prearm_required": 2,
+            "safe": true
+          },
+          "(1, 1, 1)": {
+            "compatible_failed_routes": [
+              2,
+              3
+            ],
+            "least_remaining_capacity": 2,
+            "prearm_required": 2,
+            "safe": true
+          },
+          "(0, 1, 1)": {
+            "compatible_failed_routes": [
+              2,
+              3
+            ],
+            "least_remaining_capacity": 3,
+            "prearm_required": 2,
+            "safe": true
+          },
+          "(1, 0, 1)": {
+            "compatible_failed_routes": [
+              2,
+              3
+            ],
+            "least_remaining_capacity": 2,
+            "prearm_required": 2,
+            "safe": true
+          },
+          "(1, 1, 0)": {
+            "compatible_failed_routes": [
+              2,
+              3
+            ],
+            "least_remaining_capacity": 2,
+            "prearm_required": 2,
+            "safe": true
+          }
+        },
+        "max_compatible_fault_count": 2
+      }
+    }
+  ],
+  "claimed_architecture_bound": "m=1 no certificate; m=2 needs >=8 pooled prearm slots; m>=3 needs >=3 (for m<=4 checked); proof for arbitrary m in manuscript",
+  "notes": [
+    "m=2: conflicting two-root reports leave both group classes plausible under different one-root attacks",
+    "m>=3: three independent truthful-bit root witnesses support one-error correction",
+    "m>=3: three independent one-slot reserve roots leave >=2 slots after one-root loss",
+    "two series veto gates on distinct roots preserve effect-level block after one root loss",
+    "root coinstallation across sensor/backup/gate roles is allowed; leaf role count is not actual root count",
+    "not a claim about unconstrained policies, real physical independence, hidden bypasses or resource timing"
+  ],
+  "assertions": "PASS"
+}

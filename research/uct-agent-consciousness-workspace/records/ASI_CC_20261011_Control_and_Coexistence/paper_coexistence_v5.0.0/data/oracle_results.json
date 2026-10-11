@@ -1,0 +1,45 @@
+{
+  "version": "PR-v5.0.0",
+  "method": "brute enumerate all 16 pre-arm subsets per possible sensor-vector cell, without importing certificate implementation",
+  "capacity_vectors_checked": 7380,
+  "results": {
+    "1": {
+      "min_nominal_capacity": null,
+      "witness": null,
+      "working_vectors": 0
+    },
+    "2": {
+      "min_nominal_capacity": 8,
+      "witness": [
+        4,
+        4
+      ],
+      "working_vectors": 25
+    },
+    "3": {
+      "min_nominal_capacity": 3,
+      "witness": [
+        1,
+        1,
+        1
+      ],
+      "working_vectors": 659
+    },
+    "4": {
+      "min_nominal_capacity": 3,
+      "witness": [
+        0,
+        1,
+        1,
+        1
+      ],
+      "working_vectors": 6438
+    }
+  },
+  "assertions": "PASS",
+  "limitations": [
+    "One-bit truth per actual root and at most one corruption",
+    "Prearmed route sets; no state-dependent downstream router",
+    "All prescribed gates assumed serial and independent whenever m>=2"
+  ]
+}

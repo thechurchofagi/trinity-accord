@@ -1,0 +1,141 @@
+{
+  "version": "PR-v5.0.0",
+  "hash_algorithm": "sha256",
+  "file_entries": [
+    {
+      "path": "HANDOFF_ZH.md",
+      "sha256": "8148ed6fe3881a5625cb8fb70996c37cc3dd8d058b73cfa18d6087dbe59d944f",
+      "size": 6749
+    },
+    {
+      "path": "INDEX.json",
+      "sha256": "eb769f36248ab710ca3231550c2eb7a9865cad9fb0cd1cc7ebccedaaa46af01f",
+      "size": 2661
+    },
+    {
+      "path": "README.md",
+      "sha256": "716e857d89cf254303a7a5dcfe7c62ebc25bec32316627ef81ee5e81fe82e7ce",
+      "size": 2338
+    },
+    {
+      "path": "RESULTS_SUMMARY.json",
+      "sha256": "3ee5b2e8632f2a67afc24c2e4f108439ccea9fea47d677ccb59f582267144e74",
+      "size": 2173
+    },
+    {
+      "path": "audit/FAILURES.md",
+      "sha256": "696ce09f13e203d4a1bd9808e171a5b07b5d7bc26197a6a4009e9ff67875f3c0",
+      "size": 2255
+    },
+    {
+      "path": "audit/MAP_REVIEW.json",
+      "sha256": "18193b8c0f7ca548c82ced19769d4d9de0ce83e79aec8a974a9d4d5cae9ea0e7",
+      "size": 964
+    },
+    {
+      "path": "audit/PRIOR_ART.md",
+      "sha256": "8e7c66bb2a50783f7fb37795630b0697407ee14782d68c619ca2b2988c50a03b",
+      "size": 4137
+    },
+    {
+      "path": "audit/PUBLICATION_COVERAGE_UPDATE.json",
+      "sha256": "f468a7d7c61c6b8070f67e7baeb08431937be208b71b1b5c4fd1815b20b4ab95",
+      "size": 1073
+    },
+    {
+      "path": "audit/WORK_LOG.md",
+      "sha256": "c675145ec71c7a29d22e20f0d81c52fbb9761a1d991fafd64df71d73300748ab",
+      "size": 3726
+    },
+    {
+      "path": "audit/contact_sheet_1.png",
+      "sha256": "75068b670140459f1bde3e5d2439439978c731d6e7ddc92c0f2597fc1ca78ac8",
+      "size": 507529
+    },
+    {
+      "path": "audit/contact_sheet_2.png",
+      "sha256": "07b6815bd2306d1d547d15f32804540a46cb2c8dafdd4dcb20b1921961ef71fd",
+      "size": 296369
+    },
+    {
+      "path": "data/frontier_v4_rerun.json",
+      "sha256": "10e00c80d4b849a42f129be679bd819ff5f1b7a9c3dbd74177c1b893c1619354",
+      "size": 21684
+    },
+    {
+      "path": "data/oracle_results.json",
+      "sha256": "0f9a19733fd8ebf6e6a89cd8bfee7b497fd6b80b56b22f2fea266f9e8a026c57",
+      "size": 989
+    },
+    {
+      "path": "data/role_protocol.json",
+      "sha256": "79e14458287390148bc62f531520cb33a083f7fe625e6df2eb760a07cb6a2a71",
+      "size": 186790
+    },
+    {
+      "path": "data/root_frontier.json",
+      "sha256": "76141c78775fbd38912702483a750d55e6680c55791d879bca8053e2101f732b",
+      "size": 208508
+    },
+    {
+      "path": "data/root_pareto.json",
+      "sha256": "ff48eb2d2cce5411869964ff9c16b3a8eee9ac1c7291e4500a201688c4bd06fe",
+      "size": 6793
+    },
+    {
+      "path": "data/service_v4_rerun.json",
+      "sha256": "c57502cdcb04b69250322c154b98cbc6730481cd7e46b06e55b06b36514df1af",
+      "size": 227722
+    },
+    {
+      "path": "paper/manuscript.pdf",
+      "sha256": "9386758c514d23742168a4e4f575aafdf1134a05bf2180bf2d67b3b0f5e13690",
+      "size": 308888
+    },
+    {
+      "path": "paper/manuscript.tex",
+      "sha256": "11bae1e459a1ef9efea6a0e8c1c2f60a311fb506f84ec73f52e625200ee58bf7",
+      "size": 71956
+    },
+    {
+      "path": "paper/root_section.tex",
+      "sha256": "e68019db2b422db9f9ef8a091495b6eba37938a03bc4e5374c476c16c5e9b322",
+      "size": 16330
+    },
+    {
+      "path": "src/independent_oracle.py",
+      "sha256": "253c85d5237adf73e3375f330782b01128d6dfa203526e53f53299d35417365b",
+      "size": 3043
+    },
+    {
+      "path": "src/revocation_frontier.py",
+      "sha256": "68bd8ebad8d433b40e62ec0d48a730a11bcf505cb57d82392284c468a78b7795",
+      "size": 8045
+    },
+    {
+      "path": "src/role_protocol.py",
+      "sha256": "520719330b6217ab65b2c4e438533978ab2750cc2771c8c3411fbc201f41a0aa",
+      "size": 7819
+    },
+    {
+      "path": "src/root_frontier.py",
+      "sha256": "369abb397b3d07dcb7d7687819d8c5be246ae41b3401d346458e19d3fc4ca609",
+      "size": 9535
+    },
+    {
+      "path": "src/root_pareto.py",
+      "sha256": "53d9987eae15b6bfe7ca0dbdb8b912acae6e6c44d9e8d3937c51c2004a53acf1",
+      "size": 4985
+    },
+    {
+      "path": "src/service_handoff.py",
+      "sha256": "a2084c8e0e4bc17c36cc100601ba7ff852c6a280101cef2385812f8c3baf47a8",
+      "size": 9123
+    }
+  ],
+  "local_pdf_sha256": "9386758c514d23742168a4e4f575aafdf1134a05bf2180bf2d67b3b0f5e13690",
+  "statements": [
+    "No key material or real account secrets in evidence JSON",
+    "All new results are deterministic constructed cases"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "formal_baseline":"UCT-MAP-v1.1.2",
+  "nodes_unchanged":913,
+  "conditional_rules_unchanged":424,
+  "nondeductive_relations_unchanged":261,
+  "new_established_nodes":0,
+  "new_established_rules":0,
+  "new_established_relations":0,
+  "candidate_ids_disabled":["RT-D1","RT-T1","RT-P1","RT-T2","RT-E1"],
+  "nearest_existing_context":["UCT C1/U1 actual process experience is conditional","UCT P3/P6 token/type/lineage","A4D–A4G actual effect writer and common ancestor","ASI-CC-v0.8/0.9 root independence","PR4 prior finite evidence/resource distinction"],
+  "semantic_audit":"AUDIT_INCOMPLETE",
+  "full_nodes_checked":false,
+  "full_rules_checked":false,
+  "all_pairwise_or_higher_order_contexts_checked":false,
+  "graph_admission":"PENDING_MAP_DISABLED",
+  "affected_rule_type":"none promoted; new conditional technical result outside established UCT experience axioms",
+  "publication_coverage":"UCT-PUB-v1.0.33; see audit/PUBLICATION_COVERAGE_UPDATE.json"
+}

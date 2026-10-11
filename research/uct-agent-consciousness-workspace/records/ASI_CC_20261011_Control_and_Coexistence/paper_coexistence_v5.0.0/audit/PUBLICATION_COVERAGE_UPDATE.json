@@ -1,0 +1,13 @@
+{
+  "coverage_baseline":"UCT-PUB-v1.0.33",
+  "delta_id":"PR-v5.0.0-SCOPED-COVERAGE-DELTA",
+  "new_verified_published_works":0,
+  "existing_published_work_bytes_changed":false,
+  "new_doi":false,
+  "ots_or_arweave_action":false,
+  "inherited_internal_claim_families":["PR-v1 authentic/current-source vs historical authority", "PR-v2 conditional deadline reserve Hall criterion", "PR-v3 no default AI moral/phenomenal personhood", "PR-v4 ER-T1/2/3, ER-C1, ER-P2 and its false-sensor/bypass negative controls", "UCT A4F/A4G actual source and shared common root constraints"],
+  "new_candidate_claims":["RT-D1","RT-T1","RT-P1","RT-T2","RT-E1"],
+  "novelty_status":"SCOPED_SYNTHESIS_AND_CONSTRUCTION; EXACT_PRIOR_ART_PRIORITY_UNVERIFIED",
+  "uncertainties":["Full existing published works claim-by-claim coverage not reaudited","Broad literature not exhaustively searched","Full 913/424/261 UCT semantic review incomplete","No actual hardware or frontier-model data"],
+  "decision":"REVISE_AS_PR-V5_COMPLETE_CANDIDATE; INDEPENDENT_REVIEW_BEFORE_DOI; NO_NEW_PUBLICATION_COUNT"
+}

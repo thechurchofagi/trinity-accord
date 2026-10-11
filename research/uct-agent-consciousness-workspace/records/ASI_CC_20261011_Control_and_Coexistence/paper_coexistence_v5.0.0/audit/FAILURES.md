@@ -1,0 +1,11 @@
+# Scientific attacks and corrections — PR-v5
+
+1. Repeating the PR4 fake-sensor example was rejected as novelty. Revised task: root-relative physical provenance and exact sensor/resource/gate joint attack quantification.
+2. An initial code record incorrectly labeled capacity as `bank_capacity * len(alive)`; that counted all banks, including attacked ones. Corrected the `nominal_capacity` field, kept `surviving_capacity` as an independent sum, and re-ran all tests. No theorem or final count uses this bad field.
+3. Initial process-run experiment had 340 cases; after finding the three-root co-installation construction and the two-root no-telemetry construction, three new scenarios were added. Final model: 408 fault/report cases over 12 architectures, and actual-process protocol: 408 configurations / 3,156 authenticated role messages; initial 340 counts are superseded.
+4. An experimental assertion briefly used an awkward conditional during expansion of the scenario count; changed to exact `len(records)==408`, then re-ran the entire suite.
+5. The root-count frontier assumes exactly one truthful **binary group bit per honest root**. If the honest root reveals the exact affected channel instead, the two-root lower bound need not be 8. This is explicitly a scope limit, not an error corrected by adding more prose.
+6. Initial architecture had eight distinct role roots (three sensors + three banks + two gates). Actual co-installation allows three roots to host multiple roles and still tolerate one actual root compromise. Corrected all conclusions that could have misread number of role IDs as minimum number of physical roots.
+7. All processes and HMAC keys are administered by the same parent/host UID. Hence we cannot assert real independent root control; the model assumes it. Source-specific authentic messages are real software messages but cannot certify reporter physical truthfulness.
+8. An unmediated final output route breaks all positive guards in the constructed model. No more backup slots can restore effect-level revocation in that setting. Explicit negative control retained.
+9. The full UCT 913/424/261 item-by-item semantic audit and global publication-claim coverage review are not complete. Candidate remains disabled.
