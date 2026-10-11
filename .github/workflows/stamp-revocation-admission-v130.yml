@@ -4,7 +4,7 @@ on:
   push:
     branches: [research/revocation-admission-v130-20261011]
     paths:
-      - 'research/paper-timestamps/2026-10-11-rac13-v600/OTS-AUTHORIZATION.json'
+      - 'research/paper-timestamps/2026-10-11-rac13-v130/OTS-AUTHORIZATION.json'
 
 permissions:
   contents: write
@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     env:
-      BATCH: research/paper-timestamps/2026-10-11-rac13-v600
+      BATCH: research/paper-timestamps/2026-10-11-rac13-v130
     steps:
       - name: Checkout exact publication-preservation branch
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
