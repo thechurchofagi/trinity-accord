@@ -1,0 +1,46 @@
+{
+  "schema": "uct-a4o-persistence-receipt/1",
+  "round": "A4O20261011",
+  "status": "SCIENCE_REMOTE_AND_LIBRARY_INCREMENT_VERIFIED; RECEIPT_SUCCESSOR_SHA_RECORDED_IN_FIXED_MASTER",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "verified_base_commit": "60b3bab757350030fe12899be38e6c6514c1c73f",
+    "science_commit": "c1a36458c893ca250624c91262f0f3c0bd50199a",
+    "science_tree": "b5d220c579ae5435138645ea0cb92f3bd1fb437e",
+    "changed_paths": 27,
+    "expected_sha_fast_forward": true,
+    "skip_ci": true,
+    "ordinary_git_push": "FAILED_NO_INTERACTIVE_CREDENTIAL; NO_REMOTE_MUTATION",
+    "protected_git_data_write": "SUCCEEDED",
+    "remote_key_files_read_back": true
+  },
+  "library": {
+    "fixed_master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "science_version": 137,
+    "science_version_sha256": "cfa5cdd94f74722614b4ec9b1266231d8aead2f9d9a5086d0231ca037591c22b",
+    "increment_library_file_id": "libfile_07c3852330748191add5725b55b4e878",
+    "increment_file_name": "UCT_A4O_Science_Increment_20261011.zip",
+    "increment_size_bytes": 162096,
+    "increment_sha256": "3177e5a39e9105225f3d2e14947703c5d03571af81175306f7ff0cf3a58bbea4",
+    "manifest_library_file_id": "libfile_2bece2d438448191a2965a3f9700d5a8",
+    "manifest_file_name": "UCT_A4O_Science_Increment_Manifest.json",
+    "manifest_size_bytes": 6961,
+    "manifest_sha256": "df458a543cb49f0373a6637acc1660186b7245308c09e2075805b41c5ab0e3ae",
+    "increment_is_complete_backup": false,
+    "reverse_materialization_verified": true
+  },
+  "validation": {
+    "checker_exact_results_semantically_equal": true,
+    "navigation_and_disabled_assembly_pass": true,
+    "json_parse_and_diff_check_pass": true,
+    "formal_delta": {
+      "nodes": 0,
+      "rules": 0,
+      "contexts": 0
+    },
+    "review_items_self_closed": false,
+    "full_semantic_reproof": false
+  },
+  "self_reference_note": "This file cannot contain the SHA of the commit that first contains its own final bytes. The verified receipt-successor commit SHA and final fixed-master version are recorded in the next version of the same fixed master handoff."
+}

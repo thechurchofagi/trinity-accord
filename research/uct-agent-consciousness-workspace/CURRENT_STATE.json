@@ -197,14 +197,14 @@
     "role": "Historical unresolved audit-debt record; old numbers are not newly measured current unread totals."
   },
   "latest_activity_persistence": {
-    "status": "A4N_SCIENCE_REMOTE_AND_LIBRARY_INCREMENT_CONFIRMED; RECEIPT_SUCCESSOR_PENDING",
-    "receipt": "records/A4N20261011_Enacted_Frame_Specificity/PERSISTENCE_RECEIPT.json",
-    "recovery_manifest": "records/A4N20261011_Enacted_Frame_Specificity/RECOVERY_MANIFEST.json",
-    "remote_science_commit": "0377992a10cf2d877ca61816254ce196a55741e8",
-    "remote_science_tree": "5613d8c0812ec0e115245b39848b6a9a9e0d775c",
-    "fixed_master_science_version": 135,
-    "increment_library_file_id": "libfile_fe13fe864fc481918eb4fe550146438d",
-    "increment_manifest_library_file_id": "libfile_a3cc9b2963108191babdb78abf3dcc10"
+    "status": "A4O_SCIENCE_REMOTE_AND_LIBRARY_INCREMENT_CONFIRMED; RECEIPT_SUCCESSOR_SHA_IN_FIXED_MASTER",
+    "receipt": "records/A4O20261011_Enacted_Frame_Paradigm_Triage/PERSISTENCE_RECEIPT.json",
+    "recovery_manifest": "records/A4O20261011_Enacted_Frame_Paradigm_Triage/RECOVERY_MANIFEST.json",
+    "remote_science_commit": "c1a36458c893ca250624c91262f0f3c0bd50199a",
+    "remote_science_tree": "b5d220c579ae5435138645ea0cb92f3bd1fb437e",
+    "fixed_master_science_version": 137,
+    "increment_library_file_id": "libfile_07c3852330748191add5725b55b4e878",
+    "increment_manifest_library_file_id": "libfile_2bece2d438448191a2965a3f9700d5a8"
   },
   "concurrent_research_preserved": {
     "id": "EIP20261010",
@@ -226,7 +226,7 @@
     "map_replacement": false,
     "actual_application_established": false
   },
-  "latest_persistence_receipt": "records/A4N20261011_Enacted_Frame_Specificity/PERSISTENCE_RECEIPT.json",
+  "latest_persistence_receipt": "records/A4O20261011_Enacted_Frame_Paradigm_Triage/PERSISTENCE_RECEIPT.json",
   "previous_latest_research_before_CTD": {
     "id": "A3L20261010",
     "result_version": "A3L-RESULT-v0.1.0",

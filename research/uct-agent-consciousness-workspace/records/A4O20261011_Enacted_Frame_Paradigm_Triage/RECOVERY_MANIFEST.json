@@ -1,0 +1,22 @@
+{
+  "schema": "uct-a4o-recovery/1",
+  "round": "A4O20261011",
+  "fixed_master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+  "science_commit": "c1a36458c893ca250624c91262f0f3c0bd50199a",
+  "science_tree": "b5d220c579ae5435138645ea0cb92f3bd1fb437e",
+  "increment_library_file_id": "libfile_07c3852330748191add5725b55b4e878",
+  "increment_sha256": "3177e5a39e9105225f3d2e14947703c5d03571af81175306f7ff0cf3a58bbea4",
+  "manifest_library_file_id": "libfile_2bece2d438448191a2965a3f9700d5a8",
+  "manifest_sha256": "df458a543cb49f0373a6637acc1660186b7245308c09e2075805b41c5ab0e3ae",
+  "scope": "The Library archive is an increment of 27 A4O science-save paths, not a complete repository, complete working set, or full history.",
+  "steps": [
+    "Read the latest version of fixed master libfile_4175a81748fc819187fa8f5771f056fa; do not rely on an older local copy.",
+    "Fetch the latest uct-agent-consciousness-workspace branch and require c1a36458c893ca250624c91262f0f3c0bd50199a or a verified fast-forward successor.",
+    "Read ROUND_RECORD.md, RESEARCH_NOTE.md, PARADIGM_CONTRACT.md, SOURCE_SCOPE.md, EXACT_RESULTS.json, CLAIM_LEDGER.json, GAP_LEDGER.md, FORMAL_AUDIT.md, REVIEW_RESPONSE.md, VALIDATION.json and HANDOFF_ZH.md in this directory.",
+    "Verify both Library-object SHA256 values and every per-path hash in the manifest before overlaying; never overwrite a newer verified tree with this increment.",
+    "Run check_paradigm_identification.py and compare its JSON semantically with EXACT_RESULTS.json.",
+    "Run integration/UCT-INTEGRATION-v1.0.0/validate_navigation.py --root . and records/NAV20261010_Map_Integration/validate_current_map.py --root .",
+    "Read REVIEW_SUPERVISION.md latest section and every OPEN/ACKNOWLEDGED item; keep them open absent reviewer-governed evidence."
+  ],
+  "next_question": "Can one same-event incorporated-tool paradigm fix external state, independently perturb the bearer pose/proprioceptive anchor, and causally isolate consumption of the remap by the same learned route under a closed writer/controller inventory?"
+}

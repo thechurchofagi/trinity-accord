@@ -20,3 +20,5 @@ A4N停止规则触发：当前不建立实际 `EnactedFrameBind`，不进入 `H_
 
 先获取远端最新头并读固定主交接最新版本，再读本目录的 `ROUND_RECORD.md`、`RESEARCH_NOTE.md`、`PARADIGM_CONTRACT.md`、`SOURCE_SCOPE.md`、`CLAIM_LEDGER.json`、`GAP_LEDGER.md`、`FORMAL_AUDIT.md`、`REVIEW_RESPONSE.md` 和 `EXACT_RESULTS.json`；重跑 `check_paradigm_identification.py`，再核对最新入口与审查台账。
 
+GitHub 科学提交 `c1a36458c893ca250624c91262f0f3c0bd50199a` 及树 `b5d220c579ae5435138645ea0cb92f3bd1fb437e` 已核验。Library 增量 `libfile_07c3852330748191add5725b55b4e878`（SHA256 `3177e5a3…`）和清单 `libfile_2bece2d438448191a2965a3f9700d5a8`（SHA256 `df458a54…`）是27路径增量，不是完整备份；固定主交接同一身份已更新到科学版本v137。最终收据提交SHA由固定主交接的下一版本记录。
+
