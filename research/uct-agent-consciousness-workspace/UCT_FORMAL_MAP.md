@@ -136,3 +136,10 @@ R20–R23候选：纠正将“阻止其他人强行终止仍想继续存在的�
 [英文形式化证明](records/ASI_CC_20261011_Control_and_Coexistence/RESEARCH_NOTE_v0.8.0.md) · [中文交接](records/ASI_CC_20261011_Control_and_Coexistence/HANDOFF_v0.8.0_ZH.md) · [可复核 Python](records/ASI_CC_20261011_Control_and_Coexistence/verify_mobile_roots.py) · [精确结果](records/ASI_CC_20261011_Control_and_Coexistence/EXACT_RESULTS_v0.8.0.json) · [研究日志](records/ASI_CC_20261011_Control_and_Coexistence/WORK_LOG_v0.8.0.md)。
 
 对 v0.6–v0.7 的鲁棒长期安全前提进行进一步反例检验：攻击者每轮只能新改动一个供给信任根，但历史改动持续积累；在仅知“仍运行”的不完全观测下，一次只修复一条供给线无法保证两轮以后仍持续供应。完整可信定位信息可在声明的两根固定转移游戏内支持每轮修复后的安全不变性；同样可由更强的原子双根刷新能力代替定位，前提须实际成立。精确有限状态/信念不动点及9组两轮盲策略的敌手反例全部通过。**数学继承1991/1995移动攻击/主动刷新、1984不完全信息博弈与2023部分观察屏蔽，非公认新定理；未作实际AI/电源/体验实验，不得宣称未来ASI必然不可控或共存无解。** 仅导航元数据，保持正式UCT-MAP-v1.1.2的913/424/261及已发表覆盖与其他待审项不变；尚未完成全图语义审查/正式理论晋级。
+
+
+### ASI-CC-v0.9.0 — 多超级智能与同模型多智能体的多层独立性（停用候选）
+
+[英文研究与R28–R33](records/ASI_CC_20261011_Control_and_Coexistence/RESEARCH_NOTE_v0.9.0.md) · [中文交接](records/ASI_CC_20261011_Control_and_Coexistence/HANDOFF_v0.9.0_ZH.md) · [精确穷举程序](records/ASI_CC_20261011_Control_and_Coexistence/verify_multi_asi_multiplicity.py) · [穷举结果](records/ASI_CC_20261011_Control_and_Coexistence/EXACT_RESULTS_v0.9.0.json) · [工作记录](records/ASI_CC_20261011_Control_and_Coexistence/WORK_LOG_v0.9.0.md)。
+
+本轮回应新增物理多样性约束：多个独立超级智能、同一权重模型下多个智能体、共享后端、不同根凭据、共同上级控制者和不完全重合的潜在实际过程。六代理两权重三后端三凭据根两上级管理根的虚构模型，对15种两两代理组合分别检查：不同ID15、不同模型8、不同凭据9、不同上级管理根5；6组不同模型但同一上级管理根，3组同模型但不同上级控制根。增殖表面身份不能产生独立控制；同权重模型不等于统一物理进程或单一体验主体；相关误差不宜用独立伯努利试验代替。当前实证只限封闭有限模拟和有理数数学，无真实超级智能/大模型调用，无独立体验端点、真实根权限和物理存续证明。Sybil、共同故障、跨模型串通和证据独立性已有直接前例（含2026 Epistemic Sybil Resistance、ICML同伴保护和国际AI安全报告），**不宣称首创普遍定理**。仅导航追加，不晋级正式科学图；UCT-MAP-v1.1.2/913/424/261、PUBLICATION_COVERAGE及原QC保持未变，完整全图语义审查未完成。
