@@ -1,0 +1,11 @@
+{
+  "schema": "uct-map-extension/1.0",
+  "round": "A5A20261012_Route_Orbit_Contrast_Barrier",
+  "status": "DISABLED_APPLICATION_NO_FORMAL_GRAPH_PROMOTION",
+  "nodes": [],
+  "rules": [],
+  "context_links": [],
+  "delta": {"nodes": 0, "rules": 0, "contexts": 0},
+  "reason": "The orbit-invariance and finite impossibility results are valid in their declared domain, but actual Pi, complete K, an independently calibrated endpoint, B_pc^family and H_cf remain open. The result corrects a comparison design and does not warrant a new established premise."
+}
+

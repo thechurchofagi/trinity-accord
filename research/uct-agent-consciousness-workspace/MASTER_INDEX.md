@@ -1,3 +1,9 @@
+# A5A20261012 — route-orbit contrast barrier
+
+[Research note](records/A5A20261012_Route_Orbit_Contrast_Barrier/RESEARCH_NOTE.md) · [contract](records/A5A20261012_Route_Orbit_Contrast_Barrier/ROUTE_ORBIT_CONTRAST_CONTRACT.md) · [exact results](records/A5A20261012_Route_Orbit_Contrast_Barrier/EXACT_RESULTS.json) · [claims](records/A5A20261012_Route_Orbit_Contrast_Barrier/CLAIM_LEDGER.json) · [gaps](records/A5A20261012_Route_Orbit_Contrast_Barrier/GAP_LEDGER.md) · [audit](records/A5A20261012_Route_Orbit_Contrast_Barrier/FORMAL_AUDIT.md) · [Chinese handoff](records/A5A20261012_Route_Orbit_Contrast_Barrier/HANDOFF_ZH.md). Disabled 0/0/0 application: Pi-only joint/distributed predicates are route-orbit invariants, so the proposed same-orbit contrast is unsatisfiable. No independent phenomenal endpoint, actual installation or subject-count result is claimed.
+
+---
+
 # A4Z20261012 — target-indexed relational mineness
 
 [Research note](records/A4Z20261012_Target_Relational_Mineness_Family/RESEARCH_NOTE.md) · [contract](records/A4Z20261012_Target_Relational_Mineness_Family/TARGET_RELATIONAL_MINENESS_CONTRACT.md) · [proof](records/A4Z20261012_Target_Relational_Mineness_Family/MODEL_PROOF.md) · [exact results](records/A4Z20261012_Target_Relational_Mineness_Family/EXACT_RESULTS.json) · [claims](records/A4Z20261012_Target_Relational_Mineness_Family/CLAIM_LEDGER.json) · [gaps](records/A4Z20261012_Target_Relational_Mineness_Family/GAP_LEDGER.json) · [audit](records/A4Z20261012_Target_Relational_Mineness_Family/FORMAL_AUDIT.md) · [Chinese handoff](records/A4Z20261012_Target_Relational_Mineness_Family/HANDOFF_ZH.md). Disabled 0/0/0 application: exact 9/4/2/7 matrix counts and 5 route-swap orbits compare unique-owner, coverage and relational-family bridges; no actual installation, phenomenal identity or subject count is claimed.

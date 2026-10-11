@@ -1234,3 +1234,14 @@ A4G应用保持停用，正式图增量0/0/0。C1/U1未改；硬件来源坐标�
 - `SCU-AUDIT-DEPTH`: **AUDIT_INCOMPLETE**. The 913/424/261 effective graph was structurally retraversed and affected semantics reviewed, not globally re-proved.
 - Substantive result: universal per-normal-row two-port but-for necessity rejects every diagonally correct Boolean consumer, whereas actual lineage/read plus frozen, independently reachable and exclusion-controlled contingent sensitivity distinguishes AND/OR from projections at the declared boundary. This is a disabled organizational criterion, not a general actual-causation theorem, physical installation or phenomenal result.
 - Evidence: `records/A4X20261012_Redundant_Port_Participation/REVIEW_RESPONSE.md`, `REDUNDANT_PORT_PARTICIPATION_CONTRACT.md`, `MODEL_PROOF.md`, `EXACT_RESULTS.json`, `FORMAL_AUDIT.md`, `GAP_LEDGER.json`.
+
+## A5A20261012 research response (does not close supervision items)
+
+- `QC-20261008-10`: **ACKNOWLEDGED/OPEN**. A5A corrects an unsatisfiable Pi-only contrast but supplies no independently calibrated H target or direction.
+- `IA-QC11`: **OPEN**. Nine matrices are abstract relations; no one actual bearer/event/consumer/complete signature installs Pi.
+- `QC-20261008-12`: **OPEN**. Report, conceptual self, adaptation proxies and actual participation remain distinct; a proxy twin remains explicit.
+- `QC-20261008-13`: **OPEN**. Same-instance route, target, consumer, chronology and complete physical binding are typed but uninstalled.
+- `SCU-OPEN-R191-NORMALIZATION`: **OPEN**. No normalization is attempted or used.
+- `SCU-AUDIT-DEPTH`: **AUDIT_INCOMPLETE**. The 913/424/261 effective graph was structurally traversed and affected semantics reviewed; all historical proofs were not reconstructed.
+- Substantive result: Pi-only joint-source and strict-distribution predicates are constant on route-label orbits, so a same-orbit contrast count is exactly zero. Valid repair requires cross-orbit comparison or explicit additional W. B_pc^family/H_cf remain open.
+- Evidence: `records/A5A20261012_Route_Orbit_Contrast_Barrier/REVIEW_RESPONSE.md`, `ROUTE_ORBIT_CONTRAST_CONTRACT.md`, `EXACT_RESULTS.json`, `FORMAL_AUDIT.md`, `GAP_LEDGER.md`.

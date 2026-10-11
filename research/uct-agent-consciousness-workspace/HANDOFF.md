@@ -1,4 +1,10 @@
-# A4Z20261012 current handoff — target-indexed relational mineness
+# A5A20261012 current handoff — route-orbit contrast barrier
+
+[English note](records/A5A20261012_Route_Orbit_Contrast_Barrier/RESEARCH_NOTE.md) · [contract](records/A5A20261012_Route_Orbit_Contrast_Barrier/ROUTE_ORBIT_CONTRAST_CONTRACT.md) · [exact results](records/A5A20261012_Route_Orbit_Contrast_Barrier/EXACT_RESULTS.json) · [formal audit](records/A5A20261012_Route_Orbit_Contrast_Barrier/FORMAL_AUDIT.md) · [Chinese handoff](records/A5A20261012_Route_Orbit_Contrast_Barrier/HANDOFF_ZH.md). A5A proves that joint-source and strict-distribution status defined only from Pi cannot vary inside one route-label orbit. The repaired Pi-only comparison varies the orbit while fixing target identities, conceptual self and report; a same-orbit residual must type additional actual W. Endpoint screening found no independently signed phenomenal target, so B_pc^family/H_cf remain open. Formal delta 0/0/0.
+
+---
+
+# A4Z20261012 previous handoff — target-indexed relational mineness
 
 [English note](records/A4Z20261012_Target_Relational_Mineness_Family/RESEARCH_NOTE.md) · [contract](records/A4Z20261012_Target_Relational_Mineness_Family/TARGET_RELATIONAL_MINENESS_CONTRACT.md) · [proof](records/A4Z20261012_Target_Relational_Mineness_Family/MODEL_PROOF.md) · [exact results](records/A4Z20261012_Target_Relational_Mineness_Family/EXACT_RESULTS.json) · [formal audit](records/A4Z20261012_Target_Relational_Mineness_Family/FORMAL_AUDIT.md) · [Chinese handoff](records/A4Z20261012_Target_Relational_Mineness_Family/HANDOFF_ZH.md). A4Z records A4Y's actual installation as NOT_INSTALLED and stops certificate expansion. Its disabled positive bridge represents practical mineness as a target-indexed nonexclusive route relation: 9 covered matrices, 4 locally unique, 2 global-owner, and 5 route-label-swap orbits. Coverage and a unique-owner label each lose the relevant structure. Formal delta 0/0/0; actual participation and all phenomenal/report/subject conclusions remain open.
 

@@ -1,5 +1,11 @@
 # UCT durable memory
 
+## A5A20261012 latest memory
+
+A5A corrects A4Z's proposed next contrast. If joint-source and strict-distribution are defined only from the target-indexed relation Pi, they are invariant under route relabeling and therefore cannot differ inside one route-label orbit. Exact two-route/two-target enumeration retains 9 covered relations and 5 orbits; joint-target counts 0/1/2 occur in 4/4/1 relations, strict distribution occurs in 2, and same-orbit joint/distributed contrasts are zero. A valid Pi-only experiment must vary the orbit while fixing target identity, conceptual self and report, or else explicitly add separately actual structure W. Direct source-count wording is circular; generic ratings and effort/adaptation remain fallible proxies without R197-compliant semantics and sign. Actual Pi, complete K, B_pc^family, H_cf, report and subject count remain open. Formal delta 0/0/0. Next: one noncircular route-orbit-sensitive target with a prospective refuter, or retain Pi as an organizational coordinate.
+
+---
+
 ## A4Z20261012 latest memory
 
 A4Z obeys A4Y's stop after finding no archived actual `z -> rho -> read_m` installation and returns to positive bodily/action mineness. It represents the candidate content as a target-indexed nonexclusive relation `Pi subseteq R x T`, not an owner object. In the exact two-route/two-target family there are 9 covered matrices, 4 target-locally unique matrices, only 2 global-single-owner matrices, 7 coverage countermodels and 2 local-uniqueness countermodels. Route-label swap yields 5 structural orbits; coverage collapses them and an owner label depends on presentation. Actual participation, complete K, C1/R157 transport, `B_pc^family`, `H_cf`, conceptual self, report and subject count remain separate/open. Formal delta 0/0/0. Next: independently predeclare a fallible phenomenal contrast for joint-source versus distributed-source practical mineness while fixing coverage, label orbit, conceptual self and report.

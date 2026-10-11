@@ -2588,18 +2588,18 @@
     }
   ],
   "latest_followup_application": {
-    "id": "A4Z20261012",
-    "version": "A4Z-TRMF-v0.1.0",
-    "status": "EXACT_RELATION_FAMILY_AND_ROUTE_SWAP_ORBIT_COMPARISON",
+    "id": "A5A20261012",
+    "version": "A5A-ROCB-v0.1.0",
+    "status": "PROVED_PI_ONLY_ORBIT_INVARIANCE_AND_NEGATIVE_ENDPOINT_SCREEN",
     "enabled_as_established_premises": false,
-    "source": "records/A4Z20261012_Target_Relational_Mineness_Family/RESEARCH_NOTE.md",
-    "handoff": "records/A4Z20261012_Target_Relational_Mineness_Family/HANDOFF_ZH.md",
-    "work_log": "records/A4Z20261012_Target_Relational_Mineness_Family/WORK_LOG.md",
-    "claim_ledger": "records/A4Z20261012_Target_Relational_Mineness_Family/CLAIM_LEDGER.json",
-    "map_extension": "records/A4Z20261012_Target_Relational_Mineness_Family/MAP_EXTENSION.json",
-    "exact_results": "records/A4Z20261012_Target_Relational_Mineness_Family/EXACT_RESULTS.json",
+    "source": "records/A5A20261012_Route_Orbit_Contrast_Barrier/RESEARCH_NOTE.md",
+    "handoff": "records/A5A20261012_Route_Orbit_Contrast_Barrier/HANDOFF_ZH.md",
+    "work_log": "records/A5A20261012_Route_Orbit_Contrast_Barrier/WORK_LOG.md",
+    "claim_ledger": "records/A5A20261012_Route_Orbit_Contrast_Barrier/CLAIM_LEDGER.json",
+    "map_extension": "records/A5A20261012_Route_Orbit_Contrast_Barrier/MAP_EXTENSION.json",
+    "exact_results": "records/A5A20261012_Route_Orbit_Contrast_Barrier/EXACT_RESULTS.json",
     "parent_science": "A3V20261010",
-    "parent_followup": "A4Y20261012",
+    "parent_followup": "A4Z20261012",
     "completed_map": "UCT-MAP-v1.1.2",
     "scientific_delta": {
       "nodes": 0,
@@ -2607,12 +2607,11 @@
       "contexts": 0
     },
     "covered_relation_matrices": 9,
-    "locally_unique_matrices": 4,
-    "global_single_owner_matrices": 2,
     "route_label_swap_orbits": 5,
+    "same_orbit_joint_or_distributed_contrasts": 0,
     "independent_h_validation": false,
     "actual_bodily_installation": false,
-    "standalone_manuscript": "HOLD_MERGE_A4V_TO_A4Z_SYNTHESIS"
+    "standalone_manuscript": "HOLD_MERGE_A4V_TO_A5A_SYNTHESIS"
   },
   "followup_applications": [
     {
@@ -3431,6 +3430,32 @@
       "independent_h_validation": false,
       "actual_bodily_installation": false,
       "standalone_manuscript": "HOLD_MERGE_A4V_TO_A4Z_SYNTHESIS"
+    },
+    {
+      "id": "A5A20261012",
+      "version": "A5A-ROCB-v0.1.0",
+      "status": "PROVED_PI_ONLY_ORBIT_INVARIANCE_AND_NEGATIVE_ENDPOINT_SCREEN",
+      "enabled_as_established_premises": false,
+      "source": "records/A5A20261012_Route_Orbit_Contrast_Barrier/RESEARCH_NOTE.md",
+      "handoff": "records/A5A20261012_Route_Orbit_Contrast_Barrier/HANDOFF_ZH.md",
+      "work_log": "records/A5A20261012_Route_Orbit_Contrast_Barrier/WORK_LOG.md",
+      "claim_ledger": "records/A5A20261012_Route_Orbit_Contrast_Barrier/CLAIM_LEDGER.json",
+      "map_extension": "records/A5A20261012_Route_Orbit_Contrast_Barrier/MAP_EXTENSION.json",
+      "exact_results": "records/A5A20261012_Route_Orbit_Contrast_Barrier/EXACT_RESULTS.json",
+      "parent_science": "A3V20261010",
+      "parent_followup": "A4Z20261012",
+      "completed_map": "UCT-MAP-v1.1.2",
+      "scientific_delta": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0
+      },
+      "covered_relation_matrices": 9,
+      "route_label_swap_orbits": 5,
+      "same_orbit_joint_or_distributed_contrasts": 0,
+      "independent_h_validation": false,
+      "actual_bodily_installation": false,
+      "standalone_manuscript": "HOLD_MERGE_A4V_TO_A5A_SYNTHESIS"
     }
   ],
   "scoped_foundational_reviews": [

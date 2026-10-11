@@ -1,0 +1,41 @@
+{
+  "round": "A5A20261012",
+  "result_version": "A5A-ROCB-v0.1.0",
+  "exact_checker": {
+    "command": "python3 check_route_orbit_barrier.py",
+    "status": "PASS_DECLARED_ASSERTIONS",
+    "checker_sha256": "299bc6d7680dfb7b88ba0a9fe6a2cabc9fd472a5eb3469ed9d763c62f92285f9",
+    "results_sha256": "b664a9bf512404e6e82b1b9ebfeeb91a3ef649251718c04942016c48cb4c0b27",
+    "covered_relation_matrices": 9,
+    "route_label_swap_orbits": 5,
+    "joint_target_count_distribution": {"0": 4, "1": 4, "2": 1},
+    "same_orbit_joint_or_distributed_contrasts": 0
+  },
+  "formal_audit": {
+    "command": "python3 audit_map.py <research-root> <restored-effective-graph.json>",
+    "status": "FRESH_STRUCTURAL_PASS_BOUNDED_SEMANTIC_PASS_FULL_DEPTH_INCOMPLETE",
+    "effective_nodes": 913,
+    "active_rules": 424,
+    "context_links": 261,
+    "all_of_nonlist": 0,
+    "all_of_empty": 0,
+    "unresolved_references": 0,
+    "active_cycles": 0,
+    "summary_sha256": "46d902cce2e0fe9eb7b52fea6ff1d2eb5a5ec4de95d262a5fec78d5d449d40c1",
+    "per_id_audit_gzip_sha256": "0e759bcbf6610d2a0230430a968fc706b290ce87d493a785e1617ae252127060"
+  },
+  "json_validation": {"status": "PASS"},
+  "review_recheck": {
+    "status": "PASS_RETAIN_OPEN",
+    "open_or_incomplete": ["QC-20261008-10", "IA-QC11", "QC-20261008-12", "QC-20261008-13", "SCU-OPEN-R191-NORMALIZATION", "SCU-AUDIT-DEPTH"]
+  },
+  "limits": [
+    "No actual same-instance Pi installation",
+    "No complete physical signature",
+    "No independent B_pc^family or H_cf calibration",
+    "No signed endpoint reliability",
+    "No report or subject-count result",
+    "No full historical semantic reproof"
+  ]
+}
+

@@ -1,3 +1,9 @@
+# A5A20261012 audit addendum
+
+A5A preserves the effective 913/424/261 graph and adds 0/0/0. Fresh traversal accessed every node and found zero unresolved deductive references, active cycles, non-list `all_of` or empty `all_of`. The originally proposed conjunction—same route-label orbit plus different Pi-only joint/distributed status—is jointly unsatisfiable by route-permutation invariance. The satisfiable repairs either vary the orbit or add separately typed actual structure W. Abstract Pi, actual Pi, complete K, W, selected experience, endpoint, conceptual self, report and subject count remain distinct. Structural and finite-model PASS do not establish physical actuality, C1, bridge truth or full historical semantic depth. See [A5A formal audit](records/A5A20261012_Route_Orbit_Contrast_Barrier/FORMAL_AUDIT.md).
+
+---
+
 # A4Z20261012 audit addendum
 
 A4Z preserves the effective 913/424/261 graph and adds 0/0/0. Fresh traversal accessed every node and found zero unresolved deductive references, active cycles, non-list `all_of` or empty `all_of`. Coverage, per-target local uniqueness and one-route-for-all-targets are separately quantified; their 9/4/2 counts are not interchanged. The disabled eight-clause relation-family contract remains simultaneous on one P/I/K/event binding, with actual participation and complete-K premises uninstalled. Route labels, relation orbits, conceptual self, report, phenomenal target and subject count remain distinct. Structural and finite-model PASS do not establish physical actuality, theory truth or full historical semantic depth. See [A4Z formal audit](records/A4Z20261012_Target_Relational_Mineness_Family/FORMAL_AUDIT.md).

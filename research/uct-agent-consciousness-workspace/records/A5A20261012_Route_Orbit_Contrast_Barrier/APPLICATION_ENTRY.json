@@ -1,0 +1,21 @@
+{
+  "id": "A5A20261012",
+  "version": "A5A-ROCB-v0.1.0",
+  "title": "Route-orbit contrast barrier for target-relational practical mineness",
+  "type": "DISABLED_SCOPED_FOLLOWUP_APPLICATION",
+  "status": "PROVED_PI_ONLY_ORBIT_INVARIANCE_AND_NEGATIVE_ENDPOINT_SCREEN",
+  "parent_science": "A3V20261010",
+  "parent_followups": ["R15720261009", "R17320261008", "R18120261008", "R19720261010", "A3Z20261010", "A4M20261011", "A4N20261011", "A4V20261012", "A4Z20261012"],
+  "domain": "one fixed P/I/K/event with two-route/two-target exact model and the general action of route permutations on Pi",
+  "candidate_all_of": ["BIND", "ROUTE", "PARTICIPATION", "COVER", "INDEX", "COVARIANCE", "NONEXCLUSIVITY", "SEPARATION", "INDEPENDENT_ENDPOINT"],
+  "conditional_conclusion": "Pi-only joint-source and strict-distribution predicates are constant on route-label orbits; a valid Pi-only contrast must vary the orbit, while a same-orbit residual requires separately typed actual W.",
+  "open_bridge": "B_pc^family, H_cf, actual Pi, complete K, target semantics, signed reliability, report and subject count remain open.",
+  "proof_role": "nine covered relations, five route-swap orbits, joint-target distribution 4/4/1, and zero same-orbit joint/distributed contrasts.",
+  "counterexamples": ["route-label swap", "common report front end across distinct Pi", "A3Z-style endpoint proxy twin", "same Pi with different W", "copied memory with changed current participation"],
+  "scientific_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+  "enabled_as_established_premises": false,
+  "actual_token_installed": false,
+  "independent_h_validation": false,
+  "standalone_manuscript": "HOLD_MERGE_A4V_TO_A5A_SYNTHESIS"
+}
+
