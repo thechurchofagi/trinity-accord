@@ -1,0 +1,61 @@
+{
+  "schema": "A5A-CLAIM-LEDGER-v0.1.0",
+  "claims": [
+    {
+      "id": "A5A-T1",
+      "type": "elementary theorem",
+      "statement": "Every Pi-only joint-source, strict-distribution, local-uniqueness and global-single-owner predicate defined in the contract is constant under route-label permutations.",
+      "domain": "covered relations Pi subseteq R x T with fixed target identities; exact enumeration uses two routes and two targets",
+      "premises": ["route relabeling is a bijection on R", "target labels are fixed", "predicates depend only on route-set cardinality, equality or disjointness"],
+      "proof_or_source": "ROUTE_ORBIT_CONTRAST_CONTRACT.md section 2 and exact checker",
+      "counterexample_scope": "Predicates depending on extra route properties not transported by the group action are predicates of augmented structure, not Pi alone.",
+      "status": "PROVED_IN_DECLARED_DOMAIN",
+      "thought_experiment_role": "copy/swap enforces covariance"
+    },
+    {
+      "id": "A5A-T2",
+      "type": "finite impossibility result",
+      "statement": "No same-route-swap-orbit pair in the nine covered 2x2 relations differs in any_joint, all_joint or strict_distributed.",
+      "domain": "two named routes, two named targets, nonempty route set per target",
+      "premises": ["A5A-T1", "complete enumeration of 3 squared covered matrices"],
+      "proof_or_source": "check_route_orbit_barrier.py and EXACT_RESULTS.json",
+      "counterexample_scope": "A cross-orbit pair can differ; an augmented (Pi,W) pair can differ while Pi's orbit is fixed.",
+      "status": "PROVED_IN_FINITE_DOMAIN",
+      "thought_experiment_role": "human-realized agent supplies a valid cross-orbit comparison"
+    },
+    {
+      "id": "A5A-N1",
+      "type": "negative bridge result",
+      "statement": "The requested same-orbit joint-versus-distributed phenomenal contrast cannot be grounded by Pi alone.",
+      "domain": "A4Z Pi-only candidate semantics",
+      "premises": ["joint/distributed status is defined only from Pi", "route-label orbit is fixed"],
+      "proof_or_source": "A5A-T2",
+      "counterexample_scope": "Does not rule out a cross-orbit bridge or a bridge using independently typed W.",
+      "status": "NEGATIVE_RESULT",
+      "thought_experiment_role": "endpoint proxy twin blocks relabeling a proxy as phenomenology"
+    },
+    {
+      "id": "A5A-C1",
+      "type": "conditional UCT interpretation",
+      "statement": "If an actual complete Pi or (Pi,W) is jointly grounded for one P/I/K/e, C1 plus R157 conditionally place that structure inside experience; a selected joint/distributed mineness meaning still requires an independent bridge.",
+      "domain": "admitted actual token with complete signature",
+      "premises": ["actual same-instance participation", "complete K", "C1", "R157", "separate semantic bridge for named content"],
+      "proof_or_source": "UCT I v1.2, A4Z contract and A5A inference firewall",
+      "counterexample_scope": "Finite relations, logs, reports, models or abstract products do not discharge actuality or completeness.",
+      "status": "CONDITIONAL_OPEN",
+      "thought_experiment_role": "ancestor/formation shows content change without a basal threshold"
+    },
+    {
+      "id": "A5A-E1",
+      "type": "endpoint screen",
+      "statement": "None of the screened source-count judgment, generic rating, or adaptation/effort endpoints currently supplies independently fixed target semantics and signed reliability.",
+      "domain": "selected route-orbit practical-mineness contrast",
+      "premises": ["R197 signed semantic reliability", "A3Z proxy nonidentity"],
+      "proof_or_source": "ROUTE_ORBIT_CONTRAST_CONTRACT.md section 5",
+      "counterexample_scope": "A future independently calibrated channel could satisfy the contract.",
+      "status": "OPEN_NO_ENDPOINT",
+      "thought_experiment_role": "proxy twin shows success is not identity"
+    }
+  ]
+}
+

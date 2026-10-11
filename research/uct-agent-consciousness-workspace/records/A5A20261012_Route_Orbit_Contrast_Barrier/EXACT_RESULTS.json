@@ -1,0 +1,33 @@
+{
+  "schema": "A5A-ORBIT-BARRIER-RESULT-v0.1.0",
+  "domain": {"named_routes": 2, "named_targets": 2, "covered_relations": 9},
+  "route_swap_orbits": 5,
+  "distribution": {
+    "joint_target_count": {"0": 4, "1": 4, "2": 1},
+    "strict_distributed": 2,
+    "global_single_owner": 2,
+    "local_unique": 4
+  },
+  "invariant_checks": {
+    "joint_target_count": {"constant_on_route_swap_orbits": true, "violations": []},
+    "any_joint_source": {"constant_on_route_swap_orbits": true, "violations": []},
+    "all_joint_source": {"constant_on_route_swap_orbits": true, "violations": []},
+    "strict_distributed": {"constant_on_route_swap_orbits": true, "violations": []},
+    "local_unique": {"constant_on_route_swap_orbits": true, "violations": []},
+    "global_single_owner": {"constant_on_route_swap_orbits": true, "violations": []}
+  },
+  "same_orbit_contrast_counts": {
+    "any_joint_source": {"count": 0, "witnesses": []},
+    "all_joint_source": {"count": 0, "witnesses": []},
+    "strict_distributed": {"count": 0, "witnesses": []}
+  },
+  "orbit_table": [
+    {"representative": [[0],[0]], "size": 2, "joint_target_count": 0, "strict_distributed": false, "global_single_owner": true},
+    {"representative": [[0],[0,1]], "size": 2, "joint_target_count": 1, "strict_distributed": false, "global_single_owner": false},
+    {"representative": [[0],[1]], "size": 2, "joint_target_count": 0, "strict_distributed": true, "global_single_owner": false},
+    {"representative": [[0,1],[0]], "size": 2, "joint_target_count": 1, "strict_distributed": false, "global_single_owner": false},
+    {"representative": [[0,1],[0,1]], "size": 1, "joint_target_count": 2, "strict_distributed": false, "global_single_owner": false}
+  ],
+  "conclusion": "No same-route-swap-orbit pair differs in any joint-source or strict-distribution predicate defined from Pi alone."
+}
+
