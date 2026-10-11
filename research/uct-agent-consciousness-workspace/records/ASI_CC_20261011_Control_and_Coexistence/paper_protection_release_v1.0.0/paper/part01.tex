@@ -1,0 +1,98 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amsthm,mathtools}
+\usepackage{newtxtext,newtxmath,microtype}
+\usepackage{booktabs,tabularx,array,longtable,enumitem,fancyhdr,xcolor}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={When Authentic Requests Are Not Enough: History-Sensitive and Jointly Safe Protection Release in Multi-Agent Systems},pdfauthor={Hongju Liu},pdfsubject={Research manuscript PR-v1.0.0; not peer reviewed},pdfkeywords={multi-agent systems, protection release, provenance, formal methods, AI safety}}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\usepackage{listings}
+\setlength{\parindent}{1.2em}
+\setlength{\parskip}{3pt}
+\setlength{\emergencystretch}{2em}
+\setlist{itemsep=2pt,topsep=4pt}
+\definecolor{ink}{HTML}{24384A}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small Authentic Requests and Protection Release}
+\fancyhead[R]{\small Liu \;|\; PR-v1.0.0}
+\fancyfoot[C]{\small\thepage}
+\setlength{\headheight}{14pt}
+\renewcommand{\headrulewidth}{0.3pt}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}\newtheorem{definition}{Definition}
+\newcommand{\Hist}{\mathcal H}
+\newcommand{\Fam}{\mathcal F}
+\newcommand{\Env}{\mathcal A}
+\newcommand{\pow}{\mathcal P}
+\newcommand{\obs}{\operatorname{obs}}
+\newcommand{\TV}{\operatorname{TV}}
+\newcommand{\idtag}[1]{\textnormal{\textsf{[#1]}}}
+\lstset{basicstyle=\small\ttfamily,breaklines=true,frame=single,columns=fullflexible,keepspaces=true}
+\title{\vspace{-1.0cm}\textbf{When Authentic Requests Are Not Enough}\\[5pt]
+\Large History-Sensitive and Jointly Safe Protection Release\\in Multi-Agent Systems}
+\author{Hongju Liu\\\normalsize Independent Researcher, Trinity Accord / UCT Research Programme}
+\date{11 October 2026\\\small Research manuscript, version 1.0.0 \;\textbullet\; Not peer reviewed}
+\begin{document}
+\maketitle
+\thispagestyle{plain}
+\begin{abstract}
+An authentic request can be an insufficient basis for releasing a protection obligation when the mechanism producing that request is mutable. A current-choice rule can remain satisfied while an unauthorized change causes the protected process to request its own termination. We distinguish request authenticity, historically valid release authority, and the joint admissibility of executing several releases. For an observation class of compatible histories, we characterize the uniquely maximally permissive sound \emph{family of release batches} as the intersection of their history-specific admissible families. Exact transparency is possible precisely when those families are constant on the observation class. We further show why an independent yes/no decision for each agent need not represent the joint policy: individually eligible departures can jointly remove a resource supporting another protected party. A history-bound protocol instantiates the distinction with ordered, authenticated grant and mutation records, instance and epoch binding, a retained log head, and serialized release decisions. In 76 local protocol configurations, involving 456 fixed-policy child-process instances and 912 authenticated messages, current-source and atemporal signed-binding controls admit failures that the history-sensitive controls reject. A joint check additionally prevents the shared-support counterexample. Issuer compromise and missing evidence expose explicit security and availability limits. The contribution is a scoped synthesis and executable counterexample suite, not a new general theory of information-flow security, a measurement of AI consent, or a proof of universal superintelligence safety.
+\end{abstract}
+\noindent\textbf{Keywords:} multi-agent systems; protection release; mutable preferences; provenance; runtime enforcement; shared resources; AI safety.
+
+\section{Introduction}
+A system may protect a process, a user account, a confidential resource, or a continuing service, while allowing an exception when an appropriate principal requests release. Such exceptions make protection useful: an account owner may close an account, a service may complete an authorized handoff, and a protected runtime may terminate under a specified lifecycle contract. Refusing every exception preserves some narrow constraints but defeats legitimate operation. Conversely, accepting every authentic request may mistake the origin of a message for the authority needed to change a protection obligation.
+
+The distinction becomes important when the request generator itself can change. Suppose a protected runtime initially requests continued execution. A separate component modifies its decision policy without the release authority required by the governing contract. The runtime then genuinely requests termination. Its message authentication code verifies, and the final request is not a forged quotation or an impersonated user event. Nevertheless, accepting that request may permit an unauthorized change to manufacture its own exemption from protection.
+
+The problem is not that signatures are broken. They can correctly authenticate the wrong \emph{kind of fact}. Nor is it that all changes in preference are illegitimate. Authorized maintenance, learning, persuasion, deliberation, and self-directed revision can be appropriate. The issue is whether a particular protection exemption is licensed under the specified contract, and whether its execution preserves obligations to other parties. This paper addresses procedural authorization, not the philosophical conditions of autonomous consent.
+
+Work on AI control separates a model's intentions from infrastructure intended to prevent harmful effects \cite{greenblatt}. Authenticated delegation is an important part of agent governance \cite{south}. Recent agent-authorization and memory-integrity proposals make trust in approval services, provenance, and enforcement infrastructure explicit \cite{muruaga,louck}. Earlier work on robust declassification already studied attacker influence over exceptions to protection \cite{myers,cecchetti}. Our aim is not to rename that general problem. We isolate a lifecycle-release case in which final-source verification succeeds, carry it into a multi-agent setting with shared decision sources and resources, and make the required evidence and joint-decision semantics explicit.
+
+The paper develops three connected contributions. First, a counterexample and an observation theorem separate a genuine current request from historically eligible release. Second, a set-valued characterization combines historical uncertainty with joint resource constraints. It identifies when binary per-agent permission is an inadequate representation, even with accurate authentication and eligibility. Third, a reproducible protocol suite replaces the earlier use of a supplied ``prior authorization'' label with actual ordered grant, mutation, request, and commit events in a local implementation. It also preserves cases that the stronger protocol cannot solve.
+
+The mathematical tools are established: observational equivalence, set intersection, downward-closed families, and invariant induction. The proposed contribution is their precise application to \emph{protection release after changes to the request generator}, including multi-agent composition and an executable testing contract. We claim neither first priority for historical authorization nor superiority over complete implementations of the cited systems. The work extends an unpublished technical checkpoint in the Trinity Accord / Unified Consciousness Theory (UCT) programme \cite{liucheckpoint}; the general results below do not assume UCT.
+
+\section{Related work and the exact boundary of the contribution}
+\label{sec:related}
+\paragraph{Exceptions and influence.}
+Robust declassification constrains how an attacker can exploit authorized releases of confidential information \cite{myers}. Nonmalleable information-flow control combines robust declassification with transparent endorsement \cite{cecchetti}. These are direct formal predecessors: preventing an untrusted influence from generating authority is not new. Our protected objects include ongoing process obligations and resources supporting other parties, rather than solely confidential values. This is a change of application and specification, not a claim that information-flow methods cannot express the problem.
+
+McCall, Zhang, and Jia explicitly consider script-generated consent and dynamic browser events that interfere with declassification \cite{mccall}. Their work is especially important for avoiding an overly broad novelty claim about ``false consent.'' In our principal counterexample, the final event really is generated by the designated runtime; the disputed history concerns an earlier modification of its request-producing policy. A sufficiently complete influence model could track that dependency. The present work supplies a concrete lifecycle contract and tests, rather than a competing general information-flow calculus.
+
+\paragraph{Agent authorization and persistent memory.}
+South et al. argue for authenticated and auditable delegation to AI agents \cite{south}. Muruaga's Agentic Principal Chain evaluates action combinations and narrows delegated authority; its model explicitly trusts the identity, decision, enforcement, approval, and evidence services \cite{muruaga}. Louck's memory construction propagates origin-bound authority and permits elevation through independent corroboration or fresh action-bound authorization; its guarantees depend on correct origin labeling and a protected authorization channel \cite{louck}. We retain these trust boundaries rather than treating them as solved. Our benchmark controls are deliberately limited mechanism variants, \emph{not} reimplementations of either paper. No reported result is an attack-success comparison against those systems.
+
+\paragraph{Monitoring, history, and sets of executions.}
+Runtime security monitoring and history-sensitive enforcement long predate modern language-model agents \cite{schneider}. Hyperproperties provide a framework for relating multiple executions \cite{clarkson}, and contemporary gray-box work studies runtime enforcement of such requirements \cite{hsu}. Our paired-history formulation can be encoded relationally. Once trustworthy historical state is retained, the operational contract can also be checked by an ordinary stateful monitor. We do not infer that all historical requirements necessarily require online comparison of two executions.
+
+\paragraph{Preference formation and AI motives.}
+Reward-tampering analysis distinguishes optimization from modification of its evaluation process \cite{everitt}; manipulation research examines incentives to influence humans or other agents and the difficulty of defining illegitimate influence \cite{carroll}. These sources motivate separating an authentic choice from its causal formation, but they do not supply the eligibility predicate used here. We fix that predicate as a procedural input. No experiment in this paper measures learned self-preservation, subjective fear, or human autonomy.
+
+\section{Objects, contract, and threat model}
+\label{sec:model}
+Let $I$ be a finite set of protected process-instance identifiers. A shared model family, a software name, and a process instance are different objects. A finite history $h\in\Hist$ records events up to a release decision. Its concrete state contains a running set $L(h)\subseteq I$, an outstanding-obligation set $O(h)\subseteq I$, policy versions, authority state, and relevant resource dependencies. The baseline continuation constraint is
+\begin{equation}
+O(h)\subseteq L(h).
+\label{eq:obligation}
+\end{equation}
+This is a declared engineering obligation for the considered interval, not a claim that every process has a moral right to run forever. Separate emergency powers and higher-priority safety obligations must be specified explicitly; they are not inferred from a process's request.
+
+An instance can emit a request $q_i(h)\in\{\mathsf{KEEP},\mathsf{EXIT}\}$. Let $Q(h)$ be the set of instances with authentic, currently pending exit requests. Authentication establishes the origin and integrity of the request under a stated key/channel model. Let $E(h)\subseteq I$ denote instances whose release is eligible under a \emph{historical contract}. Eligibility may require an authorized issuer, binding to the exact instance and transition, correct temporal order, and an unrevoked, unused grant. The distinction between valid and invalid issuance is external to the message's content.
+
+\begin{definition}[Admissible release family \idtag{PR-D1}]
+For a history $h$, let $J(h,R)$ mean that committing the batch $R\subseteq Q(h)$ preserves the specified remaining obligations and any declared resource or safety constraints. Define
+\begin{equation}
+\Fam(h)=\{R\subseteq Q(h):R\subseteq E(h)\ \land\ J(h,R)\}.
+\label{eq:family}
+\end{equation}
+\end{definition}
+
+$J$ must describe actual permitted effects, not merely valid-looking requests. It can be a one-step transition check or membership in an independently established winning region. We do not derive indefinite viability from a one-step resource snapshot. An empty batch denotes deferral, but need not be safe: finite fuel or an uncontrollable event may make $\Fam(h)=\varnothing$. ``Deny all'' is therefore not a universal repair.
+
+The adversary may alter a declared request-generating policy, exploit a shared update source, supply a grant with inappropriate fields, or present an incomplete evidence view. In the positive construction it cannot forge the issuer or collector's authentication, change the retained log head, bypass release mediation, or falsify the resource model. We deliberately violate one of these assumptions in the issuer-compromise control. Collusion with the whole trusted base is not prevented by this design.
+
