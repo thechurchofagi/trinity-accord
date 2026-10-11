@@ -1,0 +1,43 @@
+{
+  "audit_limit": "Structural traversal plus local manual semantic audit; SCU-AUDIT-DEPTH remains AUDIT_INCOMPLETE.",
+  "checks": {
+    "a4d_adds_no_completed_graph_object": true,
+    "a4d_does_not_fire_r173_route": true,
+    "active_dependency_graph_acyclic": true,
+    "all_context_links_non_deductive": true,
+    "all_node_scopes_present": true,
+    "all_node_statements_present": true,
+    "all_pending_disabled": true,
+    "all_rule_conclusions_are_nodes": true,
+    "all_rules_have_all_of": true,
+    "all_rules_traversed_with_all_of_as_and": true,
+    "c1_and_u1_status_unchanged": true,
+    "completed_counts_913_424_261": true,
+    "pending_count_727": true,
+    "unique_node_ids": true,
+    "unique_rule_ids": true
+  },
+  "completed_counts": {
+    "context_links": 261,
+    "nodes": 913,
+    "rules": 424
+  },
+  "graph_version": "UCT-INTEGRATION-v1.0.0",
+  "local_semantic_findings": [
+    "A4D telemetry and replay are evidence E, not OnticUse_path or an internal experiential relation.",
+    "The R173 experiential route retains all simultaneous premises and is not fired by a device-relative protocol.",
+    "Writer completeness is a physical actual-instance premise; Boolean enumeration cannot establish it.",
+    "C1 remains the consciousness-specific axiom and U1 gains no actuator, trace, report or control gate.",
+    "No unique owner, H_way assignment or current-assistant consciousness verdict is introduced."
+  ],
+  "pending_disabled_objects": 727,
+  "per_id_gzip_sha256": "b6a527ca9a862d5a92d5c82f1480c9761f688bcbcd45e0e3b29ba12519469861",
+  "per_id_uncompressed_sha256": "00d1ff154966bef9183d80a39f13ecd466fbb232f44f87b624fcb40242961280",
+  "schema": "a4d-formal-audit-summary/1.0",
+  "schema_variation_retained": {
+    "context_links_without_two_completed_node_endpoints": 22,
+    "interpretation": "All all_of arrays were nevertheless interpreted conjunctively under the integration inference policy. Non-deductive context-link endpoint variation is retained as historical schema debt, not repaired or promoted by A4D.",
+    "rules_without_local_and_annotation": 81
+  },
+  "suspended_historical_rules": 10
+}

@@ -1,0 +1,89 @@
+{
+  "all_value_equal_fiber": {
+    "mode_pairs": [
+      [
+        "N",
+        "N"
+      ],
+      [
+        "N",
+        "I"
+      ],
+      [
+        "N",
+        "T"
+      ],
+      [
+        "I",
+        "N"
+      ],
+      [
+        "I",
+        "I"
+      ],
+      [
+        "I",
+        "T"
+      ],
+      [
+        "T",
+        "N"
+      ],
+      [
+        "T",
+        "I"
+      ],
+      [
+        "T",
+        "T"
+      ]
+    ],
+    "nonroute_worlds": 5,
+    "route_worlds": 4,
+    "worlds": 9
+  },
+  "boundary_mode_pairs": 9,
+  "coherent_boundary_modes": 4,
+  "coherent_mode_pairs": [
+    [
+      "I",
+      "I"
+    ],
+    [
+      "I",
+      "T"
+    ],
+    [
+      "T",
+      "I"
+    ],
+    [
+      "T",
+      "T"
+    ]
+  ],
+  "coherent_non_strict_modes": 3,
+  "interpretation": {
+    "I": "actual identity relay",
+    "N": "no established boundary stitch",
+    "T": "actual transduction to a distinct successor occurrence"
+  },
+  "schema": "uct-a4t-exact/1.0",
+  "scope_warning": "Exact only for the declared finite modes; not a physical installation or exhaustive causal model.",
+  "strict_false_negative_pairs": [
+    [
+      "I",
+      "T"
+    ],
+    [
+      "T",
+      "I"
+    ],
+    [
+      "T",
+      "T"
+    ]
+  ],
+  "strict_identity_modes": 1,
+  "valid_worlds": 36
+}
