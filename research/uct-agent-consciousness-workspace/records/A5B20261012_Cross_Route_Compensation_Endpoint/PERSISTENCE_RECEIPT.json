@@ -1,0 +1,36 @@
+{
+  "schema": "uct-persistence-receipt/1.0",
+  "round": "A5B20261012",
+  "baseline_commit": "862261ce3ce6d9df9f0300b97603210ff773beef",
+  "authoritative_science_commit": "c09bb3e160d4d4dd52b9b39c1554045ee6bf05eb",
+  "authoritative_science_tree": "ac19130a829658d48995d948e73c3552169c1e26",
+  "branch": "uct-agent-consciousness-workspace",
+  "github": {
+    "expected_sha_fast_forward": true,
+    "commit_tree_and_key_file_read_back": true,
+    "direct_shell_push_failure": "HTTPS credentials were unavailable; no shell push occurred",
+    "authorized_repository_object_ref_path": "SUCCEEDED"
+  },
+  "library": {
+    "fixed_master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "fixed_master_science_version": 163,
+    "fixed_master_science_file_id": "file_00000000f95c81fd9803c6cff5c88400",
+    "fixed_master_science_sha256": "0dd2e2c828f8f2b29f266f8a5899c28e098dad9c612aaa6e7ee0f229d71b4706",
+    "fixed_master_reverse_materialized_byte_equal": true,
+    "increment_library_file_id": "libfile_6b0fa24f97508191ae1dc6c8227e3c1b",
+    "increment_file_id": "file_00000000a51081fb932963416e1b1a2c",
+    "increment_size_bytes": 240971,
+    "increment_sha256": "897e35d0910740dd16c3bd30a081085a550a469ac15ce29eddb61ff699be3b36",
+    "increment_manifest_library_file_id": "libfile_dc495a126b648191b003dc82103c97d0",
+    "increment_manifest_file_id": "file_00000000d3ac81fba7936404c90a87c2",
+    "increment_manifest_size_bytes": 8832,
+    "increment_manifest_sha256": "887b51fa32eebb05067b90a63a3b8294b83abc4885f99ea6dd484e14e0d925fb",
+    "increment_and_manifest_reverse_materialized_byte_equal": true,
+    "increment_is_complete_backup": false,
+    "unused_prepared_reservations": "Two initial low-level reservations were not finalized and created no Library items; the required one-shot batch helper then succeeded"
+  },
+  "final_receipt_successor": "RECORDED_IN_FIXED_MASTER_NEXT_VERSION_TO_AVOID_SELF_REFERENCE",
+  "scientific_delta_changed_by_receipt": false,
+  "review_items_closed_by_self_report": false,
+  "no_pr_ci_deploy_or_publication": true
+}
