@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.native-ots-backlog.v1",
-  "updated_at": "2026-10-11T13:30:32Z",
+  "updated_at": "2026-10-12T16:05:21Z",
   "items": [
     {
       "key": "9500673381367a9c586dcac6cc6994383dca1993e92d9ae11cf9f183c8878b22",
@@ -1201,26 +1201,42 @@
       "last_attempt_at": null,
       "last_error": null,
       "next_action": "upload_native_ots_bundle"
+    },
+    {
+      "key": "85218d91cabbabc5112e8e5395b0305cc99ffd14757f4ca1d70e549ddb665798",
+      "kind": "native_ots_bundle",
+      "record_index": 182,
+      "archive_status": "pending_upload",
+      "anchored_file_sha256": "7e14e2808b692fb04f12e94b41757706d26cfb0e3d5f5c27d9f8a495614ea4c2",
+      "ots_status": "verified",
+      "anchor_file": "record-chain/ots/native-anchors/native-record-182-R-000000182-1f288df48bd88cb9-7e14e2808b692fb0.anchor.json",
+      "bundle_file": "record-chain/ots/native-arweave-bundles/native-record-182-R-000000182-1f288df48bd88cb9-7e14e2808b692fb0.anchor.verified.arweave-bundle.json",
+      "bundle_sha256": "06ee2ed6185839fbb445eb58fa6689acac0ef91be53e87f170a9a99f6df42a08",
+      "tx_id": null,
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "last_error": null,
+      "next_action": "upload_native_ots_bundle"
     }
   ],
   "summary": {
     "waiting_for_upgrade_count": 0,
     "upgrade_due_count": 0,
     "upgrade_failed_count": 0,
-    "pending_upload_count": 75,
+    "pending_upload_count": 76,
     "failed_upload_count": 0,
     "readback_failed_count": 0,
     "waiting_for_key_count": 0,
     "archived_count": 0,
-    "open_item_count": 75,
+    "open_item_count": 76,
     "first_open_record_index": 107,
     "backlog_current": false,
     "scan_scope": "all_native_anchors",
-    "native_anchor_count": 149,
+    "native_anchor_count": 150,
     "native_anchor_pending_count": 0,
     "native_anchor_upgraded_count": 105,
-    "native_anchor_verified_count": 44,
-    "native_anchor_upgraded_or_verified_count": 149,
+    "native_anchor_verified_count": 45,
+    "native_anchor_upgraded_or_verified_count": 150,
     "upgrade_completed_prefix_record_index": 106,
     "arweave_archive_completed_prefix_record_index": 106
   },
