@@ -1,0 +1,40 @@
+{
+  "schema": "uct-a5j-anchor-decomposition/1.0",
+  "domain": {
+    "factorial_cells": [{"P": 0, "C": 0}, {"P": 0, "C": 1}, {"P": 1, "C": 0}, {"P": 1, "C": 1}],
+    "H_hypotheses": ["P", "notP", "C", "notC", "zero", "one"],
+    "channel_selectors": ["H", "P", "C"],
+    "channel_polarities": [0, 1],
+    "observation": "Z=P and A=P in every P-by-C cell"
+  },
+  "conditions": {
+    "hardware_multiplicity": "two named channels Z and A; already present in baseline",
+    "semantic_source_diversity_SD": "{Z_source,A_source}={H,P}",
+    "common_orientation_CO": "Z_polarity=A_polarity"
+  },
+  "counts": {
+    "factorial_observation_only": {"models": 12, "target_hypotheses": 6},
+    "SD_only": {"models": 4, "target_hypotheses": 2, "targets": ["P", "notP"]},
+    "CO_only": {"models": 10, "target_hypotheses": 6},
+    "SD_and_CO": {"models": 2, "target_hypotheses": 1, "targets": ["P"]}
+  },
+  "full_models": [
+    {"H": "P", "Z_source": "H", "Z_polarity": 0, "A_source": "P", "A_polarity": 0},
+    {"H": "P", "Z_source": "P", "Z_polarity": 0, "A_source": "H", "A_polarity": 0}
+  ],
+  "counterexample_witnesses": {
+    "direct_position_twin": {"H": "zero", "Z_source": "P", "Z_polarity": 0, "A_source": "P", "A_polarity": 0},
+    "complemented_phenomenal_twin": {"H": "notP", "Z_source": "H", "Z_polarity": 1, "A_source": "P", "A_polarity": 0}
+  },
+  "checks": {
+    "baseline_count_12": true,
+    "SD_count_4": true,
+    "CO_count_10": true,
+    "full_count_2": true,
+    "full_identifies_target_H_equals_P": true,
+    "full_does_not_identify_which_channel_reads_H": true,
+    "drop_SD_restores_non_P_targets": true,
+    "drop_CO_restores_complement_target": true
+  },
+  "interpretation_limit": "Different hardware, two equal outputs, and factorial P-by-C data do not establish semantic source diversity or common orientation."
+}
