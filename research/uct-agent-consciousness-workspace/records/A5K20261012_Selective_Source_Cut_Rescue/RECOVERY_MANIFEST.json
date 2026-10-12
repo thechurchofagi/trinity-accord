@@ -1,0 +1,39 @@
+{
+  "schema": "uct-recovery-manifest/1.0",
+  "round": "A5K20261012",
+  "base_commit": "74b575ea4d3b3f523993557b54a1c30cab801c82",
+  "science_commit": "846df24b9d69db01eea3f92f7c4ccbfbe2637052",
+  "science_tree": "012f3ebf75039270d3245556f7b97a0409f5b112",
+  "increment": {
+    "file_name": "UCT_A5K_Increment_20261012.zip",
+    "library_file_id": "libfile_92f2f2b0118c8191b1429e616d4ea09c",
+    "sha256": "2233431a4e34382b80d2f16ac3906373e3af531470086093b927262e20b6874d",
+    "size_bytes": 193766,
+    "path_count": 28,
+    "is_full_backup": false
+  },
+  "external_manifest": {
+    "file_name": "UCT_A5K_Increment_20261012_MANIFEST.json",
+    "library_file_id": "libfile_049d7b88004881919ad8bb6d89a71dce",
+    "sha256": "fd4ba2f9496544f95eb101a90b675c0df23fd44df2f79380efcaf86cffb08737"
+  },
+  "fixed_master": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "verified_version": 182,
+    "sha256": "9ddd6071d4cf661f1d356606fc47ef37f85400f3a6d0c3db94d902d2742564fc"
+  },
+  "restore_steps": [
+    "Read the remote branch head and latest fixed-master version before restoring.",
+    "Check out base_commit.",
+    "Verify increment SHA-256 and extract at the repository root.",
+    "Run git add -A and require git write-tree == science_tree.",
+    "Run check_selective_source.py and require counts 36/18/6/2/1 and seven true checks.",
+    "Read RESEARCH_NOTE, SELECTIVE_SOURCE_CONTRACT, FAILURES, FORMAL_AUDIT, REVIEW_RESPONSE, and HANDOFF_ZH before continuing."
+  ],
+  "verified": {
+    "replay_tree_equal": true,
+    "increment_reverse_materialization_byte_equal": true,
+    "manifest_reverse_materialization_byte_equal": true,
+    "master_reverse_materialization_byte_equal": true
+  }
+}

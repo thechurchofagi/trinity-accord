@@ -1,0 +1,32 @@
+{
+  "schema": "uct-persistence-receipt/1.0",
+  "round": "A5K20261012",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "base_commit": "74b575ea4d3b3f523993557b54a1c30cab801c82",
+    "science_commit": "846df24b9d69db01eea3f92f7c4ccbfbe2637052",
+    "science_tree": "012f3ebf75039270d3245556f7b97a0409f5b112",
+    "update": "expected_sha_nonforce_fast_forward",
+    "remote_commit_and_tree_verified": true,
+    "remote_exact_results_sha256": "e317871b9e77f94faac821f48a37f81c1267393063fa3c758828e58221630c63"
+  },
+  "library": {
+    "master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "master_version": 182,
+    "master_sha256": "9ddd6071d4cf661f1d356606fc47ef37f85400f3a6d0c3db94d902d2742564fc",
+    "increment_library_file_id": "libfile_92f2f2b0118c8191b1429e616d4ea09c",
+    "increment_sha256": "2233431a4e34382b80d2f16ac3906373e3af531470086093b927262e20b6874d",
+    "increment_size_bytes": 193766,
+    "increment_path_count": 28,
+    "increment_is_full_backup": false,
+    "manifest_library_file_id": "libfile_049d7b88004881919ad8bb6d89a71dce",
+    "manifest_sha256": "fd4ba2f9496544f95eb101a90b675c0df23fd44df2f79380efcaf86cffb08737",
+    "reverse_materialization_byte_equal": true
+  },
+  "limitations": [
+    "The increment is not a complete repository, history, or workspace backup.",
+    "The receipt proves storage/readback integrity, not theory truth or empirical installation.",
+    "A later metadata receipt commit is not part of the science-tree increment."
+  ]
+}

@@ -12,3 +12,8 @@
 10. Restored and traversed the effective formal graph; recorded structural success without treating it as theory truth or a global semantic proof.
 
 Persistence receipts are appended only after remote and persistent-workspace readback succeed.
+
+11. Saved the science tree by expected-SHA nonforced fast-forward through the authorized repository connector and re-fetched remote commit/tree plus the exact-results file.
+12. Created a 28-path increment from the verified A5J final head and replayed it over the base; `git write-tree` exactly reproduced the A5K science tree.
+13. Saved the increment and external manifest as new persistent files, and replaced the fixed master handoff under its existing identity at version 182.
+14. Reverse-materialized the increment, manifest, and master handoff; all three matched local SHA-256 byte-for-byte before writing this receipt.

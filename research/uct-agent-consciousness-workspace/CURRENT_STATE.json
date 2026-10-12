@@ -124,6 +124,16 @@
   },
   "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 effective objects received a fresh structural traversal. A5K manually rechecked C1/U1, PHEN_TARGET, R157, R159, A4P, A5I/A5J, and current supervision items. Deep full-history semantics remain AUDIT_INCOMPLETE.",
   "next_priority": "A5K next: hold the same actual R source and direct-P path intact while prospectively reversing a selected target role/pole; require the intervention to independently refute at least one non-target H law, or stop at organizational R dependence.",
+  "latest_activity_persistence_after_A5K_science": {
+    "science_commit": "846df24b9d69db01eea3f92f7c4ccbfbe2637052",
+    "science_tree": "012f3ebf75039270d3245556f7b97a0409f5b112",
+    "master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "master_verified_version": 182,
+    "increment_library_file_id": "libfile_92f2f2b0118c8191b1429e616d4ea09c",
+    "manifest_library_file_id": "libfile_049d7b88004881919ad8bb6d89a71dce",
+    "increment_is_full_backup": false,
+    "reverse_materialization_verified": true
+  },
   "latest_activity_persistence_after_A5J_science": {
     "science_commit": "374d92446b22b91fb1c09b70d711af1965439c1c",
     "science_tree": "c5ff7b48208a8f8b158b7d79429b2a909160960c",
