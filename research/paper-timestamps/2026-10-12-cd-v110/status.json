@@ -2,22 +2,26 @@
   "batch": "2026-10-12-cd-v110",
   "files": [
     {
-      "bitcoin_heights": [],
+      "bitcoin_heights": [
+        971034,
+        971036,
+        971047
+      ],
       "bytes": 267170,
       "doi": "10.5281/zenodo.23308239",
       "name": "awareness-can-catch-up-after-choice-has-closed-cd-v1.1.0.pdf",
       "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-10-12-cd-v110/proofs/CIV-CD-2026-01/awareness-can-catch-up-after-choice-has-closed-cd-v1.1.0.pdf.ots",
-      "proof_sha256": "184a100b3c2c7b4d75ed4d7814c41d059a5bf6c205a516e9e46899c83baaae8a",
+      "proof_sha256": "c68c8fe724149c50d816aba3132288391074a00ba53f0146c76887ad644b0831",
       "report": "CIV-CD-2026-01",
       "role": "Exact 12-page English theoretical preprint CD-v1.1.0",
       "sha256": "aaf63c68661ffaeaaa677f4da3e5b8df327cc1af2dbd5ec58c7780434ee3925f",
-      "state": "PENDING_BITCOIN"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     }
   ],
   "paper_count": 1,
   "pdf_count": 1,
   "schema": "trinityaccord.paper-ots-status.v1",
-  "state": "WAITING",
+  "state": "READY_FOR_ARWEAVE",
   "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
 }
