@@ -1,0 +1,37 @@
+{
+  "schema": "uct-persistence-receipt/1.0",
+  "research_id": "A5J20261012",
+  "science": {
+    "base_commit": "4c5a3aeb33bad53553db0d2fa273c77261cf015d",
+    "checkpoint_commit": "a290c210aa457de4f144747a111b4fbb73729f7c",
+    "commit": "374d92446b22b91fb1c09b70d711af1965439c1c",
+    "tree": "c5ff7b48208a8f8b158b7d79429b2a909160960c",
+    "branch": "uct-agent-consciousness-workspace",
+    "expected_sha_nonforce_fast_forward": true,
+    "commit_and_key_files_read_back": true
+  },
+  "persistent_workspace": {
+    "master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "master_file_id": "file_00000000ef7081f5aa793d7ebe152f3c",
+    "master_version": 180,
+    "master_sha256": "fee792d97a1f27dc081e16f8a45d4f1ec5afd4b66d2df186083fbf73cb899790",
+    "increment_library_file_id": "libfile_820a8ec0d1308191ae80913d877728a1",
+    "increment_file_id": "file_00000000b68081f6a4619ba152940ff5",
+    "increment_sha256": "664d2345da35b697a940faef4b4b8ed9628d4954dd44fccc5a5b1a0a906f8d46",
+    "increment_size_bytes": 150901,
+    "manifest_library_file_id": "libfile_a5982fe8b16c81919ec973f43232148b",
+    "manifest_file_id": "file_00000000fd4881f58289a99402150581",
+    "manifest_sha256": "7458cbae07c01d4618cf277fb1641f3f3ffc7b93ced677ba3f0fb97640d89bef",
+    "all_three_reverse_materialized_byte_equal": true
+  },
+  "replay": {
+    "changed_paths": 29,
+    "classification": "INCREMENT_NOT_FULL_BACKUP",
+    "replayed_tree": "c5ff7b48208a8f8b158b7d79429b2a909160960c",
+    "tree_equal": true
+  },
+  "limits": [
+    "The archive is an increment from the stated base, not a complete repository or history.",
+    "A later metadata-only successor records the final fixed-master confirmation and does not alter the science tree."
+  ]
+}

@@ -124,6 +124,16 @@
   },
   "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 effective objects received a fresh structural traversal. A5J manually rechecked C1/U1, PHEN_TARGET, R157, R159, A5I and current supervision items. Deep full-history semantics remain AUDIT_INCOMPLETE.",
   "next_priority": "A5J next: specify one noncircular, failure-capable same-participant/tool intervention that warrants semantic source diversity between an H-sensitive path and a direct-P path while preserving prospective common orientation; if unavailable, stop at cue exclusion and decoding.",
+  "latest_activity_persistence_after_A5J_science": {
+    "science_commit": "374d92446b22b91fb1c09b70d711af1965439c1c",
+    "science_tree": "c5ff7b48208a8f8b158b7d79429b2a909160960c",
+    "master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "master_verified_version": 180,
+    "increment_library_file_id": "libfile_820a8ec0d1308191ae80913d877728a1",
+    "manifest_library_file_id": "libfile_a5982fe8b16c81919ec973f43232148b",
+    "increment_is_full_backup": false,
+    "reverse_materialization_verified": true
+  },
   "latest_activity_persistence_after_A4W_science": {
     "science_commit": "0eddd9c06670a7357a8be5e38efc8af1f335405f",
     "science_tree": "f840be3dc13e384d8074f3e34500ea637fd42ced",

@@ -1,0 +1,32 @@
+{
+  "schema": "uct-recovery-pointer/1.0",
+  "research_id": "A5J20261012",
+  "base_commit": "4c5a3aeb33bad53553db0d2fa273c77261cf015d",
+  "science_commit": "374d92446b22b91fb1c09b70d711af1965439c1c",
+  "science_tree": "c5ff7b48208a8f8b158b7d79429b2a909160960c",
+  "archive": {
+    "name": "UCT_A5J_Increment_20261012.zip",
+    "library_file_id": "libfile_820a8ec0d1308191ae80913d877728a1",
+    "sha256": "664d2345da35b697a940faef4b4b8ed9628d4954dd44fccc5a5b1a0a906f8d46",
+    "size_bytes": 150901,
+    "changed_paths": 29,
+    "is_complete_backup": false
+  },
+  "external_manifest": {
+    "name": "UCT_A5J_Increment_20261012_MANIFEST.json",
+    "library_file_id": "libfile_a5982fe8b16c81919ec973f43232148b",
+    "sha256": "7458cbae07c01d4618cf277fb1641f3f3ffc7b93ced677ba3f0fb97640d89bef"
+  },
+  "master_handoff": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "verified_version": 180,
+    "sha256": "fee792d97a1f27dc081e16f8a45d4f1ec5afd4b66d2df186083fbf73cb899790"
+  },
+  "restore_order": [
+    "Read the latest fixed master handoff and remote branch head.",
+    "Checkout base_commit in a clean worktree.",
+    "Verify archive SHA-256 and extract at repository root.",
+    "Run git add -A and require git write-tree == science_tree.",
+    "Run check_anchor_decomposition.py and reread FORMAL_AUDIT.md plus REVIEW_RESPONSE.md."
+  ]
+}

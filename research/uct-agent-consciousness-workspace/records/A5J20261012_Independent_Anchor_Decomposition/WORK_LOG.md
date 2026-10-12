@@ -14,3 +14,7 @@
 12. Initial local HTTPS push failed because no Git credential was available; the authorized GitHub connector then saved the science checkpoint by expected-SHA nonforced fast-forward. The failure remains recorded.
 
 Persistence receipts are appended only after remote and persistent-workspace readback succeed.
+
+13. Created a 29-path increment from the verified A5I final head to the A5J science commit; reverse extraction over the base reproduced science tree `c5ff7b48208a8f8b158b7d79429b2a909160960c` exactly.
+14. Saved the increment and external manifest as new persistent files; replaced the fixed master handoff under its existing identity at version 180.
+15. Reverse-materialized the increment, manifest and fixed master; all three matched their local SHA-256 byte-for-byte before this receipt was written.
