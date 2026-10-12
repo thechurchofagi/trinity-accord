@@ -1,0 +1,103 @@
+{
+  "schema": "eac-v3-publication-lifecycle-receipt/1",
+  "work_family": "When the Guardians Can Be Acquired",
+  "paper_id": "EAC-v3.0.0",
+  "version": "3.0.0",
+  "author": "Hongju Liu",
+  "title": "When the Guardians Can Be Acquired: Joint Protection Across Concurrent and Renewable Authorizations",
+  "doi": "10.5281/zenodo.23307124",
+  "record_id": 23307124,
+  "doi_url": "https://doi.org/10.5281/zenodo.23307124",
+  "zenodo_url": "https://zenodo.org/records/23307124",
+  "date": "2026-10-12",
+  "pages": 12,
+  "license": "cc-by-4.0",
+  "publication_type": "preprint",
+  "peer_reviewed": false,
+  "doi_state": "PUBLISHED_PUBLIC_BYTE_READBACK_PASS",
+  "public_file_count": 6,
+  "public_file_readback_sha256_pass": true,
+  "doi_resolver_state": "RESOLVER_PASS",
+  "publication_workflow_run_id": 38189751063,
+  "publication_workflow_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/38189751063",
+  "publication_receipt_path": "research/uct-agent-consciousness-workspace/records/ASI_CC_20261011_Control_and_Coexistence/guardians_joint_v3.0.0/publication/PUBLICATION-RECEIPT.json",
+  "publication_manifest_sha256": "367e064f5ffa0ba3eee78b05398cf0b01869e343d50c14789fe75affa92f9a30",
+  "source_snapshot_commit": "6d3c6cbe9bcd6238840dc145879ff6b10ba63045",
+  "files": [
+    {
+      "name": "when-the-guardians-can-be-acquired-eac-v3.0.0.pdf",
+      "bytes": 260757,
+      "sha256": "d735a574cb8f4ce3233cde5b69f4e2135b5a0e7825536ce2b638cb93c2c93e57"
+    },
+    {
+      "name": "reproducibility-eac-v3.0.0.zip",
+      "bytes": 599292,
+      "sha256": "4353e57c83c66991ad91123634cc5f8e1ef42d1ab331a92412777c8ecb4ed58e"
+    },
+    {
+      "name": "when-the-guardians-can-be-acquired-eac-v3.0.0.tex",
+      "bytes": 48889,
+      "sha256": "24fc7c6c53b2cb1ef25562431053140a06a147da3f69b0bfcf70693d232cc5ed"
+    },
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 1629,
+      "sha256": "0ed1dc32ed4330be91ae8e2405e94ff68b7e47407641249697381d030b7e3247"
+    },
+    {
+      "name": "REVIEW-AND-SOURCES.md",
+      "bytes": 2075,
+      "sha256": "dde371a8f9437cb6e0b1df22f35fca011544970b7ab6b799514d6ca6b3219c45"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 502,
+      "sha256": "b053d6a1e37ad089ec91d244a2744fe2b84087b5743211c1e5cc4542c7423ea0"
+    }
+  ],
+  "ots": {
+    "state": "CALENDAR_SUBMITTED_PENDING_BITCOIN",
+    "batch": "2026-10-12-guardians-eac-v300",
+    "proof": "research/paper-timestamps/2026-10-12-guardians-eac-v300/proofs/ASI-CC-EAC3/when-the-guardians-can-be-acquired-eac-v3.0.0.pdf.ots",
+    "proof_sha256": "7e7c645312ea532452257afe7348e9a86be60eac826e4968912697f67123fe69",
+    "pending_calendar_attestations": 4,
+    "verified_bitcoin_heights": [],
+    "submitted_workflow_run_id": 38189884485,
+    "submitted_workflow_status": "SUCCESS"
+  },
+  "arweave": {
+    "state": "NOT_SUBMITTED_UNTIL_BITCOIN_VERIFIED_AND_BUDGET_ALLOWED",
+    "tx_id": null,
+    "verified_public_readback": false,
+    "scheduler": "https://github.com/thechurchofagi/trinity-accord/actions/workflows/research-guardians-eac-v300-ots-arweave-scheduler.yml",
+    "initial_run_id": 38189963213,
+    "schedule": "hourly around minute37, conditional and not guaranteed completion",
+    "budget_guards": {
+      "min_wallet_remaining_AR": "0.25",
+      "max_tx_reward_AR": "0.099999999999",
+      "max_30_day_spend_AR": "0.50"
+    },
+    "initial_scheduler_outcome": "SUCCESS; OTS still PENDING_BITCOIN; guarded paid upload SKIPPED"
+  },
+  "research_source_branch": "uct-agent-consciousness-workspace",
+  "publication_branch": "research/guardians-joint-v300-20261012",
+  "predecessor_unpublished_versions_preserved": [
+    "ASI-CC-v1.0.0",
+    "EAC-v2.0.0"
+  ],
+  "independent_prior_dois_unchanged": [
+    "10.5281/zenodo.23295776",
+    "10.5281/zenodo.23299153"
+  ],
+  "formal_UCT_map": "UCT-MAP-v1.1.2",
+  "formal_map_promotions": 0,
+  "whole_historical_audit_complete": false,
+  "claims_scientifically_validated_by_doi": false,
+  "limits": [
+    "No independent peer review",
+    "No real frontier AI, human legitimacy or hardware trust validation",
+    "Mathematical novelty is scoped; global priority unverified",
+    "Bitcoin calendar proof not yet final",
+    "No Arweave transaction on DOI publication event"
+  ]
+}

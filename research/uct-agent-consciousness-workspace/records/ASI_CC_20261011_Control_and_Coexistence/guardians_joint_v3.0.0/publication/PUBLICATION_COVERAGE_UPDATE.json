@@ -1,0 +1,32 @@
+{
+  "schema": "uct-scoped-publication-delta/1",
+  "baseline_coverage": "UCT-PUB-v1.0.33",
+  "version": "EAC-v3.0.0",
+  "work_family": "When the Guardians Can Be Acquired",
+  "published_preprint_doi": "10.5281/zenodo.23307124",
+  "new_verified_published_work": true,
+  "previous_versions_publication_status": "unpublished draft; first DOI for this work family",
+  "covered_claim_ids": [
+    "JPA-D1",
+    "JPA-T1",
+    "JPA-T2",
+    "JPA-T3",
+    "JPA-C1",
+    "JPA-T4",
+    "JPA-E1",
+    "JPA-N1",
+    "JPA-N2",
+    "JPA-N3"
+  ],
+  "coverage_scope": "Manuscript and published reproduction archive; separate inherited, proposed, negative and theoretical status",
+  "claim_validity": "Conditional finite proofs with executed local software checks; no independent proof or peer review",
+  "novelty_status": "Exact scoped joint-endorsement/renewal combination; global priority unverified; underlying quorum and I-confluence precedents acknowledged",
+  "old_published_papers_modified": false,
+  "scientific_map_changed": false,
+  "formal_map": "UCT-MAP-v1.1.2",
+  "publication_count_global_total": "NOT_RECONCILED_AGAINST_ALL_PUBLISHED_WORKS",
+  "ots_state": "PENDING_BITCOIN",
+  "arweave_state": "NOT_UPLOADED",
+  "receipt": "publication/PUBLICATION-RECEIPT.json",
+  "next": "Wait for independent OTS Bitcoin verification before guarded paid Arweave preservation; preserve exact public source bytes"
+}
