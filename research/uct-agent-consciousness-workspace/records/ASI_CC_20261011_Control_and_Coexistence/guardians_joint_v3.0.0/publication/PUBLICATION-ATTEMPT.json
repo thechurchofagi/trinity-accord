@@ -1,0 +1,22 @@
+{
+  "deposition_state": "unsubmitted",
+  "doi": "10.5281/zenodo.23307124",
+  "file_count": 6,
+  "files_uploaded": [
+    "when-the-guardians-can-be-acquired-eac-v3.0.0.pdf",
+    "reproducibility-eac-v3.0.0.zip",
+    "when-the-guardians-can-be-acquired-eac-v3.0.0.tex",
+    "README-LICENSE.txt",
+    "REVIEW-AND-SOURCES.md",
+    "SHA256SUMS.txt"
+  ],
+  "github_run_id": "38189751063",
+  "github_source_commit": "6d3c6cbe9bcd6238840dc145879ff6b10ba63045",
+  "manifest_sha256": "367e064f5ffa0ba3eee78b05398cf0b01869e343d50c14789fe75affa92f9a30",
+  "paper_id": "EAC-v3.0.0",
+  "publish_action_state": "done",
+  "record_id": 23307124,
+  "schema": "eac-v3-zenodo-attempt/1",
+  "started_utc": "2026-10-12T00:54:09.951021+00:00",
+  "status": "PUBLISHED_PUBLIC_BYTE_READBACK_PASS"
+}
