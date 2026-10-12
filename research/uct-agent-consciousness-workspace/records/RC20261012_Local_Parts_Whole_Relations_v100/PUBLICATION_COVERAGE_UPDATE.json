@@ -1,0 +1,31 @@
+{
+  "schema": "uct-rc-coverage-checkpoint/v1",
+  "research_id": "RC20261012",
+  "version": "1.0.0",
+  "report_id": "UCT-RC-2026-01",
+  "title": "Local Parts, Whole Relations: A Constructive Audit of Composition in Structural Consciousness Models",
+  "baseline_completed_map": "UCT-MAP-v1.1.2",
+  "baseline_publication_coverage": "UCT-PUB-v1.0.33",
+  "authoritative_map_modified": false,
+  "published_work_count_changed": false,
+  "manuscript_decision": "READY_AS_BOUNDED_THEORETICAL_METHODS_PREPRINT_FOR_AUTHOR_REVIEW",
+  "publication_state": "PREPARED_NOT_RESERVED_OR_PUBLISHED",
+  "assigned_doi": null,
+  "ots_submitted": false,
+  "arweave_uploaded": false,
+  "audit_status": "PENDING_MAP_AUDIT_INCOMPLETE",
+  "candidate_layer_enabled": false,
+  "full_map_semantic_review_performed": false,
+  "claims": [
+    {"id":"RC1","type":"CORRECTION","statement":"Finite gluing existence need not imply uniqueness; exact three-point nonempty-overlap presheaf counterexample.","evidence":"RESEARCH_NOTE.md section2 and code/verify_composition.py","enabled_as_uct_premise":false},
+    {"id":"RC2","type":"NEW_APPLICATION","statement":"Free binary relational completion fiber has size 2^k for k uncovered relation atoms, in a fixed labeled signature.","evidence":"RESEARCH_NOTE.md section3","enabled_as_uct_premise":false},
+    {"id":"RC3","type":"NEW_APPLICATION","statement":"Covering relation-incidence fields repairs unique gluing in the specified free assignment model.","evidence":"RESEARCH_NOTE.md section4","enabled_as_uct_premise":false},
+    {"id":"RC4","type":"NEW_APPLICATION","statement":"Universal expansion forbids forgetting globally discriminated pairs; nonmetric and pseudometric cases must be separated.","evidence":"RESEARCH_NOTE.md section5","enabled_as_uct_premise":false},
+    {"id":"RC5","type":"NEW_APPLICATION","statement":"A pseudometric between declared lower and upper bounds exists iff the lower bounds lie below the shortest-path closure of the upper bounds.","evidence":"RESEARCH_NOTE.md section6","enabled_as_uct_premise":false},
+    {"id":"RC6","type":"PROPOSED_NEW_APPLICATION_PRIORITY_UNVERIFIED","statement":"Exact uniform relaxation is the maximum path-average deficit; classical shortest-path construction, not a new generic algorithm.","evidence":"RESEARCH_NOTE.md section7","enabled_as_uct_premise":false},
+    {"id":"RC7","type":"NEW_APPLICATION","statement":"Same-context restriction and attention-induced intervention require separate transport and error assumptions.","evidence":"RESEARCH_NOTE.md section8","enabled_as_uct_premise":false}
+  ],
+  "inherited": ["UCT I v1.2 C1/P3/U1 and Section6.3 nonproduct comparison", "A4W local-centre versus actual joint-participation distinction", "A5L selected-feeling semantic residual", "Standard sheaf existence/uniqueness and assignment sheaves", "Classic shortest-path/metric-closure mathematics"],
+  "priority_limits": "Targeted review only. Related Santos DOI10.5281/zenodo.22135251 located through secondary discovery but primary text was inaccessible. No global-first or exhaustive novelty certificate.",
+  "persistence_scope": "This repository directory holds a technical proof checkpoint, verifier, exact JSON, work log and handoff; complete manuscript/PDF/preparation package are in the originating conversation and are not silently assumed mirrored here."
+}
