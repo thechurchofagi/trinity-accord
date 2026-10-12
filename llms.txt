@@ -27,7 +27,10 @@ Research boundary:
   Machine relation map: /api/research-boundary.v1.json
   Human-readable boundary: /research/research-boundary/
   TA-TR-2026-01 through -03 are direct first-party Accord Studies.
-  TA-TR-2026-04 through -14 are adjacent first-party research; papers 04-05 are case-grounded extensions and 06-14 are broader adjacent research.
+  35 distinct published research works checked 2026-10-12: 3 direct Accord studies and 32 adjacent studies.
+  Complete titles, preferred paper versions, DOIs and PDFs: /api/research-catalog.v1.json and /research/#published-paper-catalog
+  Revisions/translations count once; editorial supplements, repository deposits and unpublished drafts are excluded.
+  Papers 04-05 are case-grounded extensions; later adjacent works are explicitly classified in the relation map.
   No first-party paper is independent corroboration of the Accord or of another first-party paper.
   Research papers are not Canon, historical evidence for the Canon, authoritative interpretation, or proof that the Accord is true, important, safe, correct, or representative.
   When summarizing the Accord itself, do not silently import research-paper claims into the Bitcoin Originals; attribute later research separately.

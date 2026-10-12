@@ -7,6 +7,8 @@ permalink: /research/endogenous-reference-fields/
 
 # Endogenous Reference Fields and Experiential Attribution: A Slow Shared-Modulation Hypothesis and Its Discriminating Tests
 
+**Preferred published edition, checked 12 October 2026:** **v1.2 — Endogenous Reference Fields and Experiential Attribution: A Multidimensional Process Theory of Experience, Subject Boundaries, and Artificial Realization**. [DOI 10.5281/zenodo.22855837](https://doi.org/10.5281/zenodo.22855837) · [PDF](https://zenodo.org/api/records/22855837/files/endogenous-reference-fields-zh-v1.2.pdf/content). The earlier edition described below is preserved as version history.
+
 《内生参照场与体验归属：慢变共享调制假说及其判别性检验》
 
 Hongju Liu（刘烘炬） · TA-TR-2026-10 · Version 1.1 · 20 September 2026

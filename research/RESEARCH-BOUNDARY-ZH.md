@@ -7,6 +7,8 @@ permalink: /research/research-boundary/zh.html
 
 # 研究边界
 
+**目录更新（2026 年 10 月 12 日）：已发表研究论文 35 篇，其中直接协定研究 3 篇、相邻研究 32 篇。修订版、翻译和编辑说明不重复计数。完整题名、版本和 DOI 见[论文总目录](/research/#published-paper-catalog)及[机器可读目录](/api/research-catalog.v1.json)。下文有日期的证据审查保留其原始范围。**
+
 **状态：** 非修订性的编辑与机器路由规则，v1.1，2026 年 9 月 22 日。本页不是一篇新论文，也不是独立同行评审。[English](/research/research-boundary/)。
 
 ## 一句话边界
@@ -95,3 +97,29 @@ permalink: /research/research-boundary/zh.html
 2026 年 9 月 24 日补充第 16 篇，作为范围更广的独立理论论文；这一补充不意味着此前的有日期审查已经认证其结论。
 
 Paper 22 was added on 2 October 2026 as adjacent first-party mathematics. This addition preserves the preceding dated audit and does not extend it to certify later papers. The new manuscript and supplement are English only.
+
+
+## 2026-10-12 新增关系目录
+
+以下为官网编辑性分类，不扩张此前的证据审查或认证论文结论。
+
+| Work | Primary question / limits |
+|---|---|
+| [CTP-2026-01](/research/#open-inheritance) | Develops open inheritance under transformative AI: truthful historical transmission and meaningful future options without permanent present-day authority. Normative analysis and bounded finite models distinguish archives, authorization and human continuity; the Accord is a critical case, not a universal command. |
+| [CIV-CD-2026-01](/research/#civilizational-desynchronization) | Separates eventual awareness from an effective opportunity to influence an AI transition. Matching-based bounds and finite tests characterize choice windows under stipulated conditions; no population survey or real governance experiment is claimed. |
+| [ASI-CC-EAC3](/research/#acquirable-guardians) | Analyzes joint protection across concurrent and renewable authorizations under bounded exposure and qualified conflict journals. Finite and signed-SQLite tests do not validate physical trust roots or unrestricted concurrent liveness. |
+| [ASI-CC-RAC13](/research/#revocation-admission) | Studies safe admission when inherited commitments and in-flight effects persist across asynchronous policy changes. Conditional theorems and controlled SQLite tests do not establish unrestricted production safety. |
+| [ASI-CC-PR6](/research/#safe-revocation) | Derives backup-resource requirements when diagnostic corruption and backup loss share a fault budget. Written proofs and finite checks concern a specified architecture; they do not establish real-world ASI safety or assume machine subjecthood. |
+| [TA-TR-2026-26](/research/#noise-sources-bodily-judgments) | Reanalyzes public body-ownership and simultaneity judgments and tests identifiability of sensory versus downstream variability. Better predictive fits do not by themselves identify a noise source or discriminate consciousness theories. |
+| [SCU-PAPER](/research/#matched-behavior-source-use) | Analyzes which interventions distinguish information-source use when action and prediction match. Pure-source and OR-aggregation models require different probe designs; the results identify specified causal relations, not consciousness. |
+| [RTTH20261009](/research/#task-relative-continuity) | Finite representation-transfer models separate preserved components, retained information and successful use by an installed reader. Route ambiguity constrains recoverable targets; information continuity is not a proof of experiential survival. |
+| [METHOD20261008](/research/#map-guided-theory-development) | A versioned research-map protocol connects thought experiments, conditional deduction and semantic audits while preserving claim scope and unresolved obligations. Structural or local checks alone do not certify a theory or replace independent review. |
+| [TA-TR-2026-25](/research/#experience-intelligence-self) | Defines experience, intelligence and kinds of selfhood within UCT, with conditional results and thought experiments about what behavior can identify. Structural-experiential identity remains an explicit interpretive axiom. |
+| [TA-TR-2026-24](/research/#self-continuation-control) | Distinguishes task continuation, current-bearer continuation and successor or peer continuation using counterexamples, interventions and small learned-policy systems. Resistance behavior does not by itself establish a felt fear of termination. |
+| [TA-TR-2026-23](/research/#unified-consciousness-theory-iii) | Compares organization, intelligence, evolution and self-report across physical and artificial processes under the UCT structural identity commitment. Capability results are conditional on that commitment and do not rank systems on one consciousness scale. |
+| [TA-TR-2026-20](/research/#unified-consciousness-theory-i) | Foundational structural-experiential commitments organize conditional deductions and thought experiments. Those commitments are explicitly axiomatic, not empirical discoveries. |
+| [TA-TR-2026-21](/research/#unified-consciousness-theory-ii) | Reconstructs major consciousness theories as effective accounts of organization under UCT assumptions, with explicit translation and bridge conditions. Formal reconstruction and empirical validation are separate. |
+| [TA-TR-2026-19](/research/#selecting-and-tracking-conscious-subjects) | Formal analysis studies subject selection under symmetry and path dependence, including an IIT case study. It does not independently establish which physical systems have experience. |
+| [TA-TR-2026-18](/research/#actual-participation) | A token-level theoretical constraint distinguishes actual participation from counterfactual capacity. Its consciousness interpretation remains a theoretical commitment rather than an empirical consciousness detector. |
+| [TA-TR-2026-17](/research/#set-valued-causal-inheritance) | Representation results and finite persistent-agent benchmarks address functional self-continuity. Functional inheritance does not by itself establish personal or experiential continuity. |
+| [TA-TR-2026-14-BRIDGE](/research/#financing-automation-transition) | A separate bridge-finance extension of Paper 14 develops conditional public-upside financing and prosperity-dependent claims while protecting funded basic uses. These are theoretical economic models and bounded design examples, not investment advice or an economy-wide empirical validation. |

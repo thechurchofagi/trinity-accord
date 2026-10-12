@@ -7,6 +7,8 @@ permalink: /research/research-boundary/
 
 # Research Boundary
 
+**Catalog update, 12 October 2026: 35 published research works — 3 direct Accord studies and 32 adjacent studies. Revisions, translations and editorial supplements do not add research works. See the [complete catalog](/research/#published-paper-catalog) and [machine-readable catalog](/api/research-catalog.v1.json) for current titles, versions and DOIs. The dated evidence audit below retains its original scope.**
+
 **Status:** non-amending editorial and machine-routing policy, version 1.1, 22 September 2026. This is neither a research paper nor an independent review. [中文](/research/research-boundary/zh.html).
 
 ## The boundary in one sentence
@@ -30,7 +32,7 @@ The existing six-role map is retained:
 
 ## Classify by research object and contribution
 
-**TA-TR-2026-01 through -03 remain First-party Accord Studies. TA-TR-2026-04 through -16 remain the Adjacent Research Program.** This classification is based on what each paper principally tries to establish, not simply its number or whether its conclusions favor the project.
+**TA-TR-2026-01 through -03 remain First-party Accord Studies. The other 32 cataloged works belong to the Adjacent Research Program.** This classification is based on what each paper principally tries to establish, not simply its number or whether its conclusions favor the project.
 
 **Papers 04–05 are case-grounded extensions**, not unrelated work: the fourth applies a general coexistence framework to the Star Ark Covenant; the fifth develops a bounded recovery framework motivated by the archive. Papers 06–16 address broader questions. A mixed paper may have both a general contribution and a case application; these are not competing claims to canonical membership.
 
@@ -101,3 +103,29 @@ The homepage's core explanation and layout remain unchanged. A small footer link
 Paper 16 was added on 24 September 2026 as a distinct broader theoretical work; this addition does not extend the earlier dated audit to certify its conclusions.
 
 Paper 22 was added on 2 October 2026 as adjacent first-party mathematics. This addition preserves the preceding dated audit and does not extend it to certify later papers. The new manuscript and supplement are English only.
+
+
+## Relation-map additions, 12 October 2026
+
+These editorial classifications do not extend the earlier evidence audit or certify the papers' conclusions.
+
+| Work | Primary question / limits |
+|---|---|
+| [CTP-2026-01](/research/#open-inheritance) | Develops open inheritance under transformative AI: truthful historical transmission and meaningful future options without permanent present-day authority. Normative analysis and bounded finite models distinguish archives, authorization and human continuity; the Accord is a critical case, not a universal command. |
+| [CIV-CD-2026-01](/research/#civilizational-desynchronization) | Separates eventual awareness from an effective opportunity to influence an AI transition. Matching-based bounds and finite tests characterize choice windows under stipulated conditions; no population survey or real governance experiment is claimed. |
+| [ASI-CC-EAC3](/research/#acquirable-guardians) | Analyzes joint protection across concurrent and renewable authorizations under bounded exposure and qualified conflict journals. Finite and signed-SQLite tests do not validate physical trust roots or unrestricted concurrent liveness. |
+| [ASI-CC-RAC13](/research/#revocation-admission) | Studies safe admission when inherited commitments and in-flight effects persist across asynchronous policy changes. Conditional theorems and controlled SQLite tests do not establish unrestricted production safety. |
+| [ASI-CC-PR6](/research/#safe-revocation) | Derives backup-resource requirements when diagnostic corruption and backup loss share a fault budget. Written proofs and finite checks concern a specified architecture; they do not establish real-world ASI safety or assume machine subjecthood. |
+| [TA-TR-2026-26](/research/#noise-sources-bodily-judgments) | Reanalyzes public body-ownership and simultaneity judgments and tests identifiability of sensory versus downstream variability. Better predictive fits do not by themselves identify a noise source or discriminate consciousness theories. |
+| [SCU-PAPER](/research/#matched-behavior-source-use) | Analyzes which interventions distinguish information-source use when action and prediction match. Pure-source and OR-aggregation models require different probe designs; the results identify specified causal relations, not consciousness. |
+| [RTTH20261009](/research/#task-relative-continuity) | Finite representation-transfer models separate preserved components, retained information and successful use by an installed reader. Route ambiguity constrains recoverable targets; information continuity is not a proof of experiential survival. |
+| [METHOD20261008](/research/#map-guided-theory-development) | A versioned research-map protocol connects thought experiments, conditional deduction and semantic audits while preserving claim scope and unresolved obligations. Structural or local checks alone do not certify a theory or replace independent review. |
+| [TA-TR-2026-25](/research/#experience-intelligence-self) | Defines experience, intelligence and kinds of selfhood within UCT, with conditional results and thought experiments about what behavior can identify. Structural-experiential identity remains an explicit interpretive axiom. |
+| [TA-TR-2026-24](/research/#self-continuation-control) | Distinguishes task continuation, current-bearer continuation and successor or peer continuation using counterexamples, interventions and small learned-policy systems. Resistance behavior does not by itself establish a felt fear of termination. |
+| [TA-TR-2026-23](/research/#unified-consciousness-theory-iii) | Compares organization, intelligence, evolution and self-report across physical and artificial processes under the UCT structural identity commitment. Capability results are conditional on that commitment and do not rank systems on one consciousness scale. |
+| [TA-TR-2026-20](/research/#unified-consciousness-theory-i) | Foundational structural-experiential commitments organize conditional deductions and thought experiments. Those commitments are explicitly axiomatic, not empirical discoveries. |
+| [TA-TR-2026-21](/research/#unified-consciousness-theory-ii) | Reconstructs major consciousness theories as effective accounts of organization under UCT assumptions, with explicit translation and bridge conditions. Formal reconstruction and empirical validation are separate. |
+| [TA-TR-2026-19](/research/#selecting-and-tracking-conscious-subjects) | Formal analysis studies subject selection under symmetry and path dependence, including an IIT case study. It does not independently establish which physical systems have experience. |
+| [TA-TR-2026-18](/research/#actual-participation) | A token-level theoretical constraint distinguishes actual participation from counterfactual capacity. Its consciousness interpretation remains a theoretical commitment rather than an empirical consciousness detector. |
+| [TA-TR-2026-17](/research/#set-valued-causal-inheritance) | Representation results and finite persistent-agent benchmarks address functional self-continuity. Functional inheritance does not by itself establish personal or experiential continuity. |
+| [TA-TR-2026-14-BRIDGE](/research/#financing-automation-transition) | A separate bridge-finance extension of Paper 14 develops conditional public-upside financing and prosperity-dependent claims while protecting funded basic uses. These are theoretical economic models and bounded design examples, not investment advice or an economy-wide empirical validation. |

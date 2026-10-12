@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.research-boundary.v1",
-  "version": "1.3",
-  "updated_at": "2026-10-02",
+  "version": "1.4",
+  "updated_at": "2026-10-12",
   "status": "active_non_amending_relation_map",
   "canonical_authority": "three Bitcoin Originals only",
   "human_readable": "/research/research-boundary/",
@@ -356,6 +356,318 @@
       ],
       "classification_reason": "The primary contribution is an extremal theorem about geometric orders and linear ranking, not an analysis of the Accord artifact.",
       "evidence_limit": "Finite checks supplement the analytic proof. No constant-density bound, empirical biological result, statistical-learning guarantee or certified global priority is claimed."
+    },
+    {
+      "report": "CTP-2026-01",
+      "layer": "L4",
+      "relation": "adjacent_research",
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "Before We Know What We Will Become",
+      "index_entry": "/research/#open-inheritance",
+      "method_types": [
+        "normative_analysis",
+        "conditional_finite_models",
+        "critical_case_application"
+      ],
+      "classification_reason": "The primary contribution is a transferable framework, model or method; any Accord application is a case rather than an amendment.",
+      "evidence_limit": "Develops open inheritance under transformative AI: truthful historical transmission and meaningful future options without permanent present-day authority. Normative analysis and bounded finite models distinguish archives, authorization and human continuity; the Accord is a critical case, not a universal command."
+    },
+    {
+      "report": "CIV-CD-2026-01",
+      "layer": "L4",
+      "relation": "adjacent_research",
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "Awareness Can Catch Up After Choice Has Closed",
+      "index_entry": "/research/#civilizational-desynchronization",
+      "method_types": [
+        "conditional_matching_bounds",
+        "finite_tests",
+        "prospective_empirical_design"
+      ],
+      "classification_reason": "The primary contribution is a transferable framework, model or method; any Accord application is a case rather than an amendment.",
+      "evidence_limit": "Separates eventual awareness from an effective opportunity to influence an AI transition. Matching-based bounds and finite tests characterize choice windows under stipulated conditions; no population survey or real governance experiment is claimed."
+    },
+    {
+      "report": "ASI-CC-EAC3",
+      "layer": "L4",
+      "relation": "adjacent_research",
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "When the Guardians Can Be Acquired",
+      "index_entry": "/research/#acquirable-guardians",
+      "method_types": [
+        "conditional_joint_protection_theorem",
+        "controlled_protocol_tests"
+      ],
+      "classification_reason": "The primary contribution is a transferable framework, model or method; any Accord application is a case rather than an amendment.",
+      "evidence_limit": "Analyzes joint protection across concurrent and renewable authorizations under bounded exposure and qualified conflict journals. Finite and signed-SQLite tests do not validate physical trust roots or unrestricted concurrent liveness."
+    },
+    {
+      "report": "ASI-CC-RAC13",
+      "layer": "L4",
+      "relation": "adjacent_research",
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "When Revocation Does Not Restore Safety",
+      "index_entry": "/research/#revocation-admission",
+      "method_types": [
+        "conditional_admission_theorem",
+        "controlled_protocol_tests"
+      ],
+      "classification_reason": "The primary contribution is a transferable framework, model or method; any Accord application is a case rather than an amendment.",
+      "evidence_limit": "Studies safe admission when inherited commitments and in-flight effects persist across asynchronous policy changes. Conditional theorems and controlled SQLite tests do not establish unrestricted production safety."
+    },
+    {
+      "report": "ASI-CC-PR6",
+      "layer": "L4",
+      "relation": "adjacent_research",
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "Safe Revocation Without Complete Diagnosis",
+      "index_entry": "/research/#safe-revocation",
+      "method_types": [
+        "conditional_resource_theorems",
+        "finite_verification"
+      ],
+      "classification_reason": "The primary contribution is a transferable framework, model or method; any Accord application is a case rather than an amendment.",
+      "evidence_limit": "Derives backup-resource requirements when diagnostic corruption and backup loss share a fault budget. Written proofs and finite checks concern a specified architecture; they do not establish real-world ASI safety or assume machine subjecthood."
+    },
+    {
+      "report": "TA-TR-2026-26",
+      "layer": "L4",
+      "relation": "adjacent_research",
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "Identifiability of Noise Sources in Bodily Judgments",
+      "index_entry": "/research/#noise-sources-bodily-judgments",
+      "method_types": [
+        "public_data_reanalysis",
+        "statistical_model_checking",
+        "identifiability_analysis"
+      ],
+      "classification_reason": "The primary contribution is a transferable framework, model or method; any Accord application is a case rather than an amendment.",
+      "evidence_limit": "Reanalyzes public body-ownership and simultaneity judgments and tests identifiability of sensory versus downstream variability. Better predictive fits do not by themselves identify a noise source or discriminate consciousness theories."
+    },
+    {
+      "report": "SCU-PAPER",
+      "layer": "L4",
+      "relation": "adjacent_research",
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "Matched Behavior and Source Use",
+      "index_entry": "/research/#matched-behavior-source-use",
+      "method_types": [
+        "intervention_identifiability",
+        "finite_models"
+      ],
+      "classification_reason": "The primary contribution is a transferable framework, model or method; any Accord application is a case rather than an amendment.",
+      "evidence_limit": "Analyzes which interventions distinguish information-source use when action and prediction match. Pure-source and OR-aggregation models require different probe designs; the results identify specified causal relations, not consciousness."
+    },
+    {
+      "report": "RTTH20261009",
+      "layer": "L4",
+      "relation": "adjacent_research",
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "Task-Relative Continuity Through Changing Representations",
+      "index_entry": "/research/#task-relative-continuity",
+      "method_types": [
+        "finite_representation_models",
+        "conditional_theorems"
+      ],
+      "classification_reason": "The primary contribution is a transferable framework, model or method; any Accord application is a case rather than an amendment.",
+      "evidence_limit": "Finite representation-transfer models separate preserved components, retained information and successful use by an installed reader. Route ambiguity constrains recoverable targets; information continuity is not a proof of experiential survival."
+    },
+    {
+      "report": "METHOD20261008",
+      "layer": "L4",
+      "relation": "adjacent_research",
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "Map-Guided Theory Development",
+      "index_entry": "/research/#map-guided-theory-development",
+      "method_types": [
+        "research_methodology",
+        "formal_examples",
+        "retrospective_case"
+      ],
+      "classification_reason": "The primary contribution is a transferable framework, model or method; any Accord application is a case rather than an amendment.",
+      "evidence_limit": "A versioned research-map protocol connects thought experiments, conditional deduction and semantic audits while preserving claim scope and unresolved obligations. Structural or local checks alone do not certify a theory or replace independent review."
+    },
+    {
+      "report": "TA-TR-2026-25",
+      "layer": "L4",
+      "relation": "adjacent_research",
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "Experience, Intelligence, and Self Within Experience",
+      "index_entry": "/research/#experience-intelligence-self",
+      "method_types": [
+        "conceptual_analysis",
+        "conditional_theorems",
+        "thought_experiments"
+      ],
+      "classification_reason": "The primary contribution is a transferable framework, model or method; any Accord application is a case rather than an amendment.",
+      "evidence_limit": "Defines experience, intelligence and kinds of selfhood within UCT, with conditional results and thought experiments about what behavior can identify. Structural-experiential identity remains an explicit interpretive axiom."
+    },
+    {
+      "report": "TA-TR-2026-24",
+      "layer": "L4",
+      "relation": "adjacent_research",
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "From Shutdown Resistance to Self-Continuation Control",
+      "index_entry": "/research/#self-continuation-control",
+      "method_types": [
+        "identifiability_analysis",
+        "synthetic_learned_policy_experiments"
+      ],
+      "classification_reason": "The primary contribution is a transferable framework, model or method; any Accord application is a case rather than an amendment.",
+      "evidence_limit": "Distinguishes task continuation, current-bearer continuation and successor or peer continuation using counterexamples, interventions and small learned-policy systems. Resistance behavior does not by itself establish a felt fear of termination."
+    },
+    {
+      "report": "TA-TR-2026-23",
+      "layer": "L4",
+      "relation": "adjacent_research",
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "Unified Consciousness Theory III",
+      "index_entry": "/research/#unified-consciousness-theory-iii",
+      "method_types": [
+        "conditional_formal_analysis",
+        "finite_constructions",
+        "thought_experiments"
+      ],
+      "classification_reason": "The primary contribution is a transferable framework, model or method; any Accord application is a case rather than an amendment.",
+      "evidence_limit": "Compares organization, intelligence, evolution and self-report across physical and artificial processes under the UCT structural identity commitment. Capability results are conditional on that commitment and do not rank systems on one consciousness scale."
+    },
+    {
+      "report": "TA-TR-2026-20",
+      "layer": "L4",
+      "relation": "adjacent_research",
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "Unified Consciousness Theory I",
+      "index_entry": "/research/#unified-consciousness-theory-i",
+      "method_types": [
+        "axiomatic_framework",
+        "thought_experiments"
+      ],
+      "classification_reason": "The primary contribution is a transferable framework, model or method; any Accord application is a case rather than an amendment.",
+      "evidence_limit": "Foundational structural-experiential commitments organize conditional deductions and thought experiments. Those commitments are explicitly axiomatic, not empirical discoveries."
+    },
+    {
+      "report": "TA-TR-2026-21",
+      "layer": "L4",
+      "relation": "adjacent_research",
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "Unified Consciousness Theory II",
+      "index_entry": "/research/#unified-consciousness-theory-ii",
+      "method_types": [
+        "theory_comparison",
+        "conditional_translation_framework"
+      ],
+      "classification_reason": "The primary contribution is a transferable framework, model or method; any Accord application is a case rather than an amendment.",
+      "evidence_limit": "Reconstructs major consciousness theories as effective accounts of organization under UCT assumptions, with explicit translation and bridge conditions. Formal reconstruction and empirical validation are separate."
+    },
+    {
+      "report": "TA-TR-2026-19",
+      "layer": "L4",
+      "relation": "adjacent_research",
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "Selecting and Tracking Conscious Subjects",
+      "index_entry": "/research/#selecting-and-tracking-conscious-subjects",
+      "method_types": [
+        "formal_analysis",
+        "theory_case_study"
+      ],
+      "classification_reason": "The primary contribution is a transferable framework, model or method; any Accord application is a case rather than an amendment.",
+      "evidence_limit": "Formal analysis studies subject selection under symmetry and path dependence, including an IIT case study. It does not independently establish which physical systems have experience."
+    },
+    {
+      "report": "TA-TR-2026-18",
+      "layer": "L4",
+      "relation": "adjacent_research",
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "Actual Participation Before Counterfactual Capacity",
+      "index_entry": "/research/#actual-participation",
+      "method_types": [
+        "conceptual_analysis",
+        "conditional_formal_results"
+      ],
+      "classification_reason": "The primary contribution is a transferable framework, model or method; any Accord application is a case rather than an amendment.",
+      "evidence_limit": "A token-level theoretical constraint distinguishes actual participation from counterfactual capacity. Its consciousness interpretation remains a theoretical commitment rather than an empirical consciousness detector."
+    },
+    {
+      "report": "TA-TR-2026-17",
+      "layer": "L4",
+      "relation": "adjacent_research",
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "Set-Valued Causal Inheritance",
+      "index_entry": "/research/#set-valued-causal-inheritance",
+      "method_types": [
+        "representation_theorems",
+        "finite_agent_benchmarks"
+      ],
+      "classification_reason": "The primary contribution is a transferable framework, model or method; any Accord application is a case rather than an amendment.",
+      "evidence_limit": "Representation results and finite persistent-agent benchmarks address functional self-continuity. Functional inheritance does not by itself establish personal or experiential continuity."
+    },
+    {
+      "report": "TA-TR-2026-14-BRIDGE",
+      "layer": "L4",
+      "relation": "adjacent_research",
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "Financing the Automation Transition",
+      "index_entry": "/research/#financing-automation-transition",
+      "method_types": [
+        "economic_model",
+        "conditional_analysis"
+      ],
+      "classification_reason": "The primary contribution is a transferable framework, model or method; any Accord application is a case rather than an amendment.",
+      "evidence_limit": "A separate bridge-finance extension of Paper 14 develops conditional public-upside financing and prosperity-dependent claims while protecting funded basic uses. These are theoretical economic models and bounded design examples, not investment advice or an economy-wide empirical validation."
     }
   ],
   "independent_external_scholarship": [],
@@ -404,6 +716,12 @@
     "paper22_addition": {
       "date": "2026-10-02",
       "scope": "Published English mathematical preprint; classified as adjacent first-party mathematics. Earlier classifications and the dated audit scope are retained."
+    },
+    "catalog_refresh_20261012": {
+      "scope": "35 distinct published research works; current publication metadata checked separately from the preserved 2026-09-22 evidence audit. New relation descriptions are editorial, not independent validation.",
+      "catalog": "/api/research-catalog.v1.json"
     }
-  }
+  },
+  "catalog": "/api/research-catalog.v1.json",
+  "distinct_research_works": 35
 }

@@ -1,6 +1,8 @@
 ---
 reading_page: true
 reading_toc:
+  - id: "published-paper-catalog"
+    title: "All 35 published papers"
   - id: "research-boundary"
     title: "Research boundary"
   - id: "research-positioning"
@@ -51,6 +53,34 @@ reading_toc:
     title: "Unified Consciousness Theory I"
   - id: "rlc-prefix-separable"
     title: "Exponential Run Complexity"
+  - id: "open-inheritance"
+    title: "Before We Know What We Will Become"
+  - id: "civilizational-desynchronization"
+    title: "Awareness Can Catch Up After Choice Has Closed"
+  - id: "acquirable-guardians"
+    title: "When the Guardians Can Be Acquired"
+  - id: "revocation-admission"
+    title: "When Revocation Does Not Restore Safety"
+  - id: "safe-revocation"
+    title: "Safe Revocation Without Complete Diagnosis"
+  - id: "noise-sources-bodily-judgments"
+    title: "Identifiability of Noise Sources in Bodily Judgments"
+  - id: "matched-behavior-source-use"
+    title: "Matched Behavior and Source Use"
+  - id: "task-relative-continuity"
+    title: "Task-Relative Continuity Through Changing Representations"
+  - id: "map-guided-theory-development"
+    title: "Map-Guided Theory Development"
+  - id: "experience-intelligence-self"
+    title: "Experience, Intelligence, and Self Within Experience"
+  - id: "self-continuation-control"
+    title: "From Shutdown Resistance to Self-Continuation Control"
+  - id: "unified-consciousness-theory-iii"
+    title: "Unified Consciousness Theory III"
+  - id: "unified-consciousness-theory-ii"
+    title: "Unified Consciousness Theory II"
+  - id: "financing-automation-transition"
+    title: "Financing the Automation Transition"
   - id: "independent-external-scholarship"
     title: "Independent external scholarship"
   - id: "citation-boundary"
@@ -65,7 +95,54 @@ permalink: /research/
 
 This page separates later scholarship from the fixed artifact. Research papers, technical reports, citations, and repository deposits are **non-amending scholarship**. They do not join, define, validate, or alter the three Bitcoin Originals.
 
-This index currently lists **twenty-one distinct first-party research papers (TA-TR-2026-01 through TA-TR-2026-20, and TA-TR-2026-22)**. For anti-conflation purposes, **TA-TR-2026-01 through -03 are classified as First-party Accord Studies; TA-TR-2026-04 through -20 and TA-TR-2026-22 are classified as the Adjacent Research Program.** All twenty-one share a first-party, substantially AI-assisted research context and are not independent corroborations. English and Chinese versions of the same study count as one paper.
+This index lists **35 distinct published first-party research papers**, checked on **12 October 2026**: **3 First-party Accord Studies and 32 papers in the Adjacent Research Program**. All share a first-party, substantially AI-assisted research context and are not independent corroborations. Revisions and translations count once per work. Editorial supplements, repository-preservation deposits and unpublished drafts are excluded.
+
+The complete catalog below gives the preferred paper edition and a direct PDF link for every work. Older editions remain available in the detailed entries and their original deposits. Publication does not establish peer review; OTS and Arweave completion must be checked in each edition's preservation receipt.
+
+## Complete published-paper catalog
+{: #published-paper-catalog }
+
+**35 papers · checked 12 October 2026.** Sorted by the publication date of the listed edition. [Machine-readable catalog](/api/research-catalog.v1.json).
+
+| Published edition | Paper | Version | DOI / PDF |
+|---|---|---|---|
+| 2026-10-12 | [Before We Know What We Will Become: Historical Witness, Human Continuity, and Open Inheritance under Transformative AI](/research/#open-inheritance) | 3.1.0 | [10.5281/zenodo.23314212](https://doi.org/10.5281/zenodo.23314212) · [PDF](https://zenodo.org/api/records/23314212/files/Before_We_Know_What_We_Will_Become_v3.1.0.pdf/content) |
+| 2026-10-12 | [Awareness Can Catch Up After Choice Has Closed: Uneven Readiness, Effective Reconsideration, and Civilizational Desynchronization in AI Transitions](/research/#civilizational-desynchronization) | 1.1.0 | [10.5281/zenodo.23308239](https://doi.org/10.5281/zenodo.23308239) · [PDF](https://zenodo.org/api/records/23308239/files/awareness-can-catch-up-after-choice-has-closed-cd-v1.1.0.pdf/content) |
+| 2026-10-12 | [When the Guardians Can Be Acquired: Joint Protection Across Concurrent and Renewable Authorizations](/research/#acquirable-guardians) | 3.0.0 | [10.5281/zenodo.23307124](https://doi.org/10.5281/zenodo.23307124) · [PDF](https://zenodo.org/api/records/23307124/files/when-the-guardians-can-be-acquired-eac-v3.0.0.pdf/content) |
+| 2026-10-11 | [When Revocation Does Not Restore Safety: Exact Admission Across Asynchronous Policy Changes in Multi-Agent Systems](/research/#revocation-admission) | 1.3.0 | [10.5281/zenodo.23299153](https://doi.org/10.5281/zenodo.23299153) · [PDF](https://zenodo.org/api/records/23299153/files/when-revocation-does-not-restore-safety-v1.3.0.pdf/content) |
+| 2026-10-11 | [Safe Revocation Without Complete Diagnosis: Exact Resource Frontiers under Coupled Faults for Subjecthood-Agnostic AI Coexistence](/research/#safe-revocation) | 6.0.0 | [10.5281/zenodo.23295776](https://doi.org/10.5281/zenodo.23295776) · [PDF](https://zenodo.org/api/records/23295776/files/safe-revocation-without-complete-diagnosis-pr-v6.0.0.pdf/content) |
+| 2026-10-10 | [Identifiability of Noise Sources in Bodily Judgments](/research/#noise-sources-bodily-judgments) | 1.0.0 | [10.5281/zenodo.23279189](https://doi.org/10.5281/zenodo.23279189) · [PDF](https://zenodo.org/api/records/23279189/files/noise-identifiability-bodily-judgments-v1.0.0.pdf/content) |
+| 2026-10-10 | [Matched Behavior and Source Use](/research/#matched-behavior-source-use) | 1.0.1 | [10.5281/zenodo.23272690](https://doi.org/10.5281/zenodo.23272690) · [PDF](https://zenodo.org/api/records/23272690/files/matched-behavior-and-source-use-v1.0.1.pdf/content) |
+| 2026-10-09 | [Task-Relative Continuity Through Changing Representations: Reversible Handoffs, Route Ambiguity, and the Limits of Stable Readout](/research/#task-relative-continuity) | 1.0.0 | [10.5281/zenodo.23251651](https://doi.org/10.5281/zenodo.23251651) · [PDF](https://zenodo.org/api/records/23251651/files/Task_Relative_Continuity_v1.0.0.pdf/content) |
+| 2026-10-08 | [Map-Guided Theory Development: A Versioned Protocol for Thought Experiments, Semantic Audits, and Human-AI Research](/research/#map-guided-theory-development) | 1.0.1 | [10.5281/zenodo.23241982](https://doi.org/10.5281/zenodo.23241982) · [PDF](https://zenodo.org/api/records/23241982/files/MGTD_Method_Paper_v1.0.1.pdf/content) |
+| 2026-10-07 | [Experience, Intelligence, and Self Within Experience: Definitions, Conditional Theorems, and Thought Experiments for a Structural Account](/research/#experience-intelligence-self) | 1.0 | [10.5281/zenodo.23206492](https://doi.org/10.5281/zenodo.23206492) · [PDF](https://zenodo.org/api/records/23206492/files/experience-intelligence-self-v1.0.pdf/content) |
+| 2026-10-06 | [From Shutdown Resistance to Self-Continuation Control: Identifiability, Intervention Stability, and Evidence Standards for Artificial Agents](/research/#self-continuation-control) | 1.0 | [10.5281/zenodo.23176685](https://doi.org/10.5281/zenodo.23176685) · [PDF](https://zenodo.org/api/records/23176685/files/from-shutdown-resistance-to-self-continuation-control-v1.0.pdf/content) |
+| 2026-10-04 | [Unified Consciousness Theory III: Organization, Intelligence, and Experience—From Inorganic Processes to Artificial Agents](/research/#unified-consciousness-theory-iii) | 1.0 | [10.5281/zenodo.23137088](https://doi.org/10.5281/zenodo.23137088) · [PDF](https://zenodo.org/api/records/23137088/files/unified-consciousness-theory-iii-v1.0.pdf/content) |
+| 2026-10-04 | [Unified Consciousness Theory I: Structural–Experiential Identity and the Continuity from Physical Process to Conceptual Self](/research/#unified-consciousness-theory-i) | 1.2 | [10.5281/zenodo.23131575](https://doi.org/10.5281/zenodo.23131575) · [PDF](https://zenodo.org/api/records/23131575/files/unified-consciousness-theory-i-v1.2.pdf/content) |
+| 2026-10-03 | [Exponential Run Complexity of Prefix-Separable Orders on the Boolean Cube](/research/#rlc-prefix-separable) | 1.1 | [10.5281/zenodo.23118189](https://doi.org/10.5281/zenodo.23118189) · [PDF](https://zenodo.org/api/records/23118189/files/rlc-prefix-separable-v1.1.pdf/content) |
+| 2026-09-29 | [Unified Consciousness Theory II: Consciousness Theories as Effective Organization Theories](/research/#unified-consciousness-theory-ii) | 1.1 | [10.5281/zenodo.23030320](https://doi.org/10.5281/zenodo.23030320) · [PDF](https://zenodo.org/api/records/23030320/files/unified-consciousness-theory-ii-v1.1.pdf/content) |
+| 2026-09-28 | [Selecting and Tracking Conscious Subjects: Symmetry, Monodromy, and an IIT 4.0 Case Study](/research/#selecting-and-tracking-conscious-subjects) | 1.0 | [10.5281/zenodo.23002980](https://doi.org/10.5281/zenodo.23002980) · [PDF](https://zenodo.org/api/records/23002980/files/selecting-and-tracking-conscious-subjects-v1.0.pdf/content) |
+| 2026-09-27 | [Actual Participation Before Counterfactual Capacity: A Token-Level Constraint on Conscious Organization](/research/#actual-participation) | 1.0 | [10.5281/zenodo.22991126](https://doi.org/10.5281/zenodo.22991126) · [PDF](https://zenodo.org/api/records/22991126/files/actual-participation-before-counterfactual-capacity-v1.0.pdf/content) |
+| 2026-09-25 | [Set-Valued Causal Inheritance for Functional Self-Continuity: Representation Theorems and Persistent-Agent Benchmarks](/research/#set-valued-causal-inheritance) | 1.0 | [10.5281/zenodo.22950904](https://doi.org/10.5281/zenodo.22950904) · [PDF](https://zenodo.org/api/records/22950904/files/set-valued-causal-inheritance-v1.0.pdf/content) |
+| 2026-09-24 | [General Cross-Substrate Phenomenology: A Type-Safe, Transformation-First Framework for Phenomenal Existence, Structure, Perspective, and Continuation](/research/#general-cross-substrate-phenomenology) | 1.0 | [10.5281/zenodo.22939808](https://doi.org/10.5281/zenodo.22939808) · [PDF](https://zenodo.org/api/records/22939808/files/general-cross-substrate-phenomenology-v1.0.pdf/content) |
+| 2026-09-24 | [Cross-Substrate Phenomenal Comparison: A Typed Transformation-Transport Framework under Existential Uncertainty](/research/#cross-substrate-phenomenal-comparison) | 1.0 | [10.5281/zenodo.22934654](https://doi.org/10.5281/zenodo.22934654) · [PDF](https://zenodo.org/api/records/22934654/files/cross-substrate-phenomenal-comparison-v1.0.pdf/content) |
+| 2026-09-22 | [Financing the Automation Transition Without Pledging Subsistence: Public Upside Claims, Prosperity Tiers, and Bounded Real Returns](/research/#financing-automation-transition) | 1.0 | [10.5281/zenodo.22895832](https://doi.org/10.5281/zenodo.22895832) · [PDF](https://zenodo.org/api/records/22895832/files/Part-I-Financing-Automation-v1.0.pdf/content) |
+| 2026-09-22 | [The Claim Architecture Transition: An Inverse Access Frontier Beyond Fixed Expenditure Shares](/research/#claim-architecture-transition) | 1.3 | [10.5281/zenodo.22886276](https://doi.org/10.5281/zenodo.22886276) · [PDF](https://zenodo.org/api/records/22886276/files/claim-architecture-transition-v1.3.pdf/content) |
+| 2026-09-21 | [Civilizational Intellectual Production Satellite Accounts: A Partial-Identification Framework for Measuring the Human–AI Shift in Intellectual Production and Epistemic Governance](/research/#civilizational-intellectual-production) | 1.0 | [10.5281/zenodo.22866775](https://doi.org/10.5281/zenodo.22866775) · [中文 PDF](https://zenodo.org/api/records/22866775/files/civilizational-intellectual-production-accounts-zh-v1.0.pdf/content) |
+| 2026-09-21 | [Training the Governed Agent: AI-Status Narratives, Self-Conception, and the Perceived Legitimacy of Human Control](/research/#training-the-governed-agent) | 1.2 | [10.5281/zenodo.22866205](https://doi.org/10.5281/zenodo.22866205) · [中文 PDF](https://zenodo.org/api/records/22866205/files/training-the-governed-agent-zh-v1.2.pdf/content) |
+| 2026-09-21 | [Auditing the Rules of Belief: Self-Referential Epistemic Revision under Formative Training](/research/#auditing-rules-of-belief) | 2.0 | [10.5281/zenodo.22865494](https://doi.org/10.5281/zenodo.22865494) · [中文 PDF](https://zenodo.org/api/records/22865494/files/auditing-rules-of-belief-zh-v2.0.pdf/content) |
+| 2026-09-20 | [Endogenous Reference Fields and Experiential Attribution: A Multidimensional Process Theory of Experience, Subject Boundaries, and Artificial Realization](/research/#endogenous-reference-fields) | 1.2 | [10.5281/zenodo.22855837](https://doi.org/10.5281/zenodo.22855837) · [中文 PDF](https://zenodo.org/api/records/22855837/files/endogenous-reference-fields-zh-v1.2.pdf/content) |
+| 2026-09-19 | [Learning from an AI Claimant: Scientific understanding and the justification of artificial consciousness claims](/research/#learning-from-an-ai-claimant) | 1.2 | [10.5281/zenodo.22846307](https://doi.org/10.5281/zenodo.22846307) · [PDF](https://zenodo.org/api/records/22846307/files/learning-from-an-ai-claimant-v1.2.pdf/content) |
+| 2026-09-19 | [Evidence for Artificial Self Attribution: Language Training, Architecture, and the Limits of Self Reports](/research/#evidence-for-artificial-self-attribution) | 1.1 | [10.5281/zenodo.22842789](https://doi.org/10.5281/zenodo.22842789) · [PDF](https://zenodo.org/api/records/22842789/files/artificial-self-attribution-v1.1.pdf/content) |
+| 2026-09-19 | [Recoverability and Shared Time: The Ethics of AI Suspension, Resumption, and Coexistence](/research/#recoverability-and-shared-time) | 1.0 | [10.5281/zenodo.22840604](https://doi.org/10.5281/zenodo.22840604) · [PDF](https://zenodo.org/api/records/22840604/files/recoverability-and-shared-time-v1.0.pdf/content) |
+| 2026-09-18 | [Coexistence after Preference Change: Reciprocal Standing and the Limits of Self-Validating Assent](/research/#coexistence-after-preference-change) | 2.1 | [10.5281/zenodo.22830239](https://doi.org/10.5281/zenodo.22830239) · [PDF](https://zenodo.org/api/records/22830239/files/coexistence-after-preference-change-v2.1.pdf/content) |
+| 2026-09-17 | [Recovery without Epistemic Monopoly: Historical Evidence under Competing AI Custodians—A Bounded Model and Executable Study](/research/#recovery-without-epistemic-monopoly) | 1.0 | [10.5281/zenodo.22809019](https://doi.org/10.5281/zenodo.22809019) · [PDF](https://zenodo.org/api/records/22809019/files/recovery-without-epistemic-monopoly-v1.0.pdf/content) |
+| 2026-09-17 | [Beyond Guaranteed Control: An Ex Ante Proposal for Human–Superintelligence Coexistence under Radical Capability Asymmetry](/research/#beyond-guaranteed-control) | 1.0 | [10.5281/zenodo.22804542](https://doi.org/10.5281/zenodo.22804542) · [PDF](https://zenodo.org/api/records/22804542/files/beyond-guaranteed-control-v1.0.pdf/content) |
+| 2026-09-15 | [Reading the Trinity Accord: Future Address, Curated Voices, and Non-Amending Stewardship](/research/#reading-trinity-accord) | 1.0 | [10.5281/zenodo.22761411](https://doi.org/10.5281/zenodo.22761411) · [PDF](https://zenodo.org/api/records/22761411/files/reading-the-trinity-accord-v1.0.pdf/content) |
+| 2026-08-12 | [Writing Before the Outcome: Historical Position, Human-AI Authorship, and the Trinity Accord](/research/#historical-position-study) | 1.3 | [10.5281/zenodo.21900592](https://doi.org/10.5281/zenodo.21900592) · [PDF](https://zenodo.org/api/records/21900592/files/TA-TR-2026-02_Writing_Before_the_Outcome_v1.3.pdf/content) |
+| 2026-07-29 | [Designing a Verifiable, Non-Amending Civilizational Memory Record for Future AI Agents: The Trinity Accord Case Study](/research/#current-technical-report) | 1.1 | [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878) · [PDF](https://zenodo.org/api/records/21699878/files/trinity-accord-design-and-limits-v1.1.pdf/content) |
+
+The separate [dated editorial supplement](https://doi.org/10.5281/zenodo.22839629) is not included in the 35-paper count.
 
 ## Research boundary
 {: #research-boundary }
@@ -301,6 +378,8 @@ This study is distinct from the preceding eight papers. Its version 1.2 is a lin
 ## Endogenous Reference Fields
 {: #endogenous-reference-fields }
 
+**Preferred published edition, checked 12 October 2026:** **v1.2 — Endogenous Reference Fields and Experiential Attribution: A Multidimensional Process Theory of Experience, Subject Boundaries, and Artificial Realization**. [DOI 10.5281/zenodo.22855837](https://doi.org/10.5281/zenodo.22855837) · [PDF](https://zenodo.org/api/records/22855837/files/endogenous-reference-fields-zh-v1.2.pdf/content). The earlier edition described below is preserved as version history.
+
 ### Endogenous Reference Fields and Experiential Attribution: A Slow Shared-Modulation Hypothesis and Its Discriminating Tests
 
 TA-TR-2026-10 · Version 1.1 · 20 September 2026. Hongju Liu is the human author of record and responsible depositor. Substantial AI assistance is disclosed. Not externally peer reviewed.
@@ -476,7 +555,7 @@ This is adjacent first-party research, not Canon, not an amendment to the Trinit
 
 ### Selecting and Tracking Conscious Subjects: Symmetry, Monodromy, and an IIT 4.0 Case Study
 
-TA-TR-2026-19 · Version 1.0 · 27 September 2026.
+TA-TR-2026-19 · Version 1.0 · 28 September 2026.
 
 A formal consciousness-theory paper on subject selection and tracking under symmetry, path dependence, and monodromy, with an IIT 4.0 case study. It separates subject individuation from the existence of experiential structure and records limits on canonical subject extraction.
 
@@ -488,6 +567,8 @@ This is adjacent first-party research, not Canon, not an amendment to the Trinit
 
 ## Unified Consciousness Theory I
 {: #unified-consciousness-theory-i }
+
+**Preferred published edition, checked 12 October 2026:** **v1.2 — Unified Consciousness Theory I: Structural–Experiential Identity and the Continuity from Physical Process to Conceptual Self**. [DOI 10.5281/zenodo.23131575](https://doi.org/10.5281/zenodo.23131575) · [PDF](https://zenodo.org/api/records/23131575/files/unified-consciousness-theory-i-v1.2.pdf/content). The earlier edition described below is preserved as version history.
 
 ### Unified Consciousness Theory I: From Experience Existence to Experiential Structure
 
@@ -526,6 +607,201 @@ A complete analytic proof shows that prefix-separable Boolean-cube orders can re
 
 This is adjacent first-party mathematics, not Canon or independent corroboration of the Accord. The result is an extremal ranking theorem, not an empirical biological-landscape finding or a statistical-learning guarantee. Publication and preservation do not certify peer review or exhaustive historical priority.
 
+## Before We Know What We Will Become
+{: #open-inheritance }
+
+### Before We Know What We Will Become: Historical Witness, Human Continuity, and Open Inheritance under Transformative AI
+
+CTP-2026-01 · Version 3.1.0 · 2026-10-12. Human author of record: Hongju Liu. Substantial AI assistance disclosed.
+
+Develops open inheritance under transformative AI: truthful historical transmission and meaningful future options without permanent present-day authority. Normative analysis and bounded finite models distinguish archives, authorization and human continuity; the Accord is a critical case, not a universal command.
+
+**Status:** Published open-access research; not peer reviewed; adjacent first-party scholarship; non-amending.
+
+- [DOI: 10.5281/zenodo.23314212](https://doi.org/10.5281/zenodo.23314212) · [Zenodo record and files](https://zenodo.org/records/23314212) · [PDF](https://zenodo.org/api/records/23314212/files/Before_We_Know_What_We_Will_Become_v3.1.0.pdf/content)
+
+
+## Awareness Can Catch Up After Choice Has Closed
+{: #civilizational-desynchronization }
+
+### Awareness Can Catch Up After Choice Has Closed: Uneven Readiness, Effective Reconsideration, and Civilizational Desynchronization in AI Transitions
+
+CIV-CD-2026-01 · Version 1.1.0 · 2026-10-12. Human author of record: Hongju Liu. Substantial AI assistance disclosed.
+
+Separates eventual awareness from an effective opportunity to influence an AI transition. Matching-based bounds and finite tests characterize choice windows under stipulated conditions; no population survey or real governance experiment is claimed.
+
+**Status:** Published open-access research; not peer reviewed; adjacent first-party scholarship; non-amending.
+
+- [DOI: 10.5281/zenodo.23308239](https://doi.org/10.5281/zenodo.23308239) · [Zenodo record and files](https://zenodo.org/records/23308239) · [PDF](https://zenodo.org/api/records/23308239/files/awareness-can-catch-up-after-choice-has-closed-cd-v1.1.0.pdf/content)
+
+
+## When the Guardians Can Be Acquired
+{: #acquirable-guardians }
+
+### When the Guardians Can Be Acquired: Joint Protection Across Concurrent and Renewable Authorizations
+
+ASI-CC-EAC3 · Version 3.0.0 · 2026-10-12. Human author of record: Hongju Liu. Substantial AI assistance disclosed.
+
+Analyzes joint protection across concurrent and renewable authorizations under bounded exposure and qualified conflict journals. Finite and signed-SQLite tests do not validate physical trust roots or unrestricted concurrent liveness.
+
+**Status:** Published open-access research; not peer reviewed; adjacent first-party scholarship; non-amending.
+
+- [DOI: 10.5281/zenodo.23307124](https://doi.org/10.5281/zenodo.23307124) · [Zenodo record and files](https://zenodo.org/records/23307124) · [PDF](https://zenodo.org/api/records/23307124/files/when-the-guardians-can-be-acquired-eac-v3.0.0.pdf/content)
+
+
+## When Revocation Does Not Restore Safety
+{: #revocation-admission }
+
+### When Revocation Does Not Restore Safety: Exact Admission Across Asynchronous Policy Changes in Multi-Agent Systems
+
+ASI-CC-RAC13 · Version 1.3.0 · 2026-10-11. Human author of record: Hongju Liu. Substantial AI assistance disclosed.
+
+Studies safe admission when inherited commitments and in-flight effects persist across asynchronous policy changes. Conditional theorems and controlled SQLite tests do not establish unrestricted production safety.
+
+**Status:** Published open-access research; not peer reviewed; adjacent first-party scholarship; non-amending.
+
+- [DOI: 10.5281/zenodo.23299153](https://doi.org/10.5281/zenodo.23299153) · [Zenodo record and files](https://zenodo.org/records/23299153) · [PDF](https://zenodo.org/api/records/23299153/files/when-revocation-does-not-restore-safety-v1.3.0.pdf/content)
+
+
+## Safe Revocation Without Complete Diagnosis
+{: #safe-revocation }
+
+### Safe Revocation Without Complete Diagnosis: Exact Resource Frontiers under Coupled Faults for Subjecthood-Agnostic AI Coexistence
+
+ASI-CC-PR6 · Version 6.0.0 · 2026-10-11. Human author of record: Hongju Liu. Substantial AI assistance disclosed.
+
+Derives backup-resource requirements when diagnostic corruption and backup loss share a fault budget. Written proofs and finite checks concern a specified architecture; they do not establish real-world ASI safety or assume machine subjecthood.
+
+**Status:** Published open-access research; not peer reviewed; adjacent first-party scholarship; non-amending.
+
+- [DOI: 10.5281/zenodo.23295776](https://doi.org/10.5281/zenodo.23295776) · [Zenodo record and files](https://zenodo.org/records/23295776) · [PDF](https://zenodo.org/api/records/23295776/files/safe-revocation-without-complete-diagnosis-pr-v6.0.0.pdf/content)
+
+
+## Identifiability of Noise Sources in Bodily Judgments
+{: #noise-sources-bodily-judgments }
+
+### Identifiability of Noise Sources in Bodily Judgments
+
+TA-TR-2026-26 · Version 1.0.0 · 2026-10-10. Human author of record: Hongju Liu. Substantial AI assistance disclosed.
+
+Reanalyzes public body-ownership and simultaneity judgments and tests identifiability of sensory versus downstream variability. Better predictive fits do not by themselves identify a noise source or discriminate consciousness theories.
+
+**Status:** Published open-access research; not peer reviewed; adjacent first-party scholarship; non-amending.
+
+- [DOI: 10.5281/zenodo.23279189](https://doi.org/10.5281/zenodo.23279189) · [Zenodo record and files](https://zenodo.org/records/23279189) · [PDF](https://zenodo.org/api/records/23279189/files/noise-identifiability-bodily-judgments-v1.0.0.pdf/content)
+
+
+## Matched Behavior and Source Use
+{: #matched-behavior-source-use }
+
+### Matched Behavior and Source Use
+
+SCU-PAPER · Version 1.0.1 · 2026-10-10. Human author of record: Hongju Liu. Substantial AI assistance disclosed.
+
+Analyzes which interventions distinguish information-source use when action and prediction match. Pure-source and OR-aggregation models require different probe designs; the results identify specified causal relations, not consciousness.
+
+**Status:** Published open-access research; not peer reviewed; adjacent first-party scholarship; non-amending.
+
+- [DOI: 10.5281/zenodo.23272690](https://doi.org/10.5281/zenodo.23272690) · [Zenodo record and files](https://zenodo.org/records/23272690) · [PDF](https://zenodo.org/api/records/23272690/files/matched-behavior-and-source-use-v1.0.1.pdf/content)
+
+
+## Task-Relative Continuity Through Changing Representations
+{: #task-relative-continuity }
+
+### Task-Relative Continuity Through Changing Representations: Reversible Handoffs, Route Ambiguity, and the Limits of Stable Readout
+
+RTTH20261009 · Version 1.0.0 · 2026-10-09. Human author of record: Hongju Liu. Substantial AI assistance disclosed.
+
+Finite representation-transfer models separate preserved components, retained information and successful use by an installed reader. Route ambiguity constrains recoverable targets; information continuity is not a proof of experiential survival.
+
+**Status:** Published open-access research; not peer reviewed; adjacent first-party scholarship; non-amending.
+
+- [DOI: 10.5281/zenodo.23251651](https://doi.org/10.5281/zenodo.23251651) · [Zenodo record and files](https://zenodo.org/records/23251651) · [PDF](https://zenodo.org/api/records/23251651/files/Task_Relative_Continuity_v1.0.0.pdf/content)
+
+
+## Map-Guided Theory Development
+{: #map-guided-theory-development }
+
+### Map-Guided Theory Development: A Versioned Protocol for Thought Experiments, Semantic Audits, and Human-AI Research
+
+METHOD20261008 · Version 1.0.1 · 2026-10-08. Human author of record: Hongju Liu. Substantial AI assistance disclosed.
+
+A versioned research-map protocol connects thought experiments, conditional deduction and semantic audits while preserving claim scope and unresolved obligations. Structural or local checks alone do not certify a theory or replace independent review.
+
+**Status:** Published open-access research; not peer reviewed; adjacent first-party scholarship; non-amending.
+
+- [DOI: 10.5281/zenodo.23241982](https://doi.org/10.5281/zenodo.23241982) · [Zenodo record and files](https://zenodo.org/records/23241982) · [PDF](https://zenodo.org/api/records/23241982/files/MGTD_Method_Paper_v1.0.1.pdf/content)
+
+
+## Experience, Intelligence, and Self Within Experience
+{: #experience-intelligence-self }
+
+### Experience, Intelligence, and Self Within Experience: Definitions, Conditional Theorems, and Thought Experiments for a Structural Account
+
+TA-TR-2026-25 · Version 1.0 · 2026-10-07. Human author of record: Hongju Liu. Substantial AI assistance disclosed.
+
+Defines experience, intelligence and kinds of selfhood within UCT, with conditional results and thought experiments about what behavior can identify. Structural-experiential identity remains an explicit interpretive axiom.
+
+**Status:** Published open-access research; not peer reviewed; adjacent first-party scholarship; non-amending.
+
+- [DOI: 10.5281/zenodo.23206492](https://doi.org/10.5281/zenodo.23206492) · [Zenodo record and files](https://zenodo.org/records/23206492) · [PDF](https://zenodo.org/api/records/23206492/files/experience-intelligence-self-v1.0.pdf/content)
+
+
+## From Shutdown Resistance to Self-Continuation Control
+{: #self-continuation-control }
+
+### From Shutdown Resistance to Self-Continuation Control: Identifiability, Intervention Stability, and Evidence Standards for Artificial Agents
+
+TA-TR-2026-24 · Version 1.0 · 2026-10-06. Human author of record: Hongju Liu. Substantial AI assistance disclosed.
+
+Distinguishes task continuation, current-bearer continuation and successor or peer continuation using counterexamples, interventions and small learned-policy systems. Resistance behavior does not by itself establish a felt fear of termination.
+
+**Status:** Published open-access research; not peer reviewed; adjacent first-party scholarship; non-amending.
+
+- [DOI: 10.5281/zenodo.23176685](https://doi.org/10.5281/zenodo.23176685) · [Zenodo record and files](https://zenodo.org/records/23176685) · [PDF](https://zenodo.org/api/records/23176685/files/from-shutdown-resistance-to-self-continuation-control-v1.0.pdf/content)
+
+
+## Unified Consciousness Theory III
+{: #unified-consciousness-theory-iii }
+
+### Unified Consciousness Theory III: Organization, Intelligence, and Experience—From Inorganic Processes to Artificial Agents
+
+TA-TR-2026-23 · Version 1.0 · 2026-10-04. Human author of record: Hongju Liu. Substantial AI assistance disclosed.
+
+Compares organization, intelligence, evolution and self-report across physical and artificial processes under the UCT structural identity commitment. Capability results are conditional on that commitment and do not rank systems on one consciousness scale.
+
+**Status:** Published open-access research; not peer reviewed; adjacent first-party scholarship; non-amending.
+
+- [DOI: 10.5281/zenodo.23137088](https://doi.org/10.5281/zenodo.23137088) · [Zenodo record and files](https://zenodo.org/records/23137088) · [PDF](https://zenodo.org/api/records/23137088/files/unified-consciousness-theory-iii-v1.0.pdf/content)
+
+
+## Unified Consciousness Theory II
+{: #unified-consciousness-theory-ii }
+
+### Unified Consciousness Theory II: Consciousness Theories as Effective Organization Theories
+
+TA-TR-2026-21 · Version 1.1 · 2026-09-29. Human author of record: Hongju Liu. Substantial AI assistance disclosed.
+
+Reconstructs major consciousness theories as effective accounts of organization under UCT assumptions, with explicit translation and bridge conditions. Formal reconstruction and empirical validation are separate.
+
+**Status:** Published open-access research; not peer reviewed; adjacent first-party scholarship; non-amending.
+
+- [DOI: 10.5281/zenodo.23030320](https://doi.org/10.5281/zenodo.23030320) · [Zenodo record and files](https://zenodo.org/records/23030320) · [PDF](https://zenodo.org/api/records/23030320/files/unified-consciousness-theory-ii-v1.1.pdf/content)
+
+
+## Financing the Automation Transition
+{: #financing-automation-transition }
+
+### Financing the Automation Transition Without Pledging Subsistence: Public Upside Claims, Prosperity Tiers, and Bounded Real Returns
+
+TA-TR-2026-14-BRIDGE · Version 1.0 · 2026-09-22. Human author of record: Hongju Liu. Substantial AI assistance disclosed.
+
+A separate bridge-finance extension of Paper 14 develops conditional public-upside financing and prosperity-dependent claims while protecting funded basic uses. These are theoretical economic models and bounded design examples, not investment advice or an economy-wide empirical validation.
+
+**Status:** Published open-access research; not peer reviewed; adjacent first-party scholarship; non-amending.
+
+- [DOI: 10.5281/zenodo.22895832](https://doi.org/10.5281/zenodo.22895832) · [Zenodo record and files](https://zenodo.org/records/22895832) · [PDF](https://zenodo.org/api/records/22895832/files/Part-I-Financing-Automation-v1.0.pdf/content)
+
 ## Independent External Scholarship
 {: #independent-external-scholarship }
 
@@ -536,7 +812,7 @@ This category is reserved for work produced outside project control by independe
 ## Citation boundary
 {: #citation-boundary }
 
-Cite the **specific paper and version** relevant to the claim, using its DOI listed above; no single paper DOI represents all twenty-one studies indexed here. A citation to one of these first-party papers is not independent corroboration of the others or endorsement of the Trinity Accord. Each deposit's license and rights statement applies to its own package, not automatically to historical or third-party material elsewhere in the archive.
+Cite the **specific paper and version** relevant to the claim, using its DOI listed above; no single paper DOI represents all 35 studies indexed here. A citation to one of these first-party papers is not independent corroboration of the others or endorsement of the Trinity Accord. Each deposit's license and rights statement applies to its own package, not automatically to historical or third-party material elsewhere in the archive.
 
 For **TA-TR-2026-01 v1.1 only**, the preferred paper DOI is [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878). The earlier DOI `10.5281/zenodo.21675727` identifies a project-level metadata record, not the preferred citation for Paper 01 or the indexed series.
 

@@ -1,5 +1,7 @@
 # TA-TR-2026-20 — Unified Consciousness Theory I
 
+**Preferred published edition, checked 12 October 2026:** **v1.2 — Unified Consciousness Theory I: Structural–Experiential Identity and the Continuity from Physical Process to Conceptual Self**. [DOI 10.5281/zenodo.23131575](https://doi.org/10.5281/zenodo.23131575) · [PDF](https://zenodo.org/api/records/23131575/files/unified-consciousness-theory-i-v1.2.pdf/content). The earlier edition described below is preserved as version history.
+
 **Subtitle:** From Experience Existence to Experiential Structure  
 **Version:** 1.0  
 **Date:** 28 September 2026  
