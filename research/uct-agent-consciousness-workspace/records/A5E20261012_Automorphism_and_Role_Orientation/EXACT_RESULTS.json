@@ -1,0 +1,77 @@
+{
+  "assertions": {
+    "all_parameter_transports_covary": true,
+    "automorphism_count_is_8": true,
+    "nonautomorphism_count_is_56": true,
+    "preserved_and_reversal_split_is_16_16": true
+  },
+  "counts": {
+    "all_structures": 64,
+    "all_unary_target_predicates": 4,
+    "invariant_target_predicates": 2,
+    "preserved_pairs": 16,
+    "reversal_pairs": 16,
+    "reversing_target_predicates": 2,
+    "swap_automorphism_structures": 8,
+    "swap_nonautomorphism_structures": 56,
+    "true_automorphism_structure_target_pairs": 32
+  },
+  "equalities": {
+    "automorphism_conditions": [
+      "A0=A1",
+      "R00=R11",
+      "R01=R10"
+    ],
+    "parameter_free_definability_necessity": "Any parameter-free definable H must be preserved by every automorphism.",
+    "reversal_implication": "If H reverses under the swap, then H is not parameter-free definable from this K on a swap-automorphic structure."
+  },
+  "model": {
+    "domain": [
+      0,
+      1
+    ],
+    "signature": [
+      "unary A",
+      "binary R"
+    ],
+    "transformation": "swap 0 and 1"
+  },
+  "parameter_transport": [
+    {
+      "H": [
+        1,
+        0
+      ],
+      "H_after_parameter_transport": [
+        0,
+        1
+      ],
+      "covariant": true,
+      "p": 0,
+      "swap_of_H": [
+        0,
+        1
+      ],
+      "transported_p": 1
+    },
+    {
+      "H": [
+        0,
+        1
+      ],
+      "H_after_parameter_transport": [
+        1,
+        0
+      ],
+      "covariant": true,
+      "p": 1,
+      "swap_of_H": [
+        1,
+        0
+      ],
+      "transported_p": 0
+    }
+  ],
+  "schema": "uct-a5e-exact-role-automorphism/1",
+  "scope_limit": "Finite enumeration verifies the declared witness counts and parameter covariance. The definability-to-invariance implication is standard model theory, not inferred from these counts."
+}

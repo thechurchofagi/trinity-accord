@@ -1,3 +1,9 @@
+# A5E20261012 audit addendum
+
+A5E preserves the effective 913/424/261 graph and adds 0/0/0. Fresh traversal found zero unresolved deductive references, cycles, non-list `all_of` or empty `all_of`. The candidate automorphism result requires actual binding, complete relevant `K`, a genuine `K`-automorphism, `K`-definable target and transported parameters simultaneously. Manual review separates parameter-free invariance from parameter covariance, complete organization from finite views, structural target from `H_pc`, and standard mathematics from C1/phenomenal evidence. No converse or actual installation is inferred. Deep historical semantic audit remains incomplete. See [A5E formal audit](records/A5E20261012_Automorphism_and_Role_Orientation/FORMAL_AUDIT.md).
+
+---
+
 # A5D20261012 audit addendum
 
 A5D preserves the effective 913/424/261 graph and adds 0/0/0. Fresh traversal found zero unresolved deductive references, active cycles, non-list `all_of` or empty `all_of`. Eleven preserved external/pending context endpoints remain nondeductive schema differences, not proof edges. The A5D-C1 candidate requires actual `R`, complete relevant `K`, same-binding C1, typed direction and no admitted reversal symmetry simultaneously; none is claimed installed. The four `(s_B,s_E)` rows are alternative interpretations, not joint premises. Constitutive relation, named `H_pc`, endpoint evidence, actual bearer, finite view, conceptual self and report remain distinct. Structural/exact PASS does not establish C1, physical actuality, `B_pc`, endpoint calibration or historical semantic depth. See [A5D formal audit](records/A5D20261012_Constitutive_and_Evidential_Orientation/FORMAL_AUDIT.md).

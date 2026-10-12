@@ -1,5 +1,7 @@
 # UCT 研究唯一阅读入口
 
+最新停用跟进为 **A5E20261012**：[中文交接](records/A5E20261012_Automorphism_and_Role_Orientation/HANDOFF_ZH.md)；角色反转须先区分完整结构自同构、带锚点的非自同构干预和额外体验桥。正式完成图仍为 UCT-MAP-v1.1.2，增量 0/0/0。
+
 [总览](UCT_FORMAL_MAP.md) · [全部候选](PENDING_RESEARCH.md) · [当前状态](CURRENT_STATE.json) · [统一登记](UNIFIED_RESEARCH_INDEX.json) · [审查](UCT_FORMAL_AUDIT.md)
 
 1. 读 [研究指南](RESEARCH_MASTER_GUIDE.md)，保持体验—组织—智能—我感主线。

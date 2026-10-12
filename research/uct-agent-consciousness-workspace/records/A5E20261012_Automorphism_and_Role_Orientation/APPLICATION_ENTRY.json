@@ -1,0 +1,13 @@
+{
+  "id": "A5E20261012",
+  "title": "Automorphism and role orientation",
+  "version": "A5E-ROLE-AUTOMORPHISM-v0.1.0",
+  "type": "FOLLOWUP_APPLICATION",
+  "status": "DISABLED_ROLE_AUTOMORPHISM_BOUNDARY_BRIDGE_OPEN",
+  "enabled_as_established_premises": false,
+  "formal_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+  "result": "A parameter-free structural target is invariant on complete-K automorphism orbits; sign reversal requires grounded non-automorphic asymmetry, transported parameters or an extra bridge.",
+  "selected_target": "H_pc",
+  "standalone_manuscript": "HOLD_STANDALONE",
+  "next": "Find one actual body/action candidate with an independently grounded asymmetric anchor, then predeclare a non-automorphic anchor-exchange comparison and unfitted phenomenal failure outcome; otherwise keep B_pc open."
+}

@@ -1,3 +1,11 @@
+# A5E20261012 research response — automorphism and role orientation
+
+The latest ledger and all carried OPEN/ACKNOWLEDGED items were read before selection, after result formation and before save. A5E corrects the overbroad role-reversal prediction: true complete-`K` automorphisms preserve parameter-free definable targets, while grounded parameters must covary. A reversing target therefore discloses omitted actual asymmetry, parameter dependence or an extra bridge; no independent phenomenal sign is manufactured.
+
+`QC-20261008-10` remains ACKNOWLEDGED/OPEN; `IA-QC11`, `QC-20261008-12/13` and `SCU-OPEN-R191-NORMALIZATION` remain OPEN; `SCU-AUDIT-DEPTH` remains AUDIT_INCOMPLETE. No actual token, complete `K`, asymmetric anchor, `B_pc`, signed endpoint, report validation or subject-count result is claimed. Evidence: [response](records/A5E20261012_Automorphism_and_Role_Orientation/REVIEW_RESPONSE.md), [contract](records/A5E20261012_Automorphism_and_Role_Orientation/ROLE_AUTOMORPHISM_CONTRACT.md), [exact results](records/A5E20261012_Automorphism_and_Role_Orientation/EXACT_RESULTS.json), [gaps](records/A5E20261012_Automorphism_and_Role_Orientation/GAP_LEDGER.md), [audit](records/A5E20261012_Automorphism_and_Role_Orientation/FORMAL_AUDIT.md).
+
+---
+
 # A5D20261012 research response — constitutive versus evidential orientation
 
 The latest ledger and all carried OPEN/ACKNOWLEDGED items were read before selection, after result formation and before save. A5D repairs a layer equivocation: a grounded typed directed relation can have one constitutive orientation under same-binding C1 while the `H_pc` semantic bridge and `E_pc` evidence direction remain aliased. Exact four-case analysis gives two explanations per observable sign; no independent phenomenal sign was manufactured.

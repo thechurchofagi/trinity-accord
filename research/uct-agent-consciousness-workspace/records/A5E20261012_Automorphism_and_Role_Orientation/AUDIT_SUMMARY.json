@@ -1,0 +1,131 @@
+{
+  "a5e_joint_satisfiability": {
+    "actuality_claimed": false,
+    "automorphism_case": {
+      "ACTUAL_TOKEN_BINDING": 1,
+      "COMPLETE_RELEVANT_K": 1,
+      "G_IS_K_AUTOMORPHISM": 1,
+      "H_INVARIANT": 1,
+      "H_IS_K_DEFINABLE": 1,
+      "PARAMETERS_TRANSPORTED_IF_ANY": 1
+    },
+    "extra_bridge_case": {
+      "EXTRA_BRIDGE_REQUIRED": 1,
+      "G_IS_K_AUTOMORPHISM": 1,
+      "H_IS_K_DEFINABLE": 0,
+      "H_REVERSES": 1
+    },
+    "grounded_asymmetry_case": {
+      "ACTUAL_TOKEN_BINDING": 1,
+      "COMPLETE_RELEVANT_K": 1,
+      "GROUNDED_ASYMMETRIC_ANCHOR": 1,
+      "G_IS_K_AUTOMORPHISM": 0,
+      "TARGET_COVARIES_OR_CHANGES": 1
+    }
+  },
+  "a5e_scientific_delta": {
+    "contexts": 0,
+    "nodes": 0,
+    "rules": 0
+  },
+  "affected_semantic_nodes": [
+    "A:P3",
+    "A:P6",
+    "A:C1",
+    "A:U1",
+    "A:PHEN_TARGET",
+    "R157:COORDINATE_TRANSPORT",
+    "R157:SEMANTIC_RESIDUAL",
+    "R157:MINENESS_BRIDGE_SCHEMA",
+    "R166:EVIDENCE_LEVEL_LADDER",
+    "R172:EXPERIENCE_INTERNAL_ACTION_COORDINATE",
+    "R173:FAMILIAR_MINENESS_BOUNDARY"
+  ],
+  "all_rules_read_all_of_as_simultaneous_and": true,
+  "context_endpoint_schema_differences_or_unresolved": [
+    {
+      "context": "EI20261008:CTX:001",
+      "field": "from",
+      "id": "EI20261008:IMPORT_C5"
+    },
+    {
+      "context": "RU20261008:CTX:002",
+      "field": "source",
+      "id": "OO20261008"
+    },
+    {
+      "context": "RU20261008:CTX:002",
+      "field": "from",
+      "id": "OO20261008"
+    },
+    {
+      "context": "TH20261009:ctx1",
+      "field": "source",
+      "id": "CORE20261008"
+    },
+    {
+      "context": "RB20261009:ctx8",
+      "field": "source",
+      "id": "EXTERNAL:Dodis2008Lemma2.2b"
+    },
+    {
+      "context": "RB20261009:ctx9",
+      "field": "source",
+      "id": "EXTERNAL:Wolff2017"
+    },
+    {
+      "context": "RB20261009:ctx10",
+      "field": "source",
+      "id": "PENDING:AC20261009"
+    },
+    {
+      "context": "R187:ctx_r186",
+      "field": "source",
+      "id": "R186-HOM-20261009"
+    },
+    {
+      "context": "R187:ctx_r186",
+      "field": "from",
+      "id": "R186-HOM-20261009"
+    },
+    {
+      "context": "R187:ctx_ol",
+      "field": "source",
+      "id": "OL20261009"
+    },
+    {
+      "context": "R187:ctx_ol",
+      "field": "from",
+      "id": "OL20261009"
+    }
+  ],
+  "context_links_treated_as_nondeductive": true,
+  "deductive_cycles": [],
+  "effective_counts": {
+    "context_links": 261,
+    "nodes": 913,
+    "rules": 424
+  },
+  "manual_semantic_checks": [
+    "No inference from finite view, abstract symmetry or checker output to actual installation",
+    "All automorphism premises refer to one object, interval, complete signature and parameter assignment",
+    "Parameter-free invariance and parameterized covariance are not conflated",
+    "No converse from invariance to definability is asserted",
+    "No role-swap comparison is called an automorphism after a grounded anchor is changed",
+    "C1 transport is conditional and not inferred backward from report or target naming",
+    "Orbit law constrains structural content but does not identify H_pc, evidence sign or a unique owner"
+  ],
+  "per_node_fields_accessed": 913,
+  "restored_effective_graph_sha256": "e14388ac742889d32e8df6dc3dc171f62034d3cc1e5c53c44159ddbf421adcab",
+  "root_counts": {
+    "context_links": 178,
+    "nodes": 584,
+    "rules": 284
+  },
+  "root_graph_sha256": "40d17cd5f61ebcc1bfcea65eb59c3c730208bcfcf69ba92e2f615a993584e3ce",
+  "rules_with_empty_all_of": [],
+  "rules_with_nonlist_all_of": [],
+  "schema": "a5e-map-audit/1",
+  "status": "FRESH_STRUCTURAL_PASS_BOUNDED_SEMANTIC_PASS_FULL_DEPTH_INCOMPLETE",
+  "unresolved_deductive_references": []
+}

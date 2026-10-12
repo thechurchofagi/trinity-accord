@@ -1,0 +1,6 @@
+{
+  "research_id": "A5E20261012",
+  "decision": "HOLD_STANDALONE",
+  "reason": "The orbit/covariance correction is useful foundation work but applies standard mathematics and does not install a token, ground an anchor, validate B_pc or produce an empirical result.",
+  "publication_action": false
+}

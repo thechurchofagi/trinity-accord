@@ -12,9 +12,9 @@
   "readable_report": "publication/UCT-PUB-v1.0.32/COVERAGE_REPORT_ZH.md",
   "current_decision": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/CLAIM_LEDGER.json",
   "latest_update": {
-    "id": "A5D20261012",
+    "id": "A5E20261012",
     "coverage_change": "NONE",
-    "source": "records/A5D20261012_Constitutive_and_Evidential_Orientation/PUBLICATION_COVERAGE_UPDATE.json",
+    "source": "records/A5E20261012_Automorphism_and_Role_Orientation/PUBLICATION_COVERAGE_UPDATE.json",
     "manuscript_decision": "HOLD_STANDALONE"
   },
   "current_scientific_map": "UCT-MAP-v1.1.2",
@@ -168,18 +168,18 @@
     "does_not_replace_latest_scientific_research": true
   },
   "latest_followup_application": {
-    "id": "A5D20261012",
-    "version": "A5D-ORIENTATION-v0.1.0",
-    "status": "DISABLED_CONSTITUTIVE_ORIENTATION_SEMANTIC_BRIDGE_OPEN",
+    "id": "A5E20261012",
+    "version": "A5E-ROLE-AUTOMORPHISM-v0.1.0",
+    "status": "DISABLED_ROLE_AUTOMORPHISM_BOUNDARY_BRIDGE_OPEN",
     "enabled_as_established_premises": false,
-    "source": "records/A5D20261012_Constitutive_and_Evidential_Orientation/RESEARCH_NOTE.md",
-    "handoff": "records/A5D20261012_Constitutive_and_Evidential_Orientation/HANDOFF_ZH.md",
-    "work_log": "records/A5D20261012_Constitutive_and_Evidential_Orientation/WORK_LOG.md",
-    "claim_ledger": "records/A5D20261012_Constitutive_and_Evidential_Orientation/CLAIM_LEDGER.json",
-    "map_extension": "records/A5D20261012_Constitutive_and_Evidential_Orientation/MAP_EXTENSION.json",
-    "exact_results": "records/A5D20261012_Constitutive_and_Evidential_Orientation/EXACT_RESULTS.json",
+    "source": "records/A5E20261012_Automorphism_and_Role_Orientation/RESEARCH_NOTE.md",
+    "handoff": "records/A5E20261012_Automorphism_and_Role_Orientation/HANDOFF_ZH.md",
+    "work_log": "records/A5E20261012_Automorphism_and_Role_Orientation/WORK_LOG.md",
+    "claim_ledger": "records/A5E20261012_Automorphism_and_Role_Orientation/CLAIM_LEDGER.json",
+    "map_extension": "records/A5E20261012_Automorphism_and_Role_Orientation/MAP_EXTENSION.json",
+    "exact_results": "records/A5E20261012_Automorphism_and_Role_Orientation/EXACT_RESULTS.json",
     "parent_science": "A3V20261010",
-    "parent_followup": "A5C20261012",
+    "parent_followup": "A5D20261012",
     "completed_map": "UCT-MAP-v1.1.2",
     "scientific_delta": {
       "nodes": 0,
@@ -188,8 +188,8 @@
     },
     "selected_target": "H_pc",
     "actual_bodily_installation": false,
+    "independent_asymmetric_anchor": false,
     "independent_B_pc_validation": false,
-    "independent_E_pc_orientation": false,
     "standalone_manuscript": "HOLD_STANDALONE"
   },
   "followup_applications": [
@@ -540,6 +540,31 @@
       "actual_bodily_installation": false,
       "independent_B_pc_validation": false,
       "independent_E_pc_orientation": false,
+      "standalone_manuscript": "HOLD_STANDALONE"
+    },
+    {
+      "id": "A5E20261012",
+      "version": "A5E-ROLE-AUTOMORPHISM-v0.1.0",
+      "status": "DISABLED_ROLE_AUTOMORPHISM_BOUNDARY_BRIDGE_OPEN",
+      "enabled_as_established_premises": false,
+      "source": "records/A5E20261012_Automorphism_and_Role_Orientation/RESEARCH_NOTE.md",
+      "handoff": "records/A5E20261012_Automorphism_and_Role_Orientation/HANDOFF_ZH.md",
+      "work_log": "records/A5E20261012_Automorphism_and_Role_Orientation/WORK_LOG.md",
+      "claim_ledger": "records/A5E20261012_Automorphism_and_Role_Orientation/CLAIM_LEDGER.json",
+      "map_extension": "records/A5E20261012_Automorphism_and_Role_Orientation/MAP_EXTENSION.json",
+      "exact_results": "records/A5E20261012_Automorphism_and_Role_Orientation/EXACT_RESULTS.json",
+      "parent_science": "A3V20261010",
+      "parent_followup": "A5D20261012",
+      "completed_map": "UCT-MAP-v1.1.2",
+      "scientific_delta": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0
+      },
+      "selected_target": "H_pc",
+      "actual_bodily_installation": false,
+      "independent_asymmetric_anchor": false,
+      "independent_B_pc_validation": false,
       "standalone_manuscript": "HOLD_STANDALONE"
     }
   ]

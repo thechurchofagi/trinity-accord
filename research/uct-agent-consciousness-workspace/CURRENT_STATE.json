@@ -96,7 +96,7 @@
     "nondeductive_context_links": 261,
     "total_review_items": 1608
   },
-  "pending_note": "A5D separates constitutive, semantic and evidential orientation. A grounded typed directed relation is conditionally preserved as an experience-internal coordinate under C1, but H_pc interpretation and endpoint polarity remain aliased: each observable association sign has two semantic/evidential explanations. No actual token, B_pc or signed E_pc is installed.",
+  "pending_note": "A5E corrects the role-reversal prediction: a parameter-free structural target is invariant on complete-K automorphism orbits, while parameterized targets covary only when their grounded parameters are transported. A reversing target therefore exposes omitted actual asymmetry, transported parameters or an extra bridge. No actual anchor, B_pc or phenomenal sign is installed.",
   "publication_coverage": {
     "version": "UCT-PUB-v1.0.33",
     "entry": "PUBLICATION_COVERAGE.json",
@@ -106,10 +106,10 @@
     "latest_followup_application": "records/A4W20261012_Overlapping_Bearer_Centres/PUBLICATION_COVERAGE_UPDATE.json"
   },
   "latest_activity": {
-    "id": "A5D20261012",
+    "id": "A5E20261012",
     "type": "FOLLOWUP_APPLICATION",
-    "status": "DISABLED_CONSTITUTIVE_ORIENTATION_SEMANTIC_BRIDGE_OPEN",
-    "source": "records/A5D20261012_Constitutive_and_Evidential_Orientation/RESEARCH_NOTE.md"
+    "status": "DISABLED_ROLE_AUTOMORPHISM_BOUNDARY_BRIDGE_OPEN",
+    "source": "records/A5E20261012_Automorphism_and_Role_Orientation/RESEARCH_NOTE.md"
   },
   "latest_pending_research": {
     "id": "A3V20261010",
@@ -122,8 +122,8 @@
     "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
     "evidence_status": "BOUNDED_PRIMARY_SOURCE_APPLICATION_STOP_AND_R173_SCOPE_RETURN; ACTUAL_PREMISES_AND_H_OPEN"
   },
-  "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 effective objects received a fresh structural traversal. A5D manually rechecked C1/U1, P3/P6, PHEN_TARGET, R157, R166, R172, effective R173, R181, R197, R203, A3Y/A3Z and A4V-A5C. Deep full-history semantics remain AUDIT_INCOMPLETE.",
-  "next_priority": "A5D next: formulate one predeclared within-experience relational-invariance prediction under an independently verified role reversal, fixing response coding, success, target identity and conceptual self. Require an independently warranted phenomenal target and unfitted failure outcome; otherwise retain B_pc open and do not resume controller-certificate expansion.",
+  "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 effective objects received a fresh structural traversal. A5E manually rechecked C1/U1, P3/P6, PHEN_TARGET, R157, R166, R172, effective R173 and A5D. Deep full-history semantics remain AUDIT_INCOMPLETE.",
+  "next_priority": "A5E next: identify one actual body/action candidate with an independently grounded asymmetric anchor in complete K; predeclare a non-automorphic anchor-exchange intervention and an unfitted phenomenal failure outcome. If unavailable, retain the automorphism-orbit law and B_pc open; do not resume unbounded controller-certificate expansion.",
   "latest_activity_persistence_after_A4W_science": {
     "science_commit": "0eddd9c06670a7357a8be5e38efc8af1f335405f",
     "science_tree": "f840be3dc13e384d8074f3e34500ea637fd42ced",
@@ -659,18 +659,18 @@
     }
   },
   "latest_followup_application": {
-    "id": "A5D20261012",
-    "version": "A5D-ORIENTATION-v0.1.0",
-    "status": "DISABLED_CONSTITUTIVE_ORIENTATION_SEMANTIC_BRIDGE_OPEN",
+    "id": "A5E20261012",
+    "version": "A5E-ROLE-AUTOMORPHISM-v0.1.0",
+    "status": "DISABLED_ROLE_AUTOMORPHISM_BOUNDARY_BRIDGE_OPEN",
     "enabled_as_established_premises": false,
-    "source": "records/A5D20261012_Constitutive_and_Evidential_Orientation/RESEARCH_NOTE.md",
-    "handoff": "records/A5D20261012_Constitutive_and_Evidential_Orientation/HANDOFF_ZH.md",
-    "work_log": "records/A5D20261012_Constitutive_and_Evidential_Orientation/WORK_LOG.md",
-    "claim_ledger": "records/A5D20261012_Constitutive_and_Evidential_Orientation/CLAIM_LEDGER.json",
-    "map_extension": "records/A5D20261012_Constitutive_and_Evidential_Orientation/MAP_EXTENSION.json",
-    "exact_results": "records/A5D20261012_Constitutive_and_Evidential_Orientation/EXACT_RESULTS.json",
+    "source": "records/A5E20261012_Automorphism_and_Role_Orientation/RESEARCH_NOTE.md",
+    "handoff": "records/A5E20261012_Automorphism_and_Role_Orientation/HANDOFF_ZH.md",
+    "work_log": "records/A5E20261012_Automorphism_and_Role_Orientation/WORK_LOG.md",
+    "claim_ledger": "records/A5E20261012_Automorphism_and_Role_Orientation/CLAIM_LEDGER.json",
+    "map_extension": "records/A5E20261012_Automorphism_and_Role_Orientation/MAP_EXTENSION.json",
+    "exact_results": "records/A5E20261012_Automorphism_and_Role_Orientation/EXACT_RESULTS.json",
     "parent_science": "A3V20261010",
-    "parent_followup": "A5C20261012",
+    "parent_followup": "A5D20261012",
     "completed_map": "UCT-MAP-v1.1.2",
     "scientific_delta": {
       "nodes": 0,
@@ -679,8 +679,8 @@
     },
     "selected_target": "H_pc",
     "actual_bodily_installation": false,
+    "independent_asymmetric_anchor": false,
     "independent_B_pc_validation": false,
-    "independent_E_pc_orientation": false,
     "standalone_manuscript": "HOLD_STANDALONE"
   },
   "next_priority_before_FAM": "Independent signed fallible bodily-familiarity endpoint comparing familiar singleton retained route versus unfamiliar presently congruent route at fixed actual frame consumer/grain; separate cue familiarity, response fluency, ownership report and agency judgment. No more SPC expansion after named PMd feasibility stop.",

@@ -1,3 +1,9 @@
+# A5E bounded follow-up — role reversal is constrained by automorphism
+
+A5E corrects A5D's next-step wording. A parameter-free target definable from one complete grounded actual `K`-structure is invariant on its automorphism orbits; a parameterized target covaries only when its grounded parameter is transported. Therefore a target that reverses under a declared role exchange exposes either a grounded asymmetry that makes the exchange non-automorphic, a transported parameter, or an extra bridge beyond `K`. Exact two-object enumeration gives 8 swap-automorphic and 56 asymmetric structures. This does not identify `H_pc`, install an actual anchor or infer a unique owner. Disabled 0/0/0; all review items remain open. Next seek one actual asymmetric body/action anchor and a predeclared non-automorphic comparison, or keep `B_pc` open. See [A5E handoff](records/A5E20261012_Automorphism_and_Role_Orientation/HANDOFF_ZH.md).
+
+---
+
 # A5D bounded follow-up — constitutive orientation is not evidential orientation
 
 A5D separates three layers that A5C left compressed. An independently grounded typed directed actual relation has one constitutive orientation relative to its bearer/target ports; under same-binding C1 and complete relevant `K`, that relation is preserved as an experience-internal structural coordinate. The named interpretation `B_pc` and fallible evidence direction remain separate. Exact four-case algebra shows each observed `E_pc`--`R` sign has two explanations: bridge/evidence both aligned or both complemented. Thus grounding removes one convention freedom but does not calibrate `H_pc`. No actual token, complete `K`, `B_pc` or signed endpoint is installed; 0/0/0 disabled application; all review items remain open. Next test only one predeclared within-experience relational-invariance prediction under independently verified role reversal. See [A5D handoff](records/A5D20261012_Constitutive_and_Evidential_Orientation/HANDOFF_ZH.md).

@@ -1,5 +1,11 @@
 # UCT durable memory
 
+## A5E20261012 latest memory
+
+A5E replaces an unconditional phenomenal role-reversal prediction with an orbit/covariance law. On one actual complete `K` binding, parameter-free definability entails invariance under every `K`-automorphism; with grounded parameters, the full assignment must be transported. Hence a reversing target requires omitted grounded asymmetry, parameter dependence or an extra bridge. The 64-structure exact witness has 8 swap automorphisms and 56 non-automorphisms; on the symmetric cases 16 target pairs preserve and 16 reverse, with the latter not parameter-free definable by standard model theory. No converse from invariance to definability, actual anchor, `B_pc`, evidence sign or owner selection is claimed. Formal delta 0/0/0; all supervision items remain open. Next: one actual body/action anchor plus predeclared non-automorphic exchange and unfitted phenomenal failure result, else retain `B_pc` open.
+
+---
+
 ## A5D20261012 latest memory
 
 A5D separates constitutive, semantic and evidential orientation. For one independently grounded typed directed relation `R(c,t)`, complete relevant `K`, same-binding C1, preserved port direction and no admitted reversal symmetry, isomorphism preserves `R` as an experience-internal structural coordinate `X_R`. This is positive structural content inside experience, not a report or extra owner. It does not identify `X_R` with named felt practical continuity `H_pc`. Exact Boolean/rational analysis shows an observed `E_pc`--`R` sign depends only on semantic-bridge complement xor evidence complement: each sign has two explanations. Grounding reduces eight three-layer conventions to four but leaves `B_pc` and signed `E_pc` open. Copy/switch holds endpoint state fixed while current `R` changes. Formal delta 0/0/0; no actual token or complete `K`; all supervision items remain open. Next: one independently targeted relational-invariance prediction under verified role reversal, or retain `B_pc` open.

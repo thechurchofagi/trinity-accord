@@ -1,0 +1,61 @@
+{
+  "schema": "uct-disabled-claim-ledger/1",
+  "research_id": "A5E20261012",
+  "claims": [
+    {
+      "id": "A5E-C1",
+      "type": "CONDITIONAL_APPLICATION_OF_STANDARD_AUTOMORPHISM_INVARIANCE",
+      "statement": "On one fixed actual complete K-structure, every parameter-free K-definable target is invariant under every K-automorphism; with grounded parameters, truth is preserved when both arguments and parameters are transported.",
+      "domain": "Actual process tokens represented in one declared complete relevant many-sorted signature K.",
+      "all_of": ["ACTUAL_TOKEN_BINDING", "COMPLETE_RELEVANT_K", "G_IS_K_AUTOMORPHISM", "H_IS_K_DEFINABLE", "PARAMETERS_TRANSPORTED_IF_ANY"],
+      "proof_or_source": "Standard formula preservation under automorphisms; ROLE_AUTOMORPHISM_CONTRACT.md; Semenov and Soprunov 2015 for definability/invariance context.",
+      "counterexamples_or_limits": ["incomplete measured view", "non-automorphic anchor exchange", "undeclared or fixed parameter", "invariance alone does not imply definability"],
+      "status": "STANDARD_MATHEMATICS_CONDITIONAL_APPLICATION_NOT_ACTUALLY_INSTALLED",
+      "thought_experiment_role": "Symmetric abacus rails and human implementers expose orbit non-selection."
+    },
+    {
+      "id": "A5E-C2",
+      "type": "BOUNDED_DIAGNOSTIC_COROLLARY",
+      "statement": "If a proposed experience-internal role target reverses under a declared role exchange, then either the exchange is not an automorphism because complete K contains grounded asymmetry, the target uses transported parameters, or the target is not definable from the supplied K and needs an extra bridge.",
+      "domain": "A5E fixed-binding comparisons with one declared transformation and target.",
+      "all_of": ["A5E-C1", "TARGET_REVERSAL_CLAIM", "SAME_BINDING_AND_GRAIN"],
+      "proof_or_source": "Contraposition/case distinction from A5E-C1 plus explicit parameter transport.",
+      "counterexamples_or_limits": ["horns may overlap", "does not select which horn is actual", "does not identify H_pc"],
+      "status": "EXACT_DIAGNOSTIC_NOT_PHENOMENAL_IDENTIFICATION",
+      "thought_experiment_role": "Copy/switch separates perfect symmetry from retained body or lineage anchors."
+    },
+    {
+      "id": "A5E-C3",
+      "type": "EXACT_FINITE_WITNESS_ENUMERATION",
+      "statement": "Among 64 two-object structures with one unary and one binary relation, exactly 8 admit the object swap as an automorphism and 56 do not; over the 8 symmetric structures, 16 structure-target pairs are invariant and 16 reverse, with the reversing pairs excluded as parameter-free definable targets by A5E-C1.",
+      "domain": "Declared two-object finite witness family in check_role_automorphism.py.",
+      "all_of": ["TWO_OBJECT_DOMAIN", "DECLARED_A_AND_R_SIGNATURE", "FULL_ENUMERATION", "A5E-C1_FOR_DEFINABILITY_CLASSIFICATION"],
+      "proof_or_source": "Exhaustive enumeration in check_role_automorphism.py and EXACT_RESULTS.json.",
+      "counterexamples_or_limits": ["counts do not prove C1", "finite witness is not a biological model", "reversal predicates may be supplied by extra parameters"],
+      "status": "EXACT_WITHIN_DECLARED_FINITE_MODEL",
+      "thought_experiment_role": "Makes the symmetry-breaking role of an actual anchor explicit."
+    },
+    {
+      "id": "A5E-C4",
+      "type": "METHODOLOGICAL_CORRECTION",
+      "statement": "A5D's unqualified role-reversal prediction must be replaced by invariance on true complete-K automorphism orbits and covariance under transported grounded anchors; uncertain automorphism status licenses no phenomenal sign inference.",
+      "domain": "Prospective UCT bridge tests for bodily/action-related experience-internal orientation.",
+      "all_of": ["A5E-C1", "FINITE_VIEW_COMPLETE_STRUCTURE_FIREWALL", "PREDECLARED_TRANSFORMATION", "PREDECLARED_TARGET"],
+      "proof_or_source": "ROLE_AUTOMORPHISM_CONTRACT.md and the A5D no-admitted-symmetry premise.",
+      "counterexamples_or_limits": ["does not provide an actual anchor", "does not calibrate evidence", "does not identify familiar mineness"],
+      "status": "CORRECTED_DISABLED_PREDICTION_CONTRACT",
+      "thought_experiment_role": "All four families separate external renaming, symmetry and actual asymmetry."
+    },
+    {
+      "id": "A5E-C5",
+      "type": "SCOPED_UCT_INTERPRETATION",
+      "statement": "Under C1 and R157, grounded definable orientation belongs inside experiential organization and respects complete-structure symmetries; situated direction requires actual asymmetric relations or transported parameters, not an additional exclusive owner.",
+      "domain": "UCT application under A5E-C1, R157 and the existing C1/U1 boundaries.",
+      "all_of": ["A:C1_SAME_BINDING", "R157:COORDINATE_TRANSPORT", "A5E-C1", "PHYSICAL_ANCHOR_IF_ORIENTED", "NO_UNIQUE_OWNER_INFERENCE"],
+      "proof_or_source": "UCT I v1.2, R157 and A5E's orbit/covariance boundary.",
+      "counterexamples_or_limits": ["not H_pc identity", "not actual installation", "not report calibration", "not subject count", "not converse definability"],
+      "status": "DISABLED_POSITIVE_INTERPRETATION_WITH_OPEN_BRIDGE",
+      "thought_experiment_role": "Human-implemented and overlapping-process cases block exclusive-owner inflation."
+    }
+  ]
+}

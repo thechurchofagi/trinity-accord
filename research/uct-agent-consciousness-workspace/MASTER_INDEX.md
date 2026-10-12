@@ -1,3 +1,9 @@
+# A5E20261012 — automorphism and role orientation
+
+[Research note](records/A5E20261012_Automorphism_and_Role_Orientation/RESEARCH_NOTE.md) · [contract](records/A5E20261012_Automorphism_and_Role_Orientation/ROLE_AUTOMORPHISM_CONTRACT.md) · [exact results](records/A5E20261012_Automorphism_and_Role_Orientation/EXACT_RESULTS.json) · [claims](records/A5E20261012_Automorphism_and_Role_Orientation/CLAIM_LEDGER.json) · [gaps](records/A5E20261012_Automorphism_and_Role_Orientation/GAP_LEDGER.md) · [audit](records/A5E20261012_Automorphism_and_Role_Orientation/FORMAL_AUDIT.md) · [Chinese handoff](records/A5E20261012_Automorphism_and_Role_Orientation/HANDOFF_ZH.md). Disabled 0/0/0 correction: structural targets are invariant on true complete-`K` automorphism orbits and covariant with transported grounded parameters. Reversal requires actual asymmetry or an extra bridge. No actual installation or phenomenal identity is claimed.
+
+---
+
 # A5D20261012 — constitutive orientation versus evidence
 
 [Research note](records/A5D20261012_Constitutive_and_Evidential_Orientation/RESEARCH_NOTE.md) · [contract](records/A5D20261012_Constitutive_and_Evidential_Orientation/ORIENTATION_LAYER_CONTRACT.md) · [exact results](records/A5D20261012_Constitutive_and_Evidential_Orientation/EXACT_RESULTS.json) · [claims](records/A5D20261012_Constitutive_and_Evidential_Orientation/CLAIM_LEDGER.json) · [gaps](records/A5D20261012_Constitutive_and_Evidential_Orientation/GAP_LEDGER.md) · [audit](records/A5D20261012_Constitutive_and_Evidential_Orientation/FORMAL_AUDIT.md) · [Chinese handoff](records/A5D20261012_Constitutive_and_Evidential_Orientation/HANDOFF_ZH.md). Disabled 0/0/0 application: typed actual relation direction is separated from named phenomenal interpretation and endpoint polarity; exact layer alias leaves `B_pc` and `E_pc` sign open. No actual installation or subject-count result.
