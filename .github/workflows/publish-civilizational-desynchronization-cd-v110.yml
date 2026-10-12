@@ -1,0 +1,100 @@
+name: Publish CD-v1.1.0 Frozen Zenodo DOI
+
+on:
+  push:
+    branches:
+      - research/civilizational-desynchronization-cd-v110-20261012
+    paths:
+      - research/uct-agent-consciousness-workspace/records/CD_20261012_Civilizational_Desynchronization/completed_v1.1.0/publication/PUBLISH-AUTHORIZATION.json
+
+permissions:
+  contents: write
+
+concurrency:
+  group: civilizational-desynchronization-cd-v110-zenodo-one-release
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[cd11-publish]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+      PUBLICATION_DIR: research/uct-agent-consciousness-workspace/records/CD_20261012_Civilizational_Desynchronization/completed_v1.1.0/publication
+    steps:
+      - name: Checkout exact authorized publication snapshot
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - name: Install pinned publication verifier prerequisites
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends poppler-utils
+          python3 -m pip install --disable-pip-version-check requests==2.32.3
+      - name: Verify author authorization and exact frozen publication files
+        run: |
+          set -euo pipefail
+          test -n "$ZENODO_ACCESS_TOKEN"
+          python3 "$PUBLICATION_DIR/scripts/publish_zenodo.py" verify
+      - name: Recover or create one deposit, publish and anonymously verify every public file
+        run: |
+          set -euo pipefail
+          python3 "$PUBLICATION_DIR/scripts/publish_zenodo.py" publish
+      - name: Check new DOI resolver independently
+        if: success()
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,os,requests,time
+          from pathlib import Path
+          p=Path(os.environ['PUBLICATION_DIR'])
+          record=json.loads((p/'PUBLICATION-RECEIPT.json').read_text())
+          target='https://zenodo.org/records/'+str(record['record_id'])
+          result={'doi':record['doi'],'record_id':record['record_id'],'status':'PENDING','authenticated':False}
+          for k in range(8):
+              try:
+                  response=requests.get('https://doi.org/'+record['doi'],timeout=25,allow_redirects=True)
+                  result.update({'http_status':response.status_code,'redirect_url':response.url})
+                  if response.status_code==200 and response.url.rstrip('/')==target:
+                      result['status']='RESOLVER_PASS';break
+              except requests.RequestException as ex:result['error_type']=type(ex).__name__
+              time.sleep(min(2+k,8))
+          (p/'DOI-RESOLUTION.json').write_text(json.dumps(result,indent=2)+'\n')
+          print(json.dumps(result,indent=2))
+          PY
+      - name: Retain exact release attempt, receipt and resolver status
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: cd-v110-zenodo-${{ github.run_id }}
+          path: |
+            ${{ env.PUBLICATION_DIR }}/EXPECTED-PUBLICATION.json
+            ${{ env.PUBLICATION_DIR }}/PUBLISH-AUTHORIZATION.json
+            ${{ env.PUBLICATION_DIR }}/PUBLICATION-ATTEMPT.json
+            ${{ env.PUBLICATION_DIR }}/PUBLICATION-RECEIPT.json
+            ${{ env.PUBLICATION_DIR }}/DOI-RESOLUTION.json
+          retention-days: 90
+          if-no-files-found: warn
+      - name: Persist actual Zenodo outcome without modifying older papers
+        if: always()
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          for f in PUBLICATION-ATTEMPT.json PUBLICATION-RECEIPT.json DOI-RESOLUTION.json; do
+            if test -f "$PUBLICATION_DIR/$f"; then git add "$PUBLICATION_DIR/$f"; fi
+          done
+          if git diff --cached --quiet; then exit 0; fi
+          git diff --cached --check
+          git commit -m 'preservation: record actual CD-v1.1 Zenodo outcome [skip ci]'
+          for k in 1 2 3; do
+            if git push origin HEAD:research/civilizational-desynchronization-cd-v110-20261012; then exit 0; fi
+            git fetch origin research/civilizational-desynchronization-cd-v110-20261012
+            git rebase origin/research/civilizational-desynchronization-cd-v110-20261012
+          done
+          echo 'Zenodo outcome not pushed. Read retained workflow artifact; NEVER create second uncertain deposit.' >&2
+          exit 1
