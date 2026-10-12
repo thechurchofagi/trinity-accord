@@ -1,0 +1,12 @@
+{
+  "error": "Zenodo GET /records?q=title%3A%22Awareness+Can+Catch+Up+After+Choice+Has+Closed%3A+Uneven+Readiness%2C+Effective+Reconsideration%2C+and+Civilizational+Desynchronization+in+AI+Transitions%22&size=100 HTTP 400; response '{\"status\": 400, \"message\": \"A validation error occurred.\", \"errors\": [{\"field\": \"size\", \"messages\": [\"Page size cannot be greater than 25. Please use authenticated requests to increase the limit to 100.\"]}]}'",
+  "error_type": "RuntimeError",
+  "failed_at_utc": "2026-10-12T03:15:03.524035+00:00",
+  "frozen_manifest_sha256": "23794c491e48669645e6f8d43588caadfea2d30a5ca7553521864d6eb206f4f0",
+  "github_run_id": "38198973289",
+  "github_sha": "abb467f0b3774ce466ff1c39ae9a9f35aa357de0",
+  "paper_id": "CD-v1.1.0",
+  "phase": "STARTED",
+  "schema": "cd-v110-zenodo-publication-attempt/1",
+  "started_at_utc": "2026-10-12T03:15:02.384094+00:00"
+}
