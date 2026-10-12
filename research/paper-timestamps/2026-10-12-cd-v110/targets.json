@@ -1,0 +1,23 @@
+{
+  "schema": "trinityaccord.paper-ots-targets.v1",
+  "batch": "2026-10-12-cd-v110",
+  "paper_count": 1,
+  "papers": [
+    {
+      "report": "CIV-CD-2026-01",
+      "record_id": 23308239,
+      "doi": "10.5281/zenodo.23308239",
+      "version": "1.1.0",
+      "title": "Awareness Can Catch Up After Choice Has Closed: Uneven Readiness, Effective Reconsideration, and Civilizational Desynchronization in AI Transitions",
+      "receipt_path": "research/uct-agent-consciousness-workspace/records/CD_20261012_Civilizational_Desynchronization/completed_v1.1.0/publication/OTS-PUBLISHED-RECEIPT.json",
+      "pdfs": [
+        {
+          "name": "awareness-can-catch-up-after-choice-has-closed-cd-v1.1.0.pdf",
+          "bytes": 267170,
+          "sha256": "aaf63c68661ffaeaaa677f4da3e5b8df327cc1af2dbd5ec58c7780434ee3925f",
+          "role": "Exact 12-page English theoretical preprint CD-v1.1.0"
+        }
+      ]
+    }
+  ]
+}
