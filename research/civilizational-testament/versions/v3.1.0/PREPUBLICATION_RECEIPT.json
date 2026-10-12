@@ -1,0 +1,39 @@
+{
+  "schema": "trinityaccord.prepublication-source.v1",
+  "report": "CTP-2026-01",
+  "version": "3.1.0",
+  "title": "Before We Know What We Will Become: Historical Witness, Human Continuity, and Open Inheritance under Transformative AI",
+  "author": "Hongju Liu",
+  "authorized_to_publish_by_user": true,
+  "authorization_message": "按仓库流程发表。",
+  "authorization_date": "2026-10-12",
+  "license": "cc-by-4.0",
+  "software_license": "MIT",
+  "peer_reviewed": false,
+  "publishing_state": "EXACT_SOURCE_STAGED_NO_ZENODO_DOI",
+  "doi": null,
+  "ots_submitted": false,
+  "bitcoin_verified": false,
+  "arweave_uploaded": false,
+  "files": [
+    {
+      "path": "Before_We_Know_What_We_Will_Become_v3.1.0.pdf",
+      "bytes": 187669,
+      "sha256": "ee27e2e5e6b738481641917e080a00fc3a652a392cd26af1c3052416bf8f62da",
+      "git_blob": "4e8afc4e75335ed24b79050345036871e56950fb"
+    },
+    {
+      "path": "manuscript.md",
+      "bytes": 109364,
+      "sha256": "c6cc17c1b8068c08f88ac027232095365f52b62d30a51e1d8c20db67508b6635",
+      "git_blob": "e1d289d38823a9834c905821ba6d595e8ee318e4"
+    },
+    {
+      "path": "Open_Inheritance_DOI_Preparation_v3.1.0.zip",
+      "bytes": 456515,
+      "sha256": "05c97b990347ee0e14199cff93dfcbcf3f63b42d73b93f7b13cdedbebec91e6e",
+      "git_blob": "e49b9372679a3c374525147508c5024d728409b3"
+    }
+  ],
+  "boundaries": "This is an exact-byte staging commit, not a DOI publication. No current bitcoinstamp/AR evidence. Never edit earlier v1/v2/v3 manuscripts or three canonical Originals."
+}
