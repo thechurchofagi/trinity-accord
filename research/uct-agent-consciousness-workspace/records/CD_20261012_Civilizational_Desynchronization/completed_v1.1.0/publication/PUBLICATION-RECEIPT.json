@@ -1,0 +1,54 @@
+{
+  "arweave": "NOT_PERFORMED_IN_THIS_JOB",
+  "doi": "10.5281/zenodo.23308239",
+  "manifest_sha256": "23794c491e48669645e6f8d43588caadfea2d30a5ca7553521864d6eb206f4f0",
+  "ots": "NOT_PERFORMED_IN_THIS_JOB",
+  "paper_id": "CD-v1.1.0",
+  "peer_reviewed": false,
+  "prior_publications_unchanged": true,
+  "public_files": [
+    {
+      "bytes": 267170,
+      "name": "awareness-can-catch-up-after-choice-has-closed-cd-v1.1.0.pdf",
+      "sha256": "aaf63c68661ffaeaaa677f4da3e5b8df327cc1af2dbd5ec58c7780434ee3925f",
+      "url": "https://zenodo.org/api/records/23308239/files/awareness-can-catch-up-after-choice-has-closed-cd-v1.1.0.pdf/content"
+    },
+    {
+      "bytes": 311437,
+      "name": "reproducibility-cd-v1.1.0.zip",
+      "sha256": "b642957f715d806bb7d6ada4ccc5f019e3f9592bec33909d2b2a5b9818bdd0f9",
+      "url": "https://zenodo.org/api/records/23308239/files/reproducibility-cd-v1.1.0.zip/content"
+    },
+    {
+      "bytes": 45183,
+      "name": "awareness-can-catch-up-after-choice-has-closed-cd-v1.1.0.tex",
+      "sha256": "a0e5a11d1843a1a95f1e70c2f741e9c288d60e64ddcb74d30a806cb044874897",
+      "url": "https://zenodo.org/api/records/23308239/files/awareness-can-catch-up-after-choice-has-closed-cd-v1.1.0.tex/content"
+    },
+    {
+      "bytes": 2131,
+      "name": "README-LICENSE.txt",
+      "sha256": "7bd360829203ce947decaed1aa3ed384e0736f71edea2720b1e5bba52a2893ff",
+      "url": "https://zenodo.org/api/records/23308239/files/README-LICENSE.txt/content"
+    },
+    {
+      "bytes": 2610,
+      "name": "REVIEW-AND-SOURCES.md",
+      "sha256": "096ce6b0a07cbbde6ba60658a3de64dc155feabd72f39a09137327e32925c120",
+      "url": "https://zenodo.org/api/records/23308239/files/REVIEW-AND-SOURCES.md/content"
+    },
+    {
+      "bytes": 523,
+      "name": "SHA256SUMS.txt",
+      "sha256": "3f2d9b06532cc6f76abf7f07b5b0038b806112957599882fe85b33aa8028b811",
+      "url": "https://zenodo.org/api/records/23308239/files/SHA256SUMS.txt/content"
+    }
+  ],
+  "published_checked_at_utc": "2026-10-12T03:17:12.648420+00:00",
+  "record_id": 23308239,
+  "record_url": "https://zenodo.org/records/23308239",
+  "schema": "cd-v110-zenodo-public-byte-readback/1",
+  "source_commit": "67702f509e92979121a273829ba06d583c0b2383",
+  "status": "PUBLISHED_PUBLIC_BYTE_READBACK_PASS",
+  "workflow_run_id": "38199103616"
+}
