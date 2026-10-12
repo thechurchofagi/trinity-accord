@@ -1,0 +1,37 @@
+{
+  "schema": "uct-persistence-receipt/1.0",
+  "round": "A5C20261012",
+  "baseline_commit": "daaea6dba8e6fee94373a49a6dbf82dcc135bef5",
+  "authoritative_science_commit": "686b557014f65ce6b61d957526f422ec01ff1431",
+  "authoritative_science_tree": "b6650b47ec1ee8b90a9823c199bc217f9f86fba9",
+  "branch": "uct-agent-consciousness-workspace",
+  "github": {
+    "expected_sha_fast_forward": true,
+    "commit_tree_and_key_file_read_back": true,
+    "direct_shell_push_failure": "HTTPS username was unavailable; no shell push occurred",
+    "authorized_repository_object_ref_path": "SUCCEEDED"
+  },
+  "library": {
+    "fixed_master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "fixed_master_science_version": 165,
+    "fixed_master_science_file_id": "file_000000008454822f9c17555c09381ddd",
+    "fixed_master_science_sha256": "40cedd2c1e11f4a64e14a3a7d386a6bd2cabb2a2ccb9e70f144db0dee063ac63",
+    "fixed_master_reverse_materialized_byte_equal": true,
+    "increment_library_file_id": "libfile_3790c31126a481919825ec465a2a2a10",
+    "increment_file_id": "file_00000000db0881f783755bf25cdd5123",
+    "increment_size_bytes": 246420,
+    "increment_sha256": "16adb59ab25e4a29817fb9e89df9a926a1e14f4db508f3ee3c4995d7a86526e1",
+    "increment_manifest_library_file_id": "libfile_089f0d2efbb0819191822731125d4da5",
+    "increment_manifest_file_id": "file_00000000da84823092f782a4d09153c9",
+    "increment_manifest_size_bytes": 9827,
+    "increment_manifest_sha256": "09e1f82cc6ed06ebabfdef91d0e2d4461011b5bf845e6d8bc25965e45953febe",
+    "increment_and_manifest_reverse_materialized_byte_equal": true,
+    "recovered_science_tree_exact": true,
+    "increment_is_complete_backup": false
+  },
+  "final_receipt_successor": "RECORDED_IN_FIXED_MASTER_NEXT_VERSION_TO_AVOID_SELF_REFERENCE",
+  "scientific_delta_changed_by_receipt": false,
+  "review_items_closed_by_self_report": false,
+  "no_pr_ci_deploy_or_publication": true
+}
+

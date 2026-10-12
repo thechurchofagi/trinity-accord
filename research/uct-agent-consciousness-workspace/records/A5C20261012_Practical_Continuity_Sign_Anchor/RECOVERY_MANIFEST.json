@@ -1,0 +1,23 @@
+{
+  "schema": "uct-recovery-manifest/1.0",
+  "round": "A5C20261012",
+  "authoritative_science_commit": "686b557014f65ce6b61d957526f422ec01ff1431",
+  "authoritative_science_tree": "b6650b47ec1ee8b90a9823c199bc217f9f86fba9",
+  "baseline_commit": "daaea6dba8e6fee94373a49a6dbf82dcc135bef5",
+  "increment_library_file_id": "libfile_3790c31126a481919825ec465a2a2a10",
+  "increment_manifest_library_file_id": "libfile_089f0d2efbb0819191822731125d4da5",
+  "fixed_master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+  "fixed_master_science_version": 165,
+  "increment_path_count": 37,
+  "increment_is_complete_backup": false,
+  "recovery_steps": [
+    "Read the latest fixed master handoff and fetch the branch; prefer the verified A5C science commit or a verified fast-forward descendant.",
+    "If the Git science commit is unavailable, materialize the Library increment and manifest and verify their recorded SHA-256 values.",
+    "Check out the exact baseline daaea6dba8e6fee94373a49a6dbf82dcc135bef5 and extract the increment at the repository root; never apply it over a newer tree.",
+    "Validate all 37 path sizes and SHA-256 values listed in UCT_A5C_Increment_20261012.manifest.json.",
+    "Run check_sign_anchor.py, JSON validation, core navigation validation and the fresh effective-map audit.",
+    "Require both full observable tables to survive the global complement, orientation counts 4/2/1, different four-edge/two-edge route-swap orbits, and science tree b6650b47ec1ee8b90a9823c199bc217f9f86fba9.",
+    "Do not treat the incremental package as a complete repository, working set or history."
+  ]
+}
+

@@ -183,6 +183,20 @@
     "increment_scope": "35 paths; not a full repository or working-set backup",
     "reverse_materialization_byte_equal": true
   },
+  "latest_activity_persistence_after_A5C_science": {
+    "science_commit": "686b557014f65ce6b61d957526f422ec01ff1431",
+    "science_tree": "b6650b47ec1ee8b90a9823c199bc217f9f86fba9",
+    "receipt": "records/A5C20261012_Practical_Continuity_Sign_Anchor/PERSISTENCE_RECEIPT.json",
+    "recovery_manifest": "records/A5C20261012_Practical_Continuity_Sign_Anchor/RECOVERY_MANIFEST.json",
+    "fixed_master_library_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "fixed_master_verified_science_version_before_receipt_successor": 165,
+    "fixed_master_receipt_successor_target_version": 166,
+    "increment_library_id": "libfile_3790c31126a481919825ec465a2a2a10",
+    "manifest_library_id": "libfile_089f0d2efbb0819191822731125d4da5",
+    "increment_scope": "37 paths; not a full repository or working-set backup",
+    "reverse_materialization_byte_equal": true,
+    "recovered_science_tree_exact": true
+  },
   "latest_activity_persistence_after_A4X_science": {
     "science_commit": "f32d2a6daff634dfcc05f0d6aa5b4f8685c90e73",
     "science_tree": "f2631cdece223ba865f5aa244161114e30acb610",

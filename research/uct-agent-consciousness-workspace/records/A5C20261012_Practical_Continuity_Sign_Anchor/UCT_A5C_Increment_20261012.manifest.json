@@ -1,0 +1,210 @@
+{
+  "schema": "uct-increment-manifest/1.0",
+  "round": "A5C20261012",
+  "scope": "exact post-image increment relative to the verified baseline commit; not a complete repository, working set, or history",
+  "baseline_commit": "daaea6dba8e6fee94373a49a6dbf82dcc135bef5",
+  "authoritative_science_commit": "686b557014f65ce6b61d957526f422ec01ff1431",
+  "authoritative_science_tree": "b6650b47ec1ee8b90a9823c199bc217f9f86fba9",
+  "local_equivalent_science_commit": "6cd585addff9bc45ff8b96f59ddfd2a59f7fa7fc",
+  "path_count": 37,
+  "paths": [
+    {
+      "path": "research/uct-agent-consciousness-workspace/AGENTS.md",
+      "sha256": "ab27ed6bb5fb758f0a1956e28d851d46b63834a42dab924e360dcd39adb39180",
+      "size_bytes": 115359
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/CURRENT_STATE.json",
+      "sha256": "92b467c66377200ae0ffa208c030fe214248780f304b6311a627e5c76f70f569",
+      "size_bytes": 94752
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/FORMAL_MAP_EXTENSION_INDEX.json",
+      "sha256": "ad92d242e872571077aa7f35c45cd4f05c00c24506346d9211a5a3a259840b61",
+      "size_bytes": 20359
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/HANDOFF.md",
+      "sha256": "1332e973cccd7b78dfebd3c5c9d6eee94b19ac835980a993e80fac0228f936b5",
+      "size_bytes": 26634
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/MASTER_INDEX.md",
+      "sha256": "849d62d27dcc1836489adbf83a1e1caa86f726a33696570044f7f66bc0d448d3",
+      "size_bytes": 22133
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/MEMORY.md",
+      "sha256": "04e7ba523544994723ede6ba64eaa0a8e9fe0781a3f62c7a8de3c8e12328c88c",
+      "size_bytes": 25003
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/PUBLICATION_COVERAGE.json",
+      "sha256": "53d6e8fc1c28595181037e74cf48a57f8ebc0ab3c103a080eadd3b88414f0b58",
+      "size_bytes": 27317
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/REVIEW_SUPERVISION.md",
+      "sha256": "b0e1bd52848bb3b3ec20f9c6be5e5899b2c77eb490a34c929b2415c372d61141",
+      "size_bytes": 156662
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/START_HERE.md",
+      "sha256": "2541bb50af6c28a5f22319bb86556291fe5608fe3907606d927d23eb7e2f9533",
+      "size_bytes": 1198
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_AUDIT.md",
+      "sha256": "544f48b1a0d8280a03157b1b84ea145b6a160f706d6d6d0ebff50913a4b7d5dd",
+      "size_bytes": 22420
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_MAP.md",
+      "sha256": "378a194eee17ed3e2008cbecc419136004409e75a43081897c06c3e383f8da13",
+      "size_bytes": 46761
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UNIFIED_RESEARCH_INDEX.json",
+      "sha256": "e3a5e460db4cfd23febc964f2166adecbbaa1d877d4d45e576866dd58c82a6cd",
+      "size_bytes": 190479
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5C20261012_Practical_Continuity_Sign_Anchor/APPLICATION_ENTRY.json",
+      "sha256": "3a3271f49058ff3f16ad89313f40c696a45f53ed87d6d0b2cbbb737ace774427",
+      "size_bytes": 688
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5C20261012_Practical_Continuity_Sign_Anchor/AUDIT_SUMMARY.json",
+      "sha256": "cb0520a4f27e2d5c5935c7da6292f9d4220c32991505289828aedd92b4663b2b",
+      "size_bytes": 2136
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5C20261012_Practical_Continuity_Sign_Anchor/CLAIM_LEDGER.json",
+      "sha256": "7181a917a52464470134431b2949d3de4a80f4862959bf75dba8ccabb0d2c8fb",
+      "size_bytes": 5907
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5C20261012_Practical_Continuity_Sign_Anchor/DIRECTION_CHECKS.md",
+      "sha256": "0d26469b0413e8cea627a4a1f8424adf51b5df3714f3916d7f2649dec032f804",
+      "size_bytes": 1028
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5C20261012_Practical_Continuity_Sign_Anchor/DUAL_HANDLE_PROTOCOL.md",
+      "sha256": "fecad99ffaa033e24f85b0940ca5a8c0ef7f298d7a7342a1432b4d95653f12c4",
+      "size_bytes": 3543
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5C20261012_Practical_Continuity_Sign_Anchor/EXACT_RESULTS.json",
+      "sha256": "eed6177e8b76de7aa1c7a1dab593f0197febd8eaf5c02c5c2e950c8bac9d0432",
+      "size_bytes": 1338
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5C20261012_Practical_Continuity_Sign_Anchor/FAILURES.md",
+      "sha256": "c965ba2736b3ce0f05fc17b94d3b73ce48113882a66ac346e60e5881332c032f",
+      "size_bytes": 841
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5C20261012_Practical_Continuity_Sign_Anchor/FORMAL_AUDIT.md",
+      "sha256": "27d85c26c6b80122b8b236b8eb207cbcb171e67ebc6fbf02bbc93d884ccd89b6",
+      "size_bytes": 3917
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5C20261012_Practical_Continuity_Sign_Anchor/GAP_LEDGER.md",
+      "sha256": "e4f744203eac2e1c8688e3b2c1bf38ed1c03afabddd05f47a5d289ee78df9d18",
+      "size_bytes": 2300
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5C20261012_Practical_Continuity_Sign_Anchor/HANDOFF_ZH.md",
+      "sha256": "347af2336e383ed22bd49a8266e82f526630339bd31b2851ad2dc1a5c1bd6df4",
+      "size_bytes": 3065
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5C20261012_Practical_Continuity_Sign_Anchor/MANUSCRIPT_DECISION.json",
+      "sha256": "f9bed46ac4e981b81ba6cbdd3d0050de5a8dd6a7223e7281e5a89db8a2058d09",
+      "size_bytes": 441
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5C20261012_Practical_Continuity_Sign_Anchor/MAP_EXTENSION.json",
+      "sha256": "ebf3847a84fee3910035c7a77e9e90366bf8603df69cbd93c08f33d8baea5434",
+      "size_bytes": 798
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5C20261012_Practical_Continuity_Sign_Anchor/PER_ID_AUDIT.json.gz",
+      "sha256": "0e759bcbf6610d2a0230430a968fc706b290ce87d493a785e1617ae252127060",
+      "size_bytes": 14176
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5C20261012_Practical_Continuity_Sign_Anchor/PUBLICATION_COVERAGE_UPDATE.json",
+      "sha256": "982be678a0a27bb3ceda62bae5b14c782c997b8a463c11ba034091deb600a1ec",
+      "size_bytes": 294
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5C20261012_Practical_Continuity_Sign_Anchor/RESEARCH_NOTE.md",
+      "sha256": "84f683882d5b869207d61540ef396b239d31d83a0907dcc7984462cf03cb2808",
+      "size_bytes": 6743
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5C20261012_Practical_Continuity_Sign_Anchor/REVIEW_RESPONSE.md",
+      "sha256": "9c62754c11a75cc3ebcda543124eff39401889046beefb2bfa4b272536257ea0",
+      "size_bytes": 1618
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5C20261012_Practical_Continuity_Sign_Anchor/ROUND_RECORD.md",
+      "sha256": "218d03859b45333a817113d607a271dca8435d393d8660476e9647a5f315b448",
+      "size_bytes": 1857
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5C20261012_Practical_Continuity_Sign_Anchor/SIGN_ANCHOR_CONTRACT.md",
+      "sha256": "d53b0767085e95c10853c5a61f077eef2f662431adc1136406ceeb7291b4f768",
+      "size_bytes": 3138
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5C20261012_Practical_Continuity_Sign_Anchor/SOURCE_SCOPE.md",
+      "sha256": "b983a2ec6d3897bf1558f0620f7ecdc9e5b421a962260c9345738f314396527d",
+      "size_bytes": 2236
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5C20261012_Practical_Continuity_Sign_Anchor/THOUGHT_EXPERIMENTS.md",
+      "sha256": "981e2508ce3f0adb98bc3674d4b81e0563836d2aba5d20e755eaf41ac3385e3d",
+      "size_bytes": 1273
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5C20261012_Practical_Continuity_Sign_Anchor/VALIDATION.md",
+      "sha256": "643bedd415f7b25ce45e1aef365db9083e6d289f78b4e7bf17a22bfb91ba4a4d",
+      "size_bytes": 1024
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5C20261012_Practical_Continuity_Sign_Anchor/WORK_LOG.md",
+      "sha256": "e3e98f5c606764fdb27d0f19de445c51a75ff917f69d0c96a386ac094013cc2d",
+      "size_bytes": 1196
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5C20261012_Practical_Continuity_Sign_Anchor/audit_map.py",
+      "sha256": "b36e6e2098282a6c03c7616c65ebca4c66f919a51e6ff705165ecb442febace0",
+      "size_bytes": 4894
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5C20261012_Practical_Continuity_Sign_Anchor/check_sign_anchor.py",
+      "sha256": "45bf136dd6e7cbcd14ebc9ce25181ba89a6ede5f2ac295585906501b9b456773",
+      "size_bytes": 4512
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5C20261012_Practical_Continuity_Sign_Anchor/update_navigation.py",
+      "sha256": "352cdfd8b4e9f687d7946bfcf070d7305dba82d15c70bfe901bbac8ee8d7fb01",
+      "size_bytes": 3674
+    }
+  ],
+  "archive": {
+    "filename": "UCT_A5C_Increment_20261012.zip",
+    "format": "zip",
+    "size_bytes": 246420,
+    "sha256": "16adb59ab25e4a29817fb9e89df9a926a1e14f4db508f3ee3c4995d7a86526e1"
+  },
+  "recovery_constraints": [
+    "Apply only over exact baseline daaea6dba8e6fee94373a49a6dbf82dcc135bef5.",
+    "Validate every listed path size and SHA-256 after extraction.",
+    "Require resulting science tree b6650b47ec1ee8b90a9823c199bc217f9f86fba9.",
+    "Do not treat this increment as a complete backup."
+  ]
+}
+
