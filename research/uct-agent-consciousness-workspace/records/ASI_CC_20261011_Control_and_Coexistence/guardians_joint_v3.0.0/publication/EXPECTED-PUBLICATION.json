@@ -1,0 +1,72 @@
+{
+  "schema": "eac-v3-zenodo-frozen-release/1",
+  "paper_id": "EAC-v3.0.0",
+  "project": "When the Guardians Can Be Acquired",
+  "status": "FROZEN_FOR_FIRST_PUBLICATION",
+  "metadata": {
+    "title": "When the Guardians Can Be Acquired: Joint Protection Across Concurrent and Renewable Authorizations",
+    "upload_type": "publication",
+    "publication_type": "preprint",
+    "creators": [
+      {
+        "name": "Liu, Hongju",
+        "affiliation": "Independent Researcher, Shenzhen, China"
+      }
+    ],
+    "version": "3.0.0",
+    "language": "eng",
+    "publication_date": "2026-10-12",
+    "access_right": "open",
+    "license": "cc-by-4.0",
+    "description": "Publication-prepared theoretical research manuscript continuing the unpublished Guardians work family. For finite individually valid persistent proposals, qualified root-local conflict journals and bounded jointly usable exposure, proves an exact joint-certificate/solo-availability condition; derives h>kappa+k*r and an exposure-window specialization; gives an exact residual-conflict handoff and reproducible finite and signed-SQLite tests. Mathematical methods inherit invariant confluence, generalized quorum intersections and proactive security. Not Byzantine consensus, unrestricted concurrent liveness, physical root validation or a proof of AI subjecthood. Substantial ChatGPT assistance disclosed; not independently peer reviewed.",
+    "keywords": [
+      "multi-agent governance",
+      "concurrent authorization",
+      "qualified quorum",
+      "human protection",
+      "policy renewal",
+      "joint effects"
+    ],
+    "notes": "First Zenodo deposit intended for the previously unpublished Guardians research family; EAC-v1 and EAC-v2 are preserved unpublished drafts. EAC-v3.0.0 is a scoped theoretical preprint, not externally peer reviewed; substantial ChatGPT contributions disclosed. No priority certificate, rights of AI or physical security claim."
+  },
+  "original_manuscript_git_sha256": "24fc7c6c53b2cb1ef25562431053140a06a147da3f69b0bfcf70693d232cc5ed",
+  "primary_pdf": "when-the-guardians-can-be-acquired-eac-v3.0.0.pdf",
+  "source_pdf_sha256": "d735a574cb8f4ce3233cde5b69f4e2135b5a0e7825536ce2b638cb93c2c93e57",
+  "files": [
+    {
+      "name": "when-the-guardians-can-be-acquired-eac-v3.0.0.pdf",
+      "bytes": 260757,
+      "sha256": "d735a574cb8f4ce3233cde5b69f4e2135b5a0e7825536ce2b638cb93c2c93e57"
+    },
+    {
+      "name": "reproducibility-eac-v3.0.0.zip",
+      "bytes": 599292,
+      "sha256": "4353e57c83c66991ad91123634cc5f8e1ef42d1ab331a92412777c8ecb4ed58e"
+    },
+    {
+      "name": "when-the-guardians-can-be-acquired-eac-v3.0.0.tex",
+      "bytes": 48889,
+      "sha256": "24fc7c6c53b2cb1ef25562431053140a06a147da3f69b0bfcf70693d232cc5ed"
+    },
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 1629,
+      "sha256": "0ed1dc32ed4330be91ae8e2405e94ff68b7e47407641249697381d030b7e3247"
+    },
+    {
+      "name": "REVIEW-AND-SOURCES.md",
+      "bytes": 2075,
+      "sha256": "dde371a8f9437cb6e0b1df22f35fca011544970b7ab6b799514d6ca6b3219c45"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 502,
+      "sha256": "b053d6a1e37ad089ec91d244a2744fe2b84087b5743211c1e5cc4542c7423ea0"
+    }
+  ],
+  "claim_boundary": "Conditional software/finite theory, global priority unverified, not peer reviewed",
+  "earlier_works_unchanged": [
+    "10.5281/zenodo.23295776",
+    "10.5281/zenodo.23299153"
+  ]
+}

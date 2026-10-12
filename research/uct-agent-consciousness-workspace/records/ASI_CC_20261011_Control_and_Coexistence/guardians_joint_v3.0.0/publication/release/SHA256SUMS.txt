@@ -1,0 +1,5 @@
+d735a574cb8f4ce3233cde5b69f4e2135b5a0e7825536ce2b638cb93c2c93e57  when-the-guardians-can-be-acquired-eac-v3.0.0.pdf
+4353e57c83c66991ad91123634cc5f8e1ef42d1ab331a92412777c8ecb4ed58e  reproducibility-eac-v3.0.0.zip
+24fc7c6c53b2cb1ef25562431053140a06a147da3f69b0bfcf70693d232cc5ed  when-the-guardians-can-be-acquired-eac-v3.0.0.tex
+0ed1dc32ed4330be91ae8e2405e94ff68b7e47407641249697381d030b7e3247  README-LICENSE.txt
+dde371a8f9437cb6e0b1df22f35fca011544970b7ab6b799514d6ca6b3219c45  REVIEW-AND-SOURCES.md

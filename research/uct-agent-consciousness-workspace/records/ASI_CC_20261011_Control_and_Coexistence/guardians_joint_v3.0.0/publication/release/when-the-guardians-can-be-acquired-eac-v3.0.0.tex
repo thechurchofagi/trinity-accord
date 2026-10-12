@@ -1,0 +1,359 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amsthm,mathtools,newtxtext,newtxmath,microtype}
+\usepackage{booktabs,tabularx,array,enumitem,fancyhdr,needspace}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\usepackage{listings}
+\hypersetup{pdftitle={When the Guardians Can Be Acquired: Joint Protection Across Concurrent and Renewable Authorizations},pdfauthor={Hongju Liu},pdfsubject={EAC-v3.0.0; publication-prepared research manuscript, not independently peer reviewed}}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small When the Guardians Can Be Acquired}\fancyhead[R]{\small Liu | EAC-v3.0.0}\fancyfoot[C]{\small\thepage}
+\setlength{\headheight}{14pt}\setlength{\emergencystretch}{2em}\setlength{\parskip}{3pt}\setlength{\parindent}{1.1em}
+\setlist{itemsep=2pt,topsep=4pt}
+\newtheorem{theorem}{Theorem}\newtheorem{proposition}[theorem]{Proposition}\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}\newtheorem{definition}{Definition}
+\newcommand{\idtag}[1]{\textnormal{\textsf{[#1]}}}
+\newcommand{\E}{\mathcal E}\newcommand{\B}{\mathcal B}\newcommand{\F}{\mathcal F}\newcommand{\Q}{\mathcal Q}
+\lstset{basicstyle=\small\ttfamily,breaklines=true,frame=single,columns=fullflexible,keepspaces=true}
+\title{\vspace{-1cm}\textbf{When the Guardians Can Be Acquired}\\[6pt]
+\Large Joint Protection Across Concurrent\\and Renewable Authorizations}
+\author{Hongju Liu\\\normalsize Independent Researcher, Trinity Accord / UCT Research Programme}
+\date{12 October 2026\\\small EAC-v3.0.0 \textbullet\ Publication-prepared research manuscript, not peer reviewed}
+\begin{document}\maketitle\thispagestyle{plain}
+\begin{abstract}
+A collection of individually valid amendments can remove a protection that none removes alone. Per-proposal approval and pairwise honest quorum intersection are therefore insufficient for some evolving multi-agent institutions. We extend a temporal, claim-specific authorization model to separately certified changes with jointly persistent effects. Minimal unsafe proposal sets define the interaction boundary. In a finite endorsement-only architecture with qualified reviewers maintaining local conflict journals, joint protection holds exactly when the certificate sets for each minimal unsafe combination share a qualified reviewer outside the jointly usable exposure set. Requiring isolated-proposal availability gives an exact separation condition involving one refusal set per proposal. For an interaction of arity $k$, $h$ qualified roots, exposure budget $\kappa$ and at most $r$ nonresponders per isolated proposal, feasibility is equivalent to $h>\kappa+kr$; uniform certificate sizes satisfy $n-\lfloor(h-\kappa-1)/k\rfloor\le q\le n-r$. Combining this with mobile exposure produces a joint-interaction/approval-window frontier. A residual-conflict construction permits safe history compaction only after outstanding certificates are fenced and committed effects are faithfully carried forward. Independent finite-state exploration and 115 actual signed SQLite configurations test fragmented approval, moving faults, rule changes and key renewal. These results specialize established quorum, invariant-confluence and proactive-security ideas. They are not Byzantine consensus, unrestricted concurrent liveness, independent physical validation, or a presumption of AI subjecthood. The contribution is an explicit compositional certificate and falsification method for a bounded class of renewable governance systems.
+\end{abstract}
+\noindent\textbf{Keywords:} multi-agent governance; concurrent authorization; human protection; quorum systems; conflict arity; mobile faults; safe reconfiguration.
+
+\section{Introduction: individually acceptable changes can jointly remove protection}
+A human operator may approve replacing one of several safety interlocks while the others remain effective. Three independent teams may each propose replacing a different interlock against the same initial configuration. Every proposal is safe in isolation, and every pair may be safe, yet executing all three removes the last effective interlock. Authentic signatures do not by themselves eliminate this joint consequence.
+
+The problem matters when multiple AI deployments help to review, propose or implement changes. Their tasks, permissions, owners and physical effects can differ even if their model weights are shared. A static list of reviewers does not reveal which ones can evaluate an interaction among changes. A current fault count does not reveal how many still-usable approvals were obtained from reviewers at different times. Renewing keys does not necessarily settle the consequences of approvals already acted upon.
+
+Our previous guardians manuscript studied a single parent-state-bound amendment, temporal accumulation of corrupt endorsements, and different reviewers' competence to reject different human-protection violations \cite{eac2}. Its renewal argument required complete serial mediation. We do not present a concurrency counterexample as a refutation of that assumption. Instead, we remove the assumption that every effect is globally revalidated against the latest state and ask what a distributed endorsement layer must then guarantee. This is a new scope within the same unpublished work family, not a further revision of the separately published resource and recovery manuscripts \cite{pr6,rac13}.
+
+The basic noncomposition observation is classical. Invariant confluence identifies when independently invariant-preserving updates can safely merge \cite{bailis}, and Byzantine eventual consistency studies the corresponding problem with malicious replicas \cite{bec}. Byzantine quorums and their refinements have long used nonempty honest intersections to preclude incompatible decisions \cite{malkhi,fast}. Our aim is not to rename those general ideas. We derive and test a precise joint condition combining three declared quantities: the number of proposals needed for a minimal protection failure, the qualified reviewers who can recognize that combination, and the approvals that remain usable after temporally moving compromise.
+
+The new result has a constructive side. When the separation condition holds, an explicit family of sufficient signer sets protects the invariant while allowing an individually eligible proposal to complete from a clean signing context despite the declared nonresponders. When it fails, the proof constructs a schedule in which every nonexposed qualified reviewer signs only a safe proper subset, yet the combined certificates authorize a forbidden set. No reviewer need consciously intend that outcome. For repeated institutional change we further characterize what can be forgotten, and what must survive, when keys or reviewer rosters are renewed.
+
+\paragraph{Scope of coexistence.}
+The protected conditions here are human-selected operational requirements. Machine experience, moral personhood, intrinsic self-preservation or goodwill are not premises. This does not prove that AI has no experiential interests. The mathematical claim is about effectful authorization under a declared contract, not the legitimacy of all contracts or guaranteed future civilization-wide coexistence.
+
+\section{Prior work and the precise increment}
+\label{sec:prior}
+Bailis et al. show that application invariants, rather than merely read/write conflicts, determine when coordination can be avoided \cite{bailis}. Their criterion ranges over reachable valid states and merged transaction histories. Our three-proposal example does not defeat that theory by passing three pairwise checks at one initial snapshot: a later reachable state exposes the conflict. We reject only the lossy practice of checking isolated elementary pairs at the original state.
+
+Kleppmann and Howard characterize a class of Byzantine eventually consistent applications through invariant confluence \cite{bec}. Their strong impossibility result allows arbitrary Byzantine subsets and a particular replication/availability contract. Our model instead bounds effective exposure and already uses coordinated root-local endorsement journals. It is not a coordination-free protocol, nor does it offer a counterexample to their theorem. Complete globally serializable revalidation remains a possible repair that lies outside our signature-only admission interface.
+
+Malkhi and Reiter's Byzantine quorum work is a direct predecessor for honest intersection and availability \cite{malkhi}. Higher-order intersections are also not new: Fast Paxos and Fast Flexible Paxos use relations involving more than two quorum sets \cite{fast}. Their relations arise from consensus phases; ours are indexed by minimal unsafe application-level combinations and reviewer qualification. The set algebra in our proof is inherited. Recent heterogeneous quorum research distinguishes weak availability from the stronger requirements of deterministic consensus \cite{satrapy}. We accordingly use the restricted term \emph{solo availability}, not consensus or unconditional concurrent termination.
+
+Proactive secret sharing and Byzantine recovery already distinguish total lifetime exposure from a bounded vulnerability interval \cite{hjky,castro}. Our temporal count is inherited from the v2 manuscript's specialization of that idea. What changes in v3 is the number of distinct availability obligations that can be combined to create one unsafe set. The resulting feasibility condition includes an interaction-arity factor absent from a single-proposal validity check.
+
+Finally, the previously published persistent-effects study shows why revocation or a new version does not erase consequences or uncommitted obligations \cite{rac13}. We do not claim that observation anew. Here it is used specifically to explain why deleting signing journals at key renewal can reopen a higher-order conflict, and why a faithful residual conflict description can sometimes replace the raw old journal. The proposed contribution is this scoped composition/renewal contract, its exact specialization and separating tests. Worldwide priority of the exact synthesis is not established.
+
+\section{The finite proposal and witness model}
+\label{sec:model}
+\subsection{One shared protection context, several separately certified actions}
+Fix a finite set $P$ of proposed changes in one protection context and a finite set $R$ of $n$ actual endorsement roots. Each proposal is eligible and invariant-preserving \emph{when executed alone} from the context's initial state. Any independent authorization or single-proposal semantic-validity test must already have passed. This excludes a hidden inference from signed identity to normative legitimacy.
+
+Changes have declared commutative, persistent effects within the context. A set $T\subseteq P$ determines their combined state. Its admissible family is downward closed: if $T$ is safe, every subset is safe. Let $\E$ be the antichain of minimal unsafe subsets. Thus
+\begin{equation}
+\mathsf{Safe}(T)\quad\Longleftrightarrow\quad\nexists E\in\E:\ E\subseteq T.
+\label{eq:safe}
+\end{equation}
+Every $E$ has size at least two because all candidate proposals are admissible alone. If effects can undo earlier harms, depend on order, or create other paths, use the actual transition system rather than assuming \cref{eq:safe}. Monotone loss of distinct protection components is a concrete instance of this restricted model.
+
+A context identifier binds the actual initial claims and the proposal descriptions. It is \emph{not} a compare-and-swap rule that admits only one successor. Several separately certified updates can merge in the same context. The final actuator verifies the declared certificates, uniqueness and effect scope but does not run an extra omniscient aggregate-invariant checker. Adding such a checker is a valid stronger architecture, not a violation of a lower bound for the present one.
+
+\subsection{Qualified roots and local signing commitments}
+For each $E\in\E$, let $H_E\subseteq R$ be the roots capable of recognizing and refusing completion of this particular unsafe combination. A root not in $H_E$ is not assumed dishonest; it may simply have a narrower remit. Different keys, agents or model families do not automatically create different actual roots.
+
+Let $\B$ be a nonempty family of jointly realizable effective exposure sets. A root in $B\in\B$ can supply approvals without respecting the local rule. The attack model permits the adversary to obtain the relevant signatures from all roots in that \emph{same} $B$ over the context's admitted horizon. An arbitrary union of mutually exclusive control histories is not a valid $B$.
+
+For every root outside $B$, a durable local journal $L_r$ records its still-relevant approvals. A qualified root refuses a request $x$ if
+\begin{equation}
+\exists E\in\E:\quad r\in H_E,\quad E\subseteq L_r\cup\{x\}.
+\label{eq:local}
+\end{equation}
+Otherwise it signs and atomically adds $x$ to the journal. An unexposed root may therefore approve every proper subset of a minimal unsafe set, but not the whole set. The journal is a coordination mechanism local to that root. Its persistence, semantic coverage, timing and relation to real effects are substantive premises, not consequences of cryptographic validity.
+
+\subsection{Certificates, joint safety and solo availability}
+For proposal $x$, a nonempty family $\Q_x$ of nonempty signer sets specifies sufficient certificates. A signer set is accepted if it contains some $Q\in\Q_x$. The adversary may schedule and fragment requests and deliver any obtained certificates to the effect layer. It cannot forge an unexposed root's signature. Roots outside a requested set need not observe every other review before the certificate is acted upon.
+
+\emph{Joint safety} means no set of certifiable proposals contains a member of $\E$ under any admitted $B$ and signing schedule. This is stronger than testing each initial-snapshot proposal alone. It is not a proof that replicated evaluators agree on one total history.
+
+For every proposal $x$, let $\F_x$ be a nonempty family of allowed refusal sets, each a proper subset of $R$. \emph{Solo availability} requires that, if $x$ is proposed alone from a clean local signing context, the willing roots outside any $F\in\F_x$ can supply a sufficient certificate. Formally,
+\begin{equation}
+\forall x,\ F\in\F_x,\quad \exists Q\in\Q_x:\ Q\subseteq R\setminus F.
+\label{eq:solo}
+\end{equation}
+Nonresponse may include faulty behavior, absence or legitimate dissent. It is not automatically corruption. This property deliberately does not guarantee that all mutually compatible requests finish under arbitrary concurrent contention; partial commitments can cause a safe protocol to stall. We retain an explicit failure witness for that limitation.
+
+\section{An exact joint-certificate criterion}
+\label{sec:theory}
+\begin{theorem}[Qualified joint intersection \idtag{JPA-T1}]
+\label{thm:intersection}
+For the complete declared model and fixed acceptance families, joint safety holds exactly when
+\begin{equation}
+\boxed{\forall E\in\E,\ B\in\B,\ (Q_x\in\Q_x)_{x\in E}:\quad
+H_E\cap\bigcap_{x\in E}Q_x\not\subseteq B.}
+\label{eq:intersection}
+\end{equation}
+That is, the certificates of every minimal unsafe combination must share a qualified root outside the admitted exposure set.
+\end{theorem}
+\begin{proof}
+For sufficiency, suppose every proposal in some $E$ obtained an accepted certificate. Choose one sufficient signer set $Q_x$ inside each certificate. Condition~\eqref{eq:intersection} supplies a common qualified unexposed root. That root would have signed every member of $E$, contradicting its local journal rule when the last such request was processed.
+
+For necessity, suppose the intersection for some $E,B,(Q_x)$ has no qualified root outside $B$. Ask each root to sign precisely the members $x\in E$ for which it belongs to $Q_x$. Exposed roots may sign arbitrarily. Every unexposed root qualified for $E$ receives only a proper subset of $E$, since none is in their common intersection. No proper subset of $E$ contains another minimal unsafe set, so the requests also cannot violate any other applicable local rule. Unqualified roots need not detect $E$. All requested signatures are therefore obtainable in the permitted fragmented schedule. Every $x\in E$ has a certificate and all its effects can be admitted, violating \cref{eq:safe}.
+\end{proof}
+The necessity proof relies on the declared delivery freedom and fully usable exposure set. A stronger ordering protocol, a global revalidator, or an exposure history unable to produce those signatures can invalidate that construction. The theorem does not claim failure of those stronger systems.
+
+\begin{theorem}[Existence under per-proposal refusal families \idtag{JPA-T2}]
+\label{thm:existence}
+Some endorsement rule satisfies joint safety and solo availability if and only if
+\begin{equation}
+\boxed{\forall E\in\E,\ B\in\B,\ (F_x\in\F_x)_{x\in E}:\quad
+H_E\not\subseteq B\cup\bigcup_{x\in E}F_x.}
+\label{eq:separation}
+\end{equation}
+When the condition holds, the explicit choice
+\begin{equation}
+\Q_x=\{R\setminus F:F\in\F_x\}
+\label{eq:construction}
+\end{equation}
+attains both properties.
+\end{theorem}
+\begin{proof}
+If an eligible rule exists, solo availability supplies $Q_x\subseteq R\setminus F_x$ for every selected refusal tuple. If \cref{eq:separation} failed, all common qualified roots in those $Q_x$ would lie inside $B$, contradicting Theorem~\ref{thm:intersection}. Conversely, the construction consists of nonempty sets because each refusal set is proper. Its joint intersection equals $R\setminus\bigcup_xF_x$, which contains an unexposed qualified witness by \cref{eq:separation}. It is jointly safe and directly satisfies \cref{eq:solo}.
+\end{proof}
+The different $F_x$ are counterfactual solo environments that the same rule promises to tolerate. The proof does not assert that all their omissions must occur physically at once. The necessity construction instead selects the certificates forced by those availability promises and obtains their signatures through legal fragmented deliveries.
+
+For a proposed architecture, the criterion provides a finite positive certificate or a concrete negative tuple $(E,B,(F_x))$. A generic search for smaller voting sets can be expensive and resembles established hitting-set or quorum synthesis. Our complement construction establishes existence, not optimal signature count for every heterogeneous instance.
+
+\subsection{Why honest pairwise intersections are insufficient}
+Consider seven roots, with root 0 exposed. Let three certificates contain five roots each:
+\begin{align*}
+Q_1&=R\setminus\{1,2\},& Q_2&=R\setminus\{3,4\},& Q_3&=R\setminus\{5,6\}.
+\end{align*}
+Every pair intersects in three roots and hence has unexposed shared witnesses. Their common intersection is only $\{0\}$. If the three changes form a minimal unsafe set and every root is qualified, each honest root signs just two of them and respects its journal; the exposed root signs all three. All three certificates can exist.
+
+There is an even smaller no-corruption case: with three qualified roots, the signer sets $\{0,1\}$, $\{1,2\}$ and $\{0,2\}$ can certify three individually safe changes whose full combination is forbidden. Nobody signs the full combination. This is not an attack on the actual invariant-confluence criterion, which reasons over reachable merged states. It is a counterexample to replacing joint analysis by pairwise elementary checks at one original state.
+
+\section{Conflict arity, exposed approvals and refusal budgets}
+\label{sec:threshold}
+Suppose every subset of at most $\kappa$ roots can be effectively exposed, and every subset of at most $r<n$ roots can withhold an isolated proposal. Consider one minimal unsafe set $E$ of size $k\ge2$, with $h=|H_E|$ qualified roots.
+
+\begin{corollary}[Exact feasibility and uniform thresholds \idtag{JPA-T3}]
+\label{cor:threshold}
+A safe and solo-available endorsement rule exists exactly when
+\begin{equation}
+\boxed{h>\kappa+kr.}
+\label{eq:cardinality}
+\end{equation}
+Under a common threshold $q$ accepting every set of at least $q$ roots, its exact range is
+\begin{equation}
+\boxed{n-\left\lfloor\frac{h-\kappa-1}{k}\right\rfloor\le q\le n-r,}
+\label{eq:quorumrange}
+\end{equation}
+when the range is nonempty. For multiple minimal unsafe sets, impose the corresponding lower bound for every set.
+\end{corollary}
+\begin{proof}
+An exposure set and $k$ refusal sets can cover at most $\kappa+kr$ qualified roots. If $h$ is larger, \cref{eq:separation} holds. If $h\le\kappa+kr$, partition the qualified roots among one set of size at most $\kappa$ and $k$ sets of size at most $r$, obtaining a violating tuple. This proves exact feasibility even for nonuniform rules.
+
+For the threshold rule, each certificate omits at most $n-q$ roots. The intersection of $k$ such certificates contains at least $h-k(n-q)$ qualified roots. Its nonexposed portion is guaranteed nonempty exactly when $h-k(n-q)>\kappa$. Necessity is attained by spreading omissions over distinct qualified roots until only at most $\kappa$ remain in the intersection; the permitted exposed set covers those. Solving this strict integer inequality gives the left side of \cref{eq:quorumrange}. Solo availability requires and is attained by $q\le n-r$.
+\end{proof}
+These are elementary generalized-intersection arguments, not a new replacement for distributed-consensus lower bounds. At $h=n$, $k=2$ and a static $\kappa=r=f$, the familiar $n>3f$ arithmetic reappears. The model does not prove a complete consensus protocol from it. The higher-arity extension records which application-level combinations must be prevented, rather than claiming that three-way intersections were unknown.
+
+\subsection{The temporal constraint is multiplied by interaction requirements}
+The v2 manuscript modeled at most $f<n$ effectively controlled roots per slot, at most $c\le f$ newly controlled roots per step, and a common $w$-slot interval of usable endorsements. Its exact exposure size is
+\begin{equation}
+\kappa_w=\min\{n,f+c(w-1)\}.
+\label{eq:exposure}
+\end{equation}
+No more than that many distinct roots can be visited; rotating control among the target roots attains every subset up to that size. A retained stolen key continues to count as effective control, even if its host is declared recovered. The ability to obtain all required signatures during those visits is part of the current model.
+
+\paragraph{Temporal consequence \idtag{JPA-C1}.}
+Let $r=f+\delta<n$, where $\delta$ may include honest dissent. Combining \cref{eq:cardinality,eq:exposure} yields
+\begin{equation}
+\boxed{h\ge\kappa_w+k(f+\delta)+1.}
+\label{eq:temporal}
+\end{equation}
+For $c>0$, a feasible window exists only when $h-f-k(f+\delta)-1\ge0$, and then
+\begin{equation}
+\boxed{w_{\max}=1+\left\lfloor\frac{h-f-k(f+\delta)-1}{c}\right\rfloor.}
+\label{eq:window}
+\end{equation}
+This bounds the common horizon over which the relevant approvals and signing obligations can accumulate in this design. It is not a deadline imposed on human thought. Fresh scoped approval, a stronger trusted ordering layer, or a changed real review structure changes the premises.
+
+\begin{table}[t]\centering\small
+\caption{Five full-coverage roots, one currently exposed root, at most one newly exposed per slot, and one allowed solo nonresponder. Thresholds are exact for the specified interface.}
+\label{tab:windows}
+\begin{tabular}{@{}lcccc@{}}\toprule
+Minimal unsafe arity & $w=1$ & $w=2$ & $w=3$ & $w=4$\\\midrule
+Two changes &4&4&None&None\\
+Three changes &4&None&None&None\\\bottomrule
+\end{tabular}
+\end{table}
+At five roots with a three-change interaction and a two-slot window, requiring four signatures permits an accumulated two-root attack to collect all three certificates. Requiring five prevents it but loses isolated completion with one allowed holdout. No different endorsement family can evade \cref{eq:cardinality} while preserving the same solo promises and the declared attack/delivery interface.
+
+With finite witness count and any $r>0$, the same inequality limits the allowed minimal interaction arity: $k\le\lfloor(h-\kappa-1)/r\rfloor$. Thus a fixed guardian arrangement cannot guarantee this particular availability contract for arbitrarily large minimal unsafe combinations. The remedy need not be more reviewers: bundling linked changes into one operation, limiting concurrent scopes, stronger semantic coordination or narrower availability promises are alternative designs. They are not free consequences of calling a proposal an agent's goal.
+
+\section{Renewal requires residual protection, not only new keys}
+\label{sec:renewal}
+\subsection{A fresh signature roster can forget a live obligation}
+Suppose three separately approved changes disable three distinct interlocks. Every signature expires before the next epoch. At every epoch, all reviewers receive new keys and empty journals but evaluate the next change against the original three-interlock scope. They unanimously sign each change in turn. The old signatures are no longer reusable, yet the already committed effects remain and the last interlock is removed.
+
+The safety premise that failed is retained conflict state, not signature authenticity. Renewing evidence and settling its effects are different operations. This agrees with the earlier recovery/admission work \cite{rac13}, but here the state being conserved is the ability to detect completion of a joint governance conflict.
+
+It does not follow that every raw signing record must be stored forever. A stronger safe handoff can fence unused certificates and transfer an exact residual constraint based on committed effects.
+
+\begin{proposition}[Exact residual-conflict handoff \idtag{JPA-T4}]
+\label{prop:residual}
+Let $C\subseteq P$ be the actual set of committed effects still relevant to protection, with no $E\in\E$ contained in $C$. All uncommitted old certificates are now effectively fenced. Let $P'\subseteq P\setminus C$ be the proposals still permitted in the next context. Define
+\begin{equation}
+\E_C=\min_{\subseteq}\{E\setminus C:E\in\E,\ E\setminus C\subseteq P'\},
+\label{eq:residual}
+\end{equation}
+where $\min_{\subseteq}$ removes strict supersets. For every $T\subseteq P'$, $C\cup T$ violates the old protection exactly when $T$ contains a member of $\E_C$.
+\end{proposition}
+\begin{proof}
+An original minimal unsafe set satisfies $E\subseteq C\cup T$ exactly when $E\setminus C\subseteq T$. Such a remainder is contained in $P'$ whenever it can be completed by permitted new work. Removing supersets does not change whether one of the remainders is contained in $T$. No empty remainder occurs because $C$ was assumed safe.
+\end{proof}
+This is ordinary set residualization, offered as a precise lifecycle interface rather than new abstract mathematics. The residual family may contain a singleton: after two of three protective interlocks have been removed, removal of the last is individually invalid and must be rejected by the unary validity layer. The concurrent theorems then apply only to the remaining individually eligible proposals. If several original violations give the same residual, a reviewer qualified for any of them may reject its completion when it has a sound view of $C$; qualification itself must still be justified.
+
+Unused but unfenced certificates invalidate the assumption that only $P'$ can act. An incorrect $C$ can also produce an unsound residual. Complete state reconstruction and verified cancellation are alternative ways to discharge old journal obligations, not mere assertions printed in a renewal receipt.
+
+\subsection{Two individually valid rule updates can jointly invalidate the certificate}
+Consider a system whose future three-change interactions have seven roots and seven qualified witnesses, $f=c=1$, one allowed nonresponder and a one-slot window. Two proposed governance edits are individually acceptable against that state: increase the window to three slots, or reduce the qualified witness pool to five. The first leaves $h=7,\kappa=3$ and satisfies $h>\kappa+3$; the second leaves $h=5,\kappa=1$ and also satisfies it. Together they produce $h=5,\kappa=3$ and fail the condition.
+
+At the instant of these edits, no service need fail. What is lost is the next epoch's demonstrated capacity to resist a legal attack pattern. The example shows why a new policy must be checked against the \emph{combined} successor state. It does not prove that all real institutional changes can be reduced to a witness count or an approval clock.
+
+\subsection{Conditional continuing protection}
+For a sequence of finite contexts, carry every committed relevant effect into the next actual state, fence old unused endorsements, obtain qualified residual witnesses, and validate the next context's joint certificate under its actual exposure and refusal assumptions. Then every finite accepted-effect prefix preserves the declared protection: within one context Theorem~\ref{thm:intersection} prevents a minimal unsafe set; at a handoff Proposition~\ref{prop:residual} preserves the meaning of the outstanding condition. Induction gives the claim.
+
+No named reviewer must be permanently trustworthy if the effective exposure assumptions can be correctly re-established. But some continuing trustworthy functionality remains: actual root ancestry, effective fencing, faithful committed-state transfer and qualified review. The proof does not construct those real-world capabilities merely by naming them. It also does not force progress if incompatible partial approvals strand a later request.
+
+\section{Executed checks and signed-effect experiments}
+\label{sec:tests}
+\subsection{Independent finite proofs-by-example, not a replacement for proof}
+The new finite checker exhaustively searches all per-proposal acceptance menus over two roots. For two-proposal conflicts, it tests every nonempty exposure family, every nonempty refusal family separately for both proposals, and every nonempty qualified subset; for three proposals, it tests common refusal families. Across 10,800 specifications, existence found by explicit local signing patterns agrees with Theorem~\ref{thm:existence}. Each specification permits different finite menus; it is not just testing the proposed complement construction.
+
+The checker also enumerates 108,716 complete signing matrices and verifies 690 uniform-threshold profiles. Temporal dynamic programming validates 132 mobile-control configurations and 4,784 joint threshold cases. For residualization, all antichain catalogs up to four proposal bits give 193 catalogs, 1,439 safe committed-state handoffs and 9,980 new-subset comparisons; each actual union predicate equals its residual version.
+
+A separate \texttt{journal\_oracle.py} imports none of the first checker. It explores root-local signing actions one at a time, recording every reachable journal state. It covers 786 specifications, including 392 with two overlapping minimal conflicts and different qualified reviewer sets. Across 214,240 reachable states and 862,007 signing transitions, its decisions for 16,782 proposal-specific threshold vectors match the joint condition. These are finite instance counts, not measured chances of institutional capture. The general results are justified by the proofs, not by extrapolating these counts.
+
+\subsection{Actual root-local journals and a certificate-only effect gate}
+A new protocol starts seven actual persistent operating-system workers, each with a separate SQLite journal and an Ed25519 signing key. Workers are reused across cases. The parent supplies root mappings, constraint catalogs, timed delivery and explicit corruption flags. Each unexposed worker atomically tests its own existing approval set before issuing a new signature. The effect database verifies distinct root signatures and their exact scoped descriptions, then applies individually certified changes to separate interlock rows. It intentionally does not revalidate the aggregate invariant at that endpoint; otherwise it would be a stronger architecture than the one tested.
+
+The experiment's concurrency is approval and commit against the same protection context, with requests interleaved across local reviewers. SQLite serializes its low-level writes. That atomicity does not imply that the overall snapshot-based approval protocol is serializable with respect to the human-protection predicate. No operating-system or hardware isolation from the parent is claimed.
+
+The completed run has 115 configurations, 1,021 signing attempts, 993 generated signatures, 963 successful verifications at the effect gate and 127 actual configuration commits. Some repeated signatures replace an earlier packet from the same root before verification. Thus generated and verified counts need not agree.
+
+\begin{table}[t]\centering\small
+\caption{Selected executed configurations. ``Safe'' means the declared protection predicate remained true at every effect commit. It is not a metric of real-world AI behavior.}
+\label{tab:experiments}
+\begin{tabularx}{\linewidth}{@{}Xrrr@{}}\toprule
+Scenario & Cases & Unsafe cases & Accepted changes\\\midrule
+Five roots, three-way conflict, two slots, $q=4$ &25&20&70\\
+Same attempted combinations, $q=5$ &25&0&0\\
+Solo eligible change with one holdout, $q=4$ &25&0&25\\
+Same solo change, $q=5$ &25&0&0\\
+Seven roots, pairwise-safe $q=5$, one exposed root &1&1&3\\
+Seven roots, joint-aware $q=6$, three-slot window &1&0&2\\
+Same threshold, four distinct roots exposed in four slots &1&1&3\\
+Three roots, no corruption, fragmented $2$-of-$3$ &1&1&3\\
+Unanimity with honest full joint journals &1&0&2\\
+Unanimity, initial-snapshot-only review &1&1&3\\
+Accept an unrelated additional action &1&0&3\\
+Fresh keys, expired old signatures, cleared journals &1&1&3\\
+Fresh keys with retained relevant journals &1&0&2\\
+Fresh keys with actual-state residual reconstruction &1&0&2\\
+Individually safe but jointly invalid governance edits &1&1&2\\
+Joint review of the same governance edits &1&0&1\\\bottomrule
+\end{tabularx}
+\end{table}
+For five roots and a two-slot moving attack, twenty of the twenty-five one-root-per-slot sequences visit two distinct roots. A fragmented request pattern collects the three four-signature certificates in exactly those cases. Five-signature unanimity blocks them but cannot complete the isolated eligible change when one root withholds. This is the safety/solo-availability incompatibility in \cref{tab:windows}, not an attack on a full Byzantine consensus implementation.
+
+The seven-root counterexample signs every elementary request legitimately according to the nonexposed roots' local histories: no honest root sees the entire forbidden triple. A six-signature construction prevents certification of the triple within the three-slot bound, though an adversarial fragmented schedule can still prevent some compatible actions from finishing. The four-slot schedule visits the four common signers sequentially and produces the forbidden certificates.
+
+The renewal tests create real new keys. Clearing the journals lets three expired-but-already-acted-upon approvals accumulate as effects. Preserving their relevant journal prevents the last approval. Reconstructing the residual catalog from the effect database and fencing old epochs also prevents it, despite clearing the raw old journal. This last case is a positive example of useful history compaction; it is not proof that the parent's snapshot and gate are independently trustworthy.
+
+An additional negative-liveness case splits preliminary votes between two incompatible actions under a unanimity rule. Neither can obtain all signatures afterwards, although no unsafe action commits. The model's solo availability does not resolve this state. Recovery would require a sound cancellation, coordination or new context; simply deleting the partial commitments is not licensed by the safety proof.
+
+\subsection{Regression, limits and corrected implementation details}
+Both v2 programs were rerun and their semantic results matched the supplied archive after excluding only random signature bytes and corresponding public keys where present. Their old 418 configurations are not added to the v3 counts. The final new code was repeated under two Python hash seeds; verification receipts compare normalized outcomes and exact source hashes.
+
+A provisional test name described one three-root run as fault-free while its call still supplied a corrupt root. The actual recorded case was relabeled as a one-corrupt-root control, a separate genuinely no-corruption test was added, and the complete final suite was rerun. No incorrectly labeled evidence is used. Test keys are not shipped as private material; raw signed public packets, event histories and summaries are preserved.
+
+These experiments exercise real signatures, worker-local databases and final configuration updates. They do not exercise a trained LLM, real persuasion, human disagreement, key-theft exploits, physical interlocks or distributed membership recovery. All workers, root rosters and semantic labels remain controlled by one parent process under one host user. A successful cryptographic check cannot certify actual independence, complete conflict discovery or legitimate representation.
+
+\section{Research value, limitations and use in a coexistence programme}
+The principal reusable result is a joint certificate: a proposed governance design can be checked against actual minimal unsafe sets, reviewer qualification, usable exposure histories and refusal promises. If a condition fails, it returns a concrete combination of proposals and certificates rather than a vague warning that AI might misbehave. If it holds, it states exactly which safety and solo-completion properties follow. The uniform and temporal formulas make that obligation explicit for a symmetric architecture.
+
+The underlying mathematics is mostly inherited: higher-order set intersections, fault-budget counting, quorum construction, antichain residualization and invariant induction. Our claim is a scoped application and consolidation across concurrency, temporal endorsement and renewable governance, not a new general quorum theorem or a proven world-first numeric bound. The strongest new negative lesson relative to v2 is that increasing the amount of individually reviewed activity can increase the required \emph{joint} witnessing structure without changing the apparent fault count.
+
+The assumption of qualified human-protection witnesses remains central. Such a root need not be an AI with a subjective self: it can be an audited program, a human review function or another effective process. But an assigned reviewer label is not evidence of its ability to detect the actual conflict. A scientific evaluation must establish the relevant inputs, shared control ancestors, semantic coverage and effect pathways. Human legitimacy is also an independent normative question. Honest dissent can enter the refusal family; it is not transformed into malicious behavior to make a quorum theorem easier to satisfy.
+
+UCT distinguishes actual processes, structural types, causal lineage, report and subject individuation \cite{uct}. The operational roots in this paper are not asserted to be phenomenal subjects. Adopting C1/U1 does not identify a model name with a unique conscious person, establish a reviewer's competence, or automatically determine a moral right. Conversely, the subject-neutral control model does not refute artificial experience. No new threshold for basic experience or empirical bridge to particular felt content is introduced.
+
+The complete-constraint premise is restrictive. Unknown effect paths, noncommutative actions, within-scope repairs, changing semantic coverage or unfenced prior certificates need a richer model. For an unbounded proposal language, finding every minimal unsafe set may be intractable or impossible in general; our finite certificate does not solve that discovery problem. Stronger semantic state-machine replication or correctly scoped escrow may avoid the certificate-only limitation. They must be evaluated under their own availability and trust costs, not ruled out by our lower bound.
+
+Finally, this manuscript does not derive universal political consensus, guaranteed cooperation among superintelligences, or perpetual growth. It establishes a bounded nonempty condition for maintaining specified protections without requiring one immortal trustworthy guardian. Continuing trust can be renewed, but the semantic obligation being protected must not disappear during the renewal.
+
+\section{Conclusion}
+A proposal can be legitimate in isolation, its signatures authentic, and its pairwise relationships harmless, while its combination with other approved changes removes the last safeguard. Joint protection therefore needs a common qualified, unexposed refusal path for each actual minimal unsafe combination, not merely an honest signer somewhere in every isolated approval.
+
+In the declared endorsement architecture, the exact feasibility condition is a separation between qualified witnesses, temporally usable exposure and one refusal set per participating proposal. Its symmetric form, $h>\kappa+kr$, exposes how interaction arity limits approval windows and tolerated nonresponse. Its scope is safety and solo availability, not arbitrary contention progress or consensus.
+
+Renewal cannot simply erase signing history while effects remain. With complete fencing and a faithful committed-state transfer, however, a residual conflict description can replace obsolete raw records. This offers a precise intermediate position between permanently freezing an institution and assuming that every freshly approved change starts a new world.
+
+\paragraph{Assistance and publication stage.}
+Hongju Liu directed the research. ChatGPT substantially assisted with literature retrieval, derivation, code, execution, critique and typesetting. This is a complete publication-prepared preprint manuscript, not independently peer reviewed. Preparing this version does not itself publish a DOI, run OTS, upload to Arweave or validate all historical UCT claims. The prior EAC manuscripts and separately published papers are preserved unchanged.
+
+\appendix
+\section{Constructing and auditing a finite certificate}
+Given roots, individually valid proposals, minimal unsafe subsets, qualified witness sets, exposure families and per-proposal refusal families, first verify the domains and actual causal interpretations. For existing certificate families enumerate \cref{eq:intersection}; a failure supplies $E,B$ and the exact supporting root subsets for an admissible fragmented attack. To ask whether \emph{some} suitable rule exists, test \cref{eq:separation}; when it holds, the complement construction is an explicit sufficient rule. For large sets this enumeration is not necessarily efficient. The scalar corollary is a specialization, not a replacement for the complete heterogeneous relation.
+
+For a new scope, distinguish three types of state: signatures still capable of authorizing effects, effects already committed and still relevant, and review commitments whose future significance is unresolved. Fencing the first and faithfully recording the second permits residualization under Proposition~\ref{prop:residual}. If the first remains live, preserve its possible effects as well. A deletion receipt alone proves none of these facts.
+
+\section{Reproduction and claim lineage}
+The package contains full editable LaTeX, the three new executed programs, exact and raw signed results, the two rerun v2 programs, claim and prior-art ledgers, a Chinese handoff and checksums. Python 3.10 or newer, a Unix-like environment, SQLite and the Python cryptography package are sufficient. Only the process protocol needs cryptography; the mathematical checkers use the standard library. No network, external account, model API, GPU or root privilege is needed.
+\Needspace{8\baselineskip}
+\begin{lstlisting}
+python -S src/joint_certificates.py --out data/joint_results.json
+python -S src/journal_oracle.py --out data/journal_oracle.json
+python src/concurrent_amendments.py --out data/concurrent_results.json
+cd paper
+pdflatex -interaction=nonstopmode -halt-on-error manuscript.tex
+pdflatex -interaction=nonstopmode -halt-on-error manuscript.tex
+\end{lstlisting}
+The independently coded journal oracle enumerates signing actions rather than calling the algebraic test. Raw signatures and fresh public keys vary; normalized outcomes and the exact finite counts do not. Neither repeated runs nor thousands of finite states are counted as independent real-world safety trials.
+
+\begin{table}[ht]\centering\small
+\caption{Contribution ledger. General ingredients are inherited; exact application priority is unverified.}
+\begin{tabularx}{\linewidth}{@{}lXX@{}}\toprule
+Claim & Manuscript increment & Evidence or limitation\\\midrule
+JPA-T1 & Joint qualified intersection for actual minimal unsafe sets & Necessity construction and sufficiency proof; finite journal oracle\\
+JPA-T2 & Per-proposal refusal-family existence criterion & Complete small acceptance-menu search; solo availability only\\
+JPA-T3 & Conflict-arity/exposure/refusal specialization & Exact integer bound; known quorum/intersection mathematics\\
+JPA-C1 & Mobile exposure/arity window frontier & Inherited exposure count; new joint condition\\
+JPA-T4 & Residual conflict state at fenced renewal & Set-equivalence proof; exact catalog checks and real journal-reset controls\\
+JPA-E1 & Signed multi-proposal and renewal tests & 115 bounded configurations, seven reused workers; no independent hardware\\\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{thebibliography}{99}\fontsize{9.3}{10.8}\selectfont\setlength{\itemsep}{1.5pt}\setlength{\parskip}{0pt}
+\bibitem{eac2} H. Liu. \emph{When the Guardians Can Be Acquired: Temporal Representation and Renewable Authorization in Multi-Agent Governance}. EAC-v2.0.0, unpublished research manuscript, 12 October 2026. Source and raw data preserved in the accompanying baseline; original guards work ASI-CC-v1.0.0 remains separate in its history.
+\bibitem{bailis} P. Bailis, A. Fekete, M. J. Franklin, A. Ghodsi, J. M. Hellerstein and I. Stoica. Coordination Avoidance in Database Systems. \emph{Proceedings of the VLDB Endowment}, 8(3):185--196, 2014; presented at VLDB 2015. \url{https://www.vldb.org/pvldb/vol8/p185-bailis.pdf}.
+\bibitem{bec} M. Kleppmann and H. Howard. \emph{Byzantine Eventual Consistency and the Fundamental Limits of Peer-to-Peer Databases}. arXiv:2012.00472, 2020. \url{https://arxiv.org/abs/2012.00472}.
+\bibitem{malkhi} D. Malkhi and M. Reiter. Byzantine Quorum Systems. \emph{Distributed Computing}, 11(4):203--213, 1998. \href{https://doi.org/10.1007/s004460050050}{doi:10.1007/s004460050050}.
+\bibitem{fast} H. Howard, A. Charapko and R. Mortier. \emph{Fast Flexible Paxos: Relaxing Quorum Intersection for Fast Paxos}. arXiv:2008.02671, 2020. \url{https://arxiv.org/abs/2008.02671}.
+\bibitem{satrapy} X. Li, E. M. Chan and M. Lesani. Satrapy: From Abstract to Practical Consensus for Heterogeneous Quorum Systems. \emph{Distributed Computing}, 2026. \href{https://doi.org/10.1007/s00446-026-00507-0}{doi:10.1007/s00446-026-00507-0}.
+\bibitem{hjky} A. Herzberg, S. Jarecki, H. Krawczyk and M. Yung. Proactive Secret Sharing Or: How to Cope With Perpetual Leakage. \emph{CRYPTO}, LNCS 963:339--352, 1995. \href{https://doi.org/10.1007/3-540-44750-4_27}{doi:10.1007/3-540-44750-4\_27}.
+\bibitem{castro} M. Castro and B. Liskov. Practical Byzantine Fault Tolerance and Proactive Recovery. \emph{ACM Transactions on Computer Systems}, 20(4):398--461, 2002. \href{https://doi.org/10.1145/571637.571640}{doi:10.1145/571637.571640}.
+\bibitem{pr6} H. Liu. \emph{Safe Revocation Without Complete Diagnosis: Exact Resource Frontiers under Coupled Faults for Subjecthood-Agnostic AI Coexistence}. PR-v6.0.0, theoretical preprint, 2026. \href{https://doi.org/10.5281/zenodo.23295776}{doi:10.5281/zenodo.23295776}.
+\bibitem{rac13} H. Liu. \emph{When Revocation Does Not Restore Safety: Exact Admission Across Asynchronous Policy Changes in Multi-Agent Systems}. ASI-CC-v1.3.0, theoretical preprint, 2026. \href{https://doi.org/10.5281/zenodo.23299153}{doi:10.5281/zenodo.23299153}. Existing contribution retained, not republished as new.
+\bibitem{uct} H. Liu. \emph{Unified Consciousness Theory I: Structural--Experiential Identity and the Continuity from Physical Process to Conceptual Self}. v1.2, theoretical preprint, 2026. \href{https://doi.org/10.5281/zenodo.23131575}{doi:10.5281/zenodo.23131575}. Its interpretive premises are not empirical results of the present experiments.
+\end{thebibliography}
+\end{document}
