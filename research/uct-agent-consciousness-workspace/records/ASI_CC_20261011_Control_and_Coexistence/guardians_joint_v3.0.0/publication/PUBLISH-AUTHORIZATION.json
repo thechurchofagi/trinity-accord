@@ -1,0 +1,12 @@
+{
+  "schema": "eac-v3-zenodo-authorized/1",
+  "paper_id": "EAC-v3.0.0",
+  "status": "AUTHORIZED_FOR_ONE_PUBLIC_ZENODO_PREPRINT",
+  "owner_instruction": "Publish EAC-v3.0.0 according to existing repository DOI then OTS then Arweave publication process",
+  "expected_manifest_sha256": "367e064f5ffa0ba3eee78b05398cf0b01869e343d50c14789fe75affa92f9a30",
+  "allow_frozen_asset_edit": false,
+  "old_papers_unmodified": true,
+  "deposition_once": true,
+  "license": "cc-by-4.0",
+  "authorized_date": "2026-10-12"
+}
