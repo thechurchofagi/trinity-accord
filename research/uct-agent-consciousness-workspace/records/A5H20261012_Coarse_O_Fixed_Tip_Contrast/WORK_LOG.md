@@ -13,3 +13,8 @@
 11. Freshly traversed the effective 913/424/261 graph and manually audited affected concepts, simultaneous premises, satisfiability, object/time/signature/actuality/evidence levels and inference direction.
 
 Persistence steps and verified receipts are appended only after remote and persistent-workspace checks succeed.
+
+12. Saved the 35-path science tree by expected-SHA nonforced fast-forward as commit `cfcfde879d1e4c8706c014a9605beeed50e6a141`; verified remote head, tree `eafbf8904cf703628b106a96437943d400448137` and key files.
+13. Built a deterministic 35-path increment, saved archive and manifest as new persistent files, reverse-materialized both and obtained byte equality.
+14. Replayed the reverse-materialized increment from exact parent `3f18b0c40746bf527f67f3f91ea1829ab2725edd`; `git write-tree` exactly matched the science tree.
+15. Replaced the fixed master handoff in the same Library identity at v175 and reverse-materialized it byte-identically. The final metadata successor and fixed-master confirmation version are recorded after this receipt is saved.

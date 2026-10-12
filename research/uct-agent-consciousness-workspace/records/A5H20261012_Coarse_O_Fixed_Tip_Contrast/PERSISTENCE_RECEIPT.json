@@ -1,0 +1,27 @@
+{
+  "schema": "uct-persistence-receipt/1",
+  "research_id": "A5H20261012",
+  "remote_branch": "uct-agent-consciousness-workspace",
+  "science_commit": "cfcfde879d1e4c8706c014a9605beeed50e6a141",
+  "science_tree": "eafbf8904cf703628b106a96437943d400448137",
+  "science_parent": "3f18b0c40746bf527f67f3f91ea1829ab2725edd",
+  "remote_write": {
+    "expected_sha": "3f18b0c40746bf527f67f3f91ea1829ab2725edd",
+    "force": false,
+    "fast_forward": true,
+    "remote_head_and_tree_readback": true,
+    "key_files_readback": ["CURRENT_STATE.json", "records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/EXACT_RESULTS.json"]
+  },
+  "library": {
+    "fixed_master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "fixed_master_science_version": 175,
+    "fixed_master_science_sha256": "f874499d9df8e827b2f7c69c0e43efea1ef639e611619293b70e317d211735ab",
+    "increment_library_file_id": "libfile_37e8d4d431808191afa440fcecc40565",
+    "manifest_library_file_id": "libfile_e8374263e5c48191815360ad4d319c58",
+    "reverse_materialized_byte_equal": true,
+    "exact_tree_replay": true
+  },
+  "metadata_successor_rule": "This receipt is added only after science and Library verification. The final Git metadata successor and fixed-master confirmation version are recorded by remote/fixed-master readback and do not alter the science tree or claims.",
+  "publication_action": false,
+  "ci_or_deployment_action": false
+}

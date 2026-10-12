@@ -24,4 +24,6 @@ C1 仍是意识特定解释性公设，U1 和基础体验门槛不变。没有�
 
 ## 双份恢复收据
 
-待 GitHub 科学提交、增量包、外部清单、固定主交接及反向物化全部核验后填写；未核验前不称双份完成。
+GitHub 科学提交 `cfcfde879d1e4c8706c014a9605beeed50e6a141`，树 `eafbf8904cf703628b106a96437943d400448137`，父提交 `3f18b0c40746bf527f67f3f91ea1829ab2725edd`；expected-SHA 非强制快进、远端头／树／关键文件回读通过。
+
+35 路径增量不是完整仓库或工作集：`UCT_A5H_Increment_20261012.zip`，Library ID `libfile_37e8d4d431808191afa440fcecc40565`，213876 字节，SHA256 `8312becdd192f41049b5de9e52b1a46db35783c42cebaae3571e04e3a86a3887`；清单 Library ID `libfile_e8374263e5c48191815360ad4d319c58`，10871 字节，SHA256 `accce1fb8b7f283db5112ef575393cf6b06d7d688b5490ae41790e4e7ab63b6c`。二者反向物化逐字节相等，并从精确父提交重放到同一科学树。固定主交接同一身份 v175 反向物化逐字节相等；最终元数据后继与主交接确认版本以 `PERSISTENCE_RECEIPT.json` 后的远端／固定文件回读为准。
