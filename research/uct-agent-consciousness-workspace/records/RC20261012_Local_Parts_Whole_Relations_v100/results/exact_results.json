@@ -1,0 +1,193 @@
+{
+  "assertions": "PASS",
+  "dissimilarity": {
+    "also_pseudometric": 1,
+    "closure_matrices_checked": 729,
+    "expansive_projection_compatible": 9,
+    "four_state_dissimilarities": 729,
+    "path_threshold_stricter_than_all_direct_pairs": 21,
+    "positive_repair_thresholds": 534,
+    "square_bound": [
+      {
+        "opposite_distance": "0",
+        "slack": "0"
+      },
+      {
+        "opposite_distance": "1/5",
+        "slack": "1/10"
+      },
+      {
+        "opposite_distance": "1/2",
+        "slack": "1/4"
+      },
+      {
+        "opposite_distance": "1",
+        "slack": "1/2"
+      },
+      {
+        "opposite_distance": "1",
+        "slack": "1"
+      }
+    ],
+    "strict_witness": {
+      "cap": [
+        [
+          "0",
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "0",
+          "0"
+        ]
+      ],
+      "lower": [
+        [
+          "0",
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "0",
+          "0"
+        ]
+      ],
+      "minimum_uniform_slack": "1/2",
+      "path": {
+        "endpoints": [
+          0,
+          2
+        ],
+        "lower": "1",
+        "original_path_cost": "0",
+        "path": [
+          0,
+          1,
+          2
+        ]
+      }
+    },
+    "three_state_lower_upper_pairs": 729
+  },
+  "evidence_type": "EXACT_FINITE_MATHEMATICAL_FIXTURES_NOT_PHENOMENAL_MEASUREMENTS",
+  "gluing": {
+    "all_covers_checked_including_empty_and_redundant_covers": 256,
+    "five_open_nondiscrete_topology": {
+      "covers": 32,
+      "matching_families": 326,
+      "nonunique_matching_families": 32
+    },
+    "incidence_binary_covers": 100,
+    "incidence_matching_families_all_unique": 847,
+    "incidence_open_sets": 10,
+    "matching_families_all_with_amalgamations": 3382,
+    "matching_families_with_nonunique_amalgamations": 280,
+    "nonempty_overlap_fixture": {
+      "amalgamations_each": 2,
+      "compatible_pairs": 8
+    },
+    "restriction_chain_instances": 595,
+    "vertex_base_points": 3,
+    "vertex_open_sets": 8
+  },
+  "relational_completion": {
+    "added_cross_relation_chart_unique_completions": 4096,
+    "binding_metric_ordered_pairs": 64,
+    "binding_metric_states": 8,
+    "cover_results": [
+      {
+        "completions_each": 256,
+        "hidden_atoms": [
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            3,
+            0
+          ],
+          [
+            3,
+            1
+          ]
+        ],
+        "local_data_patterns": 16,
+        "patches": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "relation_atoms": 12,
+        "visible_atoms": 4
+      },
+      {
+        "completions_each": 4,
+        "hidden_atoms": [
+          [
+            0,
+            3
+          ],
+          [
+            3,
+            0
+          ]
+        ],
+        "local_data_patterns": 1024,
+        "patches": [
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "relation_atoms": 12,
+        "visible_atoms": 10
+      }
+    ],
+    "enumerated_directed_graphs_per_cover": 4096
+  },
+  "schema": "uct-relational-composition-checks/v1",
+  "version": "1.0.0"
+}
