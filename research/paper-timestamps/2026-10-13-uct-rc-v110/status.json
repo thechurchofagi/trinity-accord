@@ -1,0 +1,23 @@
+{
+  "batch": "2026-10-13-uct-rc-v110",
+  "files": [
+    {
+      "bitcoin_heights": [],
+      "bytes": 181329,
+      "doi": "10.5281/zenodo.23327394",
+      "name": "What_the_Whole_Adds_v1.1.0.pdf",
+      "pending_calendar_attestations": 4,
+      "proof": "research/paper-timestamps/2026-10-13-uct-rc-v110/proofs/UCT-RC-2026-01/What_the_Whole_Adds_v1.1.0.pdf.ots",
+      "proof_sha256": "e55ee59d8b97ac1d963a67f9417f53c4f6c850eabeb0ce071312333bb7c4088c",
+      "report": "UCT-RC-2026-01",
+      "role": "Complete English v1.1.0 overlapping-process theoretical preprint",
+      "sha256": "68e2e3a80226f946ed40a0fa7a947a27c7af33431d373a456e1ba738bc3c24c7",
+      "state": "PENDING_BITCOIN"
+    }
+  ],
+  "paper_count": 1,
+  "pdf_count": 1,
+  "schema": "trinityaccord.paper-ots-status.v1",
+  "state": "WAITING",
+  "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
+}
