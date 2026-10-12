@@ -1,0 +1,200 @@
+{
+  "schema": "UCT_INCREMENT_MANIFEST_v1",
+  "label": "A5D post-image increment; not a complete repository or workset backup",
+  "base_commit": "3614669d6006669bbdc5b4c9583167c2a6f47140",
+  "target_science_commit": "0bf317e5f02897c5a68d2b5b8945e06c3ff2a79e",
+  "target_tree": "8264f32c398d290f39b2e6fd7413068ee3b2c22b",
+  "application_order": "Apply this ZIP over an exact checkout of base_commit, preserving all unlisted paths.",
+  "path_count": 36,
+  "archive": {
+    "file_name": "UCT_A5D_Increment_20261012.zip",
+    "size_bytes": 247310,
+    "sha256": "3bb1455276d4e2f6d82346ee9d15eea5dc22e5891a73cd9d3c7686044cbf1240"
+  },
+  "files": [
+    {
+      "path": "research/uct-agent-consciousness-workspace/AGENTS.md",
+      "size_bytes": 116395,
+      "sha256": "7c5b367f21bacfed906fd0d4b3b6d032757bf69ed7b5ee61d21e31199643a973"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/CURRENT_STATE.json",
+      "size_bytes": 95550,
+      "sha256": "bf043ffdab6e2cc76a5bb614a8487e5d120146796637a683b1a80def394a8224"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/FORMAL_MAP_EXTENSION_INDEX.json",
+      "size_bytes": 21471,
+      "sha256": "175d0d2ec5336ef28dc6093542f9f3d256e28908d81832990b2498b0c1a0b1ed"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/HANDOFF.md",
+      "size_bytes": 27639,
+      "sha256": "60af3440f2adb7c1e6acc4a657abf9bccd968cbdf5349a99075b6d3020eb44cc"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/MASTER_INDEX.md",
+      "size_bytes": 23093,
+      "sha256": "6b83a88cdbd467e0317a99186d08a4e15fec92072e469b7ca50eaa2ec0550dc6"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/MEMORY.md",
+      "size_bytes": 26044,
+      "sha256": "66f642070cd960a4c03f8c8d7f4501008e7794fc33193de18a8b745acf407f3d"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/PUBLICATION_COVERAGE.json",
+      "size_bytes": 28417,
+      "sha256": "1b744e750b8be3ccdae05b156a8f85e8095d9e9c9ec7a2aee1d40b0d3ff50b51"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/REVIEW_SUPERVISION.md",
+      "size_bytes": 157948,
+      "sha256": "7ca0d9fc62a3653c4f9ef5c5ffe1b571ca08ed19c0213fc03120d17004144101"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/START_HERE.md",
+      "size_bytes": 1278,
+      "sha256": "284fba9897eea1320597c5d82dd9d10006e80fb6849f6ebc5d39a1667d06b638"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_AUDIT.md",
+      "size_bytes": 23346,
+      "sha256": "6aded854b97275006fda70ee1979b2c36f141a0a0641391c6f1583cfa22ab9fb"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UCT_FORMAL_MAP.md",
+      "size_bytes": 47676,
+      "sha256": "2862290fd3082d59b574495ba070d51c0c858105b91f9894abd8ff16c041a842"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/UNIFIED_RESEARCH_INDEX.json",
+      "size_bytes": 191588,
+      "sha256": "8558328ec92c96fb7cfec2d835194b24584f09ca12b901e80ed8b7ace079d064"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5D20261012_Constitutive_and_Evidential_Orientation/APPLICATION_ENTRY.json",
+      "size_bytes": 775,
+      "sha256": "ad2422734f7cd7f78d334943739f16bd194d808d4dc3791ca839f7cfd84c8f40"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5D20261012_Constitutive_and_Evidential_Orientation/AUDIT_SUMMARY.json",
+      "size_bytes": 3336,
+      "sha256": "86677f7e963612315fb5ede80073ada6b16a24c555b84c9772f208bfb7fe0256"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5D20261012_Constitutive_and_Evidential_Orientation/CLAIM_LEDGER.json",
+      "size_bytes": 4739,
+      "sha256": "d27caf407bad1209341f6bf7a9d05f7aae6ee5b60c8dd164ab919d76ebc18d86"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5D20261012_Constitutive_and_Evidential_Orientation/DIRECTION_CHECKS.md",
+      "size_bytes": 1035,
+      "sha256": "b9b66e36a49b4cd5327574a9d079381562fa0c59424ae72a33916995bc09bdd3"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5D20261012_Constitutive_and_Evidential_Orientation/EXACT_RESULTS.json",
+      "size_bytes": 2118,
+      "sha256": "d3ad725c41139e1387a27e4f8e56f59b2640e1c529a4e222e9dbc81642687b40"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5D20261012_Constitutive_and_Evidential_Orientation/FAILURES.md",
+      "size_bytes": 1397,
+      "sha256": "ae3f72080f9bbbec3198296ed0a06652269a3f9718f298b071188e8233bd4687"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5D20261012_Constitutive_and_Evidential_Orientation/FORMAL_AUDIT.md",
+      "size_bytes": 2956,
+      "sha256": "ce99a9ae33b302fd572a3543a55bffa633bd2241c80b6155fb8ad83d4d4d8343"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5D20261012_Constitutive_and_Evidential_Orientation/GAP_LEDGER.md",
+      "size_bytes": 2030,
+      "sha256": "d99911c3b051919a6ce2d59e8c0a3ac2bcbfc8992f313f5229906f4eeb4598d4"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5D20261012_Constitutive_and_Evidential_Orientation/HANDOFF_ZH.md",
+      "size_bytes": 2809,
+      "sha256": "796ed5ec3fe2a8717d6c395a8d55fa4c90f160df314bce36cb7e7f78910539ed"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5D20261012_Constitutive_and_Evidential_Orientation/MANUSCRIPT_DECISION.json",
+      "size_bytes": 292,
+      "sha256": "863b28ec557a7acdfa05f5b7bdbf7e56c197118861ef9888c44e9a76c798a080"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5D20261012_Constitutive_and_Evidential_Orientation/MAP_EXTENSION.json",
+      "size_bytes": 585,
+      "sha256": "d29447143e82e41a0e4ff271ea4eaf5c6d42623a35431014ffbc2ffb2536494e"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5D20261012_Constitutive_and_Evidential_Orientation/ORIENTATION_LAYER_CONTRACT.md",
+      "size_bytes": 4841,
+      "sha256": "7bdd47eb6ac4bb85afcda566465733810a50c9550b7c5c968891cbc178ed802f"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5D20261012_Constitutive_and_Evidential_Orientation/PER_ID_AUDIT.json.gz",
+      "size_bytes": 13786,
+      "sha256": "c65972d4912324d0a30803f10c8238f0e0ded3d62d713dd73e0277d1fb9e3d9f"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5D20261012_Constitutive_and_Evidential_Orientation/PUBLICATION_COVERAGE_UPDATE.json",
+      "size_bytes": 228,
+      "sha256": "4bab28e26102748b48aa5664680dd34a88a02cc5efa20d2756e2938b9b72b3d4"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5D20261012_Constitutive_and_Evidential_Orientation/RESEARCH_NOTE.md",
+      "size_bytes": 8307,
+      "sha256": "51c2d3b3be130a605bb93d5bc1a51ec072159d334e09565cb959a052f946d7a9"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5D20261012_Constitutive_and_Evidential_Orientation/REVIEW_RESPONSE.md",
+      "size_bytes": 1368,
+      "sha256": "e5cf6c8679f7ba395e2b542afb74ee06fc859be9e22ec84414ff1761f40647db"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5D20261012_Constitutive_and_Evidential_Orientation/ROUND_RECORD.md",
+      "size_bytes": 1943,
+      "sha256": "582bffe6f8b58f7bab8f282c92ec4d00e713a09439f4a191873bc13f33cfcf80"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5D20261012_Constitutive_and_Evidential_Orientation/SOURCE_SCOPE.md",
+      "size_bytes": 2310,
+      "sha256": "d17403a2d011b3942ab9c68bd10c658e792556818996d625ceba28efe02464b8"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5D20261012_Constitutive_and_Evidential_Orientation/THOUGHT_EXPERIMENTS.md",
+      "size_bytes": 1342,
+      "sha256": "52907fe6d25e34a68ac6ae1065b223970b8dad830588cbf66aacbe774bb01329"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5D20261012_Constitutive_and_Evidential_Orientation/VALIDATION.md",
+      "size_bytes": 865,
+      "sha256": "e7d45c66b2566715f21d6abbcff169f3d9cbf1a4e7763da1f0cb9827d4feb711"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5D20261012_Constitutive_and_Evidential_Orientation/WORK_LOG.md",
+      "size_bytes": 1000,
+      "sha256": "6cad07ae74441994e3e5a6c4a8f6202a9d19f07bd6763ca043316a3be23c48cd"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5D20261012_Constitutive_and_Evidential_Orientation/audit_map.py",
+      "size_bytes": 5642,
+      "sha256": "f784dcc65b21e4bf315d9fb24c28c56d068a096156cdd0689194d5ca90fbd21e"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5D20261012_Constitutive_and_Evidential_Orientation/check_orientation_layers.py",
+      "size_bytes": 4021,
+      "sha256": "7f33c976283407090e56cff43b1375d7742820568112ee27d486e52f687e41cb"
+    },
+    {
+      "path": "research/uct-agent-consciousness-workspace/records/A5D20261012_Constitutive_and_Evidential_Orientation/update_navigation.py",
+      "size_bytes": 3617,
+      "sha256": "1163eba017c5c5a58ca75a718046dd117183d1df9f198eab02e571ff4849da8e"
+    }
+  ],
+  "verification": {
+    "expected_reconstructed_tree": "8264f32c398d290f39b2e6fd7413068ee3b2c22b",
+    "verified": true
+  }
+}

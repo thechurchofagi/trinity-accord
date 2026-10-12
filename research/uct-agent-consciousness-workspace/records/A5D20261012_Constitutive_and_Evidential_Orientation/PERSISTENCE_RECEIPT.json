@@ -1,0 +1,35 @@
+{
+  "schema": "UCT_PERSISTENCE_RECEIPT_v1",
+  "round": "A5D20261012",
+  "scientific_claims_changed_by_receipt": false,
+  "formal_delta_changed_by_receipt": false,
+  "review_status_changed_by_receipt": false,
+  "github": {
+    "verified_concurrent_parent": "3614669d6006669bbdc5b4c9583167c2a6f47140",
+    "science_commit": "0bf317e5f02897c5a68d2b5b8945e06c3ff2a79e",
+    "science_tree": "8264f32c398d290f39b2e6fd7413068ee3b2c22b",
+    "remote_readback": "VERIFIED",
+    "ref_update": "EXPECTED_SHA_NON_FORCE_FAST_FORWARD"
+  },
+  "fixed_master_handoff": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "science_version": 167,
+    "size_bytes": 5004,
+    "sha256": "e7902aa85802fee559b34c99877a297098fec8bb437307aefe13d0ed7a5df9b0",
+    "reverse_materialized_byte_equal": true
+  },
+  "increment": {
+    "label": "36-path post-image increment; not a complete repository or workset backup",
+    "library_file_id": "libfile_91fb2d12c7f88191af1a1798d3adfc43",
+    "size_bytes": 247310,
+    "sha256": "3bb1455276d4e2f6d82346ee9d15eea5dc22e5891a73cd9d3c7686044cbf1240",
+    "reverse_materialized_byte_equal": true
+  },
+  "manifest": {
+    "library_file_id": "libfile_8c80ef1526b081918cfa0410b75ca2ac",
+    "size_bytes": 9462,
+    "sha256": "e817d7782d830f7aca5e88d418d5116f74be9e9c88235c01de18da61dab17788",
+    "reverse_materialized_byte_equal": true
+  },
+  "receipt_successor_note": "The commit containing this receipt is an expected-SHA successor to the science commit; its SHA is recorded in fixed-master v168 after remote verification to avoid self-reference."
+}

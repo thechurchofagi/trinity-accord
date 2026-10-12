@@ -1635,5 +1635,22 @@
     },
     "receipt": "records/A4S20261011_Token_Coherent_Route_Stitching/PERSISTENCE_RECEIPT.json"
   },
-  "next_priority_before_A4T": "A4S next: specify and attack a physically testable same-occurrence/lineage criterion at sampler→consumer and consumer→writer boundaries in one actual bearer, without treating value equality, software identifiers, or abstract port matching as physical token identity; retain H_cf calibration as OPEN."
+  "next_priority_before_A4T": "A4S next: specify and attack a physically testable same-occurrence/lineage criterion at sampler→consumer and consumer→writer boundaries in one actual bearer, without treating value equality, software identifiers, or abstract port matching as physical token identity; retain H_cf calibration as OPEN.",
+  "latest_activity_persistence_after_A5D_science": {
+    "status": "GITHUB_SCIENCE_COMMIT_VERIFIED; LIBRARY_INCREMENT_REVERSE_VERIFIED; MASTER_V167_REVERSE_VERIFIED; FINAL_METADATA_COMMIT_IS_EXPECTED_SHA_SUCCESSOR",
+    "receipt": "records/A5D20261012_Constitutive_and_Evidential_Orientation/PERSISTENCE_RECEIPT.json",
+    "recovery_manifest": "records/A5D20261012_Constitutive_and_Evidential_Orientation/RECOVERY_MANIFEST.json",
+    "verified_concurrent_parent": "3614669d6006669bbdc5b4c9583167c2a6f47140",
+    "github_science_commit": "0bf317e5f02897c5a68d2b5b8945e06c3ff2a79e",
+    "github_science_tree": "8264f32c398d290f39b2e6fd7413068ee3b2c22b",
+    "library_master_science_version": 167,
+    "library_master_science_sha256": "e7902aa85802fee559b34c99877a297098fec8bb437307aefe13d0ed7a5df9b0",
+    "library_increment_id": "libfile_91fb2d12c7f88191af1a1798d3adfc43",
+    "library_increment_sha256": "3bb1455276d4e2f6d82346ee9d15eea5dc22e5891a73cd9d3c7686044cbf1240",
+    "library_increment_size_bytes": 247310,
+    "library_manifest_id": "libfile_8c80ef1526b081918cfa0410b75ca2ac",
+    "library_manifest_sha256": "e817d7782d830f7aca5e88d418d5116f74be9e9c88235c01de18da61dab17788",
+    "library_manifest_size_bytes": 9462,
+    "reverse_materialized_byte_equal": true
+  }
 }

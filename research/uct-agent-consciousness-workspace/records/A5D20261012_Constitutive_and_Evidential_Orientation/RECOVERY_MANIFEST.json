@@ -1,0 +1,25 @@
+{
+  "schema": "UCT_RECOVERY_MANIFEST_v1",
+  "round": "A5D20261012",
+  "preferred_recovery": {
+    "remote_branch": "uct-agent-consciousness-workspace",
+    "required_science_ancestor": "0bf317e5f02897c5a68d2b5b8945e06c3ff2a79e"
+  },
+  "increment_fallback": {
+    "base_commit": "3614669d6006669bbdc5b4c9583167c2a6f47140",
+    "archive_library_file_id": "libfile_91fb2d12c7f88191af1a1798d3adfc43",
+    "archive_sha256": "3bb1455276d4e2f6d82346ee9d15eea5dc22e5891a73cd9d3c7686044cbf1240",
+    "manifest_library_file_id": "libfile_8c80ef1526b081918cfa0410b75ca2ac",
+    "manifest_sha256": "e817d7782d830f7aca5e88d418d5116f74be9e9c88235c01de18da61dab17788",
+    "path_count": 36,
+    "expected_tree": "8264f32c398d290f39b2e6fd7413068ee3b2c22b",
+    "classification": "INCREMENT_ONLY_NOT_FULL_BACKUP"
+  },
+  "checks": [
+    "Apply only over the exact base commit and preserve every unlisted path.",
+    "Verify every file hash from UCT_A5D_Increment_20261012.manifest.json.",
+    "Require git write-tree to equal 8264f32c398d290f39b2e6fd7413068ee3b2c22b.",
+    "Run check_orientation_layers.py and audit_map.py.",
+    "Recheck C1, actuality, quantifiers, direction, evidence level and all OPEN review items manually."
+  ]
+}
