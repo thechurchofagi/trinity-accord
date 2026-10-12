@@ -1,0 +1,43 @@
+{
+  "schema": "cd-v110-ots-published-input/1",
+  "state": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
+  "report_number": "CIV-CD-2026-01",
+  "record_id": 23308239,
+  "doi": "10.5281/zenodo.23308239",
+  "version": "1.1.0",
+  "title": "Awareness Can Catch Up After Choice Has Closed: Uneven Readiness, Effective Reconsideration, and Civilizational Desynchronization in AI Transitions",
+  "files": [
+    {
+      "name": "awareness-can-catch-up-after-choice-has-closed-cd-v1.1.0.pdf",
+      "bytes": 267170,
+      "sha256": "aaf63c68661ffaeaaa677f4da3e5b8df327cc1af2dbd5ec58c7780434ee3925f"
+    },
+    {
+      "name": "reproducibility-cd-v1.1.0.zip",
+      "bytes": 311437,
+      "sha256": "b642957f715d806bb7d6ada4ccc5f019e3f9592bec33909d2b2a5b9818bdd0f9"
+    },
+    {
+      "name": "awareness-can-catch-up-after-choice-has-closed-cd-v1.1.0.tex",
+      "bytes": 45183,
+      "sha256": "a0e5a11d1843a1a95f1e70c2f741e9c288d60e64ddcb74d30a806cb044874897"
+    },
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 2131,
+      "sha256": "7bd360829203ce947decaed1aa3ed384e0736f71edea2720b1e5bba52a2893ff"
+    },
+    {
+      "name": "REVIEW-AND-SOURCES.md",
+      "bytes": 2610,
+      "sha256": "096ce6b0a07cbbde6ba60658a3de64dc155feabd72f39a09137327e32925c120"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 523,
+      "sha256": "3f2d9b06532cc6f76abf7f07b5b0038b806112957599882fe85b33aa8028b811"
+    }
+  ],
+  "source_publication_receipt_git_sha": "e78276c26d93929180f39a0a842e5942c45ff731",
+  "peer_reviewed": false
+}
