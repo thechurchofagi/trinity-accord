@@ -1,0 +1,43 @@
+{
+  "schema": "guardians-eac-v3-ots-published-input/1",
+  "state": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
+  "report_number": "ASI-CC-EAC3",
+  "record_id": 23307124,
+  "doi": "10.5281/zenodo.23307124",
+  "version": "3.0.0",
+  "title": "When the Guardians Can Be Acquired: Joint Protection Across Concurrent and Renewable Authorizations",
+  "files": [
+    {
+      "name": "when-the-guardians-can-be-acquired-eac-v3.0.0.pdf",
+      "bytes": 260757,
+      "sha256": "d735a574cb8f4ce3233cde5b69f4e2135b5a0e7825536ce2b638cb93c2c93e57"
+    },
+    {
+      "name": "reproducibility-eac-v3.0.0.zip",
+      "bytes": 599292,
+      "sha256": "4353e57c83c66991ad91123634cc5f8e1ef42d1ab331a92412777c8ecb4ed58e"
+    },
+    {
+      "name": "when-the-guardians-can-be-acquired-eac-v3.0.0.tex",
+      "bytes": 48889,
+      "sha256": "24fc7c6c53b2cb1ef25562431053140a06a147da3f69b0bfcf70693d232cc5ed"
+    },
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 1629,
+      "sha256": "0ed1dc32ed4330be91ae8e2405e94ff68b7e47407641249697381d030b7e3247"
+    },
+    {
+      "name": "REVIEW-AND-SOURCES.md",
+      "bytes": 2075,
+      "sha256": "dde371a8f9437cb6e0b1df22f35fca011544970b7ab6b799514d6ca6b3219c45"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 502,
+      "sha256": "b053d6a1e37ad089ec91d244a2744fe2b84087b5743211c1e5cc4542c7423ea0"
+    }
+  ],
+  "source_publication_receipt_git_sha": "2caf13bc810a6f1462dcb6906413190bb91a831a",
+  "peer_reviewed": false
+}
