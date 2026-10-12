@@ -1,0 +1,263 @@
+{
+  "countermodels": {
+    "biconditional_residual_ambiguity": {
+      "compatible_orbits": 2,
+      "endpoint": [
+        0,
+        0
+      ],
+      "interpretation": "Even C=J identifies targetwise jointness, not same-owner versus strict distribution."
+    },
+    "different_orbits_same_endpoint": {
+      "distinct_orbits": true,
+      "endpoint": [
+        0,
+        0
+      ],
+      "interpretation": "C does not identify the Pi orbit without a faithfulness premise.",
+      "pi_global_single_owner": [
+        [
+          0
+        ],
+        [
+          0
+        ]
+      ],
+      "pi_strict_distributed": [
+        [
+          0
+        ],
+        [
+          1
+        ]
+      ]
+    },
+    "same_pi_different_W_endpoint": {
+      "endpoint_a": [
+        0,
+        0
+      ],
+      "endpoint_b": [
+        1,
+        0
+      ],
+      "interpretation": "A separately actual controller law W can change C while Pi is fixed.",
+      "pi": [
+        [
+          0,
+          1
+        ],
+        [
+          0
+        ]
+      ]
+    }
+  },
+  "domain": {
+    "covered_relations": 9,
+    "endpoint_vectors": 4,
+    "named_routes": 2,
+    "named_targets": 2,
+    "unconstrained_joint_worlds": 36
+  },
+  "faithfulness_contracts": {
+    "biconditional": {
+      "by_endpoint": {
+        "00": {
+          "compatible_orbits": 2,
+          "compatible_relations": 4,
+          "includes_global_single_owner": true,
+          "includes_strict_distributed": true,
+          "joint_vectors": [
+            "00"
+          ]
+        },
+        "01": {
+          "compatible_orbits": 1,
+          "compatible_relations": 2,
+          "includes_global_single_owner": false,
+          "includes_strict_distributed": false,
+          "joint_vectors": [
+            "01"
+          ]
+        },
+        "10": {
+          "compatible_orbits": 1,
+          "compatible_relations": 2,
+          "includes_global_single_owner": false,
+          "includes_strict_distributed": false,
+          "joint_vectors": [
+            "10"
+          ]
+        },
+        "11": {
+          "compatible_orbits": 1,
+          "compatible_relations": 1,
+          "includes_global_single_owner": false,
+          "includes_strict_distributed": false,
+          "joint_vectors": [
+            "11"
+          ]
+        }
+      },
+      "worlds": 9
+    },
+    "no_missed": {
+      "by_endpoint": {
+        "00": {
+          "compatible_orbits": 2,
+          "compatible_relations": 4,
+          "includes_global_single_owner": true,
+          "includes_strict_distributed": true,
+          "joint_vectors": [
+            "00"
+          ]
+        },
+        "01": {
+          "compatible_orbits": 3,
+          "compatible_relations": 6,
+          "includes_global_single_owner": true,
+          "includes_strict_distributed": true,
+          "joint_vectors": [
+            "00",
+            "01"
+          ]
+        },
+        "10": {
+          "compatible_orbits": 3,
+          "compatible_relations": 6,
+          "includes_global_single_owner": true,
+          "includes_strict_distributed": true,
+          "joint_vectors": [
+            "00",
+            "10"
+          ]
+        },
+        "11": {
+          "compatible_orbits": 5,
+          "compatible_relations": 9,
+          "includes_global_single_owner": true,
+          "includes_strict_distributed": true,
+          "joint_vectors": [
+            "00",
+            "01",
+            "10",
+            "11"
+          ]
+        }
+      },
+      "worlds": 25
+    },
+    "no_spurious": {
+      "by_endpoint": {
+        "00": {
+          "compatible_orbits": 5,
+          "compatible_relations": 9,
+          "includes_global_single_owner": true,
+          "includes_strict_distributed": true,
+          "joint_vectors": [
+            "00",
+            "01",
+            "10",
+            "11"
+          ]
+        },
+        "01": {
+          "compatible_orbits": 2,
+          "compatible_relations": 3,
+          "includes_global_single_owner": false,
+          "includes_strict_distributed": false,
+          "joint_vectors": [
+            "01",
+            "11"
+          ]
+        },
+        "10": {
+          "compatible_orbits": 2,
+          "compatible_relations": 3,
+          "includes_global_single_owner": false,
+          "includes_strict_distributed": false,
+          "joint_vectors": [
+            "10",
+            "11"
+          ]
+        },
+        "11": {
+          "compatible_orbits": 1,
+          "compatible_relations": 1,
+          "includes_global_single_owner": false,
+          "includes_strict_distributed": false,
+          "joint_vectors": [
+            "11"
+          ]
+        }
+      },
+      "worlds": 16
+    },
+    "unconstrained": {
+      "by_endpoint": {
+        "00": {
+          "compatible_orbits": 5,
+          "compatible_relations": 9,
+          "includes_global_single_owner": true,
+          "includes_strict_distributed": true,
+          "joint_vectors": [
+            "00",
+            "01",
+            "10",
+            "11"
+          ]
+        },
+        "01": {
+          "compatible_orbits": 5,
+          "compatible_relations": 9,
+          "includes_global_single_owner": true,
+          "includes_strict_distributed": true,
+          "joint_vectors": [
+            "00",
+            "01",
+            "10",
+            "11"
+          ]
+        },
+        "10": {
+          "compatible_orbits": 5,
+          "compatible_relations": 9,
+          "includes_global_single_owner": true,
+          "includes_strict_distributed": true,
+          "joint_vectors": [
+            "00",
+            "01",
+            "10",
+            "11"
+          ]
+        },
+        "11": {
+          "compatible_orbits": 5,
+          "compatible_relations": 9,
+          "includes_global_single_owner": true,
+          "includes_strict_distributed": true,
+          "joint_vectors": [
+            "00",
+            "01",
+            "10",
+            "11"
+          ]
+        }
+      },
+      "worlds": 36
+    }
+  },
+  "relation_classes": {
+    "global_single_owner": 2,
+    "joint_vector_distribution": {
+      "00": 4,
+      "01": 2,
+      "10": 2,
+      "11": 1
+    },
+    "strict_distributed": 2
+  },
+  "route_swap_orbits": 5,
+  "schema": "A5B-CRCE-RESULT-v0.1.0"
+}

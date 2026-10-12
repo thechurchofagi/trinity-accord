@@ -1,0 +1,64 @@
+{
+  "a5b_joint_satisfiability": {
+    "abstract_witness": {
+      "Pi": [
+        [
+          0,
+          1
+        ],
+        [
+          0
+        ]
+      ],
+      "W_C": [
+        1,
+        0
+      ],
+      "role": "joint satisfiability of actual-route and compensation predicates in the declared finite language"
+    },
+    "biconditional_c00_has_two_orbits": true,
+    "different_pi_orbits_same_endpoint": true,
+    "same_pi_different_endpoint": true
+  },
+  "a5b_scientific_delta": {
+    "contexts": 0,
+    "nodes": 0,
+    "rules": 0
+  },
+  "affected_semantic_nodes": [
+    "A:P3",
+    "A:P6",
+    "A:C1",
+    "A:U1",
+    "A:PHEN_TARGET",
+    "R157:COORDINATE_TRANSPORT",
+    "R157:SEMANTIC_RESIDUAL",
+    "R157:MINENESS_BRIDGE_SCHEMA",
+    "R159:SELECTED_OWNERSHIP_APPLICATION",
+    "R166:EVIDENCE_LEVEL_LADDER",
+    "R172:EXPERIENCE_INTERNAL_ACTION_COORDINATE",
+    "R173:FAMILIAR_MINENESS_BOUNDARY"
+  ],
+  "all_rules_read_all_of_as_simultaneous_and": true,
+  "context_links_treated_as_nondeductive": true,
+  "deductive_cycles": [],
+  "effective_counts": {
+    "context_links": 261,
+    "nodes": 913,
+    "rules": 424
+  },
+  "per_node_fields_accessed": 913,
+  "restored_effective_graph_sha256": "e14388ac742889d32e8df6dc3dc171f62034d3cc1e5c53c44159ddbf421adcab",
+  "root_counts": {
+    "context_links": 178,
+    "nodes": 584,
+    "rules": 284
+  },
+  "root_graph_sha256": "40d17cd5f61ebcc1bfcea65eb59c3c730208bcfcf69ba92e2f615a993584e3ce",
+  "rules_with_empty_all_of": [],
+  "rules_with_nonlist_all_of": [],
+  "schema": "a5b-map-audit/1",
+  "semantic_scope": "Fresh structural traversal plus bounded manual review of C1/U1, P3/P6, R157, R159, R166, R172, effective R173, R181, R197, A3Z and A4V-A5A; not a full historical semantic reproof.",
+  "status": "FRESH_STRUCTURAL_PASS_BOUNDED_SEMANTIC_PASS_FULL_DEPTH_INCOMPLETE",
+  "unresolved_deductive_references": []
+}

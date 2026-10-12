@@ -1,0 +1,36 @@
+{
+  "schema": "A5B-VALIDATION-v0.1.0",
+  "exact_checker": {
+    "command": "python records/A5B20261012_Cross_Route_Compensation_Endpoint/check_endpoint.py",
+    "status": "PASS",
+    "covered_relations": 9,
+    "route_swap_orbits": 5,
+    "world_counts": {
+      "unconstrained": 36,
+      "no_spurious": 16,
+      "no_missed": 25,
+      "biconditional": 9
+    }
+  },
+  "effective_graph_audit": {
+    "status": "PASS_WITH_BOUNDED_SEMANTIC_SCOPE",
+    "nodes": 913,
+    "active_rules": 424,
+    "context_links": 261,
+    "unresolved_references": 0,
+    "active_cycles": 0,
+    "empty_all_of": 0,
+    "nonlist_all_of": 0
+  },
+  "inherited_navigation_validator": {
+    "status": "FAIL_RETAINED",
+    "reason": "The integration-era validator equates latest_research work-log/handoff with later follow-up navigation fields; CURRENT_STATE now intentionally separates latest_research and latest_followup_application.",
+    "modified_in_A5B": false
+  },
+  "scientific_delta": {
+    "nodes": 0,
+    "rules": 0,
+    "contexts": 0
+  },
+  "full_historical_semantic_audit": "AUDIT_INCOMPLETE"
+}

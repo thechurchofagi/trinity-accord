@@ -1,0 +1,34 @@
+{
+  "schema": "A5B-MAP-EXTENSION-v0.1.0",
+  "research_id": "A5B20261012",
+  "completed_map": "UCT-MAP-v1.1.2",
+  "status": "DISABLED_APPLICATION_NO_COMPLETED_GRAPH_PROMOTION",
+  "delta": {
+    "nodes": 0,
+    "rules": 0,
+    "context_links": 0
+  },
+  "candidate_claims": [
+    "A5B-C1",
+    "A5B-C2",
+    "A5B-C3",
+    "A5B-C4",
+    "A5B-C5",
+    "A5B-C6"
+  ],
+  "reason_not_promoted": [
+    "No actual Pi or W/C installation",
+    "No independent signed H_pc endpoint calibration",
+    "B_pc^comp remains a prospective refutable bridge",
+    "The exact results are scoped finite-model facts rather than new foundation premises"
+  ],
+  "unchanged_boundaries": [
+    "A:C1",
+    "A:U1",
+    "R157 semantic residual",
+    "effective R173 familiar-mineness boundary",
+    "No basal-experience gate",
+    "No exclusive owner",
+    "No subject-count inference"
+  ]
+}
