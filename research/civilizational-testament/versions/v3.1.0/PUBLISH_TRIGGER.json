@@ -12,5 +12,7 @@
   "pdf_sha256": "ee27e2e5e6b738481641917e080a00fc3a652a392cd26af1c3052416bf8f62da",
   "source_manifest": "research/civilizational-testament/versions/v3.1.0/PREPUBLICATION_RECEIPT.json",
   "protected_old_work": "No previous DOI, published edition, Canon inscription, or GitHub main branch may be modified.",
-  "trigger": "The publication-only workflow starts only on this file's committed change with [ctp31-publish]."
+  "trigger": "The publication-only workflow starts only on this file's committed change with [ctp31-publish].",
+  "attempt": 2,
+  "reason": "Safe pagination of all authorized Zenodo deposits after single-page guard stopped before any remote create."
 }
