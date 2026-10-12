@@ -1,3 +1,9 @@
+# A5K20261012 audit addendum
+
+A5K preserves the effective 913/424/261 graph and adds 0/0/0. Fresh traversal found no unresolved deductive references, cycles, empty `all_of`, or non-list `all_of`; context links remained nondeductive. The bounded audit separates physical route `R`, direct reference `A`, readout `Z`, selected experience target `H`, complete organization, actual installation, and report. `BIND+F+RE+NDR+CLOSE` is one simultaneous physical-source package; `SB+CO` remains additionally necessary for the selected target. Exact code proves only the declared finite fibre counts, not C1, actual installation, phenomenal meaning, or global semantic correctness. Deep historical audit and R191 normalization remain incomplete. See [A5K formal audit](records/A5K20261012_Selective_Source_Cut_Rescue/FORMAL_AUDIT.md).
+
+---
+
 # A5J20261012 audit addendum
 
 A5J preserves the effective 913/424/261 graph and adds 0/0/0. Fresh capsule restoration and traversal found no unresolved deductive references, cycles or bad `all_of`. The bounded audit separates complete organization, finite views, actual `P`, nuisance `C`, selected `H`, semantic selector, polarity, output and report. The positive target-law result requires factorial crossing, semantic source diversity and common orientation simultaneously; neither hardware multiplicity nor output agreement supplies the latter two. C1 is not inferred from decoding, and the exact enumeration is not an actual installation. Deep historical semantic audit remains incomplete. See [A5J formal audit](records/A5J20261012_Independent_Anchor_Decomposition/FORMAL_AUDIT.md).

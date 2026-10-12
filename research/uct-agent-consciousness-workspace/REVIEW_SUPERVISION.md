@@ -1,3 +1,11 @@
+# A5K20261012 research response — physical/phenomenal source separation
+
+The latest ledger and every carried OPEN/ACKNOWLEDGED item were read before selection, after result formation, and before save. A5K corrects A5J's compressed phrase “cut the H source”: a cut/rescue may identify an actual physical `R` source under closure, but all six selected `H` laws still survive. An independently warranted semantic bridge and orientation remain separate.
+
+`QC-20261008-10` remains ACKNOWLEDGED/OPEN; `IA-QC11`, `QC-20261008-12/13`, and `SCU-OPEN-R191-NORMALIZATION` remain OPEN; `SCU-AUDIT-DEPTH` remains AUDIT_INCOMPLETE. No item is self-closed. Evidence: [response](records/A5K20261012_Selective_Source_Cut_Rescue/REVIEW_RESPONSE.md), [contract](records/A5K20261012_Selective_Source_Cut_Rescue/SELECTIVE_SOURCE_CONTRACT.md), [exact results](records/A5K20261012_Selective_Source_Cut_Rescue/EXACT_RESULTS.json), [failures](records/A5K20261012_Selective_Source_Cut_Rescue/FAILURES.md), [gaps](records/A5K20261012_Selective_Source_Cut_Rescue/GAP_LEDGER.json), and [audit](records/A5K20261012_Selective_Source_Cut_Rescue/FORMAL_AUDIT.md).
+
+---
+
 # A5H20261012 research response — coarse-O contrast correction
 
 The latest ledger and every carried OPEN/ACKNOWLEDGED item were read before selection, after result formation and before save. A5H repairs a scope error: `FIX_COARSE_O_A5F` is not `FIX_COMPLETE_K`; a valid intervention varies a declared actual relation `S` inside `K`. It also records that held-stick localization and somatotopic neural localization occur in different installations and cannot be cross-study conjoined.

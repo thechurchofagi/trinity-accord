@@ -1,3 +1,9 @@
+# A5K20261012 disabled addendum — physical-source/phenomenal-source barrier
+
+A5K adds no completed node, rule, or context (0/0/0). Its 216-model cut/rescue family leaves 36 signature models and 18 after route efficacy; no-direct-readout intervention leaves six models, all with physical `R` as source but all six `H` laws. Independent semantic bridge shape leaves the `P/¬P` complement, and common orientation selects `H=P`. The physical-route inference requires `BIND all_of F all_of RE all_of NDR all_of CLOSE`; selected-target inference additionally requires `SB all_of CO`. C1/R157 transport remains conditional and cannot be read backward from intervention success. See [A5K audit](records/A5K20261012_Selective_Source_Cut_Rescue/FORMAL_AUDIT.md).
+
+---
+
 # A5J20261012 disabled addendum — independent-anchor decomposition
 
 A5J adds no completed node, rule or context (0/0/0). A complete `P×C` crossing and two channels equal to `P` leave 12 models and six target laws. Semantic source diversity leaves four models and the `P/¬P` complement; common orientation alone leaves ten; their conjunction leaves two selector-swapped implementations but the unique target law `H=P`. The result decomposes A5I's calibration premise without establishing an actual `H` source, complete biological `K`, C1 or basal experience. See [A5J audit](records/A5J20261012_Independent_Anchor_Decomposition/FORMAL_AUDIT.md).

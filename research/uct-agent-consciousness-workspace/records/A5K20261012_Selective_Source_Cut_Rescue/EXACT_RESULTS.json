@@ -1,0 +1,38 @@
+{
+  "schema": "uct-a5k-selective-source/1.0",
+  "model_status": "finite_abstract_declared_model_not_physical_or_phenomenal_installation",
+  "observation": {
+    "cells": [{"P": 0, "C": 0}, {"P": 0, "C": 1}, {"P": 1, "C": 0}, {"P": 1, "C": 1}],
+    "Z": {"baseline": "P", "cut": "unavailable", "rescue": "P"},
+    "A": "P remains available at baseline, cut, and rescue"
+  },
+  "model_space": {
+    "H_laws": ["P", "notP", "C", "notC", "zero", "one"],
+    "Z_sources": ["R", "P"],
+    "orientation": [0, 1],
+    "mechanism_states": ["absent", "cut_not_rescued", "cut_and_rescued"],
+    "total_canonical_models_before_observation": 216
+  },
+  "counts": {
+    "signature_only": {"models": 36, "source_classes": ["P", "R"], "target_laws": ["C", "P", "notC", "notP", "one", "zero"]},
+    "candidate_route_cut_and_rescue_effective_RE": {"models": 18, "source_classes": ["P", "R"], "target_laws": ["C", "P", "notC", "notP", "one", "zero"]},
+    "no_direct_readout_cut_NDR": {"models": 6, "source_classes": ["R"], "target_laws": ["C", "P", "notC", "notP", "one", "zero"]},
+    "NDR_plus_semantic_shape_SB": {"models": 2, "source_classes": ["R"], "target_laws": ["P", "notP"]},
+    "NDR_plus_SB_plus_common_orientation_CO": {"models": 1, "source_classes": ["R"], "target_laws": ["P"]}
+  },
+  "witnesses": {
+    "candidate_R_source_cut": {"H": "P", "source": "R", "orientation": 0, "cut_route": true, "cut_readout": false, "rescue_route": true, "rescue_readout": false},
+    "direct_readout_gate_twin": {"H": "zero", "source": "P", "orientation": 0, "cut_route": false, "cut_readout": true, "rescue_route": false, "rescue_readout": true},
+    "opposite_phenomenal_pole_after_physical_source_identification": {"H": "notP", "source": "R", "orientation": 0, "cut_route": true, "cut_readout": false, "rescue_route": true, "rescue_readout": false}
+  },
+  "checks": {
+    "signature_has_R_source_model": true,
+    "signature_has_direct_P_gate_model": true,
+    "RE_alone_does_not_remove_direct_gate": true,
+    "NDR_signature_forces_R_source_in_declared_family": true,
+    "physical_R_source_leaves_all_H_laws": true,
+    "SB_reduces_to_global_complement": true,
+    "SB_and_CO_identify_H_equals_P": true
+  },
+  "interpretation_limit": "Cut/rescue plus a preserved direct-P reference can identify dependence on a declared physical route R only after direct readout interventions and alternate failure routes are excluded. It leaves every H law compatible. Relating R to H requires an additional independently warranted semantic bridge; selecting H=P over H=notP additionally requires common orientation."
+}

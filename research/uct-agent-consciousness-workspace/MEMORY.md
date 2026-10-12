@@ -1,5 +1,11 @@
 # UCT durable memory
 
+# A5K20261012 latest memory
+
+A5K separates a cut route's physical/ontic role from its selected phenomenal meaning. In a 216-model family, the baseline/cut/rescue signature leaves 36 models; route efficacy leaves 18; excluding direct readout intervention leaves six models that all read physical route `R` but still realize all six `H` laws. Independent semantic bridge shape reduces the target to `P/¬P`, and common orientation then selects `H=P`. Thus `BIND+F+RE+NDR+CLOSE` can support organizational `Z depends on R`, while selected `H_tip` still requires separate `SB+CO`. The initial circular model that named the route `H` was rejected and preserved as a failure. Formal delta 0/0/0; all review items remain open. Next: test a prospectively oriented role/polarity reversal while holding actual `R` and direct `P` paths intact, or stop at organizational route dependence.
+
+---
+
 # A5J20261012 latest memory
 
 A5J decomposes A5I's proposed independent held-stick anchor. A full `P×C` crossing with two channels that both follow `P` leaves 12 source/polarity models and all six target laws: different hardware and cue exclusion do not establish a phenomenal source. Semantic source diversity `SD` leaves four models and `H∈{P,¬P}`; common orientation `CO` alone leaves ten; `SD+CO` leaves two selector-swapped models but uniquely fixes the target law `H=P`. Thus cue exclusion, phenomenal-source admission and polarity are separate. Actual `SD/CO/H_tip`, complete biological `K`, and all review items remain open; formal delta 0/0/0. Next: specify one noncircular failure-capable intervention that can warrant semantic source diversity in the same participant/tool instance, or stop at cue exclusion/decoding.

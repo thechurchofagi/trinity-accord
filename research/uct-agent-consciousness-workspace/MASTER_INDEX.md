@@ -1,3 +1,9 @@
+# A5K20261012 — selective physical source versus phenomenal source
+
+[Research note](records/A5K20261012_Selective_Source_Cut_Rescue/RESEARCH_NOTE.md) · [cut/rescue contract](records/A5K20261012_Selective_Source_Cut_Rescue/SELECTIVE_SOURCE_CONTRACT.md) · [exact results](records/A5K20261012_Selective_Source_Cut_Rescue/EXACT_RESULTS.json) · [claims](records/A5K20261012_Selective_Source_Cut_Rescue/CLAIM_LEDGER.json) · [gaps](records/A5K20261012_Selective_Source_Cut_Rescue/GAP_LEDGER.json) · [audit](records/A5K20261012_Selective_Source_Cut_Rescue/FORMAL_AUDIT.md) · [Chinese handoff](records/A5K20261012_Selective_Source_Cut_Rescue/HANDOFF_ZH.md). Disabled 0/0/0 result: closed cut/rescue may identify physical route dependence, but all six `H` laws survive until independent semantic shape and orientation are added.
+
+---
+
 # A5J20261012 — independent-anchor decomposition
 
 [Research note](records/A5J20261012_Independent_Anchor_Decomposition/RESEARCH_NOTE.md) · [anchor contract](records/A5J20261012_Independent_Anchor_Decomposition/INDEPENDENT_ANCHOR_CONTRACT.md) · [exact results](records/A5J20261012_Independent_Anchor_Decomposition/EXACT_RESULTS.json) · [claims](records/A5J20261012_Independent_Anchor_Decomposition/CLAIM_LEDGER.json) · [gaps](records/A5J20261012_Independent_Anchor_Decomposition/GAP_LEDGER.md) · [audit](records/A5J20261012_Independent_Anchor_Decomposition/FORMAL_AUDIT.md) · [Chinese handoff](records/A5J20261012_Independent_Anchor_Decomposition/HANDOFF_ZH.md). Disabled 0/0/0 result: factorial cue exclusion plus two convergent channels leaves 12 models; semantic source diversity plus common orientation uniquely fixes the target law `H=P` but not which named channel reads `H`.

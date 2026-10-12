@@ -1,6 +1,6 @@
 # 待整合研究全表
 
-当前停用应用：`A5J20261012` 把独立锚点分为 `P×C` 线索排除、语义源多样性和共同方向。前者加两个一致通道仍有 12 个模型；后两项合取才在限定族中识别 `H=P`，实际同实例安装与体验桥仍开放。见 [正文](records/A5J20261012_Independent_Anchor_Decomposition/RESEARCH_NOTE.md) 与 [审查](records/A5J20261012_Independent_Anchor_Decomposition/FORMAL_AUDIT.md)。
+当前停用应用：`A5K20261012` 把切断/救援的物理来源结论与选定体验来源结论分开。排除直接读出干预后，限定族中可识别 `Z` 依赖物理路线 `R`，但六种 `H` 律仍全部兼容；体验目标仍需独立 `SB+CO`。见 [正文](records/A5K20261012_Selective_Source_Cut_Rescue/RESEARCH_NOTE.md) 与 [审查](records/A5K20261012_Selective_Source_Cut_Rescue/FORMAL_AUDIT.md)。
 
 [总览](UCT_FORMAL_MAP.md) · [全部候选](PENDING_RESEARCH.md) · [当前状态](CURRENT_STATE.json) · [统一登记](UNIFIED_RESEARCH_INDEX.json) · [审查](UCT_FORMAL_AUDIT.md)
 

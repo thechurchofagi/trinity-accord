@@ -1,4 +1,12 @@
-# A5J20261012 current handoff — independent-anchor decomposition
+# A5K20261012 current handoff — selective physical source versus phenomenal source
+
+[English note](records/A5K20261012_Selective_Source_Cut_Rescue/RESEARCH_NOTE.md) · [cut/rescue contract](records/A5K20261012_Selective_Source_Cut_Rescue/SELECTIVE_SOURCE_CONTRACT.md) · [exact results](records/A5K20261012_Selective_Source_Cut_Rescue/EXACT_RESULTS.json) · [formal audit](records/A5K20261012_Selective_Source_Cut_Rescue/FORMAL_AUDIT.md) · [Chinese handoff](records/A5K20261012_Selective_Source_Cut_Rescue/HANDOFF_ZH.md). In the declared family, excluding direct readout gating identifies physical `R` dependence but leaves all six selected-target laws compatible. Independent `SB+CO` remain necessary for `H=P`. Formal delta 0/0/0; all review items remain open.
+
+Next: hold the same actual `R` source and direct `P` path intact while prospectively reversing a selected target role/pole; if that does not independently refute non-target `H` laws, stop at organizational `R` dependence.
+
+---
+
+# A5J20261012 historical handoff — independent-anchor decomposition
 
 [English note](records/A5J20261012_Independent_Anchor_Decomposition/RESEARCH_NOTE.md) · [anchor contract](records/A5J20261012_Independent_Anchor_Decomposition/INDEPENDENT_ANCHOR_CONTRACT.md) · [exact results](records/A5J20261012_Independent_Anchor_Decomposition/EXACT_RESULTS.json) · [formal audit](records/A5J20261012_Independent_Anchor_Decomposition/FORMAL_AUDIT.md) · [Chinese handoff](records/A5J20261012_Independent_Anchor_Decomposition/HANDOFF_ZH.md). A full `P×C` crossing and two `P`-tracking channels exclude direct cue reading but leave 12 models and all six target laws. Only semantic source diversity plus common orientation identifies `H=P` in the declared family, while the named `H`-reader remains unresolved. Formal delta 0/0/0; all review items remain open.
 

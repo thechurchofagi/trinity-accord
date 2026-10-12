@@ -1,0 +1,9 @@
+{
+  "research_id": "A5K20261012",
+  "formal_graph_delta": {"nodes": 0, "rules": 0, "context_links": 0},
+  "enabled_as_established_premises": false,
+  "status": "DISABLED_DOMAIN_BOUNDED_IDENTIFICATION_AND_NONENTAILMENT",
+  "reason": "The finite cut-rescue model identifies physical R dependence only under declared closure and leaves every selected H law compatible until independent SB and CO are supplied.",
+  "candidate_claim_ids": ["A5K-D1-PHYSICAL-SOURCE-SEMANTIC-BARRIER", "A5K-C2-ORGANIZATIONAL-SOURCE-POSITIVE-LAYER", "A5K-L3-SEMANTIC-BRIDGE-REMAINS-SEPARATE"],
+  "preserves": ["A:P3", "A:P6", "A:C1", "A:U1", "A:PHEN_TARGET", "R157:COORDINATE_TRANSPORT", "R157:SEMANTIC_RESIDUAL", "R157:MINENESS_BRIDGE_SCHEMA", "R159:ANCHOR_BINDING_CONTRACT"]
+}

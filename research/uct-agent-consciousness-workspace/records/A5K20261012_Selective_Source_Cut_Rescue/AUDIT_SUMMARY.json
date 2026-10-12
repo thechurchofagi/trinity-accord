@@ -1,0 +1,32 @@
+{
+  "schema": "a5k-map-audit/1",
+  "status": "FRESH_STRUCTURAL_PASS_BOUNDED_SEMANTIC_PASS_FULL_DEPTH_INCOMPLETE",
+  "effective_graph_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
+  "restored_capsule_sha256": "e14388ac742889d32e8df6dc3dc171f62034d3cc1e5c53c44159ddbf421adcab",
+  "effective_counts": {"nodes": 913, "rules": 424, "context_links": 261},
+  "per_node_records_accessed": 913,
+  "minimal_node_fields_checked": ["id", "kind", "statement", "scope"],
+  "all_rules_read_all_of_as_simultaneous_and": true,
+  "rules_with_nonlist_all_of": [],
+  "rules_with_empty_all_of": [],
+  "unresolved_deductive_references": [],
+  "deductive_cycles": [],
+  "context_links_treated_as_nondeductive": true,
+  "affected_semantic_nodes": ["A:P3", "A:P6", "A:C1", "A:U1", "A:PHEN_TARGET", "R157:COORDINATE_TRANSPORT", "R157:SEMANTIC_RESIDUAL", "R157:MINENESS_BRIDGE_SCHEMA", "R159:ANCHOR_BINDING_CONTRACT"],
+  "a5k_exact_audit": {
+    "signature_models": 36,
+    "RE_models": 18,
+    "NDR_models": 6,
+    "NDR_target_laws": ["P", "notP", "C", "notC", "zero", "one"],
+    "NDR_SB_models": 2,
+    "NDR_SB_CO_models": 1,
+    "actual_BIND_F_RE_NDR_CLOSE_SB_CO_validated": false
+  },
+  "a5k_scientific_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+  "limits": [
+    "structural traversal is not a theory-truth certificate",
+    "the audit is not a fresh semantic re-proof of all history",
+    "65 inherited later node records lack an optional status field; no completeness claim is made for that field",
+    "R191 normalization and deep semantic audit debt remain open"
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "schema": "uct-claim-ledger/1.0",
+  "round": "A5K20261012",
+  "claims": [
+    {
+      "id": "A5K-D1-PHYSICAL-SOURCE-SEMANTIC-BARRIER",
+      "type": "domain_bounded_identification_and_nonentailment",
+      "statement": "In the declared 216-model family, the baseline/cut/rescue signature with intact A=P leaves 36 models, both physical sources and all six H laws. No-direct-readout intervention reduces the fibre to six R-source models but leaves all six H laws. Adding an independent semantic bridge up to polarity leaves H in {P,notP}; common orientation leaves H=P.",
+      "domain": "P,C binary with all four cells; H in {P,notP,C,notC,0,1}; Z source in {R,P}; binary readout orientation; candidate-route and direct-readout mechanisms each absent, cut-only, or cut-and-rescued; typed unavailable output.",
+      "all_of": [
+        "one frozen bearer/tool/interval/binding",
+        "all four P-by-C cells",
+        "R and A physically carry P in the declared model",
+        "Z baseline=P, cut=unavailable, rescue=P",
+        "A=P throughout",
+        "canonical intervention-state semantics"
+      ],
+      "proof": "Exhaustive enumeration by check_selective_source.py; exact counts and witnesses in EXACT_RESULTS.json.",
+      "source_lineage": [
+        "A4P-C01/A4P-C02 route cut-rescue closure",
+        "A5I-D1 calibration-transport barrier",
+        "A5J-D1 independent-anchor decomposition",
+        "R157:SEMANTIC_RESIDUAL"
+      ],
+      "counterexamples": [
+        "direct_readout_gate_twin",
+        "semantic_free_R_source_witness",
+        "opposite_phenomenal_pole_witness"
+      ],
+      "status": "PROVED_IN_DECLARED_FINITE_MODEL_DISABLED_APPLICATION",
+      "thought_experiment_roles": {
+        "ancestor_formation": "separates route acquisition from basal-experience onset",
+        "abacus_calculator": "supplies the direct-gate functional twin",
+        "human_realized_agent": "keeps represented and implementing actual processes distinct",
+        "copy_switch_memory": "keeps equal outputs/weights separate from actual current route and semantic pole"
+      }
+    },
+    {
+      "id": "A5K-C2-ORGANIZATIONAL-SOURCE-POSITIVE-LAYER",
+      "type": "conditional_application_contract",
+      "statement": "On one actual bound token, faithful route cut/rescue plus no direct readout intervention and alternate-route closure can support the claim that Z depends on physical route R while direct P remains available; this is organizational source diversity, not phenomenal source diversity.",
+      "domain": "One actual same-event bearer/tool/route/readout package with independently verified intervention chronology and closure.",
+      "all_of": ["BIND", "F", "RE", "NDR", "CLOSE"],
+      "proof": "Finite uniqueness inside the declared closed family plus inherited A4P closure discipline; physical application remains uninstalled.",
+      "source_lineage": ["A4P", "A5J"],
+      "counterexamples": ["direct_readout_gate_twin", "mode_aware_alternate_failure_route"],
+      "status": "CONDITIONAL_POSITIVE_LAYER_NOT_ACTUALLY_INSTALLED",
+      "thought_experiment_roles": {
+        "copy_switch_memory": "value equality does not install present route use"
+      }
+    },
+    {
+      "id": "A5K-L3-SEMANTIC-BRIDGE-REMAINS-SEPARATE",
+      "type": "scoped_limit",
+      "statement": "Physical R-source identification and conditional C1/R157 transport do not determine that the transported coordinate is the selected H_tip target; independently fixed SB and common orientation remain necessary for the target-law conclusion in the declared family.",
+      "domain": "Same A5K finite family plus UCT R157 metalinguistic target distinction.",
+      "all_of": ["A5K-D1", "R157:SEMANTIC_RESIDUAL"],
+      "proof": "Hold the physical source model fixed while varying all six H laws; every law remains observationally compatible after physical source identification.",
+      "source_lineage": ["UCT I v1.2 C1", "TA25 D5", "R157", "A5J"],
+      "counterexamples": ["H=C with genuine R dependence", "H=notP with genuine R dependence"],
+      "status": "PROVED_SCOPED_NONENTAILMENT",
+      "thought_experiment_roles": {
+        "abacus_calculator": "correct physical decoding does not settle the selected feeling"
+      }
+    }
+  ]
+}
