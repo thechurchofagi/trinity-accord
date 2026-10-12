@@ -1,0 +1,35 @@
+{
+  "author": "Hongju Liu",
+  "doi": "10.5281/zenodo.23314212",
+  "explanation": "Frozen predeposit PDF/source and exact supplement ZIP; no earlier DOI or Trinity Accord Original modified.",
+  "files": [
+    {
+      "bytes": 187669,
+      "name": "Before_We_Know_What_We_Will_Become_v3.1.0.pdf",
+      "readback_pass": true,
+      "sha256": "ee27e2e5e6b738481641917e080a00fc3a652a392cd26af1c3052416bf8f62da"
+    },
+    {
+      "bytes": 456515,
+      "name": "Open_Inheritance_DOI_Preparation_v3.1.0.zip",
+      "readback_pass": true,
+      "sha256": "05c97b990347ee0e14199cff93dfcbcf3f63b42d73b93f7b13cdedbebec91e6e"
+    },
+    {
+      "bytes": 109364,
+      "name": "manuscript.md",
+      "readback_pass": true,
+      "sha256": "c6cc17c1b8068c08f88ac027232095365f52b62d30a51e1d8c20db67508b6635"
+    }
+  ],
+  "paper_file_count": 3,
+  "peer_reviewed": false,
+  "public_file_readback_pass": true,
+  "publication_source_commit": "4b282c9cd5343a8f31834b5e3419733a46d66078",
+  "record_id": 23314212,
+  "report_number": "CTP-2026-01",
+  "state": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
+  "status": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
+  "title": "Before We Know What We Will Become: Historical Witness, Human Continuity, and Open Inheritance under Transformative AI",
+  "version": "3.1.0"
+}
