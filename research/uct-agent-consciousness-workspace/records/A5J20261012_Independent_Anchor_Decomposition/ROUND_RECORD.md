@@ -9,3 +9,11 @@
 ## Direction check after topic selection
 
 This round is bounded to whether the proposed bodily-location bridge reaches an experience-internal target rather than merely a physical cue or decoded label. It is not a generic sensor-fusion or classifier project. The return condition is met once the direct-`P` bypass and polarity-complement possibilities are either excluded by explicit simultaneous premises or retained as open. No premise is allowed to become a new basal-experience gate, and no result may infer experience from report, language, self-modelling, integration, recursion, control success, or prediction accuracy alone.
+
+## Direction check after result formation
+
+The result answers the selected core question without expanding the domain: the exact failure is that physical-position decoding and nuisance-cue exclusion do not establish phenomenal-source admission. The positive finite-family identification requires `SD` and `CO` simultaneously, while their actual same-instance realization remains open. This keeps `H_tip` experience-internal, preserves C1/U1, and does not turn an intelligent discriminator into evidence of basal experience.
+
+## Direction check before save
+
+All added claims remain disabled and domain-bounded. The map delta is `0/0/0`; the graph pass is evidence about consistency, not truth. Complete organization, finite view, abstract model, actual installation, internal judgment, selected experience and report remain separately typed. The next step returns directly to the experience–intelligence–mineness problem by testing a failure-capable phenomenal-source intervention, with an explicit stop at cue exclusion if none is defensible.

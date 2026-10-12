@@ -1,0 +1,7 @@
+{
+  "research_id": "A5J20261012",
+  "coverage_role": "NONDEDUCTIVE_METHODS_CORRECTION",
+  "standalone": "HOLD_STANDALONE",
+  "formal_graph_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+  "note": "Decomposes an independent anchor into cue exclusion, semantic source diversity and common orientation; does not alter UCT-PUB coverage or promote empirical premises."
+}

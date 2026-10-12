@@ -1,3 +1,9 @@
+# A5J20261012 — independent-anchor decomposition
+
+[Research note](records/A5J20261012_Independent_Anchor_Decomposition/RESEARCH_NOTE.md) · [anchor contract](records/A5J20261012_Independent_Anchor_Decomposition/INDEPENDENT_ANCHOR_CONTRACT.md) · [exact results](records/A5J20261012_Independent_Anchor_Decomposition/EXACT_RESULTS.json) · [claims](records/A5J20261012_Independent_Anchor_Decomposition/CLAIM_LEDGER.json) · [gaps](records/A5J20261012_Independent_Anchor_Decomposition/GAP_LEDGER.md) · [audit](records/A5J20261012_Independent_Anchor_Decomposition/FORMAL_AUDIT.md) · [Chinese handoff](records/A5J20261012_Independent_Anchor_Decomposition/HANDOFF_ZH.md). Disabled 0/0/0 result: factorial cue exclusion plus two convergent channels leaves 12 models; semantic source diversity plus common orientation uniquely fixes the target law `H=P` but not which named channel reads `H`.
+
+---
+
 # A5I20261012 — veridical-to-illusion calibration-transport barrier
 
 [Research note](records/A5I20261012_Context_Transport_Barrier/RESEARCH_NOTE.md) · [transport contract](records/A5I20261012_Context_Transport_Barrier/CALIBRATION_TRANSPORT_CONTRACT.md) · [exact results](records/A5I20261012_Context_Transport_Barrier/EXACT_RESULTS.json) · [claims](records/A5I20261012_Context_Transport_Barrier/CLAIM_LEDGER.json) · [gaps](records/A5I20261012_Context_Transport_Barrier/GAP_LEDGER.md) · [audit](records/A5I20261012_Context_Transport_Barrier/FORMAL_AUDIT.md) · [Chinese handoff](records/A5I20261012_Context_Transport_Barrier/HANDOFF_ZH.md). Disabled 0/0/0 identification result: veridical calibration plus frozen transfer leaves 12 models when target and cue are co-aligned; D/S/O jointly leave one and are individually needed relative to the other two.

@@ -1,0 +1,31 @@
+{
+  "schema": "a5j-map-audit/1",
+  "status": "FRESH_STRUCTURAL_PASS_BOUNDED_SEMANTIC_PASS_FULL_DEPTH_INCOMPLETE",
+  "effective_graph_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
+  "effective_counts": {"nodes": 913, "rules": 424, "context_links": 261},
+  "per_node_fields_accessed": 913,
+  "all_rules_read_all_of_as_simultaneous_and": true,
+  "rules_with_nonlist_all_of": [],
+  "rules_with_empty_all_of": [],
+  "unresolved_deductive_references": [],
+  "deductive_cycles": [],
+  "context_links_treated_as_nondeductive": true,
+  "affected_semantic_nodes": ["A:P3", "A:P6", "A:C1", "A:U1", "A:PHEN_TARGET", "R157:COORDINATE_TRANSPORT", "R157:SEMANTIC_RESIDUAL", "R157:MINENESS_BRIDGE_SCHEMA", "R159:ANCHOR_BINDING_CONTRACT"],
+  "a5j_exact_audit": {
+    "factorial_observation_models": 12,
+    "SD_only_models": 4,
+    "CO_only_models": 10,
+    "SD_and_CO_models": 2,
+    "SD_and_CO_target_laws": ["P"],
+    "actual_F_SD_CO_validated": false
+  },
+  "a5j_scientific_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+  "manual_semantic_checks": [
+    "complete organization, finite channel view, actual P, nuisance C, selected H, selector, polarity and report remain distinct",
+    "SD and CO are simultaneous premises and neither is inferred from output agreement",
+    "different hardware is not semantic source diversity",
+    "finite target-law identification is not actual biological installation or mechanism-label identification",
+    "C1 is not inferred backward from calibration success",
+    "no basal report gate, self-model gate, conceptual-I gate, unique-owner requirement or assistant-consciousness verdict is introduced"
+  ]
+}

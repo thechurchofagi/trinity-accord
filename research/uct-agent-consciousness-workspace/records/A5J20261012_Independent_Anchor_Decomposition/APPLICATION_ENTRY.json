@@ -1,0 +1,13 @@
+{
+  "id": "A5J20261012",
+  "title": "Independent-anchor decomposition",
+  "version": "A5J-INDEPENDENT-ANCHOR-v0.1.0",
+  "type": "FOLLOWUP_APPLICATION",
+  "status": "DISABLED_DOMAIN_BOUNDED_IDENTIFICATION_RESULT",
+  "enabled_as_established_premises": false,
+  "formal_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+  "result": "A full P-by-C crossing plus two P-tracking channels excludes direct C reading but does not identify H=P. Semantic source diversity plus common orientation identifies the target law in the declared family while leaving the H-reader channel label unresolved.",
+  "selected_target": "H_tip (selected experience-internal contact-location target); not basal experience, report, ownership, or conceptual self",
+  "standalone_manuscript": "HOLD_STANDALONE",
+  "next": "Specify one noncircular, failure-capable intervention that can warrant semantic source diversity between an H-sensitive path and a direct-P path in the same participant/tool instance; if unavailable, stop at cue-exclusion and decoding."
+}

@@ -1,3 +1,9 @@
+# A5J20261012 audit addendum
+
+A5J preserves the effective 913/424/261 graph and adds 0/0/0. Fresh capsule restoration and traversal found no unresolved deductive references, cycles or bad `all_of`. The bounded audit separates complete organization, finite views, actual `P`, nuisance `C`, selected `H`, semantic selector, polarity, output and report. The positive target-law result requires factorial crossing, semantic source diversity and common orientation simultaneously; neither hardware multiplicity nor output agreement supplies the latter two. C1 is not inferred from decoding, and the exact enumeration is not an actual installation. Deep historical semantic audit remains incomplete. See [A5J formal audit](records/A5J20261012_Independent_Anchor_Decomposition/FORMAL_AUDIT.md).
+
+---
+
 # A5I20261012 audit addendum
 
 A5I preserves the effective 913/424/261 graph and adds 0/0/0. Fresh traversal found no unresolved deductive references, cycles or bad `all_of`. The affected audit separates complete organization, actual contact, contextual cue, experiential target, source selector, orientation, channel output and report. The positive finite result requires D/S/O simultaneously; explicit leave-one-out witnesses establish 5/5/2 residual models. C1 is not inferred from decoding, and frozen hardware/software is not substituted for semantic source transport. Deep historical semantic audit remains incomplete. See [A5I formal audit](records/A5I20261012_Context_Transport_Barrier/FORMAL_AUDIT.md).

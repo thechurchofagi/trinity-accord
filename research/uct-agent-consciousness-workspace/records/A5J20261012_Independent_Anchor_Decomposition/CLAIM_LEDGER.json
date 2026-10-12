@@ -1,0 +1,39 @@
+{
+  "schema": "uct-disabled-claim-ledger/1",
+  "research_id": "A5J20261012",
+  "claims": [
+    {
+      "id": "A5J-D1-INDEPENDENT-ANCHOR-DECOMPOSITION",
+      "type": "EXACT_FINITE_IDENTIFICATION_PROPOSITION",
+      "statement": "With binary P and C fully crossed, two channels that both equal P leave 12 models and six H laws. Semantic source diversity SD leaves four models and H in {P,notP}; common orientation CO alone leaves ten; SD and CO leave two selector-swapped models and the unique target law H=P.",
+      "domain": "Six H laws, two channels, source selectors in {H,P,C}, binary source-to-output polarity, all four P-by-C cells.",
+      "all_of": ["DECLARED_FINITE_DOMAIN", "FULL_P_BY_C_CROSS", "Z_EQUALS_P", "A_EQUALS_P", "SD_FOR_POSITIVE_TARGET_IDENTIFICATION", "CO_FOR_POSITIVE_TARGET_IDENTIFICATION"],
+      "proof_or_source": "Exhaustive enumeration in check_anchor_decomposition.py; EXACT_RESULTS.json.",
+      "counterexamples_or_limits": ["direct-P twin", "complemented H twin", "selector-swap residual", "no empirical SD installation", "no consciousness inference"],
+      "status": "EXACT_WITHIN_DECLARED_FINITE_MODEL_DISABLED_AS_EMPIRICAL_PREMISE",
+      "thought_experiment_role": "Copy/reconnection preserves outputs while changing source and polarity."
+    },
+    {
+      "id": "A5J-C2-PHYSICAL-ROUTE-SCOPE",
+      "type": "SCOPED_PRIMARY_SOURCE_SYNTHESIS",
+      "statement": "Held-tool mechanics and neural signals carry actual impact-location information, so a direct physical-position route remains a live alternative to a phenomenal-target channel in a held-stick calibration.",
+      "domain": "Miller et al. 2018/2019 held-tool location studies, kept separate from rabbit-illusion reports.",
+      "all_of": ["PRIMARY_PROTOCOL_SCOPE", "ACTUAL_IMPACT_INFORMATION", "NO_TARGET_IDENTITY_RENAMING", "NO_CROSS_STUDY_ACTUALITY_MERGE"],
+      "proof_or_source": "DOIs 10.1038/s41586-018-0460-0 and 10.1016/j.cub.2019.10.043, with Miyazaki/Wada rabbit protocols used only as separate scope constraints.",
+      "counterexamples_or_limits": ["tool location is not H_tip", "EEG decoding is not C1", "reports remain downstream"],
+      "status": "PROTOCOL_LEVEL_EVIDENCE_NOT_PHENOMENAL_SOURCE_IDENTIFICATION",
+      "thought_experiment_role": "Abacus/calculator separates accurate physical decoding from experiential source identity."
+    },
+    {
+      "id": "A5J-N1-DISABLED-POSITIVE-APPLICATION",
+      "type": "DISABLED_POSITIVE_UCT_APPLICATION",
+      "statement": "If one actual same-instance held-tool installation independently grounds H, realizes semantic source diversity, and fixes common orientation, then the finite target law H=P is identified for the declared contrast; C1/R157 may interpret the corresponding actual relation without an extra owner.",
+      "domain": "One participant, tool, interval, complete signature, target grain and prospectively fixed measurement contract.",
+      "all_of": ["A:C1_SAME_BINDING", "R157:COORDINATE_TRANSPORT", "ACTUAL_K_DEFINABLE_H_TIP", "A5J_F", "A5J_SD", "A5J_CO", "NO_EXTRA_OWNER_INFERENCE"],
+      "proof_or_source": "UCT I v1.2, R157, and A5J-D1.",
+      "counterexamples_or_limits": ["not currently installed", "not C1 evidence", "not basal experience", "not mechanism-label identification", "not report identity"],
+      "status": "DISABLED_ALL_APPLICATION_PREMISES_OPEN",
+      "thought_experiment_role": "Formation and human-implemented-agent cases block retrospective and cross-bearer attribution."
+    }
+  ]
+}

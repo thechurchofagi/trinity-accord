@@ -1,5 +1,7 @@
 # 待整合研究全表
 
+当前停用应用：`A5J20261012` 把独立锚点分为 `P×C` 线索排除、语义源多样性和共同方向。前者加两个一致通道仍有 12 个模型；后两项合取才在限定族中识别 `H=P`，实际同实例安装与体验桥仍开放。见 [正文](records/A5J20261012_Independent_Anchor_Decomposition/RESEARCH_NOTE.md) 与 [审查](records/A5J20261012_Independent_Anchor_Decomposition/FORMAL_AUDIT.md)。
+
 [总览](UCT_FORMAL_MAP.md) · [全部候选](PENDING_RESEARCH.md) · [当前状态](CURRENT_STATE.json) · [统一登记](UNIFIED_RESEARCH_INDEX.json) · [审查](UCT_FORMAL_AUDIT.md)
 
 以下 38 项已统一登记；全部保持停用。节点／规则／关联数字是源文档记录数，不是原创成果数；应用型记录允许 0 新节点。三个 CTD 阶段属于同一成果家族。

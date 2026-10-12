@@ -1,5 +1,11 @@
 # UCT durable memory
 
+# A5J20261012 latest memory
+
+A5J decomposes A5I's proposed independent held-stick anchor. A full `P×C` crossing with two channels that both follow `P` leaves 12 source/polarity models and all six target laws: different hardware and cue exclusion do not establish a phenomenal source. Semantic source diversity `SD` leaves four models and `H∈{P,¬P}`; common orientation `CO` alone leaves ten; `SD+CO` leaves two selector-swapped models but uniquely fixes the target law `H=P`. Thus cue exclusion, phenomenal-source admission and polarity are separate. Actual `SD/CO/H_tip`, complete biological `K`, and all review items remain open; formal delta 0/0/0. Next: specify one noncircular failure-capable intervention that can warrant semantic source diversity in the same participant/tool instance, or stop at cue exclusion/decoding.
+
+---
+
 # A5I20261012 latest memory
 
 A5I proves a binary calibration-transport barrier for the held-stick `H_tip` bridge. If veridical calibration co-aligns target, actual contact and cue, a frozen channel that transfers to rabbit trials can still switch to the sequence cue or flip polarity. Twelve models fit ordinary calibration/transfer; source-discordant calibration D, selector transport S and orientation transport O together leave one, while dropping them leaves 5/5/2. This corrects A5H's suggestion that veridical training plus fixed orientation might suffice. Miller 2018/2019 tool-location decoding sharpens the cue-reading alternative. Formal delta 0/0/0; all review items remain open. Next: test whether one same-participant held-stick calibration can dissociate actual contact P from nuisance cue C while retaining a warranted H=P anchor and failure-capable source/pole transport tests.

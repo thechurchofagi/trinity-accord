@@ -1,3 +1,9 @@
+# A5J20261012 disabled addendum — independent-anchor decomposition
+
+A5J adds no completed node, rule or context (0/0/0). A complete `P×C` crossing and two channels equal to `P` leave 12 models and six target laws. Semantic source diversity leaves four models and the `P/¬P` complement; common orientation alone leaves ten; their conjunction leaves two selector-swapped implementations but the unique target law `H=P`. The result decomposes A5I's calibration premise without establishing an actual `H` source, complete biological `K`, C1 or basal experience. See [A5J audit](records/A5J20261012_Independent_Anchor_Decomposition/FORMAL_AUDIT.md).
+
+---
+
 # A5I20261012 disabled addendum — calibration-transport barrier
 
 A5I adds no completed node, rule or context (0/0/0). In its declared binary two-context family, a veridically accurate frozen channel calibrated where `H_V=C_V=P` leaves 12 transfer-compatible models and all four target hypotheses. Source-discordant target calibration D, selector transport S and orientation transport O together leave one model; dropping them leaves 5, 5 and 2. The result is a measurement-bridge correction, not a basal-experience gate or evidence that D/S/O are actually installed. See [A5I audit](records/A5I20261012_Context_Transport_Barrier/FORMAL_AUDIT.md).

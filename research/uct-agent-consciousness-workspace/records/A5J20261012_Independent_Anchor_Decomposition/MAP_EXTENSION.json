@@ -1,0 +1,9 @@
+{
+  "research_id": "A5J20261012",
+  "formal_graph_delta": {"nodes": 0, "rules": 0, "context_links": 0},
+  "enabled_as_established_premises": false,
+  "status": "DISABLED_DOMAIN_BOUNDED_IDENTIFICATION_RESULT",
+  "reason": "The finite decomposition corrects a measurement contract but does not establish an actual H-sensitive source, semantic source diversity, common orientation, or the H_tip bridge.",
+  "candidate_claim_ids": ["A5J-D1-INDEPENDENT-ANCHOR-DECOMPOSITION", "A5J-C2-PHYSICAL-ROUTE-SCOPE", "A5J-N1-DISABLED-POSITIVE-APPLICATION"],
+  "preserves": ["A:P3", "A:P6", "A:C1", "A:U1", "A:PHEN_TARGET", "R157:COORDINATE_TRANSPORT", "R157:SEMANTIC_RESIDUAL", "R157:MINENESS_BRIDGE_SCHEMA", "R159:ANCHOR_BINDING_CONTRACT"]
+}

@@ -1,4 +1,12 @@
-# A5I20261012 current handoff — veridical-to-illusion calibration transport
+# A5J20261012 current handoff — independent-anchor decomposition
+
+[English note](records/A5J20261012_Independent_Anchor_Decomposition/RESEARCH_NOTE.md) · [anchor contract](records/A5J20261012_Independent_Anchor_Decomposition/INDEPENDENT_ANCHOR_CONTRACT.md) · [exact results](records/A5J20261012_Independent_Anchor_Decomposition/EXACT_RESULTS.json) · [formal audit](records/A5J20261012_Independent_Anchor_Decomposition/FORMAL_AUDIT.md) · [Chinese handoff](records/A5J20261012_Independent_Anchor_Decomposition/HANDOFF_ZH.md). A full `P×C` crossing and two `P`-tracking channels exclude direct cue reading but leave 12 models and all six target laws. Only semantic source diversity plus common orientation identifies `H=P` in the declared family, while the named `H`-reader remains unresolved. Formal delta 0/0/0; all review items remain open.
+
+Next: specify one noncircular, failure-capable same-instance intervention that warrants semantic source diversity between an `H`-sensitive path and a direct-`P` path; if unavailable, retain only cue-exclusion/decoding claims.
+
+---
+
+# A5I20261012 historical handoff — veridical-to-illusion calibration transport
 
 [English note](records/A5I20261012_Context_Transport_Barrier/RESEARCH_NOTE.md) · [transport contract](records/A5I20261012_Context_Transport_Barrier/CALIBRATION_TRANSPORT_CONTRACT.md) · [exact results](records/A5I20261012_Context_Transport_Barrier/EXACT_RESULTS.json) · [formal audit](records/A5I20261012_Context_Transport_Barrier/FORMAL_AUDIT.md) · [Chinese handoff](records/A5I20261012_Context_Transport_Barrier/HANDOFF_ZH.md). A veridically accurate frozen channel does not identify `H_tip` when calibration co-aligns target and cue. In the declared binary family, D source-discordant calibration, S selector transport and O orientation transport are jointly required; ordinary transfer leaves 12 models, while D/S/O leave one. Formal delta 0/0/0; all review items remain open.
 

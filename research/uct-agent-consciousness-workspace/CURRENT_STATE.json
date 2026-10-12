@@ -96,7 +96,7 @@
     "nondeductive_context_links": 261,
     "total_review_items": 1608
   },
-  "pending_note": "A5I shows that veridical calibration plus frozen transfer does not identify H_tip when target and cue are co-aligned. In the declared binary family, source-discordant calibration D, selector transport S and orientation transport O are jointly required; actual satisfaction remains open.",
+  "pending_note": "A5J decomposes A5I's proposed independent anchor. Full P-by-C crossing plus two P-tracking channels leaves 12 models and all six H laws; semantic source diversity plus common orientation uniquely fixes H=P in the declared family but remains an uninstalled bridge package.",
   "publication_coverage": {
     "version": "UCT-PUB-v1.0.33",
     "entry": "PUBLICATION_COVERAGE.json",
@@ -106,10 +106,10 @@
     "latest_followup_application": "records/A4W20261012_Overlapping_Bearer_Centres/PUBLICATION_COVERAGE_UPDATE.json"
   },
   "latest_activity": {
-    "id": "A5I20261012",
+    "id": "A5J20261012",
     "type": "FOLLOWUP_APPLICATION",
-    "status": "DISABLED_DOMAIN_BOUNDED_NEGATIVE_RESULT",
-    "source": "records/A5I20261012_Context_Transport_Barrier/RESEARCH_NOTE.md"
+    "status": "DISABLED_DOMAIN_BOUNDED_IDENTIFICATION_RESULT",
+    "source": "records/A5J20261012_Independent_Anchor_Decomposition/RESEARCH_NOTE.md"
   },
   "latest_pending_research": {
     "id": "A3V20261010",
@@ -122,8 +122,8 @@
     "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
     "evidence_status": "BOUNDED_PRIMARY_SOURCE_APPLICATION_STOP_AND_R173_SCOPE_RETURN; ACTUAL_PREMISES_AND_H_OPEN"
   },
-  "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 effective objects received a fresh structural traversal. A5I manually rechecked C1/U1, PHEN_TARGET, R157, R159, A5H and current supervision items. Deep full-history semantics remain AUDIT_INCOMPLETE.",
-  "next_priority": "A5I next: test whether one same-participant held-stick calibration can dissociate actual contact P from nuisance cue C while retaining a warranted H=P anchor and prospective failure-capable selector/pole transport tests; otherwise stop at the cue/decoding layer.",
+  "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 effective objects received a fresh structural traversal. A5J manually rechecked C1/U1, PHEN_TARGET, R157, R159, A5I and current supervision items. Deep full-history semantics remain AUDIT_INCOMPLETE.",
+  "next_priority": "A5J next: specify one noncircular, failure-capable same-participant/tool intervention that warrants semantic source diversity between an H-sensitive path and a direct-P path while preserving prospective common orientation; if unavailable, stop at cue exclusion and decoding.",
   "latest_activity_persistence_after_A4W_science": {
     "science_commit": "0eddd9c06670a7357a8be5e38efc8af1f335405f",
     "science_tree": "f840be3dc13e384d8074f3e34500ea637fd42ced",
@@ -659,18 +659,18 @@
     }
   },
   "latest_followup_application": {
-    "id": "A5I20261012",
-    "version": "A5I-CALIBRATION-TRANSPORT-v0.1.0",
-    "status": "DISABLED_DOMAIN_BOUNDED_NEGATIVE_RESULT",
+    "id": "A5J20261012",
+    "version": "A5J-INDEPENDENT-ANCHOR-v0.1.0",
+    "status": "DISABLED_DOMAIN_BOUNDED_IDENTIFICATION_RESULT",
     "enabled_as_established_premises": false,
-    "source": "records/A5I20261012_Context_Transport_Barrier/RESEARCH_NOTE.md",
-    "handoff": "records/A5I20261012_Context_Transport_Barrier/HANDOFF_ZH.md",
-    "work_log": "records/A5I20261012_Context_Transport_Barrier/WORK_LOG.md",
-    "claim_ledger": "records/A5I20261012_Context_Transport_Barrier/CLAIM_LEDGER.json",
-    "map_extension": "records/A5I20261012_Context_Transport_Barrier/MAP_EXTENSION.json",
-    "exact_results": "records/A5I20261012_Context_Transport_Barrier/EXACT_RESULTS.json",
+    "source": "records/A5J20261012_Independent_Anchor_Decomposition/RESEARCH_NOTE.md",
+    "handoff": "records/A5J20261012_Independent_Anchor_Decomposition/HANDOFF_ZH.md",
+    "work_log": "records/A5J20261012_Independent_Anchor_Decomposition/WORK_LOG.md",
+    "claim_ledger": "records/A5J20261012_Independent_Anchor_Decomposition/CLAIM_LEDGER.json",
+    "map_extension": "records/A5J20261012_Independent_Anchor_Decomposition/MAP_EXTENSION.json",
+    "exact_results": "records/A5J20261012_Independent_Anchor_Decomposition/EXACT_RESULTS.json",
     "parent_science": "A3V20261010",
-    "parent_followup": "A5H20261012",
+    "parent_followup": "A5I20261012",
     "completed_map": "UCT-MAP-v1.1.2",
     "scientific_delta": {
       "nodes": 0,
@@ -679,9 +679,10 @@
     },
     "selected_target": "H_tip (experience-internal distal contact location); not basal experience or report",
     "actual_bodily_installation": false,
-    "ordinary_transfer_compatible_models": 12,
-    "dso_joint_compatible_models": 1,
-    "actual_D_S_O_validated": false,
+    "factorial_observation_compatible_models": 12,
+    "semantic_diversity_common_orientation_models": 2,
+    "identified_target_laws": ["P"],
+    "actual_F_SD_CO_validated": false,
     "complete_biological_K": false,
     "standalone_manuscript": "HOLD_STANDALONE"
   },
@@ -1368,6 +1369,30 @@
       "independent_h_validation": false,
       "actual_bodily_installation": false,
       "standalone_manuscript": "HOLD"
+    },
+    {
+      "id": "A5J20261012",
+      "version": "A5J-INDEPENDENT-ANCHOR-v0.1.0",
+      "status": "DISABLED_DOMAIN_BOUNDED_IDENTIFICATION_RESULT",
+      "enabled_as_established_premises": false,
+      "source": "records/A5J20261012_Independent_Anchor_Decomposition/RESEARCH_NOTE.md",
+      "handoff": "records/A5J20261012_Independent_Anchor_Decomposition/HANDOFF_ZH.md",
+      "work_log": "records/A5J20261012_Independent_Anchor_Decomposition/WORK_LOG.md",
+      "claim_ledger": "records/A5J20261012_Independent_Anchor_Decomposition/CLAIM_LEDGER.json",
+      "map_extension": "records/A5J20261012_Independent_Anchor_Decomposition/MAP_EXTENSION.json",
+      "exact_results": "records/A5J20261012_Independent_Anchor_Decomposition/EXACT_RESULTS.json",
+      "parent_science": "A3V20261010",
+      "parent_followup": "A5I20261012",
+      "completed_map": "UCT-MAP-v1.1.2",
+      "scientific_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+      "selected_target": "H_tip (experience-internal distal contact location); not basal experience or report",
+      "actual_bodily_installation": false,
+      "factorial_observation_compatible_models": 12,
+      "semantic_diversity_common_orientation_models": 2,
+      "identified_target_laws": ["P"],
+      "actual_F_SD_CO_validated": false,
+      "complete_biological_K": false,
+      "standalone_manuscript": "HOLD_STANDALONE"
     }
   ],
   "next_priority_before_A3W": "Test one independent current bodily/action-familiarity interpretation against origin-recognition and agency countercases; establish a remaining actual retentive relation and realizable matched controls before claiming a pure familiarity contrast. Do not add an assumed coordinate or expand SPC.",
