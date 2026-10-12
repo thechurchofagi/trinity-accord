@@ -96,7 +96,7 @@
     "nondeductive_context_links": 261,
     "total_review_items": 1608
   },
-  "pending_note": "A5E corrects the role-reversal prediction: a parameter-free structural target is invariant on complete-K automorphism orbits, while parameterized targets covary only when their grounded parameters are transported. A reversing target therefore exposes omitted actual asymmetry, transported parameters or an extra bridge. No actual anchor, B_pc or phenomenal sign is installed.",
+  "pending_note": "A5F identifies a real crossed-tool protocol where anatomical anchor plus actual grip and distal side removes the A5E automorphism barrier and defines a changing distal coordinate. The protocol does not establish complete biological K, and its temporal-order reports do not independently identify H_tip, ownership, agency or H_pc.",
   "publication_coverage": {
     "version": "UCT-PUB-v1.0.33",
     "entry": "PUBLICATION_COVERAGE.json",
@@ -106,10 +106,10 @@
     "latest_followup_application": "records/A4W20261012_Overlapping_Bearer_Centres/PUBLICATION_COVERAGE_UPDATE.json"
   },
   "latest_activity": {
-    "id": "A5E20261012",
+    "id": "A5F20261012",
     "type": "FOLLOWUP_APPLICATION",
-    "status": "DISABLED_ROLE_AUTOMORPHISM_BOUNDARY_BRIDGE_OPEN",
-    "source": "records/A5E20261012_Automorphism_and_Role_Orientation/RESEARCH_NOTE.md"
+    "status": "DISABLED_ACTUAL_PROTOCOL_CANDIDATE_PHENOMENAL_BRIDGE_OPEN",
+    "source": "records/A5F20261012_Grounded_Anatomical_Tool_Anchor/RESEARCH_NOTE.md"
   },
   "latest_pending_research": {
     "id": "A3V20261010",
@@ -122,8 +122,8 @@
     "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
     "evidence_status": "BOUNDED_PRIMARY_SOURCE_APPLICATION_STOP_AND_R173_SCOPE_RETURN; ACTUAL_PREMISES_AND_H_OPEN"
   },
-  "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 effective objects received a fresh structural traversal. A5E manually rechecked C1/U1, P3/P6, PHEN_TARGET, R157, R166, R172, effective R173 and A5D. Deep full-history semantics remain AUDIT_INCOMPLETE.",
-  "next_priority": "A5E next: identify one actual body/action candidate with an independently grounded asymmetric anchor in complete K; predeclare a non-automorphic anchor-exchange intervention and an unfitted phenomenal failure outcome. If unavailable, retain the automorphism-orbit law and B_pc open; do not resume unbounded controller-certificate expansion.",
+  "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 effective objects received a fresh structural traversal. A5F manually rechecked C1/U1, P3/P6, PHEN_TARGET, R157, R159, A5E and all current supervision items. Deep full-history semantics remain AUDIT_INCOMPLETE.",
+  "next_priority": "A5F next: predeclare one crossed-tool or tool-substitution comparison with a non-report-fitted independent H_tip measure and failure outcome while holding anatomical anchor and grip route fixed. If unavailable, retain only the protocol-level grounded-coordinate candidate and keep B_tip/B_pc open.",
   "latest_activity_persistence_after_A4W_science": {
     "science_commit": "0eddd9c06670a7357a8be5e38efc8af1f335405f",
     "science_tree": "f840be3dc13e384d8074f3e34500ea637fd42ced",
@@ -659,27 +659,30 @@
     }
   },
   "latest_followup_application": {
-    "id": "A5E20261012",
-    "version": "A5E-ROLE-AUTOMORPHISM-v0.1.0",
-    "status": "DISABLED_ROLE_AUTOMORPHISM_BOUNDARY_BRIDGE_OPEN",
+    "id": "A5F20261012",
+    "version": "A5F-GROUNDED-TOOL-ANCHOR-v0.1.0",
+    "status": "DISABLED_ACTUAL_PROTOCOL_CANDIDATE_PHENOMENAL_BRIDGE_OPEN",
     "enabled_as_established_premises": false,
-    "source": "records/A5E20261012_Automorphism_and_Role_Orientation/RESEARCH_NOTE.md",
-    "handoff": "records/A5E20261012_Automorphism_and_Role_Orientation/HANDOFF_ZH.md",
-    "work_log": "records/A5E20261012_Automorphism_and_Role_Orientation/WORK_LOG.md",
-    "claim_ledger": "records/A5E20261012_Automorphism_and_Role_Orientation/CLAIM_LEDGER.json",
-    "map_extension": "records/A5E20261012_Automorphism_and_Role_Orientation/MAP_EXTENSION.json",
-    "exact_results": "records/A5E20261012_Automorphism_and_Role_Orientation/EXACT_RESULTS.json",
+    "source": "records/A5F20261012_Grounded_Anatomical_Tool_Anchor/RESEARCH_NOTE.md",
+    "handoff": "records/A5F20261012_Grounded_Anatomical_Tool_Anchor/HANDOFF_ZH.md",
+    "work_log": "records/A5F20261012_Grounded_Anatomical_Tool_Anchor/WORK_LOG.md",
+    "claim_ledger": "records/A5F20261012_Grounded_Anatomical_Tool_Anchor/CLAIM_LEDGER.json",
+    "map_extension": "records/A5F20261012_Grounded_Anatomical_Tool_Anchor/MAP_EXTENSION.json",
+    "exact_results": "records/A5F20261012_Grounded_Anatomical_Tool_Anchor/EXACT_RESULTS.json",
     "parent_science": "A3V20261010",
-    "parent_followup": "A5D20261012",
+    "parent_followup": "A5E20261012",
     "completed_map": "UCT-MAP-v1.1.2",
     "scientific_delta": {
       "nodes": 0,
       "rules": 0,
       "contexts": 0
     },
-    "selected_target": "H_pc",
+    "selected_target": "H_tip (experienced distal contact location); H_pc remains open",
     "actual_bodily_installation": false,
-    "independent_asymmetric_anchor": false,
+    "actual_protocol_candidate": true,
+    "independent_asymmetric_anchor_at_protocol_level": true,
+    "complete_biological_K": false,
+    "independent_H_tip_validation": false,
     "independent_B_pc_validation": false,
     "standalone_manuscript": "HOLD_STANDALONE"
   },

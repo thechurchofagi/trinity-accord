@@ -1,0 +1,9 @@
+{
+  "research_id": "A5F20261012",
+  "formal_graph_delta": {"nodes": 0, "rules": 0, "context_links": 0},
+  "enabled_as_established_premises": false,
+  "status": "DISABLED_ACTUAL_PROTOCOL_CANDIDATE",
+  "reason": "The finite structural result is exact and the human tool protocol is actual, but complete biological K and an independent phenomenal bridge are not discharged.",
+  "candidate_claim_ids": ["A5F-C1", "A5F-C2", "A5F-C3", "A5F-C4", "A5F-N1"],
+  "preserves": ["A:C1", "A:U1", "R157:COORDINATE_TRANSPORT", "R157:SEMANTIC_RESIDUAL", "R157:MINENESS_BRIDGE_SCHEMA", "R159:ANCHOR_BINDING_CONTRACT", "R159:FRAME_RELATION_TRANSPORT"]
+}

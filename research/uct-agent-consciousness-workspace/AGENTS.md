@@ -1,3 +1,9 @@
+# A5F bounded follow-up — grounded anatomical/tool anchor
+
+A5F supplies A5E's missing actual protocol-level asymmetry without claiming a phenomenal bridge. A unique anatomical hand anchor plus actual grip route makes the crossed-tool side-complement non-isomorphic and defines a reversing distal coordinate: exact counts are 256 typed structures, 16 pair-swap automorphisms, 240 non-automorphisms; all 64 unique-anchor/unique-grip pairs are non-isomorphic, and the restricted tool family changes from 4/4 isomorphic without anchor to 8/8 non-isomorphic with anchor. Primary crossed-tool evidence grounds a real hand–tool–distal-location protocol, but temporal-order reports do not independently identify `H_tip`, ownership, agency or `H_pc`. Disabled 0/0/0; all review items remain open. Next predeclare an independent non-report-fitted `H_tip` measure and failure outcome, or retain only the coordinate candidate. See [A5F handoff](records/A5F20261012_Grounded_Anatomical_Tool_Anchor/HANDOFF_ZH.md).
+
+---
+
 # A5E bounded follow-up — role reversal is constrained by automorphism
 
 A5E corrects A5D's next-step wording. A parameter-free target definable from one complete grounded actual `K`-structure is invariant on its automorphism orbits; a parameterized target covaries only when its grounded parameter is transported. Therefore a target that reverses under a declared role exchange exposes either a grounded asymmetry that makes the exchange non-automorphic, a transported parameter, or an extra bridge beyond `K`. Exact two-object enumeration gives 8 swap-automorphic and 56 asymmetric structures. This does not identify `H_pc`, install an actual anchor or infer a unique owner. Disabled 0/0/0; all review items remain open. Next seek one actual asymmetric body/action anchor and a predeclared non-automorphic comparison, or keep `B_pc` open. See [A5E handoff](records/A5E20261012_Automorphism_and_Role_Orientation/HANDOFF_ZH.md).

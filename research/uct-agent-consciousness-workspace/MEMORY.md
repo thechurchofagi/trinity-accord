@@ -1,5 +1,11 @@
 # UCT durable memory
 
+## A5F20261012 latest memory
+
+A5F supplies an actual protocol-level asymmetric candidate for A5E: one anatomically fixed hand actually grips a stick while crossed sticks exchange distal external side without moving hand/mechanoreceptor locations. In the declared 256 typed structures, simultaneous hand/tip swap is an automorphism in 16 and not in 240; all 64 unique-anchor/unique-grip cross pairs are non-isomorphic. In the restricted perfect-matching tool family, 4/4 anchor-free pairs are isomorphic, 8/8 uniquely anchored pairs are non-isomorphic and the anchored distal coordinate flips in 8/8. This removes a structural symmetry barrier but does not establish complete biological `K` or a phenomenal bridge. Crossed-tool temporal-order evidence does not independently identify `H_tip`, ownership, agency or `H_pc`; Kalckert–Ehrsson blocks ownership/agency conflation. Formal delta 0/0/0; all supervision items remain open. Next: one preregistered non-report-fitted `H_tip` measure and failure outcome with anchor/grip fixed, else retain only the protocol-level coordinate candidate.
+
+---
+
 ## A5E20261012 latest memory
 
 A5E replaces an unconditional phenomenal role-reversal prediction with an orbit/covariance law. On one actual complete `K` binding, parameter-free definability entails invariance under every `K`-automorphism; with grounded parameters, the full assignment must be transported. Hence a reversing target requires omitted grounded asymmetry, parameter dependence or an extra bridge. The 64-structure exact witness has 8 swap automorphisms and 56 non-automorphisms; on the symmetric cases 16 target pairs preserve and 16 reverse, with the latter not parameter-free definable by standard model theory. No converse from invariance to definability, actual anchor, `B_pc`, evidence sign or owner selection is claimed. Formal delta 0/0/0; all supervision items remain open. Next: one actual body/action anchor plus predeclared non-automorphic exchange and unfitted phenomenal failure result, else retain `B_pc` open.

@@ -1,0 +1,40 @@
+{
+  "claims_checked": [
+    "The simultaneous hand-tip pair swap is an automorphism in exactly 16 of 256 typed structures.",
+    "A unique hand anchor plus exactly one gripped tip makes the side-complement intervention non-isomorphic in all 64 declared worlds.",
+    "In the restricted two-stick perfect-matching/opposite-side family, all four anchor-free crossed pairs are isomorphic, while all eight uniquely anchored pairs are non-isomorphic.",
+    "The parameter-free anchored distal-side coordinate flips in all eight restricted uniquely anchored worlds."
+  ],
+  "counts": {
+    "anchored_side_coordinate_flips": 8,
+    "pair_swap_automorphisms": 16,
+    "pair_swap_nonautomorphisms": 240,
+    "restricted_tool_cross_isomorphic_without_anchor": 4,
+    "restricted_tool_cross_nonisomorphic_with_anchor": 8,
+    "restricted_tool_worlds_with_unique_anchor": 8,
+    "restricted_tool_worlds_without_anchor": 4,
+    "total_structures": 256,
+    "unique_anchor_cross_nonisomorphic": 64,
+    "unique_anchor_unique_grip_worlds": 64
+  },
+  "limits": [
+    "Finite typed model only; it does not prove that the complete biological K has exactly these relations.",
+    "ExternalSide is a declared grounded spatial relation, not an analyst label or response key.",
+    "No phenomenal target, ownership, agency, mineness, report reliability or C1 truth is assigned.",
+    "Non-isomorphism is sufficient here to remove the A5E automorphism barrier; it is not sufficient to validate B_pc."
+  ],
+  "model": {
+    "crossing_intervention": "fix Anchor and Grip token incidence; complement ExternalSide on both tips",
+    "relations": {
+      "Anchor": "unary on hands",
+      "ExternalSide": "unary on tool_tips",
+      "Grip": "binary hands x tool_tips"
+    },
+    "sorts": {
+      "hands": 2,
+      "tool_tips": 2
+    }
+  },
+  "schema": "uct-a5f-grounded-anchor-check/1.0",
+  "status": "PASS"
+}

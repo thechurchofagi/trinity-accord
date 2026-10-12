@@ -1,3 +1,9 @@
+# A5F20261012 audit addendum
+
+A5F preserves the effective 913/424/261 graph and adds 0/0/0. Fresh traversal found zero unresolved deductive references, cycles, non-list `all_of` or empty `all_of`. The audit distinguishes protocol-level actual anchor/grip/side relations from complete biological `K`, and temporal-order reports from `H_tip`, ownership, agency and `H_pc`. Anchored/non-isomorphic and anchor-free/isomorphic cases are jointly satisfiable exact witnesses. The non-isomorphism direction is not reversed into a phenomenal bridge. Deep historical semantic audit remains incomplete. See [A5F formal audit](records/A5F20261012_Grounded_Anatomical_Tool_Anchor/FORMAL_AUDIT.md).
+
+---
+
 # A5E20261012 audit addendum
 
 A5E preserves the effective 913/424/261 graph and adds 0/0/0. Fresh traversal found zero unresolved deductive references, cycles, non-list `all_of` or empty `all_of`. The candidate automorphism result requires actual binding, complete relevant `K`, a genuine `K`-automorphism, `K`-definable target and transported parameters simultaneously. Manual review separates parameter-free invariance from parameter covariance, complete organization from finite views, structural target from `H_pc`, and standard mathematics from C1/phenomenal evidence. No converse or actual installation is inferred. Deep historical semantic audit remains incomplete. See [A5E formal audit](records/A5E20261012_Automorphism_and_Role_Orientation/FORMAL_AUDIT.md).

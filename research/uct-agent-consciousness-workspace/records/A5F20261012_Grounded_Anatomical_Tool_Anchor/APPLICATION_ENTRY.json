@@ -1,0 +1,13 @@
+{
+  "id": "A5F20261012",
+  "title": "Grounded anatomical/tool anchor",
+  "version": "A5F-GROUNDED-TOOL-ANCHOR-v0.1.0",
+  "type": "FOLLOWUP_APPLICATION",
+  "status": "DISABLED_ACTUAL_PROTOCOL_CANDIDATE_PHENOMENAL_BRIDGE_OPEN",
+  "enabled_as_established_premises": false,
+  "formal_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+  "result": "A unique actual anatomical anchor plus grip route breaks crossed-tool symmetry and defines a reversing distal coordinate; existing temporal-order evidence does not independently identify H_tip, ownership, agency or H_pc.",
+  "selected_target": "H_tip (experienced distal contact location); H_pc remains open",
+  "standalone_manuscript": "HOLD_STANDALONE",
+  "next": "Predeclare one crossed-tool or tool-substitution comparison with an independent non-report-fitted H_tip measure and failure outcome; otherwise retain only the grounded-coordinate candidate."
+}

@@ -1,3 +1,9 @@
+# A5F20261012 — grounded anatomical/tool anchor
+
+[Research note](records/A5F20261012_Grounded_Anatomical_Tool_Anchor/RESEARCH_NOTE.md) · [contract](records/A5F20261012_Grounded_Anatomical_Tool_Anchor/ANCHOR_GRIP_DISTAL_CONTRACT.md) · [exact results](records/A5F20261012_Grounded_Anatomical_Tool_Anchor/EXACT_RESULTS.json) · [claims](records/A5F20261012_Grounded_Anatomical_Tool_Anchor/CLAIM_LEDGER.json) · [gaps](records/A5F20261012_Grounded_Anatomical_Tool_Anchor/GAP_LEDGER.md) · [audit](records/A5F20261012_Grounded_Anatomical_Tool_Anchor/FORMAL_AUDIT.md) · [Chinese handoff](records/A5F20261012_Grounded_Anatomical_Tool_Anchor/HANDOFF_ZH.md). Disabled 0/0/0 protocol-level application: a grounded anatomical anchor and grip route remove crossed-tool symmetry, while complete `K`, `H_tip`, ownership, agency and `H_pc` remain unproven.
+
+---
+
 # A5E20261012 — automorphism and role orientation
 
 [Research note](records/A5E20261012_Automorphism_and_Role_Orientation/RESEARCH_NOTE.md) · [contract](records/A5E20261012_Automorphism_and_Role_Orientation/ROLE_AUTOMORPHISM_CONTRACT.md) · [exact results](records/A5E20261012_Automorphism_and_Role_Orientation/EXACT_RESULTS.json) · [claims](records/A5E20261012_Automorphism_and_Role_Orientation/CLAIM_LEDGER.json) · [gaps](records/A5E20261012_Automorphism_and_Role_Orientation/GAP_LEDGER.md) · [audit](records/A5E20261012_Automorphism_and_Role_Orientation/FORMAL_AUDIT.md) · [Chinese handoff](records/A5E20261012_Automorphism_and_Role_Orientation/HANDOFF_ZH.md). Disabled 0/0/0 correction: structural targets are invariant on true complete-`K` automorphism orbits and covariant with transported grounded parameters. Reversal requires actual asymmetry or an extra bridge. No actual installation or phenomenal identity is claimed.

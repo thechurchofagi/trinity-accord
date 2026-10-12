@@ -1,6 +1,6 @@
 # UCT 研究唯一阅读入口
 
-最新停用跟进为 **A5E20261012**：[中文交接](records/A5E20261012_Automorphism_and_Role_Orientation/HANDOFF_ZH.md)；角色反转须先区分完整结构自同构、带锚点的非自同构干预和额外体验桥。正式完成图仍为 UCT-MAP-v1.1.2，增量 0/0/0。
+最新停用跟进为 **A5F20261012**：[中文交接](records/A5F20261012_Grounded_Anatomical_Tool_Anchor/HANDOFF_ZH.md)；真实交叉工具协议中，解剖锚点与实际握持路线消除了纯置换对称，但完整生物 `K`、`H_tip`、所有权、能动感与 `H_pc` 仍分开且开放。正式完成图仍为 UCT-MAP-v1.1.2，增量 0/0/0。
 
 [总览](UCT_FORMAL_MAP.md) · [全部候选](PENDING_RESEARCH.md) · [当前状态](CURRENT_STATE.json) · [统一登记](UNIFIED_RESEARCH_INDEX.json) · [审查](UCT_FORMAL_AUDIT.md)
 

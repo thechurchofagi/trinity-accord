@@ -1,0 +1,131 @@
+{
+  "a5f_joint_satisfiability": {
+    "anchor_free_countermodel": {
+      "ACTUAL_TOKEN_BINDING": 1,
+      "CROSS_ISOMORPHIC": 1,
+      "PERFECT_MATCHING": 1,
+      "UNIQUE_ANATOMICAL_ANCHOR": 0
+    },
+    "anchored_cross_case": {
+      "ACTUAL_EXTERNAL_SIDE": 1,
+      "ACTUAL_GRIP": 1,
+      "ACTUAL_TOKEN_BINDING": 1,
+      "CROSS_NONISOMORPHIC": 1,
+      "D_SIDE_FLIPS": 1,
+      "UNIQUE_ANATOMICAL_ANCHOR": 1
+    },
+    "complete_biological_k_claimed": false,
+    "phenomenal_gap_case": {
+      "B_TIP_DISCHARGED": 0,
+      "INDEPENDENT_H_TIP_CHANNEL": 0,
+      "PROTOCOL_RELATIONS_ACTUAL": 1,
+      "TOJ_REPORT_OBSERVED": 1
+    }
+  },
+  "a5f_scientific_delta": {
+    "contexts": 0,
+    "nodes": 0,
+    "rules": 0
+  },
+  "affected_semantic_nodes": [
+    "A:P3",
+    "A:P6",
+    "A:C1",
+    "A:U1",
+    "A:PHEN_TARGET",
+    "R157:DEFINABLE_SELECTOR_SETUP",
+    "R157:COORDINATE_TRANSPORT",
+    "R157:SEMANTIC_RESIDUAL",
+    "R157:MINENESS_BRIDGE_SCHEMA",
+    "R159:ANCHOR_BINDING_CONTRACT",
+    "R159:FRAME_RELATION_TRANSPORT",
+    "R159:SELECTED_OWNERSHIP_APPLICATION"
+  ],
+  "all_rules_read_all_of_as_simultaneous_and": true,
+  "context_endpoint_schema_differences_or_unresolved": [
+    {
+      "context": "EI20261008:CTX:001",
+      "field": "from",
+      "id": "EI20261008:IMPORT_C5"
+    },
+    {
+      "context": "RU20261008:CTX:002",
+      "field": "source",
+      "id": "OO20261008"
+    },
+    {
+      "context": "RU20261008:CTX:002",
+      "field": "from",
+      "id": "OO20261008"
+    },
+    {
+      "context": "TH20261009:ctx1",
+      "field": "source",
+      "id": "CORE20261008"
+    },
+    {
+      "context": "RB20261009:ctx8",
+      "field": "source",
+      "id": "EXTERNAL:Dodis2008Lemma2.2b"
+    },
+    {
+      "context": "RB20261009:ctx9",
+      "field": "source",
+      "id": "EXTERNAL:Wolff2017"
+    },
+    {
+      "context": "RB20261009:ctx10",
+      "field": "source",
+      "id": "PENDING:AC20261009"
+    },
+    {
+      "context": "R187:ctx_r186",
+      "field": "source",
+      "id": "R186-HOM-20261009"
+    },
+    {
+      "context": "R187:ctx_r186",
+      "field": "from",
+      "id": "R186-HOM-20261009"
+    },
+    {
+      "context": "R187:ctx_ol",
+      "field": "source",
+      "id": "OL20261009"
+    },
+    {
+      "context": "R187:ctx_ol",
+      "field": "from",
+      "id": "OL20261009"
+    }
+  ],
+  "context_links_treated_as_nondeductive": true,
+  "deductive_cycles": [],
+  "effective_counts": {
+    "context_links": 261,
+    "nodes": 913,
+    "rules": 424
+  },
+  "manual_semantic_checks": [
+    "Protocol-level actuality is not promoted to complete biological K",
+    "Anatomical anchor, grip relation and external side share one object binding, interval and grain",
+    "The non-isomorphism direction is not reversed into definability or phenomenology",
+    "Temporal-order report, H_tip, ownership, agency and H_pc are not conflated",
+    "C1 and R157 are used only in the organization-to-experience direction",
+    "No exclusive owner or subject-count conclusion is introduced",
+    "The anchor-free family supplies an explicit jointly satisfiable countermodel"
+  ],
+  "per_node_fields_accessed": 913,
+  "restored_effective_graph_sha256": "e14388ac742889d32e8df6dc3dc171f62034d3cc1e5c53c44159ddbf421adcab",
+  "root_counts": {
+    "context_links": 178,
+    "nodes": 584,
+    "rules": 284
+  },
+  "root_graph_sha256": "40d17cd5f61ebcc1bfcea65eb59c3c730208bcfcf69ba92e2f615a993584e3ce",
+  "rules_with_empty_all_of": [],
+  "rules_with_nonlist_all_of": [],
+  "schema": "a5f-map-audit/1",
+  "status": "FRESH_STRUCTURAL_PASS_BOUNDED_SEMANTIC_PASS_FULL_DEPTH_INCOMPLETE",
+  "unresolved_deductive_references": []
+}

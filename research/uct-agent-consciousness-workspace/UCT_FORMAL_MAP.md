@@ -1,3 +1,9 @@
+# A5F20261012 disabled addendum — grounded anatomical/tool anchor
+
+A5F adds no completed node, rule or context (0/0/0). A unique anatomical anchor plus actual grip and distal side makes the declared crossed-tool complement non-isomorphic and defines a changing distal coordinate: 64/64 unique-anchor/unique-grip pairs are non-isomorphic; the restricted tool family is 4/4 isomorphic without anchor versus 8/8 non-isomorphic with anchor and 8/8 coordinate flips. The primary protocol grounds an actual candidate but not complete biological `K`. Temporal-order reports, `H_tip`, ownership, agency and `H_pc` are not conflated. Non-isomorphism is not used backward to infer phenomenology or a unique owner. See [A5F audit](records/A5F20261012_Grounded_Anatomical_Tool_Anchor/FORMAL_AUDIT.md).
+
+---
+
 # A5E20261012 disabled addendum — automorphism and role orientation
 
 A5E adds no completed node, rule or context (0/0/0). Standard formula preservation entails that a parameter-free target definable from complete grounded `K` is invariant on every `K`-automorphism orbit; with grounded parameters, the full assignment covaries. A sign-reversing target therefore requires a non-automorphic actual asymmetry, transported parameter or an extra bridge beyond `K`. Exact two-object witness: 8 swap automorphisms and 56 non-automorphisms. No converse from invariance to definability, actual token, asymmetric anchor, `B_pc`, evidence sign, basal gate or owner selector is added. See [A5E audit](records/A5E20261012_Automorphism_and_Role_Orientation/FORMAL_AUDIT.md).

@@ -1,0 +1,61 @@
+{
+  "schema": "uct-disabled-claim-ledger/1",
+  "research_id": "A5F20261012",
+  "claims": [
+    {
+      "id": "A5F-C1",
+      "type": "EXACT_FINITE_ANCHORED_NONISOMORPHISM_RESULT",
+      "statement": "In the declared two-hand/two-tip signature, every side-complement pair with one unique anatomical anchor and exactly one tip gripped by that anchor is non-isomorphic; in the restricted perfect-matching/opposite-side family, all anchor-free pairs are isomorphic and all uniquely anchored pairs are non-isomorphic.",
+      "domain": "The finite typed families enumerated in check_grounded_anchor.py.",
+      "all_of": ["TWO_HANDS_TWO_TIPS", "DECLARED_TYPED_SIGNATURE", "SIDE_COMPLEMENT_INTERVENTION", "UNIQUE_ANCHOR_WHERE_STATED", "UNIQUE_GRIPPED_TIP_WHERE_STATED"],
+      "proof_or_source": "Exhaustive enumeration in check_grounded_anchor.py and EXACT_RESULTS.json; standard finite relational-structure reasoning.",
+      "counterexamples_or_limits": ["anchor-free symmetric family", "incomplete biological signature", "analyst-assigned hand name"],
+      "status": "EXACT_WITHIN_DECLARED_FINITE_MODEL",
+      "thought_experiment_role": "The abacus and copy/switch cases separate installed anchors from labels."
+    },
+    {
+      "id": "A5F-C2",
+      "type": "CONDITIONAL_DEFINABLE_COORDINATE_RESULT",
+      "statement": "With a unique actual hand anchor and its unique actual grip relation, the parameter-free anchored distal-side coordinate D_side flips under the declared side-complement intervention.",
+      "domain": "Restricted anchored two-stick structures and any actual K-instance satisfying the same typed premises.",
+      "all_of": ["A5F-C1", "ANCHOR_IS_ACTUAL", "GRIP_IS_ACTUAL", "EXTERNAL_SIDE_IS_ACTUAL", "SAME_TOKEN_INTERVAL_AND_GRAIN"],
+      "proof_or_source": "Definition of AnchoredTip and D_side; exact eight-world check; R157 only for the later UCT interpretation.",
+      "counterexamples_or_limits": ["ambiguous grip", "moving the anchor", "external side only an analyst label", "more complex tool topology"],
+      "status": "EXACT_MODEL_RESULT_CONDITIONAL_FOR_ACTUAL_APPLICATION",
+      "thought_experiment_role": "Formation and human-implemented cases test whether the route is physically installed."
+    },
+    {
+      "id": "A5F-C3",
+      "type": "SCOPED_PRIMARY_EMPIRICAL_PROTOCOL_RESULT",
+      "statement": "The crossed-stick protocol supplies an actual candidate relation linking fixed anatomical hand/mechanoreceptor locations, actually held tools and exchanged distal external locations, with changed tactile temporal-order judgments and distal referral evidence.",
+      "domain": "Yamamoto and Kitazawa 2001 human crossed-tool protocol, not complete biological K.",
+      "all_of": ["PRIMARY_STUDY_PROTOCOL", "HANDS_AND_MECHANORECEPTOR_LOCATIONS_FIXED", "STICKS_ACTUALLY_HELD", "DISTAL_TIP_LOCATIONS_CROSSED"],
+      "proof_or_source": "Yamamoto and Kitazawa, Nature Neuroscience 2001, DOI 10.1038/nn721.",
+      "counterexamples_or_limits": ["report/decision effects", "unmeasured complete-K relations", "no independent H_tip measure", "no ownership or agency result"],
+      "status": "ACTUAL_PROTOCOL_LEVEL_EVIDENCE_NOT_COMPLETE_INSTALLATION",
+      "thought_experiment_role": "Provides the real comparator that abstract examples lacked."
+    },
+    {
+      "id": "A5F-C4",
+      "type": "DISABLED_SCOPED_UCT_INTERPRETATION",
+      "statement": "If the anchor–grip–distal relations belong to one complete actual K-instance, then under C1 and R157 the grounded distal coordinate is part of experiential organization without an additional exclusive owner.",
+      "domain": "UCT tokens satisfying the complete-K and same-binding premises.",
+      "all_of": ["A:C1_SAME_BINDING", "R157:COORDINATE_TRANSPORT", "A5F-C2_ACTUALLY_INSTALLED", "NO_EXTRA_OWNER_INFERENCE"],
+      "proof_or_source": "UCT I v1.2, R157 and A5F-C2.",
+      "counterexamples_or_limits": ["not C1 evidence", "not actual complete-K proof", "not H_pc identity", "not subject count"],
+      "status": "DISABLED_POSITIVE_INTERPRETATION_COMPLETE_K_OPEN",
+      "thought_experiment_role": "Overlapping routes block unique-owner inflation."
+    },
+    {
+      "id": "A5F-N1",
+      "type": "NEGATIVE_BRIDGE_IDENTIFICATION_RESULT",
+      "statement": "The cited crossed-tool evidence does not independently identify H_tip, H_pc, ownership or agency; temporal-order/location reports cannot by themselves discharge a phenomenology bridge selected from those reports.",
+      "domain": "A5F evidence-to-target inference.",
+      "all_of": ["REPORT_TARGET_DISTINCTION", "NO_INDEPENDENT_H_TIP_CHANNEL", "NO_POSTHOC_TARGET_SUBSTITUTION"],
+      "proof_or_source": "Source-scope audit plus the Kalckert–Ehrsson ownership/agency dissociation.",
+      "counterexamples_or_limits": ["a future independent target measure could alter this status"],
+      "status": "OPEN_BRIDGE_B_TIP_AND_B_PC_NOT_DISCHARGED",
+      "thought_experiment_role": "Copying the report while changing the route exposes nonidentity."
+    }
+  ]
+}

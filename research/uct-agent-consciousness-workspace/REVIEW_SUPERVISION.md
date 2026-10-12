@@ -1,3 +1,11 @@
+# A5F20261012 research response — grounded anatomical/tool anchor
+
+The latest ledger and every carried OPEN/ACKNOWLEDGED item were read before selection, after result formation and before save. A5F supplies a real crossed-tool protocol and exact grounded-anchor asymmetry, but it explicitly stops before complete biological `K` or phenomenal identification. Temporal-order/location reports are not treated as `H_tip`, ownership, agency or `H_pc`.
+
+`QC-20261008-10` remains ACKNOWLEDGED/OPEN; `IA-QC11`, `QC-20261008-12/13` and `SCU-OPEN-R191-NORMALIZATION` remain OPEN; `SCU-AUDIT-DEPTH` remains AUDIT_INCOMPLETE. No item is self-closed. Evidence: [response](records/A5F20261012_Grounded_Anatomical_Tool_Anchor/REVIEW_RESPONSE.md), [contract](records/A5F20261012_Grounded_Anatomical_Tool_Anchor/ANCHOR_GRIP_DISTAL_CONTRACT.md), [exact results](records/A5F20261012_Grounded_Anatomical_Tool_Anchor/EXACT_RESULTS.json), [gaps](records/A5F20261012_Grounded_Anatomical_Tool_Anchor/GAP_LEDGER.md), [audit](records/A5F20261012_Grounded_Anatomical_Tool_Anchor/FORMAL_AUDIT.md).
+
+---
+
 # A5E20261012 research response — automorphism and role orientation
 
 The latest ledger and all carried OPEN/ACKNOWLEDGED items were read before selection, after result formation and before save. A5E corrects the overbroad role-reversal prediction: true complete-`K` automorphisms preserve parameter-free definable targets, while grounded parameters must covary. A reversing target therefore discloses omitted actual asymmetry, parameter dependence or an extra bridge; no independent phenomenal sign is manufactured.
