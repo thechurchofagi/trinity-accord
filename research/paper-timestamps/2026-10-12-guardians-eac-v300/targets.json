@@ -1,0 +1,23 @@
+{
+  "schema": "trinityaccord.paper-ots-targets.v1",
+  "batch": "2026-10-12-guardians-eac-v300",
+  "paper_count": 1,
+  "papers": [
+    {
+      "report": "ASI-CC-EAC3",
+      "record_id": 23307124,
+      "doi": "10.5281/zenodo.23307124",
+      "version": "3.0.0",
+      "title": "When the Guardians Can Be Acquired: Joint Protection Across Concurrent and Renewable Authorizations",
+      "receipt_path": "research/uct-agent-consciousness-workspace/records/ASI_CC_20261011_Control_and_Coexistence/guardians_joint_v3.0.0/publication/OTS-PUBLISHED-RECEIPT.json",
+      "pdfs": [
+        {
+          "name": "when-the-guardians-can-be-acquired-eac-v3.0.0.pdf",
+          "bytes": 260757,
+          "sha256": "d735a574cb8f4ce3233cde5b69f4e2135b5a0e7825536ce2b638cb93c2c93e57",
+          "role": "English EAC-v3.0.0 theory preprint, exact public PDF"
+        }
+      ]
+    }
+  ]
+}
