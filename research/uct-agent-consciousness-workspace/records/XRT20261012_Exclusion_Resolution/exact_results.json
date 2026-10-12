@@ -1,0 +1,43 @@
+{
+  "assertion_failures": 0,
+  "basal_experience_or_subject_count_identified": false,
+  "checked_schedules_with_at_least_one_conflict": 436706,
+  "conditions": [
+    "common normalized time measure",
+    "same event and actual candidates",
+    "independently grounded overlap/grain",
+    "calibrated target-specific lower bounds",
+    "nonnegative weights",
+    "no inference from report alone"
+  ],
+  "evidence_type": "synthetic_exact_finite_checks_not_empirical",
+  "fixtures": {
+    "c5_half_occupancy_all_edge_tests_pass": true,
+    "c5_independence_number": 2,
+    "c5_measurement_error_0.02_overcount_0.03_lower_fraction": "1/12",
+    "c5_minimum_violation_fraction_sharp": "1/6",
+    "c5_overlap_unverified_empty_graph_allowed_lower_fraction": "0",
+    "c5_sharp_six_slot_schedule_bitmasks": [
+      5,
+      9,
+      10,
+      18,
+      20,
+      31
+    ],
+    "different_windows_false_joint_inference": true,
+    "persistent_report_invalid_target_bound": "1",
+    "persistent_report_with_valid_overcount_target_bound": "0",
+    "same_marginals_half_alternating_overlap": "0",
+    "same_marginals_half_concurrent_overlap": "1/2",
+    "two_channels_0.8_0.7_minimum_overlap": "1/2"
+  },
+  "iit_phi_computed": false,
+  "map_status": "PENDING_MAP_AUDIT_INCOMPLETE_DISABLED",
+  "pair_trace_checks": 87380,
+  "publication_decision": "HOLD_NO_DOI",
+  "simple_graphs_n2_through_n4": 74,
+  "study": "XRT20261012",
+  "three_slot_graph_weight_schedule_checks": 532736,
+  "version": "0.1.0"
+}

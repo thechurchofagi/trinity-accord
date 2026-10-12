@@ -1,0 +1,127 @@
+{
+  "schema": "uct-candidate-review/1.0",
+  "entry_id": "XRT20261012",
+  "result_version": "0.1.0",
+  "base_commit": "c98a122d68fe991895d99fb2e01d3bab3b63d261",
+  "base_map": "UCT-MAP-v1.1.2",
+  "base_publication_coverage": "UCT-PUB-v1.0.33",
+  "source": "RESEARCH_NOTE.md",
+  "work_log": "WORK_LOG.md",
+  "handoff": "HANDOFF_ZH.md",
+  "map_status": "PENDING_MAP",
+  "global_semantic_audit": "AUDIT_INCOMPLETE",
+  "merge_policy": "NOT_APPLIED; all candidates disabled; active graph and completed version unchanged",
+  "nodes": [
+    {
+      "id": "XRT-C0",
+      "claim": "Target typing: definiteness, substrate exclusion, report selection",
+      "originality": "INHERITED",
+      "status": "DISABLED",
+      "basis": "Written reasoning plus explicitly scoped finite checks where applicable",
+      "external_priority": "UNVERIFIED_APPLICATION; classical ingredients credited"
+    },
+    {
+      "id": "XRT-C1",
+      "claim": "Fusion/slow-process comparison with boundary and target conditions",
+      "originality": "NEW_APPLICATION",
+      "status": "DISABLED",
+      "basis": "Written reasoning plus explicitly scoped finite checks where applicable",
+      "external_priority": "UNVERIFIED_APPLICATION; classical ingredients credited"
+    },
+    {
+      "id": "XRT-C2",
+      "claim": "Coarse alternation/coexistence aliasing",
+      "originality": "INHERITED",
+      "status": "DISABLED",
+      "basis": "Written reasoning plus explicitly scoped finite checks where applicable",
+      "external_priority": "UNVERIFIED_APPLICATION; classical ingredients credited"
+    },
+    {
+      "id": "XRT-C3",
+      "claim": "Common-time weighted exclusion occupancy inequality",
+      "originality": "NEW_APPLICATION",
+      "status": "DISABLED",
+      "basis": "Written reasoning plus explicitly scoped finite checks where applicable",
+      "external_priority": "UNVERIFIED_APPLICATION; classical ingredients credited"
+    },
+    {
+      "id": "XRT-C4",
+      "claim": "Calibrated-error lower bound on conflict duration",
+      "originality": "NEW_APPLICATION",
+      "status": "DISABLED",
+      "basis": "Written reasoning plus explicitly scoped finite checks where applicable",
+      "external_priority": "UNVERIFIED_APPLICATION; classical ingredients credited"
+    },
+    {
+      "id": "XRT-C5",
+      "claim": "Different-window, persistent-report and unknown-overlap countermodels",
+      "originality": "CORRECTION",
+      "status": "DISABLED",
+      "basis": "Written reasoning plus explicitly scoped finite checks where applicable",
+      "external_priority": "UNVERIFIED_APPLICATION; classical ingredients credited"
+    }
+  ],
+  "context_links": [
+    {
+      "from": "C1",
+      "to": "XRT-C1",
+      "type": "context_not_active_deduction"
+    },
+    {
+      "from": "U1",
+      "to": "XRT-C1",
+      "type": "context_not_active_deduction"
+    },
+    {
+      "from": "P6",
+      "to": "XRT-C0",
+      "type": "context_not_active_deduction"
+    },
+    {
+      "from": "A4W",
+      "to": "XRT-C0",
+      "type": "context_not_active_deduction"
+    },
+    {
+      "from": "A5L",
+      "to": "XRT-C5",
+      "type": "context_not_active_deduction"
+    },
+    {
+      "from": "XRT-C3",
+      "to": "XRT-C4",
+      "type": "context_not_active_deduction"
+    }
+  ],
+  "guards": [
+    "same target type",
+    "same token/episode/time measure",
+    "actual overlapping supports at fixed grain",
+    "target-specific marker calibration not inferred from fit",
+    "boundary-accountable process description"
+  ],
+  "unresolved": [
+    "phenomenal marker-overcount bound",
+    "real candidate-support identification",
+    "empirical target matching across theories",
+    "full IIT computation for a fusion realization",
+    "whole-map semantic integration"
+  ],
+  "published_work_delta": 0,
+  "completed_map_delta": {
+    "nodes": 0,
+    "rules": 0,
+    "context_links": 0
+  },
+  "paper_decision": "HOLD_NO_DOI",
+  "new_published_coverage": "NONE",
+  "internal_read_scope": [
+    "CURRENT_STATE selected fields",
+    "RESEARCH_MASTER_GUIDE relevant policy sections",
+    "A4W full note",
+    "A5L full note",
+    "UCT I v1.2 selected sections",
+    "START_HERE"
+  ],
+  "not_reviewed": "All other complete-map node semantics and all 35 full texts were not re-audited in this turn."
+}

@@ -1,0 +1,15 @@
+{
+  "entry_id": "XRT20261012",
+  "version": "0.1.0",
+  "scope": "User-directed thought-experiment and finite-resolution research candidate",
+  "candidate_manifest": "records/XRT20261012_Exclusion_Resolution/CLAIMS_AND_COVERAGE.json",
+  "research_note": "records/XRT20261012_Exclusion_Resolution/RESEARCH_NOTE.md",
+  "handoff": "records/XRT20261012_Exclusion_Resolution/HANDOFF_ZH.md",
+  "work_log": "records/XRT20261012_Exclusion_Resolution/WORK_LOG.md",
+  "base_commit": "c98a122d68fe991895d99fb2e01d3bab3b63d261",
+  "active_map_unchanged": "UCT-MAP-v1.1.2",
+  "state": "PENDING_MAP_AUDIT_INCOMPLETE_DISABLED",
+  "merge_policy": "NOT_APPLIED",
+  "publication_decision": "HOLD_NO_DOI",
+  "note": "This separate candidate entry does not replace CURRENT_STATE, the existing next_priority, or the formal graph. No complete navigation merge or whole-map semantic audit is claimed."
+}

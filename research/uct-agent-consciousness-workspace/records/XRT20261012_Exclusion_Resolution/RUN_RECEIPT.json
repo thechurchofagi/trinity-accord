@@ -1,0 +1,48 @@
+{
+  "study": "XRT20261012",
+  "version": "0.1.0",
+  "python_version": "3.13.5",
+  "platform": "Linux",
+  "dependencies": "Python standard library only",
+  "execution": "PASS",
+  "rerun_json_byte_equal": true,
+  "evidence": "synthetic only",
+  "files": [
+    {
+      "name": "CLAIMS_AND_COVERAGE.json",
+      "bytes": 4275,
+      "sha256": "e188e6c3fb0bbe18b7a658a84657000e7ff83213f992db83a9d69ac16ff01c14",
+      "git_blob_sha1": "a0b7748764d2b33eaeaf7f460cbf4de848cc00bd"
+    },
+    {
+      "name": "HANDOFF_ZH.md",
+      "bytes": 3164,
+      "sha256": "c7da408b2e4b633889fd477d8e496b7a1f2f9e18a55f10553b8f122f91a31599",
+      "git_blob_sha1": "129b4ecefce93c6931bd6cf9f29f3e5f72804215"
+    },
+    {
+      "name": "RESEARCH_NOTE.md",
+      "bytes": 25837,
+      "sha256": "fe39bac1c4b5ff6442d761bd9b440a00d34acd66f197b49da23ba373eda77130",
+      "git_blob_sha1": "b4fa9a654e1c1de9aa0e81fdd71093869a76d1b1"
+    },
+    {
+      "name": "WORK_LOG.md",
+      "bytes": 3894,
+      "sha256": "4dfe0fd9e5a4dd00015b2f9ec2689f910b82a71e257a0fe629facc5d19d873f2",
+      "git_blob_sha1": "9ec323b79cd0a0480f512a53c6448260e678bd8f"
+    },
+    {
+      "name": "check_exclusion.py",
+      "bytes": 7216,
+      "sha256": "48b051b9156882da4a0c82ea65dbca3f7f158db0cd2f8d91954b4cab0297c5e3",
+      "git_blob_sha1": "93eca6efa29f6e3f7385ac0e7b2d2afb4f90a803"
+    },
+    {
+      "name": "exact_results.json",
+      "bytes": 1489,
+      "sha256": "0aae0466f3c2b1c4ce14db9f5a3d070d6d0889aa07f578413b3518364778fba8",
+      "git_blob_sha1": "78f5648a8525553298f1ddabbe6ed77a8e27512d"
+    }
+  ]
+}
