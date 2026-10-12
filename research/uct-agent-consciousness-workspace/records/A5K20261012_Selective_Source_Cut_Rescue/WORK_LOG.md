@@ -17,3 +17,4 @@ Persistence receipts are appended only after remote and persistent-workspace rea
 12. Created a 28-path increment from the verified A5J final head and replayed it over the base; `git write-tree` exactly reproduced the A5K science tree.
 13. Saved the increment and external manifest as new persistent files, and replaced the fixed master handoff under its existing identity at version 182.
 14. Reverse-materialized the increment, manifest, and master handoff; all three matched local SHA-256 byte-for-byte before writing this receipt.
+15. Saved the receipt commit `76090a3a4e4450e786a66954511a77e418da4e5e`, updated the same fixed master identity to final confirmation version 183, and reverse-materialized v183 with byte-equal SHA-256 before the final metadata-only writeback.

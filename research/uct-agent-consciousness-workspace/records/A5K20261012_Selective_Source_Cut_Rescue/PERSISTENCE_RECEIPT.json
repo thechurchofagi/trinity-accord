@@ -13,8 +13,8 @@
   },
   "library": {
     "master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
-    "master_version": 182,
-    "master_sha256": "9ddd6071d4cf661f1d356606fc47ef37f85400f3a6d0c3db94d902d2742564fc",
+    "master_version": 183,
+    "master_sha256": "22857ad06a7b98a727e5b71cfe549aa450ce28718eede377682033d178acd209",
     "increment_library_file_id": "libfile_92f2f2b0118c8191b1429e616d4ea09c",
     "increment_sha256": "2233431a4e34382b80d2f16ac3906373e3af531470086093b927262e20b6874d",
     "increment_size_bytes": 193766,
@@ -22,7 +22,9 @@
     "increment_is_full_backup": false,
     "manifest_library_file_id": "libfile_049d7b88004881919ad8bb6d89a71dce",
     "manifest_sha256": "fd4ba2f9496544f95eb101a90b675c0df23fd44df2f79380efcaf86cffb08737",
-    "reverse_materialization_byte_equal": true
+    "reverse_materialization_byte_equal": true,
+    "persistence_receipt_commit": "76090a3a4e4450e786a66954511a77e418da4e5e",
+    "persistence_receipt_tree": "fab1208a9d5e0449649bacb88e0ebc4e30f1b6b8"
   },
   "limitations": [
     "The increment is not a complete repository, history, or workspace backup.",

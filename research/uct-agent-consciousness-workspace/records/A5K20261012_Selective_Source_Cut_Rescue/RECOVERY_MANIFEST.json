@@ -19,8 +19,8 @@
   },
   "fixed_master": {
     "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
-    "verified_version": 182,
-    "sha256": "9ddd6071d4cf661f1d356606fc47ef37f85400f3a6d0c3db94d902d2742564fc"
+    "verified_version": 183,
+    "sha256": "22857ad06a7b98a727e5b71cfe549aa450ce28718eede377682033d178acd209"
   },
   "restore_steps": [
     "Read the remote branch head and latest fixed-master version before restoring.",
