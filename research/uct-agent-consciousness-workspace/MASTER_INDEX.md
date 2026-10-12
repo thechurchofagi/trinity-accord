@@ -1,3 +1,9 @@
+# A5I20261012 — veridical-to-illusion calibration-transport barrier
+
+[Research note](records/A5I20261012_Context_Transport_Barrier/RESEARCH_NOTE.md) · [transport contract](records/A5I20261012_Context_Transport_Barrier/CALIBRATION_TRANSPORT_CONTRACT.md) · [exact results](records/A5I20261012_Context_Transport_Barrier/EXACT_RESULTS.json) · [claims](records/A5I20261012_Context_Transport_Barrier/CLAIM_LEDGER.json) · [gaps](records/A5I20261012_Context_Transport_Barrier/GAP_LEDGER.md) · [audit](records/A5I20261012_Context_Transport_Barrier/FORMAL_AUDIT.md) · [Chinese handoff](records/A5I20261012_Context_Transport_Barrier/HANDOFF_ZH.md). Disabled 0/0/0 identification result: veridical calibration plus frozen transfer leaves 12 models when target and cue are co-aligned; D/S/O jointly leave one and are individually needed relative to the other two.
+
+---
+
 # A5H20261012 — coarse-O fixed tip-location contrast audit
 
 [Research note](records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/RESEARCH_NOTE.md) · [contract](records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/COARSE_O_CONTRAST_CONTRACT.md) · [exact results](records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/EXACT_RESULTS.json) · [claims](records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/CLAIM_LEDGER.json) · [gaps](records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/GAP_LEDGER.md) · [audit](records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/FORMAL_AUDIT.md) · [Chinese handoff](records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/HANDOFF_ZH.md). Disabled 0/0/0 scope correction: fix only coarse `O_A5F`, vary actual `S` within `K`, and require one same-instance independently oriented target channel. Existing primary paradigms do not supply the full conjunction.

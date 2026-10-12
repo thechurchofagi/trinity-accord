@@ -1,0 +1,35 @@
+{
+  "schema": "a5i-map-audit/1",
+  "status": "FRESH_STRUCTURAL_PASS_BOUNDED_SEMANTIC_PASS_FULL_DEPTH_INCOMPLETE",
+  "effective_graph_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
+  "effective_counts": {"nodes": 913, "rules": 424, "context_links": 261},
+  "per_node_fields_accessed": 913,
+  "all_rules_read_all_of_as_simultaneous_and": true,
+  "rules_with_nonlist_all_of": [],
+  "rules_with_empty_all_of": [],
+  "unresolved_deductive_references": [],
+  "deductive_cycles": [],
+  "context_links_treated_as_nondeductive": true,
+  "affected_semantic_nodes": [
+    "A:P3", "A:P6", "A:C1", "A:U1", "A:PHEN_TARGET",
+    "R157:COORDINATE_TRANSPORT", "R157:SEMANTIC_RESIDUAL",
+    "R157:MINENESS_BRIDGE_SCHEMA", "R159:ANCHOR_BINDING_CONTRACT"
+  ],
+  "a5i_exact_audit": {
+    "ordinary_compatible_models": 12,
+    "D_S_O_compatible_models": 1,
+    "drop_D_keep_S_O": 5,
+    "drop_S_keep_D_O": 5,
+    "drop_O_keep_D_S": 2,
+    "actual_D_S_O_validated": false
+  },
+  "a5i_scientific_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+  "manual_semantic_checks": [
+    "actual contact, contextual cue, target experience, channel source, orientation and report are distinct",
+    "D, S and O are simultaneous premises rather than alternative sufficient routes",
+    "same sensors and frozen weights are not semantic source transport",
+    "finite model uniqueness is not actual biological installation",
+    "C1 is not inferred backward from decoding success",
+    "no basal report gate, conceptual-self gate or exclusive owner is introduced"
+  ]
+}

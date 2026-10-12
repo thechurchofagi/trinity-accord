@@ -1,3 +1,9 @@
+# A5I20261012 disabled addendum — calibration-transport barrier
+
+A5I adds no completed node, rule or context (0/0/0). In its declared binary two-context family, a veridically accurate frozen channel calibrated where `H_V=C_V=P` leaves 12 transfer-compatible models and all four target hypotheses. Source-discordant target calibration D, selector transport S and orientation transport O together leave one model; dropping them leaves 5, 5 and 2. The result is a measurement-bridge correction, not a basal-experience gate or evidence that D/S/O are actually installed. See [A5I audit](records/A5I20261012_Context_Transport_Barrier/FORMAL_AUDIT.md).
+
+---
+
 # A5H20261012 disabled addendum — coarse-O fixed contrast
 
 A5H adds no completed node, rule or context (0/0/0). It applies existing same-binding C1 to correct the contrast domain: fixed coarse `O_A5F` is compatible with varying an actual relation `S` inside complete `K`; fixed complete pointed `K` is not. Exact response-mapping enumeration leaves six compatible models, including invariant targets and direct cue-to-decision paths. The reviewed held-stick and somatotopic-localizer studies do not jointly instantiate one same-event `H_tip` bridge. See [A5H audit](records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/FORMAL_AUDIT.md).

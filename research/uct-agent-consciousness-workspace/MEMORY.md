@@ -1,5 +1,11 @@
 # UCT durable memory
 
+# A5I20261012 latest memory
+
+A5I proves a binary calibration-transport barrier for the held-stick `H_tip` bridge. If veridical calibration co-aligns target, actual contact and cue, a frozen channel that transfers to rabbit trials can still switch to the sequence cue or flip polarity. Twelve models fit ordinary calibration/transfer; source-discordant calibration D, selector transport S and orientation transport O together leave one, while dropping them leaves 5/5/2. This corrects A5H's suggestion that veridical training plus fixed orientation might suffice. Miller 2018/2019 tool-location decoding sharpens the cue-reading alternative. Formal delta 0/0/0; all review items remain open. Next: test whether one same-participant held-stick calibration can dissociate actual contact P from nuisance cue C while retaining a warranted H=P anchor and failure-capable source/pole transport tests.
+
+---
+
 ## A5H20261012 latest memory
 
 A5H corrects A5G's intervention wording: holding the A5F anatomical-anchor/grip/distal coordinate `O_A5F` fixed is not holding complete pointed `K` fixed. A declared actual stimulation relation `S` may vary inside one coarse-O fiber, thereby changing `K`; same-binding C1 does not admit different `H_tip` under literally identical complete pointed organization. Miyazaki et al. provide held-stick external localization but only pointer report; Blankenburg et al. provide same-site sequence control and somatotopic SI localization on skin, not a held tool. The studies cannot be pooled into one actual installation. Exact mapping reversal leaves six models, including invariant targets and direct cue-to-decision paths. Formal delta 0/0/0; all review items remain open. Next: a same-participant held-tool rabbit design with a veridically trained, fixed-oriented location channel and direct-cue bypass test.

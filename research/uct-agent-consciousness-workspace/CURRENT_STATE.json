@@ -96,7 +96,7 @@
     "nondeductive_context_links": 261,
     "total_review_items": 1608
   },
-  "pending_note": "A5H corrects the intervention domain: fix only coarse O_A5F while varying an actual relation S inside complete K. Same-binding C1 does not admit different H under literally identical complete pointed K. Existing held-stick and somatotopic-localizer evidence do not supply one same-instance bridge.",
+  "pending_note": "A5I shows that veridical calibration plus frozen transfer does not identify H_tip when target and cue are co-aligned. In the declared binary family, source-discordant calibration D, selector transport S and orientation transport O are jointly required; actual satisfaction remains open.",
   "publication_coverage": {
     "version": "UCT-PUB-v1.0.33",
     "entry": "PUBLICATION_COVERAGE.json",
@@ -106,10 +106,10 @@
     "latest_followup_application": "records/A4W20261012_Overlapping_Bearer_Centres/PUBLICATION_COVERAGE_UPDATE.json"
   },
   "latest_activity": {
-    "id": "A5H20261012",
+    "id": "A5I20261012",
     "type": "FOLLOWUP_APPLICATION",
-    "status": "DISABLED_SCOPE_CORRECTION_AND_SOURCE_BOUNDED_NEGATIVE_RESULT",
-    "source": "records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/RESEARCH_NOTE.md"
+    "status": "DISABLED_DOMAIN_BOUNDED_NEGATIVE_RESULT",
+    "source": "records/A5I20261012_Context_Transport_Barrier/RESEARCH_NOTE.md"
   },
   "latest_pending_research": {
     "id": "A3V20261010",
@@ -122,8 +122,8 @@
     "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
     "evidence_status": "BOUNDED_PRIMARY_SOURCE_APPLICATION_STOP_AND_R173_SCOPE_RETURN; ACTUAL_PREMISES_AND_H_OPEN"
   },
-  "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 effective objects received a fresh structural traversal. A5H manually rechecked C1/U1, PHEN_TARGET, R157, R159, A5F-A5G and current supervision items. Deep full-history semantics remain AUDIT_INCOMPLETE.",
-  "next_priority": "A5H next: specify one same-participant held-tool rabbit design with a veridically trained, fixed-oriented distal-location target channel, crossed response mapping and a direct-sequence bypass test.",
+  "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 effective objects received a fresh structural traversal. A5I manually rechecked C1/U1, PHEN_TARGET, R157, R159, A5H and current supervision items. Deep full-history semantics remain AUDIT_INCOMPLETE.",
+  "next_priority": "A5I next: test whether one same-participant held-stick calibration can dissociate actual contact P from nuisance cue C while retaining a warranted H=P anchor and prospective failure-capable selector/pole transport tests; otherwise stop at the cue/decoding layer.",
   "latest_activity_persistence_after_A4W_science": {
     "science_commit": "0eddd9c06670a7357a8be5e38efc8af1f335405f",
     "science_tree": "f840be3dc13e384d8074f3e34500ea637fd42ced",
@@ -659,30 +659,29 @@
     }
   },
   "latest_followup_application": {
-    "id": "A5H20261012",
-    "version": "A5H-COARSE-O-CONTRAST-v0.1.0",
-    "status": "DISABLED_SCOPE_CORRECTION_AND_SOURCE_BOUNDED_NEGATIVE_RESULT",
+    "id": "A5I20261012",
+    "version": "A5I-CALIBRATION-TRANSPORT-v0.1.0",
+    "status": "DISABLED_DOMAIN_BOUNDED_NEGATIVE_RESULT",
     "enabled_as_established_premises": false,
-    "source": "records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/RESEARCH_NOTE.md",
-    "handoff": "records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/HANDOFF_ZH.md",
-    "work_log": "records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/WORK_LOG.md",
-    "claim_ledger": "records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/CLAIM_LEDGER.json",
-    "map_extension": "records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/MAP_EXTENSION.json",
-    "exact_results": "records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/EXACT_RESULTS.json",
+    "source": "records/A5I20261012_Context_Transport_Barrier/RESEARCH_NOTE.md",
+    "handoff": "records/A5I20261012_Context_Transport_Barrier/HANDOFF_ZH.md",
+    "work_log": "records/A5I20261012_Context_Transport_Barrier/WORK_LOG.md",
+    "claim_ledger": "records/A5I20261012_Context_Transport_Barrier/CLAIM_LEDGER.json",
+    "map_extension": "records/A5I20261012_Context_Transport_Barrier/MAP_EXTENSION.json",
+    "exact_results": "records/A5I20261012_Context_Transport_Barrier/EXACT_RESULTS.json",
     "parent_science": "A3V20261010",
-    "parent_followup": "A5G20261012",
+    "parent_followup": "A5H20261012",
     "completed_map": "UCT-MAP-v1.1.2",
     "scientific_delta": {
       "nodes": 0,
       "rules": 0,
       "contexts": 0
     },
-    "selected_target": "H_tip (experience-internal distal contact location); H_pc remains open",
+    "selected_target": "H_tip (experience-internal distal contact location); not basal experience or report",
     "actual_bodily_installation": false,
-    "fixed_coarse_O_A5F": true,
-    "fixed_complete_K": false,
-    "same_instance_complete_bridge": false,
-    "independent_oriented_H_tip_channel": false,
+    "ordinary_transfer_compatible_models": 12,
+    "dso_joint_compatible_models": 1,
+    "actual_D_S_O_validated": false,
     "complete_biological_K": false,
     "standalone_manuscript": "HOLD_STANDALONE"
   },

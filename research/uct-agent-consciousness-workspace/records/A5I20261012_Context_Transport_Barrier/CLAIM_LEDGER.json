@@ -1,0 +1,39 @@
+{
+  "schema": "uct-disabled-claim-ledger/1",
+  "research_id": "A5I20261012",
+  "claims": [
+    {
+      "id": "A5I-D1",
+      "type": "EXACT_FINITE_IDENTIFICATION_PROPOSITION",
+      "statement": "When veridical calibration co-aligns H_V, C_V and P, observing Z_V=P and Z_I=X does not identify H_I. In the declared binary family, source-discordant calibration D, selector transport S and orientation transport O together leave one positive tracking model; dropping D, S or O leaves 5, 5 or 2 models.",
+      "domain": "Binary two-context family in check_context_transport.py with target tracking/either pole or invariant, source in {H,C}, and context-indexed binary orientation.",
+      "all_of": ["DECLARED_BINARY_DOMAIN", "OBSERVED_Z_V_EQUALS_P", "OBSERVED_Z_I_EQUALS_X", "D_SOURCE_DISCORDANT_CALIBRATION", "S_SELECTOR_TRANSPORT", "O_ORIENTATION_TRANSPORT"],
+      "proof_or_source": "Exhaustive enumeration; EXACT_RESULTS.json.",
+      "counterexamples_or_limits": ["graded targets", "mixed-source channels", "history dependence", "D/S/O not empirically established", "no consciousness inference"],
+      "status": "EXACT_WITHIN_DECLARED_FINITE_MODEL_DISABLED_AS_EMPIRICAL_PREMISE",
+      "thought_experiment_role": "Copy/switch cases keep classifier and outputs fixed while changing the input selector or pole."
+    },
+    {
+      "id": "A5I-C2",
+      "type": "SCOPED_PRIMARY_SOURCE_SYNTHESIS",
+      "statement": "Held tools carry mechanically decodable impact-location information and held-tool touch location is neurally decodable, while held-stick rabbit reports place illusory taps along the stick; these results do not by themselves identify the source of a transfer decoder in the illusion context.",
+      "domain": "Miller et al. 2018/2019 and Miyazaki et al. 2010, each kept within its reported paradigm.",
+      "all_of": ["PRIMARY_PROTOCOLS", "TOOL_LOCATION_INFORMATION", "HELD_STICK_ILLUSION_REPORT", "NO_CROSS_STUDY_ACTUALITY_MERGE"],
+      "proof_or_source": "DOIs 10.1038/s41586-018-0460-0, 10.1016/j.cub.2019.10.043 and 10.1523/JNEUROSCI.3887-09.2010.",
+      "counterexamples_or_limits": ["actual impact decoding rather than illusion target", "report route", "different experiments", "target experience unobserved"],
+      "status": "PROTOCOL_LEVEL_EVIDENCE_NOT_H_TIP_IDENTIFICATION",
+      "thought_experiment_role": "Abacus/calculator cases distinguish accurate cue processing from target sensitivity."
+    },
+    {
+      "id": "A5I-N1",
+      "type": "DISABLED_POSITIVE_UCT_APPLICATION",
+      "statement": "If one actual held-tool installation independently satisfies D, S and O for a K-definable H_tip target, then the channel can identify the declared target within the tested contrast; C1/R157 may then interpret the corresponding actual relation without an extra owner.",
+      "domain": "One participant, held object, target grain, time window and event family satisfying every bridge conjunct.",
+      "all_of": ["A:C1_SAME_BINDING", "R157:COORDINATE_TRANSPORT", "ACTUAL_K_DEFINABLE_H_TIP", "A5I_D", "A5I_S", "A5I_O", "NO_EXTRA_OWNER_INFERENCE"],
+      "proof_or_source": "UCT I v1.2, R157 and A5I-D1.",
+      "counterexamples_or_limits": ["not C1 evidence", "not currently installed", "not basal experience", "not report identity", "not actual ownership"],
+      "status": "DISABLED_ALL_APPLICATION_PREMISES_OPEN",
+      "thought_experiment_role": "Formation and human-implemented-agent cases prevent retroactive or cross-bearer target attribution."
+    }
+  ]
+}

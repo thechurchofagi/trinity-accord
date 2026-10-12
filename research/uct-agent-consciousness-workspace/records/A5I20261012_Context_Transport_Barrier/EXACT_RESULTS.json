@@ -1,0 +1,35 @@
+{
+  "schema": "a5i-context-transport/1",
+  "observations": {
+    "veridical": "for P in {0,1}, H_V=C_V=P and Z_V=P",
+    "illusion": "for X in {0,1}, C_I=X and Z_I=X"
+  },
+  "restriction_legend": {
+    "D": "A source-discordant veridical calibration independently forces selector_v=H.",
+    "S": "The selected source class is identical across calibration and illusion contexts.",
+    "O": "The channel orientation is identical across calibration and illusion contexts."
+  },
+  "counts": {
+    "none": {"count": 12, "by_target_kind": {"invariant": 4, "tracking": 8}, "target_hypotheses": ["invariant:0", "invariant:1", "tracking:0", "tracking:1"]},
+    "D_source_discordant_calibration": {"count": 6, "by_target_kind": {"invariant": 2, "tracking": 4}, "target_hypotheses": ["invariant:0", "invariant:1", "tracking:0", "tracking:1"]},
+    "S_selector_transport": {"count": 6, "by_target_kind": {"invariant": 2, "tracking": 4}, "target_hypotheses": ["invariant:0", "invariant:1", "tracking:0", "tracking:1"]},
+    "O_orientation_transport": {"count": 10, "by_target_kind": {"invariant": 4, "tracking": 6}, "target_hypotheses": ["invariant:0", "invariant:1", "tracking:0", "tracking:1"]},
+    "S_and_O": {"count": 5, "by_target_kind": {"invariant": 2, "tracking": 3}, "target_hypotheses": ["invariant:0", "invariant:1", "tracking:0", "tracking:1"]},
+    "D_and_S": {"count": 2, "by_target_kind": {"tracking": 2}, "target_hypotheses": ["tracking:0", "tracking:1"]},
+    "D_and_O": {"count": 5, "by_target_kind": {"invariant": 2, "tracking": 3}, "target_hypotheses": ["invariant:0", "invariant:1", "tracking:0", "tracking:1"]},
+    "D_and_S_and_O": {"count": 1, "by_target_kind": {"tracking": 1}, "target_hypotheses": ["tracking:0"]}
+  },
+  "all_of_audit": {
+    "all_three": {"count": 1, "by_target_kind": {"tracking": 1}, "target_hypotheses": ["tracking:0"]},
+    "drop_D_keep_S_O": {"count": 5, "by_target_kind": {"invariant": 2, "tracking": 3}, "target_hypotheses": ["invariant:0", "invariant:1", "tracking:0", "tracking:1"]},
+    "drop_S_keep_D_O": {"count": 5, "by_target_kind": {"invariant": 2, "tracking": 3}, "target_hypotheses": ["invariant:0", "invariant:1", "tracking:0", "tracking:1"]},
+    "drop_O_keep_D_S": {"count": 2, "by_target_kind": {"tracking": 2}, "target_hypotheses": ["tracking:0", "tracking:1"]}
+  },
+  "countermodel_witnesses": {
+    "ordinary_calibration_context_switch": {"target_kind": "invariant", "target_parameter": 0, "selector_v": "H", "selector_i": "C", "orientation_v": 0, "orientation_i": 0},
+    "drop_D_cue_channel": {"target_kind": "invariant", "target_parameter": 0, "selector_v": "C", "selector_i": "C", "orientation_v": 0, "orientation_i": 0},
+    "drop_O_polarity_flip": {"target_kind": "tracking", "target_parameter": 1, "selector_v": "H", "selector_i": "H", "orientation_v": 0, "orientation_i": 1}
+  },
+  "identified_model": [{"target_kind": "tracking", "target_parameter": 0, "selector_v": "H", "selector_i": "H", "orientation_v": 0, "orientation_i": 0}],
+  "conclusion": "Veridical calibration and a frozen transfer output do not identify the illusion target when target and cue are co-aligned in calibration. Within this finite domain, source-discordant calibration, selector transport, and orientation transport are jointly sufficient; dropping any one leaves an observationally equivalent non-target or opposite-pole model."
+}

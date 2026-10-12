@@ -1307,3 +1307,13 @@ A4G应用保持停用，正式图增量0/0/0。C1/U1未改；硬件来源坐标�
 - `SCU-AUDIT-DEPTH`: **AUDIT_INCOMPLETE**. The effective 913/424/261 graph was structurally traversed and affected semantics reviewed; historical proofs were not globally reconstructed.
 - Substantive result: orientation counts 4/2/1 isolate the missing independent sign anchor, while a four-edge joint versus two-edge distributed handle mapping makes the organizational cross-orbit contrast physically credible. The protocol is not a phenomenal calibration. `Pi/W/C` remain organizational and controller-certificate expansion stops.
 - Evidence: `records/A5C20261012_Practical_Continuity_Sign_Anchor/REVIEW_RESPONSE.md`, `SIGN_ANCHOR_CONTRACT.md`, `DUAL_HANDLE_PROTOCOL.md`, `EXACT_RESULTS.json`, `FORMAL_AUDIT.md`, `GAP_LEDGER.md`.
+## A5I20261012 research response (does not close supervision items)
+
+- `QC-20261008-10`: **ACKNOWLEDGED/OPEN**. A5I separates target-sensitive calibration, selector transport and orientation transport, but supplies no independently validated positive `H_tip` warrant.
+- `IA-QC11`: **OPEN**. The selector model is abstract; same sensors and frozen weights are not a complete actual biological installation.
+- `QC-20261008-12`: **OPEN**. Actual contact, mechanical cue, classifier output, target experience and report remain separate.
+- `QC-20261008-13`: **OPEN**. Same-instance route and formation chronology are prospective, not inferred from a calibration table.
+- `SCU-OPEN-R191-NORMALIZATION`: **OPEN**. No normalization debt is discharged or used.
+- `SCU-AUDIT-DEPTH`: **AUDIT_INCOMPLETE**. The effective graph was freshly traversed and affected semantics reviewed; historical proofs were not globally reconstructed.
+- Substantive result: ordinary calibration/transfer admits 12 models; D/S/O jointly leave one, while leave-one-out counts are 5/5/2. This is a disabled finite identification result, not phenomenal or physical installation evidence.
+- Evidence: `records/A5I20261012_Context_Transport_Barrier/REVIEW_RESPONSE.md`, `CALIBRATION_TRANSPORT_CONTRACT.md`, `EXACT_RESULTS.json`, `FORMAL_AUDIT.md`, `GAP_LEDGER.md`.

@@ -1,3 +1,9 @@
+# A5I20261012 audit addendum
+
+A5I preserves the effective 913/424/261 graph and adds 0/0/0. Fresh traversal found no unresolved deductive references, cycles or bad `all_of`. The affected audit separates complete organization, actual contact, contextual cue, experiential target, source selector, orientation, channel output and report. The positive finite result requires D/S/O simultaneously; explicit leave-one-out witnesses establish 5/5/2 residual models. C1 is not inferred from decoding, and frozen hardware/software is not substituted for semantic source transport. Deep historical semantic audit remains incomplete. See [A5I formal audit](records/A5I20261012_Context_Transport_Barrier/FORMAL_AUDIT.md).
+
+---
+
 # A5H20261012 audit addendum
 
 A5H preserves the effective 913/424/261 graph and adds 0/0/0. Fresh traversal found no unresolved deductive references, cycles or bad `all_of`. The affected audit separates coarse `O_A5F`, actual relation `S`, complete `K`, `H_tip`, report and neural evidence. A valid positive bridge requires one same object/time/grain/binding conjunction; cross-study rows are not joined. C1 is applied only to block different target experience under literally identical complete pointed organization, not to infer that evidence measures the target. Deep historical semantic audit remains incomplete. See [A5H formal audit](records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/FORMAL_AUDIT.md).

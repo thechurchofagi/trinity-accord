@@ -1,0 +1,9 @@
+{
+  "research_id": "A5I20261012",
+  "formal_graph_delta": {"nodes": 0, "rules": 0, "context_links": 0},
+  "enabled_as_established_premises": false,
+  "status": "DISABLED_DOMAIN_BOUNDED_IDENTIFICATION_RESULT",
+  "reason": "The exact finite barrier corrects a prospective measurement contract but does not establish actual D/S/O satisfaction or an H_tip bridge.",
+  "candidate_claim_ids": ["A5I-D1", "A5I-C2", "A5I-N1"],
+  "preserves": ["A:C1", "A:U1", "A:PHEN_TARGET", "R157:COORDINATE_TRANSPORT", "R157:SEMANTIC_RESIDUAL", "R157:MINENESS_BRIDGE_SCHEMA", "R159:ANCHOR_BINDING_CONTRACT"]
+}

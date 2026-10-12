@@ -1,0 +1,13 @@
+{
+  "id": "A5I20261012",
+  "title": "Veridical-to-illusion calibration-transport barrier",
+  "version": "A5I-CALIBRATION-TRANSPORT-v0.1.0",
+  "type": "FOLLOWUP_APPLICATION",
+  "status": "DISABLED_DOMAIN_BOUNDED_NEGATIVE_RESULT",
+  "enabled_as_established_premises": false,
+  "formal_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+  "result": "A frozen channel calibrated where target and cue are co-aligned does not identify the illusion target. In the declared binary family, source-discordant calibration, selector transport and orientation transport are jointly required and jointly sufficient.",
+  "selected_target": "H_tip (experience-internal distal contact location); not basal experience, report, or conceptual self",
+  "standalone_manuscript": "HOLD_STANDALONE",
+  "next": "Test whether a same-participant held-stick localizer can make actual contact P and nuisance sequence cue C disagree while retaining a warranted H=P anchor and a prospective context-blind selector/pole transport test."
+}

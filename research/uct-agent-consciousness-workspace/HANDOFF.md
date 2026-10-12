@@ -1,4 +1,12 @@
-# A5H20261012 current handoff — coarse-O fixed tip-location contrast audit
+# A5I20261012 current handoff — veridical-to-illusion calibration transport
+
+[English note](records/A5I20261012_Context_Transport_Barrier/RESEARCH_NOTE.md) · [transport contract](records/A5I20261012_Context_Transport_Barrier/CALIBRATION_TRANSPORT_CONTRACT.md) · [exact results](records/A5I20261012_Context_Transport_Barrier/EXACT_RESULTS.json) · [formal audit](records/A5I20261012_Context_Transport_Barrier/FORMAL_AUDIT.md) · [Chinese handoff](records/A5I20261012_Context_Transport_Barrier/HANDOFF_ZH.md). A veridically accurate frozen channel does not identify `H_tip` when calibration co-aligns target and cue. In the declared binary family, D source-discordant calibration, S selector transport and O orientation transport are jointly required; ordinary transfer leaves 12 models, while D/S/O leave one. Formal delta 0/0/0; all review items remain open.
+
+Next: test whether one same-participant held-stick calibration can make actual contact `P` and nuisance cue `C` disagree while retaining a warranted `H=P` anchor and prospective failure-capable source/pole transport tests. If not, stop at the physical-cue/decoding layer.
+
+---
+
+# A5H20261012 prior handoff — coarse-O fixed tip-location contrast audit
 
 [English note](records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/RESEARCH_NOTE.md) · [contrast contract](records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/COARSE_O_CONTRAST_CONTRACT.md) · [exact results](records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/EXACT_RESULTS.json) · [formal audit](records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/FORMAL_AUDIT.md) · [Chinese handoff](records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/HANDOFF_ZH.md). A valid experiment may fix coarse `O_A5F` while varying an actual relation `S` inside complete `K`; it may not vary `H_tip` under literally identical complete pointed `K`. Primary held-stick and somatotopic-localizer evidence do not yet form one same-instance bridge. Formal delta 0/0/0; all review items remain open.
 
