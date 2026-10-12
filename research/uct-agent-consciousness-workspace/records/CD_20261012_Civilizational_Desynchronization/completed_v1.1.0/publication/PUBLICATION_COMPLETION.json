@@ -1,0 +1,96 @@
+{
+  "arweave": {
+    "budget_guard_preserved": true,
+    "first_paid_attempt_made": false,
+    "first_scheduler_run_id": 38199331577,
+    "first_scheduler_run_succeeded": true,
+    "followup_main_workflow_created": true,
+    "state": "NOT_UPLOADED_AWAITING_BITCOIN_PROOF",
+    "tx_id": null
+  },
+  "author": "Hongju Liu",
+  "coverage_status": "SCOPED_PUBLICATION_METADATA_ONLY",
+  "doi": "10.5281/zenodo.23308239",
+  "doi_resolution": "RESOLVER_PASS",
+  "empirical_human_data": false,
+  "failed_predeposit_reason": "Zenodo public records search 400 due to size=100 on anonymous request; no deposit was created, verified by absence of record id and phase STARTED",
+  "failed_predeposit_run_id": 38198973289,
+  "formal_science_map": "UCT-MAP-v1.1.2",
+  "formal_science_map_counts": [
+    913,
+    424,
+    261
+  ],
+  "frozen_release_manifest_sha256": "23794c491e48669645e6f8d43588caadfea2d30a5ca7553521864d6eb206f4f0",
+  "independent_doi_resolver_receipt_git_sha": "e3eb76f802c21bf0b1bb13b8676a03c6e6f4bbf6",
+  "independent_peer_review": false,
+  "library_path": "/ASI_Control_Coexistence_20261011/CD_v1.1.0_DOI_20261012",
+  "license": "cc-by-4.0",
+  "manuscript_pages": 12,
+  "older_preprints_mutated": false,
+  "ots": {
+    "batch": "2026-10-12-cd-v110",
+    "bitcoin_verified_heights": [],
+    "proof": "research/paper-timestamps/2026-10-12-cd-v110/proofs/CIV-CD-2026-01/awareness-can-catch-up-after-choice-has-closed-cd-v1.1.0.pdf.ots",
+    "run_id": 38199258362,
+    "state": "PENDING_BITCOIN",
+    "status_receipt_git_sha": "8ad7df866e40a6872d13f8b4933dc6dbb056419d",
+    "submitted_calendar_attestations": 4
+  },
+  "paper_id": "CD-v1.1.0",
+  "peer_reviewed": false,
+  "public_byte_readback_pass": true,
+  "public_file_count": 6,
+  "public_files": [
+    {
+      "bytes": 267170,
+      "name": "awareness-can-catch-up-after-choice-has-closed-cd-v1.1.0.pdf",
+      "sha256": "aaf63c68661ffaeaaa677f4da3e5b8df327cc1af2dbd5ec58c7780434ee3925f"
+    },
+    {
+      "bytes": 311437,
+      "name": "reproducibility-cd-v1.1.0.zip",
+      "sha256": "b642957f715d806bb7d6ada4ccc5f019e3f9592bec33909d2b2a5b9818bdd0f9"
+    },
+    {
+      "bytes": 45183,
+      "name": "awareness-can-catch-up-after-choice-has-closed-cd-v1.1.0.tex",
+      "sha256": "a0e5a11d1843a1a95f1e70c2f741e9c288d60e64ddcb74d30a806cb044874897"
+    },
+    {
+      "bytes": 2131,
+      "name": "README-LICENSE.txt",
+      "sha256": "7bd360829203ce947decaed1aa3ed384e0736f71edea2720b1e5bba52a2893ff"
+    },
+    {
+      "bytes": 2610,
+      "name": "REVIEW-AND-SOURCES.md",
+      "sha256": "096ce6b0a07cbbde6ba60658a3de64dc155feabd72f39a09137327e32925c120"
+    },
+    {
+      "bytes": 523,
+      "name": "SHA256SUMS.txt",
+      "sha256": "3f2d9b06532cc6f76abf7f07b5b0038b806112957599882fe85b33aa8028b811"
+    }
+  ],
+  "publication_date": "2026-10-12",
+  "publication_result_receipt_git_sha": "e78276c26d93929180f39a0a842e5942c45ff731",
+  "publication_source_commit": "67702f509e92979121a273829ba06d583c0b2383",
+  "publication_workflow_run_id": 38199103616,
+  "published_preprint": true,
+  "publisher_recovery": "Patched anonymous query to size=25, prevented unattended truncation, reran same frozen assets",
+  "schema": "cd-v110-publication-completion/1",
+  "scientific_promotion": false,
+  "status": "DOI_PUBLISHED_PUBLIC_READBACK_PASS;OTS_CALENDAR_SUBMITTED;BITCOIN_PENDING;ARWEAVE_PENDING",
+  "title": "Awareness Can Catch Up After Choice Has Closed: Uneven Readiness, Effective Reconsideration, and Civilizational Desynchronization in AI Transitions",
+  "urls": {
+    "doi": "https://doi.org/10.5281/zenodo.23308239",
+    "followup": "https://github.com/thechurchofagi/trinity-accord/actions/workflows/research-cd-v110-ots-arweave-scheduler.yml",
+    "ots_workflow": "https://github.com/thechurchofagi/trinity-accord/actions/runs/38199258362",
+    "workflow": "https://github.com/thechurchofagi/trinity-accord/actions/runs/38199103616",
+    "zenodo": "https://zenodo.org/records/23308239"
+  },
+  "version": "1.1.0",
+  "whole_graph_semantic_audit_complete": false,
+  "zenodo_record": 23308239
+}

@@ -1,0 +1,59 @@
+{
+  "all_historical_published_papers_reviewed_again": false,
+  "arweave_state": "NOT_UPLOADED",
+  "claims": [
+    {
+      "id": "CD-D1",
+      "status": "RESEARCH_DEFINITION_PUBLISHED"
+    },
+    {
+      "id": "CD-P1",
+      "status": "INHERITED_ALGEBRA_APPLICATION_PUBLISHED"
+    },
+    {
+      "id": "CD-T1",
+      "status": "SCOPED_PERIODIC_REVIEW_THEOREM_PUBLISHED"
+    },
+    {
+      "id": "CD-T2",
+      "status": "CONDITIONAL_JOINT_ACCELERATION_COUNTEREXAMPLE_PUBLISHED"
+    },
+    {
+      "id": "CD-T3",
+      "status": "INHERITED_MATCHING_METHOD_PUBLISHED"
+    },
+    {
+      "id": "CD-C1",
+      "status": "ELEMENTARY_IDENTICAL_MARGINALS_CONSTRUCTION_PUBLISHED"
+    },
+    {
+      "id": "CD-T4",
+      "status": "EXACT_INVERSE_APPLICATION_PUBLISHED_PRIORITY_UNVERIFIED"
+    },
+    {
+      "id": "CD-E1",
+      "status": "FINITE_SYNTHETIC_CHECKS_ONLY"
+    }
+  ],
+  "coverage_baseline": "UCT-PUB-v1.0.33",
+  "formal_map_changes": [
+    0,
+    0,
+    0
+  ],
+  "global_exact_priority_verified": false,
+  "human_observational_data": false,
+  "independent_review": false,
+  "manuscript_form": "English PDF+LaTeX+ZIP",
+  "map": "UCT-MAP-v1.1.2",
+  "new_doi_state": "PUBLIC_READBACK_PASS",
+  "newly_published_doi": "10.5281/zenodo.23308239",
+  "newly_published_work": true,
+  "old_published_records_unchanged": true,
+  "ots_state": "BITCOIN_PENDING",
+  "paper_id": "CD-v1.1.0",
+  "provenance_source": "PUBLICATION-RECEIPT.json",
+  "public_version": "1.1.0",
+  "schema": "uct-scoped-pub-delta/1",
+  "work_family": "Awareness Can Catch Up After Choice Has Closed"
+}
