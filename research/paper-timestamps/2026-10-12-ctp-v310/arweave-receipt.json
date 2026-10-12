@@ -1,0 +1,42 @@
+{
+  "schema": "trinityaccord.arweave-upload-result.v1",
+  "result": "readback_failed",
+  "txid": "jitEwibkVKrt-zdcJGTVOq08Fu2jARukJdHllqOQKM8",
+  "tx_id": "jitEwibkVKrt-zdcJGTVOq08Fu2jARukJdHllqOQKM8",
+  "uploaded_at": "2026-10-12T19:55:55.472Z",
+  "data_sha256": "d729aa42981d8d687b5e566470bdd78adec14219aaf9c0ec728cd1478f94ae29",
+  "payload_sha256": "d729aa42981d8d687b5e566470bdd78adec14219aaf9c0ec728cd1478f94ae29",
+  "readback_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "hash_match": false,
+  "retryable": true,
+  "resumed_from_checkpoint": false,
+  "wallet_address_sha256": "e713712111fc5eaa71d4bbb0d1357f5c6e58acd40202f2c542a6176387c1623e",
+  "wallet_balance_before_available": true,
+  "wallet_balance_before_reason": null,
+  "wallet_balance_before_winston": "14166476828743",
+  "wallet_balance_before_ar": "14.166476828743",
+  "wallet_balance_after_available": true,
+  "wallet_balance_after_reason": null,
+  "wallet_balance_after_winston": "14166476828743",
+  "wallet_balance_after_ar": "14.166476828743",
+  "upload_cost_winston": "3372282174",
+  "upload_cost_ar": "0.003372282174",
+  "actual_delta_winston": "0",
+  "actual_delta_ar": "0.000000000000",
+  "tags": {
+    "Content-Type": "application/json",
+    "App-Name": "Trinity-Accord",
+    "Research-Series": "TA-TR-2026",
+    "Archive-Type": "research-paper-ots-archive",
+    "Data-SHA256": "d729aa42981d8d687b5e566470bdd78adec14219aaf9c0ec728cd1478f94ae29",
+    "Boundary": "mirror-not-authority"
+  },
+  "boundary": {
+    "arweave_archive_is_mirror_only": true,
+    "arweave_archive_is_not_authority": true,
+    "arweave_archive_is_not_attestation": true,
+    "arweave_archive_is_not_amendment": true,
+    "arweave_archive_is_not_successor_reception": true,
+    "bitcoin_originals_prevail": true
+  }
+}

@@ -2,22 +2,26 @@
   "batch": "2026-10-12-ctp-v310",
   "files": [
     {
-      "bitcoin_heights": [],
+      "bitcoin_heights": [
+        971079,
+        971090,
+        971093
+      ],
       "bytes": 187669,
       "doi": "10.5281/zenodo.23314212",
       "name": "Before_We_Know_What_We_Will_Become_v3.1.0.pdf",
       "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-10-12-ctp-v310/proofs/CTP-2026-01/Before_We_Know_What_We_Will_Become_v3.1.0.pdf.ots",
-      "proof_sha256": "f4c4a4ad827dd5f71be3763277e70a6f62a9e9aeefe917a7d32e1dfb24a7bf30",
+      "proof_sha256": "e459d2ffa7306960edc9d6a8edb8cf194635a6f9ef5ab73dee3e7357f5f8d519",
       "report": "CTP-2026-01",
       "role": "Complete English v3.1.0 conceptual/formal preprint",
       "sha256": "ee27e2e5e6b738481641917e080a00fc3a652a392cd26af1c3052416bf8f62da",
-      "state": "PENDING_BITCOIN"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     }
   ],
   "paper_count": 1,
   "pdf_count": 1,
   "schema": "trinityaccord.paper-ots-status.v1",
-  "state": "WAITING",
+  "state": "READY_FOR_ARWEAVE",
   "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
 }

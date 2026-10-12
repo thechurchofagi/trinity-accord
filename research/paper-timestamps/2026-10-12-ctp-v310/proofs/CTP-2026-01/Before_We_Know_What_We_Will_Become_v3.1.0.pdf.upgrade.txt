@@ -1,0 +1,5 @@
+Got 1 attestation(s) from https://bob.btc.calendar.opentimestamps.org
+Got 1 attestation(s) from https://btc.calendar.catallaxy.com
+Got 1 attestation(s) from https://alice.btc.calendar.opentimestamps.org
+Got 1 attestation(s) from https://finney.calendar.eternitywall.com
+Success! Timestamp complete
