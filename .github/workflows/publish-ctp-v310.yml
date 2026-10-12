@@ -1,0 +1,116 @@
+# Publication-only workflow; deliberately no test-suite CI or pull request.
+# User explicitly authorized DOI -> OTS -> Arweave sequence for CTP-2026-01 v3.1.0.
+name: Publish Open Inheritance CTP v3.1.0 DOI and OTS
+
+on:
+  push:
+    branches:
+      - research/open-inheritance-ctp-v310-20261012
+    paths:
+      - research/civilizational-testament/versions/v3.1.0/PUBLISH_TRIGGER.json
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ctp-v310-zenodo-publish-once
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[ctp31-publish]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+          persist-credentials: true
+      - name: Verify reviewed source exact bytes, manifest, and author authorization
+        run: |
+          set -euo pipefail
+          python3 research/civilizational-testament/versions/v3.1.0/publication.py verify
+          python3 scripts/toolchain_provenance.py
+      - name: Publish exactly one new Zenodo record and anonymously read back every deposited file
+        id: publish
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: |
+          set -euo pipefail
+          python3 research/civilizational-testament/versions/v3.1.0/publication.py publish
+      - name: Persist authenticated DOI publication receipt and exact OTS targets before stamping
+        if: steps.publish.outcome == 'success'
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,pathlib
+          r=pathlib.Path('research/civilizational-testament/versions/v3.1.0/publication-record.json')
+          j=json.loads(r.read_text())
+          assert j['state']=='PUBLISHED_AND_PUBLIC_READBACK_PASS' and j['report_number']=='CTP-2026-01'
+          t=pathlib.Path('research/paper-timestamps/2026-10-12-ctp-v310/targets.json')
+          x=json.loads(t.read_text())
+          assert x['papers'][0]['doi']==j['doi'] and x['papers'][0]['pdfs'][0]['sha256']=='ee27e2e5e6b738481641917e080a00fc3a652a392cd26af1c3052416bf8f62da'
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/civilizational-testament/versions/v3.1.0/ research/paper-timestamps/2026-10-12-ctp-v310/
+          git diff --cached --check
+          if ! git diff --cached --quiet; then
+            git commit -m 'Checkpoint published CTP v3.1.0 DOI and public hash readback before OTS [skip ci]'
+            git push origin HEAD:research/open-inheritance-ctp-v310-20261012
+          fi
+      - name: Submit detached OTS timestamp for the exact DOI-public PDF
+        if: steps.publish.outcome == 'success'
+        id: ots
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          python3 -m pip install --disable-pip-version-check -r requirements-ots.txt
+          python3 scripts/research_paper_ots.py stamp --batch research/paper-timestamps/2026-10-12-ctp-v310
+      - name: Preserve detached OTS evidence and truthful pending status
+        if: always()
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if [ -d research/paper-timestamps/2026-10-12-ctp-v310 ]; then
+            git add research/paper-timestamps/2026-10-12-ctp-v310/
+          fi
+          git add research/civilizational-testament/versions/v3.1.0/ || true
+          git diff --cached --check
+          if ! git diff --cached --quiet; then
+            git commit -m 'Preserve CTP v3.1.0 publication and OTS attempt evidence [skip ci]'
+            for n in 1 2 3; do
+              if git push origin HEAD:research/open-inheritance-ctp-v310-20261012; then exit 0; fi
+              git fetch origin research/open-inheritance-ctp-v310-20261012 --prune
+              git rebase origin/research/open-inheritance-ctp-v310-20261012 || { git rebase --abort; exit 1; }
+            done
+            exit 1
+          fi
+      - name: Upload publication and OTS receipts for recovery if git push fails
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ctp-v310-publish-${{ github.run_id }}
+          path: |
+            research/civilizational-testament/versions/v3.1.0/create-attempt.json
+            research/civilizational-testament/versions/v3.1.0/deposit.json
+            research/civilizational-testament/versions/v3.1.0/publication-attempt.json
+            research/civilizational-testament/versions/v3.1.0/publication-record.json
+            research/paper-timestamps/2026-10-12-ctp-v310/
+          retention-days: 90
+          if-no-files-found: warn
+      - name: Report publication and preservation as distinct states
+        if: always()
+        env:
+          PUB: ${{ steps.publish.outcome }}
+          OTS: ${{ steps.ots.outcome }}
+        run: |
+          echo "Zenodo publication step outcome: $PUB"
+          echo "OTS submission step outcome: $OTS"
+          if [ "$PUB" != success ]; then
+            echo 'DOI not confirmed; do not advance to OTS/Arweave.' >&2
+            exit 1
+          fi
+          echo 'DOI publication and public SHA-256 readback were verified. OTS is independently reported; Arweave requires verified Bitcoin proof and budget guard.'
