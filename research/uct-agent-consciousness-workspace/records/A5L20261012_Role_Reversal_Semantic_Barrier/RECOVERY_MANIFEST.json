@@ -1,0 +1,35 @@
+{
+  "schema": "uct-recovery-manifest/1.0",
+  "round": "A5L20261012",
+  "remote": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "verified_science_commit": "d9c2200b86132b278db284db04bde416faa5fbea",
+    "verified_science_tree": "eea0f6820436c09af6b802d092126b8cad30fc23"
+  },
+  "fixed_master": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "verified_version": 184,
+    "sha256": "7cc7d740009229c9bf7c32f1ca8a580ac5fd845e3d735383111c3e2a0a544ac6"
+  },
+  "increment": {
+    "library_file_id": "libfile_eb0a386b7a6481918f351e7e2a7448ed",
+    "sha256": "0ca2e7b62fee1cdabbf880d6f449d9aa8d089c5b21e23932e94cf478377f7757",
+    "size_bytes": 195986,
+    "path_count": 30,
+    "base_commit": "1e36583f81ddd8bc7671a6a6906233e2984d5d4b",
+    "is_full_backup": false
+  },
+  "external_manifest": {
+    "library_file_id": "libfile_3fc78afb068c81918f4d44cd56edcb2b",
+    "sha256": "367ae3043f47a0e7dec4498f6cd33183350bba10284017e141c2805922cc496e"
+  },
+  "restore_steps": [
+    "Read the current remote branch head and latest fixed-master version before restoring.",
+    "Check out base commit 1e36583f81ddd8bc7671a6a6906233e2984d5d4b.",
+    "Materialize and verify the increment SHA-256, then unzip it at repository root.",
+    "Run git add -A and require git write-tree to equal eea0f6820436c09af6b802d092126b8cad30fc23.",
+    "Run check_role_reversal.py and require counts 32/10/4/2/1 and all six checks true.",
+    "Read RESEARCH_NOTE.md, ROLE_REVERSAL_CONTRACT.md, FAILURES.md, FORMAL_AUDIT.md, REVIEW_RESPONSE.md and HANDOFF_ZH.md."
+  ]
+}

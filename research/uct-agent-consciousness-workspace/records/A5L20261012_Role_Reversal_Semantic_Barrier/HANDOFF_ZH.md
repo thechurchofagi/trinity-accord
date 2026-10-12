@@ -22,3 +22,7 @@ A5L 执行了 A5K 预定的角色/极性反转检验。令实际角色坐标 `X=
 ## 恢复
 
 以远端最终回执列出的提交为准；依次读本文件、`RESEARCH_NOTE.md`、`ROLE_REVERSAL_CONTRACT.md`、`EXACT_RESULTS.json`、`FAILURES.md`、`FORMAL_AUDIT.md`、`REVIEW_RESPONSE.md` 与 `RECOVERY_MANIFEST.json`。增量包不是完整仓库或历史备份。
+
+## 持久化回执
+
+远端 ROUND_RECORD 检查点为 `12dba27a0ed3bde06971f08500d7e39126f840d3`；科学提交为 `d9c2200b86132b278db284db04bde416faa5fbea`，树为 `eea0f6820436c09af6b802d092126b8cad30fc23`。固定主交接保持 ID `libfile_4175a81748fc819187fa8f5771f056fa`，科学版 v184 已反向物化逐字节相等。30 路径增量包 ID 为 `libfile_eb0a386b7a6481918f351e7e2a7448ed`，SHA-256 为 `0ca2e7b62fee1cdabbf880d6f449d9aa8d089c5b21e23932e94cf478377f7757`；外部清单 ID 为 `libfile_3fc78afb068c81918f4d44cd56edcb2b`。三者均逐字节反向核验；增量不是完整仓库、历史或工作集备份。

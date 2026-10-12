@@ -1,0 +1,32 @@
+{
+  "schema": "uct-persistence-receipt/1.0",
+  "round": "A5L20261012",
+  "github": {
+    "branch": "uct-agent-consciousness-workspace",
+    "base_commit": "1e36583f81ddd8bc7671a6a6906233e2984d5d4b",
+    "round_record_checkpoint": "12dba27a0ed3bde06971f08500d7e39126f840d3",
+    "science_commit": "d9c2200b86132b278db284db04bde416faa5fbea",
+    "science_tree": "eea0f6820436c09af6b802d092126b8cad30fc23",
+    "expected_sha_fast_forward": true,
+    "remote_commit_tree_and_key_blob_verified": true
+  },
+  "library": {
+    "master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "master_version": 184,
+    "master_sha256": "7cc7d740009229c9bf7c32f1ca8a580ac5fd845e3d735383111c3e2a0a544ac6",
+    "increment_library_file_id": "libfile_eb0a386b7a6481918f351e7e2a7448ed",
+    "increment_sha256": "0ca2e7b62fee1cdabbf880d6f449d9aa8d089c5b21e23932e94cf478377f7757",
+    "increment_size_bytes": 195986,
+    "increment_path_count": 30,
+    "increment_is_full_backup": false,
+    "manifest_library_file_id": "libfile_3fc78afb068c81918f4d44cd56edcb2b",
+    "manifest_sha256": "367ae3043f47a0e7dec4498f6cd33183350bba10284017e141c2805922cc496e",
+    "manifest_size_bytes": 3882,
+    "reverse_materialization_byte_equal": true
+  },
+  "limitations": [
+    "The increment is not a complete repository, history, or workspace backup.",
+    "The legacy navigation validator has an inherited A3V/A4S pointer mismatch.",
+    "A5K's historical capsule hash provenance mismatch is corrected prospectively, not erased."
+  ]
+}

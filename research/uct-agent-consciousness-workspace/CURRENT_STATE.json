@@ -124,6 +124,17 @@
   },
   "review_status_scope": "Completed v1.1.2 unchanged; tracked capsule and all 82 members were freshly verified and 913/424/261 effective objects structurally traversed. A5L manually rechecked C1/U1, PHEN_TARGET, R157, R159, A5E, R195/R196, A5K and current supervision items. Deep full-history semantics remain AUDIT_INCOMPLETE.",
   "next_priority": "A5L next: after stopping endpoint escalation, characterize a non-report, constitution-level same-token criterion for when a grounded X coordinate belongs to complete relevant K rather than a measurement-side writer, without requiring a unique owner.",
+  "latest_activity_persistence_after_A5L_science": {
+    "science_commit": "d9c2200b86132b278db284db04bde416faa5fbea",
+    "science_tree": "eea0f6820436c09af6b802d092126b8cad30fc23",
+    "round_record_checkpoint": "12dba27a0ed3bde06971f08500d7e39126f840d3",
+    "master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "master_verified_version": 184,
+    "increment_library_file_id": "libfile_eb0a386b7a6481918f351e7e2a7448ed",
+    "manifest_library_file_id": "libfile_3fc78afb068c81918f4d44cd56edcb2b",
+    "increment_is_full_backup": false,
+    "reverse_materialization_verified": true
+  },
   "latest_activity_persistence_after_A5K_science": {
     "science_commit": "846df24b9d69db01eea3f92f7c4ccbfbe2637052",
     "science_tree": "012f3ebf75039270d3245556f7b97a0409f5b112",
