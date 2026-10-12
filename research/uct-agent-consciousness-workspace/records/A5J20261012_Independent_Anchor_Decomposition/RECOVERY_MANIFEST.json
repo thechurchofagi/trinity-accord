@@ -19,8 +19,9 @@
   },
   "master_handoff": {
     "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
-    "verified_version": 180,
-    "sha256": "fee792d97a1f27dc081e16f8a45d4f1ec5afd4b66d2df186083fbf73cb899790"
+    "verified_version": 181,
+    "file_id": "file_00000000029881f996dff21cff054e45",
+    "sha256": "a8f8a719c28e624172fff23ba9c6eaa60ed70834e4295924fc93c83090b3f7f2"
   },
   "restore_order": [
     "Read the latest fixed master handoff and remote branch head.",
