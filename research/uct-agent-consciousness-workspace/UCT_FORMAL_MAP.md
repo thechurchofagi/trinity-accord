@@ -289,3 +289,10 @@ A4K adds no formal object. It propagates pre-outcome first-stage, pure-gain and 
 [Zenodo DOI 10.5281/zenodo.23307124](https://doi.org/10.5281/zenodo.23307124) · [已核验的发表回执](records/ASI_CC_20261011_Control_and_Coexistence/guardians_joint_v3.0.0/publication/PUBLICATION_COMPLETION.json) · [独立主张覆盖增量](records/ASI_CC_20261011_Control_and_Coexistence/guardians_joint_v3.0.0/publication/PUBLICATION_COVERAGE_UPDATE.json) · [中文交接](records/ASI_CC_20261011_Control_and_Coexistence/guardians_joint_v3.0.0/publication/HANDOFF_PUBLISHED_ZH.md)。
 
 2026-10-12，Hongju Liu 的《When the Guardians Can Be Acquired: Joint Protection Across Concurrent and Renewable Authorizations》（12页，EAC-v3.0.0）在Zenodo正式发表，DOI **10.5281/zenodo.23307124**；首次公开该尚未发表的Guardians工作家族，保留EAC-v1/EAC-v2草稿。公开6件文件逐一经SHA-256匿名回读，DOI解析通过；非同行评审，不构成数学、AI意识、人类制度正当性或现实ASI安全的独立验证。OTS日历提交完成，4项证明仍待Bitcoin确认；Arweave未上传，已安排独立区块证明核验、严格钱包预算和付费前意图记录。不同的PR-v6 DOI 10.5281/zenodo.23295776 与RAC13 DOI 10.5281/zenodo.23299153均未修改。依据UCT最高指南，本条**仅登记可引用发表事实与文献覆盖**；保持UCT-MAP-v1.1.2正式913节点、424规则、261关联，以及C1/U1和全部未闭合项原样；全图逐项审查尚未完成，论文候选仍PENDING_MAP，不擅自晋级科学结论。
+
+
+### CD-v1.1.0 文明认知不同步 DOI 公开（发表导航／非科学晋级）
+
+[Zenodo DOI 10.5281/zenodo.23308239](https://doi.org/10.5281/zenodo.23308239) · [正式发表回执](records/CD_20261012_Civilizational_Desynchronization/completed_v1.1.0/publication/PUBLICATION_COMPLETION.json) · [受限主张覆盖增量](records/CD_20261012_Civilizational_Desynchronization/completed_v1.1.0/publication/PUBLICATION_COVERAGE_UPDATE.json) · [中文交接](records/CD_20261012_Civilizational_Desynchronization/completed_v1.1.0/publication/HANDOFF_PUBLISHED_ZH.md)。
+
+2026-10-12，Hongju Liu 的 *Awareness Can Catch Up After Choice Has Closed: Uneven Readiness, Effective Reconsideration, and Civilizational Desynchronization in AI Transitions*，12页英文 CD-v1.1.0 预印本，Zenodo **10.5281/zenodo.23308239** 公开；同一研究家族原CD-v1.0.0仅工作检查点，不另算发表论文。6项公开文件逐字节SHA-256回读成功；DOI解析通过。原稿仅形式化不同人/决定/替代方案的实际参与时刻、可执行选择截止时间与在配对未知时的精确条件性窗口延长，不是声称文明断层已经发生或某个超智能必然到来；有限数学证据并非人类样本，非同行评审，全球首创性未完全核验。OTS日历四项提交成功但Bitcoin证明待成熟，Arweave严格费用守卫定时检查，未有AR交易。原CIPSA及其他公开论文未修改。依据最高指南，本导航条目**不改变**正式UCT-MAP-v1.1.2科学对象（913节点、424有效规则、261非演绎关联）、C1/U1或历史QC；新增主张仍为PENDING_MAP，未完成全图语义及全发表语料审查不冒充完成。
