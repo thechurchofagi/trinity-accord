@@ -1,0 +1,45 @@
+{
+  "schema": "uct-recovery-manifest/1",
+  "research_id": "A5I20261012",
+  "scope": "INCREMENT_ONLY_NOT_FULL_REPOSITORY_OR_WORKING_SET",
+  "base_commit": "4af93382adc7533317cd31f2ddafe7a128a8781c",
+  "science_commit": "b3d38b097cf55ec5a444f3e681c068994047c271",
+  "science_tree": "a41f18b79b9409d9a20ed1376e47aac14c34524b",
+  "path_count": 31,
+  "archive": {
+    "name": "UCT_A5I_Increment_20261012.zip",
+    "library_file_id": "libfile_db35f7d889188191a83ee169bdf4951a",
+    "bytes": 197699,
+    "sha256": "1798e2f999580cd94a48f8e47a8049805d5c8fac80232ee8e30468e8eeccf25d",
+    "reverse_materialized_byte_equal": true
+  },
+  "external_manifest": {
+    "name": "UCT_A5I_Increment_20261012_manifest.json",
+    "library_file_id": "libfile_82b58e448cc881918a3801d98a8eaf25",
+    "bytes": 9615,
+    "sha256": "0334c6abc08f2d7ab214f0efe73652e0721be079a9af083a5842e7e615d2d9ee",
+    "reverse_materialized_byte_equal": true
+  },
+  "fixed_master": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "verified_science_version": 177,
+    "bytes": 4812,
+    "sha256": "e6fec7209cce707b2a71972354acb740766cdca0cb35a2b0d1e541edfda32d1d",
+    "reverse_materialized_byte_equal": true
+  },
+  "replay": {
+    "from_exact_base": true,
+    "initial_nonoverwriting_extract_failed": true,
+    "corrected_overwriting_extract_succeeded": true,
+    "replayed_tree": "a41f18b79b9409d9a20ed1376e47aac14c34524b",
+    "matches_science_tree": true
+  },
+  "recovery_steps": [
+    "Prefer fetching the verified science commit from the remote branch.",
+    "Only if Git is unavailable, check out base_commit and extract the 31-path archive at repository root with overwrite enabled.",
+    "Verify every external-manifest entry and require git write-tree to equal science_tree.",
+    "Run check_context_transport.py and require ordinary count 12, D/S/O count 1 and leave-one-out counts 5/5/2.",
+    "Run the structural map audit against restored v1.1.2 and require 913/424/261 with no unresolved reference or cycle.",
+    "Retain C1/U1, target/cue/evidence/report separation, all OPEN review items and the no-exclusive-owner boundary."
+  ]
+}

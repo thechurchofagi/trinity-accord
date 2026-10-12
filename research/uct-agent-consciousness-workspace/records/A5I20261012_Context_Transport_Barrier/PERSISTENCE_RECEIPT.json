@@ -1,0 +1,28 @@
+{
+  "schema": "uct-persistence-receipt/1",
+  "research_id": "A5I20261012",
+  "remote_branch": "uct-agent-consciousness-workspace",
+  "science_commit": "b3d38b097cf55ec5a444f3e681c068994047c271",
+  "science_tree": "a41f18b79b9409d9a20ed1376e47aac14c34524b",
+  "science_parent": "4af93382adc7533317cd31f2ddafe7a128a8781c",
+  "remote_write": {
+    "expected_sha": "4af93382adc7533317cd31f2ddafe7a128a8781c",
+    "force": false,
+    "fast_forward": true,
+    "remote_head_and_tree_readback": true,
+    "key_files_readback": ["CURRENT_STATE.json", "records/A5I20261012_Context_Transport_Barrier/EXACT_RESULTS.json"]
+  },
+  "library": {
+    "fixed_master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "fixed_master_science_version": 177,
+    "fixed_master_science_sha256": "e6fec7209cce707b2a71972354acb740766cdca0cb35a2b0d1e541edfda32d1d",
+    "increment_library_file_id": "libfile_db35f7d889188191a83ee169bdf4951a",
+    "manifest_library_file_id": "libfile_82b58e448cc881918a3801d98a8eaf25",
+    "reverse_materialized_byte_equal": true,
+    "exact_tree_replay": true
+  },
+  "replay_note": "The first replay extraction omitted overwrite mode and therefore stopped at an unzip prompt; the retained second attempt used explicit overwrite and matched the science tree exactly.",
+  "metadata_successor_rule": "This receipt is added only after science and Library verification. The final Git metadata successor and fixed-master confirmation version are recorded by remote/fixed-master readback and do not alter the science tree or claims.",
+  "publication_action": false,
+  "ci_or_deployment_action": false
+}
