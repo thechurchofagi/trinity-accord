@@ -1,0 +1,95 @@
+{
+  "boundary_deletion_counterexample": {
+    "correct_limit": [
+      0.5793968169324084,
+      0.7185828997837171
+    ],
+    "incorrect_reflecting_boundary": [
+      0.8187307530779817,
+      0.8187307530779817
+    ]
+  },
+  "claims": "Classical generator/ancestry machinery; conditional routing application. No empirical evolutionary or phenomenal inference.",
+  "counts": {
+    "full_64_state_models_and_time_windows": 30,
+    "killing_limit_families": 3,
+    "killing_limit_parameter_points": 15,
+    "source_and_common_mean_checks": 180
+  },
+  "killing_limits": [
+    {
+      "a": [
+        1,
+        0,
+        0
+      ],
+      "b": [
+        0,
+        0,
+        0
+      ],
+      "errors": [
+        0.02952792255160698,
+        0.0029023576944066432,
+        0.00028975229685887906,
+        2.8970379895224005e-05,
+        2.8969894753179906e-06
+      ],
+      "target": [
+        0.0,
+        0.5793968169324084,
+        0.7185828997837171
+      ]
+    },
+    {
+      "a": [
+        1,
+        1,
+        0
+      ],
+      "b": [
+        0,
+        0.01,
+        0.02
+      ],
+      "errors": [
+        0.049303159448661565,
+        0.004936317561465814,
+        0.0004932426895827846,
+        4.931988541381771e-05,
+        4.931944059982651e-06
+      ],
+      "target": [
+        0.0,
+        0.0,
+        0.24659696394160643
+      ]
+    },
+    {
+      "a": [
+        1,
+        1,
+        1
+      ],
+      "b": [
+        0,
+        0,
+        0
+      ],
+      "errors": [
+        3.7170318684129445e-05,
+        3.045740605362405e-44,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "target": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "max_full_state_reduction_error": 4.690692279041286e-15,
+  "study": "UCT-GD-20261013-GENERAL-v0.1.0"
+}

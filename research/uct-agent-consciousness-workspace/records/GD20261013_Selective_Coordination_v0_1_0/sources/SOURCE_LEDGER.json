@@ -1,0 +1,41 @@
+{
+  "scope": "Targeted primary-source review, not systematic review or global novelty certificate",
+  "items": [
+    {
+      "id": "P1",
+      "citation": "Granovsky & Madras (1995)",
+      "url": "https://www.sciencedirect.com/science/article/pii/030441499400035R",
+      "access": "publisher abstract"
+    },
+    {
+      "id": "P2",
+      "citation": "Gomez et al. (2013)",
+      "url": "https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.110.028701",
+      "access": "publisher abstract"
+    },
+    {
+      "id": "P3",
+      "citation": "Tononi, Sporns & Edelman (1994)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/8197179/",
+      "access": "original paper indexed abstract"
+    },
+    {
+      "id": "P4",
+      "citation": "Kalckert & Ehrsson (2012)",
+      "url": "https://www.frontiersin.org/journals/human-neuroscience/articles/10.3389/fnhum.2012.00040/full",
+      "access": "full publisher HTML methods/results/discussion"
+    },
+    {
+      "id": "P5",
+      "citation": "Filippetti et al. (2015)",
+      "url": "https://onlinelibrary.wiley.com/doi/full/10.1111/infa.12083",
+      "access": "publisher HTML methods/interpretive limits"
+    },
+    {
+      "id": "P6",
+      "citation": "Bozdag et al. (2023)",
+      "url": "https://www.nature.com/articles/s41586-023-06052-1",
+      "access": "publisher abstract and institutional author summary"
+    }
+  ]
+}

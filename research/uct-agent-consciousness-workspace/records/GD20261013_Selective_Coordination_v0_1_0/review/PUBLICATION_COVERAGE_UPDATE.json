@@ -1,0 +1,54 @@
+{
+  "schema": "uct-gd-publication-coverage/0.1",
+  "version": "UCT-GD-COVERAGE-v0.1.0",
+  "checkpoint": "UCT-GD-20261013",
+  "baseline_reported": "UCT-PUB-v1.0.33; RC v1.1.0 considered separately from supplied files",
+  "scope": "Targeted UCT I, RC and A5L comparison, not a fresh semantic review of all publications",
+  "claims": [
+    {
+      "id": "GD1",
+      "claim": "Agreement can increase while source contrast decays faster in the two-register noisy voter model.",
+      "originality": "INHERITED_MODEL_NEW_APPLICATION",
+      "status": "PROVED_FOR_DECLARED_MODEL",
+      "public_preprint_coverage": "NOT_CHECKED_GLOBALLY"
+    },
+    {
+      "id": "GD2",
+      "claim": "At equal total cross-copy rate, selective routing improves the specified local source readout while its specified common-input response is unchanged.",
+      "originality": "NEW_APPLICATION_PRIORITY_UNVERIFIED",
+      "status": "PROVED_FOR_DECLARED_MODEL",
+      "public_preprint_coverage": "NOT_CHECKED_GLOBALLY"
+    },
+    {
+      "id": "GD3",
+      "claim": "The local source response is bounded between exp[-(2mu+lambda+2h)t] and exp[-(2mu+2h)t] for g>=h; bounded and proportional leakage have different growth limits.",
+      "originality": "NEW_APPLICATION_PRIORITY_UNVERIFIED",
+      "status": "PROVED_FOR_DECLARED_MODEL",
+      "public_preprint_coverage": "NOT_CHECKED_GLOBALLY"
+    },
+    {
+      "id": "GD4",
+      "claim": "The reflected-module source equation is exact; its killing-limit uses a principal submatrix retaining boundary exits.",
+      "originality": "INHERITED_METHOD_NEW_APPLICATION",
+      "status": "PROVED_FOR_DECLARED_MODEL",
+      "public_preprint_coverage": "NOT_CHECKED_GLOBALLY"
+    },
+    {
+      "id": "GD5",
+      "claim": "Finite model path laws vary continuously under bounded finite rate changes; no conclusion about experiential existence or human labels follows without separate premises.",
+      "originality": "INHERITED_MATHEMATICS_APPLICATION",
+      "status": "PROVED_FOR_DECLARED_MODEL",
+      "public_preprint_coverage": "NOT_CHECKED_GLOBALLY"
+    },
+    {
+      "id": "GD6",
+      "claim": "The copying-coordinate readout is not an independently identified phenomenal target.",
+      "originality": "INHERITED_A5L_BOUNDARY",
+      "status": "NON_ENTAILMENT_BOUNDARY",
+      "public_preprint_coverage": "NOT_CHECKED_GLOBALLY"
+    }
+  ],
+  "decision": "PRESERVE_RESEARCH_CHECKPOINT_NO_STANDALONE_DOI",
+  "doi_created": false,
+  "new_paper_count": 0
+}

@@ -1,0 +1,79 @@
+{
+  "schema": "uct-disabled-candidate-layer/0.1",
+  "entrypoint": "review/MAP_DELTA.json",
+  "baseline": "UCT-MAP-v1.1.2",
+  "enabled_as_established_premises": false,
+  "merge_policy": "Do not merge until full map audit; stable IDs refer only to this checkpoint",
+  "claims": [
+    {
+      "id": "GD1",
+      "claim": "Agreement can increase while source contrast decays faster in the two-register noisy voter model.",
+      "type": "CONDITIONAL_MODEL_RESULT",
+      "enabled": false
+    },
+    {
+      "id": "GD2",
+      "claim": "At equal total cross-copy rate, selective routing improves the specified local source readout while its specified common-input response is unchanged.",
+      "type": "CONDITIONAL_MODEL_RESULT",
+      "enabled": false
+    },
+    {
+      "id": "GD3",
+      "claim": "The local source response is bounded between exp[-(2mu+lambda+2h)t] and exp[-(2mu+2h)t] for g>=h; bounded and proportional leakage have different growth limits.",
+      "type": "CONDITIONAL_MODEL_RESULT",
+      "enabled": false
+    },
+    {
+      "id": "GD4",
+      "claim": "The reflected-module source equation is exact; its killing-limit uses a principal submatrix retaining boundary exits.",
+      "type": "CONDITIONAL_MODEL_RESULT",
+      "enabled": false
+    },
+    {
+      "id": "GD5",
+      "claim": "Finite model path laws vary continuously under bounded finite rate changes; no conclusion about experiential existence or human labels follows without separate premises.",
+      "type": "CONDITIONAL_MODEL_RESULT",
+      "enabled": false
+    },
+    {
+      "id": "GD6",
+      "claim": "The copying-coordinate readout is not an independently identified phenomenal target.",
+      "type": "CONDITIONAL_MODEL_RESULT",
+      "enabled": false
+    }
+  ],
+  "links": [
+    {
+      "from": "GD1",
+      "to": "GD2",
+      "type": "MOTIVATION_NOT_DEDUCTION"
+    },
+    {
+      "from": "GD2",
+      "to": "GD3",
+      "type": "SCOPE_QUALIFICATION"
+    },
+    {
+      "from": "GD2",
+      "to": "GD4",
+      "type": "MODEL_GENERALIZATION"
+    },
+    {
+      "from": "GD4",
+      "to": "GD6",
+      "type": "SEMANTIC_NON_ENTAILMENT"
+    },
+    {
+      "from": "UCT_I_C1_U2_E2",
+      "to": "GD5",
+      "type": "CONTEXT_NOT_EMPIRICAL_DERIVATION"
+    },
+    {
+      "from": "A5L-D1-ROLE-REVERSAL-SEMANTIC-BARRIER",
+      "to": "GD6",
+      "type": "INHERITED_STOP_CONDITION"
+    }
+  ],
+  "audit_status": "AUDIT_INCOMPLETE",
+  "unreviewed_scope": "Full historical 913-node/424-active-rule/261-context baseline not freshly semantically traversed; no exact remainder count claimed"
+}

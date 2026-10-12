@@ -1,0 +1,66 @@
+{
+  "counts": {
+    "equal_budget_order_checks": 135,
+    "four_node_exact_parameter_cases": 225,
+    "four_node_exact_state_equations": 14400,
+    "four_node_full_law_parameter_time_cases": 144,
+    "prepared_mean_response_checks": 576,
+    "two_node_exact_parameter_cases": 15,
+    "two_node_exact_state_equations": 240,
+    "two_node_full_distribution_time_cases": 60
+  },
+  "equal_budget_example": {
+    "common_private_response": 0.559962482495092,
+    "internal_rate": 0.1,
+    "mu": 0.02,
+    "selective_private_response": 0.5078614673396658,
+    "selective_readout_success": 0.7539307336698329,
+    "time": 5.0,
+    "total_cross_rate": 1.0,
+    "uniform_private_response": 0.0037729975285282517,
+    "uniform_readout_success": 0.5018864987642642
+  },
+  "leakage_examples": [
+    {
+      "bounded_leak": 0.4596242113618332,
+      "bounded_leak_floor": 0.44932896411722156,
+      "one_percent_leak": 0.4596242113618332,
+      "public_rate": 1.0
+    },
+    {
+      "bounded_leak": 0.4504435077992246,
+      "bounded_leak_floor": 0.44932896411722156,
+      "one_percent_leak": 0.18314074601189972,
+      "public_rate": 10.0
+    },
+    {
+      "bounded_leak": 0.4494412092272661,
+      "bounded_leak_floor": 0.44932896411722156,
+      "one_percent_leak": 2.2550626044672838e-05,
+      "public_rate": 100.0
+    },
+    {
+      "bounded_leak": 0.44934019647079615,
+      "bounded_leak_floor": 0.44932896411722156,
+      "one_percent_leak": 1.8473817044313224e-44,
+      "public_rate": 1000.0
+    }
+  ],
+  "max_numerical_absolute_error": 1.1525502774389906e-14,
+  "max_uniformization_missing_mass": 7.771561172376096e-16,
+  "methods": [
+    "Exact Fraction generator identities",
+    "SciPy full transition exponential",
+    "Independent Poisson uniformization",
+    "Analytic moment and decoding formulae"
+  ],
+  "no_human_animal_model_consciousness_or_biological_evolution_experiment": true,
+  "standalone_publication_recommended": false,
+  "status": "CONDITIONAL_MODELS_NOT_PHENOMENAL_MEASUREMENTS",
+  "study": "UCT-GD-20261013-v0.1.0",
+  "versions": {
+    "numpy": "2.3.5",
+    "python": "3.13.5",
+    "scipy": "1.17.0"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "method": "Two independent synchronous executions; compare same named output bytes",
+  "files": [
+    {
+      "path": "results/VERIFICATION_RESULTS.json",
+      "sha256": "4adb9019c7d5973c95b74f0c20461bf2b22e37e9ec30435e1acab196cbf075f3",
+      "size_bytes": 2129,
+      "matches_second_run": true
+    },
+    {
+      "path": "results/ROUTING_GENERALIZATION_RESULTS.json",
+      "sha256": "9aff0e3f676563ca54d5f3840e05226858231b2f23c69891d1b15faf7786ed3d",
+      "size_bytes": 1774,
+      "matches_second_run": true
+    },
+    {
+      "path": "results/EQUAL_BUDGET_RESULTS.csv",
+      "sha256": "89ce403ba632ad9ea101b6fb5630a71503e5e872f1023f60a537a90d890a225e",
+      "size_bytes": 959,
+      "matches_second_run": true
+    }
+  ]
+}
