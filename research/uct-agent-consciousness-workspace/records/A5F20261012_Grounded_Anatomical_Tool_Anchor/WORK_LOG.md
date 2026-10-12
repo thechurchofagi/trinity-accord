@@ -13,3 +13,7 @@
 11. Re-ran the inherited navigation validator. It retained the known obsolete failure comparing disabled-follow-up pointers against formal `latest_research`; all JSON parsed and the four current follow-up registries agreed on A5F.
 
 Persistence steps and verified receipts are appended only after successful remote and persistent-workspace checks.
+
+12. Saved the science tree by expected-SHA nonforced fast-forward as commit `7be5f523...`; verified remote head and exact tree `b6d7b2ec...`.
+13. Built a deterministic 36-path increment, replayed it from `f671b2c7...` to the exact science tree, saved archive and manifest as new Library files, reverse-materialized both and obtained byte equality.
+14. Updated the fixed master handoff in place to v171 and read it back. Added this receipt and recovery manifest as a metadata-only successor block; no scientific claim, map object or review status changed.

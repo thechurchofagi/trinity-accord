@@ -1,0 +1,29 @@
+{
+  "schema": "uct-recovery-manifest/1",
+  "research_id": "A5F20261012",
+  "scope": "36_PATH_INCREMENT_ONLY_NOT_FULL_REPOSITORY_OR_HISTORY",
+  "base_commit": "f671b2c7dd60889f1be318ee84e09fe65482bfc3",
+  "science_commit": "7be5f5233435daaeed6a20a0358e7547ccb000f6",
+  "science_tree": "b6d7b2ecacde535b7d720f6839a78a0fcd5df4c5",
+  "archive_library_file_id": "libfile_5b721fac42f08191b1337cbb72add643",
+  "archive_sha256": "38ff0c876cc14ae129e1176732321e833d3b8d856843b01a8a61c337642cd77a",
+  "manifest_library_file_id": "libfile_a14b41e9847c8191b21b2bd9bd5e862d",
+  "manifest_sha256": "3147235f5b84dd422c2e467f280eee2026dd821c7f53154b0ca58ced1f2be0c2",
+  "fixed_master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+  "verified_master_science_version": 171,
+  "steps": [
+    "Read the latest fixed master handoff and fetch the branch; prefer the verified science commit if available.",
+    "If Git science is unavailable, check out base_commit exactly and extract the 36-path archive at repository root.",
+    "Verify every path against the external manifest and require git write-tree to equal science_tree; never apply over a newer tree.",
+    "Run check_grounded_anchor.py and require 256/16/240, 64 unique-anchor non-isomorphisms, restricted 4 anchor-free isomorphisms, 8 anchored non-isomorphisms and 8 coordinate flips.",
+    "Run audit_map.py against the effective restored map and require 913/424/261, zero unresolved references, zero cycles and zero bad all_of.",
+    "Manually recheck actual-token, complete-signature, H_tip/report, ownership/agency and no-unique-owner boundaries."
+  ],
+  "verified": {
+    "remote_science_head_read_back": true,
+    "remote_science_tree_equal": true,
+    "library_archive_byte_equal": true,
+    "library_manifest_byte_equal": true,
+    "replay_tree_equal": true
+  }
+}

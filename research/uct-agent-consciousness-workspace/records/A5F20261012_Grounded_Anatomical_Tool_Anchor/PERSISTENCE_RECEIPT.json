@@ -1,0 +1,59 @@
+{
+  "schema": "uct-dual-persistence-receipt/1",
+  "research_id": "A5F20261012",
+  "recorded_at_utc": "2026-10-12T04:54:14Z",
+  "github": {
+    "repository": "thechurchofagi/trinity-accord",
+    "branch": "uct-agent-consciousness-workspace",
+    "base_commit": "f671b2c7dd60889f1be318ee84e09fe65482bfc3",
+    "science_commit": "7be5f5233435daaeed6a20a0358e7547ccb000f6",
+    "science_tree": "b6d7b2ecacde535b7d720f6839a78a0fcd5df4c5",
+    "update_mode": "EXPECTED_SHA_NONFORCED_FAST_FORWARD_VIA_AUTHORIZED_REPOSITORY_INTERFACE",
+    "remote_head_verified": true,
+    "remote_tree_verified": true,
+    "key_files_read_back": true,
+    "skip_ci": true,
+    "pull_request_created": false,
+    "ci_run": false,
+    "deployment": false
+  },
+  "library_master_handoff": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "file_name": "UCT_Hourly_Research_Master_Handoff.md",
+    "verified_science_version": 171,
+    "bytes": 5750,
+    "sha256": "f3f21b22a15b19fbecef980c7b98de2c8e6479cc2951617cf632389fcf4f4f05",
+    "same_identity_preserved": true,
+    "read_back_verified": true,
+    "note": "A later master-handoff version may record this receipt-only Git successor; the science recovery target remains the science commit/tree."
+  },
+  "library_increment": {
+    "scope": "INCREMENT_ONLY_NOT_FULL_REPOSITORY_OR_FULL_WORKING_SET",
+    "path_count": 36,
+    "archive": {
+      "file_name": "UCT_A5F_Increment_20261012.zip",
+      "library_file_id": "libfile_5b721fac42f08191b1337cbb72add643",
+      "bytes": 248573,
+      "sha256": "38ff0c876cc14ae129e1176732321e833d3b8d856843b01a8a61c337642cd77a"
+    },
+    "manifest": {
+      "file_name": "UCT_A5F_Increment_20261012.manifest.json",
+      "library_file_id": "libfile_a14b41e9847c8191b21b2bd9bd5e862d",
+      "bytes": 11219,
+      "sha256": "3147235f5b84dd422c2e467f280eee2026dd821c7f53154b0ca58ced1f2be0c2"
+    },
+    "reverse_materialized_byte_equal": true,
+    "replay_base_commit": "f671b2c7dd60889f1be318ee84e09fe65482bfc3",
+    "replayed_tree": "b6d7b2ecacde535b7d720f6839a78a0fcd5df4c5",
+    "replay_tree_equal": true
+  },
+  "scientific_state": {
+    "formal_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+    "application_enabled": false,
+    "review_items_closed": [],
+    "actual_protocol_candidate": true,
+    "complete_biological_K_claimed": false,
+    "phenomenal_bridge_validated": false
+  },
+  "receipt_commit_policy": "This file is committed only as a metadata successor to science_commit. Its own commit SHA is recorded in the next fixed-master-handoff version to avoid self-reference."
+}
