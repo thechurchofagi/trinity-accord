@@ -1,0 +1,364 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amsthm,mathtools,newtxtext,newtxmath,microtype}
+\usepackage{booktabs,tabularx,array,enumitem,fancyhdr,needspace}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\usepackage{listings}
+\hypersetup{pdftitle={Awareness Can Catch Up After Choice Has Closed},pdfauthor={Hongju Liu},pdfsubject={Uneven readiness, effective reconsideration, and AI transitions; CD-v1.1.0}}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small Awareness Can Catch Up After Choice Has Closed}
+\fancyhead[R]{\small Liu | CD-v1.1.0}\fancyfoot[C]{\small\thepage}
+\setlength{\headheight}{14pt}\setlength{\emergencystretch}{2em}
+\setlength{\parskip}{3pt}\setlength{\parindent}{1.1em}
+\setlist{topsep=4pt,itemsep=2pt}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}\newtheorem{definition}{Definition}
+\newcommand{\tagid}[1]{\textnormal{\textsf{[#1]}}}
+\newcommand{\ind}{\mathbf 1}\newcommand{\pos}[1]{\left[#1\right]_+}
+\lstset{basicstyle=\small\ttfamily,breaklines=true,frame=single,columns=fullflexible,keepspaces=true}
+\title{\vspace{-1cm}\textbf{Awareness Can Catch Up\\After Choice Has Closed}\\[7pt]
+\Large Uneven Readiness, Effective Reconsideration,\\and Civilizational Desynchronization in AI Transitions}
+\author{Hongju Liu\\\normalsize Independent Researcher, Trinity Accord / UCT Research Programme}
+\date{12 October 2026\\\small Completed research manuscript | CD-v1.1.0 | Not peer reviewed}
+\begin{document}
+\maketitle\thispagestyle{plain}
+\begin{abstract}
+People need not recognize or respond to an AI transition at the same time. This heterogeneity becomes institutionally consequential when opportunities to influence relevant choices close before effective participation becomes accessible. We distinguish beliefs about AI, practical access, intellectual production, epistemic governance and material reconsiderability; early concern is neither proof of foresight nor a qualification for political standing. In a person--decision--alternative model, eventual convergence in awareness does not identify timely opportunity. Even identical full marginal distributions of access dates and closing dates permit sharply different coverage. We state the finite sharp pairing bounds, inherited from matching and fixed-marginal probability theory, and derive their exact inverse: the smallest common extension of effective windows guaranteeing a specified number of timely cases despite unknown pairing. A separate capacity-backed review model shows why a nominal sunset can fail and when periodic reconsideration remains feasible. A joint acceleration counterexample improves every individual's access time while reducing coverage because effective choice closes faster. Exact programs, independent permutation checks and linkage/interval-censoring controls validate the constructed results; no human panel or civilizational rupture is measured. A prospective study links neutral comprehension and access measures to specific institutional decisions rather than equating AI use or optimism with readiness. The contribution is a bounded identification-to-intervention framework, not new general matching mathematics or a prediction of inevitable superintelligence. It makes precise when catching up in understanding is insufficient, what information is missing, and what must actually be preserved for later participants to retain meaningful options.
+\end{abstract}
+\noindent\textbf{Keywords:} AI transitions; epistemic governance; anticipatory governance; temporal inequality; partial identification; reversibility; public participation.
+
+\section{Introduction: eventual understanding is not a temporal guarantee}
+\label{sec:intro}
+A technological transition can alter who generates explanations, which judgments are accepted, and who has the capacity to shape institutions. People may notice these possibilities years apart. Some may revise careers and organizational practices early; others may initially remain unconvinced, lack access to relevant information, or rationally prioritize more immediate concerns. None of these temporal positions alone demonstrates superior knowledge or inferior civic standing.
+
+The question is not simply whether early adopters gain an advantage. It is whether people who later gain practical access to deliberation and action can still affect the choices that structure their lives. Two societies can eventually have equally widespread understanding of AI, yet one may have preserved viable alternatives while the other has committed to arrangements that are prohibitively difficult to change. Conversely, slower individual uptake need not cause exclusion when effective representation and reconsideration remain available.
+
+This paper calls the potential mismatch \emph{civilizational desynchronization}, a descriptive research umbrella rather than an established historical diagnosis. The object is the relation among changes in intellectual production, epistemic governance, human recognition and actionable choice. It does not presume that superintelligence will arrive in a particular year, that knowledge sovereignty has already transferred globally, or that technical capability alone confers legitimate authority.
+
+Our operational unit is a particular person or represented constituency, a particular institutional decision, and a relevant alternative. We ask when practical access becomes possible and when that alternative is still genuinely open to entitled collective reconsideration. This avoids treating a whole person as globally ``ready'' or reducing a society to a single awareness percentage.
+
+The paper makes two connected moves. First, it separates eventual awareness from the joint timing of access and effective closure. Second, it turns the resulting identification problem into a conditional design calculation: if only the two date distributions are known, how much must actual choice windows be extended to guarantee a given amount of timely opportunity under every admissible pairing? The extension must be materially and procedurally real. A date changed on paper cannot revive a dismantled alternative.
+
+This is a theory-method contribution. The underlying techniques---anticipatory governance, irreversibility analysis, matched comparisons, assignment bounds and monotonicity---have substantial predecessors. Our finite inverse and examples are explicit applications to the defined temporal opportunity object. We report their conditions and counterexamples, not a global priority certificate or a numerical estimate of civilizational control.
+
+\section{Relation to prior work and to intellectual-production accounting}
+\label{sec:prior}
+\paragraph{Heterogeneous response is not a new discovery.}
+Granovetter's threshold models already show that aggregate collective outcomes can depend on distributions and interaction structure rather than average predispositions \cite{granovetter}. Our question is different from deriving a diffusion cascade: it conditions on access times and asks whether relevant choices remain open when those times arrive. The access dates themselves may later be generated by a diffusion model, but adopting such a model is not necessary for the finite identification results.
+
+\paragraph{Anticipation, irreversibility and the pacing problem.}
+Guston's anticipatory governance emphasizes broad social capacities to engage while technological trajectories can still be influenced, building on the Collingridge dilemma \cite{guston}. Arrow and Fisher's irreversibility analysis is a foundational predecessor for the value of preserving options under learning \cite{arrow}. Marchant discusses a tension between agility and stakeholder participation \cite{marchant}. We do not claim these literatures assume formal review automatically guarantees practical reversibility. Our contribution is a bounded operationalization with explicit timing and data requirements, not a replacement for institutional analysis.
+
+\paragraph{Power and temporal justice.}
+Acemoglu and Robinson model how de facto power can offset changes in formal political institutions \cite{acemoglu}. This is relevant to our distinction between nominal review and an implementable alternative; our indicator does not reproduce their equilibrium model. Iseko discusses temporal asymmetry and temporal sovereignty in superintelligence preparedness \cite{iseko}. That conceptual predecessor is acknowledged without treating its reported interviews as independently validated evidence for our model. We neither introduce the first temporal-justice concept nor infer power persistence from a missed date alone.
+
+\paragraph{Intellectual production versus epistemic governance.}
+The author's Civilizational Intellectual Production Satellite Accounts (CIPSA) distinguish contributions to observable intellectual production from authority over problem framing, selection, verification and acceptance \cite{cipsa}. The accounts need not shift together. This paper adds a third object: when affected people can practically take part in decisions about those arrangements. A high AI production share does not identify who controls institutions; a high awareness share does not identify whether participation was timely. This paper neither re-estimates CIPSA's illustrative shares nor treats a production crossover as proof of political transfer.
+
+\paragraph{Mathematical attribution and manuscript lineage.}
+Fixed-marginal bounds are classical, with Makarov a central reference \cite{makarov}; finite matching supplies our direct proof \cite{hall}. Unknown dependence obstructing identification is inherited. The unfinished CD-v1.0.0 checkpoint recorded the access/deadline distinction, a capacity-backed review example, an acceleration counterexample and finite pairing checks. This completed manuscript incorporates those results and adds the inverse effective-window rule and evidence-sensitive extensions. Programs reconstructed from the recorded source were actually run for this delivery. This is one manuscript lineage, not a new paper for each checkpoint.
+
+\section{What must be measured separately}
+\label{sec:objects}
+\subsection{From recognition to practical access without an ideology test}
+Let $i$ index a predeclared person--decision--alternative case. Beliefs about AI's speed, opportunities and risks are time-varying, not a binary insight variable. Record distinct quantities: exposure to claims about the transition; comprehension of the decision and alternatives; calibrated forecasts where outcomes can be observed; and practical access to an entitled participation channel.
+
+Define $A_i$ as the earliest time when the specified channel is accessible with the relevant informational and resource prerequisites. In a simple sequential decomposition, $A_i=\tau_i+p_i$, with $\tau_i$ a documented decision-relevant recognition event and $p_i$ a subsequent preparation/access delay. This decomposition is optional: resources, representatives and prior expertise can make the sequence non-additive. If an effective authorized representative already provides the participation, a case should not be marked excluded merely because the individual learns the technical details later.
+
+\textbf{Standing does not depend on $A_i$.} This variable is not a literacy qualification for a vote, a warrant to silence a skeptic, or a test of agreement that ASI is imminent. Institutions may owe accessible explanation and representation before the modeled date. An informed person who expects slow progress may have earlier practical access than an alarmed person lacking a usable channel. Early forecasts can also be wrong.
+
+The simplified theory assumes access persists once available. If a person later loses resources, time or representation, a set of access times must replace $[A_i,\infty)$. Such changes are not absorbed into a misleading single threshold.
+
+\subsection{An effective option is not merely a meeting}
+Let $\mathcal T_i$ be the times at which both an entitled process can consider the chosen alternative and that alternative can actually be implemented if selected. Define
+\begin{equation}
+J_i=\ind\{[A_i,\infty)\cap\mathcal T_i\ne\varnothing\}.
+\label{eq:general}
+\end{equation}
+$J_i=1$ denotes an effective opportunity, not that the person's preference wins. Losing a legitimate decision after meaningful participation is not itself timing exclusion. Nor is every technically imaginable alternative owed to every individual.
+
+If the effective option remains continuously open from time zero through a finite date $D_i$, including the endpoint, then
+\begin{equation}
+\boxed{J_i=\ind\{A_i\le D_i\}.}
+\label{eq:basic}
+\end{equation}
+This \emph{prefix-window} specialization excludes later reopening and intermittent availability unless separately modeled. Equality is timely. For discrete reviews, Section~\ref{sec:review} instead tests the first feasible review.
+
+For $n$ equally weighted, predeclared cases, $Q=n^{-1}\sum_iJ_i$ is opportunity coverage, not a democracy score, welfare total or intellectual-sovereignty measure. Weighted surveys require their own estimand. Counting one person's many similar alternatives must not manufacture political weight. Conflicting alternatives cannot each be guaranteed simultaneous implementation: the claim concerns reconsiderability if legitimately selected.
+
+\subsection{From timing exclusion to a durable power divide}
+An enduring consequence requires more than $J_i=0$. The missed window must concern a real allocation of authority or options; the allocation must persist; no effective remedy, representative route or relevant new alternative may undo the exclusion; and the lost channel must matter causally. These are hypotheses to investigate, not consequences of the indicator's definition.
+
+The proposed mechanism is heterogeneous recognition and access, followed by missed effective choice, followed by persistent authority differences. Each link is conditional. Power can itself shape information and deadlines, creating feedback and confounding. Nothing here establishes that education necessarily redistributes power or delaying a decision always improves welfare. Urgent action, representation and valuable commitment can outweigh a particular opportunity loss.
+
+\section{When an open procedure has no viable alternative}
+\label{sec:review}
+\subsection{A material closing date}
+For one specified alternative, suppose reconfiguration requirements grow as $C(t)=C_0e^{gt}$ and actually available capacity as $B(t)=B_0e^{ht}$, with $B_0\ge C_0>0$ and $g>h$. A relevant procedure remains open through $T$. This scalar model abstracts from persuasion and competing claims; its parameters are not fitted to an economy.
+
+\begin{proposition}[Effective closure under a worsening capacity ratio \tagid{CD-P1}]
+Under continuous review and these assumptions, the latest effective date is
+\begin{equation}
+D=\min\left\{T,\frac{\log(B_0/C_0)}{g-h}\right\}.
+\label{eq:effective}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Implementability requires $C_0e^{gt}\le B_0e^{ht}$, equivalently $t\le\log(B_0/C_0)/(g-h)$. Intersect this closed interval with $[0,T]$.
+\end{proof}
+The algebra is elementary and the irreversibility concern is inherited. Its role is to expose the evidence a review promise needs. With requirement $2^t$ and capacity eight, a case ready at two can reconsider; one ready at four cannot, despite a meeting then. Maintaining an alternative whose requirement stays at most eight, or increasing real capacity to sixteen, repairs this example. A strong sunset that already preserves the alternative is not refuted.
+
+If $h>g$ and initial capacity is insufficient, an option can instead open later. General $\mathcal T_i$ must then be retained; extrapolating a single closing date gives the wrong result.
+
+\subsection{Capacity-backed periodic reconsideration}
+Reviews take place at $0,\Delta,2\Delta,\ldots$ through $T$. Access persists and $0\le A\le\overline A$. Put $t^*=\Delta\lceil\overline A/\Delta\rceil$.
+\begin{theorem}[A review guarantee including implementation capacity \tagid{CD-T1}]
+Every permitted readiness time has an effective review in this model if and only if
+\begin{equation}
+\boxed{t^*\le T\quad\text{and}\quad B_0\ge C_0e^{(g-h)t^*}.}
+\label{eq:periodic}
+\end{equation}
+Without a finite readiness upper bound, no finite initial capacity covers every finite eventually-ready date under the unchanged worsening ratio.
+\end{theorem}
+\begin{proof}
+The first review after $A$ is $r(A)=\Delta\lceil A/\Delta\rceil$. Later reviews cannot improve a strictly worsening capacity ratio. Since $r(A)$ is nondecreasing, its largest permitted value is $t^*$. Feasibility there is necessary and sufficient. Unbounded readiness gives unbounded first-review dates, whereas finite $B_0/C_0$ supports only a finite date.
+\end{proof}
+This is a conflict in a fixed promise, not a recommendation to exclude later participants. Preserving a cheaper alternative, expanding capacity or providing earlier representation changes the premises. The theorem is for one alternative across possible readiness dates, not a right to spend shared resources twice or implement contradictory preferences.
+
+\section{Earlier readiness for everyone can coexist with fewer opportunities}
+\label{sec:acceleration}
+Let $v\ge1$ index stipulated transition scenarios, with
+\begin{equation}
+A_i(v)=a_i/v^\beta,\qquad D_i(v)=d_i/v^\alpha,
+\quad a_i,d_i,\alpha,\beta>0.
+\label{eq:speed}
+\end{equation}
+These are joint scenarios, not an estimated causal response to education.
+\begin{proposition}[Joint acceleration classification \tagid{CD-T2}]
+Every access time advances as $v$ increases. Yet $J_i(v)$ is nonincreasing if $\alpha>\beta$, unchanged if $\alpha=\beta$, and nondecreasing if $\alpha<\beta$. With $\alpha>\beta$, a timely case is lost for $v>(d_i/a_i)^{1/(\alpha-\beta)}$.
+\end{proposition}
+\begin{proof}
+The opportunity condition is $a_i\le d_iv^{\beta-\alpha}$. Its right side has the stated monotonicity. Solving equality gives the threshold; equality remains timely.
+\end{proof}
+For $a=(2,4,6,8)$, every $d_i=5$, $\beta=1$ and $\alpha=2$:
+\begin{table}[ht]
+\centering\small
+\caption{Constructed joint-speed counterexample. Units are arbitrary, not years in an ASI prediction. All four cases eventually have practical access.}
+\begin{tabular}{@{}llll@{}}\toprule
+Speed & Access times & Effective closing date & Timely cases\\\midrule
+$1$ & $2,4,6,8$ & $5$ & $2/4$\\
+$2$ & $1,2,3,4$ & $5/4$ & $1/4$\\
+$4$ & $1/2,1,3/2,2$ & $5/16$ & $0/4$\\\bottomrule
+\end{tabular}
+\end{table}
+Holding the effective opportunity set fixed, earlier persistent access can never reduce $J_i$. Thus this table is not evidence that education harms participation. It shows that earlier recognition alongside faster closure does not guarantee better coverage. Interventions must be assessed for their separate effects on both clocks.
+
+Two technological worlds can also share early observable history but later diverge toward rapid progress or a plateau. An early anticipatory decision may help in one and waste resources in the other. No theorem awards correctness to early confidence. Preserving reasoned participation under uncertainty differs from rewarding belief in the fastest AI forecast.
+
+\section{Why two complete date distributions are still insufficient}
+\label{sec:identification}
+Suppose only anonymous finite lists $A=(a_1,\ldots,a_n)$ and $D=(d_1,\ldots,d_n)$ are known. Cases have equal weight and every bijective pairing is admitted. Define empirical CDFs $F_A(t)=n^{-1}\#\{a_i\le t\}$ and $F_D(t)$ analogously, with $F_D(t^-)=n^{-1}\#\{d_i<t\}$.
+
+\begin{theorem}[Sharp finite pairing bounds \tagid{CD-T3}]
+\label{thm:pairing}
+The smallest and largest attainable opportunity coverage are
+\begin{align}
+\boxed{Q_{\min}=\max_t\pos{F_A(t)-F_D(t^-)},}\label{eq:low}\\
+\boxed{Q_{\max}=1-\max_t\pos{F_D(t)-F_A(t)}.}\label{eq:up}
+\end{align}
+Both endpoints are realized by pairings. Checking the two lists' finite support suffices.
+\end{theorem}
+\begin{proof}
+For any $t$, among the $nF_A(t)$ access dates at most $nF_D(t^-)$ can be paired with a too-early deadline. Thus at least their positive difference succeeds. Among $nF_D(t)$ deadlines, at most $nF_A(t)$ can succeed, giving the unavoidable failures in \cref{eq:up}.
+
+For sharpness of the lower bound, form the bipartite failure graph $a_i>d_j$. Its deadline neighborhoods are nested as access dates increase. A subset of access vertices has the neighborhood of its maximum date $t$; including every access date at most $t$ maximizes the deficiency for that neighborhood. Hall's deficiency formula therefore gives maximum deficiency $\max_t\pos{\#\{a_i\le t\}-\#\{d_j<t\}}$ \cite{hall}. A maximum failure matching has $n$ minus that many edges. Complete it to a bijection. No unmatched failure edge can remain, or the matching was not maximum, so all remaining pairs succeed. This attains \cref{eq:low}.
+
+For the upper bound, place deadlines on the left of the success graph $a_i\le d_j$. Nested neighborhoods yield maximum deficiency $\max_t\pos{\#\{d_j\le t\}-\#\{a_i\le t\}}$. Complete a maximum success matching to a bijection to attain \cref{eq:up}.
+\end{proof}
+This is a finite assignment application of classical fixed-marginal reasoning, not a new probability bound \cite{makarov}. The left limit matters: when all dates equal one instant, every pair succeeds, not none.
+
+\begin{corollary}[Identical full marginals, almost opposite coverage \tagid{CD-C1}]
+For $A=(1,\ldots,n)$ and the same deadline multiset, identity pairing yields $Q=1$, whereas deadlines paired as $(n,1,\ldots,n-1)$ yield $Q=1/n$.
+\end{corollary}
+\begin{proof}
+All identity pairs meet equality. In the shifted pairing, only the first succeeds; for $i\ge2$, $i>i-1$. The deadline multisets are identical.
+\end{proof}
+Thus it is not merely that averages hide differences. Full separate distributions can also leave person-specific opportunity unresolved. This does not establish that any real society realizes the worst pairing; it identifies the evidence required before drawing a conclusion.
+
+\subsection{Observed linkage must not be discarded}
+If location, decision identity or actual records exclude some assignments, let $\Pi$ be the compatible complete pairings. The identified interval is
+\begin{equation}
+\left[\min_{\pi\in\Pi}\frac1n\sum_i\ind\{a_i\le d_{\pi(i)}\},
+\ \max_{\pi\in\Pi}\frac1n\sum_i\ind\{a_i\le d_{\pi(i)}\}\right].
+\label{eq:restricted}
+\end{equation}
+The anonymous bounds contain this interval but may not be sharp for it. Identity-linked cases in the example give $[1,1]$, not $[1/n,1]$. Factorable observed strata may be analyzed separately; cross-stratum constraints need a joint model.
+
+These are identification sets, not confidence intervals or causal-effect estimates. Sampling weights, selection and date errors introduce additional uncertainty. The following intervention rule applies to the finite declared case set, not automatically to a national population.
+
+\section{An exact guarantee for preserving effective choice windows}
+\label{sec:inverse}
+Suppose an institution can prospectively and genuinely extend every effective deadline by the same $s\ge0$, while access dates and admissible pairings stay fixed. This is an implementation capability assumption, not merely a new review label. Write $a_{(1)}\le\cdots\le a_{(n)}$ and $d_{(1)}\le\cdots\le d_{(n)}$ for the sorted lists.
+
+\begin{theorem}[Minimum robust uniform extension \tagid{CD-T4}]
+\label{thm:extension}
+For at least $k$ timely cases under every pairing, $1\le k\le n$, the smallest effective extension is
+\begin{equation}
+\boxed{s_k^*=\left[\min_{i=k,\ldots,n}\big(a_{(i)}-d_{(i-k+1)}\big)\right]_+.}
+\label{eq:extension}
+\end{equation}
+For $k=0$, set $s_0^*=0$. The minimum is attained; any smaller nonnegative extension fails for some pairing. All target values can be computed in $O(n^2)$ time after sorting.
+\end{theorem}
+\begin{proof}
+By Theorem~\ref{thm:pairing}, at least $k$ cases are guaranteed iff a cutoff $t$ satisfies
+\[
+\#\{a_i\le t\}-\#\{d_j<t-s\}\ge k.
+\]
+A cutoff can be chosen at an access date. If $i$ access dates are at most that cutoff, no more than $i-k$ deadlines may be strictly less than $t-s$, equivalently $t-s\le d_{(i-k+1)}$. The smallest relevant $t$ is $a_{(i)}$, giving the displayed difference. At tied access dates, using the last tied index weakens the requirement; earlier tied indices cannot introduce a spurious smaller minimum. Minimize over $i\ge k$ and require $s\ge0$. Equality is allowed, so the minimum is reached. Below it, the sharp lower count is smaller than $k$, with an attaining failing matching.
+\end{proof}
+The inverse follows from the classical sharp bound; it is not claimed as novel general matching mathematics. Its application links a participation promise to the extra \emph{effective} time it requires while retaining uncertainty about who faces which window.
+
+\begin{table}[ht]
+\centering\small
+\caption{Anonymous access and deadline lists both $(2,4,6,8)$. Arbitrary time units, not measured people or years.}
+\label{tab:extension}
+\begin{tabular}{@{}rrrl@{}}\toprule
+Guaranteed cases & Required extension & Guaranteed share & Lower count one unit short\\\midrule
+1&0&25\%&Not applicable\\
+2&2&50\%&1\\
+3&4&75\%&2\\
+4&6&100\%&3\\\bottomrule
+\end{tabular}
+\end{table}
+If the actual identity pairing is known in this example, no extension is needed. The theorem therefore gives a robust requirement under specified ignorance, not the cost of optimal full-information policy. For $k<n$ it does not identify which people retain access and cannot justify denying rights to the others. Protecting named constituencies requires their case-specific conditions.
+
+\subsection{Nominal extension is a failed premise}
+Suppose $(2,4,6,8)$ are material closing dates. Extending only formal review by four leaves the effective dates unchanged, so worst-case coverage remains one of four. If both procedure and implementability genuinely extend by four, coverage is at least three of four. This contrast is tested independently in the software artifact.
+
+In the special cost model of Section~\ref{sec:review}, suppose all gaps equal $\lambda=g-h>0$, procedural deadlines do not bind, and options have separate sound resource capacities. Multiplying every initial capacity by $m\ge1$ extends cost-limited dates by $\log(m)/\lambda$. The minimum common multiplier for the target is then $e^{\lambda s_k^*}$. This is not a total social-budget optimum: shared infrastructure, competing alternatives, differing growth gaps or binding review dates require a different joint feasibility model.
+
+The intervention is prospective. Adding $s$ to a retrospective spreadsheet cannot recreate a dismantled option. Genuine recovery is a new causal action with resources and consequences of its own. The parameter $s$ summarizes a warranted capability, not a magical right to undo history.
+
+\subsection{Uncertain dates}
+If each access date lies in $[\underline a_i,\overline a_i]$ and each deadline in $[\underline d_j,\overline d_j]$, with all combinations and pairings possible, monotonicity gives the sharp lowest coverage at $A=\overline A,D=\underline D$ and the highest at $A=\underline A,D=\overline D$. Applying \cref{eq:extension} to the unfavorable endpoints gives the largest required extension and a robust guarantee.
+
+If causal information excludes endpoint combinations, the rectangular envelope remains conservative but need not be sharp. New evidence should shrink the joint admissible set, not be averaged into an unsupported precise date. Unbounded right-censored access may make an all-person finite-extension guarantee unavailable. Report that limitation rather than substituting a favorable date.
+
+\section{Verification: constructed cases, not human-transition data}
+\label{sec:tests}
+The CD-v1.0.0 computations were reconstructed from the recorded source and rerun. They compare sharp marginal counts with an independent subset assignment calculation on 4,877 table pairs, examine 5,616 exact-rational periodic-review configurations and 3,456 acceleration configurations, and use a separate program to enumerate 27,063 distinct complete pairings. These are inherited configurations, not new respondents.
+
+For the completed manuscript, \texttt{window\_design.py} checks 26,873 inverse target/table cases and actual assignment minima/maxima for 14,254 table/extension combinations. It does not merely test the inverse formula against itself. A separate \texttt{extension\_oracle.py} imports neither it nor its dynamic program: it enumerates 70,246 pairing/extension evaluations over 1,595 profiles and verifies 9,785 target minima. One unit below each positive minimum admits a failing pairing on the integer grid.
+
+Every three-by-three linkage graph with a complete matching is also checked: 247 graphs and 15,808 labeled binary-time profiles. In 6,912 cases, the restricted identified set is strictly narrower than the anonymous bounds. An interval-censoring check enumerates 1,296 date assignments within 256 rectangular profiles.
+
+\begin{table}[ht]
+\centering\small
+\caption{Actual finite verification. Overlapping grids and repeat executions are not independent social studies.}
+\begin{tabularx}{\linewidth}{@{}XrX@{}}\toprule
+Check & Count & Computation\\\midrule
+Inverse guarantee cases &26,873&Minimum extension versus assignment search\\
+Independent pairing/shift evaluations &70,246&Explicit permutations and extension scan\\
+Restricted-linkage profiles &15,808&Permitted matchings versus anonymous pairings\\
+Interval date realizations &1,296&All admitted date assignments\\\bottomrule
+\end{tabularx}
+\end{table}
+All final assertions passed. Repeating both new scripts under different Python hash seeds preserves their JSON outputs. No respondent, governance intervention, real AI or consciousness endpoint was measured. Generality comes from the stated proofs, not the quantity of artificial cases. A source reconstructed from recorded text is not described as a newly recovered binary artifact; exact delivered file hashes are included in the package.
+
+\section{Testing the civilizational hypothesis rather than its proxies}
+\label{sec:empirical}
+\subsection{What survey differences cannot establish}
+Pew's April 2025 report finds a 73\% versus 23\% expert--public difference in expecting positive work impacts over twenty years. Both surveys were fielded in 2024; the expert sample is unweighted and represents respondents, not every expert \cite{pew}. The Federal Reserve's 2026 report on 2025 experience reports prior-month workplace generative-AI use of 43\% among graduate-degree workers versus 10\% among those with high school education or less \cite{fed}. Expectations and usage are distinct estimands. Neither identifies $A_i,D_i$, their pairing or a causal effect of recognition timing.
+
+Thus a published-year label must not be substituted for a fieldwork date, and use must not be equated with civic competence. These findings motivate study of heterogeneity; they do not validate the proposed timing-to-power mechanism. Even a frequent adoption panel would miss the outcome if not linked to actual institutional decisions.
+
+\subsection{A prospective person--decision--alternative panel}
+Begin with a bounded domain, such as an organization's decision to delegate a review or procurement process to an AI-assisted system. Register decision objects and relevant alternatives before outcomes rather than selecting dramatic exclusions afterward. Identify affected participants, existing representation and the basis for entitled reconsideration. Do not rank political standing by education or AI enthusiasm.
+
+Repeatedly measure neutral comprehension, forecast distributions for rapid/slow/stalled scenarios, sources of information, resources, and actual ability to submit a considered preference or challenge. Keep prior use, optimism, concern and calibration separate. An informed plateau forecast can satisfy comprehension; agreement with the investigators is not the criterion.
+
+Independently record announcements, approvals, contractual commitments, review dates, feasible alternatives and the capacity to implement them if chosen. Keep provenance, coder disagreement and date intervals. Record representation and reopening rather than forcing every trajectory into a prefix window.
+
+The descriptive primary outcome is effective opportunity or its identified interval. Secondary outcomes include proposed amendments, actual revisions, alternative availability and authority allocations. They must be measured separately: opportunity is not a validated proxy for de facto power. Population aggregation requires explicit weights, dependence assumptions and a justified sampling frame.
+
+\subsection{Causal identification and a limited randomized test}
+Resources, institutional power, education and exposure may affect both access and closure. Institutions can accelerate commitments when opposition becomes better informed or delay because concern is rising. Regressing outcomes on awareness dates is not sufficient causal identification. A field design needs dated common causes, transparent selection, suitable comparison groups or natural experiments, and sensitivity to unmeasured confounding.
+
+A low-stakes initial experiment can vary when participants receive identical balanced information and whether a fictional review offers an implementable alternative. One dimension varies early versus later access within the session; the other contrasts merely nominal review with enforceable, resource-backed reconsideration. Every participant eventually receives the same material. Include rapid, slow and stalled AI scenarios without claiming any one is the true future.
+
+Predeclare the treatment interaction on actual usable reconsideration, not endorsement of the investigator's forecast. Whether the participant's preferred alternative wins is a separate outcome. Include a fixed-window condition, where earlier access cannot mechanically reduce availability, and a real-reopening condition that can repair a missed window. Unexpected observations can expose measurement problems rather than overturn an elementary indicator identity.
+
+No experiment has been approved, preregistered, recruited or executed in this project. The supplemental protocol is a proposal requiring independent ethics review, accessible materials, consent, privacy safeguards and no assignment of real civic rights or consequential losses. Generalization to civilization-scale transformations remains a subsequent empirical problem.
+
+\section{Implications, counterarguments and limits}
+\subsection{The policy object is an option, not uniform opinion}
+A timing-sensitive institution should explain which choices remain available after commitment, through what channels, with what resources and for how long. Balanced information, practical participation support, representation, real review capacity and architecture preserving alternatives affect different model terms. Publicity alone may not advance $A$; a meeting without feasible alternatives may not advance $D$.
+
+The formulas test a promise; they do not decide its legitimacy. An aggregate target cannot authorize abandoning a minority, and universal rights may require named-case guarantees. Conflicting alternatives cannot all be implemented. Multiple people becoming aware late is not by itself evidence that a valid earlier collective decision must be overturned.
+
+\subsection{Early recognition is not a mandate to rule}
+Early observers can help society prepare, yet their confidence can be mistaken or self-serving. Eventual agreement does not retroactively legitimate every prior irreversible choice. Conversely, later informed opposition does not automatically prove the original choice wrongful. Entitlement, evidence, representation, alternatives and consequences must be examined at the relevant times.
+
+Turning the access variable into a competence franchise would misuse the analysis. Later access may indicate institutional barriers rather than personal deficiency. Effective representation and accessible deliberation can support meaningful influence without requiring everyone to master frontier-model engineering. Institutions can owe those channels regardless of what participants believe about ASI.
+
+\subsection{What would weaken or refute the claims?}
+The empirical mechanism would be weakened if late-access groups retained effective alternatives or representation; if supposed closures were readily reversible; or if credible comparisons showed participation timing did not affect the claimed durable authority distribution. Rapid deployment may increase later participants' resources and reopen options. Commitment may also protect rights or beneficial coordination; welfare is not determined by $Q$.
+
+Mathematical falsifiers are more specific: an admissible pairing outside the sharp interval, a smaller real common extension meeting the all-pairing target, or a review guarantee violating \cref{eq:periodic} while its premises hold. An installation with unrecorded representation, false resource data or changing access times invalidates that application's assumptions rather than refuting the conditional algebra.
+
+\subsection{Consciousness and civilizational scale}
+No result requires artificial subjective experience or a predetermined moral status. Deterministic tools can affect intellectual production and its governance; human recognition and practical access can lead or lag those changes. Operational readiness does not measure felt awareness, and no UCT experience threshold is added or empirically validated.
+
+CIPSA's production/governance distinction provides a conceptual connection, but there is no validated civilization-wide timing index here. Case-level findings require evidence linking them to institutional power. ``Sovereignty transfer'' and ``civilizational discontinuity'' motivate investigation; they are not facts established by the finite tables.
+
+\section{Conclusion}
+People eventually understanding an AI transition does not establish that they could shape its consequences. The relevant object is the relation between practical access and a genuinely feasible opportunity, not a final awareness percentage. Identical full marginal distributions may conceal almost opposite coverage, and joint acceleration can improve everyone's access time while closing options faster.
+
+This completed framework separates identification from intervention. Researchers need linked, decision-specific evidence or sharp uncertainty about the pairing. Institutions claiming to protect later participation must warrant actual extensions of feasible choice, not just review dates. Within the finite equal-weight model the minimum common extension is exactly computable, with a failing assignment below it.
+
+The paper does not predict an inevitable rupture or prescribe a universally best regime. It offers a reusable way to ask a more precise question: when can uneven recognition be absorbed by continuing representation and reconsideration, and when can it become a persistent loss of opportunity to shape an AI-mediated civilization?
+
+\paragraph{Assistance and publication status.}
+Hongju Liu directed this research. ChatGPT substantially assisted with retrieval, derivation, programming, execution, critique and typesetting. This is completed manuscript CD-v1.1.0, not independent peer review or an automatically submitted DOI. Exact synthesis priority and the complete historical UCT semantic audit remain unverified; no candidate is promoted to a formal UCT premise. Existing publications remain unchanged.
+
+\appendix
+\section{A reproducible temporal-opportunity audit}
+Record case identity, the alternative, entitlement and effective representation. State whether access persists and effective opportunity forms a prefix. Separate actual from planned closure, later reopening and unknown dates. Under incomplete linkage, declare genuinely possible pairings; with restrictions, solve the constrained problem rather than call anonymous bounds exact.
+
+Before using $s_k^*$, explain how the intervention achieves $D_i+s$ for every case without changing $A$ or the admissible pairing set. Identify the resources and authority that make it real, and distinguish aggregate targets from protection of named constituencies. Keep jointly admissible uncertainty rather than substitute favorable estimates. An unbounded date or incompatible alternative can require a weaker, explicitly stated promise.
+
+The supplemental study protocol provides a proposed schema and non-leading endpoints. It is not an approved instrument. Exact integer test programs require a declared discretization and censoring model before representing actual dates.
+
+\section{Reproduction and claim lineage}
+The archive contains this PDF, complete LaTeX, reconstructed predecessor programs, two new programs, raw JSON outputs, run receipts, source and claim audits, a Chinese handoff and file hashes. No network, credentials, GPU or participant data are required for the finite checks.
+\Needspace{10\baselineskip}
+\begin{lstlisting}
+python -S baseline/timing_frontier.py --out data/baseline_timing.json
+python -S baseline/pairing_oracle.py --out data/baseline_pairing.json
+python -S src/window_design.py --out data/window_design_results.json
+python -S src/extension_oracle.py --out data/extension_oracle_results.json
+cd paper
+pdflatex -interaction=nonstopmode -halt-on-error manuscript.tex
+pdflatex -interaction=nonstopmode -halt-on-error manuscript.tex
+\end{lstlisting}
+The earlier conversations recorded source fragments but did not deliver a recoverable awareness-paper PDF in the current workspace. This delivery assembles, executes and checks the complete manuscript. Editorial reconstruction is recorded rather than falsely claimed to be an identical prior binary. Counts describe distinct predicates and sometimes overlapping grids; replay is not new social evidence.
+
+\begin{thebibliography}{99}\small
+\bibitem{granovetter} M. Granovetter. Threshold Models of Collective Behavior. \emph{American Journal of Sociology}, 83(6):1420--1443, 1978. \href{https://doi.org/10.1086/226707}{doi:10.1086/226707}.
+\bibitem{guston} D. H. Guston. Understanding `anticipatory governance'. \emph{Social Studies of Science}, 44(2):218--242, 2014. \href{https://doi.org/10.1177/0306312713508669}{doi:10.1177/0306312713508669}.
+\bibitem{arrow} K. J. Arrow and A. C. Fisher. Environmental Preservation, Uncertainty, and Irreversibility. \emph{Quarterly Journal of Economics}, 88(2):312--319, 1974. \href{https://doi.org/10.2307/1883074}{doi:10.2307/1883074}.
+\bibitem{marchant} G. E. Marchant. The Pacing Problem and Soft Law. \emph{Ohio State Technology Law Journal}, 22:82, 2026. \url{https://repository.law.asu.edu/Repository/Gary-E-Marchant-6/Article/The-Pacing-Problem-and-Soft-Law-10817.html}.
+\bibitem{acemoglu} D. Acemoglu and J. A. Robinson. Persistence of Power, Elites, and Institutions. \emph{American Economic Review}, 98(1):267--293, 2008. \href{https://doi.org/10.1257/aer.98.1.267}{doi:10.1257/aer.98.1.267}.
+\bibitem{iseko} A. Iseko. Rethinking AI Superintelligence Preparedness Through a Justice Lens. \emph{International Journal of Science, Technology and Society}, 13(5):177--189, 2025. \href{https://doi.org/10.11648/j.ijsts.20251305.12}{doi:10.11648/j.ijsts.20251305.12}. Conceptual predecessor only; reported interviews not independently validated here.
+\bibitem{cipsa} H. Liu. \emph{Civilizational Intellectual Production Satellite Accounts: A Partial-Identification Framework for Measuring the Human--AI Shift in Intellectual Production and Epistemic Governance}. TA-TR-2026-13, v1.0, theoretical preprint, 2026. \href{https://doi.org/10.5281/zenodo.22866775}{doi:10.5281/zenodo.22866775}. First-party source, not independent corroboration.
+\bibitem{makarov} G. D. Makarov. Estimates for the Distribution Function of a Sum of Two Random Variables When the Marginal Distributions Are Fixed. \emph{Theory of Probability and Its Applications}, 26(4):803--806, 1982. \href{https://doi.org/10.1137/1126086}{doi:10.1137/1126086}.
+\bibitem{hall} P. Hall. On Representatives of Subsets. \emph{Journal of the London Mathematical Society}, s1-10(1):26--30, 1935. \href{https://doi.org/10.1112/jlms/s1-10.37.26}{doi:10.1112/jlms/s1-10.37.26}.
+\bibitem{pew} C. McClain, B. Kennedy, J. Gottfried, M. Anderson and G. Pasquini. \emph{How the U.S. Public and AI Experts View Artificial Intelligence}. Pew Research Center, 3 April 2025; 2024 fieldwork. \url{https://www.pewresearch.org/internet/2025/04/03/how-the-us-public-and-ai-experts-view-artificial-intelligence/}.
+\bibitem{fed} Board of Governors of the Federal Reserve System. \emph{Economic Well-Being of U.S. Households in 2025: Employment and Job Quality}. May 2026. \url{https://www.federalreserve.gov/publications/2026-economic-well-being-of-us-households-in-2025-employment-and-job-quality.htm}.
+\end{thebibliography}
+\end{document}

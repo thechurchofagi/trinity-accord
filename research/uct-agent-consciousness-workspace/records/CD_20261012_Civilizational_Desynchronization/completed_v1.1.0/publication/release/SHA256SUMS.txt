@@ -1,0 +1,5 @@
+aaf63c68661ffaeaaa677f4da3e5b8df327cc1af2dbd5ec58c7780434ee3925f  awareness-can-catch-up-after-choice-has-closed-cd-v1.1.0.pdf
+b642957f715d806bb7d6ada4ccc5f019e3f9592bec33909d2b2a5b9818bdd0f9  reproducibility-cd-v1.1.0.zip
+a0e5a11d1843a1a95f1e70c2f741e9c288d60e64ddcb74d30a806cb044874897  awareness-can-catch-up-after-choice-has-closed-cd-v1.1.0.tex
+7bd360829203ce947decaed1aa3ed384e0736f71edea2720b1e5bba52a2893ff  README-LICENSE.txt
+096ce6b0a07cbbde6ba60658a3de64dc155feabd72f39a09137327e32925c120  REVIEW-AND-SOURCES.md
