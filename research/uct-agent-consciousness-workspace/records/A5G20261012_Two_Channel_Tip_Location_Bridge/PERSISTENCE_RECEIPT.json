@@ -1,0 +1,27 @@
+{
+  "schema": "uct-persistence-receipt/1",
+  "research_id": "A5G20261012",
+  "remote_branch": "uct-agent-consciousness-workspace",
+  "science_commit": "b1aba478ca6caf9240dac74fd3c2973f2570a3df",
+  "science_tree": "251dffc5e434b7c7c60a27f99c6858d96e62e31b",
+  "science_parent": "be2b4c8f23c87f2497cc67ebcb04694ef2181c59",
+  "remote_write": {
+    "expected_sha": "be2b4c8f23c87f2497cc67ebcb04694ef2181c59",
+    "force": false,
+    "fast_forward": true,
+    "remote_head_and_tree_readback": true,
+    "key_files_readback": ["CURRENT_STATE.json", "records/A5G20261012_Two_Channel_Tip_Location_Bridge/EXACT_RESULTS.json"]
+  },
+  "library": {
+    "fixed_master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "fixed_master_science_version": 173,
+    "increment_library_file_id": "libfile_c5cb2b38d5bc8191aaf8b0450a4d4717",
+    "manifest_library_file_id": "libfile_920250dae23c8191a3c885c0d113e429",
+    "reverse_materialized_byte_equal": true,
+    "exact_tree_replay": true
+  },
+  "metadata_successor_rule": "This receipt is added only after science and Library verification. The final Git metadata successor and fixed-master confirmation version are recorded by remote/fixed-master readback and do not alter the science tree or claims.",
+  "publication_action": false,
+  "ci_or_deployment_action": false
+}
+

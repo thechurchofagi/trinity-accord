@@ -1,0 +1,44 @@
+{
+  "schema": "uct-recovery-manifest/1",
+  "research_id": "A5G20261012",
+  "scope": "INCREMENT_ONLY_NOT_FULL_REPOSITORY_OR_WORKING_SET",
+  "base_commit": "be2b4c8f23c87f2497cc67ebcb04694ef2181c59",
+  "science_commit": "b1aba478ca6caf9240dac74fd3c2973f2570a3df",
+  "science_tree": "251dffc5e434b7c7c60a27f99c6858d96e62e31b",
+  "path_count": 35,
+  "archive": {
+    "name": "UCT_A5G_Increment_20261012.zip",
+    "library_file_id": "libfile_c5cb2b38d5bc8191aaf8b0450a4d4717",
+    "bytes": 210366,
+    "sha256": "813a6da8b28a8ba6cdc24fab6e857503538e8b2df8ed7c4d2513e2f25e5f95d2",
+    "reverse_materialized_byte_equal": true
+  },
+  "external_manifest": {
+    "name": "UCT_A5G_Increment_20261012_manifest.json",
+    "library_file_id": "libfile_920250dae23c8191a3c885c0d113e429",
+    "bytes": 10968,
+    "sha256": "bacb683a3f49c006f9199d940b4ab8cb775bb5528c513444e5a02a842c5549fa",
+    "reverse_materialized_byte_equal": true
+  },
+  "fixed_master": {
+    "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+    "verified_science_version": 173,
+    "bytes": 5806,
+    "sha256": "e478e0eb214c8752b9a8412094d14387d33b04bc6c141c06d8f305c1171cb563",
+    "reverse_materialized_byte_equal": true
+  },
+  "replay": {
+    "from_exact_base": true,
+    "replayed_tree": "251dffc5e434b7c7c60a27f99c6858d96e62e31b",
+    "matches_science_tree": true
+  },
+  "recovery_steps": [
+    "Prefer fetching the verified science commit from the remote branch.",
+    "Only if Git is unavailable, check out the exact base_commit and extract the 35-path archive at repository root.",
+    "Verify every external-manifest entry and require git write-tree to equal science_tree.",
+    "Run check_two_channel_bridge.py and require 10/8/2 with source counts 4/2/2/2.",
+    "Run audit_map.py against the restored v1.1.2 effective graph and require 913/424/261 with no unresolved reference, cycle or bad all_of.",
+    "Manually retain C1/U1, evidence/target separation, all OPEN review items and the no-exclusive-owner boundary."
+  ]
+}
+

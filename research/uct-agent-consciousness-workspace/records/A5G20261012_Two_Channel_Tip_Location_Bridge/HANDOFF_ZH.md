@@ -22,3 +22,9 @@ C1 仍是意识特定解释性公设，U1 与基础体验门槛不变。没有�
 
 寻找一个能在保持 A5F 组织坐标固定时改变预先声明的 `H_tip` 对比、且能校准目标方向的一级研究范式。若找不到，保留 A5G 为识别障碍，不把更多随 `O` 变化的任务数量当作体验桥。
 
+## 双份恢复收据
+
+GitHub 科学提交 `b1aba478ca6caf9240dac74fd3c2973f2570a3df`，树 `251dffc5e434b7c7c60a27f99c6858d96e62e31b`，父提交 `be2b4c8f23c87f2497cc67ebcb04694ef2181c59`；expected-SHA 非强制快进、远端头／树／关键文件回读通过。
+
+35 路径增量不是完整仓库或工作集：`UCT_A5G_Increment_20261012.zip`，Library ID `libfile_c5cb2b38d5bc8191aaf8b0450a4d4717`，210366 字节，SHA256 `813a6da8b28a8ba6cdc24fab6e857503538e8b2df8ed7c4d2513e2f25e5f95d2`；清单 Library ID `libfile_920250dae23c8191a3c885c0d113e429`，10968 字节，SHA256 `bacb683a3f49c006f9199d940b4ab8cb775bb5528c513444e5a02a842c5549fa`。二者反向物化逐字节相等，并从精确父提交重放到同一科学树。固定主交接同一身份 v173 反向物化逐字节相等；最终元数据后继与主交接确认版本以 `PERSISTENCE_RECEIPT.json` 后的远端／固定文件回读为准。
+
