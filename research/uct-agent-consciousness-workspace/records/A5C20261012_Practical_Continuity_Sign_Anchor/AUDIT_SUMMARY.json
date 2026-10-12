@@ -1,0 +1,95 @@
+{
+  "a5c_joint_satisfiability": {
+    "actuality_claimed": false,
+    "orientation_witness": {
+      "orientations_without_anchor": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "transport": "S_c=S_t",
+      "with_positive_anchor": [
+        [
+          0,
+          0
+        ]
+      ]
+    },
+    "route_witness": {
+      "different_orbits": true,
+      "distributed_edges": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "joint_edges": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ]
+    }
+  },
+  "a5c_scientific_delta": {
+    "contexts": 0,
+    "nodes": 0,
+    "rules": 0
+  },
+  "affected_semantic_nodes": [
+    "A:P3",
+    "A:P6",
+    "A:C1",
+    "A:U1",
+    "A:PHEN_TARGET",
+    "R157:COORDINATE_TRANSPORT",
+    "R157:SEMANTIC_RESIDUAL",
+    "R157:MINENESS_BRIDGE_SCHEMA",
+    "R166:EVIDENCE_LEVEL_LADDER",
+    "R172:EXPERIENCE_INTERNAL_ACTION_COORDINATE",
+    "R173:FAMILIAR_MINENESS_BOUNDARY"
+  ],
+  "all_rules_read_all_of_as_simultaneous_and": true,
+  "context_links_treated_as_nondeductive": true,
+  "deductive_cycles": [],
+  "effective_counts": {
+    "context_links": 261,
+    "nodes": 913,
+    "rules": 424
+  },
+  "per_node_fields_accessed": 913,
+  "restored_effective_graph_sha256": "e14388ac742889d32e8df6dc3dc171f62034d3cc1e5c53c44159ddbf421adcab",
+  "root_counts": {
+    "context_links": 178,
+    "nodes": 584,
+    "rules": 284
+  },
+  "root_graph_sha256": "40d17cd5f61ebcc1bfcea65eb59c3c730208bcfcf69ba92e2f615a993584e3ce",
+  "rules_with_empty_all_of": [],
+  "rules_with_nonlist_all_of": [],
+  "schema": "a5c-map-audit/1",
+  "semantic_scope": "Fresh structural traversal plus bounded manual review of C1/U1, P3/P6, R157, R166, R172, effective R173, R181, R197, R203, A3Y/A3Z and A4V-A5B; not a full historical semantic reproof.",
+  "status": "FRESH_STRUCTURAL_PASS_BOUNDED_SEMANTIC_PASS_FULL_DEPTH_INCOMPLETE",
+  "unresolved_deductive_references": []
+}

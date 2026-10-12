@@ -1,0 +1,18 @@
+{
+  "schema": "A5C-MAP-EXTENSION-v0.1.0",
+  "research_id": "A5C20261012",
+  "completed_map": "UCT-MAP-v1.1.2",
+  "status": "DISABLED_APPLICATION_NO_COMPLETED_GRAPH_PROMOTION",
+  "delta": {"nodes": 0, "rules": 0, "context_links": 0},
+  "candidate_claims": ["A5C-C1", "A5C-C2", "A5C-C3", "A5C-C4", "A5C-C5", "A5C-C6"],
+  "reason_not_promoted": [
+    "No independent signed H_pc endpoint",
+    "No actual dual-handle Pi/W/C installation",
+    "The complement and orientation-count results are scoped finite-model facts",
+    "The physical protocol is prospective and organizational only"
+  ],
+  "unchanged_boundaries": [
+    "A:C1", "A:U1", "R157 semantic residual", "effective R173 familiar-mineness boundary",
+    "No basal-experience gate", "No exclusive owner", "No subject-count inference"
+  ]
+}

@@ -1,5 +1,11 @@
 # UCT durable memory
 
+## A5C20261012 latest memory
+
+A5C gives a bounded sign-anchor result for `H_pc`. In a two-domain/two-channel model, no transport/no anchor leaves 4 latent orientations; exact class-conditional transport leaves 2 because one global complement survives; only an independently signed semantic anchor leaves 1. Multiple channels, modality and agreement do not independently select the phenomenal positive pole. A physically credible dual-handle/two-target protocol crosses from a four-edge joint `Pi` orbit to a two-edge strict-distributed orbit and uses route-specific perturbations to measure `W/C`, with target identity, neutral instructions and report machinery fixed. The protocol is not executed and does not calibrate `H_pc`. Therefore `Pi/W/C` remain organizational coordinates, `B_pc^comp/B_pc^family/H_cf` remain OPEN, and controller-certificate expansion stops. Formal delta 0/0/0. Next: seek only an independently warranted signed `H_pc` channel with inversion/copy-switch refuter and class-conditional transport; organizational experiment may proceed without phenomenal inference.
+
+---
+
 ## A5B20261012 latest memory
 
 A5B supplies a non-source-count selected target: `H_pc`, whether target-directed action remains immediately carryable-through from within across a fixed perturbation. `Pi` is actual route participation; `W` is separate perturbation/compensation organization; `C` is its targetwise compensation endpoint; `E_pc` is fallible evidence. Exact two-route/two-target enumeration has 36 unconstrained `(Pi,C)` worlds. No-spurious, no-missed and biconditional targetwise faithfulness leave 16, 25 and 9. One-way faithfulness has maximally ambiguous boundary vectors, and even `C=J(Pi)` leaves `C=00` compatible with two orbits—global-single-owner and strict-distributed. Thus compensation can prospectively probe targetwise jointness under explicit faithfulness, but it does not identify full `Pi` or `H_pc`. `B_pc^comp/B_pc^family/H_cf`, actual installation and signed endpoint calibration remain OPEN. Formal delta 0/0/0. Next: independently sign `E_pc` and specify one physically credible cross-orbit `Pi/W` manipulation, or retain organizational-only interpretation.

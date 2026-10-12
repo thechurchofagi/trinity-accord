@@ -1,0 +1,72 @@
+{
+  "schema": "A5C-CLAIM-LEDGER-v0.1.0",
+  "research_id": "A5C20261012",
+  "claims": [
+    {
+      "id": "A5C-C1",
+      "type": "exact_finite_nonidentification",
+      "statement": "In the declared two-domain, two-channel latent model, complementing H_pc and swapping every channel's class-conditionals preserves the full observable joint laws; exact class-conditional transport leaves one global two-way complement.",
+      "domain": "Two binary evidence channels, two domains, binary H_pc, conditional independence within the explicit witness.",
+      "premises": ["Fixed observable tables", "Latent binary target", "Simultaneous label and class-conditional swap"],
+      "proof_or_source": "SIGN_ANCHOR_CONTRACT.md, check_sign_anchor.py and EXACT_RESULTS.json; standard latent-label symmetry.",
+      "counterexamples_or_limits": ["An independently signed semantic anchor breaks the declared symmetry", "Not a universal impossibility theorem"],
+      "status": "EXACT_FINITE_PASS",
+      "thought_experiment_role": "Copy/switch preserves measured channels while changing their hidden interpretation."
+    },
+    {
+      "id": "A5C-C2",
+      "type": "orientation_component_count",
+      "statement": "Without transport the two domain orientations give four possibilities; exact class-conditional transport leaves two; transport plus one independently signed anchor leaves one, whereas marginal similarity does not transport the sign.",
+      "domain": "Orientation bits S_c,S_t in the declared finite connection model.",
+      "premises": ["Transport means S_c=S_t", "An independent anchor fixes S_c=0"],
+      "proof_or_source": "Exhaustive enumeration of four orientation pairs in check_sign_anchor.py.",
+      "counterexamples_or_limits": ["Counts describe the declared connectivity model only"],
+      "status": "EXACT_FINITE_PASS",
+      "thought_experiment_role": "Infant/adult or reporting/nonreporting transport separates marginal resemblance from class-conditional invariance."
+    },
+    {
+      "id": "A5C-C3",
+      "type": "physical_protocol_feasibility",
+      "statement": "A two-handle, two-target linear cursor interface can implement a four-edge joint Pi relation and a two-edge strict-distributed Pi relation that lie in different route-label-swap orbits while retaining the same named targets and report machinery.",
+      "domain": "Prospective two-axis dual-handle apparatus with frozen mapping matrices and logged ports.",
+      "premises": ["Joint mapping y0=(Lx+Rx)/sqrt(2), y1=(Ly+Ry)/sqrt(2)", "Distributed mapping y0=Lx, y1=Ry", "Actual use checks still required"],
+      "proof_or_source": "DUAL_HANDLE_PROTOCOL.md and exact edge/orbit check; Diedrichsen 2007, Dimitriou et al. 2009 and Reichenbach et al. 2013 support apparatus feasibility.",
+      "counterexamples_or_limits": ["Not executed", "Mapping code alone does not prove actual route consumption", "Effort and detailed kinematics are not automatically matched"],
+      "status": "PROSPECTIVE_NOT_INSTALLED",
+      "thought_experiment_role": "Abacus/calculator and human-realized-agent cases block implementation-independent promotion."
+    },
+    {
+      "id": "A5C-C4",
+      "type": "failed_sign_anchor_audit",
+      "statement": "Phenomenally worded report, rapid continuation choice, corrective force, physical interruption, channel agreement and compensation success each fail to independently warrant the positive sign of E_pc for H_pc in the current source set.",
+      "domain": "A5B/A5C practical-continuity target and the candidate evidence family reviewed here.",
+      "premises": ["H_pc is not defined by its candidate causes or proxies", "Reports and nonreports are fallible evidence", "A3Y/A3Z and R197/R203 boundaries retained"],
+      "proof_or_source": "RESEARCH_NOTE.md sections 1 and 4; fixed-source review.",
+      "counterexamples_or_limits": ["A future externally warranted endpoint could satisfy the contract"],
+      "status": "NO_CURRENT_SIGN_ANCHOR",
+      "thought_experiment_role": "Accurate/inverted code and adaptive-reflex twins preserve modality while changing sign or target."
+    },
+    {
+      "id": "A5C-C5",
+      "type": "stop_rule",
+      "statement": "Because a credible organizational manipulation exists but an independent sign anchor does not, Pi, W and C remain organizational coordinates, B_pc^comp/B_pc^family/H_cf remain open, and controller-certificate expansion stops.",
+      "domain": "Current archive and declared A5C method.",
+      "premises": ["A5C-C3", "A5C-C4", "No new actual participant installation"],
+      "proof_or_source": "SIGN_ANCHOR_CONTRACT.md stop rule and DIRECTION_CHECKS.md.",
+      "counterexamples_or_limits": ["New primary evidence or a genuinely independent sign intervention can reopen the calibration question"],
+      "status": "BOUNDED_STOP_ACTIVE",
+      "thought_experiment_role": "All four families prevent the stop from being misread as a negative consciousness claim."
+    },
+    {
+      "id": "A5C-C6",
+      "type": "conditional_uct_placement",
+      "statement": "Only an independently established actual dual-handle Pi/W/C in one complete K could be conditionally placed by C1/R157 as experience-internal organization; this would not by itself name H_pc, validate its evidence sign, select an exclusive owner or count subjects.",
+      "domain": "One admitted actual P/I/K/Phi/h instance with the relevant typed relations.",
+      "premises": ["Actual same-instance Pi/W/C", "Complete K", "A:C1", "R157 coordinate transport"],
+      "proof_or_source": "Scoped application of UCT I v1.2, D1/D5 and R157 with the semantic residual retained.",
+      "counterexamples_or_limits": ["Abstract code, cursor success and report are not actual complete organization"],
+      "status": "CONDITIONAL_NOT_TRIGGERED",
+      "thought_experiment_role": "Nested human implementers show why many routes need no additional owner."
+    }
+  ]
+}

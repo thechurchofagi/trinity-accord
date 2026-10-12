@@ -1,4 +1,10 @@
-# A5B20261012 current handoff — cross-route compensation endpoint
+# A5C20261012 current handoff — practical-continuity sign-anchor boundary
+
+[English note](records/A5C20261012_Practical_Continuity_Sign_Anchor/RESEARCH_NOTE.md) · [sign contract](records/A5C20261012_Practical_Continuity_Sign_Anchor/SIGN_ANCHOR_CONTRACT.md) · [dual-handle protocol](records/A5C20261012_Practical_Continuity_Sign_Anchor/DUAL_HANDLE_PROTOCOL.md) · [exact results](records/A5C20261012_Practical_Continuity_Sign_Anchor/EXACT_RESULTS.json) · [formal audit](records/A5C20261012_Practical_Continuity_Sign_Anchor/FORMAL_AUDIT.md) · [Chinese handoff](records/A5C20261012_Practical_Continuity_Sign_Anchor/HANDOFF_ZH.md). Exact two-domain/two-channel analysis shows that class-conditional transport reduces independent domain flips from four orientations to two but leaves one global `H_pc` complement; only an independently signed semantic anchor reduces the count to one. A dual-handle protocol physically realizes different joint/distributed `Pi` orbits, but it is prospective and supplies no phenomenal sign. `Pi/W/C` remain organizational coordinates, controller-certificate expansion stops, formal delta is 0/0/0 and all review items remain open.
+
+---
+
+# A5B20261012 previous handoff — cross-route compensation endpoint
 
 [English note](records/A5B20261012_Cross_Route_Compensation_Endpoint/RESEARCH_NOTE.md) · [endpoint contract](records/A5B20261012_Cross_Route_Compensation_Endpoint/ENDPOINT_CONTRACT.md) · [exact results](records/A5B20261012_Cross_Route_Compensation_Endpoint/EXACT_RESULTS.json) · [formal audit](records/A5B20261012_Cross_Route_Compensation_Endpoint/FORMAL_AUDIT.md) · [Chinese handoff](records/A5B20261012_Cross_Route_Compensation_Endpoint/HANDOFF_ZH.md). A5B predeclares `H_pc`, felt practical continuity across a target-directed perturbation, independently of source-count wording. `C` is a separate compensation endpoint under `W`, not `Pi` or feeling. Exact 36/16/25/9 world counts show that one-way faithfulness does not identify route orbits and even biconditional targetwise faithfulness leaves a two-orbit `C=00` ambiguity. The candidate is prospectively refutable but has no independently signed endpoint or actual installation. Formal delta 0/0/0; `B_pc^comp/B_pc^family/H_cf` remain open.
 

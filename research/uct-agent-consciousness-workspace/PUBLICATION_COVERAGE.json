@@ -12,10 +12,10 @@
   "readable_report": "publication/UCT-PUB-v1.0.32/COVERAGE_REPORT_ZH.md",
   "current_decision": "records/NOV20261010_Prior_Art_and_Bodily_Familiarity/CLAIM_LEDGER.json",
   "latest_update": {
-    "id": "A5B20261012",
+    "id": "A5C20261012",
     "coverage_change": "NONE",
-    "source": "records/A5B20261012_Cross_Route_Compensation_Endpoint/PUBLICATION_COVERAGE_UPDATE.json",
-    "manuscript_decision": "HOLD_MERGE_A4V_TO_A5B_SYNTHESIS"
+    "source": "records/A5C20261012_Practical_Continuity_Sign_Anchor/PUBLICATION_COVERAGE_UPDATE.json",
+    "manuscript_decision": "HOLD_MERGE_A4V_TO_A5C_SYNTHESIS"
   },
   "current_scientific_map": "UCT-MAP-v1.1.2",
   "nondeductive": true,
@@ -168,34 +168,33 @@
     "does_not_replace_latest_scientific_research": true
   },
   "latest_followup_application": {
-    "id": "A5B20261012",
-    "version": "A5B-CRCE-v0.1.0",
-    "status": "PROSPECTIVE_H_PC_TARGET_WITH_EXACT_COMPENSATION_FAITHFULNESS_BOUNDARY",
+    "id": "A5C20261012",
+    "version": "A5C-PCSA-v0.1.0",
+    "status": "CROSS_ORBIT_PROTOCOL_READY_SIGN_ANCHOR_NOT_INSTALLED",
     "enabled_as_established_premises": false,
-    "source": "records/A5B20261012_Cross_Route_Compensation_Endpoint/RESEARCH_NOTE.md",
-    "handoff": "records/A5B20261012_Cross_Route_Compensation_Endpoint/HANDOFF_ZH.md",
-    "work_log": "records/A5B20261012_Cross_Route_Compensation_Endpoint/WORK_LOG.md",
-    "claim_ledger": "records/A5B20261012_Cross_Route_Compensation_Endpoint/CLAIM_LEDGER.json",
-    "map_extension": "records/A5B20261012_Cross_Route_Compensation_Endpoint/MAP_EXTENSION.json",
-    "exact_results": "records/A5B20261012_Cross_Route_Compensation_Endpoint/EXACT_RESULTS.json",
+    "source": "records/A5C20261012_Practical_Continuity_Sign_Anchor/RESEARCH_NOTE.md",
+    "handoff": "records/A5C20261012_Practical_Continuity_Sign_Anchor/HANDOFF_ZH.md",
+    "work_log": "records/A5C20261012_Practical_Continuity_Sign_Anchor/WORK_LOG.md",
+    "claim_ledger": "records/A5C20261012_Practical_Continuity_Sign_Anchor/CLAIM_LEDGER.json",
+    "map_extension": "records/A5C20261012_Practical_Continuity_Sign_Anchor/MAP_EXTENSION.json",
+    "exact_results": "records/A5C20261012_Practical_Continuity_Sign_Anchor/EXACT_RESULTS.json",
     "parent_science": "A3V20261010",
-    "parent_followup": "A5A20261012",
+    "parent_followup": "A5B20261012",
     "completed_map": "UCT-MAP-v1.1.2",
     "scientific_delta": {
       "nodes": 0,
       "rules": 0,
       "contexts": 0
     },
-    "finite_world_counts": {
-      "unconstrained": 36,
-      "no_spurious": 16,
-      "no_missed": 25,
-      "biconditional": 9
+    "orientation_counts": {
+      "no_transport_no_anchor": 4,
+      "transport_no_anchor": 2,
+      "transport_and_signed_anchor": 1
     },
     "selected_target": "H_pc: felt practical continuity across a target-directed perturbation",
     "independent_h_validation": false,
     "actual_bodily_installation": false,
-    "standalone_manuscript": "HOLD_MERGE_A4V_TO_A5B_SYNTHESIS"
+    "standalone_manuscript": "HOLD_MERGE_A4V_TO_A5C_SYNTHESIS"
   },
   "followup_applications": [
     {
@@ -492,6 +491,35 @@
       "independent_h_validation": false,
       "actual_bodily_installation": false,
       "standalone_manuscript": "HOLD_MERGE_A4V_TO_A5B_SYNTHESIS"
+    },
+    {
+      "id": "A5C20261012",
+      "version": "A5C-PCSA-v0.1.0",
+      "status": "CROSS_ORBIT_PROTOCOL_READY_SIGN_ANCHOR_NOT_INSTALLED",
+      "enabled_as_established_premises": false,
+      "source": "records/A5C20261012_Practical_Continuity_Sign_Anchor/RESEARCH_NOTE.md",
+      "handoff": "records/A5C20261012_Practical_Continuity_Sign_Anchor/HANDOFF_ZH.md",
+      "work_log": "records/A5C20261012_Practical_Continuity_Sign_Anchor/WORK_LOG.md",
+      "claim_ledger": "records/A5C20261012_Practical_Continuity_Sign_Anchor/CLAIM_LEDGER.json",
+      "map_extension": "records/A5C20261012_Practical_Continuity_Sign_Anchor/MAP_EXTENSION.json",
+      "exact_results": "records/A5C20261012_Practical_Continuity_Sign_Anchor/EXACT_RESULTS.json",
+      "parent_science": "A3V20261010",
+      "parent_followup": "A5B20261012",
+      "completed_map": "UCT-MAP-v1.1.2",
+      "scientific_delta": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0
+      },
+      "orientation_counts": {
+        "no_transport_no_anchor": 4,
+        "transport_no_anchor": 2,
+        "transport_and_signed_anchor": 1
+      },
+      "selected_target": "H_pc: felt practical continuity across a target-directed perturbation",
+      "independent_h_validation": false,
+      "actual_bodily_installation": false,
+      "standalone_manuscript": "HOLD_MERGE_A4V_TO_A5C_SYNTHESIS"
     }
   ]
 }

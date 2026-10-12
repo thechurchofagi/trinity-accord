@@ -1256,3 +1256,14 @@ A4G应用保持停用，正式图增量0/0/0。C1/U1未改；硬件来源坐标�
 - `SCU-AUDIT-DEPTH`: **AUDIT_INCOMPLETE**. The 913/424/261 effective graph was structurally traversed and affected semantics reviewed; all historical proofs were not reconstructed.
 - Substantive result: Pi-only joint-source and strict-distribution predicates are constant on route-label orbits, so a same-orbit contrast count is exactly zero. Valid repair requires cross-orbit comparison or explicit additional W. B_pc^family/H_cf remain open.
 - Evidence: `records/A5A20261012_Route_Orbit_Contrast_Barrier/REVIEW_RESPONSE.md`, `ROUTE_ORBIT_CONTRAST_CONTRACT.md`, `EXACT_RESULTS.json`, `FORMAL_AUDIT.md`, `GAP_LEDGER.md`.
+
+## A5C20261012 research response (does not close supervision items)
+
+- `QC-20261008-10`: **ACKNOWLEDGED/OPEN**. Exact class-conditional transport leaves one global `H_pc` complement; no independent positive reliability is supplied.
+- `IA-QC11`: **OPEN**. Dual handles, targets, ports, mappings, perturbations, consumer and endpoint are prospective; no actual token installs them.
+- `QC-20261008-12`: **OPEN**. Corrective force, latency, cursor outcome and report remain evidence; mapping code is not actual route use, and `C` is not `Pi` or experience.
+- `QC-20261008-13`: **OPEN**. Same-instance port, timing, route cut/rescue and endpoint bindings are specified but uninstalled.
+- `SCU-OPEN-R191-NORMALIZATION`: **OPEN**. No R191 normalization is attempted or discharged.
+- `SCU-AUDIT-DEPTH`: **AUDIT_INCOMPLETE**. The effective 913/424/261 graph was structurally traversed and affected semantics reviewed; historical proofs were not globally reconstructed.
+- Substantive result: orientation counts 4/2/1 isolate the missing independent sign anchor, while a four-edge joint versus two-edge distributed handle mapping makes the organizational cross-orbit contrast physically credible. The protocol is not a phenomenal calibration. `Pi/W/C` remain organizational and controller-certificate expansion stops.
+- Evidence: `records/A5C20261012_Practical_Continuity_Sign_Anchor/REVIEW_RESPONSE.md`, `SIGN_ANCHOR_CONTRACT.md`, `DUAL_HANDLE_PROTOCOL.md`, `EXACT_RESULTS.json`, `FORMAL_AUDIT.md`, `GAP_LEDGER.md`.

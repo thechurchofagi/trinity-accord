@@ -1,0 +1,15 @@
+{
+  "id": "A5C20261012",
+  "version": "A5C-PCSA-v0.1.0",
+  "status": "CROSS_ORBIT_PROTOCOL_READY_SIGN_ANCHOR_NOT_INSTALLED",
+  "enabled_as_established_premises": false,
+  "parent_science": "A3V20261010",
+  "parent_followup": "A5B20261012",
+  "completed_map": "UCT-MAP-v1.1.2",
+  "scientific_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+  "orientation_counts": {"no_transport_no_anchor": 4, "transport_no_anchor": 2, "transport_and_signed_anchor": 1},
+  "selected_target": "H_pc: felt practical continuity across a target-directed perturbation",
+  "independent_h_validation": false,
+  "actual_bodily_installation": false,
+  "standalone_manuscript": "HOLD_MERGE_A4V_TO_A5C_SYNTHESIS"
+}

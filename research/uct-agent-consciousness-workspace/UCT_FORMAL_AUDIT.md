@@ -1,3 +1,9 @@
+# A5C20261012 audit addendum
+
+A5C preserves the effective 913/424/261 graph and adds 0/0/0. Fresh restoration and traversal found zero unresolved deductive references, active cycles, non-list `all_of` or empty `all_of`. The complement result is restricted to the declared binary latent model; the handle edge/orbit witness is an abstract and prospective apparatus relation. `H_pc`, evidence channels, orientation convention, actual `Pi`, `W/C`, complete `K`, report and conceptual self remain separate. The A5B bridge still requires all eight conjuncts on one instance, and A5C discharges none of `ACTUAL_PI`, `ACTUAL_WC`, `MATCH` or `SIGN`. Structural PASS and apparatus feasibility do not establish C1, actual installation, phenomenal calibration or historical semantic depth. See [A5C formal audit](records/A5C20261012_Practical_Continuity_Sign_Anchor/FORMAL_AUDIT.md).
+
+---
+
 # A5B20261012 audit addendum
 
 A5B preserves the effective 913/424/261 graph and adds 0/0/0. Fresh restoration and traversal found zero unresolved deductive references, active cycles, non-list `all_of` or empty `all_of`. The candidate bridge requires `TARGET AND CROSS_ORBIT AND ACTUAL_PI AND ACTUAL_WC AND MATCH AND SIGN AND DIRECTION AND COPY_SWITCH` on one binding. `Pi`, `W`, `C`, complete `K`, `H_pc`, `E_pc`, conceptual self, report and subject count remain distinct. Exact 36/16/25/9 counts establish only finite-model ambiguity; they do not install a route, validate endpoint sign, prove C1 or close historical semantic depth. The inherited integration-era navigation validator's obsolete latest-research equality assertion is retained as a failure and not silently repaired. See [A5B formal audit](records/A5B20261012_Cross_Route_Compensation_Endpoint/FORMAL_AUDIT.md).

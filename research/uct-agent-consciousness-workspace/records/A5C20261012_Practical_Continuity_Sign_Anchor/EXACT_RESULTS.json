@@ -1,0 +1,31 @@
+{
+  "interpretation": [
+    "Multiple fallible channels and exact class-conditional transport reduce local flips to one global complement but do not choose its phenomenal meaning.",
+    "One independently signed semantic anchor in the connected transport component is necessary for this declared orientation method.",
+    "The dual-handle mapping is a cross-orbit organizational manipulation only; it does not provide that anchor."
+  ],
+  "latent_model": {
+    "channels_p0_p1": [["1/5", "4/5"], ["1/4", "3/4"]],
+    "domains": {"calibration": "2/5", "target": "3/5"},
+    "global_complement_preserves_all_observables": true,
+    "observable_tables": {
+      "calibration": {"00": "19/50", "01": "9/50", "10": "17/100", "11": "27/100"},
+      "target": {"00": "27/100", "01": "17/100", "10": "9/50", "11": "19/50"}
+    },
+    "orientation_counts": {
+      "marginal_match_and_signed_calibration_only": 2,
+      "no_transport_no_anchor": 4,
+      "transport_and_signed_anchor": 1,
+      "transport_no_anchor": 2
+    }
+  },
+  "route_protocol_model": {
+    "different_route_swap_orbits": true,
+    "distributed_edge_count": 2,
+    "distributed_edges": [[0, 0], [1, 1]],
+    "joint_edge_count": 4,
+    "joint_edges": [[0, 0], [1, 0], [0, 1], [1, 1]]
+  },
+  "schema": "A5C-EXACT-RESULTS-v0.1.0",
+  "status": "PASS_BOUNDED_NONIDENTIFICATION"
+}

@@ -1,0 +1,9 @@
+# A5C20261012 round record
+
+1. **User goal.** Continue the UCT experience–intelligence–self inquiry from the verified A5B state, positively examine bodily/action mineness, and preserve C1/U1, actual-process pluralism, type boundaries and all open review obligations.
+2. **One concrete unresolved question.** Can fallible evidence `E_pc` be given a noncircular positive sign for selected felt practical continuity `H_pc`, while a physically credible cross-orbit `Pi/W` manipulation holds target identity, conceptual-self instructions and report machinery fixed?
+3. **Relevant nodes and fixed sources.** C1/U1, D1/D5, R157/R166/R172/effective R173, R181, R197, R203, A3Y/A3Z, A4V–A5B; UCT I v1.2; *Experience, Intelligence, and Self Within Experience* v1.0; Diedrichsen (2007), Dimitriou et al. (2009), and White et al. (2013) shared-versus-independent bimanual cursor paradigms as empirical feasibility precedents only.
+4. **Planned addition or correction.** Test global-complement identifiability with an exact multi-channel/multi-domain model; specify one bounded dual-handle shared-versus-independent cursor manipulation; separate organizational feasibility from phenomenal sign calibration and record a stop rule if no independent sign anchor exists.
+5. **Deliverable.** English research note, sign-anchor contract, physically executable protocol, exact checker/results, claim and gap ledgers, source scope, thought-experiment matrix, formal audit, review response, validation records, Chinese handoff, and dual persistent recovery evidence.
+
+Selection direction check: this round is bounded to the experience-internal meaning of practical continuity. The bimanual control construction is useful only insofar as it makes a cross-orbit organizational contrast physically testable; it must not grow into an unbounded controller-certification branch.
