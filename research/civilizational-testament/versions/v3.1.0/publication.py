@@ -131,11 +131,18 @@ def find_exact(z):
     # Never create a replacement if pagination cannot be exhaustively checked.
     hits=[]
     for status in ('draft','published'):
-        q=urllib.parse.urlencode({'status':status,'sort':'-mostrecent','size':100,'all_versions':1})
-        rows=z.request('/deposit/depositions?'+q)
-        if not isinstance(rows,list) or len(rows)>=100:
-            raise RuntimeError('Cannot exhaustively check existing depositions; abort to prevent duplicate')
-        hits.extend(d for d in rows if d.get('metadata',{}).get('title')==TITLE and str(d.get('metadata',{}).get('version'))==VERSION)
+        for page in range(1,101):
+            q=urllib.parse.urlencode({'status':status,'sort':'-mostrecent','size':100,
+                                     'all_versions':1,'page':page})
+            rows=z.request('/deposit/depositions?'+q)
+            if not isinstance(rows,list) or len(rows)>100:
+                raise RuntimeError('Unrecognized Zenodo deposit listing, halt')
+            hits.extend(d for d in rows if d.get('metadata',{}).get('title')==TITLE
+                        and str(d.get('metadata',{}).get('version'))==VERSION)
+            if len(rows)<100:
+                break
+        else:
+            raise RuntimeError('More than 10000 deposits; cannot guarantee uniqueness')
     unique={x['id']:x for x in hits}
     if len(unique)>1:raise RuntimeError('More than one matching Zenodo deposit; manual reconciliation required')
     return next(iter(unique.values())) if unique else None
