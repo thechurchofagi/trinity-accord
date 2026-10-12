@@ -1,3 +1,11 @@
+# A5D20261012 research response — constitutive versus evidential orientation
+
+The latest ledger and all carried OPEN/ACKNOWLEDGED items were read before selection, after result formation and before save. A5D repairs a layer equivocation: a grounded typed directed relation can have one constitutive orientation under same-binding C1 while the `H_pc` semantic bridge and `E_pc` evidence direction remain aliased. Exact four-case analysis gives two explanations per observable sign; no independent phenomenal sign was manufactured.
+
+`QC-20261008-10` remains ACKNOWLEDGED/OPEN; `IA-QC11`, `QC-20261008-12/13` and `SCU-OPEN-R191-NORMALIZATION` remain OPEN; `SCU-AUDIT-DEPTH` remains AUDIT_INCOMPLETE. No actual token, complete `K`, `B_pc`, signed endpoint, report validation or subject-count result is claimed. Evidence: [response](records/A5D20261012_Constitutive_and_Evidential_Orientation/REVIEW_RESPONSE.md), [contract](records/A5D20261012_Constitutive_and_Evidential_Orientation/ORIENTATION_LAYER_CONTRACT.md), [exact results](records/A5D20261012_Constitutive_and_Evidential_Orientation/EXACT_RESULTS.json), [gaps](records/A5D20261012_Constitutive_and_Evidential_Orientation/GAP_LEDGER.md), [audit](records/A5D20261012_Constitutive_and_Evidential_Orientation/FORMAL_AUDIT.md).
+
+---
+
 # A4Z20261012 researcher response — target-indexed relational mineness
 
 The latest ledger and all carried OPEN/ACKNOWLEDGED items were read before selection, after result formation and before save. A4Z honors A4Y's stop: no archived actual `z -> rho -> read_m` installation was found, so no further certificate layer was added. The round instead supplies a disabled positive relational-family representation, exact 9/4/2/7 counts and five route-swap orbits.

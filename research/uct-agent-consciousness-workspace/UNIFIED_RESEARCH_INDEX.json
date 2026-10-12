@@ -2588,33 +2588,29 @@
     }
   ],
   "latest_followup_application": {
-    "id": "A5C20261012",
-    "version": "A5C-PCSA-v0.1.0",
-    "status": "CROSS_ORBIT_PROTOCOL_READY_SIGN_ANCHOR_NOT_INSTALLED",
+    "id": "A5D20261012",
+    "version": "A5D-ORIENTATION-v0.1.0",
+    "status": "DISABLED_CONSTITUTIVE_ORIENTATION_SEMANTIC_BRIDGE_OPEN",
     "enabled_as_established_premises": false,
-    "source": "records/A5C20261012_Practical_Continuity_Sign_Anchor/RESEARCH_NOTE.md",
-    "handoff": "records/A5C20261012_Practical_Continuity_Sign_Anchor/HANDOFF_ZH.md",
-    "work_log": "records/A5C20261012_Practical_Continuity_Sign_Anchor/WORK_LOG.md",
-    "claim_ledger": "records/A5C20261012_Practical_Continuity_Sign_Anchor/CLAIM_LEDGER.json",
-    "map_extension": "records/A5C20261012_Practical_Continuity_Sign_Anchor/MAP_EXTENSION.json",
-    "exact_results": "records/A5C20261012_Practical_Continuity_Sign_Anchor/EXACT_RESULTS.json",
+    "source": "records/A5D20261012_Constitutive_and_Evidential_Orientation/RESEARCH_NOTE.md",
+    "handoff": "records/A5D20261012_Constitutive_and_Evidential_Orientation/HANDOFF_ZH.md",
+    "work_log": "records/A5D20261012_Constitutive_and_Evidential_Orientation/WORK_LOG.md",
+    "claim_ledger": "records/A5D20261012_Constitutive_and_Evidential_Orientation/CLAIM_LEDGER.json",
+    "map_extension": "records/A5D20261012_Constitutive_and_Evidential_Orientation/MAP_EXTENSION.json",
+    "exact_results": "records/A5D20261012_Constitutive_and_Evidential_Orientation/EXACT_RESULTS.json",
     "parent_science": "A3V20261010",
-    "parent_followup": "A5B20261012",
+    "parent_followup": "A5C20261012",
     "completed_map": "UCT-MAP-v1.1.2",
     "scientific_delta": {
       "nodes": 0,
       "rules": 0,
       "contexts": 0
     },
-    "orientation_counts": {
-      "no_transport_no_anchor": 4,
-      "transport_no_anchor": 2,
-      "transport_and_signed_anchor": 1
-    },
-    "selected_target": "H_pc: felt practical continuity across a target-directed perturbation",
-    "independent_h_validation": false,
+    "selected_target": "H_pc",
     "actual_bodily_installation": false,
-    "standalone_manuscript": "HOLD_MERGE_A4V_TO_A5C_SYNTHESIS"
+    "independent_B_pc_validation": false,
+    "independent_E_pc_orientation": false,
+    "standalone_manuscript": "HOLD_STANDALONE"
   },
   "followup_applications": [
     {
@@ -3518,6 +3514,31 @@
       "independent_h_validation": false,
       "actual_bodily_installation": false,
       "standalone_manuscript": "HOLD_MERGE_A4V_TO_A5C_SYNTHESIS"
+    },
+    {
+      "id": "A5D20261012",
+      "version": "A5D-ORIENTATION-v0.1.0",
+      "status": "DISABLED_CONSTITUTIVE_ORIENTATION_SEMANTIC_BRIDGE_OPEN",
+      "enabled_as_established_premises": false,
+      "source": "records/A5D20261012_Constitutive_and_Evidential_Orientation/RESEARCH_NOTE.md",
+      "handoff": "records/A5D20261012_Constitutive_and_Evidential_Orientation/HANDOFF_ZH.md",
+      "work_log": "records/A5D20261012_Constitutive_and_Evidential_Orientation/WORK_LOG.md",
+      "claim_ledger": "records/A5D20261012_Constitutive_and_Evidential_Orientation/CLAIM_LEDGER.json",
+      "map_extension": "records/A5D20261012_Constitutive_and_Evidential_Orientation/MAP_EXTENSION.json",
+      "exact_results": "records/A5D20261012_Constitutive_and_Evidential_Orientation/EXACT_RESULTS.json",
+      "parent_science": "A3V20261010",
+      "parent_followup": "A5C20261012",
+      "completed_map": "UCT-MAP-v1.1.2",
+      "scientific_delta": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0
+      },
+      "selected_target": "H_pc",
+      "actual_bodily_installation": false,
+      "independent_B_pc_validation": false,
+      "independent_E_pc_orientation": false,
+      "standalone_manuscript": "HOLD_STANDALONE"
     }
   ],
   "scoped_foundational_reviews": [

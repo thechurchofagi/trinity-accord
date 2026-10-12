@@ -1,3 +1,9 @@
+# A5D20261012 disabled addendum — constitutive versus evidential orientation
+
+A5D adds no completed node, rule or context (0/0/0). On one fixed actual binding, standard isomorphism preservation plus C1 conditionally preserves a grounded typed directed `R(c,t)` as an experience-internal structural coordinate, provided complete relevant `K`, typed port direction and no admitted reversal symmetry. This does not identify the coordinate with `H_pc`. In the exact binary layer model, an observed endpoint--relation sign depends only on semantic-bridge complement xor evidence complement; each sign has two explanations. Grounding reduces eight orientation conventions to four but does not supply `B_pc` or signed `E_pc`. No actual token or complete signature is installed; no basal gate or owner selector is added. See [A5D audit](records/A5D20261012_Constitutive_and_Evidential_Orientation/FORMAL_AUDIT.md).
+
+---
+
 # A5C20261012 disabled addendum — practical-continuity sign-anchor boundary
 
 A5C adds no completed node, rule or context (0/0/0). In its declared two-domain/two-channel model, unconstrained domain orientation has four assignments; exact class-conditional transport leaves two because the simultaneous `H_pc` complement preserves both full observable tables; an independently signed anchor leaves one. This is standard latent-label symmetry, not a universal impossibility theorem. A prospective dual-handle/two-target mapping supplies distinct four-edge joint and two-edge strict-distributed `Pi` route-swap orbits with route-specific perturbations, but no actual bearer, route consumption, complete `K` or signed endpoint is installed. Thus `Pi/W/C` remain organizational coordinates; `B_pc^comp/B_pc^family/H_cf`, report and subject count remain separate/open, and controller-certificate expansion stops. See [A5C audit](records/A5C20261012_Practical_Continuity_Sign_Anchor/FORMAL_AUDIT.md).

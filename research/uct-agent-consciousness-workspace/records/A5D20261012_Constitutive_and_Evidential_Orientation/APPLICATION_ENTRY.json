@@ -1,0 +1,14 @@
+{
+  "id": "A5D20261012",
+  "title": "Constitutive and evidential orientation",
+  "version": "A5D-ORIENTATION-v0.1.0",
+  "type": "FOLLOWUP_APPLICATION",
+  "status": "DISABLED_CONSTITUTIVE_ORIENTATION_SEMANTIC_BRIDGE_OPEN",
+  "enabled_as_established_premises": false,
+  "formal_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+  "result": "A grounded typed directed relation has a conditionally preserved experience-internal orientation under C1, while H_pc interpretation and endpoint direction remain aliased.",
+  "selected_target": "H_pc",
+  "standalone_manuscript": "HOLD_STANDALONE",
+  "next": "Test one predeclared within-experience relational-invariance prediction under independently verified role reversal; retain B_pc open absent independent target/sign warrant."
+}
+

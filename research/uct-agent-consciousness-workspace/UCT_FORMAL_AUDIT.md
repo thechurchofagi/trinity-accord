@@ -1,3 +1,9 @@
+# A5D20261012 audit addendum
+
+A5D preserves the effective 913/424/261 graph and adds 0/0/0. Fresh traversal found zero unresolved deductive references, active cycles, non-list `all_of` or empty `all_of`. Eleven preserved external/pending context endpoints remain nondeductive schema differences, not proof edges. The A5D-C1 candidate requires actual `R`, complete relevant `K`, same-binding C1, typed direction and no admitted reversal symmetry simultaneously; none is claimed installed. The four `(s_B,s_E)` rows are alternative interpretations, not joint premises. Constitutive relation, named `H_pc`, endpoint evidence, actual bearer, finite view, conceptual self and report remain distinct. Structural/exact PASS does not establish C1, physical actuality, `B_pc`, endpoint calibration or historical semantic depth. See [A5D formal audit](records/A5D20261012_Constitutive_and_Evidential_Orientation/FORMAL_AUDIT.md).
+
+---
+
 # A5C20261012 audit addendum
 
 A5C preserves the effective 913/424/261 graph and adds 0/0/0. Fresh restoration and traversal found zero unresolved deductive references, active cycles, non-list `all_of` or empty `all_of`. The complement result is restricted to the declared binary latent model; the handle edge/orbit witness is an abstract and prospective apparatus relation. `H_pc`, evidence channels, orientation convention, actual `Pi`, `W/C`, complete `K`, report and conceptual self remain separate. The A5B bridge still requires all eight conjuncts on one instance, and A5C discharges none of `ACTUAL_PI`, `ACTUAL_WC`, `MATCH` or `SIGN`. Structural PASS and apparatus feasibility do not establish C1, actual installation, phenomenal calibration or historical semantic depth. See [A5C formal audit](records/A5C20261012_Practical_Continuity_Sign_Anchor/FORMAL_AUDIT.md).

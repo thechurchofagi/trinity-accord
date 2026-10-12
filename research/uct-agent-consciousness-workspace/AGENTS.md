@@ -1,3 +1,9 @@
+# A5D bounded follow-up — constitutive orientation is not evidential orientation
+
+A5D separates three layers that A5C left compressed. An independently grounded typed directed actual relation has one constitutive orientation relative to its bearer/target ports; under same-binding C1 and complete relevant `K`, that relation is preserved as an experience-internal structural coordinate. The named interpretation `B_pc` and fallible evidence direction remain separate. Exact four-case algebra shows each observed `E_pc`--`R` sign has two explanations: bridge/evidence both aligned or both complemented. Thus grounding removes one convention freedom but does not calibrate `H_pc`. No actual token, complete `K`, `B_pc` or signed endpoint is installed; 0/0/0 disabled application; all review items remain open. Next test only one predeclared within-experience relational-invariance prediction under independently verified role reversal. See [A5D handoff](records/A5D20261012_Constitutive_and_Evidential_Orientation/HANDOFF_ZH.md).
+
+---
+
 # Stable current navigation — UCT-INTEGRATION-v1.0.0
 
 Read RESEARCH_MASTER_GUIDE.md, START_HERE.md, CURRENT_STATE.json and UNIFIED_RESEARCH_INDEX.json first. Round-specific current/next notices below are preserved historical snapshots; they never override current state or the master guide. Do not prepend another round summary to every entry page. Maintain one canonical checkpoint registry and regenerate/synchronize pending identity sets, retaining disabled status and scientific/publication separation. See records/NAV20261010_Map_Integration/validate_current_map.py.

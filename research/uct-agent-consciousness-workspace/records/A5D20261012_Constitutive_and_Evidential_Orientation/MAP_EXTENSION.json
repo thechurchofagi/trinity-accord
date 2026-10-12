@@ -1,0 +1,10 @@
+{
+  "research_id": "A5D20261012",
+  "formal_graph_delta": {"nodes": 0, "rules": 0, "context_links": 0},
+  "enabled_as_established_premises": false,
+  "status": "DISABLED_SCOPED_APPLICATION",
+  "reason": "The results clarify the layer boundary and prove a bounded finite alias, but actual grounding, complete K, B_pc and signed evidence are not jointly discharged.",
+  "candidate_claim_ids": ["A5D-C1", "A5D-C2", "A5D-C3", "A5D-C4", "A5D-C5"],
+  "preserves": ["A:C1", "A:U1", "R157:SEMANTIC_RESIDUAL", "R172:EXPERIENCE_INTERNAL_ACTION_COORDINATE", "R173:FAMILIAR_MINENESS_BOUNDARY"]
+}
+

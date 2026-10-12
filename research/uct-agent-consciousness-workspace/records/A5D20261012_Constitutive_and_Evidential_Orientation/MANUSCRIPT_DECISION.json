@@ -1,0 +1,7 @@
+{
+  "research_id": "A5D20261012",
+  "decision": "HOLD_STANDALONE",
+  "reason": "The layer distinction and exact alias are useful internal foundations but do not install an actual token, validate B_pc, calibrate E_pc or warrant a separate publication claim.",
+  "publication_action": false
+}
+

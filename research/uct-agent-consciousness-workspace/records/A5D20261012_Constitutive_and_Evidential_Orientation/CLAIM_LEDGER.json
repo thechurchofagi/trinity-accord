@@ -1,0 +1,62 @@
+{
+  "schema": "uct-disabled-claim-ledger/1",
+  "research_id": "A5D20261012",
+  "claims": [
+    {
+      "id": "A5D-C1",
+      "type": "CONDITIONAL_APPLICATION_OF_STANDARD_ISOMORPHISM_PRESERVATION",
+      "statement": "On one fixed actual binding, if a complete relevant typed signature contains grounded directed R(c,t), C1 applies on that binding, typed direction is preserved and role reversal is not an admitted symmetry, then the experience-internal counterpart preserves the truth and direction of R.",
+      "domain": "Actual process tokens and declared many-sorted relational signatures with bearer/route and target/consumer ports.",
+      "all_of": ["ACTUAL_R", "COMPLETE_RELEVANT_K", "A:C1_SAME_BINDING", "TYPED_DIRECTION_PRESERVED", "NO_ADMITTED_ROLE_REVERSAL_SYMMETRY"],
+      "proof_or_source": "Standard relational-isomorphism preservation plus A:C1; ORIENTATION_LAYER_CONTRACT.md.",
+      "counterexamples_or_limits": ["finite view is incomplete", "relation chosen post hoc", "extrinsic predicate lacks a physical witness", "role reversal is an actual admitted symmetry", "no actual token"],
+      "status": "DISABLED_CONDITIONAL_NOT_ACTUALLY_INSTALLED",
+      "thought_experiment_role": "Role reversal and abacus/calculator separate typed relation from output code."
+    },
+    {
+      "id": "A5D-C2",
+      "type": "EXACT_NEGATIVE_IDENTIFICATION_RESULT",
+      "statement": "When H_pc=X_R xor s_B and evidence polarity is s_E, the observable E-R contrast identifies only s_B xor s_E; a positive contrast is compatible with (0,0) and (1,1), and a negative contrast with (0,1) and (1,0).",
+      "domain": "Declared binary orientation model with endpoint probabilities 4/5 and 1/5.",
+      "all_of": ["X_R_GROUNDED", "BINARY_SEMANTIC_COMPLEMENT_MODEL", "BINARY_EVIDENCE_COMPLEMENT_MODEL", "FIXED_ENDPOINT_RATES"],
+      "proof_or_source": "Four-case exact enumeration in check_orientation_layers.py and Boolean xor algebra.",
+      "counterexamples_or_limits": ["an independently warranted B_pc direction", "an independently warranted E_pc direction", "richer independently anchored information outside the model"],
+      "status": "EXACT_WITHIN_DECLARED_MODEL_NOT_GENERAL_IMPOSSIBILITY",
+      "thought_experiment_role": "Response-key inversion and copy/switch show why agreement is not joint validation."
+    },
+    {
+      "id": "A5D-C3",
+      "type": "BOUNDED_ACCOUNTING_COROLLARY",
+      "statement": "Grounding the constitutive direction fixes one of three complement bits, reducing eight layer conventions to four, but leaves two semantic/evidential explanations for each observable association sign.",
+      "domain": "The A5D three-layer binary model.",
+      "all_of": ["A5D-C1", "A5D-C2"],
+      "proof_or_source": "Exact 2^3 and 2^2 enumeration in check_orientation_layers.py.",
+      "counterexamples_or_limits": ["counts do not measure theory plausibility", "outside-model anchors may reduce the family"],
+      "status": "EXACT_BOUNDED_COROLLARY",
+      "thought_experiment_role": "Ancestor/formation prevents the remaining bridge from becoming a basal gate."
+    },
+    {
+      "id": "A5D-C4",
+      "type": "COUNTERMODEL",
+      "statement": "Copied endpoint and memory state can remain fixed while a current route switch changes the actual relation R, so endpoint identity does not constitute the experience-internal structural coordinate.",
+      "domain": "Two declared worlds with copied E=1 and R in {1,0}.",
+      "all_of": ["ENDPOINT_COPY", "CURRENT_ROUTE_SWITCH", "NO_ASSUMED_B_pc"],
+      "proof_or_source": "Two-world witness in EXACT_RESULTS.json.",
+      "counterexamples_or_limits": ["does not prove that every endpoint is unreliable", "requires the route switch to be independently verified"],
+      "status": "EXACT_COUNTERMODEL",
+      "thought_experiment_role": "Copy/switch/memory is the direct refuter."
+    },
+    {
+      "id": "A5D-C5",
+      "type": "SCOPED_UCT_INTERPRETATION",
+      "statement": "UCT may conditionally locate a grounded bearer-target relation inside the experience without an extra owner, while the identification of that relation with named felt practical continuity remains open.",
+      "domain": "UCT application under A5D-C1 and the existing C1/U1/R157 boundaries.",
+      "all_of": ["A5D-C1", "R157:SEMANTIC_RESIDUAL_RETAINED", "NO_UNIQUE_OWNER_INFERENCE"],
+      "proof_or_source": "UCT I v1.2, R157 and the separation proved in A5D-C2.",
+      "counterexamples_or_limits": ["not H_pc identity", "not endpoint calibration", "not an actual installation", "not a subject count"],
+      "status": "DISABLED_POSITIVE_INTERPRETATION_WITH_OPEN_BRIDGE",
+      "thought_experiment_role": "Human-realized-agent and overlap cases block an exclusive owner."
+    }
+  ]
+}
+

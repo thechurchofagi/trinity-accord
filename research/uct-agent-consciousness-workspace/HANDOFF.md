@@ -1,4 +1,10 @@
-# A5C20261012 current handoff — practical-continuity sign-anchor boundary
+# A5D20261012 current handoff — constitutive orientation versus evidence
+
+[English note](records/A5D20261012_Constitutive_and_Evidential_Orientation/RESEARCH_NOTE.md) · [orientation contract](records/A5D20261012_Constitutive_and_Evidential_Orientation/ORIENTATION_LAYER_CONTRACT.md) · [exact results](records/A5D20261012_Constitutive_and_Evidential_Orientation/EXACT_RESULTS.json) · [formal audit](records/A5D20261012_Constitutive_and_Evidential_Orientation/FORMAL_AUDIT.md) · [Chinese handoff](records/A5D20261012_Constitutive_and_Evidential_Orientation/HANDOFF_ZH.md). A grounded typed directed actual relation is conditionally preserved by C1 as an experience-internal coordinate, so A5C's endpoint complement does not erase constitutive direction. But `H_pc=X_R xor s_B` and evidence complement `s_E` are aliased: each observed sign has two `(s_B,s_E)` explanations. No `B_pc`, signed endpoint, actual token or complete `K` is installed. Formal delta 0/0/0; all review items remain open.
+
+---
+
+# A5C20261012 previous handoff — practical-continuity sign-anchor boundary
 
 [English note](records/A5C20261012_Practical_Continuity_Sign_Anchor/RESEARCH_NOTE.md) · [sign contract](records/A5C20261012_Practical_Continuity_Sign_Anchor/SIGN_ANCHOR_CONTRACT.md) · [dual-handle protocol](records/A5C20261012_Practical_Continuity_Sign_Anchor/DUAL_HANDLE_PROTOCOL.md) · [exact results](records/A5C20261012_Practical_Continuity_Sign_Anchor/EXACT_RESULTS.json) · [formal audit](records/A5C20261012_Practical_Continuity_Sign_Anchor/FORMAL_AUDIT.md) · [Chinese handoff](records/A5C20261012_Practical_Continuity_Sign_Anchor/HANDOFF_ZH.md). Exact two-domain/two-channel analysis shows that class-conditional transport reduces independent domain flips from four orientations to two but leaves one global `H_pc` complement; only an independently signed semantic anchor reduces the count to one. A dual-handle protocol physically realizes different joint/distributed `Pi` orbits, but it is prospective and supplies no phenomenal sign. `Pi/W/C` remain organizational coordinates, controller-certificate expansion stops, formal delta is 0/0/0 and all review items remain open.
 

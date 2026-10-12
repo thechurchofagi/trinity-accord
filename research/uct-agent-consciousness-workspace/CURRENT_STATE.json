@@ -96,7 +96,7 @@
     "nondeductive_context_links": 261,
     "total_review_items": 1608
   },
-  "pending_note": "A5C proves a bounded sign-anchor limit: exact class-conditional transport connects domains but leaves one global H_pc complement; only an independently signed semantic anchor orients it. A physically credible dual-handle protocol crosses the joint/distributed Pi orbits, but no participant or signed phenomenal endpoint is installed. Pi/W/C remain organizational coordinates and controller-certificate expansion stops.",
+  "pending_note": "A5D separates constitutive, semantic and evidential orientation. A grounded typed directed relation is conditionally preserved as an experience-internal coordinate under C1, but H_pc interpretation and endpoint polarity remain aliased: each observable association sign has two semantic/evidential explanations. No actual token, B_pc or signed E_pc is installed.",
   "publication_coverage": {
     "version": "UCT-PUB-v1.0.33",
     "entry": "PUBLICATION_COVERAGE.json",
@@ -106,10 +106,10 @@
     "latest_followup_application": "records/A4W20261012_Overlapping_Bearer_Centres/PUBLICATION_COVERAGE_UPDATE.json"
   },
   "latest_activity": {
-    "id": "A5C20261012",
+    "id": "A5D20261012",
     "type": "FOLLOWUP_APPLICATION",
-    "status": "DISABLED_SIGN_ANCHOR_BOUNDARY",
-    "source": "records/A5C20261012_Practical_Continuity_Sign_Anchor/RESEARCH_NOTE.md"
+    "status": "DISABLED_CONSTITUTIVE_ORIENTATION_SEMANTIC_BRIDGE_OPEN",
+    "source": "records/A5D20261012_Constitutive_and_Evidential_Orientation/RESEARCH_NOTE.md"
   },
   "latest_pending_research": {
     "id": "A3V20261010",
@@ -122,8 +122,8 @@
     "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
     "evidence_status": "BOUNDED_PRIMARY_SOURCE_APPLICATION_STOP_AND_R173_SCOPE_RETURN; ACTUAL_PREMISES_AND_H_OPEN"
   },
-  "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 effective objects received a fresh structural traversal. A5C manually rechecked C1/U1, P3/P6, R157, R166, R172, effective R173, R181, R197, R203, A3Y/A3Z and A4V-A5B. Deep full-history semantics remain AUDIT_INCOMPLETE.",
-  "next_priority": "A5C next: search only for an independently warranted positive H_pc evidence relation with a prospective inversion/copy-switch refuter and class-conditional transport. Do not add another controller certificate. The dual-handle experiment may proceed as organizational Pi/W/C work, but no H_pc inference is licensed without the sign anchor.",
+  "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 effective objects received a fresh structural traversal. A5D manually rechecked C1/U1, P3/P6, PHEN_TARGET, R157, R166, R172, effective R173, R181, R197, R203, A3Y/A3Z and A4V-A5C. Deep full-history semantics remain AUDIT_INCOMPLETE.",
+  "next_priority": "A5D next: formulate one predeclared within-experience relational-invariance prediction under an independently verified role reversal, fixing response coding, success, target identity and conceptual self. Require an independently warranted phenomenal target and unfitted failure outcome; otherwise retain B_pc open and do not resume controller-certificate expansion.",
   "latest_activity_persistence_after_A4W_science": {
     "science_commit": "0eddd9c06670a7357a8be5e38efc8af1f335405f",
     "science_tree": "f840be3dc13e384d8074f3e34500ea637fd42ced",
@@ -659,33 +659,29 @@
     }
   },
   "latest_followup_application": {
-    "id": "A5C20261012",
-    "version": "A5C-PCSA-v0.1.0",
-    "status": "CROSS_ORBIT_PROTOCOL_READY_SIGN_ANCHOR_NOT_INSTALLED",
+    "id": "A5D20261012",
+    "version": "A5D-ORIENTATION-v0.1.0",
+    "status": "DISABLED_CONSTITUTIVE_ORIENTATION_SEMANTIC_BRIDGE_OPEN",
     "enabled_as_established_premises": false,
-    "source": "records/A5C20261012_Practical_Continuity_Sign_Anchor/RESEARCH_NOTE.md",
-    "handoff": "records/A5C20261012_Practical_Continuity_Sign_Anchor/HANDOFF_ZH.md",
-    "work_log": "records/A5C20261012_Practical_Continuity_Sign_Anchor/WORK_LOG.md",
-    "claim_ledger": "records/A5C20261012_Practical_Continuity_Sign_Anchor/CLAIM_LEDGER.json",
-    "map_extension": "records/A5C20261012_Practical_Continuity_Sign_Anchor/MAP_EXTENSION.json",
-    "exact_results": "records/A5C20261012_Practical_Continuity_Sign_Anchor/EXACT_RESULTS.json",
+    "source": "records/A5D20261012_Constitutive_and_Evidential_Orientation/RESEARCH_NOTE.md",
+    "handoff": "records/A5D20261012_Constitutive_and_Evidential_Orientation/HANDOFF_ZH.md",
+    "work_log": "records/A5D20261012_Constitutive_and_Evidential_Orientation/WORK_LOG.md",
+    "claim_ledger": "records/A5D20261012_Constitutive_and_Evidential_Orientation/CLAIM_LEDGER.json",
+    "map_extension": "records/A5D20261012_Constitutive_and_Evidential_Orientation/MAP_EXTENSION.json",
+    "exact_results": "records/A5D20261012_Constitutive_and_Evidential_Orientation/EXACT_RESULTS.json",
     "parent_science": "A3V20261010",
-    "parent_followup": "A5B20261012",
+    "parent_followup": "A5C20261012",
     "completed_map": "UCT-MAP-v1.1.2",
     "scientific_delta": {
       "nodes": 0,
       "rules": 0,
       "contexts": 0
     },
-    "orientation_counts": {
-      "no_transport_no_anchor": 4,
-      "transport_no_anchor": 2,
-      "transport_and_signed_anchor": 1
-    },
-    "selected_target": "H_pc: felt practical continuity across a target-directed perturbation",
-    "independent_h_validation": false,
+    "selected_target": "H_pc",
     "actual_bodily_installation": false,
-    "standalone_manuscript": "HOLD_MERGE_A4V_TO_A5C_SYNTHESIS"
+    "independent_B_pc_validation": false,
+    "independent_E_pc_orientation": false,
+    "standalone_manuscript": "HOLD_STANDALONE"
   },
   "next_priority_before_FAM": "Independent signed fallible bodily-familiarity endpoint comparing familiar singleton retained route versus unfamiliar presently congruent route at fixed actual frame consumer/grain; separate cue familiarity, response fluency, ownership report and agency judgment. No more SPC expansion after named PMd feasibility stop.",
   "followup_applications": [

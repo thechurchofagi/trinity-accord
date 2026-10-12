@@ -1,5 +1,11 @@
 # UCT durable memory
 
+## A5D20261012 latest memory
+
+A5D separates constitutive, semantic and evidential orientation. For one independently grounded typed directed relation `R(c,t)`, complete relevant `K`, same-binding C1, preserved port direction and no admitted reversal symmetry, isomorphism preserves `R` as an experience-internal structural coordinate `X_R`. This is positive structural content inside experience, not a report or extra owner. It does not identify `X_R` with named felt practical continuity `H_pc`. Exact Boolean/rational analysis shows an observed `E_pc`--`R` sign depends only on semantic-bridge complement xor evidence complement: each sign has two explanations. Grounding reduces eight three-layer conventions to four but leaves `B_pc` and signed `E_pc` open. Copy/switch holds endpoint state fixed while current `R` changes. Formal delta 0/0/0; no actual token or complete `K`; all supervision items remain open. Next: one independently targeted relational-invariance prediction under verified role reversal, or retain `B_pc` open.
+
+---
+
 ## A5C20261012 latest memory
 
 A5C gives a bounded sign-anchor result for `H_pc`. In a two-domain/two-channel model, no transport/no anchor leaves 4 latent orientations; exact class-conditional transport leaves 2 because one global complement survives; only an independently signed semantic anchor leaves 1. Multiple channels, modality and agreement do not independently select the phenomenal positive pole. A physically credible dual-handle/two-target protocol crosses from a four-edge joint `Pi` orbit to a two-edge strict-distributed orbit and uses route-specific perturbations to measure `W/C`, with target identity, neutral instructions and report machinery fixed. The protocol is not executed and does not calibrate `H_pc`. Therefore `Pi/W/C` remain organizational coordinates, `B_pc^comp/B_pc^family/H_cf` remain OPEN, and controller-certificate expansion stops. Formal delta 0/0/0. Next: seek only an independently warranted signed `H_pc` channel with inversion/copy-switch refuter and class-conditional transport; organizational experiment may proceed without phenomenal inference.

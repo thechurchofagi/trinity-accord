@@ -1,0 +1,9 @@
+# A5D ROUND RECORD
+
+1. **User goal.** Continue the UCT experience--intelligence--self programme from actual organization, make one substantive advance on bodily/action-related mineness, preserve C1/U1 and the experience/conceptual-I/report firewalls, and leave a recoverable, criticizable record.
+2. **One concrete unresolved question.** Does A5C's unorientable measurement label imply that UCT also lacks a positively oriented experience-internal practical relation, or can constitutive orientation be fixed by an independently grounded actual directed relation while the named phenomenal measurand and its evidence remain unoriented?
+3. **Relevant nodes and fixed sources.** A:P3, A:P6, A:C1, A:U1, A:PHEN_TARGET; R157:COORDINATE_TRANSPORT, R157:SEMANTIC_RESIDUAL and R157:MINENESS_BRIDGE_SCHEMA; R172:EXPERIENCE_INTERNAL_ACTION_COORDINATE; effective R173:FAMILIAR_MINENESS_BOUNDARY; R181, R197, R203, A3Y, A3Z, A4V--A5C; UCT I v1.2 sections 3.4, 3.5, 4, 5.6, 8.11--8.14 and 14.2--14.10.
+4. **Planned addition or correction.** Introduce a typed distinction between (i) orientation internal to a grounded directed actual relation and its C1 structural counterpart, (ii) interpretation of that coordinate as the selected named feeling `H_pc`, and (iii) fallible evidence about `H_pc`. Prove a bounded separation result and test it with relation reversal, response-key inversion, duplicate/copy-switch and route replacement.
+5. **Deliverable.** English research note and orientation contract; exact checker and results; stable claim and gap ledgers; thought-experiment matrix; fresh map audit with no automatic promotion; Chinese handoff; verified GitHub and persistent incremental recovery copies.
+
+Initial direction check: the task is bounded to the experience--organization bridge. It will not add another controller certificate, a basal experience gate, an exclusive owner, a report criterion, or a current-assistant consciousness verdict.
