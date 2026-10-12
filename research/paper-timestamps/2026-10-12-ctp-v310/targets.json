@@ -1,0 +1,23 @@
+{
+  "batch": "2026-10-12-ctp-v310",
+  "paper_count": 1,
+  "papers": [
+    {
+      "doi": "10.5281/zenodo.23314212",
+      "pdfs": [
+        {
+          "bytes": 187669,
+          "name": "Before_We_Know_What_We_Will_Become_v3.1.0.pdf",
+          "role": "Complete English v3.1.0 conceptual/formal preprint",
+          "sha256": "ee27e2e5e6b738481641917e080a00fc3a652a392cd26af1c3052416bf8f62da"
+        }
+      ],
+      "receipt_path": "research/civilizational-testament/versions/v3.1.0/publication-record.json",
+      "record_id": 23314212,
+      "report": "CTP-2026-01",
+      "title": "Before We Know What We Will Become: Historical Witness, Human Continuity, and Open Inheritance under Transformative AI",
+      "version": "3.1.0"
+    }
+  ],
+  "schema": "trinityaccord.paper-ots-targets.v1"
+}
