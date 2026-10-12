@@ -1,0 +1,9 @@
+{
+  "expected_manifest_sha256": "23794c491e48669645e6f8d43588caadfea2d30a5ca7553521864d6eb206f4f0",
+  "no_OTS_or_Arweave_in_this_step": true,
+  "once": true,
+  "owner_instruction": "Publish CD-v1.1.0 according to Trinity Accord repository workflow",
+  "paper_id": "CD-v1.1.0",
+  "schema": "cd-v110-zenodo-authorization/1",
+  "status": "AUTHORIZED_FOR_ONE_PUBLIC_ZENODO_PREPRINT"
+}
