@@ -1,4 +1,10 @@
-# A5A20261012 current handoff — route-orbit contrast barrier
+# A5B20261012 current handoff — cross-route compensation endpoint
+
+[English note](records/A5B20261012_Cross_Route_Compensation_Endpoint/RESEARCH_NOTE.md) · [endpoint contract](records/A5B20261012_Cross_Route_Compensation_Endpoint/ENDPOINT_CONTRACT.md) · [exact results](records/A5B20261012_Cross_Route_Compensation_Endpoint/EXACT_RESULTS.json) · [formal audit](records/A5B20261012_Cross_Route_Compensation_Endpoint/FORMAL_AUDIT.md) · [Chinese handoff](records/A5B20261012_Cross_Route_Compensation_Endpoint/HANDOFF_ZH.md). A5B predeclares `H_pc`, felt practical continuity across a target-directed perturbation, independently of source-count wording. `C` is a separate compensation endpoint under `W`, not `Pi` or feeling. Exact 36/16/25/9 world counts show that one-way faithfulness does not identify route orbits and even biconditional targetwise faithfulness leaves a two-orbit `C=00` ambiguity. The candidate is prospectively refutable but has no independently signed endpoint or actual installation. Formal delta 0/0/0; `B_pc^comp/B_pc^family/H_cf` remain open.
+
+---
+
+# A5A20261012 previous handoff — route-orbit contrast barrier
 
 [English note](records/A5A20261012_Route_Orbit_Contrast_Barrier/RESEARCH_NOTE.md) · [contract](records/A5A20261012_Route_Orbit_Contrast_Barrier/ROUTE_ORBIT_CONTRAST_CONTRACT.md) · [exact results](records/A5A20261012_Route_Orbit_Contrast_Barrier/EXACT_RESULTS.json) · [formal audit](records/A5A20261012_Route_Orbit_Contrast_Barrier/FORMAL_AUDIT.md) · [Chinese handoff](records/A5A20261012_Route_Orbit_Contrast_Barrier/HANDOFF_ZH.md). A5A proves that joint-source and strict-distribution status defined only from Pi cannot vary inside one route-label orbit. The repaired Pi-only comparison varies the orbit while fixing target identities, conceptual self and report; a same-orbit residual must type additional actual W. Endpoint screening found no independently signed phenomenal target, so B_pc^family/H_cf remain open. Formal delta 0/0/0.
 

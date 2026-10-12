@@ -2588,30 +2588,34 @@
     }
   ],
   "latest_followup_application": {
-    "id": "A5A20261012",
-    "version": "A5A-ROCB-v0.1.0",
-    "status": "PROVED_PI_ONLY_ORBIT_INVARIANCE_AND_NEGATIVE_ENDPOINT_SCREEN",
+    "id": "A5B20261012",
+    "version": "A5B-CRCE-v0.1.0",
+    "status": "PROSPECTIVE_H_PC_TARGET_WITH_EXACT_COMPENSATION_FAITHFULNESS_BOUNDARY",
     "enabled_as_established_premises": false,
-    "source": "records/A5A20261012_Route_Orbit_Contrast_Barrier/RESEARCH_NOTE.md",
-    "handoff": "records/A5A20261012_Route_Orbit_Contrast_Barrier/HANDOFF_ZH.md",
-    "work_log": "records/A5A20261012_Route_Orbit_Contrast_Barrier/WORK_LOG.md",
-    "claim_ledger": "records/A5A20261012_Route_Orbit_Contrast_Barrier/CLAIM_LEDGER.json",
-    "map_extension": "records/A5A20261012_Route_Orbit_Contrast_Barrier/MAP_EXTENSION.json",
-    "exact_results": "records/A5A20261012_Route_Orbit_Contrast_Barrier/EXACT_RESULTS.json",
+    "source": "records/A5B20261012_Cross_Route_Compensation_Endpoint/RESEARCH_NOTE.md",
+    "handoff": "records/A5B20261012_Cross_Route_Compensation_Endpoint/HANDOFF_ZH.md",
+    "work_log": "records/A5B20261012_Cross_Route_Compensation_Endpoint/WORK_LOG.md",
+    "claim_ledger": "records/A5B20261012_Cross_Route_Compensation_Endpoint/CLAIM_LEDGER.json",
+    "map_extension": "records/A5B20261012_Cross_Route_Compensation_Endpoint/MAP_EXTENSION.json",
+    "exact_results": "records/A5B20261012_Cross_Route_Compensation_Endpoint/EXACT_RESULTS.json",
     "parent_science": "A3V20261010",
-    "parent_followup": "A4Z20261012",
+    "parent_followup": "A5A20261012",
     "completed_map": "UCT-MAP-v1.1.2",
     "scientific_delta": {
       "nodes": 0,
       "rules": 0,
       "contexts": 0
     },
-    "covered_relation_matrices": 9,
-    "route_label_swap_orbits": 5,
-    "same_orbit_joint_or_distributed_contrasts": 0,
+    "finite_world_counts": {
+      "unconstrained": 36,
+      "no_spurious": 16,
+      "no_missed": 25,
+      "biconditional": 9
+    },
+    "selected_target": "H_pc: felt practical continuity across a target-directed perturbation",
     "independent_h_validation": false,
     "actual_bodily_installation": false,
-    "standalone_manuscript": "HOLD_MERGE_A4V_TO_A5A_SYNTHESIS"
+    "standalone_manuscript": "HOLD_MERGE_A4V_TO_A5B_SYNTHESIS"
   },
   "followup_applications": [
     {
@@ -3456,6 +3460,36 @@
       "independent_h_validation": false,
       "actual_bodily_installation": false,
       "standalone_manuscript": "HOLD_MERGE_A4V_TO_A5A_SYNTHESIS"
+    },
+    {
+      "id": "A5B20261012",
+      "version": "A5B-CRCE-v0.1.0",
+      "status": "PROSPECTIVE_H_PC_TARGET_WITH_EXACT_COMPENSATION_FAITHFULNESS_BOUNDARY",
+      "enabled_as_established_premises": false,
+      "source": "records/A5B20261012_Cross_Route_Compensation_Endpoint/RESEARCH_NOTE.md",
+      "handoff": "records/A5B20261012_Cross_Route_Compensation_Endpoint/HANDOFF_ZH.md",
+      "work_log": "records/A5B20261012_Cross_Route_Compensation_Endpoint/WORK_LOG.md",
+      "claim_ledger": "records/A5B20261012_Cross_Route_Compensation_Endpoint/CLAIM_LEDGER.json",
+      "map_extension": "records/A5B20261012_Cross_Route_Compensation_Endpoint/MAP_EXTENSION.json",
+      "exact_results": "records/A5B20261012_Cross_Route_Compensation_Endpoint/EXACT_RESULTS.json",
+      "parent_science": "A3V20261010",
+      "parent_followup": "A5A20261012",
+      "completed_map": "UCT-MAP-v1.1.2",
+      "scientific_delta": {
+        "nodes": 0,
+        "rules": 0,
+        "contexts": 0
+      },
+      "finite_world_counts": {
+        "unconstrained": 36,
+        "no_spurious": 16,
+        "no_missed": 25,
+        "biconditional": 9
+      },
+      "selected_target": "H_pc: felt practical continuity across a target-directed perturbation",
+      "independent_h_validation": false,
+      "actual_bodily_installation": false,
+      "standalone_manuscript": "HOLD_MERGE_A4V_TO_A5B_SYNTHESIS"
     }
   ],
   "scoped_foundational_reviews": [

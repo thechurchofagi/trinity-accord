@@ -96,7 +96,7 @@
     "nondeductive_context_links": 261,
     "total_review_items": 1608
   },
-  "pending_note": "A5A proves that Pi-only joint-source and strict-distribution predicates are constant on route-label orbits. The previously requested same-orbit joint/distributed contrast is unsatisfiable. A valid Pi-only test must vary the orbit, or separately type additional actual structure W. Actual Pi, complete K, endpoint semantics, signed reliability, B_pc^family and H_cf remain open.",
+  "pending_note": "A5B predeclares H_pc, felt practical continuity across a perturbation, without source-count wording. The compensation vector C is a separate organizational endpoint. Exact 36/16/25/9 world counts show that C does not identify Pi without faithfulness premises, and even biconditional targetwise faithfulness does not distinguish global-single-owner from strict-distributed Pi when C=00. B_pc^comp, B_pc^family and H_cf remain open.",
   "publication_coverage": {
     "version": "UCT-PUB-v1.0.33",
     "entry": "PUBLICATION_COVERAGE.json",
@@ -106,10 +106,10 @@
     "latest_followup_application": "records/A4W20261012_Overlapping_Bearer_Centres/PUBLICATION_COVERAGE_UPDATE.json"
   },
   "latest_activity": {
-    "id": "A5A20261012",
+    "id": "A5B20261012",
     "type": "FOLLOWUP_APPLICATION",
-    "status": "DISABLED_ROUTE_ORBIT_CONTRAST_BARRIER",
-    "source": "records/A5A20261012_Route_Orbit_Contrast_Barrier/RESEARCH_NOTE.md"
+    "status": "DISABLED_CROSS_ROUTE_COMPENSATION_ENDPOINT",
+    "source": "records/A5B20261012_Cross_Route_Compensation_Endpoint/RESEARCH_NOTE.md"
   },
   "latest_pending_research": {
     "id": "A3V20261010",
@@ -122,8 +122,8 @@
     "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
     "evidence_status": "BOUNDED_PRIMARY_SOURCE_APPLICATION_STOP_AND_R173_SCOPE_RETURN; ACTUAL_PREMISES_AND_H_OPEN"
   },
-  "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 effective objects retain a fresh per-ID structural traversal. A5A manually rechecked C1/U1, P3/P6, R157, effective R173, R181, R197, A3Z, A4M/A4N and A4V-A4Z. Deep full-history semantics remain AUDIT_INCOMPLETE.",
-  "next_priority": "A5A next: predeclare one noncircular selected target for route-orbit-sensitive practical mineness, independently of source-count wording, with one prospective refuter across a cross-orbit Pi contrast that fixes target identity, conceptual self and report. If unavailable, retain B_pc^family/H_cf as OPEN and keep Pi as an organizational coordinate.",
+  "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 effective objects received a fresh structural traversal. A5B manually rechecked C1/U1, P3/P6, R157, R159, R166, R172, effective R173, R181, R197, A3Z and A4V-A5A. Deep full-history semantics remain AUDIT_INCOMPLETE.",
+  "next_priority": "A5B next: independently justify the positive sign and class-conditional reliability of E_pc for H_pc, then specify one physically credible cross-orbit Pi/W perturbation with target identity, conceptual self and report mechanism fixed. If either cannot be installed, retain Pi and C as organizational coordinates and do not expand controller certificates.",
   "latest_activity_persistence_after_A4W_science": {
     "science_commit": "0eddd9c06670a7357a8be5e38efc8af1f335405f",
     "science_tree": "f840be3dc13e384d8074f3e34500ea637fd42ced",
@@ -632,30 +632,34 @@
     }
   },
   "latest_followup_application": {
-    "id": "A5A20261012",
-    "version": "A5A-ROCB-v0.1.0",
-    "status": "PROVED_PI_ONLY_ORBIT_INVARIANCE_AND_NEGATIVE_ENDPOINT_SCREEN",
+    "id": "A5B20261012",
+    "version": "A5B-CRCE-v0.1.0",
+    "status": "PROSPECTIVE_H_PC_TARGET_WITH_EXACT_COMPENSATION_FAITHFULNESS_BOUNDARY",
     "enabled_as_established_premises": false,
-    "source": "records/A5A20261012_Route_Orbit_Contrast_Barrier/RESEARCH_NOTE.md",
-    "handoff": "records/A5A20261012_Route_Orbit_Contrast_Barrier/HANDOFF_ZH.md",
-    "work_log": "records/A5A20261012_Route_Orbit_Contrast_Barrier/WORK_LOG.md",
-    "claim_ledger": "records/A5A20261012_Route_Orbit_Contrast_Barrier/CLAIM_LEDGER.json",
-    "map_extension": "records/A5A20261012_Route_Orbit_Contrast_Barrier/MAP_EXTENSION.json",
-    "exact_results": "records/A5A20261012_Route_Orbit_Contrast_Barrier/EXACT_RESULTS.json",
+    "source": "records/A5B20261012_Cross_Route_Compensation_Endpoint/RESEARCH_NOTE.md",
+    "handoff": "records/A5B20261012_Cross_Route_Compensation_Endpoint/HANDOFF_ZH.md",
+    "work_log": "records/A5B20261012_Cross_Route_Compensation_Endpoint/WORK_LOG.md",
+    "claim_ledger": "records/A5B20261012_Cross_Route_Compensation_Endpoint/CLAIM_LEDGER.json",
+    "map_extension": "records/A5B20261012_Cross_Route_Compensation_Endpoint/MAP_EXTENSION.json",
+    "exact_results": "records/A5B20261012_Cross_Route_Compensation_Endpoint/EXACT_RESULTS.json",
     "parent_science": "A3V20261010",
-    "parent_followup": "A4Z20261012",
+    "parent_followup": "A5A20261012",
     "completed_map": "UCT-MAP-v1.1.2",
     "scientific_delta": {
       "nodes": 0,
       "rules": 0,
       "contexts": 0
     },
-    "covered_relation_matrices": 9,
-    "route_label_swap_orbits": 5,
-    "same_orbit_joint_or_distributed_contrasts": 0,
+    "finite_world_counts": {
+      "unconstrained": 36,
+      "no_spurious": 16,
+      "no_missed": 25,
+      "biconditional": 9
+    },
+    "selected_target": "H_pc: felt practical continuity across a target-directed perturbation",
     "independent_h_validation": false,
     "actual_bodily_installation": false,
-    "standalone_manuscript": "HOLD_MERGE_A4V_TO_A5A_SYNTHESIS"
+    "standalone_manuscript": "HOLD_MERGE_A4V_TO_A5B_SYNTHESIS"
   },
   "next_priority_before_FAM": "Independent signed fallible bodily-familiarity endpoint comparing familiar singleton retained route versus unfamiliar presently congruent route at fixed actual frame consumer/grain; separate cue familiarity, response fluency, ownership report and agency judgment. No more SPC expansion after named PMd feasibility stop.",
   "followup_applications": [

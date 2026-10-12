@@ -1,3 +1,9 @@
+# A5B20261012 audit addendum
+
+A5B preserves the effective 913/424/261 graph and adds 0/0/0. Fresh restoration and traversal found zero unresolved deductive references, active cycles, non-list `all_of` or empty `all_of`. The candidate bridge requires `TARGET AND CROSS_ORBIT AND ACTUAL_PI AND ACTUAL_WC AND MATCH AND SIGN AND DIRECTION AND COPY_SWITCH` on one binding. `Pi`, `W`, `C`, complete `K`, `H_pc`, `E_pc`, conceptual self, report and subject count remain distinct. Exact 36/16/25/9 counts establish only finite-model ambiguity; they do not install a route, validate endpoint sign, prove C1 or close historical semantic depth. The inherited integration-era navigation validator's obsolete latest-research equality assertion is retained as a failure and not silently repaired. See [A5B formal audit](records/A5B20261012_Cross_Route_Compensation_Endpoint/FORMAL_AUDIT.md).
+
+---
+
 # A5A20261012 audit addendum
 
 A5A preserves the effective 913/424/261 graph and adds 0/0/0. Fresh traversal accessed every node and found zero unresolved deductive references, active cycles, non-list `all_of` or empty `all_of`. The originally proposed conjunction—same route-label orbit plus different Pi-only joint/distributed status—is jointly unsatisfiable by route-permutation invariance. The satisfiable repairs either vary the orbit or add separately typed actual structure W. Abstract Pi, actual Pi, complete K, W, selected experience, endpoint, conceptual self, report and subject count remain distinct. Structural and finite-model PASS do not establish physical actuality, C1, bridge truth or full historical semantic depth. See [A5A formal audit](records/A5A20261012_Route_Orbit_Contrast_Barrier/FORMAL_AUDIT.md).

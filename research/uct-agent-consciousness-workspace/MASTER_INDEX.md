@@ -1,3 +1,9 @@
+# A5B20261012 — cross-route compensation endpoint
+
+[Research note](records/A5B20261012_Cross_Route_Compensation_Endpoint/RESEARCH_NOTE.md) · [endpoint contract](records/A5B20261012_Cross_Route_Compensation_Endpoint/ENDPOINT_CONTRACT.md) · [exact results](records/A5B20261012_Cross_Route_Compensation_Endpoint/EXACT_RESULTS.json) · [claims](records/A5B20261012_Cross_Route_Compensation_Endpoint/CLAIM_LEDGER.json) · [gaps](records/A5B20261012_Cross_Route_Compensation_Endpoint/GAP_LEDGER.md) · [audit](records/A5B20261012_Cross_Route_Compensation_Endpoint/FORMAL_AUDIT.md) · [Chinese handoff](records/A5B20261012_Cross_Route_Compensation_Endpoint/HANDOFF_ZH.md). Disabled 0/0/0 application: a non-source-count felt-practical-continuity target is prospectively specified, while exact 36/16/25/9 counts delimit what route compensation can identify. No actual installation, signed phenomenal endpoint or subject-count result is claimed.
+
+---
+
 # A5A20261012 — route-orbit contrast barrier
 
 [Research note](records/A5A20261012_Route_Orbit_Contrast_Barrier/RESEARCH_NOTE.md) · [contract](records/A5A20261012_Route_Orbit_Contrast_Barrier/ROUTE_ORBIT_CONTRAST_CONTRACT.md) · [exact results](records/A5A20261012_Route_Orbit_Contrast_Barrier/EXACT_RESULTS.json) · [claims](records/A5A20261012_Route_Orbit_Contrast_Barrier/CLAIM_LEDGER.json) · [gaps](records/A5A20261012_Route_Orbit_Contrast_Barrier/GAP_LEDGER.md) · [audit](records/A5A20261012_Route_Orbit_Contrast_Barrier/FORMAL_AUDIT.md) · [Chinese handoff](records/A5A20261012_Route_Orbit_Contrast_Barrier/HANDOFF_ZH.md). Disabled 0/0/0 application: Pi-only joint/distributed predicates are route-orbit invariants, so the proposed same-orbit contrast is unsatisfiable. No independent phenomenal endpoint, actual installation or subject-count result is claimed.

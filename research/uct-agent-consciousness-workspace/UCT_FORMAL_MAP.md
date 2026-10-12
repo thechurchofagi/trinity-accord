@@ -1,3 +1,9 @@
+# A5B20261012 disabled addendum — cross-route compensation endpoint
+
+A5B adds no completed node, rule or context (0/0/0). It separates actual target participation `Pi`, separately actual perturbation/compensation organization `W`, targetwise compensation endpoint `C`, selected felt practical continuity `H_pc` and fallible evidence `E_pc`. In the exact two-route/two-target family, unconstrained `(Pi,C)` has 36 worlds; no-spurious, no-missed and biconditional targetwise faithfulness leave 16, 25 and 9. One-way conditions retain all five orbits at a boundary endpoint, while even `C=J(Pi)` leaves `C=00` compatible with both global-single-owner and strict-distributed orbits. Thus `C` may be a noncircular organizational probe only under explicit faithfulness and still does not identify full `Pi` or `H_pc`. Conditional C1/R157 transport applies only to independently grounded complete actual relations; `B_pc^comp/B_pc^family/H_cf`, actual installation, signed reliability, report and subject count remain separate/open. See [A5B audit](records/A5B20261012_Cross_Route_Compensation_Endpoint/FORMAL_AUDIT.md).
+
+---
+
 # A4Z20261012 disabled addendum — target-indexed relational mineness
 
 A4Z adds no completed node, rule or context (0/0/0). Its disabled candidate `Pi subseteq R x T` records which actual bearer-centred routes participate in which selected targets on one fixed P/I/K/event binding. The two-route/two-target family has 9 covered matrices, 4 target-locally unique matrices, only 2 global-owner matrices, and 5 structural orbits under route-label swap. Thus coverage is information-losing and local uniqueness does not imply one global owner. Only an independently grounded complete relation may be conditionally transported by C1/R157; `B_pc^family`, `H_cf`, conceptual self, report and subject count remain separate/open. See [A4Z audit](records/A4Z20261012_Target_Relational_Mineness_Family/FORMAL_AUDIT.md).

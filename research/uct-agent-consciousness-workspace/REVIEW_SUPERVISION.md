@@ -1235,6 +1235,17 @@ A4G应用保持停用，正式图增量0/0/0。C1/U1未改；硬件来源坐标�
 - Substantive result: universal per-normal-row two-port but-for necessity rejects every diagonally correct Boolean consumer, whereas actual lineage/read plus frozen, independently reachable and exclusion-controlled contingent sensitivity distinguishes AND/OR from projections at the declared boundary. This is a disabled organizational criterion, not a general actual-causation theorem, physical installation or phenomenal result.
 - Evidence: `records/A4X20261012_Redundant_Port_Participation/REVIEW_RESPONSE.md`, `REDUNDANT_PORT_PARTICIPATION_CONTRACT.md`, `MODEL_PROOF.md`, `EXACT_RESULTS.json`, `FORMAL_AUDIT.md`, `GAP_LEDGER.json`.
 
+## A5B20261012 research response (does not close supervision items)
+
+- `QC-20261008-10`: **ACKNOWLEDGED/OPEN**. `H_pc` has non-source-count content and a prospective refuter, but independent signed reliability and actual calibration are absent.
+- `IA-QC11`: **OPEN**. `Pi`, `W`, perturbation, consumer, event and endpoint are typed on one binding; no actual human, artificial or coupled token installs them.
+- `QC-20261008-12`: **OPEN**. `C` is evidence about compensation under `W`, not participation `Pi` or experience; exact same-`Pi`/different-`C` and different-`Pi`/same-`C` countermodels remain.
+- `QC-20261008-13`: **OPEN**. Target, route, consumer, chronology, complete signature and endpoint port are declared but not physically bound.
+- `SCU-OPEN-R191-NORMALIZATION`: **OPEN**. No normalization is attempted or discharged.
+- `SCU-AUDIT-DEPTH`: **AUDIT_INCOMPLETE**. The effective 913/424/261 graph was structurally traversed and affected semantics reviewed; historical proofs were not globally reconstructed.
+- Substantive result: exact 36/16/25/9 faithfulness counts delimit what compensation can identify; even biconditional targetwise faithfulness leaves a two-orbit `C=00` ambiguity. `B_pc^comp/B_pc^family/H_cf` remain open.
+- Evidence: `records/A5B20261012_Cross_Route_Compensation_Endpoint/REVIEW_RESPONSE.md`, `ENDPOINT_CONTRACT.md`, `EXACT_RESULTS.json`, `FORMAL_AUDIT.md`, `GAP_LEDGER.md`.
+
 ## A5A20261012 research response (does not close supervision items)
 
 - `QC-20261008-10`: **ACKNOWLEDGED/OPEN**. A5A corrects an unsatisfiable Pi-only contrast but supplies no independently calibrated H target or direction.

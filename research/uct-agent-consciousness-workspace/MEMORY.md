@@ -1,5 +1,11 @@
 # UCT durable memory
 
+## A5B20261012 latest memory
+
+A5B supplies a non-source-count selected target: `H_pc`, whether target-directed action remains immediately carryable-through from within across a fixed perturbation. `Pi` is actual route participation; `W` is separate perturbation/compensation organization; `C` is its targetwise compensation endpoint; `E_pc` is fallible evidence. Exact two-route/two-target enumeration has 36 unconstrained `(Pi,C)` worlds. No-spurious, no-missed and biconditional targetwise faithfulness leave 16, 25 and 9. One-way faithfulness has maximally ambiguous boundary vectors, and even `C=J(Pi)` leaves `C=00` compatible with two orbits—global-single-owner and strict-distributed. Thus compensation can prospectively probe targetwise jointness under explicit faithfulness, but it does not identify full `Pi` or `H_pc`. `B_pc^comp/B_pc^family/H_cf`, actual installation and signed endpoint calibration remain OPEN. Formal delta 0/0/0. Next: independently sign `E_pc` and specify one physically credible cross-orbit `Pi/W` manipulation, or retain organizational-only interpretation.
+
+---
+
 ## A5A20261012 latest memory
 
 A5A corrects A4Z's proposed next contrast. If joint-source and strict-distribution are defined only from the target-indexed relation Pi, they are invariant under route relabeling and therefore cannot differ inside one route-label orbit. Exact two-route/two-target enumeration retains 9 covered relations and 5 orbits; joint-target counts 0/1/2 occur in 4/4/1 relations, strict distribution occurs in 2, and same-orbit joint/distributed contrasts are zero. A valid Pi-only experiment must vary the orbit while fixing target identity, conceptual self and report, or else explicitly add separately actual structure W. Direct source-count wording is circular; generic ratings and effort/adaptation remain fallible proxies without R197-compliant semantics and sign. Actual Pi, complete K, B_pc^family, H_cf, report and subject count remain open. Formal delta 0/0/0. Next: one noncircular route-orbit-sensitive target with a prospective refuter, or retain Pi as an organizational coordinate.
