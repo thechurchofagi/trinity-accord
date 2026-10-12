@@ -1,0 +1,28 @@
+{
+  "schema": "uct-recovery-manifest/1",
+  "research_id": "A5E20261012",
+  "scope": "36_PATH_INCREMENT_ONLY_NOT_FULL_REPOSITORY_OR_HISTORY",
+  "base_commit": "df30ec41e5dbf90a63c2989941057ebfc5fda4e9",
+  "science_commit": "6522418f34ec5e8be1322bcd0ce183ca750c724b",
+  "science_tree": "2bf0a518ddd3b37bfddfbe4323f7d10704df65d8",
+  "archive_library_file_id": "libfile_2e528d4c03b881918b25162999c77b56",
+  "archive_sha256": "90b3e4622257560482ab7ad2f0463f8da6b6e38c843e032dc9925fc4116ac67e",
+  "manifest_library_file_id": "libfile_5c84a4c88ca48191b69ad85bc30b5932",
+  "manifest_sha256": "d5836fb0bccb0a40a4f2ef3414f1eb1f353f11d17adafd1e4b8ced3557b9a006",
+  "fixed_master_library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+  "verified_master_science_version": 169,
+  "steps": [
+    "Read the latest fixed master handoff and fetch the branch; prefer the verified science commit if available.",
+    "If Git science is unavailable, check out base_commit exactly and extract the 36-path archive at repository root.",
+    "Verify every path against the external manifest and require git write-tree to equal science_tree; never apply over a newer tree.",
+    "Run check_role_automorphism.py and require counts 64/8/56, invariant/reversing split 16/16 and parameter covariance.",
+    "Run audit_map.py against the effective restored map and require 913/424/261, zero unresolved references, zero cycles and zero bad all_of.",
+    "Manually recheck actual-token, complete-signature, parameter-transport, evidence-level and no-converse boundaries."
+  ],
+  "verified": {
+    "remote_science_head_read_back": true,
+    "library_archive_byte_equal": true,
+    "library_manifest_byte_equal": true,
+    "replay_tree_equal": true
+  }
+}

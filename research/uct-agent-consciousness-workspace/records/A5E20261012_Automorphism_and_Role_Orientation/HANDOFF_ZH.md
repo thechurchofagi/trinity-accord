@@ -22,7 +22,9 @@ A5E 修正了 A5D 末尾过宽的下一题。若一个角色交换真是同一�
 
 ## 保存与恢复
 
-GitHub 科学提交、最终收据提交、固定主交接版本和增量备份 ID 将在实际持久化并回读核验后写入 `PERSISTENCE_RECEIPT.json` 与固定主交接；不得用本段占位文字声称成功。
+GitHub 科学提交 `6522418f34ec5e8be1322bcd0ce183ca750c724b`，树 `2bf0a518ddd3b37bfddfbe4323f7d10704df65d8`，父提交 `df30ec41e5dbf90a63c2989941057ebfc5fda4e9`；expected-SHA 非强制快进及关键文件回读均成功。固定主交接同一 Library 身份已更新并回读 v169。
+
+36 路径增量不是完整仓库或完整工作集：`UCT_A5E_Increment_20261012.zip`，Library ID `libfile_2e528d4c03b881918b25162999c77b56`，247125 字节，SHA256 `90b3e4622257560482ab7ad2f0463f8da6b6e38c843e032dc9925fc4116ac67e`；清单 Library ID `libfile_5c84a4c88ca48191b69ad85bc30b5932`，11269 字节，SHA256 `d5836fb0bccb0a40a4f2ef3414f1eb1f353f11d17adafd1e4b8ced3557b9a006`。两者反向物化逐字节相等；在精确父提交重放得到同一科学树。最终元数据后继以 `PERSISTENCE_RECEIPT.json` 及固定主交接下一版本的实际回读为准。
 
 ## 下一具体问题
 
