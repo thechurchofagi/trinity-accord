@@ -1,3 +1,9 @@
+# A5H20261012 — coarse-O fixed tip-location contrast audit
+
+[Research note](records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/RESEARCH_NOTE.md) · [contract](records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/COARSE_O_CONTRAST_CONTRACT.md) · [exact results](records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/EXACT_RESULTS.json) · [claims](records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/CLAIM_LEDGER.json) · [gaps](records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/GAP_LEDGER.md) · [audit](records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/FORMAL_AUDIT.md) · [Chinese handoff](records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/HANDOFF_ZH.md). Disabled 0/0/0 scope correction: fix only coarse `O_A5F`, vary actual `S` within `K`, and require one same-instance independently oriented target channel. Existing primary paradigms do not supply the full conjunction.
+
+---
+
 # A5G20261012 — two-channel tip-location bridge audit
 
 [Research note](records/A5G20261012_Two_Channel_Tip_Location_Bridge/RESEARCH_NOTE.md) · [contract](records/A5G20261012_Two_Channel_Tip_Location_Bridge/TWO_CHANNEL_BRIDGE_CONTRACT.md) · [exact results](records/A5G20261012_Two_Channel_Tip_Location_Bridge/EXACT_RESULTS.json) · [claims](records/A5G20261012_Two_Channel_Tip_Location_Bridge/CLAIM_LEDGER.json) · [gaps](records/A5G20261012_Two_Channel_Tip_Location_Bridge/GAP_LEDGER.md) · [audit](records/A5G20261012_Two_Channel_Tip_Location_Bridge/FORMAL_AUDIT.md) · [Chinese handoff](records/A5G20261012_Two_Channel_Tip_Location_Bridge/HANDOFF_ZH.md). Disabled 0/0/0 identification audit: two convergent task channels leave ten latent-source models, including invariant `H_tip` and both target orientations. Independent target sensitivity plus predeclared orientation is required inside the model; actual validation remains open.

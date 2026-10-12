@@ -1,5 +1,11 @@
 # UCT durable memory
 
+## A5H20261012 latest memory
+
+A5H corrects A5G's intervention wording: holding the A5F anatomical-anchor/grip/distal coordinate `O_A5F` fixed is not holding complete pointed `K` fixed. A declared actual stimulation relation `S` may vary inside one coarse-O fiber, thereby changing `K`; same-binding C1 does not admit different `H_tip` under literally identical complete pointed organization. Miyazaki et al. provide held-stick external localization but only pointer report; Blankenburg et al. provide same-site sequence control and somatotopic SI localization on skin, not a held tool. The studies cannot be pooled into one actual installation. Exact mapping reversal leaves six models, including invariant targets and direct cue-to-decision paths. Formal delta 0/0/0; all review items remain open. Next: a same-participant held-tool rabbit design with a veridically trained, fixed-oriented location channel and direct-cue bypass test.
+
+---
+
 ## A5G20261012 latest memory
 
 A5G tests whether two convergent tool-use tasks identify `H_tip`. In the declared latent-source model, the shared trace leaves ten compatible explanations: eight tracking-target and two invariant-target models, with `H=O` and `H=not O` both surviving. Conditional response independence is therefore not semantic/measurand independence. Independently fixing one channel as H-sensitive removes invariant targets but leaves both orientations; predeclaring its target orientation is additionally required to identify `H=O` inside the model. Primary TOJ and visuotactile paradigms support an organizational task-by-location failure test, not an independent phenomenal bridge or complete biological `K`. Formal delta 0/0/0; review items remain open. Next: vary a predeclared `H_tip` contrast within fixed A5F organization and validate target orientation, or retain only the obstruction.

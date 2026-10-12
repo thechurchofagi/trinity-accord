@@ -1,0 +1,61 @@
+{
+  "schema": "uct-disabled-claim-ledger/1",
+  "research_id": "A5H20261012",
+  "claims": [
+    {
+      "id": "A5H-C1",
+      "type": "SCOPE_CORRECTION_CONDITIONAL_ON_C1",
+      "statement": "A within-O_A5F target contrast is not a complete-K-fixed contrast when a declared spatiotemporal relation S changes; asserting different H_tip under one identical complete pointed K and target definition is inadmissible under same-binding C1/C1-W.",
+      "domain": "Admitted actual tokens or condition-bindings with one declared complete signature and K-definable target coordinate.",
+      "all_of": ["A:C1_OR_C1_W", "SAME_BINDING", "COMPLETE_POINTED_K", "FIXED_TARGET_DEFINITION"],
+      "proof_or_source": "UCT I v1.2 finite-view/full-organization distinction and C1-W; R157 T1/T2; direct substitution K=(O_A5F,S,U).",
+      "counterexamples_or_limits": ["same coarse O with different S", "different reports with invariant H", "finite-view underdescription", "non-K semantic target"],
+      "status": "INHERITED_CONSEQUENCE_WITH_NEW_SCOPE_APPLICATION",
+      "thought_experiment_role": "Formation keeps an anchor while adding a new timing relation, changing K without creating a basal-experience threshold."
+    },
+    {
+      "id": "A5H-C2",
+      "type": "SCOPED_PRIMARY_EMPIRICAL_RESULT",
+      "statement": "Primary tactile-rabbit paradigms demonstrate reported location changes within a fixed coarse bodily/tool setup when actual temporal sequence relations vary; held-stick reports can fall between stimulated fingertips along the stick.",
+      "domain": "Miyazaki et al. 2010 held-stick protocol and Blankenburg et al. 2006 forearm protocol, each kept in its own actual experiment.",
+      "all_of": ["PRIMARY_PROTOCOL", "FIXED_DECLARED_COARSE_COORDINATE", "VARIED_SPATIOTEMPORAL_RELATION", "LOCATION_EVIDENCE"],
+      "proof_or_source": "Miyazaki et al. 2010 DOI 10.1523/JNEUROSCI.3887-09.2010; Blankenburg et al. 2006 DOI 10.1371/journal.pbio.0040069.",
+      "counterexamples_or_limits": ["report bias", "attention/decision path", "tool and body studies differ", "complete K unobserved"],
+      "status": "ACTUAL_PROTOCOL_EVIDENCE_NOT_H_TIP_IDENTIFICATION",
+      "thought_experiment_role": "The stick rabbit provides the positive external-object comparator."
+    },
+    {
+      "id": "A5H-C3",
+      "type": "NEGATIVE_SAME_INSTANCE_SOURCE_AUDIT",
+      "statement": "The reviewed tool-external localization and independently somatotopic neural-localizer evidence occur in different experiments and cannot be combined into one same-instance all_of bridge for H_tip.",
+      "domain": "The bounded A5H primary-source set.",
+      "all_of": ["TOOL_EXTERNALITY_REQUIRED", "INDEPENDENTLY_ORIENTED_TARGET_CHANNEL_REQUIRED", "SAME_PARTICIPANT_OBJECT_EVENT_REQUIRED"],
+      "proof_or_source": "Protocol comparison in COARSE_O_CONTRAST_CONTRACT.md and SOURCE_SCOPE.md.",
+      "counterexamples_or_limits": ["an unreviewed or future held-tool neural-localizer study", "a validated non-neural target channel"],
+      "status": "BOUNDED_NEGATIVE_RESULT_NOT_IMPOSSIBILITY_THEOREM",
+      "thought_experiment_role": "Human-implemented-agent cases block combining components performed by different bearers into one token."
+    },
+    {
+      "id": "A5H-C4",
+      "type": "EXACT_FINITE_RESPONSE_MAPPING_RESULT",
+      "statement": "Crossing X with response mapping R and observing Y=X xor R leaves six compatible models: four tracking-H and two invariant-H, with two H-reading and four direct-X decision models; every survivor obeys R.",
+      "domain": "The binary family enumerated in check_coarse_o_contrast.py.",
+      "all_of": ["BINARY_X", "BINARY_R", "DECLARED_H_FAMILY", "SOURCE_IN_H_OR_X", "UNKNOWN_ORIENTATION", "OBEY_OR_IGNORE_MAPPING", "OBSERVED_Y_EQUALS_X_XOR_R"],
+      "proof_or_source": "Exhaustive enumeration and EXACT_RESULTS.json.",
+      "counterexamples_or_limits": ["graded targets", "nonbinary responses", "history-dependent policies", "unmodeled physiological channels"],
+      "status": "EXACT_WITHIN_DECLARED_FINITE_MODEL",
+      "thought_experiment_role": "Abacus/calculator separates fixed-key elimination from direct cue-aware computation."
+    },
+    {
+      "id": "A5H-N1",
+      "type": "DISABLED_POSITIVE_UCT_APPLICATION",
+      "statement": "An actually grounded S_tip relation in complete K would, under C1 and R157, have an experience-internal structural counterpart without an extra owner; identifying that counterpart as H_tip still requires the same-instance calibrated bridge contract.",
+      "domain": "Actual held-tool tokens satisfying every contract conjunct.",
+      "all_of": ["A:C1_SAME_BINDING", "R157:T1", "ACTUAL_K_DEFINABLE_S_TIP", "A5H_BRIDGE_CONTRACT_ACTUALLY_VALIDATED", "NO_EXTRA_OWNER_INFERENCE"],
+      "proof_or_source": "UCT I v1.2, R157 and A5H contract.",
+      "counterexamples_or_limits": ["not C1 evidence", "not currently installed", "not ownership or agency", "not report identity"],
+      "status": "DISABLED_ALL_APPLICATION_PREMISES_OPEN",
+      "thought_experiment_role": "Overlapping routes show that distal centring need not select one exclusive subject."
+    }
+  ]
+}

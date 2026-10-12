@@ -1,4 +1,10 @@
-# A5G20261012 current handoff — two-channel tip-location bridge audit
+# A5H20261012 current handoff — coarse-O fixed tip-location contrast audit
+
+[English note](records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/RESEARCH_NOTE.md) · [contrast contract](records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/COARSE_O_CONTRAST_CONTRACT.md) · [exact results](records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/EXACT_RESULTS.json) · [formal audit](records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/FORMAL_AUDIT.md) · [Chinese handoff](records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/HANDOFF_ZH.md). A valid experiment may fix coarse `O_A5F` while varying an actual relation `S` inside complete `K`; it may not vary `H_tip` under literally identical complete pointed `K`. Primary held-stick and somatotopic-localizer evidence do not yet form one same-instance bridge. Formal delta 0/0/0; all review items remain open.
+
+---
+
+# A5G20261012 prior handoff — two-channel tip-location bridge audit
 
 [English note](records/A5G20261012_Two_Channel_Tip_Location_Bridge/RESEARCH_NOTE.md) · [bridge contract](records/A5G20261012_Two_Channel_Tip_Location_Bridge/TWO_CHANNEL_BRIDGE_CONTRACT.md) · [exact results](records/A5G20261012_Two_Channel_Tip_Location_Bridge/EXACT_RESULTS.json) · [formal audit](records/A5G20261012_Two_Channel_Tip_Location_Bridge/FORMAL_AUDIT.md) · [Chinese handoff](records/A5G20261012_Two_Channel_Tip_Location_Bridge/HANDOFF_ZH.md). Two convergent task channels leave ten latent-source explanations, including two invariant-`H_tip` models and both tracking orientations. One independently H-sensitive channel still requires a predeclared target orientation. Existing TOJ and visuotactile studies support an organizational failure test, not `H_tip` identification. Formal delta 0/0/0; all review items remain open.
 

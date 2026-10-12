@@ -1,0 +1,9 @@
+{
+  "research_id": "A5H20261012",
+  "formal_graph_delta": {"nodes": 0, "rules": 0, "context_links": 0},
+  "enabled_as_established_premises": false,
+  "status": "DISABLED_SCOPE_CORRECTION_AND_SOURCE_BOUNDED_BRIDGE_CONTRACT",
+  "reason": "The coarse-O correction is inherited from same-binding C1, the exact response model does not identify H, and no reviewed same-instance held-tool paradigm supplies all bridge premises.",
+  "candidate_claim_ids": ["A5H-C1", "A5H-C2", "A5H-C3", "A5H-C4", "A5H-N1"],
+  "preserves": ["A:C1", "A:U1", "A:PHEN_TARGET", "R157:COORDINATE_TRANSPORT", "R157:SEMANTIC_RESIDUAL", "R157:MINENESS_BRIDGE_SCHEMA", "R159:ANCHOR_BINDING_CONTRACT"]
+}

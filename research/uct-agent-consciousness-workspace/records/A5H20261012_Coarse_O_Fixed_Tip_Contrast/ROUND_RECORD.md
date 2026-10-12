@@ -1,0 +1,11 @@
+# A5H20261012 round record
+
+1. **User goal.** Continue the experience–intelligence–self inquiry from actual organization, giving a positive but non-inflationary account of bodily/action-related mineness while keeping C1 consciousness-specific, basal experience ungated, overlapping processes allowed, and organization, experience, judgment and report distinct.
+2. **One concrete unresolved question.** Can a primary tactile-localization paradigm vary a predeclared distal-contact contrast while the A5F anatomical-anchor/grip/distal coordinate O_A5F is fixed, and if so does that identify H_tip, or only show that the coarse coordinate omits another actual organizational relation?
+3. **Relevant nodes and fixed sources.** UCT I v1.2 C1/C1-W/U1/P3/P6 and finite-view failure conditions; R157 T1–T3 and its open B_min; R159 internal frame/reference distinction; TA25 experience/self/report distinctions; A5F grounded anchor; A5G ten-model obstruction; current REVIEW_SUPERVISION.md; primary tactile-localization work selected only after the record is frozen.
+4. **Planned addition or correction.** Correct “hold organization fixed” to “hold the declared coarse O_A5F coordinate fixed”; state the omitted-organizational-relation alternative explicitly; evaluate one small family of primary tactile-location manipulations against a same-binding, orientation and direct-cue-exclusion contract; give an exact finite response-mapping countermodel.
+5. **Deliverable.** An English research note, stable claim/gap ledgers, source and thought-experiment scopes, executable exact model and raw result, fresh full-map structural audit plus bounded semantic audit, Chinese handoff, verified Git persistence, and a versioned Library increment with hashes and recovery instructions.
+
+## Direction check at selection
+
+The bounded objective is to locate the next experience–organization bridge obligation, not to accumulate another control certificate. A valid comparison may keep the A5F anchor/grip/distal coordinate fixed only by varying a separately named actual sensory or multisensory relation S within K. It may not claim two different experiences under one identical complete K, and it may not define H_tip by the report used as evidence.

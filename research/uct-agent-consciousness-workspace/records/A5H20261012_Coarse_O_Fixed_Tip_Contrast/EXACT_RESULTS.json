@@ -1,0 +1,25 @@
+{
+  "schema": "a5h-coarse-o-contrast/1",
+  "observed_raw_key": {"X=0,R=0": 0, "X=0,R=1": 1, "X=1,R=0": 1, "X=1,R=1": 0},
+  "model": "H tracks X with either pole or is invariant; the decision reads H or X, may complement it, and may obey or ignore response mapping R.",
+  "counts": {
+    "total_compatible": 6,
+    "by_target_kind": {"invariant": 2, "tracking": 4},
+    "by_decision_source": {"H": 2, "X": 4},
+    "by_mapping_policy": {"obey": 6}
+  },
+  "compatible_models": [
+    {"target_kind": "tracking", "target_parameter": 0, "decision_source": "H", "source_orientation": 0, "mapping_policy": "obey"},
+    {"target_kind": "tracking", "target_parameter": 0, "decision_source": "X", "source_orientation": 0, "mapping_policy": "obey"},
+    {"target_kind": "tracking", "target_parameter": 1, "decision_source": "H", "source_orientation": 1, "mapping_policy": "obey"},
+    {"target_kind": "tracking", "target_parameter": 1, "decision_source": "X", "source_orientation": 0, "mapping_policy": "obey"},
+    {"target_kind": "invariant", "target_parameter": 0, "decision_source": "X", "source_orientation": 0, "mapping_policy": "obey"},
+    {"target_kind": "invariant", "target_parameter": 1, "decision_source": "X", "source_orientation": 0, "mapping_policy": "obey"}
+  ],
+  "restrictions": {
+    "decision_independently_H_sensitive_sign_free": {"count": 2, "target_parameters": [0, 1]},
+    "decision_independently_H_sensitive_positive_orientation": {"count": 1, "target_parameters": [0]},
+    "independent_fixed_oriented_target_channel_Z_equals_X": {"count": 2, "decision_sources": ["H", "X"]}
+  },
+  "conclusion": "Response-mapping reversal excludes mapping-ignoring fixed-key policies, but not a direct X-to-decision path or target-pole complementation. It therefore does not by itself identify H."
+}

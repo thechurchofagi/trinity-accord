@@ -1,0 +1,13 @@
+{
+  "id": "A5H20261012",
+  "title": "Coarse-O fixed tip-location contrast audit",
+  "version": "A5H-COARSE-O-CONTRAST-v0.1.0",
+  "type": "FOLLOWUP_APPLICATION",
+  "status": "DISABLED_SCOPE_CORRECTION_AND_SOURCE_BOUNDED_NEGATIVE_RESULT",
+  "enabled_as_established_premises": false,
+  "formal_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+  "result": "A valid contrast may hold the A5F coarse coordinate fixed while varying an actual relation S inside K; it may not vary H under literally identical complete pointed K. Primary held-stick and somatotopic-localizer evidence do not yet instantiate all positive bridge premises in one event.",
+  "selected_target": "H_tip (experience-internal distal contact location); H_pc remains open",
+  "standalone_manuscript": "HOLD_STANDALONE",
+  "next": "Specify one same-participant held-tool rabbit design with an independently trained, fixed-oriented distal-location target channel and a direct-sequence bypass test."
+}

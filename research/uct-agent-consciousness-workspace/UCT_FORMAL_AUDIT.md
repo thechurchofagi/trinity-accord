@@ -1,3 +1,9 @@
+# A5H20261012 audit addendum
+
+A5H preserves the effective 913/424/261 graph and adds 0/0/0. Fresh traversal found no unresolved deductive references, cycles or bad `all_of`. The affected audit separates coarse `O_A5F`, actual relation `S`, complete `K`, `H_tip`, report and neural evidence. A valid positive bridge requires one same object/time/grain/binding conjunction; cross-study rows are not joined. C1 is applied only to block different target experience under literally identical complete pointed organization, not to infer that evidence measures the target. Deep historical semantic audit remains incomplete. See [A5H formal audit](records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/FORMAL_AUDIT.md).
+
+---
+
 # A5G20261012 audit addendum
 
 A5G preserves the effective 913/424/261 graph and adds 0/0/0. Fresh traversal found zero unresolved deductive references, cycles, non-list `all_of` or empty `all_of`. The affected audit distinguishes organizational coordinate, latent `H_tip`, TOJ evidence, VTI evidence, ownership, agency and `H_pc`; all positive bridge premises must share object/time/grain and hold simultaneously. Exact witnesses cover invariant-target common cause, unsigned target sensitivity and signed target sensitivity. Protocol actuality is not complete biological installation, and evidence covariance is not read backward as phenomenology. Deep historical semantic audit remains incomplete. See [A5G formal audit](records/A5G20261012_Two_Channel_Tip_Location_Bridge/FORMAL_AUDIT.md).

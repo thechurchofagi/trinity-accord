@@ -1,3 +1,9 @@
+# A5H20261012 disabled addendum — coarse-O fixed contrast
+
+A5H adds no completed node, rule or context (0/0/0). It applies existing same-binding C1 to correct the contrast domain: fixed coarse `O_A5F` is compatible with varying an actual relation `S` inside complete `K`; fixed complete pointed `K` is not. Exact response-mapping enumeration leaves six compatible models, including invariant targets and direct cue-to-decision paths. The reviewed held-stick and somatotopic-localizer studies do not jointly instantiate one same-event `H_tip` bridge. See [A5H audit](records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/FORMAL_AUDIT.md).
+
+---
+
 # A5G20261012 disabled addendum — two-channel tip-location bridge
 
 A5G adds no completed node, rule or context (0/0/0). Exact enumeration of two convergent channels leaves ten source/orientation models: eight tracking-target and two invariant-target models, with both target orientations compatible. Conditional response independence is not target-measure independence. Independently fixing one channel as H-sensitive removes invariant targets but does not fix orientation; a predeclared orientation is additionally sufficient only within the binary model. Primary tool-use studies support a task-by-location organizational failure test, not complete biological `K` or `H_tip`. See [A5G audit](records/A5G20261012_Two_Channel_Tip_Location_Bridge/FORMAL_AUDIT.md).

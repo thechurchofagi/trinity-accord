@@ -1,3 +1,11 @@
+# A5H20261012 research response — coarse-O contrast correction
+
+The latest ledger and every carried OPEN/ACKNOWLEDGED item were read before selection, after result formation and before save. A5H repairs a scope error: `FIX_COARSE_O_A5F` is not `FIX_COMPLETE_K`; a valid intervention varies a declared actual relation `S` inside `K`. It also records that held-stick localization and somatotopic neural localization occur in different installations and cannot be cross-study conjoined.
+
+`QC-20261008-10` remains ACKNOWLEDGED/OPEN; `IA-QC11`, `QC-20261008-12/13` and `SCU-OPEN-R191-NORMALIZATION` remain OPEN; `SCU-AUDIT-DEPTH` remains AUDIT_INCOMPLETE. No item is self-closed. Evidence: [response](records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/REVIEW_RESPONSE.md), [contract](records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/COARSE_O_CONTRAST_CONTRACT.md), [exact results](records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/EXACT_RESULTS.json), [gaps](records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/GAP_LEDGER.md), [audit](records/A5H20261012_Coarse_O_Fixed_Tip_Contrast/FORMAL_AUDIT.md).
+
+---
+
 # A5G20261012 research response — two-channel tip-location bridge audit
 
 The latest ledger and every carried OPEN/ACKNOWLEDGED item were read before selection, after result formation and before save. A5G proves that task plurality does not supply target-measure independence: ten latent-source models fit the same convergent trace, including invariant `H_tip` and both target orientations. It supplies a minimum finite bridge contract but no actual independent target-sensitive oriented measure.

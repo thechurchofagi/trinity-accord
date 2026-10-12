@@ -1,0 +1,66 @@
+{
+  "a5h_joint_satisfiability": {
+    "coarse_o_fixed_complete_k_varies": {
+      "CONTRADICTION": 0,
+      "FIX_O_A5F": 1,
+      "VARY_K": 1,
+      "VARY_S": 1
+    },
+    "complete_biological_k_claimed": false,
+    "complete_pointed_k_fixed": {
+      "DIFFERENT_H_ADMISSIBLE_UNDER_C1": 0,
+      "FIX_K": 1,
+      "SAME_BINDING": 1
+    },
+    "response_equivalence": {
+      "COMPATIBLE_MODELS": 6,
+      "INVARIANT_TARGET": 2,
+      "TRACKING_TARGET": 4
+    }
+  },
+  "a5h_scientific_delta": {
+    "contexts": 0,
+    "nodes": 0,
+    "rules": 0
+  },
+  "affected_semantic_nodes": [
+    "A:P3",
+    "A:P6",
+    "A:C1",
+    "A:U1",
+    "A:PHEN_TARGET",
+    "R157:COORDINATE_TRANSPORT",
+    "R157:SEMANTIC_RESIDUAL",
+    "R157:MINENESS_BRIDGE_SCHEMA",
+    "R159:ANCHOR_BINDING_CONTRACT"
+  ],
+  "all_rules_read_all_of_as_simultaneous_and": true,
+  "context_links_treated_as_nondeductive": true,
+  "deductive_cycles": [],
+  "effective_counts": {
+    "context_links": 261,
+    "nodes": 913,
+    "rules": 424
+  },
+  "effective_graph_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
+  "manual_semantic_checks": [
+    "O_A5F is a coarse protocol coordinate, not complete K",
+    "S is an actual relation inside K, not a report or target experience",
+    "held-stick pointer reports and forearm SI localization are not pooled across installations",
+    "response-mapping reversal does not identify H_tip",
+    "all positive bridge premises are simultaneous and same-binding",
+    "C1 remains an axiom and no basal report gate or exclusive owner is introduced"
+  ],
+  "per_node_fields_accessed": 913,
+  "root_counts": {
+    "context_links": 178,
+    "nodes": 584,
+    "rules": 284
+  },
+  "root_graph_sha256": "40d17cd5f61ebcc1bfcea65eb59c3c730208bcfcf69ba92e2f615a993584e3ce",
+  "rules_with_empty_all_of": [],
+  "rules_with_nonlist_all_of": [],
+  "schema": "a5h-map-audit/1",
+  "status": "FRESH_STRUCTURAL_PASS_BOUNDED_SEMANTIC_PASS_FULL_DEPTH_INCOMPLETE",
+  "unresolved_deductive_references": []
+}
