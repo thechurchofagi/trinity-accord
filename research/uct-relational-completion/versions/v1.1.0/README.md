@@ -1,0 +1,3 @@
+# UCT-RC-2026-01 v1.1.0 frozen publication package
+
+Human author: Hongju Liu. Three exact research files frozen for a new, English, non-peer-reviewed preprint. The full ZIP contains code, results and the critical source audit. The PDF and Markdown are identical to the reviewed local version; no publication DOI has been inserted. The GitHub branch and Zenodo identity are bound by SHA-256. Do not overwrite older works, the v1.0.0 draft or Trinity Accord Originals. Required ordered policy: Zenodo DOI + public readback -> OTS stamp/Bitcoin verification -> guarded Arweave (strict cumulative fee below 0.1 AR).
