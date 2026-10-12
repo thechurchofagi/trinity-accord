@@ -1,0 +1,23 @@
+{
+  "schema": "a5l-map-audit/1",
+  "status": "FRESH_RESTORE_STRUCTURAL_PASS_BOUNDED_SEMANTIC_PASS_FULL_DEPTH_INCOMPLETE",
+  "tracked_capsule_sha256": "fa4b43e5d9a69e8c249ccd26161c28dbafcb8e7447e24bff33a811bcbe94dd8d",
+  "effective_graph_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
+  "restored_members_verified": 82,
+  "effective_counts": {"nodes": 913, "rules": 424, "context_links": 261},
+  "per_node_records_accessed": 913,
+  "minimal_node_fields_checked": ["id", "kind", "statement", "scope"],
+  "all_rules_read_all_of_as_simultaneous_and": true,
+  "rules_with_nonlist_all_of": [],
+  "rules_with_empty_all_of": [],
+  "unresolved_deductive_references": [],
+  "unresolved_context_node_references": [],
+  "external_or_module_context_endpoints": 45,
+  "deductive_cycles": [],
+  "context_links_treated_as_nondeductive": true,
+  "affected_semantic_nodes": ["A:P3", "A:P6", "A:C1", "A:U1", "A:PHEN_TARGET", "R157:STRUCTURAL_COORDINATE", "R157:COORDINATE_TRANSPORT", "R157:SEMANTIC_RESIDUAL", "R159:ANCHOR_BINDING_CONTRACT"],
+  "a5l_exact_audit": {"canonical_models": 32, "signature_models": 10, "signature_target_laws": 8, "semantic_shape_models": 4, "target_sensitive_models": 2, "common_orientation_models": 1, "independently_eliminated_H_laws_by_reversal": 0, "actual_BIND_GR_VR_KEEP_R_KEEP_P_TS_SH_CO_validated": false},
+  "a5l_scientific_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+  "provenance_correction": {"id": "A5L-G07-A5K-CAPSULE-HASH", "historical_A5K_value": "e14388ac742889d32e8df6dc3dc171f62034d3cc1e5c53c44159ddbf421adcab", "tracked_and_freshly_verified_value": "fa4b43e5d9a69e8c249ccd26161c28dbafcb8e7447e24bff33a811bcbe94dd8d", "scientific_conclusion_impact": "none"},
+  "limits": ["structural traversal is not a theory-truth certificate", "the audit is not a fresh semantic re-proof of all history", "external/module context endpoints are nondeductive references, not graph-node proof dependencies", "R191 normalization and deep semantic audit debt remain open"]
+}

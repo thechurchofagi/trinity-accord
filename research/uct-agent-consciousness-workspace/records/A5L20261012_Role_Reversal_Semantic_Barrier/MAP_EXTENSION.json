@@ -1,0 +1,8 @@
+{
+  "schema": "uct-map-extension/1.0",
+  "round": "A5L20261012",
+  "enabled": false,
+  "delta": {"nodes": 0, "rules": 0, "contexts": 0},
+  "reason": "A5L is a disabled domain-bounded application/countermodel of existing A5K, R157, R195 and R196 distinctions. It does not warrant a new general UCT premise.",
+  "candidate_claim": "A5L-D1-ROLE-REVERSAL-SEMANTIC-BARRIER"
+}

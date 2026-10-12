@@ -1,0 +1,39 @@
+{
+  "schema": "uct-a5l-role-reversal/1.0",
+  "domain": {
+    "canonical_models": 32,
+    "H_laws": ["P", "notP", "C", "notC", "X", "notX", "zero", "one"],
+    "endpoint_sources": ["X", "H"],
+    "orientations": [0, 1],
+    "cells": [
+      {"P": 0, "Q": 0, "C": 0, "X": 0, "R": 0, "A": 0, "Z": 0},
+      {"P": 0, "Q": 0, "C": 1, "X": 0, "R": 0, "A": 0, "Z": 0},
+      {"P": 0, "Q": 1, "C": 0, "X": 1, "R": 0, "A": 0, "Z": 0},
+      {"P": 0, "Q": 1, "C": 1, "X": 1, "R": 0, "A": 0, "Z": 0},
+      {"P": 1, "Q": 0, "C": 0, "X": 1, "R": 1, "A": 1, "Z": 1},
+      {"P": 1, "Q": 0, "C": 1, "X": 1, "R": 1, "A": 1, "Z": 1},
+      {"P": 1, "Q": 1, "C": 0, "X": 0, "R": 1, "A": 1, "Z": 1},
+      {"P": 1, "Q": 1, "C": 1, "X": 0, "R": 1, "A": 1, "Z": 1}
+    ]
+  },
+  "counts": {
+    "observed_E_equals_X": {"models": 10, "target_laws": ["C", "P", "X", "notC", "notP", "notX", "one", "zero"], "endpoint_sources": ["H", "X"], "orientations": [0, 1]},
+    "semantic_shape_H_in_X_complement": {"models": 4, "target_laws": ["X", "notX"], "endpoint_sources": ["H", "X"], "orientations": [0, 1]},
+    "target_sensitive_endpoint_no_direct_X": {"models": 2, "target_laws": ["X", "notX"], "endpoint_sources": ["H"], "orientations": [0, 1]},
+    "target_sensitive_plus_common_orientation": {"models": 1, "target_laws": ["X"], "endpoint_sources": ["H"], "orientations": [0]}
+  },
+  "witnesses": {
+    "aligned_target": {"H": "X", "E_source": "H", "orientation": 0},
+    "H_free_direct_X_twin": {"H": "P", "E_source": "X", "orientation": 0},
+    "complement_target": {"H": "notX", "E_source": "H", "orientation": 1},
+    "constant_H_direct_X_twin": {"H": "zero", "E_source": "X", "orientation": 0}
+  },
+  "checks": {
+    "Q_reverses_grounded_X_at_fixed_P_C": true,
+    "R_and_direct_P_paths_remain_fixed": true,
+    "role_signature_retains_all_H_laws": true,
+    "direct_X_path_reproduces_signature_for_every_H_law": true,
+    "target_sensitivity_reduces_to_global_complement": true,
+    "common_orientation_selects_H_equals_X": true
+  }
+}

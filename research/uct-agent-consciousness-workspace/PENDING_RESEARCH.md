@@ -1,6 +1,6 @@
 # 待整合研究全表
 
-当前停用应用：`A5K20261012` 把切断/救援的物理来源结论与选定体验来源结论分开。排除直接读出干预后，限定族中可识别 `Z` 依赖物理路线 `R`，但六种 `H` 律仍全部兼容；体验目标仍需独立 `SB+CO`。见 [正文](records/A5K20261012_Selective_Source_Cut_Rescue/RESEARCH_NOTE.md) 与 [审查](records/A5K20261012_Selective_Source_Cut_Rescue/FORMAL_AUDIT.md)。
+当前停用应用：`A5L20261012` 完成角色反转检验。实际结构坐标 `X=P xor Q` 可在 `P/R` 不变时反转，但直接 `X` 写入者复制全表，故八种 `H` 律均保留；终点升级按预定条件停止于组织性 `R/X`。见 [正文](records/A5L20261012_Role_Reversal_Semantic_Barrier/RESEARCH_NOTE.md) 与 [审查](records/A5L20261012_Role_Reversal_Semantic_Barrier/FORMAL_AUDIT.md)。
 
 [总览](UCT_FORMAL_MAP.md) · [全部候选](PENDING_RESEARCH.md) · [当前状态](CURRENT_STATE.json) · [统一登记](UNIFIED_RESEARCH_INDEX.json) · [审查](UCT_FORMAL_AUDIT.md)
 

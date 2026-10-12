@@ -1,3 +1,9 @@
+# A5L20261012 disabled addendum — role reversal and semantic barrier
+
+A5L adds no completed node, rule or context (0/0/0). In the declared 32-model family, grounded `Q` reverses actual `X=P xor Q` at fixed `P,C` while `R,A,Z` retain `P`; nevertheless `E=X` leaves ten models and all eight `H` laws because a direct-`X` writer can reproduce the full table for every target. The selected-target inference requires `TS all_of SH all_of CO` in addition to the structural package `BIND all_of GR all_of VR all_of KEEP_R all_of KEEP_P`; the table does not supply those premises. C1/R157 transport is conditional on complete grounded `K`. Endpoint escalation stops at organizational `R` and `X`. See [A5L audit](records/A5L20261012_Role_Reversal_Semantic_Barrier/FORMAL_AUDIT.md).
+
+---
+
 # A5K20261012 disabled addendum — physical-source/phenomenal-source barrier
 
 A5K adds no completed node, rule, or context (0/0/0). Its 216-model cut/rescue family leaves 36 signature models and 18 after route efficacy; no-direct-readout intervention leaves six models, all with physical `R` as source but all six `H` laws. Independent semantic bridge shape leaves the `P/¬P` complement, and common orientation selects `H=P`. The physical-route inference requires `BIND all_of F all_of RE all_of NDR all_of CLOSE`; selected-target inference additionally requires `SB all_of CO`. C1/R157 transport remains conditional and cannot be read backward from intervention success. See [A5K audit](records/A5K20261012_Selective_Source_Cut_Rescue/FORMAL_AUDIT.md).

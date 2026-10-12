@@ -1,5 +1,11 @@
 # UCT durable memory
 
+# A5L20261012 latest memory
+
+A5L executes A5K's grounded role/polarity reversal and reaches the declared stop. With `X=P xor Q`, role `Q` reverses `X` at fixed `P,C` while physical route `R=P` and direct `P` paths remain intact. In 32 canonical models the full `E=X` table leaves 10 models and all eight `H` laws because a direct-`X` endpoint is an `H`-free twin. Independent target sensitivity plus `H in {X,notX}` leaves two complement models; common orientation leaves one. The positive result is an actual organizational relation coordinate, conditionally experience-internal only under C1 and complete R157 grounding; selected `H_tip` semantics remain separate. Endpoint escalation stops at organizational `R` and `X`. Fresh map restore passed at 913/424/261; formal delta 0/0/0. A5K's recorded capsule hash was prospectively corrected to the tracked `fa4b43...` value without changing its science. All review items remain open.
+
+---
+
 # A5K20261012 latest memory
 
 A5K separates a cut route's physical/ontic role from its selected phenomenal meaning. In a 216-model family, the baseline/cut/rescue signature leaves 36 models; route efficacy leaves 18; excluding direct readout intervention leaves six models that all read physical route `R` but still realize all six `H` laws. Independent semantic bridge shape reduces the target to `P/¬P`, and common orientation then selects `H=P`. Thus `BIND+F+RE+NDR+CLOSE` can support organizational `Z depends on R`, while selected `H_tip` still requires separate `SB+CO`. The initial circular model that named the route `H` was rejected and preserved as a failure. Formal delta 0/0/0; all review items remain open. Next: test a prospectively oriented role/polarity reversal while holding actual `R` and direct `P` paths intact, or stop at organizational route dependence.

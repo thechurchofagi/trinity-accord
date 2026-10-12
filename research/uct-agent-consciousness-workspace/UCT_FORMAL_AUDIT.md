@@ -1,3 +1,9 @@
+# A5L20261012 audit addendum
+
+A5L freshly restored the tracked v1.1.2 capsule (`fa4b43...`) and traversed the effective 913/424/261 graph (`097360...`). All nodes and rules were accessed; unresolved deductive references, unresolved node-typed context endpoints, duplicate IDs, cycles and bad `all_of` are zero. External/module context references remain nondeductive. The affected audit separates physical `P/R`, grounded role `Q`, relation `X`, selected target `H_tip`, endpoint source, complete organization, finite view, judgment, conceptual self and report. `TS/SH/CO` are simultaneous additional premises, not consequences of reversal. Exact code proves only the declared fibre counts. Deep history and R191 normalization remain incomplete. A5K's unreproducible capsule hash is corrected prospectively in `A5L-G07` without changing its scientific result. See [A5L formal audit](records/A5L20261012_Role_Reversal_Semantic_Barrier/FORMAL_AUDIT.md).
+
+---
+
 # A5K20261012 audit addendum
 
 A5K preserves the effective 913/424/261 graph and adds 0/0/0. Fresh traversal found no unresolved deductive references, cycles, empty `all_of`, or non-list `all_of`; context links remained nondeductive. The bounded audit separates physical route `R`, direct reference `A`, readout `Z`, selected experience target `H`, complete organization, actual installation, and report. `BIND+F+RE+NDR+CLOSE` is one simultaneous physical-source package; `SB+CO` remains additionally necessary for the selected target. Exact code proves only the declared finite fibre counts, not C1, actual installation, phenomenal meaning, or global semantic correctness. Deep historical audit and R191 normalization remain incomplete. See [A5K formal audit](records/A5K20261012_Selective_Source_Cut_Rescue/FORMAL_AUDIT.md).

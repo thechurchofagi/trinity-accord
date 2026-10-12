@@ -1,0 +1,42 @@
+{
+  "schema": "uct-claim-ledger/1.0",
+  "round": "A5L20261012",
+  "claims": [
+    {
+      "id": "A5L-D1-ROLE-REVERSAL-SEMANTIC-BARRIER",
+      "type": "domain_bounded_identification_and_nonentailment",
+      "statement": "In the declared 32-model family, grounded role reversal with E=X leaves ten models and all eight H laws because a direct-X endpoint reproduces the table for every H. Independent target sensitivity plus H in {X,notX} leaves two complement models; common orientation leaves H=X.",
+      "domain": "P,Q,C binary, all eight cells; X=P xor Q; R=A=Z=P; H in {P,notP,C,notC,X,notX,0,1}; endpoint source in {X,H}; binary orientation.",
+      "all_of": ["one frozen bearer/tool/interval/binding", "grounded Q role intervention", "all P-by-Q-by-C cells", "R,A,Z retain P", "E=X observational signature", "canonical endpoint-source semantics"],
+      "proof": "Exhaustive enumeration by check_role_reversal.py; counts and witnesses in EXACT_RESULTS.json.",
+      "source_lineage": ["A5K-D1", "A5E covariance boundary", "R195 interventional polarity", "R196 complement boundary", "R157:SEMANTIC_RESIDUAL"],
+      "counterexamples": ["H_free_direct_X_twin", "constant_H_direct_X_twin", "complement_target"],
+      "status": "PROVED_IN_DECLARED_FINITE_MODEL_DISABLED_APPLICATION",
+      "thought_experiment_roles": {"ancestor_formation": "varies formation of grounded role coordinate", "abacus_calculator": "supplies direct-X writer twin", "human_realized_agent": "separates represented role from implementing organization", "copy_switch_memory": "preserves reports and memories across different present writers"}
+    },
+    {
+      "id": "A5L-C2-GROUNDED-ROLE-COORDINATE",
+      "type": "conditional_positive_application_contract",
+      "statement": "A prospectively grounded role reversal can establish an actual organizational coordinate X that changes with role while physical P and A5K route R remain fixed; under C1 and a complete grounded R157 selector this coordinate is conditionally experience-internal without requiring an exclusive owner.",
+      "domain": "One actual same-instance bearer/tool/role/route package with grounded intervention and complete relevant K.",
+      "all_of": ["BIND", "GR", "VR", "KEEP_R", "KEEP_P", "complete grounded K", "C1", "R157 selector contract"],
+      "proof": "Finite construction establishes structural independence of X from fixed P under Q; the experience-internal step is explicitly conditional on inherited UCT premises and is not installed here.",
+      "source_lineage": ["UCT I v1.2 C1", "R157", "A5K"],
+      "counterexamples": ["ungrounded Q label swap", "finite view compatible with multiple complete organizations"],
+      "status": "CONDITIONAL_POSITIVE_LAYER_NOT_ACTUALLY_INSTALLED",
+      "thought_experiment_roles": {"ancestor_formation": "formation changes self-related organization, not basal experience"}
+    },
+    {
+      "id": "A5L-L3-TARGET-SENSITIVITY-INDEPENDENT",
+      "type": "scoped_limit_and_stop_rule",
+      "statement": "GR, VR, KEEP_R, KEEP_P and F do not supply TS. Without independent TS the reversal excludes zero H laws, so endpoint escalation stops at organizational R and X rather than claiming selected H_tip semantics.",
+      "domain": "A5L finite family and the metalinguistic selected-target distinction of R157.",
+      "all_of": ["A5L-D1", "R157:SEMANTIC_RESIDUAL"],
+      "proof": "For every H law, the direct-X orientation-zero witness has the same full table.",
+      "source_lineage": ["A5K stop condition", "TA25 D5", "R157"],
+      "counterexamples": ["H=P with direct-X writer", "H=0 with direct-X writer"],
+      "status": "PROVED_SCOPED_NONENTAILMENT_AND_STOP",
+      "thought_experiment_roles": {"abacus_calculator": "correct relational display does not settle selected experience meaning"}
+    }
+  ]
+}

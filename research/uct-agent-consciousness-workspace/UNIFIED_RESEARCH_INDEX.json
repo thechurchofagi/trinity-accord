@@ -3729,6 +3729,33 @@
       "actual_BIND_F_RE_NDR_CLOSE_SB_CO_validated": false,
       "complete_biological_K": false,
       "standalone_manuscript": "HOLD_STANDALONE"
+    },
+    {
+      "id": "A5L20261012",
+      "version": "A5L-RRSB-v0.1.0",
+      "status": "DISABLED_DOMAIN_BOUNDED_IDENTIFICATION_AND_NONENTAILMENT",
+      "enabled_as_established_premises": false,
+      "source": "records/A5L20261012_Role_Reversal_Semantic_Barrier/RESEARCH_NOTE.md",
+      "handoff": "records/A5L20261012_Role_Reversal_Semantic_Barrier/HANDOFF_ZH.md",
+      "work_log": "records/A5L20261012_Role_Reversal_Semantic_Barrier/WORK_LOG.md",
+      "claim_ledger": "records/A5L20261012_Role_Reversal_Semantic_Barrier/CLAIM_LEDGER.json",
+      "map_extension": "records/A5L20261012_Role_Reversal_Semantic_Barrier/MAP_EXTENSION.json",
+      "exact_results": "records/A5L20261012_Role_Reversal_Semantic_Barrier/EXACT_RESULTS.json",
+      "parent_science": "A3V20261010",
+      "parent_followup": "A5K20261012",
+      "completed_map": "UCT-MAP-v1.1.2",
+      "scientific_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+      "selected_target": "H_tip as selected experience-internal role/location target; not X by definition, basal experience, report, ownership, conceptual self, or physical-route identity",
+      "actual_bodily_installation": false,
+      "canonical_models": 32,
+      "signature_compatible_models": 10,
+      "signature_compatible_target_laws": 8,
+      "target_sensitive_complement_models": 2,
+      "independently_refuted_target_laws_by_reversal": 0,
+      "actual_BIND_GR_VR_KEEP_R_KEEP_P_TS_SH_CO_validated": false,
+      "complete_biological_K": false,
+      "stop_decision": "STOP_ENDPOINT_ESCALATION_AT_ORGANIZATIONAL_R_AND_X",
+      "standalone_manuscript": "HOLD_STANDALONE"
     }
   ],
   "scoped_foundational_reviews": [

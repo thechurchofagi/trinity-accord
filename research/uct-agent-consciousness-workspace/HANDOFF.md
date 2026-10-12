@@ -1,4 +1,12 @@
-# A5K20261012 current handoff — selective physical source versus phenomenal source
+# A5L20261012 current handoff — role reversal and semantic barrier
+
+[English note](records/A5L20261012_Role_Reversal_Semantic_Barrier/RESEARCH_NOTE.md) · [role-reversal contract](records/A5L20261012_Role_Reversal_Semantic_Barrier/ROLE_REVERSAL_CONTRACT.md) · [exact results](records/A5L20261012_Role_Reversal_Semantic_Barrier/EXACT_RESULTS.json) · [formal audit](records/A5L20261012_Role_Reversal_Semantic_Barrier/FORMAL_AUDIT.md) · [Chinese handoff](records/A5L20261012_Role_Reversal_Semantic_Barrier/HANDOFF_ZH.md). Grounded role reversal constructs actual `X=P xor Q` but the full `E=X` table leaves all eight `H` laws because a direct-`X` writer is a complete `H`-free twin. `TS/SH/CO` remain independent; endpoint escalation stops at organizational `R` and `X`. Formal delta 0/0/0; all review items remain open.
+
+Next: characterize a non-endpoint, constitution-level same-token criterion for when grounded `X` belongs to complete relevant `K` rather than a measurement-side writer, without report or unique ownership.
+
+---
+
+# A5K20261012 historical handoff — selective physical source versus phenomenal source
 
 [English note](records/A5K20261012_Selective_Source_Cut_Rescue/RESEARCH_NOTE.md) · [cut/rescue contract](records/A5K20261012_Selective_Source_Cut_Rescue/SELECTIVE_SOURCE_CONTRACT.md) · [exact results](records/A5K20261012_Selective_Source_Cut_Rescue/EXACT_RESULTS.json) · [formal audit](records/A5K20261012_Selective_Source_Cut_Rescue/FORMAL_AUDIT.md) · [Chinese handoff](records/A5K20261012_Selective_Source_Cut_Rescue/HANDOFF_ZH.md). In the declared family, excluding direct readout gating identifies physical `R` dependence but leaves all six selected-target laws compatible. Independent `SB+CO` remain necessary for `H=P`. Formal delta 0/0/0; all review items remain open.
 

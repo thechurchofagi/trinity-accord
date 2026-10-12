@@ -1325,3 +1325,15 @@ A4G应用保持停用，正式图增量0/0/0。C1/U1未改；硬件来源坐标�
 - `SCU-AUDIT-DEPTH`: **AUDIT_INCOMPLETE**. The effective graph was freshly traversed and affected semantics reviewed; historical proofs were not globally reconstructed.
 - Substantive result: ordinary calibration/transfer admits 12 models; D/S/O jointly leave one, while leave-one-out counts are 5/5/2. This is a disabled finite identification result, not phenomenal or physical installation evidence.
 - Evidence: `records/A5I20261012_Context_Transport_Barrier/REVIEW_RESPONSE.md`, `CALIBRATION_TRANSPORT_CONTRACT.md`, `EXACT_RESULTS.json`, `FORMAL_AUDIT.md`, `GAP_LEDGER.md`.
+
+## A5L20261012 research response (does not close supervision items)
+
+- `QC-20261008-10`: **ACKNOWLEDGED/OPEN**. Grounded `X` and selected `H_tip` are explicitly separated; `TS/SH/CO` remain independent.
+- `IA-QC11`: **OPEN**. The 32-model family is a finite view, not a complete actual installation or complete `K`.
+- `QC-20261008-12`: **OPEN**. Actual organization, model, physical relation, selected experience, judgment, conceptual self and report remain distinct.
+- `QC-20261008-13`: **OPEN**. Same-token grounding and intervention chronology are required but not installed.
+- `SCU-OPEN-R191-NORMALIZATION`: **OPEN**. No normalization debt is discharged.
+- `SCU-AUDIT-DEPTH`: **AUDIT_INCOMPLETE**. The freshly restored 913/424/261 graph and affected semantics were checked, not globally re-proved.
+- Substantive result: role reversal independently refutes zero `H` laws because a direct-`X` endpoint is a complete twin. This activates the A5K stop rule at organizational `R/X`.
+- Provenance correction: `A5L-G07` records that A5K's `e14388...` capsule hash is unreproducible; the tracked archive and fresh restore verify `fa4b43...`. A5K's graph hash and science are unaffected.
+- Evidence: `records/A5L20261012_Role_Reversal_Semantic_Barrier/REVIEW_RESPONSE.md`, `ROLE_REVERSAL_CONTRACT.md`, `EXACT_RESULTS.json`, `FORMAL_AUDIT.md`, `GAP_LEDGER.json`.

@@ -1,0 +1,14 @@
+{
+  "id": "A5L20261012",
+  "title": "Role reversal and the semantic barrier",
+  "version": "A5L-RRSB-v0.1.0",
+  "type": "FOLLOWUP_APPLICATION",
+  "status": "DISABLED_DOMAIN_BOUNDED_IDENTIFICATION_AND_NONENTAILMENT",
+  "enabled_as_established_premises": false,
+  "formal_delta": {"nodes": 0, "rules": 0, "contexts": 0},
+  "result": "Grounded role reversal constructs actual X=P xor Q while R and direct P remain fixed, but E=X excludes none of eight H laws because a direct-X endpoint is a complete H-free twin.",
+  "selected_target": "H_tip as externally selected experience-internal role/location target; not X by definition, basal experience, report, ownership, conceptual self, or physical-route identity",
+  "standalone_manuscript": "HOLD_STANDALONE",
+  "stop_decision": "STOP_ENDPOINT_ESCALATION_AT_ORGANIZATIONAL_R_AND_X_UNLESS_INDEPENDENT_TS_IS_AVAILABLE",
+  "next": "Characterize a non-endpoint, constitution-level same-token criterion for when an actual grounded X coordinate belongs to the complete relevant K rather than to a measurement-side writer, without using report or unique ownership."
+}
