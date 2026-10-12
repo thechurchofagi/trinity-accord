@@ -80,9 +80,15 @@ def exact_owner_record(session,freeze):
 def public_exact_title_match(freeze):
     import requests
     title=freeze['metadata']['title'];version=freeze['metadata']['version']
-    q=urlencode({'q':'title:"'+title+'"','size':100})
+    # Public Zenodo searches cap unauthenticated page size at 25.
+    q=urlencode({'q':'title:"'+title+'"','size':25})
     body=api(requests.Session(),'GET','/records?'+q)
-    rows=((body.get('hits') or {}).get('hits') or [])
+    block=body.get('hits') or {}
+    rows=(block.get('hits') or [])
+    total=block.get('total',len(rows))
+    if isinstance(total,dict):total=total.get('value',len(rows))
+    if int(total)>len(rows):
+        raise RuntimeError('Unexamined public search pages; inspect before publication, do not create a duplicate')
     return [x for x in rows if (x.get('metadata') or {}).get('title')==title and str((x.get('metadata') or {}).get('version',''))==version]
 
 
