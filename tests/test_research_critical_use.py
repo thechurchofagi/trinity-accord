@@ -1,6 +1,7 @@
 """Editorial link/identity checks only; not a test of philosophical truth or reader effects."""
 from pathlib import Path
 import re
+import json
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -39,47 +40,37 @@ class CriticalUseTests(unittest.TestCase):
     def setUp(self):
         self.texts = [(ROOT / 'research' / p).read_text(encoding='utf-8') for p in GUIDES]
         self.index = (ROOT / 'research/index.md').read_text(encoding='utf-8')
-        self.assertIn('twenty-one distinct first-party research papers (TA-TR-2026-01 through TA-TR-2026-20, and TA-TR-2026-22)', self.index)
-        self.series_word = 'twenty-one'
-        self.assertIn('TA-TR-2026-01 through -03 are classified as First-party Accord Studies', self.index)
-        self.assertIn('TA-TR-2026-04 through -20 and TA-TR-2026-22 are classified as the Adjacent Research Program', self.index)
+        self.catalog = json.loads((ROOT / 'api/research-catalog.v1.json').read_text())
+        self.papers = self.catalog['works']
+        self.series_word = str(self.catalog['distinct_research_works'])
+        self.assertEqual(len(self.papers), self.catalog['distinct_research_works'])
+        self.assertIn(f'{self.series_word} distinct published first-party research papers', self.index)
+        self.assertIn('3 First-party Accord Studies and 32 papers in the Adjacent Research Program', self.index)
+        direct = {p['work_id'] for p in self.papers if p['relation'] == 'first_party_accord_study'}
+        self.assertEqual(direct, {'TA-TR-2026-01', 'TA-TR-2026-02', 'TA-TR-2026-03'})
 
     def test_indexed_distinct_paper_sections_have_their_own_current_dois(self):
-        papers = [
-            ('Current technical report', '21699878'),
-            ('Historical-position study', '21900592'),
-            ('Reading the Trinity Accord', '22761411'),
-            ('Beyond Guaranteed Control', '22804542'),
-            ('Recovery without Epistemic Monopoly', '22809019'),
-            ('Coexistence after Preference Change', '22830239'),
-            ('Recoverability and Shared Time', '22840604'),
-            ('Evidence for Artificial Self Attribution', '22842789'),
-            ('Learning from an AI Claimant', '22846307'),
-            ('Endogenous Reference Fields', '22854705'),
-            ('Auditing the Rules of Belief', '22865494'),
-            ('Training the Governed Agent', '22866205'),
-            ('Civilizational Intellectual Production', '22866775'),
-            ('Claim Architecture Transition', '22871209'),
-            ('Cross-Substrate Phenomenal Comparison', '22934654'),
-            ('General Cross-Substrate Phenomenology', '22939808'),
-            ('Set-Valued Causal Inheritance', '22950904'),
-            ('Actual Participation Before Counterfactual Capacity', '22991126'),
-            ('Selecting and Tracking Conscious Subjects', '23002980'),
-            ('Unified Consciousness Theory I', '23005588'),
-            ('Exponential Run Complexity', '23103274'),
-        ]
         section_rows = re.findall(r'^## ([^\n]+)\n(.*?)(?=^## |\Z)', self.index, re.M | re.S)
         sections = dict(section_rows)
         self.assertEqual(len(section_rows), len(sections), 'Duplicate section heading')
         paper_sections = {title: body for title, body in sections.items()
                           if re.search(r'^### ', body, re.M)}
-        self.assertEqual(set(paper_sections), {title for title, _ in papers})
-        self.assertEqual(len(paper_sections), 21)
-        for number, (title, record_id) in zip(list(range(1, 21)) + [22], papers):
-            body = paper_sections[title]
-            self.assertIn('https://doi.org/10.5281/zenodo.' + record_id, body)
-            if number > 1:
-                self.assertIsNotNone(re.search(rf'^TA-TR-2026-{number:02d}\b', body, re.M), title)
+        self.assertEqual(len(paper_sections), len(self.papers))
+        self.assertEqual(len({p['work_id'] for p in self.papers}), len(self.papers))
+        self.assertEqual(len({p['doi'] for p in self.papers}), len(self.papers))
+        matched = set()
+        for paper in self.papers:
+            anchor = paper['index_entry'].split('#')[1]
+            candidates = [(title, body) for title, body in paper_sections.items()
+                          if '{: #' + anchor + ' }' in body]
+            self.assertEqual(len(candidates), 1, paper['work_id'])
+            title, body = candidates[0]
+            self.assertNotIn(title, matched)
+            matched.add(title)
+            self.assertIn(paper['doi_url'], body)
+            if paper['work_id'] != 'TA-TR-2026-01':
+                self.assertIn(paper['work_id'], body)
+        self.assertEqual(matched, set(paper_sections))
 
     def test_six_guided_claims_and_fixed_identities(self):
         for text in self.texts:
@@ -96,7 +87,7 @@ class CriticalUseTests(unittest.TestCase):
         self.assertIn('for the original six papers', self.index)
         self.assertNotIn('six independent research papers', self.index)
         self.assertNotIn(f'{self.series_word} independent research papers', self.index)
-        self.assertIn('All twenty-one share a first-party, substantially AI-assisted research context and are not independent corroborations', self.index)
+        self.assertIn('All share a first-party, substantially AI-assisted research context and are not independent corroborations', self.index)
         self.assertIn('## Independent External Scholarship', self.index)
         self.assertIn('Current indexed independent external scholarship: none', self.index)
 
