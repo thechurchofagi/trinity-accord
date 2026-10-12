@@ -1,0 +1,100 @@
+name: Publish Guardians EAC-v3.0.0 Frozen Zenodo DOI
+
+on:
+  push:
+    branches:
+      - research/guardians-joint-v300-20261012
+    paths:
+      - research/uct-agent-consciousness-workspace/records/ASI_CC_20261011_Control_and_Coexistence/guardians_joint_v3.0.0/publication/PUBLISH-AUTHORIZATION.json
+
+permissions:
+  contents: write
+
+concurrency:
+  group: guardians-v300-zenodo-one-release
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[eac3-publish]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+      PUBLICATION_DIR: research/uct-agent-consciousness-workspace/records/ASI_CC_20261011_Control_and_Coexistence/guardians_joint_v3.0.0/publication
+    steps:
+      - name: Checkout exact authorized publication snapshot
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - name: Install pinned publication verifier prerequisites
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends poppler-utils
+          python3 -m pip install --disable-pip-version-check requests==2.32.3
+      - name: Verify author authorization, exact PDF and archive hashes
+        run: |
+          set -euo pipefail
+          test -n "$ZENODO_ACCESS_TOKEN"
+          python3 "$PUBLICATION_DIR/scripts/publish_zenodo.py" verify
+      - name: Create or recover only the Guardians deposit, publish and anonymously verify exact bytes
+        run: |
+          set -euo pipefail
+          python3 "$PUBLICATION_DIR/scripts/publish_zenodo.py" publish
+      - name: Check DOI resolver independently
+        if: success()
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import os,json,requests,time
+          from pathlib import Path
+          p=Path(os.environ['PUBLICATION_DIR'])
+          r=json.loads((p/'PUBLICATION-RECEIPT.json').read_text())
+          expected='https://zenodo.org/records/'+str(r['record_id'])
+          receipt={'doi':r['doi'],'record_id':r['record_id'],'status':'PENDING','independent':True}
+          for k in range(8):
+              try:
+                  req=requests.get('https://doi.org/'+r['doi'],timeout=25,allow_redirects=True)
+                  receipt.update({'http_status':req.status_code,'redirect_url':req.url})
+                  if req.status_code==200 and expected in req.url:
+                      receipt['status']='RESOLVER_PASS';break
+              except requests.RequestException as ex:receipt['error_type']=type(ex).__name__
+              time.sleep(min(2+k,8))
+          (p/'DOI-RESOLUTION.json').write_text(json.dumps(receipt,indent=2)+'\n')
+          print(json.dumps(receipt,indent=2))
+          PY
+      - name: Preserve exact execution receipts as workflow artifact
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: guardians-v300-zenodo-${{ github.run_id }}
+          path: |
+            ${{ env.PUBLICATION_DIR }}/EXPECTED-PUBLICATION.json
+            ${{ env.PUBLICATION_DIR }}/PUBLISH-AUTHORIZATION.json
+            ${{ env.PUBLICATION_DIR }}/PUBLICATION-ATTEMPT.json
+            ${{ env.PUBLICATION_DIR }}/PUBLICATION-RECEIPT.json
+            ${{ env.PUBLICATION_DIR }}/DOI-RESOLUTION.json
+          retention-days: 90
+          if-no-files-found: warn
+      - name: Persist release state to dedicated publication branch
+        if: always()
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          for f in PUBLICATION-ATTEMPT.json PUBLICATION-RECEIPT.json DOI-RESOLUTION.json; do
+            if test -f "$PUBLICATION_DIR/$f"; then git add "$PUBLICATION_DIR/$f"; fi
+          done
+          if git diff --cached --quiet; then exit 0; fi
+          git diff --cached --check
+          git commit -m 'preservation: record actual Guardians EAC-v3 Zenodo publication result [skip ci]'
+          for k in 1 2 3; do
+            if git push origin HEAD:research/guardians-joint-v300-20261012; then exit 0; fi
+            git fetch origin research/guardians-joint-v300-20261012
+            git rebase origin/research/guardians-joint-v300-20261012
+          done
+          echo 'Release receipt could not be pushed. Retrieve retained workflow artifact; NEVER create second uncertain deposit.' >&2
+          exit 1
