@@ -96,7 +96,7 @@
     "nondeductive_context_links": 261,
     "total_review_items": 1608
   },
-  "pending_note": "A5F identifies a real crossed-tool protocol where anatomical anchor plus actual grip and distal side removes the A5E automorphism barrier and defines a changing distal coordinate. The protocol does not establish complete biological K, and its temporal-order reports do not independently identify H_tip, ownership, agency or H_pc.",
+  "pending_note": "A5G proves that convergent TOJ and visuotactile task traces can share one organizational cause without identifying H_tip. The exact ten-model class includes two invariant-target models and both target orientations. Independent within-O H sensitivity plus a predeclared target orientation is sufficient only inside the declared model.",
   "publication_coverage": {
     "version": "UCT-PUB-v1.0.33",
     "entry": "PUBLICATION_COVERAGE.json",
@@ -106,10 +106,10 @@
     "latest_followup_application": "records/A4W20261012_Overlapping_Bearer_Centres/PUBLICATION_COVERAGE_UPDATE.json"
   },
   "latest_activity": {
-    "id": "A5F20261012",
+    "id": "A5G20261012",
     "type": "FOLLOWUP_APPLICATION",
-    "status": "DISABLED_ACTUAL_PROTOCOL_CANDIDATE_PHENOMENAL_BRIDGE_OPEN",
-    "source": "records/A5F20261012_Grounded_Anatomical_Tool_Anchor/RESEARCH_NOTE.md"
+    "status": "DISABLED_IDENTIFIABILITY_OBSTRUCTION_AND_MINIMUM_BRIDGE_CONTRACT",
+    "source": "records/A5G20261012_Two_Channel_Tip_Location_Bridge/RESEARCH_NOTE.md"
   },
   "latest_pending_research": {
     "id": "A3V20261010",
@@ -122,8 +122,8 @@
     "manuscript_status": "NO_STANDALONE_MANUSCRIPT",
     "evidence_status": "BOUNDED_PRIMARY_SOURCE_APPLICATION_STOP_AND_R173_SCOPE_RETURN; ACTUAL_PREMISES_AND_H_OPEN"
   },
-  "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 effective objects received a fresh structural traversal. A5F manually rechecked C1/U1, P3/P6, PHEN_TARGET, R157, R159, A5E and all current supervision items. Deep full-history semantics remain AUDIT_INCOMPLETE.",
-  "next_priority": "A5F next: predeclare one crossed-tool or tool-substitution comparison with a non-report-fitted independent H_tip measure and failure outcome while holding anatomical anchor and grip route fixed. If unavailable, retain only the protocol-level grounded-coordinate candidate and keep B_tip/B_pc open.",
+  "review_status_scope": "Completed v1.1.2 unchanged; 913/424/261 effective objects received a fresh structural traversal. A5G manually rechecked C1/U1, PHEN_TARGET, R157, R159, A5F and current supervision items. Deep full-history semantics remain AUDIT_INCOMPLETE.",
+  "next_priority": "A5G next: find one primary paradigm that varies a predeclared H_tip contrast while holding the A5F organizational coordinate fixed and validates target orientation. If unavailable, retain only the identification obstruction and do not promote task convergence to phenomenology.",
   "latest_activity_persistence_after_A4W_science": {
     "science_commit": "0eddd9c06670a7357a8be5e38efc8af1f335405f",
     "science_tree": "f840be3dc13e384d8074f3e34500ea637fd42ced",
@@ -659,18 +659,18 @@
     }
   },
   "latest_followup_application": {
-    "id": "A5F20261012",
-    "version": "A5F-GROUNDED-TOOL-ANCHOR-v0.1.0",
-    "status": "DISABLED_ACTUAL_PROTOCOL_CANDIDATE_PHENOMENAL_BRIDGE_OPEN",
+    "id": "A5G20261012",
+    "version": "A5G-TWO-CHANNEL-BRIDGE-v0.1.0",
+    "status": "DISABLED_IDENTIFIABILITY_OBSTRUCTION_AND_MINIMUM_BRIDGE_CONTRACT",
     "enabled_as_established_premises": false,
-    "source": "records/A5F20261012_Grounded_Anatomical_Tool_Anchor/RESEARCH_NOTE.md",
-    "handoff": "records/A5F20261012_Grounded_Anatomical_Tool_Anchor/HANDOFF_ZH.md",
-    "work_log": "records/A5F20261012_Grounded_Anatomical_Tool_Anchor/WORK_LOG.md",
-    "claim_ledger": "records/A5F20261012_Grounded_Anatomical_Tool_Anchor/CLAIM_LEDGER.json",
-    "map_extension": "records/A5F20261012_Grounded_Anatomical_Tool_Anchor/MAP_EXTENSION.json",
-    "exact_results": "records/A5F20261012_Grounded_Anatomical_Tool_Anchor/EXACT_RESULTS.json",
+    "source": "records/A5G20261012_Two_Channel_Tip_Location_Bridge/RESEARCH_NOTE.md",
+    "handoff": "records/A5G20261012_Two_Channel_Tip_Location_Bridge/HANDOFF_ZH.md",
+    "work_log": "records/A5G20261012_Two_Channel_Tip_Location_Bridge/WORK_LOG.md",
+    "claim_ledger": "records/A5G20261012_Two_Channel_Tip_Location_Bridge/CLAIM_LEDGER.json",
+    "map_extension": "records/A5G20261012_Two_Channel_Tip_Location_Bridge/MAP_EXTENSION.json",
+    "exact_results": "records/A5G20261012_Two_Channel_Tip_Location_Bridge/EXACT_RESULTS.json",
     "parent_science": "A3V20261010",
-    "parent_followup": "A5E20261012",
+    "parent_followup": "A5F20261012",
     "completed_map": "UCT-MAP-v1.1.2",
     "scientific_delta": {
       "nodes": 0,
@@ -680,9 +680,10 @@
     "selected_target": "H_tip (experienced distal contact location); H_pc remains open",
     "actual_bodily_installation": false,
     "actual_protocol_candidate": true,
-    "independent_asymmetric_anchor_at_protocol_level": true,
+    "two_task_channels": true,
+    "independent_h_tip_sensitivity": false,
+    "fixed_h_tip_orientation": false,
     "complete_biological_K": false,
-    "independent_H_tip_validation": false,
     "independent_B_pc_validation": false,
     "standalone_manuscript": "HOLD_STANDALONE"
   },

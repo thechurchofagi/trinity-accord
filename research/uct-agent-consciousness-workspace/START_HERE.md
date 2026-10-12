@@ -1,6 +1,6 @@
 # UCT 研究唯一阅读入口
 
-最新停用跟进为 **A5F20261012**：[中文交接](records/A5F20261012_Grounded_Anatomical_Tool_Anchor/HANDOFF_ZH.md)；真实交叉工具协议中，解剖锚点与实际握持路线消除了纯置换对称，但完整生物 `K`、`H_tip`、所有权、能动感与 `H_pc` 仍分开且开放。正式完成图仍为 UCT-MAP-v1.1.2，增量 0/0/0。
+最新停用跟进为 **A5G20261012**：[中文交接](records/A5G20261012_Two_Channel_Tip_Location_Bridge/HANDOFF_ZH.md)；两个工具使用任务同时跟随远端坐标仍不能识别 `H_tip`，因为它们可共享同一个组织原因。目标敏感性与方向必须独立预定；完整生物 `K` 和现象桥仍开放。正式完成图仍为 UCT-MAP-v1.1.2，增量 0/0/0。
 
 [总览](UCT_FORMAL_MAP.md) · [全部候选](PENDING_RESEARCH.md) · [当前状态](CURRENT_STATE.json) · [统一登记](UNIFIED_RESEARCH_INDEX.json) · [审查](UCT_FORMAL_AUDIT.md)
 
@@ -10,6 +10,6 @@
 4. 继续研究前以 [CURRENT_STATE.json](CURRENT_STATE.json) 的 latest_research 和 next_priority 为准。
 5. 保存前运行 `python records/NAV20261010_Map_Integration/validate_current_map.py --root .`，同步五个候选登记入口。
 
-最新停用跟进是 [A5D20261012](records/A5D20261012_Constitutive_and_Evidential_Orientation/HANDOFF_ZH.md)：实际有向关系的构成方向与 `H_pc` 的命名方向、`E_pc` 的证据方向已分层；C1 可条件性保留前者，但每个可观测关联符号仍有两种桥接／证据解释。无实际安装或现象校准，控制器证书扩张仍停止。精确下一题以 `CURRENT_STATE.json` 的 `next_priority` 为准。
+最新停用跟进是 [A5G20261012](records/A5G20261012_Two_Channel_Tip_Location_Bridge/HANDOFF_ZH.md)：精确十模型反例把“两个任务通道”与“独立测量目标”分开；一个预先校准为 `H_tip` 敏感且方向固定的同实例通道才足以在声明模型内识别目标。现有研究只支持组织层比较。精确下一题以 `CURRENT_STATE.json` 的 `next_priority` 为准。
 
 本轮导航整合：UCT-INTEGRATION-v1.0.0；正式科学图：UCT-MAP-v1.1.2。旧起始页已原样归档。

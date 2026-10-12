@@ -1,3 +1,9 @@
+# A5G20261012 — two-channel tip-location bridge audit
+
+[Research note](records/A5G20261012_Two_Channel_Tip_Location_Bridge/RESEARCH_NOTE.md) · [contract](records/A5G20261012_Two_Channel_Tip_Location_Bridge/TWO_CHANNEL_BRIDGE_CONTRACT.md) · [exact results](records/A5G20261012_Two_Channel_Tip_Location_Bridge/EXACT_RESULTS.json) · [claims](records/A5G20261012_Two_Channel_Tip_Location_Bridge/CLAIM_LEDGER.json) · [gaps](records/A5G20261012_Two_Channel_Tip_Location_Bridge/GAP_LEDGER.md) · [audit](records/A5G20261012_Two_Channel_Tip_Location_Bridge/FORMAL_AUDIT.md) · [Chinese handoff](records/A5G20261012_Two_Channel_Tip_Location_Bridge/HANDOFF_ZH.md). Disabled 0/0/0 identification audit: two convergent task channels leave ten latent-source models, including invariant `H_tip` and both target orientations. Independent target sensitivity plus predeclared orientation is required inside the model; actual validation remains open.
+
+---
+
 # A5F20261012 — grounded anatomical/tool anchor
 
 [Research note](records/A5F20261012_Grounded_Anatomical_Tool_Anchor/RESEARCH_NOTE.md) · [contract](records/A5F20261012_Grounded_Anatomical_Tool_Anchor/ANCHOR_GRIP_DISTAL_CONTRACT.md) · [exact results](records/A5F20261012_Grounded_Anatomical_Tool_Anchor/EXACT_RESULTS.json) · [claims](records/A5F20261012_Grounded_Anatomical_Tool_Anchor/CLAIM_LEDGER.json) · [gaps](records/A5F20261012_Grounded_Anatomical_Tool_Anchor/GAP_LEDGER.md) · [audit](records/A5F20261012_Grounded_Anatomical_Tool_Anchor/FORMAL_AUDIT.md) · [Chinese handoff](records/A5F20261012_Grounded_Anatomical_Tool_Anchor/HANDOFF_ZH.md). Disabled 0/0/0 protocol-level application: a grounded anatomical anchor and grip route remove crossed-tool symmetry, while complete `K`, `H_tip`, ownership, agency and `H_pc` remain unproven.

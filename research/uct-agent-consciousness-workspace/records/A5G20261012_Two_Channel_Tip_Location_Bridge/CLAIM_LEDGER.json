@@ -1,0 +1,62 @@
+{
+  "schema": "uct-disabled-claim-ledger/1",
+  "research_id": "A5G20261012",
+  "claims": [
+    {
+      "id": "A5G-C1",
+      "type": "EXACT_FINITE_TWO_CHANNEL_EQUIVALENCE_RESULT",
+      "statement": "The declared convergent trace is compatible with ten latent-source models: eight tracking-target models and two invariant-target models; the source-pattern counts are OO=4, OH=2, HO=2 and HH=2.",
+      "domain": "The binary source/orientation family enumerated in check_two_channel_bridge.py.",
+      "all_of": ["BINARY_INTERVENTION", "O_EQUALS_I", "DECLARED_H_FAMILY", "TWO_SOURCE_SELECTORS", "UNKNOWN_BINARY_ORIENTATIONS", "BOTH_OBSERVED_CHANNELS_EQUAL_I"],
+      "proof_or_source": "Exhaustive enumeration in check_two_channel_bridge.py and EXACT_RESULTS.json; standard latent-variable equivalence reasoning.",
+      "counterexamples_or_limits": ["graded targets", "history dependence", "more than two locations", "model misspecification"],
+      "status": "EXACT_WITHIN_DECLARED_FINITE_MODEL",
+      "thought_experiment_role": "Two displays driven by one calculator register realize the OO countermodel."
+    },
+    {
+      "id": "A5G-C2",
+      "type": "NEGATIVE_TARGET_IDENTIFICATION_RESULT",
+      "statement": "Two convergent task channels do not identify H_tip: both invariant-H models and both tracking orientations survive.",
+      "domain": "A5G-C1 model family and the observed convergent trace.",
+      "all_of": ["A5G-C1", "NO_INDEPENDENT_H_SENSITIVITY", "NO_FIXED_TARGET_ORIENTATION"],
+      "proof_or_source": "Projection of the exact compatible set onto target kind and orientation.",
+      "counterexamples_or_limits": ["independently validated target-sensitive oriented channel"],
+      "status": "EXACT_NEGATIVE_IDENTIFICATION_RESULT_IN_MODEL",
+      "thought_experiment_role": "Copy/switch keeps both traces while withholding the target-sensitive route."
+    },
+    {
+      "id": "A5G-C3",
+      "type": "MINIMUM_FINITE_IDENTIFICATION_CONTRACT",
+      "statement": "Within the declared model, independently constraining one channel to be H-sensitive removes invariant-H alternatives, and additionally fixing its target orientation identifies H=O.",
+      "domain": "A5G finite model only.",
+      "all_of": ["A5G-C1", "ONE_CHANNEL_SOURCE_FIXED_TO_H", "CHANNEL_ORIENTATION_FIXED_POSITIVE"],
+      "proof_or_source": "Exact restricted-set counts: four sign-free H-sensitive models and two positive-sign models, both H=O.",
+      "counterexamples_or_limits": ["wrong target validation", "post-hoc sign selection", "nonbinary target", "different object/time/grain"],
+      "status": "EXACT_SUFFICIENCY_RESULT_WITHIN_DECLARED_MODEL",
+      "thought_experiment_role": "Abacus/calculator separates a second display from an independently calibrated target reader."
+    },
+    {
+      "id": "A5G-C4",
+      "type": "SCOPED_PRIMARY_EMPIRICAL_ORGANIZATIONAL_RESULT",
+      "statement": "Primary tool-use paradigms support distinct temporal-order and visuotactile task operations whose spatial effects depend on active use and the used tool part, enabling a preregistered cross-task organizational failure test.",
+      "domain": "The cited crossed-tool, cross-modal extinction and tip/shaft/handle human paradigms; not complete biological K.",
+      "all_of": ["PRIMARY_STUDY_PROTOCOLS", "ACTUAL_TOOL_USE", "PREDECLARED_TASK_BY_LOCATION_COMPARISON"],
+      "proof_or_source": "Maravita et al. 2001/2002 and Holmes, Calvert and Spence 2004.",
+      "counterexamples_or_limits": ["behavioural response pathways", "selection and attention", "no direct H_tip intervention", "no complete-K observation"],
+      "status": "ACTUAL_PROTOCOL_LEVEL_EVIDENCE_NOT_PHENOMENAL_IDENTIFICATION",
+      "thought_experiment_role": "Supplies a real comparator for the common-cause ambiguity."
+    },
+    {
+      "id": "A5G-N1",
+      "type": "DISABLED_SCOPED_UCT_INTERPRETATION",
+      "statement": "If one same-instance complete-K channel independently satisfies the H-sensitive oriented bridge contract, C1 and R157 permit a positive experience-internal distal comparison without an extra owner; present evidence does not satisfy those premises.",
+      "domain": "UCT tokens satisfying all complete-K, same-binding, target-sensitivity and orientation premises.",
+      "all_of": ["A:C1_SAME_BINDING", "R157:COORDINATE_TRANSPORT", "A5G-C3_ACTUALLY_VALIDATED", "NO_EXTRA_OWNER_INFERENCE"],
+      "proof_or_source": "UCT I v1.2, R157 and A5G-C3.",
+      "counterexamples_or_limits": ["not C1 evidence", "not current complete-K proof", "not ownership or agency", "not subject count"],
+      "status": "DISABLED_POSITIVE_INTERPRETATION_ALL_APPLICATION_PREMISES_OPEN",
+      "thought_experiment_role": "Overlapping routes block unique-owner inflation."
+    }
+  ]
+}
+

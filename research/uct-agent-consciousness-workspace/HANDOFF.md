@@ -1,4 +1,10 @@
-# A5F20261012 current handoff — grounded anatomical/tool anchor
+# A5G20261012 current handoff — two-channel tip-location bridge audit
+
+[English note](records/A5G20261012_Two_Channel_Tip_Location_Bridge/RESEARCH_NOTE.md) · [bridge contract](records/A5G20261012_Two_Channel_Tip_Location_Bridge/TWO_CHANNEL_BRIDGE_CONTRACT.md) · [exact results](records/A5G20261012_Two_Channel_Tip_Location_Bridge/EXACT_RESULTS.json) · [formal audit](records/A5G20261012_Two_Channel_Tip_Location_Bridge/FORMAL_AUDIT.md) · [Chinese handoff](records/A5G20261012_Two_Channel_Tip_Location_Bridge/HANDOFF_ZH.md). Two convergent task channels leave ten latent-source explanations, including two invariant-`H_tip` models and both tracking orientations. One independently H-sensitive channel still requires a predeclared target orientation. Existing TOJ and visuotactile studies support an organizational failure test, not `H_tip` identification. Formal delta 0/0/0; all review items remain open.
+
+---
+
+# A5F20261012 prior handoff — grounded anatomical/tool anchor
 
 [English note](records/A5F20261012_Grounded_Anatomical_Tool_Anchor/RESEARCH_NOTE.md) · [anchor contract](records/A5F20261012_Grounded_Anatomical_Tool_Anchor/ANCHOR_GRIP_DISTAL_CONTRACT.md) · [exact results](records/A5F20261012_Grounded_Anatomical_Tool_Anchor/EXACT_RESULTS.json) · [formal audit](records/A5F20261012_Grounded_Anatomical_Tool_Anchor/FORMAL_AUDIT.md) · [Chinese handoff](records/A5F20261012_Grounded_Anatomical_Tool_Anchor/HANDOFF_ZH.md). Anatomical anchor plus actual grip and distal side breaks crossed-tool symmetry: 64/64 unique-anchor/unique-grip pairs are non-isomorphic; the restricted family is 4/4 isomorphic without anchor versus 8/8 non-isomorphic with anchor and 8/8 coordinate flips. This is protocol-level actual organization, not complete biological `K` or a phenomenal bridge. Temporal-order reports do not independently identify `H_tip`, ownership, agency or `H_pc`. Formal delta 0/0/0; all review items remain open.
 

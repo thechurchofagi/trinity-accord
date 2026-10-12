@@ -1,0 +1,66 @@
+{
+  "a5g_joint_satisfiability": {
+    "complete_biological_k_claimed": false,
+    "oriented_h_sensitive_case": {
+      "CHANNEL_READS_H": 1,
+      "H_EQUALS_O_IDENTIFIED_IN_MODEL": 1,
+      "ORIENTATION_FIXED": 1
+    },
+    "shared_organizational_common_cause": {
+      "E_TOJ_READS_O": 1,
+      "E_VTI_READS_O": 1,
+      "H_INVARIANT": 1,
+      "O_TRACKS_I": 1
+    },
+    "unsigned_h_sensitive_case": {
+      "BOTH_H_POLARITIES_COMPATIBLE": 1,
+      "CHANNEL_READS_H": 1,
+      "ORIENTATION_FIXED": 0
+    }
+  },
+  "a5g_scientific_delta": {
+    "contexts": 0,
+    "nodes": 0,
+    "rules": 0
+  },
+  "affected_semantic_nodes": [
+    "A:P3",
+    "A:P6",
+    "A:C1",
+    "A:U1",
+    "A:PHEN_TARGET",
+    "R157:COORDINATE_TRANSPORT",
+    "R157:SEMANTIC_RESIDUAL",
+    "R157:MINENESS_BRIDGE_SCHEMA",
+    "R159:ANCHOR_BINDING_CONTRACT"
+  ],
+  "all_rules_read_all_of_as_simultaneous_and": true,
+  "context_links_treated_as_nondeductive": true,
+  "deductive_cycles": [],
+  "effective_counts": {
+    "context_links": 261,
+    "nodes": 913,
+    "rules": 424
+  },
+  "effective_graph_sha256": "0973600f1be5cf21614592ca901112b26f9f0c9f6df36294a5dbb049efcf7612",
+  "manual_semantic_checks": [
+    "TOJ and VTI evidence are not equated with H_tip",
+    "Conditional response independence is not equated with measurand independence",
+    "All positive bridge premises are simultaneous and same-binding",
+    "Protocol actuality is not promoted to complete biological K",
+    "C1 and R157 are used only conditionally in the organization-to-experience direction",
+    "No exclusive owner, subject count or basal report gate is introduced"
+  ],
+  "per_node_fields_accessed": 913,
+  "root_counts": {
+    "context_links": 178,
+    "nodes": 584,
+    "rules": 284
+  },
+  "root_graph_sha256": "40d17cd5f61ebcc1bfcea65eb59c3c730208bcfcf69ba92e2f615a993584e3ce",
+  "rules_with_empty_all_of": [],
+  "rules_with_nonlist_all_of": [],
+  "schema": "a5g-map-audit/1",
+  "status": "FRESH_STRUCTURAL_PASS_BOUNDED_SEMANTIC_PASS_FULL_DEPTH_INCOMPLETE",
+  "unresolved_deductive_references": []
+}

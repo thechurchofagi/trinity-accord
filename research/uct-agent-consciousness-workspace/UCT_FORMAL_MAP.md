@@ -1,3 +1,9 @@
+# A5G20261012 disabled addendum — two-channel tip-location bridge
+
+A5G adds no completed node, rule or context (0/0/0). Exact enumeration of two convergent channels leaves ten source/orientation models: eight tracking-target and two invariant-target models, with both target orientations compatible. Conditional response independence is not target-measure independence. Independently fixing one channel as H-sensitive removes invariant targets but does not fix orientation; a predeclared orientation is additionally sufficient only within the binary model. Primary tool-use studies support a task-by-location organizational failure test, not complete biological `K` or `H_tip`. See [A5G audit](records/A5G20261012_Two_Channel_Tip_Location_Bridge/FORMAL_AUDIT.md).
+
+---
+
 # A5F20261012 disabled addendum — grounded anatomical/tool anchor
 
 A5F adds no completed node, rule or context (0/0/0). A unique anatomical anchor plus actual grip and distal side makes the declared crossed-tool complement non-isomorphic and defines a changing distal coordinate: 64/64 unique-anchor/unique-grip pairs are non-isomorphic; the restricted tool family is 4/4 isomorphic without anchor versus 8/8 non-isomorphic with anchor and 8/8 coordinate flips. The primary protocol grounds an actual candidate but not complete biological `K`. Temporal-order reports, `H_tip`, ownership, agency and `H_pc` are not conflated. Non-isomorphism is not used backward to infer phenomenology or a unique owner. See [A5F audit](records/A5F20261012_Grounded_Anatomical_Tool_Anchor/FORMAL_AUDIT.md).

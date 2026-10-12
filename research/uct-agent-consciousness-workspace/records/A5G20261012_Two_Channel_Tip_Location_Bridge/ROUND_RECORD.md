@@ -1,0 +1,11 @@
+# A5G round record — two-channel distal-location bridge
+
+1. **User goal.** Continue the UCT experience–intelligence–self inquiry from actual organization, preserve C1/U1 and process pluralism, and advance the positive bodily/action-mineness line without treating report, agency, ownership or a finite organizational coordinate as experience itself.
+2. **One unresolved question.** If crossed-tool temporal-order judgement is paired with a separately predeclared visual–tactile interference or extinction measure at the tool tip, does their agreement identify the experienced distal location `H_tip`, or can both channels co-vary because they read the same anchored organizational coordinate while `H_tip` remains unchanged or unspecified?
+3. **Relevant nodes and fixed sources.** UCT I v1.2 C1/U1 and actual-process clauses; TA25's complete-organization/experience/internal-self distinctions; R157 structural transport; R159 internal body-frame/external-referent allowance; A5D–A5F orientation, automorphism and grounded-anchor records; Yamamoto–Kitazawa crossed-tool evidence; primary tool-use crossmodal-interaction studies; supervision items `QC-20261008-10`, `IA-QC11`, `QC-20261008-12/13`, `SCU-OPEN-R191-NORMALIZATION`, and `SCU-AUDIT-DEPTH`.
+4. **Planned addition or correction.** Predeclare a two-channel contract, construct an exact observational-equivalence family, distinguish conditional response independence from semantic/measurand independence, and state the minimum target-sensitive bridge or failure outcome needed before either channel can count as evidence specifically about `H_tip`.
+5. **Deliverable.** An English research note, contract, exact checker/results, source scope, thought experiments, claim/gap/review ledgers, formal-map audit, publication decision, Chinese handoff, and recoverable dual-persistence package. Any candidate remains disabled unless the same-instance actual and phenomenal premises are jointly warranted.
+
+## Direction check after selection
+
+The bounded goal is to decide what two converging distal-location measures add to the experience-internal mineness question. It is not a generic measurement-model or controller-certification project. Stop after the exact shared-common-cause obstruction and its minimum repair; return the result to `H_tip`, `B_tip`, C1/R157 and the organizational/phenomenal/report distinction.

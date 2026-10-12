@@ -1,3 +1,11 @@
+# A5G20261012 research response — two-channel tip-location bridge audit
+
+The latest ledger and every carried OPEN/ACKNOWLEDGED item were read before selection, after result formation and before save. A5G proves that task plurality does not supply target-measure independence: ten latent-source models fit the same convergent trace, including invariant `H_tip` and both target orientations. It supplies a minimum finite bridge contract but no actual independent target-sensitive oriented measure.
+
+`QC-20261008-10` remains ACKNOWLEDGED/OPEN; `IA-QC11`, `QC-20261008-12/13` and `SCU-OPEN-R191-NORMALIZATION` remain OPEN; `SCU-AUDIT-DEPTH` remains AUDIT_INCOMPLETE. No item is self-closed. Evidence: [response](records/A5G20261012_Two_Channel_Tip_Location_Bridge/REVIEW_RESPONSE.md), [contract](records/A5G20261012_Two_Channel_Tip_Location_Bridge/TWO_CHANNEL_BRIDGE_CONTRACT.md), [exact results](records/A5G20261012_Two_Channel_Tip_Location_Bridge/EXACT_RESULTS.json), [gaps](records/A5G20261012_Two_Channel_Tip_Location_Bridge/GAP_LEDGER.md), [audit](records/A5G20261012_Two_Channel_Tip_Location_Bridge/FORMAL_AUDIT.md).
+
+---
+
 # A5F20261012 research response — grounded anatomical/tool anchor
 
 The latest ledger and every carried OPEN/ACKNOWLEDGED item were read before selection, after result formation and before save. A5F supplies a real crossed-tool protocol and exact grounded-anchor asymmetry, but it explicitly stops before complete biological `K` or phenomenal identification. Temporal-order/location reports are not treated as `H_tip`, ownership, agency or `H_pc`.

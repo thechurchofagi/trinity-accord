@@ -1,5 +1,11 @@
 # UCT durable memory
 
+## A5G20261012 latest memory
+
+A5G tests whether two convergent tool-use tasks identify `H_tip`. In the declared latent-source model, the shared trace leaves ten compatible explanations: eight tracking-target and two invariant-target models, with `H=O` and `H=not O` both surviving. Conditional response independence is therefore not semantic/measurand independence. Independently fixing one channel as H-sensitive removes invariant targets but leaves both orientations; predeclaring its target orientation is additionally required to identify `H=O` inside the model. Primary TOJ and visuotactile paradigms support an organizational task-by-location failure test, not an independent phenomenal bridge or complete biological `K`. Formal delta 0/0/0; review items remain open. Next: vary a predeclared `H_tip` contrast within fixed A5F organization and validate target orientation, or retain only the obstruction.
+
+---
+
 ## A5F20261012 latest memory
 
 A5F supplies an actual protocol-level asymmetric candidate for A5E: one anatomically fixed hand actually grips a stick while crossed sticks exchange distal external side without moving hand/mechanoreceptor locations. In the declared 256 typed structures, simultaneous hand/tip swap is an automorphism in 16 and not in 240; all 64 unique-anchor/unique-grip cross pairs are non-isomorphic. In the restricted perfect-matching tool family, 4/4 anchor-free pairs are isomorphic, 8/8 uniquely anchored pairs are non-isomorphic and the anchored distal coordinate flips in 8/8. This removes a structural symmetry barrier but does not establish complete biological `K` or a phenomenal bridge. Crossed-tool temporal-order evidence does not independently identify `H_tip`, ownership, agency or `H_pc`; Kalckert–Ehrsson blocks ownership/agency conflation. Formal delta 0/0/0; all supervision items remain open. Next: one preregistered non-report-fitted `H_tip` measure and failure outcome with anchor/grip fixed, else retain only the protocol-level coordinate candidate.

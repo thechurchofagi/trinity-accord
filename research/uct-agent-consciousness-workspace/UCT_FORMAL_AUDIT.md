@@ -1,3 +1,9 @@
+# A5G20261012 audit addendum
+
+A5G preserves the effective 913/424/261 graph and adds 0/0/0. Fresh traversal found zero unresolved deductive references, cycles, non-list `all_of` or empty `all_of`. The affected audit distinguishes organizational coordinate, latent `H_tip`, TOJ evidence, VTI evidence, ownership, agency and `H_pc`; all positive bridge premises must share object/time/grain and hold simultaneously. Exact witnesses cover invariant-target common cause, unsigned target sensitivity and signed target sensitivity. Protocol actuality is not complete biological installation, and evidence covariance is not read backward as phenomenology. Deep historical semantic audit remains incomplete. See [A5G formal audit](records/A5G20261012_Two_Channel_Tip_Location_Bridge/FORMAL_AUDIT.md).
+
+---
+
 # A5F20261012 audit addendum
 
 A5F preserves the effective 913/424/261 graph and adds 0/0/0. Fresh traversal found zero unresolved deductive references, cycles, non-list `all_of` or empty `all_of`. The audit distinguishes protocol-level actual anchor/grip/side relations from complete biological `K`, and temporal-order reports from `H_tip`, ownership, agency and `H_pc`. Anchored/non-isomorphic and anchor-free/isomorphic cases are jointly satisfiable exact witnesses. The non-isomorphism direction is not reversed into a phenomenal bridge. Deep historical semantic audit remains incomplete. See [A5F formal audit](records/A5F20261012_Grounded_Anatomical_Tool_Anchor/FORMAL_AUDIT.md).

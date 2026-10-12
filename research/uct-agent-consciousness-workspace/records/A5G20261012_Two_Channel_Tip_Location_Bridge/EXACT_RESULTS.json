@@ -1,0 +1,136 @@
+{
+  "schema": "a5g-two-channel-equivalence/1",
+  "observed_trace": {
+    "I=0": [
+      0,
+      0
+    ],
+    "I=1": [
+      1,
+      1
+    ]
+  },
+  "model_class": "Each decoded channel reads O or H with an unknown binary orientation; H either tracks O with either pole or is invariant.",
+  "counts": {
+    "total_compatible_models": 10,
+    "tracking_target_models": 8,
+    "invariant_target_models": 2,
+    "target_equals_organization_models": 4,
+    "target_complements_organization_models": 4,
+    "source_pattern_counts": {
+      "OO": 4,
+      "OH": 2,
+      "HO": 2,
+      "HH": 2
+    }
+  },
+  "compatible_models": [
+    {
+      "target_kind": "tracking",
+      "target_parameter": 0,
+      "source_pattern": "OO",
+      "orientations": [
+        0,
+        0
+      ]
+    },
+    {
+      "target_kind": "tracking",
+      "target_parameter": 0,
+      "source_pattern": "OH",
+      "orientations": [
+        0,
+        0
+      ]
+    },
+    {
+      "target_kind": "tracking",
+      "target_parameter": 0,
+      "source_pattern": "HO",
+      "orientations": [
+        0,
+        0
+      ]
+    },
+    {
+      "target_kind": "tracking",
+      "target_parameter": 0,
+      "source_pattern": "HH",
+      "orientations": [
+        0,
+        0
+      ]
+    },
+    {
+      "target_kind": "tracking",
+      "target_parameter": 1,
+      "source_pattern": "OO",
+      "orientations": [
+        0,
+        0
+      ]
+    },
+    {
+      "target_kind": "tracking",
+      "target_parameter": 1,
+      "source_pattern": "OH",
+      "orientations": [
+        0,
+        1
+      ]
+    },
+    {
+      "target_kind": "tracking",
+      "target_parameter": 1,
+      "source_pattern": "HO",
+      "orientations": [
+        1,
+        0
+      ]
+    },
+    {
+      "target_kind": "tracking",
+      "target_parameter": 1,
+      "source_pattern": "HH",
+      "orientations": [
+        1,
+        1
+      ]
+    },
+    {
+      "target_kind": "invariant",
+      "target_parameter": 0,
+      "source_pattern": "OO",
+      "orientations": [
+        0,
+        0
+      ]
+    },
+    {
+      "target_kind": "invariant",
+      "target_parameter": 1,
+      "source_pattern": "OO",
+      "orientations": [
+        0,
+        0
+      ]
+    }
+  ],
+  "conditional_independence_note": "All channels are deterministic given their selected source; two responses can therefore be conditionally independent given one shared organizational cause without being semantically or measurand-independent.",
+  "h_sensitive_first_channel_sign_free": {
+    "compatible_models": 4,
+    "remaining_target_poles": [
+      0,
+      1
+    ],
+    "identified": false
+  },
+  "h_sensitive_first_channel_sign_fixed_positive": {
+    "compatible_models": 2,
+    "remaining_target_poles": [
+      0
+    ],
+    "identified_within_declared_model": true
+  },
+  "conclusion": "Two convergent task channels do not identify H_tip. Independent H-sensitivity removes invariant-H alternatives, and a fixed target orientation is additionally required to identify the positive H_tip pole within this model."
+}
