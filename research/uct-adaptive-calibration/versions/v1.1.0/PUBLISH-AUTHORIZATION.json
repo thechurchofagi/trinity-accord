@@ -13,5 +13,10 @@
   "no_modification_to_published_predecessors": true,
   "not_peer_reviewed": true,
   "ots_next": true,
-  "arweave_requires_bitcoin_verification_and_strict_cumulative_fee_less_than_0_1_AR": true
+  "arweave_requires_bitcoin_verification_and_strict_cumulative_fee_less_than_0_1_AR": true,
+  "retry_after_local_preflight_fix": {
+    "reason": "NameError in stage.py corrected before Zenodo step; all original source SHA256 and publication scope unchanged",
+    "failed_run_id": 38336679489,
+    "revision": "1"
+  }
 }
