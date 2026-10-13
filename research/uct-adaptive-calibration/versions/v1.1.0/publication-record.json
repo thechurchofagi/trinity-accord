@@ -1,0 +1,35 @@
+{
+  "author": "Hongju Liu",
+  "doi": "10.5281/zenodo.23329883",
+  "explanation": "Frozen v1.1.0 PDF/English source and exact reproduction ZIP; no previous record, publication, or Trinity Accord Original modified.",
+  "files": [
+    {
+      "bytes": 2626447,
+      "name": "Adaptive_Consequence_Calibration_DOI_Preparation_v1.1.0.zip",
+      "readback_pass": true,
+      "sha256": "90c65558fd168996241876d45a3b66c038eb351d8242e2d77e08df0bc82beda5"
+    },
+    {
+      "bytes": 70093,
+      "name": "Learning_What_to_Preserve_v1.1.0.md",
+      "readback_pass": true,
+      "sha256": "b909666f526dada17c5cedd1f7b87f2c83a411a64d1c37b51727c7a3176093bb"
+    },
+    {
+      "bytes": 410208,
+      "name": "Learning_What_to_Preserve_v1.1.0.pdf",
+      "readback_pass": true,
+      "sha256": "20671c736396b95070ccd7be1af989de4e8ceef987bc6ae531ca1d5dda003f16"
+    }
+  ],
+  "paper_file_count": 3,
+  "peer_reviewed": false,
+  "public_file_readback_pass": true,
+  "publication_source_commit": "306a93953cf988db8faf38f5390fe6d1863ff02b",
+  "record_id": 23329883,
+  "report_number": "UCT-GD-2026-01",
+  "state": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
+  "status": "PUBLISHED_AND_PUBLIC_READBACK_PASS",
+  "title": "Learning What to Preserve Without Silencing the Body: Adaptive Organization, Mutable Evaluation, and Reference-Calibrated Regulation",
+  "version": "1.1.0"
+}
