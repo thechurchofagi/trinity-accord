@@ -1,0 +1,16 @@
+{
+  "checkpoint": "GD20261013_Adaptive_Calibration_v0_3_0",
+  "result_version": "UCT-GD-v0.3.0",
+  "baseline_map": "UCT-MAP-v1.1.2",
+  "coverage_version": "UCT-GD-COVERAGE-v0.3.0",
+  "claim_ids": ["GD13", "GD14", "GD15", "GD16", "GD17"],
+  "enabled_as_established_uct_premises": false,
+  "full_map_semantic_audit": "INCOMPLETE",
+  "source_scope": "Supplied GD v0.2.0 rerun; current guide/state and targeted primary-source review, not all historical papers",
+  "novelty_scope": "Conditional application of established learning/calibration methods; global priority unverified",
+  "publication_decision": "INTEGRATE_GD_FAMILY_NO_NEW_STANDALONE_DOI",
+  "new_doi": false,
+  "new_paper_count": 0,
+  "remote_mirror_scope": "Detailed handoff, numerical summaries and candidate metadata only; full code/source/raw data in originating downloadable package",
+  "next_question": "Material/selection grounding of an evaluative channel that itself can change, without imposing a selfhood score"
+}

@@ -1,0 +1,175 @@
+{
+  "common_mode": {
+    "D": 0.1,
+    "M": 0.0,
+    "N": 0.01,
+    "a": 0.1,
+    "b": 2.0,
+    "k": 1.0,
+    "p": 1.0
+  },
+  "evaluation_note": "Averaged last 20 center settings and evaluated their held-fixed stationary variance OFFLINE; not an estimate of total adaptation cost or survival.",
+  "experiments": {
+    "downstream_body": {
+      "baseline_body_variance": 0.8787878787878788,
+      "held_tailmean_body_variance_quantiles_10_50_90": [
+        0.8832127413786057,
+        0.8874631749586944,
+        0.8927599354051786
+      ],
+      "holdout_body_second_moment_median": 0.8906053309642108,
+      "oracle_body_variance": 0.8787878787878788,
+      "oracle_p": 1.0,
+      "tail_mean_p_quantiles_10_50_90": [
+        0.9802120269655838,
+        0.9876363039075953,
+        0.9936618579787726
+      ],
+      "trajectories": 32
+    },
+    "drifting_body": {
+      "baseline_body_variance": 0.8787878787878788,
+      "held_tailmean_body_variance_quantiles_10_50_90": [
+        0.8852477513410154,
+        0.8914551408673617,
+        0.8995152367214744
+      ],
+      "holdout_body_second_moment_median": 0.8928031213777401,
+      "oracle_body_variance": 0.8787878787878788,
+      "oracle_p": 1.0,
+      "tail_mean_p_quantiles_10_50_90": [
+        0.970877623658276,
+        0.9820324477740251,
+        0.9907693382120166
+      ],
+      "trajectories": 32
+    },
+    "low_noise_body": {
+      "baseline_body_variance": 1.2196969696969697,
+      "held_tailmean_body_variance_quantiles_10_50_90": [
+        1.225866522531647,
+        1.23004909773241,
+        1.2368526914249842
+      ],
+      "holdout_body_second_moment_median": 1.2360506316932067,
+      "oracle_body_variance": 1.2196969696969697,
+      "oracle_p": 1.0,
+      "tail_mean_p_quantiles_10_50_90": [
+        0.9730676398178059,
+        0.9835999648551796,
+        0.990171287641295
+      ],
+      "trajectories": 32
+    },
+    "low_noise_sensory": {
+      "baseline_body_variance": 1.2196969696969697,
+      "held_tailmean_body_variance_quantiles_10_50_90": [
+        4.981080360885676,
+        4.9984692332984055,
+        4.999999999999999
+      ],
+      "holdout_body_second_moment_median": 5.012089073985697,
+      "oracle_body_variance": 1.2196969696969697,
+      "oracle_p": 1.0,
+      "tail_mean_p_quantiles_10_50_90": [
+        0.0,
+        6.738228140044323e-05,
+        0.0008359500850612551
+      ],
+      "trajectories": 32
+    },
+    "upstream_body": {
+      "baseline_body_variance": 0.8787878787878788,
+      "held_tailmean_body_variance_quantiles_10_50_90": [
+        0.36213644604774975,
+        0.36257210579227106,
+        0.3650076324484585
+      ],
+      "holdout_body_second_moment_median": 0.36625333601840604,
+      "oracle_body_variance": 0.3621195248679894,
+      "oracle_p": 0.17416573867739416,
+      "tail_mean_p_quantiles_10_50_90": [
+        0.16516120446164156,
+        0.18137815191712792,
+        0.21026792341831838
+      ],
+      "trajectories": 32
+    }
+  },
+  "learner_inputs": [
+    "own gate setting",
+    "round counter",
+    "chosen probe settings",
+    "two observed alarm fractions"
+  ],
+  "monitor_definition": "Binary alarm on total two-compartment squared deviation; no difference-mode label is supplied",
+  "not_provided_to_learner": [
+    "a,b,k,D,N,M",
+    "noise-source label",
+    "stationary variance formula",
+    "optimal p",
+    "body states",
+    "regulator states",
+    "common or difference coordinates"
+  ],
+  "numerical_method": "Exact sampled fixed-gate four-state OU process; finite correlated probe windows; continuous carried state; randomized probe order",
+  "seeds": [
+    840130,
+    840131,
+    840132,
+    840133,
+    840134,
+    840135,
+    840136,
+    840137,
+    840138,
+    840139,
+    840140,
+    840141,
+    840142,
+    840143,
+    840144,
+    840145,
+    840146,
+    840147,
+    840148,
+    840149,
+    840150,
+    840151,
+    840152,
+    840153,
+    840154,
+    840155,
+    840156,
+    840157,
+    840158,
+    840159,
+    840160,
+    840161
+  ],
+  "settings": {
+    "alarm_sensitivity": 1.0,
+    "burn_samples": 250,
+    "delta0": 0.09,
+    "delta_exponent": 0.15,
+    "delta_scale": 40.0,
+    "dt": 0.2,
+    "evaluation_tail": 20,
+    "gain0": 0.4,
+    "gain_exponent": 0.5,
+    "gain_scale": 25.0,
+    "max_update": 0.06,
+    "rounds": 100,
+    "samples_per_probe": 4000,
+    "start_p": 1.0
+  },
+  "status": "EXECUTED_FINITE_SIMULATIONS_NOT_CONSCIOUSNESS_EVIDENCE",
+  "theorem_note": "ODE expected-feedback convergence is conditional. Finite noisy adaptive convergence is demonstrated, not universally proved.",
+  "version": "UCT-GD-20261013-v0.3.0",
+  "versions": {
+    "numba": "0.65.1",
+    "numpy": "2.3.5",
+    "python": "3.13.5",
+    "scipy": "1.17.0"
+  }
+}

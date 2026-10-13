@@ -1,0 +1,27 @@
+{
+  "alarm_uncertainty": {
+    "autocorrelation_inflation": 3.04737149518001,
+    "dt": 0.2,
+    "empirical_mean": 0.3454618453979492,
+    "empirical_variance_of_mean": 0.005338185632487907,
+    "estimated_MC_SE_of_variance": 8.340390158913271e-05,
+    "exact_mean": 0.3474341935678177,
+    "exact_variance_of_mean": 0.005397744246771121,
+    "independent_sample_formula": 0.0017712787086538897,
+    "records": 8192,
+    "samples_per_record": 128
+  },
+  "counts": {
+    "alarm_gain_order_checks": 36,
+    "baseline_twin_transition_checks": 5,
+    "bounded_alarm_root_cases": 53,
+    "central_difference_cases": 162,
+    "exact_silencing_cases": 288,
+    "stationary_alarm_records": 8192
+  },
+  "errors": {
+    "algebra_numeric_max_error": 3.9054176559361053e-13
+  },
+  "status": "PASS",
+  "uncertainty_scope": "Stationary fixed gate only; not an automatic CI for adaptive probe windows"
+}
