@@ -1,0 +1,23 @@
+{
+  "batch": "2026-10-13-uct-gd-v110",
+  "paper_count": 1,
+  "papers": [
+    {
+      "doi": "10.5281/zenodo.23329883",
+      "pdfs": [
+        {
+          "bytes": 410208,
+          "name": "Learning_What_to_Preserve_v1.1.0.pdf",
+          "role": "Complete English v1.1.0 adaptive-consequence-calibration theoretical/computational preprint",
+          "sha256": "20671c736396b95070ccd7be1af989de4e8ceef987bc6ae531ca1d5dda003f16"
+        }
+      ],
+      "receipt_path": "research/uct-adaptive-calibration/versions/v1.1.0/publication-record.json",
+      "record_id": 23329883,
+      "report": "UCT-GD-2026-01",
+      "title": "Learning What to Preserve Without Silencing the Body: Adaptive Organization, Mutable Evaluation, and Reference-Calibrated Regulation",
+      "version": "1.1.0"
+    }
+  ],
+  "schema": "trinityaccord.paper-ots-targets.v1"
+}
