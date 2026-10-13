@@ -693,3 +693,7 @@ Read R197 before selecting the next question. Do not treat “nonverbal” as an
 # Latest continuation priority — after A3M20261010
 
 Do not continue generic cube/statistical expansion. The next main-line task is to propose and criticize one independently oriented, fallible endpoint for selected bodily/action familiarity and one physically credible `R≠L` manipulation. Keep route use, cue familiarity, fluency, ownership wording, success and report distinct. Read `records/A3M20261010_Bodily_Familiarity_Invariance/HANDOFF_ZH.md` after the required entry sequence.
+
+## Persistent publication requirement — 2026-10-13
+
+Follow [the author identity policy](../PUBLICATION_AUTHOR_IDENTITY.md) (PUB-AUTHOR-IDENTITY-20261013 v1.0.0) and RESEARCH_MASTER_GUIDE.md v2.4 for all future manuscripts and new editions. Print `Hongju Liu`, `Independent researcher, Shenzhen, China`, and `liuhongju3@163.com` on the first/title page as visible, extractable text; expose the same author contact in public deposit metadata/description. Use `Liu, Hongju` for combined creator metadata. Check the final DOI-bound PDF before freezing hashes. Preserve published editions. Verified ORCID only; otherwise pending. Target claimed OpenAlex profile: `A5150552024`; check actual assignments after indexing. No automatic research restart, new publication, CI or paid preservation action is authorized by this policy update.

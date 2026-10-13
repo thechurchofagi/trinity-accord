@@ -1,5 +1,10 @@
 # A5L20261012 current handoff — role reversal and semantic barrier
 
+## Persistent publication requirement — 2026-10-13
+
+Follow [the author identity policy](../PUBLICATION_AUTHOR_IDENTITY.md) (PUB-AUTHOR-IDENTITY-20261013 v1.0.0) and RESEARCH_MASTER_GUIDE.md v2.4 for all future manuscripts and new editions. Print `Hongju Liu`, `Independent researcher, Shenzhen, China`, and `liuhongju3@163.com` on the first/title page as visible, extractable text; expose the same author contact in public deposit metadata/description. Use `Liu, Hongju` for combined creator metadata. Check the final DOI-bound PDF before freezing hashes. Preserve published editions. Verified ORCID only; otherwise pending. Target claimed OpenAlex profile: `A5150552024`; check actual assignments after indexing. No automatic research restart, new publication, CI or paid preservation action is authorized by this policy update.
+
+
 [English note](records/A5L20261012_Role_Reversal_Semantic_Barrier/RESEARCH_NOTE.md) · [role-reversal contract](records/A5L20261012_Role_Reversal_Semantic_Barrier/ROLE_REVERSAL_CONTRACT.md) · [exact results](records/A5L20261012_Role_Reversal_Semantic_Barrier/EXACT_RESULTS.json) · [formal audit](records/A5L20261012_Role_Reversal_Semantic_Barrier/FORMAL_AUDIT.md) · [Chinese handoff](records/A5L20261012_Role_Reversal_Semantic_Barrier/HANDOFF_ZH.md). Grounded role reversal constructs actual `X=P xor Q` but the full `E=X` table leaves all eight `H` laws because a direct-`X` writer is a complete `H`-free twin. `TS/SH/CO` remain independent; endpoint escalation stops at organizational `R` and `X`. Formal delta 0/0/0; all review items remain open.
 
 Next: characterize a non-endpoint, constitution-level same-token criterion for when grounded `X` belongs to complete relevant `K` rather than a measurement-side writer, without report or unique ownership.

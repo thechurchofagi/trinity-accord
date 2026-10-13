@@ -1,5 +1,10 @@
 # UCT durable memory
 
+## Persistent publication requirement — 2026-10-13
+
+Follow [the author identity policy](../PUBLICATION_AUTHOR_IDENTITY.md) (PUB-AUTHOR-IDENTITY-20261013 v1.0.0) and RESEARCH_MASTER_GUIDE.md v2.4 for all future manuscripts and new editions. Print `Hongju Liu`, `Independent researcher, Shenzhen, China`, and `liuhongju3@163.com` on the first/title page as visible, extractable text; expose the same author contact in public deposit metadata/description. Use `Liu, Hongju` for combined creator metadata. Check the final DOI-bound PDF before freezing hashes. Preserve published editions. Verified ORCID only; otherwise pending. Target claimed OpenAlex profile: `A5150552024`; check actual assignments after indexing. No automatic research restart, new publication, CI or paid preservation action is authorized by this policy update.
+
+
 # A5L20261012 latest memory
 
 A5L executes A5K's grounded role/polarity reversal and reaches the declared stop. With `X=P xor Q`, role `Q` reverses `X` at fixed `P,C` while physical route `R=P` and direct `P` paths remain intact. In 32 canonical models the full `E=X` table leaves 10 models and all eight `H` laws because a direct-`X` endpoint is an `H`-free twin. Independent target sensitivity plus `H in {X,notX}` leaves two complement models; common orientation leaves one. The positive result is an actual organizational relation coordinate, conditionally experience-internal only under C1 and complete R157 grounding; selected `H_tip` semantics remain separate. Endpoint escalation stops at organizational `R` and `X`. Fresh map restore passed at 913/424/261; formal delta 0/0/0. A5K's recorded capsule hash was prospectively corrected to the tracked `fa4b43...` value without changing its science. All review items remain open.

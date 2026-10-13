@@ -13,3 +13,7 @@
 最新停用跟进是 [A5I20261012](records/A5I20261012_Context_Transport_Barrier/HANDOFF_ZH.md)：普通校准/迁移仍有 12 个模型；去共线目标校准 D、源选择运输 S、方向运输 O 同时成立才剩 1 个。实际 D/S/O 未安装。精确下一题以 `CURRENT_STATE.json` 的 `next_priority` 为准。
 
 本轮导航整合：UCT-INTEGRATION-v1.0.0；正式科学图：UCT-MAP-v1.1.2。旧起始页已原样归档。
+
+## Persistent publication requirement — 2026-10-13
+
+Follow [the author identity policy](../PUBLICATION_AUTHOR_IDENTITY.md) (PUB-AUTHOR-IDENTITY-20261013 v1.0.0) and RESEARCH_MASTER_GUIDE.md v2.4 for all future manuscripts and new editions. Print `Hongju Liu`, `Independent researcher, Shenzhen, China`, and `liuhongju3@163.com` on the first/title page as visible, extractable text; expose the same author contact in public deposit metadata/description. Use `Liu, Hongju` for combined creator metadata. Check the final DOI-bound PDF before freezing hashes. Preserve published editions. Verified ORCID only; otherwise pending. Target claimed OpenAlex profile: `A5150552024`; check actual assignments after indexing. No automatic research restart, new publication, CI or paid preservation action is authorized by this policy update.

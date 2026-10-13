@@ -1,8 +1,8 @@
 # UCT 最高研究指导：原理论优先、局部体验保留、每步全图复核
 
-**稳定入口：** [START_HERE.md](START_HERE.md) → [统一地图](UCT_FORMAL_MAP.md) → [全部候选](PENDING_RESEARCH.md)。科学接续及下一题以 CURRENT_STATE.json 为准；历史逐轮通知见[整理前指南](integration/UCT-INTEGRATION-v1.0.0/history/RESEARCH_MASTER_GUIDE.md)。本次只整理导航，以下政策正文保持原样。
+**稳定入口：** [START_HERE.md](START_HERE.md) → [统一地图](UCT_FORMAL_MAP.md) → [全部候选](PENDING_RESEARCH.md)。科学接续及下一题以 CURRENT_STATE.json 为准；历史逐轮通知见[整理前指南](integration/UCT-INTEGRATION-v1.0.0/history/RESEARCH_MASTER_GUIDE.md)。v2.4 新增作者邮箱与身份发表检查要求（第 0.7 节）；原有科学与研究方法要求继续有效。
 
-**政策 ID：POLICY-20261008-WHOLE-MAP-PERSISTENCE；版本 2.3；修订日期：2026-10-09。**
+**政策 ID：POLICY-20261008-WHOLE-MAP-PERSISTENCE；版本 2.4；修订日期：2026-10-13。**
 
 本文件落实刘烘炬本次明确指令，是本工作区每次研究开始前及每个实质步骤完成后必须遵循的最高研究方法指南。它约束研究选题、概念解释、推理、查新、成果判断、反馈与保存；不是一条新增物理定律，也不是新的意识公设。后续作者明确修订优先，须记录修改及影响。轮次交接、自动任务中的旧“下一步”、新增审查意见均不得默默覆盖本指南的核心要求。
 
@@ -74,6 +74,14 @@
 **无法核对时**：保留具体缺失证据及待核对范围，继续能独立推进的研究，不把未知当成“未发表”或“已达首创”。每轮结束必须留下真实决策和最短续接问题；不保证研究必然产生重大突破。
 
 本循环服务于第0节的总目的：使后续 AI 能知道哪些知识已经有准确出处，哪些是本轮增加的、在什么条件下可用，以及接下来真正还缺什么。论文篇数不是这个循环的优化目标。
+
+### 0.7 作者身份与邮箱是新发表版本的必检项（v2.4，2026-10-13）
+
+作者本次明确要求：以后发表的每篇新论文及新版本都必须在论文正文中写邮箱，并把这一要求保存为长期规则。统一署名 `Hongju Liu`，元数据复合姓名 `Liu, Hongju`，机构 `Independent researcher, Shenzhen, China`，作者联系邮箱 **`liuhongju3@163.com`**。PDF 首页/标题页须可见且可抽取为文本，不能仅写在官网、账号设置或隐藏元数据中；公开存档说明也须显示同一作者及邮箱。作者模板、检查记录和元数据须保持一致。
+
+发布前必须同时检查首页视觉、首页文本提取和公开元数据；注入 DOI 后再次检查，再冻结哈希。缺失或不一致先修复，不能沿用旧稿遗漏。适用的详细流程与模板见 [统一发表身份规范](../PUBLICATION_AUTHOR_IDENTITY.md)、[机器身份记录](../AUTHOR_IDENTITY.json)、[作者模板](../templates/PAPER_AUTHOR_BLOCK.md)和[发表检查清单](../templates/PUBLICATION_IDENTITY_CHECKLIST.md)。已核实的 ORCID 应统一复用；当前未核实就记待核实，不得编造或借用同名作者号码。
+
+已认领 OpenAlex 主档案为 `A5150552024`；以后索引出现后按 DOI/作品版本与作者位置核对归属。写邮箱有助于身份核验，不保证平台永不分拆。`trinityaccord@gmail.com` 保留为既有项目联系邮箱，不默认替换上述作者邮箱。现有公开论文、DOI、OTS、Arweave 原始字节及收据不改；未来合法新版本遵循原 DOI→OTS→Arweave 顺序。此次只更新发表治理，不新增科学节点，不恢复已停止的定时研究。
 
 ## 1. 必须准确继承的 UCT 基础
 
