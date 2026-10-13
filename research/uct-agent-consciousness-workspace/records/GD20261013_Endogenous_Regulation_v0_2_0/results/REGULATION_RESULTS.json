@@ -1,0 +1,242 @@
+{
+  "checkpoint": "UCT-GD-20261013-v0.2.0",
+  "common_J_unchanged": 52.97482157018224,
+  "counts": {
+    "independent_ODE_vs_exponential_checks": 42,
+    "rational_stability_and_full_modal_cases": 961,
+    "stable_cases": 250,
+    "stable_full_covariance_checks": 31,
+    "two_state_noisy_variance_checks": 192,
+    "unstable_cases": 711
+  },
+  "fast_interface_limits": [
+    {
+      "C": 0.14,
+      "J": [
+        15.89735726001964,
+        15.740847034253994,
+        15.725398428983299,
+        15.723855611713812
+      ],
+      "finite_g": [
+        10.0,
+        100.0,
+        1000.0,
+        10000.0
+      ],
+      "h": 0.0,
+      "limiting_J": 15.723684210526311
+    },
+    {
+      "C": 0.30000000000000004,
+      "J": [
+        6.25016078440139,
+        6.25000163731594,
+        6.2500000164029395,
+        6.250000000164068
+      ],
+      "finite_g": [
+        10.0,
+        100.0,
+        1000.0,
+        10000.0
+      ],
+      "h": 0.08,
+      "limiting_J": 6.250000000000001
+    },
+    {
+      "C": 0.54,
+      "J": [
+        10.323070259441602,
+        10.339103661747426,
+        10.340728330031423,
+        10.340891012639181
+      ],
+      "finite_g": [
+        10.0,
+        100.0,
+        1000.0,
+        10000.0
+      ],
+      "h": 0.2,
+      "limiting_J": 10.340909090909093
+    }
+  ],
+  "finite_G1_optimum": {
+    "J": 6.26292507134976,
+    "g": 0.9173487040729007,
+    "h": 0.08265129592709924
+  },
+  "impulse_energy_checks": [
+    {
+      "covariance": 17.645058485338875,
+      "g": 1.0,
+      "h": 0.0,
+      "impulse_energy": 17.64505848664703,
+      "quadrature_error_estimate": 4.599768317671181e-08
+    },
+    {
+      "covariance": 6.265598209854276,
+      "g": 0.92,
+      "h": 0.08,
+      "impulse_energy": 6.26559820984916,
+      "quadrature_error_estimate": 1.2836134323911784e-08
+    },
+    {
+      "covariance": 14.524398912916398,
+      "g": 0.25,
+      "h": 0.25,
+      "impulse_energy": 14.524398912916363,
+      "quadrature_error_estimate": 7.737629326260115e-11
+    }
+  ],
+  "main_equal_budget_cases": [
+    {
+      "J_physical_error": 17.645058485338875,
+      "bench_memory_at_t5": 0.5078614673396663,
+      "g": 1.0,
+      "h": 0.0,
+      "max_growth_rate": -0.017554989594152026,
+      "route": "maximal_source_retention",
+      "status": "STABLE",
+      "total_G": 1.0
+    },
+    {
+      "J_physical_error": 6.265598209854276,
+      "bench_memory_at_t5": 0.229041039255065,
+      "g": 0.92,
+      "h": 0.08,
+      "max_growth_rate": -0.09710804320186017,
+      "route": "regulated_leakage",
+      "status": "STABLE",
+      "total_G": 1.0
+    },
+    {
+      "J_physical_error": null,
+      "bench_memory_at_t5": 0.0037729975285284863,
+      "g": 0.5,
+      "h": 0.5,
+      "max_growth_rate": 0.021967196689125945,
+      "route": "uniform_mixing",
+      "status": "UNSTABLE_NO_STATIONARY_J",
+      "total_G": 1.0
+    }
+  ],
+  "max_errors": {
+    "Lyapunov_residual": 1.1102230246251565e-14,
+    "ODE_vs_exponential": 2.604139126560767e-12,
+    "full_vs_modal_covariance": 2.0818902157770935e-12,
+    "modal_decomposition": 8.881784197001252e-16,
+    "two_state_variance": 5.364597654988756e-13
+  },
+  "noise_dependent_optima": [
+    {
+      "J_star": 6.250000000000001,
+      "analytic_C_star": 0.3,
+      "memory_noise_intensity": 0.0,
+      "numeric_C_star": 0.30000000004621036
+    },
+    {
+      "J_star": 6.621050880500231,
+      "analytic_C_star": 0.3063858403911275,
+      "memory_noise_intensity": 0.1,
+      "numeric_C_star": 0.30638584063949004
+    },
+    {
+      "J_star": 9.726441186718157,
+      "analytic_C_star": 0.3472135954999579,
+      "memory_noise_intensity": 1.0,
+      "numeric_C_star": 0.347213595533126
+    },
+    {
+      "J_star": 36.42367041456385,
+      "analytic_C_star": 0.4456832294800961,
+      "memory_noise_intensity": 10.0,
+      "numeric_C_star": 0.4456832342926812
+    }
+  ],
+  "nonlinear_saturation_counterlimit": {
+    "a": 0.1,
+    "b": 0.3,
+    "minimum_x_dot": 0.010000000000000064,
+    "x": 3.1
+  },
+  "rational_covariance_checks": [
+    {
+      "J": 17.645058485338865,
+      "J_exact_rational": "501836615/28440632",
+      "error": 1.0658141036401503e-14,
+      "g": "1",
+      "h": "0"
+    },
+    {
+      "J": 6.265598209854262,
+      "J_exact_rational": "8887325/1418432",
+      "error": 1.4210854715202004e-14,
+      "g": "0.92",
+      "h": "0.08"
+    },
+    {
+      "J": 19.888874806173856,
+      "J_exact_rational": "239932345/12063646",
+      "error": 1.4210854715202004e-14,
+      "g": "0.5",
+      "h": "0"
+    },
+    {
+      "J": 14.524398912916363,
+      "J_exact_rational": "36389705/2505419",
+      "error": 3.552713678800501e-14,
+      "g": "0.25",
+      "h": "0.25"
+    }
+  ],
+  "replay_checks": [
+    {
+      "live_body_response": 1.0,
+      "replay_body_response": 1.0,
+      "time": 0.0
+    },
+    {
+      "live_body_response": 0.7491271978111678,
+      "replay_body_response": 1.6487212707001282,
+      "time": 5.0
+    },
+    {
+      "live_body_response": 0.024429718308923626,
+      "replay_body_response": 12.182493960703473,
+      "time": 25.0
+    },
+    {
+      "live_body_response": -7.960280880981715e-05,
+      "replay_body_response": 22026.465794806718,
+      "time": 100.0
+    }
+  ],
+  "rewiring_growth_rates": {
+    "base": -0.09710804320186017,
+    "sensor_compensated": -0.09710804320186017,
+    "wrong_actuator": 0.26155320482718536
+  },
+  "science_scope": {
+    "control_tools_new_inventions": false,
+    "endogenous_norm_or_life_derived": false,
+    "exact_for_declared_linear_models": true,
+    "full_map_semantic_audit_complete": false,
+    "natural_evolution_simulated": false,
+    "subjective_experience_measured": false
+  },
+  "symbolic_checks": {
+    "Routh_factorization": "PASS",
+    "characteristic_polynomial": "PASS",
+    "noisy_variance_derivative": "PASS",
+    "two_state_Lyapunov_identity": "PASS"
+  },
+  "uniform_mixing_critical_G": 0.7709772228646444,
+  "versions": {
+    "numpy": "2.3.5",
+    "python": "3.13.5",
+    "scipy": "1.17.0",
+    "sympy": "1.14.0"
+  }
+}

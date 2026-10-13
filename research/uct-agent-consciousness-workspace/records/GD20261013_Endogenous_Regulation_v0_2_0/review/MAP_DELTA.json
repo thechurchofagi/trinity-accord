@@ -1,0 +1,74 @@
+{
+  "schema": "uct-disabled-candidate-layer/0.2",
+  "baseline": "UCT-MAP-v1.1.2",
+  "checkpoint": "UCT-GD-20261013-v0.2.0",
+  "enabled_as_established_premises": false,
+  "claims": [
+    {
+      "id": "GD-ER1",
+      "type": "CONDITIONAL_MODEL_THEOREM",
+      "statement": "Exact common/difference decomposition; common response is invariant while differential regulation can fail at fixed routing budget.",
+      "proof": "RESEARCH_NOTE.md section 4",
+      "prior_art": "INHERITED_MODAL_METHOD_NEW_APPLICATION",
+      "enabled": false
+    },
+    {
+      "id": "GD-ER2",
+      "type": "CONSTRUCTIVE_COUNTEREXAMPLE",
+      "statement": "Maximal clamped-input retention can rank worse than moderate mixing for physical disturbance rejection in the restored feedback loop.",
+      "proof": "RESEARCH_NOTE.md section 5",
+      "prior_art": "NEW_APPLICATION_PRIORITY_UNVERIFIED",
+      "enabled": false
+    },
+    {
+      "id": "GD-ER3",
+      "type": "CONDITIONAL_MODEL_THEOREM",
+      "statement": "Fast-interface physical-noise variance has unique interior optimum C=sqrt(bs); independent controller noise shifts the optimum by the stated formula.",
+      "proof": "RESEARCH_NOTE.md section 6",
+      "prior_art": "STANDARD_COVARIANCE_METHOD_NEW_APPLICATION_PRIORITY_UNVERIFIED",
+      "enabled": false
+    },
+    {
+      "id": "GD-ER4",
+      "type": "CONDITIONAL_MODEL_APPLICATION",
+      "statement": "Unpaired actuator exchange destabilizes corrective use; paired sensor exchange restores the specified x law. Replay lacks response to independent new perturbations.",
+      "proof": "RESEARCH_NOTE.md section 7",
+      "prior_art": "INHERITED_FEEDBACK_AND_REPRESENTATION_PRINCIPLES",
+      "enabled": false
+    },
+    {
+      "id": "GD-ER5",
+      "type": "SCOPE_AND_COUNTERLIMIT",
+      "statement": "Finite-time continuity does not guarantee stationary stability, nonlinear safety, autonomous norms or phenomenal target identity.",
+      "proof": "RESEARCH_NOTE.md section 8",
+      "prior_art": "INHERITED_BOUNDARIES_NEW_EXPLICIT_SATURATION_WITNESS",
+      "enabled": false
+    }
+  ],
+  "links": [
+    {
+      "from": "GD-ER1",
+      "to": "GD-ER2",
+      "type": "SAME_MODEL_CONSTRUCTION",
+      "all_of": [
+        "declared_parameter_family",
+        "distinct_bench_and_live_protocols",
+        "fixed_G"
+      ]
+    },
+    {
+      "from": "GD-ER2",
+      "to": "GD-ER3",
+      "type": "LIMIT_GENERALIZATION_NOT_EQUALITY_AT_FINITE_G"
+    },
+    {
+      "from": "GD-ER4",
+      "to": "A5L-D1-ROLE-REVERSAL-SEMANTIC-BARRIER",
+      "type": "COMPATIBILITY_ONLY_NOT_TARGET_DISCHARGE"
+    }
+  ],
+  "semantic_audit": "AUDIT_INCOMPLETE",
+  "unreviewed_scope": "Full historical all-node map not freshly reviewed; do not infer an exact unreviewed count.",
+  "merge_policy": "Disabled until required full semantic review and explicit promotion.",
+  "ontological_gates_added": false
+}

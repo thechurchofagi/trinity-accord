@@ -1,0 +1,73 @@
+{
+  "checkpoint": "UCT-GD-20261013-v0.2.0",
+  "contents": [
+    {
+      "path": "HANDOFF_ZH.md",
+      "bytes": 3344,
+      "sha256": "653348edbe79b969d90db6a6633f6553323ab1b9b70bc44b42c1a62072b58e2f"
+    },
+    {
+      "path": "README.md",
+      "bytes": 594,
+      "sha256": "478406f49eb10c19edcda2f11604591305bc95944b4b6d501c397fc3d65d290d"
+    },
+    {
+      "path": "RESEARCH_NOTE.md",
+      "bytes": 25563,
+      "sha256": "51f3490614f393f0ace900397362398d0f0a3e3543af483ea3a1745c557d9968"
+    },
+    {
+      "path": "WORK_LOG.md",
+      "bytes": 3943,
+      "sha256": "a0cad06c19d33afce20d47b083e14a1c6482e53e4d5ec5aaa24dc7f2241e1811"
+    },
+    {
+      "path": "code/verify_endogenous_regulation.py",
+      "bytes": 13551,
+      "sha256": "4bd7e5d39c3875cbbba5d97461bcb63074f497562d3ff3acd6ca0a1c71d29f9e"
+    },
+    {
+      "path": "requirements.txt",
+      "bytes": 41,
+      "sha256": "f7308e5b60ea62603b458da5fadbb55614b46fbb4d083200fa2cc9843085ceef"
+    },
+    {
+      "path": "results/REGULATION_RESULTS.json",
+      "bytes": 6004,
+      "sha256": "389786feb3c888a2ec02942d415b3e43dc2a9c499cfaf801372b97c3cdc39e2b"
+    },
+    {
+      "path": "results/REPRODUCIBILITY_RECEIPT.json",
+      "bytes": 764,
+      "sha256": "6d5d9cff3a89f430dc1425b795632d12dfb2577fa3a93168bba80f8d6515c722"
+    },
+    {
+      "path": "results/ROUTING_SCAN.csv",
+      "bytes": 7222,
+      "sha256": "ca9e7294fc61dd118ec108dfafe67c1424fddc5eaedad062990babc865ec89ba"
+    },
+    {
+      "path": "review/MAP_DELTA.json",
+      "bytes": 2883,
+      "sha256": "9c52fd5ca81066068ca49d9c8e160e06804f76eef3bd6f38634b5cb6acc6d0c7"
+    },
+    {
+      "path": "review/PUBLICATION_COVERAGE_UPDATE.json",
+      "bytes": 2477,
+      "sha256": "fe3f2c3b4b9ef2c734a011780d97fefaab2f8b0ec2073eb648941a498e920789"
+    },
+    {
+      "path": "review/SCIENTIFIC_REVIEW.md",
+      "bytes": 4124,
+      "sha256": "92afc4acb2ac8142c650f7195b78ad3a07ccf9c100f8126c990f4ffdcd974789"
+    },
+    {
+      "path": "sources/SOURCE_LEDGER.json",
+      "bytes": 1499,
+      "sha256": "3b6ea5144aee42fab89c0ac6406c1ca6a84f50521d8f35aecb45846ca8b746b7"
+    }
+  ],
+  "self_excluded": true,
+  "publication_state": "RESEARCH_CHECKPOINT_NOT_NEW_DOI",
+  "persistence_receipt": "Issued separately after actual repository readback; not included in this frozen scientific archive."
+}

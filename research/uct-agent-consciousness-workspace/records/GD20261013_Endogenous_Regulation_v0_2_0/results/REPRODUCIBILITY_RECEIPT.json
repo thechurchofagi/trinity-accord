@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "scope": "Two synchronous executions of final verifier; no empirical subjects or hardware",
+  "files": [
+    {
+      "path": "results/REGULATION_RESULTS.json",
+      "size_bytes": 6004,
+      "sha256": "389786feb3c888a2ec02942d415b3e43dc2a9c499cfaf801372b97c3cdc39e2b",
+      "byte_identical_two_executions": true
+    },
+    {
+      "path": "results/ROUTING_SCAN.csv",
+      "size_bytes": 7222,
+      "sha256": "ca9e7294fc61dd118ec108dfafe67c1424fddc5eaedad062990babc865ec89ba",
+      "byte_identical_two_executions": true
+    }
+  ],
+  "failure_history": "Initial symbolic comparison failed due to SymPy charpoly symbol assumptions. Replacing it with det(zI-A) fixed the programming comparison; no equation was changed. Final runs pass."
+}

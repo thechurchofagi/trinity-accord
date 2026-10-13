@@ -1,0 +1,45 @@
+{
+  "scope": "Targeted primary-source review; not systematic or global priority certificate",
+  "sources": [
+    {
+      "id": "P1",
+      "doi": "10.1098/rsfs.2018.0041",
+      "url": "https://doi.org/10.1098/rsfs.2018.0041",
+      "access": "Publisher full HTML conceptual framework"
+    },
+    {
+      "id": "P2",
+      "doi": "10.1177/1059712309343819",
+      "url": "https://journals.sagepub.com/doi/abs/10.1177/1059712309343819",
+      "access": "Publisher abstract and accessible notes; author abstract; full article restricted"
+    },
+    {
+      "id": "P3",
+      "doi": "10.1016/j.cels.2016.01.004",
+      "url": "https://doi.org/10.1016/j.cels.2016.01.004",
+      "access": "Publisher summary and introduction"
+    },
+    {
+      "id": "P4",
+      "doi": "10.1016/j.cels.2019.06.001",
+      "url": "https://www.sciencedirect.com/science/article/am/pii/S2405471219301966",
+      "access": "Publisher summary and search-returned accepted-manuscript leakiness excerpt; full open attempt 403"
+    },
+    {
+      "id": "P5",
+      "doi": "10.1103/PhysRevLett.80.2109",
+      "url": "https://doi.org/10.1103/PhysRevLett.80.2109",
+      "access": "Publisher abstract; full text restricted"
+    }
+  ],
+  "unused_access_failures": [
+    {
+      "url": "https://elifesciences.org/articles/04811",
+      "result": "JavaScript client challenge; not used to claim full review"
+    },
+    {
+      "url": "https://fbsbook.org/",
+      "result": "Inaccessible; not used as retrieved support"
+    }
+  ]
+}
