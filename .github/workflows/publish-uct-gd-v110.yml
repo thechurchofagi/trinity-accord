@@ -1,0 +1,74 @@
+name: Publish UCT Adaptive Consequence Calibration v1.1.0
+on:
+  push:
+    branches: [research/uct-gd-consequence-calibration-v110-20261013]
+    paths:
+      - 'research/uct-adaptive-calibration/versions/v1.1.0/PUBLISH-AUTHORIZATION.json'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: uct-gd-v110-deposit
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.repository == 'thechurchofagi/trinity-accord' && contains(github.event.head_commit.message, '[uct-gd-v110-publish]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      BRANCH: research/uct-gd-consequence-calibration-v110-20261013
+      ROOT: research/uct-adaptive-calibration/versions/v1.1.0
+      BATCH: research/paper-timestamps/2026-10-13-uct-gd-v110
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: research/uct-gd-consequence-calibration-v110-20261013
+          fetch-depth: 1
+      - name: Review frozen exact bytes before loading credentials
+        run: |
+          echo '90c65558fd168996241876d45a3b66c038eb351d8242e2d77e08df0bc82beda5  '"$ROOT/source-package.zip" | sha256sum -c -
+          python3 "$ROOT/stage.py"
+          python3 "$ROOT/publication.py" verify
+          python3 scripts/toolchain_provenance.py
+      - name: Create only this new DOI and publish with anonymous byte-for-byte readback
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: python3 "$ROOT/publication.py" publish
+      - name: Stamp exact published PDF with pinned OTS
+        id: ots
+        continue-on-error: true
+        run: |
+          python3 -m pip install -r requirements-ots.txt
+          python3 scripts/research_paper_ots.py stamp --batch "$BATCH"
+      - name: Persist DOI and OTS state even after partial failure
+        if: always()
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if [ -d "$BATCH" ]; then git add "$BATCH"; fi
+          git add "$ROOT" || true
+          git diff --cached --check
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Preserve UCT-GD v1.1.0 DOI and OTS state [skip ci]'
+          for attempt in 1 2 3; do
+            if git push origin HEAD:"$BRANCH"; then exit 0; fi
+            git fetch origin "$BRANCH" --prune
+            git rebase "origin/$BRANCH" || { git rebase --abort; exit 1; }
+          done
+          exit 1
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: uct-gd-v110-publication-${{ github.run_id }}
+          path: |
+            research/uct-adaptive-calibration/versions/v1.1.0/*json
+            research/paper-timestamps/2026-10-13-uct-gd-v110/
+          retention-days: 90
+          if-no-files-found: warn
+      - name: Flag incomplete OTS separately
+        if: always()
+        env:
+          OUTCOME: ${{ steps.ots.outcome }}
+        run: |
+          if [ "$OUTCOME" = failure ]; then echo 'Publication may be complete but OTS remains incomplete; inspect durable receipts.' >&2; exit 1; fi
