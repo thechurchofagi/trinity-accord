@@ -1,0 +1,47 @@
+{
+  "policy_id": "PUB-AUTHOR-IDENTITY-20261013",
+  "saved_date": "2026-10-13",
+  "main_commit": "9cb4f50488cf9fc61e9606eab438f21c067fde5b",
+  "research_commit": "59bc930443096bf28160ae8fe4873f83ee37a849",
+  "remote_content_readback": {
+    "main_files": 5,
+    "research_files": 12,
+    "all_exactly_match": true
+  },
+  "persistent_files": [
+    {
+      "status": "succeeded",
+      "file_id": "file_00000000a554820ca8ce148e1f2e866b",
+      "library_file_id": "libfile_4175a81748fc819187fa8f5771f056fa",
+      "file_name": "UCT_Hourly_Research_Master_Handoff.md",
+      "path": "/UCT_Hourly_Research_Master_Handoff.md",
+      "current_version_number": 186
+    },
+    {
+      "status": "succeeded",
+      "file_id": "file_00000000fa388243b8569d03b70a0cac",
+      "library_file_id": "libfile_b6e967693f408191bf320b9fbe3dd6db",
+      "file_name": "PUBLICATION-RUNBOOK.md",
+      "path": "/PUBLICATION-RUNBOOK.md",
+      "current_version_number": 1
+    },
+    {
+      "status": "succeeded",
+      "file_id": "file_000000007fac81f68497ca7c07623fc2",
+      "library_file_id": "libfile_5e7e472a14c881919e033e77ea200957",
+      "file_name": "PUBLICATION-RUNBOOK.md",
+      "path": "/UCT_统一意识理论/02_发表准备/Paper_A_TA-TR-2026-20_v1.0/PUBLICATION-RUNBOOK.md",
+      "current_version_number": 1
+    },
+    {
+      "status": "succeeded",
+      "file_id": "file_000000005ff881f5917dbfd5c6745a50",
+      "library_file_id": "libfile_60f5ed7818ac8191a2b735bb06e9cc7e",
+      "file_name": "Publication_Author_Identity_Policy_2026-10-13.txt",
+      "path": "/Publication_Author_Identity_Policy_2026-10-13.txt",
+      "current_version_number": 0
+    }
+  ],
+  "account_global_memory_written": false,
+  "published_paper_bytes_changed": false
+}
