@@ -2,22 +2,25 @@
   "batch": "2026-10-13-uct-gd-v110",
   "files": [
     {
-      "bitcoin_heights": [],
+      "bitcoin_heights": [
+        971175,
+        971177
+      ],
       "bytes": 410208,
       "doi": "10.5281/zenodo.23329883",
       "name": "Learning_What_to_Preserve_v1.1.0.pdf",
       "pending_calendar_attestations": 4,
       "proof": "research/paper-timestamps/2026-10-13-uct-gd-v110/proofs/UCT-GD-2026-01/Learning_What_to_Preserve_v1.1.0.pdf.ots",
-      "proof_sha256": "7a0a4adb5713a5599c5942c725a4a183fcbf88ff6d37a08fa769904e7aa24c24",
+      "proof_sha256": "0e14644a60d4fe55396675e389703f4f5e9792c9b5062a4a4518ed3959c24511",
       "report": "UCT-GD-2026-01",
       "role": "Complete English v1.1.0 adaptive-consequence-calibration theoretical/computational preprint",
       "sha256": "20671c736396b95070ccd7be1af989de4e8ceef987bc6ae531ca1d5dda003f16",
-      "state": "PENDING_BITCOIN"
+      "state": "BITCOIN_VERIFIED_REMOTE_HEADERS"
     }
   ],
   "paper_count": 1,
   "pdf_count": 1,
   "schema": "trinityaccord.paper-ots-status.v1",
-  "state": "WAITING",
+  "state": "READY_FOR_ARWEAVE",
   "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
 }
