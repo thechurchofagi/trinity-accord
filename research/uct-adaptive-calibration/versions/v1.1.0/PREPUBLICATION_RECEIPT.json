@@ -1,0 +1,27 @@
+{
+  "report": "UCT-GD-2026-01",
+  "version": "1.1.0",
+  "title": "Learning What to Preserve Without Silencing the Body: Adaptive Organization, Mutable Evaluation, and Reference-Calibrated Regulation",
+  "authorized_to_publish_by_user": true,
+  "publishing_state": "EXACT_SOURCE_STAGED_NO_ZENODO_DOI",
+  "authorization_context": "User explicitly requested publication by established repository workflow on 2026-10-13. Publication limited to this distinct v1.1.0 preprint, its exact PDF, source and reproducibility ZIP; no old published version overwritten.",
+  "preprint_unreviewed": true,
+  "license": "cc-by-4.0",
+  "files": [
+    {
+      "path": "Learning_What_to_Preserve_v1.1.0.pdf",
+      "bytes": 410208,
+      "sha256": "20671c736396b95070ccd7be1af989de4e8ceef987bc6ae531ca1d5dda003f16"
+    },
+    {
+      "path": "Learning_What_to_Preserve_v1.1.0.md",
+      "bytes": 70093,
+      "sha256": "b909666f526dada17c5cedd1f7b87f2c83a411a64d1c37b51727c7a3176093bb"
+    },
+    {
+      "path": "Adaptive_Consequence_Calibration_DOI_Preparation_v1.1.0.zip",
+      "bytes": 2626447,
+      "sha256": "90c65558fd168996241876d45a3b66c038eb351d8242e2d77e08df0bc82beda5"
+    }
+  ]
+}
