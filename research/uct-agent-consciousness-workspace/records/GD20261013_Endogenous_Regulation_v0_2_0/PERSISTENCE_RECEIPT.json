@@ -1,0 +1,38 @@
+{
+  "archive": {
+    "all_14_entries_match_local_bytes": true,
+    "bytes": 35687,
+    "contains_this_receipt": false,
+    "name": "UCT_Gradual_Differentiation_Research_v0.2.0.zip",
+    "sha256": "eedbf70b4aed202c00fa90e4967b8aed79cd75fc0619efcc5ad701d415ba3564"
+  },
+  "arweave_upload": false,
+  "branch": "uct-agent-consciousness-workspace",
+  "candidate_nodes_enabled": false,
+  "checkpoint": "UCT-GD-20261013-v0.2.0",
+  "full_semantic_audit": "INCOMPLETE",
+  "new_doi_created": false,
+  "official_map": "UCT-MAP-v1.1.2",
+  "official_map_changed": false,
+  "ots_submitted": false,
+  "parent_commit": "2cbcf7167794c9d6a9ee4432c52a42f92802ac4c",
+  "readback": {
+    "all_14_git_object_ids_match": true,
+    "file_count": 14,
+    "method": "Remote recursive tree Git blob IDs matched locally computed object IDs for all 14 files; fixed science-commit RESEARCH_NOTE.md readback matched its blob ID. This is not a claim of separately downloading each raw HTTP file."
+  },
+  "receipt_scope": "Separate from frozen scientific ZIP to avoid self-referential archive hash.",
+  "repository": "thechurchofagi/trinity-accord",
+  "repository_directory": "research/uct-agent-consciousness-workspace/records/GD20261013_Endogenous_Regulation_v0_2_0",
+  "root_tree": "b72df6104fd361e919cb18e17097b1bc6a34ef87",
+  "science_commit": "72a268cee592afd843a221adc519d1ca7960fb37",
+  "science_scope": "Theoretical computational model, not biological experiment or consciousness measurement",
+  "science_subtree": "6fac28bd3eec957c3b06c4a7b54600053a078ec2",
+  "state": "GITHUB_SCIENCE_COMMIT_AND_ALL_FILE_OBJECTS_VERIFIED",
+  "update": {
+    "commit_message_contains_skip_ci": true,
+    "expected_old_sha_used": true,
+    "force": false,
+    "success": true
+  }
+}
