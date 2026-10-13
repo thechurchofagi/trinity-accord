@@ -1,0 +1,17 @@
+{
+  "schema": "uct-gd-v110-publish-authorization/1",
+  "report": "UCT-GD-2026-01",
+  "version": "1.1.0",
+  "title": "Learning What to Preserve Without Silencing the Body: Adaptive Organization, Mutable Evaluation, and Reference-Calibrated Regulation",
+  "source_package_git_blob": "90ff0cdf77219dacc0549e9978944f518fa473bd",
+  "source_package_sha256": "90c65558fd168996241876d45a3b66c038eb351d8242e2d77e08df0bc82beda5",
+  "pdf_sha256": "20671c736396b95070ccd7be1af989de4e8ceef987bc6ae531ca1d5dda003f16",
+  "markdown_sha256": "b909666f526dada17c5cedd1f7b87f2c83a411a64d1c37b51727c7a3176093bb",
+  "authorized_by_user": "User explicitly requested publication according to the established repository workflow in this conversation.",
+  "metadata_license": "cc-by-4.0",
+  "publication_mode": "ZENODO_SINGLE_NEW_PREPRINT_EXACT_BYTES_AND_ANONYMOUS_READBACK",
+  "no_modification_to_published_predecessors": true,
+  "not_peer_reviewed": true,
+  "ots_next": true,
+  "arweave_requires_bitcoin_verification_and_strict_cumulative_fee_less_than_0_1_AR": true
+}
