@@ -1,0 +1,5 @@
+Calendar https://finney.calendar.eternitywall.com: Timestamped by transaction d5bfe94a7d64f9515b5415601f16416cf4d4636c006603db19f6784a94e11c22; waiting for 6 confirmations
+Got 1 attestation(s) from https://btc.calendar.catallaxy.com
+Got 1 attestation(s) from https://bob.btc.calendar.opentimestamps.org
+Got 1 attestation(s) from https://alice.btc.calendar.opentimestamps.org
+Success! Timestamp complete
