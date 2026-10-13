@@ -1,0 +1,8 @@
+{
+  "state": "PAID_ATTEMPT_INTENT",
+  "payload_sha256": "856a1810fbd5a6f28094651590fd43f2ba938ee3986c50c8bbe4de77452c9e09",
+  "run_id": "38340643816",
+  "run_attempt": "1",
+  "report": "UCT-RC-2026-01",
+  "doi": "10.5281/zenodo.23327394"
+}
