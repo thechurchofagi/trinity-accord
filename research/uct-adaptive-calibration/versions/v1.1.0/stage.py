@@ -40,7 +40,7 @@ def main():
             if row[member]['sha256']!=EXPECTED[name][1] or row[member]['bytes']!=EXPECTED[name][0]:
                 raise RuntimeError('Bundle publication manifest differs from pinned source')
     receipt=json.loads((BASE/'PREPUBLICATION_RECEIPT.json').read_text())
-    if {f['path'] for f in receipt['files']}!=set(EXPECT):raise RuntimeError('Publication identity file set changed')
+    if {f['path'] for f in receipt['files']}!=set(EXPECTED):raise RuntimeError('Publication identity file set changed')
     print(json.dumps({'state':'EXACT_FROZEN_ARTIFACTS_PASS','report':'UCT-GD-2026-01',
           'version':'1.1.0','files':out},indent=2),flush=True)
 if __name__=='__main__':main()
