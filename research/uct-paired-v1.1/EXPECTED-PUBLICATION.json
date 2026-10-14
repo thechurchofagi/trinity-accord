@@ -1,0 +1,150 @@
+{
+  "version": "1.1",
+  "doi_a": "10.5281/zenodo.23030207",
+  "doi_b": "10.5281/zenodo.23030320",
+  "papers": [
+    {
+      "state": "RESERVED_NOT_PUBLISHED",
+      "record_id": 23030207,
+      "doi": "10.5281/zenodo.23030207",
+      "conceptrecid": "23005587",
+      "prior_record_id": 23005588,
+      "report_number": "TA-TR-2026-20",
+      "title": "Unified Consciousness Theory I: Ontic Structure, Physical Views, and the Structural Continuity from Physical Process to Conceptual Self",
+      "version": "1.1",
+      "submitted": false,
+      "old_published_files_modified": false,
+      "run_id": "36524020199",
+      "release_directory": "release/a",
+      "files": [
+        {
+          "name": "README-LICENSE.txt",
+          "bytes": 687,
+          "sha256": "e03fdfa46db8aef69113f06e1e6996efd3d32701230cc9145afeafe945d410e8"
+        },
+        {
+          "name": "REVIEW-AND-SOURCES.md",
+          "bytes": 717,
+          "sha256": "d7250a02de4c5ef0fa8b1644a27b5e5f5a044ef4c2c77147d881312ea07c60ff"
+        },
+        {
+          "name": "SHA256SUMS.txt",
+          "bytes": 911,
+          "sha256": "ae7cf7579bbbe99475dc020fccd28f573def524d13b7e75df331f8b97f395734"
+        },
+        {
+          "name": "citation.bib",
+          "bytes": 323,
+          "sha256": "b3b8ae24042b8cc85e84dd7e2193485566ae227f79605a6561ff692468a2a070"
+        },
+        {
+          "name": "citation.csl.json",
+          "bytes": 516,
+          "sha256": "59939b3ed0bd03eba02329d00f6ee64b4121f0fc1cf719d49b8646e508da5555"
+        },
+        {
+          "name": "citation.ris",
+          "bytes": 305,
+          "sha256": "7ccfc6a1040a01e1c3cb3e420edb7edc3436325d531955df030659e5a5d8fa14"
+        },
+        {
+          "name": "uct-paired-v1.1-audit.zip",
+          "bytes": 379781,
+          "sha256": "ba79ed1beaa2af5ec970618bd924add6cddf47a227d08bd4d69783bce1b09aee"
+        },
+        {
+          "name": "uct-paired-v1.1-supplement.md",
+          "bytes": 15770,
+          "sha256": "dee22ebed609ef9aa050dfbb5198cfdc658eab0b25a3ea5c32c0dbcb7418b993"
+        },
+        {
+          "name": "uct-paired-v1.1-supplement.pdf",
+          "bytes": 67693,
+          "sha256": "717d093541ad8a940456e990828d494bf1e9df65b906d904ab512dfe497a43b3"
+        },
+        {
+          "name": "unified-consciousness-theory-i-v1.1.md",
+          "bytes": 107780,
+          "sha256": "b2d1d33d7b71492f1b17adce90855811dda12c73fcd8d724dd2a995197e3efc8"
+        },
+        {
+          "name": "unified-consciousness-theory-i-v1.1.pdf",
+          "bytes": 218982,
+          "sha256": "b51e37ec02c0889ab3e328608583d69be96543e13f08807bff7d1d133712ccbf"
+        }
+      ]
+    },
+    {
+      "state": "RESERVED_NOT_PUBLISHED",
+      "record_id": 23030320,
+      "doi": "10.5281/zenodo.23030320",
+      "conceptrecid": "23008261",
+      "prior_record_id": 23008262,
+      "report_number": "TA-TR-2026-21",
+      "title": "Unified Consciousness Theory II: Consciousness Theories as Effective Organization Theories",
+      "version": "1.1",
+      "submitted": false,
+      "old_published_files_modified": false,
+      "run_id": "36524020199",
+      "release_directory": "release/b",
+      "files": [
+        {
+          "name": "README-LICENSE.txt",
+          "bytes": 642,
+          "sha256": "7e9e97f201d0511265988558da09e513d009dda5504d4fc059f8358f887b638c"
+        },
+        {
+          "name": "REVIEW-AND-SOURCES.md",
+          "bytes": 717,
+          "sha256": "d7250a02de4c5ef0fa8b1644a27b5e5f5a044ef4c2c77147d881312ea07c60ff"
+        },
+        {
+          "name": "SHA256SUMS.txt",
+          "bytes": 913,
+          "sha256": "1361642f92b11856626a3e90b79c623023fe64231cff6b6b13f9672e416decb2"
+        },
+        {
+          "name": "citation.bib",
+          "bytes": 279,
+          "sha256": "aa9bddf2aac29dee3a9010f797b87c43d50a6d900d142b2d66a28d1bfce308fe"
+        },
+        {
+          "name": "citation.csl.json",
+          "bytes": 471,
+          "sha256": "640d8974580db9e7844052555d938fe314d109cc1c6a42f2a44f6ebde3f91774"
+        },
+        {
+          "name": "citation.ris",
+          "bytes": 260,
+          "sha256": "b10489c9ae992e34b2735448b626fcf8cf7df86e0518b7aaf25ee02ae47c5eae"
+        },
+        {
+          "name": "uct-paired-v1.1-audit.zip",
+          "bytes": 379781,
+          "sha256": "ba79ed1beaa2af5ec970618bd924add6cddf47a227d08bd4d69783bce1b09aee"
+        },
+        {
+          "name": "uct-paired-v1.1-supplement.md",
+          "bytes": 15770,
+          "sha256": "dee22ebed609ef9aa050dfbb5198cfdc658eab0b25a3ea5c32c0dbcb7418b993"
+        },
+        {
+          "name": "uct-paired-v1.1-supplement.pdf",
+          "bytes": 67693,
+          "sha256": "717d093541ad8a940456e990828d494bf1e9df65b906d904ab512dfe497a43b3"
+        },
+        {
+          "name": "unified-consciousness-theory-ii-v1.1.md",
+          "bytes": 59958,
+          "sha256": "d8f3329f08cd7272b77945b780e94e87a2f43773aeb86ca41b907b558d59504b"
+        },
+        {
+          "name": "unified-consciousness-theory-ii-v1.1.pdf",
+          "bytes": 150224,
+          "sha256": "ef7522a08042ffbac87d1b5c573a9ccbbab053ba087ce902d2bda6bd2191e0f2"
+        }
+      ]
+    }
+  ],
+  "state": "BUILT_AWAITING_VISUAL_REVIEW"
+}
