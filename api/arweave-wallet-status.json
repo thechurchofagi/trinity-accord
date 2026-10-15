@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.arweave-wallet-status.v1",
-  "generated_at": "2026-10-04T13:26:12Z",
+  "generated_at": "2026-10-15T06:17:18Z",
   "currency": "AR",
   "wallet": {
     "wallet_address": null,
@@ -8,16 +8,16 @@
     "public_address_allowed": false
   },
   "spending": {
-    "total_paid_uploads": 152,
-    "total_spent_ar": "0.92595291935",
-    "last_upload_cost_ar": "0.006649680859",
-    "last_upload_tx_id": "16m4zeqiz-EYkjJ6ZXLwVadUA54HDUYazBUtBaVLTOU",
+    "total_paid_uploads": 153,
+    "total_spent_ar": "0.932811383096",
+    "last_upload_cost_ar": "0.006858463746",
+    "last_upload_tx_id": "Oo-vkrsfBQVYiu67mDNFb_UpJA7XdPAOExaF4XngPms",
     "last_upload_kind": "research_paper_ots_archive",
-    "last_upload_at": "2026-10-04T13:21:11.447Z"
+    "last_upload_at": "2026-10-15T06:12:15.319Z"
   },
   "balance": {
     "balance_known": true,
-    "balance_ar": "14.196989202892",
+    "balance_ar": "14.132341943795",
     "low_balance_threshold_ar": "0.25",
     "low_balance": false,
     "needs_recharge": false,
