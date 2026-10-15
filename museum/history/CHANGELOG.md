@@ -1,3 +1,10 @@
+## Hosting migration · 2026-10-15
+
+- Move the existing museum-v1.37.0 exhibition to `https://www.trinityaccord.org/museum/` on GitHub Pages after the owner retired Alibaba hosting.
+- Remove forced redirects in both entry pages and the archive generator. Update current navigation, canonical metadata, sitemap and discovery configuration.
+- Preserve the artistic edition, runtime, models, original media, guide audio and captions unchanged. Regenerate the export inventory for address-only HTML changes.
+- Preserve former hosting instructions as retired history. No recovery of the old subdomain or browser acceptance is implied by this source change.
+
 ## museum-v1.37.0 · English voice and bilingual subtitle edition · 2026-09-09
 
 - Review all 175 NFT records and 70 lyric/poem texts. Select 43 wall entries with 30 verified own or explicitly attributed related recordings; provide a searchable full-series reading layer.

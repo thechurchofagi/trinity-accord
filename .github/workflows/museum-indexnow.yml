@@ -57,7 +57,7 @@ jobs:
           set -euo pipefail
           cmp 4c23c01d8a12d488d40469e5e5d01941.txt museum/dist/4c23c01d8a12d488d40469e5e5d01941.txt
           python3 scripts/submit_indexnow.py \
-            --site https://museum.trinityaccord.org \
+            --site https://www.trinityaccord.org \
             --sitemap museum/dist/sitemap.xml \
             --key-file 4c23c01d8a12d488d40469e5e5d01941.txt \
             --dry-run | tee museum-indexnow-dry-run.log
@@ -65,7 +65,7 @@ jobs:
       - name: Wait for museum production bytes to match source
         if: ${{ github.event_name == 'push' || github.event.inputs.dry_run != 'true' }}
         env:
-          MUSEUM_SITE: https://museum.trinityaccord.org
+          MUSEUM_SITE: https://www.trinityaccord.org/museum
           MUSEUM_DEPLOY_REF: ${{ steps.source.outputs.ref }}
         run: |
           set -euo pipefail
@@ -188,7 +188,7 @@ jobs:
         run: |
           set -euo pipefail
           python3 scripts/submit_indexnow.py \
-            --site https://museum.trinityaccord.org \
+            --site https://www.trinityaccord.org \
             --sitemap museum/dist/sitemap.xml \
             --key-file 4c23c01d8a12d488d40469e5e5d01941.txt \
             | tee museum-indexnow-submit.log
@@ -271,7 +271,7 @@ jobs:
               f"- Workflow status before receipt publication: `{prior_status}`\n"
               f"- Museum production byte-for-byte preflight: **{preflight_status}**\n"
               f"- Museum IndexNow response: **{indexnow_line}**\n"
-              "- Submitted host: `museum.trinityaccord.org`\n"
+              "- Submitted host: `www.trinityaccord.org` · path: `/museum/`\n"
               "- Meaning: operational submission evidence only; not proof of indexing, ranking, or endorsement.\n\n"
               "<details><summary>Bounded diagnostic tail</summary>\n\n"
               "```text\n"

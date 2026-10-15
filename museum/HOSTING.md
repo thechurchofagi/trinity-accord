@@ -1,95 +1,25 @@
-# Museum hosting
+# Museum hosting — GitHub Pages
 
-GitHub `thechurchofagi/trinity-accord`, directory `museum/`, is the only maintained
-source. The Alibaba Cloud Hong Kong host at `47.76.142.75` serves an exact copy
-of `museum/dist/`; do not edit exhibition files on the server.
+Canonical address: https://www.trinityaccord.org/museum/
 
-## Automatic publication
+GitHub `thechurchofagi/trinity-accord`, directory `museum/`, is the only maintained source. The existing main-site Deploy Pages workflow copies the complete, unprocessed `museum/dist/` export into `_site/museum/` and verifies its inventory and SHA-256 digests. The main site's custom domain remains unchanged.
 
-The host checks GitHub every five minutes (plus up to 15 seconds jitter). It
-selects the latest successful **Museum edition** push workflow on `main`, pins
-its commit SHA, and downloads only the static export. Unchanged files are
-reused locally. All manifest sizes and SHA-256 digests must match before an
-atomic symlink switch. A loopback HTTP check rolls back a bad switch. Failed
-downloads leave the current release running. No GitHub token or SSH key is
-needed on either side. A failed museum workflow does not deploy.
+## Migration on 2026-10-15
 
-This uses the existing independent museum checks, not the main site's complete
-record-chain deployment checks. Commit changed runtime bundles and regenerate
-the export inventory using the museum's existing build instructions.
+The owner retired the unpaid Alibaba Cloud server. The old `museum.trinityaccord.org` address is no longer the public entry. Entry HTML and the generated reading archive no longer redirect there. Homepage navigation, canonical URLs, sitemap and the museum IndexNow configuration point to the Pages location.
 
-Install from a reviewed checkout as root:
+No DNS change is required for the new address. The old subdomain cannot redirect visitors while its server is offline; update bookmarks to the canonical address. Do not claim old-domain recovery without a separate verified DNS/hosting cutover. The former server configuration is retained only in `history/HOSTING-aliyun-retired.md`.
 
-```sh
-bash museum/scripts/install_host_sync.sh
-```
+## Publish and verify
 
-The timer executes the root-owned sync program as the unprivileged
-`museumdeploy` user, with write access confined to `/srv/trinity-museum`.
-Fetched repository code is never executed. Changes to the sync program itself
-require an explicit reinstall from a reviewed checkout.
+1. Keep all runtime, media, JSON and vendor files in `dist/`. The browser executes the 3D scene; there is no museum backend.
+2. For runtime changes, follow the existing build instructions in README. For address-only changes, regenerate the reading archive/inventory with `python3 museum/scripts/build_archive.py`.
+3. Run `python3 museum/scripts/validate.py`. Review the exact changed files; all original media should remain unchanged for this migration.
+4. Publish the reviewed current main revision using the existing Deploy Pages workflow. A commit containing `[skip ci]` needs a separate deployment dispatch; a source commit alone is not publication.
+5. Verify https://www.trinityaccord.org/museum/ and `archive.html`, then use `python3 scripts/smoke_live_museum.py` for byte-level export verification. Check the homepage Museum link, model loading, recorded guide, music, subtitles and mobile controls. Record any unavailable browser verification explicitly.
 
-```sh
-systemctl status trinity-museum-sync.timer
-journalctl -u trinity-museum-sync.service -n 20 --no-pager
-systemctl start trinity-museum-sync.service
-cat /srv/trinity-museum/current/deployment.json
-```
+Use relative resource paths. The service worker is registered with `scope: './'`; its cache namespace derives from its own path, so the Pages cache is confined to `/museum/`. HTML and runtime scripts are not stored in the media cache. Audio byte ranges and network fallback remain supported by the existing worker.
 
-The initial manually installed v1.13.1 snapshot may not have a deployment receipt
-until the first changed export. The bootstrap snapshot is retained; automated
-releases retain the current and previous version. Rollback: stop the timer,
-point `current` to the retained release using atomic rename, and check local HTTP.
-Certificate renewal is handled separately by `certbot-renew.timer`.
+## Rollback and preservation
 
-## Address cutover
-
-Canonical address: `https://museum.trinityaccord.org/` (served directly at the root). The A record `museum` → `47.76.142.75` is configured in the
-authoritative DNS zone for `trinityaccord.org`. Its nameservers are
-`a.share-dns.com` and `b.share-dns.net`; it is not the Alibaba `asi.org.cn` zone.
-
-The canonical host has a Let's Encrypt certificate with automatic renewal.
-The `museum.asi.org.cn` alias redirects to it. GitHub Pages entry HTML also
-redirects while preserving the path, query and fragment. The same HTML runs
-on the canonical host without redirecting; there is no separate museum codebase.
-For any future move, verify HTTPS and resources before changing redirects.
-Do not move `www.trinityaccord.org` or the main site as part of this cutover.
-
-## Root-path serving
-
-The public HTTPS virtual host serves `/srv/trinity-museum/current/museum`
-as its document root, with `index index.html` and ordinary `try_files`.
-Keep `/deployment.json` rooted at `/srv/trinity-museum/current`, and retain
-`/museum/` as a compatibility alias to the same museum directory. Do not
-redirect the root back to `/museum/`. Legacy HTML normalizes its displayed
-URL before relative resources load, preserving query parameters and fragments.
-Using History API normalization also avoids loops in browsers that cached the
-former redirect from `/` to `/museum/`.
-
-The private health virtual host and sync program keep their original directory
-layout. Changing the public mapping does not change automatic publication.
-Back up the existing public virtual-host configuration, apply the root mapping,
-run `nginx -t`, reload, and verify HTTPS HTML, JS, media, old paths and receipts.
-Do not replace TLS or unrelated virtual-host configuration.
-
-## Repeat visits and tour buffering
-
-The HTTPS boot loader registers `media-cache-worker.js` before starting the viewer,
-with a 1.2-second maximum wait and normal network fallback. Only frozen local
-assets and lyric files are cached. HTML, scripts, manifests and external/current
-status are excluded. `build_runtime.mjs` hashes the media inventory into the cache
-revision; activation removes only this museum scope's older cache revisions.
-Successful full responses are retained up to 192 MiB / 320 entries, with a 24 MiB
-per-file ceiling. Cached audio supports byte ranges for seeking. A cold audio
-request streams a full network response while its copy is stored. Cache writes
-and denied storage never block the response. Browser eviction, private browsing
-and different devices/hosts can still require downloads; this is not a full
-offline website guarantee.
-
-The tour queues the next two stops' English narration, music and lyric files,
-plus inspection audio/images before the crystal stop. One low-priority transfer
-runs at a time, with deduplication, timeouts and retry on later requests. Data
-Saver and 2G connections skip speculative downloads. Already queued artwork
-textures prioritize the current/next two stops and are decoded before display.
-Run `node museum/scripts/check_media_cache.mjs` to check cache/range/fallback and
-prefetch behavior without a network or browser.
+Retain the complete export and Git history. Roll back content to a reviewed snapshot while retaining the working Pages address; do not reintroduce a redirect to the retired server. Validate the regenerated inventory and redeploy. External provenance links remain external, while the scene, exhibition images, music and recorded guide are bundled locally.

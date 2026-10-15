@@ -25,7 +25,7 @@ def test_museum_indexnow_batch_is_host_local_and_network_free_in_dry_run() -> No
             sys.executable,
             str(ROOT / "scripts" / "submit_indexnow.py"),
             "--site",
-            "https://museum.trinityaccord.org",
+            "https://www.trinityaccord.org",
             "--sitemap",
             str(ROOT / "museum" / "dist" / "sitemap.xml"),
             "--key-file",
@@ -40,10 +40,10 @@ def test_museum_indexnow_batch_is_host_local_and_network_free_in_dry_run() -> No
     )
     assert result.returncode == 0, result.stdout + result.stderr
     assert "DRY RUN PASS" in result.stdout
-    assert "Public host: museum.trinityaccord.org" in result.stdout
+    assert "Public host: www.trinityaccord.org" in result.stdout
     assert "URL count: 2" in result.stdout
-    assert "https://museum.trinityaccord.org/" in result.stdout
-    assert "https://museum.trinityaccord.org/archive.html" in result.stdout
+    assert "https://www.trinityaccord.org/museum/" in result.stdout
+    assert "https://www.trinityaccord.org/museum/archive.html" in result.stdout
 
 
 def test_museum_indexnow_workflow_is_bounded_and_production_gated() -> None:
@@ -62,7 +62,7 @@ def test_museum_indexnow_workflow_is_bounded_and_production_gated() -> None:
     submit = text.index("Submit museum URLs to IndexNow")
     receipt = text.index("Publish public museum discovery receipt")
     assert preflight < submit < receipt
-    assert "https://museum.trinityaccord.org" in text
+    assert "https://www.trinityaccord.org" in text
     assert "museum/dist/sitemap.xml" in text
     assert KEY_NAME in text
     assert "MUSEUM LIVE PREFLIGHT PASS" in text

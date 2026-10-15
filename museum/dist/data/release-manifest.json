@@ -12,8 +12,8 @@
     },
     {
       "path": "archive.html",
-      "bytes": 141763,
-      "sha256": "fed2b11053eee01b7309e345f191e88cb00e68566754d597790736be2e679e71"
+      "bytes": 141343,
+      "sha256": "ee733ae00155f9067fd009b45c1c3355af6cabbb819e4de9b44532d9c01820f5"
     },
     {
       "path": "assets/core-object-alpha.jpg",
@@ -1667,8 +1667,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6650,
-      "sha256": "f0e6eb8f346940e4169a6d67a0119895c7366db73397978d6d029a3697bbe1bc"
+      "bytes": 6227,
+      "sha256": "2209c19da053f5eaec1d54368a44ec415023b2d12ad0a10c7e7891e230e6973b"
     },
     {
       "path": "language-preference.js",
@@ -1742,8 +1742,8 @@
     },
     {
       "path": "robots.txt",
-      "bytes": 78,
-      "sha256": "67b6786fd283c146376a578cb48d8875b62618b1d5b89e800b8c432013766a69"
+      "bytes": 82,
+      "sha256": "ee923a54e5da465b78b07effe6288f1d3c6dd624ae5c0b4d7307dd16ecd1ec3f"
     },
     {
       "path": "selection-frame.js",
@@ -1757,8 +1757,8 @@
     },
     {
       "path": "sitemap.xml",
-      "bytes": 385,
-      "sha256": "6fcea0da3bf95062446417bdb405414100755f8aa415f0ddf6309c9dd5351ba1"
+      "bytes": 393,
+      "sha256": "12d39a7b061d4d8cfd8c88f8ebf17d62426339d8ec390f95d26670d1699d7534"
     },
     {
       "path": "spatial-layout.js",

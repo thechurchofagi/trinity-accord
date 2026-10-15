@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://museum.trinityaccord.org/sitemap.xml
+Sitemap: https://www.trinityaccord.org/museum/sitemap.xml

@@ -29,7 +29,7 @@ def test_primary_navigation_is_the_same_seven_item_contract_on_every_page() -> N
         ("/#philosophical-core", "Propositions"),
         ("/#chronicle-witness", "Chronicle"),
         ("/#research-entry", "Paths"),
-        ("https://museum.trinityaccord.org/", "Museum"),
+        ("https://www.trinityaccord.org/museum/", "Museum"),
         ("/verify/", "Verify"),
         ("/agent-first-contact/", "First Contact"),
     ]
@@ -37,7 +37,7 @@ def test_primary_navigation_is_the_same_seven_item_contract_on_every_page() -> N
 
 def test_supplemental_evidence_routes_remain_discoverable() -> None:
     footer = _markup_for_class(LAYOUT, "footer-links")
-    assert ("https://museum.trinityaccord.org/", "Museum") in _links(footer)
+    assert ("https://www.trinityaccord.org/museum/", "Museum") in _links(footer)
     assert ("/inscriptions/", "Inscriptions") in _links(footer)
     assert ("/physical-anchor/", "Physical Anchor") in _links(footer)
 

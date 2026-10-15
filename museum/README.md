@@ -19,7 +19,7 @@ For optional supervised UI development, this edition includes a Vite development
 ## Ownership and boundaries
 
 - GitHub `thechurchofagi/trinity-accord`, under `museum/`, holds the maintained exhibition source and history. There is no separately managed user repository.
-- The public museum is https://museum.trinityaccord.org/, served by the Alibaba Cloud Hong Kong host. GitHub remains the only maintained source; the host automatically synchronizes verified editions. The former GitHub Pages entry redirects to this address. See `HOSTING.md` for deployment and rollback. Historical ChatGPT previews are not the public deployment target.
+- The public museum is https://www.trinityaccord.org/museum/, served directly by GitHub Pages from the same repository as the main website. No Alibaba Cloud server is required. See `HOSTING.md` for deployment and rollback. Historical ChatGPT previews are not the public deployment target.
 - Original NFT records, Bitcoin texts and evidence stay in their existing locations. This edition pins its source commit and includes display copies with provenance and transformation records.
 - Original website links remain the entry points for verification, current status, Echo and Guardian applications. This application writes no record and makes no AI-agent oath, signature, or submission.
 - Ambient pulses are exhibition animation, not heartbeat telemetry. No reception totals are simulated.
@@ -51,12 +51,11 @@ Original artworks, lyrics, photos and music retain their original rights and att
 
 ## Deployment/export
 
-The maintained public museum is https://museum.trinityaccord.org/. See
-`HOSTING.md`: merge the museum PR, wait for the successful Museum edition push
-workflow, then verify the Alibaba host's deployment receipt and exported hashes.
-The host atomically synchronizes the validated static export from GitHub.
-Historical GitHub Pages museum entry URLs redirect to this address. Do not
-publish a separate ChatGPT Sites copy as a substitute for updating this site.
+The maintained public museum is https://www.trinityaccord.org/museum/. The existing
+Deploy Pages workflow publishes the complete `museum/dist/` export at `/museum/`.
+Regenerate the reading archive and inventory, validate locally, then publish the
+reviewed source through that workflow. See `HOSTING.md`. Do not restore the
+retired Alibaba redirect or publish a separately maintained exhibition copy.
 
 ## Word captions
 
