@@ -1,0 +1,8 @@
+{
+  "state": "PAID_ATTEMPT_INTENT",
+  "payload_sha256": "60cf5e25362e5476ba70f9cbe58dd7723347554b30a6271ac0df23fde584ea31",
+  "run_id": "38665348348",
+  "run_attempt": "2",
+  "report": "ASI-CC-PR6",
+  "doi": "10.5281/zenodo.23295776"
+}
