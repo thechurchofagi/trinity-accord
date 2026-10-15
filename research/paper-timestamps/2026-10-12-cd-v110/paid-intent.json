@@ -1,0 +1,8 @@
+{
+  "state": "PAID_ATTEMPT_INTENT",
+  "payload_sha256": "92241e6317a0a7939c4cad842ac3dffc81e0d4c962097620af661368ce31ab61",
+  "run_id": "38685547070",
+  "run_attempt": "2",
+  "report": "CIV-CD-2026-01",
+  "doi": "10.5281/zenodo.23308239"
+}
