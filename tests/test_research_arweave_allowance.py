@@ -53,6 +53,8 @@ class AllowanceTests(unittest.TestCase):
             ('ASI-CC-EAC3', '10.5281/zenodo.23307124'),
             ('CIV-CD-2026-01', '10.5281/zenodo.23308239'),
             ('UCT-GD-2026-01', '10.5281/zenodo.23329883'),
+            ('UCT-RC-2026-01', '10.5281/zenodo.23327394'),
+            ('CTP-2026-01', '10.5281/zenodo.23314212'),
         ]
         for report, doi in editions:
             with self.subTest(report=report):
