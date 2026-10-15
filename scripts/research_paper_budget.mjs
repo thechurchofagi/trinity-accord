@@ -9,7 +9,9 @@ export function publicationKeys(config) {
     throw new Error('Invalid paper publication inventory');
   }
   const keys = config.papers.map(p => {
-    if (!/^TA-TR-2026-\d{2}(?:-BRIDGE)?$/.test(p.report || '') ||
+    // Accept the established report series; identity remains report + version DOI.
+    if (typeof p.report !== 'string' || typeof p.doi !== 'string' ||
+        !/^(?:TA-TR-2026-\d{2}(?:-BRIDGE)?|ASI-CC-(?:PR|RAC|EAC)[1-9]\d*|(?:CIV-CD|UCT-GD)-2026-\d{2})$/.test(p.report) ||
         !/^10\.5281\/zenodo\.\d+$/.test(p.doi || '')) throw new Error('Invalid paper publication identity');
     return `${p.report}@${p.doi}`;
   });
