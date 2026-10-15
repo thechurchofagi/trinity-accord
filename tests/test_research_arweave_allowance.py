@@ -12,7 +12,7 @@ SCRIPT = Path(__file__).resolve().parents[1] / 'scripts/research_arweave_allowan
 
 
 class AllowanceTests(unittest.TestCase):
-    def check_gate(self, *, paid=True, resume=False, mismatch=False, branch='main', limit='1', malformed=False, cost='1'):
+    def check_gate(self, *, paid=True, resume=False, mismatch=False, branch='main', limit='1', malformed=False, cost='1', report='TA-TR-2026-15', doi='10.5281/zenodo.22934654'):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             (root / 'record-chain').mkdir()
@@ -23,7 +23,7 @@ class AllowanceTests(unittest.TestCase):
             ledger.write_text('invalid' if malformed else json.dumps({'entries': entries}))
             batch = root / 'batch'
             batch.mkdir()
-            targets = {'paper_count':1, 'papers':[{'report':'TA-TR-2026-15','doi':'10.5281/zenodo.22934654'}]}
+            targets = {'paper_count':1, 'papers':[{'report':report,'doi':doi}]}
             (batch / 'targets.json').write_text(json.dumps(targets))
             prior = root / 'research/paper-timestamps/prior'
             prior.mkdir(parents=True)
@@ -45,6 +45,36 @@ class AllowanceTests(unittest.TestCase):
             scheduling = batch / 'scheduling-status.json'
             return result.returncode, output.read_text() if output.exists() else '', (
                 json.loads(scheduling.read_text()) if scheduling.exists() else {})
+
+    def test_published_followup_series_use_the_same_cumulative_budget(self):
+        editions = [
+            ('ASI-CC-PR6', '10.5281/zenodo.23295776'),
+            ('ASI-CC-RAC13', '10.5281/zenodo.23299153'),
+            ('ASI-CC-EAC3', '10.5281/zenodo.23307124'),
+            ('CIV-CD-2026-01', '10.5281/zenodo.23308239'),
+            ('UCT-GD-2026-01', '10.5281/zenodo.23329883'),
+        ]
+        for report, doi in editions:
+            with self.subTest(report=report):
+                rc, out, _ = self.check_gate(report=report, doi=doi)
+                self.assertEqual((rc, out), (0, 'allowed=true\n'))
+                rc, out, _ = self.check_gate(report=report, doi=doi, cost='100000000000')
+                self.assertEqual((rc, out), (0, 'allowed=false\n'))
+                rc, out, _ = self.check_gate(report=report, doi=doi, resume=True, mismatch=True)
+                self.assertNotEqual(rc, 0)
+                self.assertEqual(out, '')
+
+    def test_invalid_or_unrecognized_identities_still_fail_closed(self):
+        for report, doi in [
+            ('../ASI-CC-PR6', '10.5281/zenodo.23295776'),
+            ('ASI-CC-PR6 ', '10.5281/zenodo.23295776'),
+            ('OTHER-01', '10.5281/zenodo.23295776'),
+            ('ASI-CC-PR6', '10.5281/zenodo.not-a-record'),
+        ]:
+            with self.subTest(report=report, doi=doi):
+                rc, out, _ = self.check_gate(report=report, doi=doi)
+                self.assertNotEqual(rc, 0)
+                self.assertEqual(out, '')
 
     def test_daily_allowance_does_not_apply_to_papers(self):
         rc, out, status = self.check_gate()
