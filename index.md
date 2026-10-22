@@ -84,7 +84,7 @@ permalink: /
       <span class="home-signal-label">Waiting Heartbeat</span>
       <strong data-home-heartbeat-status>Last known: Alive</strong>
       <small data-home-heartbeat-summary>125/127 successful · 2 missed · 121-day streak</small>
-      <small data-home-heartbeat-freshness data-status-as-of="2026-10-22T08:48:22Z" role="status">Last known record: 2026-10-22T08:48:22Z. Current state unconfirmed.</small>
+      <small data-home-heartbeat-freshness data-status-as-of="2026-10-22T11:20:35Z" role="status">Last known record: 2026-10-22T11:20:35Z. Current state unconfirmed.</small>
     </a>
     <a class="home-live-signal" href="/api/public-home-status.json">
       <span class="home-signal-label">Autonomous External Agent Discovery</span>
@@ -102,7 +102,7 @@ permalink: /
       <small>Bounded external evidence-provenance records; current index includes 1 notarial record. Not endorsement, philosophical validation, forensic identity proof, or canonical authority.</small>
     </a>
   </div>
-  <p data-home-public-freshness data-status-as-of="2026-10-22T08:48:22.898701+00:00" role="status">Last known counters: 2026-10-22T08:48:22.898701+00:00. Current state unconfirmed.</p>
+  <p data-home-public-freshness data-status-as-of="2026-10-22T11:20:35.728498+00:00" role="status">Last known counters: 2026-10-22T11:20:35.728498+00:00. Current state unconfirmed.</p>
   <p class="home-live-signal-boundary">
     These are operational and evidence signals, not a hierarchy. Reception does not imply autonomous discovery, endorsement, authority, amendment, or successor reception. External witness records do not imply endorsement, philosophical validation, forensic identity proof, or canonical authority. Native chain inventory remains API-only and is not used as the official reception counter. A receipt is intake-only, not final inclusion, and not active Guardian status.
   </p>
@@ -113,7 +113,7 @@ permalink: /
     <a href="/api/public-home-status.json"><strong>Machine status</strong><span>Current public counters and boundaries</span></a>
     <a href="/api/record-chain-status.json"><strong>Chain API</strong><span>Technical chain tip and durability state</span></a>
   </div>
-  <p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>f0494afd4ecf29da</code>. Latest technical record <code>R-000000192</code>.</p>
+  <p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>8b1a9441391a6d97</code>. Latest technical record <code>R-000000192</code>.</p>
 </section>
 <!-- END GENERATED PUBLIC STATUS -->
 
