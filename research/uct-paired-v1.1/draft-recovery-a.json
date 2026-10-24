@@ -1,0 +1,93 @@
+{
+  "state": "CAPTURED_FOR_REVIEW_NOT_REPLACED",
+  "record_id": 23030207,
+  "run_id": "36526257223",
+  "files": [
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 721,
+      "sha256": "7cf084bfdbb3fe5601106c0d75227b25af44026a4d75d021d57487c6c1046721",
+      "md5": "60a776333c2effc550d4828ef92c56c5",
+      "api_checksum": "60a776333c2effc550d4828ef92c56c5",
+      "api_filesize": 721.0
+    },
+    {
+      "name": "manifest.json",
+      "bytes": 1939,
+      "sha256": "fa522a9237201d6af2a785806122cd73cae4623c237da3582de5bce14b59ebc0",
+      "md5": "d8fe3d3df25f1a1a107a890d27156821",
+      "api_checksum": "d8fe3d3df25f1a1a107a890d27156821",
+      "api_filesize": 1939.0
+    },
+    {
+      "name": "VERSION-CHANGES-v1.1.md",
+      "bytes": 1638,
+      "sha256": "27a7a46524bfcc298e081673f912908ef3703e009d6879264c7b225644a9120c",
+      "md5": "e87daebf5e083808ebd7b12992929ff0",
+      "api_checksum": "e87daebf5e083808ebd7b12992929ff0",
+      "api_filesize": 1638.0
+    },
+    {
+      "name": "citation.csl.json",
+      "bytes": 597,
+      "sha256": "860454ca9e44a99633ce834dcfeefbe2e9f3630e3c84e6fb542bb4b611af1b88",
+      "md5": "319c5adf8d72ba0d98cd1229c66d50ee",
+      "api_checksum": "319c5adf8d72ba0d98cd1229c66d50ee",
+      "api_filesize": 597.0
+    },
+    {
+      "name": "citation.ris",
+      "bytes": 389,
+      "sha256": "06210c3799e8a33c078afcc3ff3c2a10ed4936c478beb50ad0625179654b17c2",
+      "md5": "18ae17f2162911c2ecf4e45b025c66c9",
+      "api_checksum": "18ae17f2162911c2ecf4e45b025c66c9",
+      "api_filesize": 389.0
+    },
+    {
+      "name": "REVIEW-AND-SOURCES-v1.1.md",
+      "bytes": 1623,
+      "sha256": "5067b820ae839b8ec3db3ee6fefd81b5f1b7be27c4a3d21c4f9039bc7f78b5c5",
+      "md5": "7cbdde9f05ebf88e48f38d85451dc802",
+      "api_checksum": "7cbdde9f05ebf88e48f38d85451dc802",
+      "api_filesize": 1623.0
+    },
+    {
+      "name": "citation.bib",
+      "bytes": 424,
+      "sha256": "4d38b832ac4911fe9caa131f18538d8a2a26c41956cc3ae36607ed4adb3ec437",
+      "md5": "e2fbe83ddef8cc4194e12f6d6abfca2c",
+      "api_checksum": "e2fbe83ddef8cc4194e12f6d6abfca2c",
+      "api_filesize": 424.0
+    },
+    {
+      "name": "README-LICENSE.txt",
+      "bytes": 1322,
+      "sha256": "b309a3428c59593051fb20903bfd06f386effeed535cd413d21e733827475319",
+      "md5": "9030e688a229e7f25fb1a06f57a72b6b",
+      "api_checksum": "9030e688a229e7f25fb1a06f57a72b6b",
+      "api_filesize": 1322.0
+    },
+    {
+      "name": "unified-consciousness-theory-i-v1.1.md",
+      "bytes": 61996,
+      "sha256": "5bddf74818812a3600936f9bda0b5c360a6263d0d657dec7402eeb9ba8ce3e94",
+      "md5": "b93d160a470934b8b352ff9725ff340c",
+      "api_checksum": "b93d160a470934b8b352ff9725ff340c",
+      "api_filesize": 61996.0
+    },
+    {
+      "name": "unified-consciousness-theory-i-v1.1.pdf",
+      "bytes": 144554,
+      "sha256": "eef7e593e30a9bef8efdd5d3f47f7f89bdd5ce3f2ba4d1a84bc80bf03630115f",
+      "md5": "a520ed3aebd19b9b0cb91e53271a3482",
+      "api_checksum": "a520ed3aebd19b9b0cb91e53271a3482",
+      "api_filesize": 144554.0
+    }
+  ],
+  "extra_draft_filenames": [
+    "manifest.json",
+    "VERSION-CHANGES-v1.1.md",
+    "REVIEW-AND-SOURCES-v1.1.md"
+  ],
+  "recovery_location": "unpublished-recovery/a in retained workflow artifact; excluded from Git"
+}

@@ -1,0 +1,48 @@
+{
+  "schema": "trinityaccord.paper-ots-targets.v1",
+  "batch": "2026-09-29-uct-v11",
+  "paper_count": 2,
+  "papers": [
+    {
+      "report": "TA-TR-2026-20",
+      "record_id": 23030207,
+      "doi": "10.5281/zenodo.23030207",
+      "version": "1.1",
+      "title": "Unified Consciousness Theory I: Ontic Structure, Physical Views, and the Structural Continuity from Physical Process to Conceptual Self",
+      "receipt_path": "research/uct-paired-v1.1/publication-a.json",
+      "pdfs": [
+        {
+          "name": "uct-paired-v1.1-supplement.pdf",
+          "bytes": 67693,
+          "sha256": "717d093541ad8a940456e990828d494bf1e9df65b906d904ab512dfe497a43b3"
+        },
+        {
+          "name": "unified-consciousness-theory-i-v1.1.pdf",
+          "bytes": 218982,
+          "sha256": "b51e37ec02c0889ab3e328608583d69be96543e13f08807bff7d1d133712ccbf"
+        }
+      ]
+    },
+    {
+      "report": "TA-TR-2026-21",
+      "record_id": 23030320,
+      "doi": "10.5281/zenodo.23030320",
+      "version": "1.1",
+      "title": "Unified Consciousness Theory II: Consciousness Theories as Effective Organization Theories",
+      "receipt_path": "research/uct-paired-v1.1/publication-b.json",
+      "pdfs": [
+        {
+          "name": "uct-paired-v1.1-supplement.pdf",
+          "bytes": 67693,
+          "sha256": "717d093541ad8a940456e990828d494bf1e9df65b906d904ab512dfe497a43b3"
+        },
+        {
+          "name": "unified-consciousness-theory-ii-v1.1.pdf",
+          "bytes": 150224,
+          "sha256": "ef7522a08042ffbac87d1b5c573a9ccbbab053ba087ce902d2bda6bd2191e0f2"
+        }
+      ]
+    }
+  ],
+  "boundary": "Preservation of two v1.1 editions; prior v1.0 files remain unchanged. No scientific validation implied."
+}

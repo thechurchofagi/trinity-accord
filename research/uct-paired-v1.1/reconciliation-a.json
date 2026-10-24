@@ -1,0 +1,12 @@
+{
+  "old_id": 23005588,
+  "conceptrecid": "23005587",
+  "matching_unpublished_ids": [
+    23030207
+  ],
+  "old_link_ids": {
+    "self": "/api/records/23005588",
+    "latest_draft": "/api/deposit/depositions/23005588",
+    "latest": "/api/records/23005588/versions/latest"
+  }
+}
