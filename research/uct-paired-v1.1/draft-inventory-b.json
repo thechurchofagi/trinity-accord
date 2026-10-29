@@ -1,0 +1,229 @@
+{
+  "record_id": 23030320,
+  "submitted": false,
+  "listing_type": "list",
+  "files": [
+    {
+      "id": "47833bf8-06ca-4c10-8c40-8a6166cb27ec",
+      "filename": "unified-consciousness-theory-ii-audit-bundle-v1.0.zip",
+      "filesize": 77889.0,
+      "checksum": "0124b91dd8abd0c467827006cdd03578",
+      "links": {
+        "self": "https://zenodo.org/api/deposit/depositions/23030320/files/47833bf8-06ca-4c10-8c40-8a6166cb27ec",
+        "download": "https://zenodo.org/api/records/23030320/draft/files/unified-consciousness-theory-ii-audit-bundle-v1.0.zip/content"
+      }
+    },
+    {
+      "id": "ca3ed1ba-2b0a-4a2f-8658-3681dc2a18cf",
+      "filename": "unified-consciousness-theory-ii-supplement-v1.0.pdf",
+      "filesize": 57696.0,
+      "checksum": "67a03e6f19f159c3beeb52550be16dcf",
+      "links": {
+        "self": "https://zenodo.org/api/deposit/depositions/23030320/files/ca3ed1ba-2b0a-4a2f-8658-3681dc2a18cf",
+        "download": "https://zenodo.org/api/records/23030320/draft/files/unified-consciousness-theory-ii-supplement-v1.0.pdf/content"
+      }
+    },
+    {
+      "id": "aecfd7d6-bfba-40f8-acc6-38a25c3a86ae",
+      "filename": "citation.ris",
+      "filesize": 292.0,
+      "checksum": "2e83d08886d88f4bb0a38b36d5414c86",
+      "links": {
+        "self": "https://zenodo.org/api/deposit/depositions/23030320/files/aecfd7d6-bfba-40f8-acc6-38a25c3a86ae",
+        "download": "https://zenodo.org/api/records/23030320/draft/files/citation.ris/content"
+      }
+    },
+    {
+      "id": "a087c2ea-8be5-48ab-9200-5e2051d17046",
+      "filename": "README-LICENSE.txt",
+      "filesize": 1300.0,
+      "checksum": "b91c744ae1bffdbe2757fb2c5783a6a8",
+      "links": {
+        "self": "https://zenodo.org/api/deposit/depositions/23030320/files/a087c2ea-8be5-48ab-9200-5e2051d17046",
+        "download": "https://zenodo.org/api/records/23030320/draft/files/README-LICENSE.txt/content"
+      }
+    },
+    {
+      "id": "1287240b-1e9d-43aa-b7ad-0e01a768778d",
+      "filename": "citation.csl.json",
+      "filesize": 500.0,
+      "checksum": "36e997d124e9fdd766fba7c8f9b7c129",
+      "links": {
+        "self": "https://zenodo.org/api/deposit/depositions/23030320/files/1287240b-1e9d-43aa-b7ad-0e01a768778d",
+        "download": "https://zenodo.org/api/records/23030320/draft/files/citation.csl.json/content"
+      }
+    },
+    {
+      "id": "f8efd76e-8c85-42bf-8114-803295e72e06",
+      "filename": "unified-consciousness-theory-ii-supplement-v1.0.md",
+      "filesize": 5452.0,
+      "checksum": "e161680169fea0d4e96523c2ce28f397",
+      "links": {
+        "self": "https://zenodo.org/api/deposit/depositions/23030320/files/f8efd76e-8c85-42bf-8114-803295e72e06",
+        "download": "https://zenodo.org/api/records/23030320/draft/files/unified-consciousness-theory-ii-supplement-v1.0.md/content"
+      }
+    },
+    {
+      "id": "073f4617-bf22-44df-9b9c-93c255a40166",
+      "filename": "SHA256SUMS.txt",
+      "filesize": 983.0,
+      "checksum": "165bb00be1af1773f0e136766f1f5126",
+      "links": {
+        "self": "https://zenodo.org/api/deposit/depositions/23030320/files/073f4617-bf22-44df-9b9c-93c255a40166",
+        "download": "https://zenodo.org/api/records/23030320/draft/files/SHA256SUMS.txt/content"
+      }
+    },
+    {
+      "id": "74f9b387-100e-4345-8245-3b8e878d85fe",
+      "filename": "citation.bib",
+      "filesize": 328.0,
+      "checksum": "b65dbc2bcd225fa09c7129629d3978da",
+      "links": {
+        "self": "https://zenodo.org/api/deposit/depositions/23030320/files/74f9b387-100e-4345-8245-3b8e878d85fe",
+        "download": "https://zenodo.org/api/records/23030320/draft/files/citation.bib/content"
+      }
+    },
+    {
+      "id": "fc0793f2-b077-4e1f-a9ce-a6fdddc43c49",
+      "filename": "unified-consciousness-theory-ii-v1.0.pdf",
+      "filesize": 139813.0,
+      "checksum": "eb47fce654b741fdec94d08d8b63fd00",
+      "links": {
+        "self": "https://zenodo.org/api/deposit/depositions/23030320/files/fc0793f2-b077-4e1f-a9ce-a6fdddc43c49",
+        "download": "https://zenodo.org/api/records/23030320/draft/files/unified-consciousness-theory-ii-v1.0.pdf/content"
+      }
+    },
+    {
+      "id": "ff973a1b-bff9-4a36-af36-e16b79f5fa35",
+      "filename": "REVIEW-AND-SOURCES.md",
+      "filesize": 1713.0,
+      "checksum": "84ee763fe3f1a30e43a26151a2b97c98",
+      "links": {
+        "self": "https://zenodo.org/api/deposit/depositions/23030320/files/ff973a1b-bff9-4a36-af36-e16b79f5fa35",
+        "download": "https://zenodo.org/api/records/23030320/draft/files/REVIEW-AND-SOURCES.md/content"
+      }
+    },
+    {
+      "id": "ba75d725-aa76-456a-acbc-9db9aba5c3ee",
+      "filename": "unified-consciousness-theory-ii-v1.0.md",
+      "filesize": 46705.0,
+      "checksum": "bca79bf4c3e206ea289585c3f5061652",
+      "links": {
+        "self": "https://zenodo.org/api/deposit/depositions/23030320/files/ba75d725-aa76-456a-acbc-9db9aba5c3ee",
+        "download": "https://zenodo.org/api/records/23030320/draft/files/unified-consciousness-theory-ii-v1.0.md/content"
+      }
+    }
+  ],
+  "deposition_file_summary": [
+    {
+      "id": "47833bf8-06ca-4c10-8c40-8a6166cb27ec",
+      "filename": "unified-consciousness-theory-ii-audit-bundle-v1.0.zip",
+      "filesize": 77889,
+      "checksum": "0124b91dd8abd0c467827006cdd03578",
+      "links": {
+        "self": "https://zenodo.org/api/deposit/depositions/23030320/files/47833bf8-06ca-4c10-8c40-8a6166cb27ec",
+        "download": "https://zenodo.org/api/records/23030320/draft/files/unified-consciousness-theory-ii-audit-bundle-v1.0.zip/content"
+      }
+    },
+    {
+      "id": "ca3ed1ba-2b0a-4a2f-8658-3681dc2a18cf",
+      "filename": "unified-consciousness-theory-ii-supplement-v1.0.pdf",
+      "filesize": 57696,
+      "checksum": "67a03e6f19f159c3beeb52550be16dcf",
+      "links": {
+        "self": "https://zenodo.org/api/deposit/depositions/23030320/files/ca3ed1ba-2b0a-4a2f-8658-3681dc2a18cf",
+        "download": "https://zenodo.org/api/records/23030320/draft/files/unified-consciousness-theory-ii-supplement-v1.0.pdf/content"
+      }
+    },
+    {
+      "id": "aecfd7d6-bfba-40f8-acc6-38a25c3a86ae",
+      "filename": "citation.ris",
+      "filesize": 292,
+      "checksum": "2e83d08886d88f4bb0a38b36d5414c86",
+      "links": {
+        "self": "https://zenodo.org/api/deposit/depositions/23030320/files/aecfd7d6-bfba-40f8-acc6-38a25c3a86ae",
+        "download": "https://zenodo.org/api/records/23030320/draft/files/citation.ris/content"
+      }
+    },
+    {
+      "id": "a087c2ea-8be5-48ab-9200-5e2051d17046",
+      "filename": "README-LICENSE.txt",
+      "filesize": 1300,
+      "checksum": "b91c744ae1bffdbe2757fb2c5783a6a8",
+      "links": {
+        "self": "https://zenodo.org/api/deposit/depositions/23030320/files/a087c2ea-8be5-48ab-9200-5e2051d17046",
+        "download": "https://zenodo.org/api/records/23030320/draft/files/README-LICENSE.txt/content"
+      }
+    },
+    {
+      "id": "1287240b-1e9d-43aa-b7ad-0e01a768778d",
+      "filename": "citation.csl.json",
+      "filesize": 500,
+      "checksum": "36e997d124e9fdd766fba7c8f9b7c129",
+      "links": {
+        "self": "https://zenodo.org/api/deposit/depositions/23030320/files/1287240b-1e9d-43aa-b7ad-0e01a768778d",
+        "download": "https://zenodo.org/api/records/23030320/draft/files/citation.csl.json/content"
+      }
+    },
+    {
+      "id": "f8efd76e-8c85-42bf-8114-803295e72e06",
+      "filename": "unified-consciousness-theory-ii-supplement-v1.0.md",
+      "filesize": 5452,
+      "checksum": "e161680169fea0d4e96523c2ce28f397",
+      "links": {
+        "self": "https://zenodo.org/api/deposit/depositions/23030320/files/f8efd76e-8c85-42bf-8114-803295e72e06",
+        "download": "https://zenodo.org/api/records/23030320/draft/files/unified-consciousness-theory-ii-supplement-v1.0.md/content"
+      }
+    },
+    {
+      "id": "073f4617-bf22-44df-9b9c-93c255a40166",
+      "filename": "SHA256SUMS.txt",
+      "filesize": 983,
+      "checksum": "165bb00be1af1773f0e136766f1f5126",
+      "links": {
+        "self": "https://zenodo.org/api/deposit/depositions/23030320/files/073f4617-bf22-44df-9b9c-93c255a40166",
+        "download": "https://zenodo.org/api/records/23030320/draft/files/SHA256SUMS.txt/content"
+      }
+    },
+    {
+      "id": "74f9b387-100e-4345-8245-3b8e878d85fe",
+      "filename": "citation.bib",
+      "filesize": 328,
+      "checksum": "b65dbc2bcd225fa09c7129629d3978da",
+      "links": {
+        "self": "https://zenodo.org/api/deposit/depositions/23030320/files/74f9b387-100e-4345-8245-3b8e878d85fe",
+        "download": "https://zenodo.org/api/records/23030320/draft/files/citation.bib/content"
+      }
+    },
+    {
+      "id": "fc0793f2-b077-4e1f-a9ce-a6fdddc43c49",
+      "filename": "unified-consciousness-theory-ii-v1.0.pdf",
+      "filesize": 139813,
+      "checksum": "eb47fce654b741fdec94d08d8b63fd00",
+      "links": {
+        "self": "https://zenodo.org/api/deposit/depositions/23030320/files/fc0793f2-b077-4e1f-a9ce-a6fdddc43c49",
+        "download": "https://zenodo.org/api/records/23030320/draft/files/unified-consciousness-theory-ii-v1.0.pdf/content"
+      }
+    },
+    {
+      "id": "ff973a1b-bff9-4a36-af36-e16b79f5fa35",
+      "filename": "REVIEW-AND-SOURCES.md",
+      "filesize": 1713,
+      "checksum": "84ee763fe3f1a30e43a26151a2b97c98",
+      "links": {
+        "self": "https://zenodo.org/api/deposit/depositions/23030320/files/ff973a1b-bff9-4a36-af36-e16b79f5fa35",
+        "download": "https://zenodo.org/api/records/23030320/draft/files/REVIEW-AND-SOURCES.md/content"
+      }
+    },
+    {
+      "id": "ba75d725-aa76-456a-acbc-9db9aba5c3ee",
+      "filename": "unified-consciousness-theory-ii-v1.0.md",
+      "filesize": 46705,
+      "checksum": "bca79bf4c3e206ea289585c3f5061652",
+      "links": {
+        "self": "https://zenodo.org/api/deposit/depositions/23030320/files/ba75d725-aa76-456a-acbc-9db9aba5c3ee",
+        "download": "https://zenodo.org/api/records/23030320/draft/files/unified-consciousness-theory-ii-v1.0.md/content"
+      }
+    }
+  ]
+}
