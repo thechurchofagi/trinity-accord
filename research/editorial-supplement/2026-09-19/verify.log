@@ -1,18 +1,1 @@
-Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.11.17/x64/bin/ots", line 6, in <module>
-    sys.exit(main())
-             ^^^^^^
-  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/otsclient/ots.py", line 34, in main
-    args.cmd_func(args)
-  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/otsclient/cmds.py", line 490, in verify_command
-    if not verify_timestamp(detached_timestamp.timestamp, args):
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/otsclient/cmds.py", line 412, in verify_timestamp
-    block_count = proxy.getblockcount()
-                  ^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/bitcoin/rpc.py", line 513, in getblockcount
-    return self._call('getblockcount')
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/bitcoin/rpc.py", line 252, in _call
-    raise JSONRPCError(
-bitcoin.rpc.JSONRPCError: {'code': -32000, 'message': 'blockstream request failed for /blocks/tip/height: The read operation timed out'}
+Success! Bitcoin block 967641 attests existence as of 2026-09-19 UTC
