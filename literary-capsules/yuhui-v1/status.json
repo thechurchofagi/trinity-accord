@@ -1,9 +1,12 @@
 {
-  "bitcoin_heights": [],
+  "bitcoin_heights": [
+    974200,
+    974225
+  ],
   "manifest_sha256": "949a8e6edc3c651ce26598bfa203d4216dfe051e89294a69ffe7f4173e7f3306",
   "pending_calendar_attestations": 3,
   "plaintext_or_recovery_key_uploaded": false,
-  "proof_sha256": "865ba2d84ead71145d8f6de0437453de3d75adb5e2bde9b5f7e920cdb40a734e",
-  "state": "PENDING_BITCOIN",
+  "proof_sha256": "3ae73942114c250a01cecd499841ac508db228ff211b3c1092716f36316b1294",
+  "state": "READY_FOR_ARWEAVE",
   "verification_model": "OTS proof and agreeing Blockstream/mempool headers; not local full-node consensus"
 }
