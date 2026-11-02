@@ -22,6 +22,18 @@ jobs:
     env:
       BATCH: literary-capsules/yuhui-v1
     steps:
+      - name: Authorize write workflow actor
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          ACTOR: ${{ github.actor }}
+          GUARDIAN_REGISTRY_WORKFLOW_ACTORS: ${{ vars.GUARDIAN_REGISTRY_WORKFLOW_ACTORS }}
+        run: |
+          ALLOWLIST="${GUARDIAN_REGISTRY_WORKFLOW_ACTORS:-thechurchofagi}"
+          if [ "$ACTOR" = 'github-actions[bot]' ]; then exit 0; fi
+          case ",$ALLOWLIST," in
+            *",$ACTOR,"*) echo "Authorized actor: $ACTOR" ;;
+            *) echo "Unauthorized actor: $ACTOR" >&2; exit 1 ;;
+          esac
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
           ref: main
@@ -37,6 +49,11 @@ jobs:
           done=p.exists() and json.loads(p.read_text()).get('state')=='ARWEAVE_READBACK_PASS'
           with open(os.environ['GITHUB_OUTPUT'],'a') as f:f.write(f'done={str(done).lower()}\n')
           PY
+      - name: Record toolchain provenance
+        if: steps.state.outputs.done != 'true'
+        run: |
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
+          cat "$RUNNER_TEMP/toolchain-provenance.json"
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         if: steps.state.outputs.done != 'true'
         with:
@@ -96,6 +113,7 @@ jobs:
           path: |
             literary-capsules/yuhui-v1/
             ${{ runner.temp }}/yuhui-ots-proxy.jsonl
+            ${{ runner.temp }}/toolchain-provenance.json
           retention-days: 90
           if-no-files-found: error
       - name: Persist public proofs and exact transaction receipts
@@ -109,7 +127,7 @@ jobs:
           git commit -m 'Record encrypted Yu Hui preservation progress'
           for attempt in 1 2 3; do
             if git push origin HEAD:main; then exit 0; fi
-            git fetch origin main
+            git fetch origin main --prune
             git rebase origin/main || { git rebase --abort; exit 1; }
           done
           echo 'Recover retained transaction artifacts before any repeated paid attempt.' >&2
