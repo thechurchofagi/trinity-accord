@@ -2,10 +2,17 @@
 from __future__ import annotations
 
 import json
+import argparse
+import base64
+import hashlib
+import io
+import os
 import shutil
 import subprocess
 import tempfile
 from pathlib import Path
+from unittest.mock import patch
+import update_arweave_wallet_ledger as updater
 
 ROOT = Path(__file__).resolve().parents[1]
 LEDGER = ROOT / "record-chain/arweave-wallet-ledger.json"
@@ -40,7 +47,55 @@ def default_ledger() -> dict:
     }
 
 
+def check_live_refresh() -> None:
+    # Synthetic public modulus only; tests require no credentials or network.
+    modulus = b"test-only-public-modulus"
+    jwk = json.dumps({"kty": "RSA", "n": base64.urlsafe_b64encode(modulus).decode().rstrip("=")})
+    address = base64.urlsafe_b64encode(hashlib.sha256(modulus).digest()).decode().rstrip("=")
+    with tempfile.TemporaryDirectory() as tmp:
+        ledger_path = Path(tmp) / "ledger.json"
+        ledger = default_ledger()
+        ledger["wallet"]["wallet_address_sha256"] = updater.sha256_text(address)
+        ledger_path.write_text(json.dumps(ledger))
+        with patch.object(updater, "LEDGER", ledger_path), patch.dict(os.environ, {"ARKEY": jwk}), patch.object(updater.time, "sleep"):
+            for balance, expected in [(b"14115073154798", "14.115073154798"), (b"0", "0"), (b"1", "0.000000000001")]:
+                with patch.object(updater, "urlopen", return_value=io.BytesIO(balance)) as query:
+                    updater.refresh_balance(argparse.Namespace())
+                    assert query.call_args.args[0] == f"https://arweave.net/wallet/{address}/balance"
+                saved = json.loads(ledger_path.read_text())
+                assert saved["wallet"]["last_known_balance_ar"] == expected
+                assert saved["wallet"]["last_known_balance_at"]
+                assert saved["wallet"]["wallet_address"] is None
+                assert saved["entries"] == []
+            before = ledger_path.read_bytes()
+            for response in [b"-1", b"NaN", b"<html>error</html>"]:
+                with patch.object(updater, "urlopen", side_effect=lambda *a, **k: io.BytesIO(response)):
+                    try:
+                        updater.refresh_balance(argparse.Namespace())
+                        raise AssertionError("invalid response accepted")
+                    except SystemExit:
+                        pass
+                assert ledger_path.read_bytes() == before
+            with patch.object(updater, "urlopen", side_effect=TimeoutError):
+                try:
+                    updater.refresh_balance(argparse.Namespace())
+                    raise AssertionError("network failure accepted")
+                except SystemExit:
+                    pass
+            assert ledger_path.read_bytes() == before
+            for key in ["invalid", json.dumps({"kty":"RSA","n":"b3RoZXI"})]:
+                with patch.dict(os.environ, {"ARKEY":key}), patch.object(updater, "urlopen") as query:
+                    try:
+                        updater.refresh_balance(argparse.Namespace())
+                        raise AssertionError("invalid or mismatched wallet accepted")
+                    except SystemExit:
+                        pass
+                    query.assert_not_called()
+                assert ledger_path.read_bytes() == before
+
+
 def main() -> int:
+    check_live_refresh()
     if not LEDGER.exists():
         raise SystemExit("missing record-chain/arweave-wallet-ledger.json")
     if not STATUS.exists():
@@ -84,6 +139,7 @@ def main() -> int:
             assert status["schema"] == "trinityaccord.arweave-wallet-status.v1"
             assert status["balance"]["balance_known"] is True
             assert status["balance"]["balance_ar"] == "1.5"
+            assert status["balance"]["checked_at"] == "2026-06-10T08:00:00Z"
             assert status["balance"]["needs_recharge"] is False
             assert status["spending"]["total_spent_ar"] == "0.1"
             assert status["spending"]["total_paid_uploads"] >= 1
@@ -100,3 +156,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

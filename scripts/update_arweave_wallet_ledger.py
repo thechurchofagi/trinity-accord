@@ -2,9 +2,13 @@
 from __future__ import annotations
 
 import argparse
+import base64
 import hashlib
 import json
+import os
 import re
+import time
+from urllib.request import urlopen
 from datetime import datetime, timezone
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
@@ -43,7 +47,7 @@ def decimal_string(value: str | None, field_name: str) -> str | None:
         d = Decimal(str(value))
     except InvalidOperation:
         raise SystemExit(f"{field_name} must be a decimal string")
-    if d < 0:
+    if not d.is_finite() or d < 0:
         raise SystemExit(f"{field_name} must be >= 0")
     return format(d.normalize(), "f")
 
@@ -129,6 +133,48 @@ def set_balance(args: argparse.Namespace) -> int:
     return 0
 
 
+def refresh_balance(args: argparse.Namespace) -> int:
+    """Read the gateway balance; never sign or send a transaction."""
+    ledger = load_ledger()
+    wallet = ledger.setdefault("wallet", {})
+    try:
+        raw = os.environ["ARKEY"].strip()
+        jwk = json.loads(raw if raw.startswith("{") else base64.b64decode(raw))
+        if jwk.get("kty") != "RSA" or not isinstance(jwk.get("n"), str):
+            raise ValueError()
+        modulus = base64.urlsafe_b64decode(jwk["n"] + "=" * (-len(jwk["n"]) % 4))
+        if not modulus:
+            raise ValueError()
+        address = base64.urlsafe_b64encode(hashlib.sha256(modulus).digest()).decode().rstrip("=")
+    except Exception:
+        raise SystemExit("ARKEY missing or invalid; wallet snapshot unchanged") from None
+    address_hash = sha256_text(address)
+    if wallet.get("wallet_address_sha256") != address_hash:
+        raise SystemExit("ARKEY does not match the recorded wallet; snapshot unchanged")
+
+    for attempt in range(3):
+        try:
+            with urlopen(f"https://arweave.net/wallet/{address}/balance", timeout=30) as response:
+                raw_balance = response.read(128).decode("ascii").strip()
+            if not re.fullmatch(r"[0-9]{1,40}", raw_balance):
+                raise ValueError("Invalid gateway balance")
+            # Integer formatting avoids floating-point loss of winston precision.
+            whole, fraction = divmod(int(raw_balance), 10**12)
+            balance_ar = f"{whole}.{fraction:012d}".rstrip("0").rstrip(".")
+            break
+        except Exception:
+            if attempt == 2:
+                raise SystemExit("Arweave balance query failed; wallet snapshot unchanged") from None
+            time.sleep(2 ** (attempt + 1))
+
+    wallet["currency"] = "AR"
+    wallet["last_known_balance_ar"] = balance_ar
+    wallet["last_known_balance_at"] = utc_now()
+    write_ledger(ledger)
+    print(f"Updated AR wallet balance snapshot: {balance_ar} AR")
+    return 0
+
+
 def append_upload(args: argparse.Namespace) -> int:
     ledger = load_ledger()
     entries = ledger.setdefault("entries", [])
@@ -163,6 +209,9 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Update Trinity Accord AR wallet ledger")
     sub = parser.add_subparsers(dest="cmd", required=True)
 
+    p_refresh = sub.add_parser("refresh-balance", help="Query the recorded wallet balance from Arweave")
+    p_refresh.set_defaults(func=refresh_balance)
+
     p_balance = sub.add_parser("set-balance", help="Set last known AR wallet balance")
     p_balance.add_argument("--balance-ar", required=True)
     p_balance.add_argument("--balance-at")
@@ -189,3 +238,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

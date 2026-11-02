@@ -150,6 +150,7 @@ def compute_status(use_env_balance: bool = False) -> dict[str, Any]:
         "balance": {
             "balance_known": balance_known,
             "balance_ar": money(balance),
+            "checked_at": wallet.get("last_known_balance_at"),
             "low_balance_threshold_ar": money(threshold),
             "low_balance": low_balance,
             "needs_recharge": low_balance,
@@ -212,3 +213,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

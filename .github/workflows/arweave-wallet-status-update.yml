@@ -1,11 +1,19 @@
 name: Arweave wallet status update
 
 on:
+  schedule:
+    # Daily at 10:12 UTC (18:12 China Standard Time).
+    - cron: "12 10 * * *"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/arweave-wallet-status-update.yml"
+      - "scripts/update_arweave_wallet_ledger.py"
   workflow_dispatch:
     inputs:
       balance_ar:
-        description: "Last known AR wallet balance"
-        required: true
+        description: "Optional manual balance override; leave blank to query Arweave"
+        required: false
         type: string
       wallet_address_sha256:
         description: "SHA256 of public AR wallet address"
@@ -69,8 +77,14 @@ jobs:
           git rebase origin/main
 
       - name: Update wallet balance snapshot
+        env:
+          ARKEY: ${{ secrets.ARKEY }}
         run: |
           set -euo pipefail
+          if [ -z "$INPUT_BALANCE_AR" ]; then
+            python3 scripts/update_arweave_wallet_ledger.py refresh-balance
+            exit 0
+          fi
           args=(
             python3 scripts/update_arweave_wallet_ledger.py set-balance
             --balance-ar "$INPUT_BALANCE_AR"
@@ -132,3 +146,4 @@ jobs:
 
           echo "::error::Failed to push wallet status update after retries."
           exit 1
+

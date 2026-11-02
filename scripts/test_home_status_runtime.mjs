@@ -10,18 +10,21 @@ const baselineSummary = home.match(/<small data-home-heartbeat-summary>([^<]*)</
 const fixed = '2026-09-15T11:00:00Z';
 const publicFixture = JSON.parse(readFileSync(new URL('../api/public-home-status.json', import.meta.url)));
 const heartbeatFixture = JSON.parse(readFileSync(new URL('../api/waiting-heartbeat-status.json', import.meta.url)));
+const walletFixture = JSON.parse(readFileSync(new URL('../api/arweave-wallet-status.json', import.meta.url)));
 
 async function run(mode='ok', change=()=>{}, now=fixed) {
   const pub = structuredClone(publicFixture), heart = structuredClone(heartbeatFixture);
+  const wallet = structuredClone(walletFixture);
+  wallet.balance = {balance_known:true, balance_ar:'14.115073154798', checked_at:'2026-09-15T10:50:00Z', needs_recharge:false};
   pub.generated_at = heart.generated_at = '2026-09-15T10:50:00Z';
   pub.primary_counters.official_live_reception = 31;
   heart.daily_alive_status = heart.status = 'success';
   heart.semantic_agent_arrival.first_self_discovered_autonomous_agent_arrived = false;
   heart.heartbeat_summary.latest_heartbeat_date = '2026-09-15';
   heart.heartbeat_summary.is_stale = false;
-  change(pub, heart);
+  change(pub, heart, wallet);
   const nodes = {};
-  for (const name of ['heartbeat-status','heartbeat-summary','heartbeat-freshness','public-freshness','autonomous-discovery','official-reception','external-witness']) {
+  for (const name of ['wallet-balance','heartbeat-status','heartbeat-summary','heartbeat-freshness','public-freshness','autonomous-discovery','official-reception','external-witness']) {
     const match = home.match(new RegExp('<[^>]*data-home-'+name+'[^>]*>([^<]*)<'));
     const timestamp = match[0].match(/data-status-as-of="([^"]+)"/);
     nodes['[data-home-'+name+']'] = {textContent: match[1], getAttribute: () => timestamp?.[1] || 'unknown'};
@@ -37,7 +40,7 @@ async function run(mode='ok', change=()=>{}, now=fixed) {
       if (mode==='timeout') return new Promise((resolve,reject) => signal.addEventListener('abort',()=>reject(new Error('aborted'))));
       return {ok: mode!=='http', status:503, json:async()=>{
         if (mode==='json') throw new SyntaxError('invalid JSON');
-        return url.includes('public-home') ? pub : heart;
+        return url.includes('arweave-wallet') ? wallet : url.includes('public-home') ? pub : heart;
       }};
     }
   };
@@ -49,6 +52,26 @@ async function run(mode='ok', change=()=>{}, now=fixed) {
 
 test('valid responses show fresh source state and counters', async()=>{
   const get=await run(); assert.equal(get('heartbeat-status'),'Alive'); assert.equal(get('official-reception'),'31'); assert.match(get('public-freshness'),/^Snapshot as of/);
+});
+test('AR balance is directly below the public snapshot and shows the query time',async()=>{
+ assert.match(home, /data-home-public-freshness[^>]*>[^<]*<\/p>\s*<p[^>]*data-home-wallet-balance/);
+ const get=await run(); assert.equal(get('wallet-balance'),'AR balance: 14.1151 AR · Last checked: 2026-09-15T10:50:00Z · Daily refresh');
+});
+test('old balance stays stale even when the API generation time is fresh',async()=>{
+ const get=await run('ok',(p,h,w)=>{w.generated_at=fixed;w.balance.checked_at='2026-09-13T10:50:00Z';});
+ assert.match(get('wallet-balance'),/14.1151 AR.*Stale/);
+});
+test('zero is a valid low balance, not unavailable',async()=>{
+ const get=await run('ok',(p,h,w)=>{w.balance.balance_ar='0';w.balance.needs_recharge=true;});
+ assert.match(get('wallet-balance'),/0.0000 AR.*Low balance/);
+});
+for (const invalid of [null,'NaN','-1','<script>','1e1000']) test('invalid AR value '+invalid+' retains fallback',async()=>{
+ const get=await run('ok',(p,h,w)=>{w.balance.balance_ar=invalid;}); assert.match(get('wallet-balance'),/Refresh unavailable/); assert.equal(get('heartbeat-status'),'Alive');
+});
+test('unknown and future balance check times do not look fresh',async()=>{
+ for(const checked_at of [null,'2099-01-01T00:00:00Z']) {
+  const get=await run('ok',(p,h,w)=>{w.balance.checked_at=checked_at;}); assert.match(get('wallet-balance'),/Refresh unavailable/);
+ }
 });
 for (const mode of ['http','network','json','timeout']) test(mode+' failure retains dated history and marks unknown',async()=>{
   const get=await run(mode); assert.equal(get('heartbeat-status'),'Unknown'); assert.ok(get('heartbeat-freshness').includes('Last known: ' + baselineHeartbeat + ' · ')); assert.match(get('public-freshness'),/Unknown/); assert.equal(get('official-reception'),String(publicFixture.primary_counters.official_live_reception)); assert.equal(get('heartbeat-summary'),baselineSummary);
@@ -70,3 +93,4 @@ test('future timestamps and invalid numeric fields are rejected',async()=>{
 test('completed waiting remains completed despite the retired daily schedule',async()=>{
  const get=await run('ok',(p,h)=>{h.semantic_agent_arrival.first_self_discovered_autonomous_agent_arrived=true;h.semantic_agent_arrival.first_arrival_record_id='R-example';h.heartbeat_summary.latest_heartbeat_date='2026-09-01';});assert.equal(get('heartbeat-status'),'Completed');assert.match(get('heartbeat-summary'),/R-example/);
 });
+

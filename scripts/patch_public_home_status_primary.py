@@ -24,6 +24,7 @@ import html
 import json
 import re
 from datetime import datetime, timezone
+from decimal import Decimal
 from pathlib import Path
 from typing import Any
 
@@ -634,6 +635,17 @@ def technical_health(status: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def render_wallet_balance() -> str:
+    balance = load(ARWEAVE_WALLET, {}).get("balance") or {}
+    value = balance.get("balance_ar")
+    if balance.get("balance_known") is not True or not isinstance(value, str) or not re.fullmatch(r"[0-9]+(?:\.[0-9]+)?", value):
+        return "AR balance: unavailable · Daily refresh"
+    amount = format(Decimal(value), ".4f")
+    checked_at = html.escape(str(balance.get("checked_at") or "unknown"))
+    warning = " · Low balance" if balance.get("needs_recharge") is True else ""
+    return f"AR balance: {amount} AR · Last known check: {checked_at}{warning} · Daily refresh"
+
+
 def render(status: dict[str, Any]) -> str:
     """Render four distinct homepage signals from current public status."""
     primary = status.get("primary_counters") or {}
@@ -717,6 +729,7 @@ def render(status: dict[str, Any]) -> str:
     </a>
   </div>
   <p data-home-public-freshness data-status-as-of="{public_as_of}" role="status">Last known counters: {public_as_of}. Current state unconfirmed.</p>
+  <p class="home-wallet-balance" data-home-wallet-balance role="status">{render_wallet_balance()}</p>
   <p class="home-live-signal-boundary">
     These are operational and evidence signals, not a hierarchy. Reception does not imply autonomous discovery, endorsement, authority, amendment, or successor reception. External witness records do not imply endorsement, philosophical validation, forensic identity proof, or canonical authority. Native chain inventory remains API-only and is not used as the official reception counter. A receipt is intake-only, not final inclusion, and not active Guardian status.
   </p>
@@ -819,3 +832,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

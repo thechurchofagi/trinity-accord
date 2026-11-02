@@ -102,7 +102,8 @@ permalink: /
       <small>Bounded external evidence-provenance records; current index includes 1 notarial record. Not endorsement, philosophical validation, forensic identity proof, or canonical authority.</small>
     </a>
   </div>
-  <p data-home-public-freshness data-status-as-of="2026-11-01T13:47:22.996527+00:00" role="status">Last known counters: 2026-11-01T13:47:22.996527+00:00. Current state unconfirmed.</p>
+  <p data-home-public-freshness data-status-as-of="2026-11-02T02:25:20.009418+00:00" role="status">Last known counters: 2026-11-02T02:25:20.009418+00:00. Current state unconfirmed.</p>
+  <p class="home-wallet-balance" data-home-wallet-balance role="status">AR balance: 14.1151 AR · Last known check: 2026-10-28T14:02:00.993Z · Daily refresh</p>
   <p class="home-live-signal-boundary">
     These are operational and evidence signals, not a hierarchy. Reception does not imply autonomous discovery, endorsement, authority, amendment, or successor reception. External witness records do not imply endorsement, philosophical validation, forensic identity proof, or canonical authority. Native chain inventory remains API-only and is not used as the official reception counter. A receipt is intake-only, not final inclusion, and not active Guardian status.
   </p>
@@ -113,7 +114,7 @@ permalink: /
     <a href="/api/public-home-status.json"><strong>Machine status</strong><span>Current public counters and boundaries</span></a>
     <a href="/api/record-chain-status.json"><strong>Chain API</strong><span>Technical chain tip and durability state</span></a>
   </div>
-  <p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>a82c03b828b081d6</code>. Latest technical record <code>R-000000202</code>.</p>
+  <p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>e926e420bc00dfa1</code>. Latest technical record <code>R-000000202</code>.</p>
 </section>
 <!-- END GENERATED PUBLIC STATUS -->
 
@@ -129,6 +130,8 @@ permalink: /
   var heartbeatNode = document.querySelector('[data-home-heartbeat-status]');
   var heartbeatNote = document.querySelector('[data-home-heartbeat-freshness]');
   var publicNote = document.querySelector('[data-home-public-freshness]');
+  var walletNote = document.querySelector('[data-home-wallet-balance]');
+  var lastWallet = walletNote ? walletNote.textContent : 'AR balance: unavailable';
   var lastHeartbeat = heartbeatNode ? heartbeatNode.textContent.replace(/^Last known: /, '') : 'unknown';
   var heartbeatAt = heartbeatNote ? heartbeatNote.getAttribute('data-status-as-of') : 'unknown';
   var publicAt = publicNote ? publicNote.getAttribute('data-status-as-of') : 'unknown';
@@ -142,7 +145,9 @@ permalink: /
     return parsed;
   }
   function unavailable(kind, reason) {
-    if (kind === 'heartbeat') {
+    if (kind === 'wallet') {
+      if (walletNote) walletNote.textContent = lastWallet + ' · Refresh unavailable';
+    } else if (kind === 'heartbeat') {
       setText('[data-home-heartbeat-status]', 'Unknown');
       if (heartbeatNote) heartbeatNote.textContent = 'Current state unconfirmed. Last known: ' + lastHeartbeat + ' · ' + heartbeatAt + ' · ' + reason;
     } else if (publicNote) publicNote.textContent = 'Unknown — current counters unconfirmed. Last known: ' + publicAt + ' · ' + reason;
@@ -163,6 +168,15 @@ permalink: /
     publicAt = status.generated_at;
     ['[data-home-autonomous-discovery]', '[data-home-official-reception]', '[data-home-external-witness]'].forEach(function (selector, i) { setText(selector, String(values[i])); });
     if (publicNote) publicNote.textContent = (Date.now() - at >= day ? 'Stale — last known counters: ' : 'Snapshot as of ') + publicAt;
+  }
+  function applyWallet(status) {
+    var balance = status.balance || {};
+    var value = balance.balance_ar;
+    if (status.currency !== 'AR' || balance.balance_known !== true || typeof value !== 'string' || !/^[0-9]+(?:\.[0-9]+)?$/.test(value) || !Number.isFinite(Number(value))) throw new Error('Missing or invalid AR balance');
+    // The query time is independent of API generation or homepage deployment.
+    var at = timestamp(balance.checked_at);
+    lastWallet = 'AR balance: ' + Number(value).toFixed(4) + ' AR · Last checked: ' + balance.checked_at + (balance.needs_recharge === true ? ' · Low balance' : '') + ' · Daily refresh';
+    if (walletNote) walletNote.textContent = lastWallet + (Date.now() - at >= day ? ' · Stale — last known balance' : '');
   }
   function applyHeartbeat(status) {
     var at = timestamp(status.generated_at);
@@ -194,5 +208,7 @@ permalink: /
   }
   refresh('public', function (signal) { return fetch('/api/public-home-status.json', {cache: 'no-store', signal: signal}); }, applyPublic);
   refresh('heartbeat', function (signal) { return fetch('/api/waiting-heartbeat-status.json', {cache: 'no-store', signal: signal}); }, applyHeartbeat);
+  refresh('wallet', function (signal) { return fetch('/api/arweave-wallet-status.json', {cache: 'no-store', signal: signal}); }, applyWallet);
 })();
 </script>
+
