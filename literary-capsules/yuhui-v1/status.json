@@ -5,10 +5,11 @@
     974200,
     974225
   ],
+  "bundle_sha256": "9e1f462eb09a2af85dbcc8dcacd4747aeebebe59221608b3921f11f1e938104a",
   "manifest_sha256": "949a8e6edc3c651ce26598bfa203d4216dfe051e89294a69ffe7f4173e7f3306",
   "pending_calendar_attestations": 3,
   "plaintext_or_recovery_key_uploaded": false,
   "proof_sha256": "3ae73942114c250a01cecd499841ac508db228ff211b3c1092716f36316b1294",
-  "state": "ARWEAVE_READBACK_PENDING",
+  "state": "ARWEAVE_READBACK_PASS",
   "verification_model": "OTS proof and agreeing Blockstream/mempool headers; not local full-node consensus"
 }
