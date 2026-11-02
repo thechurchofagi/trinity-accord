@@ -52,7 +52,12 @@ jobs:
         run: |
           python3 scripts/bitcoin_esplora_rpc_proxy.py --host 127.0.0.1 --port 18443 --trace "$RUNNER_TEMP/yuhui-ots-proxy.jsonl" --timeout 20 > "$RUNNER_TEMP/yuhui-ots-proxy.log" 2>&1 &
           proxy_pid=$!
-          trap 'kill "$proxy_pid" 2>/dev/null || true' EXIT
+          cleanup_proxy() {
+            if kill -0 "$proxy_pid" 2>/dev/null; then
+              kill "$proxy_pid"
+            fi
+          }
+          trap cleanup_proxy EXIT
           python3 scripts/literary_capsule_preserve.py prepare
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         if: steps.ots.outputs.ready == 'true'
