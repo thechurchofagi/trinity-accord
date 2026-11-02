@@ -39,6 +39,7 @@ function argValue(name) {
 function paidKind() {
   const script = path.basename(process.argv[1] || "");
   if (script === "arweave_upload_payload.mjs") {
+    if (process.env.ARWEAVE_ARCHIVE_TYPE === "encrypted-literary-capsule") return "encrypted_literary_capsule";
     if (process.env.ARWEAVE_ARCHIVE_TYPE === "research-paper-ots-archive") return "research_paper_ots_archive";
     return "record_chain_arweave_archive";
   }
@@ -127,7 +128,13 @@ Arweave.init = function guardedInit(config) {
       // Paper publications use their own strict 0.1 AR cumulative budget.
       // Other upload types retain the existing transaction and daily limits.
       const hardRewardMaximum =
-        kind === "research_paper_ots_archive" ? "0.099999999999" : DEFAULT_MAX_TRANSACTION_REWARD_AR;
+        kind === "encrypted_literary_capsule" ? "0.01" : kind === "research_paper_ots_archive" ? "0.099999999999" : DEFAULT_MAX_TRANSACTION_REWARD_AR;
+      if (kind === "encrypted_literary_capsule") {
+        const prior = ledger.entries.filter(e => e.kind === kind && e.status === "paid");
+        // This authorization covers one paid capsule transaction only. The
+        // uploader resumes an existing receipt without creating/posting again.
+        if (prior.length) throw new Error("Encrypted literary capsule already paid; resume its recorded transaction");
+      }
       if (kind === "research_paper_ots_archive") {
         const keys = paperTransactions.get(transaction);
         if (!keys) throw new Error("Paper transaction lacks payload-bound publication identity");
@@ -172,3 +179,4 @@ Arweave.init = function guardedInit(config) {
 
   return instance;
 };
+

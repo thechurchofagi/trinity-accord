@@ -53,6 +53,7 @@ function payloadByteLength(value) {
 function dailyLimit(kind) {
   if (kind === "research_paper_ots_archive") return null; // Separate per-publication budget.
   const names = {
+    encrypted_literary_capsule: "ARWEAVE_DAILY_ENCRYPTED_CAPSULE_UPLOAD_LIMIT",
     record_chain_arweave_archive: "ARWEAVE_DAILY_RECORD_CHAIN_UPLOAD_LIMIT",
     native_ots_bundle_archive: "ARWEAVE_DAILY_NATIVE_OTS_UPLOAD_LIMIT",
     homepage_machine_snapshot: "ARWEAVE_DAILY_HOMEPAGE_SNAPSHOT_UPLOAD_LIMIT",
@@ -125,3 +126,4 @@ export {
   payloadByteLength,
   rollingPaidWinston,
 };
+

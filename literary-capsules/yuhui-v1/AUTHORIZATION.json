@@ -1,0 +1,9 @@
+{
+  "scope": "Only this encrypted literary capsule; no plaintext or recovery secret may be published",
+  "user_decision": "User accepted early solving risk, requested no retained private key and an estimated USD 1M current compute cost.",
+  "manifest_sha256": "949a8e6edc3c651ce26598bfa203d4216dfe051e89294a69ffe7f4173e7f3306",
+  "maximum_total_ar": "0.01",
+  "paid_transactions_maximum": 1,
+  "reuse_existing_receipt": true,
+  "bitcoin_verification_required_before_arweave": true
+}

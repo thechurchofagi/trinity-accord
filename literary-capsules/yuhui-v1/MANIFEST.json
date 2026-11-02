@@ -1,0 +1,30 @@
+{
+  "format": "yuhui-public-manifest-v1",
+  "files": [
+    {
+      "path": "capsule.json",
+      "bytes": 320284,
+      "sha256": "c662884308fcb10649dcc7c5ee93f3ac6d71a168b0a50b814ea41e2f4e2bba0e"
+    },
+    {
+      "path": "unlock.py",
+      "bytes": 4369,
+      "sha256": "24adc880c27e57a0b4c326922bfb85ed74f6cda021c92f78cc6aa5a88acec618"
+    },
+    {
+      "path": "README.md",
+      "bytes": 4887,
+      "sha256": "d367c20ad3085bc20fb5c227580843939ae1b8665752deaa4049d4dfa73ca308"
+    },
+    {
+      "path": "cost-model.json",
+      "bytes": 1812,
+      "sha256": "7a396e1ad8554ec2e59d64c5ddcfabdff8eeabc477261cde6fc6b4b7c674a041"
+    },
+    {
+      "path": "test_unlock.py",
+      "bytes": 2190,
+      "sha256": "25761f98bcaae7c4cb8766519459889ca6037ba491ed002b333630785d60029f"
+    }
+  ]
+}

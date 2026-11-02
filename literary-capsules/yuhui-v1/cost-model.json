@@ -1,0 +1,45 @@
+{
+  "valuation_date": "2026-11-02",
+  "target_mean_usd": 1000000,
+  "candidate_count": "281474976710656",
+  "expected_candidates": 140737488355328.5,
+  "iterations": 1200000,
+  "benchmark": {
+    "gpu": "RTX 5090 FE",
+    "hashcat_version": "6.2.6-851",
+    "mode": 10900,
+    "reported_kH_per_second": 11157.2,
+    "reported_loop_iterations": 999,
+    "assumed_total_pbkdf2_iterations": 1000,
+    "source": "https://gist.github.com/Chick3nman/09bac0775e6393468c2925c1e1363d5c"
+  },
+  "rental": {
+    "provider": "LowCostGPU",
+    "type": "interruptible",
+    "usd_per_gpu_hour": 0.24,
+    "source": "https://lowcostgpu.com/templates/hashcat-cuda",
+    "availability_not_tested": true
+  },
+  "estimate": {
+    "method": "Inverse iteration-count scaling of public one-block PBKDF2 benchmark; not an on-device measurement of this exact puzzle.",
+    "guesses_per_second": 9297.666666666666,
+    "mean_gpu_hours": 4204683.622991686,
+    "mean_usd": 1009124.0695180045,
+    "full_search_usd": 2018248.1390360019,
+    "mean_days_1000_gpus": 175.19515095798693,
+    "mean_cost_not_minimum": true
+  },
+  "sensitivity": {
+    "same_speed_on_demand_0_481_usd_hour": 2022452.8226590008,
+    "same_speed_runpod_1_19_usd_hour": 5003573.511360106,
+    "tenfold_cost_efficiency_usd": 100912.40695180045
+  },
+  "limitations": [
+    "Not a security audit, best-attacker bound or guaranteed expenditure.",
+    "Uniform search may succeed early; mean and median near half the search space.",
+    "Parallel GPUs change elapsed time, not baseline total GPU-hours.",
+    "GPU kernel efficiency, price, ASICs, quantum computing and algorithmic breakthroughs may change cost.",
+    "Costs exclude tax, storage, orchestration, interruptions and engineering.",
+    "No GPU rental or attack budget was spent creating this capsule."
+  ]
+}

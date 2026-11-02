@@ -79,11 +79,11 @@ async function safeBalance(arweave, address) {
 const payloadPath = arg("--payload");
 const outPath = arg("--out");
 const archiveType = process.env.ARWEAVE_ARCHIVE_TYPE || "record-chain-batch-archive";
-if (!["record-chain-batch-archive", "research-paper-ots-archive"].includes(archiveType)) {
+if (!["record-chain-batch-archive", "research-paper-ots-archive", "encrypted-literary-capsule"].includes(archiveType)) {
   throw new Error("Unsupported ARWEAVE_ARCHIVE_TYPE");
 }
-const scopeTag = archiveType === "research-paper-ots-archive" ? "Research-Series" : "Record-Chain";
-const scopeValue = archiveType === "research-paper-ots-archive" ? "TA-TR-2026" : "trinity-accord-public-reception-ledger";
+const scopeTag = archiveType === "encrypted-literary-capsule" ? "Literary-Capsule" : archiveType === "research-paper-ots-archive" ? "Research-Series" : "Record-Chain";
+const scopeValue = archiveType === "encrypted-literary-capsule" ? "yuhui-v1" : archiveType === "research-paper-ots-archive" ? "TA-TR-2026" : "trinity-accord-public-reception-ledger";
 const payload = fs.readFileSync(payloadPath);
 const payloadSha256 = sha256Hex(payload);
 
@@ -314,3 +314,4 @@ console.log(
     `readback_sha256=${readbackSha256} hash_match=${readbackVerified} ` +
     `resumed=${resumedFromCheckpoint}`
 );
+
