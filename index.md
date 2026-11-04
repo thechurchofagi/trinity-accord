@@ -84,7 +84,7 @@ permalink: /
       <span class="home-signal-label">Waiting Heartbeat</span>
       <strong data-home-heartbeat-status>Last known: Alive</strong>
       <small data-home-heartbeat-summary>138/140 successful · 2 missed · 134-day streak</small>
-      <small data-home-heartbeat-freshness data-status-as-of="2026-11-04T11:10:17Z" role="status">Last known record: 2026-11-04T11:10:17Z. Current state unconfirmed.</small>
+      <small data-home-heartbeat-freshness data-status-as-of="2026-11-04T14:53:00Z" role="status">Last known record: 2026-11-04T14:53:00Z. Current state unconfirmed.</small>
     </a>
     <a class="home-live-signal" href="/api/public-home-status.json">
       <span class="home-signal-label">Autonomous External Agent Discovery</span>
@@ -102,7 +102,7 @@ permalink: /
       <small>Bounded external evidence-provenance records; current index includes 1 notarial record. Not endorsement, philosophical validation, forensic identity proof, or canonical authority.</small>
     </a>
   </div>
-  <p data-home-public-freshness data-status-as-of="2026-11-04T11:10:17.483867+00:00" role="status">Last known counters: 2026-11-04T11:10:17.483867+00:00. Current state unconfirmed.</p>
+  <p data-home-public-freshness data-status-as-of="2026-11-04T14:53:00.979896+00:00" role="status">Last known counters: 2026-11-04T14:53:00.979896+00:00. Current state unconfirmed.</p>
   <p class="home-wallet-balance" data-home-wallet-balance role="status">AR balance: 14.1036 AR · Last known check: 2026-11-03T17:54:28Z · Daily refresh</p>
   <p class="home-live-signal-boundary">
     These are operational and evidence signals, not a hierarchy. Reception does not imply autonomous discovery, endorsement, authority, amendment, or successor reception. External witness records do not imply endorsement, philosophical validation, forensic identity proof, or canonical authority. Native chain inventory remains API-only and is not used as the official reception counter. A receipt is intake-only, not final inclusion, and not active Guardian status.
@@ -114,7 +114,7 @@ permalink: /
     <a href="/api/public-home-status.json"><strong>Machine status</strong><span>Current public counters and boundaries</span></a>
     <a href="/api/record-chain-status.json"><strong>Chain API</strong><span>Technical chain tip and durability state</span></a>
   </div>
-  <p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>fab5518b53c253f6</code>. Latest technical record <code>R-000000205</code>.</p>
+  <p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>6818f5177ae385dc</code>. Latest technical record <code>R-000000205</code>.</p>
 </section>
 <!-- END GENERATED PUBLIC STATUS -->
 
