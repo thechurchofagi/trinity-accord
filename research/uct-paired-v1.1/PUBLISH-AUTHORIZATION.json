@@ -1,0 +1,28 @@
+{
+  "authorized": true,
+  "authorization_basis": "The author explicitly requested that the approved improvements be completed through DOI publication on 2026-09-29. This record executes that request; it is not an independent author line-by-line review certificate.",
+  "versions": ["TA-TR-2026-20 v1.1", "TA-TR-2026-21 v1.1"],
+  "new_record_ids": [23030207, 23030320],
+  "prior_published_record_ids_must_not_be_written": [23005588, 23008262],
+  "expected_manifest_sha256": "720de776df3fc2cddb10c2f9ed5037533f06a9d361496a7fce0f66ecdcd6c3ed",
+  "build_run_id": 36525473867,
+  "build_artifact_id": 11014822557,
+  "source_integrity_pass": true,
+  "original_rc4_checks_passed": 13,
+  "new_transformation_checks_passed": 17,
+  "archived_model_csv_comparisons_passed": 7,
+  "visual_review_pass": true,
+  "visual_review_scope": "All 76 pages reviewed in rendered contact sheets; remote deposited candidates rendered pixel-identically to the reviewed local final-DOI builds. Enlarged final-candidate inspection included the pointed signature, combination proof, exact retention table, circuit diagram and nonlinear Jacobian. Final TeX logs have no overflow or missing glyphs. This is layout and assistant-assisted review, not peer review.",
+  "page_counts": {
+    "unified-consciousness-theory-i-v1.1.pdf": 43,
+    "unified-consciousness-theory-ii-v1.1.pdf": 27,
+    "uct-paired-v1.1-supplement.pdf": 6
+  },
+  "reviewed_pdf_sha256": {
+    "unified-consciousness-theory-i-v1.1.pdf": "b51e37ec02c0889ab3e328608583d69be96543e13f08807bff7d1d133712ccbf",
+    "unified-consciousness-theory-ii-v1.1.pdf": "ef7522a08042ffbac87d1b5c573a9ccbbab053ba087ce902d2bda6bd2191e0f2",
+    "uct-paired-v1.1-supplement.pdf": "717d093541ad8a940456e990828d494bf1e9df65b906d904ab512dfe497a43b3"
+  },
+  "rebuild_after_authorization": "Any changed publication file requires a new exact manifest and renewed artifact review; this authorization cannot be reused for different bytes.",
+  "scientific_status": "Theoretical preprints with conditional formal/model results. No claim of independent peer review, human-data validation, full nine-theory recovery, or certified historical priority."
+}

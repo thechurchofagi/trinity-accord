@@ -1,0 +1,26 @@
+{
+  "families": [
+    {
+      "id": 23030320,
+      "conceptrecid": "23008261",
+      "submitted": false,
+      "state": "unsubmitted",
+      "version": "1.1",
+      "title": "Unified Consciousness Theory II: Consciousness Theories as Effective Organization Theories"
+    },
+    {
+      "id": 23030207,
+      "conceptrecid": "23005587",
+      "submitted": false,
+      "state": "unsubmitted",
+      "version": "1.1",
+      "title": "Unified Consciousness Theory I: Ontic Structure, Physical Views, and the Structural Continuity from Physical Process to Conceptual Self"
+    }
+  ],
+  "accounted_record_ids": [
+    23005588,
+    23008262,
+    23030207,
+    23030320
+  ]
+}

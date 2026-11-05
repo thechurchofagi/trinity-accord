@@ -1,0 +1,116 @@
+{
+  "state": "PASS",
+  "checks": [
+    {
+      "name": "complete_four_setting_transition_table",
+      "status": "PASS",
+      "cases": 64
+    },
+    {
+      "name": "fixed_s_projection_closure",
+      "status": "PASS",
+      "cases": 256
+    },
+    {
+      "name": "all_projected_reset_interventions",
+      "status": "PASS",
+      "cases": 1728
+    },
+    {
+      "name": "whole_image_size_00",
+      "status": "PASS",
+      "sizes": [
+        2,
+        2
+      ]
+    },
+    {
+      "name": "whole_image_size_01",
+      "status": "PASS",
+      "sizes": [
+        4,
+        4
+      ]
+    },
+    {
+      "name": "whole_image_size_10",
+      "status": "PASS",
+      "sizes": [
+        4,
+        4
+      ]
+    },
+    {
+      "name": "whole_image_size_11",
+      "status": "PASS",
+      "sizes": [
+        8,
+        8
+      ]
+    },
+    {
+      "name": "directed_dependencies_and_split_nonproduct",
+      "status": "PASS",
+      "nonproduct_settings": [
+        "01",
+        "10",
+        "11"
+      ],
+      "cycle_settings": [
+        "11"
+      ]
+    },
+    {
+      "name": "all_boundary_strings_through_horizon_eight",
+      "status": "PASS",
+      "initial_trajectories": 8160,
+      "scope": "No resets after the initial perturbation; same conditioned boundary sequence."
+    },
+    {
+      "name": "rank_nullity_retention_identity",
+      "status": "PASS"
+    },
+    {
+      "name": "one_link_square_zero_two_link_square_identity",
+      "status": "PASS"
+    },
+    {
+      "name": "one_link_settings_covary_under_declared_port_swap",
+      "status": "PASS",
+      "scope": "Only when a/b swapping is admissible, with the pointed state transported."
+    },
+    {
+      "name": "port_preserving_one_link_dependence_is_distinct",
+      "status": "PASS"
+    },
+    {
+      "name": "all_input_strings_through_horizon_six",
+      "status": "PASS",
+      "cases": 4032,
+      "scope": "Analytic induction in manuscript proves all finite lengths."
+    },
+    {
+      "name": "failed_finite_sufficiency_does_not_isolate_A5",
+      "status": "PASS"
+    },
+    {
+      "name": "failed_finite_reflection_does_not_isolate_A5",
+      "status": "PASS"
+    },
+    {
+      "name": "finite_prediction_can_hold_without_using_A5",
+      "status": "PASS",
+      "scope": "The numerical equality alone does not select an interpretation of D."
+    }
+  ],
+  "check_count": 17,
+  "whole_image_sizes": {
+    "00": 2,
+    "01": 4,
+    "10": 4,
+    "11": 8
+  },
+  "empirical_validation": false,
+  "original_rc4_script": "check_rc4.py",
+  "scope": "Exact finite models and countermodels only; no biological or phenomenal data."
+}

@@ -1,0 +1,12 @@
+{
+  "state": "REVIEWED_OLDER_DRAFT_SUPERSEDED",
+  "record_id": 23030207,
+  "retained_recovery_artifact_id": 11014213381,
+  "removed_extra_draft_filenames": [
+    "manifest.json",
+    "VERSION-CHANGES-v1.1.md",
+    "REVIEW-AND-SOURCES-v1.1.md"
+  ],
+  "reason": "The captured main manuscript and REVIEW-AND-SOURCES-v1.1.md identify an earlier rc3-stage candidate: A5-OI is used for combination without the later tokenwise A5-SI repair; positive subject individuation and human unpleasantness are still classified as foundational gaps. Its embedded DOI is 10.5281/zenodo.23029358, not the current draft record 23030207. These are precisely the earlier formulations superseded by the user-approved rc4 corrections and the current paired revision. All ten captured files were retained before replacement in the workflow artifact and local recovery copy. The new 43-page main PDF, 6-page supplement, executable audit bundle and corrected citation identity are already hash-authorized. The provenance of the old candidate's arrival in this draft is not inferred.",
+  "prior_published_files_modified": false
+}

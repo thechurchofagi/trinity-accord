@@ -1,0 +1,27 @@
+{
+  "reviewed": true,
+  "expected_manifest_sha256": "720de776df3fc2cddb10c2f9ed5037533f06a9d361496a7fce0f66ecdcd6c3ed",
+  "authorization_basis": "The author requested completion of the reviewed rc4-derived A/B improvements through DOI publication. This reconciliation replaces only an unpublished older candidate with the exact approved successor; it does not edit a published edition.",
+  "additional_published_family_editions": "Must pass family_check.py before any replacement. An unaccounted published edition blocks this authorization.",
+  "records": {
+    "23030207": {
+      "recovery_run_id": 36526257223,
+      "recovery_artifact_id": 11014213381,
+      "recovery_artifact_name": "uct-v11-publication",
+      "recovery_directory": "uct-paired-v1.1/unpublished-recovery/a",
+      "reason": "The captured main manuscript and REVIEW-AND-SOURCES-v1.1.md identify an earlier rc3-stage candidate: A5-OI is used for combination without the later tokenwise A5-SI repair; positive subject individuation and human unpleasantness are still classified as foundational gaps. Its embedded DOI is 10.5281/zenodo.23029358, not the current draft record 23030207. These are precisely the earlier formulations superseded by the user-approved rc4 corrections and the current paired revision. All ten captured files were retained before replacement in the workflow artifact and local recovery copy. The new 43-page main PDF, 6-page supplement, executable audit bundle and corrected citation identity are already hash-authorized. The provenance of the old candidate's arrival in this draft is not inferred.",
+      "files": [
+        {"name":"SHA256SUMS.txt","bytes":721,"api_checksum":"60a776333c2effc550d4828ef92c56c5"},
+        {"name":"manifest.json","bytes":1939,"api_checksum":"d8fe3d3df25f1a1a107a890d27156821"},
+        {"name":"VERSION-CHANGES-v1.1.md","bytes":1638,"api_checksum":"e87daebf5e083808ebd7b12992929ff0"},
+        {"name":"citation.csl.json","bytes":597,"api_checksum":"319c5adf8d72ba0d98cd1229c66d50ee"},
+        {"name":"citation.ris","bytes":389,"api_checksum":"18ae17f2162911c2ecf4e45b025c66c9"},
+        {"name":"REVIEW-AND-SOURCES-v1.1.md","bytes":1623,"api_checksum":"7cbdde9f05ebf88e48f38d85451dc802"},
+        {"name":"citation.bib","bytes":424,"api_checksum":"e2fbe83ddef8cc4194e12f6d6abfca2c"},
+        {"name":"README-LICENSE.txt","bytes":1322,"api_checksum":"9030e688a229e7f25fb1a06f57a72b6b"},
+        {"name":"unified-consciousness-theory-i-v1.1.md","bytes":61996,"api_checksum":"b93d160a470934b8b352ff9725ff340c"},
+        {"name":"unified-consciousness-theory-i-v1.1.pdf","bytes":144554,"api_checksum":"a520ed3aebd19b9b0cb91e53271a3482"}
+      ]
+    }
+  }
+}

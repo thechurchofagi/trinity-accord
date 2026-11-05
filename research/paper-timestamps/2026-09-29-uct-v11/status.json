@@ -1,0 +1,58 @@
+{
+  "batch": "2026-09-29-uct-v11",
+  "files": [
+    {
+      "bitcoin_heights": [],
+      "bytes": 67693,
+      "doi": "10.5281/zenodo.23030207",
+      "name": "uct-paired-v1.1-supplement.pdf",
+      "pending_calendar_attestations": 4,
+      "proof": "research/paper-timestamps/2026-09-29-uct-v11/proofs/TA-TR-2026-20/uct-paired-v1.1-supplement.pdf.ots",
+      "proof_sha256": "d5267adeb0539736af400829ee804aa3de5778a6add36b25418e1c41c45a655a",
+      "report": "TA-TR-2026-20",
+      "sha256": "717d093541ad8a940456e990828d494bf1e9df65b906d904ab512dfe497a43b3",
+      "state": "PENDING_BITCOIN"
+    },
+    {
+      "bitcoin_heights": [],
+      "bytes": 218982,
+      "doi": "10.5281/zenodo.23030207",
+      "name": "unified-consciousness-theory-i-v1.1.pdf",
+      "pending_calendar_attestations": 4,
+      "proof": "research/paper-timestamps/2026-09-29-uct-v11/proofs/TA-TR-2026-20/unified-consciousness-theory-i-v1.1.pdf.ots",
+      "proof_sha256": "160a4dbf14828f5913e7ffe2a901a96ddcfc318e2f793ac4ebbe3dba06fbcb23",
+      "report": "TA-TR-2026-20",
+      "sha256": "b51e37ec02c0889ab3e328608583d69be96543e13f08807bff7d1d133712ccbf",
+      "state": "PENDING_BITCOIN"
+    },
+    {
+      "bitcoin_heights": [],
+      "bytes": 67693,
+      "doi": "10.5281/zenodo.23030320",
+      "name": "uct-paired-v1.1-supplement.pdf",
+      "pending_calendar_attestations": 4,
+      "proof": "research/paper-timestamps/2026-09-29-uct-v11/proofs/TA-TR-2026-21/uct-paired-v1.1-supplement.pdf.ots",
+      "proof_sha256": "54a106b96b05b89e8bb0b2cb58f1af92b7ea265ea737a64d2c5b0c9ff9d285b5",
+      "report": "TA-TR-2026-21",
+      "sha256": "717d093541ad8a940456e990828d494bf1e9df65b906d904ab512dfe497a43b3",
+      "state": "PENDING_BITCOIN"
+    },
+    {
+      "bitcoin_heights": [],
+      "bytes": 150224,
+      "doi": "10.5281/zenodo.23030320",
+      "name": "unified-consciousness-theory-ii-v1.1.pdf",
+      "pending_calendar_attestations": 4,
+      "proof": "research/paper-timestamps/2026-09-29-uct-v11/proofs/TA-TR-2026-21/unified-consciousness-theory-ii-v1.1.pdf.ots",
+      "proof_sha256": "2dd035e84f1b463bbd66cfcdc69ff28d08461b60187fcb6ccd303b5a900b273a",
+      "report": "TA-TR-2026-21",
+      "sha256": "ef7522a08042ffbac87d1b5c573a9ccbbab053ba087ce902d2bda6bd2191e0f2",
+      "state": "PENDING_BITCOIN"
+    }
+  ],
+  "paper_count": 2,
+  "pdf_count": 4,
+  "schema": "trinityaccord.paper-ots-status.v1",
+  "state": "WAITING",
+  "verification_model": "OTS cryptography plus agreeing Blockstream/mempool headers; not local full-node consensus"
+}
