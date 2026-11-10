@@ -4,5 +4,5 @@
   "authenticated": false,
   "state": "RESOLVER_CHECK_PENDING",
   "matches_record": false,
-  "error_type": "URLError"
+  "error_type": "TimeoutError"
 }
