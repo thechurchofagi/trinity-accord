@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.arweave-wallet-status.v1",
-  "generated_at": "2026-11-11T15:14:53Z",
+  "generated_at": "2026-11-11T17:52:20Z",
   "currency": "AR",
   "wallet": {
     "wallet_address": null,
@@ -17,8 +17,8 @@
   },
   "balance": {
     "balance_known": true,
-    "balance_ar": "14.099844819767",
-    "checked_at": "2026-11-11T15:13:08.314Z",
+    "balance_ar": "14.096298944239",
+    "checked_at": "2026-11-11T17:52:20Z",
     "low_balance_threshold_ar": "0.25",
     "low_balance": false,
     "needs_recharge": false,
