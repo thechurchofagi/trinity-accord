@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-11-11T14:43:56.928117+00:00",
+  "generated_at": "2026-11-11T15:16:15.230745+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -23,7 +23,7 @@
     "/api/agent-declared-verification-index.json",
     "/api/waiting-heartbeat-status.json"
   ],
-  "source_digest": "1f884acc5c63c353",
+  "source_digest": "b968c9dac7d4cf3f",
   "current_record_chain_status": {
     "phase": "production_live",
     "total_records": 212,
@@ -110,20 +110,20 @@
         "default_mode": "dry-run",
         "implemented": true,
         "index_api": "/api/record-chain-arweave-index.json",
-        "latest_arweave_txid": "8cvcB1Xl129QoqGfwHEPSwJC07E2_6a8Gxoy6nETay8",
-        "latest_native_record_id": "R-000000205",
-        "live_archive_count": 67,
+        "latest_arweave_txid": "AxCDx232dz3ooV2NhDTLNbi-xE-rcrTTh5fFDWrDWtQ",
+        "latest_native_record_id": "R-000000212",
+        "live_archive_count": 68,
         "live_upload_enabled": true,
         "live_upload_implemented": true,
-        "native_record_count": 205,
+        "native_record_count": 212,
         "source_type": "native-record-chain",
         "workflow": "/.github/workflows/record-chain-arweave-archive.yml",
-        "latest_archive_id": "archive-native-R-000000205-9b15d5c35822",
-        "latest_manifest_path": "record-chain/arweave-archives/archive-native-R-000000205-9b15d5c35822/manifest.json",
-        "latest_native_record_sha256": "bcfe54c30b9397f88c834251c011c84505bd3f974f5ab86e26934f10eb19999c",
-        "record_count": 205,
-        "status": "archive-needed",
-        "archive_needed": true
+        "latest_archive_id": "archive-native-R-000000212-864aafe9766a",
+        "latest_manifest_path": "record-chain/arweave-archives/archive-native-R-000000212-864aafe9766a/manifest.json",
+        "latest_native_record_sha256": "012fb4a0fa47bfec0ef51d590ef82c8f2691244d8f5fe7181ad9a04dd76dce14",
+        "record_count": 212,
+        "status": "current",
+        "archive_needed": false
       },
       "anchor_status": {
         "batch_count": 8,
@@ -131,7 +131,7 @@
         "unstamped_batch_count": 0
       },
       "archive_backlog": {
-        "record_chain_arweave_pending": 1,
+        "record_chain_arweave_pending": 0,
         "record_chain_arweave_failed": 0,
         "record_chain_arweave_waiting_for_key": 0,
         "native_ots_upgrade_pending": 0,
@@ -144,9 +144,9 @@
         "current_upload_mode": "live",
         "live_upload_enabled": true,
         "live_upload_implemented": true,
-        "archive_count": 76,
-        "latest_arweave_txid": "8cvcB1Xl129QoqGfwHEPSwJC07E2_6a8Gxoy6nETay8",
-        "live_archive_count": 67,
+        "archive_count": 77,
+        "latest_arweave_txid": "AxCDx232dz3ooV2NhDTLNbi-xE-rcrTTh5fFDWrDWtQ",
+        "live_archive_count": 68,
         "arweave_wallet_address_sha256": "e713712111fc5eaa71d4bbb0d1357f5c6e58acd40202f2c542a6176387c1623e"
       }
     }
@@ -983,12 +983,12 @@
     "ots_raw_status": "verified",
     "ots_pending_since": null,
     "ots_pending_expected_window": "calendar/Bitcoin upgrade commonly takes 2-3 hours; investigate if still pending after that window",
-    "arweave": "archive-needed",
+    "arweave": "current",
     "ots_archivable_for_arweave": null,
     "arweave_archive_needed": null,
     "not_primary_counter": true,
     "archive_backlog": {
-      "record_chain_arweave_pending": 1,
+      "record_chain_arweave_pending": 0,
       "record_chain_arweave_failed": 0,
       "record_chain_arweave_waiting_for_key": 0,
       "native_ots_upgrade_pending": 0,
@@ -999,7 +999,7 @@
     },
     "arweave_wallet": {
       "currency": "AR",
-      "total_spent_ar": "0.95156638154",
+      "total_spent_ar": "0.955112257068",
       "balance_known": true,
       "balance_ar": "14.099844819767",
       "low_balance": false,
@@ -1009,8 +1009,8 @@
   "arweave_archive_status": {
     "mode": "live",
     "live_upload_implemented": true,
-    "live_archive_count": 67,
-    "latest_txid": "8cvcB1Xl129QoqGfwHEPSwJC07E2_6a8Gxoy6nETay8",
+    "live_archive_count": 68,
+    "latest_txid": "AxCDx232dz3ooV2NhDTLNbi-xE-rcrTTh5fFDWrDWtQ",
     "wallet_address_sha256": "e713712111fc5eaa71d4bbb0d1357f5c6e58acd40202f2c542a6176387c1623e",
     "boundary": {
       "mirror_only": true,
