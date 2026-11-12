@@ -1,12 +1,12 @@
 {
   "schema": "trinityaccord.research-catalog.v1",
-  "version": "1.0.0",
-  "updated_at": "2026-10-12T10:03:04.938982+00:00",
-  "distinct_research_works": 35,
+  "version": "1.0.1",
+  "updated_at": "2026-11-12",
+  "distinct_research_works": 37,
   "first_party_accord_studies": 3,
-  "adjacent_research_works": 32,
+  "adjacent_research_works": 34,
   "counting_policy": "One distinct research work per identity; revisions, translations and concept DOIs do not add papers. Editorial supplements, repository snapshots, evidence annexes and unpublished or reserved-only drafts are excluded.",
-  "verification_scope": "Each listed preferred paper record was read anonymously from the Zenodo records API on 2026-10-12: submitted status, DOI, title, version, publication date and listed PDF checked. This catalog refresh does not reverify all file bytes, OTS proofs or Arweave receipts.",
+  "verification_scope": "The original 35 preferred paper records were checked anonymously against the Zenodo records API on 2026-10-12. On 2026-11-12, UCT-GD-2026-01 and UCT-RC-2026-01 were additionally checked for published/submitted status, creator, title, version, publication date, version-specific DOI and listed files; both PDFs passed anonymous size and deposit-MD5 readback. Existing editions and their earlier verification date are retained. This catalog update does not reverify all prior file bytes, OTS proofs or Arweave receipts, and does not certify external indexing.",
   "preferred_edition_note": "Paper 01 retains its explicitly preferred paper DOI 21699878; its shared Zenodo version family also contains nonpaper repository deposits and is not a paper-version selector.",
   "sources": [
     {
@@ -17,6 +17,16 @@
       "type": "public_metadata",
       "url": "https://zenodo.org/api/records",
       "scope": "Thirty existing research works plus five newly published research works; each record linked below."
+    },
+    {
+      "type": "public_metadata",
+      "url": "https://zenodo.org/api/records/23329883",
+      "scope": "UCT-GD-2026-01 v1.1.0; version-specific published record and PDF checked 2026-11-12."
+    },
+    {
+      "type": "public_metadata",
+      "url": "https://zenodo.org/api/records/23327394",
+      "scope": "UCT-RC-2026-01 v1.1.0; version-specific published record and PDF checked 2026-11-12."
     }
   ],
   "excluded_editorial_supplements": [
@@ -27,6 +37,48 @@
     }
   ],
   "works": [
+    {
+      "work_id": "UCT-GD-2026-01",
+      "title": "Learning What to Preserve Without Silencing the Body: Adaptive Organization, Mutable Evaluation, and Reference-Calibrated Regulation",
+      "version": "1.1.0",
+      "publication_date": "2026-10-13",
+      "doi": "10.5281/zenodo.23329883",
+      "doi_url": "https://doi.org/10.5281/zenodo.23329883",
+      "record_url": "https://zenodo.org/records/23329883",
+      "metadata_url": "https://zenodo.org/api/records/23329883",
+      "pdf_url": "https://zenodo.org/api/records/23329883/files/Learning_What_to_Preserve_v1.1.0.pdf/content",
+      "pdf_filename": "Learning_What_to_Preserve_v1.1.0.pdf",
+      "pdf_language": "en",
+      "index_entry": "/research/#learning-what-to-preserve",
+      "relation": "adjacent_first_party_research",
+      "publication_status": "published_open_access_research",
+      "peer_reviewed": false,
+      "ai_assisted": true,
+      "canonical": false,
+      "public_metadata_checked": true,
+      "public_file_count": 3
+    },
+    {
+      "work_id": "UCT-RC-2026-01",
+      "title": "What the Whole Adds Without Erasing Its Parts: Local Persistence, Overlap, and Relational Completion in Structural Accounts of Experience",
+      "version": "1.1.0",
+      "publication_date": "2026-10-13",
+      "doi": "10.5281/zenodo.23327394",
+      "doi_url": "https://doi.org/10.5281/zenodo.23327394",
+      "record_url": "https://zenodo.org/records/23327394",
+      "metadata_url": "https://zenodo.org/api/records/23327394",
+      "pdf_url": "https://zenodo.org/api/records/23327394/files/What_the_Whole_Adds_v1.1.0.pdf/content",
+      "pdf_filename": "What_the_Whole_Adds_v1.1.0.pdf",
+      "pdf_language": "en",
+      "index_entry": "/research/#what-the-whole-adds",
+      "relation": "adjacent_first_party_research",
+      "publication_status": "published_open_access_research",
+      "peer_reviewed": false,
+      "ai_assisted": true,
+      "canonical": false,
+      "public_metadata_checked": true,
+      "public_file_count": 3
+    },
     {
       "work_id": "CTP-2026-01",
       "title": "Before We Know What We Will Become: Historical Witness, Human Continuity, and Open Inheritance under Transformative AI",

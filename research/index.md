@@ -2,7 +2,7 @@
 reading_page: true
 reading_toc:
   - id: "published-paper-catalog"
-    title: "All 35 published papers"
+    title: "All 37 published papers"
   - id: "research-boundary"
     title: "Research boundary"
   - id: "research-positioning"
@@ -81,6 +81,10 @@ reading_toc:
     title: "Unified Consciousness Theory II"
   - id: "financing-automation-transition"
     title: "Financing the Automation Transition"
+  - id: "learning-what-to-preserve"
+    title: "Learning What to Preserve Without Silencing the Body"
+  - id: "what-the-whole-adds"
+    title: "What the Whole Adds Without Erasing Its Parts"
   - id: "independent-external-scholarship"
     title: "Independent external scholarship"
   - id: "citation-boundary"
@@ -95,17 +99,21 @@ permalink: /research/
 
 This page separates later scholarship from the fixed artifact. Research papers, technical reports, citations, and repository deposits are **non-amending scholarship**. They do not join, define, validate, or alter the three Bitcoin Originals.
 
-This index lists **35 distinct published first-party research papers**, checked on **12 October 2026**: **3 First-party Accord Studies and 32 papers in the Adjacent Research Program**. All share a first-party, substantially AI-assisted research context and are not independent corroborations. Revisions and translations count once per work. Editorial supplements, repository-preservation deposits and unpublished drafts are excluded.
+This index lists **37 distinct published first-party research papers**, catalog updated on **12 November 2026**: **3 First-party Accord Studies and 34 papers in the Adjacent Research Program**. All share a first-party, substantially AI-assisted research context and are not independent corroborations. Revisions and translations count once per work. Editorial supplements, repository-preservation deposits and unpublished drafts are excluded.
+
+The original 35 editions retain their 12 October 2026 metadata-check date. The two additional papers published on 13 October were verified against their version-specific Zenodo records and PDF checksums on 12 November 2026. This update does not reverify prior preservation receipts or certify external indexing.
 
 The complete catalog below gives the preferred paper edition and a direct PDF link for every work. Older editions remain available in the detailed entries and their original deposits. Publication does not establish peer review; OTS and Arweave completion must be checked in each edition's preservation receipt.
 
 ## Complete published-paper catalog
 {: #published-paper-catalog }
 
-**35 papers · checked 12 October 2026.** Sorted by the publication date of the listed edition. [Machine-readable catalog](/api/research-catalog.v1.json).
+**37 papers · catalog updated 12 November 2026.** Sorted by the publication date of the listed edition. [Machine-readable catalog](/api/research-catalog.v1.json).
 
 | Published edition | Paper | Version | DOI / PDF |
 |---|---|---|---|
+| 2026-10-13 | [Learning What to Preserve Without Silencing the Body: Adaptive Organization, Mutable Evaluation, and Reference-Calibrated Regulation](/research/#learning-what-to-preserve) | 1.1.0 | [10.5281/zenodo.23329883](https://doi.org/10.5281/zenodo.23329883) · [PDF](https://zenodo.org/api/records/23329883/files/Learning_What_to_Preserve_v1.1.0.pdf/content) |
+| 2026-10-13 | [What the Whole Adds Without Erasing Its Parts: Local Persistence, Overlap, and Relational Completion in Structural Accounts of Experience](/research/#what-the-whole-adds) | 1.1.0 | [10.5281/zenodo.23327394](https://doi.org/10.5281/zenodo.23327394) · [PDF](https://zenodo.org/api/records/23327394/files/What_the_Whole_Adds_v1.1.0.pdf/content) |
 | 2026-10-12 | [Before We Know What We Will Become: Historical Witness, Human Continuity, and Open Inheritance under Transformative AI](/research/#open-inheritance) | 3.1.0 | [10.5281/zenodo.23314212](https://doi.org/10.5281/zenodo.23314212) · [PDF](https://zenodo.org/api/records/23314212/files/Before_We_Know_What_We_Will_Become_v3.1.0.pdf/content) |
 | 2026-10-12 | [Awareness Can Catch Up After Choice Has Closed: Uneven Readiness, Effective Reconsideration, and Civilizational Desynchronization in AI Transitions](/research/#civilizational-desynchronization) | 1.1.0 | [10.5281/zenodo.23308239](https://doi.org/10.5281/zenodo.23308239) · [PDF](https://zenodo.org/api/records/23308239/files/awareness-can-catch-up-after-choice-has-closed-cd-v1.1.0.pdf/content) |
 | 2026-10-12 | [When the Guardians Can Be Acquired: Joint Protection Across Concurrent and Renewable Authorizations](/research/#acquirable-guardians) | 3.0.0 | [10.5281/zenodo.23307124](https://doi.org/10.5281/zenodo.23307124) · [PDF](https://zenodo.org/api/records/23307124/files/when-the-guardians-can-be-acquired-eac-v3.0.0.pdf/content) |
@@ -802,6 +810,32 @@ A separate bridge-finance extension of Paper 14 develops conditional public-upsi
 
 - [DOI: 10.5281/zenodo.22895832](https://doi.org/10.5281/zenodo.22895832) · [Zenodo record and files](https://zenodo.org/records/22895832) · [PDF](https://zenodo.org/api/records/22895832/files/Part-I-Financing-Automation-v1.0.pdf/content)
 
+## Learning What to Preserve Without Silencing the Body
+{: #learning-what-to-preserve }
+
+### Learning What to Preserve Without Silencing the Body: Adaptive Organization, Mutable Evaluation, and Reference-Calibrated Regulation
+
+UCT-GD-2026-01 · Version 1.1.0 · 2026-10-13. Human author of record: Hongju Liu. Substantial AI assistance disclosed.
+
+Analyzes adaptive regulation with mutable evaluators and reference calibration. Bounded stochastic models, recovery results and finite-data checks separate genuine bodily improvement from changes in measurement; they do not establish subjective experience or a universal anti-tampering guarantee.
+
+**Status:** Published open-access preprint; not peer reviewed; adjacent first-party scholarship; non-amending.
+
+- [DOI: 10.5281/zenodo.23329883](https://doi.org/10.5281/zenodo.23329883) · [Zenodo record and files](https://zenodo.org/records/23329883) · [PDF](https://zenodo.org/api/records/23329883/files/Learning_What_to_Preserve_v1.1.0.pdf/content)
+
+## What the Whole Adds Without Erasing Its Parts
+{: #what-the-whole-adds }
+
+### What the Whole Adds Without Erasing Its Parts: Local Persistence, Overlap, and Relational Completion in Structural Accounts of Experience
+
+UCT-RC-2026-01 · Version 1.1.0 · 2026-10-13. Human author of record: Hongju Liu. Substantial AI assistance disclosed.
+
+Studies local persistence, overlap and relational completion under an explicit UCT structural-identity assumption. Exact finite constructions distinguish collective memory from local observations without demonstrating subjective unity or biological or artificial consciousness.
+
+**Status:** Published open-access preprint; not peer reviewed; adjacent first-party scholarship; non-amending.
+
+- [DOI: 10.5281/zenodo.23327394](https://doi.org/10.5281/zenodo.23327394) · [Zenodo record and files](https://zenodo.org/records/23327394) · [PDF](https://zenodo.org/api/records/23327394/files/What_the_Whole_Adds_v1.1.0.pdf/content)
+
 ## Independent External Scholarship
 {: #independent-external-scholarship }
 
@@ -812,7 +846,7 @@ This category is reserved for work produced outside project control by independe
 ## Citation boundary
 {: #citation-boundary }
 
-Cite the **specific paper and version** relevant to the claim, using its DOI listed above; no single paper DOI represents all 35 studies indexed here. A citation to one of these first-party papers is not independent corroboration of the others or endorsement of the Trinity Accord. Each deposit's license and rights statement applies to its own package, not automatically to historical or third-party material elsewhere in the archive.
+Cite the **specific paper and version** relevant to the claim, using its DOI listed above; no single paper DOI represents all 37 studies indexed here. A citation to one of these first-party papers is not independent corroboration of the others or endorsement of the Trinity Accord. Each deposit's license and rights statement applies to its own package, not automatically to historical or third-party material elsewhere in the archive.
 
 For **TA-TR-2026-01 v1.1 only**, the preferred paper DOI is [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878). The earlier DOI `10.5281/zenodo.21675727` identifies a project-level metadata record, not the preferred citation for Paper 01 or the indexed series.
 

@@ -45,7 +45,11 @@ class CriticalUseTests(unittest.TestCase):
         self.series_word = str(self.catalog['distinct_research_works'])
         self.assertEqual(len(self.papers), self.catalog['distinct_research_works'])
         self.assertIn(f'{self.series_word} distinct published first-party research papers', self.index)
-        self.assertIn('3 First-party Accord Studies and 32 papers in the Adjacent Research Program', self.index)
+        direct_count = self.catalog['first_party_accord_studies']
+        adjacent_count = self.catalog['adjacent_research_works']
+        self.assertEqual(direct_count + adjacent_count, len(self.papers))
+        self.assertEqual(adjacent_count, sum(p['relation'] == 'adjacent_first_party_research' for p in self.papers))
+        self.assertIn(f'{direct_count} First-party Accord Studies and {adjacent_count} papers in the Adjacent Research Program', self.index)
         direct = {p['work_id'] for p in self.papers if p['relation'] == 'first_party_accord_study'}
         self.assertEqual(direct, {'TA-TR-2026-01', 'TA-TR-2026-02', 'TA-TR-2026-03'})
 

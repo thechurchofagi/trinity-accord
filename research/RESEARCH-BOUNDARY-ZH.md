@@ -7,7 +7,7 @@ permalink: /research/research-boundary/zh.html
 
 # 研究边界
 
-**目录更新（2026 年 10 月 12 日）：已发表研究论文 35 篇，其中直接协定研究 3 篇、相邻研究 32 篇。修订版、翻译和编辑说明不重复计数。完整题名、版本和 DOI 见[论文总目录](/research/#published-paper-catalog)及[机器可读目录](/api/research-catalog.v1.json)。下文有日期的证据审查保留其原始范围。**
+**目录更新（2026 年 11 月 12 日）：已发表研究论文 37 篇，其中直接协定研究 3 篇、相邻研究 34 篇。修订版、翻译和编辑说明不重复计数。完整题名、版本和 DOI 见[论文总目录](/research/#published-paper-catalog)及[机器可读目录](/api/research-catalog.v1.json)。下文有日期的证据审查保留其原始范围。**
 
 **状态：** 非修订性的编辑与机器路由规则，v1.1，2026 年 9 月 22 日。本页不是一篇新论文，也不是独立同行评审。[English](/research/research-boundary/)。
 

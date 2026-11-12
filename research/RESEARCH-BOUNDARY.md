@@ -7,7 +7,7 @@ permalink: /research/research-boundary/
 
 # Research Boundary
 
-**Catalog update, 12 October 2026: 35 published research works — 3 direct Accord studies and 32 adjacent studies. Revisions, translations and editorial supplements do not add research works. See the [complete catalog](/research/#published-paper-catalog) and [machine-readable catalog](/api/research-catalog.v1.json) for current titles, versions and DOIs. The dated evidence audit below retains its original scope.**
+**Catalog update, 12 November 2026: 37 published research works — 3 direct Accord studies and 34 adjacent studies. Revisions, translations and editorial supplements do not add research works. See the [complete catalog](/research/#published-paper-catalog) and [machine-readable catalog](/api/research-catalog.v1.json) for current titles, versions and DOIs. The dated evidence audit below retains its original scope.**
 
 **Status:** non-amending editorial and machine-routing policy, version 1.1, 22 September 2026. This is neither a research paper nor an independent review. [中文](/research/research-boundary/zh.html).
 
@@ -32,7 +32,7 @@ The existing six-role map is retained:
 
 ## Classify by research object and contribution
 
-**TA-TR-2026-01 through -03 remain First-party Accord Studies. The other 32 cataloged works belong to the Adjacent Research Program.** This classification is based on what each paper principally tries to establish, not simply its number or whether its conclusions favor the project.
+**TA-TR-2026-01 through -03 remain First-party Accord Studies. The other 34 cataloged works belong to the Adjacent Research Program.** This classification is based on what each paper principally tries to establish, not simply its number or whether its conclusions favor the project.
 
 **Papers 04–05 are case-grounded extensions**, not unrelated work: the fourth applies a general coexistence framework to the Star Ark Covenant; the fifth develops a bounded recovery framework motivated by the archive. Papers 06–16 address broader questions. A mixed paper may have both a general contribution and a case application; these are not competing claims to canonical membership.
 

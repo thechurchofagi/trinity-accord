@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.research-boundary.v1",
-  "version": "1.4",
-  "updated_at": "2026-10-12",
+  "version": "1.5",
+  "updated_at": "2026-11-12",
   "status": "active_non_amending_relation_map",
   "canonical_authority": "three Bitcoin Originals only",
   "human_readable": "/research/research-boundary/",
@@ -668,6 +668,41 @@
       ],
       "classification_reason": "The primary contribution is a transferable framework, model or method; any Accord application is a case rather than an amendment.",
       "evidence_limit": "A separate bridge-finance extension of Paper 14 develops conditional public-upside financing and prosperity-dependent claims while protecting funded basic uses. These are theoretical economic models and bounded design examples, not investment advice or an economy-wide empirical validation."
+    },
+    {
+      "report": "UCT-GD-2026-01",
+      "layer": "L4",
+      "relation": "adjacent_research",
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "Learning What to Preserve Without Silencing the Body",
+      "index_entry": "/research/#learning-what-to-preserve",
+      "method_types": [
+        "stochastic_model",
+        "calibration_theorems",
+        "finite_computational_studies"
+      ],
+      "classification_reason": "The primary contribution is a transferable framework, model or method; this first-party work is not an artifact-centered Accord study.",
+      "evidence_limit": "Analyzes adaptive regulation with mutable evaluators and reference calibration. Bounded stochastic models, recovery results and finite-data checks separate genuine bodily improvement from changes in measurement; they do not establish subjective experience or a universal anti-tampering guarantee."
+    },
+    {
+      "report": "UCT-RC-2026-01",
+      "layer": "L4",
+      "relation": "adjacent_research",
+      "independent_corroboration": false,
+      "canonical": false,
+      "amends_canon": false,
+      "authoritative_interpretation": false,
+      "topic": "What the Whole Adds Without Erasing Its Parts",
+      "index_entry": "/research/#what-the-whole-adds",
+      "method_types": [
+        "conditional_formal_results",
+        "exact_finite_constructions"
+      ],
+      "classification_reason": "The primary contribution is a transferable framework, model or method; this first-party work is not an artifact-centered Accord study.",
+      "evidence_limit": "Studies local persistence, overlap and relational completion under an explicit UCT structural-identity assumption. Exact finite constructions distinguish collective memory from local observations without demonstrating subjective unity or biological or artificial consciousness."
     }
   ],
   "independent_external_scholarship": [],
@@ -720,8 +755,12 @@
     "catalog_refresh_20261012": {
       "scope": "35 distinct published research works; current publication metadata checked separately from the preserved 2026-09-22 evidence audit. New relation descriptions are editorial, not independent validation.",
       "catalog": "/api/research-catalog.v1.json"
+    },
+    "catalog_refresh_20261112": {
+      "scope": "Added the two distinct English preprints UCT-GD-2026-01 and UCT-RC-2026-01, published 2026-10-13; 37 cataloged works. New relation descriptions are editorial, not independent validation. Earlier dated audit scopes remain unchanged.",
+      "catalog": "/api/research-catalog.v1.json"
     }
   },
   "catalog": "/api/research-catalog.v1.json",
-  "distinct_research_works": 35
+  "distinct_research_works": 37
 }
