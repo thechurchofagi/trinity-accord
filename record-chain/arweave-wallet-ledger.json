@@ -1,13 +1,13 @@
 {
   "schema": "trinityaccord.arweave-wallet-ledger.v1",
-  "updated_at": "2026-11-20T18:35:06Z",
+  "updated_at": "2026-11-21T17:25:41Z",
   "wallet": {
     "wallet_address": null,
     "wallet_address_sha256": "e713712111fc5eaa71d4bbb0d1357f5c6e58acd40202f2c542a6176387c1623e",
     "public_address_allowed": false,
     "currency": "AR",
     "last_known_balance_ar": "14.092908704132",
-    "last_known_balance_at": "2026-11-20T18:35:06Z",
+    "last_known_balance_at": "2026-11-21T17:25:41Z",
     "low_balance_threshold_ar": "0.25"
   },
   "entries": [
