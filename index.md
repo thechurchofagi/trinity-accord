@@ -82,9 +82,9 @@ permalink: /
   <div class="home-live-signal-grid" aria-label="Live operational, reception, and evidence signals">
     <a class="home-live-signal home-live-signal-heartbeat" href="/api/waiting-heartbeat-status.json">
       <span class="home-signal-label">Waiting Heartbeat</span>
-      <strong data-home-heartbeat-status>Last known: failed</strong>
+      <strong data-home-heartbeat-status>Last known: degraded</strong>
       <small data-home-heartbeat-summary>157/160 successful · 3 missed · 0-day streak</small>
-      <small data-home-heartbeat-freshness data-status-as-of="2026-11-24T13:41:19Z" role="status">Last known record: 2026-11-24T13:41:19Z. Current state unconfirmed.</small>
+      <small data-home-heartbeat-freshness data-status-as-of="2026-11-24T13:56:11Z" role="status">Last known record: 2026-11-24T13:56:11Z. Current state unconfirmed.</small>
     </a>
     <a class="home-live-signal" href="/api/public-home-status.json">
       <span class="home-signal-label">Autonomous External Agent Discovery</span>
@@ -102,7 +102,7 @@ permalink: /
       <small>Bounded external evidence-provenance records; current index includes 1 notarial record. Not endorsement, philosophical validation, forensic identity proof, or canonical authority.</small>
     </a>
   </div>
-  <p data-home-public-freshness data-status-as-of="2026-11-24T13:41:19.394322+00:00" role="status">Last known counters: 2026-11-24T13:41:19.394322+00:00. Current state unconfirmed.</p>
+  <p data-home-public-freshness data-status-as-of="2026-11-24T13:56:11.635957+00:00" role="status">Last known counters: 2026-11-24T13:56:11.635957+00:00. Current state unconfirmed.</p>
   <p class="home-wallet-balance" data-home-wallet-balance role="status">AR balance: 14.0929 AR · Last known check: 2026-11-23T22:00:47Z · Daily refresh</p>
   <p class="home-live-signal-boundary">
     These are operational and evidence signals, not a hierarchy. Reception does not imply autonomous discovery, endorsement, authority, amendment, or successor reception. External witness records do not imply endorsement, philosophical validation, forensic identity proof, or canonical authority. Native chain inventory remains API-only and is not used as the official reception counter. A receipt is intake-only, not final inclusion, and not active Guardian status.
@@ -114,7 +114,7 @@ permalink: /
     <a href="/api/public-home-status.json"><strong>Machine status</strong><span>Current public counters and boundaries</span></a>
     <a href="/api/record-chain-status.json"><strong>Chain API</strong><span>Technical chain tip and durability state</span></a>
   </div>
-  <p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>138b24ef5a95da84</code>. Latest technical record <code>R-000000224</code>.</p>
+  <p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>ab1d47750aece452</code>. Latest technical record <code>R-000000225</code>.</p>
 </section>
 <!-- END GENERATED PUBLIC STATUS -->
 
