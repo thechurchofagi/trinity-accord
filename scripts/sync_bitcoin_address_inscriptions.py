@@ -262,7 +262,8 @@ def fetch_bytes(
 
     Explicitly allowed absent HTTP statuses (currently used only for optional
     inscription metadata) return None immediately. Other 4xx responses fail
-    immediately; transient transport errors and 5xx responses are retried.
+    immediately except for a bounded retry on intermittent public-index denial.
+    Transient transport errors and 5xx responses are retried.
     """
     headers = {"User-Agent": USER_AGENT}
     if accept:
@@ -280,6 +281,14 @@ def fetch_bytes(
                 return None
             last = exc
             last_status = exc.code
+            if exc.code == 403 and attempt == 1 and attempt < attempts:
+                # The public index intermittently denies runner requests. Retry
+                # once on the same endpoint. Leave longer cooldowns to the next run.
+                delay = exc.headers.get("Retry-After", "20") if exc.headers else "20"
+                if delay.isascii() and delay.isdigit() and len(delay) <= 2 and int(delay) <= 60:
+                    print(f"HTTP 403 from the Ord index; retrying once in {delay}s", flush=True)
+                    time.sleep(int(delay))
+                    continue
             if 400 <= exc.code < 500:
                 break
         except (urllib.error.URLError, TimeoutError) as exc:

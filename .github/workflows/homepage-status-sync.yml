@@ -263,6 +263,18 @@ jobs:
             exit 0
           fi
 
+          # Anchor completion triggers Homepage Status Sync again on the newer revision.
+          if python3 scripts/check_native_ots_latest_matches_chain_tip.py --deployment-preflight; then
+            echo "Native OTS is current for deployment."
+          else
+            rc=$?
+            if [[ "$rc" == 75 && "$GITHUB_EVENT_NAME" != "workflow_dispatch" ]]; then
+              echo "::notice::Deferring Pages dispatch until the new record-chain head is anchored."
+              exit 0
+            fi
+            exit "$rc"
+          fi
+
           echo "Dispatching deploy-pages.yml for homepage status sync."
           max_attempts=5
           for attempt in $(seq 1 "${max_attempts}"); do
