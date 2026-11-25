@@ -102,8 +102,8 @@ permalink: /
       <small>Bounded external evidence-provenance records; current index includes 1 notarial record. Not endorsement, philosophical validation, forensic identity proof, or canonical authority.</small>
     </a>
   </div>
-  <p data-home-public-freshness data-status-as-of="2026-11-25T18:04:32.218939+00:00" role="status">Last known counters: 2026-11-25T18:04:32.218939+00:00. Current state unconfirmed.</p>
-  <p class="home-wallet-balance" data-home-wallet-balance role="status">AR balance: 14.0929 AR · Last known check: 2026-11-25T17:58:43.396Z · Daily refresh</p>
+  <p data-home-public-freshness data-status-as-of="2026-11-25T19:54:45.186743+00:00" role="status">Last known counters: 2026-11-25T19:54:45.186743+00:00. Current state unconfirmed.</p>
+  <p class="home-wallet-balance" data-home-wallet-balance role="status">AR balance: 14.0895 AR · Last known check: 2026-11-25T19:53:48Z · Daily refresh</p>
   <p class="home-live-signal-boundary">
     These are operational and evidence signals, not a hierarchy. Reception does not imply autonomous discovery, endorsement, authority, amendment, or successor reception. External witness records do not imply endorsement, philosophical validation, forensic identity proof, or canonical authority. Native chain inventory remains API-only and is not used as the official reception counter. A receipt is intake-only, not final inclusion, and not active Guardian status.
   </p>
@@ -114,7 +114,7 @@ permalink: /
     <a href="/api/public-home-status.json"><strong>Machine status</strong><span>Current public counters and boundaries</span></a>
     <a href="/api/record-chain-status.json"><strong>Chain API</strong><span>Technical chain tip and durability state</span></a>
   </div>
-  <p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>231eb90f1abaa1b4</code>. Latest technical record <code>R-000000226</code>.</p>
+  <p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>e2c49bef157c6b38</code>. Latest technical record <code>R-000000226</code>.</p>
 </section>
 <!-- END GENERATED PUBLIC STATUS -->
 
