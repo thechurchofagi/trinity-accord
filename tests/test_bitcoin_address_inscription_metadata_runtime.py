@@ -60,3 +60,26 @@ def test_non_optional_404_still_fails_closed_without_retry():
 
 def test_cbor_float16_is_consumed_exactly_once():
     assert sync_mod.decode_cbor(bytes.fromhex("f93c00")) == 1.0
+
+
+def test_intermittent_ord_denial_retries_same_request_once():
+    url = "https://ordinals.example/address/test"
+    denied = urllib.error.HTTPError(url, 403, "Forbidden", {"Retry-After": "5"}, None)
+    with patch.object(sync_mod.urllib.request, "urlopen", side_effect=[denied, io.BytesIO(b"data")]) as get, patch.object(sync_mod.time, "sleep") as sleep:
+        assert sync_mod.fetch_bytes(url) == b"data"
+    assert [call.args[0].full_url for call in get.call_args_list] == [url, url]
+    sleep.assert_called_once_with(5)
+
+
+def test_repeated_or_prolonged_ord_denial_still_fails():
+    url = "https://ordinals.example/address/test"
+    for cooldown, attempts in (("0", 2), ("120", 1), ("Wed, 25 Nov 2026 23:00:00 GMT", 1)):
+        denied = urllib.error.HTTPError(url, 403, "Forbidden", {"Retry-After": cooldown}, None)
+        with patch.object(sync_mod.urllib.request, "urlopen", side_effect=denied) as get, patch.object(sync_mod.time, "sleep"):
+            try:
+                sync_mod.fetch_bytes(url)
+            except sync_mod.FetchError as exc:
+                assert exc.status == 403
+            else:
+                raise AssertionError("permanent denial must prevent publication")
+        assert get.call_count == attempts

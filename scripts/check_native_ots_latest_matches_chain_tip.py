@@ -2,6 +2,7 @@
 """Fail closed unless the native OTS latest projection binds the current chain tip."""
 from __future__ import annotations
 
+import argparse
 import json
 from pathlib import Path
 
@@ -34,10 +35,7 @@ def repo_path(value: object, label: str) -> Path:
     return resolved
 
 
-def check() -> dict:
-    tip = read_json(TIP)
-    latest = read_json(LATEST)
-
+def check_tip(tip: dict, latest: dict) -> dict:
     expected = {
         "schema": "trinityaccord.native-record-chain-ots-latest.v1",
         "latest_record_id": tip.get("latest_record_id"),
@@ -81,8 +79,44 @@ def check() -> dict:
     }
 
 
+def check() -> dict:
+    return check_tip(read_json(TIP), read_json(LATEST))
+
+
+def waiting_for_next_anchor(tip: dict, latest: dict) -> bool:
+    count = latest.get("native_record_count")
+    head = tip.get("native_record_count")
+    if type(count) is not int or type(head) is not int or not 0 < count < head:
+        return False
+
+    records = read_json(ROOT / "record-chain/indexes/record-index.json")["records"]
+    if len(records) != head:
+        return False
+    if (records[-1]["record_id"], records[-1]["record_sha256"]) != (
+        tip["latest_record_id"], tip["latest_record_sha256"]
+    ):
+        return False
+    # Retain all evidence-file, schema and chain checks for the older anchor.
+    previous = records[count - 1]
+    check_tip({
+        "latest_record_id": previous["record_id"],
+        "latest_record_sha256": previous["record_sha256"],
+        "native_record_count": count,
+    }, latest)
+    return True
+
+
 def main() -> int:
-    print(json.dumps(check(), indent=2, sort_keys=True))
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--deployment-preflight", action="store_true",
+                        help="Return 75 when a valid earlier anchor is waiting for the new tip")
+    args = parser.parse_args()
+    tip, latest = read_json(TIP), read_json(LATEST)
+    if args.deployment_preflight and waiting_for_next_anchor(tip, latest):
+        print(f"Waiting for native OTS to advance from {latest['latest_record_id']} "
+              f"to {tip['latest_record_id']}.")
+        return 75
+    print(json.dumps(check_tip(tip, latest), indent=2, sort_keys=True))
     return 0
 
 

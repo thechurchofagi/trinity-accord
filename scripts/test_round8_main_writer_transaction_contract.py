@@ -132,6 +132,23 @@ def assert_tip_helper_behavior() -> None:
             module.LATEST = root / "api/record-chain-native-ots-latest.json"
             module.check()
 
+            records = [{"record_id": tip["latest_record_id"], "record_sha256": tip["latest_record_sha256"]},
+                       {"record_id": "R-000000124", "record_sha256": "b" * 64}]
+            historical = dict(latest, native_record_count=1)
+            next_tip = dict(tip, native_record_count=2, latest_record_id=records[1]["record_id"],
+                            latest_record_sha256=records[1]["record_sha256"])
+            index = root / "record-chain/indexes/record-index.json"
+            index.parent.mkdir()
+            index.write_text(json.dumps({"records": records}))
+            require(module.waiting_for_next_anchor(next_tip, historical), "indexed prior anchor must defer dispatch")
+            require(not module.waiting_for_next_anchor(tip, latest), "current anchor must not defer dispatch")
+            try:
+                module.waiting_for_next_anchor(next_tip, dict(historical, latest_record_sha256="f" * 64))
+            except SystemExit as exc:
+                require("no longer binds" in str(exc), "foreign anchor failed for the wrong reason")
+            else:
+                fail("foreign anchor was treated as a pending deployment")
+
             latest["latest_record_sha256"] = "b" * 64
             module.LATEST.write_text(json.dumps(latest), encoding="utf-8")
             try:
