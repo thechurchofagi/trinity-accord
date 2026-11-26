@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-11-26T17:19:45.585804+00:00",
+  "generated_at": "2026-11-26T19:36:09.327885+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -23,7 +23,7 @@
     "/api/agent-declared-verification-index.json",
     "/api/waiting-heartbeat-status.json"
   ],
-  "source_digest": "91aa1fc619b995d7",
+  "source_digest": "f618f2e8cd8228b7",
   "current_record_chain_status": {
     "phase": "production_live",
     "total_records": 227,
