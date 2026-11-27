@@ -12,6 +12,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
 import pytest
+from jsonschema import Draft202012Validator
 
 from apps.record_chain_intake_gateway.gateway.canonical import (
     canonical_dumps,
@@ -520,6 +521,10 @@ def test_builder_recovers_502_with_one_post_and_verified_read(tmp_path):
     assert state.gets == 1
     assert "recovered_after_ambiguous_submit" in result.stdout
     assert "recovery_was_read_only" in result.stdout
+    output = json.loads(result.stdout[result.stdout.index("{"):])
+    schema = json.loads((ROOT / "api/record-chain-builder-submit-result.v1.json").read_text())
+    Draft202012Validator(schema).validate(output)
+
 
 
 def test_builder_429_uses_one_recovery_probe_not_poll_amplification(tmp_path):

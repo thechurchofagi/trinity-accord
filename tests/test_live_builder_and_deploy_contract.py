@@ -36,7 +36,7 @@ def test_canonical_builder_bootstraps_pinned_recovery_layer() -> None:
     assert recovery["sha256"] in source
     assert str(recovery["size_bytes"]) in source
     assert "resolveRecoveryModule" in source
-    assert "downloadVerifiedRecovery" in source
+    assert "downloadCompanion" in source
     assert "https://www.trinityaccord.org/downloads/record-chain-builder-recovery.mjs" in source
     assert "https://raw.githubusercontent.com/thechurchofagi/trinity-accord/main/downloads/record-chain-builder-recovery.mjs" in source
 
@@ -93,6 +93,6 @@ def test_live_journey_checks_real_builder_download_and_execution() -> None:
     )
 
     assert "hashlib.sha256(builder)" in helper
-    assert '["node", str(entrypoint), "--help"]' in helper
+    assert '(["--help"], HELP_MARKER)' in helper
     assert "verify_builder" in scheduled
     assert "verify_builder" in freshness

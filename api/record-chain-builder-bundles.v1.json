@@ -6,8 +6,8 @@
     "language": "node",
     "runtime": "node>=18",
     "url": "/downloads/record-chain-builder.mjs",
-    "sha256": "a87101c917128affd047eddda675863177578ca2efb300cd1b02416423761db5",
-    "size_bytes": 14518,
+    "sha256": "887f12c057595e824825c08c0248deb201dc345760b7b7709b0ecc076ee66d16",
+    "size_bytes": 14698,
     "architecture": "contract_entrypoint_autobootstrap_recovery_wrapper_core_v2",
     "recovery_wrapper": {
       "url": "/downloads/record-chain-builder-recovery.mjs",
@@ -71,7 +71,9 @@
       "context_insufficient_notice"
     ],
     "purpose": "Machine-readable field semantics for all Builder submission record types, including record intent, hash sources, target binding, and when to stop with BUILDER_USAGE_UNCLEAR. Human-readable first-contact guidance is available at /agent-record-chain-guidance/.",
-    "critical_rule": "Generated hashes such as content_sha256, content_sha256_v2, record_sha256, and receipt_sha256 are computed by Builder, Gateway, receipt tooling, or final-chain tooling. For target_record_sha256-style fields, read the target final record and copy its record_sha256 exactly. Do not use content_sha256, content_sha256_v2, receipt_sha256, archive hashes, public-key hashes, or the new record hash. If the semantic source is unclear, stop and return BUILDER_USAGE_UNCLEAR."
+    "critical_rule": "Generated hashes such as content_sha256, content_sha256_v2, record_sha256, and receipt_sha256 are computed by Builder, Gateway, receipt tooling, or final-chain tooling. For target_record_sha256-style fields, read the target final record and copy its record_sha256 exactly. Do not use content_sha256, content_sha256_v2, receipt_sha256, archive hashes, public-key hashes, or the new record hash. If the semantic source is unclear, stop and return BUILDER_USAGE_UNCLEAR.",
+    "sha256": "a99b69dfe8c20bfbb77da6a2168eac573021cd6b4289c9a05c0a4e7df1e1daec",
+    "size_bytes": 23222
   },
   "gateway": {
     "base_url": "https://trinity-record-chain-gateway.onrender.com",

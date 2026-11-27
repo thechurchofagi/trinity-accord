@@ -130,6 +130,11 @@
         "guardian_listing",
         "guardian_signed_echo",
         "operational_canary",
+        "guardian_retirement",
+        "propagation",
+        "correction",
+        "classification_update",
+        "context_insufficient_notice",
         "other"
       ]
     }

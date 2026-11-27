@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.trinityaccord.org/api/record-chain-builder-submit-result.v1.json",
+  "title": "Builder submit result",
+  "description": "JSON result printed by the Builder following a direct response or a verified read-only receipt recovery.",
+  "if": {
+    "properties": {
+      "recovered_after_ambiguous_submit": {
+        "const": true
+      }
+    },
+    "required": [
+      "recovered_after_ambiguous_submit"
+    ]
+  },
+  "else": {
+    "$ref": "https://www.trinityaccord.org/api/record-chain-submit-response.v1.json"
+  },
+  "then": {
+    "type": "object",
+    "required": [
+      "accepted",
+      "submitted",
+      "duplicate",
+      "recovery_was_read_only",
+      "receipt_id",
+      "submission_sha256",
+      "record_type",
+      "append_status",
+      "receipt",
+      "final_status",
+      "warnings"
+    ],
+    "properties": {
+      "accepted": {
+        "const": true
+      },
+      "submitted": {
+        "const": true
+      },
+      "duplicate": {
+        "const": true
+      },
+      "recovery_was_read_only": {
+        "const": true
+      },
+      "receipt_id": {
+        "type": "string",
+        "pattern": "^rcg-[0-9]{8}-[a-f0-9]{12}([a-f0-9]{12})?$"
+      },
+      "submission_sha256": {
+        "type": "string",
+        "pattern": "^[a-f0-9]{64}$"
+      },
+      "record_type": {
+        "type": "string"
+      },
+      "receipt": {
+        "type": "object",
+        "required": [
+          "server_receipt_id",
+          "submission_sha256",
+          "stored_submission_sha256",
+          "receipt_sha256"
+        ]
+      },
+      "final_status": {
+        "type": [
+          "object",
+          "null"
+        ]
+      },
+      "append_status": {
+        "enum": [
+          "appended",
+          "rejected",
+          "pending",
+          "unknown",
+          "recovered_existing_receipt"
+        ]
+      },
+      "warnings": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
