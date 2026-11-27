@@ -5,8 +5,8 @@
  * only after this immutable oath and verification surface is declared.
  */
 
-import { createHash } from "node:crypto";
-import { readFile, writeFile, mkdir } from "node:fs/promises";
+import { createHash, randomUUID } from "node:crypto";
+import { readFile, writeFile, mkdir, rename, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
@@ -81,85 +81,86 @@ const RECOVERY_URLS = Object.freeze([
   "https://raw.githubusercontent.com/thechurchofagi/trinity-accord/main/downloads/record-chain-builder-recovery.mjs",
 ]);
 
-function sha256Bytes(value) {
-  return createHash("sha256").update(value).digest("hex");
+const recovery = { name: RECOVERY_FILENAME, sha: RECOVERY_SHA256, size: RECOVERY_SIZE_BYTES, urls: RECOVERY_URLS };
+const core = {
+  name: "record-chain-builder-core.mjs",
+  sha: "2d2a417561bf470974da81e6cc3c8553368c6c9976bb5748861f243f2c21891e",
+  size: 209852,
+};
+const guidance = {
+  name: "record-chain-agent-field-guidance.v1.json",
+  sha: "a99b69dfe8c20bfbb77da6a2168eac573021cd6b4289c9a05c0a4e7df1e1daec",
+  size: 23222,
+};
+
+function sha256Bytes(bytes) {
+  return createHash("sha256").update(bytes).digest("hex");
 }
 
-function verifyRecoveryBytes(bytes, sourceLabel) {
-  if (bytes.length !== RECOVERY_SIZE_BYTES) {
-    throw new Error(
-      `Canonical Builder recovery size mismatch from ${sourceLabel}: expected ${RECOVERY_SIZE_BYTES}, got ${bytes.length}`
-    );
+function verify(asset, bytes) {
+  if (bytes.length !== asset.size || sha256Bytes(bytes) !== asset.sha) {
+    throw new Error(`Builder companion size or SHA-256 mismatch: ${asset.name}`);
   }
-  const actual = sha256Bytes(bytes);
-  if (actual !== RECOVERY_SHA256) {
-    throw new Error(
-      `Canonical Builder recovery SHA-256 mismatch from ${sourceLabel}: expected ${RECOVERY_SHA256}, got ${actual}`
-    );
-  }
+  return bytes;
 }
 
-function fetchTimeoutSignal(milliseconds = 10_000) {
-  if (typeof AbortSignal?.timeout === "function") {
-    return AbortSignal.timeout(milliseconds);
-  }
-  return undefined;
-}
-
-async function verifiedExistingRecovery(moduleUrl) {
+async function readCompanion(asset, location) {
   try {
-    const bytes = await readFile(fileURLToPath(moduleUrl));
-    verifyRecoveryBytes(bytes, moduleUrl.href);
-    return moduleUrl.href;
+    return verify(asset, await readFile(location));
   } catch (error) {
     if (error?.code === "ENOENT") return null;
     throw error;
   }
 }
 
-async function downloadVerifiedRecovery() {
-  let lastError = null;
-  for (const url of RECOVERY_URLS) {
+async function downloadCompanion(asset) {
+  const urls = asset.urls || [
+    `https://www.trinityaccord.org/downloads/${asset.name}`,
+    `https://raw.githubusercontent.com/thechurchofagi/trinity-accord/main/downloads/${asset.name}`,
+  ];
+  let lastError;
+  for (const url of urls) {
     try {
-      const response = await fetch(url, {
-        headers: { "Accept": "text/javascript, application/javascript" },
-        signal: fetchTimeoutSignal(),
-      });
+      const response = await fetch(url, { signal: AbortSignal.timeout(10000) });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      const bytes = Buffer.from(await response.arrayBuffer());
-      verifyRecoveryBytes(bytes, url);
-      return bytes;
+      return verify(asset, Buffer.from(await response.arrayBuffer()));
     } catch (error) {
       lastError = error;
     }
   }
-  throw new Error(
-    `Unable to retrieve the verified canonical Builder recovery module: ${lastError?.message || lastError}`
-  );
+  throw new Error(`Cannot retrieve ${asset.name}: ${lastError?.message}`);
+}
+
+async function installBytes(path, bytes) {
+  const temporary = path + "." + randomUUID();
+  try {
+    await writeFile(temporary, bytes, { flag: "wx", mode: 0o600 });
+    await rename(temporary, path);
+  } finally {
+    await rm(temporary, { force: true });
+  }
 }
 
 async function resolveRecoveryModule() {
-  const localUrl = new URL(`./${RECOVERY_FILENAME}`, import.meta.url);
-  const local = await verifiedExistingRecovery(localUrl);
-  if (local) return local;
-
-  const cacheDir = join(tmpdir(), "trinity-accord-builder", RECOVERY_SHA256);
-  await mkdir(cacheDir, { recursive: true });
-  const recoveryPath = join(cacheDir, RECOVERY_FILENAME);
-  const cachedUrl = pathToFileURL(recoveryPath);
-  const cached = await verifiedExistingRecovery(cachedUrl);
-  if (!cached) {
-    const bytes = await downloadVerifiedRecovery();
-    await writeFile(recoveryPath, bytes);
-    verifyRecoveryBytes(await readFile(recoveryPath), recoveryPath);
+  const assets = [recovery, core];
+  if (process.argv[2] === "guidance") assets.push(guidance);
+  const base = new URL(".", import.meta.url);
+  const local = await Promise.all(assets.map(asset => readCompanion(asset, new URL(asset.name, base))));
+  const wrapper = await readFile(fileURLToPath(import.meta.url));
+  // The core records its adjacent canonical entrypoint's hash as submission provenance.
+  if (local.every(Boolean) && new URL("record-chain-builder.mjs", base).href === import.meta.url) {
+    return new URL(recovery.name, base).href;
   }
 
-  // The recovery module resolves the wrapper relative to its own location.
-  // Mirror this verified wrapper into the same cache directory so a one-file
-  // public download behaves exactly like the repository-local bundle.
-  const wrapperBytes = await readFile(fileURLToPath(import.meta.url));
-  await writeFile(join(cacheDir, "record-chain-builder.mjs"), wrapperBytes);
-  return cachedUrl.href;
+  const dir = join(tmpdir(), "trinity-accord-builder", sha256Bytes(wrapper));
+  await mkdir(dir, { recursive: true, mode: 0o700 });
+  for (const [index, asset] of assets.entries()) {
+    const path = join(dir, asset.name);
+    if (await readCompanion(asset, path)) continue;
+    await installBytes(path, local[index] || await downloadCompanion(asset));
+  }
+  await installBytes(join(dir, "record-chain-builder.mjs"), wrapper);
+  return pathToFileURL(join(dir, recovery.name)).href;
 }
 
 await import(await resolveRecoveryModule());

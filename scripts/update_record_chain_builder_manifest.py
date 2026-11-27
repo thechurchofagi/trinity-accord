@@ -46,7 +46,7 @@ def main() -> int:
     canonical = data.setdefault("canonical_builder", {})
     canonical["sha256"] = entry_sha256
     canonical["size_bytes"] = entry_size
-    canonical["architecture"] = "contract_entrypoint_recovery_wrapper_core_v1"
+    canonical["architecture"] = "contract_entrypoint_autobootstrap_recovery_wrapper_core_v2"
 
     recovery = canonical.setdefault("recovery_wrapper", {})
     recovery.update(
@@ -71,6 +71,9 @@ def main() -> int:
             "must_match_sha256_and_size_before_execution": True,
         }
     )
+
+    guidance = data["agent_field_guidance"]
+    guidance["sha256"], guidance["size_bytes"] = _digest(ROOT / guidance["url"].lstrip("/"))
 
     supports = list(canonical.get("supports") or [])
     for value in REQUIRED_SUPPORTS:

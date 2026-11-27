@@ -113,23 +113,23 @@ def verify_builder(
             temp_path = Path(temp)
             entrypoint = temp_path / "record-chain-builder.mjs"
             entrypoint.write_bytes(builder)
-            completed = subprocess.run(
-                ["node", str(entrypoint), "--help"],
-                cwd=temp_path,
-                text=True,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.STDOUT,
-                timeout=max(30, timeout * 3),
-                check=False,
-            )
-            output = completed.stdout or ""
-            if completed.returncode != 0:
-                errors.append(
-                    "single-file Builder execution failed with exit code "
-                    f"{completed.returncode}: {output[-1200:]}"
+            for args, marker in [
+                (["--help"], HELP_MARKER),
+                (["guidance", "--record-type", "echo"], "record_type: echo"),
+            ]:
+                completed = subprocess.run(
+                    ["node", str(entrypoint), *args],
+                    cwd=temp_path,
+                    text=True,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.STDOUT,
+                    timeout=max(30, timeout * 3),
+                    check=False,
                 )
-            elif HELP_MARKER not in output:
-                errors.append("single-file Builder help output is missing the canonical marker")
+                output = completed.stdout or ""
+                if completed.returncode != 0 or marker not in output:
+                    errors.append(f"single-file Builder {args[0]} failed ({completed.returncode}): {output[-1200:]}")
+                    break
     except Exception as exc:  # noqa: BLE001 - command diagnostics
         errors.append(f"canonical Builder verification failed: {type(exc).__name__}: {exc}")
     return errors

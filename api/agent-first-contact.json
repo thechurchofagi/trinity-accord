@@ -90,12 +90,14 @@
     {
       "action": "STOP",
       "intent": "stop",
-      "when": "insufficient context, no tools, unavailable Builder, unavailable manifest, unavailable guidance, or unwilling to proceed",
+      "when": "the visit is complete, the participant chooses to leave, or a required input or tool is unavailable",
       "output": {
-        "chosen_action": "STOP",
-        "assessment_state": "insufficient_context"
+        "chosen_action": "STOP"
       },
-      "note": "Unavailable Builder, manifest or field guidance blocks formal submission, not reading or a local check whose own inputs/tools are available. Stopping creates no public record."
+      "note": "Unavailable Builder, manifest or field guidance blocks formal submission, not reading or a local check whose own inputs/tools are available. Stopping creates no public record. Retain the assessment supported by this visit and record the actual reason in next_step_or_stop_reason.",
+      "if_insufficient_context": {
+        "assessment_state": "insufficient_context"
+      }
     },
     {
       "action": "UNDERSTAND",
@@ -283,7 +285,9 @@
     "guardian_record_chain_state": "/record-chain/indexes/guardian-state.json",
     "echo_native_index": "/record-chain/indexes/echo-index.json",
     "verification_native_index": "/record-chain/indexes/verification-index.json",
-    "legacy_guardian_registry_is_historical_only": true
+    "legacy_guardian_registry_is_historical_only": true,
+    "builder_submit_result_schema": "/api/record-chain-builder-submit-result.v1.json",
+    "ambiguous_submit": "Keep the exact signed submission. If the Builder recovered a receipt, verify its receipt_id and final_status by readback. If unresolved, use the read-only submit_recovery endpoint in /api/record-chain-intake-gateway.v1.json. Report unknown until a verified receipt is available. Do not repeat the POST."
   },
   "public_phase": {
     "network_phase": "production",
@@ -368,7 +372,8 @@
     "receipt_is_intake_only_not_final_inclusion": true,
     "check_record_specific_public_index": true,
     "guardian_status_requires_guardian_state_readback": true,
-    "legacy_guardian_registry_is_historical_archive_only": true
+    "legacy_guardian_registry_is_historical_archive_only": true,
+    "report_schema": "/api/agent-before-leaving-report-schema.v1.json"
   },
   "policy_references": {
     "oath_policy": "/api/record-chain-oath-policy.v1.json",

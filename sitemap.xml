@@ -194,6 +194,7 @@
   <url><loc>https://www.trinityaccord.org/api/record-chain-arweave-data-registry.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-arweave-index.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-builder-bundles.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/record-chain-builder-submit-result.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-common-field-model.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-field-helper.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-head.json</loc></url>
